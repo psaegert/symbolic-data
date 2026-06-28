@@ -15,5 +15,6 @@ from symbolic_data.samples import Sample, sample_from_skeleton, iter_samples
 from symbolic_data.tensor_ops import mask_unused_variable_columns
 from symbolic_data.datasets import load_benchmark, BENCHMARKS
 from symbolic_data.benchmarks import FastSRBBenchmark
+from symbolic_data.convert_data import ParserFactory, TestSetParser
 from symbolic_data.paths import get_path, get_root, substitute_root_path
 from symbolic_data.config_io import load_config, save_config
