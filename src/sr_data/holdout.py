@@ -1,11 +1,32 @@
 """Holdout management for expression skeleton sampling."""
 from dataclasses import dataclass, field
 from typing import Callable, Sequence, Tuple
+import functools
 import warnings
 
 import numpy as np
 
 from flash_ansr.expressions.compilation import safe_f
+
+
+# Fixed seed for the default holdout grid. Previously each HoldoutManager drew a fresh
+# unseeded ``np.random.uniform`` grid, so the functional-equivalence holdout (the image-key
+# backstop) was non-deterministic across constructions/processes/runs: the SAME config could
+# decontaminate different borderline skeletons on different runs (the exact-symbolic path was
+# already deterministic; only the 4-dp image-key margin varied). Seeding makes the default
+# grid reproducible. NOTE: the canonical, version-pinned grid ASSET (shipped ``.npz``) belongs
+# to the sr-data carve (see SR_BENCHMARKS_DESIGN.md); this seeded default is the
+# carve-independent interim fix and is intentionally a recipe, not a frozen artifact.
+_DEFAULT_HOLDOUT_GRID_SEED = 20240617
+
+
+@functools.lru_cache(maxsize=1)
+def _default_holdout_grid() -> tuple[np.ndarray, np.ndarray]:
+    """Build the deterministic default holdout grid once per process (callers copy)."""
+    rng = np.random.default_rng(_DEFAULT_HOLDOUT_GRID_SEED)
+    holdout_X = rng.uniform(-10, 10, (512, 100))
+    holdout_C = rng.uniform(-10, 10, (100,))
+    return holdout_X, holdout_C
 
 
 @dataclass
@@ -14,8 +35,8 @@ class HoldoutManager:
 
     n_variables: int
     allow_nan: bool
-    holdout_X: np.ndarray = field(default_factory=lambda: np.random.uniform(-10, 10, (512, 100)))
-    holdout_C: np.ndarray = field(default_factory=lambda: np.random.uniform(-10, 10, (100,)))
+    holdout_X: np.ndarray = field(default_factory=lambda: _default_holdout_grid()[0].copy())
+    holdout_C: np.ndarray = field(default_factory=lambda: _default_holdout_grid()[1].copy())
     skeleton_hashes: set[Tuple[str, ...]] = field(default_factory=set)
     expression_images: set[Tuple[float, ...] | Tuple[Tuple[float, ...], ...]] = field(default_factory=set)
 

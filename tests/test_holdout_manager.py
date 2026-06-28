@@ -75,3 +75,21 @@ def test_nan_outputs_are_zeroed_before_comparison():
         return np.zeros_like(x0)
 
     assert manager.is_held_out(["identity", "x0"], zero_fn, num_constants=0)
+
+
+def test_default_grid_is_deterministic():
+    # Two managers built with NO grid args must share an identical default grid, so the
+    # functional-equivalence holdout (image-key backstop) is reproducible across
+    # constructions/processes/runs. Pre-fix this drew a fresh unseeded np.random grid.
+    a = HoldoutManager(n_variables=3, allow_nan=False)
+    b = HoldoutManager(n_variables=3, allow_nan=False)
+
+    assert np.array_equal(a.holdout_X, b.holdout_X)
+    assert np.array_equal(a.holdout_C, b.holdout_C)
+    assert a.holdout_X.shape == (512, 100)
+    assert a.holdout_C.shape == (100,)
+
+    # Each manager owns an independent copy: mutating one must not affect the other
+    # (nor the shared lru_cache'd master).
+    a.holdout_X[0, 0] += 1.0
+    assert not np.array_equal(a.holdout_X, b.holdout_X)
