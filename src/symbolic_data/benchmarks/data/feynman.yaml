@@ -1,0 +1,3920 @@
+I.6.2a:
+  raw: exp(-theta**2/2)/sqrt(2*pi)
+  prepared: exp(-v1**2/2)/sqrt(2*3.141592653589793)
+  n_variables: 1
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: theta
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: f
+I.6.2:
+  raw: exp(-(theta/sigma)**2/2)/(sqrt(2*pi)*sigma)
+  prepared: exp(-(v2/v1)**2/2)/(sqrt(2*3.141592653589793)*v1)
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: sigma
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: theta
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: f
+I.6.2b:
+  raw: exp(-((theta-theta1)/sigma)**2/2)/(sqrt(2*pi)*sigma)
+  prepared: exp(-((v2-v3)/v1)**2/2)/(sqrt(2*3.141592653589793)*v1)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: sigma
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: theta
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: theta1
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: f
+I.8.14:
+  raw: sqrt((x2-x1)**2+(y2-y1)**2)
+  prepared: sqrt((v2-v1)**2+(v4-v3)**2)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: x1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: x2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: y1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: y2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: d
+I.9.18:
+  raw: G*m1*m2/((x2-x1)**2+(y2-y1)**2+(z2-z1)**2)
+  prepared: v3*v1*v2/((v5-v4)**2+(v7-v6)**2+(v9-v8)**2)
+  n_variables: 9
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m1
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: m2
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: G
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: x1
+      sample_range:
+      - 3.0
+      - 4.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: x2
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v6:
+      name: y1
+      sample_range:
+      - 3.0
+      - 4.0
+      sample_type:
+      - uni
+      - pos
+    v7:
+      name: y2
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v8:
+      name: z1
+      sample_range:
+      - 3.0
+      - 4.0
+      sample_type:
+      - uni
+      - pos
+    v9:
+      name: z2
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: F
+I.10.7:
+  raw: m_0/sqrt(1-v**2/c**2)
+  prepared: v1/sqrt(1-v2**2/v3**2)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: c
+      sample_range:
+      - 3.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: m
+I.11.19:
+  raw: x1*y1+x2*y2+x3*y3
+  prepared: v1*v4+v2*v5+v3*v6
+  n_variables: 6
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: x1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: x2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: x3
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: y1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: y2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v6:
+      name: y3
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: A
+I.12.1:
+  raw: mu*Nn
+  prepared: v1*v2
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: mu
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: Nn
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: F
+I.12.2:
+  raw: q1*q2*r/(4*pi*epsilon*r**3)
+  prepared: v1*v2*v4/(4*3.141592653589793*v3*v4**3)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: q2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: r
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: F
+I.12.4:
+  raw: q1*r/(4*pi*epsilon*r**3)
+  prepared: v1*v3/(4*3.141592653589793*v2*v3**3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: r
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Ef
+I.12.5:
+  raw: q2*Ef
+  prepared: v1*v2
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: F
+I.12.11:
+  raw: q*(Ef+B*v*sin(theta))
+  prepared: v1*(v2+v3*v4*sin(v5))
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: B
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: v
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: theta
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: F
+I.13.4:
+  raw: 1/2*m*(v**2+u**2+w**2)
+  prepared: 1/2*v1*(v2**2+v3**2+v4**2)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: u
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: w
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: K
+I.13.12:
+  raw: G*m1*m2*(1/r2-1/r1)
+  prepared: v5*v1*v2*(1/v4-1/v3)
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: m2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: r1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: r2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: G
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: U
+I.14.3:
+  raw: m*g*z
+  prepared: v1*v2*v3
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: g
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: z
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: U
+I.14.4:
+  raw: 1/2*k_spring*x**2
+  prepared: 1/2*v1*v2**2
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: k_spring
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: x
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: U
+I.15.3x:
+  raw: (x-u*t)/sqrt(1-u**2/c**2)
+  prepared: (v1-v2*v4)/sqrt(1-v2**2/v3**2)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: x
+      sample_range:
+      - 5.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: u
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: c
+      sample_range:
+      - 3.0
+      - 20.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: t
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: x1
+I.15.3t:
+  raw: (t-u*x/c**2)/sqrt(1-u**2/c**2)
+  prepared: (v4-v3*v1/v2**2)/sqrt(1-v3**2/v2**2)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: x
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: c
+      sample_range:
+      - 3.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: u
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: t
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: t1
+I.15.1:
+  raw: m_0*v/sqrt(1-v**2/c**2)
+  prepared: v1*v2/sqrt(1-v2**2/v3**2)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: c
+      sample_range:
+      - 3.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: p
+I.16.6:
+  raw: (u+v)/(1+u*v/c**2)
+  prepared: (v3+v2)/(1+v3*v2/v1**2)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: c
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: u
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: v1
+I.18.4:
+  raw: (m1*r1+m2*r2)/(m1+m2)
+  prepared: (v1*v3+v2*v4)/(v1+v2)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: m2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: r1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: r2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: r
+I.18.12:
+  raw: r*F*sin(theta)
+  prepared: v1*v2*sin(v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: r
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: F
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: theta
+      sample_range:
+      - 0.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: tau
+I.18.14:
+  raw: m*r*v*sin(theta)
+  prepared: v1*v2*v3*sin(v4)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: r
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: v
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: theta
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: L
+I.24.6:
+  raw: 1/2*m*(omega**2+omega_0**2)*1/2*x**2
+  prepared: 1/2*v1*(v2**2+v3**2)*1/2*v4**2
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: omega
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: omega_0
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: x
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+I.25.13:
+  raw: q/C
+  prepared: v1/v2
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: C
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Volt
+I.26.2:
+  raw: arcsin(n*sin(theta2))
+  prepared: asin(v1*sin(v2))
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n
+      sample_range:
+      - 0.0
+      - 1.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: theta2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: theta1
+I.27.6:
+  raw: 1/(1/d1+n/d2)
+  prepared: 1/(1/v1+v3/v2)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: d1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: d2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: n
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: foc
+I.29.4:
+  raw: omega/c
+  prepared: v1/v2
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: omega
+      sample_range:
+      - 1.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: c
+      sample_range:
+      - 1.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: k
+I.29.16:
+  raw: sqrt(x1**2+x2**2-2*x1*x2*cos(theta1-theta2))
+  prepared: sqrt(v1**2+v2**2-2*v1*v2*cos(v3-v4))
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: x1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: x2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: theta1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: theta2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: x
+I.30.3:
+  raw: Int_0*sin(n*theta/2)**2/sin(theta/2)**2
+  prepared: v1*sin(v3*v2/2)**2/sin(v2/2)**2
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: Int_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: theta
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: n
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Int
+I.30.5:
+  raw: arcsin(lambd/(n*d))
+  prepared: asin(v1/(v3*v2))
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: lambd
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: d
+      sample_range:
+      - 2.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: n
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: theta
+I.32.5:
+  raw: q**2*a**2/(6*pi*epsilon*c**3)
+  prepared: v1**2*v2**2/(6*3.141592653589793*v3*v4**3)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: a
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: c
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Pwr
+I.32.17:
+  raw: (1/2*epsilon*c*Ef**2)*(8*pi*r**2/3)*(omega**4/(omega**2-omega_0**2)**2)
+  prepared: (1/2*v1*v2*v3**2)*(8*3.141592653589793*v4**2/3)*(v5**4/(v5**2-v6**2)**2)
+  n_variables: 6
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: c
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: r
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: omega
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v6:
+      name: omega_0
+      sample_range:
+      - 3.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Pwr
+I.34.8:
+  raw: q*v*B/p
+  prepared: v1*v2*v3/v4
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: B
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: p
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: omega
+I.34.1:
+  raw: omega_0/(1-v/c)
+  prepared: v3/(1-v2/v1)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: c
+      sample_range:
+      - 3.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: omega_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: omega
+I.34.14:
+  raw: (1+v/c)/sqrt(1-v**2/c**2)*omega_0
+  prepared: (1+v2/v1)/sqrt(1-v2**2/v1**2)*v3
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: c
+      sample_range:
+      - 3.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: omega_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: omega
+I.34.27:
+  raw: (h/(2*pi))*omega
+  prepared: (v2/(2*3.141592653589793))*v1
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: omega
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+I.37.4:
+  raw: I1+I2+2*sqrt(I1*I2)*cos(delta)
+  prepared: v1+v2+2*sqrt(v1*v2)*cos(v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: I1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: I2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: delta
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Int
+I.38.12:
+  raw: 4*pi*epsilon*(h/(2*pi))**2/(m*q**2)
+  prepared: 4*3.141592653589793*v4*(v3/(2*3.141592653589793))**2/(v1*v2**2)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: r
+I.39.1:
+  raw: 3/2*pr*V
+  prepared: 3/2*v1*v2
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: pr
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: V
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+I.39.11:
+  raw: 1/(gamma-1)*pr*V
+  prepared: 1/(v1-1)*v2*v3
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: gamma
+      sample_range:
+      - 2.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: pr
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: V
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+I.39.22:
+  raw: n*kb*T/V
+  prepared: v1*v4*v2/v3
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: T
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: V
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: kb
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: pr
+I.40.1:
+  raw: n_0*exp(-m*g*x/(kb*T))
+  prepared: v1*exp(-v2*v5*v3/(v6*v4))
+  n_variables: 6
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: m
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: x
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: T
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: g
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v6:
+      name: kb
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: n
+I.41.16:
+  raw: h/(2*pi)*omega**3/(pi**2*c**2*(exp((h/(2*pi))*omega/(kb*T))-1))
+  prepared: v3/(2*3.141592653589793)*v1**3/(3.141592653589793**2*v5**2*(exp((v3/(2*3.141592653589793))*v1/(v4*v2))-1))
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: omega
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: T
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: kb
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: c
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: L_rad
+I.43.16:
+  raw: mu_drift*q*Volt/d
+  prepared: v1*v2*v3/v4
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: mu_drift
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: Volt
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: d
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: v
+I.43.31:
+  raw: mob*kb*T
+  prepared: v1*v3*v2
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: mob
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: T
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: kb
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: D
+I.43.43:
+  raw: 1/(gamma-1)*kb*v/A
+  prepared: 1/(v1-1)*v2*v4/v3
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: gamma
+      sample_range:
+      - 2.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: kb
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: A
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: v
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: kappa
+I.44.4:
+  raw: n*kb*T*ln(V2/V1)
+  prepared: v1*v2*v3*log(v5/v4)
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: kb
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: T
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: V1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: V2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+I.47.23:
+  raw: sqrt(gamma*pr/rho)
+  prepared: sqrt(v1*v2/v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: gamma
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: pr
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: rho
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: c
+I.48.2:
+  raw: m*c**2/sqrt(1-v**2/c**2)
+  prepared: v1*v3**2/sqrt(1-v2**2/v3**2)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: c
+      sample_range:
+      - 3.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+I.50.26:
+  raw: x1*(cos(omega*t)+alpha*cos(omega*t)**2)
+  prepared: v1*(cos(v2*v3)+v4*cos(v2*v3)**2)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: x1
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: omega
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: t
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: alpha
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: x
+II.2.42:
+  raw: kappa*(T2-T1)*A/d
+  prepared: v1*(v3-v2)*v4/v5
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: kappa
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: T1
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: T2
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: A
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: d
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Pwr
+II.3.24:
+  raw: Pwr/(4*pi*r**2)
+  prepared: v1/(4*3.141592653589793*v2**2)
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: Pwr
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: r
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: flux
+II.4.23:
+  raw: q/(4*pi*epsilon*r)
+  prepared: v1/(4*3.141592653589793*v2*v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: r
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Volt
+II.6.11:
+  raw: 1/(4*pi*epsilon)*p_d*cos(theta)/r**2
+  prepared: 1/(4*3.141592653589793*v1)*v2*cos(v3)/v4**2
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: p_d
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: theta
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: r
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Volt
+II.6.15a:
+  raw: p_d/(4*pi*epsilon)*3*z/r**5*sqrt(x**2+y**2)
+  prepared: v2/(4*3.141592653589793*v1)*3*v6/v3**5*sqrt(v4**2+v5**2)
+  n_variables: 6
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: p_d
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: r
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: x
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: y
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v6:
+      name: z
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Ef
+II.6.15b:
+  raw: p_d/(4*pi*epsilon)*3*cos(theta)*sin(theta)/r**3
+  prepared: v2/(4*3.141592653589793*v1)*3*cos(v3)*sin(v3)/v4**3
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: p_d
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: theta
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: r
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Ef
+II.8.7:
+  raw: 3/5*q**2/(4*pi*epsilon*d)
+  prepared: 3/5*v1**2/(4*3.141592653589793*v2*v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: d
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+II.8.31:
+  raw: epsilon*Ef**2/2
+  prepared: v1*v2**2/2
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_den
+II.10.9:
+  raw: sigma_den/epsilon*1/(1+chi)
+  prepared: v1/v2*1/(1+v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: sigma_den
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: chi
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Ef
+II.11.3:
+  raw: q*Ef/(m*(omega_0**2-omega**2))
+  prepared: v1*v2/(v3*(v4**2-v5**2))
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: m
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: omega_0
+      sample_range:
+      - 3.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: omega
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: x
+II.11.17:
+  raw: n_0*(1+p_d*Ef*cos(theta)/(kb*T))
+  prepared: v1*(1+v5*v6*cos(v4)/(v2*v3))
+  n_variables: 6
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n_0
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: kb
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: T
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: theta
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: p_d
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v6:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: n
+II.11.20:
+  raw: n_rho*p_d**2*Ef/(3*kb*T)
+  prepared: v1*v2**2*v3/(3*v4*v5)
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n_rho
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: p_d
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: kb
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: T
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Pol
+II.11.27:
+  raw: n*alpha/(1-(n*alpha/3))*epsilon*Ef
+  prepared: v1*v2/(1-(v1*v2/3))*v3*v4
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n
+      sample_range:
+      - 0.0
+      - 1.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: alpha
+      sample_range:
+      - 0.0
+      - 1.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Pol
+II.11.28:
+  raw: 1+n*alpha/(1-(n*alpha/3))
+  prepared: 1+v1*v2/(1-(v1*v2/3))
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n
+      sample_range:
+      - 0.0
+      - 1.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: alpha
+      sample_range:
+      - 0.0
+      - 1.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: theta
+II.13.17:
+  raw: 1/(4*pi*epsilon*c**2)*2*I/r
+  prepared: 1/(4*3.141592653589793*v1*v2**2)*2*v3/v4
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: c
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: I
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: r
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: B
+II.13.23:
+  raw: rho_c_0/sqrt(1-v**2/c**2)
+  prepared: v1/sqrt(1-v2**2/v3**2)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: rho_c_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: c
+      sample_range:
+      - 3.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: rho_c
+II.13.34:
+  raw: rho_c_0*v/sqrt(1-v**2/c**2)
+  prepared: v1*v2/sqrt(1-v2**2/v3**2)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: rho_c_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: c
+      sample_range:
+      - 3.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: j
+II.15.4:
+  raw: -mom*B*cos(theta)
+  prepared: -v1*v2*cos(v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: mom
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: B
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: theta
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+II.15.5:
+  raw: -p_d*Ef*cos(theta)
+  prepared: -v1*v2*cos(v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: p_d
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: theta
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+II.21.32:
+  raw: q/(4*pi*epsilon*r*(1-v/c))
+  prepared: v1/(4*3.141592653589793*v2*v3*(1-v4/v5))
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: r
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: v
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: c
+      sample_range:
+      - 3.0
+      - 10.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: Volt
+II.24.17:
+  raw: sqrt(omega**2/c**2-pi**2/d**2)
+  prepared: sqrt(v1**2/v2**2-3.141592653589793**2/v3**2)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: omega
+      sample_range:
+      - 4.0
+      - 6.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: c
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: d
+      sample_range:
+      - 2.0
+      - 4.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: k
+II.27.16:
+  raw: epsilon*c*Ef**2
+  prepared: v1*v2*v3**2
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: c
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: flux
+II.27.18:
+  raw: epsilon*Ef**2
+  prepared: v1*v2**2
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_den
+II.34.2a:
+  raw: q*v/(2*pi*r)
+  prepared: v1*v2/(2*3.141592653589793*v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: r
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: I
+II.34.2:
+  raw: q*v*r/2
+  prepared: v1*v2*v3/2
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: v
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: r
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: mom
+II.34.11:
+  raw: g_*q*B/(2*m)
+  prepared: v1*v2*v3/(2*v4)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: g_
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: B
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: m
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: omega
+II.34.29a:
+  raw: q*h/(4*pi*m)
+  prepared: v1*v2/(4*3.141592653589793*v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: m
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: mom
+II.34.29b:
+  raw: g_*mom*B*Jz/(h/(2*pi))
+  prepared: v1*v4*v5*v3/(v2/(2*3.141592653589793))
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: g_
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: Jz
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: mom
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: B
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+II.35.18:
+  raw: n_0/(exp(mom*B/(kb*T))+exp(-mom*B/(kb*T)))
+  prepared: v1/(exp(v4*v5/(v2*v3))+exp(-v4*v5/(v2*v3)))
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n_0
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: kb
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: T
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: mom
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: B
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: n
+II.35.21:
+  raw: n_rho*mom*tanh(mom*B/(kb*T))
+  prepared: v1*v2*tanh(v2*v3/(v4*v5))
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n_rho
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: mom
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: B
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: kb
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: T
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: M
+II.36.38:
+  raw: mom*H/(kb*T)+(mom*alpha)/(epsilon*c**2*kb*T)*M
+  prepared: v1*v2/(v3*v4)+(v1*v5)/(v6*v7**2*v3*v4)*v8
+  n_variables: 8
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: mom
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: H
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: kb
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: T
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: alpha
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v6:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v7:
+      name: c
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v8:
+      name: M
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: f
+II.37.1:
+  raw: mom*(1+chi)*B
+  prepared: v1*(1+v3)*v2
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: mom
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: B
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: chi
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+II.38.3:
+  raw: Y*A*x/d
+  prepared: v1*v2*v4/v3
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: Y
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: A
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: d
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: x
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: F
+II.38.14:
+  raw: Y/(2*(1+sigma))
+  prepared: v1/(2*(1+v2))
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: Y
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: sigma
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: mu_S
+III.4.32:
+  raw: 1/(exp((h/(2*pi))*omega/(kb*T))-1)
+  prepared: 1/(exp((v1/(2*3.141592653589793))*v2/(v3*v4))-1)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: omega
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: kb
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: T
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: n
+III.4.33:
+  raw: (h/(2*pi))*omega/(exp((h/(2*pi))*omega/(kb*T))-1)
+  prepared: (v1/(2*3.141592653589793))*v2/(exp((v1/(2*3.141592653589793))*v2/(v3*v4))-1)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: omega
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: kb
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: T
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+III.7.38:
+  raw: 2*mom*B/(h/(2*pi))
+  prepared: 2*v1*v2/(v3/(2*3.141592653589793))
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: mom
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: B
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: omega
+III.8.54:
+  raw: sin(E_n*t/(h/(2*pi)))**2
+  prepared: sin(v1*v2/(v3/(2*3.141592653589793)))**2
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: E_n
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: t
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: h
+      sample_range:
+      - 1.0
+      - 4.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: prob
+III.9.52:
+  raw: (p_d*Ef*t/(h/(2*pi)))*sin((omega-omega_0)*t/2)**2/((omega-omega_0)*t/2)**2
+  prepared: (v1*v2*v3/(v4/(2*3.141592653589793)))*sin((v5-v6)*v3/2)**2/((v5-v6)*v3/2)**2
+  n_variables: 6
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: p_d
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: Ef
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: t
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: h
+      sample_range:
+      - 1.0
+      - 3.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: omega
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v6:
+      name: omega_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: prob
+III.10.19:
+  raw: mom*sqrt(Bx**2+By**2+Bz**2)
+  prepared: v1*sqrt(v2**2+v3**2+v4**2)
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: mom
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: Bx
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: By
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: Bz
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+III.12.43:
+  raw: n*(h/(2*pi))
+  prepared: v1*(v2/(2*3.141592653589793))
+  n_variables: 2
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: n
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: L
+III.13.18:
+  raw: 2*E_n*d**2*k/(h/(2*pi))
+  prepared: 2*v1*v2**2*v3/(v4/(2*3.141592653589793))
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: E_n
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: d
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: k
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: v
+III.14.14:
+  raw: I_0*(exp(q*Volt/(kb*T))-1)
+  prepared: v1*(exp(v2*v3/(v4*v5))-1)
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: I_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: q
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: Volt
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: kb
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: T
+      sample_range:
+      - 1.0
+      - 2.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: I
+III.15.12:
+  raw: 2*U*(1-cos(k*d))
+  prepared: 2*v1*(1-cos(v2*v3))
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: U
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: k
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: d
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+III.15.14:
+  raw: (h/(2*pi))**2/(2*E_n*d**2)
+  prepared: (v1/(2*3.141592653589793))**2/(2*v2*v3**2)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: E_n
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: d
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: m
+III.15.27:
+  raw: 2*pi*alpha/(n*d)
+  prepared: 2*3.141592653589793*v1/(v2*v3)
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: alpha
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: n
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: d
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: k
+III.17.37:
+  raw: beta*(1+alpha*cos(theta))
+  prepared: v1*(1+v2*cos(v3))
+  n_variables: 3
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: beta
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: alpha
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: theta
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: f
+III.19.51:
+  raw: -m*q**4/(2*(4*pi*epsilon)**2*(h/(2*pi))**2)*(1/n**2)
+  prepared: -v1*v2**4/(2*(4*3.141592653589793*v5)**2*(v3/(2*3.141592653589793))**2)*(1/v4**2)
+  n_variables: 5
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: m
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: h
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: n
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v5:
+      name: epsilon
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: E_n
+III.21.20:
+  raw: -rho_c_0*q*A_vec/m
+  prepared: -v1*v2*v3/v4
+  n_variables: 4
+  sources:
+  - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  vars:
+    v1:
+      name: rho_c_0
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v2:
+      name: q
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v3:
+      name: A_vec
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v4:
+      name: m
+      sample_range:
+      - 1.0
+      - 5.0
+      sample_type:
+      - uni
+      - pos
+    v0:
+      name: j

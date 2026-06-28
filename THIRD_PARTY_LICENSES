@@ -5,6 +5,10 @@ symbolic_data is distributed under the MIT License (see LICENSE). Portions of th
 project are derived from or interoperate with third-party work, whose licenses
 and notices are reproduced below.
 
+The curated benchmark spec files (src/symbolic_data/benchmarks/data/*.yaml) reproduce only
+mathematical facts from the cited sources -- equation formulas, numeric sampling ranges, and
+variable names -- not any copyrightable text or code. Each source is attributed below.
+
 
 -------------------------------------------------------------------------------
 Fast Symbolic Regression Benchmarking (FastSRB)
@@ -47,3 +51,49 @@ That project is distributed under the MIT License:
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
+
+
+-------------------------------------------------------------------------------
+Feynman Symbolic Regression Database (AI Feynman)
+-------------------------------------------------------------------------------
+
+The `feynman` benchmark spec (`src/symbolic_data/benchmarks/data/feynman.yaml`) is
+derived from the Feynman Symbolic Regression Database (formulas + sampling ranges),
+introduced with AI Feynman by Silviu-Marian Udrescu and Max Tegmark:
+https://space.mit.edu/home/tegmark/aifeynman.html
+
+    @article{udrescu2020ai,
+          title={AI Feynman: A physics-inspired method for symbolic regression},
+          author={Udrescu, Silviu-Marian and Tegmark, Max},
+          journal={Science Advances},
+          volume={6}, number={16}, pages={eaay2631}, year={2020},
+          publisher={American Association for the Advancement of Science},
+          url={https://arxiv.org/abs/1905.11481},
+    }
+
+
+-------------------------------------------------------------------------------
+Nguyen benchmark suite
+-------------------------------------------------------------------------------
+
+The `nguyen` benchmark spec (`src/symbolic_data/benchmarks/data/nguyen.yaml`) reproduces
+the Nguyen symbolic-regression suite introduced by Nguyen Quang Uy et al.; the formulas
+and sampling ranges follow the DSO/DSR standardization (Petersen et al. 2021).
+
+    @article{uy2011semantically,
+          title={Semantically-based crossover in genetic programming: application to
+                 real-valued symbolic regression},
+          author={Nguyen, Quang Uy and Nguyen, Xuan Hoai and O'Neill, Michael and
+                  McKay, R.I. and Galv{\'a}n-L{\'o}pez, Edgar},
+          journal={Genetic Programming and Evolvable Machines},
+          volume={12}, number={2}, pages={91--119}, year={2011},
+    }
+
+    @inproceedings{petersen2021deep,
+          title={Deep symbolic regression: Recovering mathematical expressions from data
+                 via risk-seeking policy gradients},
+          author={Petersen, Brenden K and Landajuela, Mikel and Mundhenk, T Nathan and
+                  Santiago, Claudio P and Kim, Soo K and Kim, Joanne T},
+          booktitle={International Conference on Learning Representations (ICLR)}, year={2021},
+          url={https://arxiv.org/abs/1912.04871},
+    }
