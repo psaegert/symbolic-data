@@ -5,7 +5,7 @@ This module deliberately depends only on the standard library plus a *lazily*-im
 optional ``simplify == 'sympy'`` canonicalization mode (a secondary canonicaliser on top
 of the primary simplipy engine). ``sympy`` is an optional extra::
 
-    pip install flash-ansr[sympy]
+    pip install sr-data[sympy]
 """
 import os
 
@@ -24,7 +24,7 @@ def _sympy_simplify_with_timeout(expr_str: str, timeout_seconds: float = 1.0) ->
     Uses os.fork() so that hung SymPy calls can be killed via SIGKILL,
     preventing zombie-thread accumulation that degrades performance.
 
-    Requires the optional ``sympy`` dependency (``pip install flash-ansr[sympy]``);
+    Requires the optional ``sympy`` dependency (``pip install sr-data[sympy]``);
     raises a clear ``ImportError`` with that hint if it is missing.
     """
     import time
@@ -35,7 +35,7 @@ def _sympy_simplify_with_timeout(expr_str: str, timeout_seconds: float = 1.0) ->
     except ImportError as exc:  # pragma: no cover - only hit without the [sympy] extra
         raise ImportError(
             "The simplify=='sympy' mode requires the optional 'sympy' dependency. "
-            "Install it with: pip install flash-ansr[sympy]"
+            "Install it with: pip install sr-data[sympy]"
         ) from exc
 
     r_fd, w_fd = os.pipe()

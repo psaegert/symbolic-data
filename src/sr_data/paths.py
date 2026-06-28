@@ -4,14 +4,13 @@ import os
 
 #: Environment variable that overrides the project root resolved by :func:`get_root` (and therefore
 #: by :func:`get_path` / :func:`substitute_root_path`). When set to a non-empty value, asset lookups
-#: resolve against it instead of the source-checkout root. This lets a separate repository that
-#: imports ``flash_ansr`` (e.g. the planned ``srbf`` / research repos) -- or any deployment whose
-#: assets live outside the installed package tree -- anchor lookups at its own tree. See
-#: REPO_SPLIT_PLAN.md section 10.
+#: resolve against it instead of the source-checkout root. This lets a consuming package (e.g.
+#: flash-ansr or srbf) -- or any deployment whose assets live outside the installed package tree --
+#: anchor lookups at its own tree.
 ROOT_ENV_VAR = "SR_DATA_ROOT"
 
 #: Default project root for a source checkout: ``<repo>/``. This module lives at
-#: ``<repo>/src/flash_ansr/utils/paths.py``, i.e. three directories below the repo root.
+#: ``<repo>/src/sr_data/paths.py``, i.e. two directories below the repo root.
 _DEFAULT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 
