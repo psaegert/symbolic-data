@@ -8,8 +8,6 @@ surface (decorator registration, entry-point-style shadowing policy, strict mode
 that unknown names still raise ``ValueError`` from ``get_distribution`` (error-type
 back-compat).
 """
-import warnings
-
 import numpy as np
 import pytest
 
