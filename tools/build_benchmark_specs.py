@@ -285,7 +285,11 @@ def main() -> None:
     oracle("nguyen", nguyen, engine, gate=True)
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    outputs = [("fastsrb.yaml", fastsrb_bytes.decode("utf-8")), ("feynman.yaml", _dump(feynman)), ("nguyen.yaml", _dump(nguyen))]
+    # fastsrb is vendored content-verbatim; normalize the EOF to exactly one trailing newline for
+    # repo hygiene (the upstream file has a trailing blank line). yaml.safe_dump already terminates
+    # feynman/nguyen with a single newline.
+    fastsrb_text = fastsrb_bytes.decode("utf-8").rstrip("\n") + "\n"
+    outputs = [("fastsrb.yaml", fastsrb_text), ("feynman.yaml", _dump(feynman)), ("nguyen.yaml", _dump(nguyen))]
     for fname, text in outputs:
         out = DATA_DIR / fname
         if args.check:
