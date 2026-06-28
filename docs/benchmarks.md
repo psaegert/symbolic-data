@@ -1,8 +1,8 @@
 # Benchmarks
 
 `load_benchmark(name)` resolves a named benchmark to a ready-to-sample object. Three loaders ship
-built in: `fastsrb` (spec fetched + cached from the `psaegert/ansr-data` HuggingFace dataset), and
-the curated `feynman` and `nguyen` sets (specs shipped as package data, no download).
+built in — `fastsrb`, `feynman`, and `nguyen` — each **vendored as package data** from its canonical
+upstream (regenerated + verified by `tools/build_benchmark_specs.py`), so no download is needed.
 
 ```python
 import symbolic_data
@@ -12,27 +12,29 @@ dataset = bench.sample("I.6.2a", n_points=100, random_state=0)
 ids = bench.equation_ids()
 ```
 
+Every benchmark object exposes `equation_ids()`, `sample(eq_id, n_points=..., random_state=...)`,
+`sample_multiple(...)`, and `iter_samples(...)`, and records where its spec came from on
+`bench.provenance` (see [reproducibility](#provenance)).
+
 ## FastSRB
 
-v1 ships the **FastSRB** loader (the Fast Symbolic Regression Benchmark by Viktor Martinek,
-[arXiv:2508.14481](https://arxiv.org/abs/2508.14481)). Its equation spec is versioned in the
-[`psaegert/ansr-data`](https://huggingface.co/datasets/psaegert/ansr-data) HuggingFace dataset and
-fetched (and cached) by `huggingface_hub` on first use.
+`load_benchmark("fastsrb")` returns the **FastSRB** benchmark (Viktor Martinek,
+[arXiv:2508.14481](https://arxiv.org/abs/2508.14481); 120 Feynman-family equations with
+physically-motivated SRSD ranges). The spec is vendored verbatim from the upstream
+[`viktmar/FastSRB`](https://github.com/viktmar/FastSRB) `src/expressions.yaml` (MIT).
 
 ```python
-# default: fetch the spec from HF (optionally pin a dataset revision)
-bench = symbolic_data.load_benchmark("fastsrb", revision="main", random_state=0)
+bench = symbolic_data.load_benchmark("fastsrb", random_state=0)   # package data
+dataset = bench.sample("II.38.3", n_points=100)
 
-# or point at a local spec file
+# opt in to the HF-versioned spec instead, or a local file
+bench = symbolic_data.load_benchmark("fastsrb", revision="main")
 bench = symbolic_data.load_benchmark("fastsrb", spec_path="expressions.yaml")
 ```
 
-The loader records where the spec came from on `bench.provenance` (source, repo id, filename,
-revision) — see [reproducibility](#provenance).
-
-Every benchmark object (`FastSRBBenchmark` and the curated `SpecBenchmark` loaders below) exposes
-`equation_ids()`, `sample(eq_id, n_points=..., random_state=...)`, `sample_multiple(...)`, and
-`iter_samples(...)`.
+A couple of upstream FastSRB equations (e.g. `II.24.17`, `B4`) are mostly-non-finite by construction
+under their own ranges (a `sqrt` whose argument is usually negative); `sample()` on those may raise,
+while `iter_samples()` skips them gracefully per-equation.
 
 ## Feynman
 
@@ -58,19 +60,20 @@ function's domain rather than uniform over the full declared box.
 
 ## Nguyen
 
-`load_benchmark("nguyen")` returns the **12-equation Nguyen suite** (Uy et al. 2011), with formulas
-and sampling ranges pinned to the DSO/DSR standard (Petersen et al. 2021). Nguyen-1..10 are
-cross-confirmed against the `psaegert/ansr-data` `nguyen.csv`; Nguyen-11/12 complete the canonical
-suite. Ships as package data.
+`load_benchmark("nguyen")` returns the **12-equation Nguyen suite** (Uy et al. 2011). Formulas and
+sampling ranges are derived from the canonical `benchmarks.csv` of the DSO/DSR project (Petersen et
+al. 2021, [deep-symbolic-optimization](https://github.com/dso-org/deep-symbolic-optimization)). Ships
+as package data.
 
 ```python
 nguyen = symbolic_data.load_benchmark("nguyen", random_state=0)
 dataset = nguyen.sample("Nguyen-5", n_points=20)   # sin(x^2)*cos(x) - 1 on U[-1, 1]
 ```
 
-Both curated specs are regenerated and **numerically verified** against their source formulas (a
-`sympy` oracle: `simplipy(prepared)` vs `sympy(raw)`) by `tools/build_benchmark_specs.py`; the same
-oracle runs offline over the shipped specs in the test suite.
+The `feynman` and `nguyen` specs (the ones converted from source) are regenerated and **numerically
+verified** against their source formulas (a `sympy` oracle: `simplipy(prepared)` vs `sympy(raw)`) by
+`tools/build_benchmark_specs.py`; the same oracle runs offline over the shipped specs in the test
+suite. `fastsrb` is vendored verbatim, so it is gated on parse + finite-sampling integrity instead.
 
 Pass `spec_path=...` to any loader to read a custom spec file in the same format.
 
@@ -81,9 +84,9 @@ which spec (and dataset revision) produced it:
 
 ```python
 bench.provenance
-# {'source': 'huggingface', 'repo_id': 'psaegert/ansr-data',
-#  'filename': 'test_set/fastsrb/expressions.yaml', 'revision': None,
-#  'benchmark': 'fastsrb', 'simplipy_engine': 'dev_7-3', ...}
+# {'source': 'package', 'package': 'symbolic_data',
+#  'resource': 'benchmarks/data/feynman.yaml', 'spec_version': '1.0',
+#  'benchmark': 'feynman', 'simplipy_engine': 'dev_7-3'}
 ```
 
 ## Registering a benchmark

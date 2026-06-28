@@ -4,7 +4,7 @@ I.6.2a:
   n_variables: 1
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: theta
@@ -22,7 +22,7 @@ I.6.2:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: sigma
@@ -48,7 +48,7 @@ I.6.2b:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: sigma
@@ -82,7 +82,7 @@ I.8.14:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: x1
@@ -124,7 +124,7 @@ I.9.18:
   n_variables: 9
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m1
@@ -206,7 +206,7 @@ I.10.7:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m_0
@@ -240,7 +240,7 @@ I.11.19:
   n_variables: 6
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: x1
@@ -298,7 +298,7 @@ I.12.1:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: mu
@@ -324,7 +324,7 @@ I.12.2:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q1
@@ -366,7 +366,7 @@ I.12.4:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q1
@@ -400,7 +400,7 @@ I.12.5:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q2
@@ -426,7 +426,7 @@ I.12.11:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -476,7 +476,7 @@ I.13.4:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m
@@ -518,7 +518,7 @@ I.13.12:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m1
@@ -568,7 +568,7 @@ I.14.3:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m
@@ -602,7 +602,7 @@ I.14.4:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: k_spring
@@ -628,7 +628,7 @@ I.15.3x:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: x
@@ -670,7 +670,7 @@ I.15.3t:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: x
@@ -712,7 +712,7 @@ I.15.1:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m_0
@@ -746,7 +746,7 @@ I.16.6:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: c
@@ -780,7 +780,7 @@ I.18.4:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m1
@@ -822,7 +822,7 @@ I.18.12:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: r
@@ -856,7 +856,7 @@ I.18.14:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m
@@ -898,7 +898,7 @@ I.24.6:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m
@@ -940,7 +940,7 @@ I.25.13:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -966,7 +966,7 @@ I.26.2:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n
@@ -992,7 +992,7 @@ I.27.6:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: d1
@@ -1026,7 +1026,7 @@ I.29.4:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: omega
@@ -1052,7 +1052,7 @@ I.29.16:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: x1
@@ -1094,7 +1094,7 @@ I.30.3:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: Int_0
@@ -1128,7 +1128,7 @@ I.30.5:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: lambd
@@ -1162,7 +1162,7 @@ I.32.5:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -1204,7 +1204,7 @@ I.32.17:
   n_variables: 6
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: epsilon
@@ -1262,7 +1262,7 @@ I.34.8:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -1304,7 +1304,7 @@ I.34.1:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: c
@@ -1338,7 +1338,7 @@ I.34.14:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: c
@@ -1372,7 +1372,7 @@ I.34.27:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: omega
@@ -1398,7 +1398,7 @@ I.37.4:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: I1
@@ -1432,7 +1432,7 @@ I.38.12:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m
@@ -1474,7 +1474,7 @@ I.39.1:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: pr
@@ -1500,7 +1500,7 @@ I.39.11:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: gamma
@@ -1534,7 +1534,7 @@ I.39.22:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n
@@ -1576,7 +1576,7 @@ I.40.1:
   n_variables: 6
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n_0
@@ -1634,7 +1634,7 @@ I.41.16:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: omega
@@ -1684,7 +1684,7 @@ I.43.16:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: mu_drift
@@ -1726,7 +1726,7 @@ I.43.31:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: mob
@@ -1760,7 +1760,7 @@ I.43.43:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: gamma
@@ -1802,7 +1802,7 @@ I.44.4:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n
@@ -1852,7 +1852,7 @@ I.47.23:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: gamma
@@ -1886,7 +1886,7 @@ I.48.2:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m
@@ -1920,7 +1920,7 @@ I.50.26:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: x1
@@ -1962,7 +1962,7 @@ II.2.42:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: kappa
@@ -2012,7 +2012,7 @@ II.3.24:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: Pwr
@@ -2038,7 +2038,7 @@ II.4.23:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -2072,7 +2072,7 @@ II.6.11:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: epsilon
@@ -2114,7 +2114,7 @@ II.6.15a:
   n_variables: 6
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: epsilon
@@ -2172,7 +2172,7 @@ II.6.15b:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: epsilon
@@ -2214,7 +2214,7 @@ II.8.7:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -2248,7 +2248,7 @@ II.8.31:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: epsilon
@@ -2274,7 +2274,7 @@ II.10.9:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: sigma_den
@@ -2308,7 +2308,7 @@ II.11.3:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -2358,7 +2358,7 @@ II.11.17:
   n_variables: 6
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n_0
@@ -2416,7 +2416,7 @@ II.11.20:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n_rho
@@ -2466,7 +2466,7 @@ II.11.27:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n
@@ -2508,7 +2508,7 @@ II.11.28:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n
@@ -2534,7 +2534,7 @@ II.13.17:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: epsilon
@@ -2576,7 +2576,7 @@ II.13.23:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: rho_c_0
@@ -2610,7 +2610,7 @@ II.13.34:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: rho_c_0
@@ -2644,7 +2644,7 @@ II.15.4:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: mom
@@ -2678,7 +2678,7 @@ II.15.5:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: p_d
@@ -2712,7 +2712,7 @@ II.21.32:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -2762,7 +2762,7 @@ II.24.17:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: omega
@@ -2796,7 +2796,7 @@ II.27.16:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: epsilon
@@ -2830,7 +2830,7 @@ II.27.18:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: epsilon
@@ -2856,7 +2856,7 @@ II.34.2a:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -2890,7 +2890,7 @@ II.34.2:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -2924,7 +2924,7 @@ II.34.11:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: g_
@@ -2966,7 +2966,7 @@ II.34.29a:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: q
@@ -3000,7 +3000,7 @@ II.34.29b:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: g_
@@ -3050,7 +3050,7 @@ II.35.18:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n_0
@@ -3100,7 +3100,7 @@ II.35.21:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n_rho
@@ -3150,7 +3150,7 @@ II.36.38:
   n_variables: 8
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: mom
@@ -3224,7 +3224,7 @@ II.37.1:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: mom
@@ -3258,7 +3258,7 @@ II.38.3:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: Y
@@ -3300,7 +3300,7 @@ II.38.14:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: Y
@@ -3326,7 +3326,7 @@ III.4.32:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: h
@@ -3368,7 +3368,7 @@ III.4.33:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: h
@@ -3410,7 +3410,7 @@ III.7.38:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: mom
@@ -3444,7 +3444,7 @@ III.8.54:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: E_n
@@ -3478,7 +3478,7 @@ III.9.52:
   n_variables: 6
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: p_d
@@ -3536,7 +3536,7 @@ III.10.19:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: mom
@@ -3578,7 +3578,7 @@ III.12.43:
   n_variables: 2
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: n
@@ -3604,7 +3604,7 @@ III.13.18:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: E_n
@@ -3646,7 +3646,7 @@ III.14.14:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: I_0
@@ -3696,7 +3696,7 @@ III.15.12:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: U
@@ -3730,7 +3730,7 @@ III.15.14:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: h
@@ -3764,7 +3764,7 @@ III.15.27:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: alpha
@@ -3798,7 +3798,7 @@ III.17.37:
   n_variables: 3
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: beta
@@ -3832,7 +3832,7 @@ III.19.51:
   n_variables: 5
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: m
@@ -3882,7 +3882,7 @@ III.21.20:
   n_variables: 4
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
-  - formulas + sampling ranges from FeynmanEquations.csv (psaegert/ansr-data)
+  - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
   vars:
     v1:
       name: rho_c_0

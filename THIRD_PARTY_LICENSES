@@ -15,8 +15,11 @@ Fast Symbolic Regression Benchmarking (FastSRB)
 -------------------------------------------------------------------------------
 
 The FastSRB benchmark sampling code in `src/symbolic_data/benchmarks/fastsrb.py` is
-translated and adapted from the Julia FastSRB benchmarking code by Viktor Martinek:
+translated and adapted from the Julia FastSRB benchmarking code by Viktor Martinek, and the
+spec `src/symbolic_data/benchmarks/data/fastsrb.yaml` is vendored verbatim from that project's
+`src/expressions.yaml`:
 https://github.com/viktmar/FastSRB
+Both are used under the MIT License (reproduced below).
 
     @misc{martinek2025fastsymbolicregressionbenchmarking,
           title={Fast Symbolic Regression Benchmarking},
@@ -77,8 +80,10 @@ Nguyen benchmark suite
 -------------------------------------------------------------------------------
 
 The `nguyen` benchmark spec (`src/symbolic_data/benchmarks/data/nguyen.yaml`) reproduces
-the Nguyen symbolic-regression suite introduced by Nguyen Quang Uy et al.; the formulas
-and sampling ranges follow the DSO/DSR standardization (Petersen et al. 2021).
+the Nguyen symbolic-regression suite introduced by Nguyen Quang Uy et al.; the formulas and
+sampling ranges are derived from the `benchmarks.csv` of the deep-symbolic-optimization (DSO)
+project (Petersen et al. 2021), https://github.com/dso-org/deep-symbolic-optimization, used under
+the BSD 3-Clause License (reproduced below).
 
     @article{uy2011semantically,
           title={Semantically-based crossover in genetic programming: application to
@@ -97,3 +102,35 @@ and sampling ranges follow the DSO/DSR standardization (Petersen et al. 2021).
           booktitle={International Conference on Learning Representations (ICLR)}, year={2021},
           url={https://arxiv.org/abs/1912.04871},
     }
+
+deep-symbolic-optimization is distributed under the BSD 3-Clause License:
+
+    BSD 3-Clause License
+
+    Copyright (c) 2018, Lawrence Livermore National Security, LLC
+    All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice, this
+      list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+
+    * Neither the name of the copyright holder nor the names of its
+      contributors may be used to endorse or promote products derived from
+      this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

@@ -1,20 +1,19 @@
 """Benchmark dataset loaders.
 
-``load_benchmark(name)`` resolves a named benchmark to a ready-to-sample object, fetching
-its (HF-versioned) equation spec on demand. Benchmarks live in the ``BENCHMARKS`` registry,
-so third parties can add loaders via ``@BENCHMARKS.register`` or ``symbolic_data.benchmarks`` entry
-points.
+``load_benchmark(name)`` resolves a named benchmark to a ready-to-sample object. Benchmarks live in
+the ``BENCHMARKS`` registry, so third parties can add loaders via ``@BENCHMARKS.register`` or
+``symbolic_data.benchmarks`` entry points.
 
-``load_benchmark`` ships three curated loaders:
+``load_benchmark`` ships three curated loaders, each vendored as package data from its canonical
+upstream and regenerated + verified by ``tools/build_benchmark_specs.py``:
 
-* ``fastsrb`` -- the FastSRB benchmark (Martinek, arXiv:2508.14481); its spec is fetched from the
-  ``psaegert/ansr-data`` HF dataset, or read from a local ``spec_path``.
+* ``fastsrb`` -- the FastSRB benchmark (Martinek, arXiv:2508.14481), vendored verbatim from the
+  upstream ``viktmar/FastSRB`` (MIT). Pass ``revision`` to instead fetch the HF-versioned spec.
 * ``feynman`` -- the 100-equation Feynman Symbolic Regression Database (Udrescu & Tegmark 2020).
-* ``nguyen`` -- the 12-equation Nguyen suite (Uy et al. 2011; DSO/DSR ranges).
+* ``nguyen`` -- the 12-equation Nguyen suite (Uy et al. 2011), from the DSO/DSR ``benchmarks.csv``.
 
-The ``feynman`` and ``nguyen`` specs ship as package data (regenerated + numerically verified by
-``tools/build_benchmark_specs.py``); ``fastsrb`` resolves its spec from HuggingFace. All three return
-a :class:`~symbolic_data.benchmarks.spec.SpecBenchmark` and stamp ``benchmark.provenance``.
+All three return a :class:`~symbolic_data.benchmarks.spec.SpecBenchmark` and stamp
+``benchmark.provenance``. Pass ``spec_path`` to any loader to read a custom local spec file.
 """
 from __future__ import annotations
 
@@ -90,12 +89,21 @@ def _load_fastsrb(
     revision: str | None = None,
     **kwargs: Any,
 ) -> FastSRBBenchmark:
-    resolved, provenance = _resolve_spec(
-        spec_path, repo_id=ANSR_DATA_REPO, filename=FASTSRB_SPEC, revision=revision
-    )
-    benchmark = FastSRBBenchmark(
-        resolved, simplipy_engine=simplipy_engine, random_state=random_state, **kwargs
-    )
+    """Load the FastSRB benchmark.
+
+    Defaults to the spec vendored as package data (from the upstream ``viktmar/FastSRB``, MIT). Pass
+    ``spec_path`` to read a local file, or ``revision`` to fetch the HF-versioned spec from
+    ``psaegert/ansr-data`` instead.
+    """
+    if spec_path is not None:
+        spec: Any = str(spec_path)
+        provenance = {"source": "local", "path": str(spec_path)}
+    elif revision is not None:
+        resolved, provenance = _resolve_spec(None, repo_id=ANSR_DATA_REPO, filename=FASTSRB_SPEC, revision=revision)
+        spec = resolved
+    else:
+        spec, provenance = _load_packaged_spec("fastsrb.yaml")
+    benchmark = FastSRBBenchmark(spec, simplipy_engine=simplipy_engine, random_state=random_state, **kwargs)
     provenance.update({"benchmark": "fastsrb", "simplipy_engine": str(simplipy_engine)})
     benchmark.provenance = provenance  # stamp source for reproducibility (provenance principle)
     return benchmark
@@ -126,17 +134,16 @@ def _load_nguyen(
 def load_benchmark(name: str = "fastsrb", **kwargs: Any) -> Any:
     """Load a named benchmark; extra kwargs are forwarded to that benchmark's loader.
 
-    Built-in loaders:
+    Built-in loaders (all ship their spec as package data):
 
     * ``fastsrb`` -- ``load_benchmark('fastsrb', spec_path=None, simplipy_engine='dev_7-3',
-      random_state=None, revision=None)``. With ``spec_path`` unset the FastSRB equation spec is
-      fetched (and cached) from the ``psaegert/ansr-data`` HF dataset.
+      random_state=None, revision=None)``. The 120-equation FastSRB spec, vendored from
+      ``viktmar/FastSRB``. Pass ``revision`` to fetch the HF-versioned spec instead.
     * ``feynman`` -- ``load_benchmark('feynman', spec_path=None, simplipy_engine='dev_7-3',
-      random_state=None)``. 100 equations from the Feynman Symbolic Regression Database, shipped as
-      package data.
+      random_state=None)``. 100 equations from the Feynman Symbolic Regression Database.
     * ``nguyen`` -- ``load_benchmark('nguyen', spec_path=None, simplipy_engine='dev_7-3',
-      random_state=None)``. The 12-equation Nguyen suite, shipped as package data.
+      random_state=None)``. The 12-equation Nguyen suite.
 
-    Pass ``spec_path`` to any curated loader to read a custom spec file instead of the built-in one.
+    Pass ``spec_path`` to any loader to read a custom spec file instead of the built-in one.
     """
     return BENCHMARKS.get(name)(**kwargs)

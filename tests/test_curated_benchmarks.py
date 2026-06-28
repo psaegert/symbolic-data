@@ -1,13 +1,16 @@
-"""Tests for the curated package-data benchmark loaders (feynman, nguyen).
+"""Tests for the curated package-data benchmark loaders (fastsrb, feynman, nguyen).
 
-Two layers of verification:
+All three ship their spec as package data. Two layers of verification:
 
-* **Integrity** (no extra deps): every shipped equation registers, parses through SimpliPy, and
-  samples finite ``(X, y)``. This is the runtime regression guard.
-* **Faithfulness** (sympy-gated, offline): for every equation, ``simplipy(prepared)`` is compared
-  against ``sympy(raw)`` -- the original source formula stored in the spec -- on the *same* sampled
-  inputs. This locks the specs against silent corruption through a fully independent parse path,
-  using only the shipped package data (no network).
+* **Integrity** (no extra deps): every shipped equation registers and samples finite ``(X, y)``.
+  For ``feynman``/``nguyen`` (specs we convert from source) this holds for every equation; for
+  ``fastsrb`` (vendored verbatim from upstream) a couple of equations are mostly-non-finite by
+  construction under their own ranges, so it is checked tolerantly.
+* **Faithfulness** (sympy-gated, offline): for the converted specs, ``simplipy(prepared)`` is
+  compared against ``sympy(raw)`` on the *same* sampled inputs -- an independent parse path that locks
+  the specs against silent corruption, using only the shipped package data (no network). ``fastsrb``
+  is excluded: its upstream ``prepared`` folds physical constants as literals, so ``raw`` is not
+  independently evaluable from ``vars`` alone.
 """
 import warnings
 
@@ -16,7 +19,10 @@ import pytest
 
 from symbolic_data import BENCHMARKS, SpecBenchmark, load_benchmark
 
-CURATED = {"feynman": 100, "nguyen": 12}
+# All curated loaders + their equation counts (registration / provenance).
+CURATED = {"fastsrb": 120, "feynman": 100, "nguyen": 12}
+# Specs we convert from source: every equation must sample finite AND pass the faithfulness oracle.
+GATED = {"feynman": 100, "nguyen": 12}
 
 
 @pytest.fixture(scope="module")
@@ -43,7 +49,7 @@ def test_curated_provenance_stamped(benches, name):
     assert prov["resource"].endswith(f"{name}.yaml")
 
 
-@pytest.mark.parametrize("name", CURATED)
+@pytest.mark.parametrize("name", GATED)
 def test_every_equation_samples_finite(benches, name):
     bench = benches[name]
     with warnings.catch_warnings():
@@ -58,13 +64,32 @@ def test_every_equation_samples_finite(benches, name):
             assert X.shape[1] == sample["metadata"]["n_variables"], eq_id
 
 
+def test_fastsrb_mostly_samples_and_iterates(benches):
+    """fastsrb is vendored verbatim; a couple of upstream equations are mostly-non-finite by
+    construction. The vast majority sample finite, and iter_samples skips failures gracefully."""
+    bench = benches["fastsrb"]
+    finite = 0
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        for eq_id in bench.equation_ids():
+            try:
+                y = bench.sample(eq_id, n_points=16, max_trials=1000, random_state=7)["data"]["y"]
+                finite += int(np.all(np.isfinite(y)))
+            except RuntimeError:
+                pass
+        # iter_samples must complete without raising (it skips per-equation failures)
+        iterated = sum(1 for _ in bench.iter_samples(count=1, n_points=8))
+    assert finite >= 117, f"only {finite}/120 fastsrb equations sampled finite"
+    assert iterated >= 117
+
+
 def test_nguyen_known_equations(benches):
     bench = benches["nguyen"]
     ids = bench.equation_ids()
     assert ids[0] == "Nguyen-1" and ids[-1] == "Nguyen-12"
-    # Nguyen-1 = x^3 + x^2 + x sampled on [-1, 1]
+    # Nguyen-1 = x^3 + x^2 + x sampled on [-1, 1] (raw is ast.unparse-formatted from the DSO source)
     eq = bench._entries["Nguyen-1"]
-    assert eq["raw"] == "x1**3 + x1**2 + x1"
+    assert eq["raw"] == "x1 ** 3 + x1 ** 2 + x1"
     assert eq["vars"]["v1"]["sample_range"] == [-1.0, 1.0]
 
 
@@ -78,7 +103,7 @@ def test_feynman_known_equation(benches):
 
 # --------------------------------------------------------------------------------------------------
 # Faithfulness oracle: simplipy(prepared) == sympy(raw) on shared inputs. Offline (package data only).
-# This is sympy-gated; the integrity tests above run without sympy.
+# Sympy-gated; the integrity tests above run without sympy. Only the converted specs are checked.
 # --------------------------------------------------------------------------------------------------
 try:
     import sympy  # noqa: F401
@@ -88,7 +113,7 @@ except ImportError:  # pragma: no cover - sympy is in the [dev] extra
 
 
 @pytest.mark.skipif(not _HAS_SYMPY, reason="sympy not installed (install symbolic-data[dev])")
-@pytest.mark.parametrize("name", CURATED)
+@pytest.mark.parametrize("name", GATED)
 def test_prepared_matches_source_formula(benches, name):
     """Every shipped equation: SimpliPy(prepared) agrees with sympy(raw) on sampled inputs.
 
