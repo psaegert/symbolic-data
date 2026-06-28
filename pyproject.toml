@@ -17,6 +17,7 @@ dependencies = [
     "simplipy>=0.3.1",
     "pyyaml",
     "tqdm",
+    "huggingface_hub",
 ]
 
 [project.optional-dependencies]
