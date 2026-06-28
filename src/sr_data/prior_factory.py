@@ -3,7 +3,7 @@ from typing import Any, Callable
 
 import numpy as np
 
-from flash_ansr.expressions.distributions import get_distribution
+from sr_data.distributions import get_distribution
 
 
 def build_prior_callable(config: dict[str, Any] | list[dict[str, Any]]) -> Callable:

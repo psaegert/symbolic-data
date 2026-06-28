@@ -5,7 +5,7 @@ from typing import Any, Callable, Generator, cast
 
 import yaml
 
-from flash_ansr.utils.paths import get_path, normalize_path_preserve_leading_dot, substitute_root_path
+from sr_data.paths import get_path, normalize_path_preserve_leading_dot, substitute_root_path
 
 
 def apply_on_nested(structure: list | dict, func: Callable[[Any], Any]) -> list | dict:

@@ -6,7 +6,7 @@ import warnings
 
 import numpy as np
 
-from flash_ansr.expressions.compilation import safe_f
+from sr_data.compilation import safe_f
 
 
 # Fixed seed for the default holdout grid. Previously each HoldoutManager drew a fresh

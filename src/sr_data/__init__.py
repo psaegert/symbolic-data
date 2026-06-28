@@ -1,0 +1,14 @@
+"""sr-data -- the model-agnostic symbolic-regression data layer.
+
+Skeleton/expression sampling, priors, (X, y) support sampling, holdout management, and
+dataset construction -- carved out of flash-ansr so symbolic-regression methods and the
+srbf eval framework share one data substrate. Depends only on simplipy + numpy/sklearn.
+"""
+from sr_data.skeleton_pool import SkeletonPool, NoValidSampleFoundError
+from sr_data.holdout import HoldoutManager
+from sr_data.skeleton_sampling import SkeletonSampler
+from sr_data.support_sampling import SupportSampler, SupportSamplingError
+from sr_data.distributions import get_distribution
+from sr_data.prior_factory import build_prior_callable
+from sr_data.paths import get_path, get_root, substitute_root_path
+from sr_data.config_io import load_config, save_config

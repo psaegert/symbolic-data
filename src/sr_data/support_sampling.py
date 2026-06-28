@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict
 
 import numpy as np
 
-from flash_ansr.expressions.prior_factory import build_prior_callable
+from sr_data.prior_factory import build_prior_callable
 
 
 class SupportSamplingError(Exception):

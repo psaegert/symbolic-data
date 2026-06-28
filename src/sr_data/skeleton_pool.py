@@ -15,15 +15,15 @@ import numpy as np
 from simplipy import SimpliPyEngine
 from simplipy.utils import explicit_constant_placeholders, numbers_to_constant
 
-from flash_ansr.utils.config_io import load_config, save_config
-from flash_ansr.utils.paths import substitute_root_path
-from flash_ansr.utils.sympy_timeout import _sympy_simplify_with_timeout
+from sr_data.config_io import load_config, save_config
+from sr_data.paths import substitute_root_path
+from sr_data.sympy_timeout import _sympy_simplify_with_timeout
 from simplipy.utils import codify
-from flash_ansr.expressions.prior_factory import build_prior_callable
-from flash_ansr.expressions.holdout import HoldoutManager
-from flash_ansr.expressions.skeleton_sampling import SkeletonSampler
-from flash_ansr.expressions.support_sampling import SupportSampler, SupportSamplingError
-from flash_ansr.expressions.token_ops import flatten_nested_list
+from sr_data.prior_factory import build_prior_callable
+from sr_data.holdout import HoldoutManager
+from sr_data.skeleton_sampling import SkeletonSampler
+from sr_data.support_sampling import SupportSampler, SupportSamplingError
+from sr_data.token_ops import flatten_nested_list
 
 
 class NoValidSampleFoundError(Exception):

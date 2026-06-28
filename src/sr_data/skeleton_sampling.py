@@ -4,7 +4,7 @@ from typing import Any, Sequence
 import numpy as np
 from simplipy import SimpliPyEngine
 
-from flash_ansr.expressions.structure import generate_ubi_dist
+from sr_data.structure import generate_ubi_dist
 
 
 class SkeletonSampler:

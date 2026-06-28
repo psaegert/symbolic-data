@@ -8,17 +8,17 @@ import os
 #: imports ``flash_ansr`` (e.g. the planned ``srbf`` / research repos) -- or any deployment whose
 #: assets live outside the installed package tree -- anchor lookups at its own tree. See
 #: REPO_SPLIT_PLAN.md section 10.
-ROOT_ENV_VAR = "FLASH_ANSR_ROOT"
+ROOT_ENV_VAR = "SR_DATA_ROOT"
 
 #: Default project root for a source checkout: ``<repo>/``. This module lives at
 #: ``<repo>/src/flash_ansr/utils/paths.py``, i.e. three directories below the repo root.
-_DEFAULT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+_DEFAULT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 
 def get_root() -> str:
     """Return the project root that asset paths resolve against.
 
-    Honours the ``FLASH_ANSR_ROOT`` environment variable (:data:`ROOT_ENV_VAR`) when it is set to a
+    Honours the ``SR_DATA_ROOT`` environment variable (:data:`ROOT_ENV_VAR`) when it is set to a
     non-empty value, otherwise returns the source-checkout root (:data:`_DEFAULT_ROOT`). Resolving the
     root through this single function is what lets the repository split point each repo's lookups at
     its own tree without touching the many :func:`get_path` call sites.

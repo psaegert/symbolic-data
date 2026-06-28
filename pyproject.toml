@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sr-data"
+version = "0.1.0"
+description = "Model-agnostic symbolic-regression data layer: skeleton/expression sampling, priors, holdout, datasets."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Paul Saegert" }]
+keywords = ["symbolic-regression", "dataset", "sampling", "holdout", "expression"]
+dependencies = [
+    "numpy",
+    "scikit-learn",
+    "simplipy>=0.3.1",
+    "pyyaml",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+sympy = ["sympy"]
+dev = ["pytest", "pytest-cov"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
