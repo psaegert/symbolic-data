@@ -1,6 +1,6 @@
 """Small model-agnostic array helpers for the data layer.
 
-Vendored into sr-data (like ``paths``/``config_io``) so the sampling core has no
+Vendored into symbolic_data (like ``paths``/``config_io``) so the sampling core has no
 upward dependency on a consuming package. flash-ansr keeps its own copy for the
 model-input pipeline; the deliberate, contract-tested duplication is the price of
 keeping each package's dependency graph clean.

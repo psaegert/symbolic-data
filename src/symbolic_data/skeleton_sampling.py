@@ -4,7 +4,7 @@ from typing import Any, Sequence
 import numpy as np
 from simplipy import SimpliPyEngine
 
-from sr_data.structure import generate_ubi_dist
+from symbolic_data.structure import generate_ubi_dist
 
 
 class SkeletonSampler:

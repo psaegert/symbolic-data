@@ -1,6 +1,6 @@
-# Uploads sr-data to PyPI when a GitHub release is published, via PyPI Trusted Publishing.
-# REQUIRES (one-time, manual on pypi.org): register a Trusted Publisher for project `sr-data`
-#   with repository = psaegert/sr-data, workflow = publish.yaml, environment = pypi.
+# Uploads symbolic_data to PyPI when a GitHub release is published, via PyPI Trusted Publishing.
+# REQUIRES (one-time, manual on pypi.org): register a Trusted Publisher for project `symbolic-data`
+#   with repository = psaegert/symbolic-data, workflow = publish.yaml, environment = pypi.
 
 name: Upload Python Package
 
@@ -40,7 +40,7 @@ jobs:
       id-token: write
     environment:
       name: pypi
-      url: https://pypi.org/p/sr-data
+      url: https://pypi.org/p/symbolic-data
     steps:
       - name: Retrieve release distributions
         uses: actions/download-artifact@v4

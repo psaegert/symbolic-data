@@ -1,7 +1,7 @@
 Third-party licenses
 ====================
 
-sr-data is distributed under the MIT License (see LICENSE). Portions of this
+symbolic_data is distributed under the MIT License (see LICENSE). Portions of this
 project are derived from or interoperate with third-party work, whose licenses
 and notices are reproduced below.
 
@@ -10,7 +10,7 @@ and notices are reproduced below.
 Fast Symbolic Regression Benchmarking (FastSRB)
 -------------------------------------------------------------------------------
 
-The FastSRB benchmark sampling code in `src/sr_data/benchmarks/fastsrb.py` is
+The FastSRB benchmark sampling code in `src/symbolic_data/benchmarks/fastsrb.py` is
 translated and adapted from the Julia FastSRB benchmarking code by Viktor Martinek:
 https://github.com/viktmar/FastSRB
 

@@ -4,7 +4,7 @@ from typing import Any, Callable
 
 import numpy as np
 
-from sr_data.registry import Registry
+from symbolic_data.registry import Registry
 
 
 def uniform_dist(
@@ -122,10 +122,10 @@ BASE_DISTRIBUTIONS: dict[str, Callable[..., np.ndarray]] = {
 
 # Extensible registry of constant-distribution samplers, seeded from the builtins
 # above. Custom distributions can be added in-process (``@DISTRIBUTIONS.register``)
-# or across packages via ``sr_data.distributions`` entry points; either way a
+# or across packages via ``symbolic_data.distributions`` entry points; either way a
 # registered name drops into the same ``{"name": ..., "kwargs": ...}`` config slot
 # as a builtin. ``BASE_DISTRIBUTIONS`` remains the source of truth for the builtins.
-DISTRIBUTIONS = Registry("distribution", entry_point_group="sr_data.distributions")
+DISTRIBUTIONS = Registry("distribution", entry_point_group="symbolic_data.distributions")
 for _name, _fn in BASE_DISTRIBUTIONS.items():
     DISTRIBUTIONS.register_builtin(_name, _fn)
 

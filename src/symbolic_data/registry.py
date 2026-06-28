@@ -1,12 +1,12 @@
-"""A minimal, extensible ``name -> callable`` registry for sr-data.
+"""A minimal, extensible ``name -> callable`` registry for symbolic_data.
 
 Used for the parts of the data layer that select an implementation *by name* from a
 config (currently: probability distributions). Third-party packages can add
-implementations without editing sr-data, either
+implementations without editing symbolic_data, either
 
 * in-process via the ``@REGISTRY.register("name")`` decorator, or
 * across packages via ``importlib.metadata`` entry points in the group
-  ``sr_data.<kind>`` (e.g. ``sr_data.distributions``).
+  ``symbolic_data.<kind>`` (e.g. ``symbolic_data.distributions``).
 
 Collision policy (intentionally permissive but loud):
 

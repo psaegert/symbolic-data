@@ -9,8 +9,8 @@ import os
 import numpy as np
 import pytest
 
-from sr_data import SkeletonPool, Sample, iter_samples, sample_from_skeleton
-from sr_data.samples import _inject_noise, _split_support_and_validation
+from symbolic_data import SkeletonPool, Sample, iter_samples, sample_from_skeleton
+from symbolic_data.samples import _inject_noise, _split_support_and_validation
 
 CONFIG = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "skeleton_pool_train.yaml")
 

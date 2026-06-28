@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict
 
 import numpy as np
 
-from sr_data.prior_factory import build_prior_callable
+from symbolic_data.prior_factory import build_prior_callable
 
 
 class SupportSamplingError(Exception):

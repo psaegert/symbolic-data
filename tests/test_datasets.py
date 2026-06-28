@@ -8,7 +8,7 @@ import os
 
 import pytest
 
-from sr_data import BENCHMARKS, FastSRBBenchmark, load_benchmark
+from symbolic_data import BENCHMARKS, FastSRBBenchmark, load_benchmark
 
 FIXTURE = os.path.join(os.path.dirname(__file__), "data", "fastsrb_mini.yaml")
 

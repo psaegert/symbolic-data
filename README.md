@@ -1,4 +1,4 @@
-# sr-data
+# symbolic_data
 
 The model-agnostic symbolic-regression **data layer**, carved out of
 [flash-ansr](https://github.com/psaegert/flash-ansr): skeleton/expression sampling,
@@ -12,31 +12,31 @@ holdout, and evaluation draw from one source of truth. Depends only on
 ## Install
 
 ```bash
-pip install sr-data
+pip install symbolic-data
 ```
 
 ## Quick start
 
 ```python
-import sr_data
+import symbolic_data
 
 # 1. Sample (X, y) problems from a skeleton pool (the model-agnostic seam)
-pool = sr_data.SkeletonPool.from_config("skeleton_pool.yaml")
+pool = symbolic_data.SkeletonPool.from_config("skeleton_pool.yaml")
 pool.create(100)
-for sample in sr_data.iter_samples(pool, n_support=32, noise_level=0.01, seed=0):
+for sample in symbolic_data.iter_samples(pool, n_support=32, noise_level=0.01, seed=0):
     sample.x_support, sample.y_support, sample.expression  # ready to fit / tokenize
 
 # 2. Load a benchmark (spec fetched + cached from the psaegert/ansr-data HF dataset)
-fastsrb = sr_data.load_benchmark("fastsrb")
+fastsrb = symbolic_data.load_benchmark("fastsrb")
 dataset = fastsrb.sample("II.38.3", n_points=100)
 ```
 
 ## Extensibility
 
 Distributions and benchmarks are pluggable via registries: in-process with
-`@sr_data.DISTRIBUTIONS.register("name")` / `@sr_data.BENCHMARKS.register("name")`, or
-across packages via `importlib.metadata` entry points (groups `sr_data.distributions`,
-`sr_data.benchmarks`). A registered name drops into the same config slot as a builtin.
+`@symbolic_data.DISTRIBUTIONS.register("name")` / `@symbolic_data.BENCHMARKS.register("name")`, or
+across packages via `importlib.metadata` entry points (groups `symbolic_data.distributions`,
+`symbolic_data.benchmarks`). A registered name drops into the same config slot as a builtin.
 
 ## Versioning / reproducibility
 

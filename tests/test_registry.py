@@ -11,8 +11,8 @@ back-compat).
 import numpy as np
 import pytest
 
-from sr_data import DISTRIBUTIONS, Registry, get_distribution
-from sr_data.distributions import BASE_DISTRIBUTIONS, sampler_dist
+from symbolic_data import DISTRIBUTIONS, Registry, get_distribution
+from symbolic_data.distributions import BASE_DISTRIBUTIONS, sampler_dist
 
 # One valid config per builtin (kwargs match each factory's signature).
 BUILTIN_CONFIGS = {

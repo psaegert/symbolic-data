@@ -2,7 +2,7 @@
 
 ``load_benchmark(name)`` resolves a named benchmark to a ready-to-sample object, fetching
 its (HF-versioned) equation spec on demand. Benchmarks live in the ``BENCHMARKS`` registry,
-so third parties can add loaders via ``@BENCHMARKS.register`` or ``sr_data.benchmarks`` entry
+so third parties can add loaders via ``@BENCHMARKS.register`` or ``symbolic_data.benchmarks`` entry
 points.
 
 v1 ships the FastSRB loader; its spec is versioned in the ``psaegert/ansr-data`` HF dataset and
@@ -13,8 +13,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from sr_data.benchmarks import FastSRBBenchmark
-from sr_data.registry import Registry
+from symbolic_data.benchmarks import FastSRBBenchmark
+from symbolic_data.registry import Registry
 
 __all__ = ["BENCHMARKS", "load_benchmark", "FastSRBBenchmark"]
 
@@ -22,7 +22,7 @@ __all__ = ["BENCHMARKS", "load_benchmark", "FastSRBBenchmark"]
 ANSR_DATA_REPO = "psaegert/ansr-data"
 FASTSRB_SPEC = "test_set/fastsrb/expressions.yaml"
 
-BENCHMARKS = Registry("benchmark", entry_point_group="sr_data.benchmarks")
+BENCHMARKS = Registry("benchmark", entry_point_group="symbolic_data.benchmarks")
 
 
 def _resolve_spec(

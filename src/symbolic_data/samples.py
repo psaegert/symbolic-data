@@ -21,8 +21,8 @@ import numpy as np
 from simplipy import normalize_expression, normalize_skeleton
 from simplipy.utils import substitude_constants
 
-from sr_data.skeleton_pool import NoValidSampleFoundError, SkeletonPool
-from sr_data.tensor_ops import mask_unused_variable_columns
+from symbolic_data.skeleton_pool import NoValidSampleFoundError, SkeletonPool
+from symbolic_data.tensor_ops import mask_unused_variable_columns
 
 __all__ = ["Sample", "sample_from_skeleton", "iter_samples"]
 

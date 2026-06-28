@@ -6,7 +6,7 @@ import warnings
 
 import numpy as np
 
-from sr_data.compilation import safe_f
+from symbolic_data.compilation import safe_f
 
 
 # Fixed seed for the default holdout grid. Previously each HoldoutManager drew a fresh
@@ -15,7 +15,7 @@ from sr_data.compilation import safe_f
 # decontaminate different borderline skeletons on different runs (the exact-symbolic path was
 # already deterministic; only the 4-dp image-key margin varied). Seeding makes the default
 # grid reproducible. NOTE: the canonical, version-pinned grid ASSET (shipped ``.npz``) belongs
-# to the sr-data carve (see SR_BENCHMARKS_DESIGN.md); this seeded default is the
+# to the symbolic_data carve (see SR_BENCHMARKS_DESIGN.md); this seeded default is the
 # carve-independent interim fix and is intentionally a recipe, not a frozen artifact.
 _DEFAULT_HOLDOUT_GRID_SEED = 20240617
 

@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sr-data"
+name = "symbolic-data"
 version = "0.1.0"
 description = "Model-agnostic symbolic-regression data layer: skeleton/expression sampling, priors, holdout, datasets."
 readme = "README.md"
@@ -25,8 +25,8 @@ sympy = ["sympy"]
 dev = ["pytest", "pytest-cov"]
 
 [project.urls]
-Homepage = "https://github.com/psaegert/sr-data"
-Repository = "https://github.com/psaegert/sr-data"
+Homepage = "https://github.com/psaegert/symbolic-data"
+Repository = "https://github.com/psaegert/symbolic-data"
 
 [tool.setuptools.packages.find]
 where = ["src"]
