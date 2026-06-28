@@ -8,7 +8,8 @@ from sr_data.skeleton_pool import SkeletonPool, NoValidSampleFoundError
 from sr_data.holdout import HoldoutManager
 from sr_data.skeleton_sampling import SkeletonSampler
 from sr_data.support_sampling import SupportSampler, SupportSamplingError
-from sr_data.distributions import get_distribution
+from sr_data.distributions import get_distribution, DISTRIBUTIONS, BASE_DISTRIBUTIONS
 from sr_data.prior_factory import build_prior_callable
+from sr_data.registry import Registry
 from sr_data.paths import get_path, get_root, substitute_root_path
 from sr_data.config_io import load_config, save_config
