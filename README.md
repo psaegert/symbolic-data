@@ -26,9 +26,12 @@ pool.create(100)
 for sample in symbolic_data.iter_samples(pool, n_support=32, noise_level=0.01, seed=0):
     sample.x_support, sample.y_support, sample.expression  # ready to fit / tokenize
 
-# 2. Load a benchmark (spec fetched + cached from the psaegert/ansr-data HF dataset)
-fastsrb = symbolic_data.load_benchmark("fastsrb")
-dataset = fastsrb.sample("II.38.3", n_points=100)
+# 2. Load a benchmark. All three curated sets ship as package data (no download), vendored
+#    from their canonical upstreams.
+fastsrb = symbolic_data.load_benchmark("fastsrb")          # 120 equations (Martinek, viktmar/FastSRB)
+feynman = symbolic_data.load_benchmark("feynman")          # 100 equations (Udrescu & Tegmark 2020)
+nguyen = symbolic_data.load_benchmark("nguyen")            # 12 equations (Uy et al. 2011; DSO)
+dataset = feynman.sample("I.6.2a", n_points=100, random_state=0)
 ```
 
 ## Extensibility
@@ -42,8 +45,12 @@ across packages via `importlib.metadata` entry points (groups `symbolic_data.dis
 
 v1 guarantees **leak-safety** (a seeded, shipped holdout grid + a robust symbolic/numeric
 matcher), not cross-consumer byte-identical regeneration (the rng-Generator threading is a
-separate, later phase). Benchmark specs are HF-versioned and stamped on `.provenance`.
+separate, later phase). Curated benchmark specs ship as package data, vendored from their canonical
+upstreams (`tools/build_benchmark_specs.py`), and stamp their source on `.provenance`.
 
-> Status: v0.1.0. Registry, `iter_samples` seam, and `load_benchmark` (FastSRB) are in.
-> Deferred: the MIA matched-control audit, curated benchmark loaders (Feynman/Nguyen), the
-> canonical-v1 holdout grid mint, and cross-consumer byte-identical sampling.
+> Status: v0.3.0. Registry, `iter_samples` seam, the data-prep CLI, and curated `load_benchmark`
+> loaders (FastSRB, Feynman, Nguyen) are in, each vendored from its canonical upstream. The
+> Feynman/Nguyen specs are numerically verified against their source formulas
+> (`tools/build_benchmark_specs.py`).
+> Deferred: the MIA matched-control audit, the canonical-v1 holdout grid mint, and cross-consumer
+> byte-identical sampling.

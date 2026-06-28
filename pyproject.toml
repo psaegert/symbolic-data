@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "symbolic-data"
-version = "0.2.0"
+version = "0.3.0"
 description = "Model-agnostic symbolic-regression data layer: skeleton/expression sampling, priors, holdout, datasets."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -23,7 +23,7 @@ dependencies = [
 [project.optional-dependencies]
 sympy = ["sympy"]
 ingest = ["pandas"]
-dev = ["pytest", "pytest-cov", "pandas"]
+dev = ["pytest", "pytest-cov", "pandas", "sympy"]
 
 [project.scripts]
 symbolic-data = "symbolic_data.__main__:main"
@@ -34,6 +34,9 @@ Repository = "https://github.com/psaegert/symbolic-data"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"symbolic_data.benchmarks" = ["data/*.yaml"]
 
 [tool.flake8]
 max-line-length = 250
