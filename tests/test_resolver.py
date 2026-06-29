@@ -1,6 +1,6 @@
 """Tests for the repo-agnostic versioned-artifact resolver."""
 import hashlib
-import json
+import os
 
 import pytest
 
@@ -117,3 +117,39 @@ def test_unknown_name_no_vendored_raises(monkeypatch):
     monkeypatch.setattr(R, "_vendored_path", lambda name: None)
     with pytest.raises(R.ResolverError):
         R.resolve("does_not_exist")
+
+
+# --- review fixes: integrity must not silently fall back; no CWD shadowing; colon-path; missing-sha
+
+def test_sha256_mismatch_raises_even_with_vendored_available(monkeypatch, manifest, catalog_file):
+    # Integrity failure must NEVER silently degrade to the vendored copy (the headline guarantee).
+    manifest["feynman"]["versions"]["1"]["sha256"]["catalog.yaml"] = "0" * 64
+    monkeypatch.setattr(R, "fetch_manifest", lambda **kw: manifest)
+    monkeypatch.setattr("huggingface_hub.hf_hub_download", lambda **kw: str(catalog_file))
+    monkeypatch.setattr(R, "_vendored_path", lambda name: str(catalog_file))  # vendored IS available
+    with pytest.raises(R.IntegrityError, match="sha256 mismatch"):
+        R.resolve("feynman@1")  # DEFAULT args (vendored_fallback=True)
+
+
+def test_bare_name_not_shadowed_by_cwd_file(monkeypatch, tmp_path):
+    (tmp_path / "feynman").write_text("stray", encoding="utf-8")
+    monkeypatch.chdir(tmp_path)
+    assert R._looks_like_path("feynman") is False  # a same-named CWD file must NOT make it path-like
+
+
+def test_colon_in_local_path_routes_local(tmp_path):
+    d = tmp_path / "run:2024"
+    d.mkdir()
+    f = d / "x.yaml"
+    f.write_text("metadata: {name: x}\n", encoding="utf-8")
+    art = R.resolve(str(f))
+    assert art.source == "local" and art.path == os.path.abspath(str(f))
+
+
+def test_missing_sha_warns_but_resolves(monkeypatch, manifest, catalog_file):
+    manifest["feynman"]["versions"]["1"]["sha256"] = {}  # file listed but unpinned
+    monkeypatch.setattr(R, "fetch_manifest", lambda **kw: manifest)
+    monkeypatch.setattr("huggingface_hub.hf_hub_download", lambda **kw: str(catalog_file))
+    with pytest.warns(RuntimeWarning, match="No sha256"):
+        art = R.resolve("feynman@1", vendored_fallback=False)
+    assert art.source == "huggingface"

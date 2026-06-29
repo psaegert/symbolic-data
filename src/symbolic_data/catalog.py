@@ -97,17 +97,29 @@ class ProblemCatalog:
         if not isinstance(mapping, dict):
             raise ValueError("catalog yaml must be a mapping")
 
-        if "expressions" in mapping:
+        # Structured form: a top-level `metadata` and/or `expressions` block. `metadata` and
+        # `expressions` are RESERVED top-level keys -- a flat catalog may not use them as eq_ids.
+        # (Detecting on `expressions` alone would mis-eat a metadata-only catalog as a phantom
+        # entry named "metadata".)
+        if "expressions" in mapping or "metadata" in mapping:
             meta = dict(mapping.get("metadata", {}))
-            raw_entries = mapping["expressions"]
+            raw_entries = mapping.get("expressions", {})
         else:
             # flat form: every top-level key is an expression (no metadata block)
             meta = {}
             raw_entries = mapping
+        resolved_name = name or meta.get("name", "catalog")
+        resolved_version = version if version is not None else meta.get("version")
+        # Make the metadata block consistent with the resolved identity so the in-memory object
+        # (cat.meta["version"] == cat.version) and any to_yaml round-trip preserve the loaded
+        # name/version -- the arg/resolver wins over a possibly-stale embedded block.
+        meta["name"] = resolved_name
+        if resolved_version is not None:
+            meta["version"] = resolved_version
         entries = {eq_id: CatalogEntry.from_mapping(eq_id, body) for eq_id, body in raw_entries.items()}
         return cls(
-            name=name or meta.get("name", "catalog"),
-            version=version if version is not None else meta.get("version"),
+            name=resolved_name,
+            version=resolved_version,
             entries=entries,
             meta=meta,
             source=source,
@@ -121,9 +133,12 @@ class ProblemCatalog:
     # --- persistence --------------------------------------------------------------------------
     def to_mapping(self) -> dict[str, Any]:
         meta = dict(self.meta)
-        meta.setdefault("name", self.name)
+        # Assignment (not setdefault): self.name/self.version are authoritative over a possibly
+        # stale embedded block, so a loaded-then-saved catalog preserves its resolved identity
+        # rather than silently reverting/downgrading the version.
+        meta["name"] = self.name
         if self.version is not None:
-            meta.setdefault("version", self.version)
+            meta["version"] = self.version
         return {"metadata": meta, "expressions": {e.id: e.to_mapping() for e in self.entries.values()}}
 
     def to_yaml(self, path: str | Path) -> None:

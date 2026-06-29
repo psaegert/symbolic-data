@@ -60,3 +60,22 @@ def test_to_from_yaml_roundtrip(tmp_path):
 def test_flat_yaml_form_is_accepted():
     cat = ProblemCatalog.from_yaml({"Eq1": {"raw": "x1", "prepared": "v1", "vars": {"v1": {}}}}, name="adhoc")
     assert cat.name == "adhoc" and len(cat) == 1 and cat["Eq1"].raw == "x1"
+
+
+def test_override_version_wins_and_roundtrip_is_lossless():
+    # A resolver/arg-provided version must win over a stale embedded metadata block, in memory
+    # AND through to_yaml -- never a silent revert/downgrade.
+    mapping = {"metadata": {"name": "feynman", "version": 1}, "expressions": {"E1": {"raw": "x"}}}
+    cat = ProblemCatalog.from_yaml(mapping, version=2)
+    assert cat.version == 2
+    assert cat.meta["version"] == 2  # in-memory consistency (not the stale block's 1)
+    assert cat.to_mapping()["metadata"]["version"] == 2  # no downgrade on save
+    cat2 = ProblemCatalog.from_yaml(mapping, name="renamed")
+    assert cat2.name == "renamed" and cat2.to_mapping()["metadata"]["name"] == "renamed"
+
+
+def test_metadata_only_structured_catalog_is_not_a_phantom_entry():
+    cat = ProblemCatalog.from_yaml({"metadata": {"name": "empty", "version": 3}})
+    assert len(cat) == 0          # NOT a single phantom entry named "metadata"
+    assert cat.name == "empty"    # NOT the default "catalog"
+    assert cat.version == 3

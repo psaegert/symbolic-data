@@ -25,6 +25,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import warnings
 from dataclasses import dataclass, field
 from importlib import resources
 from typing import Any
@@ -42,6 +43,10 @@ _PATH_LIKE_SUFFIXES = (".yaml", ".yml", ".json", ".npz")
 
 class ResolverError(RuntimeError):
     """Raised when a reference cannot be resolved (and no vendored fallback applies)."""
+
+
+class IntegrityError(ResolverError):
+    """Raised when a fetched artifact fails sha256 verification. Never falls back silently."""
 
 
 @dataclass
@@ -66,7 +71,11 @@ def _looks_like_path(ref: str) -> bool:
         return True
     if ref.lower().endswith(_PATH_LIKE_SUFFIXES):
         return True
-    return os.path.isfile(ref)
+    # A bare name (no separator / leading dot/tilde / known suffix) is NEVER a path -- even if a
+    # same-named file happens to exist in the CWD. Otherwise a stray file could silently shadow a
+    # manifest name and bypass the versioned + sha256-checked path. Callers wanting a literal local
+    # file pass an explicit path (``./name`` or an absolute path).
+    return False
 
 
 def _parse_ref(ref: str) -> tuple[str | None, str, int | None]:
@@ -136,9 +145,12 @@ def resolve(
     if not ref or not isinstance(ref, str):
         raise ValueError("ref must be a non-empty string")
 
-    # A "repo_id:name[@version]" override (one '/' in the part before ':') is a manifest ref,
-    # never a local path -- check this first so the repo id's '/' does not trip path detection.
-    is_repo_ref = ":" in ref and "/" in ref.split(":", 1)[0]
+    # A "repo_id:name[@version]" override is a manifest ref, never a local path -- check first so
+    # the repo id's '/' does not trip path detection. The repo_id is a "user/repo" slug (exactly
+    # one '/', not path-like), so a local path that merely contains a colon (e.g. a colon in a
+    # directory name, or an absolute path) is NOT misclassified as a repo ref.
+    _head = ref.split(":", 1)[0] if ":" in ref else ""
+    is_repo_ref = bool(_head) and _head.count("/") == 1 and not _head.startswith((".", "~", os.sep))
 
     # 1. explicit local path
     if not is_repo_ref and _looks_like_path(ref):
@@ -155,8 +167,11 @@ def resolve(
     if entry is not None:
         try:
             return _resolve_from_manifest(name, entry, version, install=install, verify=verify)
-        except ResolverError:
-            if not vendored_fallback:
+        except ResolverError as exc:
+            # An integrity failure must NEVER silently fall back to a vendored copy -- that would
+            # defeat the point of integrity pinning. Only not-found / offline / download failures
+            # are eligible for the vendored fallback.
+            if isinstance(exc, IntegrityError) or not vendored_fallback:
                 raise
 
     # 3. vendored package-data fallback (offline / unknown name)
@@ -206,10 +221,16 @@ def _resolve_from_manifest(
             local = hf_hub_download(repo_id=repo_id, filename=remote, repo_type="dataset", revision=revision)
         except (HfHubHTTPError, OSError) as exc:
             raise ResolverError(f"Failed to fetch {remote} from {repo_id}: {exc}") from exc
-        if verify and filename in sha:
-            actual = _sha256(local)
-            if actual != sha[filename]:
-                raise ResolverError(f"sha256 mismatch for {name}@{resolved_version}/{filename}: expected {sha[filename]}, got {actual}")
+        if verify:
+            if filename in sha:
+                actual = _sha256(local)
+                if actual != sha[filename]:
+                    raise IntegrityError(f"sha256 mismatch for {name}@{resolved_version}/{filename}: expected {sha[filename]}, got {actual}")
+            else:
+                warnings.warn(
+                    f"No sha256 in manifest for {name}@{resolved_version}/{filename}; integrity NOT verified for this file.",
+                    RuntimeWarning, stacklevel=2,
+                )
         paths[filename] = local
 
     return ResolvedArtifact(
