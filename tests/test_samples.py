@@ -86,7 +86,7 @@ def pool():
 
 def test_iter_samples_end_to_end(pool):
     n_support = 8
-    samples = list(iter_samples(pool, n_support=n_support, seed=0, max_trials=16))
+    samples = list(iter_samples(pool, n_support=n_support, rng=np.random.default_rng(0), max_trials=16))
     assert samples, "expected at least one non-failing sample from a 12-skeleton pool"
 
     for s in samples:
@@ -104,8 +104,8 @@ def test_iter_samples_end_to_end(pool):
 
 
 def test_iter_samples_noise_changes_y(pool):
-    clean = list(iter_samples(pool, n_support=8, noise_level=0.0, seed=1, max_trials=16))
-    noisy = list(iter_samples(pool, n_support=8, noise_level=0.1, seed=1, max_trials=16))
+    clean = list(iter_samples(pool, n_support=8, noise_level=0.0, rng=np.random.default_rng(1), max_trials=16))
+    noisy = list(iter_samples(pool, n_support=8, noise_level=0.1, rng=np.random.default_rng(1), max_trials=16))
     # at least one sample whose noisy support differs from clean support
     assert any(
         n.y_support.size > 0 and not np.array_equal(n.y_support_noisy, n.y_support) for n in noisy

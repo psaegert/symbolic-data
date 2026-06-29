@@ -200,13 +200,15 @@ class ProblemSource:
         size = gen_cfg.get("size")
         if size is None:
             raise ValueError("generate-mode config['generator'] must set `size` (number of skeletons to generate)")
+        rng = self._get_rng()
         pool = SkeletonPool.from_config({k: v for k, v in gen_cfg.items() if k != "size"})
-        pool.create(int(size))
+        pool.create(int(size), rng=rng)
         for sample in iter_samples(
             pool,
             n_support=self.n_support,
             noise_level=self.noise,
             datasets_per_expression=self.problems_per_expression,
+            rng=rng,
             skip_failed=False,
         ):
             problem = _sample_to_problem(sample)

@@ -30,8 +30,8 @@ class ScaleTransform:
         self._scale_prior = scale_prior
         self.probability = float(probability)
 
-    def apply(self, support: np.ndarray) -> np.ndarray:
-        scale_factor = 10.0 ** _to_scalar(self._scale_prior(size=1))
+    def apply(self, support: np.ndarray, rng: np.random.Generator) -> np.ndarray:
+        scale_factor = 10.0 ** _to_scalar(self._scale_prior(size=1, rng=rng))
         support *= scale_factor
         return support.astype(np.float32, copy=False)
 
@@ -64,7 +64,7 @@ class QuantizeTransform:
             raise ValueError("Transform probability must be within [0, 1].")
         self.probability = float(probability)
 
-    def apply(self, support: np.ndarray) -> np.ndarray:
+    def apply(self, support: np.ndarray, rng: np.random.Generator) -> np.ndarray:
         n_dims = support.shape[1]
         if n_dims == 0:
             return support
@@ -73,13 +73,13 @@ class QuantizeTransform:
         if max_quantizable <= 0:
             return support
 
-        raw_dims = self._d_quantized_sampler(size=1)
+        raw_dims = self._d_quantized_sampler(size=1, rng=rng)
         d_quantized = int(round(_to_scalar(raw_dims)))
         d_quantized = max(0, min(max_quantizable, d_quantized))
         if d_quantized == 0:
             return support
 
-        dims = np.random.choice(n_dims, size=d_quantized, replace=False)
+        dims = rng.choice(n_dims, size=d_quantized, replace=False)
         if dims.size == 0:
             return support.astype(np.float32, copy=False)
 
@@ -101,7 +101,7 @@ class QuantizeTransform:
         active_mins = mins[active_mask]
         active_maxs = maxs[active_mask]
 
-        quantized = self._quantize_dimensions(active_columns, active_mins, active_maxs)
+        quantized = self._quantize_dimensions(active_columns, active_mins, active_maxs, rng)
         if quantized is not None:
             support[:, active_dims] = quantized
 
@@ -112,12 +112,13 @@ class QuantizeTransform:
         values: np.ndarray,
         mins: np.ndarray,
         maxs: np.ndarray,
+        rng: np.random.Generator,
     ) -> np.ndarray | None:
         if values.ndim != 2 or values.shape[1] == 0:
             return None
 
         n_dims = values.shape[1]
-        raw_bins = self._n_bins_sampler(size=n_dims)
+        raw_bins = self._n_bins_sampler(size=n_dims, rng=rng)
         n_bins = np.round(raw_bins).astype(int, copy=False)
         n_bins = np.clip(n_bins, 2, self.max_bins)
 
@@ -137,7 +138,7 @@ class QuantizeTransform:
             if not np.isfinite(min_val) or not np.isfinite(max_val):
                 continue
 
-            edges = self._build_edges(min_val, max_val, bins)
+            edges = self._build_edges(min_val, max_val, bins, rng)
             centers = 0.5 * (edges[:-1] + edges[1:])
             indices = np.searchsorted(edges[1:-1], result[:, idx], side="left")
             if centers.shape[0] > 1:
@@ -177,7 +178,7 @@ class QuantizeTransform:
 
         return centers.astype(values.dtype, copy=False)
 
-    def _build_edges(self, min_val: float, max_val: float, n_bins: int) -> np.ndarray:
+    def _build_edges(self, min_val: float, max_val: float, n_bins: int, rng: np.random.Generator) -> np.ndarray:
         if self.strategy == "even":
             return np.linspace(min_val, max_val, num=n_bins + 1, dtype=np.float64)
 
@@ -187,7 +188,7 @@ class QuantizeTransform:
                 return np.array([min_val, max_val], dtype=np.float64)
 
             for _ in range(8):
-                internal = np.random.uniform(min_val, max_val, size=internal_count)
+                internal = rng.uniform(min_val, max_val, size=internal_count)
                 internal = np.unique(np.sort(internal))
                 if internal.size >= internal_count:
                     internal = internal[:internal_count]
@@ -314,9 +315,10 @@ class SupportSampler:
             f"got {type(spec).__name__}."
         )
 
-    def sample_n_support(self) -> int:
+    def sample_n_support(self, rng: np.random.Generator | None = None) -> int:
         """Sample the number of support points to generate."""
-        raw = self.n_support_prior(size=1)
+        rng = rng if rng is not None else np.random.default_rng()
+        raw = self.n_support_prior(size=1, rng=rng)
         count = int(round(_to_scalar(raw)))
         return max(1, count)
 
@@ -325,15 +327,17 @@ class SupportSampler:
         n_support: int,
         support_prior: Callable[..., np.ndarray] | None = None,
         support_scale_prior: Callable[..., np.ndarray] | None = None,
+        rng: np.random.Generator | None = None,
     ) -> np.ndarray:
         if n_support <= 0:
             raise SupportSamplingError("n_support must be positive.")
+        rng = rng if rng is not None else np.random.default_rng()
 
         support_prior_fn = support_prior or self.support_prior
         if support_prior_fn is None:
             raise SupportSamplingError("Support prior must be defined before sampling.")
 
-        support = self._draw_continuous_support(n_support, support_prior_fn)
+        support = self._draw_continuous_support(n_support, support_prior_fn, rng)
 
         transforms: list[Any] = []
         if support_scale_prior is not None:
@@ -347,9 +351,9 @@ class SupportSampler:
             probability = float(getattr(transform, "probability", 1.0))
             if probability <= 0.0:
                 continue
-            if probability < 1.0 and np.random.random() >= probability:
+            if probability < 1.0 and rng.random() >= probability:
                 continue
-            support = transform.apply(support)
+            support = transform.apply(support, rng)
 
         self._maybe_check_unique(support, n_support)
         return support.astype(np.float32, copy=False)
@@ -358,16 +362,17 @@ class SupportSampler:
         self,
         n_support: int,
         support_prior: Callable[..., np.ndarray],
+        rng: np.random.Generator,
     ) -> np.ndarray:
         if self.independent_dimensions:
             columns = []
             for _ in range(self.n_variables):
-                samples = support_prior(size=(n_support, 1))
+                samples = support_prior(size=(n_support, 1), rng=rng)
                 column = np.asarray(samples, dtype=np.float64).reshape(n_support)
                 columns.append(column)
             support = np.stack(columns, axis=1)
         else:
-            base = support_prior(size=(n_support, self.n_variables))
+            base = support_prior(size=(n_support, self.n_variables), rng=rng)
             support = np.asarray(base, dtype=np.float64).reshape(n_support, self.n_variables)
         return support.astype(np.float32)
 

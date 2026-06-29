@@ -515,7 +515,7 @@ class SkeletonPool:
 
         return load_config(config_path), pool
 
-    def _sympy_simplify_skeleton(self, skeleton: list[str]) -> list[str]:
+    def _sympy_simplify_skeleton(self, skeleton: list[str], rng: np.random.Generator) -> list[str]:
         """Simplify a skeleton using SymPy with a subprocess timeout."""
         # Replace mult/div tokens with arithmetic equivalents
         expression = _constantify_skeleton(list(skeleton))
@@ -528,7 +528,7 @@ class SkeletonPool:
 
         # Replace constant placeholders with random numerical values
         for c in constants:
-            infix = infix.replace(c, str(np.random.uniform(-10, 10)))
+            infix = infix.replace(c, str(rng.uniform(-10, 10)))
 
         # Run SymPy simplification with timeout
         result = _sympy_simplify_with_timeout(infix, timeout_seconds=1.0)
@@ -551,7 +551,7 @@ class SkeletonPool:
 
         return prefix
 
-    def sample_skeleton(self, new: bool = False, decontaminate: bool = True) -> tuple[tuple[str], CodeType, list[str]]:
+    def sample_skeleton(self, new: bool = False, decontaminate: bool = True, rng: np.random.Generator | None = None) -> tuple[tuple[str], CodeType, list[str]]:
         '''
         Sample a skeleton from the pool.
 
@@ -565,29 +565,30 @@ class SkeletonPool:
         tuple[str], CodeType, list[str]
             The skeleton, its compiled code, and the constants used in the skeleton.
         '''
+        rng = rng if rng is not None else np.random.default_rng()
         if len(self.skeletons) == 0 or new:
             for _ in range(self.sample_strategy['max_tries']):
                 match self.sample_strategy['n_operator_distribution']:
                     case "equiprobable_lengths":
-                        n_operators = np.random.randint(self.sample_strategy['min_operators'], self.sample_strategy['max_operators'] + 1)
+                        n_operators = rng.integers(self.sample_strategy['min_operators'], self.sample_strategy['max_operators'] + 1)
                     case "length_proportional":
                         if self.operator_probs is None:
                             self.operator_probs = np.arange(self.sample_strategy['min_operators'], self.sample_strategy['max_operators'] + 1)**self.sample_strategy['power']
                             self.operator_probs = self.operator_probs / self.operator_probs.sum()
-                        n_operators = np.random.choice(
+                        n_operators = rng.choice(
                             range(self.sample_strategy['min_operators'], self.sample_strategy['max_operators'] + 1),
                             p=self.operator_probs)
                     case "length_exponential":
                         if self.operator_probs is None:
                             self.operator_probs = np.exp(np.arange(self.sample_strategy['min_operators'], self.sample_strategy['max_operators'] + 1)**self.sample_strategy['power'] / self.sample_strategy['lambda'])
                             self.operator_probs = self.operator_probs / self.operator_probs.sum()
-                        n_operators = np.random.choice(
+                        n_operators = rng.choice(
                             range(self.sample_strategy['min_operators'], self.sample_strategy['max_operators'] + 1),
                             p=self.operator_probs)
                     case _:
                         raise ValueError(f"Invalid n_operator_distribution: {self.sample_strategy['n_operator_distribution']}")
 
-                skeleton = self.skeleton_sampler.sample(n_operators)
+                skeleton = self.skeleton_sampler.sample(n_operators, rng)
                 if self.simplify is True:
                     try:
                         skeleton = self.simplipy_engine.simplify(skeleton, inplace=True, max_pattern_length=4)
@@ -599,7 +600,7 @@ class SkeletonPool:
                         raise NoValidSampleFoundError(f"Skeleton contains forbidden tokens: {skeleton}")
                 elif self.simplify == 'sympy':
                     try:
-                        skeleton = self._sympy_simplify_skeleton(skeleton)
+                        skeleton = self._sympy_simplify_skeleton(skeleton, rng)
                     except NoValidSampleFoundError:
                         raise
                     except Exception as e:
@@ -617,14 +618,15 @@ class SkeletonPool:
                     if not decontaminate or not self.is_held_out(skeleton, constants):
                         return tuple(skeleton), code, constants   # type: ignore
         else:
-            skeleton = random.choice(tuple(self.skeletons))  # type: ignore
+            skeletons_tuple = tuple(self.skeletons)
+            skeleton = skeletons_tuple[int(rng.integers(len(skeletons_tuple)))]  # type: ignore
             code, constants = self.skeleton_codes[skeleton]  # type: ignore
 
             return skeleton, code, constants  # type: ignore
 
         raise NoValidSampleFoundError(f"Failed to sample a non-contaminated skeleton after {self.sample_strategy['max_tries']} retries")
 
-    def sample_data(self, code: CodeType, n_constants: int = 0, n_support: int | None = None, support_prior: Callable | None = None, support_scale_prior: Callable | None = None) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    def sample_data(self, code: CodeType, n_constants: int = 0, n_support: int | None = None, support_prior: Callable | None = None, support_scale_prior: Callable | None = None, rng: np.random.Generator | None = None) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         '''
         Sample support points and literals for an expression.
 
@@ -646,12 +648,13 @@ class SkeletonPool:
         tuple[np.ndarray, np.ndarray, np.ndarray]
             The support points, their images, and the literals.
         '''
+        rng = rng if rng is not None else np.random.default_rng()
         expression_callable = self.simplipy_engine.code_to_lambda(code)
         if n_support is None:
-            n_support = self.support_sampler.sample_n_support()
+            n_support = self.support_sampler.sample_n_support(rng=rng)
 
         for _ in range(self.sample_strategy['max_tries']):
-            literals = self.literal_prior(size=n_constants).astype(np.float32)
+            literals = self.literal_prior(size=n_constants, rng=rng).astype(np.float32)
 
             override_support_prior = SupportSampler.ensure_prior_callable(support_prior) if support_prior is not None else None
             override_support_scale = SupportSampler.ensure_prior_callable(support_scale_prior) if support_scale_prior is not None else None
@@ -661,6 +664,7 @@ class SkeletonPool:
                     n_support=n_support,
                     support_prior=override_support_prior,
                     support_scale_prior=override_support_scale,
+                    rng=rng,
                 )
             except SupportSamplingError:
                 continue
@@ -697,7 +701,7 @@ class SkeletonPool:
 
         return x_support, y_support.reshape(-1, 1), literals
 
-    def sample(self, n_support: int | None = None) -> dict:
+    def sample(self, n_support: int | None = None, rng: np.random.Generator | None = None) -> dict:
         '''
         Sample a skeleton, support points, and literals.
 
@@ -711,8 +715,9 @@ class SkeletonPool:
         dict
             A dictionary containing the skeleton hash, code, constants, support points, and literals.
         '''
-        skeleton_hash, skeleton_code, skeleton_constants = self.sample_skeleton()
-        x_support, y_support, literals = self.sample_data(skeleton_code, len(skeleton_constants), n_support)
+        rng = rng if rng is not None else np.random.default_rng()
+        skeleton_hash, skeleton_code, skeleton_constants = self.sample_skeleton(rng=rng)
+        x_support, y_support, literals = self.sample_data(skeleton_code, len(skeleton_constants), n_support, rng=rng)
 
         return {
             'skeleton_hash': skeleton_hash,
@@ -723,7 +728,7 @@ class SkeletonPool:
             'literals': literals
         }
 
-    def create(self, size: int, verbose: bool = False) -> None:
+    def create(self, size: int, verbose: bool = False, rng: np.random.Generator | None = None) -> None:
         '''
         Create a pool of skeletons of a given size.
 
@@ -734,6 +739,7 @@ class SkeletonPool:
         verbose : bool, optional
             Whether to display a progress bar.
         '''
+        rng = rng if rng is not None else np.random.default_rng()
         n_skipped = 0
         n_created = len(self.skeletons)
 
@@ -741,7 +747,7 @@ class SkeletonPool:
 
         while n_created < size:
             try:
-                skeleton, code, constants = self.sample_skeleton(new=True)
+                skeleton, code, constants = self.sample_skeleton(new=True, rng=rng)
             except NoValidSampleFoundError:
                 n_skipped += 1
                 pbar.set_postfix_str(f"Skipped: {n_skipped:,}")

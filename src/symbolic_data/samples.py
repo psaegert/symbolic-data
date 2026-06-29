@@ -145,7 +145,7 @@ def sample_from_skeleton(
 
     for _ in range(max_trials):
         try:
-            x_all, y_all, literals = pool.sample_data(code, n_constants, n_support=n_points)
+            x_all, y_all, literals = pool.sample_data(code, n_constants, n_support=n_points, rng=rng)
         except NoValidSampleFoundError:
             continue
         if x_all.size == 0 or y_all.size == 0:
@@ -218,7 +218,7 @@ def iter_samples(
     mask_unused_variables: bool = False,
     datasets_per_expression: int = 1,
     skeletons: Sequence[Sequence[str]] | None = None,
-    seed: int | None = None,
+    rng: np.random.Generator | None = None,
     max_trials: int = 8,
     skip_failed: bool = True,
 ) -> Iterator[Sample]:
@@ -235,7 +235,7 @@ def iter_samples(
     if skeletons is None:
         skeletons = sorted(pool.skeletons)
 
-    rng = np.random.default_rng(seed)
+    rng = rng if rng is not None else np.random.default_rng()
 
     for skeleton in skeletons:
         for _ in range(datasets_per_expression):
