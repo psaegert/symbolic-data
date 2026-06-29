@@ -91,8 +91,25 @@ def test_fixed_mode_roundtrips_inline_problems(engine):
     assert np.array_equal(out[0].x_support, problems[0].x_support)
 
 
-def test_generate_mode_stub_raises():
-    src = ProblemSource({"generator": {"operators": {}}})
+def test_generate_mode_produces_problems():
+    import os
+    import yaml
+    cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "skeleton_pool_train.yaml")
+    gen_cfg = yaml.safe_load(open(cfg_path, encoding="utf-8"))
+    gen_cfg["size"] = 6
+    src = ProblemSource({"generator": gen_cfg, "sampling": {"n_support": 16, "noise": 0.0}})
+    assert src.mode == "generate" and src.size_hint() == 6
+    problems = list(src)
+    assert len(problems) == 6  # one Sample (or placeholder) per generated skeleton
+    real = [p for p in problems if not p.is_placeholder]
+    assert real, "expected at least some non-placeholder generated problems"
+    for p in real:
+        assert p.eq_id is None and p.expression and p.is_finite()
+        assert p.x_support.ndim == 2 and p.x_support.shape[0] >= 1
+
+
+def test_generate_mode_requires_size():
+    src = ProblemSource({"generator": {"simplipy_engine": "dev_7-3"}})
     assert src.mode == "generate"
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(ValueError, match="size"):
         list(src)

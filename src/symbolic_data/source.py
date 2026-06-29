@@ -106,14 +106,15 @@ class ProblemSource:
         elif self.mode == "fixed":
             yield from self._iter_fixed()
         else:
-            raise NotImplementedError("generate-mode ProblemSource is not implemented yet (Stage c2)")
+            yield from self._iter_generate()
 
     def size_hint(self) -> int | None:
         if self.mode == "set":
             return len(self._get_catalog()) * self.problems_per_expression
         if self.mode == "fixed":
             return len(self.config["problems"]) * self.problems_per_expression
-        return None                                     # on-the-fly: unbounded
+        size = self.config["generator"].get("size")
+        return int(size) * self.problems_per_expression if size is not None else None
 
     # --- SET mode ----------------------------------------------------------------------------
     def _resolve_counts(self, catalog: ProblemCatalog) -> tuple[int, int]:
@@ -185,6 +186,32 @@ class ProblemSource:
             if problem.is_placeholder or self._passes_filters(problem):
                 yield problem
 
+    # --- GENERATE mode (on-the-fly procedural skeletons) -------------------------------------
+    def _iter_generate(self) -> Iterator[Problem]:
+        # Drives the (internal, transitional) skeleton machinery. Its global np.random is threaded
+        # onto the source's Generator and the machinery privatized in a follow-up increment (c2b);
+        # under the no-seeding model a live generate source is reproduced INFERENTIALLY (multi-draw),
+        # not by a seed, so using the proven sampler as-is here is distribution-correct.
+        from symbolic_data.skeleton_pool import SkeletonPool
+        from symbolic_data.samples import iter_samples
+
+        gen_cfg = self.config["generator"]
+        size = gen_cfg.get("size")
+        if size is None:
+            raise ValueError("generate-mode config['generator'] must set `size` (number of skeletons to generate)")
+        pool = SkeletonPool.from_config({k: v for k, v in gen_cfg.items() if k != "size"})
+        pool.create(int(size))
+        for sample in iter_samples(
+            pool,
+            n_support=self.n_support,
+            noise_level=self.noise,
+            datasets_per_expression=self.problems_per_expression,
+            skip_failed=False,
+        ):
+            problem = _sample_to_problem(sample)
+            if problem.is_placeholder or self._passes_filters(problem):
+                yield problem
+
     # --- filters / holdouts ------------------------------------------------------------------
     def _passes_filters(self, problem: Problem) -> bool:
         for rule in self.holdouts:
@@ -200,6 +227,17 @@ class ProblemSource:
 
     def to_catalog(self) -> ProblemCatalog:
         raise NotImplementedError("to_catalog() is implemented in Stage c4")
+
+
+def _sample_to_problem(sample: Any) -> Problem:
+    """Adapt a generate-track Sample into the unified Problem (transitional bridge)."""
+    return Problem(
+        x_support=sample.x_support, y_support=sample.y_support, y_support_noisy=sample.y_support_noisy,
+        x_validation=sample.x_validation, y_validation=sample.y_validation, y_validation_noisy=sample.y_validation_noisy,
+        skeleton=sample.skeleton, expression=sample.expression, constants=list(sample.constants),
+        variables=list(sample.variables), complexity=sample.complexity, noise=sample.noise_level, eq_id=None,
+        is_placeholder=sample.placeholder, placeholder_reason=sample.placeholder_reason,
+    )
 
 
 def _passes_filter(problem: Problem, spec: Mapping[str, Any]) -> bool:
