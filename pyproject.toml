@@ -37,6 +37,7 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "symbolic_data.benchmarks" = ["data/*.yaml", "specs/*.yaml"]
+"symbolic_data.catalogs" = ["data/*.yaml"]
 
 [tool.flake8]
 max-line-length = 250
