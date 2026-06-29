@@ -1,6 +1,6 @@
 import numpy as np
 
-from symbolic_data.holdout import HoldoutManager
+from symbolic_data._generate.holdout import HoldoutManager
 
 
 def _make_manager(n_variables: int = 2, allow_nan: bool = False) -> HoldoutManager:

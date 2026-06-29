@@ -185,7 +185,7 @@ def test_threaded_skeleton_sampler_preserves_operator_weights(engine):
     # DISTRIBUTIONAL sanity: high-weight binary ops (+,-,*,/ weight 10) dominate low-weight ones
     # (mult2/div2 weight 1) -- proves rng.choice(p=weights) still threads the configured weights.
     from collections import Counter
-    from symbolic_data.skeleton_pool import SkeletonPool
+    from symbolic_data._generate.skeleton_pool import SkeletonPool
     pool = SkeletonPool.from_config(_generate_cfg(1))
     sampler = pool.skeleton_sampler
     rng = np.random.default_rng(0)

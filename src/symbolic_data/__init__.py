@@ -10,7 +10,7 @@ distribution) and the extensibility ``Registry``. Depends only on simplipy + num
 The skeleton-sampling machinery is an internal implementation detail of generate-mode
 ``ProblemSource`` and is no longer part of the public API.
 """
-from symbolic_data.skeleton_pool import NoValidSampleFoundError
+from symbolic_data._generate.skeleton_pool import NoValidSampleFoundError
 from symbolic_data.distributions import get_distribution, fastsrb_dist, DISTRIBUTIONS, BASE_DISTRIBUTIONS
 from symbolic_data.prior_factory import build_prior_callable
 from symbolic_data.registry import Registry

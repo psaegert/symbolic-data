@@ -204,7 +204,7 @@ class ProblemSource:
         # Drives the (private, Generator-threaded) skeleton-generation engine and builds Problems
         # natively (no Sample intermediary). Reproducibility is inferential (multi-draw), not seeded;
         # the engine's randomness is fully controlled by self._get_rng().
-        from symbolic_data.skeleton_pool import SkeletonPool, NoValidSampleFoundError
+        from symbolic_data._generate.skeleton_pool import SkeletonPool, NoValidSampleFoundError
 
         gen_cfg = self.config["generator"]
         size = gen_cfg.get("size")

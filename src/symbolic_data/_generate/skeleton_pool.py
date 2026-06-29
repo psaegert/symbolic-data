@@ -20,9 +20,9 @@ from symbolic_data.paths import substitute_root_path
 from symbolic_data.sympy_timeout import _sympy_simplify_with_timeout
 from simplipy.utils import codify
 from symbolic_data.prior_factory import build_prior_callable
-from symbolic_data.holdout import HoldoutManager
-from symbolic_data.skeleton_sampling import SkeletonSampler
-from symbolic_data.support_sampling import SupportSampler, SupportSamplingError
+from symbolic_data._generate.holdout import HoldoutManager
+from symbolic_data._generate.skeleton_sampling import SkeletonSampler
+from symbolic_data._generate.support_sampling import SupportSampler, SupportSamplingError
 from symbolic_data.token_ops import flatten_nested_list
 
 
