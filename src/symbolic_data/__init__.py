@@ -13,6 +13,7 @@ from symbolic_data.prior_factory import build_prior_callable
 from symbolic_data.registry import Registry
 from symbolic_data.problem import Problem
 from symbolic_data.catalog import ProblemCatalog, CatalogEntry, load_catalog, CATALOGS
+from symbolic_data.source import ProblemSource
 from symbolic_data.samples import Sample, sample_from_skeleton, iter_samples
 from symbolic_data.tensor_ops import mask_unused_variable_columns
 from symbolic_data.convert_data import ParserFactory, TestSetParser
