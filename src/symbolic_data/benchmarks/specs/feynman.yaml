@@ -1,0 +1,15 @@
+# Benchmark spec (header) — references the `feynman` problem-set. See symbolic_data.datasets.load_spec.
+metadata:
+  name: feynman
+  version: 1
+  description: Feynman Symbolic Regression Database (Udrescu & Tegmark 2020), 100 equations.
+  sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+source:
+  kind: set
+  mode: iterate
+sampling:
+  n_points: 100          # FSReD fixes no count; 100 is the package default
+  method: random
+  noise: 0.0
+problems: feynman        # -> benchmarks/data/feynman.yaml

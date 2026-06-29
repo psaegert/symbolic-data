@@ -25,7 +25,7 @@ import yaml
 from symbolic_data.benchmarks import FastSRBBenchmark, SpecBenchmark
 from symbolic_data.registry import Registry
 
-__all__ = ["BENCHMARKS", "load_benchmark", "SpecBenchmark", "FastSRBBenchmark"]
+__all__ = ["BENCHMARKS", "load_benchmark", "load_spec", "SpecBenchmark", "FastSRBBenchmark"]
 
 # The HF dataset that versions the canonical benchmark specs.
 ANSR_DATA_REPO = "psaegert/ansr-data"
@@ -45,16 +45,57 @@ def _load_packaged_spec(filename: str) -> tuple[dict[str, Any], dict[str, Any]]:
     return spec, provenance
 
 
-def _curated_loader(name: str, filename: str, *, spec_path: str | None, simplipy_engine: Any, random_state: Any, **kwargs: Any) -> SpecBenchmark:
-    """Shared body for the package-data curated loaders (feynman, nguyen)."""
+def _load_packaged_header(name: str) -> dict[str, Any] | None:
+    """Load a benchmark-spec *header* (``specs/<name>.yaml``) shipped as package data, or None."""
+    ref = resources.files("symbolic_data.benchmarks").joinpath("specs", f"{name}.yaml")
+    try:
+        text = ref.read_text(encoding="utf-8")
+    except (FileNotFoundError, OSError):
+        return None
+    return yaml.safe_load(text)
+
+
+def _resolve_problems(ref: str, *, spec_path: str | None) -> tuple[Any, dict[str, Any]]:
+    """Resolve a spec header's ``problems`` reference to (problem-set, provenance).
+
+    MVP resolver: a local ``spec_path`` wins; else ``ref`` names a package-data problem-set
+    (``benchmarks/data/<ref>.yaml``). (HF-versioned ``name@version`` resolution is a later increment.)
+    """
     if spec_path is not None:
-        spec: Any = str(spec_path)
-        provenance = {"source": "local", "path": str(spec_path)}
-    else:
-        spec, provenance = _load_packaged_spec(filename)
-    benchmark = SpecBenchmark(spec, name=name, simplipy_engine=simplipy_engine, random_state=random_state, **kwargs)
-    provenance.update({"benchmark": name, "simplipy_engine": str(simplipy_engine)})
-    benchmark.provenance = provenance
+        return str(spec_path), {"source": "local", "path": str(spec_path)}
+    return _load_packaged_spec(f"{ref}.yaml")
+
+
+def load_spec(
+    name: str,
+    *,
+    spec_path: str | None = None,
+    simplipy_engine: Any = "dev_7-3",
+    random_state: Any = None,
+    **kwargs: Any,
+) -> SpecBenchmark:
+    """Build a benchmark from its versioned spec *header* (``benchmarks/specs/<name>.yaml``).
+
+    The header (``metadata`` / ``source`` / ``sampling`` / ``problems``) references a problem-set,
+    which is resolved (package data, or a local ``spec_path`` override) and wrapped in a
+    :class:`SpecBenchmark` carrying the header. The header's ``sampling`` block becomes the canonical
+    per-call default (e.g. Nguyen's ``n_points: 20``). ``benchmark.provenance`` records the spec
+    version + the resolved problem-set.
+    """
+    header = _load_packaged_header(name)
+    if header is None:
+        raise KeyError(f"No benchmark spec for {name!r}")
+    meta = header.get("metadata", {})
+    problems, problems_prov = _resolve_problems(header.get("problems", name), spec_path=spec_path)
+    benchmark = SpecBenchmark(problems, name=meta.get("name", name), header=header, simplipy_engine=simplipy_engine, random_state=random_state, **kwargs)
+    benchmark.provenance = {
+        "source": "package",
+        "benchmark": meta.get("name", name),
+        "spec": f"benchmarks/specs/{name}.yaml",
+        "spec_version": meta.get("version", CURATED_SPEC_VERSION),
+        "problems": problems_prov,
+        "simplipy_engine": str(simplipy_engine),
+    }
     return benchmark
 
 
@@ -95,17 +136,25 @@ def _load_fastsrb(
     ``spec_path`` to read a local file, or ``revision`` to fetch the HF-versioned spec from
     ``psaegert/ansr-data`` instead.
     """
+    header = _load_packaged_header("fastsrb")
     if spec_path is not None:
-        spec: Any = str(spec_path)
-        provenance = {"source": "local", "path": str(spec_path)}
+        problems: Any = str(spec_path)
+        problems_prov = {"source": "local", "path": str(spec_path)}
     elif revision is not None:
-        resolved, provenance = _resolve_spec(None, repo_id=ANSR_DATA_REPO, filename=FASTSRB_SPEC, revision=revision)
-        spec = resolved
+        resolved, problems_prov = _resolve_spec(None, repo_id=ANSR_DATA_REPO, filename=FASTSRB_SPEC, revision=revision)
+        problems = resolved
     else:
-        spec, provenance = _load_packaged_spec("fastsrb.yaml")
-    benchmark = FastSRBBenchmark(spec, simplipy_engine=simplipy_engine, random_state=random_state, **kwargs)
-    provenance.update({"benchmark": "fastsrb", "simplipy_engine": str(simplipy_engine)})
-    benchmark.provenance = provenance  # stamp source for reproducibility (provenance principle)
+        problems, problems_prov = _load_packaged_spec("fastsrb.yaml")
+    benchmark = FastSRBBenchmark(problems, header=header, simplipy_engine=simplipy_engine, random_state=random_state, **kwargs)
+    meta = (header or {}).get("metadata", {})
+    benchmark.provenance = {
+        "source": "package" if (spec_path is None and revision is None) else problems_prov.get("source"),
+        "benchmark": "fastsrb",
+        "spec": "benchmarks/specs/fastsrb.yaml",
+        "spec_version": meta.get("version", CURATED_SPEC_VERSION),
+        "problems": problems_prov,
+        "simplipy_engine": str(simplipy_engine),
+    }
     return benchmark
 
 
@@ -117,7 +166,7 @@ def _load_feynman(
     random_state: Any = None,
     **kwargs: Any,
 ) -> SpecBenchmark:
-    return _curated_loader("feynman", "feynman.yaml", spec_path=spec_path, simplipy_engine=simplipy_engine, random_state=random_state, **kwargs)
+    return load_spec("feynman", spec_path=spec_path, simplipy_engine=simplipy_engine, random_state=random_state, **kwargs)
 
 
 @BENCHMARKS.register("nguyen")
@@ -128,7 +177,7 @@ def _load_nguyen(
     random_state: Any = None,
     **kwargs: Any,
 ) -> SpecBenchmark:
-    return _curated_loader("nguyen", "nguyen.yaml", spec_path=spec_path, simplipy_engine=simplipy_engine, random_state=random_state, **kwargs)
+    return load_spec("nguyen", spec_path=spec_path, simplipy_engine=simplipy_engine, random_state=random_state, **kwargs)
 
 
 def load_benchmark(name: str = "fastsrb", **kwargs: Any) -> Any:

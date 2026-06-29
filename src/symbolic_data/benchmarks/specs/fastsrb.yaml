@@ -1,0 +1,15 @@
+# Benchmark spec (header) — references the `fastsrb` problem-set. See symbolic_data.datasets.load_spec.
+metadata:
+  name: fastsrb
+  version: 1
+  description: FastSRB benchmark (Martinek, arXiv:2508.14481), 120 equations.
+  sources:
+    - FastSRB (Viktor Martinek, arXiv:2508.14481, MIT); vendored from viktmar/FastSRB
+source:
+  kind: set
+  mode: iterate
+sampling:
+  n_points: 100
+  method: random
+  noise: 0.0
+problems: fastsrb        # -> benchmarks/data/fastsrb.yaml (or HF via revision / a local spec_path)

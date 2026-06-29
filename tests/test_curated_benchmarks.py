@@ -17,7 +17,7 @@ import warnings
 import numpy as np
 import pytest
 
-from symbolic_data import BENCHMARKS, SpecBenchmark, load_benchmark
+from symbolic_data import BENCHMARKS, SpecBenchmark, load_benchmark, load_spec
 
 # All curated loaders + their equation counts (registration / provenance).
 CURATED = {"fastsrb": 120, "feynman": 100, "nguyen": 12}
@@ -46,7 +46,34 @@ def test_curated_provenance_stamped(benches, name):
     assert prov["source"] == "package"
     assert prov["benchmark"] == name
     assert prov["spec_version"]
-    assert prov["resource"].endswith(f"{name}.yaml")
+    # provenance is now spec-header-aware: a `spec` (the header) referencing a `problems` set
+    assert prov["spec"].endswith(f"specs/{name}.yaml")
+    assert prov["problems"]["resource"].endswith(f"data/{name}.yaml")
+
+
+@pytest.mark.parametrize("name", CURATED)
+def test_spec_header_carried(benches, name):
+    """Each curated benchmark carries its versioned spec header (metadata/source/sampling)."""
+    header = benches[name].header
+    assert header["metadata"]["name"] == name
+    assert header["source"]["kind"] == "set"
+    assert "n_points" in header["sampling"]
+
+
+def test_canonical_n_points_from_header_applied():
+    """The spec header's sampling.n_points is the no-arg default (Nguyen's canonical 20),
+    while an explicit n_points still overrides it."""
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        ng = load_spec("nguyen", random_state=0)
+        assert ng.header["sampling"]["n_points"] == 20
+        assert ng.sample("Nguyen-1", random_state=0)["data"]["X"].shape[0] == 20  # header default
+        assert ng.sample("Nguyen-1", n_points=5, random_state=0)["data"]["X"].shape[0] == 5  # override
+
+
+def test_load_spec_unknown_raises():
+    with pytest.raises(KeyError):
+        load_spec("does_not_exist")
 
 
 @pytest.mark.parametrize("name", GATED)

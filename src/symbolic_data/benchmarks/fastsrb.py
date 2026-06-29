@@ -12,7 +12,7 @@ name and preserves the historical ``FastSRBBenchmark(yaml_path, ...)`` construct
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional, Union
+from typing import Any, Mapping, Optional, Union
 
 import numpy as np
 
@@ -28,6 +28,7 @@ class FastSRBBenchmark(SpecBenchmark):
         self,
         yaml_path: Union[str, Path],
         *,
+        header: Optional[Mapping[str, Any]] = None,
         simplipy_engine: SimpliPyEngine | str = "dev_7-3",
         random_state: Optional[Union[int, np.random.Generator]] = None,
     ) -> None:
@@ -35,6 +36,7 @@ class FastSRBBenchmark(SpecBenchmark):
         super().__init__(
             yaml_path,
             name="fastsrb",
+            header=header,
             simplipy_engine=simplipy_engine,
             random_state=random_state,
         )

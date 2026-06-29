@@ -38,6 +38,7 @@ class SpecBenchmark:
         spec: Union[str, Path, Mapping[str, Any]],
         *,
         name: str = "spec",
+        header: Optional[Mapping[str, Any]] = None,
         simplipy_engine: SimpliPyEngine | str = "dev_7-3",
         random_state: Optional[Union[int, np.random.Generator]] = None,
     ) -> None:
@@ -47,10 +48,14 @@ class SpecBenchmark:
         ----------
         spec:
             Either a path to a YAML spec file, or an already-parsed mapping from equation id
-            to entry. A mapping lets loaders pass packaged spec data without a filesystem round
-            trip.
+            to entry (the *problem set*). A mapping lets loaders pass packaged spec data without a
+            filesystem round trip.
         name:
             Human-readable benchmark name (used in warnings and as a default provenance tag).
+        header:
+            Optional parsed benchmark-spec *header* (``metadata`` / ``source`` / ``sampling``); see
+            ``symbolic_data.datasets.load_spec``. Its ``sampling`` block supplies the canonical
+            per-call defaults (``n_points``, ``method``) for :meth:`sample` when those are not passed.
         simplipy_engine:
             A :class:`SimpliPyEngine` instance or an engine id to load.
         random_state:
@@ -74,6 +79,8 @@ class SpecBenchmark:
             raise ValueError("Benchmark specification must be a mapping from equation ids to entries.")
 
         self.name = name
+        self.header: Dict[str, Any] = dict(header) if header else {}
+        self._sampling_defaults: Dict[str, Any] = dict(self.header.get("sampling", {}))
         self.provenance: Dict[str, Any] = {}
         self._entries: Dict[str, MutableMapping[str, Any]] = dict(entries)
         self._rng = self._resolve_rng(random_state)
@@ -372,15 +379,26 @@ class SpecBenchmark:
         self,
         eq_id: str,
         *,
-        n_points: int = 100,
-        method: str = "random",
+        n_points: Optional[int] = None,
+        method: Optional[str] = None,
         max_trials: int = 100,
         incremental: bool = False,
         random_state: Optional[Union[int, np.random.Generator]] = None,
     ) -> Dict[str, Any]:
-        """Sample a dataset for the requested equation."""
+        """Sample a dataset for the requested equation.
+
+        When ``n_points`` / ``method`` are not passed, they fall back to the spec header's
+        ``sampling`` block (e.g. Nguyen's canonical 20 points), else to ``100`` / ``"random"``.
+        ``method="grid"`` is accepted as an alias for the internal ``"range"`` (linspace) layout.
+        """
         if eq_id not in self._entries:
             raise KeyError(f"Unknown equation id: {eq_id}")
+        if n_points is None:
+            n_points = int(self._sampling_defaults.get("n_points", 100))
+        if method is None:
+            method = str(self._sampling_defaults.get("method", "random"))
+        if method == "grid":
+            method = "range"
         if n_points < 1:
             raise ValueError("n_points must be positive")
         rng = self._resolve_rng(random_state) if random_state is not None else self._rng

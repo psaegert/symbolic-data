@@ -36,7 +36,7 @@ Repository = "https://github.com/psaegert/symbolic-data"
 where = ["src"]
 
 [tool.setuptools.package-data]
-"symbolic_data.benchmarks" = ["data/*.yaml"]
+"symbolic_data.benchmarks" = ["data/*.yaml", "specs/*.yaml"]
 
 [tool.flake8]
 max-line-length = 250
