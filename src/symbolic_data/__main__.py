@@ -50,7 +50,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def _generate_skeleton_pool(args: argparse.Namespace) -> None:
-    from symbolic_data import SkeletonPool
+    from symbolic_data.skeleton_pool import SkeletonPool
 
     if args.verbose:
         print(f"Generating skeleton pool from {args.config}")
@@ -74,7 +74,8 @@ def _import_data(args: argparse.Namespace) -> None:
 
     from simplipy import SimpliPyEngine
 
-    from symbolic_data import SkeletonPool, substitute_root_path
+    from symbolic_data import substitute_root_path
+    from symbolic_data.skeleton_pool import SkeletonPool
     from symbolic_data.convert_data import ParserFactory
 
     if args.verbose:
@@ -119,7 +120,7 @@ def _import_data(args: argparse.Namespace) -> None:
 def _split_skeleton_pool(args: argparse.Namespace) -> None:
     import os
 
-    from symbolic_data import SkeletonPool
+    from symbolic_data.skeleton_pool import SkeletonPool
 
     print(f"Loading skeleton pool from {args.input}")
     config, skeleton_pool = SkeletonPool.load(args.input)

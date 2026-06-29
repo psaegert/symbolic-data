@@ -4,7 +4,8 @@ import pytest
 
 from simplipy import SimpliPyEngine
 
-from symbolic_data import SkeletonPool, ParserFactory
+from symbolic_data import ParserFactory
+from symbolic_data.skeleton_pool import SkeletonPool
 from symbolic_data.convert_data import FastSRBParser, NguyenParser, SOOSEParser, FeynmanParser
 
 REPO_ROOT = os.path.dirname(os.path.dirname(__file__))

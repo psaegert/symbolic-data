@@ -3,6 +3,58 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.4.0] - 2026-06-29
+
+A ground-up redesign of the data layer around one central unit and a clean, versioned, three-level
+stack. **Breaking:** the `load_benchmark` / `SpecBenchmark` / `BENCHMARKS` API and the public
+skeleton-sampling classes are removed (see Migration).
+
+### Added
+- **`Problem`** -- the one central data unit produced by every source (expression, skeleton,
+  constants, X, clean + noisy y for support and validation, complexity, provenance, placeholder
+  protocol). Noise is on the target y only; `y_*_noisy is y_*` when noise is zero.
+- **`ProblemCatalog` + `load_catalog`** -- the level-1 declarative artifact (`{metadata,
+  expressions}`): expressions + their intrinsic per-variable sampling. Curated catalogs `fastsrb`
+  (120), `feynman` (100), `nguyen` (12) ship vendored as package data.
+- **Versioned, repo-agnostic resolver** (`symbolic_data.resolver`): `load_catalog("name@version")`
+  resolves from a Hugging Face dataset manifest with a pinned git revision **and a sha256 integrity
+  check**, cached locally; `load_catalog("user/repo:name@version")` loads third-party catalogs;
+  vendored package data is the offline fallback. Integrity failures never silently fall back.
+- **`ProblemSource`** -- one concrete level-2 class (no ABC/subclasses), mode inferred from config:
+  a catalog ref (SET), a `generator` block (on-the-fly GENERATE), or inline `problems` (FIXED). Owns
+  the usage policy: draw `method`, `n_support`/`n_validation`, `noise`, `problems_per_expression`,
+  `layout`, holdouts/filters, and `materialize()`.
+  - Holdouts: a list of `{filter: {finite, max_complexity, n_variables, ...}}` and
+    `{exclude: <catalog>}` (decontamination by exact normalized-expression match).
+  - `materialize()` -> a FIXED source that re-iterates byte-identical Problems: the no-seed
+    reproducibility mechanism (sample once, freeze).
+- **Unified distribution framework**: the `fastsrb` distribution interprets the FastSRB
+  `sample_range`/`sample_type` recipe as one nestable distribution within the existing
+  named/nested/mixture vocabulary. All distributions thread a `numpy.random.Generator`. (Finding:
+  log-uniform is base-invariant, so FastSRB's base-10 `log` is value-equivalent to the native
+  natural-log `log_uniform`.)
+
+### Changed / Removed (breaking)
+- Removed `load_benchmark`, `load_spec`, `BENCHMARKS`, `SpecBenchmark`, `FastSRBBenchmark`, and
+  `datasets.py` (replaced by `load_catalog` / `ProblemCatalog` / the resolver).
+- The skeleton-sampling machinery (`SkeletonPool`, `SkeletonSampler`, `SupportSampler`,
+  `HoldoutManager`, `Sample`, `sample_from_skeleton`, `iter_samples`) is no longer public -- it is an
+  internal detail of generate-mode `ProblemSource`. `NoValidSampleFoundError` remains exported.
+- Reproducibility is no longer seed-based: sampling threads a `Generator` (entropy by default) and
+  exact reproduction comes from `materialize()`.
+
+### Migration
+- `load_benchmark("feynman")` -> `load_catalog("feynman")` (returns a `ProblemCatalog`; inspect
+  `cat["I.6.2a"].prepared` / `.variables`).
+- To get `(X, y)` problems: `ProblemSource({"catalog": "feynman", "sampling": {...}})` then iterate.
+
+### Deferred (tracked for 0.4.x)
+- Generate-mode's internal skeleton sampler still uses global `np.random`; threading it onto the
+  source's `Generator` and fully folding it into `ProblemSource` internals is a 0.4.1 refinement (it
+  is distribution-correct today, behind the clean `ProblemSource` API).
+- Publishing the Hugging Face asset manifest + a frozen `holdout_grid` asset; `to_catalog()`
+  (persistent frozen catalogs).
+
 ## [0.3.0] - 2026-06-28
 
 ### Added

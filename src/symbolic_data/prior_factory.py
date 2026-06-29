@@ -3,7 +3,7 @@ from typing import Any, Callable
 
 import numpy as np
 
-from symbolic_data.distributions import get_distribution
+from symbolic_data.distributions import _DEFAULT_RNG, get_distribution
 
 
 def build_prior_callable(config: dict[str, Any] | list[dict[str, Any]]) -> Callable:
@@ -15,10 +15,11 @@ def build_prior_callable(config: dict[str, Any] | list[dict[str, Any]]) -> Calla
             raise ValueError("Mixture prior weights must sum to a positive value.")
         weights /= weights.sum()
 
-        def mixture_distribution(size: Any = 1) -> Any:
-            chosen_index = int(np.random.choice(len(distributions), p=weights))
+        def mixture_distribution(size: Any = 1, rng: np.random.Generator | None = None) -> Any:
+            generator = rng if rng is not None else _DEFAULT_RNG
+            chosen_index = int(generator.choice(len(distributions), p=weights))
             chosen_dist_callable = distributions[chosen_index]
-            return chosen_dist_callable(size=size)
+            return chosen_dist_callable(size=size, rng=generator)
 
         return mixture_distribution
 
