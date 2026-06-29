@@ -37,14 +37,16 @@ def test_registry_seeded_faithfully_from_builtins():
 
 @pytest.mark.parametrize("name,kwargs", list(BUILTIN_CONFIGS.items()))
 def test_builtin_resolution_is_behaviour_preserving(name, kwargs):
-    """get_distribution via the registry == calling the builtin factory directly (same seed)."""
+    """get_distribution via the registry == calling the builtin factory directly.
+
+    Reproducibility now comes from threading the SAME Generator (no global ``np.random`` seed —
+    seeding is dropped in 0.4.0), so both paths get a freshly-constructed Generator with the
+    same internal state.
+    """
     config = {"name": name, "kwargs": kwargs}
 
-    np.random.seed(20240617)
-    via_registry = get_distribution(config)(size=64)
-
-    np.random.seed(20240617)
-    direct = BASE_DISTRIBUTIONS[name](**kwargs, size=64)
+    via_registry = get_distribution(config)(size=64, rng=np.random.default_rng(20240617))
+    direct = BASE_DISTRIBUTIONS[name](**kwargs, size=64, rng=np.random.default_rng(20240617))
 
     np.testing.assert_array_equal(via_registry, direct)
 
