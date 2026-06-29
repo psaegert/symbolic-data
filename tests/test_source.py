@@ -85,6 +85,26 @@ def test_exclude_holdout_decontaminates(engine):
     assert list(src) == []
 
 
+def test_to_catalog_frozen_roundtrip(engine, tmp_path):
+    from symbolic_data import load_catalog
+    src = _source(engine, n_support=6, n_validation=2)
+    cat = src.to_catalog(name="nguyen-frozen")
+    assert cat.frozen and cat.problems is not None and len(cat.problems) == 12
+
+    path = cat.save(tmp_path / "frozen")          # frozen -> self-contained .npz
+    assert path.suffix == ".npz"
+
+    reloaded = load_catalog(str(path))            # local .npz -> from_npz -> frozen catalog
+    assert reloaded.frozen and len(reloaded.problems) == 12
+
+    out = list(ProblemSource({"catalog": str(path)}))   # frozen catalog -> iterate realized Problems
+    assert len(out) == 12
+    for a, b in zip(cat.problems, out):
+        assert a.eq_id == b.eq_id and a.expression == b.expression
+        assert np.array_equal(a.x_support, b.x_support) and np.array_equal(a.y_support, b.y_support)
+        assert np.array_equal(a.y_support_noisy, b.y_support_noisy)
+
+
 def test_materialize_freezes_a_reproducible_source(engine):
     # materialize() -> a FIXED source that re-iterates byte-identical Problems (the no-seed
     # reproducibility mechanism).

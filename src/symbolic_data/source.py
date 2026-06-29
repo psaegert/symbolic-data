@@ -111,7 +111,10 @@ class ProblemSource:
 
     def size_hint(self) -> int | None:
         if self.mode == "set":
-            return len(self._get_catalog()) * self.problems_per_expression
+            catalog = self._get_catalog()
+            if catalog.frozen:
+                return len(catalog.problems or [])
+            return len(catalog) * self.problems_per_expression
         if self.mode == "fixed":
             return len(self.config["problems"]) * self.problems_per_expression
         size = self.config["generator"].get("size")
@@ -136,6 +139,13 @@ class ProblemSource:
 
     def _iter_set(self) -> Iterator[Problem]:
         catalog = self._get_catalog()
+        if catalog.frozen:
+            # A frozen/materialized catalog already holds realized Problems -- iterate them
+            # directly (no sampling), like a fixed source.
+            for problem in (catalog.problems or []):
+                if problem.is_placeholder or self._passes_filters(problem):
+                    yield problem
+            return
         engine = self._get_engine()
         rng = self._get_rng()
         n_support, n_validation = self._resolve_counts(catalog)
@@ -260,6 +270,20 @@ class ProblemSource:
             if n is not None and len(frozen) >= n:
                 break
         return ProblemSource({"problems": frozen})
+
+    def to_catalog(self, name: str | None = None, n: int | None = None) -> ProblemCatalog:
+        """Materialize once and return a FROZEN ProblemCatalog (persist via ``.save(path)``).
+
+        The frozen catalog holds the realized Problems; loading it back (``load_catalog``) and
+        iterating yields byte-identical data -- the shareable form of ``materialize()``.
+        """
+        problems: list[Problem] = []
+        for problem in self:
+            problems.append(problem)
+            if n is not None and len(problems) >= n:
+                break
+        cat_name = name or (str(self.config["catalog"]) if self.mode == "set" else "materialized")
+        return ProblemCatalog.from_problems(problems, name=cat_name)
 
 
 def _sample_to_problem(sample: Any) -> Problem:
