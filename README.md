@@ -58,10 +58,12 @@ obtained from a fixed (materialized) catalog rather than by re-seeding. Versione
 from Hugging Face with a pinned revision **and a sha256 integrity check**; the curated sets ship
 vendored from their canonical upstreams as the offline fallback.
 
-> Status: 0.4.0. The full public stack is in: `Problem`, the unified distribution framework (incl.
-> the `fastsrb` distribution), `ProblemCatalog` + `load_catalog` + the versioned HF resolver, and
-> `ProblemSource` (set / on-the-fly generate / fixed, with holdouts/filters and `materialize()`).
-> The curated catalogs (FastSRB, Feynman, Nguyen) ship vendored from their canonical upstreams.
-> Deferred to 0.4.x: threading generate-mode's internal skeleton sampler onto the source's
-> `Generator` (it is distribution-correct today, behind the clean `ProblemSource` API), publishing
-> the HF asset manifest + a frozen holdout grid, and `to_catalog()` (persistent frozen catalogs).
+> Status: 0.5.0. The full public stack: `Problem`, the unified distribution framework (incl. the
+> `fastsrb` distribution), `ProblemCatalog` + `load_catalog` + the versioned HF resolver, and
+> `ProblemSource` (set / on-the-fly generate / fixed; holdouts/filters; `materialize()` +
+> `to_catalog()` for frozen, byte-reproducible catalogs). Generate-mode is fully
+> `Generator`-driven (no global `np.random`); the skeleton engine is private (`_generate`), so the
+> public surface is just Problem / Catalog / Source. Curated catalogs (FastSRB, Feynman, Nguyen)
+> ship vendored. CLI: `symbolic-data materialize`.
+> Deferred: publishing the HF asset manifest + a frozen holdout grid; functional-equivalence
+> `exclude` (currently exact normalized-expression match).

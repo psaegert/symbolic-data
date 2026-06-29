@@ -85,6 +85,26 @@ def test_exclude_holdout_decontaminates(engine):
     assert list(src) == []
 
 
+def test_to_catalog_frozen_roundtrip(engine, tmp_path):
+    from symbolic_data import load_catalog
+    src = _source(engine, n_support=6, n_validation=2)
+    cat = src.to_catalog(name="nguyen-frozen")
+    assert cat.frozen and cat.problems is not None and len(cat.problems) == 12
+
+    path = cat.save(tmp_path / "frozen")          # frozen -> self-contained .npz
+    assert path.suffix == ".npz"
+
+    reloaded = load_catalog(str(path))            # local .npz -> from_npz -> frozen catalog
+    assert reloaded.frozen and len(reloaded.problems) == 12
+
+    out = list(ProblemSource({"catalog": str(path)}))   # frozen catalog -> iterate realized Problems
+    assert len(out) == 12
+    for a, b in zip(cat.problems, out):
+        assert a.eq_id == b.eq_id and a.expression == b.expression
+        assert np.array_equal(a.x_support, b.x_support) and np.array_equal(a.y_support, b.y_support)
+        assert np.array_equal(a.y_support_noisy, b.y_support_noisy)
+
+
 def test_materialize_freezes_a_reproducible_source(engine):
     # materialize() -> a FIXED source that re-iterates byte-identical Problems (the no-seed
     # reproducibility mechanism).
@@ -129,3 +149,50 @@ def test_generate_mode_requires_size():
     assert src.mode == "generate"
     with pytest.raises(ValueError, match="size"):
         list(src)
+
+
+def _generate_cfg(size):
+    import os
+    import yaml
+    cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "skeleton_pool_train.yaml")
+    gen_cfg = yaml.safe_load(open(cfg_path, encoding="utf-8"))
+    gen_cfg["size"] = size
+    return gen_cfg
+
+
+def test_generate_is_fully_generator_threaded_no_global_random():
+    # COMPLETENESS: the source's injected Generator must fully control generate output. We run twice
+    # with the SAME injected Generator but DIFFERENT global np.random state; if ANY code path still
+    # touched global np.random, the two runs would diverge. Byte-identical => no leak + reproducible.
+    gen_cfg = _generate_cfg(5)
+
+    def run(global_seed):
+        np.random.seed(global_seed)  # perturb global state to prove it's irrelevant
+        src = ProblemSource({"generator": gen_cfg, "sampling": {"n_support": 16, "noise": 0.05}},
+                            rng=np.random.default_rng(123))
+        return list(src)
+
+    a, b = run(0), run(999)
+    assert len(a) == len(b) == 5
+    for pa, pb in zip(a, b):
+        assert pa.skeleton == pb.skeleton and pa.expression == pb.expression
+        assert np.array_equal(pa.x_support, pb.x_support)
+        assert np.array_equal(pa.y_support, pb.y_support)
+        assert np.array_equal(pa.y_support_noisy, pb.y_support_noisy)
+
+
+def test_threaded_skeleton_sampler_preserves_operator_weights(engine):
+    # DISTRIBUTIONAL sanity: high-weight binary ops (+,-,*,/ weight 10) dominate low-weight ones
+    # (mult2/div2 weight 1) -- proves rng.choice(p=weights) still threads the configured weights.
+    from collections import Counter
+    from symbolic_data._generate.skeleton_pool import SkeletonPool
+    pool = SkeletonPool.from_config(_generate_cfg(1))
+    sampler = pool.skeleton_sampler
+    rng = np.random.default_rng(0)
+    counts: Counter = Counter()
+    for _ in range(3000):
+        for tok in sampler.sample(6, rng=rng):
+            if tok in pool.simplipy_engine.operator_arity:
+                counts[tok] += 1
+    # "+" (weight 10) should appear many times more than "mult2" (weight 1); generous band for noise.
+    assert counts["+"] > 5 * max(1, counts.get("mult2", 0))

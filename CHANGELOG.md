@@ -3,6 +3,46 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.5.0] - 2026-06-30
+
+Completes the data-layer redesign: `SkeletonPool` (and the whole skeleton machinery) is removed
+from the public surface, generate-mode is fully `Generator`-driven, and materialization is
+shippable. (0.4.0 was a GitHub milestone; 0.5.0 is the first PyPI release of the new data layer.)
+
+### Added
+- **`ProblemSource.materialize()` + `to_catalog()` + frozen catalogs.** `materialize()` returns a
+  fixed source that re-iterates byte-identical Problems; `to_catalog()` returns a FROZEN
+  `ProblemCatalog` (realized `(X, y)`), persisted as a self-contained `.npz` via `.save()` and
+  reloaded with `load_catalog` -- the shareable, exactly-reproducible form. This is the no-seed
+  reproducibility mechanism.
+- **`materialize` CLI command** -- `symbolic-data materialize -c <source-config> -o <out.npz>`
+  samples a ProblemSource once and freezes it to a catalog.
+
+### Changed
+- **Generate-mode is fully `numpy.random.Generator`-threaded** -- the skeleton/support/holdout
+  sampling no longer touches global `np.random`; the source's Generator controls everything
+  (verified by a completeness test: same injected Generator + different global seed -> byte-identical
+  output). Generate-mode builds `Problem`s natively.
+- **The skeleton engine is now private** (`symbolic_data._generate`): `SkeletonPool`,
+  `SkeletonSampler`, `SupportSampler`, `HoldoutManager`, and `structure` are ProblemSource's
+  internal generate engine, not public modules/classes.
+
+### Removed (breaking)
+- **`Sample` / `sample_from_skeleton` / `iter_samples`** (`samples.py`) -- generate-mode emits
+  `Problem` directly.
+- **`ParserFactory` / `TestSetParser` (`convert_data.py`)** -- the legacy skeleton-ingest of raw
+  benchmark files. Superseded by vendored curated catalogs + decontamination via
+  `ProblemSource(holdouts=[{exclude: <catalog>}])`.
+- **The `generate-skeleton-pool` / `import-data` / `split-skeleton-pool` CLI commands** -- replaced
+  by the single `materialize` command.
+- The public `symbolic_data.skeleton_pool` / `.skeleton_sampling` / `.support_sampling` /
+  `.holdout` / `.structure` import paths (engine is private under `_generate`).
+  `NoValidSampleFoundError` and `token_ops.apply_variable_mapping` remain available.
+
+### Deferred (tracked for a later release)
+- Publishing the Hugging Face asset manifest + a frozen `holdout_grid` asset; upgrading holdout
+  `exclude` from exact normalized-expression match to functional-equivalence.
+
 ## [0.4.0] - 2026-06-29
 
 A ground-up redesign of the data layer around one central unit and a clean, versioned, three-level

@@ -18,6 +18,8 @@ from typing import Any, Iterator, Mapping
 
 import numpy as np
 import yaml
+from simplipy import normalize_expression, normalize_skeleton
+from simplipy.utils import substitude_constants
 
 from symbolic_data._evaluation import broadcast_target, compile_expression, evaluate, load_engine
 from symbolic_data.catalog import ProblemCatalog
@@ -111,7 +113,10 @@ class ProblemSource:
 
     def size_hint(self) -> int | None:
         if self.mode == "set":
-            return len(self._get_catalog()) * self.problems_per_expression
+            catalog = self._get_catalog()
+            if catalog.frozen:
+                return len(catalog.problems or [])
+            return len(catalog) * self.problems_per_expression
         if self.mode == "fixed":
             return len(self.config["problems"]) * self.problems_per_expression
         size = self.config["generator"].get("size")
@@ -136,6 +141,13 @@ class ProblemSource:
 
     def _iter_set(self) -> Iterator[Problem]:
         catalog = self._get_catalog()
+        if catalog.frozen:
+            # A frozen/materialized catalog already holds realized Problems -- iterate them
+            # directly (no sampling), like a fixed source.
+            for problem in (catalog.problems or []):
+                if problem.is_placeholder or self._passes_filters(problem):
+                    yield problem
+            return
         engine = self._get_engine()
         rng = self._get_rng()
         n_support, n_validation = self._resolve_counts(catalog)
@@ -189,29 +201,51 @@ class ProblemSource:
 
     # --- GENERATE mode (on-the-fly procedural skeletons) -------------------------------------
     def _iter_generate(self) -> Iterator[Problem]:
-        # Drives the (internal, transitional) skeleton machinery. Its global np.random is threaded
-        # onto the source's Generator and the machinery privatized in a follow-up increment (c2b);
-        # under the no-seeding model a live generate source is reproduced INFERENTIALLY (multi-draw),
-        # not by a seed, so using the proven sampler as-is here is distribution-correct.
-        from symbolic_data.skeleton_pool import SkeletonPool
-        from symbolic_data.samples import iter_samples
+        # Drives the (private, Generator-threaded) skeleton-generation engine and builds Problems
+        # natively (no Sample intermediary). Reproducibility is inferential (multi-draw), not seeded;
+        # the engine's randomness is fully controlled by self._get_rng().
+        from symbolic_data._generate.skeleton_pool import SkeletonPool, NoValidSampleFoundError
 
         gen_cfg = self.config["generator"]
         size = gen_cfg.get("size")
         if size is None:
             raise ValueError("generate-mode config['generator'] must set `size` (number of skeletons to generate)")
+        rng = self._get_rng()
+        n_support = int(self.n_support) if self.n_support is not None else 32
+        n_validation = int(self.n_validation) if self.n_validation is not None else n_support
         pool = SkeletonPool.from_config({k: v for k, v in gen_cfg.items() if k != "size"})
-        pool.create(int(size))
-        for sample in iter_samples(
-            pool,
-            n_support=self.n_support,
-            noise_level=self.noise,
-            datasets_per_expression=self.problems_per_expression,
-            skip_failed=False,
-        ):
-            problem = _sample_to_problem(sample)
-            if problem.is_placeholder or self._passes_filters(problem):
-                yield problem
+        pool.create(int(size), rng=rng)
+        if not pool.skeleton_codes:
+            pool.skeleton_codes = pool.compile_codes(verbose=False)
+        for skeleton in sorted(pool.skeletons):
+            code, constants_tokens = pool.skeleton_codes[skeleton]
+            for _ in range(self.problems_per_expression):
+                problem = self._generate_one(pool, skeleton, code, len(constants_tokens), n_support, n_validation, rng, NoValidSampleFoundError)
+                if problem.is_placeholder or self._passes_filters(problem):
+                    yield problem
+
+    def _generate_one(self, pool, skeleton, code, n_constants, n_support, n_validation, rng, no_valid_exc) -> Problem:
+        variables = list(pool.variables)
+        n_total = n_support + n_validation
+        for _ in range(self.max_trials):
+            try:
+                x_all, y_all, literals = pool.sample_data(code, n_constants, n_support=n_total, rng=rng)
+            except no_valid_exc:
+                continue
+            if x_all.size == 0 or y_all.size == 0:
+                continue
+            xs, xv, ys, yv = _split_support_validation(x_all, y_all, n_support)
+            if xs.size == 0:
+                continue
+            expression, complexity = _gt_metadata(skeleton, literals)
+            return Problem(
+                x_support=xs, y_support=ys, y_support_noisy=_inject_noise(ys, self.noise, rng),
+                x_validation=xv, y_validation=yv, y_validation_noisy=_inject_noise(yv, self.noise, rng),
+                skeleton=tuple(skeleton), expression=expression,
+                constants=list(np.asarray(literals, dtype=np.float64).ravel().tolist()),
+                variables=variables, complexity=complexity, noise=self.noise, eq_id=None,
+            )
+        return Problem.placeholder(variables=variables, reason="max_trials_exhausted", skeleton=tuple(skeleton))
 
     # --- filters / holdouts ------------------------------------------------------------------
     def _passes_filters(self, problem: Problem) -> bool:
@@ -259,16 +293,30 @@ class ProblemSource:
                 break
         return ProblemSource({"problems": frozen})
 
+    def to_catalog(self, name: str | None = None, n: int | None = None) -> ProblemCatalog:
+        """Materialize once and return a FROZEN ProblemCatalog (persist via ``.save(path)``).
 
-def _sample_to_problem(sample: Any) -> Problem:
-    """Adapt a generate-track Sample into the unified Problem (transitional bridge)."""
-    return Problem(
-        x_support=sample.x_support, y_support=sample.y_support, y_support_noisy=sample.y_support_noisy,
-        x_validation=sample.x_validation, y_validation=sample.y_validation, y_validation_noisy=sample.y_validation_noisy,
-        skeleton=sample.skeleton, expression=sample.expression, constants=list(sample.constants),
-        variables=list(sample.variables), complexity=sample.complexity, noise=sample.noise_level, eq_id=None,
-        is_placeholder=sample.placeholder, placeholder_reason=sample.placeholder_reason,
-    )
+        The frozen catalog holds the realized Problems; loading it back (``load_catalog``) and
+        iterating yields byte-identical data -- the shareable form of ``materialize()``.
+        """
+        problems: list[Problem] = []
+        for problem in self:
+            problems.append(problem)
+            if n is not None and len(problems) >= n:
+                break
+        cat_name = name or (str(self.config["catalog"]) if self.mode == "set" else "materialized")
+        return ProblemCatalog.from_problems(problems, name=cat_name)
+
+
+def _gt_metadata(skeleton, literals) -> tuple[list[str] | None, int | None]:
+    """Normalized GT expression (constants substituted) + its token-length complexity."""
+    skeleton_list = normalize_skeleton(skeleton)
+    if skeleton_list is None:
+        return None, None
+    expression_tokens = substitude_constants(list(skeleton_list), values=literals, inplace=False)
+    expression = normalize_expression(expression_tokens)
+    complexity = len(expression_tokens) if expression_tokens else None
+    return expression, complexity
 
 
 def _passes_filter(problem: Problem, spec: Mapping[str, Any]) -> bool:
