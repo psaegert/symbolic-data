@@ -73,6 +73,7 @@ class ProblemSource:
         self.layout = s.get("layout", "random")          # X-point layout passed to the distribution
         self.max_trials = int(s.get("max_trials", 100))
         self.holdouts = list(self.config.get("holdouts", []))
+        self._exclude_cache: dict[str, set] = {}
 
     @classmethod
     def from_config(cls, config: Mapping[str, Any] | str | Path) -> "ProblemSource":
@@ -217,16 +218,46 @@ class ProblemSource:
         for rule in self.holdouts:
             if "filter" in rule and not _passes_filter(problem, rule["filter"]):
                 return False
-            if "exclude" in rule:
-                raise NotImplementedError("holdout `exclude` (decontamination vs another catalog) is Stage c3")
+            if "exclude" in rule and self._is_excluded(problem, rule["exclude"]):
+                return False
         return True
 
-    # --- materialize / freeze (Stage c4) -----------------------------------------------------
-    def materialize(self, n: int | None = None) -> "ProblemSource":
-        raise NotImplementedError("materialize() is implemented in Stage c4")
+    def _is_excluded(self, problem: Problem, ref: str) -> bool:
+        """Decontamination: drop a problem whose normalized expression matches the excluded catalog.
 
-    def to_catalog(self) -> ProblemCatalog:
-        raise NotImplementedError("to_catalog() is implemented in Stage c4")
+        Exact normalized-prefix match (leak-safe for shared templates). Functional-equivalence
+        decontamination (a frozen evaluation grid) is a 0.4.x refinement.
+        """
+        if problem.expression is None:
+            return False
+        if ref not in self._exclude_cache:
+            engine = self._get_engine()
+            other = ProblemCatalog.load(ref)
+            keys: set[tuple[str, ...]] = set()
+            for entry in other.iter_expressions():
+                try:
+                    compiled = compile_expression(engine, entry.id, entry.prepared, entry.variables, name=other.name)
+                except Exception:
+                    continue
+                keys.add(tuple(compiled["prefix"]))
+            self._exclude_cache[ref] = keys
+        return tuple(problem.expression) in self._exclude_cache[ref]
+
+    # --- materialize / freeze ----------------------------------------------------------------
+    def materialize(self, n: int | None = None) -> "ProblemSource":
+        """Sample once and FREEZE -> a FIXED-mode source that re-iterates the identical Problems.
+
+        This is the reproducibility mechanism (no seeds): the returned source holds the realized
+        Problems, so iterating it any number of times yields byte-identical data, and it is
+        identical across models/runs. ``n`` caps the number of problems (required for an unbounded
+        generate source without a ``size``).
+        """
+        frozen: list[dict] = []
+        for problem in self:
+            frozen.append(problem.to_dict())
+            if n is not None and len(frozen) >= n:
+                break
+        return ProblemSource({"problems": frozen})
 
 
 def _sample_to_problem(sample: Any) -> Problem:

@@ -74,12 +74,28 @@ def test_filter_max_complexity_drops_complex_problems(engine):
     assert len(kept) < len(base)  # nguyen has higher-complexity entries that get filtered
 
 
-def test_exclude_holdout_not_yet_implemented(engine):
+def test_exclude_holdout_decontaminates(engine):
+    # Self-exclusion: excluding `nguyen` from a nguyen source drops every problem (all the
+    # normalized expression prefixes match), proving decontamination is wired through.
     src = ProblemSource(
-        {"catalog": "nguyen", "holdouts": [{"exclude": "feynman"}]}, simplipy_engine=engine,
+        {"catalog": "nguyen", "sampling": {"n_support": 6, "n_validation": 2},
+         "holdouts": [{"exclude": "nguyen"}]},
+        simplipy_engine=engine,
     )
-    with pytest.raises(NotImplementedError):
-        list(src)
+    assert list(src) == []
+
+
+def test_materialize_freezes_a_reproducible_source(engine):
+    # materialize() -> a FIXED source that re-iterates byte-identical Problems (the no-seed
+    # reproducibility mechanism).
+    frozen = _source(engine, n_support=6, n_validation=2).materialize()
+    assert frozen.mode == "fixed"
+    run1 = list(frozen)
+    run2 = list(frozen)
+    assert len(run1) == 12 and len(run2) == 12
+    for a, b in zip(run1, run2):
+        assert a.eq_id == b.eq_id and np.array_equal(a.x_support, b.x_support)
+        assert np.array_equal(a.y_support, b.y_support)
 
 
 def test_fixed_mode_roundtrips_inline_problems(engine):

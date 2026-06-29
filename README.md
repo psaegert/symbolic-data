@@ -20,21 +20,24 @@ pip install symbolic-data
 ```python
 import symbolic_data
 
-# 1. Sample (X, y) problems from a skeleton pool (the model-agnostic seam)
-pool = symbolic_data.SkeletonPool.from_config("skeleton_pool.yaml")
-pool.create(100)
-for sample in symbolic_data.iter_samples(pool, n_support=32, noise_level=0.01):
-    sample.x_support, sample.y_support, sample.expression  # ready to fit / tokenize
-
-# 2. Load a curated catalog (the level-1 declarative collection: expressions + their intrinsic
-#    per-variable sampling). The three curated sets ship as package data (no download);
-#    `load_catalog("name@version")` resolves a versioned catalog from Hugging Face when a manifest
-#    is available, and `load_catalog("user/repo:name")` loads a third party's published catalog.
+# 1. Load a curated catalog (level 1: expressions + their intrinsic per-variable sampling). The
+#    three curated sets ship as package data (no download); `load_catalog("name@version")` resolves
+#    a versioned catalog from Hugging Face when a manifest is available, and
+#    `load_catalog("user/repo:name")` loads a third party's published catalog.
 feynman = symbolic_data.load_catalog("feynman")            # 100 equations (Udrescu & Tegmark 2020)
-fastsrb = symbolic_data.load_catalog("fastsrb")            # 120 equations (Martinek, viktmar/FastSRB)
-nguyen = symbolic_data.load_catalog("nguyen")              # 12 equations (Uy et al. 2011; DSO)
 entry = feynman["I.6.2a"]
 entry.prepared, entry.variables                            # expression + intrinsic per-variable sampling
+
+# 2. Draw (X, y) Problems from a ProblemSource (level 2). Mode is inferred from the config:
+#    a catalog ref (set), a `generator` block (on-the-fly), or inline `problems` (fixed).
+src = symbolic_data.ProblemSource({"catalog": "feynman",
+                                   "sampling": {"n_support": 32, "n_validation": 32, "noise": 0.01}})
+for problem in src:
+    problem.x_support, problem.y_support, problem.y_support_noisy, problem.expression  # fit / tokenize
+
+# 3. Freeze for exact reproduction (no seeds): materialize() -> a fixed source that re-iterates
+#    byte-identical Problems, identical across models/runs.
+frozen = src.materialize()
 ```
 
 ## Extensibility
@@ -55,8 +58,10 @@ obtained from a fixed (materialized) catalog rather than by re-seeding. Versione
 from Hugging Face with a pinned revision **and a sha256 integrity check**; the curated sets ship
 vendored from their canonical upstreams as the offline fallback.
 
-> Status: 0.4.0 (in development). The `Problem` unit, the unified distribution framework (incl. the
-> `fastsrb` distribution), `ProblemCatalog` + `load_catalog`, and the versioned HF resolver are in;
-> the curated catalogs (FastSRB, Feynman, Nguyen) ship vendored from their canonical upstreams.
-> Forthcoming: `ProblemSource` (the level-2 sampler that turns a catalog into `Problem`s, with
-> holdouts/filters and materialization).
+> Status: 0.4.0. The full public stack is in: `Problem`, the unified distribution framework (incl.
+> the `fastsrb` distribution), `ProblemCatalog` + `load_catalog` + the versioned HF resolver, and
+> `ProblemSource` (set / on-the-fly generate / fixed, with holdouts/filters and `materialize()`).
+> The curated catalogs (FastSRB, Feynman, Nguyen) ship vendored from their canonical upstreams.
+> Deferred to 0.4.x: threading generate-mode's internal skeleton sampler onto the source's
+> `Generator` (it is distribution-correct today, behind the clean `ProblemSource` API), publishing
+> the HF asset manifest + a frozen holdout grid, and `to_catalog()` (persistent frozen catalogs).

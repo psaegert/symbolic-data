@@ -1,20 +1,22 @@
 """symbolic_data -- the model-agnostic symbolic-regression data layer.
 
-Skeleton/expression sampling, priors, (X, y) support sampling, holdout management, and
-dataset construction -- carved out of flash-ansr so symbolic-regression methods and the
-srbf eval framework share one data substrate. Depends only on simplipy + numpy/sklearn.
+The public stack: one ``Problem`` (the central unit), one declarative ``ProblemCatalog`` (level 1,
+resolved by reference via the versioned HF :mod:`~symbolic_data.resolver`), and one
+``ProblemSource`` (level 2) that turns a catalog / generator / inline problems into ``Problem``s
+under a usage policy (draw method, support/validation counts, noise, problems-per-expression,
+holdouts/filters, materialization). Plus the distribution vocabulary (incl. the ``fastsrb``
+distribution) and the extensibility ``Registry``. Depends only on simplipy + numpy/sklearn.
+
+The skeleton-sampling machinery is an internal implementation detail of generate-mode
+``ProblemSource`` and is no longer part of the public API.
 """
-from symbolic_data.skeleton_pool import SkeletonPool, NoValidSampleFoundError
-from symbolic_data.holdout import HoldoutManager
-from symbolic_data.skeleton_sampling import SkeletonSampler
-from symbolic_data.support_sampling import SupportSampler, SupportSamplingError
+from symbolic_data.skeleton_pool import NoValidSampleFoundError
 from symbolic_data.distributions import get_distribution, fastsrb_dist, DISTRIBUTIONS, BASE_DISTRIBUTIONS
 from symbolic_data.prior_factory import build_prior_callable
 from symbolic_data.registry import Registry
 from symbolic_data.problem import Problem
 from symbolic_data.catalog import ProblemCatalog, CatalogEntry, load_catalog, CATALOGS
 from symbolic_data.source import ProblemSource
-from symbolic_data.samples import Sample, sample_from_skeleton, iter_samples
 from symbolic_data.tensor_ops import mask_unused_variable_columns
 from symbolic_data.convert_data import ParserFactory, TestSetParser
 from symbolic_data.paths import get_path, get_root, substitute_root_path

@@ -125,18 +125,15 @@ def test_fastsrb_nests_inside_mixture():
 # --- golden regeneration (run while benchmarks/spec.py still exists; pre-Stage-b) --------------
 
 if __name__ == "__main__":
-    # Capture the published recipe from the live SpecBenchmark oracle into the frozen fixture.
-    # _sample_points does not touch `self`, so an uninitialised instance is a clean oracle.
-    from symbolic_data.benchmarks.spec import SpecBenchmark
-
-    oracle = SpecBenchmark.__new__(SpecBenchmark)
+    # The committed fixture was ORIGINALLY captured from the historical SpecBenchmark._sample_points
+    # oracle (proof that fastsrb_dist faithfully ports the published recipe). That oracle is gone in
+    # 0.4.0; fastsrb_dist is the canonical implementation and reproduces it exactly, so a regen now
+    # snapshots fastsrb_dist itself as a forward-stability baseline (only re-run intentionally).
     arrays = {}
     for base, sign, layout in COMBOS:
         low, high = _bounds(base)
-        distribution, integer = _recipe_args(base)
-        arrays[_combo_key(base, sign, layout)] = oracle._sample_points(
-            low, high, N, method=_LAYOUT_TO_METHOD[layout], distribution=distribution,
-            sign_mode=sign, integer=integer, rng=np.random.default_rng(SEED))
+        arrays[_combo_key(base, sign, layout)] = fastsrb_dist(
+            low, high, base=base, sign=sign, layout=layout, size=N, rng=np.random.default_rng(SEED))
     GOLDEN_PATH.parent.mkdir(parents=True, exist_ok=True)
     np.savez(GOLDEN_PATH, **arrays)
     print(f"wrote {len(arrays)} golden arrays -> {GOLDEN_PATH}")
