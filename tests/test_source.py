@@ -226,3 +226,12 @@ def test_n_support_prior_rejects_declarative_catalog(engine):
     src = ProblemSource({"catalog": "nguyen", "sampling": {"n_support": "prior", "n_validation": 0}}, simplipy_engine=engine)
     with pytest.raises(ValueError, match="generative catalog"):
         list(src)
+
+
+def test_problemsource_exposes_its_catalog(engine):
+    from symbolic_data import GenerativeCatalog, ProblemCatalog
+    dsrc = ProblemSource({"catalog": "nguyen", "sampling": {"n_support": 6}}, simplipy_engine=engine)
+    assert isinstance(dsrc.catalog, ProblemCatalog)
+    gsrc = ProblemSource({"catalog": _lample_charton_cfg(), "sampling": {"size": 1}})
+    assert isinstance(gsrc.catalog, GenerativeCatalog)
+    assert gsrc.catalog is gsrc.catalog   # cached single instance (shareable)
