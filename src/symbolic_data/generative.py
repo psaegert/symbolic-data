@@ -225,19 +225,27 @@ class LampleChartonCatalog(GenerativeCatalog):
             if key in config_ and key not in support_sampler_cfg:
                 support_sampler_cfg[key] = config_[key]
 
-        return cls(
+        catalog = cls(
             simplipy_engine=SimpliPyEngine.load(config_["simplipy_engine"], install=True),
             sample_strategy=config_["sample_strategy"],
             literal_prior=config_["literal_prior"],
             variables=config_["variables"],
             support_sampler_config=support_sampler_cfg,
             operator_weights=config_.get("operator_weights"),
-            holdout_pools=config_["holdout_pools"],
-            allow_nan=config_["allow_nan"],
+            holdout_pools=config_.get("holdout_pools", []),
+            allow_nan=config_.get("allow_nan", False),
             simplify=config_.get("simplify", True),
             name=config_.get("name", "lample_charton"),
             decontaminate=config_.get("decontaminate", True),
         )
+        # Optional inline FROZEN skeletons (a fixed catalog distributed as one self-contained spec --
+        # e.g. a held-out validation set): the recipe still drives X/y sampling, but the skeleton set
+        # is fixed (sample_skeleton(new=False) draws from these), not generated on the fly.
+        frozen = config_.get("skeletons")
+        if frozen:
+            catalog.skeletons = {tuple(s) for s in frozen}
+            catalog.skeleton_codes = catalog.compile_codes()
+        return catalog
 
     @classmethod
     def from_dict(
@@ -940,7 +948,10 @@ def build_catalog(spec: "str | Mapping[str, Any] | Catalog") -> Catalog:
 
     - a :class:`Catalog` instance -> returned as-is;
     - a mapping with a ``type`` key -> the registered :class:`GenerativeCatalog` built from it;
-    - a string / path -> a declarative :class:`~symbolic_data.catalog.ProblemCatalog` (resolved/loaded).
+    - a string / path / ``name[@version]`` -> RESOLVED (local path or HF manifest), then dispatched on
+      content: a generative spec (a ``type:`` yaml, optionally with inline frozen ``skeletons:``) builds
+      the registered :class:`GenerativeCatalog`; anything else is a declarative
+      :class:`~symbolic_data.catalog.ProblemCatalog`.
     """
     if isinstance(spec, Catalog):
         return spec
@@ -952,4 +963,17 @@ def build_catalog(spec: "str | Mapping[str, Any] | Catalog") -> Catalog:
         if ctype not in _GENERATIVE_CATALOGS:
             raise ValueError(f"unknown generative catalog type {ctype!r}; known: {sorted(_GENERATIVE_CATALOGS)}")
         return _GENERATIVE_CATALOGS[ctype].from_config(cfg)
+
+    # string / path / name[@version]: resolve once, then peek the content to choose the catalog type.
+    import yaml
+    from symbolic_data.resolver import resolve
+    artifact = resolve(spec)
+    if not artifact.path.endswith(".npz"):
+        try:
+            with open(artifact.path, encoding="utf-8") as handle:
+                head = yaml.safe_load(handle)
+        except Exception:  # noqa: BLE001 - a non-yaml artifact is simply not a generative spec
+            head = None
+        if isinstance(head, Mapping) and head.get("type") in _GENERATIVE_CATALOGS:
+            return _GENERATIVE_CATALOGS[head["type"]].from_config(artifact.path)
     return ProblemCatalog.load(spec)
