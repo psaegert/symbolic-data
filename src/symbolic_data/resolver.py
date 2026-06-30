@@ -1,5 +1,6 @@
 """Repo-agnostic resolver for versioned symbolic-data artifacts (catalogs, grids).
 
+Catalogs are distributed as artifacts on Hugging Face (the artifact store), NOT bundled in the wheel.
 A *reference* resolves to a local filesystem path. Three forms:
 
 * a **local path** -- something that exists on disk, or is explicitly path-like (``./x.yaml``,
@@ -11,8 +12,9 @@ A *reference* resolves to a local filesystem path. Three forms:
 * ``repo_id:name`` / ``repo_id:name@version`` -- the same, against a THIRD-PARTY repo's manifest,
   so anyone can publish and load their own catalogs through this mechanism.
 
-If the manifest cannot be fetched or the name is unknown, a vendored package-data copy is used
-when available (``source="vendored"``) so the curated catalogs work offline.
+There is NO vendored package-data fallback: a bare ``name`` resolves only via the HF manifest, so a
+fresh install needs network on first use (``hf_hub_download`` then caches). Use an explicit local
+path for fully offline operation.
 
 Design notes (avoiding the pitfalls of the simplipy ``asset_manager`` this generalizes):
 * we rely on ``hf_hub_download``'s own content-addressed cache -- no custom install/uninstall and
@@ -27,22 +29,17 @@ import json
 import os
 import warnings
 from dataclasses import dataclass, field
-from importlib import resources
 from typing import Any
 
 # Default manifest location (our official catalogs/grids). Third-party refs override the repo.
 HF_MANIFEST_REPO = "psaegert/symbolic-data-assets"
 HF_MANIFEST_FILENAME = "manifest.json"
 
-# Where vendored copies of the curated artifacts ship as package data (offline fallback).
-VENDORED_PACKAGE = "symbolic_data.catalogs"
-VENDORED_SUBDIR = "data"
-
 _PATH_LIKE_SUFFIXES = (".yaml", ".yml", ".json", ".npz")
 
 
 class ResolverError(RuntimeError):
-    """Raised when a reference cannot be resolved (and no vendored fallback applies)."""
+    """Raised when a reference cannot be resolved (not a local path and not in the HF manifest)."""
 
 
 class IntegrityError(ResolverError):
@@ -55,7 +52,7 @@ class ResolvedArtifact:
 
     path: str                       # absolute path to the entrypoint file
     name: str                       # logical name ("feynman"); the path stem for local refs
-    source: str                     # "local" | "huggingface" | "vendored"
+    source: str                     # "local" | "huggingface"
     version: int | None = None
     repo_id: str | None = None
     revision: str | None = None
@@ -120,25 +117,12 @@ def _sha256(path: str) -> str:
     return digest.hexdigest()
 
 
-def _vendored_path(name: str) -> str | None:
-    """Path to a vendored package-data copy of ``<name>`` (offline fallback), or None."""
-    for suffix in (".yaml", ".yml"):
-        ref = resources.files(VENDORED_PACKAGE).joinpath(VENDORED_SUBDIR, f"{name}{suffix}")
-        try:
-            if ref.is_file():
-                return str(ref)
-        except (FileNotFoundError, OSError, ModuleNotFoundError):
-            continue
-    return None
-
-
 def resolve(
     ref: str,
     *,
     install: bool = True,
     repo_id: str | None = None,
     manifest_filename: str | None = None,
-    vendored_fallback: bool = True,
     verify: bool = True,
 ) -> ResolvedArtifact:
     """Resolve ``ref`` (local path / ``name[@version]`` / ``repo:name[@version]``) to a local file."""
@@ -161,29 +145,18 @@ def resolve(
     repo_override, name, version = _parse_ref(ref)
     effective_repo = repo_override or repo_id
 
-    # 2. manifest lookup (+ integrity)
+    # 2. HF manifest lookup (+ integrity). No vendored fallback: a name resolves ONLY via the
+    #    manifest, so an unknown name / offline first-use is an error (use a local path for offline).
     manifest = fetch_manifest(repo_id=effective_repo, manifest_filename=manifest_filename)
     entry = manifest.get(name) if manifest else None
-    if entry is not None:
-        try:
-            return _resolve_from_manifest(name, entry, version, install=install, verify=verify)
-        except ResolverError as exc:
-            # An integrity failure must NEVER silently fall back to a vendored copy -- that would
-            # defeat the point of integrity pinning. Only not-found / offline / download failures
-            # are eligible for the vendored fallback.
-            if isinstance(exc, IntegrityError) or not vendored_fallback:
-                raise
-
-    # 3. vendored package-data fallback (offline / unknown name)
-    if vendored_fallback:
-        vendored = _vendored_path(name)
-        if vendored is not None:
-            return ResolvedArtifact(path=vendored, name=name, source="vendored", version=version)
-
-    raise ResolverError(
-        f"Could not resolve {ref!r}: not a local path, not in the manifest"
-        f"{' (repo ' + effective_repo + ')' if effective_repo else ''}, and no vendored copy."
-    )
+    if entry is None:
+        raise ResolverError(
+            f"Could not resolve {ref!r}: not a local path and not in the manifest"
+            f"{' (repo ' + effective_repo + ')' if effective_repo else ''}. "
+            "Bare names resolve from Hugging Face (network needed on first use); pass an explicit "
+            "local path for offline operation."
+        )
+    return _resolve_from_manifest(name, entry, version, install=install, verify=verify)
 
 
 def _resolve_from_manifest(

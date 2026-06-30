@@ -55,10 +55,11 @@ with a `manifest.json`, then `symbolic_data.load_catalog("your-user/your-repo:na
 Reproducibility comes from **fixed data, not seeds**: sampling draws from a threaded
 `numpy.random.Generator` (entropy by default), and exact reproduction across runs/models is
 obtained from a fixed (materialized) catalog rather than by re-seeding. Versioned catalogs resolve
-from Hugging Face with a pinned revision **and a sha256 integrity check**; the curated sets ship
-vendored from their canonical upstreams as the offline fallback.
+from Hugging Face with a pinned revision **and a sha256 integrity check**. Catalogs are HF artifacts
+(not bundled in the wheel since 0.8.0): a bare `name` needs network on first use, then caches; pass
+an explicit local path for fully offline operation.
 
-> Status: 0.6.0. The full public stack: `Problem`, the unified distribution framework (incl. the
+> Status: 0.8.0. The full public stack: `Problem`, the unified distribution framework (incl. the
 > `fastsrb` distribution), and the **`Catalog`** a `ProblemSource` samples from -- either a
 > declarative `ProblemCatalog` (+ `load_catalog` + the versioned HF resolver) or an on-the-fly
 > `GenerativeCatalog` (`LampleChartonCatalog`: random unary-binary operator trees; `build_catalog`
@@ -67,6 +68,7 @@ vendored from their canonical upstreams as the offline fallback.
 > `materialize()` + `to_catalog()` for frozen, byte-reproducible catalogs). Generate-mode is fully
 > `Generator`-driven (no global `np.random`). The skeleton/support/holdout machinery stays private
 > (`_generate`); the public face is `LampleChartonCatalog`. Curated catalogs (FastSRB, Feynman,
-> Nguyen) ship vendored. CLI: `symbolic-data materialize`.
-> Deferred: publishing the HF asset manifest + a frozen holdout grid; functional-equivalence
-> `exclude` (currently exact normalized-expression match).
+> Nguyen) are published to the HF assets repo and resolved by name (not bundled in the wheel).
+> CLI: `symbolic-data materialize`.
+> Deferred: a frozen holdout grid; functional-equivalence `exclude` (currently exact
+> normalized-expression match).

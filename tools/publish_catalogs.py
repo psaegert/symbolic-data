@@ -1,9 +1,10 @@
 """Publish the curated catalogs to the Hugging Face assets dataset repo + a versioned manifest.
 
 This is the distribution step for ``symbolic_data``'s curated catalogs: they live as artifacts on
-Hugging Face (the artifact store), NOT as the primary distribution channel in the PyPI wheel. The
-wheel keeps a small *vendored* copy purely as an offline fallback (see ``resolver.py``); the
-canonical, versioned, sha256-integrity-checked source of truth is the HF dataset repo.
+Hugging Face (the artifact store), NOT in the PyPI wheel. The wheel ships NO catalog copies (pure-HF
+since 0.8.0); the canonical, versioned, sha256-integrity-checked source of truth is the HF dataset
+repo, and the repo keeps the source-of-truth yamls under ``assets/catalogs/`` (publish source + the
+tests' local fixtures).
 
 Layout (flat repo root): ``<name>.yaml`` for each catalog + ``manifest.json``. Each manifest entry
 pins the catalog's content by ``revision`` (the git commit sha of the files commit) and per-file
@@ -26,7 +27,7 @@ from huggingface_hub import HfApi, CommitOperationAdd
 
 REPO = "psaegert/symbolic-data-assets"          # MUST match resolver.HF_MANIFEST_REPO
 REPO_TYPE = "dataset"
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "src", "symbolic_data", "catalogs", "data")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "catalogs")
 
 # logical name -> filename + curated entry count (sanity check after publish)
 CATALOGS = {

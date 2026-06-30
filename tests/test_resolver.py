@@ -87,7 +87,7 @@ def test_sha256_mismatch_raises(monkeypatch, manifest, catalog_file):
     monkeypatch.setattr(R, "fetch_manifest", lambda **kw: manifest)
     monkeypatch.setattr("huggingface_hub.hf_hub_download", lambda **kw: str(catalog_file))
     with pytest.raises(R.ResolverError, match="sha256 mismatch"):
-        R.resolve("feynman@1", vendored_fallback=False)
+        R.resolve("feynman@1")
 
 
 def test_third_party_repo_override_is_used(monkeypatch, manifest, catalog_file):
@@ -103,32 +103,24 @@ def test_third_party_repo_override_is_used(monkeypatch, manifest, catalog_file):
     assert seen["repo_id"] == "someuser/their-assets"
 
 
-# --- vendored fallback ------------------------------------------------------------------------
+# --- pure-HF: a bare name resolves ONLY via the manifest (no vendored fallback) ---------------
 
-def test_vendored_fallback_when_manifest_empty(monkeypatch, catalog_file):
+def test_unknown_name_raises(monkeypatch):
+    # Offline / unknown name -> empty manifest -> ResolverError (there is no vendored fallback).
     monkeypatch.setattr(R, "fetch_manifest", lambda **kw: {})
-    monkeypatch.setattr(R, "_vendored_path", lambda name: str(catalog_file))
-    art = R.resolve("feynman")
-    assert art.source == "vendored" and art.path == str(catalog_file)
-
-
-def test_unknown_name_no_vendored_raises(monkeypatch):
-    monkeypatch.setattr(R, "fetch_manifest", lambda **kw: {})
-    monkeypatch.setattr(R, "_vendored_path", lambda name: None)
-    with pytest.raises(R.ResolverError):
+    with pytest.raises(R.ResolverError, match="not in the manifest"):
         R.resolve("does_not_exist")
 
 
-# --- review fixes: integrity must not silently fall back; no CWD shadowing; colon-path; missing-sha
+# --- review fixes: integrity must always raise; no CWD shadowing; colon-path; missing-sha ------
 
-def test_sha256_mismatch_raises_even_with_vendored_available(monkeypatch, manifest, catalog_file):
-    # Integrity failure must NEVER silently degrade to the vendored copy (the headline guarantee).
+def test_sha256_mismatch_raises_as_integrity_error(monkeypatch, manifest, catalog_file):
+    # Integrity failure must surface as IntegrityError -- never a silent degrade (the headline guarantee).
     manifest["feynman"]["versions"]["1"]["sha256"]["catalog.yaml"] = "0" * 64
     monkeypatch.setattr(R, "fetch_manifest", lambda **kw: manifest)
     monkeypatch.setattr("huggingface_hub.hf_hub_download", lambda **kw: str(catalog_file))
-    monkeypatch.setattr(R, "_vendored_path", lambda name: str(catalog_file))  # vendored IS available
     with pytest.raises(R.IntegrityError, match="sha256 mismatch"):
-        R.resolve("feynman@1")  # DEFAULT args (vendored_fallback=True)
+        R.resolve("feynman@1")
 
 
 def test_bare_name_not_shadowed_by_cwd_file(monkeypatch, tmp_path):
@@ -151,5 +143,5 @@ def test_missing_sha_warns_but_resolves(monkeypatch, manifest, catalog_file):
     monkeypatch.setattr(R, "fetch_manifest", lambda **kw: manifest)
     monkeypatch.setattr("huggingface_hub.hf_hub_download", lambda **kw: str(catalog_file))
     with pytest.warns(RuntimeWarning, match="No sha256"):
-        art = R.resolve("feynman@1", vendored_fallback=False)
+        art = R.resolve("feynman@1")
     assert art.source == "huggingface"

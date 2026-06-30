@@ -11,9 +11,9 @@ On-disk a catalog is a single yaml with two top-level blocks::
       <eq_id>: {raw, prepared, n_variables, vars: {vN: {name, sample_range, sample_type, ...}}, ...}
 
 Catalogs are loaded through :func:`load_catalog`, which resolves a reference (a local path, a
-``name[@version]`` against the official manifest, or ``repo_id:name[@version]`` against a
-third-party one) via :mod:`symbolic_data.resolver`, with vendored package-data as the offline
-fallback for the curated sets.
+``name[@version]`` against the official Hugging Face manifest, or ``repo_id:name[@version]`` against
+a third-party one) via :mod:`symbolic_data.resolver`. Curated catalogs are HF artifacts, not bundled
+in the wheel, so a bare name needs network on first use; pass a local path for offline operation.
 """
 from __future__ import annotations
 
@@ -32,7 +32,7 @@ from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.problem import Problem
 from symbolic_data.resolver import resolve
 
-# Known curated catalog names (for discovery; all ship as vendored package data).
+# Known curated catalog names (for discovery; all resolved from the HF assets repo, not bundled).
 CATALOGS: tuple[str, ...] = ("fastsrb", "feynman", "nguyen")
 
 # Keys consumed as structured fields on a CatalogEntry; everything else on an entry -> entry.meta.
@@ -333,8 +333,8 @@ class ProblemCatalog(Catalog):
 def load_catalog(ref: str = "fastsrb", *, install: bool = True, repo_id: str | None = None) -> ProblemCatalog:
     """Load a :class:`ProblemCatalog` by reference.
 
-    ``ref`` is a local path, a ``name[@version]`` (resolved against the official manifest, with
-    the vendored curated copy as the offline fallback), or ``repo_id:name[@version]`` for a
-    third-party catalog. Curated names: ``fastsrb`` (120), ``feynman`` (100), ``nguyen`` (12).
+    ``ref`` is a local path, a ``name[@version]`` (resolved from the official Hugging Face manifest;
+    network on first use, then cached), or ``repo_id:name[@version]`` for a third-party catalog.
+    Curated names: ``fastsrb`` (120), ``feynman`` (100), ``nguyen`` (12).
     """
     return ProblemCatalog.load(ref, install=install, repo_id=repo_id)

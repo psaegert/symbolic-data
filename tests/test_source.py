@@ -1,9 +1,14 @@
 """Stage-c tests for the SET/FIXED-mode ProblemSource (catalog -> Problems)."""
+from pathlib import Path
+
 import numpy as np
 import pytest
 
 from symbolic_data import Problem, ProblemSource
-from symbolic_data import resolver as R
+
+# Curated catalogs are HF artifacts (not bundled); load them by LOCAL PATH from the repo's
+# assets/ source-of-truth copies so the suite is hermetic (no network).
+NGUYEN = str(Path(__file__).resolve().parent.parent / "assets" / "catalogs" / "nguyen.yaml")
 
 
 @pytest.fixture(scope="module")
@@ -12,14 +17,8 @@ def engine():
     return SimpliPyEngine.load("dev_7-3", install=True)
 
 
-@pytest.fixture(autouse=True)
-def _offline(monkeypatch):
-    # Resolve curated catalogs from the vendored package data (no network).
-    monkeypatch.setattr(R, "fetch_manifest", lambda **kw: {})
-
-
 def _source(engine, **sampling):
-    return ProblemSource({"catalog": "nguyen", "sampling": sampling}, simplipy_engine=engine)
+    return ProblemSource({"catalog": NGUYEN, "sampling": sampling}, simplipy_engine=engine)
 
 
 def test_set_mode_iterates_catalog_into_problems(engine):
@@ -65,7 +64,7 @@ def test_random_without_replacement_covers_all_once(engine):
 def test_filter_max_complexity_drops_complex_problems(engine):
     base = list(_source(engine, n_support=6, n_validation=2))
     src = ProblemSource(
-        {"catalog": "nguyen", "sampling": {"n_support": 6, "n_validation": 2},
+        {"catalog": NGUYEN, "sampling": {"n_support": 6, "n_validation": 2},
          "holdouts": [{"filter": {"max_complexity": 5}}]},
         simplipy_engine=engine,
     )
@@ -78,8 +77,8 @@ def test_exclude_holdout_decontaminates(engine):
     # Self-exclusion: excluding `nguyen` from a nguyen source drops every problem (all the
     # normalized expression prefixes match), proving decontamination is wired through.
     src = ProblemSource(
-        {"catalog": "nguyen", "sampling": {"n_support": 6, "n_validation": 2},
-         "holdouts": [{"exclude": "nguyen"}]},
+        {"catalog": NGUYEN, "sampling": {"n_support": 6, "n_validation": 2},
+         "holdouts": [{"exclude": NGUYEN}]},
         simplipy_engine=engine,
     )
     assert list(src) == []
@@ -223,14 +222,14 @@ def test_n_support_prior_requires_n_validation_zero():
 
 def test_n_support_prior_rejects_declarative_catalog(engine):
     # prior mode needs a generative catalog (it draws from a support prior); a declarative one has none.
-    src = ProblemSource({"catalog": "nguyen", "sampling": {"n_support": "prior", "n_validation": 0}}, simplipy_engine=engine)
+    src = ProblemSource({"catalog": NGUYEN, "sampling": {"n_support": "prior", "n_validation": 0}}, simplipy_engine=engine)
     with pytest.raises(ValueError, match="generative catalog"):
         list(src)
 
 
 def test_problemsource_exposes_its_catalog(engine):
     from symbolic_data import GenerativeCatalog, ProblemCatalog
-    dsrc = ProblemSource({"catalog": "nguyen", "sampling": {"n_support": 6}}, simplipy_engine=engine)
+    dsrc = ProblemSource({"catalog": NGUYEN, "sampling": {"n_support": 6}}, simplipy_engine=engine)
     assert isinstance(dsrc.catalog, ProblemCatalog)
     gsrc = ProblemSource({"catalog": _lample_charton_cfg(), "sampling": {"size": 1}})
     assert isinstance(gsrc.catalog, GenerativeCatalog)

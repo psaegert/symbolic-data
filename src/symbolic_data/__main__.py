@@ -10,8 +10,9 @@ One command:
 Invoke as ``symbolic-data materialize ...`` (console script) or ``python -m symbolic_data ...``.
 
 (The pre-0.4.1 skeleton-pool commands -- generate-skeleton-pool / import-data / split-skeleton-pool
--- were removed: skeleton pools are now ProblemSource's private engine, curated test sets ship as
-vendored catalogs, and decontamination is a ProblemSource ``holdouts: [{exclude: <catalog>}]``.)
+-- were removed: skeleton pools are now ProblemSource's private engine, curated test sets are HF
+artifacts (resolved by name, not bundled), and decontamination is a ProblemSource
+``holdouts: [{exclude: <catalog>}]``.)
 """
 from __future__ import annotations
 

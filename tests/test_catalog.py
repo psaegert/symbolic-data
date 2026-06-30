@@ -1,25 +1,29 @@
-"""Tests for the level-1 ProblemCatalog + load_catalog (curated, vendored)."""
+"""Tests for the level-1 ProblemCatalog + load_catalog.
+
+Curated catalogs are HF artifacts (not bundled). Tests load them by LOCAL PATH from the repo's
+``assets/catalogs/`` source-of-truth copies, so the suite stays hermetic (no network / no manifest).
+"""
+from pathlib import Path
+
 import pytest
 
 from symbolic_data import CatalogEntry, ProblemCatalog, load_catalog
-from symbolic_data import resolver as R
 
+ASSETS = Path(__file__).resolve().parent.parent / "assets" / "catalogs"
 CURATED_COUNTS = {"fastsrb": 120, "feynman": 100, "nguyen": 12}
 
 
-@pytest.fixture(autouse=True)
-def _offline(monkeypatch):
-    # Force the vendored package-data path (no network / manifest) for deterministic tests.
-    monkeypatch.setattr(R, "fetch_manifest", lambda **kw: {})
+def _local(name: str) -> ProblemCatalog:
+    return load_catalog(str(ASSETS / f"{name}.yaml"))
 
 
 @pytest.mark.parametrize("name,count", CURATED_COUNTS.items())
 def test_load_curated_catalog_counts_and_metadata(name, count):
-    cat = load_catalog(name)
+    cat = _local(name)
     assert isinstance(cat, ProblemCatalog)
     assert cat.name == name
     assert cat.version == 1
-    assert cat.source == "vendored"
+    assert cat.source == "local"
     assert len(cat) == count
     assert len(list(cat.iter_expressions())) == count
     # metadata carried through (incl. sampling defaults + conventions note)
@@ -29,7 +33,7 @@ def test_load_curated_catalog_counts_and_metadata(name, count):
 
 
 def test_entry_structure_and_vars():
-    cat = load_catalog("feynman")
+    cat = _local("feynman")
     entry = cat["I.6.2a"]
     assert isinstance(entry, CatalogEntry)
     assert entry.raw and entry.prepared
@@ -41,12 +45,12 @@ def test_entry_structure_and_vars():
 
 
 def test_nguyen_sampling_default_is_20():
-    cat = load_catalog("nguyen")
+    cat = _local("nguyen")
     assert cat.meta["sampling_defaults"]["n_points"] == 20
 
 
 def test_to_from_yaml_roundtrip(tmp_path):
-    cat = load_catalog("nguyen")
+    cat = _local("nguyen")
     out = tmp_path / "nguyen.yaml"
     cat.to_yaml(out)
     reloaded = ProblemCatalog.from_yaml(out)
