@@ -486,8 +486,10 @@ class LampleChartonCatalog(GenerativeCatalog):
         if isinstance(holdout_pool, str):
             if holdout_pool in self.holdout_pools:
                 return
-
-            _, holdout_pool_obj = LampleChartonCatalog.load(holdout_pool)
+            resolved = substitute_root_path(holdout_pool)
+            # a saved-catalog DIRECTORY (legacy) -> load it; otherwise a ref/name/inline -> build_catalog
+            # (resolves a name[@version] via HF, a config path, or an inline spec).
+            holdout_pool_obj = LampleChartonCatalog.load(resolved)[1] if os.path.isdir(resolved) else build_catalog(resolved)
             self.holdout_pools.append(holdout_pool)
         else:
             if any(existing is holdout_pool for existing in self.holdout_pools if not isinstance(existing, str)):
@@ -496,13 +498,37 @@ class LampleChartonCatalog(GenerativeCatalog):
             holdout_pool_obj = holdout_pool
             self.holdout_pools.append(holdout_pool_obj)
 
-        for skeleton in holdout_pool_obj.skeletons:
-            no_constant_expression = holdout_pool_obj.get_structural_prototype(skeleton)
-            executable_prefix_expression = holdout_pool_obj.simplipy_engine.operators_to_realizations(no_constant_expression)
+        # A generative (skeleton-bearing) holdout exposes its own skeletons + engine/variables; a
+        # declarative ProblemCatalog (e.g. the canonical `fastsrb`) does not, so derive its structural
+        # prototypes from its expressions in THIS catalog's space (self.simplipy_engine / self.variables).
+        if isinstance(holdout_pool_obj, GenerativeCatalog):
+            items = [
+                (holdout_pool_obj.get_structural_prototype(sk), holdout_pool_obj.simplipy_engine,
+                 holdout_pool_obj.variables, holdout_pool_obj.n_variables)
+                for sk in holdout_pool_obj.skeletons
+            ]
+        else:
+            items = []
+            for entry in holdout_pool_obj.iter_entries(np.random.default_rng()):
+                expression = getattr(entry, "prepared", None) or getattr(entry, "raw", None)
+                if expression is None:
+                    continue
+                prefix = self.simplipy_engine.infix_to_prefix(expression)
+                # normalize_skeleton canonicalizes the declarative source's variable names (e.g. v1->x1)
+                # into THIS catalog's space and abstracts numeric literals to <constant>; then take the
+                # structural prototype (constants removed) -- the same form the generative path registers.
+                canonical = normalize_skeleton(prefix)
+                if canonical is None:
+                    continue
+                items.append((self.get_structural_prototype(canonical), self.simplipy_engine,
+                              self.variables, self.n_variables))
+
+        for no_constant_expression, engine, variables, n_variables in items:
+            executable_prefix_expression = engine.operators_to_realizations(no_constant_expression)
             prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
-            code_string = holdout_pool_obj.simplipy_engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
-            code = codify(code_string, holdout_pool_obj.variables + constants)
-            compiled_fn = holdout_pool_obj.simplipy_engine.code_to_lambda(code)
+            code_string = engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
+            code = codify(code_string, variables + constants)
+            compiled_fn = engine.code_to_lambda(code)
 
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
@@ -510,7 +536,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                     no_constant_expression,
                     compiled_fn,
                     num_constants=len(constants),
-                    n_variables=holdout_pool_obj.n_variables,
+                    n_variables=n_variables,
                 )
 
     def clear_holdouts(self) -> None:
