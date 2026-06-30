@@ -1,28 +1,35 @@
 # Registries & extensibility
 
-The pieces of the data layer that select an implementation *by name* from a config are backed by a
-small `Registry`. A custom implementation drops into the **same config slot** as a builtin — there is
-no separate idiom to learn — and a custom prior/distribution changes *what* is sampled, never *how*
-holdout membership is tested.
+The pieces of the data layer that select an implementation *by name* from a config are pluggable. A
+custom implementation drops into the **same config slot** as a builtin — there is no separate idiom
+to learn — and a custom prior/distribution changes *what* is sampled, never *how* holdout membership
+is tested.
 
-Two registries ship today:
+Two extension seams ship today:
 
-- `symbolic_data.DISTRIBUTIONS` — constant-value distributions (group `symbolic_data.distributions`).
-- `symbolic_data.BENCHMARKS` — benchmark loaders (group `symbolic_data.benchmarks`).
+- **Distributions** — the `symbolic_data.DISTRIBUTIONS` registry (a `Registry`), backing the
+  `{name: ..., kwargs: ...}` config slot used by per-variable sampling, literal priors, and support
+  priors. Entry-point group: `symbolic_data.distributions`.
+- **Generative catalogs** — `register_generative_catalog(name, cls)`, backing the `type: <name>`
+  config slot a generative catalog spec selects (`lample_charton` is the builtin).
 
-## Registering in-process
+## Distributions
+
+### Registering in-process
 
 ```python
 import numpy as np
 from symbolic_data import DISTRIBUTIONS
 
 @DISTRIBUTIONS.register("student_t")
-def student_t_dist(df, loc=0.0, scale=1.0, min_value=None, max_value=None, size=1):
-    s = loc + scale * np.random.standard_t(df, size=size)
+def student_t_dist(df, loc=0.0, scale=1.0, min_value=None, max_value=None, size=1, rng=None):
+    g = rng if rng is not None else np.random.default_rng()
+    s = loc + scale * g.standard_t(df, size=size)
     return np.clip(s, min_value, max_value) if min_value is not None else s
 ```
 
-It is now usable from the same `{"name": ..., "kwargs": ...}` config slot as a builtin, including in a
+It is now usable from the same `{name: ..., kwargs: ...}` config slot as a builtin (`uniform`,
+`normal`, `log_uniform`, `log_normal`, `gamma`, `cauchy`, `binomial`, `fastsrb`), including in a
 mixture prior:
 
 ```yaml
@@ -31,23 +38,20 @@ literal_prior:
   - {name: student_t, kwargs: {df: 3},            weight: 0.3}
 ```
 
-## Registering across packages (entry points)
+### Registering across packages (entry points)
 
-A third-party package can add implementations **without editing symbolic-data**, via
-`importlib.metadata` entry points:
+A third-party package can add distributions **without editing symbolic-data**, via
+`importlib.metadata` entry points in the `symbolic_data.distributions` group:
 
 ```toml
 # in your package's pyproject.toml
 [project.entry-points."symbolic_data.distributions"]
 student_t = "my_pkg:student_t_dist"
-
-[project.entry-points."symbolic_data.benchmarks"]
-my_bench = "my_pkg:load_my_bench"
 ```
 
 They are discovered lazily on first lookup.
 
-## Collision policy & reproducibility
+### Collision policy & reproducibility
 
 - A direct `register` of an existing name **warns and keeps the existing one** unless `overwrite=True`.
 - An entry point that shadows an existing name is **ignored with a warning** (first-registered wins),
@@ -58,3 +62,20 @@ They are discovered lazily on first lookup.
 
 The builtins are the source of truth (`symbolic_data.BASE_DISTRIBUTIONS`); the registry is seeded from
 them.
+
+## Generative catalogs
+
+A generative catalog spec selects its implementation by a `type:` key (the builtin is
+`lample_charton`). Register a custom `GenerativeCatalog` subclass under a new `type:` name:
+
+```python
+from symbolic_data import GenerativeCatalog, register_generative_catalog
+
+class MyCatalog(GenerativeCatalog):
+    ...  # implement sample_skeleton + the Catalog interface (iter_entries / realize)
+
+register_generative_catalog("my_catalog", MyCatalog)
+```
+
+It is now built from a `{type: my_catalog, ...}` mapping (or a resolved yaml with that `type:`) by
+`build_catalog(...)` / `ProblemSource({"catalog": {...}})`, exactly like the builtin recipe.
