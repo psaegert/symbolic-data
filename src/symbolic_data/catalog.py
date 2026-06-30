@@ -299,11 +299,17 @@ class ProblemCatalog(Catalog):
         compiled = self._compiled(entry, engine)
         variable_order = compiled["variable_order"]
         columns = []
-        for key in variable_order:
-            spec = entry.variables[key]
-            base, sign = spec["sample_type"]
-            low, high = spec["sample_range"]
-            columns.append(fastsrb_dist(low, high, base=base, sign=sign, layout=layout, size=n_points, rng=rng))
+        try:
+            for key in variable_order:
+                spec = entry.variables[key]
+                base, sign = spec["sample_type"]
+                low, high = spec["sample_range"]
+                columns.append(fastsrb_dist(low, high, base=base, sign=sign, layout=layout, size=n_points, rng=rng))
+        except (KeyError, ValueError, TypeError) as exc:
+            # A missing/malformed per-variable spec is a permanent entry defect (not a transient draw
+            # failure): raise CatalogEntryError so the source yields a placeholder instead of crashing
+            # the whole iteration -- mirroring _compiled()'s compile_failed handling.
+            raise CatalogEntryError(f"malformed variable spec for {entry.id!r}: {exc}") from exc
         x_all = np.column_stack(columns).astype(float)
         value_map = {var: x_all[:, i] for i, var in enumerate(variable_order)}
         try:

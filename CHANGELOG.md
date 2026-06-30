@@ -3,6 +3,17 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.9.1] - 2026-07-01
+
+Post-release audit fixes (no API change).
+
+### Fixed
+- `ProblemCatalog.realize` now raises `CatalogEntryError` (which the source turns into a placeholder)
+  instead of an uncaught `KeyError`/`ValueError` when an entry's per-variable spec is missing or
+  malformed, so a single bad entry no longer aborts catalog iteration.
+- README quickstart corrected: the curated catalogs are Hugging Face artifacts (network on first use,
+  then cached), not bundled package data.
+
 ## [0.9.0] - 2026-06-30
 
 Completes the family's by-name catalog transition + a terminology cleanup.

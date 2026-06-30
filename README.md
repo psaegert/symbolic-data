@@ -21,9 +21,10 @@ pip install symbolic-data
 import symbolic_data
 
 # 1. Load a curated catalog (level 1: expressions + their intrinsic per-variable sampling). The
-#    three curated sets ship as package data (no download); `load_catalog("name@version")` resolves
-#    a versioned catalog from Hugging Face when a manifest is available, and
-#    `load_catalog("user/repo:name")` loads a third party's published catalog.
+#    curated sets are Hugging Face artifacts (not bundled in the wheel): a bare `name` needs network
+#    on first use, then caches; pass an explicit local path for offline use. `load_catalog("name@version")`
+#    resolves a versioned catalog from the HF manifest, and `load_catalog("user/repo:name")` loads a
+#    third party's published catalog.
 feynman = symbolic_data.load_catalog("feynman")            # 100 equations (Udrescu & Tegmark 2020)
 entry = feynman["I.6.2a"]
 entry.prepared, entry.variables                            # expression + intrinsic per-variable sampling
