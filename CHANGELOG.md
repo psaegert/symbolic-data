@@ -3,6 +3,14 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.7.1] - 2026-06-30
+
+### Added
+- **`ProblemSource.catalog`** -- public accessor for the `Catalog` the source samples from (built
+  lazily, cached). Lets a consumer that also needs the catalog directly (e.g. a trainer harvesting
+  raw skeletons for prompt features) share the source's single catalog instance -- one simplipy
+  engine -- instead of constructing a second one.
+
 ## [0.7.0] - 2026-06-30
 
 Adds the training-time generation knobs a downstream trainer needs so it can consume a

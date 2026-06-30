@@ -122,6 +122,16 @@ class ProblemSource:
             self._catalog = build_catalog(self.config["catalog"])
         return self._catalog
 
+    @property
+    def catalog(self) -> Catalog:
+        """The :class:`~symbolic_data.catalog.Catalog` this source samples from (built lazily).
+
+        Lets a consumer that ALSO needs the catalog directly -- e.g. a trainer harvesting raw
+        skeletons for prompt features -- share the source's single catalog instance (one engine)
+        instead of building a second one.
+        """
+        return self._get_catalog()
+
     # --- iteration ---------------------------------------------------------------------------
     def __iter__(self) -> Iterator[Problem]:
         if self.mode == "fixed":
