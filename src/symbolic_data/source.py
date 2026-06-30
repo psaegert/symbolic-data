@@ -267,7 +267,7 @@ class ProblemSource:
         ``v1..`` expression's structure) and constant-agnostic -- the leak-safe behaviour a held-out
         evaluation set needs. The excluded ``ref`` resolves via :func:`build_catalog`, so it may be a
         declarative catalog (skeletons from its expressions) OR a generative one (its skeleton set);
-        never a "skeleton pool" file. Functional-equivalence decontamination is a later refinement.
+        never a "catalog" file. Functional-equivalence decontamination is a later refinement.
         """
         if problem.expression is None:
             return False

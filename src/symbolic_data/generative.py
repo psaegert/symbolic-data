@@ -212,9 +212,6 @@ class LampleChartonCatalog(GenerativeCatalog):
         '''
         config_ = load_config(config)
 
-        if "skeleton_pool" in config_.keys():
-            config_ = config_["skeleton_pool"]
-
         # If the config is a string, convert relative paths within the config to absolute paths
         if isinstance(config, str) and isinstance(config_["simplipy_engine"], str):
             if config_["simplipy_engine"].startswith('.'):
@@ -304,7 +301,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         LampleChartonCatalog
             The LampleChartonCatalog object.
         '''
-        skeleton_pool = cls(
+        catalog = cls(
             simplipy_engine=simplipy_engine,
             sample_strategy=sample_strategy,
             literal_prior=literal_prior,
@@ -319,14 +316,14 @@ class LampleChartonCatalog(GenerativeCatalog):
             simplify=simplify
         )
 
-        skeleton_pool.skeletons = skeletons
+        catalog.skeletons = skeletons
 
         if skeleton_codes is not None:
-            skeleton_pool.skeleton_codes = skeleton_codes
+            catalog.skeleton_codes = skeleton_codes
         else:
-            skeleton_pool.skeleton_codes = skeleton_pool.compile_codes()
+            catalog.skeleton_codes = catalog.compile_codes()
 
-        return skeleton_pool
+        return catalog
 
     def compile_codes(self, verbose: bool = False) -> dict[tuple[str], tuple[CodeType, list[str]]]:
         '''
@@ -523,12 +520,12 @@ class LampleChartonCatalog(GenerativeCatalog):
 
     def save(self, directory: str, config: dict[str, Any] | str | None = None, reference: str = 'relative', recursive: bool = True) -> None:
         '''
-        Save the skeleton pool to a directory.
+        Save the catalog to a directory.
 
         Parameters
         ----------
         directory : str
-            The directory to save the skeleton pool to.
+            The directory to save the catalog to.
         config : dict or str or None, optional
             The configuration dictionary or path to the configuration file. If None, the model will be saved without a config file.
         reference : str, optional
@@ -552,12 +549,12 @@ class LampleChartonCatalog(GenerativeCatalog):
     @classmethod
     def load(cls, directory: str, verbose: bool = True) -> tuple[dict[str, Any], "LampleChartonCatalog"]:
         '''
-        Load a skeleton pool from a directory.
+        Load a catalog from a directory.
 
         Parameters
         ----------
         directory : str
-            The directory to load the skeleton pool from.
+            The directory to load the catalog from.
         verbose : bool, optional
             Whether to display a progress bar.
 
@@ -892,7 +889,7 @@ class LampleChartonCatalog(GenerativeCatalog):
 
     def split(self, train_size: float, random_state: int | None = None) -> tuple["LampleChartonCatalog", "LampleChartonCatalog"]:
         """
-        Split the skeleton pool into two disjoint pools randomly.
+        Split the catalog into two disjoint pools randomly.
 
         Parameters
         ----------
@@ -904,7 +901,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         Returns
         -------
         tuple[LampleChartonCatalog, LampleChartonCatalog]
-            The two disjoint skeleton pools.
+            The two disjoint catalogs.
         """
         train_keys, test_keys = train_test_split(list(self.skeletons), train_size=train_size, random_state=random_state)
 

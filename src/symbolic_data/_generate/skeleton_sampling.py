@@ -1,4 +1,4 @@
-"""Utilities for sampling operator skeletons independent from SkeletonPool.
+"""Utilities for sampling operator skeletons for generative catalogs (operator-tree skeletons).
 
 All randomness flows through a passed ``numpy.random.Generator`` (entropy by default when not
 supplied); no global ``np.random`` state. Reproducibility comes from threading one Generator

@@ -9,6 +9,13 @@ support/validation counts, noise, problems-per-expression, holdouts/filters, mat
 Plus the distribution vocabulary (incl. the ``fastsrb`` distribution) and the extensibility
 ``Registry``. Depends only on simplipy + numpy/sklearn.
 """
+from importlib.metadata import PackageNotFoundError, version as _pkg_version
+
+try:
+    __version__ = _pkg_version("symbolic-data")
+except PackageNotFoundError:  # pragma: no cover - source tree without installed metadata
+    __version__ = "0.0.0+unknown"
+
 from symbolic_data.errors import NoValidSampleFoundError, CatalogEntryError
 from symbolic_data.distributions import get_distribution, fastsrb_dist, DISTRIBUTIONS, BASE_DISTRIBUTIONS
 from symbolic_data.prior_factory import build_prior_callable
