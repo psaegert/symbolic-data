@@ -35,6 +35,9 @@ Repository = "https://github.com/psaegert/symbolic-data"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+symbolic_data = ["py.typed"]
+
 [tool.flake8]
 max-line-length = 250
 extend-ignore = ["E203", "W503"]
