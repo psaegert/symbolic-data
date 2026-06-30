@@ -3,6 +3,21 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.7.0] - 2026-06-30
+
+Adds the training-time generation knobs a downstream trainer needs so it can consume a
+`ProblemSource` directly (yielding `Problem`s) instead of reaching past it into the catalog's
+low-level samplers. Additive; no breaking change.
+
+### Added
+- **`sampling.n_support: prior`** (generative catalogs only) -- draw the per-sample support size
+  from the catalog's own `n_support_prior` (variable support sizes, the training pattern) instead of
+  a fixed count. Requires `n_validation: 0`: every realized row is support, no validation split. The
+  distribution is the catalog's existing `sample_data(n_support=None)` path, unchanged; it errors on
+  a declarative catalog (no support prior).
+- **`ProblemSource.max_n_support`** -- upper bound on a sampled support size (a generative catalog's
+  configured support maximum, else the fixed `n_support`); lets a consumer pre-size buffers.
+
 ## [0.6.0] - 2026-06-30
 
 Generalizes the catalog abstraction: a `ProblemSource` now samples from a **`Catalog`**, which is
