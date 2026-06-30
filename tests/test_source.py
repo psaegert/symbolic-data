@@ -235,3 +235,21 @@ def test_problemsource_exposes_its_catalog(engine):
     gsrc = ProblemSource({"catalog": _lample_charton_cfg(), "sampling": {"size": 1}})
     assert isinstance(gsrc.catalog, GenerativeCatalog)
     assert gsrc.catalog is gsrc.catalog   # cached single instance (shareable)
+
+
+def test_problemsource_accepts_loaded_generative_catalog_instance(engine):
+    # A PRE-LOADED generative catalog passed as an INSTANCE (the saved fixed-validation-pool pattern):
+    # ProblemSource is in generate mode and an unbounded stream samples ONLY the catalog's existing
+    # fixed skeletons (new=False), not freshly generated ones.
+    from itertools import islice
+    from symbolic_data.generative import LampleChartonCatalog
+    cfg = _lample_charton_cfg()
+    cfg.pop("type", None)
+    cat = LampleChartonCatalog.from_config(cfg)
+    cat.create(4, rng=np.random.default_rng(0))
+    fixed = set(cat.skeletons)
+    src = ProblemSource({"catalog": cat, "sampling": {"n_support": "prior", "n_validation": 0, "noise": 0.0}},
+                        rng=np.random.default_rng(1))
+    assert src.mode == "generate" and src.catalog is cat
+    problems = [p for p in islice(iter(src), 12) if not p.is_placeholder]
+    assert problems and all(tuple(p.skeleton) in fixed for p in problems)

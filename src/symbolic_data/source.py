@@ -76,7 +76,14 @@ class ProblemSource:
         if "problems" in self.config:
             self.mode = "fixed"
         else:
-            self.mode = "generate" if isinstance(self.config["catalog"], Mapping) else "set"
+            # `catalog:` may be a mapping (`{type: ...}`) OR a pre-built Catalog instance OR a
+            # string/path. A GenerativeCatalog (mapping or instance) -> generate; a string/path or a
+            # declarative ProblemCatalog instance -> set.
+            catalog_spec = self.config["catalog"]
+            if isinstance(catalog_spec, Mapping) or isinstance(catalog_spec, GenerativeCatalog):
+                self.mode = "generate"
+            else:
+                self.mode = "set"
 
         s = dict(self.config.get("sampling", {}))
         self.method = s.get("method", "procedural" if self.mode == "generate" else "iterate")

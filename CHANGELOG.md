@@ -3,6 +3,23 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.7.2] - 2026-06-30
+
+Lets a downstream trainer consume a *saved fixed* generative catalog (a held-out validation pool
+loaded from disk) through `ProblemSource`, not just an on-the-fly generator.
+
+### Added
+- **`ProblemSource` accepts a pre-built `Catalog` instance** as `config["catalog"]` (a
+  `GenerativeCatalog` instance -> generate mode), so a consumer can hand it an already-loaded
+  catalog (e.g. `LampleChartonCatalog.load(dir)`) instead of only a config dict / ref.
+
+### Changed
+- **`GenerativeCatalog.iter_entries(size=None)`** now streams via `sample_skeleton(new=False)`: an
+  EMPTY catalog generates a fresh skeleton each draw (training-time streaming), while a PRE-LOADED
+  catalog samples from its existing fixed skeletons (a saved validation pool) -- restoring the old
+  worker's `sample_skeleton()` default. (It previously forced `new=True`, which would wrongly
+  generate fresh skeletons for a loaded pool.)
+
 ## [0.7.1] - 2026-06-30
 
 ### Added

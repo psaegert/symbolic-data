@@ -831,13 +831,16 @@ class LampleChartonCatalog(GenerativeCatalog):
         """Yield generated skeletons.
 
         ``size`` set -> generate that many DISTINCT skeletons (cached + sorted, the reproducible
-        finite-pool behaviour). ``size`` is ``None`` -> an UNBOUNDED stream of fresh skeletons
-        (training-time streaming). ``method`` is ignored: generation is always procedural.
+        finite-pool behaviour). ``size`` is ``None`` -> an UNBOUNDED stream via ``sample_skeleton``
+        with ``new=False``: an EMPTY catalog generates a fresh skeleton each draw (training-time
+        streaming), while a PRE-LOADED catalog (e.g. a saved fixed validation pool) samples from its
+        existing skeletons -- matching the old worker's ``sample_skeleton()`` default. ``method`` is
+        ignored: generation is always procedural.
         """
         if size is None:
             while True:
                 try:
-                    skeleton, code, constants = self.sample_skeleton(new=True, decontaminate=self.decontaminate, rng=rng)
+                    skeleton, code, constants = self.sample_skeleton(new=False, decontaminate=self.decontaminate, rng=rng)
                 except NoValidSampleFoundError:
                     continue
                 yield GeneratedEntry(skeleton=tuple(skeleton), code=code, constants=list(constants), variables=list(self.variables))
