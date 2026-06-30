@@ -58,3 +58,18 @@ def test_problemsource_over_frozen_spec_samples_only_frozen_skeletons():
 def test_build_catalog_declarative_path_still_builds_problem_catalog():
     cat = build_catalog(str(ASSETS / "nguyen.yaml"))
     assert isinstance(cat, ProblemCatalog) and len(cat) == 12
+
+
+def test_v23_val_frozen_catalog_resolves_with_its_1000_skeletons():
+    # The shipped v23 validation set: a single self-contained generative spec (recipe + inline frozen
+    # skeletons). Resolving it yields the fixed 1000-skeleton set; a ProblemSource samples X/y per the
+    # recipe over those fixed skeletons (the held-out eval set, no generation).
+    cat = build_catalog(str(ASSETS / "v23-val.yaml"))
+    assert isinstance(cat, GenerativeCatalog)
+    assert len(cat.skeletons) == 1000
+    src = ProblemSource({"catalog": str(ASSETS / "v23-val.yaml"),
+                         "sampling": {"n_support": 32, "n_validation": 0, "noise": 0.0}})
+    from itertools import islice
+    frozen = set(cat.skeletons)
+    probs = [p for p in islice(iter(src), 5) if not p.is_placeholder]
+    assert probs and all(tuple(p.skeleton) in frozen for p in probs)
