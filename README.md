@@ -58,12 +58,15 @@ obtained from a fixed (materialized) catalog rather than by re-seeding. Versione
 from Hugging Face with a pinned revision **and a sha256 integrity check**; the curated sets ship
 vendored from their canonical upstreams as the offline fallback.
 
-> Status: 0.5.0. The full public stack: `Problem`, the unified distribution framework (incl. the
-> `fastsrb` distribution), `ProblemCatalog` + `load_catalog` + the versioned HF resolver, and
-> `ProblemSource` (set / on-the-fly generate / fixed; holdouts/filters; `materialize()` +
-> `to_catalog()` for frozen, byte-reproducible catalogs). Generate-mode is fully
-> `Generator`-driven (no global `np.random`); the skeleton engine is private (`_generate`), so the
-> public surface is just Problem / Catalog / Source. Curated catalogs (FastSRB, Feynman, Nguyen)
-> ship vendored. CLI: `symbolic-data materialize`.
+> Status: 0.6.0. The full public stack: `Problem`, the unified distribution framework (incl. the
+> `fastsrb` distribution), and the **`Catalog`** a `ProblemSource` samples from -- either a
+> declarative `ProblemCatalog` (+ `load_catalog` + the versioned HF resolver) or an on-the-fly
+> `GenerativeCatalog` (`LampleChartonCatalog`: random unary-binary operator trees; `build_catalog`
+> dispatches a `catalog: {type: ...}` config). `ProblemSource` adds the usage policy (draw method,
+> support/validation counts, noise, holdouts/filters, `problems_per_expression`, unbounded streaming,
+> `materialize()` + `to_catalog()` for frozen, byte-reproducible catalogs). Generate-mode is fully
+> `Generator`-driven (no global `np.random`). The skeleton/support/holdout machinery stays private
+> (`_generate`); the public face is `LampleChartonCatalog`. Curated catalogs (FastSRB, Feynman,
+> Nguyen) ship vendored. CLI: `symbolic-data materialize`.
 > Deferred: publishing the HF asset manifest + a frozen holdout grid; functional-equivalence
 > `exclude` (currently exact normalized-expression match).

@@ -3,6 +3,46 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.6.0] - 2026-06-30
+
+Generalizes the catalog abstraction: a `ProblemSource` now samples from a **`Catalog`**, which is
+either a declarative `ProblemCatalog` or an on-the-fly **`GenerativeCatalog`**. The procedural
+skeleton engine is no longer a private `SkeletonPool` hidden behind a special `generator:` mode;
+it is a first-class, public generative catalog (`LampleChartonCatalog`) that produces fresh
+expressions and that flash-ansr (training + prompt features) and srbf (sampling baselines) can
+consume directly. (0.5.0 hid the engine entirely; two first-party consumers genuinely need a public
+generation API, so 0.6.0 exposes it cleanly as a catalog rather than re-exposing the pool.)
+
+### Added
+- **`Catalog` (abstract base)** -- the level-1 thing a `ProblemSource` samples from: supplies
+  expressions and realizes each into raw `(X, y)` via its intrinsic sampling (`iter_entries` +
+  `realize`). `ProblemCatalog` (declarative) and `GenerativeCatalog` (on-the-fly) both implement it.
+- **`GenerativeCatalog` + `LampleChartonCatalog`** -- a public generative catalog that grows random
+  unary-binary operator trees (the Lample-Charton recipe). Streams fresh skeletons unbounded
+  (`iter_entries(size=None)`) or yields a finite reproducible set (`size=N`); exposes raw
+  `sample_skeleton(...)` for structure-only consumers (prompt-term harvesting, sampling baselines).
+- **`build_catalog(spec)` + `register_generative_catalog(name, cls)`** -- a string/path resolves to a
+  declarative `ProblemCatalog`; a mapping with a `type:` key resolves to the registered generative
+  catalog. Third parties can register their own generators.
+- **`RealizedExpression`** -- the catalog's intrinsic output (`n_points` of `(X, y)` + ground truth),
+  which `ProblemSource` splits/noises into a `Problem`.
+- **Unbounded streaming generation.** A generative source without `size` streams `Problem`s forever
+  (the training-time mode); `size_hint()` is `None`.
+
+### Changed
+- **`ProblemSource` config: `catalog:` replaces `generator:`.** A string/path `catalog:` is a
+  declarative set; a mapping `catalog: {type: lample_charton, ...}` is generative. The number of
+  expressions to draw moves to `sampling: {size: N}` (usage policy); `generator:` is gone.
+- **Shared exceptions** live in `symbolic_data.errors` (`NoValidSampleFoundError` still public; new
+  `CatalogEntryError` distinguishes a permanently-unrealizable entry from a transient retry).
+
+### Migration
+- `{"generator": {<skeleton-pool cfg>, "size": N}, "sampling": {...}}`
+  -> `{"catalog": {<skeleton-pool cfg>, "type": "lample_charton"}, "sampling": {"size": N, ...}}`.
+- `from symbolic_data._generate.skeleton_pool import SkeletonPool`
+  -> `from symbolic_data import LampleChartonCatalog` (same `from_config`/`load`/`sample_skeleton`/
+  `sample_data`/`create`/`clear_holdouts` API; it is now a public `GenerativeCatalog`).
+
 ## [0.5.0] - 2026-06-30
 
 Completes the data-layer redesign: `SkeletonPool` (and the whole skeleton machinery) is removed
