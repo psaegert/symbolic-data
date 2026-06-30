@@ -570,7 +570,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         if config is None:
             warnings.warn("No config specified, saving the model without a config file. Loading the model will require manual configuration.")
         else:
-            save_config(load_config(config, resolve_paths=True), directory=directory, filename='skeleton_pool.yaml', reference=reference, recursive=recursive, resolve_paths=True)
+            save_config(load_config(config, resolve_paths=True), directory=directory, filename='catalog.yaml', reference=reference, recursive=recursive, resolve_paths=True)
 
     @classmethod
     def load(cls, directory: str, verbose: bool = True) -> tuple[dict[str, Any], "LampleChartonCatalog"]:
@@ -589,7 +589,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         dict[str, Any], LampleChartonCatalog
             The configuration dictionary and the LampleChartonCatalog object.
         '''
-        config_path = os.path.join(directory, 'skeleton_pool.yaml')
+        config_path = os.path.join(directory, 'catalog.yaml')
         resolved_directory = substitute_root_path(directory)
 
         pool = cls.from_config(config_path)
