@@ -3,6 +3,25 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.9.0] - 2026-06-30
+
+Completes the family's by-name catalog transition + a terminology cleanup.
+
+### Added
+- **`register_holdout_pool` accepts declarative catalogs + by-name/HF refs.** A training catalog can
+  now hold out the canonical (declarative) `fastsrb` benchmark by name, not just a saved skeleton-pool
+  directory: a string ref resolves via `build_catalog` (name[@version] → HF, config path, inline), a
+  directory still loads as before, and a declarative `ProblemCatalog`'s structural prototypes are
+  derived from its expressions in the training catalog's space (variables canonicalized).
+
+### Changed
+- **Saved-catalog default filename `skeleton_pool.yaml` → `catalog.yaml`** (`LampleChartonCatalog.save`/
+  `.load`). Breaking for loaders of pre-0.9 saved directories by the old name; the family now resolves
+  catalogs by name, so nothing depends on the legacy filename.
+- Added a package `__version__`; purged the term "skeleton pool" from source + docs (the public API has
+  been `LampleChartonCatalog`/`ProblemSource`/`load_catalog` since 0.6; this finishes the prose/CLI/docs
+  and drops a legacy `skeleton_pool:` config-key unwrap).
+
 ## [0.8.0] - 2026-06-30
 
 Catalogs become **pure Hugging Face artifacts** (not bundled in the wheel), the curated **v23**
