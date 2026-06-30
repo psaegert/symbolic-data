@@ -809,7 +809,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         n_skipped = 0
         n_created = len(self.skeletons)
 
-        pbar = tqdm(total=size, desc="Creating Skeleton Pool", disable=not verbose, smoothing=0.0)
+        pbar = tqdm(total=size, desc="Generating skeletons", disable=not verbose, smoothing=0.0)
 
         while n_created < size:
             try:

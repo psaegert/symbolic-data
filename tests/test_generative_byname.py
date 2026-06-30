@@ -16,7 +16,7 @@ from symbolic_data import ProblemCatalog, ProblemSource
 from symbolic_data.generative import GenerativeCatalog, LampleChartonCatalog, build_catalog
 
 ASSETS = Path(__file__).resolve().parent.parent / "assets" / "catalogs"
-RECIPE = Path(__file__).resolve().parent.parent / "configs" / "test" / "skeleton_pool_train.yaml"
+RECIPE = Path(__file__).resolve().parent.parent / "configs" / "test" / "catalog_train.yaml"
 
 
 def _write_spec(extra: dict) -> str:

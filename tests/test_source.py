@@ -130,7 +130,7 @@ def _lample_charton_cfg():
     """The lample_charton generative-catalog config: the test skeleton params + a ``type`` discriminator."""
     import os
     import yaml
-    cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "skeleton_pool_train.yaml")
+    cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "catalog_train.yaml")
     cfg = yaml.safe_load(open(cfg_path, encoding="utf-8"))
     cfg["type"] = "lample_charton"
     return cfg

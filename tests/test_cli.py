@@ -7,7 +7,7 @@ from symbolic_data import load_catalog
 from symbolic_data.__main__ import build_parser, main
 
 REPO_ROOT = os.path.dirname(os.path.dirname(__file__))
-GEN_CONFIG = os.path.join(REPO_ROOT, "configs", "test", "skeleton_pool_train.yaml")
+GEN_CONFIG = os.path.join(REPO_ROOT, "configs", "test", "catalog_train.yaml")
 
 
 def test_cli_requires_a_subcommand():

@@ -29,11 +29,13 @@ REPO = "psaegert/symbolic-data-assets"          # MUST match resolver.HF_MANIFES
 REPO_TYPE = "dataset"
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "catalogs")
 
-# logical name -> filename + curated entry count (sanity check after publish)
+# logical name -> (filename, entry/skeleton count for the log, manifest type)
 CATALOGS = {
-    "fastsrb": ("fastsrb.yaml", 120),
-    "feynman": ("feynman.yaml", 100),
-    "nguyen": ("nguyen.yaml", 12),
+    "fastsrb": ("fastsrb.yaml", 120, "problem_catalog"),
+    "feynman": ("feynman.yaml", 100, "problem_catalog"),
+    "nguyen": ("nguyen.yaml", 12, "problem_catalog"),
+    "v23-val": ("v23-val.yaml", 1000, "generative_catalog"),                 # frozen validation set
+    "lample-charton-v23": ("lample-charton-v23.yaml", None, "generative_catalog"),  # open training recipe
 }
 
 
@@ -55,23 +57,23 @@ def main() -> None:
 
     # 1. upload all catalog files in ONE commit so a single revision pins the whole v1 set
     ops = []
-    for _name, (fn, _cnt) in CATALOGS.items():
+    for _name, (fn, _cnt, _type) in CATALOGS.items():
         local = os.path.abspath(os.path.join(DATA_DIR, fn))
         assert os.path.isfile(local), f"missing catalog file: {local}"
         ops.append(CommitOperationAdd(path_in_repo=fn, path_or_fileobj=local))
     commit = api.create_commit(
         repo_id=REPO, repo_type=REPO_TYPE, operations=ops,
-        commit_message="Publish curated catalogs (fastsrb, feynman, nguyen) v1",
+        commit_message="Publish catalogs (fastsrb, feynman, nguyen, v23-val, lample-charton-v23) v1",
     )
     revision = commit.oid
     print(f"files commit: {revision}")
 
     # 2. build the manifest pinning revision + per-file sha256, then upload it
     manifest: dict = {}
-    for name, (fn, _cnt) in CATALOGS.items():
+    for name, (fn, _cnt, ctype) in CATALOGS.items():
         local = os.path.abspath(os.path.join(DATA_DIR, fn))
         manifest[name] = {
-            "type": "problem_catalog",
+            "type": ctype,
             "repo_id": REPO,
             "default_version": 1,
             "versions": {

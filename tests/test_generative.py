@@ -10,7 +10,7 @@ from symbolic_data.errors import NoValidSampleFoundError
 
 
 def _cfg():
-    cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "skeleton_pool_train.yaml")
+    cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "catalog_train.yaml")
     return yaml.safe_load(open(cfg_path, encoding="utf-8"))
 
 

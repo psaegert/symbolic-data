@@ -15,7 +15,7 @@ import yaml
 
 from symbolic_data import ProblemSource
 
-RECIPE = Path(__file__).resolve().parent.parent / "configs" / "test" / "skeleton_pool_train.yaml"
+RECIPE = Path(__file__).resolve().parent.parent / "configs" / "test" / "catalog_train.yaml"
 
 
 def _frozen_spec(skeletons: list[list[str]], name: str = "probe") -> str:
