@@ -1,0 +1,96 @@
+"""Publish the curated catalogs to the Hugging Face assets dataset repo + a versioned manifest.
+
+This is the distribution step for ``symbolic_data``'s curated catalogs: they live as artifacts on
+Hugging Face (the artifact store), NOT as the primary distribution channel in the PyPI wheel. The
+wheel keeps a small *vendored* copy purely as an offline fallback (see ``resolver.py``); the
+canonical, versioned, sha256-integrity-checked source of truth is the HF dataset repo.
+
+Layout (flat repo root): ``<name>.yaml`` for each catalog + ``manifest.json``. Each manifest entry
+pins the catalog's content by ``revision`` (the git commit sha of the files commit) and per-file
+``sha256``, exactly what ``symbolic_data.resolver.resolve`` verifies on download.
+
+Run from the repo root: ``python tools/publish_catalogs.py``  (requires HF auth: ``huggingface_hub.whoami``).
+
+Versioning discipline (forward-only): re-running this script overwrites the v1 manifest entry to point
+at a fresh files commit. That is fine for the INITIAL publish, but a later CONTENT change to a catalog
+should be published as a NEW version (add ``"2": {...}`` and bump ``default_version``) rather than
+re-running v1, so a pinned ``name@1`` always resolves to identical bytes.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+
+from huggingface_hub import HfApi, CommitOperationAdd
+
+REPO = "psaegert/symbolic-data-assets"          # MUST match resolver.HF_MANIFEST_REPO
+REPO_TYPE = "dataset"
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "src", "symbolic_data", "catalogs", "data")
+
+# logical name -> filename + curated entry count (sanity check after publish)
+CATALOGS = {
+    "fastsrb": ("fastsrb.yaml", 120),
+    "feynman": ("feynman.yaml", 100),
+    "nguyen": ("nguyen.yaml", 12),
+}
+
+
+def sha256(path: str) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def main() -> None:
+    api = HfApi()
+    who = api.whoami()["name"]
+    print(f"HF user: {who}")
+
+    api.create_repo(REPO, repo_type=REPO_TYPE, exist_ok=True, private=False)
+    print(f"repo ready: {REPO} ({REPO_TYPE}, public)")
+
+    # 1. upload all catalog files in ONE commit so a single revision pins the whole v1 set
+    ops = []
+    for _name, (fn, _cnt) in CATALOGS.items():
+        local = os.path.abspath(os.path.join(DATA_DIR, fn))
+        assert os.path.isfile(local), f"missing catalog file: {local}"
+        ops.append(CommitOperationAdd(path_in_repo=fn, path_or_fileobj=local))
+    commit = api.create_commit(
+        repo_id=REPO, repo_type=REPO_TYPE, operations=ops,
+        commit_message="Publish curated catalogs (fastsrb, feynman, nguyen) v1",
+    )
+    revision = commit.oid
+    print(f"files commit: {revision}")
+
+    # 2. build the manifest pinning revision + per-file sha256, then upload it
+    manifest: dict = {}
+    for name, (fn, _cnt) in CATALOGS.items():
+        local = os.path.abspath(os.path.join(DATA_DIR, fn))
+        manifest[name] = {
+            "type": "problem_catalog",
+            "repo_id": REPO,
+            "default_version": 1,
+            "versions": {
+                "1": {
+                    "repo_id": REPO,
+                    "directory": "",
+                    "files": [fn],
+                    "revision": revision,
+                    "sha256": {fn: sha256(local)},
+                }
+            },
+        }
+    manifest_bytes = (json.dumps(manifest, indent=2) + "\n").encode("utf-8")
+    api.upload_file(
+        path_or_fileobj=manifest_bytes, path_in_repo="manifest.json",
+        repo_id=REPO, repo_type=REPO_TYPE, commit_message="Publish manifest v1",
+    )
+    print("manifest.json uploaded")
+    print(json.dumps(manifest, indent=2))
+
+
+if __name__ == "__main__":
+    main()
