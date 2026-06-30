@@ -838,13 +838,26 @@ class LampleChartonCatalog(GenerativeCatalog):
     def iter_entries(self, rng: np.random.Generator, *, method: str = "procedural", size: int | None = None) -> Iterator[GeneratedEntry]:
         """Yield generated skeletons.
 
-        ``size`` set -> generate that many DISTINCT skeletons (cached + sorted, the reproducible
-        finite-pool behaviour). ``size`` is ``None`` -> an UNBOUNDED stream via ``sample_skeleton``
-        with ``new=False``: an EMPTY catalog generates a fresh skeleton each draw (training-time
-        streaming), while a PRE-LOADED catalog (e.g. a saved fixed validation pool) samples from its
-        existing skeletons -- matching the old worker's ``sample_skeleton()`` default. ``method`` is
-        ignored: generation is always procedural.
+        ``method="iterate"`` on a FROZEN catalog (one with an existing skeleton set, e.g. a saved
+        validation pool) -> iterate that fixed set ONCE (bounded, each skeleton once): the eval /
+        set-mode semantics, so ``list(...)`` terminates at ``len(skeletons)``.
+
+        Otherwise generation is procedural: ``size`` set -> generate that many DISTINCT skeletons
+        (cached + sorted, the reproducible finite-pool behaviour); ``size`` is ``None`` -> an UNBOUNDED
+        stream via ``sample_skeleton`` with ``new=False`` (an EMPTY catalog generates a fresh skeleton
+        each draw -- training-time streaming; a PRE-LOADED one samples its existing skeletons with
+        replacement -- matching the old worker's ``sample_skeleton()`` default).
         """
+        if method == "iterate" and size is None and self.skeletons:
+            # Frozen set: iterate the fixed skeleton set ONCE (bounded). A ProblemSource in set mode
+            # over a frozen generative catalog (e.g. v23-val) needs each skeleton exactly once, not an
+            # unbounded resampling stream -- else `list(source)` never terminates.
+            if not self.skeleton_codes:
+                self.skeleton_codes = self.compile_codes()
+            for skeleton in sorted(self.skeletons):
+                code, constants = self.skeleton_codes[skeleton]
+                yield GeneratedEntry(skeleton=tuple(skeleton), code=code, constants=list(constants), variables=list(self.variables))
+            return
         if size is None:
             while True:
                 try:
@@ -941,6 +954,32 @@ _GENERATIVE_CATALOGS: dict[str, type[GenerativeCatalog]] = {
 def register_generative_catalog(name: str, cls: type[GenerativeCatalog]) -> None:
     """Register a custom :class:`GenerativeCatalog` under ``type: <name>`` so it can be built by config."""
     _GENERATIVE_CATALOGS[name] = cls
+
+
+def is_open_generative_ref(spec: "str | Mapping[str, Any] | Catalog") -> bool:
+    """True iff ``spec`` (a STRING ref / mapping) builds an OPEN generative catalog -- one that
+    generates on the fly with NO fixed skeleton set.
+
+    A generative spec carrying inline ``skeletons:`` is FROZEN (a fixed set), so it is NOT open: a
+    consumer iterates it as a bounded set (each skeleton once), not as an unbounded stream. Declarative
+    refs and ``.npz`` frozen catalogs are never open. Used by :class:`~symbolic_data.source.ProblemSource`
+    to infer ``generate`` (unbounded) vs ``set`` (bounded) mode for a string catalog ref.
+    """
+    if isinstance(spec, Mapping):
+        return spec.get("type") in _GENERATIVE_CATALOGS and not spec.get("skeletons")
+    if isinstance(spec, Catalog):
+        return False
+    import yaml
+    from symbolic_data.resolver import resolve
+    try:
+        artifact = resolve(spec)
+        if artifact.path.endswith(".npz"):
+            return False
+        with open(artifact.path, encoding="utf-8") as handle:
+            head = yaml.safe_load(handle)
+    except Exception:  # noqa: BLE001 - unresolvable / non-yaml -> treat as not-open
+        return False
+    return isinstance(head, Mapping) and head.get("type") in _GENERATIVE_CATALOGS and not head.get("skeletons")
 
 
 def build_catalog(spec: "str | Mapping[str, Any] | Catalog") -> Catalog:

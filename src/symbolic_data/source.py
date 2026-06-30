@@ -22,8 +22,9 @@ import yaml
 from symbolic_data._evaluation import compile_expression, load_engine
 from symbolic_data.catalog import Catalog, ProblemCatalog
 from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
-from symbolic_data.generative import GenerativeCatalog, build_catalog
+from symbolic_data.generative import GenerativeCatalog, build_catalog, is_open_generative_ref
 from symbolic_data.problem import Problem
+from simplipy import normalize_skeleton
 
 
 def _entry_variables(entry: Any) -> list[str]:
@@ -77,11 +78,14 @@ class ProblemSource:
             self.mode = "fixed"
         else:
             # `catalog:` may be a mapping (`{type: ...}`) OR a pre-built Catalog instance OR a
-            # string/path. A GenerativeCatalog (mapping or instance) -> generate; a string/path or a
-            # declarative ProblemCatalog instance -> set.
+            # string/path / name. A generative mapping or instance -> generate. A STRING ref is
+            # resolved + peeked: an OPEN generative spec streams (generate); a FROZEN generative spec
+            # (inline skeletons, e.g. a validation set) or a declarative one iterates a fixed set (set).
             catalog_spec = self.config["catalog"]
             if isinstance(catalog_spec, Mapping) or isinstance(catalog_spec, GenerativeCatalog):
                 self.mode = "generate"
+            elif isinstance(catalog_spec, (str, Path)):
+                self.mode = "generate" if is_open_generative_ref(catalog_spec) else "set"
             else:
                 self.mode = "set"
 
@@ -255,25 +259,38 @@ class ProblemSource:
         return True
 
     def _is_excluded(self, problem: Problem, ref: str) -> bool:
-        """Decontamination: drop a problem whose normalized expression matches the excluded catalog.
+        """Decontamination: drop a problem whose SKELETON matches one in the excluded catalog.
 
-        Exact normalized-prefix match (leak-safe for shared templates). Functional-equivalence
-        decontamination (a frozen evaluation grid) is a 0.4.x refinement.
+        Matching is at the skeleton level via :func:`simplipy.normalize_skeleton`, which collapses
+        constants to ``<constant>`` AND canonicalizes variable names (``v3 -> x3``). So decontamination
+        is structural (a generated ``x1..`` skeleton is dropped if it matches a held-out FastSRB
+        ``v1..`` expression's structure) and constant-agnostic -- the leak-safe behaviour a held-out
+        evaluation set needs. The excluded ``ref`` resolves via :func:`build_catalog`, so it may be a
+        declarative catalog (skeletons from its expressions) OR a generative one (its skeleton set);
+        never a "skeleton pool" file. Functional-equivalence decontamination is a later refinement.
         """
         if problem.expression is None:
             return False
         if ref not in self._exclude_cache:
-            engine = self._get_engine()
-            other = ProblemCatalog.load(ref)
-            keys: set[tuple[str, ...]] = set()
-            for entry in other.iter_expressions():
-                try:
-                    compiled = compile_expression(engine, entry.id, entry.prepared, entry.variables, name=other.name)
-                except Exception:
-                    continue
-                keys.add(tuple(compiled["prefix"]))
-            self._exclude_cache[ref] = keys
-        return tuple(problem.expression) in self._exclude_cache[ref]
+            self._exclude_cache[ref] = self._exclusion_keys(ref)
+        return tuple(normalize_skeleton(list(problem.expression))) in self._exclude_cache[ref]
+
+    def _exclusion_keys(self, ref: str) -> set:
+        """Skeleton keys of the excluded catalog (normalized: constants collapsed, variables canonical)."""
+        catalog = build_catalog(ref)
+        keys: set[tuple[str, ...]] = set()
+        if isinstance(catalog, GenerativeCatalog):
+            for skeleton in catalog.skeletons:
+                keys.add(tuple(normalize_skeleton(list(skeleton))))
+            return keys
+        engine = self._get_engine()
+        for entry in catalog.iter_expressions():
+            try:
+                compiled = compile_expression(engine, entry.id, entry.prepared, entry.variables, name=catalog.name)
+            except Exception:  # noqa: BLE001 - skip an entry that fails to compile
+                continue
+            keys.add(tuple(normalize_skeleton(list(compiled["prefix"]))))
+        return keys
 
     # --- materialize / freeze ----------------------------------------------------------------
     def materialize(self, n: int | None = None) -> "ProblemSource":
