@@ -3,6 +3,37 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.8.0] - 2026-06-30
+
+Catalogs become **pure Hugging Face artifacts** (not bundled in the wheel), the curated **v23**
+catalogs are published, and any catalog — declarative or generative — resolves **by name**.
+
+### Added
+- **Resolve generative catalogs by name/path.** `build_catalog(ref)` / `ProblemSource({"catalog": ref})`
+  now resolve a string ref (local path or HF `name[@version]`) and dispatch on content: a `type:` spec
+  builds a `GenerativeCatalog` — **open** (on-the-fly), or **frozen** if it carries inline `skeletons:`
+  — while anything else is a declarative `ProblemCatalog`. `from_config` makes `holdout_pools` optional
+  and loads optional inline `skeletons:`.
+- **Two v23 catalogs published to the HF assets repo:** `v23-val` (the 1000-skeleton frozen validation
+  set, a single self-contained generative spec) and `lample-charton-v23` (the open v23 training recipe).
+  Resolve with `ProblemSource({"catalog": "v23-val"})` / `"lample-charton-v23"`.
+- **Skeleton-level, variable-canonical decontamination.** `ProblemSource` `holdouts: [{exclude: <ref>}]`
+  now drops a problem whose *skeleton* (constants collapsed and variables canonicalized via
+  `normalize_skeleton`, e.g. `v1.. -> x1..`) matches the excluded catalog — which may be declarative
+  (FastSRB) or generative (v23-val), so cross-namespace decontamination is leak-safe. This replaces the
+  internal "skeleton pool" holdout for training generation.
+
+### Changed (breaking)
+- **Catalogs are HF-only (pure-HF).** The curated catalogs no longer ship in the wheel; a bare `name`
+  resolves only via the HF manifest (network on first use, then cached). The vendored package-data
+  offline fallback (`resolver._vendored_path` / `vendored_fallback`) is removed — pass an explicit
+  local path for offline use.
+
+### Fixed
+- A **frozen** generative catalog in `set` mode now iterates its fixed skeleton set **once** (bounded);
+  previously it streamed unbounded, so `list(ProblemSource("v23-val"))` would never terminate despite a
+  finite `size_hint`, and a fully-excluded source looped forever.
+
 ## [0.7.2] - 2026-06-30
 
 Lets a downstream trainer consume a *saved fixed* generative catalog (a held-out validation pool
