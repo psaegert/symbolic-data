@@ -21,12 +21,21 @@ import yaml
 from simplipy import normalize_expression, normalize_skeleton
 from simplipy.utils import substitude_constants
 
-from symbolic_data._evaluation import broadcast_target, compile_expression, evaluate, load_engine
-from symbolic_data.catalog import ProblemCatalog
-from symbolic_data.distributions import fastsrb_dist
+from symbolic_data._evaluation import compile_expression, load_engine
+from symbolic_data.catalog import Catalog, ProblemCatalog
+from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.problem import Problem
 
-_DRAW_METHODS = {"iterate", "random_without_replacement", "random_with_replacement"}
+
+def _entry_variables(entry: Any) -> list[str]:
+    """Best-effort variable-name list for a placeholder, across entry shapes (declarative dict /
+    generative list)."""
+    variables = getattr(entry, "variables", None)
+    if isinstance(variables, dict):
+        return list(variables.keys())
+    if isinstance(variables, (list, tuple)):
+        return list(variables)
+    return []
 
 
 def _split_support_validation(x_all: np.ndarray, y_all: np.ndarray, n_support: int) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
@@ -129,16 +138,6 @@ class ProblemSource:
         n_validation = int(self.n_validation) if self.n_validation is not None else n_support
         return n_support, n_validation
 
-    def _draw_eq_ids(self, catalog: ProblemCatalog, rng: np.random.Generator) -> list[str]:
-        eq_ids = list(catalog.entries.keys())
-        if self.method == "iterate":
-            return eq_ids
-        if self.method == "random_without_replacement":
-            return [eq_ids[i] for i in rng.permutation(len(eq_ids))]
-        if self.method == "random_with_replacement":
-            return [eq_ids[i] for i in rng.integers(0, len(eq_ids), size=len(eq_ids))]
-        raise ValueError(f"Unknown set draw method {self.method!r}; expected one of {sorted(_DRAW_METHODS)}")
-
     def _iter_set(self) -> Iterator[Problem]:
         catalog = self._get_catalog()
         if catalog.frozen:
@@ -151,46 +150,40 @@ class ProblemSource:
         engine = self._get_engine()
         rng = self._get_rng()
         n_support, n_validation = self._resolve_counts(catalog)
-        for eq_id in self._draw_eq_ids(catalog, rng):
-            entry = catalog[eq_id]
+        for entry in catalog.iter_entries(rng, method=self.method):
             for _ in range(self.problems_per_expression):
-                problem = self._sample_set_problem(engine, catalog, entry, eq_id, n_support, n_validation, rng)
+                problem = self._realize_problem(catalog, entry, n_support, n_validation, engine, rng)
                 if problem.is_placeholder or self._passes_filters(problem):
                     yield problem
 
-    def _sample_set_problem(self, engine, catalog, entry, eq_id, n_support, n_validation, rng) -> Problem:
-        try:
-            compiled = compile_expression(engine, eq_id, entry.prepared, entry.variables, name=catalog.name)
-        except Exception as exc:  # malformed entry -> placeholder, keep accounting aligned
-            return Problem.placeholder(variables=list(entry.variables.keys()), reason=f"compile_failed: {exc}", eq_id=eq_id)
+    def _realize_problem(self, catalog: Catalog, entry, n_support: int, n_validation: int, engine, rng) -> Problem:
+        """Realize one catalog entry into a Problem, applying usage policy (split + noise).
 
-        variable_order = compiled["variable_order"]
+        ``catalog.realize`` owns the intrinsic (X, y) sampling; this method owns the usage policy and
+        the placeholder protocol: a transient ``NoValidSampleFoundError`` is retried up to
+        ``max_trials``, a permanent ``CatalogEntryError`` becomes a placeholder immediately.
+        """
         n_total = n_support + n_validation
-        for _ in range(self.max_trials):
-            columns = []
-            for key in variable_order:
-                spec = entry.variables[key]
-                base, sign = spec["sample_type"]
-                low, high = spec["sample_range"]
-                columns.append(fastsrb_dist(low, high, base=base, sign=sign, layout=self.layout, size=n_total, rng=rng))
-            x_all = np.column_stack(columns).astype(float)
-            value_map = {var: x_all[:, i] for i, var in enumerate(variable_order)}
-            try:
-                y_all = broadcast_target(evaluate(compiled, value_map), n_total, eq_id).reshape(-1, 1)
-            except Exception:
-                continue
-            if not (np.all(np.isfinite(x_all)) and np.all(np.isfinite(y_all))):
-                continue
-            xs, xv, ys, yv = _split_support_validation(x_all, y_all, n_support)
-            return Problem(
-                x_support=xs, y_support=ys, y_support_noisy=_inject_noise(ys, self.noise, rng),
-                x_validation=xv, y_validation=yv, y_validation_noisy=_inject_noise(yv, self.noise, rng),
-                skeleton=tuple(compiled["prefix"]), expression=list(compiled["prefix"]),
-                constants=[], variables=list(variable_order), complexity=len(compiled["prefix"]),
-                noise=self.noise, eq_id=eq_id,
-                meta={"prepared_normalized": compiled["normalized_infix"], **{k: v for k, v in entry.meta.items() if k != "sources"}},
-            )
-        return Problem.placeholder(variables=list(variable_order), reason="max_trials_exhausted", eq_id=eq_id)
+        eq_id = getattr(entry, "id", None)
+        try:
+            for _ in range(self.max_trials):
+                try:
+                    realized = catalog.realize(entry, n_total, rng, engine=engine, layout=self.layout)
+                except NoValidSampleFoundError:
+                    continue
+                xs, xv, ys, yv = _split_support_validation(realized.x, realized.y, n_support)
+                if xs.size == 0:
+                    continue
+                return Problem(
+                    x_support=xs, y_support=ys, y_support_noisy=_inject_noise(ys, self.noise, rng),
+                    x_validation=xv, y_validation=yv, y_validation_noisy=_inject_noise(yv, self.noise, rng),
+                    skeleton=realized.skeleton, expression=realized.expression,
+                    constants=realized.constants, variables=realized.variables, complexity=realized.complexity,
+                    noise=self.noise, eq_id=realized.eq_id, meta=realized.meta,
+                )
+        except CatalogEntryError as exc:
+            return Problem.placeholder(variables=_entry_variables(entry), reason=str(exc), eq_id=eq_id)
+        return Problem.placeholder(variables=_entry_variables(entry), reason="max_trials_exhausted", eq_id=eq_id)
 
     # --- FIXED mode (inline pre-supplied problems) -------------------------------------------
     def _iter_fixed(self) -> Iterator[Problem]:

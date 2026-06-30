@@ -18,6 +18,7 @@ fallback for the curated sets.
 from __future__ import annotations
 
 import json
+from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterator
@@ -25,6 +26,9 @@ from typing import Any, Iterator
 import numpy as np
 import yaml
 
+from symbolic_data._evaluation import broadcast_target, compile_expression, evaluate
+from symbolic_data.distributions import fastsrb_dist
+from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.problem import Problem
 from symbolic_data.resolver import resolve
 
@@ -76,7 +80,54 @@ class CatalogEntry:
 
 
 @dataclass
-class ProblemCatalog:
+class RealizedExpression:
+    """One expression realized into raw (X, y) data plus its ground truth.
+
+    The :class:`Catalog`'s *intrinsic* output (``n_points`` rows, before any usage policy): the
+    :class:`~symbolic_data.source.ProblemSource` splits it into support/validation, injects noise,
+    and wraps it into a :class:`~symbolic_data.problem.Problem`.
+    """
+
+    x: np.ndarray                         # (n_points, n_variables)
+    y: np.ndarray                         # (n_points, 1)
+    skeleton: tuple[str, ...] | None
+    expression: list[str] | None          # constants substituted + normalized
+    constants: list[float]
+    variables: list[str]                  # column order of x
+    complexity: int | None
+    eq_id: str | None = None
+    meta: dict[str, Any] = field(default_factory=dict)
+
+
+class Catalog(ABC):
+    """The level-1 abstraction a :class:`~symbolic_data.source.ProblemSource` samples from.
+
+    A catalog supplies *expressions* and knows how to realize each into raw (X, y) data via its
+    *intrinsic* sampling (per-variable ranges for a declarative :class:`ProblemCatalog`; a learned
+    generator for a :class:`~symbolic_data.generative.GenerativeCatalog`). It owns NO usage policy
+    (draw counts, noise, holdouts) -- that is the ``ProblemSource``'s job.
+    """
+
+    name: str
+
+    @abstractmethod
+    def iter_entries(self, rng: np.random.Generator, *, method: str = "iterate", size: int | None = None) -> Iterator[Any]:
+        """Yield the entries to realize (a finite catalog honors ``method``; a generative one
+        produces fresh entries, ``size`` of them or unbounded when ``size`` is ``None``)."""
+
+    @abstractmethod
+    def realize(self, entry: Any, n_points: int, rng: np.random.Generator, *, engine: Any = None, layout: str = "random") -> RealizedExpression:
+        """Sample ``n_points`` rows of (X, y) for one ``entry`` using the catalog's intrinsic
+        sampling. Raise :class:`~symbolic_data.errors.NoValidSampleFoundError` on a transient
+        failure (retryable) or :class:`~symbolic_data.errors.CatalogEntryError` on a permanent one.
+        Subclasses ignore kwargs they do not need."""
+
+    def is_finite(self) -> bool:
+        return True
+
+
+@dataclass
+class ProblemCatalog(Catalog):
     """A declarative, versioned collection of problem templates (level 1)."""
 
     name: str
@@ -221,6 +272,62 @@ class ProblemCatalog:
 
     def __getitem__(self, eq_id: str) -> CatalogEntry:
         return self.entries[eq_id]
+
+    def is_finite(self) -> bool:
+        return True
+
+    # --- Catalog interface (sampled by ProblemSource) -----------------------------------------
+    def iter_entries(self, rng: np.random.Generator, *, method: str = "iterate", size: int | None = None) -> Iterator[CatalogEntry]:
+        """Yield catalog entries in the order dictated by the draw ``method`` (``size`` ignored:
+        a declarative catalog has a fixed entry set)."""
+        eq_ids = list(self.entries.keys())
+        if method == "iterate":
+            order = eq_ids
+        elif method == "random_without_replacement":
+            order = [eq_ids[i] for i in rng.permutation(len(eq_ids))]
+        elif method == "random_with_replacement":
+            order = [eq_ids[i] for i in rng.integers(0, len(eq_ids), size=len(eq_ids))]
+        else:
+            raise ValueError(f"Unknown set draw method {method!r}; expected iterate | random_without_replacement | random_with_replacement")
+        for eq_id in order:
+            yield self.entries[eq_id]
+
+    def realize(self, entry: CatalogEntry, n_points: int, rng: np.random.Generator, *, engine: Any = None, layout: str = "random") -> RealizedExpression:
+        """Realize one entry: sample each variable from its intrinsic ``fastsrb`` range and evaluate."""
+        if engine is None:
+            raise ValueError("declarative ProblemCatalog.realize requires a simplipy engine (pass engine=...)")
+        compiled = self._compiled(entry, engine)
+        variable_order = compiled["variable_order"]
+        columns = []
+        for key in variable_order:
+            spec = entry.variables[key]
+            base, sign = spec["sample_type"]
+            low, high = spec["sample_range"]
+            columns.append(fastsrb_dist(low, high, base=base, sign=sign, layout=layout, size=n_points, rng=rng))
+        x_all = np.column_stack(columns).astype(float)
+        value_map = {var: x_all[:, i] for i, var in enumerate(variable_order)}
+        try:
+            y_all = broadcast_target(evaluate(compiled, value_map), n_points, entry.id).reshape(-1, 1)
+        except Exception as exc:
+            raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
+        if not (np.all(np.isfinite(x_all)) and np.all(np.isfinite(y_all))):
+            raise NoValidSampleFoundError(f"non-finite support/target for {entry.id!r}")
+        return RealizedExpression(
+            x=x_all, y=y_all,
+            skeleton=tuple(compiled["prefix"]), expression=list(compiled["prefix"]),
+            constants=[], variables=list(variable_order), complexity=len(compiled["prefix"]),
+            eq_id=entry.id,
+            meta={"prepared_normalized": compiled["normalized_infix"], **{k: v for k, v in entry.meta.items() if k != "sources"}},
+        )
+
+    def _compiled(self, entry: CatalogEntry, engine: Any) -> dict[str, Any]:
+        cache = self.__dict__.setdefault("_compiled_cache", {})
+        if entry.id not in cache:
+            try:
+                cache[entry.id] = compile_expression(engine, entry.id, entry.prepared, entry.variables, name=self.name)
+            except Exception as exc:  # malformed entry -> permanent failure (placeholder, no retry)
+                raise CatalogEntryError(f"compile_failed: {exc}") from exc
+        return cache[entry.id]
 
 
 def load_catalog(ref: str = "fastsrb", *, install: bool = True, repo_id: str | None = None) -> ProblemCatalog:

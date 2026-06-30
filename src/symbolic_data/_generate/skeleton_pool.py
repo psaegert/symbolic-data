@@ -24,10 +24,7 @@ from symbolic_data._generate.holdout import HoldoutManager
 from symbolic_data._generate.skeleton_sampling import SkeletonSampler
 from symbolic_data._generate.support_sampling import SupportSampler, SupportSamplingError
 from symbolic_data.token_ops import flatten_nested_list
-
-
-class NoValidSampleFoundError(Exception):
-    pass
+from symbolic_data.errors import NoValidSampleFoundError
 
 
 def _constantify_skeleton(skeleton: list[str]) -> list[str]:
