@@ -199,3 +199,30 @@ def test_threaded_skeleton_sampler_preserves_operator_weights(engine):
                 counts[tok] += 1
     # "+" (weight 10) should appear many times more than "mult2" (weight 1); generous band for noise.
     assert counts["+"] > 5 * max(1, counts.get("mult2", 0))
+
+
+def test_generate_n_support_prior_draws_from_catalog_prior(engine):
+    # n_support: prior (generative) -> per-sample support size drawn from the catalog's own
+    # n_support_prior (test config: uniform 16-512); ALL rows are support, no validation split.
+    src = ProblemSource({"catalog": _lample_charton_cfg(),
+                         "sampling": {"size": 4, "n_support": "prior", "n_validation": 0, "noise": 0.0}})
+    assert src.max_n_support == 512   # configured_max_n_support from the n_support_prior
+    problems = [p for p in src if not p.is_placeholder]
+    assert problems
+    for p in problems:
+        n = p.x_support.shape[0]
+        assert 16 <= n <= 512
+        assert p.x_validation.shape[0] == 0 and p.y_validation.shape[0] == 0   # no validation split
+        assert p.y_support.shape[0] == n
+
+
+def test_n_support_prior_requires_n_validation_zero():
+    with pytest.raises(ValueError, match="n_validation"):
+        ProblemSource({"catalog": {"type": "lample_charton"}, "sampling": {"n_support": "prior", "n_validation": 4}})
+
+
+def test_n_support_prior_rejects_declarative_catalog(engine):
+    # prior mode needs a generative catalog (it draws from a support prior); a declarative one has none.
+    src = ProblemSource({"catalog": "nguyen", "sampling": {"n_support": "prior", "n_validation": 0}}, simplipy_engine=engine)
+    with pytest.raises(ValueError, match="generative catalog"):
+        list(src)

@@ -80,8 +80,14 @@ class ProblemSource:
 
         s = dict(self.config.get("sampling", {}))
         self.method = s.get("method", "procedural" if self.mode == "generate" else "iterate")
-        self.n_support = s.get("n_support")
+        # `n_support: prior` (generative catalogs only): draw the per-sample support size from the
+        # catalog's OWN support prior (the training-time pattern -- variable support sizes), rather
+        # than a fixed count. It implies no validation split (all realized rows are support).
+        self._n_support_from_prior = (s.get("n_support") == "prior")
+        self.n_support = None if self._n_support_from_prior else s.get("n_support")
         self.n_validation = s.get("n_validation")
+        if self._n_support_from_prior and self.n_validation not in (None, 0):
+            raise ValueError("sampling.n_support: 'prior' requires n_validation: 0 (the support size is drawn per sample; there is no validation split)")
         self.noise = float(s.get("noise", 0.0))
         self.problems_per_expression = int(s.get("problems_per_expression", 1))
         self.layout = s.get("layout", "random")          # X-point layout passed to the distribution
@@ -134,8 +140,22 @@ class ProblemSource:
             return len(catalog.problems or [])
         return len(catalog) * self.problems_per_expression
 
+    @property
+    def max_n_support(self) -> int | None:
+        """Upper bound on a sampled support size (for buffer pre-allocation): a generative catalog's
+        configured support maximum when available, else the fixed ``n_support`` (None if neither)."""
+        catalog = self._get_catalog()
+        support_sampler = getattr(catalog, "support_sampler", None)
+        configured = getattr(support_sampler, "configured_max_n_support", None) if support_sampler is not None else None
+        if configured is not None:
+            return int(configured)
+        return int(self.n_support) if self.n_support is not None else None
+
     # --- catalog modes (declarative SET + generative GENERATE) -------------------------------
-    def _resolve_counts(self, catalog: Catalog) -> tuple[int, int]:
+    def _resolve_counts(self, catalog: Catalog) -> tuple[int | None, int]:
+        # prior mode: the catalog draws the support size per sample; no fixed count, no validation split
+        if self._n_support_from_prior:
+            return None, 0
         meta = getattr(catalog, "meta", None) or {}
         defaults = meta.get("sampling_defaults", {})
         if self.n_support is not None:
@@ -156,6 +176,8 @@ class ProblemSource:
                 if problem.is_placeholder or self._passes_filters(problem):
                     yield problem
             return
+        if self._n_support_from_prior and not isinstance(catalog, GenerativeCatalog):
+            raise ValueError("sampling.n_support: 'prior' requires a generative catalog (it draws the support size from the catalog's support prior)")
         rng = self._get_rng()
         # generative catalogs carry their own engine; declarative ones borrow the source's
         engine = None if isinstance(catalog, GenerativeCatalog) else self._get_engine()
@@ -166,22 +188,25 @@ class ProblemSource:
                 if problem.is_placeholder or self._passes_filters(problem):
                     yield problem
 
-    def _realize_problem(self, catalog: Catalog, entry, n_support: int, n_validation: int, engine, rng) -> Problem:
+    def _realize_problem(self, catalog: Catalog, entry, n_support: int | None, n_validation: int, engine, rng) -> Problem:
         """Realize one catalog entry into a Problem, applying usage policy (split + noise).
 
         ``catalog.realize`` owns the intrinsic (X, y) sampling; this method owns the usage policy and
         the placeholder protocol: a transient ``NoValidSampleFoundError`` is retried up to
-        ``max_trials``, a permanent ``CatalogEntryError`` becomes a placeholder immediately.
+        ``max_trials``, a permanent ``CatalogEntryError`` becomes a placeholder immediately. When
+        ``n_support`` is ``None`` (prior mode) the catalog draws the support size and ALL realized
+        rows become support (no validation split).
         """
-        n_total = n_support + n_validation
+        n_points = None if n_support is None else n_support + n_validation
         eq_id = getattr(entry, "id", None)
         try:
             for _ in range(self.max_trials):
                 try:
-                    realized = catalog.realize(entry, n_total, rng, engine=engine, layout=self.layout)
+                    realized = catalog.realize(entry, n_points, rng, engine=engine, layout=self.layout)
                 except NoValidSampleFoundError:
                     continue
-                xs, xv, ys, yv = _split_support_validation(realized.x, realized.y, n_support)
+                split_at = realized.x.shape[0] if n_support is None else n_support
+                xs, xv, ys, yv = _split_support_validation(realized.x, realized.y, split_at)
                 if xs.size == 0:
                     continue
                 return Problem(
