@@ -127,16 +127,22 @@ def test_fixed_mode_roundtrips_inline_problems(engine):
     assert np.array_equal(out[0].x_support, problems[0].x_support)
 
 
-def test_generate_mode_produces_problems():
+def _lample_charton_cfg():
+    """The lample_charton generative-catalog config: the test skeleton params + a ``type`` discriminator."""
     import os
     import yaml
     cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "skeleton_pool_train.yaml")
-    gen_cfg = yaml.safe_load(open(cfg_path, encoding="utf-8"))
-    gen_cfg["size"] = 6
-    src = ProblemSource({"generator": gen_cfg, "sampling": {"n_support": 16, "noise": 0.0}})
+    cfg = yaml.safe_load(open(cfg_path, encoding="utf-8"))
+    cfg["type"] = "lample_charton"
+    return cfg
+
+
+def test_generate_mode_produces_problems():
+    # A generative catalog (catalog: {type: lample_charton, ...}) drawn `size` times.
+    src = ProblemSource({"catalog": _lample_charton_cfg(), "sampling": {"size": 6, "n_support": 16, "noise": 0.0}})
     assert src.mode == "generate" and src.size_hint() == 6
     problems = list(src)
-    assert len(problems) == 6  # one Sample (or placeholder) per generated skeleton
+    assert len(problems) == 6  # one problem (or placeholder) per generated skeleton
     real = [p for p in problems if not p.is_placeholder]
     assert real, "expected at least some non-placeholder generated problems"
     for p in real:
@@ -144,31 +150,26 @@ def test_generate_mode_produces_problems():
         assert p.x_support.ndim == 2 and p.x_support.shape[0] >= 1
 
 
-def test_generate_mode_requires_size():
-    src = ProblemSource({"generator": {"simplipy_engine": "dev_7-3"}})
-    assert src.mode == "generate"
-    with pytest.raises(ValueError, match="size"):
-        list(src)
-
-
-def _generate_cfg(size):
-    import os
-    import yaml
-    cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "skeleton_pool_train.yaml")
-    gen_cfg = yaml.safe_load(open(cfg_path, encoding="utf-8"))
-    gen_cfg["size"] = size
-    return gen_cfg
+def test_generate_mode_streams_unbounded_without_size():
+    # No `size` -> an UNBOUNDED streaming generative source (size_hint None); take a few via islice
+    # (the training-time generation mode flash-ansr consumes).
+    from itertools import islice
+    src = ProblemSource({"catalog": _lample_charton_cfg(), "sampling": {"n_support": 16, "noise": 0.0}})
+    assert src.mode == "generate" and src.size_hint() is None
+    problems = list(islice(iter(src), 4))
+    assert len(problems) == 4
+    assert any(not p.is_placeholder for p in problems)
 
 
 def test_generate_is_fully_generator_threaded_no_global_random():
     # COMPLETENESS: the source's injected Generator must fully control generate output. We run twice
     # with the SAME injected Generator but DIFFERENT global np.random state; if ANY code path still
     # touched global np.random, the two runs would diverge. Byte-identical => no leak + reproducible.
-    gen_cfg = _generate_cfg(5)
+    cfg = _lample_charton_cfg()
 
     def run(global_seed):
         np.random.seed(global_seed)  # perturb global state to prove it's irrelevant
-        src = ProblemSource({"generator": gen_cfg, "sampling": {"n_support": 16, "noise": 0.05}},
+        src = ProblemSource({"catalog": cfg, "sampling": {"size": 5, "n_support": 16, "noise": 0.05}},
                             rng=np.random.default_rng(123))
         return list(src)
 
@@ -185,14 +186,16 @@ def test_threaded_skeleton_sampler_preserves_operator_weights(engine):
     # DISTRIBUTIONAL sanity: high-weight binary ops (+,-,*,/ weight 10) dominate low-weight ones
     # (mult2/div2 weight 1) -- proves rng.choice(p=weights) still threads the configured weights.
     from collections import Counter
-    from symbolic_data._generate.skeleton_pool import SkeletonPool
-    pool = SkeletonPool.from_config(_generate_cfg(1))
-    sampler = pool.skeleton_sampler
+    from symbolic_data.generative import LampleChartonCatalog
+    cfg = _lample_charton_cfg()
+    cfg.pop("type", None)
+    catalog = LampleChartonCatalog.from_config(cfg)
+    sampler = catalog.skeleton_sampler
     rng = np.random.default_rng(0)
     counts: Counter = Counter()
     for _ in range(3000):
         for tok in sampler.sample(6, rng=rng):
-            if tok in pool.simplipy_engine.operator_arity:
+            if tok in catalog.simplipy_engine.operator_arity:
                 counts[tok] += 1
     # "+" (weight 10) should appear many times more than "mult2" (weight 1); generous band for noise.
     assert counts["+"] > 5 * max(1, counts.get("mult2", 0))

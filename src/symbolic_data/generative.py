@@ -1,19 +1,29 @@
+"""Generative (on-the-fly) catalogs: the public counterpart to a declarative ``ProblemCatalog``.
+
+A :class:`GenerativeCatalog` produces *fresh* expressions on demand rather than holding a fixed
+set; a :class:`~symbolic_data.source.ProblemSource` samples from it exactly as it samples from a
+declarative catalog. :class:`LampleChartonCatalog` is the concrete generator: it grows random
+unary-binary operator trees (the Lample-Charton recipe) and realizes their support data.
+
+The skeleton/support/holdout machinery is private (``_generate``); this module is the public face.
+"""
 import os
 import re
 import warnings
-import random
 import pickle
+from abc import ABC, abstractmethod
 from copy import deepcopy
+from dataclasses import dataclass
 
 from types import CodeType
-from typing import Any, Callable, Sequence
+from typing import Any, Callable, Iterator, Mapping, Sequence
 
 from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 import numpy as np
 
-from simplipy import SimpliPyEngine
-from simplipy.utils import explicit_constant_placeholders, numbers_to_constant
+from simplipy import SimpliPyEngine, normalize_expression, normalize_skeleton
+from simplipy.utils import explicit_constant_placeholders, numbers_to_constant, substitude_constants
 
 from symbolic_data.config_io import load_config, save_config
 from symbolic_data.paths import substitute_root_path
@@ -25,6 +35,44 @@ from symbolic_data._generate.skeleton_sampling import SkeletonSampler
 from symbolic_data._generate.support_sampling import SupportSampler, SupportSamplingError
 from symbolic_data.token_ops import flatten_nested_list
 from symbolic_data.errors import NoValidSampleFoundError
+from symbolic_data.catalog import Catalog, ProblemCatalog, RealizedExpression
+
+
+def _gt_metadata(skeleton: Sequence[str], literals: Any) -> tuple[list[str] | None, int | None]:
+    """Normalized ground-truth expression (constants substituted) + its token-length complexity."""
+    skeleton_list = normalize_skeleton(skeleton)
+    if skeleton_list is None:
+        return None, None
+    expression_tokens = substitude_constants(list(skeleton_list), values=literals, inplace=False)
+    expression = normalize_expression(expression_tokens)
+    complexity = len(expression_tokens) if expression_tokens else None
+    return expression, complexity
+
+
+@dataclass
+class GeneratedEntry:
+    """One freshly generated skeleton (the unit a GenerativeCatalog yields to ProblemSource)."""
+
+    skeleton: tuple[str, ...]
+    code: CodeType
+    constants: list[str]              # constant-placeholder token names
+    variables: list[str]             # the catalog's variable column order
+
+
+class GenerativeCatalog(Catalog, ABC):
+    """Abstract base for on-the-fly catalogs (generate expressions instead of holding a fixed set).
+
+    Concretes implement :meth:`sample_skeleton` (the generation algorithm) and the
+    :class:`~symbolic_data.catalog.Catalog` interface (``iter_entries`` / ``realize``). Unlike a
+    declarative catalog, a generative one is *infinite*: ``iter_entries(size=None)`` streams forever.
+    """
+
+    @abstractmethod
+    def sample_skeleton(self, new: bool = True, decontaminate: bool = True, rng: np.random.Generator | None = None) -> tuple[tuple[str, ...], CodeType, list[str]]:
+        """Sample one raw skeleton (operator template), its compiled code, and its constant tokens."""
+
+    def is_finite(self) -> bool:
+        return False
 
 
 def _constantify_skeleton(skeleton: list[str]) -> list[str]:
@@ -39,9 +87,13 @@ def _constantify_skeleton(skeleton: list[str]) -> list[str]:
     return result
 
 
-class SkeletonPool:
+class LampleChartonCatalog(GenerativeCatalog):
     '''
-    Manage and sample from a set of expression 'skeletons' (prefix expressions with placeholders for constants).
+    A generative catalog that grows random unary-binary operator trees (Lample-Charton recipe).
+
+    Samples expression 'skeletons' (prefix expressions with placeholders for constants) on the fly,
+    optionally caching a finite set of them, and realizes each into support data. It is the
+    on-the-fly counterpart to a declarative :class:`~symbolic_data.catalog.ProblemCatalog`.
 
     Parameters
     ----------
@@ -63,8 +115,8 @@ class SkeletonPool:
     support_sampler_config : dict[str, Any] or None, optional
         Unified configuration describing how support points are generated (priors,
         uniqueness constraints, quantized behaviour, etc.).
-    holdout_pools : Sequence[SkeletonPool | str] or None, optional
-        SkeletonPools or paths to pools to exclude when sampling.
+    holdout_pools : Sequence[LampleChartonCatalog | str] or None, optional
+        LampleChartonCatalogs or paths to pools to exclude when sampling.
     allow_nan : bool, optional
         Whether to allow NaNs in the support points.
     simplify : bool or str, optional
@@ -83,9 +135,13 @@ class SkeletonPool:
             n_support_prior: dict[str, Any] | list[dict[str, Any]] | Callable | None = None,
             support_sampler_config: dict[str, Any] | None = None,
             operator_weights: dict[str, float] | None = None,
-            holdout_pools: Sequence["SkeletonPool | str"] | None = None,
+            holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
-            simplify: bool | str = True) -> None:
+            simplify: bool | str = True,
+            name: str = "lample_charton",
+            decontaminate: bool = True) -> None:
+        self.name = name
+        self.decontaminate = decontaminate
         self.simplipy_engine = simplipy_engine
         self.sample_strategy = sample_strategy
         self.variables = variables
@@ -94,7 +150,7 @@ class SkeletonPool:
 
         self.holdout_manager = HoldoutManager(n_variables=self.n_variables, allow_nan=allow_nan)
 
-        self.holdout_pools: list["SkeletonPool | str"] = []
+        self.holdout_pools: list["LampleChartonCatalog | str"] = []
         for holdout_pool in holdout_pools or []:
             self.register_holdout_pool(holdout_pool)
 
@@ -140,9 +196,9 @@ class SkeletonPool:
         self.operator_probs: np.ndarray | None = None
 
     @classmethod
-    def from_config(cls, config: dict[str, Any] | str) -> "SkeletonPool":
+    def from_config(cls, config: dict[str, Any] | str) -> "LampleChartonCatalog":
         '''
-        Create a SkeletonPool from a configuration dictionary or file.
+        Create a LampleChartonCatalog from a configuration dictionary or file.
 
         Parameters
         ----------
@@ -151,8 +207,8 @@ class SkeletonPool:
 
         Returns
         -------
-        SkeletonPool
-            The SkeletonPool object.
+        LampleChartonCatalog
+            The LampleChartonCatalog object.
         '''
         config_ = load_config(config)
 
@@ -178,7 +234,9 @@ class SkeletonPool:
             operator_weights=config_.get("operator_weights"),
             holdout_pools=config_["holdout_pools"],
             allow_nan=config_["allow_nan"],
-            simplify=config_.get("simplify", True)
+            simplify=config_.get("simplify", True),
+            name=config_.get("name", "lample_charton"),
+            decontaminate=config_.get("decontaminate", True),
         )
 
     @classmethod
@@ -195,11 +253,11 @@ class SkeletonPool:
             n_support_prior: dict[str, Any] | list[dict[str, Any]] | Callable | None = None,
             operator_weights: dict[str, float] | None = None,
             skeleton_codes: dict[tuple[str], tuple[CodeType, list[str]]] | None = None,
-            holdout_pools: Sequence["SkeletonPool | str"] | None = None,
+            holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
-            simplify: bool = True) -> "SkeletonPool":
+            simplify: bool = True) -> "LampleChartonCatalog":
         '''
-        Create a SkeletonPool from a set of skeletons.
+        Create a LampleChartonCatalog from a set of skeletons.
 
         Parameters
         ----------
@@ -226,8 +284,8 @@ class SkeletonPool:
             A dictionary mapping operators to their weights.
         skeleton_codes : dict[tuple[str], tuple[CodeType, list[str]]] or None, optional
             A dictionary mapping skeletons to their compiled codes.
-        holdout_pools : Sequence[SkeletonPool | str] or None, optional
-            SkeletonPools or paths to pools to exclude when sampling.
+        holdout_pools : Sequence[LampleChartonCatalog | str] or None, optional
+            LampleChartonCatalogs or paths to pools to exclude when sampling.
         allow_nan : bool, optional
             Whether to allow NaNs in the support points.
         simplify : bool, optional
@@ -235,8 +293,8 @@ class SkeletonPool:
 
         Returns
         -------
-        SkeletonPool
-            The SkeletonPool object.
+        LampleChartonCatalog
+            The LampleChartonCatalog object.
         '''
         skeleton_pool = cls(
             simplipy_engine=simplipy_engine,
@@ -411,20 +469,20 @@ class SkeletonPool:
 
         return flatten_nested_list(stack, reverse=True)
 
-    def register_holdout_pool(self, holdout_pool: "SkeletonPool | str") -> None:
+    def register_holdout_pool(self, holdout_pool: "LampleChartonCatalog | str") -> None:
         '''
         Register a holdout pool to exclude from sampling: Cache the skeletons and their images to compare against when sampling.
 
         Parameters
         ----------
-        holdout_pool : SkeletonPool or str
+        holdout_pool : LampleChartonCatalog or str
             The holdout pool object or path to register.
         '''
         if isinstance(holdout_pool, str):
             if holdout_pool in self.holdout_pools:
                 return
 
-            _, holdout_pool_obj = SkeletonPool.load(holdout_pool)
+            _, holdout_pool_obj = LampleChartonCatalog.load(holdout_pool)
             self.holdout_pools.append(holdout_pool)
         else:
             if any(existing is holdout_pool for existing in self.holdout_pools if not isinstance(existing, str)):
@@ -484,7 +542,7 @@ class SkeletonPool:
             save_config(load_config(config, resolve_paths=True), directory=directory, filename='skeleton_pool.yaml', reference=reference, recursive=recursive, resolve_paths=True)
 
     @classmethod
-    def load(cls, directory: str, verbose: bool = True) -> tuple[dict[str, Any], "SkeletonPool"]:
+    def load(cls, directory: str, verbose: bool = True) -> tuple[dict[str, Any], "LampleChartonCatalog"]:
         '''
         Load a skeleton pool from a directory.
 
@@ -497,8 +555,8 @@ class SkeletonPool:
 
         Returns
         -------
-        dict[str, Any], SkeletonPool
-            The configuration dictionary and the SkeletonPool object.
+        dict[str, Any], LampleChartonCatalog
+            The configuration dictionary and the LampleChartonCatalog object.
         '''
         config_path = os.path.join(directory, 'skeleton_pool.yaml')
         resolved_directory = substitute_root_path(directory)
@@ -623,7 +681,10 @@ class SkeletonPool:
 
         raise NoValidSampleFoundError(f"Failed to sample a non-contaminated skeleton after {self.sample_strategy['max_tries']} retries")
 
-    def sample_data(self, code: CodeType, n_constants: int = 0, n_support: int | None = None, support_prior: Callable | None = None, support_scale_prior: Callable | None = None, rng: np.random.Generator | None = None) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    def sample_data(
+            self, code: CodeType, n_constants: int = 0, n_support: int | None = None,
+            support_prior: Callable | None = None, support_scale_prior: Callable | None = None,
+            rng: np.random.Generator | None = None) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         '''
         Sample support points and literals for an expression.
 
@@ -765,7 +826,47 @@ class SkeletonPool:
             if n_created >= size:
                 break
 
-    def split(self, train_size: float, random_state: int | None = None) -> tuple["SkeletonPool", "SkeletonPool"]:
+    # --- Catalog interface (sampled by ProblemSource) -----------------------------------------
+    def iter_entries(self, rng: np.random.Generator, *, method: str = "procedural", size: int | None = None) -> Iterator[GeneratedEntry]:
+        """Yield generated skeletons.
+
+        ``size`` set -> generate that many DISTINCT skeletons (cached + sorted, the reproducible
+        finite-pool behaviour). ``size`` is ``None`` -> an UNBOUNDED stream of fresh skeletons
+        (training-time streaming). ``method`` is ignored: generation is always procedural.
+        """
+        if size is None:
+            while True:
+                try:
+                    skeleton, code, constants = self.sample_skeleton(new=True, decontaminate=self.decontaminate, rng=rng)
+                except NoValidSampleFoundError:
+                    continue
+                yield GeneratedEntry(skeleton=tuple(skeleton), code=code, constants=list(constants), variables=list(self.variables))
+        else:
+            self.create(int(size), rng=rng)
+            if not self.skeleton_codes:
+                self.skeleton_codes = self.compile_codes()
+            for skeleton in sorted(self.skeletons):
+                code, constants = self.skeleton_codes[skeleton]
+                yield GeneratedEntry(skeleton=tuple(skeleton), code=code, constants=list(constants), variables=list(self.variables))
+
+    def realize(self, entry: GeneratedEntry, n_points: int, rng: np.random.Generator, *, engine: Any = None, layout: str = "random") -> RealizedExpression:
+        """Realize one generated skeleton into support data (its intrinsic support + literal sampling).
+
+        ``engine``/``layout`` are ignored: a generative catalog carries its own engine and support
+        sampler. Raises :class:`NoValidSampleFoundError` (retryable) when no valid support is found.
+        """
+        x_all, y_all, literals = self.sample_data(entry.code, len(entry.constants), n_support=n_points, rng=rng)
+        if x_all.size == 0 or y_all.size == 0:
+            raise NoValidSampleFoundError("empty support sample")
+        expression, complexity = _gt_metadata(entry.skeleton, literals)
+        return RealizedExpression(
+            x=x_all, y=y_all,
+            skeleton=tuple(entry.skeleton), expression=expression,
+            constants=list(np.asarray(literals, dtype=np.float64).ravel().tolist()),
+            variables=list(entry.variables), complexity=complexity, eq_id=None,
+        )
+
+    def split(self, train_size: float, random_state: int | None = None) -> tuple["LampleChartonCatalog", "LampleChartonCatalog"]:
         """
         Split the skeleton pool into two disjoint pools randomly.
 
@@ -778,12 +879,12 @@ class SkeletonPool:
 
         Returns
         -------
-        tuple[SkeletonPool, SkeletonPool]
+        tuple[LampleChartonCatalog, LampleChartonCatalog]
             The two disjoint skeleton pools.
         """
         train_keys, test_keys = train_test_split(list(self.skeletons), train_size=train_size, random_state=random_state)
 
-        train_pool = SkeletonPool.from_dict(
+        train_pool = LampleChartonCatalog.from_dict(
             set(train_keys),
             simplipy_engine=self.simplipy_engine,
             sample_strategy=self.sample_strategy,
@@ -794,7 +895,7 @@ class SkeletonPool:
             operator_weights=self.operator_weights,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
-        test_pool = SkeletonPool.from_dict(
+        test_pool = LampleChartonCatalog.from_dict(
             set(test_keys),
             simplipy_engine=self.simplipy_engine,
             sample_strategy=self.sample_strategy,
@@ -818,3 +919,34 @@ class SkeletonPool:
             The number of skeletons in the pool.
         '''
         return len(self.skeletons)
+
+
+# Registry of generative catalog types (a mapping catalog spec selects one via its ``type`` key).
+_GENERATIVE_CATALOGS: dict[str, type[GenerativeCatalog]] = {
+    "lample_charton": LampleChartonCatalog,
+}
+
+
+def register_generative_catalog(name: str, cls: type[GenerativeCatalog]) -> None:
+    """Register a custom :class:`GenerativeCatalog` under ``type: <name>`` so it can be built by config."""
+    _GENERATIVE_CATALOGS[name] = cls
+
+
+def build_catalog(spec: "str | Mapping[str, Any] | Catalog") -> Catalog:
+    """Build the :class:`~symbolic_data.catalog.Catalog` a ``ProblemSource`` samples from.
+
+    - a :class:`Catalog` instance -> returned as-is;
+    - a mapping with a ``type`` key -> the registered :class:`GenerativeCatalog` built from it;
+    - a string / path -> a declarative :class:`~symbolic_data.catalog.ProblemCatalog` (resolved/loaded).
+    """
+    if isinstance(spec, Catalog):
+        return spec
+    if isinstance(spec, Mapping):
+        cfg = dict(spec)
+        ctype = cfg.pop("type", None)
+        if ctype is None:
+            raise ValueError("a mapping catalog spec must declare a 'type' (e.g. {'type': 'lample_charton', ...})")
+        if ctype not in _GENERATIVE_CATALOGS:
+            raise ValueError(f"unknown generative catalog type {ctype!r}; known: {sorted(_GENERATIVE_CATALOGS)}")
+        return _GENERATIVE_CATALOGS[ctype].from_config(cfg)
+    return ProblemCatalog.load(spec)

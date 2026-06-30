@@ -18,12 +18,11 @@ from typing import Any, Iterator, Mapping
 
 import numpy as np
 import yaml
-from simplipy import normalize_expression, normalize_skeleton
-from simplipy.utils import substitude_constants
 
 from symbolic_data._evaluation import compile_expression, load_engine
 from symbolic_data.catalog import Catalog, ProblemCatalog
 from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
+from symbolic_data.generative import GenerativeCatalog, build_catalog
 from symbolic_data.problem import Problem
 
 
@@ -67,13 +66,17 @@ class ProblemSource:
         self._rng = rng
         self._engine_spec = simplipy_engine if simplipy_engine is not None else self.config.get("engine", "dev_7-3")
         self._engine = simplipy_engine if not isinstance(simplipy_engine, (str, type(None))) else None
-        self._catalog: ProblemCatalog | None = None
+        self._catalog: Catalog | None = None
 
-        # mode inference -- exactly one of catalog / generator / problems
-        present = [k for k in ("catalog", "generator", "problems") if k in self.config]
+        # mode inference -- exactly one of catalog / problems. A `catalog:` that is a mapping (with a
+        # `type:`) is a GENERATIVE catalog (on-the-fly); a string/path is a DECLARATIVE one.
+        present = [k for k in ("catalog", "problems") if k in self.config]
         if len(present) != 1:
-            raise ValueError("ProblemSource config must specify exactly one of: catalog | generator | problems")
-        self.mode = {"catalog": "set", "generator": "generate", "problems": "fixed"}[present[0]]
+            raise ValueError("ProblemSource config must specify exactly one of: catalog | problems")
+        if "problems" in self.config:
+            self.mode = "fixed"
+        else:
+            self.mode = "generate" if isinstance(self.config["catalog"], Mapping) else "set"
 
         s = dict(self.config.get("sampling", {}))
         self.method = s.get("method", "procedural" if self.mode == "generate" else "iterate")
@@ -83,6 +86,8 @@ class ProblemSource:
         self.problems_per_expression = int(s.get("problems_per_expression", 1))
         self.layout = s.get("layout", "random")          # X-point layout passed to the distribution
         self.max_trials = int(s.get("max_trials", 100))
+        # number of expressions to draw from a generative catalog (usage policy); None = unbounded stream
+        self._size = int(s["size"]) if s.get("size") is not None else None
         self.holdouts = list(self.config.get("holdouts", []))
         self._exclude_cache: dict[str, set] = {}
 
@@ -106,51 +111,56 @@ class ProblemSource:
         if simplipy_engine is not None:
             self._engine = load_engine(simplipy_engine)
 
-    def _get_catalog(self) -> ProblemCatalog:
+    def _get_catalog(self) -> Catalog:
         if self._catalog is None:
-            self._catalog = ProblemCatalog.load(self.config["catalog"])
+            self._catalog = build_catalog(self.config["catalog"])
         return self._catalog
 
     # --- iteration ---------------------------------------------------------------------------
     def __iter__(self) -> Iterator[Problem]:
-        if self.mode == "set":
-            yield from self._iter_set()
-        elif self.mode == "fixed":
+        if self.mode == "fixed":
             yield from self._iter_fixed()
         else:
-            yield from self._iter_generate()
+            yield from self._iter_catalog()
 
     def size_hint(self) -> int | None:
-        if self.mode == "set":
-            catalog = self._get_catalog()
-            if catalog.frozen:
-                return len(catalog.problems or [])
-            return len(catalog) * self.problems_per_expression
         if self.mode == "fixed":
             return len(self.config["problems"]) * self.problems_per_expression
-        size = self.config["generator"].get("size")
-        return int(size) * self.problems_per_expression if size is not None else None
+        if self.mode == "generate":
+            # an unbounded streaming generative source has no finite size
+            return self._size * self.problems_per_expression if self._size is not None else None
+        catalog = self._get_catalog()
+        if getattr(catalog, "frozen", False):
+            return len(catalog.problems or [])
+        return len(catalog) * self.problems_per_expression
 
-    # --- SET mode ----------------------------------------------------------------------------
-    def _resolve_counts(self, catalog: ProblemCatalog) -> tuple[int, int]:
-        defaults = catalog.meta.get("sampling_defaults", {}) if catalog.meta else {}
-        n_support = int(self.n_support) if self.n_support is not None else int(defaults.get("n_points", 100))
+    # --- catalog modes (declarative SET + generative GENERATE) -------------------------------
+    def _resolve_counts(self, catalog: Catalog) -> tuple[int, int]:
+        meta = getattr(catalog, "meta", None) or {}
+        defaults = meta.get("sampling_defaults", {})
+        if self.n_support is not None:
+            n_support = int(self.n_support)
+        elif isinstance(catalog, GenerativeCatalog):
+            n_support = 32
+        else:
+            n_support = int(defaults.get("n_points", 100))
         n_validation = int(self.n_validation) if self.n_validation is not None else n_support
         return n_support, n_validation
 
-    def _iter_set(self) -> Iterator[Problem]:
+    def _iter_catalog(self) -> Iterator[Problem]:
         catalog = self._get_catalog()
-        if catalog.frozen:
+        if getattr(catalog, "frozen", False):
             # A frozen/materialized catalog already holds realized Problems -- iterate them
             # directly (no sampling), like a fixed source.
             for problem in (catalog.problems or []):
                 if problem.is_placeholder or self._passes_filters(problem):
                     yield problem
             return
-        engine = self._get_engine()
         rng = self._get_rng()
+        # generative catalogs carry their own engine; declarative ones borrow the source's
+        engine = None if isinstance(catalog, GenerativeCatalog) else self._get_engine()
         n_support, n_validation = self._resolve_counts(catalog)
-        for entry in catalog.iter_entries(rng, method=self.method):
+        for entry in catalog.iter_entries(rng, method=self.method, size=self._size):
             for _ in range(self.problems_per_expression):
                 problem = self._realize_problem(catalog, entry, n_support, n_validation, engine, rng)
                 if problem.is_placeholder or self._passes_filters(problem):
@@ -193,53 +203,6 @@ class ProblemSource:
                 yield problem
 
     # --- GENERATE mode (on-the-fly procedural skeletons) -------------------------------------
-    def _iter_generate(self) -> Iterator[Problem]:
-        # Drives the (private, Generator-threaded) skeleton-generation engine and builds Problems
-        # natively (no Sample intermediary). Reproducibility is inferential (multi-draw), not seeded;
-        # the engine's randomness is fully controlled by self._get_rng().
-        from symbolic_data._generate.skeleton_pool import SkeletonPool, NoValidSampleFoundError
-
-        gen_cfg = self.config["generator"]
-        size = gen_cfg.get("size")
-        if size is None:
-            raise ValueError("generate-mode config['generator'] must set `size` (number of skeletons to generate)")
-        rng = self._get_rng()
-        n_support = int(self.n_support) if self.n_support is not None else 32
-        n_validation = int(self.n_validation) if self.n_validation is not None else n_support
-        pool = SkeletonPool.from_config({k: v for k, v in gen_cfg.items() if k != "size"})
-        pool.create(int(size), rng=rng)
-        if not pool.skeleton_codes:
-            pool.skeleton_codes = pool.compile_codes(verbose=False)
-        for skeleton in sorted(pool.skeletons):
-            code, constants_tokens = pool.skeleton_codes[skeleton]
-            for _ in range(self.problems_per_expression):
-                problem = self._generate_one(pool, skeleton, code, len(constants_tokens), n_support, n_validation, rng, NoValidSampleFoundError)
-                if problem.is_placeholder or self._passes_filters(problem):
-                    yield problem
-
-    def _generate_one(self, pool, skeleton, code, n_constants, n_support, n_validation, rng, no_valid_exc) -> Problem:
-        variables = list(pool.variables)
-        n_total = n_support + n_validation
-        for _ in range(self.max_trials):
-            try:
-                x_all, y_all, literals = pool.sample_data(code, n_constants, n_support=n_total, rng=rng)
-            except no_valid_exc:
-                continue
-            if x_all.size == 0 or y_all.size == 0:
-                continue
-            xs, xv, ys, yv = _split_support_validation(x_all, y_all, n_support)
-            if xs.size == 0:
-                continue
-            expression, complexity = _gt_metadata(skeleton, literals)
-            return Problem(
-                x_support=xs, y_support=ys, y_support_noisy=_inject_noise(ys, self.noise, rng),
-                x_validation=xv, y_validation=yv, y_validation_noisy=_inject_noise(yv, self.noise, rng),
-                skeleton=tuple(skeleton), expression=expression,
-                constants=list(np.asarray(literals, dtype=np.float64).ravel().tolist()),
-                variables=variables, complexity=complexity, noise=self.noise, eq_id=None,
-            )
-        return Problem.placeholder(variables=variables, reason="max_trials_exhausted", skeleton=tuple(skeleton))
-
     # --- filters / holdouts ------------------------------------------------------------------
     def _passes_filters(self, problem: Problem) -> bool:
         for rule in self.holdouts:
@@ -299,17 +262,6 @@ class ProblemSource:
                 break
         cat_name = name or (str(self.config["catalog"]) if self.mode == "set" else "materialized")
         return ProblemCatalog.from_problems(problems, name=cat_name)
-
-
-def _gt_metadata(skeleton, literals) -> tuple[list[str] | None, int | None]:
-    """Normalized GT expression (constants substituted) + its token-length complexity."""
-    skeleton_list = normalize_skeleton(skeleton)
-    if skeleton_list is None:
-        return None, None
-    expression_tokens = substitude_constants(list(skeleton_list), values=literals, inplace=False)
-    expression = normalize_expression(expression_tokens)
-    complexity = len(expression_tokens) if expression_tokens else None
-    return expression, complexity
 
 
 def _passes_filter(problem: Problem, spec: Mapping[str, Any]) -> bool:

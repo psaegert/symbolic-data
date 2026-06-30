@@ -9,7 +9,7 @@ inputs. ``v0`` carries target metadata only. These are the simplipy-dependent he
 from __future__ import annotations
 
 import warnings
-from typing import Any, Dict, List, Mapping, Sequence
+from typing import Any, Dict, List, Mapping
 
 import numpy as np
 from simplipy import SimpliPyEngine

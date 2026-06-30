@@ -16,11 +16,11 @@ def test_cli_requires_a_subcommand():
 
 
 def test_materialize_generate_to_frozen_catalog(tmp_path):
-    # A ProblemSource config (generate mode) -> materialize -> frozen .npz catalog.
+    # A ProblemSource config (generative catalog) -> materialize -> frozen .npz catalog.
     gen_cfg = yaml.safe_load(open(GEN_CONFIG, encoding="utf-8"))
-    gen_cfg["size"] = 3
+    gen_cfg["type"] = "lample_charton"
     cfg_path = tmp_path / "source.yaml"
-    cfg_path.write_text(yaml.safe_dump({"generator": gen_cfg, "sampling": {"n_support": 8, "n_validation": 4}}), encoding="utf-8")
+    cfg_path.write_text(yaml.safe_dump({"catalog": gen_cfg, "sampling": {"size": 3, "n_support": 8, "n_validation": 4}}), encoding="utf-8")
     out = tmp_path / "frozen.npz"
 
     main(["materialize", "-c", str(cfg_path), "-o", str(out)])
