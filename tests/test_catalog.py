@@ -83,3 +83,28 @@ def test_metadata_only_structured_catalog_is_not_a_phantom_entry():
     assert len(cat) == 0          # NOT a single phantom entry named "metadata"
     assert cat.name == "empty"    # NOT the default "catalog"
     assert cat.version == 3
+
+
+def test_declarative_realize_covers_the_evaluation_path():
+    # A2 + FIRST direct coverage of the declarative realize path (ProblemCatalog.realize ->
+    # _evaluation.compile_expression/evaluate). After A2 the evaluated callable is built from the SAME
+    # simplified prefix reported as ground truth, so realizing a curated entry yields finite y and a
+    # populated reported expression without raising.
+    import numpy as np
+    from simplipy import SimpliPyEngine
+    from symbolic_data.errors import NoValidSampleFoundError
+
+    engine = SimpliPyEngine.load("dev_7-3", install=True)
+    cat = _local("nguyen")
+    rng = np.random.default_rng(0)
+    realized_any = False
+    for entry in cat.iter_expressions():
+        try:
+            rex = cat.realize(entry, n_points=8, rng=rng, engine=engine)
+        except NoValidSampleFoundError:
+            continue
+        assert rex.expression and len(rex.expression) > 0        # reported GT expression is populated
+        if np.isfinite(np.asarray(rex.y, dtype=np.float64)).all():
+            realized_any = True
+            break
+    assert realized_any, "expected at least one curated entry to realize to finite y"

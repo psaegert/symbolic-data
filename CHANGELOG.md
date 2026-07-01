@@ -3,6 +3,16 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.9.4] - 2026-07-01
+
+### Fixed
+- **Excluding a frozen (materialized) `ProblemCatalog` now actually decontaminates.** A frozen catalog
+  holds realized Problems in `.problems`, so `iter_expressions()` yields nothing -- `ProblemSource`
+  holdout key extraction now keys off `.problems` for a frozen excluded catalog instead of silently
+  producing zero exclusion keys (a silent decontamination no-op). `iter_expressions()` on a frozen
+  catalog now raises a clear `TypeError` pointing at `.problems` rather than returning empty. Adds the
+  first direct test of the declarative realize path.
+
 ## [0.9.3] - 2026-07-01
 
 Post-release audit cleanup (mechanical fixes; no public API change).

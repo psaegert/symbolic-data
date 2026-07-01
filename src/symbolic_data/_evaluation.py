@@ -80,6 +80,12 @@ def compile_expression(
     if unknown:
         raise KeyError(f"Prepared expression for {eq_id} references undefined variables: {', '.join(sorted(unknown))}")
 
+    # Evaluate the CONCRETE `prefix_parsed` (numeric literals intact) to produce y. Do NOT realize
+    # `prefix_simplified` instead: `engine.simplify(..., max_pattern_length=4)` also constantifies
+    # literals into `<constant>` placeholders (it yields the normalized SKELETON, reported below as the
+    # structural `prefix`/`normalized_infix`), which is not directly evaluable -- realizing it would
+    # corrupt y (turn valid entries into placeholders). The concrete expression and its skeleton label
+    # are intentionally distinct objects.
     prefix_realized = engine.operators_to_realizations(prefix_parsed)
     code = codify(engine.prefix_to_infix(prefix_realized, realization=True), variable_order)
     return {

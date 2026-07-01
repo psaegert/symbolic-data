@@ -259,6 +259,11 @@ class ProblemCatalog(Catalog):
 
     # --- access -------------------------------------------------------------------------------
     def iter_expressions(self) -> Iterator[CatalogEntry]:
+        if self.frozen:
+            raise TypeError(
+                "a frozen ProblemCatalog holds realized Problems, not declarative expression entries; "
+                "iterate its `.problems` (or a ProblemSource over it) instead of `iter_expressions()`."
+            )
         return iter(self.entries.values())
 
     def __iter__(self) -> Iterator[CatalogEntry]:

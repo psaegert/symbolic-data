@@ -283,6 +283,14 @@ class ProblemSource:
             for skeleton in catalog.skeletons:
                 keys.add(tuple(normalize_skeleton(list(skeleton))))
             return keys
+        # A FROZEN ProblemCatalog (a materialized .npz) holds realized Problems in `.problems`, not
+        # declarative `.entries` -- `iter_expressions()` would yield nothing, so excluding one would be
+        # a SILENT no-op. Key off each problem's normalized expression directly.
+        if isinstance(catalog, ProblemCatalog) and getattr(catalog, "frozen", False):
+            for problem in (catalog.problems or []):
+                if problem.expression is not None:
+                    keys.add(tuple(normalize_skeleton(list(problem.expression))))
+            return keys
         engine = self._get_engine()
         for entry in catalog.iter_expressions():
             try:

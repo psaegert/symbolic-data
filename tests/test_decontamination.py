@@ -58,6 +58,31 @@ def test_cross_namespace_declarative_exclude_drops_matching_structure():
     assert ("cos", "x1") in kept_skeletons              # the non-matching structure survives
 
 
+def test_exclude_frozen_problem_catalog_is_not_a_silent_noop():
+    # A1: excluding a FROZEN ProblemCatalog (a materialized .npz) must actually decontaminate. A frozen
+    # catalog holds realized Problems in `.problems`, so `iter_expressions()` yields nothing -- the
+    # exclusion must key off `.problems`, else holding out a materialized catalog is a silent no-op.
+    from symbolic_data import ProblemCatalog
+    spec = _frozen_spec([["sin", "x1"], ["+", "x1", "x2"]], name="frzexcl")
+    frozen_cat = ProblemSource({"catalog": spec, "sampling": {"n_support": 6, "n_validation": 0, "noise": 0.0}}).materialize().to_catalog()
+    assert isinstance(frozen_cat, ProblemCatalog) and frozen_cat.frozen
+    npz = str(frozen_cat.save(os.path.join(tempfile.mkdtemp(), "frozen")))
+    probe = ProblemSource({"catalog": spec, "sampling": {"n_support": 6, "n_validation": 0}})
+    assert len(probe._exclusion_keys(npz)) > 0          # non-empty (pre-fix: 0 keys -> silent no-op)
+    src = ProblemSource({"catalog": spec, "sampling": {"n_support": 6, "n_validation": 0, "noise": 0.0},
+                         "holdouts": [{"exclude": npz}]})
+    assert [p for p in islice(iter(src), 8) if not p.is_placeholder] == []   # frozen catalog covers all structures
+
+
+def test_iter_expressions_raises_on_a_frozen_catalog():
+    # A1: iter_expressions() on a frozen catalog raises a clear error instead of silently yielding nothing.
+    import pytest
+    spec = _frozen_spec([["sin", "x1"]], name="frziter")
+    frozen = ProblemSource({"catalog": spec, "sampling": {"n_support": 4, "n_validation": 0}}).materialize().to_catalog()
+    with pytest.raises(TypeError):
+        list(frozen.iter_expressions())
+
+
 def test_open_generative_ref_infers_generate_mode():
     cfg = yaml.safe_load(RECIPE.read_text(encoding="utf-8"))
     cfg["type"] = "lample_charton"
