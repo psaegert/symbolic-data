@@ -76,7 +76,14 @@ class GenerativeCatalog(Catalog, ABC):
 
 
 def _constantify_skeleton(skeleton: list[str]) -> list[str]:
-    """Replace mult<N>/div<N> tokens with multiplication by a constant."""
+    """Replace mult<N>/div<N> tokens with multiplication by a (free) constant.
+
+    Both ``mult<N>`` (N*x) and ``div<N>`` (x/N = (1/N)*x) collapse to the SAME skeleton -- "scale x by a
+    free constant" -- so both emit ``['*', N]``. The literal N is irrelevant here: this runs only inside
+    :meth:`_sympy_simplify_skeleton`, which immediately turns it into a ``<constant>`` placeholder and
+    substitutes a RANDOM value before SymPy structural simplification. (So ``div<N> -> '* N'`` is NOT a
+    value inversion bug -- the value is discarded; do not "fix" it to ``'/'`` / ``1/N``.)
+    """
     result: list[str] = []
     for token in skeleton:
         m = re.match(r'^(mult|div)(\d+)$', token)
