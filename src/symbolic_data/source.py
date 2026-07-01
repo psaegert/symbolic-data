@@ -26,6 +26,11 @@ from symbolic_data.generative import GenerativeCatalog, build_catalog, is_open_g
 from symbolic_data.problem import Problem
 from simplipy import normalize_skeleton
 
+# Sampling-policy defaults used when the config / catalog metadata does not specify a value.
+_DEFAULT_MAX_TRIALS = 100          # per-slot generation retries before yielding a placeholder Problem
+_DEFAULT_GENERATE_N_SUPPORT = 32   # generative catalogs: support size when `sampling.n_support` is unset
+_DEFAULT_SET_N_POINTS = 100        # declarative catalogs: support size when catalog meta omits `n_points`
+
 
 def _entry_variables(entry: Any) -> list[str]:
     """Best-effort variable-name list for a placeholder, across entry shapes (declarative dict /
@@ -102,7 +107,7 @@ class ProblemSource:
         self.noise = float(s.get("noise", 0.0))
         self.problems_per_expression = int(s.get("problems_per_expression", 1))
         self.layout = s.get("layout", "random")          # X-point layout passed to the distribution
-        self.max_trials = int(s.get("max_trials", 100))
+        self.max_trials = int(s.get("max_trials", _DEFAULT_MAX_TRIALS))
         # number of expressions to draw from a generative catalog (usage policy); None = unbounded stream
         self._size = int(s["size"]) if s.get("size") is not None else None
         self.holdouts = list(self.config.get("holdouts", []))
@@ -182,9 +187,9 @@ class ProblemSource:
         if self.n_support is not None:
             n_support = int(self.n_support)
         elif isinstance(catalog, GenerativeCatalog):
-            n_support = 32
+            n_support = _DEFAULT_GENERATE_N_SUPPORT
         else:
-            n_support = int(defaults.get("n_points", 100))
+            n_support = int(defaults.get("n_points", _DEFAULT_SET_N_POINTS))
         n_validation = int(self.n_validation) if self.n_validation is not None else n_support
         return n_support, n_validation
 

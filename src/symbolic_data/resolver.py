@@ -92,21 +92,38 @@ def _parse_ref(ref: str) -> tuple[str | None, str, int | None]:
     return repo_id, name, version
 
 
+_MANIFEST_CACHE: dict[tuple[str, str], dict[str, Any]] = {}
+
+
 def fetch_manifest(repo_id: str | None = None, manifest_filename: str | None = None) -> dict[str, Any]:
-    """Download + parse the manifest from an HF dataset repo. Returns ``{}`` on failure."""
+    """Download + parse the manifest from an HF dataset repo. Returns ``{}`` on failure.
+
+    Successful fetches are memoized per ``(repo, filename)`` -- ``resolve()`` runs 2-3x per declarative
+    ProblemSource, so this avoids re-downloading + re-parsing the manifest each time. A failed (empty)
+    fetch is NOT cached, so a transient network error can still recover on a later call. Callers treat
+    the returned mapping as read-only.
+    """
     from huggingface_hub import hf_hub_download
     from huggingface_hub.utils import HfHubHTTPError
 
+    key = (repo_id or HF_MANIFEST_REPO, manifest_filename or HF_MANIFEST_FILENAME)
+    cached = _MANIFEST_CACHE.get(key)
+    if cached is not None:
+        return cached
+
     try:
         manifest_path = hf_hub_download(
-            repo_id=repo_id or HF_MANIFEST_REPO,
-            filename=manifest_filename or HF_MANIFEST_FILENAME,
+            repo_id=key[0],
+            filename=key[1],
             repo_type="dataset",
         )
     except (HfHubHTTPError, OSError):
         return {}
     with open(manifest_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+        manifest = json.load(handle)
+    if manifest:
+        _MANIFEST_CACHE[key] = manifest
+    return manifest
 
 
 def _sha256(path: str) -> str:

@@ -3,6 +3,31 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.10.0] - 2026-07-01
+
+Post-release audit round (deferred tiers C + D): one breaking API harmonization plus internal
+performance/clarity work. No behavior change to sampling, decontamination, or ground-truth values.
+
+### Changed
+- **BREAKING: `LampleChartonCatalog.load(directory)` returns the catalog object only** (was
+  `(config_dict, catalog)`), consistent with `ProblemCatalog.load`. Read the config separately via
+  `load_config(<dir>/catalog.yaml)` if you need it. Internal callers are updated; there is no
+  deprecation alias.
+
+### Performance
+- **HF manifest is memoized** per `(repo, filename)` in `resolver.fetch_manifest`: a declarative
+  `ProblemSource` resolves 2-3x per build, and the manifest was re-downloaded + re-parsed each time.
+  Only successful (non-empty) fetches are cached, so a transient network failure can still recover.
+- **`LampleChartonCatalog.split` is O(n)** (was O(n^2)): membership tests use `set`s instead of
+  scanning the train/test key lists.
+- **`sample_skeleton(new=False)` caches the indexable skeleton tuple** and rebuilds it only when the
+  skeleton set size changes, instead of materializing `tuple(self.skeletons)` on every draw (the
+  streaming resample path calls this once per sample).
+
+### Internal
+- Named the previously-inline sampling defaults (`_DEFAULT_MAX_TRIALS`, `_DEFAULT_GENERATE_N_SUPPORT`,
+  `_DEFAULT_SET_N_POINTS`) in `source.py`.
+
 ## [0.9.5] - 2026-07-01
 
 ### Changed

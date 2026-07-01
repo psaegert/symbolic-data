@@ -163,6 +163,7 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         self.skeletons: set[tuple[str]] = set()
         self.skeleton_codes: dict[tuple[str], tuple[CodeType, list[str]]] = {}
+        self._skeletons_tuple: tuple[Any, ...] | None = None   # cached indexable view for resampling (see sample_skeleton)
 
         self.skeleton_sampler = SkeletonSampler(
             simplipy_engine=self.simplipy_engine,
@@ -498,7 +499,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             resolved = substitute_root_path(holdout_pool)
             # a saved-catalog DIRECTORY (legacy) -> load it; otherwise a ref/name/inline -> build_catalog
             # (resolves a name[@version] via HF, a config path, or an inline spec).
-            holdout_pool_obj = LampleChartonCatalog.load(resolved)[1] if os.path.isdir(resolved) else build_catalog(resolved)
+            holdout_pool_obj = LampleChartonCatalog.load(resolved) if os.path.isdir(resolved) else build_catalog(resolved)
             self.holdout_pools.append(holdout_pool)
         else:
             if any(existing is holdout_pool for existing in self.holdout_pools if not isinstance(existing, str)):
@@ -582,7 +583,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             save_config(load_config(config, resolve_paths=True), directory=directory, filename='catalog.yaml', reference=reference, recursive=recursive, resolve_paths=True)
 
     @classmethod
-    def load(cls, directory: str, verbose: bool = True) -> tuple[dict[str, Any], "LampleChartonCatalog"]:
+    def load(cls, directory: str, verbose: bool = True) -> "LampleChartonCatalog":
         '''
         Load a catalog from a directory.
 
@@ -595,8 +596,9 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         Returns
         -------
-        dict[str, Any], LampleChartonCatalog
-            The configuration dictionary and the LampleChartonCatalog object.
+        LampleChartonCatalog
+            The loaded catalog (consistent with :meth:`ProblemCatalog.load`, which also returns the
+            catalog object; read the config separately via ``load_config`` if needed).
         '''
         config_path = os.path.join(directory, 'catalog.yaml')
         resolved_directory = substitute_root_path(directory)
@@ -608,7 +610,7 @@ class LampleChartonCatalog(GenerativeCatalog):
 
             pool.skeleton_codes = pool.compile_codes(verbose=verbose)
 
-        return load_config(config_path), pool
+        return pool
 
     def _sympy_simplify_skeleton(self, skeleton: list[str], rng: np.random.Generator) -> list[str]:
         """Simplify a skeleton using SymPy with a subprocess timeout."""
@@ -712,8 +714,15 @@ class LampleChartonCatalog(GenerativeCatalog):
                     if not decontaminate or not self.is_held_out(skeleton, constants):
                         return tuple(skeleton), code, constants   # type: ignore
         else:
-            skeletons_tuple = tuple(self.skeletons)
-            skeleton = skeletons_tuple[int(rng.integers(len(skeletons_tuple)))]  # type: ignore
+            # Resample the existing (fixed / append-only) skeleton set. Cache the indexable tuple and
+            # rebuild only when the set size changes, instead of materializing it on every draw (the
+            # streaming resample path calls this once per sample). `self.skeletons` is never shrunk
+            # in place during a source's lifetime (create() only adds), so a length check is sufficient.
+            cached = self._skeletons_tuple
+            if cached is None or len(cached) != len(self.skeletons):
+                cached = tuple(self.skeletons)
+                self._skeletons_tuple = cached
+            skeleton = cached[int(rng.integers(len(cached)))]  # type: ignore
             code, constants = self.skeleton_codes[skeleton]  # type: ignore
 
             return skeleton, code, constants  # type: ignore
@@ -940,24 +949,25 @@ class LampleChartonCatalog(GenerativeCatalog):
             The two disjoint catalogs.
         """
         train_keys, test_keys = train_test_split(list(self.skeletons), train_size=train_size, random_state=random_state)
+        train_set, test_set = set(train_keys), set(test_keys)   # O(1) membership below (was O(n) -> O(n^2) split)
 
         train_pool = LampleChartonCatalog.from_dict(
-            set(train_keys),
+            train_set,
             simplipy_engine=self.simplipy_engine,
             sample_strategy=self.sample_strategy,
             literal_prior=self.literal_prior,
-            skeleton_codes={k: v for k, v in self.skeleton_codes.items() if k in train_keys},
+            skeleton_codes={k: v for k, v in self.skeleton_codes.items() if k in train_set},
             variables=self.variables,
             support_sampler_config=deepcopy(self.support_sampler_config),
             operator_weights=self.operator_weights,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
         test_pool = LampleChartonCatalog.from_dict(
-            set(test_keys),
+            test_set,
             simplipy_engine=self.simplipy_engine,
             sample_strategy=self.sample_strategy,
             literal_prior=self.literal_prior,
-            skeleton_codes={k: v for k, v in self.skeleton_codes.items() if k in test_keys},
+            skeleton_codes={k: v for k, v in self.skeleton_codes.items() if k in test_set},
             variables=self.variables,
             support_sampler_config=deepcopy(self.support_sampler_config),
             operator_weights=self.operator_weights,
