@@ -858,43 +858,45 @@ class LampleChartonCatalog(GenerativeCatalog):
                 break
 
     # --- Catalog interface (sampled by ProblemSource) -----------------------------------------
-    def iter_entries(self, rng: np.random.Generator, *, method: str = "procedural", size: int | None = None) -> Iterator[GeneratedEntry]:
+    def iter_entries(self, rng: np.random.Generator, *, method: str = "iterate", size: int | None = None) -> Iterator[GeneratedEntry]:
         """Yield generated skeletons.
 
-        ``method="iterate"`` on a FROZEN catalog (one with an existing skeleton set, e.g. a saved
-        validation pool) -> iterate that fixed set ONCE (bounded, each skeleton once): the eval /
-        set-mode semantics, so ``list(...)`` terminates at ``len(skeletons)``.
+        ``method="iterate"`` (the DEFAULT, matching :meth:`Catalog.iter_entries`; BOUNDED):
+        ``size`` is ``None`` -> iterate the existing fixed skeleton set ONCE (each skeleton once, e.g. a
+        frozen validation pool), so ``list(...)`` terminates at ``len(skeletons)``; ``size=N`` ->
+        generate a finite pool of ``N`` distinct skeletons and iterate it. On an OPEN catalog with
+        NEITHER a fixed skeleton set NOR a ``size``, "iterate" is undefined (there is nothing bounded to
+        yield) -> a clear ``ValueError`` instead of a silent unbounded stream a caller might ``list()``.
 
-        Otherwise generation is procedural: ``size`` set -> generate that many DISTINCT skeletons
-        (cached + sorted, the reproducible finite-pool behaviour); ``size`` is ``None`` -> an UNBOUNDED
-        stream via ``sample_skeleton`` with ``new=False`` (an EMPTY catalog generates a fresh skeleton
-        each draw -- training-time streaming; a PRE-LOADED one samples its existing skeletons with
-        replacement -- matching the old worker's ``sample_skeleton()`` default).
+        ``method="procedural"`` (UNBOUNDED training stream; must be requested explicitly):
+        ``size`` is ``None`` -> a fresh skeleton each draw (an EMPTY catalog) or the existing set sampled
+        WITH REPLACEMENT (a pre-loaded one); ``size=N`` -> a finite pool. This is what
+        :class:`ProblemSource` passes in generate mode; a direct ``list()`` of it never terminates.
         """
-        if method == "iterate" and size is None and self.skeletons:
-            # Frozen set: iterate the fixed skeleton set ONCE (bounded). A ProblemSource in set mode
-            # over a frozen generative catalog (e.g. v23-val) needs each skeleton exactly once, not an
-            # unbounded resampling stream -- else `list(source)` never terminates.
-            if not self.skeleton_codes:
-                self.skeleton_codes = self.compile_codes()
-            for skeleton in sorted(self.skeletons):
-                code, constants = self.skeleton_codes[skeleton]
-                yield GeneratedEntry(skeleton=tuple(skeleton), code=code, constants=list(constants), variables=list(self.variables))
-            return
-        if size is None:
+        if method == "procedural" and size is None:
+            # Explicit unbounded stream (generate-mode streaming). Never the default, so a naive
+            # `list(catalog.iter_entries(rng))` no longer hangs -- it takes the bounded path below.
             while True:
                 try:
                     skeleton, code, constants = self.sample_skeleton(new=False, decontaminate=self.decontaminate, rng=rng)
                 except NoValidSampleFoundError:
                     continue
                 yield GeneratedEntry(skeleton=tuple(skeleton), code=code, constants=list(constants), variables=list(self.variables))
-        else:
+            return
+        # Bounded paths: an explicit `size` generates a finite pool; otherwise iterate the fixed set.
+        if size is not None:
             self.create(int(size), rng=rng)
-            if not self.skeleton_codes:
-                self.skeleton_codes = self.compile_codes()
-            for skeleton in sorted(self.skeletons):
-                code, constants = self.skeleton_codes[skeleton]
-                yield GeneratedEntry(skeleton=tuple(skeleton), code=code, constants=list(constants), variables=list(self.variables))
+        elif not self.skeletons:
+            raise ValueError(
+                "iter_entries(method='iterate') on an open generative catalog with no fixed skeleton "
+                "set is unbounded and cannot be materialized: pass size=N to generate a finite pool, "
+                "or method='procedural' for an explicit unbounded training stream."
+            )
+        if not self.skeleton_codes:
+            self.skeleton_codes = self.compile_codes()
+        for skeleton in sorted(self.skeletons):
+            code, constants = self.skeleton_codes[skeleton]
+            yield GeneratedEntry(skeleton=tuple(skeleton), code=code, constants=list(constants), variables=list(self.variables))
 
     def realize(self, entry: GeneratedEntry, n_points: int, rng: np.random.Generator, *, engine: Any = None, layout: str = "random") -> RealizedExpression:
         """Realize one generated skeleton into support data (its intrinsic support + literal sampling).

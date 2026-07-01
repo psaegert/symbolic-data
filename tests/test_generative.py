@@ -56,6 +56,24 @@ def test_iter_entries_then_realize(catalog):
     assert realized_any, "expected at least one entry to realize"
 
 
+def test_iter_entries_default_is_bounded_and_raises_on_open():
+    # ISSUE-002: the default method='iterate' matches Catalog.iter_entries -> list() is BOUNDED on a
+    # fixed skeleton set; an OPEN catalog with no set and no size raises instead of a silent unbounded
+    # stream a caller might list() (the footgun), while explicit method='procedural' still streams.
+    import itertools
+    rng = np.random.default_rng(3)
+    fixed = LampleChartonCatalog.from_config(_cfg())
+    fixed.create(3, rng=rng)
+    assert len(list(fixed.iter_entries(rng))) == 3            # default 'iterate' -> bounded, no hang
+
+    open_cat = LampleChartonCatalog.from_config(_cfg())
+    with pytest.raises(ValueError):
+        list(open_cat.iter_entries(rng))                      # open, no set, no size -> raise (no hang)
+
+    streamed = list(itertools.islice(open_cat.iter_entries(rng, method="procedural"), 3))
+    assert len(streamed) == 3                                 # explicit procedural still streams
+
+
 def test_build_catalog_dispatch():
     # mapping with a type -> generative; the registry resolves it.
     spec = {**_cfg(), "type": "lample_charton"}

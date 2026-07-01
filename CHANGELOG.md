@@ -3,6 +3,16 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.9.2] - 2026-07-01
+
+### Fixed
+- **`LampleChartonCatalog.iter_entries` no longer defaults to an unbounded stream.** The default
+  `method` is now `"iterate"` (matching `Catalog.iter_entries`), so `list(catalog.iter_entries(rng))`
+  is BOUNDED on a catalog with a fixed skeleton set instead of hanging forever, and an OPEN catalog
+  with neither a fixed set nor a `size` raises a clear `ValueError` (pass `size=N`, or
+  `method="procedural"` for an explicit unbounded training stream). `ProblemSource` is unaffected (it
+  passes `method` explicitly per mode).
+
 ## [0.9.1] - 2026-07-01
 
 Post-release audit fixes (no API change).
