@@ -115,6 +115,8 @@ class ProblemSource:
 
     @classmethod
     def from_config(cls, config: Mapping[str, Any] | str | Path) -> "ProblemSource":
+        """Build a source from a config mapping or a path to a yaml config (alias for the constructor
+        with default engine and entropy ``rng``)."""
         return cls(config)
 
     # --- lazy resources ----------------------------------------------------------------------
@@ -156,6 +158,13 @@ class ProblemSource:
             yield from self._iter_catalog()
 
     def size_hint(self) -> int | None:
+        """Best-effort number of Problems this source will yield, or ``None`` when unbounded.
+
+        ``fixed`` -> inline problem count times ``problems_per_expression``; ``generate`` -> the
+        configured ``size`` times ``problems_per_expression`` (``None`` for an unbounded stream);
+        ``set`` -> the frozen catalog's problem count, or the entry count times
+        ``problems_per_expression``.
+        """
         if self.mode == "fixed":
             return len(self.config["problems"]) * self.problems_per_expression
         if self.mode == "generate":

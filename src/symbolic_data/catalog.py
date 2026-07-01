@@ -55,6 +55,8 @@ class CatalogEntry:
 
     @classmethod
     def from_mapping(cls, eq_id: str, mapping: dict[str, Any]) -> "CatalogEntry":
+        """Build an entry from its yaml body: the structured fields (``raw``/``prepared``/
+        ``n_variables``/``vars``) become attributes, every other key is collected into ``meta``."""
         meta = {k: v for k, v in mapping.items() if k not in _ENTRY_FIELDS}
         return cls(
             id=eq_id,
@@ -66,6 +68,8 @@ class CatalogEntry:
         )
 
     def to_mapping(self) -> dict[str, Any]:
+        """Serialize the entry back to its yaml body (inverse of :meth:`from_mapping`): the set
+        structured fields plus every ``meta`` key, with the ``vars`` block last."""
         out: dict[str, Any] = {}
         if self.raw is not None:
             out["raw"] = self.raw
@@ -123,6 +127,8 @@ class Catalog(ABC):
         Subclasses ignore kwargs they do not need."""
 
     def is_finite(self) -> bool:
+        """Whether the catalog has a bounded entry set (default ``True``; overridden to ``False`` by
+        an on-the-fly :class:`~symbolic_data.generative.GenerativeCatalog`)."""
         return True
 
 
@@ -155,6 +161,13 @@ class ProblemCatalog(Catalog):
         version: int | None = None,
         source: str | None = None,
     ) -> "ProblemCatalog":
+        """Build a declarative catalog from a yaml file or an already-parsed mapping.
+
+        Accepts either the structured form (top-level ``metadata`` / ``expressions`` blocks) or the
+        flat form (every top-level key is an expression id). An explicit ``name`` / ``version`` /
+        ``source`` overrides the embedded metadata block. Raises ``ValueError`` if the yaml is not a
+        mapping.
+        """
         if isinstance(path_or_mapping, (str, Path)):
             mapping = yaml.safe_load(Path(path_or_mapping).read_text(encoding="utf-8"))
         else:
@@ -192,6 +205,11 @@ class ProblemCatalog(Catalog):
 
     @classmethod
     def load(cls, ref: str = "fastsrb", *, install: bool = True, repo_id: str | None = None) -> "ProblemCatalog":
+        """Resolve ``ref`` (a local path, a ``name[@version]``, or ``repo_id:name[@version]``) and load
+        the catalog: a ``.npz`` artifact via :meth:`from_npz`, otherwise the yaml via :meth:`from_yaml`.
+
+        The engine behind :func:`load_catalog`; see it for the reference syntax and curated names.
+        """
         artifact = resolve(ref, install=install, repo_id=repo_id)
         if str(artifact.path).endswith(".npz"):
             return cls.from_npz(artifact.path)
@@ -214,6 +232,9 @@ class ProblemCatalog(Catalog):
 
     # --- persistence --------------------------------------------------------------------------
     def to_mapping(self) -> dict[str, Any]:
+        """Serialize the declarative catalog to the structured yaml form (a ``metadata`` block plus an
+        ``expressions`` block); ``self.name`` / ``self.version`` are authoritative over the embedded
+        metadata."""
         meta = dict(self.meta)
         # Assignment (not setdefault): self.name/self.version are authoritative over a possibly
         # stale embedded block, so a loaded-then-saved catalog preserves its resolved identity
@@ -224,6 +245,7 @@ class ProblemCatalog(Catalog):
         return {"metadata": meta, "expressions": {e.id: e.to_mapping() for e in self.entries.values()}}
 
     def to_yaml(self, path: str | Path) -> None:
+        """Write the declarative catalog (:meth:`to_mapping`) to ``path`` as yaml."""
         Path(path).write_text(yaml.safe_dump(self.to_mapping(), sort_keys=False, allow_unicode=True), encoding="utf-8")
 
     def save(self, path: str | Path) -> Path:
@@ -259,6 +281,8 @@ class ProblemCatalog(Catalog):
 
     # --- access -------------------------------------------------------------------------------
     def iter_expressions(self) -> Iterator[CatalogEntry]:
+        """Iterate the declarative expression entries. Raises ``TypeError`` on a frozen catalog (which
+        holds realized Problems in ``.problems``, not expression templates)."""
         if self.frozen:
             raise TypeError(
                 "a frozen ProblemCatalog holds realized Problems, not declarative expression entries; "
@@ -279,6 +303,7 @@ class ProblemCatalog(Catalog):
         return self.entries[eq_id]
 
     def is_finite(self) -> bool:
+        """Always ``True``: a declarative catalog has a fixed, bounded set of entries."""
         return True
 
     # --- Catalog interface (sampled by ProblemSource) -----------------------------------------

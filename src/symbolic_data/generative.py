@@ -72,6 +72,8 @@ class GenerativeCatalog(Catalog, ABC):
         """Sample one raw skeleton (operator template), its compiled code, and its constant tokens."""
 
     def is_finite(self) -> bool:
+        """Always ``False``: a generative catalog produces fresh expressions on the fly and has no
+        bounded entry set."""
         return False
 
 
@@ -423,21 +425,49 @@ class LampleChartonCatalog(GenerativeCatalog):
 
     @property
     def holdout_skeletons(self) -> set[tuple[str, ...]]:
+        """The set of registered held-out skeleton hashes (structural exclusion keys)."""
         return self.holdout_manager.skeleton_hashes
 
     @property
     def holdout_y(self) -> set[tuple[float, ...] | tuple[tuple[float, ...], ...]]:
+        """The set of held-out expression images (functional values on the holdout grid), used to
+        also exclude structurally-distinct but functionally-equivalent expressions."""
         return self.holdout_manager.expression_images
 
     @property
     def holdout_X(self) -> np.ndarray:
+        """The fixed support grid on which held-out expressions are evaluated to form their images."""
         return self.holdout_manager.holdout_X
 
     @property
     def holdout_C(self) -> np.ndarray:
+        """The fixed constant values substituted when evaluating held-out expressions to images."""
         return self.holdout_manager.holdout_C
 
     def get_structural_prototype(self, expression: list[str] | tuple[str, ...], verbose: bool = False, debug: bool = False) -> list[str]:
+        '''
+        Reduce a prefix expression to its constant-free structural skeleton.
+
+        Walks the expression right-to-left and folds ``<constant>`` operands out of each operator: an
+        operator with all-constant operands collapses to a single ``<constant>``; an operator with a
+        constant and exactly one non-constant operand collapses to that operand; a constant alongside
+        more than one non-constant operand raises ``NotImplementedError``. The result is the
+        structural prototype used for holdout / functional-equivalence matching.
+
+        Parameters
+        ----------
+        expression : list[str] or tuple[str, ...]
+            The prefix expression (skeleton) to reduce.
+        verbose : bool, optional
+            Whether to print a note each time a constant is removed.
+        debug : bool, optional
+            Whether to print the stack and token at each step.
+
+        Returns
+        -------
+        list[str]
+            The constant-free structural prototype (prefix expression).
+        '''
         stack: list = []
         i = len(expression) - 1
 
