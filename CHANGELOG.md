@@ -3,6 +3,18 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.9.3] - 2026-07-01
+
+Post-release audit cleanup (mechanical fixes; no public API change).
+
+### Fixed
+- `sample_data` accepts a scalar (Python-`float`) evaluation result (float32-coerced) instead of
+  silently discarding the sample; `safe_f` guards a 0-d / empty result before indexing.
+- `get_distribution` validates its `name` / `base_dist_name` / `param_samplers` keys with a clear
+  `ValueError`; `apply_on_nested` (config IO) recurses into dicts/paths nested inside list values.
+- Removed a dead, drift-prone duplicate `codify`, two stray debug `print`s (holdout / sample_skeleton
+  paths), and reconciled an abstract-vs-concrete `sample_skeleton(new=...)` default; docstring fixes.
+
 ## [0.9.2] - 2026-07-01
 
 ### Fixed

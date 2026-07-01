@@ -14,9 +14,8 @@ from symbolic_data.compilation import safe_f
 # backstop) was non-deterministic across constructions/processes/runs: the SAME config could
 # decontaminate different borderline skeletons on different runs (the exact-symbolic path was
 # already deterministic; only the 4-dp image-key margin varied). Seeding makes the default
-# grid reproducible. NOTE: the canonical, version-pinned grid ASSET (shipped ``.npz``) belongs
-# to the symbolic_data carve (see SR_BENCHMARKS_DESIGN.md); this seeded default is the
-# carve-independent interim fix and is intentionally a recipe, not a frozen artifact.
+# grid reproducible. NOTE: this seeded default is a reproducible recipe, not a frozen
+# artifact; a canonical, version-pinned grid ASSET (shipped ``.npz``) can replace it later.
 _DEFAULT_HOLDOUT_GRID_SEED = 20240617
 
 
@@ -31,7 +30,9 @@ def _default_holdout_grid() -> tuple[np.ndarray, np.ndarray]:
 
 @dataclass
 class HoldoutManager:
-    """Track previously sampled skeletons to avoid duplicates."""
+    """Track held-out expressions by both skeleton hash AND functional image (evaluated on a
+    fixed grid), so structurally-distinct but functionally-equivalent expressions are also
+    excluded."""
 
     n_variables: int
     allow_nan: bool

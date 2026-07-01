@@ -179,6 +179,9 @@ class QuantizeTransform:
         return centers.astype(values.dtype, copy=False)
 
     def _build_edges(self, min_val: float, max_val: float, n_bins: int, rng: np.random.Generator) -> np.ndarray:
+        # Unreachable via the normal dispatch: _quantize_dimensions routes the
+        # 'even' strategy to _quantize_even before ever calling _build_edges
+        # (see self._is_even_strategy). Kept as a defensive fallback only.
         if self.strategy == "even":
             return np.linspace(min_val, max_val, num=n_bins + 1, dtype=np.float64)
 

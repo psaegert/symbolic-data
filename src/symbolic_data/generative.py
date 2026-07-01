@@ -68,7 +68,7 @@ class GenerativeCatalog(Catalog, ABC):
     """
 
     @abstractmethod
-    def sample_skeleton(self, new: bool = True, decontaminate: bool = True, rng: np.random.Generator | None = None) -> tuple[tuple[str, ...], CodeType, list[str]]:
+    def sample_skeleton(self, new: bool = False, decontaminate: bool = True, rng: np.random.Generator | None = None) -> tuple[tuple[str, ...], CodeType, list[str]]:
         """Sample one raw skeleton (operator template), its compiled code, and its constant tokens."""
 
     def is_finite(self) -> bool:
@@ -405,10 +405,12 @@ class LampleChartonCatalog(GenerativeCatalog):
                 num_constants=len(constants),
             )
         except (OverflowError, NameError):
-            print("Overflow or Name error during holdout evaluation, assuming held out")
-            print(f'Skeleton: {skeleton}')
-            print(f'Constants: {constants}')
-            print(f'Code: {code}')
+            warnings.warn(
+                f"Overflow/Name error during holdout evaluation; assuming held out "
+                f"(skeleton={skeleton}, constants={constants})",
+                RuntimeWarning,
+                stacklevel=2,
+            )
             return True
 
     @property
@@ -679,7 +681,6 @@ class LampleChartonCatalog(GenerativeCatalog):
                     try:
                         skeleton = self.simplipy_engine.simplify(skeleton, inplace=True, max_pattern_length=4)
                     except Exception as e:
-                        print(f"Failed to simplify skeleton: {skeleton}")
                         raise NoValidSampleFoundError(f"Failed to simplify skeleton: {skeleton}") from e
 
                     if any(forbidden_token in skeleton for forbidden_token in ['float("inf")', 'float("-inf")', 'float("nan")']):
@@ -730,7 +731,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         support_prior : Callable or None, optional
             The prior distribution for the support points. If None, the default support prior will be used.
         support_scale_prior : Callable or None, optional
-            The prior distribution for the support scale. If None, the default support scale prior will be
+            The prior distribution for the support scale. If None, the default support scale prior will be used.
 
         Returns
         -------
@@ -763,7 +764,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                 y_support = expression_callable(*x_support.T, *literals)
 
             if not isinstance(y_support, np.ndarray):
-                y_support = np.full((n_support, 1), y_support)
+                y_support = np.full((n_support, 1), y_support, dtype=np.float32)
 
             if len(y_support) == 1:
                 # Repeat y to match the shape of x

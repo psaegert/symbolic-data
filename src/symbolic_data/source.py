@@ -5,7 +5,7 @@ or inline problems) into :class:`~symbolic_data.problem.Problem`s, applying the 
 catalog deliberately omits: draw ``method``, ``n_support`` / ``n_validation``, ``noise``,
 ``problems_per_expression``, holdouts/filters, and (for sets lacking intrinsic ranges) a global
 sampling fallback. It is ONE concrete class -- no ABC, no subclasses; the mode is INFERRED from the
-config (a ``catalog:`` ref -> SET, a ``generator:`` block -> ON-THE-FLY, inline ``problems:`` ->
+config (a ``catalog:`` ref -> SET or GENERATE (a generative ``catalog: {type: ...}`` mapping streams on-the-fly), inline ``problems:`` ->
 FIXED).
 
 Reproducibility never comes from a seed: ``rng`` is entropy by default; exact reproduction is

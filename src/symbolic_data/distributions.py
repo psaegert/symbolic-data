@@ -271,6 +271,8 @@ def get_distribution(config: dict[str, Any]) -> Callable[..., np.ndarray]:
     Supports builtins/registered names, the ``constant`` special form, and the ``sampler``
     nesting form (a distribution whose parameters are themselves sampled).
     """
+    if "name" not in config:
+        raise ValueError(f"distribution config must include a 'name' key; got keys {sorted(config)}")
     name = config["name"]
     kwargs = config.get("kwargs", {})
 
@@ -281,6 +283,9 @@ def get_distribution(config: dict[str, Any]) -> Callable[..., np.ndarray]:
         return partial(DISTRIBUTIONS.get(name), **kwargs)
 
     if name == "sampler":
+        for required_key in ("base_dist_name", "param_samplers"):
+            if required_key not in kwargs:
+                raise ValueError(f"sampler distribution config must include a '{required_key}' key in kwargs; got kwargs keys {sorted(kwargs)}")
         resolved_samplers = {
             param_name: get_distribution(sampler_config)
             for param_name, sampler_config in kwargs["param_samplers"].items()

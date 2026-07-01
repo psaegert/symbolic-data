@@ -12,7 +12,7 @@ def apply_on_nested(structure: list | dict, func: Callable[[Any], Any]) -> list 
     """Apply ``func`` recursively across nested ``structure`` values."""
     if isinstance(structure, list):
         for i, value in enumerate(structure):
-            if isinstance(value, dict):
+            if isinstance(value, (dict, list)):
                 structure[i] = apply_on_nested(value, func)
             else:
                 structure[i] = func(value)
@@ -20,7 +20,7 @@ def apply_on_nested(structure: list | dict, func: Callable[[Any], Any]) -> list 
 
     if isinstance(structure, dict):
         for key, value in structure.items():
-            if isinstance(value, dict):
+            if isinstance(value, (dict, list)):
                 structure[key] = apply_on_nested(value, func)
             else:
                 structure[key] = func(value)
