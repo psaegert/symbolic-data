@@ -51,7 +51,11 @@ def test_fastsrb_matches_published_recipe(base, sign, layout):
     got = fastsrb_dist(low, high, base=base, sign=sign, layout=layout, size=N,
                        rng=np.random.default_rng(SEED))
     ref = golden[_combo_key(base, sign, layout)]
-    assert np.array_equal(got, ref)
+    # Reproduce the golden recipe to floating-point precision, NOT bit-exactly: the seeded Generator
+    # stream is version-stable, but a float transform like the base-10 `log`'s ``10**x`` can differ by
+    # ~1 ULP across numpy builds, which `array_equal` would (and did, in CI) flag spuriously. A tight
+    # tolerance still catches any real recipe change while surviving numpy point releases.
+    np.testing.assert_allclose(got, ref, rtol=1e-9, atol=1e-12)
 
 
 # --- (2) invariants ---------------------------------------------------------------------------
