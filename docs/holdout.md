@@ -35,9 +35,9 @@ either the declarative FastSRB benchmark or the generative `v23-val` set). The e
 cached on first use. Functional-equivalence decontamination (beyond structural skeleton match) is a
 later refinement.
 
-This replaces the internal "skeleton pool" holdout machinery that earlier versions used for training
-generation; there is no longer a separate `HoldoutManager` in the public API — holdout is a
-`ProblemSource` policy.
+This replaces the former internal holdout machinery (a separate `HoldoutManager`) that earlier
+versions used for training generation; there is no longer a separate `HoldoutManager` in the public
+API — holdout is a `ProblemSource` policy.
 
 ## Filters: `{filter: {...}}`
 
@@ -45,7 +45,7 @@ A `filter` rule drops problems failing any of its predicates:
 
 | key | predicate |
 |---|---|
-| `finite: true` | keep only problems whose `(X, y)` arrays are all-finite (`Problem.is_finite()`) |
+| `finite: true` | keep only problems whose `(X, y)` arrays are all-finite (`Problem.is_finite()`); applies to realized problems only — placeholders pass through (see below) |
 | `max_complexity: N` | keep only problems whose substituted-expression token length is `<= N` |
 | `n_variables: N` | keep only problems using exactly `N` distinct pool variables |
 | `max_variables: N` | keep only problems using at most `N` distinct pool variables |

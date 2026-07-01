@@ -63,6 +63,45 @@ They are discovered lazily on first lookup.
 The builtins are the source of truth (`symbolic_data.BASE_DISTRIBUTIONS`); the registry is seeded from
 them.
 
+### From config to callable: `get_distribution` / `build_prior_callable`
+
+The `{name, kwargs}` config slot is turned into an actual sampler by two public helpers. Both return
+a callable with the signature `(size=1, rng=None) -> np.ndarray`, so you thread your own
+`numpy.random.Generator` for reproducible draws.
+
+`get_distribution(config)` builds one distribution callable from a single `{name, kwargs}` mapping.
+Besides any builtin / registered `name`, it understands two special forms — `constant` (a fixed fill)
+and `sampler` (a distribution whose parameters are themselves drawn from nested distributions):
+
+```python
+import numpy as np
+from symbolic_data import get_distribution
+
+rng = np.random.default_rng(0)
+
+normal = get_distribution({"name": "normal", "kwargs": {"loc": 0.0, "scale": 5.0}})
+normal(size=4, rng=rng)                       # -> ndarray of shape (4,)
+
+const = get_distribution({"name": "constant", "kwargs": {"value": 3.0}})
+const(size=3)                                 # -> array([3., 3., 3.])
+```
+
+`build_prior_callable(config)` builds a prior sampler. Given a single `{name, kwargs}` mapping it
+delegates to `get_distribution`; given a **list** of `{name, kwargs, weight}` entries it builds a
+**mixture** prior — per draw it picks a component with probability proportional to `weight` (weights
+are normalized; they need only be positive), then samples from it. This is the same list form the
+mixture-prior yaml above uses:
+
+```python
+from symbolic_data import build_prior_callable
+
+mixture = build_prior_callable([
+    {"name": "normal",  "kwargs": {"loc": 0.0, "scale": 5.0}, "weight": 0.7},
+    {"name": "uniform", "kwargs": {"low": -1.0, "high": 1.0}, "weight": 0.3},
+])
+mixture(size=4, rng=np.random.default_rng(2))  # -> ndarray of shape (4,)
+```
+
 ## Generative catalogs
 
 A generative catalog spec selects its implementation by a `type:` key (the builtin is

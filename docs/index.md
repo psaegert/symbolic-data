@@ -11,7 +11,7 @@ It is a deep leaf: it depends only on
 [`simplipy`](https://github.com/psaegert/simplipy) (the expression engine) plus numpy / scikit-learn.
 
 ```
-simplipy  ◄──  symbolic-data  ◄──  { flash-ansr[train], srbf, other SR methods }
+simplipy  ◄──  symbolic-data  ◄──  { flash-ansr, srbf, other SR methods }
 ```
 
 ## The two-level model

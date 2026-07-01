@@ -37,18 +37,34 @@ one-liner). The `eq_id` is the catalog key (`"I.9.18"`, `"Nguyen-5"`, `"II.38.3"
 
 ## Resolving references
 
-`load_catalog(ref)` / `ProblemSource({"catalog": ref})` accept several reference forms:
+`load_catalog(ref)` resolves **declarative** catalogs and **`.npz` frozen** catalogs only. `ref`
+is a string that points at a declarative-yaml or frozen-`.npz` artifact:
 
 - a curated **name** — `fastsrb`, `feynman`, `nguyen`;
-- the published **v23** catalogs — `v23-val` (a 1000-skeleton frozen validation set) and
-  `lample-charton-v23` (the open training recipe). These resolve from the same HF manifest but are
-  not members of `CATALOGS` (they are generative catalogs, not declarative benchmarks);
 - **`name@version`** — pin a specific version;
 - **`repo_id:name[@version]`** — a third-party HF manifest, so anyone can publish + load their own;
-- a **local path** — a `.yaml` declarative/generative spec or a `.npz` frozen catalog;
-- an **inline mapping** — `{type: lample_charton, ...}` (a generative spec).
+- a **local path** — a `.yaml` declarative spec or a `.npz` frozen catalog.
 
-Pass an explicit local path for fully offline operation; a bare name needs network on first use.
+`load_catalog` has no `type:` dispatch and rejects a mapping (it goes through `ProblemCatalog.load`
+→ the resolver, which requires a string ref). To use a **generative** catalog — the published
+**`v23-val`** validation set (a generative catalog carrying a fixed 1000-skeleton set), the open
+`lample-charton-v23` training recipe, a local generative `.yaml` (a `type:` spec), or an inline
+`{type: lample_charton, ...}` mapping — build it through `build_catalog(ref)` or
+`ProblemSource({"catalog": ref})`, which dispatch on the `type:` key:
+
+```python
+from symbolic_data import build_catalog, ProblemSource
+
+# generative names, a local generative .yaml, or an inline mapping — via build_catalog / ProblemSource
+val = build_catalog("v23-val")                     # the frozen 1000-skeleton validation set (generative)
+gen = build_catalog("lample-charton-v23")          # the open training recipe (a GenerativeCatalog)
+src = ProblemSource({"catalog": {"type": "lample_charton"}})   # + generative config keys (inline mapping)
+```
+
+`build_catalog` / `ProblemSource` also accept every form `load_catalog` accepts (a curated name, a
+`name@version`, a `repo_id:name`, a local declarative-yaml / `.npz` path); for a non-generative ref
+they fall through to `ProblemCatalog.load`. Pass an explicit local path for fully offline operation;
+a bare name needs network on first use.
 
 ## FastSRB
 
