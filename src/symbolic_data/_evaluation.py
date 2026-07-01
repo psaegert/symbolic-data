@@ -12,8 +12,19 @@ import warnings
 from typing import Any, Dict, List, Mapping
 
 import numpy as np
-from simplipy import SimpliPyEngine
+from simplipy import SimpliPyEngine, normalize_expression
 from simplipy.utils import codify
+
+
+def _is_number_token(token: Any) -> bool:
+    """True iff ``token`` is a numeric literal (a concrete constant), not a variable/operator."""
+    if not isinstance(token, str):
+        return False
+    try:
+        float(token)
+        return True
+    except (TypeError, ValueError):
+        return False
 
 
 def load_engine(engine: SimpliPyEngine | str | None) -> SimpliPyEngine:
@@ -82,10 +93,12 @@ def compile_expression(
 
     # Evaluate the CONCRETE `prefix_parsed` (numeric literals intact) to produce y. Do NOT realize
     # `prefix_simplified` instead: `engine.simplify(..., max_pattern_length=4)` also constantifies
-    # literals into `<constant>` placeholders (it yields the normalized SKELETON, reported below as the
-    # structural `prefix`/`normalized_infix`), which is not directly evaluable -- realizing it would
-    # corrupt y (turn valid entries into placeholders). The concrete expression and its skeleton label
-    # are intentionally distinct objects.
+    # literals into `<constant>` placeholders (it yields the normalized SKELETON, returned as `prefix`),
+    # which is not directly evaluable -- realizing it would corrupt y (turn valid entries into
+    # placeholders). Three distinct, deliberate objects are returned: `prefix` = the masked SKELETON
+    # (the structural / recovery form); `expression` + `constants` = the CONCRETE ground truth (the
+    # actual formula with its literal values, matching the generative catalog's RealizedExpression);
+    # `callable` evaluates that concrete formula.
     prefix_realized = engine.operators_to_realizations(prefix_parsed)
     code = codify(engine.prefix_to_infix(prefix_realized, realization=True), variable_order)
     return {
@@ -93,6 +106,8 @@ def compile_expression(
         "variable_order": variable_order,
         "prefix": tuple(prefix_simplified),
         "normalized_infix": engine.prefix_to_infix(prefix_simplified, realization=False),
+        "expression": normalize_expression(list(prefix_parsed)),
+        "constants": [float(tok) for tok in prefix_parsed if _is_number_token(tok)],
     }
 
 

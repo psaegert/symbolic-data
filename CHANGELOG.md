@@ -3,6 +3,23 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.9.5] - 2026-07-01
+
+### Changed
+- **Curated (declarative) `realize` now surfaces the CONCRETE ground truth.** `RealizedExpression`
+  for a curated entry carries `expression` = the actual formula (its literal constant values intact)
+  and `constants` = those values, matching the generative catalog, instead of leaving `expression` as
+  the masked skeleton and `constants` empty. `skeleton` remains the masked structural / recovery form.
+  So `Problem.expression` / `constants` (and downstream `ground_truth_infix` / `ground_truth_prefix`)
+  are now the exact curated formula, not a `<constant>`-masked skeleton.
+
+### Fixed
+- **Decontamination keys off `problem.skeleton`, not `problem.expression`.** Matching the exclusion
+  keys (which are built from skeletons) and the method's own docstring; this keeps holdout matching
+  structural now that a realized `expression` can be the concrete formula (whose parsed structure
+  differs from the simplified skeleton). Behaviour for generative sources is unchanged
+  (`normalize_skeleton` of the concrete expression and of the skeleton agree there).
+
 ## [0.9.4] - 2026-07-01
 
 ### Fixed

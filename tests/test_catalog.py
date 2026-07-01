@@ -108,3 +108,27 @@ def test_declarative_realize_covers_the_evaluation_path():
             realized_any = True
             break
     assert realized_any, "expected at least one curated entry to realize to finite y"
+
+
+def test_declarative_realize_surfaces_concrete_ground_truth():
+    # Option B: a curated realize reports the CONCRETE expression + its constants (matching the
+    # generative catalog), while `skeleton` stays the masked structural / recovery form.
+    import numpy as np
+    from simplipy import SimpliPyEngine
+    from symbolic_data.errors import NoValidSampleFoundError
+
+    engine = SimpliPyEngine.load("dev_7-3", install=True)
+    cat = _local("feynman")   # Feynman formulas carry concrete constants (e.g. 2, pi)
+    rng = np.random.default_rng(0)
+    found = False
+    for entry in cat.iter_expressions():
+        try:
+            rex = cat.realize(entry, 8, rng, engine=engine)
+        except NoValidSampleFoundError:
+            continue
+        if "<constant>" in rex.skeleton:                 # an entry whose GT has real constants
+            assert "<constant>" not in rex.expression    # `expression` is the CONCRETE formula, not the skeleton
+            assert len(rex.constants) > 0                 # the concrete constant values are surfaced
+            found = True
+            break
+    assert found, "expected a Feynman entry with concrete constants to surface them"

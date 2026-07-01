@@ -324,9 +324,14 @@ class ProblemCatalog(Catalog):
         if not (np.all(np.isfinite(x_all)) and np.all(np.isfinite(y_all))):
             raise NoValidSampleFoundError(f"non-finite support/target for {entry.id!r}")
         return RealizedExpression(
+            # `skeleton` is the masked structural/recovery form; `expression` + `constants` are the
+            # CONCRETE ground truth (the actual formula with its literal values), matching the
+            # generative catalog's RealizedExpression instead of leaving expression as the skeleton
+            # and constants empty.
             x=x_all, y=y_all,
-            skeleton=tuple(compiled["prefix"]), expression=list(compiled["prefix"]),
-            constants=[], variables=list(variable_order), complexity=len(compiled["prefix"]),
+            skeleton=tuple(compiled["prefix"]), expression=list(compiled["expression"]),
+            constants=list(compiled["constants"]), variables=list(variable_order),
+            complexity=len(compiled["expression"]),
             eq_id=entry.id,
             meta={"prepared_normalized": compiled["normalized_infix"], **{k: v for k, v in entry.meta.items() if k != "sources"}},
         )

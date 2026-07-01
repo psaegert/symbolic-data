@@ -269,11 +269,15 @@ class ProblemSource:
         declarative catalog (skeletons from its expressions) OR a generative one (its skeleton set);
         never a "catalog" file. Functional-equivalence decontamination is a later refinement.
         """
-        if problem.expression is None:
+        # Key off the problem's SKELETON (the structural form), not its `expression`: the exclusion
+        # keys are built from skeletons, and a realized `expression` may be the CONCRETE formula (its
+        # parsed structure differs from the simplified skeleton). normalize_skeleton canonicalizes
+        # variables so the comparison stays cross-namespace (v3 <-> x3).
+        if problem.skeleton is None:
             return False
         if ref not in self._exclude_cache:
             self._exclude_cache[ref] = self._exclusion_keys(ref)
-        return tuple(normalize_skeleton(list(problem.expression))) in self._exclude_cache[ref]
+        return tuple(normalize_skeleton(list(problem.skeleton))) in self._exclude_cache[ref]
 
     def _exclusion_keys(self, ref: str) -> set:
         """Skeleton keys of the excluded catalog (normalized: constants collapsed, variables canonical)."""
@@ -288,8 +292,8 @@ class ProblemSource:
         # a SILENT no-op. Key off each problem's normalized expression directly.
         if isinstance(catalog, ProblemCatalog) and getattr(catalog, "frozen", False):
             for problem in (catalog.problems or []):
-                if problem.expression is not None:
-                    keys.add(tuple(normalize_skeleton(list(problem.expression))))
+                if problem.skeleton is not None:
+                    keys.add(tuple(normalize_skeleton(list(problem.skeleton))))
             return keys
         engine = self._get_engine()
         for entry in catalog.iter_expressions():
