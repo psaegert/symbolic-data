@@ -1,0 +1,171 @@
+{
+ "identity": "normalized skeleton (dev_7-3, literals masked) + n_variables",
+ "n_entries_total": 486,
+ "n_unique_problems": 437,
+ "n_cross_or_intra_duplicate_clusters": 38,
+ "clusters": {
+  "eq0000": [
+   "constant:Const-Test-1",
+   "constant:Const-Test-2"
+  ],
+  "eq0002": [
+   "constant:Constant-2",
+   "livermore:Livermore-18",
+   "livermore:Livermore-2",
+   "neat:Neat-3",
+   "nguyen:Nguyen-5"
+  ],
+  "eq0008": [
+   "constant:Constant-8",
+   "neat:Neat-4",
+   "nguyen:Nguyen-7"
+  ],
+  "eq0029": [
+   "fastsrb:I.10.7",
+   "fastsrb:II.13.23"
+  ],
+  "eq0031": [
+   "fastsrb:I.12.1",
+   "fastsrb:I.12.5"
+  ],
+  "eq0039": [
+   "fastsrb:I.15.1",
+   "fastsrb:II.13.34"
+  ],
+  "eq0084": [
+   "fastsrb:II.15.4",
+   "fastsrb:II.15.5"
+  ],
+  "eq0101": [
+   "fastsrb:I.34.8",
+   "fastsrb:I.43.16",
+   "fastsrb:II.38.3"
+  ],
+  "eq0123": [
+   "feynman:I.10.7",
+   "feynman:II.13.23"
+  ],
+  "eq0125": [
+   "feynman:I.12.1",
+   "feynman:I.12.5"
+  ],
+  "eq0133": [
+   "feynman:I.15.1",
+   "feynman:II.13.34"
+  ],
+  "eq0141": [
+   "feynman:I.25.13",
+   "feynman:I.29.4"
+  ],
+  "eq0152": [
+   "feynman:I.34.8",
+   "feynman:I.43.16"
+  ],
+  "eq0178": [
+   "feynman:II.15.4",
+   "feynman:II.15.5"
+  ],
+  "eq0188": [
+   "feynman:II.34.29a",
+   "feynman:II.34.2a"
+  ],
+  "eq0216": [
+   "grammarvae:GrammarVAE-1",
+   "livermore:Livermore-1"
+  ],
+  "eq0221": [
+   "jin:Jin-5",
+   "keijzer:Keijzer-13",
+   "livermore:Livermore-10",
+   "livermore:Livermore-17",
+   "neat:Neat-5",
+   "nguyen:Nguyen-10",
+   "vladislavleva:Vladislavleva-6"
+  ],
+  "eq0223": [
+   "keijzer:Keijzer-1",
+   "keijzer:Keijzer-2",
+   "keijzer:Keijzer-3"
+  ],
+  "eq0224": [
+   "keijzer:Keijzer-10",
+   "nguyen:Nguyen-11"
+  ],
+  "eq0226": [
+   "keijzer:Keijzer-12",
+   "nguyen:Nguyen-12"
+  ],
+  "eq0233": [
+   "keijzer:Keijzer-8",
+   "nguyen:Nguyen-8"
+  ],
+  "eq0269": [
+   "livermore2:Livermore2-Vars2-16",
+   "livermore2:Livermore2-Vars2-6"
+  ],
+  "eq0276": [
+   "livermore2:Livermore2-Vars3-12",
+   "livermore2:Livermore2-Vars3-24"
+  ],
+  "eq0397": [
+   "livermore:Livermore-11",
+   "meier:Meier-3"
+  ],
+  "eq0398": [
+   "livermore:Livermore-12",
+   "meier:Meier-4"
+  ],
+  "eq0400": [
+   "livermore:Livermore-14",
+   "poly:Poly-2"
+  ],
+  "eq0405": [
+   "livermore:Livermore-21",
+   "livermore:Livermore-23"
+  ],
+  "eq0411": [
+   "livermore:Livermore-7",
+   "livermore:Livermore-7a"
+  ],
+  "eq0412": [
+   "livermore:Livermore-8",
+   "livermore:Livermore-8a"
+  ],
+  "eq0413": [
+   "livermore:Livermore-9",
+   "nonic:Nonic"
+  ],
+  "eq0414": [
+   "neat:Neat-1",
+   "nguyen:Nguyen-2"
+  ],
+  "eq0415": [
+   "neat:Neat-2",
+   "nguyen:Nguyen-3"
+  ],
+  "eq0417": [
+   "neat:Neat-8",
+   "vladislavleva:Vladislavleva-1"
+  ],
+  "eq0418": [
+   "neat:Neat-9",
+   "pagie:Pagie-1"
+  ],
+  "eq0427": [
+   "r-rationals:R1",
+   "r-rationals:R1a"
+  ],
+  "eq0428": [
+   "r-rationals:R2",
+   "r-rationals:R2a"
+  ],
+  "eq0429": [
+   "r-rationals:R3",
+   "r-rationals:R3a"
+  ],
+  "eq0430": [
+   "nguyen:Nguyen-6",
+   "sine:Sine"
+  ]
+ }
+}

@@ -36,6 +36,23 @@ CATALOGS = {
     "nguyen": ("nguyen.yaml", 12, "problem_catalog"),
     "v23-val": ("v23-val.yaml", 1000, "generative_catalog"),                 # frozen validation set
     "lample-charton-v23": ("lample-charton-v23.yaml", None, "generative_catalog"),  # open training recipe
+    # P1 GP-toy suites (DSO benchmarks.csv, BSD-3; validated 2026-07-10, 16/16)
+    "constant": ("constant.yaml", 10, "problem_catalog"),
+    "grammarvae": ("grammarvae.yaml", 1, "problem_catalog"),
+    "jin": ("jin.yaml", 6, "problem_catalog"),
+    "keijzer": ("keijzer.yaml", 15, "problem_catalog"),
+    "korns": ("korns.yaml", 12, "problem_catalog"),
+    "koza": ("koza.yaml", 2, "problem_catalog"),
+    "livermore": ("livermore.yaml", 25, "problem_catalog"),
+    "livermore2": ("livermore2.yaml", 150, "problem_catalog"),
+    "meier": ("meier.yaml", 2, "problem_catalog"),
+    "neat": ("neat.yaml", 8, "problem_catalog"),
+    "nonic": ("nonic.yaml", 1, "problem_catalog"),
+    "pagie": ("pagie.yaml", 1, "problem_catalog"),
+    "poly": ("poly.yaml", 6, "problem_catalog"),
+    "r-rationals": ("r-rationals.yaml", 6, "problem_catalog"),
+    "sine": ("sine.yaml", 1, "problem_catalog"),
+    "vladislavleva": ("vladislavleva.yaml", 8, "problem_catalog"),
 }
 
 
