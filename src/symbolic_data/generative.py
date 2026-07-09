@@ -377,7 +377,8 @@ class LampleChartonCatalog(GenerativeCatalog):
         '''
         return tuple(skeleton) in self.skeletons
 
-    def is_held_out(self, skeleton: tuple[str] | list[str], constants: list[str], code: CodeType | None = None) -> bool:
+    def is_held_out(self, skeleton: tuple[str] | list[str], constants: list[str], code: CodeType | None = None,
+                    n_variables: int | None = None) -> bool:
         '''
         Check if a skeleton is held out from the pool.
 
@@ -389,6 +390,11 @@ class LampleChartonCatalog(GenerativeCatalog):
             The constants used in the skeleton.
         code : CodeType or None, optional
             The compiled code for the skeleton. If not provided, it will be compiled.
+        n_variables : int or None, optional
+            Number of grid variables the skeleton is defined over; defaults to this pool's
+            ``n_variables``. Pass the source pool's value for foreign/benchmark skeletons
+            (mirrors ``register_holdout_pool``); otherwise wider skeletons NameError into the
+            blanket except and are falsely reported held out.
 
         Returns
         -------
@@ -398,13 +404,22 @@ class LampleChartonCatalog(GenerativeCatalog):
         if constants is None:
             raise ValueError("Need constants for test of functional equivalence")
 
+        variable_count = n_variables if n_variables is not None else self.n_variables
         no_constant_expression = self.get_structural_prototype(skeleton)
 
         if code is None:
             executable_prefix_expression = self.simplipy_engine.operators_to_realizations(no_constant_expression)
             prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
             code_string = self.simplipy_engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
-            code = codify(code_string, self.variables + constants)
+            # Bind exactly the queried width: foreign skeletons may use more (or fewer)
+            # variables than this pool declares.
+            if variable_count <= len(self.variables):
+                variable_names = list(self.variables[:variable_count])
+            else:
+                variable_names = list(self.variables) + [
+                    f'x{i}' for i in range(len(self.variables) + 1, variable_count + 1)
+                ]
+            code = codify(code_string, variable_names + constants)
 
         compiled_fn = self.simplipy_engine.code_to_lambda(code)
 
@@ -413,6 +428,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                 no_constant_expression,
                 compiled_fn,
                 num_constants=len(constants),
+                n_variables=variable_count,
             )
         except (OverflowError, NameError):
             warnings.warn(

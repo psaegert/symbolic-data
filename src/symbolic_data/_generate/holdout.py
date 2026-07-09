@@ -7,6 +7,7 @@ import warnings
 import numpy as np
 
 from symbolic_data.compilation import safe_f
+from simplipy import normalize_skeleton
 
 
 # Fixed seed for the default holdout grid. Previously each HoldoutManager drew a fresh
@@ -80,7 +81,10 @@ class HoldoutManager:
 
     @staticmethod
     def _normalize_tokens(tokens: Sequence[str]) -> list[str]:
-        return [str(token) for token in tokens]
+        # Canonicalize before hashing: variable renames (v1 -> x1) and numeric literals
+        # (3.5 -> <constant>) must not defeat the exact-match layer; literal skeletons
+        # otherwise leak through BOTH holdout layers (mirror of the flash-ansr fix).
+        return list(normalize_skeleton([str(token) for token in tokens]))
 
     def _evaluate_to_key(
         self,

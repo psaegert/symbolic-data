@@ -93,3 +93,13 @@ def test_default_grid_is_deterministic():
     # (nor the shared lru_cache'd master).
     a.holdout_X[0, 0] += 1.0
     assert not np.array_equal(a.holdout_X, b.holdout_X)
+
+
+def test_hash_layer_matches_renamed_and_literal_skeletons():
+    """Mirror of the flash-ansr bug-2 fix: renames and literals must not defeat the hash layer."""
+    from symbolic_data._generate.holdout import HoldoutManager
+
+    manager = HoldoutManager(n_variables=2, allow_nan=False)
+    manager.skeleton_hashes.add(tuple(manager._normalize_tokens(["+", "x1", "3.5"])))
+    assert tuple(manager._normalize_tokens(["+", "v1", "<constant>"])) in manager.skeleton_hashes
+    assert tuple(manager._normalize_tokens(["+", "x1", "2.7"])) in manager.skeleton_hashes
