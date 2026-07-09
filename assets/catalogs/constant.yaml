@@ -15,6 +15,10 @@ metadata:
     sampling: vars use the `fastsrb` distribution (sample_range/sample_type); DSO
       train_spec ranges; evenly-spaced (E) upstream grids are sampled uniformly here
       (noted per entry as meta.dso_spec).
+    validity: 'accepted points follow the declared per-variable distribution CONDITIONED
+      on the expression''s valid domain; meta.finite_fraction is the MC-estimated
+      per-point valid fraction (n=20000); entries below 0.05 carry low_validity: true
+      and need per-entry review.'
 expressions:
   Constant-1:
     raw: 3.39*pow(x1,3)+2.12*pow(x1,2)+1.78*x1
@@ -45,6 +49,7 @@ expressions:
             - 20
         test: null
         function_set: CKoza
+      finite_fraction: 1.0
   Constant-2:
     raw: sin(pow(x1,2))*cos(x1)-0.75
     prepared: sin(((v1)**(2)))*cos(v1)-0.75
@@ -74,6 +79,7 @@ expressions:
             - 20
         test: null
         function_set: CKoza
+      finite_fraction: 1.0
   Constant-3:
     raw: sin(1.5*x1)*cos(0.5*x2)
     prepared: sin(1.5*v1)*cos(0.5*v2)
@@ -111,6 +117,7 @@ expressions:
             - 20
         test: null
         function_set: CKoza
+      finite_fraction: 1.0
   Constant-4:
     raw: 2.7*pow(x1,x2)
     prepared: 2.7*((v1)**(v2))
@@ -148,6 +155,7 @@ expressions:
             - 20
         test: null
         function_set: CKoza
+      finite_fraction: 1.0
   Constant-5:
     raw: sqrt(1.23*x1)
     prepared: sqrt(1.23*v1)
@@ -177,6 +185,7 @@ expressions:
             - 20
         test: null
         function_set: CKoza
+      finite_fraction: 1.0
   Constant-6:
     raw: pow(x1,0.426)
     prepared: ((v1)**(0.426))
@@ -206,6 +215,7 @@ expressions:
             - 20
         test: null
         function_set: CKoza
+      finite_fraction: 1.0
   Constant-7:
     raw: 2*sin(1.3*x1)*cos(x2)
     prepared: 2*sin(1.3*v1)*cos(v2)
@@ -243,6 +253,7 @@ expressions:
             - 20
         test: null
         function_set: CKoza
+      finite_fraction: 1.0
   Constant-8:
     raw: log(x1+1.4)+log(pow(x1,2)+1.3)
     prepared: log(v1+1.4)+log(((v1)**(2))+1.3)
@@ -272,6 +283,7 @@ expressions:
             - 20
         test: null
         function_set: CKoza
+      finite_fraction: 1.0
   Const-Test-1:
     raw: 3.14159265358979323846*x1*x1
     prepared: 3.14159265358979323846*v1*v1
@@ -306,6 +318,7 @@ expressions:
             - 1
             - 20
         function_set: KozaUserConst
+      finite_fraction: 1.0
   Const-Test-2:
     raw: 3.14159265358979323846*x1*x1
     prepared: 3.14159265358979323846*v1*v1
@@ -340,3 +353,4 @@ expressions:
             - 1
             - 20
         function_set: CKoza
+      finite_fraction: 1.0

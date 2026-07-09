@@ -10,11 +10,9 @@ UPDATE 2026-07-10: livermore (25/25) + nonic (1/1) CLEAN under simplipy 0.4.2 (t
 fix: non-smooth exponents like x**7 now stay binary pow instead of emitting unrealizable pow7
 tokens). 15/16 catalogs validated.
 
-OPEN (1 catalog, NOT publishable yet):
-- livermore2 (150): 95/150 max_trials_exhausted — whole-draw all-finite rejection meets
-  partial domains (measured per-point finite fractions 0.12-0.91 over the upstream DSO
-  U-ranges). Pending the sampling-policy decision (per-point rejection = distributionally
-  identical conditional law; disclosure via per-entry finite_fraction; low-validity floor).
-
-Nguyen rows (13, incl. 12a) logged only: published nguyen@1 stays untouched (forward-only).
-NONE of these are published to HF yet; publishing = the release step after all 16 validate.
+RESOLVED 2026-07-10: livermore2 150/150 CLEAN under per-point rejection (symbolic-data
+0.12.0) — distributionally identical conditional law, exponential cost removed. finite_fraction
+audit: 97/150 livermore2 entries partial-domain (min f=0.092), ZERO below the 0.05 floor; all
+15 other catalogs fully valid domains (f=1.0 everywhere). fastsrb (report-only, published v1
+untouched): 3/120 partial-domain entries (min f=0.13) — the source of the known ~50/1200
+placeholder rows. **ALL 16 CATALOGS VALIDATED — ready for the batch publish.**

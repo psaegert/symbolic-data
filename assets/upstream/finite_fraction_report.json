@@ -1,0 +1,892 @@
+[
+ {
+  "catalog": "constant",
+  "n": 10,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Constant-1": {
+    "finite_fraction": 1.0
+   },
+   "Constant-2": {
+    "finite_fraction": 1.0
+   },
+   "Constant-3": {
+    "finite_fraction": 1.0
+   },
+   "Constant-4": {
+    "finite_fraction": 1.0
+   },
+   "Constant-5": {
+    "finite_fraction": 1.0
+   },
+   "Constant-6": {
+    "finite_fraction": 1.0
+   },
+   "Constant-7": {
+    "finite_fraction": 1.0
+   },
+   "Constant-8": {
+    "finite_fraction": 1.0
+   },
+   "Const-Test-1": {
+    "finite_fraction": 1.0
+   },
+   "Const-Test-2": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "grammarvae",
+  "n": 1,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "GrammarVAE-1": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "jin",
+  "n": 6,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Jin-1": {
+    "finite_fraction": 1.0
+   },
+   "Jin-2": {
+    "finite_fraction": 1.0
+   },
+   "Jin-3": {
+    "finite_fraction": 1.0
+   },
+   "Jin-4": {
+    "finite_fraction": 1.0
+   },
+   "Jin-5": {
+    "finite_fraction": 1.0
+   },
+   "Jin-6": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "keijzer",
+  "n": 15,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Keijzer-1": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-2": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-3": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-4": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-5": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-6": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-7": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-8": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-9": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-10": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-11": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-12": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-13": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-14": {
+    "finite_fraction": 1.0
+   },
+   "Keijzer-15": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "korns",
+  "n": 12,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Korns-1": {
+    "finite_fraction": 1.0
+   },
+   "Korns-2": {
+    "finite_fraction": 1.0
+   },
+   "Korns-3": {
+    "finite_fraction": 1.0
+   },
+   "Korns-4": {
+    "finite_fraction": 1.0
+   },
+   "Korns-5": {
+    "finite_fraction": 1.0
+   },
+   "Korns-6": {
+    "finite_fraction": 1.0
+   },
+   "Korns-7": {
+    "finite_fraction": 1.0
+   },
+   "Korns-8": {
+    "finite_fraction": 1.0
+   },
+   "Korns-9": {
+    "finite_fraction": 1.0
+   },
+   "Korns-10": {
+    "finite_fraction": 1.0
+   },
+   "Korns-11": {
+    "finite_fraction": 1.0
+   },
+   "Korns-12": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "koza",
+  "n": 2,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Koza-2": {
+    "finite_fraction": 1.0
+   },
+   "Koza-3": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "livermore",
+  "n": 25,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Livermore-1": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-2": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-3": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-4": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-5": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-6": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-7": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-7a": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-8": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-8a": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-9": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-10": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-11": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-12": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-13": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-14": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-15": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-16": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-17": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-18": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-19": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-20": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-21": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-22": {
+    "finite_fraction": 1.0
+   },
+   "Livermore-23": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "livermore2",
+  "n": 150,
+  "flagged": [],
+  "min_f": 0.0921,
+  "rows": {
+   "Livermore2-Vars2-1": {
+    "finite_fraction": 0.5039
+   },
+   "Livermore2-Vars2-2": {
+    "finite_fraction": 0.9053
+   },
+   "Livermore2-Vars2-3": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars2-4": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars2-5": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars2-6": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars2-7": {
+    "finite_fraction": 0.1239
+   },
+   "Livermore2-Vars2-8": {
+    "finite_fraction": 0.2535
+   },
+   "Livermore2-Vars2-9": {
+    "finite_fraction": 0.623
+   },
+   "Livermore2-Vars2-10": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars2-11": {
+    "finite_fraction": 0.496
+   },
+   "Livermore2-Vars2-12": {
+    "finite_fraction": 0.1754
+   },
+   "Livermore2-Vars2-13": {
+    "finite_fraction": 0.5037
+   },
+   "Livermore2-Vars2-14": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars2-15": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars2-16": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars2-17": {
+    "finite_fraction": 0.1731
+   },
+   "Livermore2-Vars2-18": {
+    "finite_fraction": 0.501
+   },
+   "Livermore2-Vars2-19": {
+    "finite_fraction": 0.2651
+   },
+   "Livermore2-Vars2-20": {
+    "finite_fraction": 0.4926
+   },
+   "Livermore2-Vars2-21": {
+    "finite_fraction": 0.498
+   },
+   "Livermore2-Vars2-22": {
+    "finite_fraction": 0.1243
+   },
+   "Livermore2-Vars2-23": {
+    "finite_fraction": 0.4198
+   },
+   "Livermore2-Vars2-24": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars2-25": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-1": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-2": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-3": {
+    "finite_fraction": 0.2495
+   },
+   "Livermore2-Vars3-4": {
+    "finite_fraction": 0.4768
+   },
+   "Livermore2-Vars3-5": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-6": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-7": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-8": {
+    "finite_fraction": 0.4453
+   },
+   "Livermore2-Vars3-9": {
+    "finite_fraction": 0.2567
+   },
+   "Livermore2-Vars3-10": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-11": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-12": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-13": {
+    "finite_fraction": 0.1888
+   },
+   "Livermore2-Vars3-14": {
+    "finite_fraction": 0.4962
+   },
+   "Livermore2-Vars3-15": {
+    "finite_fraction": 0.4988
+   },
+   "Livermore2-Vars3-16": {
+    "finite_fraction": 0.2887
+   },
+   "Livermore2-Vars3-17": {
+    "finite_fraction": 0.4933
+   },
+   "Livermore2-Vars3-18": {
+    "finite_fraction": 0.4986
+   },
+   "Livermore2-Vars3-19": {
+    "finite_fraction": 0.7534
+   },
+   "Livermore2-Vars3-20": {
+    "finite_fraction": 0.2543
+   },
+   "Livermore2-Vars3-21": {
+    "finite_fraction": 0.45
+   },
+   "Livermore2-Vars3-22": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-23": {
+    "finite_fraction": 0.4975
+   },
+   "Livermore2-Vars3-24": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars3-25": {
+    "finite_fraction": 0.499
+   },
+   "Livermore2-Vars4-1": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-2": {
+    "finite_fraction": 0.5033
+   },
+   "Livermore2-Vars4-3": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-4": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-5": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-6": {
+    "finite_fraction": 0.4954
+   },
+   "Livermore2-Vars4-7": {
+    "finite_fraction": 0.4955
+   },
+   "Livermore2-Vars4-8": {
+    "finite_fraction": 0.8275
+   },
+   "Livermore2-Vars4-9": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-10": {
+    "finite_fraction": 0.2485
+   },
+   "Livermore2-Vars4-11": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-12": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-13": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-14": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-15": {
+    "finite_fraction": 0.9425
+   },
+   "Livermore2-Vars4-16": {
+    "finite_fraction": 0.1058
+   },
+   "Livermore2-Vars4-17": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-18": {
+    "finite_fraction": 0.25
+   },
+   "Livermore2-Vars4-19": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-20": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-21": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-22": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars4-23": {
+    "finite_fraction": 0.2531
+   },
+   "Livermore2-Vars4-24": {
+    "finite_fraction": 0.1368
+   },
+   "Livermore2-Vars4-25": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars5-1": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars5-2": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars5-3": {
+    "finite_fraction": 0.5009
+   },
+   "Livermore2-Vars5-4": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars5-5": {
+    "finite_fraction": 0.257
+   },
+   "Livermore2-Vars5-6": {
+    "finite_fraction": 0.5023
+   },
+   "Livermore2-Vars5-7": {
+    "finite_fraction": 0.5012
+   },
+   "Livermore2-Vars5-8": {
+    "finite_fraction": 0.4503
+   },
+   "Livermore2-Vars5-9": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars5-10": {
+    "finite_fraction": 0.4968
+   },
+   "Livermore2-Vars5-11": {
+    "finite_fraction": 0.1035
+   },
+   "Livermore2-Vars5-12": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars5-13": {
+    "finite_fraction": 0.4997
+   },
+   "Livermore2-Vars5-14": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars5-15": {
+    "finite_fraction": 0.1258
+   },
+   "Livermore2-Vars5-16": {
+    "finite_fraction": 0.5003
+   },
+   "Livermore2-Vars5-17": {
+    "finite_fraction": 0.4945
+   },
+   "Livermore2-Vars5-18": {
+    "finite_fraction": 0.5046
+   },
+   "Livermore2-Vars5-19": {
+    "finite_fraction": 0.5011
+   },
+   "Livermore2-Vars5-20": {
+    "finite_fraction": 0.4971
+   },
+   "Livermore2-Vars5-21": {
+    "finite_fraction": 0.249
+   },
+   "Livermore2-Vars5-22": {
+    "finite_fraction": 0.2498
+   },
+   "Livermore2-Vars5-23": {
+    "finite_fraction": 0.498
+   },
+   "Livermore2-Vars5-24": {
+    "finite_fraction": 0.2434
+   },
+   "Livermore2-Vars5-25": {
+    "finite_fraction": 0.2534
+   },
+   "Livermore2-Vars6-1": {
+    "finite_fraction": 0.8766
+   },
+   "Livermore2-Vars6-2": {
+    "finite_fraction": 0.5098
+   },
+   "Livermore2-Vars6-3": {
+    "finite_fraction": 0.5017
+   },
+   "Livermore2-Vars6-4": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars6-5": {
+    "finite_fraction": 0.5053
+   },
+   "Livermore2-Vars6-6": {
+    "finite_fraction": 0.2382
+   },
+   "Livermore2-Vars6-7": {
+    "finite_fraction": 0.1006
+   },
+   "Livermore2-Vars6-8": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars6-9": {
+    "finite_fraction": 0.3527
+   },
+   "Livermore2-Vars6-10": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars6-11": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars6-12": {
+    "finite_fraction": 0.2517
+   },
+   "Livermore2-Vars6-13": {
+    "finite_fraction": 0.1279
+   },
+   "Livermore2-Vars6-14": {
+    "finite_fraction": 0.0993
+   },
+   "Livermore2-Vars6-15": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars6-16": {
+    "finite_fraction": 0.2442
+   },
+   "Livermore2-Vars6-17": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars6-18": {
+    "finite_fraction": 0.252
+   },
+   "Livermore2-Vars6-19": {
+    "finite_fraction": 0.2738
+   },
+   "Livermore2-Vars6-20": {
+    "finite_fraction": 0.494
+   },
+   "Livermore2-Vars6-21": {
+    "finite_fraction": 0.5011
+   },
+   "Livermore2-Vars6-22": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars6-23": {
+    "finite_fraction": 0.3997
+   },
+   "Livermore2-Vars6-24": {
+    "finite_fraction": 0.1268
+   },
+   "Livermore2-Vars6-25": {
+    "finite_fraction": 0.499
+   },
+   "Livermore2-Vars7-1": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars7-2": {
+    "finite_fraction": 0.5033
+   },
+   "Livermore2-Vars7-3": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars7-4": {
+    "finite_fraction": 0.2519
+   },
+   "Livermore2-Vars7-5": {
+    "finite_fraction": 0.4953
+   },
+   "Livermore2-Vars7-6": {
+    "finite_fraction": 0.6367
+   },
+   "Livermore2-Vars7-7": {
+    "finite_fraction": 0.2526
+   },
+   "Livermore2-Vars7-8": {
+    "finite_fraction": 0.4975
+   },
+   "Livermore2-Vars7-9": {
+    "finite_fraction": 0.4968
+   },
+   "Livermore2-Vars7-10": {
+    "finite_fraction": 0.0998
+   },
+   "Livermore2-Vars7-11": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars7-12": {
+    "finite_fraction": 0.9756
+   },
+   "Livermore2-Vars7-13": {
+    "finite_fraction": 0.2522
+   },
+   "Livermore2-Vars7-14": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars7-15": {
+    "finite_fraction": 0.2531
+   },
+   "Livermore2-Vars7-16": {
+    "finite_fraction": 1.0
+   },
+   "Livermore2-Vars7-17": {
+    "finite_fraction": 0.0921
+   },
+   "Livermore2-Vars7-18": {
+    "finite_fraction": 0.4979
+   },
+   "Livermore2-Vars7-19": {
+    "finite_fraction": 0.4175
+   },
+   "Livermore2-Vars7-20": {
+    "finite_fraction": 0.2471
+   },
+   "Livermore2-Vars7-21": {
+    "finite_fraction": 0.4784
+   },
+   "Livermore2-Vars7-22": {
+    "finite_fraction": 0.458
+   },
+   "Livermore2-Vars7-23": {
+    "finite_fraction": 0.4996
+   },
+   "Livermore2-Vars7-24": {
+    "finite_fraction": 0.2492
+   },
+   "Livermore2-Vars7-25": {
+    "finite_fraction": 0.3085
+   }
+  }
+ },
+ {
+  "catalog": "meier",
+  "n": 2,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Meier-3": {
+    "finite_fraction": 1.0
+   },
+   "Meier-4": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "neat",
+  "n": 8,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Neat-1": {
+    "finite_fraction": 1.0
+   },
+   "Neat-2": {
+    "finite_fraction": 1.0
+   },
+   "Neat-3": {
+    "finite_fraction": 1.0
+   },
+   "Neat-4": {
+    "finite_fraction": 1.0
+   },
+   "Neat-5": {
+    "finite_fraction": 1.0
+   },
+   "Neat-7": {
+    "finite_fraction": 1.0
+   },
+   "Neat-8": {
+    "finite_fraction": 1.0
+   },
+   "Neat-9": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "nonic",
+  "n": 1,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Nonic": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "pagie",
+  "n": 1,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Pagie-1": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "poly",
+  "n": 6,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Poly-10": {
+    "finite_fraction": 1.0
+   },
+   "Poly-1": {
+    "finite_fraction": 1.0
+   },
+   "Poly-2": {
+    "finite_fraction": 1.0
+   },
+   "Poly-3": {
+    "finite_fraction": 1.0
+   },
+   "Poly-4": {
+    "finite_fraction": 1.0
+   },
+   "Poly-5": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "r-rationals",
+  "n": 6,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "R1": {
+    "finite_fraction": 1.0
+   },
+   "R2": {
+    "finite_fraction": 1.0
+   },
+   "R3": {
+    "finite_fraction": 1.0
+   },
+   "R1a": {
+    "finite_fraction": 1.0
+   },
+   "R2a": {
+    "finite_fraction": 1.0
+   },
+   "R3a": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "sine",
+  "n": 1,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Sine": {
+    "finite_fraction": 1.0
+   }
+  }
+ },
+ {
+  "catalog": "vladislavleva",
+  "n": 8,
+  "flagged": [],
+  "min_f": 1.0,
+  "rows": {
+   "Vladislavleva-1": {
+    "finite_fraction": 1.0
+   },
+   "Vladislavleva-2": {
+    "finite_fraction": 1.0
+   },
+   "Vladislavleva-3": {
+    "finite_fraction": 1.0
+   },
+   "Vladislavleva-4": {
+    "finite_fraction": 1.0
+   },
+   "Vladislavleva-5": {
+    "finite_fraction": 1.0
+   },
+   "Vladislavleva-6": {
+    "finite_fraction": 1.0
+   },
+   "Vladislavleva-7": {
+    "finite_fraction": 1.0
+   },
+   "Vladislavleva-8": {
+    "finite_fraction": 1.0
+   }
+  }
+ }
+]

@@ -15,6 +15,10 @@ metadata:
     sampling: vars use the `fastsrb` distribution (sample_range/sample_type); DSO
       train_spec ranges; evenly-spaced (E) upstream grids are sampled uniformly here
       (noted per entry as meta.dso_spec).
+    validity: 'accepted points follow the declared per-variable distribution CONDITIONED
+      on the expression''s valid domain; meta.finite_fraction is the MC-estimated
+      per-point valid fraction (n=20000); entries below 0.05 carry low_validity: true
+      and need per-entry review.'
 expressions:
   Livermore-1:
     raw: 1./3+x1+sin(pow(x1,2))
@@ -45,6 +49,7 @@ expressions:
             - 1000
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-2:
     raw: sin(pow(x1,2))*cos(x1)-2
     prepared: sin(((v1)**(2)))*cos(v1)-2
@@ -74,6 +79,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-3:
     raw: sin(pow(x1,3))*cos(pow(x1,2))-1
     prepared: sin(((v1)**(3)))*cos(((v1)**(2)))-1
@@ -103,6 +109,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-4:
     raw: log(x1+1)+log(pow(x1,2)+1)+log(x1)
     prepared: log(v1+1)+log(((v1)**(2))+1)+log(v1)
@@ -132,6 +139,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-5:
     raw: pow(x1,4)-pow(x1,3)+pow(x2,2)-x2
     prepared: ((v1)**(4))-((v1)**(3))+((v2)**(2))-v2
@@ -169,6 +177,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-6:
     raw: 4*pow(x1,4)+3*pow(x1,3)+2*pow(x1,2)+x1
     prepared: 4*((v1)**(4))+3*((v1)**(3))+2*((v1)**(2))+v1
@@ -198,6 +207,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-7:
     raw: div(exp(x1)-exp(-1*x1),2)
     prepared: ((exp(v1)-exp(-1*v1))/(2))
@@ -227,6 +237,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-7a:
     raw: div(exp(x1)-exp(-1*x1),2)
     prepared: ((exp(v1)-exp(-1*v1))/(2))
@@ -256,6 +267,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-8:
     raw: div(exp(x1)+exp(-1*x1),2)
     prepared: ((exp(v1)+exp(-1*v1))/(2))
@@ -285,6 +297,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-8a:
     raw: div(exp(x1)+exp(-1*x1),2)
     prepared: ((exp(v1)+exp(-1*v1))/(2))
@@ -314,6 +327,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-9:
     raw: pow(x1,9)+pow(x1,8)+pow(x1,7)+pow(x1,6)+pow(x1,5)+pow(x1,4)+pow(x1,3)+pow(x1,2)+x1
     prepared: ((v1)**(9))+((v1)**(8))+((v1)**(7))+((v1)**(6))+((v1)**(5))+((v1)**(4))+((v1)**(3))+((v1)**(2))+v1
@@ -343,6 +357,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-10:
     raw: 6*sin(x1)*cos(x2)
     prepared: 6*sin(v1)*cos(v2)
@@ -380,6 +395,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-11:
     raw: div(pow(x1,2)*pow(x2,2),(x1+x2))
     prepared: ((((v1)**(2))*((v2)**(2)))/((v1+v2)))
@@ -417,6 +433,7 @@ expressions:
             - 50
         test: null
         function_set: None
+      finite_fraction: 1.0
   Livermore-12:
     raw: div(pow(x1,5),pow(x2,3))
     prepared: ((((v1)**(5)))/(((v2)**(3))))
@@ -454,6 +471,7 @@ expressions:
             - 50
         test: null
         function_set: None
+      finite_fraction: 1.0
   Livermore-13:
     raw: pow(x1,1/3)
     prepared: ((v1)**(1/3))
@@ -483,6 +501,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-14:
     raw: pow(x1,3)+pow(x1,2)+x1+sin(x1)+sin(pow(x2,2))
     prepared: ((v1)**(3))+((v1)**(2))+v1+sin(v1)+sin(((v2)**(2)))
@@ -520,6 +539,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-15:
     raw: pow(x1,1/5)
     prepared: ((v1)**(1/5))
@@ -549,6 +569,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-16:
     raw: pow(x1,2/3)
     prepared: ((v1)**(2/3))
@@ -578,6 +599,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-17:
     raw: 4*sin(x1)*cos(x2)
     prepared: 4*sin(v1)*cos(v2)
@@ -615,6 +637,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-18:
     raw: sin(pow(x1,2))*cos(x1)-5
     prepared: sin(((v1)**(2)))*cos(v1)-5
@@ -644,6 +667,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-19:
     raw: log(pow(x1,2)+x1)+log(pow(x1,3)+x1)
     prepared: log(((v1)**(2))+v1)+log(((v1)**(3))+v1)
@@ -673,6 +697,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-20:
     raw: pow(x1,5)+pow(x1,4)+pow(x1,2)+x1
     prepared: ((v1)**(5))+((v1)**(4))+((v1)**(2))+v1
@@ -702,6 +727,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-21:
     raw: exp(-1*pow(x1,2))
     prepared: exp(-1*((v1)**(2)))
@@ -731,6 +757,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-22:
     raw: pow(x1,8)+pow(x1,7)+pow(x1,6)+pow(x1,5)+pow(x1,4)+pow(x1,3)+pow(x1,2)+x1
     prepared: ((v1)**(8))+((v1)**(7))+((v1)**(6))+((v1)**(5))+((v1)**(4))+((v1)**(3))+((v1)**(2))+v1
@@ -760,6 +787,7 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0
   Livermore-23:
     raw: exp(-0.5*pow(x1,2))
     prepared: exp(-0.5*((v1)**(2)))
@@ -789,3 +817,4 @@ expressions:
             - 20
         test: null
         function_set: Koza
+      finite_fraction: 1.0

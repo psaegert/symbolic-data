@@ -1,0 +1,370 @@
+[
+ {
+  "catalog": "fastsrb",
+  "n": 120,
+  "flagged": [],
+  "min_f": 0.1298,
+  "rows": {
+   "II.38.3": {
+    "finite_fraction": 1.0
+   },
+   "II.38.14": {
+    "finite_fraction": 1.0
+   },
+   "III.7.38": {
+    "finite_fraction": 1.0
+   },
+   "III.12.43": {
+    "finite_fraction": 1.0
+   },
+   "III.15.27": {
+    "finite_fraction": 1.0
+   },
+   "I.12.1": {
+    "finite_fraction": 1.0
+   },
+   "I.12.4": {
+    "finite_fraction": 1.0
+   },
+   "I.12.5": {
+    "finite_fraction": 1.0
+   },
+   "I.14.3": {
+    "finite_fraction": 1.0
+   },
+   "I.14.4": {
+    "finite_fraction": 1.0
+   },
+   "I.18.12": {
+    "finite_fraction": 1.0
+   },
+   "I.18.14": {
+    "finite_fraction": 1.0
+   },
+   "I.25.13": {
+    "finite_fraction": 1.0
+   },
+   "I.26.2": {
+    "finite_fraction": 1.0
+   },
+   "I.27.6": {
+    "finite_fraction": 1.0
+   },
+   "I.30.5": {
+    "finite_fraction": 1.0
+   },
+   "I.43.16": {
+    "finite_fraction": 1.0
+   },
+   "I.47.23": {
+    "finite_fraction": 1.0
+   },
+   "II.2.42": {
+    "finite_fraction": 1.0
+   },
+   "II.3.24": {
+    "finite_fraction": 1.0
+   },
+   "II.4.23": {
+    "finite_fraction": 1.0
+   },
+   "II.8.31": {
+    "finite_fraction": 1.0
+   },
+   "II.10.9": {
+    "finite_fraction": 1.0
+   },
+   "II.13.17": {
+    "finite_fraction": 1.0
+   },
+   "II.15.4": {
+    "finite_fraction": 1.0
+   },
+   "II.15.5": {
+    "finite_fraction": 1.0
+   },
+   "II.27.16": {
+    "finite_fraction": 1.0
+   },
+   "II.27.18": {
+    "finite_fraction": 1.0
+   },
+   "II.34.11": {
+    "finite_fraction": 1.0
+   },
+   "II.34.29b": {
+    "finite_fraction": 1.0
+   },
+   "I.10.7": {
+    "finite_fraction": 1.0
+   },
+   "I.11.19": {
+    "finite_fraction": 1.0
+   },
+   "I.12.2": {
+    "finite_fraction": 1.0
+   },
+   "I.12.11": {
+    "finite_fraction": 1.0
+   },
+   "I.13.4": {
+    "finite_fraction": 1.0
+   },
+   "I.13.12": {
+    "finite_fraction": 1.0
+   },
+   "I.15.1": {
+    "finite_fraction": 1.0
+   },
+   "I.16.6": {
+    "finite_fraction": 1.0
+   },
+   "I.18.4": {
+    "finite_fraction": 1.0
+   },
+   "I.24.6": {
+    "finite_fraction": 1.0
+   },
+   "I.29.4": {
+    "finite_fraction": 1.0
+   },
+   "I.32.5": {
+    "finite_fraction": 1.0
+   },
+   "I.34.1": {
+    "finite_fraction": 1.0
+   },
+   "I.34.8": {
+    "finite_fraction": 1.0
+   },
+   "I.34.27": {
+    "finite_fraction": 1.0
+   },
+   "I.38.12": {
+    "finite_fraction": 1.0
+   },
+   "I.39.1": {
+    "finite_fraction": 1.0
+   },
+   "I.39.11": {
+    "finite_fraction": 1.0
+   },
+   "I.43.31": {
+    "finite_fraction": 1.0
+   },
+   "I.43.43": {
+    "finite_fraction": 1.0
+   },
+   "I.48.2": {
+    "finite_fraction": 1.0
+   },
+   "II.6.11": {
+    "finite_fraction": 1.0
+   },
+   "II.8.7": {
+    "finite_fraction": 1.0
+   },
+   "II.11.3": {
+    "finite_fraction": 1.0
+   },
+   "II.21.32": {
+    "finite_fraction": 1.0
+   },
+   "II.34.2a": {
+    "finite_fraction": 1.0
+   },
+   "II.34.2": {
+    "finite_fraction": 1.0
+   },
+   "II.34.29a": {
+    "finite_fraction": 1.0
+   },
+   "II.37.1": {
+    "finite_fraction": 1.0
+   },
+   "III.4.32": {
+    "finite_fraction": 1.0
+   },
+   "III.8.54": {
+    "finite_fraction": 1.0
+   },
+   "III.13.18": {
+    "finite_fraction": 1.0
+   },
+   "III.14.14": {
+    "finite_fraction": 1.0
+   },
+   "III.15.12": {
+    "finite_fraction": 1.0
+   },
+   "III.15.14": {
+    "finite_fraction": 1.0
+   },
+   "III.17.37": {
+    "finite_fraction": 1.0
+   },
+   "III.19.51": {
+    "finite_fraction": 1.0
+   },
+   "B8": {
+    "finite_fraction": 1.0
+   },
+   "B18": {
+    "finite_fraction": 1.0
+   },
+   "I.8.14": {
+    "finite_fraction": 1.0
+   },
+   "I.6.2a": {
+    "finite_fraction": 1.0
+   },
+   "I.6.2": {
+    "finite_fraction": 1.0
+   },
+   "I.6.2b": {
+    "finite_fraction": 1.0
+   },
+   "I.9.18": {
+    "finite_fraction": 1.0
+   },
+   "I.15.3t": {
+    "finite_fraction": 1.0
+   },
+   "I.29.16": {
+    "finite_fraction": 1.0
+   },
+   "I.15.3x": {
+    "finite_fraction": 1.0
+   },
+   "I.30.3": {
+    "finite_fraction": 1.0
+   },
+   "I.32.17": {
+    "finite_fraction": 1.0
+   },
+   "I.37.4": {
+    "finite_fraction": 1.0
+   },
+   "I.39.22": {
+    "finite_fraction": 1.0
+   },
+   "I.40.1": {
+    "finite_fraction": 1.0
+   },
+   "I.41.16": {
+    "finite_fraction": 1.0
+   },
+   "I.44.4": {
+    "finite_fraction": 1.0
+   },
+   "I.50.26": {
+    "finite_fraction": 1.0
+   },
+   "I.34.14": {
+    "finite_fraction": 1.0
+   },
+   "II.6.15b": {
+    "finite_fraction": 1.0
+   },
+   "II.6.15a": {
+    "finite_fraction": 1.0
+   },
+   "II.11.17": {
+    "finite_fraction": 1.0
+   },
+   "II.11.20": {
+    "finite_fraction": 1.0
+   },
+   "II.11.27": {
+    "finite_fraction": 1.0
+   },
+   "II.11.28": {
+    "finite_fraction": 1.0
+   },
+   "II.13.23": {
+    "finite_fraction": 1.0
+   },
+   "II.13.34": {
+    "finite_fraction": 1.0
+   },
+   "II.24.17": {
+    "finite_fraction": 0.1298
+   },
+   "II.35.18": {
+    "finite_fraction": 1.0
+   },
+   "II.35.21": {
+    "finite_fraction": 1.0
+   },
+   "II.36.38": {
+    "finite_fraction": 1.0
+   },
+   "III.4.33": {
+    "finite_fraction": 1.0
+   },
+   "III.9.52": {
+    "finite_fraction": 1.0
+   },
+   "III.10.19": {
+    "finite_fraction": 1.0
+   },
+   "III.21.20": {
+    "finite_fraction": 1.0
+   },
+   "B1": {
+    "finite_fraction": 1.0
+   },
+   "B2": {
+    "finite_fraction": 1.0
+   },
+   "B3": {
+    "finite_fraction": 1.0
+   },
+   "B4": {
+    "finite_fraction": 0.5022
+   },
+   "B5": {
+    "finite_fraction": 1.0
+   },
+   "B6": {
+    "finite_fraction": 1.0
+   },
+   "B7": {
+    "finite_fraction": 0.5929
+   },
+   "B9": {
+    "finite_fraction": 1.0
+   },
+   "B10": {
+    "finite_fraction": 1.0
+   },
+   "B11": {
+    "finite_fraction": 1.0
+   },
+   "B12": {
+    "finite_fraction": 1.0
+   },
+   "B13": {
+    "finite_fraction": 1.0
+   },
+   "B14": {
+    "finite_fraction": 1.0
+   },
+   "B15": {
+    "finite_fraction": 1.0
+   },
+   "B16": {
+    "finite_fraction": 1.0
+   },
+   "B17": {
+    "finite_fraction": 1.0
+   },
+   "B19": {
+    "finite_fraction": 1.0
+   },
+   "B20": {
+    "finite_fraction": 1.0
+   }
+  }
+ }
+]

@@ -39,6 +39,10 @@ CATALOGS: tuple[str, ...] = ("fastsrb", "feynman", "nguyen")
 _ENTRY_FIELDS = {"raw", "prepared", "n_variables", "vars"}
 
 # The per-Problem array fields a FROZEN catalog stores in its .npz sidecar.
+# Per-point rejection budget: total draws allowed = cap * n_points before an entry is declared
+# transiently unsamplable (mean valid-domain fraction below ~1/cap). 200 admits f >= ~0.005.
+_PER_POINT_REJECTION_CAP = 200
+
 _PROBLEM_ARRAY_FIELDS = ("x_support", "y_support", "y_support_noisy", "x_validation", "y_validation", "y_validation_noisy")
 # optional per-problem arrays (absent for synthetic problems): reference-law predictions
 _PROBLEM_OPTIONAL_ARRAY_FIELDS = ("y_reference_support", "y_reference_validation")
@@ -357,8 +361,48 @@ class ProblemCatalog(Catalog):
             y_all = broadcast_target(evaluate(compiled, value_map), n_points, entry.id).reshape(-1, 1)
         except Exception as exc:
             raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
-        if not (np.all(np.isfinite(x_all)) and np.all(np.isfinite(y_all))):
-            raise NoValidSampleFoundError(f"non-finite support/target for {entry.id!r}")
+
+        # Per-point rejection: keep finite rows and top up until n_points are collected.
+        # Distributionally IDENTICAL to the previous whole-draw all-finite rejection -- points
+        # are i.i.d. and validity is a per-point property, so conditioning the joint on
+        # "all points valid" factorizes into per-point conditioning; the accepted sample is
+        # the declared distribution CONDITIONED on the expression's valid domain either way.
+        # This only removes the exponential cost (f^-n vs 1/f draws) that made partial-domain
+        # entries (e.g. sqrt(x1+x2) over a box straddling the domain) exhaust max_trials.
+        # An attempts cap keeps truly degenerate entries (f ~ 0) on the honest placeholder path.
+        finite_mask = np.isfinite(x_all).all(axis=1) & np.isfinite(y_all).all(axis=1)
+        if not finite_mask.all():
+            keep_x, keep_y = [x_all[finite_mask]], [y_all[finite_mask]]
+            collected = int(finite_mask.sum())
+            drawn = n_points
+            max_draws = _PER_POINT_REJECTION_CAP * n_points
+            while collected < n_points and drawn < max_draws:
+                batch = min(max(n_points, 1024), max_draws - drawn)
+                cols = [
+                    fastsrb_dist(entry.variables[key]["sample_range"][0],
+                                 entry.variables[key]["sample_range"][1],
+                                 base=entry.variables[key]["sample_type"][0],
+                                 sign=entry.variables[key]["sample_type"][1],
+                                 layout=layout, size=batch, rng=rng)
+                    for key in variable_order
+                ]
+                xb = np.column_stack(cols).astype(float)
+                vb = {var: xb[:, i] for i, var in enumerate(variable_order)}
+                try:
+                    yb = broadcast_target(evaluate(compiled, vb), batch, entry.id).reshape(-1, 1)
+                except Exception as exc:
+                    raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
+                mask = np.isfinite(xb).all(axis=1) & np.isfinite(yb).all(axis=1)
+                keep_x.append(xb[mask])
+                keep_y.append(yb[mask])
+                collected += int(mask.sum())
+                drawn += batch
+            if collected < n_points:
+                raise NoValidSampleFoundError(
+                    f"non-finite support/target for {entry.id!r}: only {collected}/{n_points} valid "
+                    f"points within {drawn} draws (valid-domain fraction too low)")
+            x_all = np.concatenate(keep_x)[:n_points]
+            y_all = np.concatenate(keep_y)[:n_points]
         return RealizedExpression(
             # `skeleton` is the masked structural/recovery form; `expression` + `constants` are the
             # CONCRETE ground truth (the actual formula with its literal values), matching the

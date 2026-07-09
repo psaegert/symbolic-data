@@ -15,6 +15,10 @@ metadata:
     sampling: vars use the `fastsrb` distribution (sample_range/sample_type); DSO
       train_spec ranges; evenly-spaced (E) upstream grids are sampled uniformly here
       (noted per entry as meta.dso_spec).
+    validity: 'accepted points follow the declared per-variable distribution CONDITIONED
+      on the expression''s valid domain; meta.finite_fraction is the MC-estimated
+      per-point valid fraction (n=20000); entries below 0.05 carry low_validity: true
+      and need per-entry review.'
 expressions:
   Keijzer-1:
     raw: 0.3*x1*sin(2*pi*x1)
@@ -50,6 +54,7 @@ expressions:
             - 1
             - 0.001
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-2:
     raw: 0.3*x1*sin(2*pi*x1)
     prepared: 0.3*v1*sin(2*3.141592653589793*v1)
@@ -84,6 +89,7 @@ expressions:
             - 2
             - 0.001
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-3:
     raw: 0.3*x1*sin(2*pi*x1)
     prepared: 0.3*v1*sin(2*3.141592653589793*v1)
@@ -118,6 +124,7 @@ expressions:
             - 3
             - 0.001
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-4:
     raw: pow(x1,3)*exp(-x1)*cos(x1)*sin(x1)*(pow(sin(x1),2)*cos(x1)-1)
     prepared: ((v1)**(3))*exp(-v1)*cos(v1)*sin(v1)*(((sin(v1))**(2))*cos(v1)-1)
@@ -152,6 +159,7 @@ expressions:
             - 10.05
             - 0.1
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-5:
     raw: div(30*x1*x3,(x1-10)*pow(x2,2))
     prepared: ((30*v1*v3)/((v1-10)*((v2)**(2))))
@@ -222,6 +230,7 @@ expressions:
             - 2
             - 10000
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-6:
     raw: div(x1*(x1+1),2)
     prepared: ((v1*(v1+1))/(2))
@@ -256,6 +265,7 @@ expressions:
             - 120
             - 1
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-7:
     raw: log(x1)
     prepared: log(v1)
@@ -290,6 +300,7 @@ expressions:
             - 100
             - 0.1
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-8:
     raw: sqrt(x1)
     prepared: sqrt(v1)
@@ -324,6 +335,7 @@ expressions:
             - 100
             - 0.1
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-9:
     raw: log(x1+sqrt(pow(x1,2)+1))
     prepared: log(v1+sqrt(((v1)**(2))+1))
@@ -358,6 +370,7 @@ expressions:
             - 100
             - 0.1
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-10:
     raw: pow(x1,x2)
     prepared: ((v1)**(v2))
@@ -400,6 +413,7 @@ expressions:
             - 1
             - 0.01
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-11:
     raw: x1*x2+sin((x1-1)*(x2-1))
     prepared: v1*v2+sin((v1-1)*(v2-1))
@@ -442,6 +456,7 @@ expressions:
             - 3
             - 0.01
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-12:
     raw: pow(x1,4)-pow(x1,3)+div(pow(x2,2),2)-x2
     prepared: ((v1)**(4))-((v1)**(3))+((((v2)**(2)))/(2))-v2
@@ -484,6 +499,7 @@ expressions:
             - 3
             - 0.01
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-13:
     raw: 6*sin(x1)*cos(x2)
     prepared: 6*sin(v1)*cos(v2)
@@ -526,6 +542,7 @@ expressions:
             - 3
             - 0.01
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-14:
     raw: div(8,2+pow(x1,2)+pow(x2,2))
     prepared: ((8)/(2+((v1)**(2))+((v2)**(2))))
@@ -568,6 +585,7 @@ expressions:
             - 3
             - 0.01
         function_set: Keijzer
+      finite_fraction: 1.0
   Keijzer-15:
     raw: div(pow(x1,3),5)+div(pow(x2,3),2)-x2-x1
     prepared: ((((v1)**(3)))/(5))+((((v2)**(3)))/(2))-v2-v1
@@ -610,3 +628,4 @@ expressions:
             - 3
             - 0.01
         function_set: Keijzer
+      finite_fraction: 1.0

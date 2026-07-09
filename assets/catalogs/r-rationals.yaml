@@ -15,6 +15,10 @@ metadata:
     sampling: vars use the `fastsrb` distribution (sample_range/sample_type); DSO
       train_spec ranges; evenly-spaced (E) upstream grids are sampled uniformly here
       (noted per entry as meta.dso_spec).
+    validity: 'accepted points follow the declared per-variable distribution CONDITIONED
+      on the expression''s valid domain; meta.finite_fraction is the MC-estimated
+      per-point valid fraction (n=20000); entries below 0.05 carry low_validity: true
+      and need per-entry review.'
 expressions:
   R1:
     raw: div(pow(x1+1,3),pow(x1,2)-x1+1)
@@ -50,6 +54,7 @@ expressions:
             - 1
             - 20
         function_set: None
+      finite_fraction: 1.0
   R2:
     raw: div((pow(x1,5)-3*pow(x1,3)+1),(pow(x1,2)+1))
     prepared: (((((v1)**(5))-3*((v1)**(3))+1))/((((v1)**(2))+1)))
@@ -84,6 +89,7 @@ expressions:
             - 1
             - 20
         function_set: None
+      finite_fraction: 1.0
   R3:
     raw: div((pow(x1,6)+pow(x1,5)),(pow(x1,4)+pow(x1,3)+pow(x1,2)+x1+1))
     prepared: (((((v1)**(6))+((v1)**(5))))/((((v1)**(4))+((v1)**(3))+((v1)**(2))+v1+1)))
@@ -118,6 +124,7 @@ expressions:
             - 1
             - 20
         function_set: None
+      finite_fraction: 1.0
   R1a:
     raw: div(pow(x1+1,3),pow(x1,2)-x1+1)
     prepared: ((((v1+1)**(3)))/(((v1)**(2))-v1+1))
@@ -152,6 +159,7 @@ expressions:
             - 10
             - 20
         function_set: None
+      finite_fraction: 1.0
   R2a:
     raw: div((pow(x1,5)-3*pow(x1,3)+1),(pow(x1,2)+1))
     prepared: (((((v1)**(5))-3*((v1)**(3))+1))/((((v1)**(2))+1)))
@@ -186,6 +194,7 @@ expressions:
             - 10
             - 20
         function_set: None
+      finite_fraction: 1.0
   R3a:
     raw: div((pow(x1,6)+pow(x1,5)),(pow(x1,4)+pow(x1,3)+pow(x1,2)+x1+1))
     prepared: (((((v1)**(6))+((v1)**(5))))/((((v1)**(4))+((v1)**(3))+((v1)**(2))+v1+1)))
@@ -220,3 +229,4 @@ expressions:
             - 10
             - 20
         function_set: None
+      finite_fraction: 1.0

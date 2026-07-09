@@ -15,6 +15,10 @@ metadata:
     sampling: vars use the `fastsrb` distribution (sample_range/sample_type); DSO
       train_spec ranges; evenly-spaced (E) upstream grids are sampled uniformly here
       (noted per entry as meta.dso_spec).
+    validity: 'accepted points follow the declared per-variable distribution CONDITIONED
+      on the expression''s valid domain; meta.finite_fraction is the MC-estimated
+      per-point valid fraction (n=20000); entries below 0.05 carry low_validity: true
+      and need per-entry review.'
 expressions:
   Pagie-1:
     raw: div(1,(1+pow(x1,-4)))+div(1,(1+pow(x2,-4)))
@@ -53,3 +57,4 @@ expressions:
             - 0.4
         test: null
         function_set: Koza
+      finite_fraction: 1.0
