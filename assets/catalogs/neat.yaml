@@ -1,0 +1,282 @@
+metadata:
+  name: neat
+  version: 1
+  description: neat-GP suite (aggregated classics).
+  sources:
+  - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming
+  - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+    Petersen et al. 2021, Mundhenk et al. 2021)
+  sampling_defaults:
+    n_points: 20
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: vars use the `fastsrb` distribution (sample_range/sample_type); DSO
+      train_spec ranges; evenly-spaced (E) upstream grids are sampled uniformly here
+      (noted per entry as meta.dso_spec).
+expressions:
+  Neat-1:
+    raw: pow(x1,4)+pow(x1,3)+pow(x1,2)+x1
+    prepared: ((v1)**(4))+((v1)**(3))+((v1)**(2))+v1
+    n_variables: 1
+    sources:
+    - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -1
+            - 1
+            - 20
+        test: null
+        function_set: KozaPlus1
+  Neat-2:
+    raw: pow(x1,5)+pow(x1,4)+pow(x1,3)+pow(x1,2)+x1
+    prepared: ((v1)**(5))+((v1)**(4))+((v1)**(3))+((v1)**(2))+v1
+    n_variables: 1
+    sources:
+    - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -1
+            - 1
+            - 20
+        test: null
+        function_set: KozaPlus1
+  Neat-3:
+    raw: sin(pow(x1,2))*cos(x1)-1
+    prepared: sin(((v1)**(2)))*cos(v1)-1
+    n_variables: 1
+    sources:
+    - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -1
+            - 1
+            - 20
+        test: null
+        function_set: KozaPlus1
+  Neat-4:
+    raw: log(x1+1)+log(pow(x1,2)+1)
+    prepared: log(v1+1)+log(((v1)**(2))+1)
+    n_variables: 1
+    sources:
+    - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - 0
+            - 2
+            - 20
+        test: null
+        function_set: KozaPlus1
+  Neat-5:
+    raw: 2*sin(x1)*cos(x2)
+    prepared: 2*sin(v1)*cos(v2)
+    n_variables: 2
+    sources:
+    - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -1
+            - 1
+            - 100
+        test: null
+        function_set: Koza
+  Neat-7:
+    raw: 2-2.1*cos(9.8*x1)*sin(1.3*x2)
+    prepared: 2-2.1*cos(9.8*v1)*sin(1.3*v2)
+    n_variables: 2
+    sources:
+    - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 10000
+        test: null
+        function_set: Korns
+  Neat-8:
+    raw: div(exp(-pow(x1-1,2)),(1.2+pow((x2-2.5),2)))
+    prepared: ((exp(-((v1-1)**(2))))/((1.2+(((v2-2.5))**(2)))))
+    n_variables: 2
+    sources:
+    - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.3
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.3
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - 0.3
+            - 4
+            - 100
+        test: null
+        function_set: Vladislavleva-B
+  Neat-9:
+    raw: div(1,(1+pow(x1,-4)))+div(1,(1+pow(x2,-4)))
+    prepared: ((1)/((1+((v1)**(-4)))))+((1)/((1+((v2)**(-4)))))
+    n_variables: 2
+    sources:
+    - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -5.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -5.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            E:
+            - -5
+            - 5
+            - 0.4
+        test: null
+        function_set: Koza

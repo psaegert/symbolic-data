@@ -1,0 +1,810 @@
+metadata:
+  name: korns
+  version: 1
+  description: Korns accuracy suite (5-variable, constant-heavy).
+  sources:
+  - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+  - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+    Petersen et al. 2021, Mundhenk et al. 2021)
+  sampling_defaults:
+    n_points: 20
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: vars use the `fastsrb` distribution (sample_range/sample_type); DSO
+      train_spec ranges; evenly-spaced (E) upstream grids are sampled uniformly here
+      (noted per entry as meta.dso_spec).
+expressions:
+  Korns-1:
+    raw: 1.57+24.3*x4
+    prepared: 1.57+24.3*v4
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-2:
+    raw: 0.23+14.2*div((x4+x2),(3*x5))
+    prepared: 0.23+14.2*(((v4+v2))/((3*v5)))
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-3:
+    raw: 4.9*div((x4-x1+div(x2,x5)),(3*x5))-5.41
+    prepared: 4.9*(((v4-v1+((v2)/(v5))))/((3*v5)))-5.41
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-4:
+    raw: 0.13*sin(x3)-2.3
+    prepared: 0.13*sin(v3)-2.3
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-5:
+    raw: 3+2.13*log(abs(x5))
+    prepared: 3+2.13*log(abs(v5))
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-6:
+    raw: 1.3+0.13*sqrt(abs(x1))
+    prepared: 1.3+0.13*sqrt(abs(v1))
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-7:
+    raw: 2.1380940889*(1-exp(-0.54723748542*x1))
+    prepared: 2.1380940889*(1-exp(-0.54723748542*v1))
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-8:
+    raw: 6.87+11*sqrt(abs(7.23*x1*x4*x5))
+    prepared: 6.87+11*sqrt(abs(7.23*v1*v4*v5))
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-9:
+    raw: div(sqrt(abs(x1)),log(abs(x2)))*div(exp(x3),pow(x4,2))
+    prepared: ((sqrt(abs(v1)))/(log(abs(v2))))*((exp(v3))/(((v4)**(2))))
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-10:
+    raw: 0.81+24.3*div(2*x2+3*pow(x3,2),((4*pow(x4,3)+5*pow(x5,4))))
+    prepared: 0.81+24.3*((2*v2+3*((v3)**(2)))/(((4*((v4)**(3))+5*((v5)**(4))))))
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-11:
+    raw: 6.87+11*cos(7.23*pow(x1,3))
+    prepared: 6.87+11*cos(7.23*((v1)**(3)))
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns
+  Korns-12:
+    raw: 2-2.1*cos(9.8*x1)*sin(1.3*x5)
+    prepared: 2-2.1*cos(9.8*v1)*sin(1.3*v5)
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        test:
+          all:
+            U:
+            - -50
+            - 50
+            - 100
+        function_set: Korns

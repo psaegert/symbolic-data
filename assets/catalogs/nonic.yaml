@@ -1,0 +1,52 @@
+metadata:
+  name: nonic
+  version: 1
+  description: Nonic polynomial benchmark.
+  sources:
+  - GP benchmark surveys (McDermott et al. 2012 lineage)
+  - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+    Petersen et al. 2021, Mundhenk et al. 2021)
+  sampling_defaults:
+    n_points: 20
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: vars use the `fastsrb` distribution (sample_range/sample_type); DSO
+      train_spec ranges; evenly-spaced (E) upstream grids are sampled uniformly here
+      (noted per entry as meta.dso_spec).
+expressions:
+  Nonic:
+    raw: pow(x1,9)+pow(x1,8)+pow(x1,7)+pow(x1,6)+pow(x1,5)+pow(x1,4)+pow(x1,3)+pow(x1,2)+x1
+    prepared: ((v1)**(9))+((v1)**(8))+((v1)**(7))+((v1)**(6))+((v1)**(5))+((v1)**(4))+((v1)**(3))+((v1)**(2))+v1
+    n_variables: 1
+    sources:
+    - GP benchmark surveys (McDermott et al. 2012 lineage)
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            E:
+            - -1
+            - 1
+            - 20
+        test:
+          all:
+            U:
+            - -1
+            - 1
+            - 20
+        function_set: None

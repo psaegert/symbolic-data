@@ -1,0 +1,612 @@
+metadata:
+  name: keijzer
+  version: 1
+  description: Keijzer symbolic-regression suite.
+  sources:
+  - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+  - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+    Petersen et al. 2021, Mundhenk et al. 2021)
+  sampling_defaults:
+    n_points: 20
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: vars use the `fastsrb` distribution (sample_range/sample_type); DSO
+      train_spec ranges; evenly-spaced (E) upstream grids are sampled uniformly here
+      (noted per entry as meta.dso_spec).
+expressions:
+  Keijzer-1:
+    raw: 0.3*x1*sin(2*pi*x1)
+    prepared: 0.3*v1*sin(2*3.141592653589793*v1)
+    n_variables: 1
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            E:
+            - -1
+            - 1
+            - 0.1
+        test:
+          all:
+            E:
+            - -1
+            - 1
+            - 0.001
+        function_set: Keijzer
+  Keijzer-2:
+    raw: 0.3*x1*sin(2*pi*x1)
+    prepared: 0.3*v1*sin(2*3.141592653589793*v1)
+    n_variables: 1
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            E:
+            - -2
+            - 2
+            - 0.1
+        test:
+          all:
+            E:
+            - -2
+            - 2
+            - 0.001
+        function_set: Keijzer
+  Keijzer-3:
+    raw: 0.3*x1*sin(2*pi*x1)
+    prepared: 0.3*v1*sin(2*3.141592653589793*v1)
+    n_variables: 1
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            E:
+            - -3
+            - 3
+            - 0.1
+        test:
+          all:
+            E:
+            - -3
+            - 3
+            - 0.001
+        function_set: Keijzer
+  Keijzer-4:
+    raw: pow(x1,3)*exp(-x1)*cos(x1)*sin(x1)*(pow(sin(x1),2)*cos(x1)-1)
+    prepared: ((v1)**(3))*exp(-v1)*cos(v1)*sin(v1)*(((sin(v1))**(2))*cos(v1)-1)
+    n_variables: 1
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            E:
+            - 0
+            - 10
+            - 0.1
+        test:
+          all:
+            E:
+            - 0.05
+            - 10.05
+            - 0.1
+        function_set: Keijzer
+  Keijzer-5:
+    raw: div(30*x1*x3,(x1-10)*pow(x2,2))
+    prepared: ((30*v1*v3)/((v1-10)*((v2)**(2))))
+    n_variables: 3
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          x1:
+            U:
+            - -1
+            - 1
+            - 1000
+          x2:
+            U:
+            - -1
+            - 1
+            - 1000
+          x3:
+            U:
+            - 1
+            - 2
+            - 1000
+        test:
+          x1:
+            U:
+            - -1
+            - 1
+            - 10000
+          x2:
+            U:
+            - -1
+            - 1
+            - 10000
+          x3:
+            U:
+            - 1
+            - 2
+            - 10000
+        function_set: Keijzer
+  Keijzer-6:
+    raw: div(x1*(x1+1),2)
+    prepared: ((v1*(v1+1))/(2))
+    n_variables: 1
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 50.0
+        sample_type:
+        - int
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            E:
+            - 1
+            - 50
+            - 1
+        test:
+          all:
+            E:
+            - 1
+            - 120
+            - 1
+        function_set: Keijzer
+  Keijzer-7:
+    raw: log(x1)
+    prepared: log(v1)
+    n_variables: 1
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - int
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            E:
+            - 1
+            - 100
+            - 1
+        test:
+          all:
+            E:
+            - 1
+            - 100
+            - 0.1
+        function_set: Keijzer
+  Keijzer-8:
+    raw: sqrt(x1)
+    prepared: sqrt(v1)
+    n_variables: 1
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - int
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            E:
+            - 0
+            - 100
+            - 1
+        test:
+          all:
+            E:
+            - 1
+            - 100
+            - 0.1
+        function_set: Keijzer
+  Keijzer-9:
+    raw: log(x1+sqrt(pow(x1,2)+1))
+    prepared: log(v1+sqrt(((v1)**(2))+1))
+    n_variables: 1
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - int
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            E:
+            - 0
+            - 100
+            - 1
+        test:
+          all:
+            E:
+            - 1
+            - 100
+            - 0.1
+        function_set: Keijzer
+  Keijzer-10:
+    raw: pow(x1,x2)
+    prepared: ((v1)**(v2))
+    n_variables: 2
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - 0
+            - 1
+            - 100
+        test:
+          all:
+            E:
+            - 0
+            - 1
+            - 0.01
+        function_set: Keijzer
+  Keijzer-11:
+    raw: x1*x2+sin((x1-1)*(x2-1))
+    prepared: v1*v2+sin((v1-1)*(v2-1))
+    n_variables: 2
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3
+            - 3
+            - 20
+        test:
+          all:
+            E:
+            - -3
+            - 3
+            - 0.01
+        function_set: Keijzer
+  Keijzer-12:
+    raw: pow(x1,4)-pow(x1,3)+div(pow(x2,2),2)-x2
+    prepared: ((v1)**(4))-((v1)**(3))+((((v2)**(2)))/(2))-v2
+    n_variables: 2
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3
+            - 3
+            - 20
+        test:
+          all:
+            E:
+            - -3
+            - 3
+            - 0.01
+        function_set: Keijzer
+  Keijzer-13:
+    raw: 6*sin(x1)*cos(x2)
+    prepared: 6*sin(v1)*cos(v2)
+    n_variables: 2
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3
+            - 3
+            - 20
+        test:
+          all:
+            E:
+            - -3
+            - 3
+            - 0.01
+        function_set: Keijzer
+  Keijzer-14:
+    raw: div(8,2+pow(x1,2)+pow(x2,2))
+    prepared: ((8)/(2+((v1)**(2))+((v2)**(2))))
+    n_variables: 2
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3
+            - 3
+            - 20
+        test:
+          all:
+            E:
+            - -3
+            - 3
+            - 0.01
+        function_set: Keijzer
+  Keijzer-15:
+    raw: div(pow(x1,3),5)+div(pow(x2,3),2)-x2-x1
+    prepared: ((((v1)**(3)))/(5))+((((v2)**(3)))/(2))-v2-v1
+    n_variables: 2
+    sources:
+    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3
+            - 3
+            - 20
+        test:
+          all:
+            E:
+            - -3
+            - 3
+            - 0.01
+        function_set: Keijzer
