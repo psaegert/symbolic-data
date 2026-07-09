@@ -250,6 +250,7 @@ class ProblemSource:
                     skeleton=realized.skeleton, expression=realized.expression,
                     constants=realized.constants, variables=realized.variables, complexity=realized.complexity,
                     noise=self.noise, eq_id=realized.eq_id, meta=realized.meta,
+                    gt_kind="exact",
                 )
         except CatalogEntryError as exc:
             return Problem.placeholder(variables=_entry_variables(entry), reason=str(exc), eq_id=eq_id)
@@ -354,9 +355,12 @@ def _passes_filter(problem: Problem, spec: Mapping[str, Any]) -> bool:
         return False
     if "max_complexity" in spec and problem.complexity is not None and problem.complexity > spec["max_complexity"]:
         return False
-    if "n_variables" in spec and problem.n_variables_used != spec["n_variables"]:
+    # Structural filters apply only to problems WITH a skeleton: for black-box problems
+    # (gt_kind='none') n_variables_used is 0 by construction, and filtering on it would
+    # silently drop or keep rows for the wrong reason.
+    if "n_variables" in spec and problem.skeleton is not None and problem.n_variables_used != spec["n_variables"]:
         return False
-    if "max_variables" in spec and problem.n_variables_used > spec["max_variables"]:
+    if "max_variables" in spec and problem.skeleton is not None and problem.n_variables_used > spec["max_variables"]:
         return False
     return True
 

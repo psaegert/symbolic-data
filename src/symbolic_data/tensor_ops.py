@@ -27,6 +27,10 @@ def mask_unused_variable_columns(
     """
     if not variables:
         return
+    if not skeleton_tokens:
+        # Unknown structure (black-box problem): every column is potentially signal; zeroing
+        # them all (the old fall-through) would silently destroy the inputs.
+        return
 
     variable_to_index = {var: idx for idx, var in enumerate(variables)}
     if not variable_to_index:

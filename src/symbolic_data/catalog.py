@@ -40,6 +40,8 @@ _ENTRY_FIELDS = {"raw", "prepared", "n_variables", "vars"}
 
 # The per-Problem array fields a FROZEN catalog stores in its .npz sidecar.
 _PROBLEM_ARRAY_FIELDS = ("x_support", "y_support", "y_support_noisy", "x_validation", "y_validation", "y_validation_noisy")
+# optional per-problem arrays (absent for synthetic problems): reference-law predictions
+_PROBLEM_OPTIONAL_ARRAY_FIELDS = ("y_reference_support", "y_reference_validation")
 
 
 @dataclass
@@ -227,6 +229,10 @@ class ProblemCatalog(Catalog):
             kwargs["skeleton"] = tuple(kwargs["skeleton"]) if kwargs.get("skeleton") is not None else None
             for fld in _PROBLEM_ARRAY_FIELDS:
                 kwargs[fld] = data[f"p{i}__{fld}"]
+            for fld in _PROBLEM_OPTIONAL_ARRAY_FIELDS:
+                key = f"p{i}__{fld}"
+                if key in data:
+                    kwargs[fld] = data[key]
             problems.append(Problem.from_dict(kwargs))
         return cls(name=cat["name"], version=cat.get("version"), entries={}, meta=cat.get("meta", {}), frozen=True, problems=problems, source="local")
 
@@ -259,6 +265,10 @@ class ProblemCatalog(Catalog):
             for i, p in enumerate(self.problems or []):
                 for fld in _PROBLEM_ARRAY_FIELDS:
                     arrays[f"p{i}__{fld}"] = np.asarray(getattr(p, fld))
+                for fld in _PROBLEM_OPTIONAL_ARRAY_FIELDS:      # reference-law predictions
+                    value = getattr(p, fld)
+                    if value is not None:
+                        arrays[f"p{i}__{fld}"] = np.asarray(value)
                 scalars.append({
                     "skeleton": [str(t) for t in p.skeleton] if p.skeleton is not None else None,
                     "expression": [str(t) for t in p.expression] if p.expression is not None else None,
@@ -270,6 +280,7 @@ class ProblemCatalog(Catalog):
                     "meta": p.meta,
                     "is_placeholder": p.is_placeholder,
                     "placeholder_reason": p.placeholder_reason,
+                    "gt_kind": p.gt_kind,
                 })
             blob = json.dumps({"catalog": {"name": self.name, "version": self.version, "meta": self.meta}, "problems": scalars})
             np.savez(path, _meta=np.array(blob), **arrays)

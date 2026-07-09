@@ -3,6 +3,44 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.11.0] - 2026-07-09
+
+Optional-ground-truth schema (the benchmark-import program's P0): real-world and black-box
+problems become first-class citizens alongside synthetic ones.
+
+### Added
+- **`Problem.gt_kind`**: `"exact"` (synthetic GT that generated y) | `"reference"` (the
+  historically accepted law accompanying real measurements — stored in the SAME
+  expression/skeleton fields, so every existing consumer works unchanged) | `"none"`
+  (black-box). Inferred from skeleton/expression presence when omitted (0.10-era dicts and
+  call sites keep working); validated in `__post_init__`; placeholders exempt. Round-trips
+  through `to_dict`/`from_dict` and frozen `.npz` catalogs (legacy blobs load with inference).
+- **`Problem.from_data(x, y, ...)`**: measured-data constructor. Convention: the measured `y`
+  IS the fitted target (`y_*_noisy` are copies; `noise=None` = unknown); variables default
+  `x1..xd`; a given `expression` best-effort derives the skeleton via simplipy so
+  decontamination and recovery metrics keep working for reference problems.
+- **Reference-law predictions**: optional `y_reference_support` / `y_reference_validation`
+  arrays on `Problem` (the catalog owns the reference expression and precomputes its
+  predictions; downstream derives reference-relative metrics without re-evaluating
+  expressions). Persisted in frozen `.npz` catalogs when present.
+
+### Fixed
+- **Holdout mirror fixes** (same two defects as flash-ansr): `is_held_out` now accepts and
+  forwards `n_variables` (foreign skeletons no longer NameError into a false "held out");
+  holdout hash keys are canonicalized via `simplipy.normalize_skeleton` (variable renames and
+  numeric literals no longer defeat — or leak through — the exact-match layer).
+- Structural source filters (`n_variables`/`max_variables`) are vacuous for problems without a
+  skeleton instead of comparing against a meaningless 0.
+- `mask_unused_variable_columns` is a no-op without skeleton tokens (previously it zeroed
+  EVERY column — destroying black-box inputs).
+
+### Compatibility
+- Reading old artifacts is unchanged. `.npz` catalogs written by 0.11.0 require
+  symbolic-data ≥ 0.11.0 to read (the scalar blob gains `gt_kind`). Never re-save a published
+  frozen catalog in place (forward-only policy: its sha256 would change).
+- Declarative yaml catalogs remain synthetic-only by design; measured-data catalogs are
+  frozen artifacts (`Problem.from_data` → `ProblemCatalog.from_problems` → `save(.npz)`).
+
 ## [0.10.0] - 2026-07-01
 
 Post-release audit round (deferred tiers C + D): one breaking API harmonization plus internal

@@ -24,7 +24,12 @@ from typing import Any
 
 import numpy as np
 
-__all__ = ["Problem"]
+__all__ = ["Problem", "GT_KINDS"]
+
+# Ground-truth kinds: "exact" = synthetic GT that generated y; "reference" = the historically
+# accepted law accompanying real measurements (stored in the SAME expression/skeleton fields);
+# "none" = black-box (no expression at all). Decides holdout-ability and metric regimes.
+GT_KINDS = ("exact", "reference", "none")
 
 
 @dataclass
@@ -54,6 +59,27 @@ class Problem:
     # placeholder protocol
     is_placeholder: bool = False
     placeholder_reason: str | None = None
+    # ground-truth kind (see GT_KINDS). None at construction => inferred in __post_init__ from
+    # skeleton/expression presence, so 0.10-era dicts and call sites keep working unchanged.
+    gt_kind: str | None = None
+    # reference-law predictions on the SAME sampled/measured points (real-data catalogs, WP7):
+    # the catalog owns the reference expression and precomputes its predictions; downstream
+    # derives reference_fvu without ever re-evaluating expressions. None <=> synthetic problem.
+    y_reference_support: np.ndarray | None = None
+    y_reference_validation: np.ndarray | None = None
+
+    def __post_init__(self) -> None:
+        if self.gt_kind is None:
+            has_structure = self.expression is not None or self.skeleton is not None
+            self.gt_kind = "exact" if has_structure else "none"
+        if self.gt_kind not in GT_KINDS:
+            raise ValueError(f"gt_kind must be one of {GT_KINDS} (got {self.gt_kind!r})")
+        if not self.is_placeholder:
+            if self.gt_kind == "none" and (self.expression is not None or self.skeleton is not None
+                                           or self.constants):
+                raise ValueError("gt_kind='none' requires expression, skeleton and constants to be empty")
+            if self.gt_kind in ("exact", "reference") and self.expression is None and self.skeleton is None:
+                raise ValueError(f"gt_kind={self.gt_kind!r} requires a skeleton or expression")
 
     @property
     def n_variables_used(self) -> int:
@@ -89,6 +115,9 @@ class Problem:
             "meta": dict(self.meta),
             "is_placeholder": self.is_placeholder,
             "placeholder_reason": self.placeholder_reason,
+            "gt_kind": self.gt_kind,
+            "y_reference_support": self.y_reference_support,
+            "y_reference_validation": self.y_reference_validation,
         }
 
     @classmethod
@@ -125,4 +154,76 @@ class Problem:
             eq_id=eq_id,
             is_placeholder=True,
             placeholder_reason=reason,
+        )
+
+    @classmethod
+    def from_data(
+        cls,
+        x: np.ndarray,
+        y: np.ndarray,
+        *,
+        x_validation: np.ndarray | None = None,
+        y_validation: np.ndarray | None = None,
+        expression: list[str] | None = None,
+        skeleton: tuple[str, ...] | None = None,
+        constants: list[float] | None = None,
+        variables: list[str] | None = None,
+        gt_kind: str | None = None,
+        y_reference_support: np.ndarray | None = None,
+        y_reference_validation: np.ndarray | None = None,
+        noise: float | dict | None = None,
+        eq_id: str | None = None,
+        meta: dict[str, Any] | None = None,
+    ) -> "Problem":
+        """A :class:`Problem` from MEASURED data (real-world / black-box catalogs).
+
+        Convention: the measured ``y`` IS the fitted target, so ``y_*_noisy`` are copies of
+        the clean arrays and ``noise`` defaults to ``None`` (= unknown measurement noise).
+        There is no separate clean target for measured data. ``gt_kind`` defaults to
+        ``"reference"`` when an expression/skeleton is given (the accepted law accompanying
+        the measurements) and ``"none"`` (black-box) otherwise; pass ``gt_kind="exact"``
+        explicitly for frozen synthetic data. When an ``expression`` is given without a
+        ``skeleton``, the skeleton is best-effort derived via simplipy so decontamination
+        and recovery metrics keep working for reference problems."""
+        x = np.asarray(x, dtype=np.float32)
+        if x.ndim == 1:
+            x = x.reshape(-1, 1)
+        y = np.asarray(y, dtype=np.float32).reshape(-1, 1)
+        if x_validation is None or y_validation is None:
+            x_validation = np.empty((0, x.shape[1]), dtype=np.float32)
+            y_validation = np.empty((0, 1), dtype=np.float32)
+        else:
+            x_validation = np.asarray(x_validation, dtype=np.float32)
+            if x_validation.ndim == 1:
+                x_validation = x_validation.reshape(-1, 1)
+            y_validation = np.asarray(y_validation, dtype=np.float32).reshape(-1, 1)
+        if variables is None:
+            variables = [f"x{i}" for i in range(1, x.shape[1] + 1)]
+        if skeleton is None and expression is not None:
+            try:
+                from simplipy import normalize_skeleton
+                normalized = normalize_skeleton(list(expression))
+                skeleton = tuple(normalized) if normalized is not None else None
+            except Exception:
+                skeleton = None
+        if gt_kind is None:
+            gt_kind = "reference" if (expression is not None or skeleton is not None) else "none"
+        return cls(
+            x_support=x,
+            y_support=y,
+            y_support_noisy=y.copy(),
+            x_validation=x_validation,
+            y_validation=y_validation,
+            y_validation_noisy=y_validation.copy(),
+            skeleton=skeleton,
+            expression=expression,
+            constants=list(constants) if constants else [],
+            variables=list(variables),
+            complexity=len(expression) if expression is not None else None,
+            noise=noise,
+            eq_id=eq_id,
+            meta=dict(meta) if meta else {},
+            gt_kind=gt_kind,
+            y_reference_support=y_reference_support,
+            y_reference_validation=y_reference_validation,
         )
