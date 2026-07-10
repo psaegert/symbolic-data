@@ -9,6 +9,7 @@ metadata:
   sources:
   - Tenachi et al. 2024 (arXiv:2312.01816), Class Symbolic Regression — physo/benchmark/
     ClassDataset/ClassEquations.csv (MIT; vendored under assets/upstream/physo/)
+  license: MIT (WassimTenachi/PhySO, ClassEquations.csv vendored under assets/upstream/physo/)
   sampling_defaults:
     n_points: 100
     method: random

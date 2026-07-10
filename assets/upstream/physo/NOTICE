@@ -1,4 +1,4 @@
-Vendored data from WassimTenachi/PhySO (MIT; LICENSE.physo alongside; fetched 2026-07-10):
+Vendored data from WassimTenachi/PhySO (MIT; LICENSE.physo alongside; commit bfbfa88, fetched 2026-07-10):
 
 - streams.csv.gz: demos/class_sr/demo_milky_way_streams/streams.csv — 2900 simulated phase-space
   points (29 Milky-Way stellar streams x 100 points; mock orbits integrated in an NFW potential

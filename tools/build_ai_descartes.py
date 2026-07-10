@@ -190,6 +190,11 @@ def _build_real_problems(engine):
             # DEGENERATE on some rows (time dilation's textbook form returns exactly 0 at
             # v=0.55 m/s, where 1 - v^2/c^2 rounds to 1 in float64) -- judge the deviation
             # against the problem's scale, not row-by-row relative.
+            # LIMITATION (verified): on supports where the structure is numerically invisible
+            # (v^2/c^2 ~ 1e-14 makes sqrt(1-x) and its Taylor forms coincide to 1e-14), NO
+            # numeric gate discriminates laws -- even a structurally wrong quadratic passes at
+            # 1e-6. Alternates must therefore be ALGEBRAIC REWRITES verified by derivation;
+            # this gate is only a smoke test against typos, never the proof of equivalence.
             scale = float(np.sqrt(np.mean(y_ref[finite] ** 2)))
             assert np.max(np.abs(y_alt[finite] - y_ref[finite])) < alt_rel_tol * max(scale, 1e-30), \
                 (eq_id, alt)

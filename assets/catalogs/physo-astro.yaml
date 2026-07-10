@@ -7,6 +7,7 @@ metadata:
   sources:
   - Tenachi, Ibata & Diakogiannis 2023 (arXiv:2303.03192), Deep symbolic regression for physics
     guided by units constraints — Appendix A mock specs
+  license: specs authored from arXiv:2303.03192 Appendix A (paper specs; no upstream data files); PhySO repo MIT
   sampling_defaults:
     n_points: 1000
     method: random

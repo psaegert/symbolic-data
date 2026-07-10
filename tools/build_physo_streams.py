@@ -7,7 +7,8 @@ problem per stream: E_kin = E_t_s + A * log(B*r + 1) / r in the demo's normalize
 (r = |x|/20 kpc, v = |v|/200 km/s, E_kin = v^2/2), with the SHARED constants A = 3.77705922384934,
 B = 1.0000075063141 and the 29 per-stream E_t values taken VERBATIM from the demo's target
 expressions (MW_streams_results_analysis.py). No fitting: the builder matches each stream to its
-upstream E_t bijectively (closed-form LS estimate -> nearest listed value, asserted < 1e-4 apart)
+upstream E_t bijectively (closed-form LS estimate -> nearest listed value, with an explicit
+identifiability margin against the list's 1.77e-4 twin pair)
 and verifies the law on every point.
 
 gt_kind: the data comes from orbit INTEGRATION, so energy conservation holds to integrator
@@ -70,10 +71,14 @@ def main() -> None:
         # bijective upstream-constant matching: closed-form LS E_t -> nearest listed value
         basis = A * np.log(B * rs + 1.0) / rs
         e_fit = float(np.mean(ys - basis))
-        idx = int(np.argmin([abs(e_fit - e) for e in E_T]))
+        dists = sorted((abs(e_fit - e), i) for i, e in enumerate(E_T))
+        (dist, idx), (runner, _) = dists[0], dists[1]
         # upstream E_t values are theoretical (orbit initial conditions), not per-point LS refits:
-        # the LS estimate lands within ~1e-5 of the right value while wrong matches are >~1e-2 away
-        assert abs(e_fit - E_T[idx]) < 1e-4, (s, e_fit, E_T[idx])
+        # measured LS-to-match distances are <= 4.7e-5. The list contains a TWIN pair only
+        # 1.77e-4 apart, so nearest-match alone cannot exclude a mutual swap -- require an
+        # explicit identifiability margin (runner-up clearly farther) on top of closeness.
+        assert dist < 6e-5, (s, e_fit, E_T[idx], dist)
+        assert runner - dist > 6e-5, (s, "ambiguous E_t match", dist, runner)
         assert idx not in used, f"stream {s}: E_t {E_T[idx]} already consumed (non-bijective)"
         used.add(idx)
         e_t = E_T[idx]
