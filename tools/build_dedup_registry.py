@@ -18,7 +18,7 @@ from simplipy import SimpliPyEngine, normalize_skeleton
 
 CATALOGS = ["constant", "grammarvae", "jin", "keijzer", "korns", "koza", "livermore",
             "livermore2", "meier", "neat", "nonic", "pagie", "poly", "r-rationals",
-            "sine", "vladislavleva", "nguyen", "fastsrb", "feynman"]
+            "sine", "vladislavleva", "nguyen", "fastsrb", "feynman", "srsd-dummy"]
 
 
 def main() -> None:
@@ -43,7 +43,27 @@ def main() -> None:
     clusters = {f"eq{i:04d}": sorted(members)
                 for i, ((skel, n), members) in enumerate(sorted(groups.items(), key=lambda kv: kv[1][0]))
                 if len(members) > 1}
-    out = {"identity": "normalized skeleton (dev_7-3, literals masked) + n_variables",
+
+    # Explicit provenance links (meta.base_catalog/base_eq_id): variant catalogs that renumber
+    # variables (e.g. srsd-dummy's dummy insertions) defeat index-sensitive skeleton identity,
+    # so their 1:1 base links are recorded as explicit equivalences instead of inferred ones.
+    explicit = {}
+    for name in CATALOGS:
+        path = Path("assets/catalogs") / f"{name}.yaml"
+        if not path.exists():
+            continue
+        cfg = yaml.safe_load(path.read_text())
+        for eq_id, entry in cfg["expressions"].items():
+            meta = entry.get("meta") or {}
+            base_cat, base_eq = meta.get("base_catalog"), meta.get("base_eq_id")
+            if base_cat and base_eq:
+                explicit[f"{name}:{eq_id}"] = f"{base_cat.split('@')[0]}:{base_eq}"
+    out = {"identity": "normalized skeleton (dev_7-3, literals masked) + n_variables; "
+                       "PLUS explicit meta.base_eq_id links (variable-index-insensitive)",
+           "explicit_variant_links": explicit,
+           "known_limit": "skeleton identity is variable-index-sensitive (canonicalization of "
+                          "variable order is a deferred decision); explicit links cover variant "
+                          "catalogs, and every rendering joins the union holdout independently",
            "n_entries_total": sum(len(m) for m in groups.values()),
            "n_unique_problems": len(groups),
            "n_cross_or_intra_duplicate_clusters": len(clusters),

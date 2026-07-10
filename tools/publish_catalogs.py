@@ -53,6 +53,8 @@ CATALOGS = {
     "r-rationals": ("r-rationals.yaml", 6, "problem_catalog"),
     "sine": ("sine.yaml", 1, "problem_catalog"),
     "vladislavleva": ("vladislavleva.yaml", 8, "problem_catalog"),
+    # P2 Feynman variant 3/3 (fastsrb + feynman already published)
+    "srsd-dummy": ("srsd-dummy.yaml", 120, "problem_catalog"),
 }
 
 

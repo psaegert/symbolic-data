@@ -36,11 +36,12 @@ def audit_catalog(path: Path, engine, write: bool) -> dict:
         try:
             compiled = catalog._compiled(entry, engine)
             order = compiled["variable_order"]
-            cols = [fastsrb_dist(entry.variables[k]["sample_range"][0],
-                                 entry.variables[k]["sample_range"][1],
-                                 base=entry.variables[k]["sample_type"][0],
-                                 sign=entry.variables[k]["sample_type"][1],
-                                 layout="random", size=N_MC, rng=rng) for k in order]
+            cols = []
+            for k in order:
+                low, high = entry.variables[k]["sample_range"]      # strict: malformed specs must FLAG
+                base, sign = entry.variables[k]["sample_type"]
+                cols.append(fastsrb_dist(low, high, base=base, sign=sign,
+                                         layout="random", size=N_MC, rng=rng))
             x = np.column_stack(cols).astype(float)
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
