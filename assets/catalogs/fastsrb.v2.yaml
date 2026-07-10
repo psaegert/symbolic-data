@@ -1,6 +1,7 @@
 metadata:
   name: fastsrb
   version: 2
+  license: MIT (viktmar/FastSRB; see THIRD_PARTY_LICENSES + upstream PR viktmar/FastSRB#1)
   description: FastSRB benchmark (Martinek, arXiv:2508.14481), 120 equations.
   sources:
   - FastSRB (Viktor Martinek, arXiv:2508.14481, MIT); vendored from viktmar/FastSRB

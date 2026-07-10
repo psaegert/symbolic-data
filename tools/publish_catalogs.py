@@ -105,6 +105,8 @@ def sha256(path: str) -> str:
 
 
 def main() -> None:
+    from lint_catalogs import lint_paths
+    assert lint_paths(), "catalog lint failed -- fix errors before publishing"
     api = HfApi()
     who = api.whoami()["name"]
     print(f"HF user: {who}")
