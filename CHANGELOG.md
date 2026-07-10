@@ -3,6 +3,29 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.12.2] - 2026-07-10
+
+### Fixed
+- **Frozen catalogs now register as holdout pools**: `GenerativeCatalog.register_holdout_pool`
+  derived prototypes by iterating catalog `entries`, which a FROZEN (materialized `.npz`)
+  `ProblemCatalog` does not have -- registering one silently held out NOTHING. Prototypes now come
+  from each stored problem's skeleton (falling back to normalizing its expression tokens);
+  black-box (`gt_kind="none"`) problems contribute nothing, by definition. Closes the
+  decontamination hole for measured-data catalogs ahead of the first frozen import
+  (`first-principles`).
+- **`Problem.from_data` normalizes reference predictions**: `y_reference_support` /
+  `y_reference_validation` are now coerced to float32 column vectors (like their `y`
+  counterparts) and shape-checked, instead of surviving to the npz as raw float64 1-d arrays.
+
+### Added
+- `first-principles` catalog (published to HF): the SRBench-2.0 phenomenological track -- 13 PMLB
+  `first_principles_*` measured/frozen datasets (MIT) with refit reference laws from
+  EmpiricalBench (Cranmer 2023), MvSR (Russeil et al. 2024), and Bazin et al. 2009; all entries
+  `gt_kind="reference"`, all points support (no validation split), reference predictions in
+  `y_reference_support`. Builder: `tools/build_first_principles.py` (deterministic; fitted
+  constants recover h/k, 2h/c^2, R_inf, G, R). Vendored inputs under
+  `assets/upstream/pmlb_first_principles/` (NOTICE inside).
+
 ## [0.12.1] - 2026-07-10
 
 ### Changed

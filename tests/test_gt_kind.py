@@ -53,7 +53,19 @@ def test_from_data_reference_conventions():
     assert p.noise is None                                                   # unknown measurement noise
     np.testing.assert_array_equal(p.y_support, p.y_support_noisy)            # measured y IS the target
     assert p.y_support_noisy is not p.y_support                              # copy, not alias
-    assert p.y_reference_support is ref
+    np.testing.assert_allclose(p.y_reference_support, ref)
+
+
+def test_from_data_normalizes_reference_arrays():
+    # reference predictions get the SAME normalization as y: float32 column vectors, shape-checked
+    # (a raw float64 1-d law prediction must not survive to the npz as-is).
+    x, y = _arrays()
+    p = Problem.from_data(x, y, expression=["*", "x1", "2.0"],
+                          y_reference_support=np.asarray(y, dtype=np.float64).ravel())
+    assert p.y_reference_support.dtype == np.float32
+    assert p.y_reference_support.shape == p.y_support.shape
+    with pytest.raises(ValueError, match="y_reference_support shape"):
+        Problem.from_data(x, y, expression=["*", "x1", "2.0"], y_reference_support=y[:3])
 
 
 def test_round_trip_mixed_catalog_npz(tmp_path):

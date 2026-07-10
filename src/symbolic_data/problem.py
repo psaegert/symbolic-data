@@ -208,6 +208,16 @@ class Problem:
                 skeleton = None
         if gt_kind is None:
             gt_kind = "reference" if (expression is not None or skeleton is not None) else "none"
+        # normalize the reference predictions like their y counterparts (float32, column vectors)
+        if y_reference_support is not None:
+            y_reference_support = np.asarray(y_reference_support, dtype=np.float32).reshape(-1, 1)
+            if y_reference_support.shape != y.shape:
+                raise ValueError(f"y_reference_support shape {y_reference_support.shape} != y shape {y.shape}")
+        if y_reference_validation is not None:
+            y_reference_validation = np.asarray(y_reference_validation, dtype=np.float32).reshape(-1, 1)
+            if y_reference_validation.shape != y_validation.shape:
+                raise ValueError(f"y_reference_validation shape {y_reference_validation.shape} != "
+                                 f"y_validation shape {y_validation.shape}")
         return cls(
             x_support=x,
             y_support=y,

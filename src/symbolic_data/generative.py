@@ -563,6 +563,21 @@ class LampleChartonCatalog(GenerativeCatalog):
                  holdout_pool_obj.variables, holdout_pool_obj.n_variables)
                 for sk in holdout_pool_obj.skeletons
             ]
+        elif getattr(holdout_pool_obj, "frozen", False):
+            # A FROZEN ProblemCatalog holds realized Problems (entries is empty) -- derive the
+            # prototypes from each problem's stored skeleton, falling back to normalizing its
+            # expression tokens. gt_kind="none" (black-box) problems carry neither and have
+            # nothing to hold out, by definition.
+            items = []
+            for problem in (holdout_pool_obj.problems or []):
+                tokens = problem.skeleton or problem.expression
+                if not tokens:
+                    continue
+                canonical = normalize_skeleton([str(token) for token in tokens])
+                if canonical is None:
+                    continue
+                items.append((self.get_structural_prototype(canonical), self.simplipy_engine,
+                              self.variables, self.n_variables))
         else:
             items = []
             for entry in holdout_pool_obj.iter_entries(np.random.default_rng()):

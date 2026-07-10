@@ -1,0 +1,17 @@
+Vendored copies of the PMLB "first_principles_*" datasets (13 tsv.gz files + metadata.yaml),
+fetched 2026-07-10 from https://github.com/EpistasisLab/pmlb (master; data via Git LFS media
+endpoint).
+
+License: MIT (PMLB). Copyright (c) 2016 Epistasis Lab at UPenn.
+
+Dataset provenance (per the PMLB metadata):
+- 10 datasets (hubble, kepler, newton, ideal_gas, planck, rydberg, leavitt, schechter, bode,
+  tully_fisher): EmpiricalBench, from "Interpretable machine learning for science with PySR and
+  SymbolicRegression.jl", M. Cranmer, arXiv:2305.01582 (2023).
+- 3 datasets (absorption, supernovae_zg, supernovae_zr): Multiview Symbolic Regression,
+  E. Russeil et al., GECCO 2024, doi:10.1145/3638529.3654087
+  (https://github.com/erusseil/MvSR-analysis).
+
+These files are the build input for the `first-principles` catalog
+(tools/build_first_principles.py); the metadata_*.yaml files ground each dataset's provenance,
+column semantics, and (where stated) the governing equation.

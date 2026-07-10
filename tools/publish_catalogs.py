@@ -55,6 +55,9 @@ CATALOGS = {
     "vladislavleva": ("vladislavleva.yaml", 8, "problem_catalog"),
     # P2 Feynman variant 3/3 (fastsrb + feynman already published)
     "srsd-dummy": ("srsd-dummy.yaml", 120, "problem_catalog"),
+    # P3 real-world GT: SRBench-2.0 phenomenological track (PMLB first_principles_*, MIT).
+    # FROZEN measured-data catalog (.npz): 13 datasets + refit reference laws, gt_kind=reference.
+    "first-principles": ("first-principles.npz", 13, "problem_catalog"),
 }
 
 

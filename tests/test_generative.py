@@ -83,3 +83,28 @@ def test_build_catalog_dispatch():
         build_catalog({"simplipy_engine": "dev_7-3"})  # mapping without a type
     with pytest.raises(ValueError, match="unknown generative catalog"):
         build_catalog({"type": "does_not_exist"})
+
+
+def test_register_holdout_pool_frozen_catalog_is_not_a_silent_noop(tmp_path):
+    # A FROZEN ProblemCatalog (materialized .npz, e.g. a measured-data import with reference laws)
+    # has `entries == {}`; the pre-fix registration iterated entries and silently registered NOTHING,
+    # leaving every frozen benchmark OUT of the two-layer training holdout. The prototypes must come
+    # from `.problems` (skeleton, falling back to expression tokens); gt_kind="none" (black-box)
+    # problems carry neither and contribute nothing, by definition.
+    from symbolic_data import Problem, ProblemCatalog
+
+    x = np.linspace(0.5, 2.5, 16)
+    with_law = Problem.from_data(x, np.sin(x), expression=["sin", "x1"], eq_id="lawful")
+    black_box = Problem.from_data(x, np.exp(x), eq_id="blackbox")
+    assert with_law.gt_kind == "reference" and black_box.gt_kind == "none"
+    frozen = ProblemCatalog.from_problems([with_law, black_box], name="frozen-probe")
+    npz = str(frozen.save(tmp_path / "frozen-probe"))
+
+    catalog = LampleChartonCatalog.from_config(_cfg())
+    catalog.register_holdout_pool(npz)
+    try:
+        assert ("sin", "x1") in catalog.holdout_skeletons     # pre-fix: empty set (silent no-op)
+        assert len(catalog.holdout_skeletons) == 1            # the black-box problem contributed nothing
+        assert len(catalog.holdout_y) >= 1                    # the grid-image layer registered too
+    finally:
+        catalog.clear_holdouts()
