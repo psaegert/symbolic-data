@@ -32,6 +32,14 @@ from scipy.optimize import curve_fit
 from symbolic_data import Problem, ProblemCatalog
 from symbolic_data._evaluation import compile_expression, load_engine
 
+
+def _is_number(token: str) -> bool:
+    try:
+        float(token)
+        return True
+    except (TypeError, ValueError):
+        return False
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 UPSTREAM = os.path.join(HERE, "..", "assets", "upstream", "pmlb_first_principles")
 OUT_NPZ = os.path.join(HERE, "..", "assets", "catalogs", "first-principles.npz")
@@ -59,6 +67,11 @@ class Law:
     notes: list[str] = field(default_factory=list)
     columns: list[str] = field(default_factory=list)
     target: str = ""
+    # Algebraically-equivalent canonical renderings of the SAME law (v-infix templates over the
+    # same {c}-placeholders, possibly derived constants): registered as additional holdout
+    # structures so the textbook form of a stabilized/rewritten stored law cannot evade the
+    # structure layer. Each is numerically verified against the fitted law on its finite domain.
+    alternates: Callable | None = None    # alternates(theta) -> list[str] (concrete v-infix)
 
 
 # ---------------------------------------------------------------- fitting helpers (deterministic)
@@ -159,7 +172,8 @@ def build_laws() -> list[Law]:
                "ln(c1 nu^3 / (exp(c2 nu/T) - 1)) -- the naive form overflows exp() at the "
                "support's max c2*nu/T = 1372 even in float64.",
                "Fitted constants recover the physics: c1 = 1.455e-50 vs 2h/c^2 = 1.47e-50, "
-               "c2 vs h/k = 4.799e-11.", "Synthetically generated per PMLB metadata."]))
+               "c2 vs h/k = 4.799e-11.", "Synthetically generated per PMLB metadata."],
+        alternates=lambda t: [f"log({t[0]!r}*((v1)**(3))/(exp({t[1]!r}*v1/v2)-1))"]))
 
     # -- rydberg: y = ln(lambda) = -ln(c1 (1/n1^2 - 1/n2^2)) ---------------------------------
     def m_rydberg(X, c1):
@@ -173,7 +187,8 @@ def build_laws() -> list[Law]:
         columns=["n_1", "n_2"], target="ln(wavelength / m)",
         notes=["Target verified to be the NATURAL LOG of the wavelength in meters "
                "(n1=1, n2=2 row reproduces ln(121.6 nm) = -15.92, the Lyman-alpha line).",
-               "Synthetically generated per PMLB metadata."]))
+               "Synthetically generated per PMLB metadata."],
+        alternates=lambda t: [f"log(1/({t[0]!r}*(1/((v1)**(2))-1/((v2)**(2)))))"]))
 
     # -- leavitt: M = c1 logP + c2 ------------------------------------------------------------
     def m_leavitt(X, c1, c2):
@@ -194,7 +209,12 @@ def build_laws() -> list[Law]:
         EMPIRICALBENCH, synthetic=True,
         columns=["L"], target="ln(number density)",
         notes=["Schechter function in log-density form: ln(phi* (L/L*)^alpha exp(-L/L*)) is linear "
-               "in [1, ln L, L].", "Synthetically generated per PMLB metadata."]))
+               "in [1, ln L, L].", "Synthetically generated per PMLB metadata."],
+        alternates=lambda t: [
+            # product form with the derived (phi*, alpha, L*): alpha = c2, L* = -1/c3,
+            # phi* = exp(c1 + c2 ln L*)
+            f"log({float(np.exp(t[0] + t[1] * np.log(-1.0 / t[2])))!r}"
+            f"*((v1/{-1.0 / t[2]!r})**({t[1]!r}))*exp(-v1/{-1.0 / t[2]!r}))"]))
 
     # -- bode: a = c1 + c2 exp(c3 n)  (canonical 0.4 + 0.3 * 2^n; c3 = ln 2) -------------------
     def m_bode(X, c1, c2, c3):
@@ -215,7 +235,8 @@ def build_laws() -> list[Law]:
         notes=["Bode's law 0.4 + 0.3*2^(n-1) rendered in exp-form (fitted c3 recovers ln 2; the "
                "dataset indexes Venus at n = 1, so the 2^(n-1) halving is absorbed into c2); "
                "Mercury ships as the PMLB sentinel n = -1000 (2^n underflows to exactly 0, as "
-               "intended)."]))
+               "intended)."],
+        alternates=lambda t: [f"{t[0]!r}+{t[1]!r}*(({float(np.exp(t[2]))!r})**(v1))"]))
 
     # -- tully_fisher: M = c1 ln(DV) + c2 (L ~ DV^2.5 in magnitudes) ---------------------------
     def m_tully(X, c1, c2):
@@ -318,14 +339,43 @@ def main() -> None:
         rel = np.max(np.abs(y_engine - y_ref) / np.maximum(np.abs(y_ref), 1e-30))
         assert rel < 1e-8, f"{law.eq_id}: engine rendering deviates from the fitted law (rel={rel:.2e})"
 
+        # the CONCRETE ground truth: literal tokens + parse-order constants (the realize-path
+        # convention; compiled["prefix"] is the masked SKELETON and must never land in expression)
+        expression = list(compiled["expression"])
+        constants = list(compiled["constants"])
+        skeleton = tuple(compiled["prefix"])
+        assert "<constant>" not in expression, f"{law.eq_id}: masked token leaked into expression"
+        assert len(constants) == sum(1 for tok in expression if _is_number(tok)), \
+            f"{law.eq_id}: constants/literals misaligned"
+
+        # alternate canonical renderings: verify each is numerically THE SAME LAW on its finite
+        # domain (a wrong alternate would silently hold out the wrong structure), then ship it
+        # in meta for holdout registration.
+        alternate_infixes: list[str] = []
+        for alt in (law.alternates(theta) if law.alternates else []):
+            alt_compiled = compile_expression(engine, f"{law.eq_id}:alt", alt, vars_info,
+                                              name="first-principles")
+            with np.errstate(all="ignore"):
+                y_alt = alt_compiled["callable"](*[X[i] for i in range(X.shape[0])])
+            y_alt = np.broadcast_to(np.asarray(y_alt, dtype=np.float64), y.shape)
+            finite = np.isfinite(y_alt)
+            assert finite.mean() >= 0.5, f"{law.eq_id}: alternate finite on <50% of support: {alt}"
+            rel_alt = np.max(np.abs(y_alt[finite] - y_ref[finite])
+                             / np.maximum(np.abs(y_ref[finite]), 1e-30))
+            assert rel_alt < 1e-6, f"{law.eq_id}: alternate deviates (rel={rel_alt:.2e}): {alt}"
+            assert tuple(alt_compiled["prefix"]) != skeleton, \
+                f"{law.eq_id}: alternate is structurally identical to the stored form: {alt}"
+            alternate_infixes.append(alt)
+
         gt_kind = "exact" if (law.synthetic and fvu <= 1e-12) else "reference"
         if law.synthetic and fvu > 1e-12:
             print(f"!! {law.eq_id}: metadata-synthetic but refit FVU={fvu:.3e} > 1e-12 -> kept 'reference'")
 
         problem = Problem.from_data(
             X.T, y,
-            expression=list(compiled["prefix"]),
-            constants=theta,
+            expression=expression,
+            skeleton=skeleton,
+            constants=constants,
             variables=list(compiled["variable_order"]),
             gt_kind=gt_kind,
             y_reference_support=y_ref,
@@ -335,6 +385,8 @@ def main() -> None:
                 "columns": law.columns,
                 "target": law.target,
                 "reference_law": law.infix_template,
+                "prepared_infix": infix,
+                "alternate_renderings": alternate_infixes,
                 "law_source": law.source,
                 "constant_policy": "least-squares refit on the full dataset (deterministic)",
                 "fitted_constants": theta,

@@ -1,5 +1,6 @@
 """The public GenerativeCatalog contract (the direct-use API flash-ansr + srbf baselines depend on)."""
 import os
+import warnings
 
 import numpy as np
 import pytest
@@ -106,5 +107,57 @@ def test_register_holdout_pool_frozen_catalog_is_not_a_silent_noop(tmp_path):
         assert ("sin", "x1") in catalog.holdout_skeletons     # pre-fix: empty set (silent no-op)
         assert len(catalog.holdout_skeletons) == 1            # the black-box problem contributed nothing
         assert len(catalog.holdout_y) >= 1                    # the grid-image layer registered too
+    finally:
+        catalog.clear_holdouts()
+
+
+def test_register_holdout_pool_frozen_alternate_renderings(tmp_path):
+    # A frozen problem may declare meta["alternate_renderings"] (v-infix): algebraically-equivalent
+    # canonical forms of its law (e.g. the textbook rendering of a log-stabilized stored form).
+    # BOTH structures must join the holdout; a bad alternate warns instead of registering silently.
+    from symbolic_data import Problem, ProblemCatalog
+
+    x = np.linspace(0.5, 2.5, 16)
+    p = Problem.from_data(
+        x, np.log(1.0 / x), expression=["log", "/", "1.0", "x1"], eq_id="stabilized",
+        meta={"alternate_renderings": ["-log(v1)"]})
+    frozen = ProblemCatalog.from_problems([p], name="alt-probe")
+    npz = str(frozen.save(tmp_path / "alt-probe"))
+
+    catalog = LampleChartonCatalog.from_config(_cfg())
+    catalog.register_holdout_pool(npz)
+    try:
+        # constant-stripped structural prototypes of BOTH renderings (log(c/x1) -> log(x1);
+        # -log(v1) -> neg(log(x1))): the alternate is a distinct registered structure.
+        assert ("log", "x1") in catalog.holdout_skeletons
+        assert ("neg", "log", "x1") in catalog.holdout_skeletons
+        assert len(catalog.holdout_skeletons) == 2
+    finally:
+        catalog.clear_holdouts()
+
+
+def test_register_holdout_pool_frozen_wider_than_catalog_keeps_image_layer(tmp_path):
+    # A frozen problem using MORE variables than the registering catalog must still register its
+    # functional image (pre-fix: codify bound only the catalog's variables, the NameError was
+    # swallowed, and the image layer was silently dropped for exactly those laws).
+    import yaml as _yaml
+    from symbolic_data import Problem, ProblemCatalog
+
+    rng = np.random.default_rng(0)
+    x = rng.uniform(0.5, 2.0, (32, 3))
+    y = x[:, 0] * x[:, 1] / x[:, 2]
+    p = Problem.from_data(x, y, expression=["/", "*", "x1", "x2", "x3"], eq_id="wide3")
+    frozen = ProblemCatalog.from_problems([p], name="wide-probe")
+    npz = str(frozen.save(tmp_path / "wide-probe"))
+
+    cfg = _cfg()
+    cfg["variables"] = ["x1", "x2"]          # registering catalog is NARROWER than the problem
+    catalog = LampleChartonCatalog.from_config(cfg)
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", RuntimeWarning)   # the old silent NameError path now warns
+        catalog.register_holdout_pool(npz)
+    try:
+        assert ("/", "*", "x1", "x2", "x3") in catalog.holdout_skeletons
+        assert len(catalog.holdout_y) == 1               # the image layer survived the width gap
     finally:
         catalog.clear_holdouts()

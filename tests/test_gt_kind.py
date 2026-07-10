@@ -99,3 +99,20 @@ def test_mask_unused_variable_columns_noop_without_skeleton():
     before = x.copy()
     mask_unused_variable_columns([x], variables=["x1", "x2"], skeleton_tokens=None)
     np.testing.assert_array_equal(x, before)                                 # black-box: keep all columns
+
+
+def test_from_data_rejects_nonfinite_and_orphan_reference():
+    # (1) A reference baseline must be finite on its own support: the float32 cast silently maps
+    # out-of-range float64 (e.g. 1e50 from a non-log-space law rendering) to inf, which would
+    # poison every downstream reference_fvu. (2) y_reference_* without a reference/exact structure
+    # (gt_kind='none') is an inconsistent record and is rejected outright.
+    x, y = _arrays()
+    with pytest.raises(ValueError, match="non-finite"):
+        Problem.from_data(x, y, expression=["*", "x1", "2.0"],
+                          y_reference_support=np.full(len(y), 1e50, dtype=np.float64))
+    with pytest.raises(ValueError, match="non-finite"):
+        ref = np.asarray(y, dtype=np.float64).copy()
+        ref[0] = np.nan
+        Problem.from_data(x, y, expression=["*", "x1", "2.0"], y_reference_support=ref)
+    with pytest.raises(ValueError, match="reference/exact structure"):
+        Problem.from_data(x, y, y_reference_support=y.copy())

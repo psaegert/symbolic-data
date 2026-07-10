@@ -208,16 +208,28 @@ class Problem:
                 skeleton = None
         if gt_kind is None:
             gt_kind = "reference" if (expression is not None or skeleton is not None) else "none"
-        # normalize the reference predictions like their y counterparts (float32, column vectors)
+        if gt_kind == "none" and (y_reference_support is not None or y_reference_validation is not None):
+            raise ValueError("y_reference_* requires a reference/exact structure; a black-box "
+                             "(gt_kind='none') problem has no reference law to predict with")
+        # normalize the reference predictions like their y counterparts (float32, column vectors);
+        # reject non-finite baselines -- a reference law must be finite on its own support, and the
+        # float32 cast silently maps out-of-range float64 values (e.g. a non-log-space rendering of
+        # a wide-dynamic-range law) to inf, which would poison every reference_fvu downstream.
         if y_reference_support is not None:
             y_reference_support = np.asarray(y_reference_support, dtype=np.float32).reshape(-1, 1)
             if y_reference_support.shape != y.shape:
                 raise ValueError(f"y_reference_support shape {y_reference_support.shape} != y shape {y.shape}")
+            if not np.all(np.isfinite(y_reference_support)):
+                raise ValueError("y_reference_support contains non-finite values (possibly a "
+                                 "float32-range overflow); fix the reference rendering or exclude the points")
         if y_reference_validation is not None:
             y_reference_validation = np.asarray(y_reference_validation, dtype=np.float32).reshape(-1, 1)
             if y_reference_validation.shape != y_validation.shape:
                 raise ValueError(f"y_reference_validation shape {y_reference_validation.shape} != "
                                  f"y_validation shape {y_validation.shape}")
+            if not np.all(np.isfinite(y_reference_validation)):
+                raise ValueError("y_reference_validation contains non-finite values (possibly a "
+                                 "float32-range overflow); fix the reference rendering or exclude the points")
         return cls(
             x_support=x,
             y_support=y,

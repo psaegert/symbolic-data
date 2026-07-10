@@ -57,7 +57,15 @@ class HoldoutManager:
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
                 key = self._evaluate_to_key(compiled_fn, num_constants, n_variables)
-        except (OverflowError, NameError):
+        except (OverflowError, NameError) as exc:
+            # The structure layer is registered; only the functional-image layer is lost. That
+            # is a real degradation of the equivalence backstop for THIS skeleton, so say so
+            # instead of silently returning (a swallowed NameError here hid a variable-binding
+            # bug for wider-than-catalog holdout laws).
+            warnings.warn(
+                f"holdout image registration failed for skeleton {skeleton_key!r} "
+                f"({type(exc).__name__}: {exc}); only the exact-structure layer covers it",
+                RuntimeWarning, stacklevel=2)
             return
 
         self.expression_images.add(key)

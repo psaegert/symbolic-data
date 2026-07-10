@@ -567,17 +567,44 @@ class LampleChartonCatalog(GenerativeCatalog):
             # A FROZEN ProblemCatalog holds realized Problems (entries is empty) -- derive the
             # prototypes from each problem's stored skeleton, falling back to normalizing its
             # expression tokens. gt_kind="none" (black-box) problems carry neither and have
-            # nothing to hold out, by definition.
+            # nothing to hold out, by definition. A problem MAY additionally declare
+            # meta["alternate_renderings"] (v-infix strings): algebraically-equivalent forms of
+            # its law (e.g. the textbook Planck rendering of a log-stabilized stored form) that
+            # must join the holdout too -- the stored rendering alone would let the canonical
+            # form of the same law evade the structure layer.
             items = []
             for problem in (holdout_pool_obj.problems or []):
+                candidates: list[list[str]] = []
                 tokens = problem.skeleton or problem.expression
-                if not tokens:
+                if tokens:
+                    candidates.append([str(token) for token in tokens])
+                for alternate in (problem.meta or {}).get("alternate_renderings", []):
+                    try:
+                        candidates.append(self.simplipy_engine.infix_to_prefix(alternate))
+                    except Exception:  # noqa: BLE001 - a bad alternate must be loud, not fatal
+                        warnings.warn(
+                            f"holdout pool {holdout_pool_obj.name!r}: alternate rendering of "
+                            f"{problem.eq_id!r} failed to parse and is NOT held out: {alternate!r}",
+                            RuntimeWarning, stacklevel=2)
+                if not candidates and getattr(problem, "gt_kind", None) != "none":
+                    warnings.warn(
+                        f"holdout pool {holdout_pool_obj.name!r}: problem {problem.eq_id!r} has "
+                        f"gt_kind={problem.gt_kind!r} but no usable tokens; it contributes NOTHING "
+                        f"to the holdout", RuntimeWarning, stacklevel=2)
                     continue
-                canonical = normalize_skeleton([str(token) for token in tokens])
-                if canonical is None:
-                    continue
-                items.append((self.get_structural_prototype(canonical), self.simplipy_engine,
-                              self.variables, self.n_variables))
+                registered_any = False
+                for candidate in candidates:
+                    canonical = normalize_skeleton(candidate)
+                    if canonical is None:
+                        continue
+                    registered_any = True
+                    items.append((self.get_structural_prototype(canonical), self.simplipy_engine,
+                                  self.variables, self.n_variables))
+                if candidates and not registered_any and getattr(problem, "gt_kind", None) != "none":
+                    warnings.warn(
+                        f"holdout pool {holdout_pool_obj.name!r}: no rendering of {problem.eq_id!r} "
+                        f"could be canonicalized; it contributes NOTHING to the holdout",
+                        RuntimeWarning, stacklevel=2)
         else:
             items = []
             for entry in holdout_pool_obj.iter_entries(np.random.default_rng()):
@@ -598,7 +625,18 @@ class LampleChartonCatalog(GenerativeCatalog):
             executable_prefix_expression = engine.operators_to_realizations(no_constant_expression)
             prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
             code_string = engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
-            code = codify(code_string, variables + constants)
+            # Bind exactly the prototype's own width (mirror of the is_held_out binding): a
+            # holdout prototype may use MORE variables than this catalog declares; binding only
+            # self.variables made codify NameError inside register_skeleton, silently dropping
+            # the functional-image layer for wider laws.
+            used_indices = [int(token[1:]) for token in no_constant_expression
+                            if isinstance(token, str) and token.startswith("x") and token[1:].isdigit()]
+            width = max([n_variables] + used_indices) if used_indices else n_variables
+            if width <= len(variables):
+                bound_variables = list(variables[:width])
+            else:
+                bound_variables = list(variables) + [f"x{i}" for i in range(len(variables) + 1, width + 1)]
+            code = codify(code_string, bound_variables + constants)
             compiled_fn = engine.code_to_lambda(code)
 
             with warnings.catch_warnings():
@@ -607,7 +645,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                     no_constant_expression,
                     compiled_fn,
                     num_constants=len(constants),
-                    n_variables=n_variables,
+                    n_variables=width,
                 )
 
     def clear_holdouts(self) -> None:

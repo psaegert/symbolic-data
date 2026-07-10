@@ -50,10 +50,25 @@ def main() -> None:
             continue
         from symbolic_data import ProblemCatalog
         for problem in ProblemCatalog.from_npz(path).problems or []:
-            if problem.skeleton is None:
+            # identity must live in the SAME space as the yaml branch (parse of a prepared infix,
+            # literals masked): the stored problem.skeleton comes from compile_expression's
+            # simplify pass, which reassociates constants differently from engine.parse -- keying
+            # on it silently under-clusters equivalent entries. meta.prepared_infix (written by
+            # frozen builders) goes through the identical pipeline as yaml `prepared`.
+            prepared = (problem.meta or {}).get("prepared_infix")
+            if prepared:
+                try:
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("ignore")
+                        prefix = engine.parse(prepared, mask_numbers=True)
+                        skel = tuple(normalize_skeleton([str(t) for t in prefix]))
+                except Exception as exc:
+                    skel = ("UNPARSED", str(exc)[:40])
+            elif problem.skeleton is not None:
+                skel = tuple(problem.skeleton)      # fallback: stored-skeleton space (may under-cluster)
+            else:
                 continue           # black-box: nothing to identify (and nothing to hold out)
-            groups[(tuple(problem.skeleton), int(problem.x_support.shape[1]))].append(
-                f"{name}:{problem.eq_id}")
+            groups[(skel, int(problem.x_support.shape[1]))].append(f"{name}:{problem.eq_id}")
 
     clusters = {f"eq{i:04d}": sorted(members)
                 for i, ((skel, n), members) in enumerate(sorted(groups.items(), key=lambda kv: kv[1][0]))

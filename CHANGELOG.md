@@ -3,6 +3,34 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.12.3] - 2026-07-10
+
+### Fixed
+- **Holdout registration hardening** (adversarial review of 0.12.2, three verified findings):
+  (1) frozen problems may declare `meta["alternate_renderings"]` (v-infix) and every rendering
+  joins the structure layer -- previously the textbook Planck form evaded BOTH holdout layers
+  because only the log-stabilized stored rendering was registered (executed probe: 12/13
+  standard-form laws held out, naive Planck NOT; now 13/13 + 4 alternates). (2) The
+  `register_holdout_pool` tail now binds each prototype's OWN variable width (mirror of the
+  `is_held_out` binding), so laws wider than the registering catalog keep their functional-image
+  layer instead of a swallowed NameError silently dropping it. (3) Image-registration failures
+  and reference problems contributing nothing now WARN instead of passing silently.
+- **`Problem.from_data` rejects invalid reference baselines**: non-finite `y_reference_*` values
+  (e.g. a float32-range overflow from a non-log-space law rendering) and `y_reference_*` on a
+  black-box problem (`gt_kind="none"`) now raise instead of shipping inconsistent records.
+
+### Changed
+- **`first-principles` catalog REPUBLISHED (same-day correction of the initial v1 publish, no
+  downstream consumers existed):** the initial artifact stored the masked skeleton
+  (`<constant>` placeholders) in `Problem.expression` with a misaligned constants list; the
+  corrected artifact stores the concrete literal-token expression + parse-order constants (the
+  realize-path convention; verified: 13/13 expressions evaluable and reproducing
+  `y_reference_support` to <1e-5 rel), plus `meta.prepared_infix` (registry identity in the same
+  parse space as yaml catalogs) and `meta.alternate_renderings` (planck textbook, rydberg
+  log(1/.), schechter product form, bode base-2 pow form; each numerically verified equivalent
+  on its finite domain). An independent BLIND re-derivation from the raw PMLB data confirmed all
+  13 law forms, constants, and FVUs before republication.
+
 ## [0.12.2] - 2026-07-10
 
 ### Fixed
