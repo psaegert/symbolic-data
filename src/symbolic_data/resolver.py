@@ -93,6 +93,7 @@ def _parse_ref(ref: str) -> tuple[str | None, str, int | None]:
 
 
 _MANIFEST_CACHE: dict[tuple[str, str], dict[str, Any]] = {}
+_MANIFEST_FETCH_ERRORS: dict = {}
 
 
 def fetch_manifest(repo_id: str | None = None, manifest_filename: str | None = None) -> dict[str, Any]:
@@ -117,7 +118,10 @@ def fetch_manifest(repo_id: str | None = None, manifest_filename: str | None = N
             filename=key[1],
             repo_type="dataset",
         )
-    except (HfHubHTTPError, OSError):
+    except (HfHubHTTPError, OSError) as exc:
+        # remember the cause so a later "not in the manifest" error can say WHY the manifest
+        # is empty (offline / HTTP failure) instead of implying the name does not exist
+        _MANIFEST_FETCH_ERRORS[key] = f"{type(exc).__name__}: {exc}"
         return {}
     with open(manifest_path, "r", encoding="utf-8") as handle:
         manifest = json.load(handle)
@@ -167,8 +171,14 @@ def resolve(
     manifest = fetch_manifest(repo_id=effective_repo, manifest_filename=manifest_filename)
     entry = manifest.get(name) if manifest else None
     if entry is None:
+        _mkey = (effective_repo or HF_MANIFEST_REPO, manifest_filename or HF_MANIFEST_FILENAME)
+        fetch_note = ""
+        if _mkey in _MANIFEST_FETCH_ERRORS:
+            # the name may well exist -- the MANIFEST could not be fetched (offline / HTTP error)
+            fetch_note = (f" (NOTE: the manifest itself could not be fetched -- "
+                          f"{_MANIFEST_FETCH_ERRORS[_mkey]}; offline with a cold cache?)")
         raise ResolverError(
-            f"Could not resolve {ref!r}: not a local path and not in the manifest"
+            f"Could not resolve {ref!r}: not a local path and not in the manifest{fetch_note}"
             f"{' (repo ' + effective_repo + ')' if effective_repo else ''}. "
             "Bare names resolve from Hugging Face (network needed on first use); pass an explicit "
             "local path for offline operation."
@@ -215,7 +225,10 @@ def _resolve_from_manifest(
             if filename in sha:
                 actual = _sha256(local)
                 if actual != sha[filename]:
-                    raise IntegrityError(f"sha256 mismatch for {name}@{resolved_version}/{filename}: expected {sha[filename]}, got {actual}")
+                    raise IntegrityError(
+                        f"sha256 mismatch for {name}@{resolved_version}/{filename}: expected "
+                        f"{sha[filename]}, got {actual}. The cached copy is corrupted and will "
+                        f"NOT self-heal; delete it to force a re-download: {local}")
             else:
                 warnings.warn(
                     f"No sha256 in manifest for {name}@{resolved_version}/{filename}; integrity NOT verified for this file.",
