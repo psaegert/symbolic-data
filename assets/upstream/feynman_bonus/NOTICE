@@ -1,0 +1,17 @@
+BonusEquations.csv: the machine-readable spec of the AI-Feynman BONUS equation set (20 named
+physics results; Feynman Symbolic Regression Database, Udrescu & Tegmark 2020, Science Advances
+6(16):eaay2631). The original host (space.mit.edu/home/tegmark/aifeynman.html) is DEAD (MIT Kavli
+site redesign); this copy is the canonical surviving artifact, vendored verbatim from
+WassimTenachi/PhySO (MIT; commit bfbfa88) physo/benchmark/FeynmanDataset/BonusEquations.csv.
+
+Like feynman@1 (main set): the original AIFeynman DATA files are unlicensed, so we regenerate
+from the equation specs (formulas + uniform sampling ranges = cited derived facts); nothing from
+the original data distribution is redistributed.
+
+Known errata (applied + asserted by tools/build_feynman_bonus.py, following PhySO's documented
+fix in FeynmanProblem.py): the '# variables' column undercounts test_12 (4->5), test_13 (4->5),
+test_18 (4->5), test_19 (5->6) — a count-driven parser silently drops the last variable.
+
+Build input for feynman-bonus@1. The same 20 equations exist in their SRSD rendering as
+fastsrb@1 B1-B20 and srsd-dummy@1 B1-B20; this catalog is the aifeynman-original rendering
+(3rd of 3, mirroring the main set's variant structure), with 1:1 base_eq_id links recorded.

@@ -81,6 +81,10 @@ CATALOGS = {
     "erbench-densities": ("erbench-densities.yaml", 33, "problem_catalog"),
     # P6 black-box tier (gt_kind='none', eval-only): GT-free cp3-bench discovery sets.
     "cp3-blackbox": ("cp3-blackbox.npz", 11, "problem_catalog"),
+    # P6: SRBench 2.0 black-box 12-selection (PMLB, MIT; fri_c0 pair = verified z-scored
+    # Friedman-1 references) + the AI-Feynman BONUS set (aifeynman-original rendering, 3rd of 3).
+    "srbench2-blackbox": ("srbench2-blackbox.npz", 12, "problem_catalog"),
+    "feynman-bonus": ("feynman-bonus.yaml", 20, "problem_catalog"),
 }
 
 

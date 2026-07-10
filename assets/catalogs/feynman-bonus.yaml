@@ -1,0 +1,1112 @@
+metadata:
+  name: feynman-bonus
+  version: 1
+  description: AI-Feynman BONUS set (20 named physics results), aifeynman-original rendering — the 3rd rendering
+    of the bonus set alongside fastsrb B1-B20 (SRSD) and srsd-dummy B1-B20, mirroring the main set's variant structure.
+  sources: &id001
+  - Feynman Symbolic Regression Database BONUS set (Udrescu & Tegmark 2020, Science Advances 6(16):eaay2631)
+  - BonusEquations.csv vendored from WassimTenachi/PhySO (MIT, commit bfbfa88) — the canonical surviving copy (the
+    original space.mit.edu host is dead); see assets/upstream/feynman_bonus/NOTICE
+  license: specs regenerated from the equation database (formulas + ranges = cited derived facts; original data
+    files unlicensed and NOT redistributed); csv copy via PhySO (MIT)
+  sampling_defaults:
+    n_points: 100
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: per-variable uniform in the original integer-endpoint boxes; singularity-free (verified); per-point
+      rejection conditioning as everywhere.
+    errata: the csv's '# variables' column undercounts test_12/13/18/19; corrected + asserted (PhySO's documented
+      fix).
+    variants: 1:1 base_eq_id links to fastsrb B<N>; renderings join the union holdout independently. ERBench's Feynman
+      collection drops bonus_10 (arccos) — this catalog keeps the arccos original.
+expressions:
+  B1:
+    raw: (Z_1*Z_2*alpha*hbar*c/(4*E_n*sin(theta/2)**2))**2
+    prepared: (v1*v2*v3*v4*v5/(4*v6*sin(v7/2)**2))**2
+    n_variables: 7
+    sources: *id001
+    vars:
+      v1:
+        name: Z_1
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: Z_2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: hbar
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: c
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: E_n
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: theta
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: A
+    meta:
+      bonus_filename: test_1
+      bonus_name: Rutherford scattering
+      base_catalog: fastsrb@1
+      base_eq_id: B1
+  B2:
+    raw: m*k_G/L**2*(1+sqrt(1+2*E_n*L**2/(m*k_G**2))*cos(theta1-theta2))
+    prepared: v1*v2/v3**2*(1+sqrt(1+2*v4*v3**2/(v1*v2**2))*cos(v5-v6))
+    n_variables: 6
+    sources: *id001
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: k_G
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: L
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: E_n
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: theta2
+        sample_range:
+        - 0.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: k
+    meta:
+      bonus_filename: test_2
+      bonus_name: 3.55 Goldstein
+      base_catalog: fastsrb@1
+      base_eq_id: B2
+  B3:
+    raw: d*(1-alpha**2)/(1+alpha*cos(theta1-theta2))
+    prepared: v1*(1-v2**2)/(1+v2*cos(v3-v4))
+    n_variables: 4
+    sources: *id001
+    vars:
+      v1:
+        name: d
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: alpha
+        sample_range:
+        - 2.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 4.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: theta2
+        sample_range:
+        - 4.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: r
+    meta:
+      bonus_filename: test_3
+      bonus_name: 3.64 Goldstein
+      base_catalog: fastsrb@1
+      base_eq_id: B3
+  B4:
+    raw: sqrt(2/m*(E_n-U-L**2/(2*m*r**2)))
+    prepared: sqrt(2/v1*(v2-v3-v4**2/(2*v1*v5**2)))
+    n_variables: 5
+    sources: *id001
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: E_n
+        sample_range:
+        - 8.0
+        - 12.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: U
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: L
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: r
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: v
+    meta:
+      bonus_filename: test_4
+      bonus_name: 3.16 Goldstein
+      base_catalog: fastsrb@1
+      base_eq_id: B4
+  B5:
+    raw: 2*pi*d**(3/2)/sqrt(G*(m1+m2))
+    prepared: 2*3.141592653589793*v1**(3/2)/sqrt(v2*(v3+v4))
+    n_variables: 4
+    sources: *id001
+    vars:
+      v1:
+        name: d
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: G
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: m1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: m2
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: t
+    meta:
+      bonus_filename: test_5
+      bonus_name: 3.74 Goldstein
+      base_catalog: fastsrb@1
+      base_eq_id: B5
+  B6:
+    raw: sqrt(1+2*epsilon**2*E_n*L**2/(m*(Z_1*Z_2*q**2)**2))
+    prepared: sqrt(1+2*v1**2*v7*v2**2/(v3*(v4*v5*v6**2)**2))
+    n_variables: 7
+    sources: *id001
+    vars:
+      v1:
+        name: epsilon
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: L
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: m
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: Z_1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: Z_2
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: q
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: E_n
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: alpha
+    meta:
+      bonus_filename: test_6
+      bonus_name: 3.99 Goldstein
+      base_catalog: fastsrb@1
+      base_eq_id: B6
+  B7:
+    raw: sqrt(8*pi*G*rho/3-alpha*c**2/d**2)
+    prepared: sqrt(8*3.141592653589793*v1*v2/3-v3*v4**2/v5**2)
+    n_variables: 5
+    sources: *id001
+    vars:
+      v1:
+        name: G
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: rho
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: c
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: d
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: H_G
+    meta:
+      bonus_filename: test_7
+      bonus_name: Friedman Equation
+      base_catalog: fastsrb@1
+      base_eq_id: B7
+  B8:
+    raw: E_n/(1+E_n/(m*c**2)*(1-cos(theta)))
+    prepared: v1/(1+v1/(v2*v3**2)*(1-cos(v4)))
+    n_variables: 4
+    sources: *id001
+    vars:
+      v1:
+        name: E_n
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: m
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: c
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: theta
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: K
+    meta:
+      bonus_filename: test_8
+      bonus_name: Compton Scattering
+      base_catalog: fastsrb@1
+      base_eq_id: B8
+  B9:
+    raw: -32/5*G**4/c**5*(m1*m2)**2*(m1+m2)/r**5
+    prepared: -32/5*v1**4/v2**5*(v3*v4)**2*(v3+v4)/v5**5
+    n_variables: 5
+    sources: *id001
+    vars:
+      v1:
+        name: G
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: m1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: m2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: r
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: Pwr
+    meta:
+      bonus_filename: test_9
+      bonus_name: Gravitational wave ratiated power
+      base_catalog: fastsrb@1
+      base_eq_id: B9
+  B10:
+    raw: arccos((cos(theta2)-v/c)/(1-v/c*cos(theta2)))
+    prepared: acos((cos(v3)-v2/v1)/(1-v2/v1*cos(v3)))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: c
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: v
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta2
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: theta1
+    meta:
+      bonus_filename: test_10
+      bonus_name: Relativistic aberation
+      base_catalog: fastsrb@1
+      base_eq_id: B10
+  B11:
+    raw: I_0*(sin(alpha/2)*sin(n*delta/2)/(alpha/2*sin(delta/2)))**2
+    prepared: v1*(sin(v2/2)*sin(v4*v3/2)/(v2/2*sin(v3/2)))**2
+    n_variables: 4
+    sources: *id001
+    vars:
+      v1:
+        name: I_0
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: delta
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: n
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: I
+    meta:
+      bonus_filename: test_11
+      bonus_name: N-slit diffraction
+      base_catalog: fastsrb@1
+      base_eq_id: B11
+  B12:
+    raw: q/(4*pi*epsilon*y**2)*(4*pi*epsilon*Volt*d-q*d*y**3/(y**2-d**2)**2)
+    prepared: v1/(4*3.141592653589793*v5*v2**2)*(4*3.141592653589793*v5*v3*v4-v1*v4*v2**3/(v2**2-v4**2)**2)
+    n_variables: 5
+    sources: *id001
+    vars:
+      v1:
+        name: q
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: Volt
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: epsilon
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: F
+    meta:
+      bonus_filename: test_12
+      bonus_name: 2.11 Jackson
+      base_catalog: fastsrb@1
+      base_eq_id: B12
+      variables_count_corrected: 4->5
+  B13:
+    raw: 1/(4*pi*epsilon)*q/sqrt(r**2+d**2-2*r*d*cos(alpha))
+    prepared: 1/(4*3.141592653589793*v5)*v1/sqrt(v2**2+v3**2-2*v2*v3*cos(v4))
+    n_variables: 5
+    sources: *id001
+    vars:
+      v1:
+        name: q
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: r
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: d
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: alpha
+        sample_range:
+        - 0.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: epsilon
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: Volt
+    meta:
+      bonus_filename: test_13
+      bonus_name: 3.45 Jackson
+      base_catalog: fastsrb@1
+      base_eq_id: B13
+      variables_count_corrected: 4->5
+  B14:
+    raw: Ef*cos(theta)*(-r+d**3/r**2*(alpha-1)/(alpha+2))
+    prepared: v1*cos(v2)*(-v3+v4**3/v3**2*(v5-1)/(v5+2))
+    n_variables: 5
+    sources: *id001
+    vars:
+      v1:
+        name: Ef
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 0.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: r
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: Volt
+    meta:
+      bonus_filename: test_14
+      bonus_name: 4.60' Jackson
+      base_catalog: fastsrb@1
+      base_eq_id: B14
+  B15:
+    raw: sqrt(1-v**2/c**2)*omega/(1+v/c*cos(theta))
+    prepared: sqrt(1-v2**2/v1**2)*v3/(1+v2/v1*cos(v4))
+    n_variables: 4
+    sources: *id001
+    vars:
+      v1:
+        name: c
+        sample_range:
+        - 5.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: v
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: omega
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: theta
+        sample_range:
+        - 0.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: omega_0
+    meta:
+      bonus_filename: test_15
+      bonus_name: 11.38 Jackson
+      base_catalog: fastsrb@1
+      base_eq_id: B15
+  B16:
+    raw: sqrt((p-q*A_vec)**2*c**2+m**2*c**4)+q*Volt
+    prepared: sqrt((v3-v4*v5)**2*v2**2+v1**2*v2**4)+v4*v6
+    n_variables: 6
+    sources: *id001
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: p
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: q
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: A_vec
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: Volt
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: E_n
+    meta:
+      bonus_filename: test_16
+      bonus_name: 8.56 Goldstein
+      base_catalog: fastsrb@1
+      base_eq_id: B16
+  B17:
+    raw: 1/(2*m)*(p**2+m**2*omega**2*x**2*(1+alpha*x/y))
+    prepared: 1/(2*v1)*(v3**2+v1**2*v2**2*v5**2*(1+v6*v5/v4))
+    n_variables: 6
+    sources: *id001
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: omega
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: p
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: E_n
+    meta:
+      bonus_filename: test_17
+      bonus_name: 12.80' Goldstein
+      base_catalog: fastsrb@1
+      base_eq_id: B17
+  B18:
+    raw: 3/(8*pi*G)*(c**2*k_f/r**2+H_G**2)
+    prepared: 3/(8*3.141592653589793*v1)*(v5**2*v2/v3**2+v4**2)
+    n_variables: 5
+    sources: *id001
+    vars:
+      v1:
+        name: G
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: k_f
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: r
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: H_G
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: c
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: rho_0
+    meta:
+      bonus_filename: test_18
+      bonus_name: 15.2.1 Weinberg
+      base_catalog: fastsrb@1
+      base_eq_id: B18
+      variables_count_corrected: 4->5
+  B19:
+    raw: -1/(8*pi*G)*(c**4*k_f/r**2+H_G**2*c**2*(1-2*alpha))
+    prepared: -1/(8*3.141592653589793*v1)*(v6**4*v2/v3**2+v4**2*v6**2*(1-2*v5))
+    n_variables: 6
+    sources: *id001
+    vars:
+      v1:
+        name: G
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: k_f
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: r
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: H_G
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: c
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: pr
+    meta:
+      bonus_filename: test_19
+      bonus_name: 15.2.2 Weinberg
+      base_catalog: fastsrb@1
+      base_eq_id: B19
+      variables_count_corrected: 5->6
+  B20:
+    raw: 1/(4*pi)*alpha**2*h**2/(m**2*c**2)*(omega_0/omega)**2*(omega_0/omega+omega/omega_0-sin(beta)**2)
+    prepared: 1/(4*3.141592653589793)*v3**2*v4**2/(v5**2*v6**2)*(v2/v1)**2*(v2/v1+v1/v2-sin(v7)**2)
+    n_variables: 7
+    sources: *id001
+    vars:
+      v1:
+        name: omega
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: omega_0
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: h
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: m
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: c
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: beta
+        sample_range:
+        - 0.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: A
+    meta:
+      bonus_filename: test_20
+      bonus_name: Klein-Nishina (13.132 Schwarz)
+      base_catalog: fastsrb@1
+      base_eq_id: B20

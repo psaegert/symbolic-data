@@ -521,6 +521,26 @@
   "soose-fc:SOOSE-FC-197": "soose-nc:SOOSE-NC-197",
   "soose-fc:SOOSE-FC-198": "soose-nc:SOOSE-NC-198",
   "soose-fc:SOOSE-FC-199": "soose-nc:SOOSE-NC-199",
+  "feynman-bonus:B1": "fastsrb:B1",
+  "feynman-bonus:B2": "fastsrb:B2",
+  "feynman-bonus:B3": "fastsrb:B3",
+  "feynman-bonus:B4": "fastsrb:B4",
+  "feynman-bonus:B5": "fastsrb:B5",
+  "feynman-bonus:B6": "fastsrb:B6",
+  "feynman-bonus:B7": "fastsrb:B7",
+  "feynman-bonus:B8": "fastsrb:B8",
+  "feynman-bonus:B9": "fastsrb:B9",
+  "feynman-bonus:B10": "fastsrb:B10",
+  "feynman-bonus:B11": "fastsrb:B11",
+  "feynman-bonus:B12": "fastsrb:B12",
+  "feynman-bonus:B13": "fastsrb:B13",
+  "feynman-bonus:B14": "fastsrb:B14",
+  "feynman-bonus:B15": "fastsrb:B15",
+  "feynman-bonus:B16": "fastsrb:B16",
+  "feynman-bonus:B17": "fastsrb:B17",
+  "feynman-bonus:B18": "fastsrb:B18",
+  "feynman-bonus:B19": "fastsrb:B19",
+  "feynman-bonus:B20": "fastsrb:B20",
   "ai-descartes:fsrd-noise:I.10.7": "feynman:I.10.7",
   "ai-descartes:fsrd-noise:I.11.19": "feynman:I.11.19",
   "ai-descartes:fsrd-noise:I.12.1": "feynman:I.12.1",
@@ -604,8 +624,8 @@
   "ai-descartes:fsrd-noise:III.7.38": "feynman:III.7.38"
  },
  "known_limit": "skeleton identity is variable-index-sensitive (canonicalization of variable order is a deferred decision); explicit links cover variant catalogs, and every rendering joins the union holdout independently",
- "n_entries_total": 10480,
- "n_unique_problems": 7854,
+ "n_entries_total": 10502,
+ "n_unique_problems": 7876,
  "n_cross_or_intra_duplicate_clusters": 490,
  "clusters": {
   "eq0001": [
@@ -3956,17 +3976,17 @@
    "fastsrb:I.43.16",
    "fastsrb:II.38.3"
   ],
-  "eq6857": [
+  "eq6877": [
    "ai-descartes:fsrd-noise:I.10.7",
    "ai-descartes:fsrd-noise:II.13.23",
    "feynman:I.10.7",
    "feynman:II.13.23"
   ],
-  "eq6858": [
+  "eq6878": [
    "ai-descartes:fsrd-noise:I.11.19",
    "feynman:I.11.19"
   ],
-  "eq6859": [
+  "eq6879": [
    "ai-descartes:fsrd-noise:I.12.1",
    "ai-descartes:fsrd-noise:I.12.5",
    "erbench-eponymous:eponymous_110",
@@ -3978,57 +3998,57 @@
    "feynman:I.12.1",
    "feynman:I.12.5"
   ],
-  "eq6861": [
+  "eq6881": [
    "ai-descartes:fsrd-noise:I.12.2",
    "feynman:I.12.2"
   ],
-  "eq6862": [
+  "eq6882": [
    "ai-descartes:fsrd-noise:I.12.4",
    "feynman:I.12.4"
   ],
-  "eq6863": [
+  "eq6883": [
    "ai-descartes:fsrd-noise:I.13.12",
    "feynman:I.13.12"
   ],
-  "eq6864": [
+  "eq6884": [
    "ai-descartes:fsrd-noise:I.13.4",
    "feynman:I.13.4"
   ],
-  "eq6865": [
+  "eq6885": [
    "ai-descartes:fsrd-noise:I.14.3",
    "feynman:I.14.3"
   ],
-  "eq6866": [
+  "eq6886": [
    "ai-descartes:fsrd-noise:I.14.4",
    "feynman:I.14.4"
   ],
-  "eq6867": [
+  "eq6887": [
    "ai-descartes:fsrd-noise:I.15.1",
    "ai-descartes:fsrd-noise:II.13.34",
    "feynman:I.15.1",
    "feynman:II.13.34"
   ],
-  "eq6868": [
+  "eq6888": [
    "ai-descartes:fsrd-noise:I.15.3t",
    "feynman:I.15.3t"
   ],
-  "eq6869": [
+  "eq6889": [
    "ai-descartes:fsrd-noise:I.15.3x",
    "feynman:I.15.3x"
   ],
-  "eq6870": [
+  "eq6890": [
    "ai-descartes:fsrd-noise:I.16.6",
    "feynman:I.16.6"
   ],
-  "eq6873": [
+  "eq6893": [
    "ai-descartes:fsrd-noise:I.18.4",
    "feynman:I.18.4"
   ],
-  "eq6874": [
+  "eq6894": [
    "ai-descartes:fsrd-noise:I.24.6",
    "feynman:I.24.6"
   ],
-  "eq6875": [
+  "eq6895": [
    "ai-descartes:fsrd-noise:I.25.13",
    "ai-descartes:fsrd-noise:I.29.4",
    "erbench-eponymous:eponymous_102",
@@ -4042,31 +4062,31 @@
    "feynman:I.25.13",
    "feynman:I.29.4"
   ],
-  "eq6877": [
+  "eq6897": [
    "ai-descartes:fsrd-noise:I.27.6",
    "feynman:I.27.6"
   ],
-  "eq6881": [
+  "eq6901": [
    "ai-descartes:fsrd-noise:I.32.17",
    "feynman:I.32.17"
   ],
-  "eq6882": [
+  "eq6902": [
    "ai-descartes:fsrd-noise:I.32.5",
    "feynman:I.32.5"
   ],
-  "eq6883": [
+  "eq6903": [
    "ai-descartes:fsrd-noise:I.34.1",
    "feynman:I.34.1"
   ],
-  "eq6884": [
+  "eq6904": [
    "ai-descartes:fsrd-noise:I.34.14",
    "feynman:I.34.14"
   ],
-  "eq6885": [
+  "eq6905": [
    "ai-descartes:fsrd-noise:I.34.27",
    "feynman:I.34.27"
   ],
-  "eq6886": [
+  "eq6906": [
    "ai-descartes:fsrd-noise:I.34.8",
    "ai-descartes:fsrd-noise:I.43.16",
    "erbench-eponymous:eponymous_112",
@@ -4074,231 +4094,231 @@
    "feynman:I.34.8",
    "feynman:I.43.16"
   ],
-  "eq6888": [
+  "eq6908": [
    "ai-descartes:fsrd-noise:I.38.12",
    "feynman:I.38.12"
   ],
-  "eq6889": [
+  "eq6909": [
    "ai-descartes:fsrd-noise:I.39.1",
    "feynman:I.39.1"
   ],
-  "eq6890": [
+  "eq6910": [
    "ai-descartes:fsrd-noise:I.39.11",
    "feynman:I.39.11"
   ],
-  "eq6891": [
+  "eq6911": [
    "ai-descartes:fsrd-noise:I.39.22",
    "feynman:I.39.22"
   ],
-  "eq6892": [
+  "eq6912": [
    "ai-descartes:fsrd-noise:I.40.1",
    "feynman:I.40.1"
   ],
-  "eq6893": [
+  "eq6913": [
    "ai-descartes:fsrd-noise:I.41.16",
    "feynman:I.41.16"
   ],
-  "eq6894": [
+  "eq6914": [
    "ai-descartes:fsrd-noise:I.43.31",
    "feynman:I.43.31"
   ],
-  "eq6895": [
+  "eq6915": [
    "ai-descartes:fsrd-noise:I.43.43",
    "feynman:I.43.43"
   ],
-  "eq6896": [
+  "eq6916": [
    "ai-descartes:fsrd-noise:I.44.4",
    "feynman:I.44.4"
   ],
-  "eq6897": [
+  "eq6917": [
    "ai-descartes:fsrd-noise:I.47.23",
    "feynman:I.47.23"
   ],
-  "eq6898": [
+  "eq6918": [
    "ai-descartes:fsrd-noise:I.48.2",
    "feynman:I.48.2"
   ],
-  "eq6900": [
+  "eq6920": [
    "ai-descartes:fsrd-noise:I.6.2",
    "feynman:I.6.2"
   ],
-  "eq6901": [
+  "eq6921": [
    "ai-descartes:fsrd-noise:I.6.2a",
    "erbench-densities:standard normal",
    "feynman:I.6.2a"
   ],
-  "eq6902": [
+  "eq6922": [
    "ai-descartes:fsrd-noise:I.6.2b",
    "feynman:I.6.2b"
   ],
-  "eq6903": [
+  "eq6923": [
    "ai-descartes:fsrd-noise:I.8.14",
    "feynman:I.8.14"
   ],
-  "eq6904": [
+  "eq6924": [
    "ai-descartes:fsrd-noise:I.9.18",
    "feynman:I.9.18"
   ],
-  "eq6905": [
+  "eq6925": [
    "ai-descartes:fsrd-noise:II.10.9",
    "feynman:II.10.9"
   ],
-  "eq6907": [
+  "eq6927": [
    "ai-descartes:fsrd-noise:II.11.20",
    "feynman:II.11.20"
   ],
-  "eq6908": [
+  "eq6928": [
    "ai-descartes:fsrd-noise:II.11.27",
    "feynman:II.11.27"
   ],
-  "eq6909": [
+  "eq6929": [
    "ai-descartes:fsrd-noise:II.11.28",
    "feynman:II.11.28"
   ],
-  "eq6910": [
+  "eq6930": [
    "ai-descartes:fsrd-noise:II.11.3",
    "feynman:II.11.3"
   ],
-  "eq6911": [
+  "eq6931": [
    "ai-descartes:fsrd-noise:II.13.17",
    "feynman:II.13.17"
   ],
-  "eq6912": [
+  "eq6932": [
    "feynman:II.15.4",
    "feynman:II.15.5"
   ],
-  "eq6913": [
+  "eq6933": [
    "ai-descartes:fsrd-noise:II.2.42",
    "feynman:II.2.42"
   ],
-  "eq6914": [
+  "eq6934": [
    "ai-descartes:fsrd-noise:II.21.32",
    "feynman:II.21.32"
   ],
-  "eq6915": [
+  "eq6935": [
    "ai-descartes:fsrd-noise:II.24.17",
    "feynman:II.24.17"
   ],
-  "eq6916": [
+  "eq6936": [
    "ai-descartes:fsrd-noise:II.27.16",
    "feynman:II.27.16"
   ],
-  "eq6917": [
+  "eq6937": [
    "ai-descartes:fsrd-noise:II.27.18",
    "feynman:II.27.18"
   ],
-  "eq6918": [
+  "eq6938": [
    "ai-descartes:fsrd-noise:II.3.24",
    "feynman:II.3.24"
   ],
-  "eq6919": [
+  "eq6939": [
    "ai-descartes:fsrd-noise:II.34.11",
    "feynman:II.34.11"
   ],
-  "eq6920": [
+  "eq6940": [
    "ai-descartes:fsrd-noise:II.34.2",
    "feynman:II.34.2"
   ],
-  "eq6921": [
+  "eq6941": [
    "ai-descartes:fsrd-noise:II.34.29b",
    "feynman:II.34.29b"
   ],
-  "eq6922": [
+  "eq6942": [
    "ai-descartes:fsrd-noise:II.34.29a",
    "ai-descartes:fsrd-noise:II.34.2a",
    "feynman:II.34.29a",
    "feynman:II.34.2a"
   ],
-  "eq6923": [
+  "eq6943": [
    "ai-descartes:fsrd-noise:II.35.18",
    "feynman:II.35.18"
   ],
-  "eq6925": [
+  "eq6945": [
    "ai-descartes:fsrd-noise:II.36.38",
    "feynman:II.36.38"
   ],
-  "eq6926": [
+  "eq6946": [
    "ai-descartes:fsrd-noise:II.37.1",
    "feynman:II.37.1"
   ],
-  "eq6927": [
+  "eq6947": [
    "ai-descartes:fsrd-noise:II.38.14",
    "feynman:II.38.14"
   ],
-  "eq6928": [
+  "eq6948": [
    "ai-descartes:fsrd-noise:II.38.3",
    "erbench-eponymous:eponymous_190",
    "feynman:II.38.3"
   ],
-  "eq6929": [
+  "eq6949": [
    "ai-descartes:fsrd-noise:II.4.23",
    "feynman:II.4.23"
   ],
-  "eq6931": [
+  "eq6951": [
    "ai-descartes:fsrd-noise:II.6.15a",
    "feynman:II.6.15a"
   ],
-  "eq6933": [
+  "eq6953": [
    "ai-descartes:fsrd-noise:II.8.31",
    "feynman:II.8.31"
   ],
-  "eq6934": [
+  "eq6954": [
    "ai-descartes:fsrd-noise:II.8.7",
    "feynman:II.8.7"
   ],
-  "eq6935": [
+  "eq6955": [
    "ai-descartes:fsrd-noise:III.10.19",
    "feynman:III.10.19"
   ],
-  "eq6936": [
+  "eq6956": [
    "ai-descartes:fsrd-noise:III.12.43",
    "feynman:III.12.43"
   ],
-  "eq6937": [
+  "eq6957": [
    "ai-descartes:fsrd-noise:III.13.18",
    "feynman:III.13.18"
   ],
-  "eq6938": [
+  "eq6958": [
    "ai-descartes:fsrd-noise:III.14.14",
    "feynman:III.14.14"
   ],
-  "eq6940": [
+  "eq6960": [
    "ai-descartes:fsrd-noise:III.15.14",
    "feynman:III.15.14"
   ],
-  "eq6941": [
+  "eq6961": [
    "ai-descartes:fsrd-noise:III.15.27",
    "feynman:III.15.27"
   ],
-  "eq6943": [
+  "eq6963": [
    "ai-descartes:fsrd-noise:III.19.51",
    "feynman:III.19.51"
   ],
-  "eq6944": [
+  "eq6964": [
    "ai-descartes:fsrd-noise:III.21.20",
    "feynman:III.21.20"
   ],
-  "eq6945": [
+  "eq6965": [
    "ai-descartes:fsrd-noise:III.4.32",
    "feynman:III.4.32"
   ],
-  "eq6946": [
+  "eq6966": [
    "ai-descartes:fsrd-noise:III.4.33",
    "feynman:III.4.33"
   ],
-  "eq6947": [
+  "eq6967": [
    "ai-descartes:fsrd-noise:III.7.38",
    "feynman:III.7.38"
   ],
-  "eq6957": [
+  "eq6977": [
    "first-principles:supernovae_zg",
    "first-principles:supernovae_zr"
   ],
-  "eq6959": [
+  "eq6979": [
    "grammarvae:GrammarVAE-1",
    "livermore:Livermore-1"
   ],
-  "eq6964": [
+  "eq6984": [
    "jin:Jin-5",
    "keijzer:Keijzer-13",
    "livermore:Livermore-10",
@@ -4307,20 +4327,20 @@
    "nguyen:Nguyen-10",
    "vladislavleva:Vladislavleva-6"
   ],
-  "eq6966": [
+  "eq6986": [
    "keijzer:Keijzer-1",
    "keijzer:Keijzer-2",
    "keijzer:Keijzer-3"
   ],
-  "eq6967": [
+  "eq6987": [
    "keijzer:Keijzer-10",
    "nguyen:Nguyen-11"
   ],
-  "eq6969": [
+  "eq6989": [
    "keijzer:Keijzer-12",
    "nguyen:Nguyen-12"
   ],
-  "eq6974": [
+  "eq6994": [
    "erbench-oeis:A056000",
    "erbench-oeis:A056115",
    "erbench-oeis:A056119",
@@ -4333,72 +4353,72 @@
    "erbench-oeis:A132758",
    "keijzer:Keijzer-6"
   ],
-  "eq6976": [
+  "eq6996": [
    "keijzer:Keijzer-8",
    "nguyen:Nguyen-8"
   ],
-  "eq7012": [
+  "eq7032": [
    "livermore2:Livermore2-Vars2-16",
    "livermore2:Livermore2-Vars2-6"
   ],
-  "eq7019": [
+  "eq7039": [
    "livermore2:Livermore2-Vars3-12",
    "livermore2:Livermore2-Vars3-24"
   ],
-  "eq7140": [
+  "eq7160": [
    "livermore:Livermore-11",
    "meier:Meier-3"
   ],
-  "eq7141": [
+  "eq7161": [
    "livermore:Livermore-12",
    "meier:Meier-4"
   ],
-  "eq7143": [
+  "eq7163": [
    "livermore:Livermore-14",
    "poly:Poly-2"
   ],
-  "eq7148": [
+  "eq7168": [
    "livermore:Livermore-21",
    "livermore:Livermore-23"
   ],
-  "eq7154": [
+  "eq7174": [
    "livermore:Livermore-7",
    "livermore:Livermore-7a"
   ],
-  "eq7155": [
+  "eq7175": [
    "livermore:Livermore-8",
    "livermore:Livermore-8a"
   ],
-  "eq7156": [
+  "eq7176": [
    "livermore:Livermore-9",
    "nonic:Nonic"
   ],
-  "eq7157": [
+  "eq7177": [
    "neat:Neat-1",
    "nguyen:Nguyen-2"
   ],
-  "eq7158": [
+  "eq7178": [
    "erbench-oeis:A152031",
    "neat:Neat-2",
    "nguyen:Nguyen-3"
   ],
-  "eq7160": [
+  "eq7180": [
    "neat:Neat-8",
    "vladislavleva:Vladislavleva-1"
   ],
-  "eq7161": [
+  "eq7181": [
    "neat:Neat-9",
    "pagie:Pagie-1"
   ],
-  "eq7163": [
+  "eq7183": [
    "erbench-oeis:A228290",
    "nguyen:Nguyen-4"
   ],
-  "eq7168": [
+  "eq7188": [
    "physo-class:damped-harmonic-oscillator-a",
    "physo-class:damped-harmonic-oscillator-b"
   ],
-  "eq7169": [
+  "eq7189": [
    "erbench-oeis:A060834",
    "erbench-oeis:A069477",
    "erbench-oeis:A080859",
@@ -4433,7 +4453,7 @@
    "erbench-oeis:A239325",
    "physo-class:free-fall"
   ],
-  "eq7174": [
+  "eq7194": [
    "physo-streams:stream-01",
    "physo-streams:stream-04",
    "physo-streams:stream-05",
@@ -4464,243 +4484,243 @@
    "physo-streams:stream-85",
    "physo-streams:stream-86"
   ],
-  "eq7180": [
+  "eq7200": [
    "r-rationals:R1",
    "r-rationals:R1a"
   ],
-  "eq7181": [
+  "eq7201": [
    "r-rationals:R2",
    "r-rationals:R2a"
   ],
-  "eq7182": [
+  "eq7202": [
    "r-rationals:R3",
    "r-rationals:R3a"
   ],
-  "eq7183": [
+  "eq7203": [
    "nguyen:Nguyen-6",
    "sine:Sine"
   ],
-  "eq7380": [
+  "eq7400": [
    "soose-nc:SOOSE-NC-001",
    "soose-wc:SOOSE-WC-001"
   ],
-  "eq7383": [
+  "eq7403": [
    "soose-nc:SOOSE-NC-004",
    "soose-wc:SOOSE-WC-004"
   ],
-  "eq7385": [
+  "eq7405": [
    "soose-nc:SOOSE-NC-006",
    "soose-wc:SOOSE-WC-006"
   ],
-  "eq7397": [
+  "eq7417": [
    "soose-nc:SOOSE-NC-018",
    "soose-wc:SOOSE-WC-018"
   ],
-  "eq7399": [
+  "eq7419": [
    "soose-nc:SOOSE-NC-020",
    "soose-wc:SOOSE-WC-020"
   ],
-  "eq7406": [
+  "eq7426": [
    "soose-nc:SOOSE-NC-027",
    "soose-wc:SOOSE-WC-027"
   ],
-  "eq7416": [
+  "eq7436": [
    "soose-nc:SOOSE-NC-037",
    "soose-wc:SOOSE-WC-037"
   ],
-  "eq7418": [
+  "eq7438": [
    "soose-nc:SOOSE-NC-039",
    "soose-wc:SOOSE-WC-039"
   ],
-  "eq7427": [
+  "eq7447": [
    "soose-nc:SOOSE-NC-048",
    "soose-wc:SOOSE-WC-048"
   ],
-  "eq7430": [
+  "eq7450": [
    "soose-nc:SOOSE-NC-051",
    "soose-wc:SOOSE-WC-051"
   ],
-  "eq7434": [
+  "eq7454": [
    "soose-nc:SOOSE-NC-055",
    "soose-wc:SOOSE-WC-055"
   ],
-  "eq7438": [
+  "eq7458": [
    "soose-nc:SOOSE-NC-059",
    "soose-wc:SOOSE-WC-059"
   ],
-  "eq7440": [
+  "eq7460": [
    "soose-nc:SOOSE-NC-061",
    "soose-wc:SOOSE-WC-061"
   ],
-  "eq7442": [
+  "eq7462": [
    "soose-nc:SOOSE-NC-063",
    "soose-wc:SOOSE-WC-063"
   ],
-  "eq7443": [
+  "eq7463": [
    "soose-nc:SOOSE-NC-064",
    "soose-wc:SOOSE-WC-064"
   ],
-  "eq7446": [
+  "eq7466": [
    "soose-nc:SOOSE-NC-067",
    "soose-wc:SOOSE-WC-067"
   ],
-  "eq7447": [
+  "eq7467": [
    "soose-nc:SOOSE-NC-068",
    "soose-wc:SOOSE-WC-068"
   ],
-  "eq7457": [
+  "eq7477": [
    "soose-nc:SOOSE-NC-078",
    "soose-wc:SOOSE-WC-078"
   ],
-  "eq7461": [
+  "eq7481": [
    "soose-nc:SOOSE-NC-082",
    "soose-wc:SOOSE-WC-082"
   ],
-  "eq7463": [
+  "eq7483": [
    "soose-nc:SOOSE-NC-084",
    "soose-wc:SOOSE-WC-084"
   ],
-  "eq7466": [
+  "eq7486": [
    "soose-nc:SOOSE-NC-087",
    "soose-wc:SOOSE-WC-087"
   ],
-  "eq7467": [
+  "eq7487": [
    "soose-nc:SOOSE-NC-088",
    "soose-wc:SOOSE-WC-088"
   ],
-  "eq7470": [
+  "eq7490": [
    "soose-nc:SOOSE-NC-091",
    "soose-wc:SOOSE-WC-091"
   ],
-  "eq7472": [
+  "eq7492": [
    "soose-nc:SOOSE-NC-093",
    "soose-wc:SOOSE-WC-093"
   ],
-  "eq7483": [
+  "eq7503": [
    "soose-nc:SOOSE-NC-104",
    "soose-wc:SOOSE-WC-104"
   ],
-  "eq7491": [
+  "eq7511": [
    "soose-nc:SOOSE-NC-112",
    "soose-wc:SOOSE-WC-112"
   ],
-  "eq7494": [
+  "eq7514": [
    "soose-nc:SOOSE-NC-115",
    "soose-wc:SOOSE-WC-115"
   ],
-  "eq7496": [
+  "eq7516": [
    "soose-nc:SOOSE-NC-117",
    "soose-wc:SOOSE-WC-117"
   ],
-  "eq7497": [
+  "eq7517": [
    "soose-nc:SOOSE-NC-118",
    "soose-wc:SOOSE-WC-118"
   ],
-  "eq7501": [
+  "eq7521": [
    "soose-nc:SOOSE-NC-122",
    "soose-wc:SOOSE-WC-122"
   ],
-  "eq7502": [
+  "eq7522": [
    "soose-nc:SOOSE-NC-123",
    "soose-wc:SOOSE-WC-123"
   ],
-  "eq7508": [
+  "eq7528": [
    "soose-nc:SOOSE-NC-129",
    "soose-wc:SOOSE-WC-129"
   ],
-  "eq7509": [
+  "eq7529": [
    "soose-nc:SOOSE-NC-130",
    "soose-wc:SOOSE-WC-130"
   ],
-  "eq7515": [
+  "eq7535": [
    "soose-nc:SOOSE-NC-136",
    "soose-wc:SOOSE-WC-136"
   ],
-  "eq7518": [
+  "eq7538": [
    "soose-nc:SOOSE-NC-139",
    "soose-wc:SOOSE-WC-139"
   ],
-  "eq7529": [
+  "eq7549": [
    "soose-nc:SOOSE-NC-150",
    "soose-wc:SOOSE-WC-150"
   ],
-  "eq7530": [
+  "eq7550": [
    "soose-nc:SOOSE-NC-151",
    "soose-wc:SOOSE-WC-151"
   ],
-  "eq7537": [
+  "eq7557": [
    "soose-nc:SOOSE-NC-158",
    "soose-wc:SOOSE-WC-158"
   ],
-  "eq7544": [
+  "eq7564": [
    "soose-nc:SOOSE-NC-165",
    "soose-wc:SOOSE-WC-165"
   ],
-  "eq7548": [
+  "eq7568": [
    "soose-nc:SOOSE-NC-169",
    "soose-wc:SOOSE-WC-169"
   ],
-  "eq7552": [
+  "eq7572": [
    "soose-nc:SOOSE-NC-173",
    "soose-wc:SOOSE-WC-173"
   ],
-  "eq7553": [
+  "eq7573": [
    "soose-nc:SOOSE-NC-174",
    "soose-wc:SOOSE-WC-174"
   ],
-  "eq7557": [
+  "eq7577": [
    "soose-nc:SOOSE-NC-178",
    "soose-wc:SOOSE-WC-178"
   ],
-  "eq7558": [
+  "eq7578": [
    "soose-nc:SOOSE-NC-179",
    "soose-wc:SOOSE-WC-179"
   ],
-  "eq7560": [
+  "eq7580": [
    "soose-nc:SOOSE-NC-181",
    "soose-wc:SOOSE-WC-181"
   ],
-  "eq7563": [
+  "eq7583": [
    "soose-nc:SOOSE-NC-184",
    "soose-wc:SOOSE-WC-184"
   ],
-  "eq7565": [
+  "eq7585": [
    "soose-nc:SOOSE-NC-186",
    "soose-wc:SOOSE-WC-186"
   ],
-  "eq7567": [
+  "eq7587": [
    "soose-nc:SOOSE-NC-188",
    "soose-wc:SOOSE-WC-188"
   ],
-  "eq7569": [
+  "eq7589": [
    "soose-nc:SOOSE-NC-190",
    "soose-wc:SOOSE-WC-190"
   ],
-  "eq7574": [
+  "eq7594": [
    "soose-nc:SOOSE-NC-195",
    "soose-wc:SOOSE-WC-195"
   ],
-  "eq7575": [
+  "eq7595": [
    "soose-nc:SOOSE-NC-196",
    "soose-wc:SOOSE-WC-196"
   ],
-  "eq7605": [
+  "eq7625": [
    "soose-fc:SOOSE-FC-032",
    "soose-wc:SOOSE-WC-032"
   ],
-  "eq7629": [
+  "eq7649": [
    "soose-fc:SOOSE-FC-065",
    "soose-wc:SOOSE-WC-065"
   ],
-  "eq7680": [
+  "eq7700": [
    "soose-fc:SOOSE-FC-134",
    "soose-wc:SOOSE-WC-134"
   ],
-  "eq7688": [
+  "eq7708": [
    "soose-fc:SOOSE-FC-144",
    "soose-wc:SOOSE-WC-144"
   ],
-  "eq7724": [
+  "eq7744": [
    "soose-fc:SOOSE-FC-194",
    "soose-wc:SOOSE-WC-194"
   ]

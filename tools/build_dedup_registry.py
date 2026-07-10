@@ -20,12 +20,12 @@ CATALOGS = ["constant", "grammarvae", "jin", "keijzer", "korns", "koza", "liverm
             "livermore2", "meier", "neat", "nonic", "pagie", "poly", "r-rationals",
             "sine", "vladislavleva", "nguyen", "fastsrb", "feynman", "srsd-dummy",
             "physo-astro", "physo-class", "soose-nc", "soose-wc", "soose-fc",
-            "erbench-syneq", "erbench-phybench", "erbench-densities"]
+            "erbench-syneq", "erbench-phybench", "erbench-densities", "feynman-bonus"]
 # SA-firewalled declarative catalogs (assets_sa/; clusters reference names only, no SA prose)
 SA_CATALOGS = ["erbench-oeis", "erbench-eponymous"]
 # FROZEN catalogs (materialized .npz, measured data): identity from each problem's stored
 # skeleton (already normalize_skeleton-canonical) + its x width.
-FROZEN_CATALOGS = ["first-principles", "cp3-cosmo", "ai-descartes", "physo-streams"]
+FROZEN_CATALOGS = ["first-principles", "cp3-cosmo", "ai-descartes", "physo-streams", "srbench2-blackbox"]
 
 
 def main() -> None:
