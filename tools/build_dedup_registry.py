@@ -21,7 +21,7 @@ CATALOGS = ["constant", "grammarvae", "jin", "keijzer", "korns", "koza", "liverm
             "sine", "vladislavleva", "nguyen", "fastsrb", "feynman", "srsd-dummy"]
 # FROZEN catalogs (materialized .npz, measured data): identity from each problem's stored
 # skeleton (already normalize_skeleton-canonical) + its x width.
-FROZEN_CATALOGS = ["first-principles"]
+FROZEN_CATALOGS = ["first-principles", "cp3-cosmo"]
 
 
 def main() -> None:

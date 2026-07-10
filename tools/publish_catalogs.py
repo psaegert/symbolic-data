@@ -58,6 +58,8 @@ CATALOGS = {
     # P3 real-world GT: SRBench-2.0 phenomenological track (PMLB first_principles_*, MIT).
     # FROZEN measured-data catalog (.npz): 13 datasets + refit reference laws, gt_kind=reference.
     "first-principles": ("first-principles.npz", 13, "problem_catalog"),
+    # P3 real-world GT: known-GT cosmology subset of cp3-bench (Things-to-bench, MIT). FROZEN.
+    "cp3-cosmo": ("cp3-cosmo.npz", 17, "problem_catalog"),
 }
 
 

@@ -123,9 +123,9 @@
   "srsd-dummy:B20": "fastsrb:B20"
  },
  "known_limit": "skeleton identity is variable-index-sensitive (canonicalization of variable order is a deferred decision); explicit links cover variant catalogs, and every rendering joins the union holdout independently",
- "n_entries_total": 619,
- "n_unique_problems": 569,
- "n_cross_or_intra_duplicate_clusters": 39,
+ "n_entries_total": 636,
+ "n_unique_problems": 583,
+ "n_cross_or_intra_duplicate_clusters": 41,
  "clusters": {
   "eq0000": [
    "constant:Const-Test-1",
@@ -143,64 +143,73 @@
    "neat:Neat-4",
    "nguyen:Nguyen-7"
   ],
-  "eq0029": [
+  "eq0009": [
+   "cp3-cosmo:C1a",
+   "cp3-cosmo:C1b"
+  ],
+  "eq0016": [
+   "cp3-cosmo:C5a",
+   "cp3-cosmo:C5b",
+   "cp3-cosmo:C5c"
+  ],
+  "eq0043": [
    "fastsrb:I.10.7",
    "fastsrb:II.13.23"
   ],
-  "eq0031": [
+  "eq0045": [
    "fastsrb:I.12.1",
    "fastsrb:I.12.5"
   ],
-  "eq0039": [
+  "eq0053": [
    "fastsrb:I.15.1",
    "fastsrb:II.13.34"
   ],
-  "eq0084": [
+  "eq0098": [
    "fastsrb:II.15.4",
    "fastsrb:II.15.5"
   ],
-  "eq0101": [
+  "eq0115": [
    "fastsrb:I.34.8",
    "fastsrb:I.43.16",
    "fastsrb:II.38.3"
   ],
-  "eq0123": [
+  "eq0137": [
    "feynman:I.10.7",
    "feynman:II.13.23"
   ],
-  "eq0125": [
+  "eq0139": [
    "feynman:I.12.1",
    "feynman:I.12.5"
   ],
-  "eq0133": [
+  "eq0147": [
    "feynman:I.15.1",
    "feynman:II.13.34"
   ],
-  "eq0141": [
+  "eq0155": [
    "feynman:I.25.13",
    "feynman:I.29.4"
   ],
-  "eq0152": [
+  "eq0166": [
    "feynman:I.34.8",
    "feynman:I.43.16"
   ],
-  "eq0178": [
+  "eq0192": [
    "feynman:II.15.4",
    "feynman:II.15.5"
   ],
-  "eq0188": [
+  "eq0202": [
    "feynman:II.34.29a",
    "feynman:II.34.2a"
   ],
-  "eq0226": [
+  "eq0240": [
    "first-principles:supernovae_zg",
    "first-principles:supernovae_zr"
   ],
-  "eq0228": [
+  "eq0242": [
    "grammarvae:GrammarVAE-1",
    "livermore:Livermore-1"
   ],
-  "eq0233": [
+  "eq0247": [
    "jin:Jin-5",
    "keijzer:Keijzer-13",
    "livermore:Livermore-10",
@@ -209,88 +218,88 @@
    "nguyen:Nguyen-10",
    "vladislavleva:Vladislavleva-6"
   ],
-  "eq0235": [
+  "eq0249": [
    "keijzer:Keijzer-1",
    "keijzer:Keijzer-2",
    "keijzer:Keijzer-3"
   ],
-  "eq0236": [
+  "eq0250": [
    "keijzer:Keijzer-10",
    "nguyen:Nguyen-11"
   ],
-  "eq0238": [
+  "eq0252": [
    "keijzer:Keijzer-12",
    "nguyen:Nguyen-12"
   ],
-  "eq0245": [
+  "eq0259": [
    "keijzer:Keijzer-8",
    "nguyen:Nguyen-8"
   ],
-  "eq0281": [
+  "eq0295": [
    "livermore2:Livermore2-Vars2-16",
    "livermore2:Livermore2-Vars2-6"
   ],
-  "eq0288": [
+  "eq0302": [
    "livermore2:Livermore2-Vars3-12",
    "livermore2:Livermore2-Vars3-24"
   ],
-  "eq0409": [
+  "eq0423": [
    "livermore:Livermore-11",
    "meier:Meier-3"
   ],
-  "eq0410": [
+  "eq0424": [
    "livermore:Livermore-12",
    "meier:Meier-4"
   ],
-  "eq0412": [
+  "eq0426": [
    "livermore:Livermore-14",
    "poly:Poly-2"
   ],
-  "eq0417": [
+  "eq0431": [
    "livermore:Livermore-21",
    "livermore:Livermore-23"
   ],
-  "eq0423": [
+  "eq0437": [
    "livermore:Livermore-7",
    "livermore:Livermore-7a"
   ],
-  "eq0424": [
+  "eq0438": [
    "livermore:Livermore-8",
    "livermore:Livermore-8a"
   ],
-  "eq0425": [
+  "eq0439": [
    "livermore:Livermore-9",
    "nonic:Nonic"
   ],
-  "eq0426": [
+  "eq0440": [
    "neat:Neat-1",
    "nguyen:Nguyen-2"
   ],
-  "eq0427": [
+  "eq0441": [
    "neat:Neat-2",
    "nguyen:Nguyen-3"
   ],
-  "eq0429": [
+  "eq0443": [
    "neat:Neat-8",
    "vladislavleva:Vladislavleva-1"
   ],
-  "eq0430": [
+  "eq0444": [
    "neat:Neat-9",
    "pagie:Pagie-1"
   ],
-  "eq0439": [
+  "eq0453": [
    "r-rationals:R1",
    "r-rationals:R1a"
   ],
-  "eq0440": [
+  "eq0454": [
    "r-rationals:R2",
    "r-rationals:R2a"
   ],
-  "eq0441": [
+  "eq0455": [
    "r-rationals:R3",
    "r-rationals:R3a"
   ],
-  "eq0442": [
+  "eq0456": [
    "nguyen:Nguyen-6",
    "sine:Sine"
   ]
