@@ -120,96 +120,473 @@
   "srsd-dummy:B16": "fastsrb:B16",
   "srsd-dummy:B17": "fastsrb:B17",
   "srsd-dummy:B19": "fastsrb:B19",
-  "srsd-dummy:B20": "fastsrb:B20"
+  "srsd-dummy:B20": "fastsrb:B20",
+  "ai-descartes:fsrd-noise:I.10.7": "feynman:I.10.7",
+  "ai-descartes:fsrd-noise:I.11.19": "feynman:I.11.19",
+  "ai-descartes:fsrd-noise:I.12.1": "feynman:I.12.1",
+  "ai-descartes:fsrd-noise:I.12.2": "feynman:I.12.2",
+  "ai-descartes:fsrd-noise:I.12.4": "feynman:I.12.4",
+  "ai-descartes:fsrd-noise:I.12.5": "feynman:I.12.5",
+  "ai-descartes:fsrd-noise:I.13.12": "feynman:I.13.12",
+  "ai-descartes:fsrd-noise:I.13.4": "feynman:I.13.4",
+  "ai-descartes:fsrd-noise:I.14.3": "feynman:I.14.3",
+  "ai-descartes:fsrd-noise:I.14.4": "feynman:I.14.4",
+  "ai-descartes:fsrd-noise:I.15.1": "feynman:I.15.1",
+  "ai-descartes:fsrd-noise:I.15.3t": "feynman:I.15.3t",
+  "ai-descartes:fsrd-noise:I.15.3x": "feynman:I.15.3x",
+  "ai-descartes:fsrd-noise:I.16.6": "feynman:I.16.6",
+  "ai-descartes:fsrd-noise:I.18.4": "feynman:I.18.4",
+  "ai-descartes:fsrd-noise:I.24.6": "feynman:I.24.6",
+  "ai-descartes:fsrd-noise:I.25.13": "feynman:I.25.13",
+  "ai-descartes:fsrd-noise:I.27.6": "feynman:I.27.6",
+  "ai-descartes:fsrd-noise:I.29.4": "feynman:I.29.4",
+  "ai-descartes:fsrd-noise:I.32.17": "feynman:I.32.17",
+  "ai-descartes:fsrd-noise:I.32.5": "feynman:I.32.5",
+  "ai-descartes:fsrd-noise:I.34.1": "feynman:I.34.1",
+  "ai-descartes:fsrd-noise:I.34.14": "feynman:I.34.14",
+  "ai-descartes:fsrd-noise:I.34.27": "feynman:I.34.27",
+  "ai-descartes:fsrd-noise:I.34.8": "feynman:I.34.8",
+  "ai-descartes:fsrd-noise:I.38.12": "feynman:I.38.12",
+  "ai-descartes:fsrd-noise:I.39.1": "feynman:I.39.1",
+  "ai-descartes:fsrd-noise:I.39.11": "feynman:I.39.11",
+  "ai-descartes:fsrd-noise:I.39.22": "feynman:I.39.22",
+  "ai-descartes:fsrd-noise:I.40.1": "feynman:I.40.1",
+  "ai-descartes:fsrd-noise:I.41.16": "feynman:I.41.16",
+  "ai-descartes:fsrd-noise:I.43.16": "feynman:I.43.16",
+  "ai-descartes:fsrd-noise:I.43.31": "feynman:I.43.31",
+  "ai-descartes:fsrd-noise:I.43.43": "feynman:I.43.43",
+  "ai-descartes:fsrd-noise:I.44.4": "feynman:I.44.4",
+  "ai-descartes:fsrd-noise:I.47.23": "feynman:I.47.23",
+  "ai-descartes:fsrd-noise:I.48.2": "feynman:I.48.2",
+  "ai-descartes:fsrd-noise:I.6.2": "feynman:I.6.2",
+  "ai-descartes:fsrd-noise:I.6.2a": "feynman:I.6.2a",
+  "ai-descartes:fsrd-noise:I.6.2b": "feynman:I.6.2b",
+  "ai-descartes:fsrd-noise:I.8.14": "feynman:I.8.14",
+  "ai-descartes:fsrd-noise:I.9.18": "feynman:I.9.18",
+  "ai-descartes:fsrd-noise:II.10.9": "feynman:II.10.9",
+  "ai-descartes:fsrd-noise:II.11.20": "feynman:II.11.20",
+  "ai-descartes:fsrd-noise:II.11.27": "feynman:II.11.27",
+  "ai-descartes:fsrd-noise:II.11.28": "feynman:II.11.28",
+  "ai-descartes:fsrd-noise:II.11.3": "feynman:II.11.3",
+  "ai-descartes:fsrd-noise:II.13.17": "feynman:II.13.17",
+  "ai-descartes:fsrd-noise:II.13.23": "feynman:II.13.23",
+  "ai-descartes:fsrd-noise:II.13.34": "feynman:II.13.34",
+  "ai-descartes:fsrd-noise:II.2.42": "feynman:II.2.42",
+  "ai-descartes:fsrd-noise:II.21.32": "feynman:II.21.32",
+  "ai-descartes:fsrd-noise:II.24.17": "feynman:II.24.17",
+  "ai-descartes:fsrd-noise:II.27.16": "feynman:II.27.16",
+  "ai-descartes:fsrd-noise:II.27.18": "feynman:II.27.18",
+  "ai-descartes:fsrd-noise:II.3.24": "feynman:II.3.24",
+  "ai-descartes:fsrd-noise:II.34.11": "feynman:II.34.11",
+  "ai-descartes:fsrd-noise:II.34.2": "feynman:II.34.2",
+  "ai-descartes:fsrd-noise:II.34.29a": "feynman:II.34.29a",
+  "ai-descartes:fsrd-noise:II.34.29b": "feynman:II.34.29b",
+  "ai-descartes:fsrd-noise:II.34.2a": "feynman:II.34.2a",
+  "ai-descartes:fsrd-noise:II.35.18": "feynman:II.35.18",
+  "ai-descartes:fsrd-noise:II.36.38": "feynman:II.36.38",
+  "ai-descartes:fsrd-noise:II.37.1": "feynman:II.37.1",
+  "ai-descartes:fsrd-noise:II.38.14": "feynman:II.38.14",
+  "ai-descartes:fsrd-noise:II.38.3": "feynman:II.38.3",
+  "ai-descartes:fsrd-noise:II.4.23": "feynman:II.4.23",
+  "ai-descartes:fsrd-noise:II.6.15a": "feynman:II.6.15a",
+  "ai-descartes:fsrd-noise:II.8.31": "feynman:II.8.31",
+  "ai-descartes:fsrd-noise:II.8.7": "feynman:II.8.7",
+  "ai-descartes:fsrd-noise:III.10.19": "feynman:III.10.19",
+  "ai-descartes:fsrd-noise:III.12.43": "feynman:III.12.43",
+  "ai-descartes:fsrd-noise:III.13.18": "feynman:III.13.18",
+  "ai-descartes:fsrd-noise:III.14.14": "feynman:III.14.14",
+  "ai-descartes:fsrd-noise:III.15.14": "feynman:III.15.14",
+  "ai-descartes:fsrd-noise:III.15.27": "feynman:III.15.27",
+  "ai-descartes:fsrd-noise:III.19.51": "feynman:III.19.51",
+  "ai-descartes:fsrd-noise:III.21.20": "feynman:III.21.20",
+  "ai-descartes:fsrd-noise:III.4.32": "feynman:III.4.32",
+  "ai-descartes:fsrd-noise:III.4.33": "feynman:III.4.33",
+  "ai-descartes:fsrd-noise:III.7.38": "feynman:III.7.38"
  },
  "known_limit": "skeleton identity is variable-index-sensitive (canonicalization of variable order is a deferred decision); explicit links cover variant catalogs, and every rendering joins the union holdout independently",
- "n_entries_total": 636,
- "n_unique_problems": 583,
- "n_cross_or_intra_duplicate_clusters": 41,
+ "n_entries_total": 723,
+ "n_unique_problems": 587,
+ "n_cross_or_intra_duplicate_clusters": 112,
  "clusters": {
-  "eq0000": [
+  "eq0001": [
+   "ai-descartes:kepler-exoplanets",
+   "ai-descartes:kepler-solar-system"
+  ],
+  "eq0002": [
+   "ai-descartes:langmuir-sun-et-al",
+   "ai-descartes:langmuir-table-ix"
+  ],
+  "eq0004": [
    "constant:Const-Test-1",
    "constant:Const-Test-2"
   ],
-  "eq0002": [
+  "eq0006": [
    "constant:Constant-2",
    "livermore:Livermore-18",
    "livermore:Livermore-2",
    "neat:Neat-3",
    "nguyen:Nguyen-5"
   ],
-  "eq0008": [
+  "eq0012": [
    "constant:Constant-8",
    "neat:Neat-4",
    "nguyen:Nguyen-7"
   ],
-  "eq0009": [
+  "eq0013": [
    "cp3-cosmo:C1a",
    "cp3-cosmo:C1b"
   ],
-  "eq0016": [
+  "eq0020": [
    "cp3-cosmo:C5a",
    "cp3-cosmo:C5b",
    "cp3-cosmo:C5c"
   ],
-  "eq0043": [
+  "eq0047": [
    "fastsrb:I.10.7",
    "fastsrb:II.13.23"
   ],
-  "eq0045": [
+  "eq0049": [
    "fastsrb:I.12.1",
    "fastsrb:I.12.5"
   ],
-  "eq0053": [
+  "eq0057": [
    "fastsrb:I.15.1",
    "fastsrb:II.13.34"
   ],
-  "eq0098": [
+  "eq0102": [
    "fastsrb:II.15.4",
    "fastsrb:II.15.5"
   ],
-  "eq0115": [
+  "eq0119": [
    "fastsrb:I.34.8",
    "fastsrb:I.43.16",
    "fastsrb:II.38.3"
   ],
-  "eq0137": [
+  "eq0141": [
+   "ai-descartes:fsrd-noise:I.10.7",
+   "ai-descartes:fsrd-noise:II.13.23",
    "feynman:I.10.7",
    "feynman:II.13.23"
   ],
-  "eq0139": [
+  "eq0142": [
+   "ai-descartes:fsrd-noise:I.11.19",
+   "feynman:I.11.19"
+  ],
+  "eq0143": [
+   "ai-descartes:fsrd-noise:I.12.1",
+   "ai-descartes:fsrd-noise:I.12.5",
    "feynman:I.12.1",
    "feynman:I.12.5"
   ],
+  "eq0145": [
+   "ai-descartes:fsrd-noise:I.12.2",
+   "feynman:I.12.2"
+  ],
+  "eq0146": [
+   "ai-descartes:fsrd-noise:I.12.4",
+   "feynman:I.12.4"
+  ],
   "eq0147": [
+   "ai-descartes:fsrd-noise:I.13.12",
+   "feynman:I.13.12"
+  ],
+  "eq0148": [
+   "ai-descartes:fsrd-noise:I.13.4",
+   "feynman:I.13.4"
+  ],
+  "eq0149": [
+   "ai-descartes:fsrd-noise:I.14.3",
+   "feynman:I.14.3"
+  ],
+  "eq0150": [
+   "ai-descartes:fsrd-noise:I.14.4",
+   "feynman:I.14.4"
+  ],
+  "eq0151": [
+   "ai-descartes:fsrd-noise:I.15.1",
+   "ai-descartes:fsrd-noise:II.13.34",
    "feynman:I.15.1",
    "feynman:II.13.34"
   ],
-  "eq0155": [
+  "eq0152": [
+   "ai-descartes:fsrd-noise:I.15.3t",
+   "feynman:I.15.3t"
+  ],
+  "eq0153": [
+   "ai-descartes:fsrd-noise:I.15.3x",
+   "feynman:I.15.3x"
+  ],
+  "eq0154": [
+   "ai-descartes:fsrd-noise:I.16.6",
+   "feynman:I.16.6"
+  ],
+  "eq0157": [
+   "ai-descartes:fsrd-noise:I.18.4",
+   "feynman:I.18.4"
+  ],
+  "eq0158": [
+   "ai-descartes:fsrd-noise:I.24.6",
+   "feynman:I.24.6"
+  ],
+  "eq0159": [
+   "ai-descartes:fsrd-noise:I.25.13",
+   "ai-descartes:fsrd-noise:I.29.4",
    "feynman:I.25.13",
    "feynman:I.29.4"
   ],
+  "eq0161": [
+   "ai-descartes:fsrd-noise:I.27.6",
+   "feynman:I.27.6"
+  ],
+  "eq0165": [
+   "ai-descartes:fsrd-noise:I.32.17",
+   "feynman:I.32.17"
+  ],
   "eq0166": [
+   "ai-descartes:fsrd-noise:I.32.5",
+   "feynman:I.32.5"
+  ],
+  "eq0167": [
+   "ai-descartes:fsrd-noise:I.34.1",
+   "feynman:I.34.1"
+  ],
+  "eq0168": [
+   "ai-descartes:fsrd-noise:I.34.14",
+   "feynman:I.34.14"
+  ],
+  "eq0169": [
+   "ai-descartes:fsrd-noise:I.34.27",
+   "feynman:I.34.27"
+  ],
+  "eq0170": [
+   "ai-descartes:fsrd-noise:I.34.8",
+   "ai-descartes:fsrd-noise:I.43.16",
    "feynman:I.34.8",
    "feynman:I.43.16"
   ],
+  "eq0172": [
+   "ai-descartes:fsrd-noise:I.38.12",
+   "feynman:I.38.12"
+  ],
+  "eq0173": [
+   "ai-descartes:fsrd-noise:I.39.1",
+   "feynman:I.39.1"
+  ],
+  "eq0174": [
+   "ai-descartes:fsrd-noise:I.39.11",
+   "feynman:I.39.11"
+  ],
+  "eq0175": [
+   "ai-descartes:fsrd-noise:I.39.22",
+   "feynman:I.39.22"
+  ],
+  "eq0176": [
+   "ai-descartes:fsrd-noise:I.40.1",
+   "feynman:I.40.1"
+  ],
+  "eq0177": [
+   "ai-descartes:fsrd-noise:I.41.16",
+   "feynman:I.41.16"
+  ],
+  "eq0178": [
+   "ai-descartes:fsrd-noise:I.43.31",
+   "feynman:I.43.31"
+  ],
+  "eq0179": [
+   "ai-descartes:fsrd-noise:I.43.43",
+   "feynman:I.43.43"
+  ],
+  "eq0180": [
+   "ai-descartes:fsrd-noise:I.44.4",
+   "feynman:I.44.4"
+  ],
+  "eq0181": [
+   "ai-descartes:fsrd-noise:I.47.23",
+   "feynman:I.47.23"
+  ],
+  "eq0182": [
+   "ai-descartes:fsrd-noise:I.48.2",
+   "feynman:I.48.2"
+  ],
+  "eq0184": [
+   "ai-descartes:fsrd-noise:I.6.2",
+   "feynman:I.6.2"
+  ],
+  "eq0185": [
+   "ai-descartes:fsrd-noise:I.6.2a",
+   "feynman:I.6.2a"
+  ],
+  "eq0186": [
+   "ai-descartes:fsrd-noise:I.6.2b",
+   "feynman:I.6.2b"
+  ],
+  "eq0187": [
+   "ai-descartes:fsrd-noise:I.8.14",
+   "feynman:I.8.14"
+  ],
+  "eq0188": [
+   "ai-descartes:fsrd-noise:I.9.18",
+   "feynman:I.9.18"
+  ],
+  "eq0189": [
+   "ai-descartes:fsrd-noise:II.10.9",
+   "feynman:II.10.9"
+  ],
+  "eq0191": [
+   "ai-descartes:fsrd-noise:II.11.20",
+   "feynman:II.11.20"
+  ],
   "eq0192": [
+   "ai-descartes:fsrd-noise:II.11.27",
+   "feynman:II.11.27"
+  ],
+  "eq0193": [
+   "ai-descartes:fsrd-noise:II.11.28",
+   "feynman:II.11.28"
+  ],
+  "eq0194": [
+   "ai-descartes:fsrd-noise:II.11.3",
+   "feynman:II.11.3"
+  ],
+  "eq0195": [
+   "ai-descartes:fsrd-noise:II.13.17",
+   "feynman:II.13.17"
+  ],
+  "eq0196": [
    "feynman:II.15.4",
    "feynman:II.15.5"
   ],
+  "eq0197": [
+   "ai-descartes:fsrd-noise:II.2.42",
+   "feynman:II.2.42"
+  ],
+  "eq0198": [
+   "ai-descartes:fsrd-noise:II.21.32",
+   "feynman:II.21.32"
+  ],
+  "eq0199": [
+   "ai-descartes:fsrd-noise:II.24.17",
+   "feynman:II.24.17"
+  ],
+  "eq0200": [
+   "ai-descartes:fsrd-noise:II.27.16",
+   "feynman:II.27.16"
+  ],
+  "eq0201": [
+   "ai-descartes:fsrd-noise:II.27.18",
+   "feynman:II.27.18"
+  ],
   "eq0202": [
+   "ai-descartes:fsrd-noise:II.3.24",
+   "feynman:II.3.24"
+  ],
+  "eq0203": [
+   "ai-descartes:fsrd-noise:II.34.11",
+   "feynman:II.34.11"
+  ],
+  "eq0204": [
+   "ai-descartes:fsrd-noise:II.34.2",
+   "feynman:II.34.2"
+  ],
+  "eq0205": [
+   "ai-descartes:fsrd-noise:II.34.29b",
+   "feynman:II.34.29b"
+  ],
+  "eq0206": [
+   "ai-descartes:fsrd-noise:II.34.29a",
+   "ai-descartes:fsrd-noise:II.34.2a",
    "feynman:II.34.29a",
    "feynman:II.34.2a"
   ],
-  "eq0240": [
+  "eq0207": [
+   "ai-descartes:fsrd-noise:II.35.18",
+   "feynman:II.35.18"
+  ],
+  "eq0209": [
+   "ai-descartes:fsrd-noise:II.36.38",
+   "feynman:II.36.38"
+  ],
+  "eq0210": [
+   "ai-descartes:fsrd-noise:II.37.1",
+   "feynman:II.37.1"
+  ],
+  "eq0211": [
+   "ai-descartes:fsrd-noise:II.38.14",
+   "feynman:II.38.14"
+  ],
+  "eq0212": [
+   "ai-descartes:fsrd-noise:II.38.3",
+   "feynman:II.38.3"
+  ],
+  "eq0213": [
+   "ai-descartes:fsrd-noise:II.4.23",
+   "feynman:II.4.23"
+  ],
+  "eq0215": [
+   "ai-descartes:fsrd-noise:II.6.15a",
+   "feynman:II.6.15a"
+  ],
+  "eq0217": [
+   "ai-descartes:fsrd-noise:II.8.31",
+   "feynman:II.8.31"
+  ],
+  "eq0218": [
+   "ai-descartes:fsrd-noise:II.8.7",
+   "feynman:II.8.7"
+  ],
+  "eq0219": [
+   "ai-descartes:fsrd-noise:III.10.19",
+   "feynman:III.10.19"
+  ],
+  "eq0220": [
+   "ai-descartes:fsrd-noise:III.12.43",
+   "feynman:III.12.43"
+  ],
+  "eq0221": [
+   "ai-descartes:fsrd-noise:III.13.18",
+   "feynman:III.13.18"
+  ],
+  "eq0222": [
+   "ai-descartes:fsrd-noise:III.14.14",
+   "feynman:III.14.14"
+  ],
+  "eq0224": [
+   "ai-descartes:fsrd-noise:III.15.14",
+   "feynman:III.15.14"
+  ],
+  "eq0225": [
+   "ai-descartes:fsrd-noise:III.15.27",
+   "feynman:III.15.27"
+  ],
+  "eq0227": [
+   "ai-descartes:fsrd-noise:III.19.51",
+   "feynman:III.19.51"
+  ],
+  "eq0228": [
+   "ai-descartes:fsrd-noise:III.21.20",
+   "feynman:III.21.20"
+  ],
+  "eq0229": [
+   "ai-descartes:fsrd-noise:III.4.32",
+   "feynman:III.4.32"
+  ],
+  "eq0230": [
+   "ai-descartes:fsrd-noise:III.4.33",
+   "feynman:III.4.33"
+  ],
+  "eq0231": [
+   "ai-descartes:fsrd-noise:III.7.38",
+   "feynman:III.7.38"
+  ],
+  "eq0244": [
    "first-principles:supernovae_zg",
    "first-principles:supernovae_zr"
   ],
-  "eq0242": [
+  "eq0246": [
    "grammarvae:GrammarVAE-1",
    "livermore:Livermore-1"
   ],
-  "eq0247": [
+  "eq0251": [
    "jin:Jin-5",
    "keijzer:Keijzer-13",
    "livermore:Livermore-10",
@@ -218,88 +595,88 @@
    "nguyen:Nguyen-10",
    "vladislavleva:Vladislavleva-6"
   ],
-  "eq0249": [
+  "eq0253": [
    "keijzer:Keijzer-1",
    "keijzer:Keijzer-2",
    "keijzer:Keijzer-3"
   ],
-  "eq0250": [
+  "eq0254": [
    "keijzer:Keijzer-10",
    "nguyen:Nguyen-11"
   ],
-  "eq0252": [
+  "eq0256": [
    "keijzer:Keijzer-12",
    "nguyen:Nguyen-12"
   ],
-  "eq0259": [
+  "eq0263": [
    "keijzer:Keijzer-8",
    "nguyen:Nguyen-8"
   ],
-  "eq0295": [
+  "eq0299": [
    "livermore2:Livermore2-Vars2-16",
    "livermore2:Livermore2-Vars2-6"
   ],
-  "eq0302": [
+  "eq0306": [
    "livermore2:Livermore2-Vars3-12",
    "livermore2:Livermore2-Vars3-24"
   ],
-  "eq0423": [
+  "eq0427": [
    "livermore:Livermore-11",
    "meier:Meier-3"
   ],
-  "eq0424": [
+  "eq0428": [
    "livermore:Livermore-12",
    "meier:Meier-4"
   ],
-  "eq0426": [
+  "eq0430": [
    "livermore:Livermore-14",
    "poly:Poly-2"
   ],
-  "eq0431": [
+  "eq0435": [
    "livermore:Livermore-21",
    "livermore:Livermore-23"
   ],
-  "eq0437": [
+  "eq0441": [
    "livermore:Livermore-7",
    "livermore:Livermore-7a"
   ],
-  "eq0438": [
+  "eq0442": [
    "livermore:Livermore-8",
    "livermore:Livermore-8a"
   ],
-  "eq0439": [
+  "eq0443": [
    "livermore:Livermore-9",
    "nonic:Nonic"
   ],
-  "eq0440": [
+  "eq0444": [
    "neat:Neat-1",
    "nguyen:Nguyen-2"
   ],
-  "eq0441": [
+  "eq0445": [
    "neat:Neat-2",
    "nguyen:Nguyen-3"
   ],
-  "eq0443": [
+  "eq0447": [
    "neat:Neat-8",
    "vladislavleva:Vladislavleva-1"
   ],
-  "eq0444": [
+  "eq0448": [
    "neat:Neat-9",
    "pagie:Pagie-1"
   ],
-  "eq0453": [
+  "eq0457": [
    "r-rationals:R1",
    "r-rationals:R1a"
   ],
-  "eq0454": [
+  "eq0458": [
    "r-rationals:R2",
    "r-rationals:R2a"
   ],
-  "eq0455": [
+  "eq0459": [
    "r-rationals:R3",
    "r-rationals:R3a"
   ],
-  "eq0456": [
+  "eq0460": [
    "nguyen:Nguyen-6",
    "sine:Sine"
   ]

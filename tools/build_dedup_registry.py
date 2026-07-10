@@ -21,7 +21,7 @@ CATALOGS = ["constant", "grammarvae", "jin", "keijzer", "korns", "koza", "liverm
             "sine", "vladislavleva", "nguyen", "fastsrb", "feynman", "srsd-dummy"]
 # FROZEN catalogs (materialized .npz, measured data): identity from each problem's stored
 # skeleton (already normalize_skeleton-canonical) + its x width.
-FROZEN_CATALOGS = ["first-principles", "cp3-cosmo"]
+FROZEN_CATALOGS = ["first-principles", "cp3-cosmo", "ai-descartes"]
 
 
 def main() -> None:
@@ -88,6 +88,16 @@ def main() -> None:
             base_cat, base_eq = meta.get("base_catalog"), meta.get("base_eq_id")
             if base_cat and base_eq:
                 explicit[f"{name}:{eq_id}"] = f"{base_cat.split('@')[0]}:{base_eq}"
+    for name in FROZEN_CATALOGS:
+        path = Path("assets/catalogs") / f"{name}.npz"
+        if not path.exists():
+            continue
+        from symbolic_data import ProblemCatalog
+        for problem in ProblemCatalog.from_npz(path).problems or []:
+            meta = problem.meta or {}
+            base_cat, base_eq = meta.get("base_catalog"), meta.get("base_eq_id")
+            if base_cat and base_eq:
+                explicit[f"{name}:{problem.eq_id}"] = f"{base_cat.split('@')[0]}:{base_eq}"
     out = {"identity": "normalized skeleton (dev_7-3, literals masked) + n_variables; "
                        "PLUS explicit meta.base_eq_id links (variable-index-insensitive)",
            "explicit_variant_links": explicit,

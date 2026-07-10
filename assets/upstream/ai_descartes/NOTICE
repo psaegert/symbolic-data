@@ -1,0 +1,19 @@
+Vendored data from IBM/AI-Descartes (fetched 2026-07-10), the benchmark data of
+"Combining data and theory for derivable scientific discovery with AI-Descartes",
+Cornelio et al., Nature Communications 14, 1777 (2023). https://github.com/IBM/AI-Descartes
+
+License: MIT (LICENSE alongside; Copyright IBM Corp.).
+
+Contents:
+- FSRD_noise/: 81 Feynman equations, one directory each. input.dat = the canonical frozen
+  10-point benchmark with additive Gaussian noise on y (sigma = 0.01 * rms(y); the generator
+  generate_noise.py is UNSEEDED, so the frozen files are the only reproducible artifact).
+  input_original.dat = the frozen clean 20-point parent (rows 0-9 are the support x's).
+- kepler/: measured orbital data (8 solar-system planets, 12 exoplanets, 4 binary-star
+  systems) + the paper's stated reference law p^2 = 4 pi^2 d^3 / (G (m1 + m2)).
+- langmuir/: two digitized adsorption isotherms (Sun et al.; Langmuir 1918 Table IX) +
+  q = a b p / (1 + a p). NOTE: langmuir_table_IX.dat carries a UTF-8 BOM and CRLF endings.
+- relativistic_time_dilation/: 7 measured optical-clock points + t = sqrt(1 - v^2/c^2) - 1
+  (in 1e-15 units).
+
+These files are the build input for the `ai-descartes` catalog (tools/build_ai_descartes.py).

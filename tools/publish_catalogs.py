@@ -60,6 +60,9 @@ CATALOGS = {
     "first-principles": ("first-principles.npz", 13, "problem_catalog"),
     # P3 real-world GT: known-GT cosmology subset of cp3-bench (Things-to-bench, MIT). FROZEN.
     "cp3-cosmo": ("cp3-cosmo.npz", 17, "problem_catalog"),
+    # P3 real-world GT: AI-Descartes (IBM, MIT) — FSRD_noise (81 frozen 10-point noisy Feynman
+    # renderings + clean validation) + 6 measured real-world datasets. FROZEN.
+    "ai-descartes": ("ai-descartes.npz", 87, "problem_catalog"),
 }
 
 
