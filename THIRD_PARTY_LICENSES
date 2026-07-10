@@ -1,3 +1,10 @@
+NOTE (2026-07-10 program audit): path anchors updated after the 0.4.0+ refactor moved catalog
+specs from src/symbolic_data/benchmarks/data/ to assets/catalogs/; P0-P6 import-program upstreams
+(PMLB, CP3-Origins, IBM/AI-Descartes, PhySO, NeSymReS/SOOSE, ERBench, DSO, SRSD) each carry their
+own NOTICE + license file under assets/upstream/*/ and assets_sa/upstream/*/ -- see those files
+and the HF dataset card (assets/hf_card/) for the per-catalog table. assets_sa/ is CC-BY-SA-4.0
+(its own LICENSE); everything else in this repo is per the root LICENSE + the notices below.
+
 Third-party licenses
 ====================
 
@@ -5,7 +12,7 @@ symbolic_data is distributed under the MIT License (see LICENSE). Portions of th
 project are derived from or interoperate with third-party work, whose licenses
 and notices are reproduced below.
 
-The curated benchmark spec files (src/symbolic_data/benchmarks/data/*.yaml) reproduce only
+The curated benchmark spec files (assets/catalogs/*.yaml) reproduce only
 mathematical facts from the cited sources -- equation formulas, numeric sampling ranges, and
 variable names -- not any copyrightable text or code. Each source is attributed below.
 
@@ -14,9 +21,9 @@ variable names -- not any copyrightable text or code. Each source is attributed 
 Fast Symbolic Regression Benchmarking (FastSRB)
 -------------------------------------------------------------------------------
 
-The FastSRB benchmark sampling code in `src/symbolic_data/benchmarks/fastsrb.py` is
+The FastSRB benchmark sampling code in the fastsrb catalog sampling conventions (assets/catalogs/fastsrb*.yaml) is
 translated and adapted from the Julia FastSRB benchmarking code by Viktor Martinek, and the
-spec `src/symbolic_data/benchmarks/data/fastsrb.yaml` is vendored verbatim from that project's
+spec `assets/catalogs/fastsrb.yaml` (+ fastsrb.v2.yaml) is vendored verbatim from that project's
 `src/expressions.yaml`:
 https://github.com/viktmar/FastSRB
 Both are used under the MIT License (reproduced below).
@@ -60,7 +67,7 @@ That project is distributed under the MIT License:
 Feynman Symbolic Regression Database (AI Feynman)
 -------------------------------------------------------------------------------
 
-The `feynman` benchmark spec (`src/symbolic_data/benchmarks/data/feynman.yaml`) is
+The `feynman` benchmark spec (`assets/catalogs/feynman.yaml`) is
 derived from the Feynman Symbolic Regression Database (formulas + sampling ranges),
 introduced with AI Feynman by Silviu-Marian Udrescu and Max Tegmark:
 https://space.mit.edu/home/tegmark/aifeynman.html
@@ -79,7 +86,7 @@ https://space.mit.edu/home/tegmark/aifeynman.html
 Nguyen benchmark suite
 -------------------------------------------------------------------------------
 
-The `nguyen` benchmark spec (`src/symbolic_data/benchmarks/data/nguyen.yaml`) reproduces
+The `nguyen` benchmark spec (`assets/catalogs/nguyen.yaml`) reproduces
 the Nguyen symbolic-regression suite introduced by Nguyen Quang Uy et al.; the formulas and
 sampling ranges are derived from the `benchmarks.csv` of the deep-symbolic-optimization (DSO)
 project (Petersen et al. 2021), https://github.com/dso-org/deep-symbolic-optimization, used under

@@ -80,3 +80,12 @@ an explicit local path for fully offline operation.
 > `load_config(<dir>/catalog.yaml)` if you need it (see the CHANGELOG).
 > Deferred: a frozen holdout grid; functional-equivalence `exclude` (currently exact
 > normalized-expression match).
+
+## Licensing
+
+The repository is MIT-licensed (see LICENSE) with one carve-out: **everything under `assets_sa/`
+is CC BY-SA 4.0** (OEIS-/Wikipedia-derived benchmark catalogs; see `assets_sa/LICENSE` for the
+full legal code + derivation statement). Vendored upstream data under `assets/upstream/*/`
+carries per-directory NOTICE + license files; `THIRD_PARTY_LICENSES` has the summary table.
+The share-alike catalogs publish to a separate HF repo (psaegert/symbolic-data-assets-sa),
+never mixed into the permissive artifact repo.

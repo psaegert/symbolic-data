@@ -16,6 +16,10 @@ import yaml
 
 from simplipy import SimpliPyEngine, normalize_skeleton
 
+# NOTE: "fastsrb" identity comes from the v2 file (fastsrb.v2.yaml): v1 lacked n_variables
+# entirely (keying all 120 entries at n_variables=0 and hiding every fastsrb co-cluster,
+# found by the 2026-07-10 program audit) and carried malformed III.21.20 ranges.
+CATALOG_FILES = {"fastsrb": "fastsrb.v2.yaml"}
 CATALOGS = ["constant", "grammarvae", "jin", "keijzer", "korns", "koza", "livermore",
             "livermore2", "meier", "neat", "nonic", "pagie", "poly", "r-rationals",
             "sine", "vladislavleva", "nguyen", "fastsrb", "feynman", "srsd-dummy",
@@ -33,7 +37,7 @@ def main() -> None:
     groups: dict[tuple, list[str]] = defaultdict(list)
     for name, base in ([(n, "assets/catalogs") for n in CATALOGS]
                        + [(n, "assets_sa/catalogs") for n in SA_CATALOGS]):
-        path = Path(base) / f"{name}.yaml"
+        path = Path(base) / CATALOG_FILES.get(name, f"{name}.yaml")
         if not path.exists():
             print(f"skip {name} (no local yaml)")
             continue
@@ -46,7 +50,12 @@ def main() -> None:
                     skel = tuple(normalize_skeleton([str(t) for t in prefix]))
             except Exception as exc:
                 skel = ("UNPARSED", str(exc)[:40])
-            groups[(skel, int(entry.get("n_variables", 0)))].append(f"{name}:{eq_id}")
+            # fallback: derive the input-variable count from the vars block (v0 = output) --
+            # an absent n_variables must never silently key an entry at 0 (the fastsrb@1 bug)
+            n_vars = entry.get("n_variables")
+            if n_vars is None:
+                n_vars = len([k for k in (entry.get("vars") or {}) if k != "v0"])
+            groups[(skel, int(n_vars))].append(f"{name}:{eq_id}")
 
     for name in FROZEN_CATALOGS:
         path = Path("assets/catalogs") / f"{name}.npz"
@@ -103,8 +112,14 @@ def main() -> None:
             base_cat, base_eq = meta.get("base_catalog"), meta.get("base_eq_id")
             if base_cat and base_eq:
                 explicit[f"{name}:{problem.eq_id}"] = f"{base_cat.split('@')[0]}:{base_eq}"
+    # variable-ORDER duplicates found by the 2026-07-10 audit's numeric hunt (the skeleton
+    # identity is index-sensitive; these pairs are numerically identical under permutation)
+    explicit["erbench-eponymous:eponymous_112"] = "feynman:I.39.22"
+    explicit["erbench-eponymous:eponymous_169"] = "feynman:II.27.18"
     out = {"identity": "normalized skeleton (dev_7-3, literals masked) + n_variables; "
-                       "PLUS explicit meta.base_eq_id links (variable-index-insensitive)",
+                       "PLUS explicit meta.base_eq_id links (variable-index-insensitive). "
+                       "SCOPE: benchmark suites only -- v23-val / lample-charton-v23 (generative "
+                       "skeleton specs, not expression catalogs) are deliberately excluded.",
            "explicit_variant_links": explicit,
            "known_limit": "skeleton identity is variable-index-sensitive (canonicalization of "
                           "variable order is a deferred decision); explicit links cover variant "

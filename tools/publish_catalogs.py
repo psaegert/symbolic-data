@@ -29,6 +29,14 @@ REPO = "psaegert/symbolic-data-assets"          # MUST match resolver.HF_MANIFES
 REPO_TYPE = "dataset"
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "catalogs")
 
+# Forward-only multi-version catalogs: name -> {version: filename}, plus the default version a
+# bare name resolves to. v1 files stay byte-identical forever (pinned refs keep resolving);
+# content fixes ship as NEW versions. fastsrb@2 = the 2026-07-10 audit repair (III.21.20
+# unrealizable, string bounds, missing n_variables); see the changelog inside fastsrb.v2.yaml.
+MULTI_VERSION = {
+    "fastsrb": {"versions": {"1": "fastsrb.yaml", "2": "fastsrb.v2.yaml"}, "default": 2},
+}
+
 # logical name -> (filename, entry/skeleton count for the log, manifest type)
 CATALOGS = {
     "fastsrb": ("fastsrb.yaml", 120, "problem_catalog"),
@@ -106,13 +114,20 @@ def main() -> None:
 
     # 1. upload all catalog files in ONE commit so a single revision pins the whole v1 set
     ops = []
-    for _name, (fn, _cnt, _type) in CATALOGS.items():
+    filenames = [fn for (fn, _cnt, _type) in CATALOGS.values()]
+    for spec in MULTI_VERSION.values():
+        filenames += [fn for fn in spec["versions"].values() if fn not in filenames]
+    for extra in ("README.md", "THIRD_PARTY_NOTICES.md"):
+        path = os.path.abspath(os.path.join(DATA_DIR, "..", "hf_card", extra))
+        assert os.path.isfile(path), f"missing {extra}: {path}"
+        ops.append(CommitOperationAdd(path_in_repo=extra, path_or_fileobj=path))
+    for fn in filenames:
         local = os.path.abspath(os.path.join(DATA_DIR, fn))
         assert os.path.isfile(local), f"missing catalog file: {local}"
         ops.append(CommitOperationAdd(path_in_repo=fn, path_or_fileobj=local))
     commit = api.create_commit(
         repo_id=REPO, repo_type=REPO_TYPE, operations=ops,
-        commit_message="Publish catalogs (fastsrb, feynman, nguyen, v23-val, lample-charton-v23) v1",
+        commit_message=f"Publish {len(filenames)} catalog artifacts + card/notices",
     )
     revision = commit.oid
     print(f"files commit: {revision}")
@@ -120,19 +135,21 @@ def main() -> None:
     # 2. build the manifest pinning revision + per-file sha256, then upload it
     manifest: dict = {}
     for name, (fn, _cnt, ctype) in CATALOGS.items():
-        local = os.path.abspath(os.path.join(DATA_DIR, fn))
+        spec = MULTI_VERSION.get(name)
+        versions = spec["versions"] if spec else {"1": fn}
         manifest[name] = {
             "type": ctype,
             "repo_id": REPO,
-            "default_version": 1,
+            "default_version": spec["default"] if spec else 1,
             "versions": {
-                "1": {
+                v: {
                     "repo_id": REPO,
                     "directory": "",
-                    "files": [fn],
+                    "files": [vfn],
                     "revision": revision,
-                    "sha256": {fn: sha256(local)},
+                    "sha256": {vfn: sha256(os.path.abspath(os.path.join(DATA_DIR, vfn)))},
                 }
+                for v, vfn in versions.items()
             },
         }
     manifest_bytes = (json.dumps(manifest, indent=2) + "\n").encode("utf-8")

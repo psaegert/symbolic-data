@@ -1,4 +1,4 @@
-Vendored copies of 17 known-ground-truth cosmology datasets from CP3-Origins/Things-to-bench
+Vendored copies of 28 cosmology datasets (17 known-GT + 11 GT-free) from CP3-Origins/Things-to-bench
 (gzipped CSVs; upstream commit 69a45dd, fetched 2026-07-10), the dataset companion of cp3-bench:
 "cp3-bench: A tool for benchmarking symbolic regression algorithms tested with cosmology",
 M. E. Thing & S. M. Koksbang, arXiv:2406.15531.
@@ -6,11 +6,11 @@ M. E. Thing & S. M. Koksbang, arXiv:2406.15531.
 License: MIT (LICENSE.things-to-bench alongside; Copyright (c) 2023 CP3-Origins). The cp3-bench
 tool repo (method wrappers, no data) is separately MIT.
 
-Selection: the known-GT subset only — C1a-C1d (LCDM H(z)), C2a-C2b (redshift drift), C3g-C3h
-(two-region backreaction, the two C3 members WITH a closed form), C5a-C5f (NFW/Burkert halo
-profiles), C6a-C6c (gravitational-wave-inspired h_plus toys). The GT-free discovery sets
-(C3a-C3f, C4a-C4e) and the F1-F8 GP-toy re-renderings (dedup to our existing DSO-derived suites)
-are intentionally NOT vendored; the F-set dedup and three upstream paper-vs-data discrepancies
-(C3h sign/prefactor, C6a phase, C6c m2=m1) are documented in the catalog build report.
-
-These files are the build input for the `cp3-cosmo` catalog (tools/build_cp3_cosmo.py).
+Selection: 28 datasets in two tiers — the 17 known-GT sets (C1a-C1d LCDM H(z), C2a-C2b redshift
+drift, C3g-C3h two-region backreaction closed forms, C5a-C5f NFW/Burkert profiles, C6a-C6c
+GW-inspired h_plus toys; build input for `cp3-cosmo`, tools/build_cp3_cosmo.py) and the 11
+GT-free discovery sets (C3a-C3f, C4a-C4e; build input for `cp3-blackbox`,
+tools/build_cp3_blackbox.py — vendored later in P6, superseding this NOTICE's earlier
+"not vendored" statement). The F1-F8 GP-toy re-renderings remain NOT vendored (dedup to our
+DSO-derived suites); the F-set dedup and three upstream paper-vs-data discrepancies (C3h
+sign/prefactor, C6a phase, C6c m2=m1) are documented in the catalog build reports.

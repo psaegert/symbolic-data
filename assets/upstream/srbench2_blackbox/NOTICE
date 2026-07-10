@@ -1,0 +1,14 @@
+Vendored copies of the 12 SRBench 2.0 black-box selection datasets (gzipped PMLB tsv files),
+fetched 2026-07-10 from https://github.com/EpistasisLab/pmlb at the commit recorded in
+PMLB_REVISION (7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68; LFS media endpoint).
+
+License: MIT (PMLB; Copyright (c) 2016 Epistasis Lab at UPenn — the PMLB repo's MIT grant
+covers the redistributed dataset files). Selection list from "Call for Action: Towards the
+Next Generation of Symbolic Regression Benchmark" (Aldeia et al., GECCO 2025 workshop =
+SRBench 2.0), paper Table 1 == datasets/download_data.py['blackbox'] on the srbench_2025
+branch of cavalab/srbench. The srbench repo itself is GPL-3.0: only the dataset LIST (facts)
+was used; no GPL code or data is vendored here.
+
+Build input for the `srbench2-blackbox` catalog (tools/build_srbench2_blackbox.py); the
+Friedman-family findings (PMLB stores fri_* z-scored; c0 variants verify as affine-wrapped
+Friedman-1) are documented in SRBENCH2_BLACKBOX_REPORT.md and the catalog meta.

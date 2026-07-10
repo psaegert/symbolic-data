@@ -8,6 +8,12 @@ silently dropped. The published `nguyen@1` catalog is left untouched (forward-on
 Nguyen rows here are recorded only in the dedup report.
 
 Run from the repo root: python tools/dso_to_catalogs.py
+
+
+NOTE (2026-07-10 audit): the COMMITTED catalog yamls are this builder's output PLUS a
+subsequent tools/audit_finite_fraction.py pass (which writes per-entry meta.finite_fraction
+and the conventions.validity block). Re-running this builder alone therefore does not
+byte-reproduce the committed files -- run the audit tool afterwards to reproduce them.
 """
 from __future__ import annotations
 

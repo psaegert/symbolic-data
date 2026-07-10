@@ -1,6 +1,9 @@
 Vendored copies of the PMLB "first_principles_*" datasets (13 tsv.gz files + metadata.yaml),
 fetched 2026-07-10 from https://github.com/EpistasisLab/pmlb (master; data via Git LFS media
-endpoint).
+endpoint). The exact upstream revision was not captured at fetch time; the vendored bytes are
+the artifacts of record (committed + sha-pinned via the HF manifest), and PMLB master on the
+fetch date was 7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68 (recorded in
+../srbench2_blackbox/PMLB_REVISION, pinned the same day).
 
 License: MIT (PMLB). Copyright (c) 2016 Epistasis Lab at UPenn.
 
