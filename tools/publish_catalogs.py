@@ -63,6 +63,11 @@ CATALOGS = {
     # P3 real-world GT: AI-Descartes (IBM, MIT) — FSRD_noise (81 frozen 10-point noisy Feynman
     # renderings + clean validation) + 6 measured real-world datasets. FROZEN.
     "ai-descartes": ("ai-descartes.npz", 87, "problem_catalog"),
+    # P3 real-world GT: PhySO (MIT) — Class-SR MW streams (frozen), paper astro panel + Class-SR
+    # Table 1 (declarative; isochrone-action excluded, see physo-astro conventions).
+    "physo-streams": ("physo-streams.npz", 29, "problem_catalog"),
+    "physo-astro": ("physo-astro.yaml", 2, "problem_catalog"),
+    "physo-class": ("physo-class.yaml", 8, "problem_catalog"),
 }
 
 

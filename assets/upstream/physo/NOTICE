@@ -1,0 +1,20 @@
+Vendored data from WassimTenachi/PhySO (MIT; LICENSE.physo alongside; fetched 2026-07-10):
+
+- streams.csv.gz: demos/class_sr/demo_milky_way_streams/streams.csv — 2900 simulated phase-space
+  points (29 Milky-Way stellar streams x 100 points; mock orbits integrated in an NFW potential
+  with progenitors approximating the 29 real thin streams of Ibata et al. 2023, arXiv:2311.17202).
+  The Class-SR demo of "Class Symbolic Regression: Discovering One Unifying Formula from Multiple
+  Datasets" (Tenachi et al. 2024, arXiv:2312.01816). Build input for the `physo-streams` catalog
+  (tools/build_physo_streams.py); the exact per-stream target expressions (shared NFW constants +
+  per-stream total energy E_t) come from MW_streams_results_analysis.py in the same demo.
+- ClassEquations.csv: physo/benchmark/ClassDataset/ — the 8 Class-SR benchmark formulas
+  (Table 1 of arXiv:2312.01816) with variable/spe ranges; source of the `physo-class` declarative
+  catalog (spe constants frozen at documented representatives; class protocol in catalog meta).
+
+The `physo-astro` declarative catalog (NFW profile, expansion-law mock) is authored from
+arXiv:2303.03192 Appendix A (Tables 6-8) — specs only, no upstream data shipped. The isochrone-
+action case is EXCLUDED: the paper's printed form fails the b->0 Kepler limit (typo), no shipped
+data/generator disambiguates the intended form, and importing a guessed form would fabricate
+comparability. Also not imported: the PhySO Feynman csv re-rendering (dedup; variant cap full),
+the Pantheon SN Hubble case (data not shipped; integral forward-model task), usa-tariffs
+(non-physics demo curiosity).

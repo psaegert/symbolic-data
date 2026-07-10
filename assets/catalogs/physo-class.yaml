@@ -1,0 +1,121 @@
+metadata:
+  name: physo-class
+  version: 1
+  description: The 8 Class-SR benchmark laws (Tenachi et al. 2024, arXiv:2312.01816, Table 1 =
+    ClassEquations.csv), flattened to one representative realization each. Upstream protocol
+    draws the `spe` constants uniformly per realization; here each spe is frozen at a documented
+    representative (range midpoint, or quarter-point where the midpoint would degenerate a term)
+    with the upstream range recorded per entry.
+  sources:
+  - Tenachi et al. 2024 (arXiv:2312.01816), Class Symbolic Regression — physo/benchmark/
+    ClassDataset/ClassEquations.csv (MIT; vendored under assets/upstream/physo/)
+  sampling_defaults:
+    n_points: 100
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: vars use the `fastsrb` distribution (sample_range/sample_type); upstream draws 100
+      uniform points per realization, noise levels {0, 0.001, 0.01, 0.1} x y_rms, N_realizations
+      in {1, 10}.
+    class_protocol: 'upstream evaluates CLASS recovery (one functional form jointly fit across
+      realizations that differ only in spe constants); this flattened import scores per-entry
+      recovery. The spe ranges live in meta.spe_ranges; joint-fit class metrics need harness
+      support (recorded as future work).'
+expressions:
+  harmonic-oscillator:
+    raw: A*cos(omega*t + Phi)
+    prepared: 0.9*cos(0.85*v1+1.05)
+    n_variables: 1
+    sources: [arXiv:2312.01816 Table 1, eq. 1]
+    vars:
+      v1: {name: t, sample_range: [0.0, 9.42], sample_type: [uni, pos]}
+      v0: {name: l}
+    meta:
+      spe_ranges: {A: [0.6, 1.2], omega: [0.2, 1.5], Phi: [0.95, 1.15]}
+      spe_representatives: {A: 0.9, omega: 0.85, Phi: 1.05}
+  radioactive-decay:
+    raw: n0*exp(-t/T)
+    prepared: 1.2*exp(-v1/1.15)
+    n_variables: 1
+    sources: [arXiv:2312.01816 Table 1, eq. 2]
+    vars:
+      v1: {name: t, sample_range: [0.5, 6.0], sample_type: [uni, pos]}
+      v0: {name: n}
+    meta:
+      spe_ranges: {n0: [0.4, 2.0], T: [0.9, 1.4]}
+      spe_representatives: {n0: 1.2, T: 1.15}
+  free-fall:
+    raw: -0.5*9.81*t**2 + v0*t + z0
+    prepared: -4.905*((v1)**(2))+3.0*v1+1.5
+    n_variables: 1
+    sources: [arXiv:2312.01816 Table 1, eq. 3]
+    vars:
+      v1: {name: t, sample_range: [0.0, 1.0], sample_type: [uni, pos]}
+      v0: {name: z}
+    meta:
+      spe_ranges: {v0: [-2.0, 8.0], z0: [-3.0, 3.0]}
+      spe_representatives: {v0: 3.0, z0: 1.5}
+      notes: z0 frozen at the quarter-point 1.5 (the midpoint 0 would remove the constant term
+        and change the skeleton).
+  damped-harmonic-oscillator-a:
+    raw: exp(-k*t)*cos(1.389*t + Phi)
+    prepared: exp(-0.6*v1)*cos(1.389*v1+0.05)
+    n_variables: 1
+    sources: [arXiv:2312.01816 Table 1, eq. 4]
+    vars:
+      v1: {name: t, sample_range: [0.0, 9.42], sample_type: [uni, pos]}
+      v0: {name: l}
+    meta:
+      spe_ranges: {k: [0.2, 1.0], Phi: [-0.2, 0.3]}
+      spe_representatives: {k: 0.6, Phi: 0.05}
+  damped-harmonic-oscillator-b:
+    raw: exp(-0.345*t)*cos(omega*t + Phi)
+    prepared: exp(-0.345*v1)*cos(1.0*v1+0.05)
+    n_variables: 1
+    sources: [arXiv:2312.01816 Table 1, eq. 5]
+    vars:
+      v1: {name: t, sample_range: [0.0, 9.42], sample_type: [uni, pos]}
+      v0: {name: l}
+    meta:
+      spe_ranges: {omega: [0.6, 1.4], Phi: [-0.2, 0.3]}
+      spe_representatives: {omega: 1.0, Phi: 0.05}
+  black-body-photon-count:
+    raw: 1/(exp(5.90*nu/T)-1)
+    prepared: 1/(exp(5.9*v1/3.0)-1)
+    n_variables: 1
+    sources: [arXiv:2312.01816 Table 1, eq. 6]
+    vars:
+      v1: {name: nu, sample_range: [1.0, 5.0], sample_type: [uni, pos]}
+      v0: {name: n}
+    meta:
+      spe_ranges: {T: [1.0, 5.0]}
+      spe_representatives: {T: 3.0}
+      notes: Bose-Einstein occupation structure (cf. planck in first-principles, which is the
+        full ln-radiance law; distinct skeletons).
+  ideal-gas-law:
+    raw: n*8.314*T/V
+    prepared: 3.0*8.314*v1/v2
+    n_variables: 2
+    sources: [arXiv:2312.01816 Table 1, eq. 7]
+    vars:
+      v1: {name: T, sample_range: [1.0, 5.0], sample_type: [uni, pos]}
+      v2: {name: V, sample_range: [1.0, 5.0], sample_type: [uni, pos]}
+      v0: {name: P}
+    meta:
+      spe_ranges: {n: [1.0, 5.0]}
+      spe_representatives: {n: 3.0}
+      notes: same law family as first-principles ideal_gas (which is the ln-target rendering);
+        registry records the relation.
+  terminal-velocity:
+    raw: sqrt(2*m*9.807/(rho*A*0.470))
+    prepared: sqrt(2*v1*9.807/(3.5*v2*0.470))
+    n_variables: 2
+    sources: [arXiv:2312.01816 Table 1, eq. 8]
+    vars:
+      v1: {name: m, sample_range: [1.0, 10.0], sample_type: [uni, pos]}
+      v2: {name: A, sample_range: [1.0, 5.0], sample_type: [uni, pos]}
+      v0: {name: vt}
+    meta:
+      spe_ranges: {rho: [1.0, 6.0]}
+      spe_representatives: {rho: 3.5}

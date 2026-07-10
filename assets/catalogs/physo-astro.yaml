@@ -1,0 +1,61 @@
+metadata:
+  name: physo-astro
+  version: 1
+  description: PhySO paper astrophysics panel (arXiv:2303.03192 Appendix A) — the two genuinely
+    new laws only. Declarative specs authored from the paper (no upstream data or generator is
+    shipped); constants exactly as printed in Tables 6-8.
+  sources:
+  - Tenachi, Ibata & Diakogiannis 2023 (arXiv:2303.03192), Deep symbolic regression for physics
+    guided by units constraints — Appendix A mock specs
+  sampling_defaults:
+    n_points: 1000
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: vars use the `fastsrb` distribution (sample_range/sample_type); upstream protocol
+      is 1000 noiseless uniform points per case.
+    exclusions: 'isochrone-action EXCLUDED: the paper''s printed form Jr = GM/sqrt(-2E) -
+      (1/2)*(L + (1/2)*sqrt(L^2 - 4*GM*b)) fails the b->0 Kepler limit (gives -(3/4)L instead of
+      -L; textbook Binney & Tremaine 3.226a also differs in the sqrt sign), no data or generator
+      is shipped to disambiguate which form produced the paper''s mocks, and importing a guessed
+      form would fabricate comparability. Relativistic energy, damped HO, and classical gravity
+      dedup to Feynman-family imports. The Pantheon SN Hubble case is an integral forward-model
+      task (out of scope); usa-tariffs is a non-physics demo curiosity (not imported).'
+expressions:
+  nfw-profile:
+    raw: rho0/((r/rs)*(1+r/rs)^2), rho0=0.984, rs=1.391
+    prepared: 0.984/((v1/1.391)*((1+v1/1.391)**(2)))
+    n_variables: 1
+    sources:
+    - arXiv:2303.03192 Appendix A (NFW dark-matter halo density profile)
+    accept:
+    - 0.984*((1.391)**(3))/(v1*((v1+1.391)**(2)))
+    vars:
+      v1:
+        name: r
+        sample_range: [0.2, 3.0]
+        sample_type: [uni, pos]
+      v0:
+        name: rho
+    meta:
+      notes: same NFW structure as cp3-cosmo C5d (varying-R0 form) and physo-streams (potential
+        form); registry clusters record the overlaps.
+  expansion-law:
+    raw: H^2 = H0^2*(Omega_m*(1+z)^3 + (1-Omega_m)), H0=1.072, Omega_m=1.315
+    prepared: 1.149184*(1.315*((1+v1)**(3))-0.315)
+    n_variables: 1
+    sources:
+    - arXiv:2303.03192 Appendix A (Friedmann/LCDM expansion-law mock)
+    vars:
+      v1:
+        name: z
+        sample_range: [0.01, 2.5]
+        sample_type: [uni, pos]
+      v0:
+        name: H_squared
+    meta:
+      notes: 'target is H SQUARED; Omega_m = 1.315 is the paper''s printed mock value (kept for
+        fidelity; >1 is cosmologically unphysical and this is a mock, not LCDM). Thematic overlap
+        with first-principles/cp3-cosmo H(z) laws: different rendering (H^2, no sqrt), registry
+        keeps them distinct.'

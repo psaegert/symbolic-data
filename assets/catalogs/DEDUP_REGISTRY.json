@@ -204,9 +204,9 @@
   "ai-descartes:fsrd-noise:III.7.38": "feynman:III.7.38"
  },
  "known_limit": "skeleton identity is variable-index-sensitive (canonicalization of variable order is a deferred decision); explicit links cover variant catalogs, and every rendering joins the union holdout independently",
- "n_entries_total": 723,
- "n_unique_problems": 587,
- "n_cross_or_intra_duplicate_clusters": 112,
+ "n_entries_total": 762,
+ "n_unique_problems": 597,
+ "n_cross_or_intra_duplicate_clusters": 114,
  "clusters": {
   "eq0001": [
    "ai-descartes:kepler-exoplanets",
@@ -664,19 +664,54 @@
    "neat:Neat-9",
    "pagie:Pagie-1"
   ],
-  "eq0457": [
+  "eq0455": [
+   "physo-class:damped-harmonic-oscillator-a",
+   "physo-class:damped-harmonic-oscillator-b"
+  ],
+  "eq0461": [
+   "physo-streams:stream-01",
+   "physo-streams:stream-04",
+   "physo-streams:stream-05",
+   "physo-streams:stream-10",
+   "physo-streams:stream-18",
+   "physo-streams:stream-19",
+   "physo-streams:stream-22",
+   "physo-streams:stream-33",
+   "physo-streams:stream-34",
+   "physo-streams:stream-39",
+   "physo-streams:stream-41",
+   "physo-streams:stream-44",
+   "physo-streams:stream-45",
+   "physo-streams:stream-47",
+   "physo-streams:stream-49",
+   "physo-streams:stream-50",
+   "physo-streams:stream-52",
+   "physo-streams:stream-53",
+   "physo-streams:stream-57",
+   "physo-streams:stream-59",
+   "physo-streams:stream-61",
+   "physo-streams:stream-62",
+   "physo-streams:stream-63",
+   "physo-streams:stream-64",
+   "physo-streams:stream-65",
+   "physo-streams:stream-72",
+   "physo-streams:stream-75",
+   "physo-streams:stream-85",
+   "physo-streams:stream-86"
+  ],
+  "eq0467": [
    "r-rationals:R1",
    "r-rationals:R1a"
   ],
-  "eq0458": [
+  "eq0468": [
    "r-rationals:R2",
    "r-rationals:R2a"
   ],
-  "eq0459": [
+  "eq0469": [
    "r-rationals:R3",
    "r-rationals:R3a"
   ],
-  "eq0460": [
+  "eq0470": [
    "nguyen:Nguyen-6",
    "sine:Sine"
   ]
