@@ -19,7 +19,7 @@ from simplipy import SimpliPyEngine, normalize_skeleton
 CATALOGS = ["constant", "grammarvae", "jin", "keijzer", "korns", "koza", "livermore",
             "livermore2", "meier", "neat", "nonic", "pagie", "poly", "r-rationals",
             "sine", "vladislavleva", "nguyen", "fastsrb", "feynman", "srsd-dummy",
-            "physo-astro", "physo-class"]
+            "physo-astro", "physo-class", "soose-nc", "soose-wc", "soose-fc"]
 # FROZEN catalogs (materialized .npz, measured data): identity from each problem's stored
 # skeleton (already normalize_skeleton-canonical) + its x width.
 FROZEN_CATALOGS = ["first-principles", "cp3-cosmo", "ai-descartes", "physo-streams"]

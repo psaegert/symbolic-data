@@ -1,0 +1,26 @@
+Vendored SOOSE benchmark files from SymposiumOrganization/NeuralSymbolicRegressionThatScales
+(MIT; LICENSE.nesymres alongside; Copyright (c) 2021 SymposiumOrganization), the repo of
+"Neural Symbolic Regression that Scales", Biggio et al., ICML 2021 (arXiv:2106.06427).
+Fetched 2026-07-10.
+
+- nc.csv: test_set/nc.csv at HEAD 09f5af4 — SOOSE-NC, 200 unseen skeletons with no constants
+  (byte-identical to the pre-catalog copy long carried in flash-ansr's legacy data tree).
+- old_test.csv: data/benchmark/old_test.csv RECOVERED FROM DELETED HISTORY at commit 0cfff79
+  ("benchmarks", 2021-05-06) — the only surviving concrete instantiation of SOOSE-WC and
+  SOOSE-FC (the constant-sampling generator is unseeded, so re-rendering cannot reproduce the
+  paper-era constants). 600 rows: 0-199 = NC (byte-equal to nc.csv), 200-399 = FC ("full
+  constants": every slot filled; 2-6 literals/eq, zero constant-free rows), 400-599 = WC ("with
+  constants": 0-3 slots sampled; 47/200 rows end constant-free after sympy.simplify). Block
+  identity is INFERRED from constant density (FC's definition excludes constant-free rows), not
+  from labels in the file. Whether this instantiation is the exact one behind the paper's
+  figures is unverifiable from the repo; it predates publication and is the best available
+  canonical source. The exact generating-code state is unrecoverable (the 0cfff79 code contains
+  a constant-range bug the file's literals contradict); the FILE is the artifact of record.
+
+Explicitly NOT imported (decided, not overlooked):
+- data/benchmark/test.csv @ 0cfff79 (100-equation dev/validation GT file, deleted at HEAD,
+  non-integer exponents): no paper standing — fails the citability bar, like TPSR-400.
+- data/benchmark/nc_old.csv: byte-identical duplicate of nc.csv.
+
+These files are the build input for the soose-nc / soose-wc / soose-fc catalogs
+(tools/soose_to_catalogs.py).

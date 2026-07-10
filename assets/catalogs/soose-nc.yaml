@@ -1,0 +1,5568 @@
+metadata:
+  name: soose-nc
+  version: 1
+  description: 'SOOSE-NC: 200 out-of-training-sample NeSymReS skeletons, no constants: all multiplicative
+    placeholders = 1, additive = 0.'
+  sources: &id001
+  - Biggio et al. 2021 (arXiv:2106.06427), Neural Symbolic Regression that Scales (NeSymReS) — SOOSE test
+    set
+  - 'SymposiumOrganization/NeuralSymbolicRegressionThatScales (MIT); NC: test_set/nc.csv @ 09f5af4; WC/FC:
+    data/benchmark/old_test.csv @ 0cfff79 (recovered from deleted history, see assets/upstream/soose/NOTICE)'
+  license: MIT (SymposiumOrganization/NeuralSymbolicRegressionThatScales)
+  sampling_defaults:
+    n_points: 500
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: all variables uniform on [-10, 10] (upstream support), 500 points; domain-restricted ops
+      (sqrt/log/asin over the full box) follow the per-point rejection convention — accepted points are
+      the declared distribution conditioned on the valid domain; meta.finite_fraction (audit tool) discloses
+      the per-entry valid fraction.
+    variants: row i shares its skeleton across soose-nc/wc/fc; WC/FC carry meta.base_eq_id links to the
+      NC row; block identity of the historical WC/FC source is inferred from constant density (NOTICE).
+expressions:
+  SOOSE-NC-000:
+    raw: -x_1 + log(x_1 + x_2**4)
+    prepared: -v1+log(v1+v2**4)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-001:
+    raw: sin(x_3) + sin(x_3/(x_1 - x_2))
+    prepared: sin(v3)+sin(v3/(v1-v2))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-002:
+    raw: x_2*cos(x_1*x_3 - x_2) - 1
+    prepared: v2*cos(v1*v3-v2)-1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-003:
+    raw: x_2 + tan(x_1 - 1/(x_1 - 1))
+    prepared: v2+tan(v1-1/(v1-1))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-004:
+    raw: x_1 - x_2**2 - log(x_2)
+    prepared: v1-v2**2-log(v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-005:
+    raw: x_1 - tan(exp(x_1 - 1))
+    prepared: v1-tan(exp(v1-1))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-006:
+    raw: x_1*(x_1 + 1)/(x_1 - 1)
+    prepared: v1*(v1+1)/(v1-1)
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-007:
+    raw: x_1*x_3/(-x_1 + x_2) - x_3
+    prepared: v1*v3/(-v1+v2)-v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-008:
+    raw: tan(x_2 + x_3)/(-x_1 - 1)
+    prepared: tan(v2+v3)/(-v1-1)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-009:
+    raw: x_1 + cos(x_1 - x_2*x_3)
+    prepared: v1+cos(v1-v2*v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-010:
+    raw: x_3 + x_3/(x_1 + x_2 + x_3)
+    prepared: v3+v3/(v1+v2+v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-011:
+    raw: sqrt(-x_1*x_2 + x_3/x_1)
+    prepared: sqrt(-v1*v2+v3/v1)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-012:
+    raw: x_1/(x_1 + x_3 + log(x_2**4))
+    prepared: v1/(v1+v3+log(v2**4))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-013:
+    raw: sin(x_2/(-x_1 + x_2)) - tan(1)
+    prepared: sin(v2/(-v1+v2))-tan(1)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-014:
+    raw: cos(x_2 + sin(x_1)/cos(x_3))
+    prepared: cos(v2+sin(v1)/cos(v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-015:
+    raw: x_1**2 + x_2 - tan(1) - 1
+    prepared: v1**2+v2-tan(1)-1
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-016:
+    raw: x_2*sin(x_1**2 + x_1*x_2)
+    prepared: v2*sin(v1**2+v1*v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-017:
+    raw: -x_1/(x_1 - x_2 + x_3 - 1) + x_3
+    prepared: -v1/(v1-v2+v3-1)+v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-018:
+    raw: x_2/(x_2 + cos(x_1*x_3))
+    prepared: v2/(v2+cos(v1*v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-019:
+    raw: 1 + tan(x_2)/(x_2*(-x_1 + x_2))
+    prepared: 1+tan(v2)/(v2*(-v1+v2))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-020:
+    raw: 1/(x_1 - sin(cos(x_2)))
+    prepared: 1/(v1-sin(cos(v2)))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-021:
+    raw: (x_1 + 1)/(x_2 + 1) + 1
+    prepared: (v1+1)/(v2+1)+1
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-022:
+    raw: log(-x_1 + x_2)/(x_2*(x_2 - 1))
+    prepared: log(-v1+v2)/(v2*(v2-1))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-023:
+    raw: (x_3 - 1)*sin(x_1 + x_1/x_2)
+    prepared: (v3-1)*sin(v1+v1/v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-024:
+    raw: x_2*x_3*cos(x_1 + x_2) + x_2
+    prepared: v2*v3*cos(v1+v2)+v2
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-025:
+    raw: sin(x_2*tan(x_1**3 - x_2))
+    prepared: sin(v2*tan(v1**3-v2))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-026:
+    raw: x_1*cos(sqrt(log(x_2))) + x_3
+    prepared: v1*cos(sqrt(log(v2)))+v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-027:
+    raw: x_1*sqrt(-x_3 + sin(x_2))
+    prepared: v1*sqrt(-v3+sin(v2))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-028:
+    raw: cos(x_1 - tan(x_2**3))
+    prepared: cos(v1-tan(v2**3))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-029:
+    raw: sqrt(x_2**2 - x_2 - exp(x_1))
+    prepared: sqrt(v2**2-v2-exp(v1))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-030:
+    raw: -x_2 + (x_3 + sin(x_1/x_2))/x_3
+    prepared: -v2+(v3+sin(v1/v2))/v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-031:
+    raw: x_3 + 1/(x_2 - log(x_1 + x_2))
+    prepared: v3+1/(v2-log(v1+v2))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-032:
+    raw: sin(x_1**2) + 1/x_2
+    prepared: sin(v1**2)+1/v2
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-033:
+    raw: -x_2 + log(x_1*(-x_2 + exp(-1)))
+    prepared: -v2+log(v1*(-v2+exp(-1)))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-034:
+    raw: (x_1 + cos(1))*log(x_2)
+    prepared: (v1+cos(1))*log(v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-035:
+    raw: x_2 + sqrt(1 + x_3/(x_1*x_2))
+    prepared: v2+sqrt(1+v3/(v1*v2))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-036:
+    raw: (x_1 - x_3)/sin(x_1*x_2)
+    prepared: (v1-v3)/sin(v1*v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-037:
+    raw: x_2*sqrt(x_1/x_3 + x_2)/x_3
+    prepared: v2*sqrt(v1/v3+v2)/v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-038:
+    raw: sin(x_2/x_1) + sin(x_1 - x_2)
+    prepared: sin(v2/v1)+sin(v1-v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-039:
+    raw: cos(x_1) - sqrt(cos(x_2))
+    prepared: cos(v1)-sqrt(cos(v2))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-040:
+    raw: x_1*(x_1 + x_2 + x_3 + sin(x_2))
+    prepared: v1*(v1+v2+v3+sin(v2))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-041:
+    raw: x_2*(x_1 + log(cos(x_3)))/x_1
+    prepared: v2*(v1+log(cos(v3)))/v1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-042:
+    raw: x_1 + sin(log(x_2*(x_2 - 1)))
+    prepared: v1+sin(log(v2*(v2-1)))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-043:
+    raw: (-x_1 + x_3)*log(-x_1 + x_2)
+    prepared: (-v1+v3)*log(-v1+v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-044:
+    raw: x_3 - cos(x_1**3*x_2**3)
+    prepared: v3-cos(v1**3*v2**3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-045:
+    raw: cos((-x_1 + sin(x_2) - 1)**3)
+    prepared: cos((-v1+sin(v2)-1)**3)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-046:
+    raw: x_2 + sin(x_1**5 + x_3)
+    prepared: v2+sin(v1**5+v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-047:
+    raw: x_1 + x_2/(exp(x_2) - 1)
+    prepared: v1+v2/(exp(v2)-1)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-048:
+    raw: tan(cos(x_1) + tan(1))
+    prepared: tan(cos(v1)+tan(1))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-049:
+    raw: x_1 + 1 + 1/(x_1 + 1)
+    prepared: v1+1+1/(v1+1)
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-050:
+    raw: cos(sin(x_1)) - 1/x_1
+    prepared: cos(sin(v1))-1/v1
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-051:
+    raw: x_1*log(sin(tan(x_1)))
+    prepared: v1*log(sin(tan(v1)))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-052:
+    raw: (x_1 + sin(x_2))*(sqrt(x_2) + x_3)
+    prepared: (v1+sin(v2))*(sqrt(v2)+v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-053:
+    raw: tan(sin(x_1*tan(x_2) - x_3))
+    prepared: tan(sin(v1*tan(v2)-v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-054:
+    raw: sin(x_2*(-x_1 + x_2 - x_3 + 1))
+    prepared: sin(v2*(-v1+v2-v3+1))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-055:
+    raw: log(cos(x_1**2 - x_2*x_3))
+    prepared: log(cos(v1**2-v2*v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-056:
+    raw: sin(sin(x_2*x_3/x_1**2))
+    prepared: sin(sin(v2*v3/v1**2))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-057:
+    raw: x_1 + sin(exp(x_2) + cos(x_2))
+    prepared: v1+sin(exp(v2)+cos(v2))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-058:
+    raw: x_1 + sqrt(x_1 - x_3) + sin(x_2)
+    prepared: v1+sqrt(v1-v3)+sin(v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-059:
+    raw: 1 - sin(x_1*(x_1 + sin(x_1)))
+    prepared: 1-sin(v1*(v1+sin(v1)))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-060:
+    raw: x_1/(x_2 + (x_1 + tan(x_3))/x_2)
+    prepared: v1/(v2+(v1+tan(v3))/v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-061:
+    raw: -log((x_1 + x_2)**2)
+    prepared: -log((v1+v2)**2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-062:
+    raw: x_1*(-x_1 + cos(sqrt(x_2))**2)
+    prepared: v1*(-v1+cos(sqrt(v2))**2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-063:
+    raw: -exp(cos(x_1)) + sin(x_1)
+    prepared: -exp(cos(v1))+sin(v1)
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-064:
+    raw: x_2 + 1/(-x_1*(x_3 - 1) + x_2)
+    prepared: v2+1/(-v1*(v3-1)+v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-065:
+    raw: x_1 + cos(1 + 1/x_2)
+    prepared: v1+cos(1+1/v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-066:
+    raw: x_3/(x_1 - x_2*exp(x_2) - 1)
+    prepared: v3/(v1-v2*exp(v2)-1)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-067:
+    raw: tan(exp(x_1 - x_2)) - 1
+    prepared: tan(exp(v1-v2))-1
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-068:
+    raw: cos(x_1**5*(x_2 - x_3)**5)/x_1
+    prepared: cos(v1**5*(v2-v3)**5)/v1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-069:
+    raw: x_1*cos(x_2)*tan(x_2)
+    prepared: v1*cos(v2)*tan(v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-070:
+    raw: exp(cos((x_1 + x_2 + 1)**4))
+    prepared: exp(cos((v1+v2+1)**4))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-071:
+    raw: x_3/(x_2*(x_3**2 + tan(x_1)))
+    prepared: v3/(v2*(v3**2+tan(v1)))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-072:
+    raw: -x_3 + (-x_1 + x_2)/log(x_2) - 1
+    prepared: -v3+(-v1+v2)/log(v2)-1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-073:
+    raw: x_2 + cos(tan(x_1 - cos(1)))
+    prepared: v2+cos(tan(v1-cos(1)))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-074:
+    raw: -x_2 + cos(x_2 - 1)/x_1
+    prepared: -v2+cos(v2-1)/v1
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-075:
+    raw: log(x_1/sin(1/x_1))
+    prepared: log(v1/sin(1/v1))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-076:
+    raw: x_3/(x_2 + cos(x_1/cos(x_2)))
+    prepared: v3/(v2+cos(v1/cos(v2)))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-077:
+    raw: x_1 + x_1/(x_2*(x_1 + cos(x_2)))
+    prepared: v1+v1/(v2*(v1+cos(v2)))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-078:
+    raw: x_2/((x_1 + tan(x_2))*(x_2 + x_3))
+    prepared: v2/((v1+tan(v2))*(v2+v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-079:
+    raw: x_1 - x_2*(cos(x_2) - cos(x_3))
+    prepared: v1-v2*(cos(v2)-cos(v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-080:
+    raw: x_3*cos(x_2 + x_3) + cos(x_1)
+    prepared: v3*cos(v2+v3)+cos(v1)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-081:
+    raw: x_2**2 - cos(cos(x_1))
+    prepared: v2**2-cos(cos(v1))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-082:
+    raw: -x_2*sin(x_1*(x_3 - 1))
+    prepared: -v2*sin(v1*(v3-1))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-083:
+    raw: tan(cos(x_1) - tan(1)) - 1
+    prepared: tan(cos(v1)-tan(1))-1
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-084:
+    raw: (x_2 + x_3 - cos(x_1))/x_3
+    prepared: (v2+v3-cos(v1))/v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-085:
+    raw: x_1*(sin(x_2) - sin(x_3)/x_2)
+    prepared: v1*(sin(v2)-sin(v3)/v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-086:
+    raw: x_3*cos(x_1**2 + x_2)**3
+    prepared: v3*cos(v1**2+v2)**3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-087:
+    raw: tan((x_1 - x_2**5)*sin(x_3))
+    prepared: tan((v1-v2**5)*sin(v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-088:
+    raw: -x_1*sin(tan(x_1*x_2)) + x_1
+    prepared: -v1*sin(tan(v1*v2))+v1
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-089:
+    raw: cos(1 - (x_2*x_3 + x_2)/x_1)
+    prepared: cos(1-(v2*v3+v2)/v1)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-090:
+    raw: x_1 - (x_2 + x_3)*sin(x_1) + 1
+    prepared: v1-(v2+v3)*sin(v1)+1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-091:
+    raw: -1/tan(x_1*x_2)
+    prepared: -1/tan(v1*v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-092:
+    raw: sin(x_1) + tan(tan(exp(x_1)))
+    prepared: sin(v1)+tan(tan(exp(v1)))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-093:
+    raw: (x_2 + x_3 + (x_2 - 1)/x_2)/x_1
+    prepared: (v2+v3+(v2-1)/v2)/v1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-094:
+    raw: x_1/(x_2*(-x_2 + x_3)) - x_2
+    prepared: v1/(v2*(-v2+v3))-v2
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-095:
+    raw: x_2 + log(x_1*(x_1 + sin(x_2)))
+    prepared: v2+log(v1*(v1+sin(v2)))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-096:
+    raw: x_2 + x_3/(-x_1*x_3 - x_2)
+    prepared: v2+v3/(-v1*v3-v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-097:
+    raw: sin(x_3*(x_1 - x_2 + 1))
+    prepared: sin(v3*(v1-v2+1))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-098:
+    raw: -x_2 + x_3*sin(cos(tan(x_1)))
+    prepared: -v2+v3*sin(cos(tan(v1)))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-099:
+    raw: sin(x_2*(x_1 + x_3)**2 + x_2)
+    prepared: sin(v2*(v1+v3)**2+v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-100:
+    raw: x_1*(x_2 - asin(1/x_1))
+    prepared: v1*(v2-asin(1/v1))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-101:
+    raw: cos(sqrt(x_1**2 - 1))
+    prepared: cos(sqrt(v1**2-1))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-102:
+    raw: x_1*(x_1 + x_2*cos(x_3)) + 1
+    prepared: v1*(v1+v2*cos(v3))+1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-103:
+    raw: x_1*cos(x_2**3 + x_2)
+    prepared: v1*cos(v2**3+v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-104:
+    raw: sin(exp((x_2 + x_3)/x_1))
+    prepared: sin(exp((v2+v3)/v1))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-105:
+    raw: tan(x_2 + (x_1 + x_3)/(x_2*x_3))
+    prepared: tan(v2+(v1+v3)/(v2*v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-106:
+    raw: exp(1 - cos(x_1)) + 1
+    prepared: exp(1-cos(v1))+1
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-107:
+    raw: x_1 - sqrt(x_1 + x_2)/x_2
+    prepared: v1-sqrt(v1+v2)/v2
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-108:
+    raw: x_1/(x_1 + tan(sin(x_1)))
+    prepared: v1/(v1+tan(sin(v1)))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-109:
+    raw: (x_3 + sin(x_1)/x_2)/x_3
+    prepared: (v3+sin(v1)/v2)/v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-110:
+    raw: x_2*x_3/(x_1*(x_1 + sqrt(x_2)))
+    prepared: v2*v3/(v1*(v1+sqrt(v2)))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-111:
+    raw: x_1*sin(x_2 + x_3*sin(x_1))
+    prepared: v1*sin(v2+v3*sin(v1))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-112:
+    raw: cos((x_1 + x_2)*(x_1 + x_3 + 1))
+    prepared: cos((v1+v2)*(v1+v3+1))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-113:
+    raw: x_2**2*sin(x_1 - 1) - 1
+    prepared: v2**2*sin(v1-1)-1
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-114:
+    raw: x_2/(x_1*(x_2 + sin(x_1 + x_3)))
+    prepared: v2/(v1*(v2+sin(v1+v3)))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-115:
+    raw: x_3 - 1/(x_1 + exp(x_2))
+    prepared: v3-1/(v1+exp(v2))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-116:
+    raw: x_2**2 - cos(sin(x_1))
+    prepared: v2**2-cos(sin(v1))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-117:
+    raw: sqrt(x_1*(x_2/x_3 + x_3))
+    prepared: sqrt(v1*(v2/v3+v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-118:
+    raw: log(exp(x_1 + x_2) + log(x_2))
+    prepared: log(exp(v1+v2)+log(v2))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-119:
+    raw: x_1*x_2/log(log(-x_1))
+    prepared: v1*v2/log(log(-v1))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-120:
+    raw: sqrt(-1 + (x_1*x_2 + x_2)/x_3)
+    prepared: sqrt(-1+(v1*v2+v2)/v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-121:
+    raw: x_2*sin(x_1 - x_3**2)
+    prepared: v2*sin(v1-v3**2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-122:
+    raw: cos(sin(x_2) + x_3/x_1)
+    prepared: cos(sin(v2)+v3/v1)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-123:
+    raw: x_2 - log((x_1 - 1)**2)
+    prepared: v2-log((v1-1)**2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-124:
+    raw: sqrt(tan(x_2*(-x_1 + exp(-1))))
+    prepared: sqrt(tan(v2*(-v1+exp(-1))))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-125:
+    raw: -x_2*sin(x_1*x_3 + 1) - 1
+    prepared: -v2*sin(v1*v3+1)-1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-126:
+    raw: -x_1 + exp(-sin(x_1/x_2))
+    prepared: -v1+exp(-sin(v1/v2))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-127:
+    raw: x_1 - x_2**2 + x_2 + x_3 - 1
+    prepared: v1-v2**2+v2+v3-1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-128:
+    raw: log(cos(exp(-1/cos(x_1))))
+    prepared: log(cos(exp(-1/cos(v1))))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-129:
+    raw: x_1 - x_2*cos(x_1**3)
+    prepared: v1-v2*cos(v1**3)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-130:
+    raw: sin(x_2*x_3/x_1) - 1
+    prepared: sin(v2*v3/v1)-1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-131:
+    raw: sqrt(x_2/(x_1 + x_1/sin(x_1)))
+    prepared: sqrt(v2/(v1+v1/sin(v1)))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-132:
+    raw: sin(cos(x_1*tan(x_1) + x_1))
+    prepared: sin(cos(v1*tan(v1)+v1))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-133:
+    raw: x_2/(x_2 + sqrt(x_1*x_3)) + x_3
+    prepared: v2/(v2+sqrt(v1*v3))+v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-134:
+    raw: log(sqrt(x_1*sin(x_2)))
+    prepared: log(sqrt(v1*sin(v2)))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-135:
+    raw: x_3 + 1 - 1/(x_1 + x_2*x_3)
+    prepared: v3+1-1/(v1+v2*v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-136:
+    raw: -x_1 + x_2*cos(x_3 - sin(x_3))
+    prepared: -v1+v2*cos(v3-sin(v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-137:
+    raw: x_2*(x_2 + x_3) - cos(tan(x_1))
+    prepared: v2*(v2+v3)-cos(tan(v1))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-138:
+    raw: cos(x_2)/cos(x_1/x_3)
+    prepared: cos(v2)/cos(v1/v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-139:
+    raw: -x_1 + tan(x_1*x_2**2 - x_3)
+    prepared: -v1+tan(v1*v2**2-v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-140:
+    raw: x_1**2 + x_2 - cos(x_2 - x_3)
+    prepared: v1**2+v2-cos(v2-v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-141:
+    raw: x_2*cos(x_2) + cos(x_1/x_2)
+    prepared: v2*cos(v2)+cos(v1/v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-142:
+    raw: cos(x_1 - tan(x_2)**2)
+    prepared: cos(v1-tan(v2)**2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-143:
+    raw: log(x_1 - x_2 + x_3 + exp(x_2))
+    prepared: log(v1-v2+v3+exp(v2))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-144:
+    raw: tan(x_1*cos(1/x_1)/x_2)
+    prepared: tan(v1*cos(1/v1)/v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-145:
+    raw: -x_1*(x_1 + sin(x_1 + x_2))
+    prepared: -v1*(v1+sin(v1+v2))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-146:
+    raw: sin(log(-x_1/x_2 + x_2))
+    prepared: sin(log(-v1/v2+v2))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-147:
+    raw: tan(log(-x_1*x_2 + x_1))
+    prepared: tan(log(-v1*v2+v1))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-148:
+    raw: x_1 + x_2 + sin(x_1 + x_3) + 1
+    prepared: v1+v2+sin(v1+v3)+1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-149:
+    raw: x_2 + x_3 - tan(x_2/x_1)
+    prepared: v2+v3-tan(v2/v1)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-150:
+    raw: x_2*(x_1 + log(x_2) + 1) + x_3
+    prepared: v2*(v1+log(v2)+1)+v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-151:
+    raw: sin(x_3)/(x_1**5 + x_2)
+    prepared: sin(v3)/(v1**5+v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-152:
+    raw: x_1 + (x_2 + sin(x_1 + 1))/x_3
+    prepared: v1+(v2+sin(v1+1))/v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-153:
+    raw: asin(sin(x_1)/x_1)
+    prepared: asin(sin(v1)/v1)
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-154:
+    raw: -x_2 + (x_1 + sqrt(x_2))**2
+    prepared: -v2+(v1+sqrt(v2))**2
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-155:
+    raw: x_2 + 1 + (x_1 + cos(x_1))/x_3
+    prepared: v2+1+(v1+cos(v1))/v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-156:
+    raw: cos(x_1*(-x_1 + x_2**2*x_3))
+    prepared: cos(v1*(-v1+v2**2*v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-157:
+    raw: (tan(x_2/x_1) - 1)/x_2
+    prepared: (tan(v2/v1)-1)/v2
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-158:
+    raw: x_2*cos(x_1*x_2*x_3 + x_1)
+    prepared: v2*cos(v1*v2*v3+v1)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-159:
+    raw: x_2**2 + sin(x_1*x_2)
+    prepared: v2**2+sin(v1*v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-160:
+    raw: x_1*(-x_2 + sqrt(x_1 - x_3))
+    prepared: v1*(-v2+sqrt(v1-v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-161:
+    raw: x_3**2/(x_1*exp(x_2) + x_3)
+    prepared: v3**2/(v1*exp(v2)+v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-162:
+    raw: (-x_1 + (-x_1 + x_2)*log(x_2))/x_1
+    prepared: (-v1+(-v1+v2)*log(v2))/v1
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-163:
+    raw: x_3 + sin(x_1) - 1/(x_2*x_3)
+    prepared: v3+sin(v1)-1/(v2*v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-164:
+    raw: x_1 - x_2 + tan(x_1**2 - x_3)
+    prepared: v1-v2+tan(v1**2-v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-165:
+    raw: sqrt(-x_1 + x_2*x_3/x_1)
+    prepared: sqrt(-v1+v2*v3/v1)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-166:
+    raw: x_1 - sin(x_3/(x_1 + x_2 + 1))
+    prepared: v1-sin(v3/(v1+v2+1))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-167:
+    raw: cos(x_1 + x_2 + (x_2 + x_3)**2)
+    prepared: cos(v1+v2+(v2+v3)**2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-168:
+    raw: (-x_2 + x_3*(-x_1 + x_3))**(-3)
+    prepared: (-v2+v3*(-v1+v3))**(-3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-169:
+    raw: -x_1 + cos(1 + 1/x_1)
+    prepared: -v1+cos(1+1/v1)
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-170:
+    raw: -x_3 + tan(x_3/(x_1*x_2))
+    prepared: -v3+tan(v3/(v1*v2))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-171:
+    raw: -x_1**2 + x_1/x_2 + x_2 + x_3
+    prepared: -v1**2+v1/v2+v2+v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-172:
+    raw: cos((x_1 - x_2 - 1/x_2)**5)
+    prepared: cos((v1-v2-1/v2)**5)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-173:
+    raw: x_2 + x_3 - x_3/(x_1 - 1)
+    prepared: v2+v3-v3/(v1-1)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-174:
+    raw: x_1 - x_3*(x_2 - 1) + tan(x_3)
+    prepared: v1-v3*(v2-1)+tan(v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-175:
+    raw: x_2 - cos(sin(x_1) - 1)**2
+    prepared: v2-cos(sin(v1)-1)**2
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-176:
+    raw: x_1 + x_2 + (x_1 + x_2*x_3)/x_3
+    prepared: v1+v2+(v1+v2*v3)/v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-177:
+    raw: x_2/(-exp(x_1) + tan(x_1)) - 1
+    prepared: v2/(-exp(v1)+tan(v1))-1
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-178:
+    raw: x_2*(x_2 - (-x_1 - 1)/x_2)
+    prepared: v2*(v2-(-v1-1)/v2)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-179:
+    raw: cos(sin(exp(x_1) + 1))
+    prepared: cos(sin(exp(v1)+1))
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-180:
+    raw: log(x_2 + cos(x_2))/(x_1 + x_3)
+    prepared: log(v2+cos(v2))/(v1+v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-181:
+    raw: -1 - sin(x_1)**2/x_2
+    prepared: -1-sin(v1)**2/v2
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-182:
+    raw: sin(tan(x_2))*cos(x_1)
+    prepared: sin(tan(v2))*cos(v1)
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-183:
+    raw: cos(x_1*(x_2 + 1) + sin(x_1))
+    prepared: cos(v1*(v2+1)+sin(v1))
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-184:
+    raw: sin((x_1 - x_3)/(x_2*x_3))
+    prepared: sin((v1-v3)/(v2*v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-185:
+    raw: cos(cos(x_2)**2/(-x_1 + x_3)**2)
+    prepared: cos(cos(v2)**2/(-v1+v3)**2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-186:
+    raw: x_3 + (-x_2 + x_3)*cos(x_1 + x_3)
+    prepared: v3+(-v2+v3)*cos(v1+v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-187:
+    raw: x_2 + x_3 + cos(x_1 + 1) + 1
+    prepared: v2+v3+cos(v1+1)+1
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-188:
+    raw: asin(x_1**3/(x_3*(x_2 + x_3)))
+    prepared: asin(v1**3/(v3*(v2+v3)))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-189:
+    raw: cos((x_1 - 1)**3)**2
+    prepared: cos((v1-1)**3)**2
+    n_variables: 1
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-190:
+    raw: x_1*(x_1 + x_3 + 1) + sqrt(x_2)
+    prepared: v1*(v1+v3+1)+sqrt(v2)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-191:
+    raw: -x_1 + x_2 - sin(x_2*x_3)
+    prepared: -v1+v2-sin(v2*v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-192:
+    raw: sin(x_2*x_3*(x_1*x_2 + x_3))
+    prepared: sin(v2*v3*(v1*v2+v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-193:
+    raw: sin((-x_2 + x_3)**2/(x_1 + x_2))
+    prepared: sin((-v2+v3)**2/(v1+v2))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-194:
+    raw: (x_1*x_2 + sqrt(x_2))/x_1
+    prepared: (v1*v2+sqrt(v2))/v1
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-195:
+    raw: x_1 - x_3 + (x_2 + x_3)*sin(x_3)
+    prepared: v1-v3+(v2+v3)*sin(v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-196:
+    raw: x_1 + log(x_2 + tan(x_2)) + 1
+    prepared: v1+log(v2+tan(v2))+1
+    n_variables: 2
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-197:
+    raw: x_1 - x_2*x_3 + x_2 + cos(x_3)
+    prepared: v1-v2*v3+v2+cos(v3)
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-198:
+    raw: x_1/(x_1 + x_2**2 + tan(x_3))
+    prepared: v1/(v1+v2**2+tan(v3))
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+  SOOSE-NC-199:
+    raw: x_2 + x_3 - tan(x_1 - x_2)/x_3
+    prepared: v2+v3-tan(v1-v2)/v3
+    n_variables: 3
+    sources: *id001
+    vars:
+      v1:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y

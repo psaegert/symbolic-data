@@ -68,6 +68,12 @@ CATALOGS = {
     "physo-streams": ("physo-streams.npz", 29, "problem_catalog"),
     "physo-astro": ("physo-astro.yaml", 2, "problem_catalog"),
     "physo-class": ("physo-class.yaml", 8, "problem_catalog"),
+    # P4 neural-SR bespoke: SOOSE NC/WC/FC (NeSymReS, MIT; WC/FC recovered from deleted history
+    # @0cfff79 — the only surviving concrete instantiation). SSDNC (no license + no canonical
+    # artifact), TPSR-400 (protocol, not a file), SymbolicGPT (generator configs only) = skips.
+    "soose-nc": ("soose-nc.yaml", 200, "problem_catalog"),
+    "soose-wc": ("soose-wc.yaml", 200, "problem_catalog"),
+    "soose-fc": ("soose-fc.yaml", 200, "problem_catalog"),
 }
 
 
