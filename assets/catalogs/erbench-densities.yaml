@@ -1,0 +1,748 @@
+metadata:
+  name: erbench-densities
+  version: 1
+  description: ERBench Densities family (33 entries after deduplication; headline eval tier).
+  sources:
+  - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+  - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+  license: BSD-3-Clause (SciPy-derived, per ERBench README)
+  eval_tier: headline
+  sampling_defaults:
+    n_points: 100
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: per-variable uniform (or uniform-integer for dtype=int rows) in the upstream support box; per-point
+      rejection conditioning + meta.finite_fraction disclosure as everywhere. ERBench's own REFERENCE sampler (100
+      pts/dim, 1-3-component mixtures in a half-width train sub-box, extrapolative eval region, noise w.p. 0.2)
+      is an EVALUATION PROTOCOL, recorded here as provenance -- our harness samples the declared box directly.
+    canonicalization: '''^''->''**'', ''Abs(''->''abs('', log(u,10)->log10-rewrite, x_k->v{k+1}; exact duplicates
+      (expression+support+dtype) merged with names in meta.duplicate_of_rows.'
+expressions:
+  anglit:
+    raw: cos(2*x_0)
+    prepared: cos(2*v1)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -0.7853981633974483
+        - 0.7853981633974483
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_0
+      distribution: anglit density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.anglit.html#scipy.stats.anglit
+  arcsine:
+    raw: 1/(pi*sqrt(x_0*(1 - x_0)))
+    prepared: 1/(3.141592653589793*sqrt(v1*(1-v1)))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 0.999
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_1
+      distribution: arcsine density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.arcsine.html#scipy.stats.arcsine
+  logistic:
+    raw: exp(-x_0)/(1+exp(-x_0))^2
+    prepared: exp(-v1)/(1+exp(-v1))**2
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_2
+      distribution: logistic density
+      scipy_doc: c = 1, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genlogistic.html#scipy.stats.genlogistic
+  generalized pareto:
+    raw: (1 + 2*x_0)^(-3/2)
+    prepared: (1+2*v1)**(-3/2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_3
+      distribution: generalized pareto density
+      scipy_doc: c = 2, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genpareto.html#scipy.stats.genpareto
+  generalized exponential:
+    raw: (1 + 2*(1 - exp(-2*x_0)))*exp(-3*x_0 + 1 - exp(-2*x_0))
+    prepared: (1+2*(1-exp(-2*v1)))*exp(-3*v1+1-exp(-2*v1))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_4
+      distribution: generalized exponential density
+      scipy_doc: a,b,c = 1, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genexpon.html#scipy.stats.genexpon
+  generalized  extreme value:
+    raw: exp(-(1 + x_0)^(-1))*(1 + x_0)^(-2)
+    prepared: exp(-(1+v1)**(-1))*(1+v1)**(-2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -0.5
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_5
+      distribution: generalized  extreme value density
+      scipy_doc: c = -1, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genextreme.html#scipy.stats.genextreme
+  gibrat:
+    raw: 1/(x_0*sqrt(2*pi))*exp(-0.5*(log(x_0)^2))
+    prepared: 1/(v1*sqrt(2*3.141592653589793))*exp(-0.5*(log(v1)**2))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 3.4452751762614753e-10
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_6
+      distribution: gibrat density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gibrat.html#scipy.stats.gibrat
+  gompertz:
+    raw: exp(x_0)*exp(1 - exp(x_0))
+    prepared: exp(v1)*exp(1-exp(v1))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_7
+      distribution: gompertz density
+      scipy_doc: c = 1, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gompertz.html#scipy.stats.gompertz
+  right-skewed Gumbel:
+    raw: exp(-(x_0 + exp(-x_0)))
+    prepared: exp(-(v1+exp(-v1)))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.5
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_8
+      distribution: right-skewed Gumbel density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gumbel_r.html#scipy.stats.gumbel_r
+  Half-Cauchy:
+    raw: 2/(pi*(1 + x_0^2))
+    prepared: 2/(3.141592653589793*(1+v1**2))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_9
+      distribution: Half-Cauchy density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.halfcauchy.html#scipy.stats.halfcauchy
+  Half-Logistic:
+    raw: (2*exp(-x_0))/((1 + exp(-x_0))^2)
+    prepared: (2*exp(-v1))/((1+exp(-v1))**2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_10
+      distribution: Half-Logistic density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.halflogistic.html#scipy.stats.halflogistic
+  Half-Normal:
+    raw: sqrt(2/pi)*exp(-x_0^2/2)
+    prepared: sqrt(2/3.141592653589793)*exp(-v1**2/2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_11
+      distribution: Half-Normal density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.halfnorm.html#scipy.stats.halfnorm
+  bradford:
+    raw: 1/(log(2)*(1 + x_0))
+    prepared: 1/(log(2)*(1+v1))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_12
+      distribution: bradford density
+      scipy_doc: c = 1.0, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bradford.html#scipy.stats.bradford
+  Inverse Gaussian:
+    raw: 1/sqrt((2*pi*x_0^3))*exp(-((x_0-1)^2)/(2*x_0))
+    prepared: 1/sqrt((2*3.141592653589793*v1**3))*exp(-((v1-1)**2)/(2*v1))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.2
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_13
+      distribution: Inverse Gaussian density
+      scipy_doc: mu = 1, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.invgauss.html#scipy.stats.invgauss
+  Inverse Weibull:
+    raw: exp(-1/x_0)/(x_0^2)
+    prepared: exp(-1/v1)/(v1**2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.2
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_14
+      distribution: Inverse Weibull density
+      scipy_doc: c = 1, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.invweibull.html#scipy.stats.invweibull
+  Lomax:
+    raw: 1/((1 +x_0)^2)
+    prepared: 1/((1+v1)**2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_15
+      distribution: Lomax density
+      scipy_doc: c = 1, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lomax.html#scipy.stats.lomax
+  Maxwell:
+    raw: sqrt(2/pi)*x_0^2*exp(-x_0^2/2)
+    prepared: sqrt(2/3.141592653589793)*v1**2*exp(-v1**2/2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_16
+      distribution: Maxwell density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.maxwell.html#scipy.stats.maxwell
+  Moyal:
+    raw: (exp(-(x_0+exp(-x_0))/2))/(sqrt(2*pi))
+    prepared: (exp(-(v1+exp(-v1))/2))/(sqrt(2*3.141592653589793))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_17
+      distribution: Moyal density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.moyal.html#scipy.stats.moyal
+  standard normal:
+    raw: (exp(-x_0^2/2))/(sqrt(2*pi))
+    prepared: (exp(-v1**2/2))/(sqrt(2*3.141592653589793))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_18
+      distribution: standard normal density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm
+  standard normal~densities_19:
+    raw: 2/(x_0^3)
+    prepared: 2/(v1**3)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_19
+      distribution: standard normal density
+      scipy_doc: b = 2, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pareto.html#scipy.stats.pareto
+  power law:
+    raw: 1/(2*sqrt(x_0))
+    prepared: 1/(2*sqrt(v1))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 5.213836029582808e-10
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_20
+      distribution: power law density
+      scipy_doc: a = 0.5, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.powerlaw.html#scipy.stats.powerlaw
+  rayleigh:
+    raw: x_0*exp(-x_0^2/2)
+    prepared: v1*exp(-v1**2/2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_21
+      distribution: rayleigh density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rayleigh.html#scipy.stats.rayleigh
+  semicircular:
+    raw: 2/pi*sqrt(1 - x_0^2)
+    prepared: 2/3.141592653589793*sqrt(1-v1**2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_22
+      distribution: semicircular density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.semicircular.html#scipy.stats.semicircular
+  bradford~densities_23:
+    raw: 2*(x_0^(-3))/((1+x_0^(-2))^2)
+    prepared: 2*(v1**(-3))/((1+v1**(-2))**2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 2.235761575875017e-10
+        - 1.8350870916695006
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_23
+      distribution: bradford density
+      scipy_doc: c = 2.0, d = 1.0, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.burr.html#scipy.stats.burr
+  Boltzmann:
+    raw: 0.09516690253473127*exp(-0.1*x_0)
+    prepared: 0.09516690253473127*exp(-0.1*v1)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 50.0
+        sample_type:
+        - int
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_24
+      distribution: Boltzmann density
+      scipy_doc: lambda = 0.1, N = 100, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.boltzmann.html#scipy.stats.boltzmann
+  Geometric:
+    raw: 0.8^(x_0-1)*0.2
+    prepared: 0.8**(v1-1)*0.2
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - int
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_25
+      distribution: Geometric density
+      scipy_doc: p = 0.2, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.geom.html#scipy.stats.geom
+  Log Series:
+    raw: -(0.9^x_0)/(x_0*log(0.1))
+    prepared: -(0.9**v1)/(v1*log(0.1))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - int
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_26
+      distribution: Log Series density
+      scipy_doc: p = 0.9, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.logser.html#scipy.stats.logser
+  cauchy:
+    raw: 1/(pi*(1 + x_0^2))
+    prepared: 1/(3.141592653589793*(1+v1**2))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_27
+      distribution: cauchy density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.cauchy.html#scipy.stats.cauchy
+  cosine:
+    raw: (1 + cos(x_0))/(2*pi)
+    prepared: (1+cos(v1))/(2*3.141592653589793)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -3.141592653589793
+        - 3.141592653589793
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_28
+      distribution: cosine density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.cosine.html#scipy.stats.cosine
+  exponential:
+    raw: exp(-x_0)
+    prepared: exp(-v1)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_29
+      distribution: exponential density
+      scipy_doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.expon.html#scipy.stats.expon
+  exponential weibull:
+    raw: 2*(1 - exp(-x_0))*exp(-x_0)
+    prepared: 2*(1-exp(-v1))*exp(-v1)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_30
+      distribution: exponential weibull density
+      scipy_doc: a = 2, c = 1, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.exponweib.html#scipy.stats.exponweib
+  fatigue life:
+    raw: (x_0+1)/(2*sqrt(2*pi*x_0^3))*exp(-(x_0-1)^2/(2*x_0))
+    prepared: (v1+1)/(2*sqrt(2*3.141592653589793*v1**3))*exp(-(v1-1)**2/(2*v1))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 8.485969149596428e-10
+        - 0.29538227738363126
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_31
+      distribution: fatigue life density
+      scipy_doc: c = 1, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.fatiguelife.html#scipy.stats.fatiguelife
+  folded cauchy:
+    raw: 1/(pi*(1 + (x_0-1)^2)) + 1/(pi*(1 + (x_0+1)^2))
+    prepared: 1/(3.141592653589793*(1+(v1-1)**2))+1/(3.141592653589793*(1+(v1+1)**2))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: densities_32
+      distribution: folded cauchy density
+      scipy_doc: c = 1, https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.foldcauchy.html#scipy.stats.foldcauchy

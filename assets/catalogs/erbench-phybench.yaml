@@ -1,0 +1,3786 @@
+metadata:
+  name: erbench-phybench
+  version: 1
+  description: ERBench PHYBench family (90 entries after deduplication; headline eval tier).
+  sources:
+  - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+  - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+  license: MIT (ERBench paper table + upstream Eureka-Lab/PHYBench)
+  eval_tier: headline
+  sampling_defaults:
+    n_points: 100
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: per-variable uniform (or uniform-integer for dtype=int rows) in the upstream support box; per-point
+      rejection conditioning + meta.finite_fraction disclosure as everywhere. ERBench's own REFERENCE sampler (100
+      pts/dim, 1-3-component mixtures in a half-width train sub-box, extrapolative eval region, noise w.p. 0.2)
+      is an EVALUATION PROTOCOL, recorded here as provenance -- our harness samples the declared box directly.
+    canonicalization: '''^''->''**'', ''Abs(''->''abs('', log(u,10)->log10-rewrite, x_k->v{k+1}; exact duplicates
+      (expression+support+dtype) merged with names in meta.duplicate_of_rows.'
+expressions:
+  phybench_0:
+    raw: 0.2333976725*(x_0*x_1*x_4**2)/(x_2*x_3**2*(1-x_4**2)**2)
+    prepared: 0.2333976725*(v1*v2*v5**2)/(v3*v4**2*(1-v5**2)**2)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type: &id001
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.2
+        - 2.0
+        sample_type: *id001
+      v3:
+        name: x_2
+        sample_range:
+        - 0.5
+        - 1.5
+        sample_type: *id001
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id001
+      v5:
+        name: x_4
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id001
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_0
+      upstream_name: pybench_ID_495
+      problem: The Verdet constant v as a function of atomic number density N, number of outer electrons Z, electron
+        mass m, refractive index n, angular frequency ω, and resonance frequency ω₀, where x_0 is N, x_1 is Z, constant
+        is m, x_2 is n, x_3 is ω, and x_4 is ω₀. For numerical stability, we use dimensionless parameters here.
+  phybench_1:
+    raw: 5*x_0*x_1**2*x_2
+    prepared: 5*v1*v2**2*v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: &id002
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 1000.0
+        sample_type: *id002
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: *id002
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_1
+      upstream_name: pybench_ID_285
+      problem: The equation describes the maximum force acting on an insect in a rotating reference frame, where
+        x_0 is the mass of the insect, x_1 is the angular velocity, and x_2 is the radius of the circular motion.
+  phybench_2:
+    raw: sqrt(2)*sqrt(x_0*(1 - sin(x_3))/(x_1*x_2))
+    prepared: sqrt(2)*sqrt(v1*(1-sin(v4))/(v2*v3))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type: &id003
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 700.0
+        - 1300.0
+        sample_type: *id003
+      v3:
+        name: x_2
+        sample_range:
+        - 9.78
+        - 9.82
+        sample_type: *id003
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 3.141592653589793
+        sample_type: *id003
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_2
+      upstream_name: pybench_ID_281
+      problem: This equation describes the height h of a liquid surface in a capillary tube, where x_0 is the surface
+        tension, x_1 is the density of the liquid, x_2 is the gravitational acceleration, and x_3 is the contact
+        angle.
+  phybench_3:
+    raw: 5*x_0*cos(sqrt(19)*x_1*x_2)/(247*x_1**2) + 4*x_0*cos(sqrt(6)*x_1*x_2)/(39*x_1**2) - 7*x_0/(57*x_1**2)
+    prepared: 5*v1*cos(sqrt(19)*v2*v3)/(247*v2**2)+4*v1*cos(sqrt(6)*v2*v3)/(39*v2**2)-7*v1/(57*v2**2)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id004
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id004
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id004
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_3
+      upstream_name: pybench_ID_95
+      problem: This equation describes the position x of a small ball under the influence of gravitational, Coriolis,
+        and other forces, where x_0 is the applied force F, x_1 is the angular velocity Omega, and x_2 is the time
+        t.
+  phybench_4:
+    raw: 25*sqrt(2)*x_0/204
+    prepared: 25*sqrt(2)*v1/204
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 3.141592653589793
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_4
+      upstream_name: pybench_ID_101
+      problem: This equation describes the amplitude A as a function of the initial angular displacement theta_0,
+        where x_0 represents the initial angular displacement.
+  phybench_5:
+    raw: x_0*(x_1 + 1)*(0.240558094779889*x_1*x_2/x_3 + 10*x_1 + 5)/(8*x_1 + 5)
+    prepared: v1*(v2+1)*(0.240558094779889*v2*v3/v4+10*v2+5)/(8*v2+5)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 100000.0
+        - 200000.0
+        sample_type: &id005
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.5
+        sample_type: *id005
+      v3:
+        name: x_2
+        sample_range:
+        - 30000.0
+        - 50000.0
+        sample_type: *id005
+      v4:
+        name: x_3
+        sample_range:
+        - 273.0
+        - 373.0
+        sample_type: *id005
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_5
+      upstream_name: pybench_ID_630
+      problem: "This equation describes the final pressure \\( P_1 \\) in a system where \\( x_0 \\) is the initial\
+        \ pressure \\( P_0 \\), \\( x_1 \\) is the mole fraction parameter \\( \alpha \\), \\( x_2 \\) is the latent\
+        \ heat \\( \\lambda \\), and \\( x_3 \\) is the initial temperature \\( T_0 \\)."
+  phybench_6:
+    raw: x_0*x_1/x_2
+    prepared: v1*v2/v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id006
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 15.0
+        sample_type: *id006
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id006
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_6
+      upstream_name: pybench_ID_134
+      problem: The equation describes the normal acceleration of a hunting dog in uniform circular motion, where
+        x_0 is the velocity of the fox, x_1 is the velocity of the hunting dog, and x_2 is the distance between
+        the fox and the hunting dog.
+  phybench_7:
+    raw: 0.638550856814101*sqrt(x_0*x_1/x_2)*sqrt(x_1*(-2 + pi)**2/x_3 + 2)/pi
+    prepared: 0.638550856814101*sqrt(v1*v2/v3)*sqrt(v2*(-2+3.141592653589793)**2/v4+2)/3.141592653589793
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: &id007
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id007
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id007
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 50.0
+        sample_type: *id007
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_7
+      upstream_name: pybench_ID_650
+      problem: This equation describes the maximum distance d_max for which one rope has no tension, where x_0 is
+        the initial energy E_0, x_1 is the radius R, x_2 is the mass m, and x_3 is the length L.
+  phybench_8:
+    raw: 1.77083756256e-11*x_0*x_1/sqrt(x_1**2 - x_2**2)
+    prepared: 1.77083756256e-11*v1*v2/sqrt(v2**2-v3**2)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-06
+        - 1000000.0
+        sample_type: &id008
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 11828.383365981426
+        - 511518.9008003393
+        sample_type: *id008
+      v3:
+        name: x_2
+        sample_range:
+        - 11828.381365980827
+        - 11828.383365980828
+        sample_type: *id008
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_8
+      upstream_name: pybench_ID_409
+      problem: This equation describes the surface charge density σ (y) on a charged circular disk as a function
+        of the electric field strength at the center E₀ (x₀), the disk radius a (x₁), and the radial distance r
+        (x₂) from the center.
+      near_degenerate_intervals:
+      - 3
+  phybench_9:
+    raw: x_0**3/(x_1*x_2)
+    prepared: v1**3/(v2*v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: &id009
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 1000.0
+        sample_type: *id009
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 50.0
+        sample_type: *id009
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_9
+      upstream_name: pybench_ID_133
+      problem: This equation describes the magnitude of a particle's acceleration in terms of its velocity, radius
+        of curvature, and the horizontal component of velocity, where x_0 is the velocity, x_1 is the radius of
+        curvature, and x_2 is the horizontal component of velocity.
+  phybench_10:
+    raw: sqrt((39.24*x_1 + 39.24*x_2 - 39.24*x_1*x_2**2/x_0**2)/((-1 + x_1*x_2/x_0**2)*(x_0**2 + 5*x_2**2)))/(2*pi)
+    prepared: sqrt((39.24*v2+39.24*v3-39.24*v2*v3**2/v1**2)/((-1+v2*v3/v1**2)*(v1**2+5*v3**2)))/(2*3.141592653589793)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 4.262970298648032
+        - 4.508852310401151
+        sample_type: &id010
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 7.8244908612611805
+        - 7.82449286516743
+        sample_type: *id010
+      v3:
+        name: x_2
+        sample_range:
+        - 2.59822006554651
+        - 2.5982220655465103
+        sample_type: *id010
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_10
+      upstream_name: pybench_ID_336
+      problem: The frequency of oscillation of an elliptical cylinder rolling without slipping, where x_0 is the
+        semi-major axis of the ellipse, x_1 is the radius of the surface it rolls on, and x_2 is the semi-minor
+        axis of the ellipse.
+      near_degenerate_intervals:
+      - 2
+      - 3
+  phybench_11:
+    raw: x_0*x_1*x_2*(1 - x_3**2/89875517873681764)**2*exp(-4*x_0/7)/(-x_3*cos(x_4)/299792458 + 1)**3
+    prepared: v1*v2*v3*(1-v4**2/89875517873681764)**2*exp(-4*v1/7)/(-v4*cos(v5)/299792458+1)**3
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0001
+        - 1000.0
+        sample_type: &id011
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 1.0e+20
+        sample_type: *id011
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-20
+        - 1.0e-10
+        sample_type: *id011
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 299792457.0
+        sample_type: *id011
+      v5:
+        name: x_4
+        sample_range:
+        - 0.0
+        - 3.141592653589793
+        sample_type: *id011
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_11
+      upstream_name: pybench_ID_88
+      problem: This equation describes the power distribution of emitted light as a function of velocity and angle,
+        where x_0 is the decay constant, x_1 is the initial number of atoms, x_2 is the initial energy, x_3 is the
+        velocity, and x_4 is the angle.
+      near_degenerate_intervals:
+      - 3
+  phybench_12:
+    raw: 2*pi*sqrt((x_0/x_1 + 1)/(-x_0**2/x_1**2 + x_0/x_1 + 1))
+    prepared: 2*3.141592653589793*sqrt((v1/v2+1)/(-v1**2/v2**2+v1/v2+1))
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 5.865582102922921
+        sample_type: &id012
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 8.60092321625794
+        - 8.602923216257938
+        sample_type: *id012
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_12
+      upstream_name: pybench_ID_321
+      problem: This equation describes the phase shift φ (y) as a function of the radial distance r (x_0) and the
+        characteristic length λ (x_1) in a given potential.
+      near_degenerate_intervals:
+      - 2
+  phybench_13:
+    raw: sqrt(2)*x_0*sqrt(x_1/x_2)/2
+    prepared: sqrt(2)*v1*sqrt(v2/v3)/2
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id013
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 9.7
+        - 9.9
+        sample_type: *id013
+      v3:
+        name: x_2
+        sample_range:
+        - 0.5
+        - 5.0
+        sample_type: *id013
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_13
+      upstream_name: pybench_ID_617
+      problem: The equation describes the terminal angular velocity of an infinitely falling rod, where x_0 is the
+        length of the rod, x_1 is the acceleration due to gravity, and x_2 is the height of the rod.
+  phybench_14:
+    raw: sqrt(2)*sqrt(x_0*x_1/(x_2*x_3**2*x_4))/sqrt(pi)
+    prepared: sqrt(2)*sqrt(v1*v2/(v3*v4**2*v5))/sqrt(3.141592653589793)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-19
+        - 1.0e-18
+        sample_type: &id014
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-09
+        - 1.0e-06
+        sample_type: *id014
+      v3:
+        name: x_2
+        sample_range:
+        - 8.8541878128e-12
+        - 8.8541878129e-12
+        sample_type: *id014
+      v4:
+        name: x_3
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type: *id014
+      v5:
+        name: x_4
+        sample_range:
+        - 1.0e-26
+        - 1.0e-20
+        sample_type: *id014
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_14
+      upstream_name: pybench_ID_702
+      problem: This equation represents the angular frequency ω₀ for a system of charged particles, where x_0 is
+        the charge of the ion, x_1 is the linear charge density, x_2 is the permittivity of free space, x_3 is the
+        distance from the origin to the line charges, and x_4 is the mass of the ion.
+      near_degenerate_intervals:
+      - 1
+      - 2
+      - 3
+      - 5
+  phybench_15:
+    raw: 1.19023949272741e-5*pi**(3/2)*sqrt(x_0*x_1**3*x_2**2/(x_3*x_4*(x_1**2 - x_2**2)))
+    prepared: 1.19023949272741e-5*3.141592653589793**(3/2)*sqrt(v1*v2**3*v3**2/(v4*v5*(v2**2-v3**2)))
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 7.099743015714921e-10
+        - 1648.5591847609207
+        sample_type: &id015
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 3.5129232855979353e-10
+        - 113.60350089463304
+        sample_type: *id015
+      v3:
+        name: x_2
+        sample_range:
+        - -660.0439373556252
+        - -113.60350089470023
+        sample_type: *id015
+      v4:
+        name: x_3
+        sample_range:
+        - -515.5212145347571
+        - -7.439666660502553e-10
+        sample_type: *id015
+      v5:
+        name: x_4
+        sample_range:
+        - 6.004370334267151e-10
+        - 807.5445977426587
+        sample_type: *id015
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_15
+      upstream_name: pybench_ID_367
+      problem: This equation describes the period of small vibrations of an object in an elliptical orbit, where
+        x_0 is the mass of the object, x_1 is the semi-major axis, x_2 is the semi-minor axis, x_3 is the charge
+        of the fixed object, and x_4 is the charge of the small object. Adjusted intervals for numerical stability.
+  phybench_16:
+    raw: x_0*x_1*(x_3/3 + x_4 - 1/3)/(4*x_2)
+    prepared: v1*v2*(v4/3+v5-1/3)/(4*v3)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: &id016
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 10.0
+        sample_type: *id016
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 1000.0
+        sample_type: *id016
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id016
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id016
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_16
+      upstream_name: pybench_ID_497
+      problem: This equation describes the change in amplitude (y) as a function of added mass (x_0), initial amplitude
+        (x_1), total mass (x_2), and dimensionless parameters (x_3 and x_4).
+  phybench_17:
+    raw: 2*sqrt(2)*sqrt(x_0*(9 - 5*tan(pi/x_1)**2)**2*sin(pi/x_1)/(x_2*x_3*(-(9 - 5*tan(pi/x_1)**2)**2 + (7*tan(pi/x_1)**2
+      + 9)**2)*(sin(pi/x_1)**2/3 + cos(pi/x_1)**2 + 2)))
+    prepared: 2*sqrt(2)*sqrt(v1*(9-5*tan(3.141592653589793/v2)**2)**2*sin(3.141592653589793/v2)/(v3*v4*(-(9-5*tan(3.141592653589793/v2)**2)**2+(7*tan(3.141592653589793/v2)**2+9)**2)*(sin(3.141592653589793/v2)**2/3+cos(3.141592653589793/v2)**2+2)))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: &id017
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 3.0
+        - 100.0
+        sample_type: *id017
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: *id017
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id017
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_17
+      upstream_name: pybench_ID_457
+      problem: This equation describes the angular velocity ω (y) of a regular N-sided polygon after a collision,
+        where x_0 is the force F, x_1 is the number of sides N, x_2 is the mass m, and x_3 is the distance from
+        the center to a vertex l.
+  phybench_18:
+    raw: 18967.7642081542*sqrt((-x_0**2 + sqrt(x_0**4 + 3.71114186014562e-27*pi**2*x_0**2*x_1*x_2**4*x_3**2))/x_1)/sqrt(pi)
+    prepared: 18967.7642081542*sqrt((-v1**2+sqrt(v1**4+3.71114186014562e-27*3.141592653589793**2*v1**2*v2*v3**4*v4**2))/v2)/sqrt(3.141592653589793)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1518.1049928863667
+        - -0.03389288636702665
+        sample_type: &id018
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -1640.3356076156947
+        - -8.9146075056947
+        sample_type: *id018
+      v3:
+        name: x_2
+        sample_range:
+        - 267.3829699379511
+        - 1973.645179947951
+        sample_type: *id018
+      v4:
+        name: x_3
+        sample_range:
+        - -1647.9681577878582
+        - -27.768155787858216
+        sample_type: *id018
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_18
+      upstream_name: pybench_ID_432
+      problem: This equation describes the equilibrium height \( h \) (y) of a levitating object as a function of
+        charge \( Q \) (x_0), mass \( m \) (x_1), radius \( R \) (x_2), and angular velocity \( \omega \) (x_3).
+  phybench_19:
+    raw: 0.638550856814101*pi*sqrt(x_0*x_1/x_2)
+    prepared: 0.638550856814101*3.141592653589793*sqrt(v1*v2/v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1000.0
+        - 8000.0
+        sample_type: &id019
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id019
+      v3:
+        name: x_2
+        sample_range:
+        - 800.0
+        - 1200.0
+        sample_type: *id019
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_19
+      upstream_name: pybench_ID_39
+      problem: This equation describes the period of simple harmonic motion of a block in a fluid, where x_0 is
+        the density of the block, x_1 is the height of the block, and x_2 is the density of the fluid.
+  phybench_20:
+    raw: 2*pi*sqrt(x_0*(x_0*sin(x_2)**2 + x_1)/(x_3*(x_0 + x_1)))
+    prepared: 2*3.141592653589793*sqrt(v1*(v1*sin(v3)**2+v2)/(v4*(v1+v2)))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id020
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id020
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 1.5
+        sample_type: *id020
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type: *id020
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_20
+      upstream_name: pybench_ID_124
+      problem: This equation describes the period of oscillation T (y) of a system with a small block of mass m
+        (x_0) on a wedge of mass M (x_1) with an angle θ (x_2) and spring constant k (x_3).
+  phybench_21:
+    raw: x_1*x_2**2*(3 - 3*x_0)/(4*pi**2*x_3**3*(x_0 + 2))
+    prepared: v2*v3**2*(3-3*v1)/(4*3.141592653589793**2*v4**3*(v1+2))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: &id021
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-09
+        - 1.0e-06
+        sample_type: *id021
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-09
+        - 1.0e-06
+        sample_type: *id021
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id021
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_21
+      upstream_name: pybench_ID_55
+      problem: This equation describes the force on a polarized medium sphere due to an external electric field
+        generated by a charged line, where x_0 is the relative permittivity, x_1 is the volume of the sphere, x_2
+        is the linear charge density, and x_3 is the distance from the charged line.
+      near_degenerate_intervals:
+      - 2
+      - 3
+  phybench_22:
+    raw: sqrt(3)*x_0**4*x_1/(320*x_2*x_3)
+    prepared: sqrt(3)*v1**4*v2/(320*v3*v4)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type: &id022
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type: *id022
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type: *id022
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id022
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_22
+      upstream_name: pybench_ID_458
+      problem: This equation describes the flow rate Q (y) as a function of the side length of a triangular channel
+        (x_0), pressure difference (x_1), viscosity (x_2), and length of the channel (x_3).
+  phybench_23:
+    raw: 3*sqrt(5)*sqrt(x_0*x_1)/5
+    prepared: 3*sqrt(5)*sqrt(v1*v2)/5
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 9.8
+        - 10.0
+        sample_type: &id023
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: *id023
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_23
+      upstream_name: pybench_ID_674
+      problem: This equation represents the minimum initial velocity \( v_{0,\min} \) required for a coin to jump
+        off a table, where \( x_0 \) is the gravitational acceleration \( g \) and \( x_1 \) is the radius \( r
+        \) of the coin.
+  phybench_24:
+    raw: x_2*log(tan(x_3/2)/tan(x_0/2))/log(tan(x_1/2)/tan(x_0/2))
+    prepared: v3*log(tan(v4/2)/tan(v1/2))/log(tan(v2/2)/tan(v1/2))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 1.5
+        sample_type: &id024
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.6
+        - 3.0
+        sample_type: *id024
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id024
+      v4:
+        name: x_3
+        sample_range:
+        - 0.2
+        - 3.0
+        sample_type: *id024
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_24
+      upstream_name: pybench_ID_206
+      problem: This equation describes the electric potential distribution V (y) as a function of the angle α (x_3)
+        in spherical coordinates, with boundary conditions defined by angles α₁ (x_0) and α₂ (x_1) and potential
+        V₀ (x_2).
+  phybench_25:
+    raw: 237635.126546247*sqrt(x_0*x_1*(x_3**2 - 2*x_4**2)/(x_2*(x_3**2 + x_4**2)**(5/2)))/sqrt(pi)
+    prepared: 237635.126546247*sqrt(v1*v2*(v4**2-2*v5**2)/(v3*(v4**2+v5**2)**(5/2)))/sqrt(3.141592653589793)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -23.19332174559932
+        - -6.933493779115452e-10
+        sample_type: &id025
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 6.671712071693037e-10
+        - 211.77211806274403
+        sample_type: *id025
+      v3:
+        name: x_2
+        sample_range:
+        - 3.444711182964966e-11
+        - 1124.9108817273554
+        sample_type: *id025
+      v4:
+        name: x_3
+        sample_range:
+        - -197.7559526584388
+        - 230.72971542718312
+        sample_type: *id025
+      v5:
+        name: x_4
+        sample_range:
+        - 163.1505464001443
+        - 163.1525464001443
+        sample_type: *id025
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_25
+      upstream_name: pybench_ID_204
+      problem: The equation describes the angular frequency of a simple harmonic oscillator for a charged particle
+        in an electric field, where x_0 is the charge Q, x_1 is the charge q, x_2 is the mass m, x_3 is the radius
+        R, and x_4 is the length l. Adjusted intervals for numerical stability.
+      near_degenerate_intervals:
+      - 5
+  phybench_26:
+    raw: x_0*x_1/x_2
+    prepared: v1*v2/v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id026
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1000000.0
+        sample_type: *id026
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id026
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_26
+      upstream_name: pybench_ID_478
+      problem: This equation describes the electrostatic force on a charged conductor sphere in an external electric
+        field, where x_0 is the total charge on the sphere, x_1 is the magnitude of the external electric field,
+        and x_2 is the relative permittivity of the medium.
+  phybench_27:
+    raw: x_0*(-x_2**2*x_3**2*x_4**2/(4*Abs(x_5)**2) + 1)/x_1
+    prepared: v1*(-v3**2*v4**2*v5**2/(4*abs(v6)**2)+1)/v2
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1000.0
+        - 1000.0
+        sample_type: &id027
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id027
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id027
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0e-30
+        - 1.0e-20
+        sample_type: *id027
+      v5:
+        name: x_4
+        sample_range:
+        - 1000.0
+        - 100000.0
+        sample_type: *id027
+      v6:
+        name: x_5
+        sample_range:
+        - 1.0e-19
+        - 1.0e-18
+        sample_type: *id027
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_27
+      upstream_name: pybench_ID_71
+      problem: This equation describes the modified electric field drift velocity of a charged particle in a magnetic
+        field, where x_0 is the electric field, x_1 is the magnetic field, x_2 is the wave number, x_3 is the mass
+        of the particle, x_4 is the perpendicular velocity, and x_5 is the charge of the particle.
+      near_degenerate_intervals:
+      - 4
+      - 6
+  phybench_28:
+    raw: 2*x_0**2*x_1**2*(1 - x_2**2/89875517873681764)**(3/2)/(-x_0**2*x_2**2/89875517873681764 + 1)
+    prepared: 2*v1**2*v2**2*(1-v3**2/89875517873681764)**(3/2)/(-v1**2*v3**2/89875517873681764+1)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 100000000.0
+        sample_type: &id028
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id028
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 100000000.0
+        sample_type: *id028
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_28
+      upstream_name: pybench_ID_259
+      problem: This equation describes the area of a quadrilateral formed by four particles in a relativistic frame
+        S', where x_0 is the velocity of the particles, x_1 is the time in frame S', and x_2 is the relative velocity
+        between frames S and S'.
+  phybench_29:
+    raw: 9.81*x_1*(cos(x_0)**2 + 5)*sin(x_0)/(cos(x_0)**2 + 1)**2
+    prepared: 9.81*v2*(cos(v1)**2+5)*sin(v1)/(cos(v1)**2+1)**2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 1.5
+        sample_type: &id029
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id029
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_29
+      upstream_name: pybench_ID_766
+      problem: The equation describes the tension T in a rope as a function of the angle θ between the rope and
+        a rod, and the mass m of a small ball, where x_0 is the angle θ in radians and x_1 is the mass m in kilograms.
+  phybench_30:
+    raw: 4*sqrt(299)*sqrt(x_0*x_1*x_2/(x_3*x_4**3))/23
+    prepared: 4*sqrt(299)*sqrt(v1*v2*v3/(v4*v5**3))/23
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-12
+        - 1.0e-06
+        sample_type: &id030
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-09
+        - 0.001
+        sample_type: *id030
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-09
+        - 0.001
+        sample_type: *id030
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0e-06
+        - 0.1
+        sample_type: *id030
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id030
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_30
+      upstream_name: pybench_ID_716
+      problem: The equation describes the angular velocity of a thin tube at equilibrium, where x_0 is the Coulomb
+        constant, x_1 and x_2 are charges, x_3 is the mass of the small ball, and x_4 is the length of the tube.
+      near_degenerate_intervals:
+      - 1
+      - 2
+      - 3
+  phybench_31:
+    raw: x_0*(3 - sqrt(3))
+    prepared: v1*(3-sqrt(3))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 1000.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_31
+      upstream_name: pybench_ID_103
+      problem: This equation calculates the equivalent resistance \( R_{04} \) of a resistor network, where \( x_0
+        \) stands for the resistance \( R \) of each individual resistor in the network.
+  phybench_32:
+    raw: ((x_1/(149896229*x_2) + sqrt((x_0 + 1)/(1 - x_0)))**2 - 1)/((x_1/(149896229*x_2) + sqrt((x_0 + 1)/(1 -
+      x_0)))**2 + 1)
+    prepared: ((v2/(149896229*v3)+sqrt((v1+1)/(1-v1)))**2-1)/((v2/(149896229*v3)+sqrt((v1+1)/(1-v1)))**2+1)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -0.99
+        - 0.99
+        sample_type: &id031
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1000000.0
+        sample_type: *id031
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-30
+        - 1.0e-20
+        sample_type: *id031
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_32
+      upstream_name: pybench_ID_310
+      problem: This equation describes the final velocity (y) of a particle after a collision, where x_0 is the
+        initial velocity, x_1 is the initial energy, and x_2 is the mass of the particle.
+      near_degenerate_intervals:
+      - 3
+  phybench_33:
+    raw: 1.12344397342102e+16*sqrt(3)*x_0
+    prepared: 1.12344397342102e+16*sqrt(3)*v1
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_33
+      upstream_name: pybench_ID_256
+      problem: This equation describes the critical energy \( E_1 \) required for a transition in a particle system,
+        where \( x_0 \) is the mass \( M \) and \( constant \) is the speed of light \( c \).
+  phybench_34:
+    raw: -27*x_0*x_1*sin(x_2)/31
+    prepared: -27*v1*v2*sin(v3)/31
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-10
+        - 1000.0
+        sample_type: &id032
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-10
+        - 10.0
+        sample_type: *id032
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 3.141592653589793
+        sample_type: *id032
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_34
+      upstream_name: pybench_ID_83
+      problem: This equation describes the torque M (y) experienced by a magnetic dipole moment m (x_0) in an external
+        magnetic field B_0 (x_1) at an angle alpha (x_2).
+  phybench_35:
+    raw: 5.31251268768e-11*pi*x_0**3*x_1**2/(x_2 + 2)
+    prepared: 5.31251268768e-11*3.141592653589793*v1**3*v2**2/(v3+2)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: &id033
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type: *id033
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id033
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_35
+      upstream_name: pybench_ID_112
+      problem: This equation describes the total Joule heat generated in a conductive dielectric sphere, where x_0
+        is the radius of the sphere, x_1 is the external electric field strength, and x_2 is the relative dielectric
+        constant.
+  phybench_36:
+    raw: sqrt(x_0**4*(x_2**2 - x_3**2)*(-x_2**2 + x_3**2 + x_1**2/x_0**4)/x_1**2)
+    prepared: sqrt(v1**4*(v3**2-v4**2)*(-v3**2+v4**2+v2**2/v1**4)/v2**2)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 3.316957404078053
+        sample_type: &id034
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 9.8
+        - 9.81
+        sample_type: *id034
+      v3:
+        name: x_2
+        sample_range:
+        - 0.7330285047141137
+        - 0.7330305047141138
+        sample_type: *id034
+      v4:
+        name: x_3
+        sample_range:
+        - 0.04388545783831668
+        - 0.043887457838316685
+        sample_type: *id034
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_36
+      upstream_name: pybench_ID_505
+      problem: This equation describes the boundary condition for the ejection of a water droplet in terms of its
+        coordinates, where x_0 is the angular velocity, x_1 is the gravitational acceleration, x_2 is the radius,
+        and x_3 is the x-coordinate.
+      near_degenerate_intervals:
+      - 3
+      - 4
+  phybench_37:
+    raw: x_1*x_2*x_3*(tan(x_0)**2 + 1)/sin(x_0)
+    prepared: v2*v3*v4*(tan(v1)**2+1)/sin(v1)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -3.14
+        - 3.14
+        sample_type: &id035
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 3.8e-07
+        - 7.5e-07
+        sample_type: *id035
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id035
+      v4:
+        name: x_3
+        sample_range:
+        - 100000.0
+        - 1000000.0
+        sample_type: *id035
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_37
+      upstream_name: pybench_ID_331
+      problem: The equation describes the difference in the y-coordinate (y) due to diffraction, where x_0 is the
+        angle phi, x_1 is the wavelength lambda, x_2 is the distance L, and x_3 is the reciprocal of the grating
+        spacing d.
+      near_degenerate_intervals:
+      - 2
+  phybench_38:
+    raw: 2*pi*x_1/(x_2*x_3*sqrt(x_0 + 1))
+    prepared: 2*3.141592653589793*v2/(v3*v4*sqrt(v1+1))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id036
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-30
+        - 1.0e-20
+        sample_type: *id036
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-19
+        - 1.0e-10
+        sample_type: *id036
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0e-05
+        - 100000.0
+        sample_type: *id036
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_38
+      upstream_name: pybench_ID_737
+      problem: The equation describes the period of simple harmonic motion for a charged particle in a magnetic
+        field, where x_0 is the exponent n, x_1 is the mass m, x_2 is the charge q, and x_3 is the magnetic field
+        strength B_0.
+      near_degenerate_intervals:
+      - 2
+      - 3
+  phybench_39:
+    raw: -22301.8259841014*pi**(3/2)*x_0**2*sqrt(x_1**3*x_2/(x_3*x_4))/x_1**2
+    prepared: -22301.8259841014*3.141592653589793**(3/2)*v1**2*sqrt(v2**3*v3/(v4*v5))/v2**2
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id037
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: *id037
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-30
+        - 1.0e-20
+        sample_type: *id037
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id037
+      v5:
+        name: x_4
+        sample_range:
+        - 1.602176634e-19
+        - 1.602176634e-18
+        sample_type: *id037
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_39
+      upstream_name: pybench_ID_636
+      problem: This equation describes the difference in periods \( T_r - T_{\oplus} \) for a charged particle in
+        a ring system, where \( x_0 \) is the radius of the loops \( R \), \( x_1 \) is the radial distance \( r_0
+        \), \( x_2 \) is the mass of the particle \( m \), \( x_3 \) is the number of loops \( n \), and \( x_4
+        \) is the charge of the particle \( q \).
+      near_degenerate_intervals:
+      - 3
+      - 5
+  phybench_40:
+    raw: x_0*x_1/x_2
+    prepared: v1*v2/v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: &id038
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id038
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 2.0
+        sample_type: *id038
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_40
+      upstream_name: pybench_ID_420
+      problem: This equation describes the amplitude of the oscillation angle θ as a function of the initial amplitude
+        θ₀, initial position x₀, and current position x, where x_0 is the initial amplitude, x_1 is the initial
+        position, and x_2 is the current position.
+  phybench_41:
+    raw: 3*(2*x_2*x_3**2 + x_4*x_5**2*cos(x_0 - x_1) + 19.62*cos(x_0))*sin(x_0 - x_1)/(x_4*(3*sin(x_0 - x_1)**2
+      + 1))
+    prepared: 3*(2*v3*v4**2+v5*v6**2*cos(v1-v2)+19.62*cos(v1))*sin(v1-v2)/(v5*(3*sin(v1-v2)**2+1))
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -3.14
+        - 3.14
+        sample_type: &id039
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -3.14
+        - 3.14
+        sample_type: *id039
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id039
+      v4:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id039
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id039
+      v6:
+        name: x_5
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id039
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_41
+      upstream_name: pybench_ID_228
+      problem: This equation describes the angular acceleration (y) of a pole around its center of mass, where x_0
+        and x_1 are the angles theta_1 and theta_2, x_2 is the length l_1, x_3 is the angular velocity omega_1,
+        x_4 is the length l_2, and x_5 is the angular velocity omega_2.
+  phybench_42:
+    raw: 39.2266*x_0*sqrt(x_0**2 - x_1**2)*(2*x_0**4 - x_0**3*x_1 + 2*x_0**3*sqrt(x_0**2 - x_1**2) + x_1**4)/(x_1*(2*x_0**3
+      + x_1**3)**2)
+    prepared: 39.2266*v1*sqrt(v1**2-v2**2)*(2*v1**4-v1**3*v2+2*v1**3*sqrt(v1**2-v2**2)+v2**4)/(v2*(2*v1**3+v2**3)**2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 2.0220897822819976
+        - 10.0
+        sample_type: &id040
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 2.0220877822452508
+        - 2.022089782245251
+        sample_type: *id040
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_42
+      upstream_name: pybench_ID_450
+      problem: This equation describes the angular acceleration (y) of a rotating object, where x_0 is the distance
+        A and x_1 is the distance B.
+      near_degenerate_intervals:
+      - 2
+  phybench_43:
+    raw: 149896229*sqrt(2)*x_3*x_4*sqrt(x_0/(x_1*x_2))/(pi*x_5)
+    prepared: 149896229*sqrt(2)*v4*v5*sqrt(v1/(v2*v3))/(3.141592653589793*v6)
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-30
+        - 1.0e-25
+        sample_type: &id041
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-24
+        - 1.0e-22
+        sample_type: *id041
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type: *id041
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id041
+      v5:
+        name: x_4
+        sample_range:
+        - 4.0e-07
+        - 7.0e-07
+        sample_type: *id041
+      v6:
+        name: x_5
+        sample_range:
+        - 1.0e-06
+        - 0.001
+        sample_type: *id041
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_43
+      upstream_name: pybench_ID_708
+      problem: This equation describes the position x on a screen where the light intensity decreases to 1/e of
+        its maximum due to thermal motion, where x_0 is the mass of the particle, x_1 is the Boltzmann constant,
+        x_2 is the temperature, x_3 is the distance from the source to the screen, constant is the speed of light,
+        x_4 is the wavelength of light, and x_5 is the separation distance between slits.
+      near_degenerate_intervals:
+      - 1
+      - 2
+      - 5
+      - 6
+  phybench_44:
+    raw: 1680334094289.75*sqrt(x_1*(x_0**2 - 2*x_2**2)*sqrt(x_0**2 + x_2**2)/(x_3*x_4))/(sqrt(pi)*x_0**2)
+    prepared: 1680334094289.75*sqrt(v2*(v1**2-2*v3**2)*sqrt(v1**2+v3**2)/(v4*v5))/(sqrt(3.141592653589793)*v1**2)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 99.46411633905706
+        - 1094.2511007897156
+        sample_type: &id042
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -1747.9146812164888
+        - -5.73209035792388e-10
+        sample_type: *id042
+      v3:
+        name: x_2
+        sample_range:
+        - -773.7543736896016
+        - -773.7523736896017
+        sample_type: *id042
+      v4:
+        name: x_3
+        sample_range:
+        - 2.737863269430818e-10
+        - 273.0106406990567
+        sample_type: *id042
+      v5:
+        name: x_4
+        sample_range:
+        - 6.447180567192845e-10
+        - 989.7442512093877
+        sample_type: *id042
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_44
+      upstream_name: pybench_ID_649
+      problem: This equation represents the minimum angular velocity Omega (y) required for stability in a magnetic
+        field system, where x_0 is the radius R, x_1 is the mass m, x_2 is the length l, x_3 is the charge Q, and
+        x_4 is the charge q. Adjusted intervals for numerical stability.
+      near_degenerate_intervals:
+      - 3
+  phybench_45:
+    raw: 4*x_0*x_1**2/x_2 + 19.62*x_0
+    prepared: 4*v1*v2**2/v3+19.62*v1
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id043
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 20.0
+        sample_type: *id043
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 5.0
+        sample_type: *id043
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_45
+      upstream_name: pybench_ID_54
+      problem: This equation describes the tension \( T_2 \) in a system of three connected balls, where \( x_0
+        \) is the mass of the balls, \( x_1 \) is the initial velocity, and \( x_2 \) is the length of the connecting
+        rod.
+  phybench_46:
+    raw: 2*pi*x_0/(x_1*x_2*sqrt(x_3 + 1))
+    prepared: 2*3.141592653589793*v1/(v2*v3*sqrt(v4+1))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-30
+        - 1.0e-20
+        sample_type: &id044
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-10
+        - 1.0e-05
+        sample_type: *id044
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-05
+        - 1.0
+        sample_type: *id044
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id044
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_46
+      upstream_name: pybench_ID_688
+      problem: The equation describes the oscillation period T (y) of a charged particle in a magnetic field, where
+        x_0 is the mass of the particle, x_1 is the charge, x_2 is the magnetic field strength, and x_3 is the exponent
+        of the radial dependence of the magnetic field.
+      near_degenerate_intervals:
+      - 1
+      - 2
+  phybench_47:
+    raw: 38*x_0/41
+    prepared: 38*v1/41
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_47
+      upstream_name: pybench_ID_118
+      problem: This equation describes the equivalent resistance \( R_{BC} \) as a function of the resistance \(
+        r \), where \( x_0 \) represents \( r \).
+  phybench_48:
+    raw: -pi*x_0**2*x_1*x_2*x_3*x_4**2*x_5*cos(x_4*x_6)*cos(2*pi*x_7*x_8)
+    prepared: -3.141592653589793*v1**2*v2*v3*v4*v5**2*v6*cos(v5*v7)*cos(2*3.141592653589793*v8*v9)
+    n_variables: 9
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: &id045
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id045
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type: *id045
+      v4:
+        name: x_3
+        sample_range:
+        - 100000.0
+        - 200000.0
+        sample_type: *id045
+      v5:
+        name: x_4
+        sample_range:
+        - 10.0
+        - 100.0
+        sample_type: *id045
+      v6:
+        name: x_5
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: *id045
+      v7:
+        name: x_6
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id045
+      v8:
+        name: x_7
+        sample_range:
+        - 100.0
+        - 1000.0
+        sample_type: *id045
+      v9:
+        name: x_8
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id045
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_48
+      upstream_name: pybench_ID_318
+      problem: The force on a cylinder in a standing wave, where x_0 is the radius of the cylinder, x_1 is the height,
+        x_2 is the adiabatic index, x_3 is the equilibrium pressure, x_4 is the wavenumber, x_5 is the amplitude,
+        x_6 is the position, x_7 is the frequency, and x_8 is the time.
+  phybench_49:
+    raw: x_0*(x_0*x_3 + 2*x_1*x_2)
+    prepared: v1*(v1*v4+2*v2*v3)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id046
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 5.0
+        sample_type: *id046
+      v3:
+        name: x_2
+        sample_range:
+        - 0.5
+        - 10.0
+        sample_type: *id046
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 2.0
+        sample_type: *id046
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_49
+      upstream_name: pybench_ID_62
+      problem: The equation represents the product of characteristic frequencies in a Heisenberg spin system, where
+        x_0 is the gyromagnetic ratio, x_1 is the exchange interaction constant, x_2 is the spin magnitude, and
+        x_3 is the magnetic field strength.
+  phybench_50:
+    raw: sqrt(x_2/x_3)*(4*x_0/x_1 + 2*pi)
+    prepared: sqrt(v3/v4)*(4*v1/v2+2*3.141592653589793)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id047
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id047
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id047
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: *id047
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_50
+      upstream_name: pybench_ID_143
+      problem: This equation describes the total time for a particle to complete a full cycle of motion under elastic
+        forces, where x_0 is the distance a, x_1 is the amplitude b, x_2 is the mass m, and x_3 is the spring constant
+        k.
+  phybench_51:
+    raw: 2*x_0**2*x_1/((1 - x_0**2)*(1 - x_2))
+    prepared: 2*v1**2*v2/((1-v1**2)*(1-v3))
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: &id048
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1.57
+        sample_type: *id048
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id048
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_51
+      upstream_name: pybench_ID_401
+      problem: The equation describes the total angle turned around the Earth's center during projectile motion,
+        where x_0 is the coefficient k, x_1 is the initial angle theta, and x_2 is the restitution coefficient epsilon.
+  phybench_52:
+    raw: x_0*sqrt((x_1 + x_2)/(x_1*x_2))
+    prepared: v1*sqrt((v2+v3)/(v2*v3))
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 3.8e-07
+        - 7.5e-07
+        sample_type: &id049
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 4.0
+        sample_type: *id049
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id049
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_52
+      upstream_name: pybench_ID_443
+      problem: The equation describes the wavelength of a surface plasmon polariton, where y is the wavelength,
+        x_0 is the free-space wavelength, x_1 is the permittivity of the dielectric medium, and x_2 is the real
+        part of the permittivity of the metal.
+      near_degenerate_intervals:
+      - 1
+  phybench_53:
+    raw: 1.11265005605362e-17*x_0*x_1**2*x_2**2/(-1.11265005605362e-17*x_1**2*x_2**2 + 1) + log(-1.11265005605362e-17*x_1**2*x_2**2
+      + 1)
+    prepared: 1.11265005605362e-17*v1*v2**2*v3**2/(-1.11265005605362e-17*v2**2*v3**2+1)+log(-1.11265005605362e-17*v2**2*v3**2+1)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-10
+        - 10000000000.0
+        sample_type: &id050
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 1000.0
+        sample_type: *id050
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id050
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_53
+      upstream_name: pybench_ID_115
+      problem: This equation describes the radiation power of a rotating charged particle system in a moving reference
+        frame, where x_0 is the charge density, x_1 is the angular velocity, x_2 is the radius, and constant is
+        the speed of light.
+  phybench_54:
+    raw: 4472.13595499958*pi*sqrt(x_0*(x_1**2 + x_2**2)**(7/2)/(x_3*x_4*(2*x_1**4 - 11*x_1**2*x_2**2 + 2*x_2**4)))
+    prepared: 4472.13595499958*3.141592653589793*sqrt(v1*(v2**2+v3**2)**(7/2)/(v4*v5*(2*v2**4-11*v2**2*v3**2+2*v3**4)))
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 5.4725429993534975
+        sample_type: &id051
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.3330546979027673
+        - 1.0
+        sample_type: *id051
+      v3:
+        name: x_2
+        sample_range:
+        - 0.028987615790468726
+        - 0.02898961579046873
+        sample_type: *id051
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 5.983242743970718
+        sample_type: *id051
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id051
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_54
+      upstream_name: pybench_ID_493
+      problem: The resonant period \( T_1 \) of a magnetic ring system, where \( x_0 \) is the mass of the ring,
+        \( x_1 \) is the height \( h \), \( x_2 \) is the radius \( R \) of the ring, \( x_3 \) is the magnetic
+        moment \( m \), and \( x_4 \) is the current \( I \).
+      near_degenerate_intervals:
+      - 3
+  phybench_55:
+    raw: 345400.5792049118*(x_0*x_1*x_2**4*(x_0+x_1)**(2/3))/(x_3**(4/3)*x_4**4)
+    prepared: 345400.5792049118*(v1*v2*v3**4*(v1+v2)**(2/3))/(v4**(4/3)*v5**4)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id052
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id052
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id052
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id052
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id052
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_55
+      upstream_name: pybench_ID_69
+      problem: This equation describes the change in the angle Δα for a planet in a binary star system, where x_0
+        and x_1 are the masses of the two stars, x_2 is the mass of the planet, x_3 is the angular velocity of the
+        binary system, and x_4 is the angular momentum of the planet. For numerical stability, we use dimensionless
+        parameters here.
+  phybench_56:
+    raw: 56470453368.651*x_0*x_1*((x_1**2 + (x_2 + x_3)**2 + (x_4 - x_5)**2)**(-3/2) - 1/(x_1**2 + (-x_2 + x_3)**2
+      + (x_4 - x_5)**2)**(3/2))/pi
+    prepared: 56470453368.651*v1*v2*((v2**2+(v3+v4)**2+(v5-v6)**2)**(-3/2)-1/(v2**2+(-v3+v4)**2+(v5-v6)**2)**(3/2))/3.141592653589793
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.0e-06
+        - 1.0e-06
+        sample_type: &id053
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id053
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id053
+      v4:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id053
+      v5:
+        name: x_4
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id053
+      v6:
+        name: x_5
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id053
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_56
+      upstream_name: pybench_ID_10
+      problem: This equation describes the y-component of the electric field due to image charges, where x_0 is
+        the charge, x_1 is the distance parameter, x_2 is the offset in the x-direction, x_3 is the position along
+        the x-axis, x_4 is the position along the z-axis, and x_5 is the offset in the z-direction.
+      near_degenerate_intervals:
+      - 1
+  phybench_57:
+    raw: x_0*exp(-5*pi*x_1*x_2**2*x_5/(14*x_3*x_4))
+    prepared: v1*exp(-5*3.141592653589793*v2*v3**2*v6/(14*v4*v5))
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id054
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: *id054
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id054
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id054
+      v5:
+        name: x_4
+        sample_range:
+        - 1.0e-06
+        - 0.001
+        sample_type: *id054
+      v6:
+        name: x_5
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id054
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_57
+      upstream_name: pybench_ID_65
+      problem: This equation describes the velocity of a sphere as a function of time, where y is the velocity vector,
+        x_0 is the initial velocity vector, x_1 is the radius of the sphere, x_2 is the magnetic field strength,
+        x_3 is the mass of the sphere, x_4 is the resistivity parameter, and x_5 is time.
+      near_degenerate_intervals:
+      - 5
+  phybench_58:
+    raw: x_0**3*x_1/x_2**3
+    prepared: v1**3*v2/v3**3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id055
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id055
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id055
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_58
+      upstream_name: pybench_ID_131
+      problem: This equation describes the relationship between the magnetic moment m' and the original magnetic
+        moment m, where x_0 is the radius of the sphere, x_1 is the original magnetic moment, and x_2 is the distance
+        from the center of the sphere.
+  phybench_59:
+    raw: -2*x_1/(x_0**2 + 1)
+    prepared: -2*v2/(v1**2+1)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: &id056
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id056
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_59
+      upstream_name: pybench_ID_709
+      problem: This equation describes the precession angular velocity of a wave crest on a rotating ring, where
+        x_0 is the mode number and x_1 is the angular velocity of the ring.
+  phybench_60:
+    raw: 3*x_0*x_1*((x_3*x_4**2/(x_0*x_1**2))**(1/3) - 1)/x_2
+    prepared: 3*v1*v2*((v4*v5**2/(v1*v2**2))**(1/3)-1)/v3
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 100000.0
+        - 1000000.0
+        sample_type: &id057
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 0.01
+        sample_type: *id057
+      v3:
+        name: x_2
+        sample_range:
+        - 273.15
+        - 373.15
+        sample_type: *id057
+      v4:
+        name: x_3
+        sample_range:
+        - 100000.0
+        - 1000000.0
+        sample_type: *id057
+      v5:
+        name: x_4
+        sample_range:
+        - 0.001
+        - 0.01
+        sample_type: *id057
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_60
+      upstream_name: pybench_ID_423
+      problem: This equation describes the change in entropy between two states D and A, where x_0 is the initial
+        pressure, x_1 is the initial volume, x_2 is the initial temperature, x_3 is the final pressure, and x_4
+        is the final volume.
+  phybench_61:
+    raw: 9456.338748443015*sqrt((x_0**2 + x_1)/(x_2))
+    prepared: 9456.338748443015*sqrt((v1**2+v2)/(v3))
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id058
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id058
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-10
+        - 1000.0
+        sample_type: *id058
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_61
+      upstream_name: pybench_ID_36
+      problem: This equation describes the eccentricity of a rotational ellipsoid under the influence of gravitational
+        and centrifugal forces, where x_0 is the angular velocity, x_1 is the mass of the external body, x_2 is
+        the distance to the external body, and x_3 is the density of the ellipsoid. For numerical stability, we
+        use dimensionless parameters here, and redefined x_2 := x_1/x_2^2, x_1 := x_3
+  phybench_62:
+    raw: 2*x_0/(x_1*x_2**2 + 50.26548245743669*x_3**2*x_4*((x_2**3/(2*x_5) - 3*x_2**2/(4*x_5**2) + 3*x_2/(4*x_5**3)
+      - 3/(8*x_5**4))*exp(2*x_2*x_5) + 3/(8*x_5**4)))
+    prepared: 2*v1/(v2*v3**2+50.26548245743669*v4**2*v5*((v3**3/(2*v6)-3*v3**2/(4*v6**2)+3*v3/(4*v6**3)-3/(8*v6**4))*exp(2*v3*v6)+3/(8*v6**4)))
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id059
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id059
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 0.5
+        sample_type: *id059
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id059
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id059
+      v6:
+        name: x_5
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id059
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_62
+      upstream_name: pybench_ID_333
+      problem: This equation describes the angular acceleration (y) of a cylinder as a function of torque (x_0),
+        mass (x_1), radius (x_2), initial current density parameter (x_3), length (x_4), and decay constant (x_5).
+  phybench_63:
+    raw: 300*x_0*((x_1*x_2*x_3 + 5100000.0*x_4*x_6)/(x_1*x_2*x_3 + 5100000.0*x_5*x_6))**0.285714285714286*(1.96e-7*x_1*x_2*x_3/(x_4*x_6)
+      + 1)**(1457142.85714286*x_4*x_6/(x_1*x_2*x_3))/(1.96e-7*x_1*x_2*x_3/(x_5*x_6) + 1)**(1457142.85714286*x_5*x_6/(x_1*x_2*x_3))
+    prepared: 300*v1*((v2*v3*v4+5100000.0*v5*v7)/(v2*v3*v4+5100000.0*v6*v7))**0.285714285714286*(1.96e-7*v2*v3*v4/(v5*v7)+1)**(1457142.85714286*v5*v7/(v2*v3*v4))/(1.96e-7*v2*v3*v4/(v6*v7)+1)**(1457142.85714286*v6*v7/(v2*v3*v4))
+    n_variables: 7
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.91
+        - 1.24
+        sample_type: &id060
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id060
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id060
+      v4:
+        name: x_3
+        sample_range:
+        - 0.9995
+        - 1.0005
+        sample_type: *id060
+      v5:
+        name: x_4
+        sample_range:
+        - 0.2
+        - 2.0
+        sample_type: *id060
+      v6:
+        name: x_5
+        sample_range:
+        - 0.2
+        - 2.0
+        sample_type: *id060
+      v7:
+        name: x_6
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id060
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_63
+      upstream_name: pybench_ID_50
+      problem: The equation describes the final temperature y of a gas in a container after a quasi-static adiabatic
+        process, where x_0 is the initial temperature, x_1 is the number of molecules, x_2 is the mass of a molecule,
+        x_3 is the gravitational acceleration, x_4 is the final pressure, x_5 is the cross-sectional area of the
+        container, and x_6 is the initial pressure. For numerical stability, we use dimensi
+      near_degenerate_intervals:
+      - 4
+  phybench_64:
+    raw: sqrt(2)*sqrt(x_3**4*x_4*(x_2*x_3**2/(89875517873681764*x_4) + sqrt(x_2**2*x_3**4/(8077608713062490229263800746151696*x_4**2)
+      + 4))/x_2)*(x_2*(-1/x_5 + 1/x_3)/89875517873681764 + x_3**4*x_4*(x_5**(-7) - 1/x_3**7)*(x_2*x_3**2/(157282156278943087*x_4)
+      + 4*sqrt(x_2**2*x_3**4/(8077608713062490229263800746151696*x_4**2) + 4)/7)/2)/(2*x_0*x_1)
+    prepared: sqrt(2)*sqrt(v4**4*v5*(v3*v4**2/(89875517873681764*v5)+sqrt(v3**2*v4**4/(8077608713062490229263800746151696*v5**2)+4))/v3)*(v3*(-1/v6+1/v4)/89875517873681764+v4**4*v5*(v6**(-7)-1/v4**7)*(v3*v4**2/(157282156278943087*v5)+4*sqrt(v3**2*v4**4/(8077608713062490229263800746151696*v5**2)+4)/7)/2)/(2*v1*v2)
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-06
+        - 0.001
+        sample_type: &id061
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0001
+        - 0.1
+        sample_type: *id061
+      v3:
+        name: x_2
+        sample_range:
+        - 100.0
+        - 100000.0
+        sample_type: *id061
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: *id061
+      v5:
+        name: x_4
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type: *id061
+      v6:
+        name: x_5
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id061
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_64
+      upstream_name: pybench_ID_221
+      problem: This equation describes the time t (y) as a function of the density (x_0), area (x_1), spring constant
+        (x_2), initial radius (x_3), initial mass (x_4), and current radius (x_5) in an adiabatic process involving
+        relativistic circular motion.
+      near_degenerate_intervals:
+      - 1
+  phybench_65:
+    raw: (x_0 - 1)/(2*sqrt(x_0*x_1*x_2/x_3) - 1)
+    prepared: (v1-1)/(2*sqrt(v1*v2*v3/v4)-1)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type: &id062
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 100000.0
+        - 200000.0
+        sample_type: *id062
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: *id062
+      v4:
+        name: x_3
+        sample_range:
+        - 100.0
+        - 1000.0
+        sample_type: *id062
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_65
+      upstream_name: pybench_ID_120
+      problem: This equation describes the maximum efficiency (y) of a thermodynamic cycle as a function of the
+        heat capacity ratio (x_0), initial pressure (x_1), initial volume (x_2), and work done (x_3).
+  phybench_66:
+    raw: 89875517873681764*Abs(sqrt(89875517873681764 - x_0**2) - sqrt(89875517873681764 - x_1**2))/sqrt(-2*x_0**2*x_1**2
+      + 89875517873681764*x_0**2 - 2*x_0*x_1*sqrt((89875517873681764 - x_0**2)*(89875517873681764 - x_1**2))*cos(x_2)
+      + 89875517873681764*x_1**2)
+    prepared: 89875517873681764*abs(sqrt(89875517873681764-v1**2)-sqrt(89875517873681764-v2**2))/sqrt(-2*v1**2*v2**2+89875517873681764*v1**2-2*v1*v2*sqrt((89875517873681764-v1**2)*(89875517873681764-v2**2))*cos(v3)+89875517873681764*v2**2)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 43943152.227231786
+        - 48334064.227231786
+        sample_type: &id063
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 16697890.341639128
+        - 21088802.341639128
+        sample_type: *id063
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 3.141592653589793
+        sample_type: *id063
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_66
+      upstream_name: pybench_ID_121
+      problem: This equation calculates the velocity u as a function of two velocities v_1 and v_2 and the angle
+        alpha between them, where x_0 is v_1, x_1 is v_2, and x_2 is the angle alpha.
+  phybench_67:
+    raw: x_2*(5.670374419e-8*x_0**4 - 5.670374419e-8*x_1**4)*(x_3 - x_4*cos(x_5))/(x_3**2 - 2*x_3*x_4*cos(x_5) +
+      x_4**2)
+    prepared: v3*(5.670374419e-8*v1**4-5.670374419e-8*v2**4)*(v4-v5*cos(v6))/(v4**2-2*v4*v5*cos(v6)+v5**2)
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 273.15
+        - 573.15
+        sample_type: &id064
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 273.15
+        - 573.15
+        sample_type: *id064
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id064
+      v4:
+        name: x_3
+        sample_range:
+        - 0.02
+        - 2.0
+        sample_type: *id064
+      v5:
+        name: x_4
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id064
+      v6:
+        name: x_5
+        sample_range:
+        - 0.0
+        - 6.283185307
+        sample_type: *id064
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_67
+      upstream_name: pybench_ID_33
+      problem: This equation describes the heat flux absorbed by a unit area element at angle θ from a heat source,
+        where x_0 is the temperature of the outer cylinder, x_1 is the temperature of the inner cylinder, x_2 is
+        the radius of the inner cylinder, x_3 is the radius of the outer cylinder, and x_4 is the distance between
+        the axes of the cylinders, and x_5 is the angle θ.
+  phybench_68:
+    raw: sqrt(2)*sqrt(x_0*x_1*x_2*(1 - cos(pi/x_5))/(x_3*x_4*(2*cos(pi/x_5) - 1)))
+    prepared: sqrt(2)*sqrt(v1*v2*v3*(1-cos(3.141592653589793/v6))/(v4*v5*(2*cos(3.141592653589793/v6)-1)))
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: &id065
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id065
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 5.74500820650337
+        sample_type: *id065
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 1.1157296529358918
+        sample_type: *id065
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id065
+      v6:
+        name: x_5
+        sample_range:
+        - 3.000000000054193
+        - 10.0
+        sample_type: *id065
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_68
+      upstream_name: pybench_ID_648
+      problem: This equation describes the minimal launch speed \( y \) of a charged ball in a spherical shell system,
+        where \( x_0 \) is the Coulomb constant, \( x_1 \) is the charge of the sphere, \( x_2 \) is the charge
+        of the ball, \( x_3 \) is the mass of the ball, \( x_4 \) is the radius of the sphere, and \( x_5 \) is
+        the number of collisions.
+  phybench_69:
+    raw: 0.2*x_0/x_1
+    prepared: 0.2*v1/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id066
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 5.0
+        sample_type: *id066
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_69
+      upstream_name: pybench_ID_72
+      problem: This equation describes the displacement length \( l \) as a function of initial volume \( V_0 \)
+        and cross-sectional area \( S \), where \( x_0 \) is the initial volume and \( x_1 \) is the cross-sectional
+        area.
+  phybench_70:
+    raw: 1 + -0.10007*x_0/(x_1**2)
+    prepared: 1+-0.10007*v1/(v2**2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type: &id067
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 17.7
+        sample_type: *id067
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_70
+      upstream_name: pybench_ID_603
+      problem: This equation describes the dielectric constant (y) as a function of electron density (x_0), electron
+        charge (constant), permittivity of free space (constant), electron mass (constant), and angular frequency
+        (x_1). For numerical stability, we use dimensionless parameters here.
+  phybench_71:
+    raw: 2.7440000000000003e-08*10**(2.25*x_0 - 2.5*x_1)
+    prepared: 2.7440000000000003e-08*10**(2.25*v1-2.5*v2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type: &id068
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type: *id068
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_71
+      upstream_name: pybench_ID_670
+      problem: The Debye length (y) as a function of temperature (x_0), Boltzmann constant (constant), permittivity
+        of free space (constant), and ion number density (x_1). For numerical stability, we use dimensionless parameters
+        here.
+  phybench_72:
+    raw: sqrt(6)*x_0/18
+    prepared: sqrt(6)*v1/18
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_72
+      upstream_name: pybench_ID_140
+      problem: The equation describes the tension T (y) in a string as a function of the gravitational force P (x_0)
+        acting on a sphere in an equilateral triangle configuration.
+  phybench_73:
+    raw: sqrt(19.62*x_0 + pi**2*x_1**2*x_2**4/(x_3*x_4))
+    prepared: sqrt(19.62*v1+3.141592653589793**2*v2**2*v3**4/(v4*v5))
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: &id069
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id069
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: *id069
+      v4:
+        name: x_3
+        sample_range:
+        - 0.001
+        - 0.01
+        sample_type: *id069
+      v5:
+        name: x_4
+        sample_range:
+        - 1.0e-06
+        - 0.001
+        sample_type: *id069
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_73
+      upstream_name: pybench_ID_653
+      problem: The equation describes the initial velocity \( v_0 \) required for a superconducting ring to reach
+        the horizontal direction, where \( x_0 \) is the characteristic length \( a \), \( x_1 \) is the magnetic
+        field strength \( B \), \( x_2 \) is the radius of the ring \( r \), \( x_3 \) is the mass of the ring \(
+        m \), and \( x_4 \) is the inductance \( L \).
+      near_degenerate_intervals:
+      - 5
+  phybench_74:
+    raw: 42648777000000.0*x_0/(x_1*(x_2 + 3389.5))
+    prepared: 42648777000000.0*v1/(v2*(v3+3389.5))
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: &id070
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id070
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 100000.0
+        sample_type: *id070
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_74
+      upstream_name: pybench_ID_719
+      problem: This equation describes the temperature distribution of Mars' atmosphere as a function of height,
+        where x_0 is the molar mass, constant is the gravitational constant, constant is the mass of Mars, x_1 is
+        the polytropic index, constant is the radius of Mars, and x_2 is the height.
+  phybench_75:
+    raw: x_0/(x_0*x_1/89875517873681764 + 1)
+    prepared: v1/(v1*v2/89875517873681764+1)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1000000.0
+        sample_type: &id071
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 100000.0
+        sample_type: *id071
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_75
+      upstream_name: pybench_ID_211
+      problem: This equation describes the relationship between the acceleration of two reference frames in special
+        relativity, where x_0 is the acceleration of frame A and x_1 is the proper length of the train.
+  phybench_76:
+    raw: -5.42494239600754*sqrt(x_0*sin(x_1))
+    prepared: -5.42494239600754*sqrt(v1*sin(v2))
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id072
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 3.141592653589793
+        sample_type: *id072
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_76
+      upstream_name: pybench_ID_106
+      problem: The equation describes the terminal velocity of a pendulum system, where x_0 is the length of the
+        pendulum and x_1 is the initial angle.
+  phybench_77:
+    raw: x_0*(-x_0/x_1 + 2)
+    prepared: v1*(-v1/v2+2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: &id073
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: *id073
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_77
+      upstream_name: pybench_ID_58
+      problem: This equation calculates the equivalent resistance between endpoints 1 and 2 in a symmetric four-terminal
+        network, where x_0 is the resistance R_2 and x_1 is the resistance R_1.
+  phybench_78:
+    raw: -6371000.0 + 6371000.0/sqrt(x_0*(x_1 + 1) - x_1)
+    prepared: -6371000.0+6371000.0/sqrt(v1*(v2+1)-v2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.46629947856958787
+        - 1.5820295658497385
+        sample_type: &id074
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.8699625721201549
+        - 0.8719625721201549
+        sample_type: *id074
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_78
+      upstream_name: pybench_ID_41
+      problem: This equation calculates the height h (y) as a function of the Earth's radius (constant), the pressure
+        ratio (x_0), and the initial force ratio (x_1).
+  phybench_79:
+    raw: 2*pi*sqrt((2.0e-7*pi*x_2*x_3*x_4**2*(-x_0/sqrt(x_0**2 + x_1**2) + 1)/x_5 - x_6)/((x_0**2 + x_1**2)**(3/2)*(9.81*x_0*(6.0e-7*pi*x_2*x_3*x_4**2/x_5
+      - 3*x_6)/(x_0**2 + x_1**2)**(5/2) - 1.962e-6*pi*x_2*x_3*x_4**2*(3*x_0**2 - x_1**2)/(x_5*(x_0**2 + x_1**2)**3))))
+    prepared: 2*3.141592653589793*sqrt((2.0e-7*3.141592653589793*v3*v4*v5**2*(-v1/sqrt(v1**2+v2**2)+1)/v6-v7)/((v1**2+v2**2)**(3/2)*(9.81*v1*(6.0e-7*3.141592653589793*v3*v4*v5**2/v6-3*v7)/(v1**2+v2**2)**(5/2)-1.962e-6*3.141592653589793*v3*v4*v5**2*(3*v1**2-v2**2)/(v6*(v1**2+v2**2)**3))))
+    n_variables: 7
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: &id075
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: *id075
+      v3:
+        name: x_2
+        sample_range:
+        - 1000.0
+        - 10000.0
+        sample_type: *id075
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id075
+      v5:
+        name: x_4
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: *id075
+      v6:
+        name: x_5
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id075
+      v7:
+        name: x_6
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id075
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_79
+      upstream_name: pybench_ID_412
+      problem: The equation describes the period of oscillation T (y) for a stable equilibrium condition in a magnetic
+        levitation system, where x_0 is the equilibrium position z_0, x_1 is the radius R of the loop, x_2 is the
+        number of turns per unit length n, x_3 is the current I in the solenoid, x_4 is the radius r of the solenoid,
+        x_5 is the length L of the solenoid, and x_6 is the current I_0 in the loop.
+  phybench_80:
+    raw: x_0*x_1*(x_2*x_3/(x_2*x_4 + x_3*x_5) + (-x_2*x_3/(x_2*x_4 + x_3*x_5) - x_6*x_7*(x_2*x_4 + x_3*x_5)/(x_4*x_6
+      + x_5*x_7)**2 + (x_2*x_7 + x_3*x_6)/(x_4*x_6 + x_5*x_7))*exp(x_8*(-x_2*x_4 - x_3*x_5)/(x_4*x_6 + x_5*x_7)))
+    prepared: v1*v2*(v3*v4/(v3*v5+v4*v6)+(-v3*v4/(v3*v5+v4*v6)-v7*v8*(v3*v5+v4*v6)/(v5*v7+v6*v8)**2+(v3*v8+v4*v7)/(v5*v7+v6*v8))*exp(v9*(-v3*v5-v4*v6)/(v5*v7+v6*v8)))
+    n_variables: 9
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 10.0
+        sample_type: &id076
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: *id076
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0001
+        - 10.0
+        sample_type: *id076
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0001
+        - 10.0
+        sample_type: *id076
+      v5:
+        name: x_4
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: *id076
+      v6:
+        name: x_5
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: *id076
+      v7:
+        name: x_6
+        sample_range:
+        - 1.0e-12
+        - 1.0e-09
+        sample_type: *id076
+      v8:
+        name: x_7
+        sample_range:
+        - 1.0e-12
+        - 1.0e-09
+        sample_type: *id076
+      v9:
+        name: x_8
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id076
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_80
+      upstream_name: pybench_ID_43
+      problem: This equation describes the current I in a circuit with two media, where x_0 is the area A, x_1 is
+        the applied voltage U_0, x_2 and x_3 are the conductivities σ_1 and σ_2, x_4 and x_5 are the thicknesses
+        h_1 and h_2, x_6 and x_7 are the permittivities ε_1 and ε_2, and x_8 is the time t.
+      near_degenerate_intervals:
+      - 7
+      - 8
+  phybench_81:
+    raw: 64*x_0*x_1**2*x_2/(3*x_3)
+    prepared: 64*v1*v2**2*v3/(3*v4)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id077
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 5.0
+        sample_type: *id077
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 2.0
+        sample_type: *id077
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id077
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_81
+      upstream_name: pybench_ID_117
+      problem: The equation describes the total height correction due to energy loss from collisions and gravitational
+        effects, where x_0 is the snow density, x_1 is the radius of the block, x_2 is the characteristic length,
+        and x_3 is the mass of the block.
+  phybench_82:
+    raw: x_0*x_1*sqrt(x_2**2/x_3**4 - (x_2**2 - 1)/x_3**2)
+    prepared: v1*v2*sqrt(v3**2/v4**4-(v3**2-1)/v4**2)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id078
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id078
+      v3:
+        name: x_2
+        sample_range:
+        - 6.59038132347015
+        - 7.555108046187757
+        sample_type: *id078
+      v4:
+        name: x_3
+        sample_range:
+        - 0.8760464876011667
+        - 0.8780464876011667
+        sample_type: *id078
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_82
+      upstream_name: pybench_ID_42
+      problem: This equation describes the refractive index profile n(r) as a function of the radial distance r,
+        where x_0 is a proportionality constant, x_1 is a characteristic length, x_2 is a dimensionless parameter,
+        and x_3 is the radial distance.
+  phybench_83:
+    raw: sqrt(2*x_0*(x_2 + x_1**2/x_0**2)/(x_0*x_1 - x_1**2) - 2*x_1/x_0**2)
+    prepared: sqrt(2*v1*(v3+v2**2/v1**2)/(v1*v2-v2**2)-2*v2/v1**2)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 69.04373336084075
+        - 69.6527078026626
+        sample_type: &id079
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 69.04372936000306
+        - 69.04373136000305
+        sample_type: *id079
+      v3:
+        name: x_2
+        sample_range:
+        - 1000.0
+        - 100000.0
+        sample_type: *id079
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_83
+      upstream_name: pybench_ID_45
+      problem: This equation describes the speed of sound in a van der Waals gas, where x_0 is the molar mass, x_1
+        is the density, and x_2 is the pressure.
+      near_degenerate_intervals:
+      - 2
+  phybench_84:
+    raw: x_0**2*x_1*x_2*x_3/(2*x_4)
+    prepared: v1**2*v2*v3*v4/(2*v5)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.5
+        sample_type: &id080
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id080
+      v3:
+        name: x_2
+        sample_range:
+        - 0.05
+        - 0.2
+        sample_type: *id080
+      v4:
+        name: x_3
+        sample_range:
+        - 9.8
+        - 9.81
+        sample_type: *id080
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 5.0
+        sample_type: *id080
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_84
+      upstream_name: pybench_ID_37
+      problem: The transverse acceleration of a curling stone, where x_0 is the coefficient of friction, x_1 is
+        the angular velocity, x_2 is the height, x_3 is the gravitational acceleration, and x_4 is the linear velocity.
+  phybench_85:
+    raw: 105.70819324641045*log((x_0*x_1*x_2*(x_3-x_4)**2)/(x_5*(1 - x_3**2)*sqrt(1 - x_4**2)))
+    prepared: 105.70819324641045*log((v1*v2*v3*(v4-v5)**2)/(v6*(1-v4**2)*sqrt(1-v5**2)))
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-05
+        - 100000.0
+        sample_type: &id081
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id081
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-05
+        - 100000.0
+        sample_type: *id081
+      v4:
+        name: x_3
+        sample_range:
+        - 1.538437341577468e-05
+        - 3.0073826540774688e-05
+        sample_type: *id081
+      v5:
+        name: x_4
+        sample_range:
+        - 1.3384286879921493e-05
+        - 1.5384286879921495e-05
+        sample_type: *id081
+      v6:
+        name: x_5
+        sample_range:
+        - 1.0
+        - 8.94689012136316
+        sample_type: *id081
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_85
+      upstream_name: pybench_ID_654
+      problem: 'This equation calculates the number of photons emitted per unit time due to the resistance of a
+        spaceship moving through cosmic dust, where x_0 is the particle density, x_1 is the cross-sectional area,
+        x_2 is the mass of a dust particle, x_3 and x_4 are the velocities of the spaceship and dust particles respectively,
+        and x_5 is the frequency of the emitted photons. For numerical stability, we use '
+      near_degenerate_intervals:
+      - 4
+      - 5
+  phybench_86:
+    raw: 5.17743375e-23*x_0**(1/5)*sqrt(x_1)
+    prepared: 5.17743375e-23*v1**(1/5)*sqrt(v2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-06
+        - 1000000.0
+        sample_type: &id082
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type: *id082
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_86
+      upstream_name: pybench_ID_244
+      problem: This equation describes the heat capacity at constant volume (y) as a function of volume (x_0) and
+        temperature (x_1), where k is the Boltzmann constant.
+  phybench_87:
+    raw: x_0*(1 - cos(x_1))
+    prepared: v1*(1-cos(v2))
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: &id083
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 6.28
+        sample_type: *id083
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_87
+      upstream_name: pybench_ID_25
+      problem: This equation describes the radial distance y as a function of the angle x_1 in a cyclotron motion,
+        where x_0 is a constant related to the initial velocity and magnetic field.
+  phybench_88:
+    raw: 1.3859292911256331*sqrt(x_0*x_1/(x_2*x_3*x_4**3))
+    prepared: 1.3859292911256331*sqrt(v1*v2/(v3*v4*v5**3))
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id084
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 5.0
+        sample_type: *id084
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type: *id084
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id084
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id084
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_88
+      upstream_name: pybench_ID_100
+      problem: This equation represents the angular frequency of horizontal vibration of a system, where x_0 is
+        the mass, constant is the acceleration due to gravity, x_1 is the length, x_2 is the Young's modulus, x_3
+        is the cross-sectional area, and x_4 is the height of the beam. For numerical stability, we use dimensionless
+        parameters here.
+  phybench_89:
+    raw: 3.3261899999999997e-06*(x_0*x_1**4)/(x_2*(1e-10*x_1**2*x_4**2 + (x_3**2-x_1**2)**2))
+    prepared: 3.3261899999999997e-06*(v1*v2**4)/(v3*(1e-10*v2**2*v5**2+(v4**2-v2**2)**2))
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: &id085
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id085
+      v3:
+        name: x_2
+        sample_range:
+        - 0.5
+        - 1.5
+        sample_type: *id085
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id085
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id085
+      v0:
+        name: y
+    meta:
+      erbench_task_id: phybench_89
+      upstream_name: pybench_ID_453
+      problem: This equation describes the absorption coefficient (y) as a function of electron number density (x_0),
+        angular frequency of the incident wave (x_1), refractive index of the medium (x_2), natural frequency of
+        the oscillator (x_3), and damping coefficient (x_4). For numerical stability, we use dimensionless parameters
+        here.

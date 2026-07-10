@@ -604,9 +604,9 @@
   "ai-descartes:fsrd-noise:III.7.38": "feynman:III.7.38"
  },
  "known_limit": "skeleton identity is variable-index-sensitive (canonicalization of variable order is a deferred decision); explicit links cover variant catalogs, and every rendering joins the union holdout independently",
- "n_entries_total": 1362,
- "n_unique_problems": 1141,
- "n_cross_or_intra_duplicate_clusters": 170,
+ "n_entries_total": 10480,
+ "n_unique_problems": 7854,
+ "n_cross_or_intra_duplicate_clusters": 490,
  "clusters": {
   "eq0001": [
    "ai-descartes:kepler-exoplanets",
@@ -620,12 +620,27 @@
    "constant:Const-Test-1",
    "constant:Const-Test-2"
   ],
+  "eq0005": [
+   "constant:Constant-1",
+   "erbench-oeis:A191745",
+   "erbench-oeis:A303609"
+  ],
   "eq0006": [
    "constant:Constant-2",
    "livermore:Livermore-18",
    "livermore:Livermore-2",
    "neat:Neat-3",
    "nguyen:Nguyen-5"
+  ],
+  "eq0010": [
+   "constant:Constant-6",
+   "erbench-oeis:A008455",
+   "erbench-oeis:A010805",
+   "erbench-oeis:A010807",
+   "erbench-oeis:A010809",
+   "erbench-oeis:A010810",
+   "erbench-oeis:A010811",
+   "erbench-oeis:A122969"
   ],
   "eq0012": [
    "constant:Constant-8",
@@ -641,352 +656,3649 @@
    "cp3-cosmo:C5b",
    "cp3-cosmo:C5c"
   ],
-  "eq0047": [
+  "eq0029": [
+   "erbench-densities:Half-Cauchy",
+   "erbench-densities:cauchy"
+  ],
+  "eq0059": [
+   "erbench-eponymous:eponymous_1",
+   "erbench-eponymous:eponymous_100",
+   "erbench-eponymous:eponymous_62"
+  ],
+  "eq0076": [
+   "erbench-eponymous:eponymous_120",
+   "erbench-eponymous:eponymous_176"
+  ],
+  "eq0100": [
+   "erbench-eponymous:eponymous_146",
+   "erbench-eponymous:eponymous_164"
+  ],
+  "eq0104": [
+   "erbench-eponymous:eponymous_151",
+   "erbench-eponymous:eponymous_152"
+  ],
+  "eq0173": [
+   "erbench-eponymous:eponymous_169",
+   "erbench-eponymous:eponymous_53"
+  ],
+  "eq0181": [
+   "erbench-eponymous:eponymous_61",
+   "erbench-eponymous:eponymous_99"
+  ],
+  "eq0182": [
+   "erbench-eponymous:eponymous_103",
+   "erbench-eponymous:eponymous_64"
+  ],
+  "eq0183": [
+   "erbench-eponymous:eponymous_104",
+   "erbench-eponymous:eponymous_65"
+  ],
+  "eq0184": [
+   "erbench-eponymous:eponymous_105",
+   "erbench-eponymous:eponymous_66"
+  ],
+  "eq0188": [
+   "erbench-eponymous:eponymous_59",
+   "erbench-eponymous:eponymous_7"
+  ],
+  "eq0204": [
+   "erbench-eponymous:eponymous_140",
+   "erbench-eponymous:eponymous_172",
+   "erbench-eponymous:eponymous_88"
+  ],
+  "eq0213": [
+   "erbench-oeis:A000400",
+   "erbench-oeis:A090561",
+   "erbench-oeis:A098608",
+   "erbench-oeis:A133752",
+   "erbench-oeis:A140300",
+   "erbench-oeis:A159991",
+   "erbench-oeis:A175558",
+   "erbench-oeis:A198915",
+   "erbench-oeis:A309916",
+   "erbench-oeis:A327926",
+   "erbench-oeis:A350384"
+  ],
+  "eq0214": [
+   "erbench-oeis:A001105",
+   "erbench-oeis:A016802",
+   "erbench-oeis:A016850",
+   "erbench-oeis:A016910",
+   "erbench-oeis:A016982",
+   "erbench-oeis:A017066",
+   "erbench-oeis:A017162",
+   "erbench-oeis:A017270",
+   "erbench-oeis:A017390",
+   "erbench-oeis:A017522",
+   "erbench-oeis:A033582",
+   "erbench-oeis:A033583",
+   "erbench-oeis:A033584",
+   "erbench-oeis:A133496",
+   "erbench-oeis:A144555",
+   "erbench-oeis:A152742",
+   "erbench-oeis:A174338",
+   "erbench-oeis:A174339",
+   "erbench-oeis:A195321",
+   "erbench-oeis:A195323",
+   "erbench-oeis:A195824",
+   "erbench-oeis:A244630",
+   "erbench-oeis:A244631",
+   "erbench-oeis:A244632",
+   "erbench-oeis:A244633",
+   "erbench-oeis:A244634",
+   "erbench-oeis:A244635",
+   "erbench-oeis:A244636",
+   "erbench-oeis:A289443",
+   "erbench-oeis:A303302",
+   "erbench-oeis:A325475"
+  ],
+  "eq0215": [
+   "erbench-oeis:A001513",
+   "erbench-oeis:A001526",
+   "erbench-oeis:A001534",
+   "erbench-oeis:A001536",
+   "erbench-oeis:A001538",
+   "erbench-oeis:A001545",
+   "erbench-oeis:A033571",
+   "erbench-oeis:A033572",
+   "erbench-oeis:A033573",
+   "erbench-oeis:A033574",
+   "erbench-oeis:A033575",
+   "erbench-oeis:A033576",
+   "erbench-oeis:A085001",
+   "erbench-oeis:A085027",
+   "erbench-oeis:A144410",
+   "erbench-oeis:A145923",
+   "erbench-oeis:A146301",
+   "erbench-oeis:A146302",
+   "erbench-oeis:A153127",
+   "erbench-oeis:A177060",
+   "erbench-oeis:A177065",
+   "erbench-oeis:A177071",
+   "erbench-oeis:A177072",
+   "erbench-oeis:A177073",
+   "erbench-oeis:A304507"
+  ],
+  "eq0216": [
+   "erbench-oeis:A001509",
+   "erbench-oeis:A001520",
+   "erbench-oeis:A001547",
+   "erbench-oeis:A001561",
+   "erbench-oeis:A033591",
+   "erbench-oeis:A069072",
+   "erbench-oeis:A079610",
+   "erbench-oeis:A133586",
+   "erbench-oeis:A133767"
+  ],
+  "eq0217": [
+   "erbench-oeis:A001551",
+   "erbench-oeis:A134006"
+  ],
+  "eq0218": [
+   "erbench-oeis:A001580",
+   "erbench-oeis:A251701"
+  ],
+  "eq0222": [
+   "erbench-oeis:A002446",
+   "erbench-oeis:A241888",
+   "erbench-oeis:A241916"
+  ],
+  "eq0224": [
+   "erbench-oeis:A002593",
+   "erbench-oeis:A370109"
+  ],
+  "eq0226": [
+   "erbench-eponymous:eponymous_24",
+   "erbench-oeis:A002942"
+  ],
+  "eq0241": [
+   "erbench-oeis:A008785",
+   "erbench-oeis:A008786",
+   "erbench-oeis:A008787"
+  ],
+  "eq0251": [
+   "erbench-oeis:A013708",
+   "erbench-oeis:A013709",
+   "erbench-oeis:A013710",
+   "erbench-oeis:A013711",
+   "erbench-oeis:A013712",
+   "erbench-oeis:A013713",
+   "erbench-oeis:A013714",
+   "erbench-oeis:A013715",
+   "erbench-oeis:A013716",
+   "erbench-oeis:A013717",
+   "erbench-oeis:A013718",
+   "erbench-oeis:A013719",
+   "erbench-oeis:A013720",
+   "erbench-oeis:A013721",
+   "erbench-oeis:A013722",
+   "erbench-oeis:A013723",
+   "erbench-oeis:A013724",
+   "erbench-oeis:A013725",
+   "erbench-oeis:A013726",
+   "erbench-oeis:A013727",
+   "erbench-oeis:A013728",
+   "erbench-oeis:A013729",
+   "erbench-oeis:A013730",
+   "erbench-oeis:A013731",
+   "erbench-oeis:A013732",
+   "erbench-oeis:A013734",
+   "erbench-oeis:A013735",
+   "erbench-oeis:A013736",
+   "erbench-oeis:A013737",
+   "erbench-oeis:A013738",
+   "erbench-oeis:A013739",
+   "erbench-oeis:A013740",
+   "erbench-oeis:A013741",
+   "erbench-oeis:A013742",
+   "erbench-oeis:A013743",
+   "erbench-oeis:A013744",
+   "erbench-oeis:A013745",
+   "erbench-oeis:A013746",
+   "erbench-oeis:A013747",
+   "erbench-oeis:A013748",
+   "erbench-oeis:A013749",
+   "erbench-oeis:A013750",
+   "erbench-oeis:A013751",
+   "erbench-oeis:A013752",
+   "erbench-oeis:A013753",
+   "erbench-oeis:A013754",
+   "erbench-oeis:A013755",
+   "erbench-oeis:A013756",
+   "erbench-oeis:A013757",
+   "erbench-oeis:A013760",
+   "erbench-oeis:A013761",
+   "erbench-oeis:A013762",
+   "erbench-oeis:A013763",
+   "erbench-oeis:A013764",
+   "erbench-oeis:A013765",
+   "erbench-oeis:A013767",
+   "erbench-oeis:A013768",
+   "erbench-oeis:A013769",
+   "erbench-oeis:A013770",
+   "erbench-oeis:A013771",
+   "erbench-oeis:A013772",
+   "erbench-oeis:A013773",
+   "erbench-oeis:A013774",
+   "erbench-oeis:A013775",
+   "erbench-oeis:A013777",
+   "erbench-oeis:A013778",
+   "erbench-oeis:A013779",
+   "erbench-oeis:A013780",
+   "erbench-oeis:A013781",
+   "erbench-oeis:A013782",
+   "erbench-oeis:A013783",
+   "erbench-oeis:A013784",
+   "erbench-oeis:A013786",
+   "erbench-oeis:A013787",
+   "erbench-oeis:A013788",
+   "erbench-oeis:A013789",
+   "erbench-oeis:A013790",
+   "erbench-oeis:A013791",
+   "erbench-oeis:A013792",
+   "erbench-oeis:A013793",
+   "erbench-oeis:A013795",
+   "erbench-oeis:A013796",
+   "erbench-oeis:A013797",
+   "erbench-oeis:A013798",
+   "erbench-oeis:A013799",
+   "erbench-oeis:A013800",
+   "erbench-oeis:A013801",
+   "erbench-oeis:A013802",
+   "erbench-oeis:A013803",
+   "erbench-oeis:A013804",
+   "erbench-oeis:A013805",
+   "erbench-oeis:A013807",
+   "erbench-oeis:A013808",
+   "erbench-oeis:A013809",
+   "erbench-oeis:A013810",
+   "erbench-oeis:A013811",
+   "erbench-oeis:A013812",
+   "erbench-oeis:A013813",
+   "erbench-oeis:A013814",
+   "erbench-oeis:A013815",
+   "erbench-oeis:A013816",
+   "erbench-oeis:A013817",
+   "erbench-oeis:A013818",
+   "erbench-oeis:A013819",
+   "erbench-oeis:A013820",
+   "erbench-oeis:A013821",
+   "erbench-oeis:A013822",
+   "erbench-oeis:A013823",
+   "erbench-oeis:A013824",
+   "erbench-oeis:A013825",
+   "erbench-oeis:A013826",
+   "erbench-oeis:A013827",
+   "erbench-oeis:A013828",
+   "erbench-oeis:A013829",
+   "erbench-oeis:A013830",
+   "erbench-oeis:A013832",
+   "erbench-oeis:A013833",
+   "erbench-oeis:A013834",
+   "erbench-oeis:A013835",
+   "erbench-oeis:A013836",
+   "erbench-oeis:A013837",
+   "erbench-oeis:A013838",
+   "erbench-oeis:A013840",
+   "erbench-oeis:A013841",
+   "erbench-oeis:A013842",
+   "erbench-oeis:A013843",
+   "erbench-oeis:A013844",
+   "erbench-oeis:A013845",
+   "erbench-oeis:A013846",
+   "erbench-oeis:A013847",
+   "erbench-oeis:A013848",
+   "erbench-oeis:A013849",
+   "erbench-oeis:A013850",
+   "erbench-oeis:A013851",
+   "erbench-oeis:A013852",
+   "erbench-oeis:A013853",
+   "erbench-oeis:A013854",
+   "erbench-oeis:A013855",
+   "erbench-oeis:A013856",
+   "erbench-oeis:A013857",
+   "erbench-oeis:A013858",
+   "erbench-oeis:A013859",
+   "erbench-oeis:A013860",
+   "erbench-oeis:A013861",
+   "erbench-oeis:A013862",
+   "erbench-oeis:A013863",
+   "erbench-oeis:A013864",
+   "erbench-oeis:A013865",
+   "erbench-oeis:A013866",
+   "erbench-oeis:A013867",
+   "erbench-oeis:A013868",
+   "erbench-oeis:A013869",
+   "erbench-oeis:A013870",
+   "erbench-oeis:A013871",
+   "erbench-oeis:A013872",
+   "erbench-oeis:A013873",
+   "erbench-oeis:A013874",
+   "erbench-oeis:A013875",
+   "erbench-oeis:A013876",
+   "erbench-oeis:A013877",
+   "erbench-oeis:A013878",
+   "erbench-oeis:A013879",
+   "erbench-oeis:A013880",
+   "erbench-oeis:A013882",
+   "erbench-oeis:A013883",
+   "erbench-oeis:A013884",
+   "erbench-oeis:A013885",
+   "erbench-oeis:A013886",
+   "erbench-oeis:A013887",
+   "erbench-oeis:A013888",
+   "erbench-oeis:A013889",
+   "erbench-oeis:A013890",
+   "erbench-oeis:A013891",
+   "erbench-oeis:A013892",
+   "erbench-oeis:A013893",
+   "erbench-oeis:A013894",
+   "erbench-oeis:A013895",
+   "erbench-oeis:A013896",
+   "erbench-oeis:A013897",
+   "erbench-oeis:A013900",
+   "erbench-oeis:A013901",
+   "erbench-oeis:A013902",
+   "erbench-oeis:A013903",
+   "erbench-oeis:A013904",
+   "erbench-oeis:A013906",
+   "erbench-oeis:A013907",
+   "erbench-oeis:A013908",
+   "erbench-oeis:A013909",
+   "erbench-oeis:A013910",
+   "erbench-oeis:A013911",
+   "erbench-oeis:A013912",
+   "erbench-oeis:A013913",
+   "erbench-oeis:A191559",
+   "erbench-oeis:A191560",
+   "erbench-oeis:A345963"
+  ],
+  "eq0256": [
+   "erbench-oeis:A015242",
+   "erbench-oeis:A015243",
+   "erbench-oeis:A015245",
+   "erbench-oeis:A015246",
+   "erbench-oeis:A015247"
+  ],
+  "eq0257": [
+   "erbench-oeis:A016749",
+   "erbench-oeis:A016773",
+   "erbench-oeis:A016917",
+   "erbench-oeis:A016989",
+   "erbench-oeis:A017073",
+   "erbench-oeis:A017169",
+   "erbench-oeis:A017277",
+   "erbench-oeis:A017397"
+  ],
+  "eq0258": [
+   "erbench-oeis:A016750",
+   "erbench-oeis:A016774",
+   "erbench-oeis:A016918",
+   "erbench-oeis:A016990",
+   "erbench-oeis:A017074",
+   "erbench-oeis:A017170",
+   "erbench-oeis:A017278",
+   "erbench-oeis:A017398"
+  ],
+  "eq0259": [
+   "erbench-oeis:A016752",
+   "erbench-oeis:A016776",
+   "erbench-oeis:A016920",
+   "erbench-oeis:A016992",
+   "erbench-oeis:A017076",
+   "erbench-oeis:A017280",
+   "erbench-oeis:A017400",
+   "erbench-oeis:A017532"
+  ],
+  "eq0260": [
+   "erbench-oeis:A016755",
+   "erbench-oeis:A016791",
+   "erbench-oeis:A016815",
+   "erbench-oeis:A016839",
+   "erbench-oeis:A016863",
+   "erbench-oeis:A016887",
+   "erbench-oeis:A016923",
+   "erbench-oeis:A016935",
+   "erbench-oeis:A016947",
+   "erbench-oeis:A016959",
+   "erbench-oeis:A016971",
+   "erbench-oeis:A016995",
+   "erbench-oeis:A017007",
+   "erbench-oeis:A017019",
+   "erbench-oeis:A017031",
+   "erbench-oeis:A017043",
+   "erbench-oeis:A017055",
+   "erbench-oeis:A017079",
+   "erbench-oeis:A017091",
+   "erbench-oeis:A017103",
+   "erbench-oeis:A017115",
+   "erbench-oeis:A017127",
+   "erbench-oeis:A017151",
+   "erbench-oeis:A017175",
+   "erbench-oeis:A017187",
+   "erbench-oeis:A017199",
+   "erbench-oeis:A017211",
+   "erbench-oeis:A017223",
+   "erbench-oeis:A017235",
+   "erbench-oeis:A017247",
+   "erbench-oeis:A017259",
+   "erbench-oeis:A017283",
+   "erbench-oeis:A017307",
+   "erbench-oeis:A017319",
+   "erbench-oeis:A017331",
+   "erbench-oeis:A017343",
+   "erbench-oeis:A017355",
+   "erbench-oeis:A017367",
+   "erbench-oeis:A017379",
+   "erbench-oeis:A017415",
+   "erbench-oeis:A017439",
+   "erbench-oeis:A017451",
+   "erbench-oeis:A017463",
+   "erbench-oeis:A017475",
+   "erbench-oeis:A017487",
+   "erbench-oeis:A017499",
+   "erbench-oeis:A017511",
+   "erbench-oeis:A017535",
+   "erbench-oeis:A017619",
+   "erbench-oeis:A017631"
+  ],
+  "eq0261": [
+   "erbench-oeis:A016757",
+   "erbench-oeis:A016781",
+   "erbench-oeis:A016793",
+   "erbench-oeis:A016901",
+   "erbench-oeis:A016925",
+   "erbench-oeis:A016937",
+   "erbench-oeis:A016949",
+   "erbench-oeis:A016961",
+   "erbench-oeis:A016973",
+   "erbench-oeis:A016997",
+   "erbench-oeis:A017009",
+   "erbench-oeis:A017021",
+   "erbench-oeis:A017033",
+   "erbench-oeis:A017045",
+   "erbench-oeis:A017057",
+   "erbench-oeis:A017081",
+   "erbench-oeis:A017093",
+   "erbench-oeis:A017105",
+   "erbench-oeis:A017117",
+   "erbench-oeis:A017129",
+   "erbench-oeis:A017141",
+   "erbench-oeis:A017153",
+   "erbench-oeis:A017189",
+   "erbench-oeis:A017201",
+   "erbench-oeis:A017213",
+   "erbench-oeis:A017225",
+   "erbench-oeis:A017237",
+   "erbench-oeis:A017249",
+   "erbench-oeis:A017261",
+   "erbench-oeis:A017285",
+   "erbench-oeis:A017297",
+   "erbench-oeis:A017309",
+   "erbench-oeis:A017321",
+   "erbench-oeis:A017333",
+   "erbench-oeis:A017345",
+   "erbench-oeis:A017357",
+   "erbench-oeis:A017369",
+   "erbench-oeis:A017381",
+   "erbench-oeis:A017417",
+   "erbench-oeis:A017429",
+   "erbench-oeis:A017441",
+   "erbench-oeis:A017453",
+   "erbench-oeis:A017465",
+   "erbench-oeis:A017477",
+   "erbench-oeis:A017489",
+   "erbench-oeis:A017501",
+   "erbench-oeis:A017513",
+   "erbench-oeis:A017657"
+  ],
+  "eq0262": [
+   "erbench-oeis:A016758",
+   "erbench-oeis:A016782",
+   "erbench-oeis:A016794",
+   "erbench-oeis:A016830",
+   "erbench-oeis:A016902",
+   "erbench-oeis:A016926",
+   "erbench-oeis:A016938",
+   "erbench-oeis:A016950",
+   "erbench-oeis:A016962",
+   "erbench-oeis:A016974",
+   "erbench-oeis:A016998",
+   "erbench-oeis:A017010",
+   "erbench-oeis:A017022",
+   "erbench-oeis:A017034",
+   "erbench-oeis:A017046",
+   "erbench-oeis:A017058",
+   "erbench-oeis:A017082",
+   "erbench-oeis:A017094",
+   "erbench-oeis:A017106",
+   "erbench-oeis:A017118",
+   "erbench-oeis:A017130",
+   "erbench-oeis:A017142",
+   "erbench-oeis:A017154",
+   "erbench-oeis:A017190",
+   "erbench-oeis:A017202",
+   "erbench-oeis:A017214",
+   "erbench-oeis:A017226",
+   "erbench-oeis:A017238",
+   "erbench-oeis:A017250",
+   "erbench-oeis:A017262",
+   "erbench-oeis:A017286",
+   "erbench-oeis:A017298",
+   "erbench-oeis:A017310",
+   "erbench-oeis:A017322",
+   "erbench-oeis:A017334",
+   "erbench-oeis:A017346",
+   "erbench-oeis:A017358",
+   "erbench-oeis:A017370",
+   "erbench-oeis:A017382",
+   "erbench-oeis:A017442",
+   "erbench-oeis:A017454",
+   "erbench-oeis:A017466",
+   "erbench-oeis:A017478",
+   "erbench-oeis:A017490",
+   "erbench-oeis:A017502",
+   "erbench-oeis:A017514",
+   "erbench-oeis:A017622"
+  ],
+  "eq0263": [
+   "erbench-oeis:A016759",
+   "erbench-oeis:A016763",
+   "erbench-oeis:A016787",
+   "erbench-oeis:A016799",
+   "erbench-oeis:A016903",
+   "erbench-oeis:A016927",
+   "erbench-oeis:A016931",
+   "erbench-oeis:A016943",
+   "erbench-oeis:A016951",
+   "erbench-oeis:A016955",
+   "erbench-oeis:A016963",
+   "erbench-oeis:A016967",
+   "erbench-oeis:A016975",
+   "erbench-oeis:A016979",
+   "erbench-oeis:A016999",
+   "erbench-oeis:A017003",
+   "erbench-oeis:A017011",
+   "erbench-oeis:A017015",
+   "erbench-oeis:A017023",
+   "erbench-oeis:A017027",
+   "erbench-oeis:A017035",
+   "erbench-oeis:A017039",
+   "erbench-oeis:A017047",
+   "erbench-oeis:A017051",
+   "erbench-oeis:A017059",
+   "erbench-oeis:A017063",
+   "erbench-oeis:A017083",
+   "erbench-oeis:A017087",
+   "erbench-oeis:A017095",
+   "erbench-oeis:A017099",
+   "erbench-oeis:A017107",
+   "erbench-oeis:A017111",
+   "erbench-oeis:A017123",
+   "erbench-oeis:A017131",
+   "erbench-oeis:A017135",
+   "erbench-oeis:A017143",
+   "erbench-oeis:A017147",
+   "erbench-oeis:A017155",
+   "erbench-oeis:A017159",
+   "erbench-oeis:A017191",
+   "erbench-oeis:A017195",
+   "erbench-oeis:A017203",
+   "erbench-oeis:A017207",
+   "erbench-oeis:A017215",
+   "erbench-oeis:A017219",
+   "erbench-oeis:A017227",
+   "erbench-oeis:A017231",
+   "erbench-oeis:A017239",
+   "erbench-oeis:A017243",
+   "erbench-oeis:A017251",
+   "erbench-oeis:A017255",
+   "erbench-oeis:A017263",
+   "erbench-oeis:A017267",
+   "erbench-oeis:A017287",
+   "erbench-oeis:A017291",
+   "erbench-oeis:A017299",
+   "erbench-oeis:A017303",
+   "erbench-oeis:A017311",
+   "erbench-oeis:A017315",
+   "erbench-oeis:A017323",
+   "erbench-oeis:A017327",
+   "erbench-oeis:A017335",
+   "erbench-oeis:A017339",
+   "erbench-oeis:A017347",
+   "erbench-oeis:A017351",
+   "erbench-oeis:A017363",
+   "erbench-oeis:A017371",
+   "erbench-oeis:A017375",
+   "erbench-oeis:A017387",
+   "erbench-oeis:A017419",
+   "erbench-oeis:A017443",
+   "erbench-oeis:A017447",
+   "erbench-oeis:A017455",
+   "erbench-oeis:A017459",
+   "erbench-oeis:A017467",
+   "erbench-oeis:A017471",
+   "erbench-oeis:A017479",
+   "erbench-oeis:A017483",
+   "erbench-oeis:A017491",
+   "erbench-oeis:A017495",
+   "erbench-oeis:A017503",
+   "erbench-oeis:A017507",
+   "erbench-oeis:A017515",
+   "erbench-oeis:A017519",
+   "erbench-oeis:A017543",
+   "erbench-oeis:A017551",
+   "erbench-oeis:A017615",
+   "erbench-oeis:A017623",
+   "erbench-oeis:A017627",
+   "erbench-oeis:A017635",
+   "erbench-oeis:A017663"
+  ],
+  "eq0264": [
+   "erbench-oeis:A016760",
+   "erbench-oeis:A016784",
+   "erbench-oeis:A016796",
+   "erbench-oeis:A016820",
+   "erbench-oeis:A016880",
+   "erbench-oeis:A016904",
+   "erbench-oeis:A016928",
+   "erbench-oeis:A016940",
+   "erbench-oeis:A016952",
+   "erbench-oeis:A016964",
+   "erbench-oeis:A016976",
+   "erbench-oeis:A017000",
+   "erbench-oeis:A017012",
+   "erbench-oeis:A017024",
+   "erbench-oeis:A017048",
+   "erbench-oeis:A017060",
+   "erbench-oeis:A017084",
+   "erbench-oeis:A017096",
+   "erbench-oeis:A017108",
+   "erbench-oeis:A017120",
+   "erbench-oeis:A017132",
+   "erbench-oeis:A017144",
+   "erbench-oeis:A017156",
+   "erbench-oeis:A017192",
+   "erbench-oeis:A017204",
+   "erbench-oeis:A017216",
+   "erbench-oeis:A017228",
+   "erbench-oeis:A017240",
+   "erbench-oeis:A017252",
+   "erbench-oeis:A017264",
+   "erbench-oeis:A017288",
+   "erbench-oeis:A017300",
+   "erbench-oeis:A017312",
+   "erbench-oeis:A017324",
+   "erbench-oeis:A017336",
+   "erbench-oeis:A017348",
+   "erbench-oeis:A017360",
+   "erbench-oeis:A017384",
+   "erbench-oeis:A017432",
+   "erbench-oeis:A017444",
+   "erbench-oeis:A017456",
+   "erbench-oeis:A017468",
+   "erbench-oeis:A017480",
+   "erbench-oeis:A017492",
+   "erbench-oeis:A017504",
+   "erbench-oeis:A017516",
+   "erbench-oeis:A017540"
+  ],
+  "eq0265": [
+   "erbench-oeis:A016761",
+   "erbench-oeis:A016785",
+   "erbench-oeis:A016797",
+   "erbench-oeis:A016905",
+   "erbench-oeis:A016929",
+   "erbench-oeis:A016941",
+   "erbench-oeis:A016953",
+   "erbench-oeis:A016965",
+   "erbench-oeis:A016977",
+   "erbench-oeis:A017001",
+   "erbench-oeis:A017013",
+   "erbench-oeis:A017025",
+   "erbench-oeis:A017037",
+   "erbench-oeis:A017049",
+   "erbench-oeis:A017061",
+   "erbench-oeis:A017085",
+   "erbench-oeis:A017097",
+   "erbench-oeis:A017109",
+   "erbench-oeis:A017121",
+   "erbench-oeis:A017133",
+   "erbench-oeis:A017145",
+   "erbench-oeis:A017157",
+   "erbench-oeis:A017193",
+   "erbench-oeis:A017205",
+   "erbench-oeis:A017217",
+   "erbench-oeis:A017229",
+   "erbench-oeis:A017241",
+   "erbench-oeis:A017253",
+   "erbench-oeis:A017265",
+   "erbench-oeis:A017289",
+   "erbench-oeis:A017301",
+   "erbench-oeis:A017313",
+   "erbench-oeis:A017325",
+   "erbench-oeis:A017337",
+   "erbench-oeis:A017349",
+   "erbench-oeis:A017361",
+   "erbench-oeis:A017373",
+   "erbench-oeis:A017385",
+   "erbench-oeis:A017445",
+   "erbench-oeis:A017457",
+   "erbench-oeis:A017469",
+   "erbench-oeis:A017481",
+   "erbench-oeis:A017493",
+   "erbench-oeis:A017505",
+   "erbench-oeis:A017517",
+   "erbench-oeis:A017565"
+  ],
+  "eq0266": [
+   "erbench-oeis:A016762",
+   "erbench-oeis:A016786",
+   "erbench-oeis:A016798",
+   "erbench-oeis:A016846",
+   "erbench-oeis:A016906",
+   "erbench-oeis:A016930",
+   "erbench-oeis:A016942",
+   "erbench-oeis:A016966",
+   "erbench-oeis:A016978",
+   "erbench-oeis:A017002",
+   "erbench-oeis:A017014",
+   "erbench-oeis:A017026",
+   "erbench-oeis:A017038",
+   "erbench-oeis:A017050",
+   "erbench-oeis:A017062",
+   "erbench-oeis:A017086",
+   "erbench-oeis:A017098",
+   "erbench-oeis:A017110",
+   "erbench-oeis:A017122",
+   "erbench-oeis:A017134",
+   "erbench-oeis:A017146",
+   "erbench-oeis:A017158",
+   "erbench-oeis:A017194",
+   "erbench-oeis:A017206",
+   "erbench-oeis:A017218",
+   "erbench-oeis:A017230",
+   "erbench-oeis:A017242",
+   "erbench-oeis:A017254",
+   "erbench-oeis:A017266",
+   "erbench-oeis:A017290",
+   "erbench-oeis:A017302",
+   "erbench-oeis:A017314",
+   "erbench-oeis:A017326",
+   "erbench-oeis:A017338",
+   "erbench-oeis:A017350",
+   "erbench-oeis:A017362",
+   "erbench-oeis:A017374",
+   "erbench-oeis:A017386",
+   "erbench-oeis:A017446",
+   "erbench-oeis:A017458",
+   "erbench-oeis:A017470",
+   "erbench-oeis:A017482",
+   "erbench-oeis:A017494",
+   "erbench-oeis:A017506",
+   "erbench-oeis:A017518",
+   "erbench-oeis:A017566",
+   "erbench-oeis:A017590"
+  ],
+  "eq0267": [
+   "erbench-oeis:A016764",
+   "erbench-oeis:A016788",
+   "erbench-oeis:A016800",
+   "erbench-oeis:A016848",
+   "erbench-oeis:A016896",
+   "erbench-oeis:A016908",
+   "erbench-oeis:A016932",
+   "erbench-oeis:A016944",
+   "erbench-oeis:A016956",
+   "erbench-oeis:A016968",
+   "erbench-oeis:A016980",
+   "erbench-oeis:A017004",
+   "erbench-oeis:A017016",
+   "erbench-oeis:A017028",
+   "erbench-oeis:A017040",
+   "erbench-oeis:A017052",
+   "erbench-oeis:A017064",
+   "erbench-oeis:A017088",
+   "erbench-oeis:A017100",
+   "erbench-oeis:A017112",
+   "erbench-oeis:A017124",
+   "erbench-oeis:A017136",
+   "erbench-oeis:A017148",
+   "erbench-oeis:A017160",
+   "erbench-oeis:A017196",
+   "erbench-oeis:A017208",
+   "erbench-oeis:A017220",
+   "erbench-oeis:A017232",
+   "erbench-oeis:A017244",
+   "erbench-oeis:A017256",
+   "erbench-oeis:A017268",
+   "erbench-oeis:A017292",
+   "erbench-oeis:A017304",
+   "erbench-oeis:A017316",
+   "erbench-oeis:A017328",
+   "erbench-oeis:A017340",
+   "erbench-oeis:A017364",
+   "erbench-oeis:A017376",
+   "erbench-oeis:A017388",
+   "erbench-oeis:A017448",
+   "erbench-oeis:A017460",
+   "erbench-oeis:A017472",
+   "erbench-oeis:A017484",
+   "erbench-oeis:A017496",
+   "erbench-oeis:A017508",
+   "erbench-oeis:A017520"
+  ],
+  "eq0268": [
+   "erbench-oeis:A016780",
+   "erbench-oeis:A016792",
+   "erbench-oeis:A016828",
+   "erbench-oeis:A016864",
+   "erbench-oeis:A016900",
+   "erbench-oeis:A016924",
+   "erbench-oeis:A016936",
+   "erbench-oeis:A016948",
+   "erbench-oeis:A016960",
+   "erbench-oeis:A016972",
+   "erbench-oeis:A016996",
+   "erbench-oeis:A017008",
+   "erbench-oeis:A017020",
+   "erbench-oeis:A017032",
+   "erbench-oeis:A017044",
+   "erbench-oeis:A017056",
+   "erbench-oeis:A017080",
+   "erbench-oeis:A017092",
+   "erbench-oeis:A017104",
+   "erbench-oeis:A017116",
+   "erbench-oeis:A017128",
+   "erbench-oeis:A017140",
+   "erbench-oeis:A017152",
+   "erbench-oeis:A017188",
+   "erbench-oeis:A017200",
+   "erbench-oeis:A017212",
+   "erbench-oeis:A017224",
+   "erbench-oeis:A017236",
+   "erbench-oeis:A017248",
+   "erbench-oeis:A017260",
+   "erbench-oeis:A017284",
+   "erbench-oeis:A017296",
+   "erbench-oeis:A017308",
+   "erbench-oeis:A017320",
+   "erbench-oeis:A017332",
+   "erbench-oeis:A017344",
+   "erbench-oeis:A017356",
+   "erbench-oeis:A017368",
+   "erbench-oeis:A017380",
+   "erbench-oeis:A017440",
+   "erbench-oeis:A017452",
+   "erbench-oeis:A017464",
+   "erbench-oeis:A017476",
+   "erbench-oeis:A017488",
+   "erbench-oeis:A017500",
+   "erbench-oeis:A017512",
+   "erbench-oeis:A017560",
+   "erbench-oeis:A017596",
+   "erbench-oeis:A017632"
+  ],
+  "eq0274": [
+   "erbench-eponymous:eponymous_197",
+   "erbench-oeis:A022959",
+   "erbench-oeis:A022960",
+   "erbench-oeis:A022961",
+   "erbench-oeis:A022962",
+   "erbench-oeis:A022963",
+   "erbench-oeis:A022964",
+   "erbench-oeis:A022965",
+   "erbench-oeis:A022966",
+   "erbench-oeis:A022967",
+   "erbench-oeis:A022968",
+   "erbench-oeis:A022969",
+   "erbench-oeis:A022970",
+   "erbench-oeis:A022971",
+   "erbench-oeis:A022972",
+   "erbench-oeis:A022973",
+   "erbench-oeis:A022974",
+   "erbench-oeis:A022975",
+   "erbench-oeis:A022976",
+   "erbench-oeis:A022977",
+   "erbench-oeis:A022978",
+   "erbench-oeis:A022979",
+   "erbench-oeis:A022980",
+   "erbench-oeis:A022981",
+   "erbench-oeis:A022982",
+   "erbench-oeis:A022983",
+   "erbench-oeis:A022984",
+   "erbench-oeis:A022985",
+   "erbench-oeis:A022986",
+   "erbench-oeis:A022987",
+   "erbench-oeis:A022988",
+   "erbench-oeis:A022989",
+   "erbench-oeis:A022990",
+   "erbench-oeis:A022991",
+   "erbench-oeis:A022992",
+   "erbench-oeis:A022993",
+   "erbench-oeis:A022994",
+   "erbench-oeis:A022995",
+   "erbench-oeis:A022996"
+  ],
+  "eq0275": [
+   "erbench-eponymous:eponymous_44",
+   "erbench-oeis:A023443",
+   "erbench-oeis:A023444",
+   "erbench-oeis:A023445",
+   "erbench-oeis:A023447",
+   "erbench-oeis:A023448",
+   "erbench-oeis:A023451",
+   "erbench-oeis:A023453",
+   "erbench-oeis:A023455",
+   "erbench-oeis:A023456",
+   "erbench-oeis:A023457",
+   "erbench-oeis:A023466",
+   "erbench-oeis:A023472",
+   "erbench-oeis:A023474"
+  ],
+  "eq0280": [
+   "erbench-oeis:A024005",
+   "erbench-oeis:A024009"
+  ],
+  "eq0285": [
+   "erbench-oeis:A024017",
+   "erbench-oeis:A024030",
+   "erbench-oeis:A024034",
+   "erbench-oeis:A024043",
+   "erbench-oeis:A024047",
+   "erbench-oeis:A024056",
+   "erbench-oeis:A024060",
+   "erbench-oeis:A024069",
+   "erbench-oeis:A024073",
+   "erbench-oeis:A024086",
+   "erbench-oeis:A024095",
+   "erbench-oeis:A024099",
+   "erbench-oeis:A024108",
+   "erbench-oeis:A024112",
+   "erbench-oeis:A024121",
+   "erbench-oeis:A024125",
+   "erbench-oeis:A024134",
+   "erbench-oeis:A024138",
+   "erbench-oeis:A024147",
+   "erbench-oeis:A024151"
+  ],
+  "eq0286": [
+   "erbench-oeis:A024020",
+   "erbench-oeis:A024033",
+   "erbench-oeis:A024046",
+   "erbench-oeis:A024059",
+   "erbench-oeis:A024072",
+   "erbench-oeis:A024085",
+   "erbench-oeis:A024098",
+   "erbench-oeis:A024111",
+   "erbench-oeis:A024124",
+   "erbench-oeis:A024137",
+   "erbench-oeis:A024150"
+  ],
+  "eq0287": [
+   "erbench-oeis:A024022",
+   "erbench-oeis:A024035",
+   "erbench-oeis:A024048",
+   "erbench-oeis:A024061",
+   "erbench-oeis:A024074",
+   "erbench-oeis:A024087",
+   "erbench-oeis:A024100",
+   "erbench-oeis:A024113",
+   "erbench-oeis:A024126",
+   "erbench-oeis:A024139"
+  ],
+  "eq0288": [
+   "erbench-oeis:A024024",
+   "erbench-oeis:A024037",
+   "erbench-oeis:A024050",
+   "erbench-oeis:A024063",
+   "erbench-oeis:A024076",
+   "erbench-oeis:A024089",
+   "erbench-oeis:A024102",
+   "erbench-oeis:A024115",
+   "erbench-oeis:A024141"
+  ],
+  "eq0289": [
+   "erbench-oeis:A024025",
+   "erbench-oeis:A024038",
+   "erbench-oeis:A024051",
+   "erbench-oeis:A024064",
+   "erbench-oeis:A024077",
+   "erbench-oeis:A024103",
+   "erbench-oeis:A024116"
+  ],
+  "eq0290": [
+   "erbench-oeis:A024026",
+   "erbench-oeis:A024039",
+   "erbench-oeis:A024052",
+   "erbench-oeis:A024065",
+   "erbench-oeis:A024078",
+   "erbench-oeis:A024091",
+   "erbench-oeis:A024104",
+   "erbench-oeis:A024117",
+   "erbench-oeis:A024130",
+   "erbench-oeis:A024143"
+  ],
+  "eq0291": [
+   "erbench-oeis:A024027",
+   "erbench-oeis:A024040",
+   "erbench-oeis:A024053",
+   "erbench-oeis:A024066",
+   "erbench-oeis:A024079",
+   "erbench-oeis:A024092",
+   "erbench-oeis:A024105",
+   "erbench-oeis:A024118",
+   "erbench-oeis:A024131",
+   "erbench-oeis:A024144"
+  ],
+  "eq0292": [
+   "erbench-oeis:A024028",
+   "erbench-oeis:A024041",
+   "erbench-oeis:A024054",
+   "erbench-oeis:A024067",
+   "erbench-oeis:A024080",
+   "erbench-oeis:A024093",
+   "erbench-oeis:A024106",
+   "erbench-oeis:A024119",
+   "erbench-oeis:A024132",
+   "erbench-oeis:A024145"
+  ],
+  "eq0293": [
+   "erbench-oeis:A024029",
+   "erbench-oeis:A024042",
+   "erbench-oeis:A024055",
+   "erbench-oeis:A024081",
+   "erbench-oeis:A024107",
+   "erbench-oeis:A024120",
+   "erbench-oeis:A024133",
+   "erbench-oeis:A024146"
+  ],
+  "eq0294": [
+   "erbench-oeis:A024031",
+   "erbench-oeis:A024044",
+   "erbench-oeis:A024057",
+   "erbench-oeis:A024070",
+   "erbench-oeis:A024083",
+   "erbench-oeis:A024096",
+   "erbench-oeis:A024109",
+   "erbench-oeis:A024122",
+   "erbench-oeis:A024135",
+   "erbench-oeis:A024148"
+  ],
+  "eq0295": [
+   "erbench-oeis:A024032",
+   "erbench-oeis:A024045",
+   "erbench-oeis:A024058",
+   "erbench-oeis:A024071",
+   "erbench-oeis:A024084",
+   "erbench-oeis:A024097",
+   "erbench-oeis:A024110",
+   "erbench-oeis:A024123",
+   "erbench-oeis:A024136",
+   "erbench-oeis:A024149"
+  ],
+  "eq0296": [
+   "erbench-oeis:A024062",
+   "erbench-oeis:A024075",
+   "erbench-oeis:A024088",
+   "erbench-oeis:A024101",
+   "erbench-oeis:A024127",
+   "erbench-oeis:A024140",
+   "erbench-oeis:A058896",
+   "erbench-oeis:A098609",
+   "erbench-oeis:A164783",
+   "erbench-oeis:A164784",
+   "erbench-oeis:A164785",
+   "erbench-oeis:A164786",
+   "erbench-oeis:A168611",
+   "erbench-oeis:A168613",
+   "erbench-oeis:A168616",
+   "erbench-oeis:A170955",
+   "erbench-oeis:A178671",
+   "erbench-oeis:A178672",
+   "erbench-oeis:A185346",
+   "erbench-oeis:A220087",
+   "erbench-oeis:A220088",
+   "erbench-oeis:A220089",
+   "erbench-oeis:A246168",
+   "erbench-oeis:A334595"
+  ],
+  "eq0299": [
+   "erbench-oeis:A026740",
+   "erbench-oeis:A026809"
+  ],
+  "eq0301": [
+   "erbench-oeis:A027382",
+   "erbench-oeis:A058031"
+  ],
+  "eq0302": [
+   "erbench-oeis:A027469",
+   "erbench-oeis:A027470"
+  ],
+  "eq0303": [
+   "erbench-oeis:A027480",
+   "erbench-oeis:A111396",
+   "erbench-oeis:A264443",
+   "erbench-oeis:A264444",
+   "erbench-oeis:A264445",
+   "erbench-oeis:A356095"
+  ],
+  "eq0306": [
+   "erbench-oeis:A027599",
+   "erbench-oeis:A054567",
+   "erbench-oeis:A087348",
+   "erbench-oeis:A112087",
+   "erbench-oeis:A125201",
+   "erbench-oeis:A125202",
+   "erbench-oeis:A127316",
+   "erbench-oeis:A136392",
+   "erbench-oeis:A141631",
+   "erbench-oeis:A156711",
+   "erbench-oeis:A156810",
+   "erbench-oeis:A156812",
+   "erbench-oeis:A158186",
+   "erbench-oeis:A185212",
+   "erbench-oeis:A185939",
+   "erbench-oeis:A186865",
+   "erbench-oeis:A191413",
+   "erbench-oeis:A193448",
+   "erbench-oeis:A211607",
+   "erbench-oeis:A211775",
+   "erbench-oeis:A213810",
+   "erbench-oeis:A214660",
+   "erbench-oeis:A214675",
+   "erbench-oeis:A239449",
+   "erbench-oeis:A242658",
+   "erbench-oeis:A271649",
+   "erbench-oeis:A272129",
+   "erbench-oeis:A304616",
+   "erbench-oeis:A318791",
+   "erbench-oeis:A360416",
+   "erbench-oeis:A360417"
+  ],
+  "eq0312": [
+   "erbench-oeis:A027688",
+   "erbench-oeis:A027689",
+   "erbench-oeis:A027690",
+   "erbench-oeis:A027691",
+   "erbench-oeis:A027692",
+   "erbench-oeis:A027693",
+   "erbench-oeis:A027694",
+   "erbench-oeis:A048058",
+   "erbench-oeis:A100094",
+   "erbench-oeis:A187710"
+  ],
+  "eq0317": [
+   "erbench-oeis:A028400",
+   "erbench-oeis:A033934"
+  ],
+  "eq0319": [
+   "erbench-oeis:A028895",
+   "erbench-oeis:A045943"
+  ],
+  "eq0321": [
+   "erbench-oeis:A030180",
+   "erbench-oeis:A108495",
+   "erbench-oeis:A108496",
+   "erbench-oeis:A208537",
+   "erbench-oeis:A366488",
+   "erbench-oeis:A366489",
+   "erbench-oeis:A366490",
+   "erbench-oeis:A366491"
+  ],
+  "eq0322": [
+   "erbench-oeis:A016767",
+   "erbench-oeis:A016803",
+   "erbench-oeis:A016851",
+   "erbench-oeis:A016911",
+   "erbench-oeis:A016983",
+   "erbench-oeis:A017067",
+   "erbench-oeis:A017163",
+   "erbench-oeis:A017271",
+   "erbench-oeis:A017391",
+   "erbench-oeis:A017523",
+   "erbench-oeis:A033430",
+   "erbench-oeis:A117642",
+   "erbench-oeis:A280428"
+  ],
+  "eq0323": [
+   "erbench-oeis:A005587",
+   "erbench-oeis:A033487",
+   "erbench-oeis:A033488"
+  ],
+  "eq0324": [
+   "erbench-oeis:A033537",
+   "erbench-oeis:A139275",
+   "erbench-oeis:A139276",
+   "erbench-oeis:A139277",
+   "erbench-oeis:A139278",
+   "erbench-oeis:A139576",
+   "erbench-oeis:A139577",
+   "erbench-oeis:A139578",
+   "erbench-oeis:A139580",
+   "erbench-oeis:A139581",
+   "erbench-oeis:A140677",
+   "erbench-oeis:A140678",
+   "erbench-oeis:A140679",
+   "erbench-oeis:A140680",
+   "erbench-oeis:A140689",
+   "erbench-oeis:A168668",
+   "erbench-oeis:A195028",
+   "erbench-oeis:A202804"
+  ],
+  "eq0325": [
+   "erbench-oeis:A033566",
+   "erbench-oeis:A179741"
+  ],
+  "eq0326": [
+   "erbench-oeis:A033568",
+   "erbench-oeis:A033578",
+   "erbench-oeis:A060785",
+   "erbench-oeis:A060787"
+  ],
+  "eq0329": [
+   "erbench-oeis:A001512",
+   "erbench-oeis:A033592",
+   "erbench-oeis:A069080",
+   "erbench-oeis:A133818"
+  ],
+  "eq0335": [
+   "erbench-oeis:A034472",
+   "erbench-oeis:A034491",
+   "erbench-oeis:A034524",
+   "erbench-oeis:A052539",
+   "erbench-oeis:A062394",
+   "erbench-oeis:A062395",
+   "erbench-oeis:A062396",
+   "erbench-oeis:A140504",
+   "erbench-oeis:A153079",
+   "erbench-oeis:A168609",
+   "erbench-oeis:A168610",
+   "erbench-oeis:A168614",
+   "erbench-oeis:A178675",
+   "erbench-oeis:A178676",
+   "erbench-oeis:A178681",
+   "erbench-oeis:A188165",
+   "erbench-oeis:A216179",
+   "erbench-oeis:A242328",
+   "erbench-oeis:A242329",
+   "erbench-oeis:A242475",
+   "erbench-oeis:A246139",
+   "erbench-oeis:A253208",
+   "erbench-oeis:A253209",
+   "erbench-oeis:A253210",
+   "erbench-oeis:A253211",
+   "erbench-oeis:A253212",
+   "erbench-oeis:A253213"
+  ],
+  "eq0336": [
+   "erbench-oeis:A034478",
+   "erbench-oeis:A034659",
+   "erbench-oeis:A047850",
+   "erbench-oeis:A083294",
+   "erbench-oeis:A132079",
+   "erbench-oeis:A155701",
+   "erbench-oeis:A156605",
+   "erbench-oeis:A163834",
+   "erbench-oeis:A163868",
+   "erbench-oeis:A165247",
+   "erbench-oeis:A173735",
+   "erbench-oeis:A173764"
+  ],
+  "eq0337": [
+   "erbench-oeis:A001576",
+   "erbench-oeis:A034513",
+   "erbench-oeis:A074501",
+   "erbench-oeis:A074503",
+   "erbench-oeis:A074504",
+   "erbench-oeis:A074505",
+   "erbench-oeis:A074506",
+   "erbench-oeis:A074507",
+   "erbench-oeis:A074508",
+   "erbench-oeis:A074509",
+   "erbench-oeis:A074510",
+   "erbench-oeis:A074511",
+   "erbench-oeis:A074512",
+   "erbench-oeis:A074513",
+   "erbench-oeis:A074515",
+   "erbench-oeis:A074516",
+   "erbench-oeis:A074517",
+   "erbench-oeis:A074518",
+   "erbench-oeis:A074519",
+   "erbench-oeis:A074521",
+   "erbench-oeis:A074522",
+   "erbench-oeis:A074523",
+   "erbench-oeis:A074524",
+   "erbench-oeis:A074525",
+   "erbench-oeis:A318528"
+  ],
+  "eq0342": [
+   "erbench-oeis:A018215",
+   "erbench-oeis:A036291",
+   "erbench-oeis:A036292",
+   "erbench-oeis:A036293",
+   "erbench-oeis:A036294",
+   "erbench-oeis:A126431",
+   "erbench-oeis:A158749"
+  ],
+  "eq0343": [
+   "erbench-oeis:A036442",
+   "erbench-oeis:A217628"
+  ],
+  "eq0344": [
+   "erbench-oeis:A036562",
+   "erbench-oeis:A171590"
+  ],
+  "eq0346": [
+   "erbench-oeis:A037182",
+   "erbench-oeis:A162729"
+  ],
+  "eq0355": [
+   "erbench-oeis:A045946",
+   "erbench-oeis:A144314",
+   "erbench-oeis:A195026",
+   "erbench-oeis:A195027"
+  ],
+  "eq0362": [
+   "erbench-oeis:A049480",
+   "erbench-oeis:A063488"
+  ],
+  "eq0363": [
+   "erbench-oeis:A050408",
+   "erbench-oeis:A069125",
+   "erbench-oeis:A069128",
+   "erbench-oeis:A082450",
+   "erbench-oeis:A140064",
+   "erbench-oeis:A140065",
+   "erbench-oeis:A140066",
+   "erbench-oeis:A192136",
+   "erbench-oeis:A290768"
+  ],
+  "eq0364": [
+   "erbench-oeis:A050914",
+   "erbench-oeis:A050915",
+   "erbench-oeis:A050916",
+   "erbench-oeis:A050917",
+   "erbench-oeis:A050919",
+   "erbench-oeis:A064480"
+  ],
+  "eq0365": [
+   "erbench-oeis:A051405",
+   "erbench-oeis:A051406"
+  ],
+  "eq0367": [
+   "erbench-oeis:A051443",
+   "erbench-oeis:A051490"
+  ],
+  "eq0368": [
+   "erbench-oeis:A051489",
+   "erbench-oeis:A155539"
+  ],
+  "eq0369": [
+   "erbench-oeis:A051633",
+   "erbench-oeis:A064385",
+   "erbench-oeis:A083813",
+   "erbench-oeis:A086224",
+   "erbench-oeis:A086573",
+   "erbench-oeis:A086575",
+   "erbench-oeis:A086576",
+   "erbench-oeis:A086577",
+   "erbench-oeis:A086578",
+   "erbench-oeis:A086579",
+   "erbench-oeis:A086580",
+   "erbench-oeis:A086945",
+   "erbench-oeis:A100412",
+   "erbench-oeis:A114569",
+   "erbench-oeis:A140529",
+   "erbench-oeis:A141722",
+   "erbench-oeis:A153465",
+   "erbench-oeis:A155155",
+   "erbench-oeis:A156127",
+   "erbench-oeis:A171389",
+   "erbench-oeis:A172252",
+   "erbench-oeis:A175164",
+   "erbench-oeis:A175165",
+   "erbench-oeis:A175166",
+   "erbench-oeis:A175603",
+   "erbench-oeis:A175604",
+   "erbench-oeis:A176448",
+   "erbench-oeis:A176449",
+   "erbench-oeis:A177080",
+   "erbench-oeis:A177097",
+   "erbench-oeis:A177108",
+   "erbench-oeis:A177109",
+   "erbench-oeis:A196305",
+   "erbench-oeis:A198480",
+   "erbench-oeis:A198643",
+   "erbench-oeis:A198645",
+   "erbench-oeis:A198646",
+   "erbench-oeis:A198692",
+   "erbench-oeis:A198693",
+   "erbench-oeis:A198694",
+   "erbench-oeis:A198698",
+   "erbench-oeis:A198700",
+   "erbench-oeis:A198763",
+   "erbench-oeis:A198768",
+   "erbench-oeis:A198794",
+   "erbench-oeis:A198846",
+   "erbench-oeis:A198847",
+   "erbench-oeis:A198848",
+   "erbench-oeis:A198850",
+   "erbench-oeis:A198851",
+   "erbench-oeis:A198852",
+   "erbench-oeis:A198853",
+   "erbench-oeis:A198855",
+   "erbench-oeis:A198858",
+   "erbench-oeis:A198960",
+   "erbench-oeis:A198965",
+   "erbench-oeis:A198966",
+   "erbench-oeis:A198970",
+   "erbench-oeis:A199029",
+   "erbench-oeis:A199030",
+   "erbench-oeis:A199031",
+   "erbench-oeis:A199032",
+   "erbench-oeis:A199106",
+   "erbench-oeis:A199107",
+   "erbench-oeis:A302507",
+   "erbench-oeis:A355142",
+   "erbench-oeis:A355298"
+  ],
+  "eq0370": [
+   "erbench-oeis:A051667",
+   "erbench-oeis:A051669",
+   "erbench-oeis:A116972",
+   "erbench-oeis:A126284",
+   "erbench-oeis:A142964"
+  ],
+  "eq0371": [
+   "erbench-oeis:A051745",
+   "erbench-oeis:A090391"
+  ],
+  "eq0372": [
+   "erbench-oeis:A051747",
+   "erbench-oeis:A101862"
+  ],
+  "eq0373": [
+   "erbench-oeis:A001157",
+   "erbench-oeis:A022264",
+   "erbench-oeis:A022268",
+   "erbench-oeis:A022270",
+   "erbench-oeis:A022272",
+   "erbench-oeis:A022274",
+   "erbench-oeis:A022276",
+   "erbench-oeis:A022278",
+   "erbench-oeis:A022280",
+   "erbench-oeis:A022282",
+   "erbench-oeis:A022284",
+   "erbench-oeis:A022286",
+   "erbench-oeis:A022288",
+   "erbench-oeis:A051850",
+   "erbench-oeis:A051868",
+   "erbench-oeis:A098140",
+   "erbench-oeis:A098230",
+   "erbench-oeis:A180232",
+   "erbench-oeis:A186030",
+   "erbench-oeis:A218471",
+   "erbench-oeis:A255184",
+   "erbench-oeis:A255186",
+   "erbench-oeis:A255187",
+   "erbench-oeis:A263227",
+   "erbench-oeis:A263231",
+   "erbench-oeis:A282851",
+   "erbench-oeis:A282852",
+   "erbench-oeis:A282854",
+   "erbench-oeis:A326725",
+   "erbench-oeis:A360488"
+  ],
+  "eq0374": [
+   "erbench-oeis:A014107",
+   "erbench-oeis:A051865",
+   "erbench-oeis:A051869",
+   "erbench-oeis:A051870",
+   "erbench-oeis:A051873",
+   "erbench-oeis:A051875",
+   "erbench-oeis:A135703",
+   "erbench-oeis:A135706",
+   "erbench-oeis:A139268",
+   "erbench-oeis:A139272",
+   "erbench-oeis:A139274",
+   "erbench-oeis:A152995",
+   "erbench-oeis:A152997",
+   "erbench-oeis:A161958",
+   "erbench-oeis:A185019",
+   "erbench-oeis:A195018",
+   "erbench-oeis:A195021",
+   "erbench-oeis:A195024",
+   "erbench-oeis:A254474",
+   "erbench-oeis:A255185",
+   "erbench-oeis:A282850",
+   "erbench-oeis:A282853",
+   "erbench-oeis:A360436"
+  ],
+  "eq0375": [
+   "erbench-oeis:A051939",
+   "erbench-oeis:A051941"
+  ],
+  "eq0378": [
+   "erbench-oeis:A052762",
+   "erbench-oeis:A062765"
+  ],
+  "eq0379": [
+   "erbench-oeis:A053455",
+   "erbench-oeis:A178511",
+   "erbench-oeis:A239284",
+   "erbench-oeis:A239285",
+   "erbench-oeis:A239294"
+  ],
+  "eq0383": [
+   "erbench-oeis:A053764",
+   "erbench-oeis:A053766"
+  ],
+  "eq0387": [
+   "erbench-oeis:A055437",
+   "erbench-oeis:A092277",
+   "erbench-oeis:A156814"
+  ],
+  "eq0390": [
+   "erbench-oeis:A004538",
+   "erbench-oeis:A056237",
+   "erbench-oeis:A073577",
+   "erbench-oeis:A166143",
+   "erbench-oeis:A166147",
+   "erbench-oeis:A166150",
+   "erbench-oeis:A271625",
+   "erbench-oeis:A332519"
+  ],
+  "eq0391": [
+   "erbench-oeis:A057651",
+   "erbench-oeis:A061801",
+   "erbench-oeis:A083584",
+   "erbench-oeis:A083597",
+   "erbench-oeis:A083713",
+   "erbench-oeis:A108019",
+   "erbench-oeis:A117088",
+   "erbench-oeis:A125682",
+   "erbench-oeis:A168569",
+   "erbench-oeis:A168571",
+   "erbench-oeis:A173768",
+   "erbench-oeis:A173802",
+   "erbench-oeis:A198849",
+   "erbench-oeis:A198964",
+   "erbench-oeis:A238055",
+   "erbench-oeis:A238275",
+   "erbench-oeis:A238276",
+   "erbench-oeis:A246058",
+   "erbench-oeis:A255043",
+   "erbench-oeis:A321421",
+   "erbench-oeis:A350995",
+   "erbench-oeis:A353957"
+  ],
+  "eq0394": [
+   "erbench-oeis:A057721",
+   "erbench-oeis:A082044",
+   "erbench-oeis:A082113",
+   "erbench-oeis:A156798",
+   "erbench-oeis:A304726"
+  ],
+  "eq0396": [
+   "erbench-oeis:A057781",
+   "erbench-oeis:A272297",
+   "erbench-oeis:A272298"
+  ],
+  "eq0397": [
+   "erbench-oeis:A058331",
+   "erbench-oeis:A061722",
+   "erbench-oeis:A093328",
+   "erbench-oeis:A247155",
+   "erbench-oeis:A247541",
+   "erbench-oeis:A255843",
+   "erbench-oeis:A255845",
+   "erbench-oeis:A255846",
+   "erbench-oeis:A255847",
+   "erbench-oeis:A339048"
+  ],
+  "eq0404": [
+   "erbench-oeis:A022269",
+   "erbench-oeis:A022271",
+   "erbench-oeis:A022273",
+   "erbench-oeis:A022275",
+   "erbench-oeis:A022277",
+   "erbench-oeis:A022279",
+   "erbench-oeis:A022281",
+   "erbench-oeis:A022283",
+   "erbench-oeis:A022285",
+   "erbench-oeis:A022287",
+   "erbench-oeis:A022289",
+   "erbench-oeis:A059845",
+   "erbench-oeis:A140090",
+   "erbench-oeis:A140672",
+   "erbench-oeis:A140674",
+   "erbench-oeis:A140675",
+   "erbench-oeis:A147875",
+   "erbench-oeis:A179986",
+   "erbench-oeis:A211013"
+  ],
+  "eq0405": [
+   "erbench-oeis:A059997",
+   "erbench-oeis:A132112",
+   "erbench-oeis:A135713",
+   "erbench-oeis:A255687",
+   "erbench-oeis:A304993"
+  ],
+  "eq0406": [
+   "erbench-oeis:A059999",
+   "erbench-oeis:A121887"
+  ],
+  "eq0409": [
+   "erbench-oeis:A060354",
+   "erbench-oeis:A162607"
+  ],
+  "eq0411": [
+   "erbench-oeis:A060722",
+   "erbench-oeis:A060757",
+   "erbench-oeis:A060758",
+   "erbench-oeis:A060759",
+   "erbench-oeis:A060760",
+   "erbench-oeis:A060761",
+   "erbench-oeis:A076781",
+   "erbench-oeis:A076782",
+   "erbench-oeis:A076783",
+   "erbench-oeis:A076811",
+   "erbench-oeis:A078185",
+   "erbench-oeis:A078186",
+   "erbench-oeis:A078351",
+   "erbench-oeis:A078352",
+   "erbench-oeis:A078353",
+   "erbench-oeis:A078354"
+  ],
+  "eq0432": [
+   "erbench-oeis:A001614",
+   "erbench-oeis:A061316",
+   "erbench-oeis:A318054"
+  ],
+  "eq0434": [
+   "erbench-oeis:A061654",
+   "erbench-oeis:A135423",
+   "erbench-oeis:A136412",
+   "erbench-oeis:A173193",
+   "erbench-oeis:A173262",
+   "erbench-oeis:A173535",
+   "erbench-oeis:A173772",
+   "erbench-oeis:A173776",
+   "erbench-oeis:A178769",
+   "erbench-oeis:A199109",
+   "erbench-oeis:A199113",
+   "erbench-oeis:A199210",
+   "erbench-oeis:A199213",
+   "erbench-oeis:A199412",
+   "erbench-oeis:A199420",
+   "erbench-oeis:A199560",
+   "erbench-oeis:A199566",
+   "erbench-oeis:A199680",
+   "erbench-oeis:A199754",
+   "erbench-oeis:A199757",
+   "erbench-oeis:A199762",
+   "erbench-oeis:A321358"
+  ],
+  "eq0435": [
+   "erbench-oeis:A061761",
+   "erbench-oeis:A168273"
+  ],
+  "eq0436": [
+   "erbench-oeis:A061792",
+   "erbench-oeis:A061793",
+   "erbench-oeis:A262402"
+  ],
+  "eq0437": [
+   "erbench-oeis:A061804",
+   "erbench-oeis:A271636",
+   "erbench-oeis:A295130"
+  ],
+  "eq0438": [
+   "erbench-oeis:A061981",
+   "erbench-oeis:A289254",
+   "erbench-oeis:A289255"
+  ],
+  "eq0442": [
+   "erbench-oeis:A004188",
+   "erbench-oeis:A062025",
+   "erbench-oeis:A063522"
+  ],
+  "eq0443": [
+   "erbench-oeis:A006484",
+   "erbench-oeis:A014628",
+   "erbench-oeis:A062026",
+   "erbench-oeis:A101375"
+  ],
+  "eq0446": [
+   "erbench-oeis:A020530",
+   "erbench-oeis:A062510",
+   "erbench-oeis:A242902"
+  ],
+  "eq0448": [
+   "erbench-oeis:A062971",
+   "erbench-oeis:A091482",
+   "erbench-oeis:A091483"
+  ],
+  "eq0449": [
+   "erbench-oeis:A063337",
+   "erbench-oeis:A098018",
+   "erbench-oeis:A122709",
+   "erbench-oeis:A139222",
+   "erbench-oeis:A139245",
+   "erbench-oeis:A139249",
+   "erbench-oeis:A139264",
+   "erbench-oeis:A139279",
+   "erbench-oeis:A139280",
+   "erbench-oeis:A156795",
+   "erbench-oeis:A156796",
+   "erbench-oeis:A164284",
+   "erbench-oeis:A187206",
+   "erbench-oeis:A288313",
+   "erbench-oeis:A356714",
+   "erbench-oeis:A361692",
+   "erbench-oeis:A362360",
+   "erbench-oeis:A362361"
+  ],
+  "eq0450": [
+   "erbench-oeis:A007689",
+   "erbench-oeis:A063481",
+   "erbench-oeis:A074601",
+   "erbench-oeis:A074602",
+   "erbench-oeis:A074603",
+   "erbench-oeis:A074604",
+   "erbench-oeis:A074606",
+   "erbench-oeis:A074607",
+   "erbench-oeis:A074608",
+   "erbench-oeis:A074609",
+   "erbench-oeis:A074610",
+   "erbench-oeis:A074611",
+   "erbench-oeis:A074612",
+   "erbench-oeis:A074613",
+   "erbench-oeis:A074614",
+   "erbench-oeis:A074615",
+   "erbench-oeis:A074616",
+   "erbench-oeis:A074617",
+   "erbench-oeis:A074618",
+   "erbench-oeis:A074619",
+   "erbench-oeis:A074620",
+   "erbench-oeis:A074621",
+   "erbench-oeis:A074622",
+   "erbench-oeis:A074624",
+   "erbench-oeis:A087452",
+   "erbench-oeis:A098610",
+   "erbench-oeis:A102345",
+   "erbench-oeis:A221904",
+   "erbench-oeis:A245806",
+   "erbench-oeis:A245807",
+   "erbench-oeis:A274074"
+  ],
+  "eq0451": [
+   "erbench-oeis:A063486",
+   "erbench-oeis:A130740",
+   "erbench-oeis:A130741"
+  ],
+  "eq0452": [
+   "erbench-oeis:A063489",
+   "erbench-oeis:A063492",
+   "erbench-oeis:A063493",
+   "erbench-oeis:A063494",
+   "erbench-oeis:A063495"
+  ],
+  "eq0453": [
+   "erbench-oeis:A005009",
+   "erbench-oeis:A005029",
+   "erbench-oeis:A005030",
+   "erbench-oeis:A005032",
+   "erbench-oeis:A005052",
+   "erbench-oeis:A005055",
+   "erbench-oeis:A063941",
+   "erbench-oeis:A120354",
+   "erbench-oeis:A175805",
+   "erbench-oeis:A175806",
+   "erbench-oeis:A193577",
+   "erbench-oeis:A216491",
+   "erbench-oeis:A258597",
+   "erbench-oeis:A258598"
+  ],
+  "eq0460": [
+   "erbench-oeis:A014642",
+   "erbench-oeis:A064201",
+   "erbench-oeis:A067239",
+   "erbench-oeis:A126964",
+   "erbench-oeis:A152760",
+   "erbench-oeis:A152965",
+   "erbench-oeis:A152994",
+   "erbench-oeis:A153780",
+   "erbench-oeis:A153784",
+   "erbench-oeis:A153786",
+   "erbench-oeis:A153794",
+   "erbench-oeis:A153795",
+   "erbench-oeis:A153796",
+   "erbench-oeis:A153797",
+   "erbench-oeis:A154617",
+   "erbench-oeis:A193872",
+   "erbench-oeis:A195320",
+   "erbench-oeis:A263228",
+   "erbench-oeis:A263229"
+  ],
+  "eq0462": [
+   "erbench-oeis:A064226",
+   "erbench-oeis:A093245",
+   "erbench-oeis:A093390",
+   "erbench-oeis:A131874",
+   "erbench-oeis:A160749",
+   "erbench-oeis:A220083"
+  ],
+  "eq0465": [
+   "erbench-oeis:A065532",
+   "erbench-oeis:A100536",
+   "erbench-oeis:A136016",
+   "erbench-oeis:A158447",
+   "erbench-oeis:A158463"
+  ],
+  "eq0470": [
+   "erbench-oeis:A067046",
+   "erbench-oeis:A067047",
+   "erbench-oeis:A067048",
+   "erbench-oeis:A171662",
+   "erbench-oeis:A188897"
+  ],
+  "eq0472": [
+   "erbench-oeis:A067705",
+   "erbench-oeis:A067724",
+   "erbench-oeis:A067725",
+   "erbench-oeis:A067726",
+   "erbench-oeis:A067727",
+   "erbench-oeis:A067728",
+   "erbench-oeis:A126264",
+   "erbench-oeis:A139579"
+  ],
+  "eq0473": [
+   "erbench-oeis:A016885",
+   "erbench-oeis:A016993",
+   "erbench-oeis:A017017",
+   "erbench-oeis:A017029",
+   "erbench-oeis:A017041",
+   "erbench-oeis:A017053",
+   "erbench-oeis:A017089",
+   "erbench-oeis:A017353",
+   "erbench-oeis:A017365",
+   "erbench-oeis:A017413",
+   "erbench-oeis:A017425",
+   "erbench-oeis:A017437",
+   "erbench-oeis:A017449",
+   "erbench-oeis:A017461",
+   "erbench-oeis:A017473",
+   "erbench-oeis:A017497",
+   "erbench-oeis:A017533",
+   "erbench-oeis:A068796",
+   "erbench-oeis:A097802",
+   "erbench-oeis:A100775",
+   "erbench-oeis:A100776",
+   "erbench-oeis:A102438",
+   "erbench-oeis:A102439",
+   "erbench-oeis:A102603",
+   "erbench-oeis:A103214",
+   "erbench-oeis:A126978",
+   "erbench-oeis:A126979",
+   "erbench-oeis:A126980",
+   "erbench-oeis:A127009",
+   "erbench-oeis:A131877",
+   "erbench-oeis:A135403",
+   "erbench-oeis:A135659",
+   "erbench-oeis:A139606",
+   "erbench-oeis:A139607",
+   "erbench-oeis:A139608",
+   "erbench-oeis:A139609",
+   "erbench-oeis:A139610",
+   "erbench-oeis:A139611",
+   "erbench-oeis:A139612",
+   "erbench-oeis:A139613",
+   "erbench-oeis:A139614",
+   "erbench-oeis:A139615",
+   "erbench-oeis:A139616",
+   "erbench-oeis:A139617",
+   "erbench-oeis:A139618",
+   "erbench-oeis:A139619",
+   "erbench-oeis:A139620",
+   "erbench-oeis:A141694",
+   "erbench-oeis:A142241",
+   "erbench-oeis:A156376",
+   "erbench-oeis:A158060",
+   "erbench-oeis:A159551",
+   "erbench-oeis:A161709",
+   "erbench-oeis:A161714",
+   "erbench-oeis:A172178",
+   "erbench-oeis:A190991",
+   "erbench-oeis:A215137",
+   "erbench-oeis:A215144",
+   "erbench-oeis:A215145",
+   "erbench-oeis:A215146",
+   "erbench-oeis:A215148",
+   "erbench-oeis:A229855",
+   "erbench-oeis:A242215",
+   "erbench-oeis:A260751",
+   "erbench-oeis:A261149",
+   "erbench-oeis:A261150",
+   "erbench-oeis:A261151",
+   "erbench-oeis:A281546",
+   "erbench-oeis:A290781",
+   "erbench-oeis:A317164",
+   "erbench-oeis:A317255",
+   "erbench-oeis:A345339",
+   "erbench-oeis:A350521",
+   "erbench-oeis:A350522",
+   "first-principles:leavitt"
+  ],
+  "eq0482": [
+   "erbench-oeis:A070290",
+   "erbench-oeis:A070291",
+   "erbench-oeis:A070292",
+   "erbench-oeis:A070293",
+   "erbench-oeis:A153814",
+   "erbench-oeis:A154549",
+   "erbench-oeis:A174312",
+   "erbench-oeis:A177769",
+   "erbench-oeis:A214206",
+   "erbench-oeis:A283442",
+   "erbench-oeis:A305548",
+   "first-principles:hubble"
+  ],
+  "eq0484": [
+   "erbench-oeis:A071244",
+   "erbench-oeis:A071252"
+  ],
+  "eq0487": [
+   "erbench-oeis:A008354",
+   "erbench-oeis:A071270"
+  ],
+  "eq0488": [
+   "erbench-oeis:A072025",
+   "erbench-oeis:A127878",
+   "erbench-oeis:A270868",
+   "erbench-oeis:A304725"
+  ],
+  "eq0490": [
+   "erbench-oeis:A072258",
+   "erbench-oeis:A072259",
+   "erbench-oeis:A072260",
+   "erbench-oeis:A294327",
+   "erbench-oeis:A294328"
+  ],
+  "eq0491": [
+   "erbench-oeis:A072674",
+   "erbench-oeis:A269019"
+  ],
+  "eq0493": [
+   "erbench-oeis:A001579",
+   "erbench-oeis:A074526",
+   "erbench-oeis:A074527",
+   "erbench-oeis:A074529",
+   "erbench-oeis:A074530",
+   "erbench-oeis:A074531",
+   "erbench-oeis:A074532",
+   "erbench-oeis:A074533",
+   "erbench-oeis:A074534",
+   "erbench-oeis:A074536",
+   "erbench-oeis:A074537",
+   "erbench-oeis:A074538",
+   "erbench-oeis:A074539",
+   "erbench-oeis:A074540",
+   "erbench-oeis:A074541",
+   "erbench-oeis:A074542",
+   "erbench-oeis:A074543",
+   "erbench-oeis:A074544",
+   "erbench-oeis:A074545",
+   "erbench-oeis:A074546",
+   "erbench-oeis:A074547",
+   "erbench-oeis:A074548",
+   "erbench-oeis:A074549",
+   "erbench-oeis:A074550",
+   "erbench-oeis:A074551",
+   "erbench-oeis:A074552",
+   "erbench-oeis:A074553",
+   "erbench-oeis:A074554",
+   "erbench-oeis:A074555",
+   "erbench-oeis:A074556",
+   "erbench-oeis:A074558",
+   "erbench-oeis:A074559",
+   "erbench-oeis:A074560",
+   "erbench-oeis:A074561",
+   "erbench-oeis:A074562",
+   "erbench-oeis:A074563",
+   "erbench-oeis:A074564",
+   "erbench-oeis:A074565",
+   "erbench-oeis:A074566",
+   "erbench-oeis:A074567",
+   "erbench-oeis:A074568",
+   "erbench-oeis:A074569",
+   "erbench-oeis:A074570",
+   "erbench-oeis:A074571",
+   "erbench-oeis:A074572",
+   "erbench-oeis:A074573",
+   "erbench-oeis:A074574",
+   "erbench-oeis:A074575",
+   "erbench-oeis:A074576",
+   "erbench-oeis:A074577",
+   "erbench-oeis:A074578",
+   "erbench-oeis:A074579",
+   "erbench-oeis:A074580"
+  ],
+  "eq0495": [
+   "erbench-oeis:A075414",
+   "erbench-oeis:A075417"
+  ],
+  "eq0498": [
+   "erbench-oeis:A079583",
+   "erbench-oeis:A101945",
+   "erbench-oeis:A132308"
+  ],
+  "eq0499": [
+   "erbench-oeis:A011199",
+   "erbench-oeis:A079588"
+  ],
+  "eq0501": [
+   "erbench-oeis:A080039",
+   "erbench-oeis:A080041"
+  ],
+  "eq0509": [
+   "erbench-oeis:A081680",
+   "erbench-oeis:A081681",
+   "erbench-oeis:A081682"
+  ],
+  "eq0511": [
+   "erbench-oeis:A081686",
+   "erbench-oeis:A081687"
+  ],
+  "eq0513": [
+   "erbench-oeis:A082412",
+   "erbench-oeis:A082413",
+   "erbench-oeis:A083229",
+   "erbench-oeis:A083231",
+   "erbench-oeis:A083232",
+   "erbench-oeis:A083295",
+   "erbench-oeis:A083296",
+   "erbench-oeis:A083297",
+   "erbench-oeis:A083299",
+   "erbench-oeis:A083300",
+   "erbench-oeis:A083301",
+   "erbench-oeis:A083302",
+   "erbench-oeis:A083423",
+   "erbench-oeis:A083424",
+   "erbench-oeis:A083426"
+  ],
+  "eq0514": [
+   "erbench-oeis:A007613",
+   "erbench-oeis:A082414",
+   "erbench-oeis:A082724",
+   "erbench-oeis:A083234",
+   "erbench-oeis:A166035",
+   "erbench-oeis:A166036",
+   "erbench-oeis:A166152",
+   "erbench-oeis:A166153",
+   "erbench-oeis:A166157"
+  ],
+  "eq0515": [
+   "erbench-oeis:A082541",
+   "erbench-oeis:A083582",
+   "erbench-oeis:A083583",
+   "erbench-oeis:A083595",
+   "erbench-oeis:A090019",
+   "erbench-oeis:A090409",
+   "erbench-oeis:A154410",
+   "erbench-oeis:A226511",
+   "erbench-oeis:A344109"
+  ],
+  "eq0519": [
+   "erbench-oeis:A083196",
+   "erbench-oeis:A156701"
+  ],
+  "eq0523": [
+   "erbench-oeis:A083315",
+   "erbench-oeis:A083316"
+  ],
+  "eq0524": [
+   "erbench-oeis:A083320",
+   "erbench-oeis:A135160"
+  ],
+  "eq0526": [
+   "erbench-oeis:A020515",
+   "erbench-oeis:A083323",
+   "erbench-oeis:A103457",
+   "erbench-oeis:A155596",
+   "erbench-oeis:A155597",
+   "erbench-oeis:A155598",
+   "erbench-oeis:A155599",
+   "erbench-oeis:A155600",
+   "erbench-oeis:A155609",
+   "erbench-oeis:A155626",
+   "erbench-oeis:A155627",
+   "erbench-oeis:A155628",
+   "erbench-oeis:A155629",
+   "erbench-oeis:A155630",
+   "erbench-oeis:A155639",
+   "erbench-oeis:A155640",
+   "erbench-oeis:A155650",
+   "erbench-oeis:A155659",
+   "erbench-oeis:A155660",
+   "erbench-oeis:A155666"
+  ],
+  "eq0527": [
+   "erbench-oeis:A083324",
+   "erbench-oeis:A083325",
+   "erbench-oeis:A083326",
+   "erbench-oeis:A135159"
+  ],
+  "eq0528": [
+   "erbench-oeis:A083327",
+   "erbench-oeis:A083328"
+  ],
+  "eq0529": [
+   "erbench-oeis:A083330",
+   "erbench-oeis:A083331"
+  ],
+  "eq0530": [
+   "erbench-oeis:A083578",
+   "erbench-oeis:A143079",
+   "erbench-oeis:A152105",
+   "erbench-oeis:A152106"
+  ],
+  "eq0531": [
+   "erbench-oeis:A010730",
+   "erbench-oeis:A083581",
+   "erbench-oeis:A165752",
+   "erbench-oeis:A165755",
+   "erbench-oeis:A165758",
+   "erbench-oeis:A165759",
+   "erbench-oeis:A165760"
+  ],
+  "eq0537": [
+   "erbench-oeis:A084367",
+   "erbench-oeis:A322675"
+  ],
+  "eq0538": [
+   "erbench-oeis:A084378",
+   "erbench-oeis:A084379",
+   "erbench-oeis:A084380",
+   "erbench-oeis:A084381",
+   "erbench-oeis:A084382",
+   "erbench-oeis:A274077"
+  ],
+  "eq0539": [
+   "erbench-oeis:A016747",
+   "erbench-oeis:A016751",
+   "erbench-oeis:A016771",
+   "erbench-oeis:A016807",
+   "erbench-oeis:A016855",
+   "erbench-oeis:A016915",
+   "erbench-oeis:A016919",
+   "erbench-oeis:A016987",
+   "erbench-oeis:A016991",
+   "erbench-oeis:A017071",
+   "erbench-oeis:A017075",
+   "erbench-oeis:A017167",
+   "erbench-oeis:A017171",
+   "erbench-oeis:A017275",
+   "erbench-oeis:A017279",
+   "erbench-oeis:A017395",
+   "erbench-oeis:A085479"
+  ],
+  "eq0540": [
+   "erbench-oeis:A016748",
+   "erbench-oeis:A016772",
+   "erbench-oeis:A016856",
+   "erbench-oeis:A016988",
+   "erbench-oeis:A017072",
+   "erbench-oeis:A017168",
+   "erbench-oeis:A017276",
+   "erbench-oeis:A017396",
+   "erbench-oeis:A085482"
+  ],
+  "eq0544": [
+   "erbench-oeis:A086302",
+   "erbench-oeis:A094200",
+   "erbench-oeis:A129029",
+   "erbench-oeis:A160827",
+   "erbench-oeis:A160828",
+   "erbench-oeis:A176712",
+   "erbench-oeis:A272124"
+  ],
+  "eq0545": [
+   "erbench-oeis:A086653",
+   "erbench-oeis:A163980",
+   "erbench-oeis:A213223",
+   "erbench-oeis:A221905",
+   "erbench-oeis:A221906",
+   "erbench-oeis:A221907",
+   "erbench-oeis:A221908",
+   "erbench-oeis:A221909",
+   "erbench-oeis:A221910",
+   "erbench-oeis:A221911",
+   "erbench-oeis:A297663"
+  ],
+  "eq0550": [
+   "erbench-oeis:A006589",
+   "erbench-oeis:A087323"
+  ],
+  "eq0555": [
+   "erbench-oeis:A090197",
+   "erbench-oeis:A270867",
+   "erbench-oeis:A271779"
+  ],
+  "eq0557": [
+   "erbench-oeis:A090386",
+   "erbench-oeis:A332697"
+  ],
+  "eq0564": [
+   "erbench-oeis:A091270",
+   "erbench-oeis:A098808",
+   "erbench-oeis:A098809",
+   "erbench-oeis:A168572"
+  ],
+  "eq0566": [
+   "erbench-oeis:A091348",
+   "erbench-oeis:A305863"
+  ],
+  "eq0569": [
+   "erbench-oeis:A092185",
+   "erbench-oeis:A332698"
+  ],
+  "eq0573": [
+   "erbench-oeis:A020537",
+   "erbench-oeis:A094125",
+   "erbench-oeis:A102485",
+   "erbench-oeis:A145544",
+   "erbench-oeis:A245804",
+   "erbench-oeis:A369404"
+  ],
+  "eq0577": [
+   "erbench-oeis:A094421",
+   "erbench-oeis:A163815",
+   "erbench-oeis:A163832",
+   "erbench-oeis:A196507"
+  ],
+  "eq0582": [
+   "erbench-oeis:A098077",
+   "erbench-oeis:A213827"
+  ],
+  "eq0584": [
+   "erbench-oeis:A005057",
+   "erbench-oeis:A005062",
+   "erbench-oeis:A016195",
+   "erbench-oeis:A016197",
+   "erbench-oeis:A098611",
+   "erbench-oeis:A105723",
+   "erbench-oeis:A118004",
+   "erbench-oeis:A121213",
+   "erbench-oeis:A190540",
+   "erbench-oeis:A190542",
+   "erbench-oeis:A247281",
+   "erbench-oeis:A248216",
+   "erbench-oeis:A248225",
+   "erbench-oeis:A248337",
+   "erbench-oeis:A274072",
+   "erbench-oeis:A274073",
+   "erbench-oeis:A276352"
+  ],
+  "eq0585": [
+   "erbench-oeis:A098803",
+   "erbench-oeis:A098880"
+  ],
+  "eq0586": [
+   "erbench-oeis:A098847",
+   "erbench-oeis:A098848",
+   "erbench-oeis:A098849",
+   "erbench-oeis:A098850",
+   "erbench-oeis:A119412",
+   "erbench-oeis:A120071",
+   "erbench-oeis:A132760",
+   "erbench-oeis:A132762",
+   "erbench-oeis:A132763",
+   "erbench-oeis:A132764",
+   "erbench-oeis:A132765",
+   "erbench-oeis:A132766",
+   "erbench-oeis:A132768",
+   "erbench-oeis:A132769",
+   "erbench-oeis:A132770",
+   "erbench-oeis:A132771",
+   "erbench-oeis:A132772",
+   "erbench-oeis:A132773"
+  ],
+  "eq0588": [
+   "erbench-oeis:A098939",
+   "erbench-oeis:A098940"
+  ],
+  "eq0594": [
+   "erbench-oeis:A005056",
+   "erbench-oeis:A099393",
+   "erbench-oeis:A103454",
+   "erbench-oeis:A103455",
+   "erbench-oeis:A103456",
+   "erbench-oeis:A155588",
+   "erbench-oeis:A155589",
+   "erbench-oeis:A155590",
+   "erbench-oeis:A155593",
+   "erbench-oeis:A155603",
+   "erbench-oeis:A155604",
+   "erbench-oeis:A155606",
+   "erbench-oeis:A155618",
+   "erbench-oeis:A155625",
+   "erbench-oeis:A155636",
+   "erbench-oeis:A155638",
+   "erbench-oeis:A155646",
+   "erbench-oeis:A155647",
+   "erbench-oeis:A155648",
+   "erbench-oeis:A155649",
+   "erbench-oeis:A155655",
+   "erbench-oeis:A155656",
+   "erbench-oeis:A155658",
+   "erbench-oeis:A155663",
+   "erbench-oeis:A155664",
+   "erbench-oeis:A155665",
+   "erbench-oeis:A155673",
+   "erbench-oeis:A171270"
+  ],
+  "eq0599": [
+   "erbench-oeis:A100041",
+   "erbench-oeis:A144391"
+  ],
+  "eq0604": [
+   "erbench-oeis:A100207",
+   "erbench-oeis:A272126",
+   "erbench-oeis:A272130",
+   "erbench-oeis:A322830"
+  ],
+  "eq0607": [
+   "erbench-oeis:A100504",
+   "erbench-oeis:A274974",
+   "erbench-oeis:A323218"
+  ],
+  "eq0611": [
+   "erbench-oeis:A101094",
+   "erbench-oeis:A257200"
+  ],
+  "eq0629": [
+   "erbench-oeis:A101859",
+   "erbench-oeis:A155212",
+   "erbench-oeis:A302537"
+  ],
+  "eq0635": [
+   "erbench-oeis:A102305",
+   "erbench-oeis:A108151",
+   "erbench-oeis:A134594",
+   "erbench-oeis:A155461"
+  ],
+  "eq0637": [
+   "erbench-oeis:A103461",
+   "erbench-oeis:A155601",
+   "erbench-oeis:A155615",
+   "erbench-oeis:A155632",
+   "erbench-oeis:A155661",
+   "erbench-oeis:A155662",
+   "erbench-oeis:A155667"
+  ],
+  "eq0644": [
+   "erbench-oeis:A107584",
+   "erbench-oeis:A107585",
+   "erbench-oeis:A186948",
+   "erbench-oeis:A198396",
+   "erbench-oeis:A198397",
+   "erbench-oeis:A198399",
+   "erbench-oeis:A198400"
+  ],
+  "eq0652": [
+   "erbench-oeis:A108649",
+   "erbench-oeis:A108684"
+  ],
+  "eq0656": [
+   "erbench-oeis:A108677",
+   "erbench-oeis:A108683"
+  ],
+  "eq0675": [
+   "erbench-oeis:A114444",
+   "erbench-oeis:A140681",
+   "erbench-oeis:A163758",
+   "erbench-oeis:A164136",
+   "erbench-oeis:A173307",
+   "erbench-oeis:A173308",
+   "erbench-oeis:A173309"
+  ],
+  "eq0676": [
+   "erbench-oeis:A114949",
+   "erbench-oeis:A117619",
+   "erbench-oeis:A117951",
+   "erbench-oeis:A189834",
+   "erbench-oeis:A189836",
+   "erbench-oeis:A241748",
+   "erbench-oeis:A241750",
+   "erbench-oeis:A241751",
+   "erbench-oeis:A241847",
+   "erbench-oeis:A241848",
+   "erbench-oeis:A241849",
+   "erbench-oeis:A241851",
+   "erbench-oeis:A241889",
+   "erbench-oeis:A241890"
+  ],
+  "eq0677": [
+   "erbench-oeis:A114958",
+   "erbench-oeis:A169831"
+  ],
+  "eq0680": [
+   "erbench-oeis:A115565",
+   "erbench-oeis:A118485",
+   "erbench-oeis:A239426",
+   "erbench-oeis:A272132"
+  ],
+  "eq0681": [
+   "erbench-oeis:A116138",
+   "erbench-oeis:A116144",
+   "erbench-oeis:A116156",
+   "erbench-oeis:A116164",
+   "erbench-oeis:A116165",
+   "erbench-oeis:A116166",
+   "erbench-oeis:A116176"
+  ],
+  "eq0682": [
+   "erbench-oeis:A006124",
+   "erbench-oeis:A116668"
+  ],
+  "eq0699": [
+   "erbench-oeis:A003464",
+   "erbench-oeis:A120741",
+   "erbench-oeis:A125831",
+   "erbench-oeis:A133830",
+   "erbench-oeis:A182512",
+   "erbench-oeis:A195156",
+   "erbench-oeis:A218723",
+   "erbench-oeis:A218729",
+   "erbench-oeis:A218730",
+   "erbench-oeis:A218731",
+   "erbench-oeis:A218732",
+   "erbench-oeis:A218733",
+   "erbench-oeis:A218734",
+   "erbench-oeis:A218736",
+   "erbench-oeis:A218737",
+   "erbench-oeis:A218738",
+   "erbench-oeis:A218739",
+   "erbench-oeis:A218740",
+   "erbench-oeis:A218741",
+   "erbench-oeis:A218742",
+   "erbench-oeis:A218743",
+   "erbench-oeis:A218744",
+   "erbench-oeis:A218745",
+   "erbench-oeis:A218747",
+   "erbench-oeis:A218748",
+   "erbench-oeis:A218749",
+   "erbench-oeis:A218750",
+   "erbench-oeis:A218751",
+   "erbench-oeis:A218752",
+   "erbench-oeis:A218753",
+   "erbench-oeis:A323639"
+  ],
+  "eq0702": [
+   "erbench-oeis:A120800",
+   "erbench-oeis:A120838"
+  ],
+  "eq0705": [
+   "erbench-oeis:A120845",
+   "erbench-oeis:A121200"
+  ],
+  "eq0724": [
+   "erbench-oeis:A005491",
+   "erbench-oeis:A124363"
+  ],
+  "eq0728": [
+   "erbench-oeis:A125817",
+   "erbench-oeis:A125819"
+  ],
+  "eq0729": [
+   "erbench-oeis:A125820",
+   "erbench-oeis:A141041"
+  ],
+  "eq0730": [
+   "erbench-oeis:A125894",
+   "erbench-oeis:A125895"
+  ],
+  "eq0734": [
+   "erbench-oeis:A126665",
+   "erbench-oeis:A136316"
+  ],
+  "eq0740": [
+   "erbench-oeis:A007758",
+   "erbench-oeis:A127960",
+   "erbench-oeis:A128782",
+   "erbench-oeis:A128785",
+   "erbench-oeis:A128788"
+  ],
+  "eq0743": [
+   "erbench-oeis:A127989",
+   "erbench-oeis:A280089"
+  ],
+  "eq0744": [
+   "erbench-oeis:A128013",
+   "erbench-oeis:A128074"
+  ],
+  "eq0746": [
+   "erbench-oeis:A128796",
+   "erbench-oeis:A128799",
+   "erbench-oeis:A128800",
+   "erbench-oeis:A128801",
+   "erbench-oeis:A128802"
+  ],
+  "eq0747": [
+   "erbench-oeis:A128960",
+   "erbench-oeis:A128961",
+   "erbench-oeis:A128962",
+   "erbench-oeis:A128963",
+   "erbench-oeis:A128964",
+   "erbench-oeis:A128965",
+   "erbench-oeis:A128967",
+   "erbench-oeis:A128969"
+  ],
+  "eq0748": [
+   "erbench-oeis:A128985",
+   "erbench-oeis:A128986",
+   "erbench-oeis:A128987",
+   "erbench-oeis:A128988",
+   "erbench-oeis:A128989",
+   "erbench-oeis:A128990",
+   "erbench-oeis:A128991",
+   "erbench-oeis:A128992"
+  ],
+  "eq0749": [
+   "erbench-oeis:A129002",
+   "erbench-oeis:A129003",
+   "erbench-oeis:A129004",
+   "erbench-oeis:A129005",
+   "erbench-oeis:A129006",
+   "erbench-oeis:A129008",
+   "erbench-oeis:A129009"
+  ],
+  "eq0750": [
+   "erbench-oeis:A129026",
+   "erbench-oeis:A188480",
+   "erbench-oeis:A257601"
+  ],
+  "eq0753": [
+   "erbench-oeis:A129197",
+   "erbench-oeis:A140660",
+   "erbench-oeis:A140788",
+   "erbench-oeis:A164094",
+   "erbench-oeis:A164285",
+   "erbench-oeis:A175161",
+   "erbench-oeis:A175162",
+   "erbench-oeis:A175163",
+   "erbench-oeis:A193579",
+   "erbench-oeis:A199108",
+   "erbench-oeis:A199110",
+   "erbench-oeis:A199111",
+   "erbench-oeis:A199114",
+   "erbench-oeis:A199115",
+   "erbench-oeis:A199116",
+   "erbench-oeis:A199207",
+   "erbench-oeis:A199208",
+   "erbench-oeis:A199209",
+   "erbench-oeis:A199211",
+   "erbench-oeis:A199212",
+   "erbench-oeis:A199214",
+   "erbench-oeis:A199215",
+   "erbench-oeis:A199317",
+   "erbench-oeis:A199494",
+   "erbench-oeis:A199561",
+   "erbench-oeis:A199567",
+   "erbench-oeis:A199682",
+   "erbench-oeis:A199684",
+   "erbench-oeis:A199685",
+   "erbench-oeis:A199689",
+   "erbench-oeis:A199756",
+   "erbench-oeis:A199763",
+   "erbench-oeis:A224790",
+   "erbench-oeis:A258073",
+   "erbench-oeis:A283070",
+   "erbench-oeis:A350382"
+  ],
+  "eq0756": [
+   "erbench-oeis:A130129",
+   "erbench-oeis:A155988",
+   "erbench-oeis:A165283",
+   "erbench-oeis:A199299",
+   "erbench-oeis:A199300"
+  ],
+  "eq0757": [
+   "erbench-oeis:A130861",
+   "erbench-oeis:A343560"
+  ],
+  "eq0760": [
+   "erbench-oeis:A002413",
+   "erbench-oeis:A007584",
+   "erbench-oeis:A007587",
+   "erbench-oeis:A131423",
+   "erbench-oeis:A172082",
+   "erbench-oeis:A237616",
+   "erbench-oeis:A237617",
+   "erbench-oeis:A237618",
+   "erbench-oeis:A256645",
+   "erbench-oeis:A256646",
+   "erbench-oeis:A256647",
+   "erbench-oeis:A256648",
+   "erbench-oeis:A256649",
+   "erbench-oeis:A256650",
+   "erbench-oeis:A256716",
+   "erbench-oeis:A256718",
+   "erbench-oeis:A304659"
+  ],
+  "eq0761": [
+   "erbench-oeis:A131464",
+   "erbench-oeis:A155883",
+   "erbench-oeis:A160250",
+   "erbench-oeis:A218457",
+   "erbench-oeis:A218458",
+   "erbench-oeis:A268201",
+   "erbench-oeis:A271828",
+   "erbench-oeis:A272131",
+   "erbench-oeis:A341043"
+  ],
+  "eq0766": [
+   "erbench-oeis:A131895",
+   "erbench-oeis:A269457"
+  ],
+  "eq0785": [
+   "erbench-oeis:A020514",
+   "erbench-oeis:A134007"
+  ],
+  "eq0786": [
+   "erbench-oeis:A022096",
+   "erbench-oeis:A134008"
+  ],
+  "eq0790": [
+   "erbench-oeis:A134230",
+   "erbench-oeis:A188129"
+  ],
+  "eq0792": [
+   "erbench-oeis:A016745",
+   "erbench-oeis:A016769",
+   "erbench-oeis:A016853",
+   "erbench-oeis:A016913",
+   "erbench-oeis:A017069",
+   "erbench-oeis:A017165",
+   "erbench-oeis:A017273",
+   "erbench-oeis:A017393",
+   "erbench-oeis:A134298"
+  ],
+  "eq0797": [
+   "erbench-oeis:A008788",
+   "erbench-oeis:A008789",
+   "erbench-oeis:A008790",
+   "erbench-oeis:A008791",
+   "erbench-oeis:A134684"
+  ],
+  "eq0798": [
+   "erbench-oeis:A016778",
+   "erbench-oeis:A016814",
+   "erbench-oeis:A016862",
+   "erbench-oeis:A016874",
+   "erbench-oeis:A016886",
+   "erbench-oeis:A016922",
+   "erbench-oeis:A016934",
+   "erbench-oeis:A016946",
+   "erbench-oeis:A016970",
+   "erbench-oeis:A016994",
+   "erbench-oeis:A017006",
+   "erbench-oeis:A017018",
+   "erbench-oeis:A017030",
+   "erbench-oeis:A017042",
+   "erbench-oeis:A017078",
+   "erbench-oeis:A017090",
+   "erbench-oeis:A017102",
+   "erbench-oeis:A017114",
+   "erbench-oeis:A017126",
+   "erbench-oeis:A017138",
+   "erbench-oeis:A017150",
+   "erbench-oeis:A017174",
+   "erbench-oeis:A017186",
+   "erbench-oeis:A017198",
+   "erbench-oeis:A017210",
+   "erbench-oeis:A017222",
+   "erbench-oeis:A017234",
+   "erbench-oeis:A017246",
+   "erbench-oeis:A017258",
+   "erbench-oeis:A017282",
+   "erbench-oeis:A017294",
+   "erbench-oeis:A017306",
+   "erbench-oeis:A017318",
+   "erbench-oeis:A017342",
+   "erbench-oeis:A017354",
+   "erbench-oeis:A017366",
+   "erbench-oeis:A017378",
+   "erbench-oeis:A017402",
+   "erbench-oeis:A017438",
+   "erbench-oeis:A017450",
+   "erbench-oeis:A017462",
+   "erbench-oeis:A017474",
+   "erbench-oeis:A017486",
+   "erbench-oeis:A017498",
+   "erbench-oeis:A017510",
+   "erbench-oeis:A017534",
+   "erbench-oeis:A017558",
+   "erbench-oeis:A017570",
+   "erbench-oeis:A017594",
+   "erbench-oeis:A017606",
+   "erbench-oeis:A017642",
+   "erbench-oeis:A134934"
+  ],
+  "eq0800": [
+   "erbench-oeis:A135161",
+   "erbench-oeis:A137647"
+  ],
+  "eq0807": [
+   "erbench-oeis:A135168",
+   "erbench-oeis:A220442"
+  ],
+  "eq0808": [
+   "erbench-oeis:A135292",
+   "erbench-oeis:A135314",
+   "erbench-oeis:A135320",
+   "erbench-oeis:A135428"
+  ],
+  "eq0809": [
+   "erbench-oeis:A135321",
+   "erbench-oeis:A135397",
+   "erbench-oeis:A135398",
+   "erbench-oeis:A135421",
+   "erbench-oeis:A135425",
+   "erbench-oeis:A135426",
+   "erbench-oeis:A135427"
+  ],
+  "eq0812": [
+   "erbench-oeis:A135914",
+   "erbench-oeis:A297928"
+  ],
+  "eq0818": [
+   "erbench-oeis:A136165",
+   "erbench-oeis:A173506"
+  ],
+  "eq0831": [
+   "erbench-oeis:A139740",
+   "erbench-oeis:A139741",
+   "erbench-oeis:A139742",
+   "erbench-oeis:A139743",
+   "erbench-oeis:A139744",
+   "erbench-oeis:A139745",
+   "erbench-oeis:A139746",
+   "erbench-oeis:A139747",
+   "erbench-oeis:A248226",
+   "erbench-oeis:A248338",
+   "erbench-oeis:A248340"
+  ],
+  "eq0835": [
+   "erbench-oeis:A141530",
+   "erbench-oeis:A152064"
+  ],
+  "eq0836": [
+   "erbench-oeis:A142954",
+   "erbench-oeis:A168379"
+  ],
+  "eq0843": [
+   "erbench-oeis:A144844",
+   "erbench-oeis:A145020"
+  ],
+  "eq0847": [
+   "erbench-oeis:A145910",
+   "erbench-oeis:A178977",
+   "erbench-oeis:A179436"
+  ],
+  "eq0848": [
+   "erbench-oeis:A146882",
+   "erbench-oeis:A156641",
+   "erbench-oeis:A156675",
+   "erbench-oeis:A233325",
+   "erbench-oeis:A233328"
+  ],
+  "eq0849": [
+   "erbench-oeis:A146966",
+   "erbench-oeis:A147961",
+   "erbench-oeis:A147962",
+   "erbench-oeis:A152055",
+   "erbench-oeis:A152056",
+   "erbench-oeis:A152107",
+   "erbench-oeis:A152108",
+   "erbench-oeis:A152109",
+   "erbench-oeis:A152261",
+   "erbench-oeis:A152264",
+   "erbench-oeis:A152266",
+   "erbench-oeis:A289414",
+   "erbench-oeis:A289415"
+  ],
+  "eq0852": [
+   "erbench-oeis:A147688",
+   "erbench-oeis:A147689",
+   "erbench-oeis:A152267"
+  ],
+  "eq0868": [
+   "erbench-oeis:A152744",
+   "erbench-oeis:A152759",
+   "erbench-oeis:A152773",
+   "erbench-oeis:A152777",
+   "erbench-oeis:A153783",
+   "erbench-oeis:A153785",
+   "erbench-oeis:A153793",
+   "erbench-oeis:A153875",
+   "erbench-oeis:A268351"
+  ],
+  "eq0871": [
+   "erbench-oeis:A005898",
+   "erbench-oeis:A153976"
+  ],
+  "eq0882": [
+   "erbench-oeis:A158129",
+   "erbench-oeis:A195023",
+   "erbench-oeis:A263226"
+  ],
+  "eq0885": [
+   "erbench-oeis:A159920",
+   "erbench-oeis:A290168"
+  ],
+  "eq0889": [
+   "erbench-oeis:A161365",
+   "erbench-oeis:A168286",
+   "erbench-oeis:A168456"
+  ],
+  "eq0891": [
+   "erbench-oeis:A162266",
+   "erbench-oeis:A162267"
+  ],
+  "eq0894": [
+   "erbench-oeis:A015219",
+   "erbench-oeis:A162540"
+  ],
+  "eq0902": [
+   "erbench-oeis:A163655",
+   "erbench-oeis:A163661",
+   "erbench-oeis:A163673",
+   "erbench-oeis:A163675",
+   "erbench-oeis:A163833",
+   "erbench-oeis:A245301"
+  ],
+  "eq0904": [
+   "erbench-oeis:A163683",
+   "erbench-oeis:A257042",
+   "erbench-oeis:A258617",
+   "erbench-oeis:A258618"
+  ],
+  "eq0906": [
+   "erbench-oeis:A164938",
+   "erbench-oeis:A208536"
+  ],
+  "eq0909": [
+   "erbench-oeis:A165222",
+   "erbench-oeis:A319667"
+  ],
+  "eq0910": [
+   "erbench-oeis:A165254",
+   "erbench-oeis:A258806"
+  ],
+  "eq0911": [
+   "erbench-oeis:A165746",
+   "erbench-oeis:A165751"
+  ],
+  "eq0913": [
+   "erbench-oeis:A166033",
+   "erbench-oeis:A168211",
+   "erbench-oeis:A168213",
+   "erbench-oeis:A168331",
+   "erbench-oeis:A168333"
+  ],
+  "eq0914": [
+   "erbench-oeis:A014989",
+   "erbench-oeis:A014990",
+   "erbench-oeis:A014991",
+   "erbench-oeis:A014992",
+   "erbench-oeis:A014993",
+   "erbench-oeis:A014994",
+   "erbench-oeis:A166114",
+   "erbench-oeis:A166122"
+  ],
+  "eq0917": [
+   "erbench-oeis:A166137",
+   "erbench-oeis:A166154"
+  ],
+  "eq0918": [
+   "erbench-oeis:A166144",
+   "erbench-oeis:A166146",
+   "erbench-oeis:A166148",
+   "erbench-oeis:A166151",
+   "erbench-oeis:A297675"
+  ],
+  "eq0923": [
+   "erbench-oeis:A168102",
+   "erbench-oeis:A168103"
+  ],
+  "eq0943": [
+   "erbench-oeis:A168236",
+   "erbench-oeis:A168237",
+   "erbench-oeis:A168283",
+   "erbench-oeis:A168284",
+   "erbench-oeis:A168376",
+   "erbench-oeis:A168414"
+  ],
+  "eq0945": [
+   "erbench-oeis:A168276",
+   "erbench-oeis:A168277"
+  ],
+  "eq0949": [
+   "erbench-oeis:A168301",
+   "erbench-oeis:A168326",
+   "erbench-oeis:A168329",
+   "erbench-oeis:A168457",
+   "erbench-oeis:A168459"
+  ],
+  "eq0955": [
+   "erbench-oeis:A168381",
+   "erbench-oeis:A168384"
+  ],
+  "eq0965": [
+   "erbench-oeis:A168575",
+   "erbench-oeis:A343318"
+  ],
+  "eq1009": [
+   "erbench-oeis:A171248",
+   "erbench-oeis:A171583",
+   "erbench-oeis:A171766"
+  ],
+  "eq1011": [
+   "erbench-oeis:A171461",
+   "erbench-oeis:A171553",
+   "erbench-oeis:A254362",
+   "erbench-oeis:A254368",
+   "erbench-oeis:A291537"
+  ],
+  "eq1016": [
+   "erbench-oeis:A172075",
+   "erbench-oeis:A172077",
+   "erbench-oeis:A172118"
+  ],
+  "eq1017": [
+   "erbench-oeis:A172080",
+   "erbench-oeis:A172085"
+  ],
+  "eq1018": [
+   "erbench-oeis:A172241",
+   "erbench-oeis:A176963"
+  ],
+  "eq1020": [
+   "erbench-oeis:A005920",
+   "erbench-oeis:A172482",
+   "erbench-oeis:A220084",
+   "erbench-oeis:A268484",
+   "erbench-oeis:A269232"
+  ],
+  "eq1028": [
+   "erbench-oeis:A006564",
+   "erbench-oeis:A174723",
+   "erbench-oeis:A203552",
+   "erbench-oeis:A226451",
+   "erbench-oeis:A318159"
+  ],
+  "eq1036": [
+   "erbench-oeis:A176691",
+   "erbench-oeis:A176805",
+   "erbench-oeis:A176916",
+   "erbench-oeis:A176972"
+  ],
+  "eq1037": [
+   "erbench-oeis:A176776",
+   "erbench-oeis:A176777"
+  ],
+  "eq1046": [
+   "erbench-oeis:A178630",
+   "erbench-oeis:A178631",
+   "erbench-oeis:A178632",
+   "erbench-oeis:A178633",
+   "erbench-oeis:A178634",
+   "erbench-oeis:A178635"
+  ],
+  "eq1054": [
+   "erbench-oeis:A016746",
+   "erbench-oeis:A016770",
+   "erbench-oeis:A016854",
+   "erbench-oeis:A016914",
+   "erbench-oeis:A016986",
+   "erbench-oeis:A017070",
+   "erbench-oeis:A017166",
+   "erbench-oeis:A017274",
+   "erbench-oeis:A017394",
+   "erbench-oeis:A017526",
+   "erbench-oeis:A185270"
+  ],
+  "eq1059": [
+   "erbench-oeis:A187272",
+   "erbench-oeis:A187273",
+   "erbench-oeis:A187275"
+  ],
+  "eq1069": [
+   "erbench-oeis:A014209",
+   "erbench-oeis:A190576"
+  ],
+  "eq1080": [
+   "erbench-oeis:A194431",
+   "erbench-oeis:A298078"
+  ],
+  "eq1103": [
+   "erbench-oeis:A209261",
+   "erbench-oeis:A220528"
+  ],
+  "eq1107": [
+   "erbench-oeis:A212343",
+   "erbench-oeis:A212772"
+  ],
+  "eq1123": [
+   "erbench-oeis:A218148",
+   "erbench-oeis:A218149"
+  ],
+  "eq1126": [
+   "erbench-oeis:A016804",
+   "erbench-oeis:A016984",
+   "erbench-oeis:A017068",
+   "erbench-oeis:A017164",
+   "erbench-oeis:A017272",
+   "erbench-oeis:A017392",
+   "erbench-oeis:A219056",
+   "erbench-oeis:A269792"
+  ],
+  "eq1133": [
+   "erbench-oeis:A225810",
+   "erbench-oeis:A225813"
+  ],
+  "eq1134": [
+   "erbench-oeis:A225928",
+   "erbench-oeis:A279512"
+  ],
+  "eq1135": [
+   "erbench-oeis:A226200",
+   "erbench-oeis:A226737"
+  ],
+  "eq1137": [
+   "erbench-oeis:A226450",
+   "erbench-oeis:A272134",
+   "erbench-oeis:A272378"
+  ],
+  "eq1159": [
+   "erbench-oeis:A233326",
+   "erbench-oeis:A269025"
+  ],
+  "eq1161": [
+   "erbench-eponymous:eponymous_137",
+   "erbench-oeis:A020705",
+   "erbench-oeis:A020710",
+   "erbench-oeis:A020715",
+   "erbench-oeis:A020719",
+   "erbench-oeis:A020722",
+   "erbench-oeis:A020723",
+   "erbench-oeis:A236673",
+   "erbench-oeis:A276233",
+   "erbench-oeis:A337177"
+  ],
+  "eq1162": [
+   "erbench-oeis:A236770",
+   "erbench-oeis:A264854",
+   "erbench-oeis:A264888"
+  ],
+  "eq1191": [
+   "erbench-oeis:A254028",
+   "erbench-oeis:A254365"
+  ],
+  "eq1192": [
+   "erbench-oeis:A254030",
+   "erbench-oeis:A254366",
+   "erbench-oeis:A254369"
+  ],
+  "eq1193": [
+   "erbench-oeis:A254031",
+   "erbench-oeis:A254364",
+   "erbench-oeis:A254370"
+  ],
+  "eq1194": [
+   "erbench-oeis:A254144",
+   "erbench-oeis:A254463",
+   "erbench-oeis:A254465"
+  ],
+  "eq1195": [
+   "erbench-oeis:A254145",
+   "erbench-oeis:A254464",
+   "erbench-oeis:A254466",
+   "erbench-oeis:A254468"
+  ],
+  "eq1211": [
+   "erbench-oeis:A258340",
+   "erbench-oeis:A344747"
+  ],
+  "eq1217": [
+   "erbench-oeis:A258808",
+   "erbench-oeis:A258812"
+  ],
+  "eq1233": [
+   "erbench-oeis:A006597",
+   "erbench-oeis:A262000"
+  ],
+  "eq1237": [
+   "erbench-oeis:A263998",
+   "erbench-oeis:A264850",
+   "erbench-oeis:A264851"
+  ],
+  "eq1238": [
+   "erbench-oeis:A264891",
+   "erbench-oeis:A264894"
+  ],
+  "eq1239": [
+   "erbench-oeis:A264892",
+   "erbench-oeis:A264895"
+  ],
+  "eq1267": [
+   "erbench-oeis:A272357",
+   "erbench-oeis:A272379"
+  ],
+  "eq1268": [
+   "erbench-oeis:A272358",
+   "erbench-oeis:A272380"
+  ],
+  "eq1270": [
+   "erbench-oeis:A274520",
+   "erbench-oeis:A274526",
+   "erbench-oeis:A277091"
+  ],
+  "eq1302": [
+   "erbench-eponymous:eponymous_124",
+   "erbench-oeis:A290786"
+  ],
+  "eq1328": [
+   "erbench-oeis:A317637",
+   "erbench-oeis:A370912"
+  ],
+  "eq1425": [
+   "erbench-oeis:A248739",
+   "erbench-phybench:phybench_47"
+  ],
+  "eq1439": [
+   "erbench-eponymous:eponymous_166",
+   "erbench-eponymous:eponymous_188",
+   "erbench-eponymous:eponymous_23",
+   "erbench-eponymous:eponymous_85",
+   "erbench-phybench:phybench_26",
+   "erbench-phybench:phybench_40",
+   "erbench-phybench:phybench_6"
+  ],
+  "eq1449": [
+   "erbench-eponymous:eponymous_122",
+   "erbench-phybench:phybench_69"
+  ],
+  "eq1591": [
+   "erbench-syneq:syneq_1103",
+   "erbench-syneq:syneq_1430",
+   "erbench-syneq:syneq_1759",
+   "erbench-syneq:syneq_2022",
+   "erbench-syneq:syneq_2254"
+  ],
+  "eq1817": [
+   "erbench-syneq:syneq_1307",
+   "erbench-syneq:syneq_5215"
+  ],
+  "eq1884": [
+   "erbench-syneq:syneq_1368",
+   "erbench-syneq:syneq_3505"
+  ],
+  "eq2020": [
+   "erbench-syneq:syneq_1492",
+   "erbench-syneq:syneq_2786"
+  ],
+  "eq2329": [
+   "erbench-syneq:syneq_1773",
+   "erbench-syneq:syneq_4483"
+  ],
+  "eq2387": [
+   "erbench-syneq:syneq_1825",
+   "erbench-syneq:syneq_2325"
+  ],
+  "eq2393": [
+   "erbench-syneq:syneq_1830",
+   "erbench-syneq:syneq_4354"
+  ],
+  "eq2445": [
+   "erbench-syneq:syneq_1878",
+   "erbench-syneq:syneq_4977"
+  ],
+  "eq2536": [
+   "erbench-syneq:syneq_1614",
+   "erbench-syneq:syneq_196",
+   "erbench-syneq:syneq_2738",
+   "erbench-syneq:syneq_392"
+  ],
+  "eq2624": [
+   "erbench-syneq:syneq_2039",
+   "erbench-syneq:syneq_3041"
+  ],
+  "eq2804": [
+   "erbench-syneq:syneq_2200",
+   "erbench-syneq:syneq_4166"
+  ],
+  "eq2954": [
+   "erbench-syneq:syneq_2339",
+   "erbench-syneq:syneq_4523"
+  ],
+  "eq3792": [
+   "erbench-oeis:A065651",
+   "erbench-oeis:A094765",
+   "erbench-syneq:syneq_3097"
+  ],
+  "eq3822": [
+   "erbench-syneq:syneq_3123",
+   "erbench-syneq:syneq_5225"
+  ],
+  "eq3928": [
+   "erbench-syneq:syneq_1403",
+   "erbench-syneq:syneq_1608",
+   "erbench-syneq:syneq_322",
+   "erbench-syneq:syneq_3408",
+   "erbench-syneq:syneq_3571",
+   "erbench-syneq:syneq_5073"
+  ],
+  "eq4766": [
+   "erbench-syneq:syneq_398",
+   "erbench-syneq:syneq_4619"
+  ],
+  "eq4801": [
+   "erbench-syneq:syneq_3159",
+   "erbench-syneq:syneq_401"
+  ],
+  "eq5012": [
+   "erbench-syneq:syneq_4201",
+   "erbench-syneq:syneq_5197"
+  ],
+  "eq6220": [
+   "erbench-syneq:syneq_53",
+   "erbench-syneq:syneq_995",
+   "first-principles:kepler"
+  ],
+  "eq6422": [
+   "erbench-syneq:syneq_2229",
+   "erbench-syneq:syneq_709"
+  ],
+  "eq6565": [
+   "erbench-syneq:syneq_5082",
+   "erbench-syneq:syneq_838"
+  ],
+  "eq6633": [
+   "erbench-syneq:syneq_4071",
+   "erbench-syneq:syneq_9"
+  ],
+  "eq6722": [
+   "erbench-syneq:syneq_2755",
+   "erbench-syneq:syneq_98"
+  ],
+  "eq6763": [
    "fastsrb:I.10.7",
    "fastsrb:II.13.23"
   ],
-  "eq0049": [
+  "eq6765": [
    "fastsrb:I.12.1",
    "fastsrb:I.12.5"
   ],
-  "eq0057": [
+  "eq6773": [
    "fastsrb:I.15.1",
    "fastsrb:II.13.34"
   ],
-  "eq0102": [
+  "eq6818": [
    "fastsrb:II.15.4",
    "fastsrb:II.15.5"
   ],
-  "eq0119": [
+  "eq6835": [
    "fastsrb:I.34.8",
    "fastsrb:I.43.16",
    "fastsrb:II.38.3"
   ],
-  "eq0141": [
+  "eq6857": [
    "ai-descartes:fsrd-noise:I.10.7",
    "ai-descartes:fsrd-noise:II.13.23",
    "feynman:I.10.7",
    "feynman:II.13.23"
   ],
-  "eq0142": [
+  "eq6858": [
    "ai-descartes:fsrd-noise:I.11.19",
    "feynman:I.11.19"
   ],
-  "eq0143": [
+  "eq6859": [
    "ai-descartes:fsrd-noise:I.12.1",
    "ai-descartes:fsrd-noise:I.12.5",
+   "erbench-eponymous:eponymous_110",
+   "erbench-eponymous:eponymous_149",
+   "erbench-eponymous:eponymous_171",
+   "erbench-eponymous:eponymous_25",
+   "erbench-eponymous:eponymous_26",
+   "erbench-eponymous:eponymous_93",
    "feynman:I.12.1",
    "feynman:I.12.5"
   ],
-  "eq0145": [
+  "eq6861": [
    "ai-descartes:fsrd-noise:I.12.2",
    "feynman:I.12.2"
   ],
-  "eq0146": [
+  "eq6862": [
    "ai-descartes:fsrd-noise:I.12.4",
    "feynman:I.12.4"
   ],
-  "eq0147": [
+  "eq6863": [
    "ai-descartes:fsrd-noise:I.13.12",
    "feynman:I.13.12"
   ],
-  "eq0148": [
+  "eq6864": [
    "ai-descartes:fsrd-noise:I.13.4",
    "feynman:I.13.4"
   ],
-  "eq0149": [
+  "eq6865": [
    "ai-descartes:fsrd-noise:I.14.3",
    "feynman:I.14.3"
   ],
-  "eq0150": [
+  "eq6866": [
    "ai-descartes:fsrd-noise:I.14.4",
    "feynman:I.14.4"
   ],
-  "eq0151": [
+  "eq6867": [
    "ai-descartes:fsrd-noise:I.15.1",
    "ai-descartes:fsrd-noise:II.13.34",
    "feynman:I.15.1",
    "feynman:II.13.34"
   ],
-  "eq0152": [
+  "eq6868": [
    "ai-descartes:fsrd-noise:I.15.3t",
    "feynman:I.15.3t"
   ],
-  "eq0153": [
+  "eq6869": [
    "ai-descartes:fsrd-noise:I.15.3x",
    "feynman:I.15.3x"
   ],
-  "eq0154": [
+  "eq6870": [
    "ai-descartes:fsrd-noise:I.16.6",
    "feynman:I.16.6"
   ],
-  "eq0157": [
+  "eq6873": [
    "ai-descartes:fsrd-noise:I.18.4",
    "feynman:I.18.4"
   ],
-  "eq0158": [
+  "eq6874": [
    "ai-descartes:fsrd-noise:I.24.6",
    "feynman:I.24.6"
   ],
-  "eq0159": [
+  "eq6875": [
    "ai-descartes:fsrd-noise:I.25.13",
    "ai-descartes:fsrd-noise:I.29.4",
+   "erbench-eponymous:eponymous_102",
+   "erbench-eponymous:eponymous_147",
+   "erbench-eponymous:eponymous_186",
+   "erbench-eponymous:eponymous_187",
+   "erbench-eponymous:eponymous_37",
+   "erbench-eponymous:eponymous_5",
+   "erbench-eponymous:eponymous_63",
+   "erbench-eponymous:eponymous_81",
    "feynman:I.25.13",
    "feynman:I.29.4"
   ],
-  "eq0161": [
+  "eq6877": [
    "ai-descartes:fsrd-noise:I.27.6",
    "feynman:I.27.6"
   ],
-  "eq0165": [
+  "eq6881": [
    "ai-descartes:fsrd-noise:I.32.17",
    "feynman:I.32.17"
   ],
-  "eq0166": [
+  "eq6882": [
    "ai-descartes:fsrd-noise:I.32.5",
    "feynman:I.32.5"
   ],
-  "eq0167": [
+  "eq6883": [
    "ai-descartes:fsrd-noise:I.34.1",
    "feynman:I.34.1"
   ],
-  "eq0168": [
+  "eq6884": [
    "ai-descartes:fsrd-noise:I.34.14",
    "feynman:I.34.14"
   ],
-  "eq0169": [
+  "eq6885": [
    "ai-descartes:fsrd-noise:I.34.27",
    "feynman:I.34.27"
   ],
-  "eq0170": [
+  "eq6886": [
    "ai-descartes:fsrd-noise:I.34.8",
    "ai-descartes:fsrd-noise:I.43.16",
+   "erbench-eponymous:eponymous_112",
+   "erbench-eponymous:eponymous_165",
    "feynman:I.34.8",
    "feynman:I.43.16"
   ],
-  "eq0172": [
+  "eq6888": [
    "ai-descartes:fsrd-noise:I.38.12",
    "feynman:I.38.12"
   ],
-  "eq0173": [
+  "eq6889": [
    "ai-descartes:fsrd-noise:I.39.1",
    "feynman:I.39.1"
   ],
-  "eq0174": [
+  "eq6890": [
    "ai-descartes:fsrd-noise:I.39.11",
    "feynman:I.39.11"
   ],
-  "eq0175": [
+  "eq6891": [
    "ai-descartes:fsrd-noise:I.39.22",
    "feynman:I.39.22"
   ],
-  "eq0176": [
+  "eq6892": [
    "ai-descartes:fsrd-noise:I.40.1",
    "feynman:I.40.1"
   ],
-  "eq0177": [
+  "eq6893": [
    "ai-descartes:fsrd-noise:I.41.16",
    "feynman:I.41.16"
   ],
-  "eq0178": [
+  "eq6894": [
    "ai-descartes:fsrd-noise:I.43.31",
    "feynman:I.43.31"
   ],
-  "eq0179": [
+  "eq6895": [
    "ai-descartes:fsrd-noise:I.43.43",
    "feynman:I.43.43"
   ],
-  "eq0180": [
+  "eq6896": [
    "ai-descartes:fsrd-noise:I.44.4",
    "feynman:I.44.4"
   ],
-  "eq0181": [
+  "eq6897": [
    "ai-descartes:fsrd-noise:I.47.23",
    "feynman:I.47.23"
   ],
-  "eq0182": [
+  "eq6898": [
    "ai-descartes:fsrd-noise:I.48.2",
    "feynman:I.48.2"
   ],
-  "eq0184": [
+  "eq6900": [
    "ai-descartes:fsrd-noise:I.6.2",
    "feynman:I.6.2"
   ],
-  "eq0185": [
+  "eq6901": [
    "ai-descartes:fsrd-noise:I.6.2a",
+   "erbench-densities:standard normal",
    "feynman:I.6.2a"
   ],
-  "eq0186": [
+  "eq6902": [
    "ai-descartes:fsrd-noise:I.6.2b",
    "feynman:I.6.2b"
   ],
-  "eq0187": [
+  "eq6903": [
    "ai-descartes:fsrd-noise:I.8.14",
    "feynman:I.8.14"
   ],
-  "eq0188": [
+  "eq6904": [
    "ai-descartes:fsrd-noise:I.9.18",
    "feynman:I.9.18"
   ],
-  "eq0189": [
+  "eq6905": [
    "ai-descartes:fsrd-noise:II.10.9",
    "feynman:II.10.9"
   ],
-  "eq0191": [
+  "eq6907": [
    "ai-descartes:fsrd-noise:II.11.20",
    "feynman:II.11.20"
   ],
-  "eq0192": [
+  "eq6908": [
    "ai-descartes:fsrd-noise:II.11.27",
    "feynman:II.11.27"
   ],
-  "eq0193": [
+  "eq6909": [
    "ai-descartes:fsrd-noise:II.11.28",
    "feynman:II.11.28"
   ],
-  "eq0194": [
+  "eq6910": [
    "ai-descartes:fsrd-noise:II.11.3",
    "feynman:II.11.3"
   ],
-  "eq0195": [
+  "eq6911": [
    "ai-descartes:fsrd-noise:II.13.17",
    "feynman:II.13.17"
   ],
-  "eq0196": [
+  "eq6912": [
    "feynman:II.15.4",
    "feynman:II.15.5"
   ],
-  "eq0197": [
+  "eq6913": [
    "ai-descartes:fsrd-noise:II.2.42",
    "feynman:II.2.42"
   ],
-  "eq0198": [
+  "eq6914": [
    "ai-descartes:fsrd-noise:II.21.32",
    "feynman:II.21.32"
   ],
-  "eq0199": [
+  "eq6915": [
    "ai-descartes:fsrd-noise:II.24.17",
    "feynman:II.24.17"
   ],
-  "eq0200": [
+  "eq6916": [
    "ai-descartes:fsrd-noise:II.27.16",
    "feynman:II.27.16"
   ],
-  "eq0201": [
+  "eq6917": [
    "ai-descartes:fsrd-noise:II.27.18",
    "feynman:II.27.18"
   ],
-  "eq0202": [
+  "eq6918": [
    "ai-descartes:fsrd-noise:II.3.24",
    "feynman:II.3.24"
   ],
-  "eq0203": [
+  "eq6919": [
    "ai-descartes:fsrd-noise:II.34.11",
    "feynman:II.34.11"
   ],
-  "eq0204": [
+  "eq6920": [
    "ai-descartes:fsrd-noise:II.34.2",
    "feynman:II.34.2"
   ],
-  "eq0205": [
+  "eq6921": [
    "ai-descartes:fsrd-noise:II.34.29b",
    "feynman:II.34.29b"
   ],
-  "eq0206": [
+  "eq6922": [
    "ai-descartes:fsrd-noise:II.34.29a",
    "ai-descartes:fsrd-noise:II.34.2a",
    "feynman:II.34.29a",
    "feynman:II.34.2a"
   ],
-  "eq0207": [
+  "eq6923": [
    "ai-descartes:fsrd-noise:II.35.18",
    "feynman:II.35.18"
   ],
-  "eq0209": [
+  "eq6925": [
    "ai-descartes:fsrd-noise:II.36.38",
    "feynman:II.36.38"
   ],
-  "eq0210": [
+  "eq6926": [
    "ai-descartes:fsrd-noise:II.37.1",
    "feynman:II.37.1"
   ],
-  "eq0211": [
+  "eq6927": [
    "ai-descartes:fsrd-noise:II.38.14",
    "feynman:II.38.14"
   ],
-  "eq0212": [
+  "eq6928": [
    "ai-descartes:fsrd-noise:II.38.3",
+   "erbench-eponymous:eponymous_190",
    "feynman:II.38.3"
   ],
-  "eq0213": [
+  "eq6929": [
    "ai-descartes:fsrd-noise:II.4.23",
    "feynman:II.4.23"
   ],
-  "eq0215": [
+  "eq6931": [
    "ai-descartes:fsrd-noise:II.6.15a",
    "feynman:II.6.15a"
   ],
-  "eq0217": [
+  "eq6933": [
    "ai-descartes:fsrd-noise:II.8.31",
    "feynman:II.8.31"
   ],
-  "eq0218": [
+  "eq6934": [
    "ai-descartes:fsrd-noise:II.8.7",
    "feynman:II.8.7"
   ],
-  "eq0219": [
+  "eq6935": [
    "ai-descartes:fsrd-noise:III.10.19",
    "feynman:III.10.19"
   ],
-  "eq0220": [
+  "eq6936": [
    "ai-descartes:fsrd-noise:III.12.43",
    "feynman:III.12.43"
   ],
-  "eq0221": [
+  "eq6937": [
    "ai-descartes:fsrd-noise:III.13.18",
    "feynman:III.13.18"
   ],
-  "eq0222": [
+  "eq6938": [
    "ai-descartes:fsrd-noise:III.14.14",
    "feynman:III.14.14"
   ],
-  "eq0224": [
+  "eq6940": [
    "ai-descartes:fsrd-noise:III.15.14",
    "feynman:III.15.14"
   ],
-  "eq0225": [
+  "eq6941": [
    "ai-descartes:fsrd-noise:III.15.27",
    "feynman:III.15.27"
   ],
-  "eq0227": [
+  "eq6943": [
    "ai-descartes:fsrd-noise:III.19.51",
    "feynman:III.19.51"
   ],
-  "eq0228": [
+  "eq6944": [
    "ai-descartes:fsrd-noise:III.21.20",
    "feynman:III.21.20"
   ],
-  "eq0229": [
+  "eq6945": [
    "ai-descartes:fsrd-noise:III.4.32",
    "feynman:III.4.32"
   ],
-  "eq0230": [
+  "eq6946": [
    "ai-descartes:fsrd-noise:III.4.33",
    "feynman:III.4.33"
   ],
-  "eq0231": [
+  "eq6947": [
    "ai-descartes:fsrd-noise:III.7.38",
    "feynman:III.7.38"
   ],
-  "eq0244": [
+  "eq6957": [
    "first-principles:supernovae_zg",
    "first-principles:supernovae_zr"
   ],
-  "eq0246": [
+  "eq6959": [
    "grammarvae:GrammarVAE-1",
    "livermore:Livermore-1"
   ],
-  "eq0251": [
+  "eq6964": [
    "jin:Jin-5",
    "keijzer:Keijzer-13",
    "livermore:Livermore-10",
@@ -995,80 +4307,133 @@
    "nguyen:Nguyen-10",
    "vladislavleva:Vladislavleva-6"
   ],
-  "eq0253": [
+  "eq6966": [
    "keijzer:Keijzer-1",
    "keijzer:Keijzer-2",
    "keijzer:Keijzer-3"
   ],
-  "eq0254": [
+  "eq6967": [
    "keijzer:Keijzer-10",
    "nguyen:Nguyen-11"
   ],
-  "eq0256": [
+  "eq6969": [
    "keijzer:Keijzer-12",
    "nguyen:Nguyen-12"
   ],
-  "eq0263": [
+  "eq6974": [
+   "erbench-oeis:A056000",
+   "erbench-oeis:A056115",
+   "erbench-oeis:A056119",
+   "erbench-oeis:A056121",
+   "erbench-oeis:A056126",
+   "erbench-oeis:A132754",
+   "erbench-oeis:A132755",
+   "erbench-oeis:A132756",
+   "erbench-oeis:A132757",
+   "erbench-oeis:A132758",
+   "keijzer:Keijzer-6"
+  ],
+  "eq6976": [
    "keijzer:Keijzer-8",
    "nguyen:Nguyen-8"
   ],
-  "eq0299": [
+  "eq7012": [
    "livermore2:Livermore2-Vars2-16",
    "livermore2:Livermore2-Vars2-6"
   ],
-  "eq0306": [
+  "eq7019": [
    "livermore2:Livermore2-Vars3-12",
    "livermore2:Livermore2-Vars3-24"
   ],
-  "eq0427": [
+  "eq7140": [
    "livermore:Livermore-11",
    "meier:Meier-3"
   ],
-  "eq0428": [
+  "eq7141": [
    "livermore:Livermore-12",
    "meier:Meier-4"
   ],
-  "eq0430": [
+  "eq7143": [
    "livermore:Livermore-14",
    "poly:Poly-2"
   ],
-  "eq0435": [
+  "eq7148": [
    "livermore:Livermore-21",
    "livermore:Livermore-23"
   ],
-  "eq0441": [
+  "eq7154": [
    "livermore:Livermore-7",
    "livermore:Livermore-7a"
   ],
-  "eq0442": [
+  "eq7155": [
    "livermore:Livermore-8",
    "livermore:Livermore-8a"
   ],
-  "eq0443": [
+  "eq7156": [
    "livermore:Livermore-9",
    "nonic:Nonic"
   ],
-  "eq0444": [
+  "eq7157": [
    "neat:Neat-1",
    "nguyen:Nguyen-2"
   ],
-  "eq0445": [
+  "eq7158": [
+   "erbench-oeis:A152031",
    "neat:Neat-2",
    "nguyen:Nguyen-3"
   ],
-  "eq0447": [
+  "eq7160": [
    "neat:Neat-8",
    "vladislavleva:Vladislavleva-1"
   ],
-  "eq0448": [
+  "eq7161": [
    "neat:Neat-9",
    "pagie:Pagie-1"
   ],
-  "eq0455": [
+  "eq7163": [
+   "erbench-oeis:A228290",
+   "nguyen:Nguyen-4"
+  ],
+  "eq7168": [
    "physo-class:damped-harmonic-oscillator-a",
    "physo-class:damped-harmonic-oscillator-b"
   ],
-  "eq0461": [
+  "eq7169": [
+   "erbench-oeis:A060834",
+   "erbench-oeis:A069477",
+   "erbench-oeis:A080859",
+   "erbench-oeis:A080860",
+   "erbench-oeis:A080861",
+   "erbench-oeis:A082041",
+   "erbench-oeis:A082112",
+   "erbench-oeis:A085473",
+   "erbench-oeis:A106648",
+   "erbench-oeis:A108099",
+   "erbench-oeis:A131878",
+   "erbench-oeis:A134593",
+   "erbench-oeis:A135704",
+   "erbench-oeis:A145980",
+   "erbench-oeis:A152161",
+   "erbench-oeis:A152813",
+   "erbench-oeis:A153037",
+   "erbench-oeis:A154099",
+   "erbench-oeis:A157517",
+   "erbench-oeis:A161532",
+   "erbench-oeis:A161549",
+   "erbench-oeis:A161587",
+   "erbench-oeis:A161617",
+   "erbench-oeis:A162316",
+   "erbench-oeis:A172044",
+   "erbench-oeis:A172193",
+   "erbench-oeis:A177059",
+   "erbench-oeis:A188135",
+   "erbench-oeis:A194268",
+   "erbench-oeis:A210527",
+   "erbench-oeis:A214732",
+   "erbench-oeis:A239325",
+   "physo-class:free-fall"
+  ],
+  "eq7174": [
    "physo-streams:stream-01",
    "physo-streams:stream-04",
    "physo-streams:stream-05",
@@ -1099,243 +4464,243 @@
    "physo-streams:stream-85",
    "physo-streams:stream-86"
   ],
-  "eq0467": [
+  "eq7180": [
    "r-rationals:R1",
    "r-rationals:R1a"
   ],
-  "eq0468": [
+  "eq7181": [
    "r-rationals:R2",
    "r-rationals:R2a"
   ],
-  "eq0469": [
+  "eq7182": [
    "r-rationals:R3",
    "r-rationals:R3a"
   ],
-  "eq0470": [
+  "eq7183": [
    "nguyen:Nguyen-6",
    "sine:Sine"
   ],
-  "eq0667": [
+  "eq7380": [
    "soose-nc:SOOSE-NC-001",
    "soose-wc:SOOSE-WC-001"
   ],
-  "eq0670": [
+  "eq7383": [
    "soose-nc:SOOSE-NC-004",
    "soose-wc:SOOSE-WC-004"
   ],
-  "eq0672": [
+  "eq7385": [
    "soose-nc:SOOSE-NC-006",
    "soose-wc:SOOSE-WC-006"
   ],
-  "eq0684": [
+  "eq7397": [
    "soose-nc:SOOSE-NC-018",
    "soose-wc:SOOSE-WC-018"
   ],
-  "eq0686": [
+  "eq7399": [
    "soose-nc:SOOSE-NC-020",
    "soose-wc:SOOSE-WC-020"
   ],
-  "eq0693": [
+  "eq7406": [
    "soose-nc:SOOSE-NC-027",
    "soose-wc:SOOSE-WC-027"
   ],
-  "eq0703": [
+  "eq7416": [
    "soose-nc:SOOSE-NC-037",
    "soose-wc:SOOSE-WC-037"
   ],
-  "eq0705": [
+  "eq7418": [
    "soose-nc:SOOSE-NC-039",
    "soose-wc:SOOSE-WC-039"
   ],
-  "eq0714": [
+  "eq7427": [
    "soose-nc:SOOSE-NC-048",
    "soose-wc:SOOSE-WC-048"
   ],
-  "eq0717": [
+  "eq7430": [
    "soose-nc:SOOSE-NC-051",
    "soose-wc:SOOSE-WC-051"
   ],
-  "eq0721": [
+  "eq7434": [
    "soose-nc:SOOSE-NC-055",
    "soose-wc:SOOSE-WC-055"
   ],
-  "eq0725": [
+  "eq7438": [
    "soose-nc:SOOSE-NC-059",
    "soose-wc:SOOSE-WC-059"
   ],
-  "eq0727": [
+  "eq7440": [
    "soose-nc:SOOSE-NC-061",
    "soose-wc:SOOSE-WC-061"
   ],
-  "eq0729": [
+  "eq7442": [
    "soose-nc:SOOSE-NC-063",
    "soose-wc:SOOSE-WC-063"
   ],
-  "eq0730": [
+  "eq7443": [
    "soose-nc:SOOSE-NC-064",
    "soose-wc:SOOSE-WC-064"
   ],
-  "eq0733": [
+  "eq7446": [
    "soose-nc:SOOSE-NC-067",
    "soose-wc:SOOSE-WC-067"
   ],
-  "eq0734": [
+  "eq7447": [
    "soose-nc:SOOSE-NC-068",
    "soose-wc:SOOSE-WC-068"
   ],
-  "eq0744": [
+  "eq7457": [
    "soose-nc:SOOSE-NC-078",
    "soose-wc:SOOSE-WC-078"
   ],
-  "eq0748": [
+  "eq7461": [
    "soose-nc:SOOSE-NC-082",
    "soose-wc:SOOSE-WC-082"
   ],
-  "eq0750": [
+  "eq7463": [
    "soose-nc:SOOSE-NC-084",
    "soose-wc:SOOSE-WC-084"
   ],
-  "eq0753": [
+  "eq7466": [
    "soose-nc:SOOSE-NC-087",
    "soose-wc:SOOSE-WC-087"
   ],
-  "eq0754": [
+  "eq7467": [
    "soose-nc:SOOSE-NC-088",
    "soose-wc:SOOSE-WC-088"
   ],
-  "eq0757": [
+  "eq7470": [
    "soose-nc:SOOSE-NC-091",
    "soose-wc:SOOSE-WC-091"
   ],
-  "eq0759": [
+  "eq7472": [
    "soose-nc:SOOSE-NC-093",
    "soose-wc:SOOSE-WC-093"
   ],
-  "eq0770": [
+  "eq7483": [
    "soose-nc:SOOSE-NC-104",
    "soose-wc:SOOSE-WC-104"
   ],
-  "eq0778": [
+  "eq7491": [
    "soose-nc:SOOSE-NC-112",
    "soose-wc:SOOSE-WC-112"
   ],
-  "eq0781": [
+  "eq7494": [
    "soose-nc:SOOSE-NC-115",
    "soose-wc:SOOSE-WC-115"
   ],
-  "eq0783": [
+  "eq7496": [
    "soose-nc:SOOSE-NC-117",
    "soose-wc:SOOSE-WC-117"
   ],
-  "eq0784": [
+  "eq7497": [
    "soose-nc:SOOSE-NC-118",
    "soose-wc:SOOSE-WC-118"
   ],
-  "eq0788": [
+  "eq7501": [
    "soose-nc:SOOSE-NC-122",
    "soose-wc:SOOSE-WC-122"
   ],
-  "eq0789": [
+  "eq7502": [
    "soose-nc:SOOSE-NC-123",
    "soose-wc:SOOSE-WC-123"
   ],
-  "eq0795": [
+  "eq7508": [
    "soose-nc:SOOSE-NC-129",
    "soose-wc:SOOSE-WC-129"
   ],
-  "eq0796": [
+  "eq7509": [
    "soose-nc:SOOSE-NC-130",
    "soose-wc:SOOSE-WC-130"
   ],
-  "eq0802": [
+  "eq7515": [
    "soose-nc:SOOSE-NC-136",
    "soose-wc:SOOSE-WC-136"
   ],
-  "eq0805": [
+  "eq7518": [
    "soose-nc:SOOSE-NC-139",
    "soose-wc:SOOSE-WC-139"
   ],
-  "eq0816": [
+  "eq7529": [
    "soose-nc:SOOSE-NC-150",
    "soose-wc:SOOSE-WC-150"
   ],
-  "eq0817": [
+  "eq7530": [
    "soose-nc:SOOSE-NC-151",
    "soose-wc:SOOSE-WC-151"
   ],
-  "eq0824": [
+  "eq7537": [
    "soose-nc:SOOSE-NC-158",
    "soose-wc:SOOSE-WC-158"
   ],
-  "eq0831": [
+  "eq7544": [
    "soose-nc:SOOSE-NC-165",
    "soose-wc:SOOSE-WC-165"
   ],
-  "eq0835": [
+  "eq7548": [
    "soose-nc:SOOSE-NC-169",
    "soose-wc:SOOSE-WC-169"
   ],
-  "eq0839": [
+  "eq7552": [
    "soose-nc:SOOSE-NC-173",
    "soose-wc:SOOSE-WC-173"
   ],
-  "eq0840": [
+  "eq7553": [
    "soose-nc:SOOSE-NC-174",
    "soose-wc:SOOSE-WC-174"
   ],
-  "eq0844": [
+  "eq7557": [
    "soose-nc:SOOSE-NC-178",
    "soose-wc:SOOSE-WC-178"
   ],
-  "eq0845": [
+  "eq7558": [
    "soose-nc:SOOSE-NC-179",
    "soose-wc:SOOSE-WC-179"
   ],
-  "eq0847": [
+  "eq7560": [
    "soose-nc:SOOSE-NC-181",
    "soose-wc:SOOSE-WC-181"
   ],
-  "eq0850": [
+  "eq7563": [
    "soose-nc:SOOSE-NC-184",
    "soose-wc:SOOSE-WC-184"
   ],
-  "eq0852": [
+  "eq7565": [
    "soose-nc:SOOSE-NC-186",
    "soose-wc:SOOSE-WC-186"
   ],
-  "eq0854": [
+  "eq7567": [
    "soose-nc:SOOSE-NC-188",
    "soose-wc:SOOSE-WC-188"
   ],
-  "eq0856": [
+  "eq7569": [
    "soose-nc:SOOSE-NC-190",
    "soose-wc:SOOSE-WC-190"
   ],
-  "eq0861": [
+  "eq7574": [
    "soose-nc:SOOSE-NC-195",
    "soose-wc:SOOSE-WC-195"
   ],
-  "eq0862": [
+  "eq7575": [
    "soose-nc:SOOSE-NC-196",
    "soose-wc:SOOSE-WC-196"
   ],
-  "eq0892": [
+  "eq7605": [
    "soose-fc:SOOSE-FC-032",
    "soose-wc:SOOSE-WC-032"
   ],
-  "eq0916": [
+  "eq7629": [
    "soose-fc:SOOSE-FC-065",
    "soose-wc:SOOSE-WC-065"
   ],
-  "eq0967": [
+  "eq7680": [
    "soose-fc:SOOSE-FC-134",
    "soose-wc:SOOSE-WC-134"
   ],
-  "eq0975": [
+  "eq7688": [
    "soose-fc:SOOSE-FC-144",
    "soose-wc:SOOSE-WC-144"
   ],
-  "eq1011": [
+  "eq7724": [
    "soose-fc:SOOSE-FC-194",
    "soose-wc:SOOSE-WC-194"
   ]

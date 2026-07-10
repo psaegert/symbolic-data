@@ -389,7 +389,11 @@ class ProblemCatalog(Catalog):
         # This only removes the exponential cost (f^-n vs 1/f draws) that made partial-domain
         # entries (e.g. sqrt(x1+x2) over a box straddling the domain) exhaust max_trials.
         # An attempts cap keeps truly degenerate entries (f ~ 0) on the honest placeholder path.
-        finite_mask = np.isfinite(x_all).all(axis=1) & np.isfinite(y_all).all(axis=1)
+        # Validity is judged in the STORAGE dtype (float32): a point whose y is finite in float64
+        # but overflows float32 (e.g. fast-growing integer-sequence formulas near their support
+        # edge) would otherwise ship as inf in the frozen Problem arrays.
+        finite_mask = (np.isfinite(x_all.astype(np.float32)).all(axis=1)
+                       & np.isfinite(y_all.astype(np.float32)).all(axis=1))
         if finite_mask.all() and n_first > n_points:
             x_all, y_all = x_all[:n_points], y_all[:n_points]
         elif not finite_mask.all():
@@ -413,7 +417,8 @@ class ProblemCatalog(Catalog):
                     yb = broadcast_target(evaluate(compiled, vb), batch, entry.id).reshape(-1, 1)
                 except Exception as exc:
                     raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
-                mask = np.isfinite(xb).all(axis=1) & np.isfinite(yb).all(axis=1)
+                mask = (np.isfinite(xb.astype(np.float32)).all(axis=1)
+                        & np.isfinite(yb.astype(np.float32)).all(axis=1))
                 keep_x.append(xb[mask])
                 keep_y.append(yb[mask])
                 collected += int(mask.sum())

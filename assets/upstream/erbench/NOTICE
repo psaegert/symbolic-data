@@ -1,0 +1,22 @@
+Vendored subset of the ERBench benchmark: "ERBench: A Benchmark and Testsuite for Equation
+Discovery Algorithms", Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276. Source: HuggingFace
+dataset EquationDiscovery/Equation_Recovery_Benchmark, revision 95bf15c27de68c3f170ca6140d2e4a811c60344f
+(fetched 2026-07-10).
+
+train_permissive.csv = the PERMISSIVE-licensed novel-family rows only (per the upstream README
+license table + paper Table): SynEq (5303, MIT, ERBench-author-generated), PHYBench (90, MIT per
+the paper table and upstream Eureka-Lab/PHYBench), Densities (33, BSD-3-Clause, SciPy-derived).
+
+NOT vendored here:
+- OEIS + Eponymous rows (CC-BY-SA-4.0, OEIS-/Wikipedia-derived): under assets_sa/ behind the
+  share-alike firewall, minimized (description column removed — upstream rows embed entire OEIS
+  entry texts incl. contributor comments).
+- Re-rendering families (Feynman incl. bonus rows, SRDS, Nguyen, Keijzer, Korns, Livermore,
+  Vladislavleva, Koza, Pagie): dedup to our existing imports; residual novelties recorded in
+  the program doc (AIFeynman bonus set -> future import from the original source; 3 extra Korns).
+- Strogatz (14 rows): ODE-derived (out of scope) AND GPL-3.0 (sole copyleft family).
+
+Build input for erbench-syneq / erbench-phybench / erbench-densities (tools/erbench_to_catalogs.py).
+ERBench's reference sampler (mixtures, extrapolation split, noise protocol) is an EVALUATION
+protocol, recorded as provenance in the catalog conventions; the declarative specs here are the
+expression + support boxes.

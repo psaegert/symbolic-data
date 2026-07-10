@@ -84,3 +84,14 @@ def test_partial_domain_realizes_in_few_rounds(tmp_path):
         warnings.simplefilter("ignore")
         p = next(iter(src))
     assert not p.is_placeholder and p.x_support.shape[0] == 64
+
+
+def test_rejection_is_float32_storage_aware(tmp_path):
+    # A point finite in float64 but overflowing float32 (y ~ 1e50) must be REJECTED like any
+    # invalid point: the frozen Problem stores float32, and pre-fix such points shipped as inf.
+    # exp(60x) exceeds float32 max (3.4e38) for x > ~1.48, so on [0, 10] the float32-valid
+    # fraction is ~0.148 -- realizable per point, but ONLY from the low-x slice.
+    p = _one(_catalog(tmp_path, "exp(60*v1)", 0.0, 10.0))
+    assert not p.is_placeholder
+    assert np.isfinite(p.y_support).all()        # in the STORED float32 arrays
+    assert p.x_support.max() < 1.5               # accepted points = the float32-valid slice

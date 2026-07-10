@@ -1,0 +1,6992 @@
+metadata:
+  name: erbench-eponymous
+  version: 1
+  description: ERBench Eponymous family (195 entries after deduplication; headline eval tier).
+  sources:
+  - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+  - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+  license: CC-BY-SA-4.0 (Wikipedia-derived; see assets_sa LICENSE)
+  eval_tier: headline
+  sampling_defaults:
+    n_points: 100
+    method: random
+    noise: 0.0
+  source_kind: set
+  conventions:
+    sampling: per-variable uniform (or uniform-integer for dtype=int rows) in the upstream support box; per-point
+      rejection conditioning + meta.finite_fraction disclosure as everywhere. ERBench's own REFERENCE sampler (100
+      pts/dim, 1-3-component mixtures in a half-width train sub-box, extrapolative eval region, noise w.p. 0.2)
+      is an EVALUATION PROTOCOL, recorded here as provenance -- our harness samples the declared box directly.
+    canonicalization: '''^''->''**'', ''Abs(''->''abs('', log(u,10)->log10-rewrite, x_k->v{k+1}; exact duplicates
+      (expression+support+dtype) merged with names in meta.duplicate_of_rows.'
+expressions:
+  eponymous_0:
+    raw: sqrt((x_0 + 4*x_1/3)/x_2)
+    prepared: sqrt((v1+4*v2/3)/v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 95.05825033339732
+        sample_type: &id001
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 63.433589833745664
+        - 63.43558983374566
+        sample_type: *id001
+      v3:
+        name: x_2
+        sample_range:
+        - 4.1390180172129476e-10
+        - 10.0
+        sample_type: *id001
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_0
+      equation_name: Adams–Williamson equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 2
+  eponymous_1:
+    raw: sqrt(x_0/x_1)
+    prepared: sqrt(v1/v2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 9.239684573003615e-10
+        - 100.0
+        sample_type: &id002
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.3500667250809784e-10
+        - 10.0
+        sample_type: *id002
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_1
+      equation_name: Adams–Williamson equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_2:
+    raw: x_0/(x_0**2 + 1)
+    prepared: v1/(v1**2+1)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_2
+      equation_name: Benjamin–Bona–Mahony equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_3:
+    raw: 19707*x_1**(463/250)/(2500*((x_2**(463/250)*x_3**(3044/625)))*(x_0**(463/250)))
+    prepared: 19707*v2**(463/250)/(2500*((v3**(463/250)*v4**(3044/625)))*(v1**(463/250)))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 0.04
+        sample_type: &id003
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id003
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: *id003
+      v4:
+        name: x_3
+        sample_range:
+        - 0.001
+        - 10.0
+        sample_type: *id003
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_3
+      equation_name: Hazen–Williams equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_4:
+    raw: x_0 + log(x_1/x_2, 10)
+    prepared: v1+0.4342944819032518*log(v2/v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 14.0
+        sample_type: &id004
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-06
+        - 1.0
+        sample_type: *id004
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-06
+        - 1.0
+        sample_type: *id004
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_4
+      equation_name: Henderson–Hasselbalch equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_5:
+    raw: x_0/x_1
+    prepared: v1/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: &id005
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 9.444676152270404e-10
+        - 100.0
+        sample_type: *id005
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_5
+      equation_name: Hill equation (biochemistry)
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_6:
+    raw: (-x_0 + x_1)/(1/x_3 - 1*1/x_2)
+    prepared: (-v1+v2)/(1/v4-1*1/v3)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id006
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id006
+      v3:
+        name: x_2
+        sample_range:
+        - 1.8407984796296806
+        - 2.785561249328673
+        sample_type: *id006
+      v4:
+        name: x_3
+        sample_range:
+        - 1.8387984794051082
+        - 1.840798479405108
+        sample_type: *id006
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_6
+      equation_name: Hugoniot equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_7:
+    raw: 1*(1/x_3 + 1/x_2)*(-x_0 + x_1)/2
+    prepared: 1*(1/v4+1/v3)*(-v1+v2)/2
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id007
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id007
+      v3:
+        name: x_2
+        sample_range:
+        - 4.237408202101278e-10
+        - 3.6106334461630896
+        sample_type: *id007
+      v4:
+        name: x_3
+        sample_range:
+        - 1.5648993212380446e-10
+        - 10.0
+        sample_type: *id007
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_7
+      equation_name: Hugoniot equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_8:
+    raw: x_4*(-x_0/x_2 + x_1/x_3)/(x_4 - 1) - 1*1*(1/x_3 + 1/x_2)*(-x_0 + x_1)/2
+    prepared: v5*(-v1/v3+v2/v4)/(v5-1)-1*1*(1/v4+1/v3)*(-v1+v2)/2
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id008
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id008
+      v3:
+        name: x_2
+        sample_range:
+        - 4.601741210308319e-10
+        - 10.0
+        sample_type: *id008
+      v4:
+        name: x_3
+        sample_range:
+        - 6.921494488665303e-10
+        - 8.145417595604535
+        sample_type: *id008
+      v5:
+        name: x_4
+        sample_range:
+        - 1.0000000001300038
+        - 2.0
+        sample_type: *id008
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_8
+      equation_name: Hugoniot equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_9:
+    raw: (x_0 - 1)/(x_1 - 1)
+    prepared: (v1-1)/(v2-1)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id009
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id009
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_9
+      equation_name: Hugoniot equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_10:
+    raw: x_0*(x_1*Abs(x_2)*Abs(x_3))*(-x_6/(x_4 + x_5) + 1)/(x_4 + x_5)
+    prepared: v1*(v2*abs(v3)*abs(v4))*(-v7/(v5+v6)+1)/(v5+v6)
+    n_variables: 7
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id010
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id010
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id010
+      v4:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id010
+      v5:
+        name: x_4
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id010
+      v6:
+        name: x_5
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id010
+      v7:
+        name: x_6
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id010
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_10
+      equation_name: Kapustinskii equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_11:
+    raw: x_0*(x_1*Abs(x_2)*Abs(x_3))/(x_4 + x_5)
+    prepared: v1*(v2*abs(v3)*abs(v4))/(v5+v6)
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id011
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id011
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id011
+      v4:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id011
+      v5:
+        name: x_4
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id011
+      v6:
+        name: x_5
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id011
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_11
+      equation_name: Kapustinskii equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_12:
+    raw: -x_0*x_1*x_2*x_3*x_4**2*(1 - 1*1/x_7)/(4*pi*x_5*x_6)
+    prepared: -v1*v2*v3*v4*v5**2*(1-1*1/v8)/(4*3.141592653589793*v6*v7)
+    n_variables: 8
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id012
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id012
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id012
+      v4:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id012
+      v5:
+        name: x_4
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id012
+      v6:
+        name: x_5
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id012
+      v7:
+        name: x_6
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id012
+      v8:
+        name: x_7
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id012
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_12
+      equation_name: Kapustinskii equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_13:
+    raw: -x_0**3 + x_0
+    prepared: -v1**3+v1
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_13
+      equation_name: Benjamin–Bona–Mahony equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_14:
+    raw: x_0*cos(2*x_1) + x_2*cos(x_1) + x_3
+    prepared: v1*cos(2*v2)+v3*cos(v2)+v4
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 360.0
+        sample_type: &id013
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id013
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id013
+      v4:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id013
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_14
+      equation_name: Karplus equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_15:
+    raw: 2*x_0**(3/2)/3
+    prepared: 2*v1**(3/2)/3
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_15
+      equation_name: Kepler's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_16:
+    raw: (150*x_0)*x_4*(1 - x_3)**2/(((x_1**2*x_2**2))*(x_3**3))
+    prepared: (150*v1)*v5*(1-v4)**2/(((v2**2*v3**2))*(v4**3))
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 10.0
+        sample_type: &id014
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id014
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type: *id014
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 0.6
+        sample_type: *id014
+      v5:
+        name: x_4
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id014
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_16
+      equation_name: Kozeny–Carman equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_17:
+    raw: x_0*x_2/(x_1*x_3)
+    prepared: v1*v3/(v2*v4)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 10.0
+        sample_type: &id015
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 10.0
+        sample_type: *id015
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: *id015
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id015
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_17
+      equation_name: Kozeny–Carman equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_18:
+    raw: x_0**2*(x_1**3*x_2**2)/((180*(1 - x_1)**2))
+    prepared: v1**2*(v2**3*v3**2)/((180*(1-v2)**2))
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: &id016
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 0.6
+        sample_type: *id016
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type: *id016
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_18
+      equation_name: Kozeny–Carman equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_19:
+    raw: x_0**(1 + 1/x_2)*x_1
+    prepared: v1**(1+1/v3)*v2
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 3.6948178544493615e-10
+        - 0.04443330038779237
+        sample_type: &id017
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.34
+        - 0.4
+        sample_type: *id017
+      v3:
+        name: x_2
+        sample_range:
+        - -0.54
+        - -0.48
+        sample_type: *id017
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_19
+      equation_name: Lane–Emden equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_20:
+    raw: x_0**x_2*x_1
+    prepared: v1**v3*v2
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id018
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id018
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 5.0
+        sample_type: *id018
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_20
+      equation_name: Lane–Emden equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_21:
+    raw: -1*1*x_0**2/6 + 1
+    prepared: -1*1*v1**2/6+1
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_21
+      equation_name: Lane–Emden equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_22:
+    raw: x_0
+    prepared: v1
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_22
+      equation_name: Laplace's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_23:
+    raw: (x_0*x_1)/x_2
+    prepared: (v1*v2)/v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1000.0
+        - 110000.0
+        sample_type: &id019
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id019
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id019
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_23
+      equation_name: List of equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_24:
+    raw: x_0**2
+    prepared: v1**2
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_24
+      equation_name: Bernoulli differential equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_25:
+    raw: x_0*x_1
+    prepared: v1*v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 1000.0
+        sample_type: &id020
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: *id020
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_25
+      equation_name: List of equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_26:
+    raw: x_0*x_1
+    prepared: v1*v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 1000.0
+        sample_type: &id021
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id021
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_26
+      equation_name: List of equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_27:
+    raw: x_0*x_1 + x_2
+    prepared: v1*v2+v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: &id022
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: *id022
+      v3:
+        name: x_2
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: *id022
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_27
+      equation_name: List of equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_28:
+    raw: x_0*exp(-x_1/x_2)
+    prepared: v1*exp(-v2/v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: &id023
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1000.0
+        - 100000.0
+        sample_type: *id023
+      v3:
+        name: x_2
+        sample_range:
+        - 200.0
+        - 1000.0
+        sample_type: *id023
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_28
+      equation_name: List of equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_29:
+    raw: (x_0*x_1)/(x_1 + x_2)
+    prepared: (v1*v2)/(v2+v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: &id024
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id024
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id024
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_29
+      equation_name: List of equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_30:
+    raw: x_0*(x_1 + x_2*x_3)
+    prepared: v1*(v2+v3*v4)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.0e-06
+        - 1.0e-06
+        sample_type: &id025
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -1000000.0
+        - 1000000.0
+        sample_type: *id025
+      v3:
+        name: x_2
+        sample_range:
+        - -1000000.0
+        - 1000000.0
+        sample_type: *id025
+      v4:
+        name: x_3
+        sample_range:
+        - -1000000.0
+        - 1000000.0
+        sample_type: *id025
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_30
+      equation_name: Lorentz equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 1
+      duplicate_of_rows:
+      - eponymous_31:Lorentz equation
+  eponymous_32:
+    raw: (4*pi)*x_0*x_1/3
+    prepared: (4*3.141592653589793)*v1*v2/3
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e+20
+        - 1.0e+25
+        sample_type: &id026
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-30
+        - 1.0e-25
+        sample_type: *id026
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_32
+      equation_name: Lorentz–Lorenz equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 2
+  eponymous_33:
+    raw: x_0*x_1*(x_0)
+    prepared: v1*v2*(v1)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id027
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id027
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_33
+      equation_name: Lyapunov equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_34:Lyapunov equation
+  eponymous_35:
+    raw: x_0**4
+    prepared: v1**4
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_35
+      equation_name: Bernoulli differential equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_36:
+    raw: x_0*x_1**x_2
+    prepared: v1*v2**v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: &id028
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1000.0
+        - 1000000.0
+        sample_type: *id028
+      v3:
+        name: x_2
+        sample_range:
+        - 0.5
+        - 2.0
+        sample_type: *id028
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_36
+      equation_name: Mark–Houwink equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_37:
+    raw: x_0/x_1
+    prepared: v1/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-10
+        - 1.0e-05
+        sample_type: &id029
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-10
+        - 1.0e-05
+        sample_type: *id029
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_37
+      equation_name: Mason–Weaver equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 1
+      - 2
+      duplicate_of_rows:
+      - eponymous_38:Mason–Weaver equation
+  eponymous_39:
+    raw: x_0*exp(-x_1)
+    prepared: v1*exp(-v2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-10
+        - 1.0e-05
+        sample_type: &id030
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-10
+        - 1.0e-05
+        sample_type: *id030
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_39
+      equation_name: Mason–Weaver equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 1
+      - 2
+  eponymous_40:
+    raw: x_0*x_1*x_2*x_3 + 1*x_0*x_4*x_5*x_6*Abs(x_6)/2
+    prepared: v1*v2*v3*v4+1*v1*v5*v6*v7*abs(v7)/2
+    n_variables: 7
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 1000.0
+        sample_type: &id031
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id031
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id031
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: *id031
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id031
+      v6:
+        name: x_5
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: *id031
+      v7:
+        name: x_6
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id031
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_40
+      equation_name: Morison equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_41:
+    raw: x_0*x_1*x_2 + x_0*x_1*x_3*(x_2 - x_4) + 1*x_0*x_5*x_6*(x_7 - x_8)*Abs(x_7 - x_8)/2
+    prepared: v1*v2*v3+v1*v2*v4*(v3-v5)+1*v1*v6*v7*(v8-v9)*abs(v8-v9)/2
+    n_variables: 9
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 1000.0
+        sample_type: &id032
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: *id032
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id032
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id032
+      v5:
+        name: x_4
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id032
+      v6:
+        name: x_5
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id032
+      v7:
+        name: x_6
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: *id032
+      v8:
+        name: x_7
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id032
+      v9:
+        name: x_8
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id032
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_41
+      equation_name: Morison equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_42:
+    raw: x_0 - x_1*log(x_3/x_4, E)/x_2
+    prepared: v1-v2*log(v4/v5)/v3
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 273.15
+        - 373.15
+        sample_type: &id033
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.02
+        - 0.03
+        sample_type: *id033
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id033
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id033
+      v5:
+        name: x_4
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id033
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_42
+      equation_name: Nernst equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_43:
+    raw: x_0/(x_0*x_1 + 1)
+    prepared: v1/(v1*v2+1)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id034
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id034
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_43
+      equation_name: Ornstein–Zernike equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_44:
+    raw: x_0 - 1
+    prepared: v1-1
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_44
+      equation_name: Ornstein–Zernike equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_45:
+    raw: 3/2 + (-x_0*(x_0 + 1) + 3/4)/((2*x_1*(x_1 + 1)))
+    prepared: 3/2+(-v1*(v1+1)+3/4)/((2*v2*(v2+1)))
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id035
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.5
+        - 10.5
+        sample_type: *id035
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_45
+      equation_name: Pauli equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_46:
+    raw: (3*x_0)*((x_1/x_2)**(7/3) - (x_1/x_2)**(5/3))*(3*(x_3 - 4)*((x_1/x_2)**(2/3) - 1)/4 + 1)/2
+    prepared: (3*v1)*((v2/v3)**(7/3)-(v2/v3)**(5/3))*(3*(v4-4)*((v2/v3)**(2/3)-1)/4+1)/2
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: &id036
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id036
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id036
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id036
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_46
+      equation_name: Birch–Murnaghan equation of state
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_47:
+    raw: (x_0*x_1 + x_2*(643/100)*(67*x_3/125 + 1)*x_4)/((x_5*(x_0 + x_2)))
+    prepared: (v1*v2+v3*(643/100)*(67*v4/125+1)*v5)/((v6*(v1+v3)))
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: &id037
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: *id037
+      v3:
+        name: x_2
+        sample_range:
+        - 734.4649426197814
+        - 734.4669426197813
+        sample_type: *id037
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: *id037
+      v5:
+        name: x_4
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: *id037
+      v6:
+        name: x_5
+        sample_range:
+        - 8.997176337288693e-10
+        - 745.7438253960154
+        sample_type: *id037
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_47
+      equation_name: Penman equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 3
+  eponymous_48:
+    raw: exp(2107/100 - 1*5336/x_0)
+    prepared: exp(2107/100-1*5336/v1)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 200.0
+        - 350.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_48
+      equation_name: Penman equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_49:
+    raw: 5336*exp(2107/100 - 1*5336/x_0)/(x_0**2)
+    prepared: 5336*exp(2107/100-1*5336/v1)/(v1**2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 200.0
+        - 350.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_49
+      equation_name: Penman equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_50:
+    raw: x_0**3/(x_0**3 - 1*27*x_1**2)
+    prepared: v1**3/(v1**3-1*27*v2**2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: &id038
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: *id038
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_50
+      equation_name: Picard–Fuchs equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_51:
+    raw: 4*x_0**3 - x_0*x_1 - x_2
+    prepared: 4*v1**3-v1*v2-v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: &id039
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: *id039
+      v3:
+        name: x_2
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: *id039
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_51
+      equation_name: Picard–Fuchs equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_52:
+    raw: -x_0/x_1
+    prepared: -v1/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id040
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id040
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_52
+      equation_name: Poisson's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_53:
+    raw: x_0**2*x_1
+    prepared: v1**2*v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id041
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id041
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_53
+      equation_name: Prandtl–Glauert equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_54:
+    raw: (2*pi*x_0)/(x_1 + 2/x_2)
+    prepared: (2*3.141592653589793*v1)/(v2+2/v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id042
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id042
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id042
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_54
+      equation_name: Prandtl–Glauert equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_55:
+    raw: x_0*(x_2*x_3 + x_3**2*x_4)/x_1
+    prepared: v1*(v3*v4+v4**2*v5)/v2
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 100.0
+        sample_type: &id043
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id043
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 5.0
+        sample_type: *id043
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id043
+      v5:
+        name: x_4
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id043
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_55
+      equation_name: Prony equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_56:
+    raw: (269/100)*10**5*x_0**(3/2)*x_1*x_2*sqrt(x_3*x_4)
+    prepared: (269/100)*10**5*v1**(3/2)*v2*v3*sqrt(v4*v5)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: &id044
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-05
+        - 0.001
+        sample_type: *id044
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id044
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0e-06
+        - 0.0001
+        sample_type: *id044
+      v5:
+        name: x_4
+        sample_range:
+        - 1.0e-06
+        - 0.0001
+        sample_type: *id044
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_56
+      equation_name: Randles–Sevcik equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 2
+      - 4
+      - 5
+  eponymous_57:
+    raw: 1*((x_0/x_1)**(2/3) - 1)/2
+    prepared: 1*((v1/v2)**(2/3)-1)/2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: &id045
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id045
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_57
+      equation_name: Birch–Murnaghan equation of state
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_58:
+    raw: x_0 + x_1*(x_2/(-3 + 1*E))**x_3
+    prepared: v1+v2*(v3/(-3+1*2.718281828459045))**v4
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.77
+        - 0.23
+        sample_type: &id046
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -1.78
+        - 0.22
+        sample_type: *id046
+      v3:
+        name: x_2
+        sample_range:
+        - -2.59
+        - -0.59
+        sample_type: *id046
+      v4:
+        name: x_3
+        sample_range:
+        - 0.42
+        - 2.42
+        sample_type: *id046
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_58
+      equation_name: Randles–Sevcik equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_59:
+    raw: 1*(1/x_3 + 1/x_2)*(-x_0 + x_1)/2
+    prepared: 1*(1/v4+1/v3)*(-v1+v2)/2
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: &id047
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id047
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id047
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id047
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_59
+      equation_name: Rankine–Hugoniot equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_60:
+    raw: x_0*4*pi*x_1**2*x_2
+    prepared: v1*4*3.141592653589793*v2**2*v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 900.0
+        - 1100.0
+        sample_type: &id048
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id048
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id048
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_60
+      equation_name: Rayleigh–Plesset equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_61:
+    raw: x_0 + x_1/x_2 + x_2*(x_3 + x_4)
+    prepared: v1+v2/v3+v3*(v4+v5)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: &id049
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id049
+      v3:
+        name: x_2
+        sample_range:
+        - 6.851221812098629e-10
+        - 1.0
+        sample_type: *id049
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id049
+      v5:
+        name: x_4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id049
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_61
+      equation_name: Rodrigues equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_62:
+    raw: sqrt(x_0/x_1)
+    prepared: sqrt(v1/v2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 5.695283133988482e-10
+        - 1.0
+        sample_type: &id050
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 3.772975265547984e-10
+        - 1.0
+        sample_type: *id050
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_62
+      equation_name: Rodrigues equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_63:
+    raw: x_0/x_1
+    prepared: v1/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: &id051
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 9.085288493748678e-10
+        - 0.027076785042440002
+        sample_type: *id051
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_63
+      equation_name: Rodrigues equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_64:
+    raw: (x_0/x_1)**2
+    prepared: (v1/v2)**2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: &id052
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.4354550881279238e-10
+        - 1.0
+        sample_type: *id052
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_64
+      equation_name: Rodrigues equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_65:
+    raw: 8*(x_0/x_1)**2*log(2, E)
+    prepared: 8*(v1/v2)**2*log(2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: &id053
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 7.666192125554971e-10
+        - 0.42393999176393415
+        sample_type: *id053
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_65
+      equation_name: Rodrigues equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_66:
+    raw: 16*(x_0/x_1)**2
+    prepared: 16*(v1/v2)**2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: &id054
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 2.5780477752590514e-10
+        - 1.0
+        sample_type: *id054
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_66
+      equation_name: Rodrigues equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_67:
+    raw: log(x_0*(x_4*(4*pi*x_2)/(x_1*((3*x_3**2))))**(3/2)/x_1, E) + 5/2
+    prepared: log(v1*(v5*(4*3.141592653589793*v3)/(v2*((3*v4**2))))**(3/2)/v2)+5/2
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type: &id055
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 1.0e+23
+        sample_type: *id055
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-30
+        - 1.0e-25
+        sample_type: *id055
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0e-34
+        - 1.0e-33
+        sample_type: *id055
+      v5:
+        name: x_4
+        sample_range:
+        - 1.0e-20
+        - 1.0e-15
+        sample_type: *id055
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_67
+      equation_name: Sackur–Tetrode equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 3
+      - 4
+      - 5
+  eponymous_68:
+    raw: x_0 + (9*x_1*x_2)*(x_4*((x_1/x_3)**(2/3) - 1)**3 + (-1*4*(x_1/x_3)**(2/3) + 6)*((x_1/x_3)**(2/3) - 1)**2)/16
+    prepared: v1+(9*v2*v3)*(v5*((v2/v4)**(2/3)-1)**3+(-1*4*(v2/v4)**(2/3)+6)*((v2/v4)**(2/3)-1)**2)/16
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: &id056
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id056
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id056
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id056
+      v5:
+        name: x_4
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id056
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_68
+      equation_name: Birch–Murnaghan equation of state
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_69:
+    raw: log(x_0/((x_1*x_2**3)), E) + 5/2
+    prepared: log(v1/((v2*v3**3)))+5/2
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type: &id057
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 1.0e+23
+        sample_type: *id057
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-10
+        - 1.0e-08
+        sample_type: *id057
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_69
+      equation_name: Sackur–Tetrode equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 3
+  eponymous_70:
+    raw: log(x_0*((2*pi*x_2*x_3*x_4)/(x_5**2))**(3/2)/x_1, E) + 5/2
+    prepared: log(v1*((2*3.141592653589793*v3*v4*v5)/(v6**2))**(3/2)/v2)+5/2
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type: &id058
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 1.0e+23
+        sample_type: *id058
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-30
+        - 1.0e-25
+        sample_type: *id058
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0e-23
+        - 1.0e-19
+        sample_type: *id058
+      v5:
+        name: x_4
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type: *id058
+      v6:
+        name: x_5
+        sample_range:
+        - 1.0e-34
+        - 1.0e-33
+        sample_type: *id058
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_70
+      equation_name: Sackur–Tetrode equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 3
+      - 4
+      - 6
+  eponymous_71:
+    raw: x_0/(exp(x_1/((x_2*x_3))) - 1)
+    prepared: v1/(exp(v2/((v3*v4)))-1)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: &id059
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.02
+        sample_type: *id059
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-06
+        - 1.0e-05
+        sample_type: *id059
+      v4:
+        name: x_3
+        sample_range:
+        - 273.0
+        - 1273.0
+        sample_type: *id059
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_71
+      equation_name: Sakuma–Hattori equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 3
+  eponymous_72:
+    raw: x_0/(exp(x_1/(x_2*x_3 + x_4)) - 1)
+    prepared: v1/(exp(v2/(v3*v4+v5))-1)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: &id060
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.02
+        sample_type: *id060
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-06
+        - 1.0e-05
+        sample_type: *id060
+      v4:
+        name: x_3
+        sample_range:
+        - 273.0
+        - 1273.0
+        sample_type: *id060
+      v5:
+        name: x_4
+        sample_range:
+        - 0.001
+        - 0.01
+        sample_type: *id060
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_72
+      equation_name: Sakuma–Hattori equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 3
+  eponymous_73:
+    raw: x_0/((x_1*log(x_2/x_3 + 1, E))) - x_4/x_1
+    prepared: v1/((v2*log(v3/v4+1)))-v5/v2
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.02
+        sample_type: &id061
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-06
+        - 1.0e-05
+        sample_type: *id061
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id061
+      v4:
+        name: x_3
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id061
+      v5:
+        name: x_4
+        sample_range:
+        - 0.001
+        - 0.01
+        sample_type: *id061
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_73
+      equation_name: Sakuma–Hattori equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 2
+  eponymous_74:
+    raw: (x_0/(exp(x_1/(x_2*x_3 + x_4)) - 1))**2*(x_1*x_2)*exp(x_1/(x_2*x_3 + x_4))/((x_5*(x_2*x_3 + x_4)**2))
+    prepared: (v1/(exp(v2/(v3*v4+v5))-1))**2*(v2*v3)*exp(v2/(v3*v4+v5))/((v6*(v3*v4+v5)**2))
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: &id062
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.02
+        sample_type: *id062
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-06
+        - 1.0e-05
+        sample_type: *id062
+      v4:
+        name: x_3
+        sample_range:
+        - 273.0
+        - 1273.0
+        sample_type: *id062
+      v5:
+        name: x_4
+        sample_range:
+        - 0.001
+        - 0.01
+        sample_type: *id062
+      v6:
+        name: x_5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id062
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_74
+      equation_name: Sakuma–Hattori equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 3
+  eponymous_75:
+    raw: x_0*(1 - x_1)**(x_2 - 1)
+    prepared: v1*(1-v2)**(v3-1)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: &id063
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id063
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id063
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_75
+      equation_name: Scheil equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_76:
+    raw: x_0*x_1*(1 - x_2)**(x_3 - 1)
+    prepared: v1*v2*(1-v3)**(v4-1)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: &id064
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id064
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id064
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id064
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_76
+      equation_name: Scheil equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_77:
+    raw: x_0 + x_1/x_2
+    prepared: v1+v2/v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: &id065
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id065
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id065
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_77
+      equation_name: Scheil equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_78:
+    raw: x_0/(x_1**(1/3))
+    prepared: v1/(v2**(1/3))
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: &id066
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id066
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_78
+      equation_name: Scheil equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_79:
+    raw: x_0*(457*x_1/1000 + 1016/125)
+    prepared: v1*(457*v2/1000+1016/125)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type: &id067
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id067
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_79
+      equation_name: Blaney–Criddle equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_80:
+    raw: 107*sqrt((x_0 - x_1)/x_1)/1000
+    prepared: 107*sqrt((v1-v2)/v2)/1000
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 500.0
+        - 1500.0
+        sample_type: &id068
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 50.0
+        sample_type: *id068
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_80
+      equation_name: Souders–Brown equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_81:
+    raw: x_0/x_1
+    prepared: v1/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id069
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id069
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_81
+      equation_name: Souders–Brown equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_82:
+    raw: sqrt((4*x_0)/pi)
+    prepared: sqrt((4*v1)/3.141592653589793)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_82
+      equation_name: Souders–Brown equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_83:
+    raw: x_0*x_1*(x_2 - x_3 - x_4*(x_5 - x_6))
+    prepared: v1*v2*(v3-v4-v5*(v6-v7))
+    n_variables: 7
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 10.0
+        sample_type: &id070
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 10.0
+        sample_type: *id070
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id070
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id070
+      v5:
+        name: x_4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id070
+      v6:
+        name: x_5
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id070
+      v7:
+        name: x_6
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id070
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_83
+      equation_name: Starling equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_84:Starling equation
+  eponymous_85:
+    raw: (x_0*x_1)/x_2
+    prepared: (v1*v2)/v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-06
+        - 0.001
+        sample_type: &id071
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id071
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id071
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_85
+      equation_name: Stokes–Einstein equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 1
+      duplicate_of_rows:
+      - eponymous_86:Stokes–Einstein equation
+  eponymous_87:
+    raw: x_1 + 1*log(x_0, E)/8
+    prepared: v2+1*log(v1)/8
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: &id072
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id072
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_87
+      equation_name: Strominger's equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_88:
+    raw: x_0 + x_1
+    prepared: v1+v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id073
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id073
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_88
+      equation_name: Strominger's equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_89:
+    raw: x_0*x_1 + x_2*x_3
+    prepared: v1*v2+v3*v4
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id074
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id074
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id074
+      v4:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id074
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_89
+      equation_name: Taft equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_90:
+    raw: x_0*(x_1 - x_2)**2/2
+    prepared: v1*(v2-v3)**2/2
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: &id075
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: *id075
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: *id075
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_90
+      equation_name: Borda–Carnot equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_91:
+    raw: 1*(x_1 - x_2)/(62*x_0/25)
+    prepared: 1*(v2-v3)/(62*v1/25)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id076
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id076
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id076
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_91
+      equation_name: Taft equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_92:
+    raw: 1*x_1/x_0
+    prepared: 1*v2/v1
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id077
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id077
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_92
+      equation_name: Taft equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_93:
+    raw: x_0*x_1
+    prepared: v1*v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id078
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id078
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_93
+      equation_name: Taft equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_94:Taft equation
+      - eponymous_185:Euler's equations (rigid body dynamics)
+      - eponymous_205:Hammett equation
+  eponymous_95:
+    raw: x_0**2 + 2*x_1*x_2
+    prepared: v1**2+2*v2*v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: &id079
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id079
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id079
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_95
+      equation_name: Torricelli's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_96:
+    raw: x_2*log(x_0/x_1, E)
+    prepared: v3*log(v1/v2)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1000.0
+        - 10000.0
+        sample_type: &id080
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 500.0
+        - 5000.0
+        sample_type: *id080
+      v3:
+        name: x_2
+        sample_range:
+        - 2000.0
+        - 4000.0
+        sample_type: *id080
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_96
+      equation_name: Tsiolkovsky rocket equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_97:
+    raw: -x_1/x_0 + x_2/x_0
+    prepared: -v2/v1+v3/v1
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 273.15
+        - 373.15
+        sample_type: &id081
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 100000.0
+        sample_type: *id081
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 100000.0
+        sample_type: *id081
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_97
+      equation_name: Van 't Hoff equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_98:Van 't Hoff equation
+  eponymous_99:
+    raw: x_0 + x_1/x_2 + x_2*(x_3 + x_4)
+    prepared: v1+v2/v3+v3*(v4+v5)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: &id082
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id082
+      v3:
+        name: x_2
+        sample_range:
+        - 4.203514480938253e-10
+        - 0.201314020577212
+        sample_type: *id082
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id082
+      v5:
+        name: x_4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id082
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_99
+      equation_name: Van Deemter's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_100:
+    raw: sqrt(x_0/x_1)
+    prepared: sqrt(v1/v2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 4.76438555274683e-10
+        - 0.6649213757510973
+        sample_type: &id083
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 3.744133891814272e-10
+        - 1.0
+        sample_type: *id083
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_100
+      equation_name: Van Deemter's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_101:
+    raw: 1*x_0*(-x_1/x_2 + 1)**2*x_3**2/2
+    prepared: 1*v1*(-v2/v3+1)**2*v4**2/2
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: &id084
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id084
+      v3:
+        name: x_2
+        sample_range:
+        - 4.423768018568808e-10
+        - 10.0
+        sample_type: *id084
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id084
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_101
+      equation_name: Borda–Carnot equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_102:
+    raw: x_0/x_1
+    prepared: v1/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id085
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type: *id085
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_102
+      equation_name: Van Deemter's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_103:
+    raw: (x_0/x_1)**2
+    prepared: (v1/v2)**2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: &id086
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 5.780282918976809e-10
+        - 9.069412182435306
+        sample_type: *id086
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_103
+      equation_name: Van Deemter's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_104:
+    raw: 8*(x_0/x_1)**2*log(2, E)
+    prepared: 8*(v1/v2)**2*log(2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: &id087
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 7.518199396372438e-10
+        - 10.0
+        sample_type: *id087
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_104
+      equation_name: Van Deemter's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_105:
+    raw: 16*(x_0/x_1)**2
+    prepared: 16*(v1/v2)**2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: &id088
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.7922463513286857e-10
+        - 10.0
+        sample_type: *id088
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_105
+      equation_name: Van Deemter's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_106:
+    raw: (x_0*x_1)/(x_2 - x_3) - x_4/(x_2**2)
+    prepared: (v1*v2)/(v3-v4)-v5/(v3**2)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: &id089
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: *id089
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 10.0
+        sample_type: *id089
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 0.1
+        sample_type: *id089
+      v5:
+        name: x_4
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id089
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_106
+      equation_name: Van der Waals equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_107:
+    raw: x_1/(1 + exp(-x_0*(x_2 - x_3)))
+    prepared: v2/(1+exp(-v1*(v3-v4)))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id090
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.5
+        - 2.0
+        sample_type: *id090
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id090
+      v4:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id090
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_107
+      equation_name: Verhulst equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_108:
+    raw: 1/(1 + exp(-x_0))
+    prepared: 1/(1+exp(-v1))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -6.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_108
+      equation_name: Verhulst equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_109:
+    raw: 1*tanh(x_0/2)/2 + 1/2
+    prepared: 1*tanh(v1/2)/2+1/2
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -6.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_109
+      equation_name: Verhulst equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_110:
+    raw: x_0*x_1
+    prepared: v1*v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 6.0
+        sample_type: &id091
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 6.0
+        sample_type: *id091
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_110
+      equation_name: Wald's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_111:
+    raw: sqrt((x_0*x_1*x_2*cos(x_3))/((2*x_4)))
+    prepared: sqrt((v1*v2*v3*cos(v4))/((2*v5)))
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.75
+        - -1.72
+        sample_type: &id092
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -1.19
+        - -1.16
+        sample_type: *id092
+      v3:
+        name: x_2
+        sample_range:
+        - 1.82
+        - 1.85
+        sample_type: *id092
+      v4:
+        name: x_3
+        sample_range:
+        - -0.57
+        - -0.54
+        sample_type: *id092
+      v5:
+        name: x_4
+        sample_range:
+        - 4.1727593255713735e-10
+        - 0.03
+        sample_type: *id092
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_111
+      equation_name: Washburn's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_112:
+    raw: (x_0*x_1*x_2)/x_3
+    prepared: (v1*v2*v3)/v4
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1000000.0
+        sample_type: &id093
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1000000.0
+        sample_type: *id093
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 1000000.0
+        sample_type: *id093
+      v4:
+        name: x_3
+        sample_range:
+        - 5.820766091346741e-10
+        - 1000000.0
+        sample_type: *id093
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_112
+      equation_name: Archard equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_113:
+    raw: 1*x_0*(-1 + 1/x_1)**2*(x_2/x_3)**2*x_4**2/2
+    prepared: 1*v1*(-1+1/v2)**2*(v3/v4)**2*v5**2/2
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: &id094
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0690065499474599e-10
+        - 0.8969306508179609
+        sample_type: *id094
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id094
+      v4:
+        name: x_3
+        sample_range:
+        - 8.048257615911325e-10
+        - 3.732907147258272
+        sample_type: *id094
+      v5:
+        name: x_4
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type: *id094
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_113
+      equation_name: Borda–Carnot equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_114:
+    raw: (x_0*(x_1**4 + 4*x_1**3*x_2))/((8*x_1**2*x_3*x_4))
+    prepared: (v1*(v2**4+4*v2**3*v3))/((8*v2**2*v4*v5))
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: &id095
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id095
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id095
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id095
+      v5:
+        name: x_4
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id095
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_114
+      equation_name: Washburn's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_115:
+    raw: x_0*x_1*x_2 - x_1*x_3*sin(x_4)
+    prepared: v1*v2*v3-v2*v4*sin(v5)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 9.8
+        - 9.9
+        sample_type: &id096
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id096
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id096
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id096
+      v5:
+        name: x_4
+        sample_range:
+        - 0.0
+        - 180.0
+        sample_type: *id096
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_115
+      equation_name: Washburn's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_116:
+    raw: (2*x_0)*cos(x_2)/x_1
+    prepared: (2*v1)*cos(v3)/v2
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: &id097
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id097
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 180.0
+        sample_type: *id097
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_116
+      equation_name: Washburn's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_117:
+    raw: x_4**(1/2)*((x_0*cos(x_1))/2)**(1/2)*(x_2/x_3)**(1/2)
+    prepared: v5**(1/2)*((v1*cos(v2))/2)**(1/2)*(v3/v4)**(1/2)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.47
+        - 1.49
+        sample_type: &id098
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.83
+        - 0.85
+        sample_type: *id098
+      v3:
+        name: x_2
+        sample_range:
+        - 1.07
+        - 1.08
+        sample_type: *id098
+      v4:
+        name: x_3
+        sample_range:
+        - 3.0245940474404875e-10
+        - 0.02
+        sample_type: *id098
+      v5:
+        name: x_4
+        sample_range:
+        - 0.92
+        - 0.94
+        sample_type: *id098
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_117
+      equation_name: Washburn's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_118:
+    raw: x_0**2/(x_0**2 + x_1**2)
+    prepared: v1**2/(v1**2+v2**2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: &id099
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id099
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_118
+      equation_name: Whitham equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_119:
+    raw: x_0 + x_1*cos(x_2)
+    prepared: v1+v2*cos(v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 10.0
+        - 100.0
+        sample_type: &id100
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 10.0
+        - 100.0
+        sample_type: *id100
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 180.0
+        sample_type: *id100
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_119
+      equation_name: Young–Dupre equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_120:
+    raw: x_0 + x_1*x_2
+    prepared: v1+v2*v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type: &id101
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type: *id101
+      v3:
+        name: x_2
+        sample_range:
+        - 10.0
+        - 100.0
+        sample_type: *id101
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_120
+      equation_name: Young–Dupre equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_121:
+    raw: -x_0*(1/x_2 + 1/x_1)
+    prepared: -v1*(1/v3+1/v2)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: &id102
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id102
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id102
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_121
+      equation_name: Young–Laplace equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_122:
+    raw: (2*x_0)/x_1
+    prepared: (2*v1)/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: &id103
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id103
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_122
+      equation_name: Young–Laplace equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_123:
+    raw: (2*x_0*cos(x_1))/x_2
+    prepared: (2*v1*cos(v2))/v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: &id104
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1.57
+        sample_type: *id104
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id104
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_123
+      equation_name: Young–Laplace equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_124:
+    raw: -x_0
+    prepared: -v1
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_124
+      equation_name: Bridgman's thermodynamic equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_125:
+    raw: 1/x_1 + 1/x_0
+    prepared: 1/v2+1/v1
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: &id105
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id105
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_125
+      equation_name: Young–Laplace equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_126:
+    raw: (x_0*x_1 + x_2)/(x_1*x_3 + 1)
+    prepared: (v1*v2+v3)/(v2*v4+1)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: &id106
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: *id106
+      v3:
+        name: x_2
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: *id106
+      v4:
+        name: x_3
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: *id106
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_126
+      equation_name: Burgers' equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_127:
+    raw: tanh(x_0/(sqrt(2*x_1)))
+    prepared: tanh(v1/(sqrt(2*v2)))
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id107
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id107
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_127
+      equation_name: Cahn–Hilliard equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_128:
+    raw: 2*x_0*x_1/(x_1**2 + 1)
+    prepared: 2*v1*v2/(v2**2+1)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id108
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id108
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_128
+      equation_name: Camassa–Holm equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_129:
+    raw: x_2*(-x_0*x_3 + x_1)
+    prepared: v3*(-v1*v4+v2)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id109
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id109
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id109
+      v4:
+        name: x_3
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id109
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_129
+      equation_name: Camassa–Holm equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_130:
+    raw: 1/(1 - x_0)
+    prepared: 1/(1-v1)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 0.99
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_130
+      equation_name: Carothers equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_131:
+    raw: (x_0 + 1)/(-1*2*x_0*x_1 + x_0 + 1)
+    prepared: (v1+1)/(-1*2*v1*v2+v1+1)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 0.99
+        sample_type: &id110
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.5
+        - 1.0
+        sample_type: *id110
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_131
+      equation_name: Carothers equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_132:
+    raw: 2/(-x_0*x_1 + 2)
+    prepared: 2/(-v1*v2+2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 0.99
+        sample_type: &id111
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 2.0
+        - 4.0
+        sample_type: *id111
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_132
+      equation_name: Carothers equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_133:
+    raw: (x_0 + 1)/(1 - x_0)
+    prepared: (v1+1)/(1-v1)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 0.99
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_133
+      equation_name: Carothers equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_134:
+    raw: x_0*exp((-x_1)/((x_2*x_3)))
+    prepared: v1*exp((-v2)/((v3*v4)))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-05
+        - 100000.0
+        sample_type: &id112
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1000.0
+        - 100000.0
+        sample_type: *id112
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id112
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id112
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_134
+      equation_name: Arrhenius equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_135:
+    raw: x_0*1/(1 - x_1)
+    prepared: v1*1/(1-v2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 100.0
+        - 200.0
+        sample_type: &id113
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 0.99
+        sample_type: *id113
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_135
+      equation_name: Carothers equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_136:
+    raw: x_0*(x_1 + 1)/(1 - x_1)
+    prepared: v1*(v2+1)/(1-v2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 100.0
+        - 200.0
+        sample_type: &id114
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 0.99
+        sample_type: *id114
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_136
+      equation_name: Carothers equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_137:
+    raw: x_0 + 1
+    prepared: v1+1
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 0.99
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_137
+      equation_name: Carothers equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_138:
+    raw: x_0 + x_1/(x_2**2)
+    prepared: v1+v2/(v3**2)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type: &id115
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 0.01
+        sample_type: *id115
+      v3:
+        name: x_2
+        sample_range:
+        - 0.4
+        - 0.7
+        sample_type: *id115
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_138
+      equation_name: Cauchy's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_139:
+    raw: 1 + ((388/5)/10**6)*(1 + ((188/25)/10**3)/(x_1**2))*(x_2 + 4810*x_3/x_0)/x_0
+    prepared: 1+((388/5)/10**6)*(1+((188/25)/10**3)/(v2**2))*(v3+4810*v4/v1)/v1
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 273.15
+        - 373.15
+        sample_type: &id116
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.4
+        - 0.7
+        sample_type: *id116
+      v3:
+        name: x_2
+        sample_range:
+        - 900.0
+        - 1100.0
+        sample_type: *id116
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 50.0
+        sample_type: *id116
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_139
+      equation_name: Cauchy's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_140:
+    raw: x_0 + x_1
+    prepared: v1+v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: &id117
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type: *id117
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_140
+      equation_name: Cauchy's functional equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_141:
+    raw: x_0**2 - x_1**2
+    prepared: v1**2-v2**2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id118
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id118
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_141
+      equation_name: Cauchy–Riemann equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_142:
+    raw: 2*x_0*x_1
+    prepared: 2*v1*v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id119
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id119
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_142
+      equation_name: Cauchy–Riemann equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_143:
+    raw: (x_0*x_1 + x_2)**(-1/x_3)
+    prepared: (v1*v2+v3)**(-1/v4)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id120
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 9.004134906117555
+        - 9.006134959523317
+        sample_type: *id120
+      v3:
+        name: x_2
+        sample_range:
+        - 2.80283499340658
+        - 2.8048349934065797
+        sample_type: *id120
+      v4:
+        name: x_3
+        sample_range:
+        - 8.059952705252726e-10
+        - 10.0
+        sample_type: *id120
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_143
+      equation_name: Cesàro equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 2
+      - 3
+  eponymous_144:
+    raw: exp(x_0/x_1)/x_1
+    prepared: exp(v1/v2)/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.9430988573368526
+        - -1.4430988573368526
+        sample_type: &id121
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -1.086345829714523
+        - -0.586345829714523
+        sample_type: *id121
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_144
+      equation_name: Cesàro equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_145:
+    raw: x_0*exp(-(x_1/((x_2*x_3)))**x_4)
+    prepared: v1*exp(-(v2/((v3*v4)))**v5)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-05
+        - 100000.0
+        sample_type: &id122
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1000.0
+        - 100000.0
+        sample_type: *id122
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id122
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id122
+      v5:
+        name: x_4
+        sample_range:
+        - 0.5
+        - 1.5
+        sample_type: *id122
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_145
+      equation_name: Arrhenius equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_146:
+    raw: 1/x_0
+    prepared: 1/v1
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 9.101306375214335e-10
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_146
+      equation_name: Cesàro equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_147:
+    raw: x_0/x_1
+    prepared: v1/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id123
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 3.2785862913442543e-10
+        - 9.359868397090018
+        sample_type: *id123
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_147
+      equation_name: Cesàro equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_148:
+    raw: x_0/(sqrt(x_1))
+    prepared: v1/(sqrt(v2))
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id124
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 9.169185410939917e-10
+        - 5.922762476883673
+        sample_type: *id124
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_148
+      equation_name: Cesàro equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_149:
+    raw: x_0*x_1
+    prepared: v1*v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id125
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id125
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_149
+      equation_name: Cesàro equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_150:
+    raw: x_0/(x_0**2 + x_1**2)
+    prepared: v1/(v1**2+v2**2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id126
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 7.837988036385468e-10
+        - 10.0
+        sample_type: *id126
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_150
+      equation_name: Cesàro equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_151:
+    raw: x_0*(x_1/((2*pi*x_2*x_3)))**(3/2)*exp(-x_1*(x_4 - x_5)**2/(2*x_2*x_3))
+    prepared: v1*(v2/((2*3.141592653589793*v3*v4)))**(3/2)*exp(-v2*(v5-v6)**2/(2*v3*v4))
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1.97
+        - -1.72
+        sample_type: &id127
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.79
+        - 2.04
+        sample_type: *id127
+      v3:
+        name: x_2
+        sample_range:
+        - 0.05
+        - 0.3
+        sample_type: *id127
+      v4:
+        name: x_3
+        sample_range:
+        - 0.88
+        - 1.13
+        sample_type: *id127
+      v5:
+        name: x_4
+        sample_range:
+        - 1.55
+        - 1.8
+        sample_type: *id127
+      v6:
+        name: x_5
+        sample_range:
+        - 1.74
+        - 1.99
+        sample_type: *id127
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_151
+      equation_name: Chapman–Enskog equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_152:
+    raw: x_0*(x_1/((2*pi*x_2*x_3)))**(3/2)*exp(-x_1*(x_4 - x_5)**2/(2*x_2*x_3))
+    prepared: v1*(v2/((2*3.141592653589793*v3*v4)))**(3/2)*exp(-v2*(v5-v6)**2/(2*v3*v4))
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.89
+        - 1.96
+        sample_type: &id128
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.66
+        - 1.73
+        sample_type: *id128
+      v3:
+        name: x_2
+        sample_range:
+        - 0.45
+        - 0.51
+        sample_type: *id128
+      v4:
+        name: x_3
+        sample_range:
+        - 0.03
+        - 0.09
+        sample_type: *id128
+      v5:
+        name: x_4
+        sample_range:
+        - -1.55
+        - -1.49
+        sample_type: *id128
+      v6:
+        name: x_5
+        sample_range:
+        - -1.3
+        - -1.24
+        sample_type: *id128
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_152
+      equation_name: Chapman–Enskog equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_153:
+    raw: (31*x_0**(1/2)*x_1**(1/3)/50)*((x_0/282000)**(5/8) + 1)**(4/5)/(((2/(5*x_1))**(2/3) + 1)**(1/4)) + 3/10
+    prepared: (31*v1**(1/2)*v2**(1/3)/50)*((v1/282000)**(5/8)+1)**(4/5)/(((2/(5*v2))**(2/3)+1)**(1/4))+3/10
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.2
+        - 1000000.0
+        sample_type: &id129
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.2
+        - 1000000.0
+        sample_type: *id129
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_153
+      equation_name: Churchill–Bernstein equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_154:Churchill–Bernstein equation
+  eponymous_155:
+    raw: (x_0 - x_1)/((x_1*x_2))
+    prepared: (v1-v2)/((v2*v3))
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 273.0
+        - 373.0
+        sample_type: &id130
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 273.0
+        - 373.0
+        sample_type: *id130
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 0.1
+        sample_type: *id130
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_155
+      equation_name: Clarke's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_156:
+    raw: 1 - exp(-x_0*x_1**x_2)
+    prepared: 1-exp(-v1*v2**v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: &id131
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: *id131
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id131
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_156
+      equation_name: Avrami equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_157:
+    raw: -log(-x_0*x_1*x_2*exp(-x_1**2) + 1, E)
+    prepared: -log(-v1*v2*v3*exp(-v2**2)+1)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type: &id132
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id132
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 1.0
+        sample_type: *id132
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_157
+      equation_name: Clarke's equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_158:
+    raw: x_0*(x_1*x_2**2)/((2*x_3*x_4))
+    prepared: v1*(v2*v3**2)/((2*v4*v5))
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: &id133
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type: *id133
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id133
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id133
+      v5:
+        name: x_4
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id133
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_158
+      equation_name: Darcy–Weisbach equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_159:
+    raw: x_0*x_1*x_2**2/(2*x_3)
+    prepared: v1*v2*v3**2/(2*v4)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: &id134
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 500.0
+        - 1500.0
+        sample_type: *id134
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id134
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id134
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_159
+      equation_name: Darcy–Weisbach equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_160:
+    raw: 128*(x_0*x_1)/(pi*(x_2**4))
+    prepared: 128*(v1*v2)/(3.141592653589793*(v3**4))
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: &id135
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: *id135
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id135
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_160
+      equation_name: Darcy–Weisbach equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_161:
+    raw: x_0*1*x_2**2/((2*x_1)*x_3)
+    prepared: v1*1*v3**2/((2*v2)*v4)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: &id136
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id136
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id136
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id136
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_161
+      equation_name: Darcy–Weisbach equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_162:
+    raw: x_0*8*x_2**2/((pi**2*x_1)*x_3**5)
+    prepared: v1*8*v3**2/((3.141592653589793**2*v2)*v4**5)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: &id137
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id137
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: *id137
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id137
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_162
+      equation_name: Darcy–Weisbach equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_163:
+    raw: 1*x_0*x_1*x_2**2/8
+    prepared: 1*v1*v2*v3**2/8
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: &id138
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 500.0
+        - 1500.0
+        sample_type: *id138
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id138
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_163
+      equation_name: Darcy–Weisbach equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_164:
+    raw: 64/x_0
+    prepared: 64/v1
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 2000.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_164
+      equation_name: Darcy–Weisbach equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_165:
+    raw: (x_0*x_1*x_2)/x_3
+    prepared: (v1*v2*v3)/v4
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 500.0
+        - 1500.0
+        sample_type: &id139
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: *id139
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id139
+      v4:
+        name: x_3
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: *id139
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_165
+      equation_name: Darcy–Weisbach equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_166:
+    raw: (x_0*x_1)/x_2
+    prepared: (v1*v2)/v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: &id140
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id140
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id140
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_166
+      equation_name: Debye–Hückel equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_167:
+    raw: x_1*log(x_2, E) + log(x_0, E)
+    prepared: v2*log(v3)+log(v1)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: &id141
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id141
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: *id141
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_167
+      equation_name: Avrami equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_168:
+    raw: (x_0**x_1*x_2**x_3)**(1/(x_1 + x_3))
+    prepared: (v1**v2*v3**v4)**(1/(v2+v4))
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: &id142
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type: *id142
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type: *id142
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type: *id142
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_168
+      equation_name: Debye–Hückel equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_169:
+    raw: x_0**2*x_1
+    prepared: v1**2*v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0e-10
+        - 1.0e-06
+        sample_type: &id143
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-10
+        - 1.0e-06
+        sample_type: *id143
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_169
+      equation_name: Debye–Hückel equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 1
+      - 2
+  eponymous_170:
+    raw: exp(x_0/2)
+    prepared: exp(v1/2)
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_170
+      equation_name: Dirac equation in the algebra of physical space
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_171:
+    raw: x_0*x_1
+    prepared: v1*v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: &id144
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -1000.0
+        - 1000.0
+        sample_type: *id144
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_171
+      equation_name: Dirac equation in the algebra of physical space
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_172:
+    raw: x_0 + x_1
+    prepared: v1+v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1000.0
+        - 1000.0
+        sample_type: &id145
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -1000.0
+        - 1000.0
+        sample_type: *id145
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_172
+      equation_name: Dirac equation in the algebra of physical space
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_173:Dirac equation in the algebra of physical space
+  eponymous_174:
+    raw: x_0*cos(x_1)
+    prepared: v1*cos(v2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 10.0
+        - 100.0
+        sample_type: &id146
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 180.0
+        sample_type: *id146
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_174
+      equation_name: Doppler equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_175:Doppler equations
+  eponymous_176:
+    raw: x_0 + x_1*x_2
+    prepared: v1+v2*v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id147
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id147
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id147
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_176
+      equation_name: Einstein field equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_177:
+    raw: x_0 - 1*1*x_1*x_2/2
+    prepared: v1-1*1*v2*v3/2
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id148
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id148
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id148
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_177
+      equation_name: Einstein field equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_178:
+    raw: (x_0/x_1)**(1/4)
+    prepared: (v1/v2)**(1/4)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: &id149
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: *id149
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_178
+      equation_name: Avrami equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_179:
+    raw: (8*pi*x_0)/(x_1**4)
+    prepared: (8*3.141592653589793*v1)/(v2**4)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id150
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 4.0115377686333886e-10
+        - 7.45877143327692
+        sample_type: *id150
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_179
+      equation_name: Einstein field equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_180:
+    raw: x_0 - 1*1*x_1*x_2/2 + x_2*x_3
+    prepared: v1-1*1*v2*v3/2+v3*v4
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id151
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id151
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id151
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id151
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_180
+      equation_name: Einstein field equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_181:
+    raw: x_0 - 1*2*x_2*x_3/(x_1 - 2)
+    prepared: v1-1*2*v3*v4/(v2-2)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id152
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id152
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id152
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id152
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_181
+      equation_name: Einstein field equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_182:
+    raw: x_0 - x_1*x_2
+    prepared: v1-v2*v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: &id153
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id153
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type: *id153
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_182
+      equation_name: Einstein field equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_183:
+    raw: x_0*x_1*x_2 + x_0*x_1
+    prepared: v1*v2*v3+v1*v2
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id154
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id154
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id154
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_183
+      equation_name: Euler's equations (rigid body dynamics)
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_184:Euler's equations (rigid body dynamics)
+  eponymous_186:
+    raw: x_0/x_1
+    prepared: v1/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -1000.0
+        - 1000.0
+        sample_type: &id155
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1000.0
+        - 100000.0
+        sample_type: *id155
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_186
+      equation_name: Euler–Bernoulli beam equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_187:
+    raw: x_0/x_1
+    prepared: v1/v2
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -0.1
+        - 0.1
+        sample_type: &id156
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id156
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_187
+      equation_name: Euler–Bernoulli beam equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_188:
+    raw: x_0*x_1/x_2
+    prepared: v1*v2/v3
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1000.0
+        - 100000.0
+        sample_type: &id157
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -0.1
+        - 0.1
+        sample_type: *id157
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id157
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_188
+      equation_name: Euler–Bernoulli beam equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_189:
+    raw: x_0*x_1*(-exp(-x_2*x_3) + exp(-x_1*x_3))/(-x_1 + x_2)
+    prepared: v1*v2*(-exp(-v3*v4)+exp(-v2*v4))/(-v2+v3)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: &id158
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.5282908306462137
+        - 0.6300081711155743
+        sample_type: *id158
+      v3:
+        name: x_2
+        sample_range:
+        - 0.5262908305806789
+        - 0.5282908305806789
+        sample_type: *id158
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: *id158
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_189
+      equation_name: Bateman equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_190:
+    raw: x_0*x_1*x_3/x_2
+    prepared: v1*v2*v4/v3
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1000.0
+        - 100000.0
+        sample_type: &id159
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -0.1
+        - 0.1
+        sample_type: *id159
+      v3:
+        name: x_2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type: *id159
+      v4:
+        name: x_3
+        sample_range:
+        - 1.0e-06
+        - 0.001
+        sample_type: *id159
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_190
+      equation_name: Euler–Bernoulli beam equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 4
+  eponymous_191:
+    raw: log(x_0*(1 - x_1)/(x_1*(1 - x_0)), 10)/log(x_2, 10)
+    prepared: 0.4342944819032518*log(v1*(1-v2)/(v2*(1-v1)))/0.4342944819032518*log(v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: &id160
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id160
+      v3:
+        name: x_2
+        sample_range:
+        - 1.01
+        - 10.0
+        sample_type: *id160
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_191
+      equation_name: Fenske equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_193:Fenske equation
+  eponymous_192:
+    raw: log(x_0*x_2/(x_1*x_3), 10)/log(x_4, 10)
+    prepared: 0.4342944819032518*log(v1*v3/(v2*v4))/0.4342944819032518*log(v5)
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: &id161
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id161
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id161
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id161
+      v5:
+        name: x_4
+        sample_range:
+        - 1.01
+        - 10.0
+        sample_type: *id161
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_192
+      equation_name: Fenske equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_194:
+    raw: x_0*(x_2/x_3)**x_4/x_1
+    prepared: v1*(v3/v4)**v5/v2
+    n_variables: 5
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: &id162
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 0.99
+        sample_type: *id162
+      v3:
+        name: x_2
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id162
+      v4:
+        name: x_3
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type: *id162
+      v5:
+        name: x_4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type: *id162
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_194
+      equation_name: Fenske equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_195:
+    raw: Abs((x_0*cos(x_1) - x_2*cos(x_3))/(x_0*cos(x_1) + x_2*cos(x_3)))**2
+    prepared: abs((v1*cos(v2)-v3*cos(v4))/(v1*cos(v2)+v3*cos(v4)))**2
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type: &id163
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 90.0
+        sample_type: *id163
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type: *id163
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 90.0
+        sample_type: *id163
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_195
+      equation_name: Fresnel equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_196:
+    raw: Abs((x_0*cos(x_3) - x_2*cos(x_1))/(x_0*cos(x_3) + x_2*cos(x_1)))**2
+    prepared: abs((v1*cos(v4)-v3*cos(v2))/(v1*cos(v4)+v3*cos(v2)))**2
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type: &id164
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 90.0
+        sample_type: *id164
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type: *id164
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 90.0
+        sample_type: *id164
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_196
+      equation_name: Fresnel equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_197:
+    raw: 1 - x_0
+    prepared: 1-v1
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_197
+      equation_name: Fresnel equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_198:Fresnel equations
+  eponymous_199:
+    raw: (x_0*x_2 - x_1**2)/(x_3*x_5 - x_4**2)
+    prepared: (v1*v3-v2**2)/(v4*v6-v5**2)
+    n_variables: 6
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id165
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id165
+      v3:
+        name: x_2
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: *id165
+      v4:
+        name: x_3
+        sample_range:
+        - -3.118570258002336
+        - -2.266187344412952
+        sample_type: *id165
+      v5:
+        name: x_4
+        sample_range:
+        - 3.0644395024331135
+        - 3.0664395024331133
+        sample_type: *id165
+      v6:
+        name: x_5
+        sample_range:
+        - -4.151282384430481
+        - -4.149282382523132
+        sample_type: *id165
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_199
+      equation_name: Gauss–Codazzi equations
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      near_degenerate_intervals:
+      - 5
+      - 6
+  eponymous_200:
+    raw: x_0*x_2*(-exp(-x_2*x_3) + exp(-x_1*x_3))/(-x_1 + x_2)
+    prepared: v1*v3*(-exp(-v3*v4)+exp(-v2*v4))/(-v2+v3)
+    n_variables: 4
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: &id166
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.1687469724538584
+        - 1.0
+        sample_type: *id166
+      v3:
+        name: x_2
+        sample_range:
+        - 0.16674697181228273
+        - 0.16874697181228274
+        sample_type: *id166
+      v4:
+        name: x_3
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: *id166
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_200
+      equation_name: Bateman equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_201:
+    raw: -x_1/(x_0**2)
+    prepared: -v2/(v1**2)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 273.15
+        - 373.15
+        sample_type: &id167
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: *id167
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_201
+      equation_name: Gibbs–Helmholtz equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+      duplicate_of_rows:
+      - eponymous_202:Gibbs–Helmholtz equation
+  eponymous_203:
+    raw: x_2*(-1*1/x_1 + 1/x_0)
+    prepared: v3*(-1*1/v2+1/v1)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 273.15
+        - 373.15
+        sample_type: &id168
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 273.15
+        - 373.15
+        sample_type: *id168
+      v3:
+        name: x_2
+        sample_range:
+        - 0.0
+        - 1000.0
+        sample_type: *id168
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_203
+      equation_name: Gibbs–Helmholtz equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_204:
+    raw: 79/(250*x_0**(1/4))
+    prepared: 79/(250*v1**(1/4))
+    n_variables: 1
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 4000.0
+        - 100000.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_204
+      equation_name: Haaland equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_206:
+    raw: 1*log(x_0/x_1, 10)/(211/100)
+    prepared: 1*0.4342944819032518*log(v1/v2)/(211/100)
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: &id169
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: *id169
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_206
+      equation_name: Hammett equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_207:
+    raw: -1*1*log(x_0/x_1, 10)/227/50
+    prepared: -1*1*0.4342944819032518*log(v1/v2)/227/50
+    n_variables: 2
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: &id170
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.01
+        - 100.0
+        sample_type: *id170
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_207
+      equation_name: Hammett equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_208:
+    raw: x_1*exp(x_0/x_2)
+    prepared: v2*exp(v1/v3)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id171
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-06
+        - 1000000.0
+        sample_type: *id171
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-06
+        - 1000000.0
+        sample_type: *id171
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_208
+      equation_name: Hasegawa–Mima equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_209:
+    raw: (x_0*x_1)/((x_1**2*x_2))
+    prepared: (v1*v2)/((v2**2*v3))
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type: &id172
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 1.0e-06
+        - 1000000.0
+        sample_type: *id172
+      v3:
+        name: x_2
+        sample_range:
+        - 1.0e-06
+        - 1000000.0
+        sample_type: *id172
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_209
+      equation_name: Hasegawa–Mima equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper
+  eponymous_210:
+    raw: x_0*x_1**(63/100)*x_2**(27/50)
+    prepared: v1*v2**(63/100)*v3**(27/50)
+    n_variables: 3
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
+    vars:
+      v1:
+        name: x_0
+        sample_range:
+        - 0.001
+        - 0.04
+        sample_type: &id173
+        - uni
+        - pos
+      v2:
+        name: x_1
+        sample_range:
+        - 0.001
+        - 100.0
+        sample_type: *id173
+      v3:
+        name: x_2
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type: *id173
+      v0:
+        name: y
+    meta:
+      erbench_task_id: eponymous_210
+      equation_name: Hazen–Williams equation
+      attribution: Wikipedia, 'List of scientific equations named after people' (CC-BY-SA-4.0); intervals LLM-suggested
+        (mistral-large), author cross-verified per the ERBench paper

@@ -74,6 +74,11 @@ CATALOGS = {
     "soose-nc": ("soose-nc.yaml", 200, "problem_catalog"),
     "soose-wc": ("soose-wc.yaml", 200, "problem_catalog"),
     "soose-fc": ("soose-fc.yaml", 200, "problem_catalog"),
+    # P5 ERBench permissive novel families (MIT/BSD-3; arXiv:2606.09276). The CC-BY-SA families
+    # (erbench-oeis, erbench-eponymous) publish to the SEPARATE SA repo via publish_catalogs_sa.py.
+    "erbench-syneq": ("erbench-syneq.yaml", 5301, "problem_catalog"),
+    "erbench-phybench": ("erbench-phybench.yaml", 90, "problem_catalog"),
+    "erbench-densities": ("erbench-densities.yaml", 33, "problem_catalog"),
 }
 
 

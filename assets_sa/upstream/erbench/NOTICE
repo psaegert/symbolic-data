@@ -1,0 +1,13 @@
+Vendored MINIMIZED subset of the ERBench benchmark (arXiv:2606.09276; HuggingFace dataset
+EquationDiscovery/Equation_Recovery_Benchmark, revision 95bf15c27de68c3f170ca6140d2e4a811c60344f,
+fetched 2026-07-10): the CC-BY-SA-4.0 families ONLY (OEIS 3757 rows, Eponymous 211 rows).
+
+License: CC BY-SA 4.0 — see assets_sa/LICENSE (full legal code + derivation/modification
+statement). Everything under assets_sa/ carries this license; the description column was REMOVED
+from train_sa.csv (upstream rows embed entire OEIS entry texts with contributor comments; the
+minimized rows keep only collection, task_ID, dtype, expression, name = A-number/equation name,
+support). Per-entry attribution lives in the built catalogs' meta (A-number + oeis.org URL;
+Wikipedia list attribution).
+
+Build input for erbench-oeis / erbench-eponymous (tools/erbench_to_catalogs.py); published to the
+SEPARATE share-alike HF repo (tools/publish_catalogs_sa.py), never folded into permissive bundles.

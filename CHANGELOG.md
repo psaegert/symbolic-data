@@ -3,6 +3,16 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.12.4] - 2026-07-10
+
+### Fixed
+- **Per-point rejection is float32-storage-aware**: validity is now judged after casting to the
+  STORAGE dtype (float32), so points whose y is finite in float64 but overflows float32 (e.g.
+  fast-growing integer-sequence formulas near their support edge, found via two ERBench OEIS
+  entries) are rejected like any invalid point instead of shipping as `inf` in the frozen
+  Problem arrays. The accepted sample remains the declared distribution conditioned on the
+  (float32-)valid domain; `meta.finite_fraction` discloses the fraction as before.
+
 ## [0.12.3] - 2026-07-10
 
 ### Fixed

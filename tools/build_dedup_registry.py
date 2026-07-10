@@ -19,7 +19,10 @@ from simplipy import SimpliPyEngine, normalize_skeleton
 CATALOGS = ["constant", "grammarvae", "jin", "keijzer", "korns", "koza", "livermore",
             "livermore2", "meier", "neat", "nonic", "pagie", "poly", "r-rationals",
             "sine", "vladislavleva", "nguyen", "fastsrb", "feynman", "srsd-dummy",
-            "physo-astro", "physo-class", "soose-nc", "soose-wc", "soose-fc"]
+            "physo-astro", "physo-class", "soose-nc", "soose-wc", "soose-fc",
+            "erbench-syneq", "erbench-phybench", "erbench-densities"]
+# SA-firewalled declarative catalogs (assets_sa/; clusters reference names only, no SA prose)
+SA_CATALOGS = ["erbench-oeis", "erbench-eponymous"]
 # FROZEN catalogs (materialized .npz, measured data): identity from each problem's stored
 # skeleton (already normalize_skeleton-canonical) + its x width.
 FROZEN_CATALOGS = ["first-principles", "cp3-cosmo", "ai-descartes", "physo-streams"]
@@ -28,8 +31,9 @@ FROZEN_CATALOGS = ["first-principles", "cp3-cosmo", "ai-descartes", "physo-strea
 def main() -> None:
     engine = SimpliPyEngine.load("dev_7-3", install=True)
     groups: dict[tuple, list[str]] = defaultdict(list)
-    for name in CATALOGS:
-        path = Path("assets/catalogs") / f"{name}.yaml"
+    for name, base in ([(n, "assets/catalogs") for n in CATALOGS]
+                       + [(n, "assets_sa/catalogs") for n in SA_CATALOGS]):
+        path = Path(base) / f"{name}.yaml"
         if not path.exists():
             print(f"skip {name} (no local yaml)")
             continue
