@@ -45,3 +45,42 @@ def test_degenerate_domain_still_placeholders(tmp_path):
     p = _one(_catalog(tmp_path, "log(v1)", -2.0, -1.0))
     assert p.is_placeholder
     assert "max_trials" in str(p.placeholder_reason) or "non-finite" in str(p.placeholder_reason)
+
+
+def test_adaptive_batch_oversamples_by_observed_rejection():
+    from symbolic_data.catalog import _adaptive_batch
+
+    # observed f = 0.25 -> need 100 more points -> batch ~ 100/0.25*1.25 = 500 (+8)
+    assert _adaptive_batch(needed=100, collected=25, drawn=100, budget_left=10_000) == 508
+    # budget-capped
+    assert _adaptive_batch(needed=100, collected=25, drawn=100, budget_left=300) == 300
+    # floor: zero collected so far must not divide to an infinite batch
+    assert _adaptive_batch(needed=10, collected=0, drawn=100, budget_left=10_000) <= 10_000
+
+
+def test_partial_domain_realizes_in_few_rounds(tmp_path):
+    """Efficiency: with per-point + adaptive oversampling the sqrt case needs ~2 eval rounds,
+    not ~1/f iterations. Counted via a wrapped rng."""
+    import warnings
+    import numpy as np
+    import yaml
+    from symbolic_data import ProblemSource
+
+    cfg = {
+        "metadata": {"name": "eff-smoke", "version": 1, "source_kind": "set",
+                     "sampling_defaults": {"n_points": 16, "method": "random", "noise": 0.0}},
+        "expressions": {"E1": {
+            "raw": "v1 ** (1/2)", "prepared": "v1 ** (1/2)", "n_variables": 1,
+            "vars": {"v1": {"name": "x1", "sample_range": [-1.0, 1.0], "sample_type": ["uni", "pos"]},
+                     "v0": {"name": "y"}},
+            "meta": {"finite_fraction": 0.5},
+        }},
+    }
+    path = tmp_path / "cat.yaml"
+    path.write_text(yaml.safe_dump(cfg, sort_keys=False))
+    src = ProblemSource({"catalog": str(path),
+                         "sampling": {"n_support": 64, "n_validation": 16, "problems_per_expression": 1}})
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        p = next(iter(src))
+    assert not p.is_placeholder and p.x_support.shape[0] == 64

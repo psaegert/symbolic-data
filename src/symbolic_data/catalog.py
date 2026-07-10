@@ -43,6 +43,17 @@ _ENTRY_FIELDS = {"raw", "prepared", "n_variables", "vars"}
 # transiently unsamplable (mean valid-domain fraction below ~1/cap). 200 admits f >= ~0.005.
 _PER_POINT_REJECTION_CAP = 200
 
+
+def _adaptive_batch(needed: int, collected: int, drawn: int, budget_left: int) -> int:
+    """Oversample the top-up batch by the observed rejection rate.
+
+    Instead of drawing only the missing points (and iterating ~1/f times), size the next batch
+    as needed / f_hat with a 25% safety margin, where f_hat is the valid fraction observed so
+    far (floored at 1/cap so a pathological first batch cannot divide the estimate to zero).
+    Typically collects everything in one extra round."""
+    f_hat = max(collected / max(drawn, 1), 1.0 / _PER_POINT_REJECTION_CAP)
+    return max(1, min(int(needed / f_hat * 1.25) + 8, budget_left))
+
 _PROBLEM_ARRAY_FIELDS = ("x_support", "y_support", "y_support_noisy", "x_validation", "y_validation", "y_validation_noisy")
 # optional per-problem arrays (absent for synthetic problems): reference-law predictions
 _PROBLEM_OPTIONAL_ARRAY_FIELDS = ("y_reference_support", "y_reference_validation")
@@ -343,13 +354,21 @@ class ProblemCatalog(Catalog):
             raise ValueError("declarative ProblemCatalog.realize requires a simplipy engine (pass engine=...)")
         compiled = self._compiled(entry, engine)
         variable_order = compiled["variable_order"]
+        # First-draw oversampling: when the entry discloses its valid-domain fraction
+        # (meta.finite_fraction, written by tools/audit_finite_fraction.py), size the first
+        # batch to land the full n_points in one round instead of topping up iteratively.
+        f_meta = entry.meta.get("finite_fraction") if isinstance(getattr(entry, "meta", None), dict) else None
+        n_first = n_points
+        if isinstance(f_meta, (int, float)) and 0.0 < f_meta < 1.0:
+            n_first = min(int(n_points / max(f_meta, 1.0 / _PER_POINT_REJECTION_CAP) * 1.25) + 8,
+                          _PER_POINT_REJECTION_CAP * n_points)
         columns = []
         try:
             for key in variable_order:
                 spec = entry.variables[key]
                 base, sign = spec["sample_type"]
                 low, high = spec["sample_range"]
-                columns.append(fastsrb_dist(low, high, base=base, sign=sign, layout=layout, size=n_points, rng=rng))
+                columns.append(fastsrb_dist(low, high, base=base, sign=sign, layout=layout, size=n_first, rng=rng))
         except (KeyError, ValueError, TypeError) as exc:
             # A missing/malformed per-variable spec is a permanent entry defect (not a transient draw
             # failure): raise CatalogEntryError so the source yields a placeholder instead of crashing
@@ -358,7 +377,7 @@ class ProblemCatalog(Catalog):
         x_all = np.column_stack(columns).astype(float)
         value_map = {var: x_all[:, i] for i, var in enumerate(variable_order)}
         try:
-            y_all = broadcast_target(evaluate(compiled, value_map), n_points, entry.id).reshape(-1, 1)
+            y_all = broadcast_target(evaluate(compiled, value_map), n_first, entry.id).reshape(-1, 1)
         except Exception as exc:
             raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
 
@@ -371,13 +390,15 @@ class ProblemCatalog(Catalog):
         # entries (e.g. sqrt(x1+x2) over a box straddling the domain) exhaust max_trials.
         # An attempts cap keeps truly degenerate entries (f ~ 0) on the honest placeholder path.
         finite_mask = np.isfinite(x_all).all(axis=1) & np.isfinite(y_all).all(axis=1)
-        if not finite_mask.all():
+        if finite_mask.all() and n_first > n_points:
+            x_all, y_all = x_all[:n_points], y_all[:n_points]
+        elif not finite_mask.all():
             keep_x, keep_y = [x_all[finite_mask]], [y_all[finite_mask]]
             collected = int(finite_mask.sum())
-            drawn = n_points
+            drawn = n_first
             max_draws = _PER_POINT_REJECTION_CAP * n_points
             while collected < n_points and drawn < max_draws:
-                batch = min(max(n_points, 1024), max_draws - drawn)
+                batch = _adaptive_batch(n_points - collected, collected, drawn, max_draws - drawn)
                 cols = [
                     fastsrb_dist(entry.variables[key]["sample_range"][0],
                                  entry.variables[key]["sample_range"][1],
