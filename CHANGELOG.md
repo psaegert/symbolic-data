@@ -3,6 +3,31 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.12.1] - 2026-07-10
+
+### Changed
+- **Adaptive oversampling for per-point rejection**: the first draw oversizes by the entry's
+  disclosed `meta.finite_fraction` (when present) and top-up batches oversize by the observed
+  valid fraction (25% margin, budget-capped) — partial-domain entries typically collect all
+  points in one or two evaluation rounds instead of ~1/f iterations. Distribution unchanged
+  (i.i.d. points; only batch sizing differs).
+
+## [0.12.0] - 2026-07-10
+
+### Changed
+- **Per-point rejection sampling** in `ProblemCatalog.realize`: invalid (non-finite) points are
+  rejected individually and topped up, instead of rejecting the whole n-point draw. The accepted
+  sample is DISTRIBUTIONALLY IDENTICAL (points are i.i.d. and validity is per-point, so the
+  all-valid conditioning factorizes): the declared per-variable distribution conditioned on the
+  expression's valid domain, under both modes. Removes the exponential cost (f^-n vs 1/f) that
+  exhausted `max_trials` for partial-domain entries; a 200x draws cap keeps degenerate entries
+  (f ~ 0) on the honest placeholder path.
+
+### Added
+- `tools/audit_finite_fraction.py`: per-entry MC estimate of the valid-domain fraction f, written
+  into entry meta (`finite_fraction`, plus `low_validity: true` below f = 0.05) as the standing
+  disclosure that sampling follows the conditional law; report-only for published catalogs.
+
 ## [0.11.0] - 2026-07-09
 
 Optional-ground-truth schema (the benchmark-import program's P0): real-world and black-box
