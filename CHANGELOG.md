@@ -3,6 +3,19 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.13.0] - unreleased
+
+### Changed
+- **Skeleton simplification is now unrestricted** (BREAKING for distribution reproducibility,
+  in lockstep with simplipy 0.10.0's removal of the `max_pattern_length` knob). The generative
+  sampler and the catalog evaluation path previously capped rule application at pattern length
+  4; rule application now always considers every pattern in the loaded ruleset, so freshly
+  generated skeletons can simplify further (e.g. dev_7-3's length-5..7 rules now fire during
+  sampling). To reproduce the historical capped distribution byte-for-byte, install
+  `symbolic-data<0.13` with the matching-era simplipy. Calling the removed keyword against
+  simplipy >= 0.10 raised `TypeError`, which the sampler's rejection loop retried forever —
+  0.13.0 is therefore also the compatibility floor for simplipy >= 0.10.
+
 ## [0.12.4] - 2026-07-10
 
 ### Fixed

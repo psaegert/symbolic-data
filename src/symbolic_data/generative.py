@@ -787,7 +787,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                 skeleton = self.skeleton_sampler.sample(n_operators, rng)
                 if self.simplify is True:
                     try:
-                        skeleton = self.simplipy_engine.simplify(skeleton, inplace=True, max_pattern_length=4)
+                        skeleton = self.simplipy_engine.simplify(skeleton, inplace=True)
                     except Exception as e:
                         raise NoValidSampleFoundError(f"Failed to simplify skeleton: {skeleton}") from e
 

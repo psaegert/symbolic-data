@@ -78,7 +78,7 @@ def compile_expression(
 
     prefix_parsed = engine.parse(prepared_text, mask_numbers=False)
     try:
-        prefix_simplified = engine.simplify(prefix_parsed, max_pattern_length=4)
+        prefix_simplified = engine.simplify(prefix_parsed)
     except Exception as exc:  # pragma: no cover - defensive against SimpliPy regressions
         warnings.warn(
             f"Failed to simplify {name} expression {eq_id}: {exc}. Falling back to unsimplified prefix.",
@@ -92,7 +92,7 @@ def compile_expression(
         raise KeyError(f"Prepared expression for {eq_id} references undefined variables: {', '.join(sorted(unknown))}")
 
     # Evaluate the CONCRETE `prefix_parsed` (numeric literals intact) to produce y. Do NOT realize
-    # `prefix_simplified` instead: `engine.simplify(..., max_pattern_length=4)` also constantifies
+    # `prefix_simplified` instead: `engine.simplify(...)` also constantifies
     # literals into `<constant>` placeholders (it yields the normalized SKELETON, returned as `prefix`),
     # which is not directly evaluable -- realizing it would corrupt y (turn valid entries into
     # placeholders). Three distinct, deliberate objects are returned: `prefix` = the masked SKELETON
