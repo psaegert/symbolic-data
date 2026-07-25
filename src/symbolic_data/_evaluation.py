@@ -63,10 +63,15 @@ def compile_expression(
     vars_info: Mapping[str, Mapping[str, Any]],
     *,
     name: str = "catalog",
+    mask: bool = True,
 ) -> Dict[str, Any]:
     """Compile ``prepared`` to a callable over the ordered input variables.
 
-    Returns ``{callable, variable_order, prefix, normalized_infix}``.
+    Returns ``{callable, variable_order, prefix, normalized_infix}``. ``mask`` (default True)
+    controls whether the returned ``prefix`` is the MASKED normalized skeleton (numeric
+    literals relabelled to ``<constant>`` + operand sorting via ``engine.mask``) — the
+    catalog contract. Since simplipy 0.9 masking is a separate step, no longer part of
+    ``simplify``.
     """
     if not isinstance(prepared, str) or not prepared.strip():
         raise ValueError(f"Entry {eq_id} has no prepared expression")
@@ -79,6 +84,9 @@ def compile_expression(
     prefix_parsed = engine.parse(prepared_text, mask_numbers=False)
     try:
         prefix_simplified = engine.simplify(prefix_parsed)
+        if mask:
+            # Terminal representation step (never re-simplified): literals -> `<constant>` + sort.
+            prefix_simplified = engine.mask(prefix_simplified)
     except Exception as exc:  # pragma: no cover - defensive against SimpliPy regressions
         warnings.warn(
             f"Failed to simplify {name} expression {eq_id}: {exc}. Falling back to unsimplified prefix.",
@@ -92,10 +100,11 @@ def compile_expression(
         raise KeyError(f"Prepared expression for {eq_id} references undefined variables: {', '.join(sorted(unknown))}")
 
     # Evaluate the CONCRETE `prefix_parsed` (numeric literals intact) to produce y. Do NOT realize
-    # `prefix_simplified` instead: `engine.simplify(...)` also constantifies
-    # literals into `<constant>` placeholders (it yields the normalized SKELETON, returned as `prefix`),
-    # which is not directly evaluable -- realizing it would corrupt y (turn valid entries into
-    # placeholders). Three distinct, deliberate objects are returned: `prefix` = the masked SKELETON
+    # `prefix_simplified` instead: with `mask=True` (default) it is the MASKED normalized SKELETON
+    # (literals relabelled to `<constant>` by the explicit `engine.mask` call above -- simplipy >= 0.9
+    # no longer masks inside `simplify`), which is not directly evaluable -- realizing it would
+    # corrupt y (turn valid entries into placeholders). Three distinct, deliberate objects are
+    # returned: `prefix` = the masked SKELETON
     # (the structural / recovery form); `expression` + `constants` = the CONCRETE ground truth (the
     # actual formula with its literal values, matching the generative catalog's RealizedExpression);
     # `callable` evaluates that concrete formula.

@@ -131,6 +131,13 @@ class LampleChartonCatalog(GenerativeCatalog):
     simplify : bool or str, optional
         Whether and how to simplify sampled skeletons.
         ``True`` uses SimpliPy, ``'sympy'`` uses SymPy (with timeout), ``False`` disables simplification.
+    mask : bool, optional
+        Whether to mask sampled skeletons after simplification (``engine.mask``: numeric
+        literals relabelled to ``<constant>`` + operand sorting), independent of ``simplify``.
+        Defaults to True — the catalog contract is masked, normalized skeletons. Since
+        simplipy 0.9 masking is a separate representation step (no longer part of
+        ``simplify``), so this flag is what keeps skeletons in placeholder form. Masked
+        skeletons are terminal: they are never re-fed to ``simplify``.
     '''
 
     def __init__(
@@ -147,6 +154,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
             simplify: bool | str = True,
+            mask: bool = True,
             name: str = "lample_charton",
             decontaminate: bool = True) -> None:
         self.name = name
@@ -195,6 +203,7 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         self.allow_nan = allow_nan
         self.simplify = simplify
+        self.mask = mask
 
         independent_dims = self.sample_strategy.get('independent_dimensions', False)
         self.support_sampler = SupportSampler(
@@ -242,6 +251,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             holdout_pools=config_.get("holdout_pools", []),
             allow_nan=config_.get("allow_nan", False),
             simplify=config_.get("simplify", True),
+            mask=config_.get("mask", True),
             name=config_.get("name", "lample_charton"),
             decontaminate=config_.get("decontaminate", True),
         )
@@ -270,7 +280,8 @@ class LampleChartonCatalog(GenerativeCatalog):
             skeleton_codes: dict[tuple[str], tuple[CodeType, list[str]]] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
-            simplify: bool = True) -> "LampleChartonCatalog":
+            simplify: bool = True,
+            mask: bool = True) -> "LampleChartonCatalog":
         '''
         Create a LampleChartonCatalog from a set of skeletons.
 
@@ -305,6 +316,8 @@ class LampleChartonCatalog(GenerativeCatalog):
             Whether to allow NaNs in the support points.
         simplify : bool, optional
             Whether to simplify sampled skeletons.
+        mask : bool, optional
+            Whether to mask sampled skeletons after simplification (defaults to True).
 
         Returns
         -------
@@ -323,7 +336,8 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_weights=operator_weights,
             holdout_pools=holdout_pools,
             allow_nan=allow_nan,
-            simplify=simplify
+            simplify=simplify,
+            mask=mask
         )
 
         catalog.skeletons = skeletons
@@ -800,6 +814,17 @@ class LampleChartonCatalog(GenerativeCatalog):
                         raise
                     except Exception as e:
                         raise NoValidSampleFoundError(f"SymPy failed on skeleton: {skeleton}") from e
+
+                # Terminal representation step, independent of the simplify mode: numeric literals
+                # -> `<constant>` + operand sorting (simplipy >= 0.9 no longer masks inside
+                # `simplify`). Runs AFTER the forbidden-token check (mask leaves inf/nan tokens
+                # alone, but the check belongs to the pre-mask value form); masked skeletons are
+                # never re-fed to `simplify`.
+                if self.mask:
+                    try:
+                        skeleton = self.simplipy_engine.mask(skeleton)
+                    except Exception as e:
+                        raise NoValidSampleFoundError(f"Failed to mask skeleton: {skeleton}") from e
 
                 if tuple(skeleton) not in self.skeletons and len(skeleton) <= self.sample_strategy['max_length']:
                     executable_prefix_expression = self.simplipy_engine.operators_to_realizations(skeleton)

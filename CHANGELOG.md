@@ -5,6 +5,18 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ## [0.13.0] - unreleased
 
+### Added
+- **Masking is now an explicit, optional step — ON by default.** `LampleChartonCatalog`
+  (constructor / `from_dict` / `from_config` key `mask`) masks sampled skeletons after
+  simplification (`engine.mask`: numeric literals relabelled to `<constant>` + operand
+  sorting), and `compile_expression` gained the same `mask` keyword for the catalog
+  evaluation path. This restores the catalog contract (masked, normalized skeletons) that
+  silently drifted when simplipy 0.9 carved masking out of `simplify`: under simplipy >= 0.9
+  the sampler had been emitting UNMASKED skeletons (folded literals survived as literal
+  tokens instead of fittable `<constant>` placeholders). Masked skeletons are terminal and
+  never re-fed to `simplify`. Set `mask: false` to reproduce the unmasked 0.12.x-on-simplipy>=0.9
+  behavior.
+
 ### Changed
 - **Skeleton simplification is now unrestricted** (BREAKING for distribution reproducibility,
   in lockstep with simplipy 0.10.0's removal of the `max_pattern_length` knob). The generative
