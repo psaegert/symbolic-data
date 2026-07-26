@@ -3,7 +3,7 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
-## [0.13.0] - unreleased
+## [0.13.0] - 2026-07-26
 
 ### Added
 - **Masking is now an explicit, optional step — ON by default.** `LampleChartonCatalog`
