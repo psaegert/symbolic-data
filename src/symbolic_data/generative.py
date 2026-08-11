@@ -23,7 +23,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 
 from simplipy import SimpliPyEngine, normalize_expression, normalize_skeleton
-from simplipy.utils import explicit_constant_placeholders, numbers_to_constant, substitude_constants
+from simplipy.utils import explicit_constant_placeholders, substitude_constants
 
 from symbolic_data.config_io import load_config, save_config
 from symbolic_data.paths import substitute_root_path
@@ -33,17 +33,28 @@ from symbolic_data.prior_factory import build_prior_callable
 from symbolic_data._generate.holdout import HoldoutManager
 from symbolic_data._generate.skeleton_sampling import SkeletonSampler
 from symbolic_data._generate.support_sampling import SupportSampler, SupportSamplingError
-from symbolic_data.token_ops import flatten_nested_list
+from symbolic_data.token_ops import desugar_sqrt, flatten_nested_list
 from symbolic_data.errors import NoValidSampleFoundError
 from symbolic_data.catalog import Catalog, ProblemCatalog, RealizedExpression
 
 
 def _gt_metadata(skeleton: Sequence[str], literals: Any) -> tuple[list[str] | None, int | None]:
-    """Normalized ground-truth expression (constants substituted) + its token-length complexity."""
-    skeleton_list = normalize_skeleton(skeleton)
-    if skeleton_list is None:
-        return None, None
-    expression_tokens = substitude_constants(list(skeleton_list), values=literals, inplace=False)
+    """Normalized ground-truth expression + its token-length complexity.
+
+    Two skeleton eras coexist: a frozen placeholder-form spec carries ``<constant>``
+    slots whose sampled values arrive in ``literals`` (their count matches by
+    construction -- the constant count was derived from exactly those tokens), while a
+    modern generative skeleton is already a CONCRETE expression and samples zero
+    literals, so substitution has nothing to do and the tokens are the ground truth.
+    """
+    values = np.asarray(literals, dtype=np.float64).ravel() if literals is not None else np.empty(0)
+    if values.size:
+        skeleton_list = normalize_skeleton(skeleton)
+        if skeleton_list is None:
+            return None, None
+        expression_tokens = substitude_constants(list(skeleton_list), values=values, inplace=False)
+    else:
+        expression_tokens = [str(token) for token in skeleton]
     expression = normalize_expression(expression_tokens)
     complexity = len(expression_tokens) if expression_tokens else None
     return expression, complexity
@@ -131,13 +142,17 @@ class LampleChartonCatalog(GenerativeCatalog):
     simplify : bool or str, optional
         Whether and how to simplify sampled skeletons.
         ``True`` uses SimpliPy, ``'sympy'`` uses SymPy (with timeout), ``False`` disables simplification.
-    mask : bool, optional
-        Whether to mask sampled skeletons after simplification (``engine.mask``: numeric
-        literals relabelled to ``<constant>`` + operand sorting), independent of ``simplify``.
-        Defaults to True — the catalog contract is masked, normalized skeletons. Since
-        simplipy 0.9 masking is a separate representation step (no longer part of
-        ``simplify``), so this flag is what keeps skeletons in placeholder form. Masked
-        skeletons are terminal: they are never re-fed to ``simplify``.
+    typed_slots : dict, optional
+        Per-operator constrained argument slots (``pow`` exponent, ``rootn`` index): the
+        named argument is filled by a literal drawn from the slot's ``prior`` rather than
+        by a general subtree. See :class:`SkeletonSampler`.
+
+    Notes
+    -----
+    There is no masking step. This catalog yields EXPRESSIONS with concrete numeric
+    literals, never ``<constant>`` placeholders. Abstracting a literal into a fittable
+    parameter depends on which numbers a downstream model can emit, so it is the
+    consumer's decision and is deliberately not offered here.
     '''
 
     def __init__(
@@ -151,10 +166,10 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_support_prior: dict[str, Any] | list[dict[str, Any]] | Callable | None = None,
             support_sampler_config: dict[str, Any] | None = None,
             operator_weights: dict[str, float] | None = None,
+            typed_slots: dict[str, Any] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
             simplify: bool | str = True,
-            mask: bool = True,
             name: str = "lample_charton",
             decontaminate: bool = True) -> None:
         self.name = name
@@ -164,6 +179,11 @@ class LampleChartonCatalog(GenerativeCatalog):
         self.variables = variables
         self.n_variables = len(self.variables)
         self.operator_weights = operator_weights or {op: 1.0 for op in self.simplipy_engine.operator_arity.keys()}
+        # Constrained argument slots (``pow`` exponent, ``rootn`` index). The retired
+        # hyper-operator vocabulary carried this constraint in the vocabulary itself;
+        # on the 23-operator vocabulary it has to live here or the tree sampler fills
+        # the slot with an arbitrary subtree (``rootn(x, tanh(y))``).
+        self.typed_slots = typed_slots or {}
 
         self.holdout_manager = HoldoutManager(n_variables=self.n_variables, allow_nan=allow_nan)
 
@@ -180,6 +200,8 @@ class LampleChartonCatalog(GenerativeCatalog):
             sample_strategy=self.sample_strategy,
             variables=self.variables,
             operator_weights=self.operator_weights,
+            literal_prior=literal_prior,
+            typed_slots=self.typed_slots,
         )
 
         if isinstance(literal_prior, (dict, list)):
@@ -203,7 +225,6 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         self.allow_nan = allow_nan
         self.simplify = simplify
-        self.mask = mask
 
         independent_dims = self.sample_strategy.get('independent_dimensions', False)
         self.support_sampler = SupportSampler(
@@ -231,6 +252,16 @@ class LampleChartonCatalog(GenerativeCatalog):
         '''
         config_ = load_config(config)
 
+        # Fail closed on the retired key: silently ignoring `mask:` would generate an
+        # UNMASKED corpus for a config that declares masking. Generative catalogs yield
+        # concrete expressions since 0.14.0; mask downstream via `simplipy.masking`
+        # (e.g. `masking.mask(tokens, engine, masking.mask_values_keep_structure)`).
+        if "mask" in config_:
+            raise ValueError(
+                "the 'mask' catalog key was removed in symbolic-data 0.14.0: generative "
+                "catalogs yield concrete expressions and never mask. Apply masking "
+                "downstream with simplipy.masking instead.")
+
         # If the config is a string, convert relative paths within the config to absolute paths
         if isinstance(config, str) and isinstance(config_["simplipy_engine"], str):
             if config_["simplipy_engine"].startswith('.'):
@@ -248,10 +279,10 @@ class LampleChartonCatalog(GenerativeCatalog):
             variables=config_["variables"],
             support_sampler_config=support_sampler_cfg,
             operator_weights=config_.get("operator_weights"),
+            typed_slots=config_.get("typed_slots"),
             holdout_pools=config_.get("holdout_pools", []),
             allow_nan=config_.get("allow_nan", False),
             simplify=config_.get("simplify", True),
-            mask=config_.get("mask", True),
             name=config_.get("name", "lample_charton"),
             decontaminate=config_.get("decontaminate", True),
         )
@@ -277,11 +308,12 @@ class LampleChartonCatalog(GenerativeCatalog):
             support_scale_prior: dict[str, Any] | list[dict[str, Any]] | Callable | None = None,
             n_support_prior: dict[str, Any] | list[dict[str, Any]] | Callable | None = None,
             operator_weights: dict[str, float] | None = None,
+            typed_slots: dict[str, Any] | None = None,
             skeleton_codes: dict[tuple[str], tuple[CodeType, list[str]]] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
             simplify: bool = True,
-            mask: bool = True) -> "LampleChartonCatalog":
+            ) -> "LampleChartonCatalog":
         '''
         Create a LampleChartonCatalog from a set of skeletons.
 
@@ -316,8 +348,6 @@ class LampleChartonCatalog(GenerativeCatalog):
             Whether to allow NaNs in the support points.
         simplify : bool, optional
             Whether to simplify sampled skeletons.
-        mask : bool, optional
-            Whether to mask sampled skeletons after simplification (defaults to True).
 
         Returns
         -------
@@ -334,10 +364,10 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_support_prior=n_support_prior,
             support_sampler_config=support_sampler_config,
             operator_weights=operator_weights,
+            typed_slots=typed_slots,
             holdout_pools=holdout_pools,
             allow_nan=allow_nan,
             simplify=simplify,
-            mask=mask
         )
 
         catalog.skeletons = skeletons
@@ -367,7 +397,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         for skeleton in tqdm(self.skeletons, desc="Compiling Skeletons", disable=not verbose, smoothing=0.0):
             # Codify the Expression
             executable_prefix_expression = self.simplipy_engine.operators_to_realizations(skeleton)
-            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
+            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
             code_string = self.simplipy_engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
             code = codify(code_string, self.variables + constants)
 
@@ -423,7 +453,7 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         if code is None:
             executable_prefix_expression = self.simplipy_engine.operators_to_realizations(no_constant_expression)
-            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
+            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
             code_string = self.simplipy_engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
             # Bind exactly the queried width: foreign skeletons may use more (or fewer)
             # variables than this pool declares.
@@ -637,7 +667,7 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         for no_constant_expression, engine, variables, n_variables in items:
             executable_prefix_expression = engine.operators_to_realizations(no_constant_expression)
-            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
+            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
             code_string = engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
             # Bind exactly the prototype's own width (mirror of the is_held_out binding): a
             # holdout prototype may use MORE variables than this catalog declares; binding only
@@ -731,7 +761,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         expression = _constantify_skeleton(list(skeleton))
 
         # Extract constant placeholders
-        expression, constants = explicit_constant_placeholders(expression)
+        expression, constants = explicit_constant_placeholders(expression, convert_numbers_to_constant=False)
 
         # Convert prefix to infix for SymPy
         infix = self.simplipy_engine.prefix_to_infix(expression, power='**')
@@ -750,11 +780,15 @@ class LampleChartonCatalog(GenerativeCatalog):
         # Translate SymPy function names back
         simplified_infix = simplified_infix.replace('Abs', 'abs')
 
-        # Parse back to prefix notation
+        # Parse back to prefix notation; SymPy's printer spells square roots as `sqrt(...)`,
+        # which is not in the engine's vocabulary -- rewrite to `rootn(u, 2)`.
         prefix = self.simplipy_engine.parse(simplified_infix)
+        prefix = desugar_sqrt(prefix, self.simplipy_engine.operator_arity)
 
-        # Convert numeric literals back to constant placeholders
-        prefix = numbers_to_constant(prefix, inplace=True)
+        # Literals stay CONCRETE, matching the SimpliPy branch: the catalog yields
+        # expressions, never `<constant>` templates (abstraction is a downstream,
+        # vocabulary-dependent decision). SymPy may have combined or created literals;
+        # those are part of the expression it returned.
 
         if any(forbidden_token in prefix for forbidden_token in ['float("inf")', 'float("-inf")', 'float("nan")', 'zoo', 'nan', 'oo']):
             raise NoValidSampleFoundError(f"SymPy result contains forbidden tokens: {prefix}")
@@ -801,7 +835,19 @@ class LampleChartonCatalog(GenerativeCatalog):
                 skeleton = self.skeleton_sampler.sample(n_operators, rng)
                 if self.simplify is True:
                     try:
-                        skeleton = self.simplipy_engine.simplify(skeleton, inplace=True)
+                        # form='explicit': simplipy >= 0.12 returns its native TAGGED
+                        # dialect (<add> ... </add>) by default, which every downstream
+                        # consumer here (validation, codify, prefix_to_infix) reads as a
+                        # malformed prefix expression. The explicit binary-prefix dialect
+                        # is the documented escape until tagged notation is adopted
+                        # end-to-end.
+                        skeleton = self.simplipy_engine.simplify(skeleton, form='explicit')
+                    except TypeError:
+                        # A call-signature error is a BUG, not a rejectable sample: wrapped as
+                        # NoValidSampleFoundError it sends the retry loop into an infinite
+                        # full-CPU spin (it did, twice -- the 0.13.0 `max_pattern_length` floor
+                        # and the simplipy 0.12 `inplace` removal).
+                        raise
                     except Exception as e:
                         raise NoValidSampleFoundError(f"Failed to simplify skeleton: {skeleton}") from e
 
@@ -810,25 +856,20 @@ class LampleChartonCatalog(GenerativeCatalog):
                 elif self.simplify == 'sympy':
                     try:
                         skeleton = self._sympy_simplify_skeleton(skeleton, rng)
-                    except NoValidSampleFoundError:
+                    except (NoValidSampleFoundError, TypeError):
+                        # TypeError: a call-signature error is a bug, not a rejectable sample
+                        # (see the SimpliPy branch above).
                         raise
                     except Exception as e:
                         raise NoValidSampleFoundError(f"SymPy failed on skeleton: {skeleton}") from e
 
-                # Terminal representation step, independent of the simplify mode: numeric literals
-                # -> `<constant>` + operand sorting (simplipy >= 0.9 no longer masks inside
-                # `simplify`). Runs AFTER the forbidden-token check (mask leaves inf/nan tokens
-                # alone, but the check belongs to the pre-mask value form); masked skeletons are
-                # never re-fed to `simplify`.
-                if self.mask:
-                    try:
-                        skeleton = self.simplipy_engine.mask(skeleton)
-                    except Exception as e:
-                        raise NoValidSampleFoundError(f"Failed to mask skeleton: {skeleton}") from e
-
+                # No masking step. The generator yields EXPRESSIONS with concrete numeric
+                # literals; abstracting a literal into a fittable `<constant>` is a
+                # downstream, vocabulary-dependent decision (which numbers a given model
+                # can emit), so it belongs to the consumer, not to the data layer.
                 if tuple(skeleton) not in self.skeletons and len(skeleton) <= self.sample_strategy['max_length']:
                     executable_prefix_expression = self.simplipy_engine.operators_to_realizations(skeleton)
-                    prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
+                    prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
                     try:
                         code_string = self.simplipy_engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
                     except ValueError:

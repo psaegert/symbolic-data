@@ -14,7 +14,7 @@ NGUYEN = str(Path(__file__).resolve().parent.parent / "assets" / "catalogs" / "n
 @pytest.fixture(scope="module")
 def engine():
     from simplipy import SimpliPyEngine
-    return SimpliPyEngine.load("dev_7-3", install=True)
+    return SimpliPyEngine.load("acj-4-3", install=True)
 
 
 def _source(engine, **sampling):

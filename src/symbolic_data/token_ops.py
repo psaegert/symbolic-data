@@ -70,3 +70,34 @@ def flatten_nested_list(nested_list: list[Any] | Any, reverse: bool = False) -> 
     if reverse:
         flat_list.reverse()
     return flat_list
+
+
+def desugar_sqrt(tokens: list[str], operator_arity: dict[str, int]) -> list[str]:
+    """Rewrite every ``sqrt`` call to the engine's spelling: ``sqrt u`` -> ``rootn u 2``.
+
+    Curated formulas (and SymPy's printer) spell the square root as ``sqrt(...)``, but the
+    engine's vocabulary has no ``sqrt`` operator -- its parser is lenient with unknown
+    function names and passes the bare token through, which every downstream prefix walk
+    then rejects as malformed. Tokens other than ``sqrt`` that are missing from
+    ``operator_arity`` are treated as leaves, preserving the parser's lenient behavior
+    (a genuinely alien token still fails downstream, with the same error as before).
+    """
+    out: list[str] = []
+
+    def walk(index: int) -> int:
+        token = tokens[index]
+        if token == "sqrt":
+            out.append("rootn")
+            end = walk(index + 1)
+            out.append("2")
+            return end
+        out.append(token)
+        end = index + 1
+        for _ in range(operator_arity.get(token, 0)):
+            end = walk(end)
+        return end
+
+    end = walk(0)
+    if end != len(tokens):
+        raise ValueError(f"sqrt desugaring consumed {end} of {len(tokens)} tokens")
+    return out

@@ -70,7 +70,9 @@ class ProblemSource:
     def __init__(self, config: Mapping[str, Any] | str | Path, *, simplipy_engine: Any = None, rng: np.random.Generator | None = None) -> None:
         self.config = _load_config(config)
         self._rng = rng
-        self._engine_spec = simplipy_engine if simplipy_engine is not None else self.config.get("engine", "dev_7-3")
+        # The config key matches the catalog schema (`simplipy_engine:`); the old undocumented
+        # `engine:` spelling was never used by any shipped config and is dropped in 0.14.0.
+        self._engine_spec = simplipy_engine if simplipy_engine is not None else self.config.get("simplipy_engine", "acj-4-3")
         self._engine = simplipy_engine if not isinstance(simplipy_engine, (str, type(None))) else None
         self._catalog: Catalog | None = None
 

@@ -10,6 +10,7 @@ import tempfile
 from pathlib import Path
 
 import numpy as np
+import pytest
 import yaml
 
 from symbolic_data import ProblemCatalog, ProblemSource
@@ -60,16 +61,12 @@ def test_build_catalog_declarative_path_still_builds_problem_catalog():
     assert isinstance(cat, ProblemCatalog) and len(cat) == 12
 
 
-def test_v23_val_frozen_catalog_resolves_with_its_1000_skeletons():
-    # The shipped v23 validation set: a single self-contained generative spec (recipe + inline frozen
-    # skeletons). Resolving it yields the fixed 1000-skeleton set; a ProblemSource samples X/y per the
-    # recipe over those fixed skeletons (the held-out eval set, no generation).
-    cat = build_catalog(str(ASSETS / "v23-val.yaml"))
-    assert isinstance(cat, GenerativeCatalog)
-    assert len(cat.skeletons) == 1000
-    src = ProblemSource({"catalog": str(ASSETS / "v23-val.yaml"),
-                         "sampling": {"n_support": 32, "n_validation": 0, "noise": 0.0}})
-    from itertools import islice
-    frozen = set(cat.skeletons)
-    probs = [p for p in islice(iter(src), 5) if not p.is_placeholder]
-    assert probs and all(tuple(p.skeleton) in frozen for p in probs)
+def test_retired_mask_key_is_rejected_loudly():
+    # The `mask:` catalog key was removed in 0.14.0 (generative catalogs yield concrete
+    # expressions; masking is a downstream `simplipy.masking` concern). Silently ignoring
+    # it would generate an UNMASKED corpus for a config that declares masking, so the
+    # loader fails closed instead.
+    recipe = yaml.safe_load(RECIPE.read_text(encoding="utf-8"))
+    recipe["mask"] = True
+    with pytest.raises(ValueError, match="mask.*removed"):
+        LampleChartonCatalog.from_config(recipe)

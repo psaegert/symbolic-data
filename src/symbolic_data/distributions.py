@@ -13,6 +13,7 @@ contaminating the native ``log_uniform``. See the package README conventions sec
 """
 import math
 import warnings
+from decimal import Decimal
 from functools import partial
 from typing import Any, Callable
 
@@ -59,6 +60,92 @@ def normal_dist(
     if min_value is not None and max_value is not None:
         return np.clip(samples, min_value, max_value)
     return samples
+
+
+def choice_dist(
+    values: list[Any],
+    weights: list[float] | None = None,
+    size: Any = 1,
+    rng: np.random.Generator | None = None,
+) -> np.ndarray:
+    """Sample from an explicit weighted set of values.
+
+    The categorical distribution the numeric-literal prior needs: an operator's exponent
+    slot draws from a small INTEGER support (``pow``, ``rootn``) rather than a continuum,
+    and a training vocabulary is an explicit set. Weights need not be normalized.
+
+    Returns ``float64`` with the caller's ``size`` shape, like every other builtin -- the
+    values are indexed into a float array rather than collected in a list comprehension, so
+    a tuple ``size`` works and the input dtype does not leak (an integer or string
+    ``values`` list used to come back as ``int64`` / ``<U1``).
+    """
+    if not values:
+        raise ValueError("choice distribution needs a non-empty 'values' list")
+    probabilities = None
+    if weights is not None:
+        if len(weights) != len(values):
+            raise ValueError(
+                f"choice distribution: {len(weights)} weights for {len(values)} values")
+        probability_array = np.asarray(weights, dtype=np.float64)
+        # NaN passes both tests below (comparisons and sum are False/NaN), so it has to be
+        # rejected explicitly or it only fails later, inside numpy's own sampler.
+        if not np.isfinite(probability_array).all():
+            raise ValueError("choice distribution weights must all be finite")
+        if (probability_array < 0).any() or probability_array.sum() <= 0:
+            raise ValueError("choice distribution weights must be non-negative and sum to > 0")
+        probabilities = probability_array / probability_array.sum()
+    value_array = np.asarray(values, dtype=np.float64)
+    indices = _resolve_rng(rng).choice(len(values), size=size, p=probabilities)
+    return value_array[indices]
+
+
+def rounded_dist(
+    base: Callable[..., np.ndarray] | dict[str, Any],
+    precision: Callable[..., np.ndarray] | dict[str, Any] | None = None,
+    size: Any = 1,
+    rng: np.random.Generator | None = None,
+) -> np.ndarray:
+    """Draw from ``base`` and round each draw to a sampled number of decimals.
+
+    Precision is a first-class part of a numeric-literal prior, not cosmetics: a
+    description-length measure prices a literal by the bit length of its EXACT value, so
+    an unrounded float64 draw denotes a rational with a ~17-digit numerator and costs an
+    order of magnitude more than a structural node. Sampling the precision spreads
+    literal cost across the corpus instead of pinning it at one magnitude.
+
+    ``precision`` omitted means uniform over ``1..d`` where ``d`` is the draw's OWN full
+    precision (the decimals in its shortest round-trip repr), so the full range from a
+    coarse literal to the raw draw is covered without an arbitrary cap. Precision 0 is
+    never used: it would collapse the float branch onto the integer support.
+    """
+    generator = _resolve_rng(rng)
+    base_callable = get_distribution(base) if isinstance(base, dict) else base
+    draws = np.asarray(base_callable(size=size, rng=generator), dtype=np.float64)
+    shape = draws.shape
+    flat = draws.ravel()
+
+    precision_callable = None
+    if precision is not None:
+        precision_callable = get_distribution(precision) if isinstance(precision, dict) else precision
+
+    out = np.empty(flat.size, dtype=np.float64)
+    for index, value in enumerate(flat):
+        value = float(value)
+        # A non-finite draw has no decimal expansion: `Decimal(repr(inf)).as_tuple().exponent`
+        # is the STRING 'F' (or 'n' for nan), so negating it raises. Pass it through.
+        if not np.isfinite(value):
+            out[index] = value
+            continue
+        if precision_callable is not None:
+            decimals = max(
+                int(round(float(np.atleast_1d(precision_callable(size=1, rng=generator))[0]))), 1)
+        else:
+            full = -Decimal(repr(value)).as_tuple().exponent  # type: ignore[operator]
+            decimals = int(generator.integers(1, max(int(full), 1) + 1))
+        # `+ 0.0` normalizes -0.0 to 0.0: a rounded small negative draw otherwise reaches
+        # a consumer as negative zero, which prints as "-0.0" and denotes nothing useful.
+        out[index] = round(value, decimals) + 0.0
+    return out.reshape(shape)
 
 
 def log_uniform_dist(
@@ -227,6 +314,8 @@ def fastsrb_dist(
 BASE_DISTRIBUTIONS: dict[str, Callable[..., np.ndarray]] = {
     "uniform": uniform_dist,
     "normal": normal_dist,
+    "choice": choice_dist,
+    "rounded": rounded_dist,
     "log_uniform": log_uniform_dist,
     "log_normal": log_normal_dist,
     "gamma": gamma_dist,

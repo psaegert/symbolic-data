@@ -1,0 +1,181 @@
+# PRELIMINARY training prior for the flash-ansr v24.0 model series.
+#
+# Successor to lample-charton-v23.yaml, which is retired with the generation-1
+# hyper-operator vocabulary (pow2..pow5, pow1_2..pow1_5, mult2..mult5, div2..div5) that
+# simplipy >= 0.12 no longer serves. Here pow and rootn are binary and their exponent
+# slots are constrained by a prior instead of by the operator name.
+#
+# WHAT THIS CATALOG YIELDS: expressions with CONCRETE numeric literals. There is no
+# <constant> placeholder and no masking step. Deciding which literals a model cannot emit
+# (and must therefore abstract into a fittable parameter) depends on that model's numeric
+# vocabulary, so it is a downstream concern -- flash-ansr masks OOV numbers against the
+# vocabulary declared in its own v24.0 config.
+#
+# STATUS: preliminary. No holdout pools yet. The weights below are starting points, not
+# tuned values; the ones most worth revisiting are marked KNOB.
+#
+# Operator weights preserve v23's per-CLASS node rates, not its per-NAME weights, because
+# four hyper-op names collapse into one binary operator:
+#   pow2..pow5   (4 x 1) -> pow    : 4        mult2..mult5 (4 x 1) -> *  : 10 + 4 = 14
+#   pow1_2..1_5  (4 x 1) -> rootn  : 4        div2..div5   (4 x 1) -> /  : 10 + 4 = 14
+# The multiplicative STRUCTURE rate is preserved; the small integer COEFFICIENTS that
+# mult_k/div_k carried now arrive through the literal prior instead.
+type: lample_charton
+name: lample-charton-v24
+license: MIT
+simplipy_engine: acj-4-3
+
+sample_strategy:
+  n_operator_distribution: length_exponential
+  min_operators: 0
+  max_operators: 17
+  power: 0.7
+  lambda: 1
+  max_length: 35
+  max_tries: 4
+  independent_dimensions: true
+
+allow_nan: false
+simplify: true
+
+# Numeric literals at CONSTANT LEAVES. A weighted mixture is an ordinary prior config, so
+# "half integers, half floats" needs no special mechanism.
+#   integer branch -- KNOB: support is flash-ansr's declared numeric vocabulary (-10..10),
+#     weights decreasing linearly with magnitude to 1 at the vocabulary edge (one rule,
+#     no tuned shape); 0 is kept rare because a 0 coefficient collapses a term.
+#   float branch -- v23's literal scale (normal, sigma 5). `rounded` samples the decimal
+#     precision per draw, uniform over 1..(the draw's own full precision). Precision is
+#     load-bearing, not cosmetic: a description-length measure prices a literal by the bit
+#     length of its exact value, so an unrounded float64 draw costs an order of magnitude
+#     more than a structural node and would swamp the structural signal.
+literal_prior:
+- weight: 0.5
+  name: choice
+  kwargs:
+    values: [0,
+             1, -1, 2, -2, 3, -3, 4, -4, 5, -5,
+             6, -6, 7, -7, 8, -8, 9, -9, 10, -10]
+    weights: [1,
+              10, 10, 9, 9, 8, 8, 7, 7, 6, 6,
+              5, 5, 4, 4, 3, 3, 2, 2, 1, 1]
+- weight: 0.5
+  name: rounded
+  kwargs:
+    base:
+      name: normal
+      kwargs:
+        loc: 0
+        scale: 5
+
+# Constrained argument slots. The hyper-op vocabulary guaranteed integer exponents by
+# construction; on the binary vocabulary the general tree sampler would otherwise fill
+# these with arbitrary subtrees (rootn(x, tanh(y)), pow(x, x1*x1)).
+#
+# COHERENCE REQUIREMENT: every value in an INTEGER slot branch must lie inside the
+# downstream numeric vocabulary. Otherwise OOV masking would rewrite it to a fittable
+# parameter -- and a fitted real rootn index is non-integer almost surely, which makes the
+# expression nan almost everywhere. The supports below sit inside -10..10.
+typed_slots:
+  # pow: integers and floats are both legitimate. pow(x, 0) = 1 for every base and
+  # pow(x, 1) = x, so 0 and +-1 are valid; kept rare (3 of 93 units) since they are
+  # trivially simplifiable. Float exponents are defined for non-negative bases only, and
+  # are deliberately OOV -- they are what a downstream mask turns into pow(x, <constant>).
+  # Integer support spans the full numeric vocabulary +-{2..10}; weights decrease linearly
+  # with magnitude to 1 at the edge -- the same rule as the literal prior's integer branch.
+  pow:
+    argument: 1
+    prior:
+    - weight: 0.5
+      name: choice
+      kwargs:
+        values: [2, -2, 3, -3, 4, -4, 5, -5, 6, -6, 7, -7, 8, -8, 9, -9, 10, -10, 1, -1, 0]
+        weights: [9, 9, 8, 8, 7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 1, 1, 1]
+    - weight: 0.5
+      name: rounded
+      kwargs:
+        base:
+          name: normal
+          kwargs:
+            loc: 0
+            scale: 2
+  # rootn: integers ONLY, nonzero, and no +-1. simplipy's c_rootn contract: "the index
+  # must be a finite nonzero integer -- n == 0 or a non-integer index is an invalid
+  # operation (nan)". +-1 dropped as trivial (identity / inv).
+  rootn:
+    argument: 1
+    prior:
+      name: choice
+      kwargs:
+        values: [2, -2, 3, -3, 4, -4, 5, -5, 6, -6, 7, -7, 8, -8, 9, -9, 10, -10]
+        weights: [9, 9, 8, 8, 7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1]
+
+support_sampler:
+  support_prior:
+    name: sampler
+    kwargs:
+      base_dist_name: uniform
+      base_kwargs:
+        min_value: -30
+        max_value: 30
+      param_samplers:
+        low:
+          name: normal
+          kwargs:
+            loc: 0
+            scale: 10
+        high:
+          name: normal
+          kwargs:
+            loc: 0
+            scale: 10
+  n_support_prior:
+    name: uniform
+    kwargs:
+      low: 1
+      high: 1024
+      min_value: 1
+      max_value: 1024
+
+variables:
+- x1
+- x2
+- x3
+- x4
+- x5
+- x6
+- x7
+- x8
+- x9
+- x10
+- x11
+- x12
+- x13
+- x14
+- x15
+- x16
+- x17
+
+operator_weights:
+  +: 10
+  '-': 10
+  '*': 14
+  /: 14
+  pow: 4
+  rootn: 4
+  abs: 1
+  inv: 1
+  neg: 1
+  sin: 1
+  cos: 1
+  tan: 1
+  asin: 1
+  acos: 1
+  atan: 1
+  sinh: 1
+  cosh: 1
+  tanh: 1
+  asinh: 1
+  acosh: 1
+  atanh: 1
+  exp: 1
+  log: 1
