@@ -46,9 +46,9 @@ is a string that points at a declarative-yaml or frozen-`.npz` artifact:
 - a **local path** — a `.yaml` declarative spec or a `.npz` frozen catalog.
 
 `load_catalog` has no `type:` dispatch and rejects a mapping (it goes through `ProblemCatalog.load`
-→ the resolver, which requires a string ref). To use a **generative** catalog — the published
-**`v23-val`** validation set (a generative catalog carrying a fixed 1000-skeleton set), the open
-`lample-charton-v23` training recipe, a local generative `.yaml` (a `type:` spec), or an inline
+→ the resolver, which requires a string ref). To use a **generative** catalog — the open
+`lample-charton-v24` training recipe (or its unsimplified benchmark twin
+`lample-charton-v24-bench`), a local generative `.yaml` (a `type:` spec), or an inline
 `{type: lample_charton, ...}` mapping — build it through `build_catalog(ref)` or
 `ProblemSource({"catalog": ref})`, which dispatch on the `type:` key:
 
@@ -56,10 +56,13 @@ is a string that points at a declarative-yaml or frozen-`.npz` artifact:
 from symbolic_data import build_catalog, ProblemSource
 
 # generative names, a local generative .yaml, or an inline mapping — via build_catalog / ProblemSource
-val = build_catalog("v23-val")                     # the frozen 1000-skeleton validation set (generative)
-gen = build_catalog("lample-charton-v23")          # the open training recipe (a GenerativeCatalog)
+gen = build_catalog("lample-charton-v24")          # the open training recipe (a GenerativeCatalog)
 src = ProblemSource({"catalog": {"type": "lample_charton"}})   # + generative config keys (inline mapping)
 ```
+
+(The generation-1 `lample-charton-v23` recipe and its frozen `v23-val` set retired with the
+hyper-operator vocabulary that `simplipy >= 0.12` no longer serves; their pinned manifest
+entries keep resolving for the legacy stack — `symbolic-data < 0.14` with `simplipy < 0.12`.)
 
 `build_catalog` / `ProblemSource` also accept every form `load_catalog` accepts (a curated name, a
 `name@version`, a `repo_id:name`, a local declarative-yaml / `.npz` path); for a non-generative ref

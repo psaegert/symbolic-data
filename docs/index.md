@@ -53,16 +53,16 @@ for problem in source:
 
 # 3. Generate fresh training expressions on the fly (an open generative recipe -> "generate" mode).
 train = ProblemSource({
-    "catalog": "lample-charton-v23",
+    "catalog": "lample-charton-v24",
     "sampling": {"n_support": "prior", "n_validation": 0, "size": 1000},
-    "holdouts": [{"exclude": "v23-val"}],   # decontaminate against the held-out validation set
+    "holdouts": [{"exclude": "fastsrb"}],   # decontaminate against the held-out benchmark set
 })
 ```
 
 ## What's inside
 
 - **[Sampling data](sampling.md)** — `Catalog` (declarative `ProblemCatalog` / generative
-  `LampleChartonCatalog`), `ProblemSource`, the `Problem` unit, noise + masking.
+  `LampleChartonCatalog`), `ProblemSource`, the `Problem` unit, noise + unused-variable masking.
 - **[Benchmarks](benchmarks.md)** — curated catalogs (`fastsrb`, `feynman`, `nguyen`),
   `load_catalog`, HuggingFace-versioned references, provenance.
 - **[Registries & extensibility](registries.md)** — plug in custom distributions / generative

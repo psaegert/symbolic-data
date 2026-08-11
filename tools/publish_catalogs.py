@@ -42,8 +42,12 @@ CATALOGS = {
     "fastsrb": ("fastsrb.yaml", 120, "problem_catalog"),
     "feynman": ("feynman.yaml", 100, "problem_catalog"),
     "nguyen": ("nguyen.yaml", 12, "problem_catalog"),
-    "v23-val": ("v23-val.yaml", 1000, "generative_catalog"),                 # frozen validation set
-    "lample-charton-v23": ("lample-charton-v23.yaml", None, "generative_catalog"),  # open training recipe
+    # Generation-2 open training recipe + its unsimplified benchmark twin (0.14.0). The
+    # generation-1 pair (lample-charton-v23, v23-val) left the repo with the hyper-operator
+    # vocabulary; their hosted, revision-pinned manifest entries are PRESERVED by the merge
+    # logic below so the legacy stack (symbolic-data < 0.14 + simplipy < 0.12) keeps resolving.
+    "lample-charton-v24": ("lample-charton-v24.yaml", None, "generative_catalog"),
+    "lample-charton-v24-bench": ("lample-charton-v24-bench.yaml", None, "generative_catalog"),
     # P1 GP-toy suites (DSO benchmarks.csv, BSD-3; validated 2026-07-10, 16/16)
     "constant": ("constant.yaml", 10, "problem_catalog"),
     "grammarvae": ("grammarvae.yaml", 1, "problem_catalog"),
@@ -104,64 +108,114 @@ def sha256(path: str) -> str:
     return digest.hexdigest()
 
 
-def main() -> None:
+def _entry(fn: str, revision: str, ctype: str, spec: dict | None) -> dict:
+    versions = spec["versions"] if spec else {"1": fn}
+    return {
+        "type": ctype,
+        "repo_id": REPO,
+        "default_version": spec["default"] if spec else 1,
+        "versions": {
+            v: {
+                "repo_id": REPO,
+                "directory": "",
+                "files": [vfn],
+                "revision": revision,
+                "sha256": {vfn: sha256(os.path.abspath(os.path.join(DATA_DIR, vfn)))},
+            }
+            for v, vfn in versions.items()
+        },
+    }
+
+
+def main(execute: bool = False) -> None:
+    """Incremental, forward-only publish: hosted state is the baseline, never rebuilt.
+
+    * a CATALOGS name absent from the hosted manifest -> its file uploads and a new entry
+      is added (revision = the fresh files commit);
+    * a hosted name absent from CATALOGS (a retired catalog) -> its entry is PRESERVED
+      verbatim, so pinned legacy stacks keep resolving;
+    * a hosted name whose local file bytes differ from the pinned sha256 -> REFUSED:
+      published versions are immutable, ship the change as a NEW version in MULTI_VERSION.
+
+    Dry-run by default; pass ``--execute`` to publish.
+    """
     from lint_catalogs import lint_paths
     assert lint_paths(), "catalog lint failed -- fix errors before publishing"
+    import json as _json
+
     api = HfApi()
+    manifest_path = api.hf_hub_download(repo_id=REPO, repo_type=REPO_TYPE, filename="manifest.json")
+    with open(manifest_path, "r", encoding="utf-8") as handle:
+        hosted = _json.load(handle)
+    print(f"hosted manifest: {len(hosted)} entries")
+
+    new_names, unchanged, conflicts = [], [], []
+    for name, (fn, _cnt, _ctype) in CATALOGS.items():
+        local = os.path.abspath(os.path.join(DATA_DIR, fn))
+        assert os.path.isfile(local), f"missing catalog file: {local}"
+        if name not in hosted:
+            new_names.append(name)
+            continue
+        pinned = hosted[name]["versions"][str(hosted[name]["default_version"])]["sha256"].get(fn)
+        if pinned == sha256(local):
+            unchanged.append(name)
+        elif name in MULTI_VERSION:
+            new_names.append(name)  # a new version of a multi-version catalog
+        else:
+            conflicts.append(name)
+    preserved = [name for name in hosted if name not in CATALOGS]
+
+    print(f"new: {sorted(new_names)}")
+    print(f"unchanged (skipped): {len(unchanged)}")
+    print(f"preserved retired entries: {sorted(preserved)}")
+    if conflicts:
+        raise SystemExit(
+            f"REFUSED: content changed for published catalogs {sorted(conflicts)} -- published "
+            f"versions are immutable; ship the change as a NEW version via MULTI_VERSION.")
+    if not new_names:
+        print("nothing to publish")
+        return
+    if not execute:
+        print("dry run (pass --execute to publish)")
+        return
+
     who = api.whoami()["name"]
     print(f"HF user: {who}")
 
-    api.create_repo(REPO, repo_type=REPO_TYPE, exist_ok=True, private=False)
-    print(f"repo ready: {REPO} ({REPO_TYPE}, public)")
-
-    # 1. upload all catalog files in ONE commit so a single revision pins the whole v1 set
+    # 1. upload only the NEW files, in one commit so a single revision pins them
     ops = []
-    filenames = [fn for (fn, _cnt, _type) in CATALOGS.values()]
-    for spec in MULTI_VERSION.values():
-        filenames += [fn for fn in spec["versions"].values() if fn not in filenames]
-    for extra in ("README.md", "THIRD_PARTY_NOTICES.md"):
-        path = os.path.abspath(os.path.join(DATA_DIR, "..", "hf_card", extra))
-        assert os.path.isfile(path), f"missing {extra}: {path}"
-        ops.append(CommitOperationAdd(path_in_repo=extra, path_or_fileobj=path))
+    filenames: list[str] = []
+    for name in new_names:
+        fn = CATALOGS[name][0]
+        spec = MULTI_VERSION.get(name)
+        for vfn in (spec["versions"].values() if spec else [fn]):
+            if vfn not in filenames:
+                filenames.append(vfn)
     for fn in filenames:
         local = os.path.abspath(os.path.join(DATA_DIR, fn))
-        assert os.path.isfile(local), f"missing catalog file: {local}"
         ops.append(CommitOperationAdd(path_in_repo=fn, path_or_fileobj=local))
     commit = api.create_commit(
         repo_id=REPO, repo_type=REPO_TYPE, operations=ops,
-        commit_message=f"Publish {len(filenames)} catalog artifacts + card/notices",
+        commit_message=f"Publish {len(filenames)} catalog artifacts: {', '.join(sorted(new_names))}",
     )
     revision = commit.oid
     print(f"files commit: {revision}")
 
-    # 2. build the manifest pinning revision + per-file sha256, then upload it
-    manifest: dict = {}
-    for name, (fn, _cnt, ctype) in CATALOGS.items():
-        spec = MULTI_VERSION.get(name)
-        versions = spec["versions"] if spec else {"1": fn}
-        manifest[name] = {
-            "type": ctype,
-            "repo_id": REPO,
-            "default_version": spec["default"] if spec else 1,
-            "versions": {
-                v: {
-                    "repo_id": REPO,
-                    "directory": "",
-                    "files": [vfn],
-                    "revision": revision,
-                    "sha256": {vfn: sha256(os.path.abspath(os.path.join(DATA_DIR, vfn)))},
-                }
-                for v, vfn in versions.items()
-            },
-        }
+    # 2. merge: hosted entries verbatim (incl. retired names), new entries at the new revision
+    manifest = dict(hosted)
+    for name in new_names:
+        fn, _cnt, ctype = CATALOGS[name]
+        manifest[name] = _entry(fn, revision, ctype, MULTI_VERSION.get(name))
     manifest_bytes = (json.dumps(manifest, indent=2) + "\n").encode("utf-8")
     api.upload_file(
         path_or_fileobj=manifest_bytes, path_in_repo="manifest.json",
-        repo_id=REPO, repo_type=REPO_TYPE, commit_message="Publish manifest v1",
+        repo_id=REPO, repo_type=REPO_TYPE,
+        commit_message=f"Manifest: add {', '.join(sorted(new_names))} (hosted entries preserved)",
     )
-    print("manifest.json uploaded")
-    print(json.dumps(manifest, indent=2))
+    print(f"manifest.json uploaded: {len(manifest)} entries "
+          f"({len(new_names)} new, {len(preserved)} preserved-retired)")
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(execute="--execute" in sys.argv)

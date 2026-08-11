@@ -11,10 +11,10 @@ Each rule is one of:
 from symbolic_data import ProblemSource
 
 source = ProblemSource({
-    "catalog": "lample-charton-v23",        # an open generative training recipe
+    "catalog": "lample-charton-v24",        # an open generative training recipe
     "sampling": {"n_support": "prior", "n_validation": 0, "size": 1000},
     "holdouts": [
-        {"exclude": "v23-val"},             # decontaminate against the held-out validation set
+        {"exclude": "fastsrb"},             # decontaminate against the held-out benchmark set
         {"filter": {"finite": True, "max_complexity": 30, "max_variables": 5}},
     ],
 })
@@ -31,7 +31,7 @@ held-out evaluation set needs.
 The excluded `<ref>` is resolved by the same mechanism as any catalog ref (a name / path / mapping),
 so it may be a **declarative** catalog (skeletons taken from its expressions) **or** a **generative**
 one (its skeleton set) — enabling cross-namespace decontamination (e.g. training generation excluding
-either the declarative FastSRB benchmark or the generative `v23-val` set). The exclusion keys are
+either the declarative FastSRB benchmark or a frozen generative validation set). The exclusion keys are
 cached on first use. Functional-equivalence decontamination (beyond structural skeleton match) is a
 later refinement.
 

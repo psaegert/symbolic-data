@@ -67,13 +67,14 @@ from symbolic_data import LampleChartonCatalog, build_catalog
 catalog = LampleChartonCatalog.from_config("recipe.yaml")
 
 # ...or resolve any catalog ref to a Catalog (declarative OR generative) in one call:
-catalog = build_catalog("lample-charton-v23")     # the published open v23 training recipe
+catalog = build_catalog("lample-charton-v24")     # the published open training recipe
 ```
 
 A `type:` generative spec carrying inline `skeletons:` is **frozen** (a fixed skeleton set — e.g. a
 held-out validation set distributed as one self-contained yaml); without it, the catalog is **open**
-and generates fresh skeletons indefinitely. The published `v23-val` catalog is the frozen
-1000-skeleton validation set; `lample-charton-v23` is the open training recipe.
+and generates fresh skeletons indefinitely. The published `lample-charton-v24` catalog is the open
+training recipe; `lample-charton-v24-bench` is its unsimplified twin for benchmarking (a benchmark
+corpus must not sit at the simplifier's own fixed point).
 
 ## ProblemSource (level 2)
 
@@ -113,7 +114,7 @@ support prior (the training-time pattern — variable support sizes). `n_support
 
 ```python
 train = ProblemSource({
-    "catalog": "lample-charton-v23",
+    "catalog": "lample-charton-v24",
     "sampling": {"n_support": "prior", "n_validation": 0, "size": 1000},
 })
 ```

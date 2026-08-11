@@ -38,13 +38,13 @@ An example config (`configs/my_val.yaml`) — generate 1000 fresh expressions an
 against a held-out set:
 
 ```yaml
-catalog: lample-charton-v23          # an open generative recipe (resolved by name)
+catalog: lample-charton-v24          # an open generative recipe (resolved by name)
 sampling:
   n_support: prior                   # draw the support size per sample from the catalog's prior
   n_validation: 0                    # required when n_support: prior
   size: 1000                         # number of expressions to draw
 holdouts:
-  - exclude: v23-val                 # drop any problem whose skeleton matches the v23 validation set
+  - exclude: fastsrb                 # drop any problem whose skeleton matches the benchmark set
 ```
 
 The frozen `.npz` it writes is loaded back with `load_catalog("./data/my_val.npz")` (or
