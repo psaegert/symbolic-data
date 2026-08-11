@@ -3,6 +3,82 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.14.0] - 2026-08-11
+
+Generation-2 release: the generative pipeline moves to the current simplipy engine family
+(`acj-*`, binary `pow`/`rootn`) and yields concrete expressions.
+
+### Added
+- **Typed argument slots** (`typed_slots` catalog key): a chosen argument of a chosen operator
+  (the `pow` exponent, the `rootn` index) is drawn from a configurable literal prior instead of
+  the general subtree sampler — which would otherwise fill it with arbitrary subtrees like
+  `rootn(x, tanh(y))` that the `rootn` contract rejects. The retired hyper-operator vocabulary
+  encoded this constraint in operator names (`pow2`..`pow5` were unary); on the binary
+  vocabulary it lives in the generator. Slot specs validate fail-closed (unknown operator,
+  arity < 2, bad argument index, missing prior).
+- **`choice` and `rounded` literal distributions.** `choice` samples an explicit weighted value
+  set (weights validated: finite, non-negative, matching length; float64 out regardless of the
+  input dtype). `rounded` draws from a base distribution and rounds each draw to a sampled
+  number of decimals — by default uniform over 1..the draw's own shortest-round-trip precision —
+  so literal description length spans coarse to full precision instead of pinning at float64's
+  ~17 digits. Non-finite draws pass through; `-0.0` normalizes to `0.0`.
+- **`lample-charton-v24` / `lample-charton-v24-bench` catalogs**: the generation-2 training
+  prior on the 23-operator vocabulary (`acj-4-3`), with typed exponent slots (integers
+  ±2..±10 with linearly decreasing weights; `pow` also draws rounded float exponents), a mixed
+  integer/rounded-float literal prior over the ±10 numeric vocabulary, and per-class operator
+  rates carried over from v23 (`*` / `/` absorb the retired `mult_k`/`div_k` mass). The
+  `-bench` twin differs only in `simplify: false`: a benchmark corpus must not sit at the
+  simplifier's own fixed point.
+- `token_ops.desugar_sqrt`: curated formulas and SymPy's printer spell the square root as
+  `sqrt(...)`, which the current vocabulary has no operator for (the engine's parser passes
+  unknown names through as bare tokens); both parse paths now rewrite it to `rootn(u, 2)`.
+
+### Changed
+- **Generative catalogs yield EXPRESSIONS, not templates** (BREAKING). Constant leaves
+  materialize as concrete numeric literals drawn from `literal_prior`; there is no
+  `<constant>` placeholder and no masking step in generation. Which literals a model must
+  abstract into a fittable parameter depends on that model's numeric vocabulary, so masking is
+  the consumer's decision (`simplipy.masking` provides the policies). The retired `mask`
+  catalog key is rejected loudly (`ValueError`) rather than silently ignored — silently
+  ignoring it would generate an unmasked corpus for a config that declares masking. Holdout
+  decontamination is unaffected: skeleton hashing normalizes numerals to `<constant>` on both
+  sides, so a concrete corpus still matches placeholder-form held-out structures.
+- **Only explicit `<constant>` tokens are fittable.** All `explicit_constant_placeholders`
+  call sites now pass `convert_numbers_to_constant=False`. Previously digit-only literals —
+  including small integer exponents — were silently re-templated into fittable constants and
+  resampled at data time, and the count mismatch against skeleton normalization made
+  ground-truth substitution fail intermittently (`IndexError`).
+- **The default engine is `acj-4-3`** (`ProblemSource`, `compile_expression`); the `dev_7-3`
+  defaults were dead on simplipy >= 0.12. The undocumented `engine:` ProblemSource config key
+  is renamed to `simplipy_engine`, matching the catalog schema.
+- Engine `simplify` calls request `form='explicit'` (simplipy >= 0.12 defaults to its tagged
+  n-ary dialect, which the prefix consumers reject) and drop the removed `inplace` keyword.
+- The curated evaluation path masks via
+  `simplipy.masking.mask(tokens, engine, mask_values_keep_structure)`: value-position literals
+  become `<constant>` while exponent / root-index literals stay visible (structure, not
+  fittable constants). `engine.mask()` no longer exists in simplipy >= 0.12.
+- Dependency floor: `simplipy>=0.12` (the shipped catalogs only load there; the declared floor
+  and the shipped assets are coherent again).
+
+### Fixed
+- **A call-signature `TypeError` inside skeleton simplification now propagates** instead of
+  being wrapped as a retryable no-valid-sample failure. Twice in this project's history a
+  removed simplify keyword produced an infinite full-CPU rejection loop (the 0.13.0
+  `max_pattern_length` floor; the simplipy 0.12 `inplace` removal) because a programming
+  error was treated as a rejectable sample. That class is now structurally closed, in both
+  the SimpliPy and SymPy branches.
+- Ground-truth metadata for concrete skeletons: with zero sampled literals the tokens ARE the
+  ground truth; the placeholder-substitution path runs only for frozen placeholder-form specs.
+- SymPy-mode simplification (`simplify: 'sympy'`) keeps concrete literals, matching the
+  SimpliPy branch (it previously re-templated them into placeholders).
+
+### Removed
+- The generation-1 catalogs `lample-charton-v23` and `v23-val` (hyper-operator vocabulary,
+  which simplipy >= 0.12 no longer serves) leave the repo, together with the test that
+  resolved `v23-val`. Their pinned, revision-locked manifest entries keep resolving for the
+  legacy stack (`symbolic-data < 0.14` with `simplipy < 0.12`), so no installed pair breaks;
+  the publish tool preserves hosted entries it no longer finds locally.
+
 ## [0.13.0] - 2026-07-26
 
 ### Added
