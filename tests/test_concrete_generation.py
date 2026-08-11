@@ -203,3 +203,18 @@ def test_simplify_call_signature_errors_propagate_instead_of_spinning():
     with pytest.raises(TypeError, match="unexpected keyword"):
         for _ in range(50):  # a rejection loop would spin past this in microseconds
             catalog.sample(n_support=8, rng=np.random.default_rng(0))
+
+
+def test_structural_slots_realize_the_drawn_operator_count_exactly(engine):
+    # The slot literal is written in at placement time (effective arity = arity - 1),
+    # never grown as a subtree and torn out -- so the drawn n_operators IS the shipped
+    # operator count, for every k. (The grow-then-collapse approach deleted a mean of
+    # ~3.2 operators per tree and smeared the drawn distribution downward.)
+    sampler = _sampler(engine)
+    arity = engine.operator_arity
+    rng = np.random.default_rng(20260811)
+    for k in (1, 3, 8, 13, 17):
+        for _ in range(100):
+            tokens = sampler.sample(k, rng=rng)
+            assert sum(1 for t in tokens if t in arity) == k
+            assert len(tokens) <= 2 * k + 1 + k  # growing seats + slot literals bound

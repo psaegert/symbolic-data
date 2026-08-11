@@ -3,6 +3,21 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.15.0] - 2026-08-11
+
+### Changed
+- **Typed slots are now STRUCTURAL** (BREAKING for distribution reproducibility). A
+  slot-bearing operator exposes only its growing seats to the tree walk (effective arity =
+  arity - 1 -- exactly the retired hyper-operators' semantics: `pow3` was unary because the
+  exponent lived in the name), and the slot literal is written in at placement time.
+  Previously the walk grew a full subtree in the slot seat and a post-pass tore it out,
+  deleting every operator inside: the shipped operator-count distribution was the drawn one
+  smeared downward (at the v24 prior: mean 3.2 operators deleted per tree, drawn-17 trees
+  kept 17 operators only 37% of the time). The drawn `n_operators` is now realized exactly
+  (probe: 27.5% shipped at k=17 vs 27.6% configured), no work is grown to be discarded, and
+  pow/rootn density is essentially unchanged (~0.100 vs ~0.099 of operator tokens).
+  Skeleton corpora generated with 0.14.0 are not distributionally comparable.
+
 ## [0.14.0] - 2026-08-11
 
 Generation-2 release: the generative pipeline moves to the current simplipy engine family

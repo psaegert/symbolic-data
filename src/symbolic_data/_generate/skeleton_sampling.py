@@ -71,8 +71,19 @@ class SkeletonSampler:
         self._n_unary_operators = 1
         self._n_binary_operators = 1
 
-        self.unary_operators = [name for name, arity in simplipy_engine.operator_arity.items() if arity == 1]
-        self.binary_operators = [name for name, arity in simplipy_engine.operator_arity.items() if arity == 2]
+        # STRUCTURAL slots: a slot-bearing operator exposes only its GROWING seats to the
+        # tree walk (effective arity = arity - number of slots), exactly as the retired
+        # hyper-operator vocabulary did -- `pow3` was unary because the exponent lived in
+        # the name. The slot literal is written in at placement time, so the drawn
+        # n_operators is realized EXACTLY (a grow-then-collapse approach instead deletes
+        # every operator inside torn-out slot subtrees, smearing the drawn operator-count
+        # distribution downward), and pow/rootn compete in the class their effective
+        # arity puts them in, matching the pool dynamics the hyper-ops had.
+        def _effective_arity(name: str) -> int:
+            return simplipy_engine.operator_arity[name] - (1 if name in self.typed_slots else 0)
+
+        self.unary_operators = [name for name in simplipy_engine.operator_arity if _effective_arity(name) == 1]
+        self.binary_operators = [name for name in simplipy_engine.operator_arity if _effective_arity(name) == 2]
 
         self.unary_operator_probs = self._build_probability_vector(self.unary_operators)
         self.binary_operator_probs = self._build_probability_vector(self.binary_operators)
@@ -142,49 +153,6 @@ class SkeletonSampler:
             raise ValueError("a constant leaf was sampled but no 'literal_prior' is configured")
         return self._format_literal(np.atleast_1d(self.literal_prior(size=1, rng=rng))[0])
 
-    def _subtree_end(self, stack: Sequence[Any], index: int) -> int:
-        """Index just past the subtree rooted at ``index`` (``None`` counts as a leaf)."""
-        token = stack[index]
-        if token is None:
-            return index + 1
-        end = index + 1
-        for _ in range(self.simplipy_engine.operator_arity.get(token, 0)):
-            end = self._subtree_end(stack, end)
-        return end
-
-    def _collapse_typed_slots(self, stack: list[Any], rng: np.random.Generator) -> list[Any]:
-        """Replace every constrained argument subtree with a sampled literal.
-
-        Applied AFTER the structure walk so the Lample-Charton tree-counting
-        invariants (``unary_binary_distribution``, the empty-node bookkeeping) are
-        untouched; the collapse only shortens what the sampler already produced.
-        """
-        out: list[Any] = []
-
-        def rebuild(index: int) -> int:
-            token = stack[index]
-            if token is None:
-                out.append(None)
-                return index + 1
-            out.append(token)
-            spec = self.typed_slots.get(token)
-            end = index + 1
-            for argument in range(self.simplipy_engine.operator_arity.get(token, 0)):
-                if spec is not None and argument == spec["argument"]:
-                    end = self._subtree_end(stack, end)      # discard the sampled subtree
-                    out.append(self._slot_literal(token, rng))
-                else:
-                    end = rebuild(end)
-            return end
-
-        consumed = rebuild(0)
-        # Not an `assert`: `python -O` strips those, and a malformed walk would then
-        # silently emit a TRUNCATED expression rather than failing.
-        if consumed != len(stack):
-            raise RuntimeError(
-                f"typed-slot collapse consumed {consumed} of {len(stack)} tokens")
-        return out
-
     def _sample_next_pos_ubi(self, n_empty_nodes: int, n_operators: int, rng: np.random.Generator) -> tuple[int, int]:
         if n_empty_nodes >= len(self.unary_binary_distribution):
             self.unary_binary_distribution = generate_ubi_dist(
@@ -244,25 +212,30 @@ class SkeletonSampler:
             else:
                 operator = rng.choice(self.binary_operators, p=self.binary_operator_probs)
 
-            arity_value = self.simplipy_engine.operator_arity[operator]
-            n_empty_nodes += arity_value - 1 - position
-            total_leaves += arity_value - 1
+            operator = str(operator)
+            slot_spec = self.typed_slots.get(operator)
+            true_arity = self.simplipy_engine.operator_arity[operator]
+            # Growing seats only: the ubi bookkeeping runs on the EFFECTIVE arity, and the
+            # slot literal is written in right here, never grown as a subtree.
+            growing_arity = true_arity - (1 if slot_spec is not None else 0)
+            n_empty_nodes += growing_arity - 1 - position
+            total_leaves += growing_arity - 1
             left_leaves += position
+
+            children: list[str | None] = [None] * true_arity
+            if slot_spec is not None:
+                children[slot_spec["argument"]] = self._slot_literal(operator, rng)
 
             insert_index = [index for index, value in enumerate(stack) if value is None][left_leaves]
             stack = (
                 stack[:insert_index]
-                + [str(operator)]
-                + [None for _ in range(arity_value)]
+                + [operator]
+                + children
                 + stack[insert_index + 1:]
             )
 
         assert len([1 for value in stack if value in self.simplipy_engine.operator_arity]) == n_operators
         assert len([1 for value in stack if value is None]) == total_leaves
-
-        if self.typed_slots:
-            stack = self._collapse_typed_slots(stack, rng)
-            total_leaves = sum(1 for value in stack if value is None)
 
         leaves = self._get_leaves(t_leaves=total_leaves, rng=rng)
         assert len(leaves) == total_leaves, f"Expected {total_leaves} leaves, got {len(leaves)}"
