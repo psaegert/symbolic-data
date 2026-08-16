@@ -23,7 +23,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 
 from simplipy import SimpliPyEngine, normalize_expression, normalize_skeleton
-from simplipy.utils import explicit_constant_placeholders, substitude_constants
+from simplipy.utils import explicit_constant_placeholders, substitute_constants
 
 from symbolic_data.config_io import load_config, save_config
 from symbolic_data.paths import substitute_root_path
@@ -52,7 +52,7 @@ def _gt_metadata(skeleton: Sequence[str], literals: Any) -> tuple[list[str] | No
         skeleton_list = normalize_skeleton(skeleton)
         if skeleton_list is None:
             return None, None
-        expression_tokens = substitude_constants(list(skeleton_list), values=values, inplace=False)
+        expression_tokens = substitute_constants(list(skeleton_list), values=values, inplace=False)
     else:
         expression_tokens = [str(token) for token in skeleton]
     expression = normalize_expression(expression_tokens)
