@@ -7,14 +7,14 @@ name = "symbolic-data"
 version = "0.15.0"
 description = "Model-agnostic symbolic-regression data layer: Problem, versioned ProblemCatalog, and ProblemSource (curated sets / on-the-fly generation / fixed)."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = "MIT"
 authors = [{ name = "Paul Saegert" }]
 keywords = ["symbolic-regression", "dataset", "sampling", "holdout", "expression"]
 dependencies = [
     "numpy",
     "scikit-learn",
-    "simplipy>=0.12,<0.14",
+    "simplipy>=0.13,<0.14",
     "pyyaml",
     "tqdm",
     "huggingface_hub",
