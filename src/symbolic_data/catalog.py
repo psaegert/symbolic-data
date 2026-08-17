@@ -54,6 +54,7 @@ def _adaptive_batch(needed: int, collected: int, drawn: int, budget_left: int) -
     f_hat = max(collected / max(drawn, 1), 1.0 / _PER_POINT_REJECTION_CAP)
     return max(1, min(int(needed / f_hat * 1.25) + 8, budget_left))
 
+
 _PROBLEM_ARRAY_FIELDS = ("x_support", "y_support", "y_support_noisy", "x_validation", "y_validation", "y_validation_noisy")
 # optional per-problem arrays (absent for synthetic problems): reference-law predictions
 _PROBLEM_OPTIONAL_ARRAY_FIELDS = ("y_reference_support", "y_reference_validation")

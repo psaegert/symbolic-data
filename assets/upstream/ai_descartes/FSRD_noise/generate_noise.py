@@ -73,4 +73,3 @@ f = open(y_rmsfilename, "a")
 temp = dirname + " " + str(y_rms) + '\n'
 f.write(temp)
 f.close()
-

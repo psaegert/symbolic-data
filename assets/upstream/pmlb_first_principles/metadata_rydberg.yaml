@@ -2,7 +2,7 @@
 dataset: first_principles_rydberg
 description: |
   The Rydberg formula is a model for the energy levels of an electron in a hydrogen atom.
-  
+
   Data was synthetically generated using the Rydberg formula, with a range of parameters using the scripts in the publication repository.
 
 source: publication repository https://github.com/MilesCranmer/PySR

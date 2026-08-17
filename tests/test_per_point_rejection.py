@@ -62,7 +62,6 @@ def test_partial_domain_realizes_in_few_rounds(tmp_path):
     """Efficiency: with per-point + adaptive oversampling the sqrt case needs ~2 eval rounds,
     not ~1/f iterations. Counted via a wrapped rng."""
     import warnings
-    import numpy as np
     import yaml
     from symbolic_data import ProblemSource
 

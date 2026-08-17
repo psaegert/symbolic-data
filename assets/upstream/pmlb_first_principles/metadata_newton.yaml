@@ -2,7 +2,7 @@
 dataset: first_principles_newton
 description: |
   The Newton's law of gravitation is a model for the gravitational force between two bodies, given their masses and distance.
-  
+
   Data was synthetically generated using the Newton's law of gravitation, with a range of parameters using the scripts in the publication repository.
 
 source: publication repository https://github.com/MilesCranmer/PySR

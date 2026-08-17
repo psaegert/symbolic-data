@@ -13,6 +13,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import yaml
+from symbolic_data import ProblemCatalog
 
 from simplipy import SimpliPyEngine, normalize_skeleton
 
@@ -62,7 +63,6 @@ def main() -> None:
         if not path.exists():
             print(f"skip {name} (no local npz)")
             continue
-        from symbolic_data import ProblemCatalog
         for problem in ProblemCatalog.from_npz(path).problems or []:
             # identity must live in the SAME space as the yaml branch (parse of a prepared infix,
             # literals masked): the stored problem.skeleton comes from compile_expression's
@@ -106,7 +106,6 @@ def main() -> None:
         path = Path("assets/catalogs") / f"{name}.npz"
         if not path.exists():
             continue
-        from symbolic_data import ProblemCatalog
         for problem in ProblemCatalog.from_npz(path).problems or []:
             meta = problem.meta or {}
             base_cat, base_eq = meta.get("base_catalog"), meta.get("base_eq_id")

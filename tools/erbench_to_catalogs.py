@@ -42,6 +42,7 @@ REPORT = os.path.join(HERE, "..", "assets", "catalogs", "ERBENCH_REPORT.md")
 PAPER = "ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)"
 HF = "HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark"
 
+
 def _rewrite_two_arg_logs(expr: str) -> str:
     """sympy two-arg log(u, base) -> engine-parseable natural-log forms (paren-balanced)."""
     out = []

@@ -14,7 +14,7 @@ keywords:
   - first principles
 target:
   type: continuous
-  description: luminosity 
+  description: luminosity
 features:
   - name: DV
     type: continuous
