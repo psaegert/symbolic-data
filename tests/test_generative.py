@@ -140,7 +140,6 @@ def test_register_holdout_pool_frozen_wider_than_catalog_keeps_image_layer(tmp_p
     # A frozen problem using MORE variables than the registering catalog must still register its
     # functional image (pre-fix: codify bound only the catalog's variables, the NameError was
     # swallowed, and the image layer was silently dropped for exactly those laws).
-    import yaml as _yaml
     from symbolic_data import Problem, ProblemCatalog
 
     rng = np.random.default_rng(0)

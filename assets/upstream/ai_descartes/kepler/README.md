@@ -1,6 +1,6 @@
 # PARAMETERS
 
-## SOLAR_SYSTEM 
+## SOLAR_SYSTEM
 
 | Entity    | Label  | Conversion           | Units    |
 | ---       |  ---   |    ----              |    --- |
@@ -10,7 +10,7 @@
 | distance  | d		 | 1.496 * 10^11	    | distance [astronomical units] |
 
 
-## EXOPLANETS 
+## EXOPLANETS
 
 | Entity    | Label | Conversion            | Units    |
 | ---       |  ---  |    ----               |    --- |
@@ -20,7 +20,7 @@
 | Distance  | d		| 1.496 * 10^11			| distance [astronomical units] |
 
 
-## BINARY STARS 
+## BINARY STARS
 
 | Entity    | Label  | Conversion           | Units    |
 | ---       |  ---   |    ----              |    --- |

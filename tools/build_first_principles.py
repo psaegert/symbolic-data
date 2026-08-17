@@ -40,6 +40,7 @@ def _is_number(token: str) -> bool:
     except (TypeError, ValueError):
         return False
 
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 UPSTREAM = os.path.join(HERE, "..", "assets", "upstream", "pmlb_first_principles")
 OUT_NPZ = os.path.join(HERE, "..", "assets", "catalogs", "first-principles.npz")
@@ -119,6 +120,7 @@ def build_laws() -> list[Law]:
     # -- newton: y = ln(F) = ln(c1 m1 m2 / r^2) (cols r, m1, m2; c1 = G) -----------------------
     def m_newton(X, c1):
         return np.log(c1 * X[1] * X[2] / X[0] ** 2)
+
     def f_newton(X, y):
         return [float(np.exp(np.mean(y - np.log(X[1] * X[2] / X[0] ** 2))))]
     laws.append(Law(
@@ -133,6 +135,7 @@ def build_laws() -> list[Law]:
     # -- ideal_gas: y = ln(P) = ln(c1 n T / V) (cols n, T, V; c1 = R) --------------------------
     def m_ideal(X, c1):
         return np.log(c1 * X[0] * X[1] / X[2])
+
     def f_ideal(X, y):
         return [float(np.exp(np.mean(y - np.log(X[0] * X[1] / X[2]))))]
     laws.append(Law(
@@ -148,8 +151,10 @@ def build_laws() -> list[Law]:
         x = np.asarray(x, dtype=np.float64)
         return np.where(x > 30.0, x + np.log1p(-np.exp(-np.minimum(x, 700.0))),
                         np.log(np.expm1(np.minimum(x, 30.0))))
+
     def m_planck(X, c1, c2):
         return np.log(c1) + 3.0 * np.log(X[0]) - _logexpm1(c2 * X[0] / X[1])
+
     def f_planck(X, y):
         best = None
         for c2 in np.geomspace(1e-14, 1e-7, 600):
@@ -178,6 +183,7 @@ def build_laws() -> list[Law]:
     # -- rydberg: y = ln(lambda) = -ln(c1 (1/n1^2 - 1/n2^2)) ---------------------------------
     def m_rydberg(X, c1):
         return -np.log(c1 * (1.0 / X[0] ** 2 - 1.0 / X[1] ** 2))
+
     def f_rydberg(X, y):
         term = 1.0 / X[0] ** 2 - 1.0 / X[1] ** 2
         return [float(np.exp(-np.mean(y + np.log(term))))]
@@ -219,6 +225,7 @@ def build_laws() -> list[Law]:
     # -- bode: a = c1 + c2 exp(c3 n)  (canonical 0.4 + 0.3 * 2^n; c3 = ln 2) -------------------
     def m_bode(X, c1, c2, c3):
         return c1 + c2 * np.exp(c3 * X[0])
+
     def f_bode(X, y):
         best = None
         for c3 in np.linspace(0.05, 2.0, 400):
@@ -253,6 +260,7 @@ def build_laws() -> list[Law]:
     # -- absorption: A = log(1/(c1 + exp(-c2 x))) (MvSR refit simplified form) -----------------
     def m_absorption(X, c1, c2):
         return np.log(1.0 / (c1 + np.exp(-c2 * X[0])))
+
     def f_absorption(X, y):
         best = None
         for c2 in np.geomspace(1e-3, 10.0, 400):
@@ -273,6 +281,7 @@ def build_laws() -> list[Law]:
     # -- supernovae (2 bands): Bazin et al. 2009, f = c1 / (c2 exp(c3 t) + exp(-c4 t)) ---------
     def m_bazin(X, c1, c2, c3, c4):
         return c1 / (c2 * np.exp(np.clip(c3 * X[0], -700, 700)) + np.exp(np.clip(-c4 * X[0], -700, 700)))
+
     def f_bazin(X, y):
         mask = y > 1e-3
         t, ym = X[0][mask], y[mask]

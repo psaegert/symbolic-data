@@ -16,4 +16,3 @@ ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276); HuggingFace datas
 
 ## erbench-eponymous [SA]
 - rows 211 -> entries 195 (dups merged 16, excluded 0); tier headline; CC-BY-SA-4.0 (Wikipedia-derived; see assets_sa LICENSE)
-

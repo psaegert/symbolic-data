@@ -25,7 +25,6 @@ Run from the repo root: ``PYTHONPATH=src python tools/build_ai_descartes.py``
 from __future__ import annotations
 
 import os
-import warnings
 
 import numpy as np
 import yaml
@@ -154,6 +153,7 @@ def _fit_langmuir(p, q):
         if best is None or fvu < best[0]:
             best = (fvu, u, v)
     _, u, v = best
+
     def model(_x, a, b):
         return a * b * p / (1.0 + a * p)
     try:
