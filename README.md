@@ -10,6 +10,10 @@ holdout, and evaluation draw from one source of truth. Its only heavy dependency
 [`simplipy`](https://github.com/psaegert/simplipy); otherwise just numpy/sklearn plus
 `huggingface_hub` (for resolving versioned catalogs from the HF asset repo).
 
+## Publications
+
+- Saegert & Köthe 2026, _Breaking the Simplification Bottleneck in Amortized Neural Symbolic Regression_ (ICML 2026) [https://arxiv.org/abs/2602.08885](https://arxiv.org/abs/2602.08885)
+
 ## Install
 
 ```bash
