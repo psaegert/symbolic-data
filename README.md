@@ -61,23 +61,19 @@ Reproducibility comes from **fixed data, not seeds**: sampling draws from a thre
 `numpy.random.Generator` (entropy by default), and exact reproduction across runs/models is
 obtained from a fixed (materialized) catalog rather than by re-seeding. Versioned catalogs resolve
 from Hugging Face with a pinned revision **and a sha256 integrity check**. Catalogs are HF artifacts
-(not bundled in the wheel since 0.8.0): a bare `name` needs network on first use, then caches; pass
+(not bundled in the wheel): a bare `name` needs network on first use, then caches; pass
 an explicit local path for fully offline operation.
 
-> Status: 0.10.0. The full public stack: `Problem`, the unified distribution framework (incl. the
-> `fastsrb` distribution), and the **`Catalog`** a `ProblemSource` samples from -- either a
-> declarative `ProblemCatalog` (+ `load_catalog` + the versioned HF resolver) or an on-the-fly
-> `GenerativeCatalog` (`LampleChartonCatalog`: random unary-binary operator trees; `build_catalog`
-> dispatches a `catalog: {type: ...}` config). `ProblemSource` adds the usage policy (draw method,
-> support/validation counts, noise, holdouts/filters, `problems_per_expression`, unbounded streaming,
-> `materialize()` + `to_catalog()` for frozen, byte-reproducible catalogs). Generate-mode is fully
-> `Generator`-driven (no global `np.random`). The skeleton/support/holdout machinery stays private
-> (`_generate`); the public face is `LampleChartonCatalog`. Curated catalogs (FastSRB, Feynman,
-> Nguyen) are published to the HF assets repo and resolved by name (not bundled in the wheel).
-> CLI: `symbolic-data materialize`.
-> 0.10.0 breaking: `LampleChartonCatalog.load(directory)` now returns the catalog object only (was
-> `(config_dict, catalog)`), consistent with `ProblemCatalog.load`; read the config separately via
-> `load_config(<dir>/catalog.yaml)` if you need it (see the CHANGELOG).
+The public stack: `Problem`, the unified distribution framework (incl. the `fastsrb`
+distribution), and the **`Catalog`** a `ProblemSource` samples from -- either a declarative
+`ProblemCatalog` (+ `load_catalog` + the versioned HF resolver) or an on-the-fly
+`GenerativeCatalog` (`LampleChartonCatalog`: random unary-binary operator trees; `build_catalog`
+dispatches a `catalog: {type: ...}` config). `ProblemSource` adds the usage policy (draw method,
+support/validation counts, noise, holdouts/filters, `problems_per_expression`, unbounded streaming,
+`materialize()` + `to_catalog()` for frozen, byte-reproducible catalogs). Generate-mode is fully
+`Generator`-driven (no global `np.random`); the public generative face is `LampleChartonCatalog`.
+Curated catalogs (FastSRB, Feynman, Nguyen) are published to the HF assets repo and resolved by
+name (not bundled in the wheel). CLI: `symbolic-data materialize`.
 > Deferred: a frozen holdout grid; functional-equivalence `exclude` (currently exact
 > normalized-expression match).
 
