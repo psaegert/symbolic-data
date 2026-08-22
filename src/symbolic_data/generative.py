@@ -925,6 +925,20 @@ class LampleChartonCatalog(GenerativeCatalog):
         if n_support is None:
             n_support = self.support_sampler.sample_n_support(rng=rng)
 
+        # Domain-aware oversampling (v24, opt-in): a domain-restricted expression (log,
+        # rootn, atanh, ...) rejects a WHOLE draw when any single row lands outside its
+        # domain, so P(success/try) decays exponentially in n_support and ~45% of
+        # domain-heavy instances fail even 512 tries (night-2 finding). With
+        # `sample_strategy['support_oversampling_max'] = k_max > 1`, a failed try doubles
+        # the per-try draw (one sampler call, so ONE scale-transform application -- the
+        # per-instance support scale stays unified) and the first n_support in-domain
+        # rows are kept: per-row conditioning on validity instead of all-rows-at-once.
+        # The default (1) consumes the rng identically to the pre-v24 loop and is pinned
+        # byte-identical by test. Only the allow_nan=False regime selects rows: when NaNs
+        # are data (allow_nan=True), dropping rows would reshape the distribution.
+        max_oversampling = int(self.sample_strategy.get('support_oversampling_max', 1))
+        oversampling = 1
+
         for _ in range(self.sample_strategy['max_tries']):
             literals = self.literal_prior(size=n_constants, rng=rng).astype(np.float32)
 
@@ -933,7 +947,7 @@ class LampleChartonCatalog(GenerativeCatalog):
 
             try:
                 x_support = self.support_sampler.sample(
-                    n_support=n_support,
+                    n_support=oversampling * n_support,
                     support_prior=override_support_prior,
                     support_scale_prior=override_support_scale,
                     rng=rng,
@@ -946,7 +960,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                 y_support = expression_callable(*x_support.T, *literals)
 
             if not isinstance(y_support, np.ndarray):
-                y_support = np.full((n_support, 1), y_support, dtype=np.float32)
+                y_support = np.full((x_support.shape[0], 1), y_support, dtype=np.float32)
 
             if len(y_support) == 1:
                 # Repeat y to match the shape of x
@@ -957,11 +971,15 @@ class LampleChartonCatalog(GenerativeCatalog):
                 continue
 
             if not self.allow_nan:
-                # If any of the support points are NaN, skip the expression
-                if np.isnan(x_support).any() or np.isinf(x_support).any():
-                    continue
-                if np.isnan(y_support).any() or np.isinf(y_support).any():
-                    continue
+                y_rows = y_support.reshape(x_support.shape[0], -1)
+                valid = np.isfinite(x_support).all(axis=1) & np.isfinite(y_rows).all(axis=1)
+                if int(valid.sum()) >= n_support:
+                    keep = np.flatnonzero(valid)[:n_support]
+                    x_support = x_support[keep]
+                    y_support = y_rows[keep]
+                    break
+                oversampling = min(oversampling * 2, max_oversampling)
+                continue
             elif np.isnan(y_support).all():
                 # Even if NaNs are allowed, if all support points are NaN, skip the expression
                 continue

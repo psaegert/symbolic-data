@@ -3,7 +3,7 @@ import re
 from typing import Any, Sequence
 
 import numpy as np
-from simplipy import normalize_variable_token
+from simplipy import SimpliPyEngine, normalize_variable_token
 from simplipy.utils import is_numeric_string
 
 
@@ -155,3 +155,19 @@ def desugar_sqrt(tokens: list[str], operator_arity: dict[str, int]) -> list[str]
     if end != len(tokens):
         raise ValueError(f"sqrt desugaring consumed {end} of {len(tokens)} tokens")
     return out
+
+
+def tagged_canonical(engine: SimpliPyEngine, expression: Sequence[str]) -> list[str]:
+    """The engine's canonical form of a concrete ``expression``, in the TAGGED dialect.
+
+    This is ``simplify`` OPERATING IN the tagged dialect (dialect-preserving in
+    simplipy >= 0.14), NOT a spelling conversion of the prefix-dialect canonical form.
+    The two are different normal forms: measured over the curated catalogs
+    (2026-08-22), 796 of 3,628 expressions canonicalize differently between the
+    dialects -- exact-rational literal spellings (``1.4`` becomes ``<mul> 7 <div> 5
+    </mul>``), negative exponents absorbed into ``pow`` instead of an ``inv`` wrapper,
+    negation distributed into bag sections. The v24 target contract (A3) names the
+    tagged canonical, so the consumer must simplify IN the tagged dialect; converting
+    the prefix canonical yields a different (equal-valued, differently-spelled) form.
+    """
+    return list(engine.simplify(engine.to_tagged(list(expression))))
