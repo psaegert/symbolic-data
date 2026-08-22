@@ -201,7 +201,7 @@ class Problem:
             variables = [f"x{i}" for i in range(1, x.shape[1] + 1)]
         if skeleton is None and expression is not None:
             try:
-                from simplipy import normalize_skeleton
+                from symbolic_data.token_ops import normalize_skeleton
                 normalized = normalize_skeleton(list(expression))
                 skeleton = tuple(normalized) if normalized is not None else None
             except Exception:

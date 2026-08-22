@@ -15,7 +15,8 @@ from pathlib import Path
 import yaml
 from symbolic_data import ProblemCatalog
 
-from simplipy import SimpliPyEngine, normalize_skeleton
+from simplipy import SimpliPyEngine
+from symbolic_data.token_ops import normalize_skeleton
 
 # NOTE: "fastsrb" identity comes from the v2 file (fastsrb.v2.yaml): v1 lacked n_variables
 # entirely (keying all 120 entries at n_variables=0 and hiding every fastsrb co-cluster,

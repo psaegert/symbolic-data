@@ -22,7 +22,9 @@ from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 import numpy as np
 
-from simplipy import SimpliPyEngine, normalize_expression, normalize_skeleton
+from simplipy import SimpliPyEngine
+
+from symbolic_data.token_ops import normalize_expression, normalize_skeleton
 from simplipy.utils import explicit_constant_placeholders, substitute_constants
 
 from symbolic_data.config_io import load_config, save_config
@@ -782,7 +784,7 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         # Parse back to prefix notation; SymPy's printer spells square roots as `sqrt(...)`,
         # which is not in the engine's vocabulary -- rewrite to `rootn(u, 2)`.
-        prefix = self.simplipy_engine.parse(simplified_infix)
+        prefix = self.simplipy_engine.read_infix(simplified_infix)
         prefix = desugar_sqrt(prefix, self.simplipy_engine.operator_arity)
 
         # Literals stay CONCRETE, matching the SimpliPy branch: the catalog yields
@@ -835,13 +837,12 @@ class LampleChartonCatalog(GenerativeCatalog):
                 skeleton = self.skeleton_sampler.sample(n_operators, rng)
                 if self.simplify is True:
                     try:
-                        # form='explicit': simplipy >= 0.12 returns its native TAGGED
-                        # dialect (<add> ... </add>) by default, which every downstream
-                        # consumer here (validation, codify, prefix_to_infix) reads as a
-                        # malformed prefix expression. The explicit binary-prefix dialect
-                        # is the documented escape until tagged notation is adopted
-                        # end-to-end.
-                        skeleton = self.simplipy_engine.simplify(skeleton, form='explicit')
+                        # simplipy >= 0.14 simplify is dialect-preserving: the sampled
+                        # skeleton is an explicit binary-prefix list, so the answer is
+                        # one too -- which every downstream consumer here (validation,
+                        # codify, prefix_to_infix) requires. The form= escape it
+                        # replaces is removed.
+                        skeleton = self.simplipy_engine.simplify(skeleton)
                     except TypeError:
                         # A call-signature error is a BUG, not a rejectable sample: wrapped as
                         # NoValidSampleFoundError it sends the retry loop into an infinite

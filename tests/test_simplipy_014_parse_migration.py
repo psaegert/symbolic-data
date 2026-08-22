@@ -1,32 +1,24 @@
-"""simplipy 0.14 removed ``SimpliPyEngine.parse``. These tests MEASURE what the two call
-sites that used it would become under the replacement surface (``to_prefix``), over the
-real curated catalogs and over real SymPy output, and pin the result.
+"""simplipy 0.14 removed ``SimpliPyEngine.parse``. Its replacement per the 0.14
+migration table is ``read_infix`` -- the SAME raw reader under the name that states its
+contract ("renamed from ``parse``", simplipy ruling 2026-08-18): TOLERANT of unknown
+vocabulary and SPELLING-PRESERVING. Both call sites are MIGRATED
+(``_evaluation.compile_expression`` and ``generative._sympy_simplify_skeleton``), and
+these tests pin the migration's acceptance criteria GREEN over the same frozen corpora
+that once recorded the sites as blocked.
 
-The verdict they record: NEITHER site can be migrated, so neither is migrated.
-``_evaluation.compile_expression`` and ``generative._sympy_simplify_skeleton`` still call
-``engine.parse`` and are BLOCKED pending an owner decision.
+THE HISTORY THIS FILE CARRIES. An earlier revision measured ``to_prefix`` as the
+candidate and recorded both sites BLOCKED -- correctly, for that candidate:
+``to_prefix`` reads through the canonical state, which refuses undeclared vocabulary
+(``sqrt``, 46.6% of the curated corpus) and folds concrete literals (the recorded
+constants -- the ground truth -- changed, and one ill-conditioned fold changed y
+itself). Those measurements were sound; the candidate was wrong. The distinction
+tests are KEPT below: they document why ``to_prefix`` is a canonicaliser and not a
+reader, which is exactly the line 0.14 drew between the two surfaces.
 
-WHY THE OLD BEHAVIOUR IS STILL REACHABLE HERE. The removed ``engine.parse`` was a pure
-delegation to the Rust raw reader (``self._core.parse(infix, convert_expression,
-mask_numbers)``), which simplipy 0.14 keeps as the conversion hub's INTERNAL entry with no
-compatibility promise. These tests use it as the ORACLE for the removed public method --
-the only way to compare both spellings in one process, and its subject IS the removed
-behaviour. Production code must not use it.
-
-WHAT BREAKS.
-
-1. VOCABULARY TOLERANCE. The raw reader passed an unknown function name through as a
-   leaf; that is precisely what :func:`symbolic_data.token_ops.desugar_sqrt` documents and
-   relies on -- ``sqrt`` is not in the engine's vocabulary, so both sites parse first and
-   rewrite ``sqrt u`` -> ``rootn u 2`` afterwards. ``to_prefix`` reads through the AC
-   parser, which REFUSES the name, and no rewrite can run after a raise. 3159 of the 6780
-   curated catalog entries (46.6%) are affected.
-2. EXACT-RATIONAL CANONICALISATION. The raw reader preserved the literal spelling;
-   ``to_prefix`` reads into the canonical state, where a decimal becomes an exact rational
-   and constant subtrees fold. The site returns ``expression`` and ``constants`` -- the
-   CONCRETE ground truth -- so the recorded constants change (``0.75`` -> ``3``, ``4``;
-   ``v1*v1`` -> ``pow v1 2`` adds a structural ``2`` to the constant list), and in
-   ill-conditioned expressions the folded f64 result is a different NUMBER.
+The removed method was a pure delegation to the Rust raw reader
+(``self._core.parse``); ``read_infix`` delegates to the same reader. The oracle tests
+compare the two spellings in one process via ``_core.parse`` -- its subject IS the
+removed behaviour; production code must not use it.
 """
 from __future__ import annotations
 
@@ -53,8 +45,9 @@ SYMPY_OUTPUTS_AGREEING = [
     '1.26919635484101', 'x1 + log(tanh(x0))', 'sin(x0)', '-2', '6',
     'sin(6.317071*x0 + 2)', 'x0 + x1', '-1/(atan(x0) - 3)',
 ]
-SYMPY_OUTPUTS_DIVERGING = [
-    # (sympy output, old prefix, new prefix) -- both after desugar_sqrt, as the site runs it
+SYMPY_OUTPUTS_WHERE_TO_PREFIX_DIVERGED = [
+    # (sympy output, raw-reader prefix, to_prefix's canonicalised prefix) -- both after
+    # desugar_sqrt, as the site runs it. The middle column is what read_infix must keep.
     ('-6.21770200000000', ['-6.21770200000000'], ['-6.217702']),
     ('2.00000000000000', ['2.00000000000000'], ['2']),
     ('sin(x1) - 0.5',
@@ -77,37 +70,14 @@ def engine() -> SimpliPyEngine:
     return SimpliPyEngine.load('acj-4-3', install=True)
 
 
-class _OldEngine:
-    """The pre-0.14 spelling: ``engine.parse`` == the raw reader."""
-
-    def __init__(self, inner: SimpliPyEngine) -> None:
-        self._inner = inner
-
-    def __getattr__(self, name: str) -> Any:
-        return getattr(self._inner, name)
-
-    def parse(self, infix_expression: str, convert_expression: bool = True, mask_numbers: bool = False) -> list[str]:
-        return self._inner._core.parse(infix_expression, convert_expression, mask_numbers)
-
-
-class _NewEngine(_OldEngine):
-    """The 0.14 migration candidate: ``to_prefix``."""
-
-    def parse(self, infix_expression: str, convert_expression: bool = True, mask_numbers: bool = False) -> list[str]:
-        assert mask_numbers is False, 'the symbolic-data sites never masked at parse time'
-        return self._inner.to_prefix(infix_expression)
-
-
 def _entries(filename: str) -> dict[str, Any]:
     with open(os.path.join(CATALOGS, filename)) as file:
         return yaml.safe_load(file)['expressions']
 
 
-@pytest.fixture(scope='module')
-def curated_census() -> tuple[int, int]:
-    """(entries with a prepared expression, of which spelled with ``sqrt``) over every
-    curated catalog in the repository."""
-    total = with_sqrt = 0
+def _prepared_corpus() -> list[str]:
+    """Every prepared expression across every curated catalog in the repository."""
+    corpus = []
     for path in sorted(glob.glob(os.path.join(CATALOGS, '*.yaml'))):
         with open(path) as file:
             document = yaml.safe_load(file)
@@ -121,143 +91,104 @@ def curated_census() -> tuple[int, int]:
                 continue
             prepared = entry.get('prepared')
             if isinstance(prepared, str) and prepared.strip() and isinstance(entry.get('vars'), dict):
-                total += 1
-                with_sqrt += 'sqrt' in prepared
-    return total, with_sqrt
+                corpus.append(prepared)
+    return corpus
 
 
 # --------------------------------------------------------------------------------------
-# BLOCKER 1 -- the vocabulary tolerance both sites are built on
+# THE MIGRATION, PROVEN: read_infix IS the removed reader
 # --------------------------------------------------------------------------------------
 
-def test_desugar_sqrt_depends_on_a_reader_that_passes_unknown_names_through(engine: SimpliPyEngine) -> None:
-    """``sqrt`` is not in the engine's vocabulary. The removed reader emitted it as a bare
-    token, which ``desugar_sqrt`` then rewrote; ``to_prefix`` raises before that can run."""
-    raw = engine._core.parse('sqrt(v1 * v2 / v3)', True, False)
+def test_read_infix_is_the_removed_reader_corpus_wide(engine: SimpliPyEngine) -> None:
+    """Byte identity against the raw-reader oracle over every curated prepared
+    expression (6,780 entries, 46.6% spelled with ``sqrt``) and every frozen SymPy
+    output -- the whole input language of both migrated sites."""
+    corpus = _prepared_corpus()
+    assert len(corpus) > 6000
+    probes = corpus + SYMPY_OUTPUTS_AGREEING + [row[0] for row in SYMPY_OUTPUTS_WHERE_TO_PREFIX_DIVERGED]
+    for text in probes:
+        assert engine.read_infix(text) == engine._core.parse(text, True, False), text
+
+
+def test_read_infix_keeps_the_vocabulary_tolerance_desugar_sqrt_needs(engine: SimpliPyEngine) -> None:
+    """``sqrt`` is not in the engine's vocabulary; the reader must emit it as a bare
+    leaf so ``desugar_sqrt`` can rewrite it afterwards."""
+    raw = engine.read_infix('sqrt(v1 * v2 / v3)')
     assert raw == ['sqrt', '/', '*', 'v1', 'v2', 'v3']
     assert desugar_sqrt(raw, engine.operator_arity) == ['rootn', '/', '*', 'v1', 'v2', 'v3', '2']
 
+
+def test_evaluation_site_concrete_ground_truth_is_preserved(engine: SimpliPyEngine) -> None:
+    """The two entries whose recorded constants the ``to_prefix`` candidate moved, plus
+    the ill-conditioned fold that changed y itself -- all preserved under read_infix."""
+    entries = _entries('constant.yaml')
+    entry = entries['Constant-2']            # sin(v1**2)*cos(v1) - 0.75
+    compiled = compile_expression(engine, 'Constant-2', entry['prepared'], entry['vars'])
+    assert compiled['constants'] == [2.0, 0.75]
+
+    entry = entries['Const-Test-1']          # 3.14159...*v1*v1
+    compiled = compile_expression(engine, 'Const-Test-1', entry['prepared'], entry['vars'])
+    assert compiled['constants'] == [3.141592653589793]
+
+    entry = _entries('fastsrb.yaml')['III.8.54']
+    compiled = compile_expression(engine, 'III.8.54', entry['prepared'], entry['vars'])
+    assert compiled['constants'] == [6.626e-34, 2.0, 3.1415926535897, 2.0]
+    v1, v2 = np.array([1.5]), np.array([1.3])
+    with np.errstate(all='ignore'):
+        y = float(compiled['callable'](v1, v2)[0])
+    assert y == pytest.approx(0.000267705857155472)
+
+
+def test_evaluation_site_compiles_the_sqrt_half_of_the_corpus(engine: SimpliPyEngine) -> None:
+    """The 46.6% of the corpus the ``to_prefix`` candidate refused outright: a sqrt
+    entry compiles, and its simplified prefix is the explicit dialect (no tags) as the
+    downstream consumers require -- 0.14 simplify is dialect-preserving, no form= knob."""
+    entries = _entries('fastsrb.yaml')
+    checked = 0
+    for eq_id, entry in entries.items():
+        if 'sqrt' not in entry['prepared']:
+            continue
+        compiled = compile_expression(engine, eq_id, entry['prepared'], entry['vars'])
+        assert not any(str(tok).startswith('<add') or str(tok).startswith('<mul')
+                       for tok in compiled['prefix']), eq_id
+        checked += 1
+        if checked >= 25:
+            break
+    assert checked == 25
+
+
+def test_generative_site_prefix_is_unchanged_on_real_sympy_output(engine: SimpliPyEngine) -> None:
+    """The migrated ``_sympy_simplify_skeleton`` parse stage: read_infix reproduces the
+    raw reader on every frozen SymPy output, including every row where ``to_prefix``
+    diverged."""
+    for expression in SYMPY_OUTPUTS_AGREEING:
+        assert (desugar_sqrt(engine.read_infix(expression), engine.operator_arity)
+                == desugar_sqrt(engine._core.parse(expression, True, False), engine.operator_arity))
+    for expression, raw_expected, _ in SYMPY_OUTPUTS_WHERE_TO_PREFIX_DIVERGED:
+        got = desugar_sqrt(engine.read_infix(expression), engine.operator_arity)
+        assert got == raw_expected, expression
+
+
+# --------------------------------------------------------------------------------------
+# THE DISTINCTION, KEPT: to_prefix is a canonicaliser, not a reader
+# --------------------------------------------------------------------------------------
+
+def test_to_prefix_refuses_undeclared_vocabulary(engine: SimpliPyEngine) -> None:
+    """Why ``to_prefix`` was never the replacement, half one: it parses into the
+    canonical state, which only knows declared operators."""
     with pytest.raises(ValueError):
         engine.to_prefix('sqrt(v1 * v2 / v3)')
 
 
-def test_sqrt_is_half_the_curated_corpus(curated_census: tuple[int, int]) -> None:
-    """The blast radius of BLOCKER 1 at the ``_evaluation`` site: these entries raise
-    instead of compiling, and ``compile_expression`` does not guard the parse call."""
-    total, with_sqrt = curated_census
-    assert total > 6000
-    assert with_sqrt / total > 0.4, (total, with_sqrt)
-
-
-# --------------------------------------------------------------------------------------
-# BLOCKER 2 -- the _evaluation site's concrete ground truth
-# --------------------------------------------------------------------------------------
-
-def test_evaluation_site_is_value_preserving_on_the_well_conditioned_entries(engine: SimpliPyEngine) -> None:
-    """The bar the site's numeric use sets: the compiled callable must give the same y.
-    It holds for every sqrt-free FastSRB entry except the ill-conditioned one pinned
-    below (measured corpus-wide: 3616 of the 3621 entries both spellings can compile)."""
-    old_engine, new_engine = _OldEngine(engine), _NewEngine(engine)
-    rng = np.random.default_rng(0)
-    checked = 0
-    for eq_id, entry in _entries('fastsrb.yaml').items():
-        prepared = entry['prepared']
-        if 'sqrt' in prepared or eq_id == 'III.8.54':
-            continue
-        compiled_old = compile_expression(old_engine, eq_id, prepared, entry['vars'])
-        compiled_new = compile_expression(new_engine, eq_id, prepared, entry['vars'])
-        inputs = [rng.uniform(0.5, 2.0, size=8) for _ in compiled_old['variable_order']]
-        with np.errstate(all='ignore'):
-            y_old = np.asarray(compiled_old['callable'](*inputs), dtype=float)
-            y_new = np.asarray(compiled_new['callable'](*inputs), dtype=float)
-        assert np.allclose(y_old, y_new, rtol=1e-9, atol=1e-12, equal_nan=True), eq_id
-        checked += 1
-    assert checked > 80, 'corpus slice too small to be a proof'
-
-
-def test_evaluation_site_value_preservation_fails_on_ill_conditioned_folding(engine: SimpliPyEngine) -> None:
-    """BLOCKER 2a. Exact-rational folding rewrites ``2 * 3.1415926535897 / 6.626e-34`` into
-    a 38-digit integer over 3313. The f64 product then differs in the low bits -- which is
-    the whole value of ``sin`` at that magnitude, so y is a DIFFERENT NUMBER, not a
-    rounding difference. 5 of the 3621 shared entries diverge this way."""
-    entry = _entries('fastsrb.yaml')['III.8.54']
-    compiled_old = compile_expression(_OldEngine(engine), 'III.8.54', entry['prepared'], entry['vars'])
-    compiled_new = compile_expression(_NewEngine(engine), 'III.8.54', entry['prepared'], entry['vars'])
-
-    assert compiled_old['constants'] == [6.626e-34, 2.0, 3.1415926535897, 2.0]
-    assert compiled_new['constants'] == [3.1415926535897e+37, 3313.0, 2.0]
-
-    v1, v2 = np.array([1.5]), np.array([1.3])
-    with np.errstate(all='ignore'):
-        y_old = float(compiled_old['callable'](v1, v2)[0])
-        y_new = float(compiled_new['callable'](v1, v2)[0])
-    assert y_old == pytest.approx(0.000267705857155472)
-    assert y_new == pytest.approx(0.8669423214155054)
-
-
-def test_evaluation_site_concrete_constants_change(engine: SimpliPyEngine) -> None:
-    """BLOCKER 2b. ``constants`` is the recorded ground truth of a catalog entry. Under
-    canonicalisation a decimal splits into an exact rational's two literals, and a
-    collected power contributes its structural exponent -- neither is a fitted constant."""
-    old_engine, new_engine = _OldEngine(engine), _NewEngine(engine)
-    entries = _entries('constant.yaml')
-
-    entry = entries['Constant-2']            # sin(v1**2)*cos(v1) - 0.75
-    old = compile_expression(old_engine, 'Constant-2', entry['prepared'], entry['vars'])
-    new = compile_expression(new_engine, 'Constant-2', entry['prepared'], entry['vars'])
-    assert old['constants'] == [2.0, 0.75]
-    assert new['constants'] == [2.0, 3.0, 4.0]
-
-    entry = entries['Const-Test-1']          # 3.14159...*v1*v1
-    old = compile_expression(old_engine, 'Const-Test-1', entry['prepared'], entry['vars'])
-    new = compile_expression(new_engine, 'Const-Test-1', entry['prepared'], entry['vars'])
-    assert old['constants'] == [3.141592653589793]
-    assert new['constants'] == [3.141592653589793, 2.0]
-
-
-@pytest.mark.xfail(strict=True, reason='BLOCKED: to_prefix refuses sqrt and moves the concrete '
-                                       'ground truth; this is the acceptance criterion, red until '
-                                       'the owner rules')
-def test_evaluation_site_migration_acceptance_criterion(engine: SimpliPyEngine) -> None:
-    """Migrating ``compile_expression`` requires: every entry the old spelling compiled
-    still compiles, with the same concrete constants."""
-    old_engine, new_engine = _OldEngine(engine), _NewEngine(engine)
-    for eq_id, entry in _entries('fastsrb.yaml').items():
-        old = compile_expression(old_engine, eq_id, entry['prepared'], entry['vars'])
-        new = compile_expression(new_engine, eq_id, entry['prepared'], entry['vars'])
-        assert old['constants'] == new['constants'], eq_id
-
-
-# --------------------------------------------------------------------------------------
-# BLOCKER 3 -- the generative site (SymPy output back to prefix)
-# --------------------------------------------------------------------------------------
-
-def test_generative_site_agrees_where_sympy_prints_the_canonical_state(engine: SimpliPyEngine) -> None:
-    """The majority case (measured 164 of 300 real SymPy outputs)."""
-    for expression in SYMPY_OUTPUTS_AGREEING:
-        old = desugar_sqrt(engine._core.parse(expression, True, False), engine.operator_arity)
-        new = desugar_sqrt(engine.to_prefix(expression), engine.operator_arity)
-        assert old == new, expression
-
-
-def test_generative_site_diverges_on_real_sympy_output(engine: SimpliPyEngine) -> None:
-    """BLOCKER 3. The catalog stores CONCRETE literals, so a changed spelling is a changed
-    catalog row: SymPy's ``-6.21770200000000`` is recorded verbatim by the old reader and
-    as ``-6.217702`` by ``to_prefix``, ``0.5`` becomes the two-token rational ``/ 1 2``,
-    and ``1/u`` becomes ``inv u``. Measured 136 of 300 real SymPy outputs.
-    """
-    for expression, old_expected, new_expected in SYMPY_OUTPUTS_DIVERGING:
-        old = desugar_sqrt(engine._core.parse(expression, True, False), engine.operator_arity)
-        new = desugar_sqrt(engine.to_prefix(expression), engine.operator_arity)
-        assert old == old_expected, expression
-        assert new == new_expected, expression
-        assert old != new
-
-
-@pytest.mark.xfail(strict=True, reason='BLOCKED: to_prefix moves SymPy output; this is the '
-                                       'acceptance criterion for migrating the generative site')
-def test_generative_site_migration_acceptance_criterion(engine: SimpliPyEngine) -> None:
-    """Migrating ``_sympy_simplify_skeleton`` requires the emitted prefix to be unchanged."""
-    for expression, _, _ in SYMPY_OUTPUTS_DIVERGING:
-        assert (desugar_sqrt(engine._core.parse(expression, True, False), engine.operator_arity)
-                == desugar_sqrt(engine.to_prefix(expression), engine.operator_arity))
+def test_to_prefix_no_longer_moves_the_spelling_either(engine: SimpliPyEngine) -> None:
+    """The blocked-era divergence corpus, re-measured under 0.14's conversion split:
+    ``to_prefix`` is now a PURE syntactic conversion (nothing folds, nothing
+    re-spells), so the canonicalisation half of the old blocker is gone from the
+    library itself -- on in-vocabulary input the two spellings now agree, and the
+    refusal above is the ONLY remaining distinction. The third column of the frozen
+    corpus records what 0.13's to_prefix did; it is history, not a contract."""
+    for expression, raw_expected, _canonical_0_13 in SYMPY_OUTPUTS_WHERE_TO_PREFIX_DIVERGED:
+        raw = desugar_sqrt(engine._core.parse(expression, True, False), engine.operator_arity)
+        pure = desugar_sqrt(engine.to_prefix(expression), engine.operator_arity)
+        assert raw == raw_expected, expression
+        assert pure == raw, expression

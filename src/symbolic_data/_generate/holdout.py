@@ -7,7 +7,7 @@ import warnings
 import numpy as np
 
 from symbolic_data.compilation import safe_f
-from simplipy import normalize_skeleton
+from symbolic_data.token_ops import normalize_skeleton
 
 
 # Fixed seed for the default holdout grid. Previously each HoldoutManager drew a fresh

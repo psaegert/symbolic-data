@@ -24,7 +24,7 @@ from symbolic_data.catalog import Catalog, ProblemCatalog
 from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.generative import GenerativeCatalog, build_catalog, is_open_generative_ref
 from symbolic_data.problem import Problem
-from simplipy import normalize_skeleton
+from symbolic_data.token_ops import normalize_skeleton
 
 # Sampling-policy defaults used when the config / catalog metadata does not specify a value.
 _DEFAULT_MAX_TRIALS = 100          # per-slot generation retries before yielding a placeholder Problem
