@@ -160,3 +160,29 @@ def test_register_holdout_pool_frozen_wider_than_catalog_keeps_image_layer(tmp_p
         assert len(catalog.holdout_y) == 1               # the image layer survived the width gap
     finally:
         catalog.clear_holdouts()
+
+
+def test_register_holdout_pool_frozen_sqrt_spelling_desugars(tmp_path):
+    # Canonical benchmark artifacts (fastsrb) spell the square root as `sqrt`, which the
+    # generation-2 vocabulary does not contain (`rootn` carries it). Pre-fix, the prototype
+    # derivation passed the alien token through: build_catalog crashed in prefix_to_infix
+    # ("too many operands remain" -- the T13 pilot launch, 2026-08-22), and any candidate
+    # that survived would register a sqrt-shaped prototype no generated skeleton can match.
+    from symbolic_data import Problem, ProblemCatalog
+
+    x = np.linspace(0.5, 2.5, 16)
+    p = Problem.from_data(x, np.sqrt(x), expression=["sqrt", "x1"], eq_id="rooted",
+                          meta={"alternate_renderings": ["sqrt(v1)"]})
+    frozen = ProblemCatalog.from_problems([p], name="sqrt-probe")
+    npz = str(frozen.save(tmp_path / "sqrt-probe"))
+
+    catalog = LampleChartonCatalog.from_config(_cfg())
+    catalog.register_holdout_pool(npz)
+    try:
+        assert len(catalog.holdout_skeletons) >= 1
+        flat = [token for proto in catalog.holdout_skeletons for token in proto]
+        assert "sqrt" not in flat
+        assert "rootn" in flat
+    finally:
+        catalog.clear_holdouts()
+

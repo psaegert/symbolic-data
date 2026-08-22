@@ -640,6 +640,14 @@ class LampleChartonCatalog(GenerativeCatalog):
                     continue
                 registered_any = False
                 for candidate in candidates:
+                    # Canonical benchmark spellings (sqrt) are sugar over this catalog's
+                    # vocabulary; rewrite BEFORE deriving the prototype, or the alien token
+                    # ends up inside it and no generated skeleton can ever match. A token
+                    # list the walk cannot consume is non-canonicalizable, same as below.
+                    try:
+                        candidate = desugar_sqrt(candidate, self.simplipy_engine.operator_arity)
+                    except ValueError:
+                        continue
                     canonical = normalize_skeleton(candidate)
                     if canonical is None:
                         continue
@@ -658,6 +666,10 @@ class LampleChartonCatalog(GenerativeCatalog):
                 if expression is None:
                     continue
                 prefix = self.simplipy_engine.infix_to_prefix(expression)
+                try:
+                    prefix = desugar_sqrt(prefix, self.simplipy_engine.operator_arity)
+                except ValueError:
+                    continue
                 # normalize_skeleton canonicalizes the declarative source's variable names (e.g. v1->x1)
                 # into THIS catalog's space and abstracts numeric literals to <constant>; then take the
                 # structural prototype (constants removed) -- the same form the generative path registers.
