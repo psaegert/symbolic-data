@@ -67,7 +67,7 @@ SYMPY_OUTPUTS_WHERE_TO_PREFIX_DIVERGED = [
 
 @pytest.fixture(scope='module')
 def engine() -> SimpliPyEngine:
-    return SimpliPyEngine.load('acj-4-3', install=True)
+    return SimpliPyEngine.load('acj-4', install=True)
 
 
 def _entries(filename: str) -> dict[str, Any]:

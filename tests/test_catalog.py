@@ -94,7 +94,7 @@ def test_declarative_realize_covers_the_evaluation_path():
     from simplipy import SimpliPyEngine
     from symbolic_data.errors import NoValidSampleFoundError
 
-    engine = SimpliPyEngine.load("acj-4-3", install=True)
+    engine = SimpliPyEngine.load("acj-4", install=True)
     cat = _local("nguyen")
     rng = np.random.default_rng(0)
     realized_any = False
@@ -117,7 +117,7 @@ def test_declarative_realize_surfaces_concrete_ground_truth():
     from simplipy import SimpliPyEngine
     from symbolic_data.errors import NoValidSampleFoundError
 
-    engine = SimpliPyEngine.load("acj-4-3", install=True)
+    engine = SimpliPyEngine.load("acj-4", install=True)
     cat = _local("feynman")   # Feynman formulas carry concrete constants (e.g. 2, pi)
     rng = np.random.default_rng(0)
     found = False

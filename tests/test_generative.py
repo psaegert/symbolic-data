@@ -81,7 +81,7 @@ def test_build_catalog_dispatch():
     cat = build_catalog(spec)
     assert isinstance(cat, LampleChartonCatalog)
     with pytest.raises(ValueError, match="type"):
-        build_catalog({"simplipy_engine": "acj-4-3"})  # mapping without a type
+        build_catalog({"simplipy_engine": "acj-4"})  # mapping without a type
     with pytest.raises(ValueError, match="unknown generative catalog"):
         build_catalog({"type": "does_not_exist"})
 

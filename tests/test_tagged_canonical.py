@@ -1,6 +1,6 @@
 """``tagged_canonical`` is simplify IN the tagged dialect -- a different normal form
 from the prefix-dialect canonical, not a respelling of it. Specimens below are
-measured engine output (acj-4-3, 2026-08-22), pinned."""
+measured engine output (acj-4, 2026-08-23), pinned."""
 import pytest
 
 from simplipy import SimpliPyEngine
@@ -10,7 +10,7 @@ from symbolic_data.token_ops import tagged_canonical
 
 @pytest.fixture(scope="module")
 def engine() -> SimpliPyEngine:
-    return SimpliPyEngine.load("acj-4-3", install=True)
+    return SimpliPyEngine.load("acj-4", install=True)
 
 
 # infix -> the tagged canonical (measured, not derived)

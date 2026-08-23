@@ -35,7 +35,7 @@ def load_engine(engine: SimpliPyEngine | str | None) -> SimpliPyEngine:
     """Resolve an engine id / None to a loaded :class:`SimpliPyEngine` (instances pass through)."""
     if isinstance(engine, SimpliPyEngine):
         return engine
-    return SimpliPyEngine.load(engine or "acj-4-3", install=True)
+    return SimpliPyEngine.load(engine or "acj-4", install=True)
 
 
 def resolve_variable_order(vars_info: Mapping[str, Mapping[str, Any]]) -> List[str]:

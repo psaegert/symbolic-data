@@ -72,7 +72,7 @@ class ProblemSource:
         self._rng = rng
         # The config key matches the catalog schema (`simplipy_engine:`); the old undocumented
         # `engine:` spelling was never used by any shipped config and is dropped in 0.14.0.
-        self._engine_spec = simplipy_engine if simplipy_engine is not None else self.config.get("simplipy_engine", "acj-4-3")
+        self._engine_spec = simplipy_engine if simplipy_engine is not None else self.config.get("simplipy_engine", "acj-4")
         self._engine = simplipy_engine if not isinstance(simplipy_engine, (str, type(None))) else None
         self._catalog: Catalog | None = None
 
