@@ -39,6 +39,15 @@ from symbolic_data.token_ops import desugar_sqrt, flatten_nested_list
 from symbolic_data.errors import NoValidSampleFoundError
 from symbolic_data.catalog import Catalog, ProblemCatalog, RealizedExpression
 
+# Sentinel for "no failed draw produced row-validity evidence" in sample_data (all
+# failures were sampling errors / complex results, which carry no row counts).
+_NO_ROW_EVIDENCE = float("inf")
+
+# Rows evaluated by the all-or-nothing fast-reject probe before committing to the full
+# box. Any invalid probe row already decides the draw, so this is a pure evaluation-order
+# optimization: acceptance, the rng stream and every accepted sample are bit-identical.
+_VALIDITY_PROBE_ROWS = 32
+
 
 def _gt_metadata(skeleton: Sequence[str], literals: Any) -> tuple[list[str] | None, int | None]:
     """Normalized ground-truth expression + its token-length complexity.
@@ -950,6 +959,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         # are data (allow_nan=True), dropping rows would reshape the distribution.
         max_oversampling = int(self.sample_strategy.get('support_oversampling_max', 1))
         oversampling = 1
+        min_invalid_rows = _NO_ROW_EVIDENCE
 
         for _ in range(self.sample_strategy['max_tries']):
             literals = self.literal_prior(size=n_constants, rng=rng).astype(np.float32)
@@ -966,6 +976,28 @@ class LampleChartonCatalog(GenerativeCatalog):
                 )
             except SupportSamplingError:
                 continue
+
+            # All-or-nothing fast reject (pure evaluation-order optimization): in the
+            # whole-draw regime a single invalid row already decides the draw, so a small
+            # row prefix is evaluated first and the full-box evaluation is skipped when
+            # the prefix fails. Scalar/complex/odd-shaped results fall through to the
+            # full path, which re-evaluates the prefix (deterministically identical), so
+            # acceptance and every accepted sample stay bit-identical.
+            if not self.allow_nan and max_oversampling == 1 and x_support.shape[0] > _VALIDITY_PROBE_ROWS:
+                probe = x_support[:_VALIDITY_PROBE_ROWS]
+                with warnings.catch_warnings():
+                    warnings.filterwarnings("ignore", category=RuntimeWarning)
+                    y_probe = expression_callable(*probe.astype(np.float64).T, *literals.astype(np.float64))
+                if (isinstance(y_probe, np.ndarray) and len(y_probe) == _VALIDITY_PROBE_ROWS
+                        and not np.iscomplexobj(y_probe) and np.issubdtype(y_probe.dtype, np.number)):
+                    with warnings.catch_warnings():
+                        warnings.filterwarnings("ignore", category=RuntimeWarning)
+                        y_probe32 = np.asarray(y_probe, dtype=np.float64).astype(np.float32)
+                    rows_ok = np.isfinite(probe).all(axis=1) & np.isfinite(y_probe32.reshape(_VALIDITY_PROBE_ROWS, -1)).all(axis=1)
+                    if not bool(rows_ok.all()):
+                        # Evidence is a lower bound here (only the probe was evaluated).
+                        min_invalid_rows = min(min_invalid_rows, int((~rows_ok).sum()))
+                        continue
 
             # f64 END TO END (owner ruling 2026-08-23): simplipy's evaluation contract is
             # f64, so the expression is evaluated in f64 -- at f32-REPRESENTABLE points,
@@ -1006,6 +1038,9 @@ class LampleChartonCatalog(GenerativeCatalog):
                     x_support = x_support[keep]
                     y_support = y_rows[keep]
                     break
+                # Evidence for the caller's retry policy: how far the BEST draw so far was
+                # from a fully valid box (0 == a draw was one row short of acceptance).
+                min_invalid_rows = min(min_invalid_rows, int((~valid).sum()))
                 oversampling = min(oversampling * 2, max_oversampling)
                 continue
             elif np.isnan(y_support).all():
@@ -1015,7 +1050,12 @@ class LampleChartonCatalog(GenerativeCatalog):
             # All checks passed, break the loop
             break
         else:
-            raise NoValidSampleFoundError(f"Failed to generate a valid expression after {self.sample_strategy['max_tries']} retries")
+            error = NoValidSampleFoundError(f"Failed to generate a valid expression after {self.sample_strategy['max_tries']} retries")
+            # The retry policy upstream (ProblemSource._realize_problem) reads this to
+            # abort skeletons whose draws never come close to a fully valid box; None
+            # when no draw produced row evidence (sampling/complex failures only).
+            error.min_invalid_rows = None if min_invalid_rows == _NO_ROW_EVIDENCE else min_invalid_rows
+            raise error
 
         return x_support, y_support.reshape(-1, 1), literals
 
