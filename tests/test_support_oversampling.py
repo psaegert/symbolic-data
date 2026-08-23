@@ -20,11 +20,12 @@ from symbolic_data.prior_factory import build_prior_callable
 CONFIG = Path(__file__).resolve().parent.parent / "configs" / "test" / "catalog_train.yaml"
 
 # sha256(x || y || literals), first 16 hex digits, of sample_data draws captured on the
-# vectorized per-column-params support draw (2026-08-23): the default path must consume
-# the rng identically. (The 2026-08-22 pins covered the pre-oversampling per-column loop;
-# vectorizing the draw changed the stream deliberately -- distribution unchanged, one
-# base draw per attempt instead of one per column.)
-GOLDEN_DRAWS = {7: "34b3cfe0aca46549", 20260822: "a8070c0b7b034946", 424242: "b5efd326f15a60ae"}
+# vectorized support draw + f64 evaluation (2026-08-23): the default path must consume
+# the rng identically. (History: the 2026-08-22 pins covered the pre-oversampling
+# per-column loop; vectorizing the draw changed the stream deliberately, and the f64
+# end-to-end evaluation then changed y's low bits at the f32 boundary cast -- seed
+# 424242 rounds identically and its digest survived both.)
+GOLDEN_DRAWS = {7: "19521d5440815fea", 20260822: "16fff80703a539fb", 424242: "b5efd326f15a60ae"}
 
 # A fixed symmetric support prior. The test config's meta-sampler draws its own
 # low/high per call, which sometimes lands entirely positive -- that would let the

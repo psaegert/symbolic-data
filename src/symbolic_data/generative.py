@@ -967,20 +967,36 @@ class LampleChartonCatalog(GenerativeCatalog):
             except SupportSamplingError:
                 continue
 
+            # f64 END TO END (owner ruling 2026-08-23): simplipy's evaluation contract is
+            # f64, so the expression is evaluated in f64 -- at f32-REPRESENTABLE points,
+            # because flash-ansr's boundary (the support tensors, the 32-bit <ieee754>
+            # constants format) is f32. X and literals are snapped to the f32 grid first
+            # and upcast, so y is the f64-true value at exactly the coordinates the
+            # consumer will see. The f32 cast happens once, at the end: a finite f64
+            # value beyond f32 range becomes inf there and rejects like a domain nan.
+            # (This retires the old `dtype != float32` gate, which silently rejected any
+            # tree containing an f64-upcasting realization -- rootn -- on every draw.)
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
-                y_support = expression_callable(*x_support.T, *literals)
+                y_evaluated = expression_callable(*x_support.astype(np.float64).T, *literals.astype(np.float64))
 
-            if not isinstance(y_support, np.ndarray):
-                y_support = np.full((x_support.shape[0], 1), y_support, dtype=np.float32)
+            if not isinstance(y_evaluated, np.ndarray):
+                y_evaluated = np.full((x_support.shape[0], 1), y_evaluated, dtype=np.float64)
 
-            if len(y_support) == 1:
+            if len(y_evaluated) == 1:
                 # Repeat y to match the shape of x
-                y_support = np.repeat(y_support, x_support.shape[0])
+                y_evaluated = np.repeat(y_evaluated, x_support.shape[0])
 
-            # Complex numbers are not supported
-            if np.iscomplex(y_support).any() or y_support.dtype != np.float32:
+            # Complex (or any non-numeric) results are not supported
+            if np.iscomplexobj(y_evaluated) or not (
+                    np.issubdtype(y_evaluated.dtype, np.floating) or np.issubdtype(y_evaluated.dtype, np.integer)):
                 continue
+
+            with warnings.catch_warnings():
+                # A finite f64 value beyond f32 range warns on the cast; the resulting
+                # inf is exactly the boundary-rejection signal, not an error.
+                warnings.filterwarnings("ignore", category=RuntimeWarning)
+                y_support = np.asarray(y_evaluated, dtype=np.float64).astype(np.float32)
 
             if not self.allow_nan:
                 y_rows = y_support.reshape(x_support.shape[0], -1)
