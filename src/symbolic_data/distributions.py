@@ -38,8 +38,12 @@ def uniform_dist(
     size: Any = 1,
     rng: np.random.Generator | None = None,
 ) -> np.ndarray:
-    """Sample uniformly from ``[low, high]`` with optional clipping."""
-    low, high = min(low, high), max(low, high)
+    """Sample uniformly from ``[low, high]`` with optional clipping.
+
+    ``low``/``high`` may be arrays (one bound pair per column, broadcast against a 2-D
+    ``size``): the per-column-params path of :func:`sampler_dist` relies on it.
+    """
+    low, high = np.minimum(low, high), np.maximum(low, high)
     samples = _resolve_rng(rng).uniform(low, high, size=size)
     if min_value is not None and max_value is not None:
         return np.clip(samples, min_value, max_value)
@@ -54,8 +58,12 @@ def normal_dist(
     size: Any = 1,
     rng: np.random.Generator | None = None,
 ) -> np.ndarray:
-    """Sample from a normal distribution with optional clipping."""
-    scale = max(scale, 1e-9)
+    """Sample from a normal distribution with optional clipping.
+
+    ``loc``/``scale`` may be arrays (one pair per column, broadcast against a 2-D
+    ``size``): the per-column-params path of :func:`sampler_dist` relies on it.
+    """
+    scale = np.maximum(scale, 1e-9)
     samples = _resolve_rng(rng).normal(loc, scale, size=size)
     if min_value is not None and max_value is not None:
         return np.clip(samples, min_value, max_value)
@@ -333,6 +341,18 @@ DISTRIBUTIONS = Registry("distribution", entry_point_group="symbolic_data.distri
 for _name, _fn in BASE_DISTRIBUTIONS.items():
     DISTRIBUTIONS.register_builtin(_name, _fn)
 
+# Bases whose parameters may be arrays (one value per column of a 2-D ``size``); the
+# per-column-params path of ``sampler_dist`` is limited to these.
+VECTOR_PARAM_BASES = frozenset({"uniform", "normal"})
+
+# Builtins whose entries are elementwise-iid for FIXED kwargs: one ``(n, k)`` draw is
+# distributionally identical to ``k`` separate ``(n, 1)`` draws. ``fastsrb`` is excluded
+# (its 'grid' layout correlates the entries of a single call).
+ELEMENTWISE_IID_BASES: frozenset[Callable[..., np.ndarray]] = frozenset({
+    uniform_dist, normal_dist, choice_dist, rounded_dist, log_uniform_dist,
+    log_normal_dist, gamma_dist, cauchy_dist, binomial_dist,
+})
+
 
 def sampler_dist(
     base_dist_name: str,
@@ -340,15 +360,33 @@ def sampler_dist(
     base_kwargs: dict[str, Any] | None = None,
     size: Any = 1,
     rng: np.random.Generator | None = None,
+    per_column_params: bool = False,
 ) -> np.ndarray:
-    """Sample from ``base_dist_name`` after drawing its parameters from ``param_samplers``."""
+    """Sample from ``base_dist_name`` after drawing its parameters from ``param_samplers``.
+
+    ``per_column_params`` (requires a 2-D ``size=(n_rows, n_columns)`` and a base in
+    ``VECTOR_PARAM_BASES``): draw one parameter set PER COLUMN, vectorized, so ``k``
+    independent dimensions cost one base draw instead of ``k``. Distributionally identical
+    to ``k`` separate ``size=(n_rows, 1)`` calls -- each column still gets its own
+    independent parameter draw -- but the rng stream differs from the per-column loop.
+    """
     if base_dist_name not in DISTRIBUTIONS:
         raise ValueError(f"Unknown base_dist_name: {base_dist_name}")
 
     generator = _resolve_rng(rng)
     final_kwargs = base_kwargs.copy() if base_kwargs else {}
-    for param_name, sampler_func in param_samplers.items():
-        final_kwargs[param_name] = sampler_func(size=1, rng=generator)[0]  # type: ignore[index]
+    if per_column_params:
+        if not (isinstance(size, tuple) and len(size) == 2):
+            raise ValueError("per_column_params requires size=(n_rows, n_columns)")
+        if base_dist_name not in VECTOR_PARAM_BASES:
+            raise ValueError(
+                f"per_column_params supports bases {sorted(VECTOR_PARAM_BASES)}; got {base_dist_name!r}")
+        for param_name, sampler_func in param_samplers.items():
+            final_kwargs[param_name] = np.asarray(
+                sampler_func(size=size[1], rng=generator), dtype=np.float64)
+    else:
+        for param_name, sampler_func in param_samplers.items():
+            final_kwargs[param_name] = sampler_func(size=1, rng=generator)[0]  # type: ignore[index]
 
     base_dist_func = DISTRIBUTIONS.get(base_dist_name)
     return base_dist_func(**final_kwargs, size=size, rng=generator)

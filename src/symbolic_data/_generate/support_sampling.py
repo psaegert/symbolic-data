@@ -1,12 +1,34 @@
 """Helpers for sampling mixed continuous/quantized support points."""
 from __future__ import annotations
 
+import functools
 from copy import deepcopy
 from typing import Any, Callable, Dict
 
 import numpy as np
 
+from symbolic_data.distributions import ELEMENTWISE_IID_BASES, VECTOR_PARAM_BASES, sampler_dist
 from symbolic_data.prior_factory import build_prior_callable
+
+
+def _independent_columns_fast_path(prior: Callable[..., np.ndarray]) -> str | None:
+    """How to draw k independent columns in ONE call, if provably safe for ``prior``.
+
+    ``"sampler"``: a ``sampler``-form prior over a vectorizable base -- one call with
+    ``per_column_params=True`` draws each column's parameters independently.
+    ``"iid"``: an elementwise-iid builtin -- one ``(n, k)`` call IS k independent columns.
+    ``None``: anything else (mixtures, custom callables, hierarchical non-vector bases)
+    keeps the per-column loop, because a single ``(n, k)`` call would let one internal
+    parameter draw correlate the columns.
+    """
+    if isinstance(prior, functools.partial):
+        if prior.func is sampler_dist:
+            if prior.keywords.get("base_dist_name") in VECTOR_PARAM_BASES:
+                return "sampler"
+            return None
+        if prior.func in ELEMENTWISE_IID_BASES:
+            return "iid"
+    return None
 
 
 class SupportSamplingError(Exception):
@@ -368,12 +390,20 @@ class SupportSampler:
         rng: np.random.Generator,
     ) -> np.ndarray:
         if self.independent_dimensions:
-            columns = []
-            for _ in range(self.n_variables):
-                samples = support_prior(size=(n_support, 1), rng=rng)
-                column = np.asarray(samples, dtype=np.float64).reshape(n_support)
-                columns.append(column)
-            support = np.stack(columns, axis=1)
+            fast_path = _independent_columns_fast_path(support_prior)
+            if fast_path == "sampler":
+                base = support_prior(size=(n_support, self.n_variables), rng=rng, per_column_params=True)
+                support = np.asarray(base, dtype=np.float64).reshape(n_support, self.n_variables)
+            elif fast_path == "iid":
+                base = support_prior(size=(n_support, self.n_variables), rng=rng)
+                support = np.asarray(base, dtype=np.float64).reshape(n_support, self.n_variables)
+            else:
+                columns = []
+                for _ in range(self.n_variables):
+                    samples = support_prior(size=(n_support, 1), rng=rng)
+                    column = np.asarray(samples, dtype=np.float64).reshape(n_support)
+                    columns.append(column)
+                support = np.stack(columns, axis=1)
         else:
             base = support_prior(size=(n_support, self.n_variables), rng=rng)
             support = np.asarray(base, dtype=np.float64).reshape(n_support, self.n_variables)

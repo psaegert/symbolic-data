@@ -1,7 +1,8 @@
 """Domain-aware support oversampling (v24): a failed try doubles the per-try draw and
 keeps the first ``n_support`` in-domain rows, so a domain-restricted expression no
 longer needs EVERY row of a draw to land inside its domain at once. The default
-(``support_oversampling_max`` absent or 1) is the pre-v24 loop, pinned byte-identical."""
+(``support_oversampling_max`` absent or 1) keeps whole-draw semantics; its rng
+stream is pinned below (re-captured 2026-08-23 for the vectorized support draw)."""
 import hashlib
 from pathlib import Path
 
@@ -19,8 +20,11 @@ from symbolic_data.prior_factory import build_prior_callable
 CONFIG = Path(__file__).resolve().parent.parent / "configs" / "test" / "catalog_train.yaml"
 
 # sha256(x || y || literals), first 16 hex digits, of sample_data draws captured on the
-# pre-oversampling loop (2026-08-22): the default path must consume the rng identically.
-GOLDEN_DRAWS = {7: "1c7187b94cc50c3d", 20260822: "1a39d67f20cb6cba", 424242: "fd70054a66f9b352"}
+# vectorized per-column-params support draw (2026-08-23): the default path must consume
+# the rng identically. (The 2026-08-22 pins covered the pre-oversampling per-column loop;
+# vectorizing the draw changed the stream deliberately -- distribution unchanged, one
+# base draw per attempt instead of one per column.)
+GOLDEN_DRAWS = {7: "34b3cfe0aca46549", 20260822: "a8070c0b7b034946", 424242: "b5efd326f15a60ae"}
 
 # A fixed symmetric support prior. The test config's meta-sampler draws its own
 # low/high per call, which sometimes lands entirely positive -- that would let the
@@ -30,7 +34,7 @@ SYMMETRIC_SUPPORT = build_prior_callable({"name": "uniform", "kwargs": {"low": -
 
 @pytest.fixture(scope="module")
 def engine() -> SimpliPyEngine:
-    return SimpliPyEngine.load("acj-4-3", install=True)
+    return SimpliPyEngine.load("acj-4", install=True)
 
 
 def _catalog(engine: SimpliPyEngine, **sample_strategy_overrides):
@@ -50,7 +54,7 @@ def _catalog(engine: SimpliPyEngine, **sample_strategy_overrides):
     return catalog, cfg
 
 
-def test_the_default_path_is_byte_identical_to_the_pre_oversampling_loop(engine: SimpliPyEngine) -> None:
+def test_the_default_path_rng_stream_is_pinned(engine: SimpliPyEngine) -> None:
     catalog, cfg = _catalog(engine)
     code = codify("x1 * c0 + c1", cfg["variables"] + ["c0", "c1"])
     for seed, expected in GOLDEN_DRAWS.items():
