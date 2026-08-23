@@ -392,20 +392,22 @@ def sampler_dist(
     return base_dist_func(**final_kwargs, size=size, rng=generator)
 
 
-def sampler_box_drawer(
+def sampler_box_batch(
     prior: Callable[..., np.ndarray],
     n_cols: int,
+    n_boxes: int,
     rng: np.random.Generator,
-) -> Callable[[int], np.ndarray] | None:
-    """One BOX from ``prior``, drawable in row blocks: ``draw(m) -> (m, n_cols)``.
+) -> "tuple[Callable[[int], np.ndarray], Callable[[int, int], np.ndarray]] | None":
+    """``n_boxes`` BOXES from ``prior`` at once, drawable in row blocks.
 
-    For a ``sampler``-form prior the per-column parameter set is drawn ONCE here, so
-    every block belongs to the same box -- distribution-identical to a single
-    ``size=(n, n_cols)`` call split at the block boundaries (rows are iid given the
-    parameters, and the generator fills row-major, so consecutive blocks consume the
-    identical stream a single call would). Elementwise-iid builtins need no shared
-    state. Returns ``None`` when the prior's shape cannot be block-drawn safely
-    (mixtures, unknown callables, non-vectorizable bases).
+    Returns ``(draw_all, draw_one)``: ``draw_all(m) -> (n_boxes, m, n_cols)`` draws an
+    ``m``-row block for EVERY box, ``draw_one(j, m) -> (m, n_cols)`` draws a further
+    block for box ``j`` alone. For a ``sampler``-form prior the per-column parameter
+    sets of all boxes are drawn ONCE here, so every block belongs to its box -- rows
+    are iid given the parameters, so any block schedule is distribution-identical to
+    drawing each box in one piece. Elementwise-iid builtins need no shared state.
+    Returns ``None`` when the prior's shape cannot be block-drawn safely (mixtures,
+    unknown callables, non-vectorizable bases).
     """
     if isinstance(prior, partial):
         if prior.func is sampler_dist:
@@ -414,20 +416,28 @@ def sampler_box_drawer(
                 return None
             base_kwargs = dict(kw.get("base_kwargs") or {})
             params = {
-                name: np.asarray(fn(size=n_cols, rng=rng), dtype=np.float64)
+                name: np.asarray(fn(size=(n_boxes, n_cols), rng=rng), dtype=np.float64)
                 for name, fn in kw["param_samplers"].items()
             }
             base_fn = DISTRIBUTIONS.get(kw["base_dist_name"])
 
-            def draw_sampler_block(m: int) -> np.ndarray:
-                return base_fn(**base_kwargs, **params, size=(m, n_cols), rng=rng)
+            def draw_all_sampler(m: int) -> np.ndarray:
+                broadcast = {name: arr[:, None, :] for name, arr in params.items()}
+                return base_fn(**base_kwargs, **broadcast, size=(n_boxes, m, n_cols), rng=rng)
 
-            return draw_sampler_block
+            def draw_one_sampler(j: int, m: int) -> np.ndarray:
+                box = {name: arr[j] for name, arr in params.items()}
+                return base_fn(**base_kwargs, **box, size=(m, n_cols), rng=rng)
+
+            return draw_all_sampler, draw_one_sampler
         if prior.func in ELEMENTWISE_IID_BASES:
-            def draw_iid_block(m: int) -> np.ndarray:
+            def draw_all_iid(m: int) -> np.ndarray:
+                return prior(size=(n_boxes, m, n_cols), rng=rng)
+
+            def draw_one_iid(j: int, m: int) -> np.ndarray:
                 return prior(size=(m, n_cols), rng=rng)
 
-            return draw_iid_block
+            return draw_all_iid, draw_one_iid
     return None
 
 

@@ -916,6 +916,88 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         raise NoValidSampleFoundError(f"Failed to sample a non-contaminated skeleton after {self.sample_strategy['max_tries']} retries")
 
+    def _first_valid_box(
+            self,
+            probes: np.ndarray,
+            draw_rest: Callable[[int], np.ndarray],
+            expression_callable: Callable[..., Any],
+            n_constants: int,
+            rng: np.random.Generator,
+    ) -> tuple[tuple[np.ndarray, np.ndarray, np.ndarray] | None, float]:
+        """Scan the batched boxes in order and realize the FIRST fully valid one.
+
+        Each box gets its own literal draw (like each sequential try would); all probe
+        blocks are evaluated in one expression pass, with each box's constants repeated
+        across its rows. Returns ``((x_support, y_rows, literals), evidence)`` for the
+        accepted box, or ``(None, evidence)`` when every box fails -- ``evidence`` is
+        the smallest invalid-row count observed (``_NO_ROW_EVIDENCE`` when no row
+        evidence was produced).
+        """
+        n_boxes, n_probe, _ = probes.shape
+        evidence = _NO_ROW_EVIDENCE
+        lit_sets = [self.literal_prior(size=n_constants, rng=rng).astype(np.float32) for _ in range(n_boxes)]
+
+        x_flat = probes.reshape(n_boxes * n_probe, -1).astype(np.float64)
+        if n_constants:
+            lit64 = np.stack([lit.astype(np.float64) for lit in lit_sets])
+            lit_args: tuple = tuple(np.repeat(lit64[:, c], n_probe) for c in range(n_constants))
+        else:
+            lit_args = ()
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=RuntimeWarning)
+            y_flat = expression_callable(*x_flat.T, *lit_args)
+
+        if np.iscomplexobj(y_flat) or not (
+                np.issubdtype(np.asarray(y_flat).dtype, np.floating)
+                or np.issubdtype(np.asarray(y_flat).dtype, np.integer)):
+            return None, evidence
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=RuntimeWarning)
+            y32 = np.asarray(y_flat, dtype=np.float64).astype(np.float32)
+
+        if y32.ndim == 0 or y32.size == 1:
+            # Constant expression: one value decides every row of every box; box 0 is
+            # the first try, exactly as the sequential loop would accept or exhaust.
+            value = float(np.ravel(y32)[0])
+            if not np.isfinite(value) or not bool(np.isfinite(probes[0]).all()):
+                return None, evidence
+            x_rest = draw_rest(0)
+            if x_rest.shape[0] and not bool(np.isfinite(x_rest).all()):
+                return None, evidence
+            x_support = np.concatenate([probes[0], x_rest], axis=0)
+            return (x_support, np.full((x_support.shape[0], 1), value, dtype=np.float32), lit_sets[0]), evidence
+
+        y_rows_all = y32.reshape(n_boxes, n_probe, -1)
+        rows_ok = np.isfinite(probes).all(axis=2) & np.isfinite(y_rows_all).all(axis=2)
+        for j in range(n_boxes):
+            if not bool(rows_ok[j].all()):
+                # Lower-bound evidence: only this box's probe was evaluated.
+                evidence = min(evidence, int(n_probe - int(np.count_nonzero(rows_ok[j]))))
+                continue
+            x_rest = draw_rest(j)
+            if x_rest.shape[0] == 0:
+                return (probes[j], y_rows_all[j], lit_sets[j]), evidence
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", category=RuntimeWarning)
+                y_rest = expression_callable(*x_rest.astype(np.float64).T, *lit_sets[j].astype(np.float64))
+            if np.iscomplexobj(y_rest) or not (
+                    np.issubdtype(np.asarray(y_rest).dtype, np.floating)
+                    or np.issubdtype(np.asarray(y_rest).dtype, np.integer)):
+                continue
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", category=RuntimeWarning)
+                y_rest32 = np.asarray(y_rest, dtype=np.float64).astype(np.float32)
+            if not isinstance(y_rest, np.ndarray) or len(np.atleast_1d(y_rest)) != x_rest.shape[0]:
+                y_rest32 = np.full((x_rest.shape[0],), float(np.ravel(y_rest32)[0]), dtype=np.float32)
+            rest_ok = np.isfinite(x_rest).all(axis=1) & np.isfinite(y_rest32.reshape(x_rest.shape[0], -1)).all(axis=1)
+            if not bool(rest_ok.all()):
+                evidence = min(evidence, int((~rest_ok).sum()))
+                continue
+            x_support = np.concatenate([probes[j], x_rest], axis=0)
+            y_rows = np.concatenate([y_rows_all[j], y_rest32.reshape(x_rest.shape[0], -1)], axis=0)
+            return (x_support, y_rows, lit_sets[j]), evidence
+        return None, evidence
+
     def sample_data(
             self, code: CodeType, n_constants: int = 0, n_support: int | None = None,
             support_prior: Callable | None = None, support_scale_prior: Callable | None = None,
@@ -961,72 +1043,35 @@ class LampleChartonCatalog(GenerativeCatalog):
         oversampling = 1
         min_invalid_rows = _NO_ROW_EVIDENCE
 
+        # Try-batching (all-or-nothing regime, no per-call prior overrides): draw ALL
+        # max_tries boxes' parameters and probe blocks at once, evaluate every probe in
+        # ONE expression pass, and finish the first box IN ORDER whose probe and
+        # remaining rows both validate. Tries are iid and the first-valid selection is
+        # preserved, so this is distribution-identical to the sequential loop below;
+        # only the rng call schedule differs. Falls through to the loop whenever the
+        # sampler's shape cannot be block-drawn safely.
+        if (not self.allow_nan and max_oversampling == 1
+                and support_prior is None and support_scale_prior is None):
+            n_probe = min(_VALIDITY_PROBE_ROWS, n_support)
+            batch = self.support_sampler.sample_box_batch(
+                int(self.sample_strategy['max_tries']), n_probe, n_support, rng)
+            if batch is not None:
+                probes, draw_rest = batch
+                accepted, evidence = self._first_valid_box(
+                    probes, draw_rest, expression_callable, n_constants, rng)
+                if accepted is None:
+                    error = NoValidSampleFoundError(
+                        f"Failed to generate a valid expression after {self.sample_strategy['max_tries']} retries")
+                    error.min_invalid_rows = None if evidence == _NO_ROW_EVIDENCE else int(evidence)
+                    raise error
+                x_support, y_rows, literals = accepted
+                return x_support, y_rows.reshape(-1, 1), literals
+
         for _ in range(self.sample_strategy['max_tries']):
             literals = self.literal_prior(size=n_constants, rng=rng).astype(np.float32)
 
             override_support_prior = SupportSampler.ensure_prior_callable(support_prior) if support_prior is not None else None
             override_support_scale = SupportSampler.ensure_prior_callable(support_scale_prior) if support_scale_prior is not None else None
-
-            # Two-stage draw (pure cost optimization for the all-or-nothing regime): draw
-            # ONE box as a probe block + a finish block, evaluate the probe first, and
-            # only pay for the remaining rows when the probe is fully valid. Rows are iid
-            # given the box parameters, so this is distribution-identical to drawing the
-            # whole box at once -- an accepted draw even consumes the identical rng
-            # stream (the generator fills row-major); a rejected try consumes less.
-            boxed = None
-            if (not self.allow_nan and max_oversampling == 1
-                    and override_support_prior is None and override_support_scale is None
-                    and n_support > _VALIDITY_PROBE_ROWS):
-                boxed = self.support_sampler.sample_boxed(_VALIDITY_PROBE_ROWS, n_support, rng)
-
-            if boxed is not None:
-                x_probe, finish_box = boxed
-                lits64 = literals.astype(np.float64)
-                with warnings.catch_warnings():
-                    warnings.filterwarnings("ignore", category=RuntimeWarning)
-                    y_probe = expression_callable(*x_probe.astype(np.float64).T, *lits64)
-                if np.iscomplexobj(y_probe) or not (
-                        np.issubdtype(np.asarray(y_probe).dtype, np.floating)
-                        or np.issubdtype(np.asarray(y_probe).dtype, np.integer)):
-                    continue
-                probe_is_array = isinstance(y_probe, np.ndarray) and len(np.atleast_1d(y_probe)) == _VALIDITY_PROBE_ROWS
-                with warnings.catch_warnings():
-                    warnings.filterwarnings("ignore", category=RuntimeWarning)
-                    y_probe32 = np.asarray(y_probe, dtype=np.float64).astype(np.float32)
-                if probe_is_array:
-                    probe_ok = np.isfinite(x_probe).all(axis=1) & np.isfinite(y_probe32.reshape(_VALIDITY_PROBE_ROWS, -1)).all(axis=1)
-                else:
-                    # Constant expression: one value decides every row of the box.
-                    probe_ok = np.isfinite(x_probe).all(axis=1) & bool(np.isfinite(y_probe32).all())
-                if not bool(np.all(probe_ok)):
-                    # Evidence is a lower bound here (only the probe was evaluated).
-                    min_invalid_rows = min(min_invalid_rows, int(np.size(probe_ok) - np.count_nonzero(probe_ok)))
-                    continue
-                x_rest = finish_box()
-                with warnings.catch_warnings():
-                    warnings.filterwarnings("ignore", category=RuntimeWarning)
-                    y_rest = expression_callable(*x_rest.astype(np.float64).T, *lits64)
-                if np.iscomplexobj(y_rest) or not (
-                        np.issubdtype(np.asarray(y_rest).dtype, np.floating)
-                        or np.issubdtype(np.asarray(y_rest).dtype, np.integer)):
-                    continue
-                with warnings.catch_warnings():
-                    warnings.filterwarnings("ignore", category=RuntimeWarning)
-                    y_rest32 = np.asarray(y_rest, dtype=np.float64).astype(np.float32)
-                if not isinstance(y_rest, np.ndarray) or len(np.atleast_1d(y_rest)) != x_rest.shape[0]:
-                    y_rest32 = np.full((x_rest.shape[0],), float(np.ravel(y_rest32)[0]), dtype=np.float32)
-                rest_ok = np.isfinite(x_rest).all(axis=1) & np.isfinite(y_rest32.reshape(x_rest.shape[0], -1)).all(axis=1)
-                if not bool(rest_ok.all()):
-                    min_invalid_rows = min(min_invalid_rows, int((~rest_ok).sum()))
-                    continue
-                if not probe_is_array:
-                    y_probe32 = np.full((_VALIDITY_PROBE_ROWS,), float(np.ravel(y_probe32)[0]), dtype=np.float32)
-                x_support = np.concatenate([x_probe, x_rest], axis=0)
-                y_support = np.concatenate([
-                    y_probe32.reshape(_VALIDITY_PROBE_ROWS, -1),
-                    y_rest32.reshape(x_rest.shape[0], -1),
-                ], axis=0)
-                break
 
             try:
                 x_support = self.support_sampler.sample(

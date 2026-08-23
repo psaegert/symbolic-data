@@ -7,7 +7,7 @@ from typing import Any, Callable, Dict
 
 import numpy as np
 
-from symbolic_data.distributions import ELEMENTWISE_IID_BASES, VECTOR_PARAM_BASES, sampler_box_drawer, sampler_dist
+from symbolic_data.distributions import ELEMENTWISE_IID_BASES, VECTOR_PARAM_BASES, sampler_box_batch, sampler_dist
 from symbolic_data.prior_factory import build_prior_callable
 
 
@@ -383,39 +383,48 @@ class SupportSampler:
         self._maybe_check_unique(support, n_support)
         return support.astype(np.float32, copy=False)
 
-    def sample_boxed(
+    def sample_box_batch(
         self,
+        n_boxes: int,
         n_probe: int,
         n_total: int,
         rng: np.random.Generator | None = None,
-    ) -> "tuple[np.ndarray, Callable[[], np.ndarray]] | None":
-        """ONE box drawn as two row blocks: an ``(n_probe, k)`` probe now, plus a
-        callable producing the remaining ``(n_total - n_probe, k)`` rows of the SAME
-        box. Distribution-identical to one ``sample(n_total)`` call (rows are iid given
-        the box parameters); an accepted two-stage draw even consumes the identical rng
-        stream, since the generator fills row-major. Returns ``None`` whenever block
-        drawing is unsafe: transforms or uniqueness checking configured (they act on
-        the whole matrix with their own per-call draws), a prior the block drawer
-        cannot classify, or a ``sampler``-form prior under dependent dimensions (its
-        single parameter set spans all columns, which the per-column drawer would
-        redraw)."""
+    ) -> "tuple[np.ndarray, Callable[[int], np.ndarray]] | None":
+        """``n_boxes`` boxes at once, each split into an ``n_probe``-row probe block
+        (returned eagerly as ``(n_boxes, n_probe, k)``) and a ``draw_rest(j)`` callable
+        producing the remaining rows of box ``j`` on demand. Rows are iid given each
+        box's parameters, so any schedule of blocks is distribution-identical to
+        drawing every box in one piece -- and boxes never drawn to completion (probe
+        failed, or a box after the accepted one) simply consume nothing further.
+        Returns ``None`` whenever block drawing is unsafe: transforms or uniqueness
+        checking configured (they act on the whole matrix with their own per-call
+        draws), a prior the block drawer cannot classify, or a ``sampler``-form prior
+        under dependent dimensions (its single parameter set spans all columns, which
+        the per-column drawer would redraw)."""
         if self.require_unique or self.scale_transform is not None or self._post_scale_transforms:
             return None
-        if self.support_prior is None or n_probe <= 0 or n_total <= n_probe:
+        if self.support_prior is None or n_boxes <= 0 or n_probe <= 0 or n_total < n_probe:
             return None
         if (isinstance(self.support_prior, functools.partial)
                 and self.support_prior.func is sampler_dist and not self.independent_dimensions):
             return None
         rng = rng if rng is not None else np.random.default_rng()
-        drawer = sampler_box_drawer(self.support_prior, self.n_variables, rng)
-        if drawer is None:
+        batch = sampler_box_batch(self.support_prior, self.n_variables, n_boxes, rng)
+        if batch is None:
             return None
+        draw_all, draw_one = batch
 
-        def block(m: int) -> np.ndarray:
-            arr = np.asarray(drawer(m), dtype=np.float64).reshape(m, self.n_variables)
+        probes = np.asarray(draw_all(n_probe), dtype=np.float64)
+        probes = probes.reshape(n_boxes, n_probe, self.n_variables).astype(np.float32)
+        n_rest = n_total - n_probe
+
+        def draw_rest(j: int) -> np.ndarray:
+            if n_rest <= 0:
+                return np.zeros((0, self.n_variables), dtype=np.float32)
+            arr = np.asarray(draw_one(j, n_rest), dtype=np.float64).reshape(n_rest, self.n_variables)
             return arr.astype(np.float32)
 
-        return block(n_probe), (lambda: block(n_total - n_probe))
+        return probes, draw_rest
 
     def _draw_continuous_support(
         self,
