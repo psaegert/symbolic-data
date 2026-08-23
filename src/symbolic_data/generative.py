@@ -967,6 +967,67 @@ class LampleChartonCatalog(GenerativeCatalog):
             override_support_prior = SupportSampler.ensure_prior_callable(support_prior) if support_prior is not None else None
             override_support_scale = SupportSampler.ensure_prior_callable(support_scale_prior) if support_scale_prior is not None else None
 
+            # Two-stage draw (pure cost optimization for the all-or-nothing regime): draw
+            # ONE box as a probe block + a finish block, evaluate the probe first, and
+            # only pay for the remaining rows when the probe is fully valid. Rows are iid
+            # given the box parameters, so this is distribution-identical to drawing the
+            # whole box at once -- an accepted draw even consumes the identical rng
+            # stream (the generator fills row-major); a rejected try consumes less.
+            boxed = None
+            if (not self.allow_nan and max_oversampling == 1
+                    and override_support_prior is None and override_support_scale is None
+                    and n_support > _VALIDITY_PROBE_ROWS):
+                boxed = self.support_sampler.sample_boxed(_VALIDITY_PROBE_ROWS, n_support, rng)
+
+            if boxed is not None:
+                x_probe, finish_box = boxed
+                lits64 = literals.astype(np.float64)
+                with warnings.catch_warnings():
+                    warnings.filterwarnings("ignore", category=RuntimeWarning)
+                    y_probe = expression_callable(*x_probe.astype(np.float64).T, *lits64)
+                if np.iscomplexobj(y_probe) or not (
+                        np.issubdtype(np.asarray(y_probe).dtype, np.floating)
+                        or np.issubdtype(np.asarray(y_probe).dtype, np.integer)):
+                    continue
+                probe_is_array = isinstance(y_probe, np.ndarray) and len(np.atleast_1d(y_probe)) == _VALIDITY_PROBE_ROWS
+                with warnings.catch_warnings():
+                    warnings.filterwarnings("ignore", category=RuntimeWarning)
+                    y_probe32 = np.asarray(y_probe, dtype=np.float64).astype(np.float32)
+                if probe_is_array:
+                    probe_ok = np.isfinite(x_probe).all(axis=1) & np.isfinite(y_probe32.reshape(_VALIDITY_PROBE_ROWS, -1)).all(axis=1)
+                else:
+                    # Constant expression: one value decides every row of the box.
+                    probe_ok = np.isfinite(x_probe).all(axis=1) & bool(np.isfinite(y_probe32).all())
+                if not bool(np.all(probe_ok)):
+                    # Evidence is a lower bound here (only the probe was evaluated).
+                    min_invalid_rows = min(min_invalid_rows, int(np.size(probe_ok) - np.count_nonzero(probe_ok)))
+                    continue
+                x_rest = finish_box()
+                with warnings.catch_warnings():
+                    warnings.filterwarnings("ignore", category=RuntimeWarning)
+                    y_rest = expression_callable(*x_rest.astype(np.float64).T, *lits64)
+                if np.iscomplexobj(y_rest) or not (
+                        np.issubdtype(np.asarray(y_rest).dtype, np.floating)
+                        or np.issubdtype(np.asarray(y_rest).dtype, np.integer)):
+                    continue
+                with warnings.catch_warnings():
+                    warnings.filterwarnings("ignore", category=RuntimeWarning)
+                    y_rest32 = np.asarray(y_rest, dtype=np.float64).astype(np.float32)
+                if not isinstance(y_rest, np.ndarray) or len(np.atleast_1d(y_rest)) != x_rest.shape[0]:
+                    y_rest32 = np.full((x_rest.shape[0],), float(np.ravel(y_rest32)[0]), dtype=np.float32)
+                rest_ok = np.isfinite(x_rest).all(axis=1) & np.isfinite(y_rest32.reshape(x_rest.shape[0], -1)).all(axis=1)
+                if not bool(rest_ok.all()):
+                    min_invalid_rows = min(min_invalid_rows, int((~rest_ok).sum()))
+                    continue
+                if not probe_is_array:
+                    y_probe32 = np.full((_VALIDITY_PROBE_ROWS,), float(np.ravel(y_probe32)[0]), dtype=np.float32)
+                x_support = np.concatenate([x_probe, x_rest], axis=0)
+                y_support = np.concatenate([
+                    y_probe32.reshape(_VALIDITY_PROBE_ROWS, -1),
+                    y_rest32.reshape(x_rest.shape[0], -1),
+                ], axis=0)
+                break
+
             try:
                 x_support = self.support_sampler.sample(
                     n_support=oversampling * n_support,

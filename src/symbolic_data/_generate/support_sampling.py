@@ -7,7 +7,7 @@ from typing import Any, Callable, Dict
 
 import numpy as np
 
-from symbolic_data.distributions import ELEMENTWISE_IID_BASES, VECTOR_PARAM_BASES, sampler_dist
+from symbolic_data.distributions import ELEMENTWISE_IID_BASES, VECTOR_PARAM_BASES, sampler_box_drawer, sampler_dist
 from symbolic_data.prior_factory import build_prior_callable
 
 
@@ -382,6 +382,40 @@ class SupportSampler:
 
         self._maybe_check_unique(support, n_support)
         return support.astype(np.float32, copy=False)
+
+    def sample_boxed(
+        self,
+        n_probe: int,
+        n_total: int,
+        rng: np.random.Generator | None = None,
+    ) -> "tuple[np.ndarray, Callable[[], np.ndarray]] | None":
+        """ONE box drawn as two row blocks: an ``(n_probe, k)`` probe now, plus a
+        callable producing the remaining ``(n_total - n_probe, k)`` rows of the SAME
+        box. Distribution-identical to one ``sample(n_total)`` call (rows are iid given
+        the box parameters); an accepted two-stage draw even consumes the identical rng
+        stream, since the generator fills row-major. Returns ``None`` whenever block
+        drawing is unsafe: transforms or uniqueness checking configured (they act on
+        the whole matrix with their own per-call draws), a prior the block drawer
+        cannot classify, or a ``sampler``-form prior under dependent dimensions (its
+        single parameter set spans all columns, which the per-column drawer would
+        redraw)."""
+        if self.require_unique or self.scale_transform is not None or self._post_scale_transforms:
+            return None
+        if self.support_prior is None or n_probe <= 0 or n_total <= n_probe:
+            return None
+        if (isinstance(self.support_prior, functools.partial)
+                and self.support_prior.func is sampler_dist and not self.independent_dimensions):
+            return None
+        rng = rng if rng is not None else np.random.default_rng()
+        drawer = sampler_box_drawer(self.support_prior, self.n_variables, rng)
+        if drawer is None:
+            return None
+
+        def block(m: int) -> np.ndarray:
+            arr = np.asarray(drawer(m), dtype=np.float64).reshape(m, self.n_variables)
+            return arr.astype(np.float32)
+
+        return block(n_probe), (lambda: block(n_total - n_probe))
 
     def _draw_continuous_support(
         self,
