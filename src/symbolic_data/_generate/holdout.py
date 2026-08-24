@@ -117,6 +117,12 @@ class HoldoutManager:
             # produces. Conservative: two unevaluable expressions share the sentinel,
             # which can only ever over-reject.
             return ("__unevaluable__",)
+        if np.isnan(image).all():
+            # safe_f signals a refused evaluation as an all-NaN vector (and a
+            # domain-empty candidate looks the same): key it to the sentinel BEFORE
+            # the nan->0 mapping, which would otherwise collide with a genuine
+            # zero image. Conservative either way -- over-rejects, never matches.
+            return ("__unevaluable__",)
         image = np.round(image, 4)
 
         if np.isnan(image).any():

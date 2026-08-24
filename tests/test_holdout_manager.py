@@ -128,3 +128,20 @@ def test_unevaluable_candidate_keys_to_the_sentinel_and_never_matches():
         return x + 1.0
 
     assert manager._evaluate_to_key(fine, num_constants=0, n_variables=1) != key
+
+
+def test_safe_f_returns_nan_on_ufunc_refusal():
+    """The single choke point: every evaluation path flows through safe_f, and a
+    bigint the ufunc refuses becomes an all-NaN vector (the universal reject
+    signal), never an exception (np.sinh(bigint) killed a T16 worker through the
+    data sampler after the holdout-only guard, 2026-08-24)."""
+    import numpy as np
+    from symbolic_data.compilation import safe_f
+
+    X = np.linspace(-1, 1, 8).reshape(-1, 1)
+    y = safe_f(lambda x: np.sinh(3 ** 500), X)
+    assert y.shape == (8,) and np.isnan(y).all()
+    y = safe_f(lambda x: np.exp(10 ** 400), X)
+    assert np.isnan(y).all()
+    y = safe_f(lambda x: x + 1.0, X)
+    assert np.allclose(y, X.ravel() + 1.0)
