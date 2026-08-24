@@ -56,8 +56,10 @@ def _adaptive_batch(needed: int, collected: int, drawn: int, budget_left: int) -
 
 
 _PROBLEM_ARRAY_FIELDS = ("x_support", "y_support", "y_support_noisy", "x_validation", "y_validation", "y_validation_noisy")
-# optional per-problem arrays (absent for synthetic problems): reference-law predictions
-_PROBLEM_OPTIONAL_ARRAY_FIELDS = ("y_reference_support", "y_reference_validation")
+# optional per-problem arrays: reference-law predictions (absent for synthetic problems)
+# and noise-mixture outlier masks (absent without a mixture spec)
+_PROBLEM_OPTIONAL_ARRAY_FIELDS = ("y_reference_support", "y_reference_validation",
+                                  "outlier_mask_support", "outlier_mask_validation")
 
 
 @dataclass
@@ -281,7 +283,7 @@ class ProblemCatalog(Catalog):
             for i, p in enumerate(self.problems or []):
                 for fld in _PROBLEM_ARRAY_FIELDS:
                     arrays[f"p{i}__{fld}"] = np.asarray(getattr(p, fld))
-                for fld in _PROBLEM_OPTIONAL_ARRAY_FIELDS:      # reference-law predictions
+                for fld in _PROBLEM_OPTIONAL_ARRAY_FIELDS:      # reference predictions / outlier masks
                     value = getattr(p, fld)
                     if value is not None:
                         arrays[f"p{i}__{fld}"] = np.asarray(value)

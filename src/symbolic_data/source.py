@@ -23,6 +23,7 @@ from symbolic_data._evaluation import compile_expression, load_engine
 from symbolic_data.catalog import Catalog, ProblemCatalog
 from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.generative import GenerativeCatalog, build_catalog, is_open_generative_ref
+from symbolic_data.noise import NoiseSpec, apply_noise
 from symbolic_data.problem import Problem
 from symbolic_data.token_ops import normalize_skeleton
 
@@ -106,7 +107,12 @@ class ProblemSource:
         self.n_validation = s.get("n_validation")
         if self._n_support_from_prior and self.n_validation not in (None, 0):
             raise ValueError("sampling.n_support: 'prior' requires n_validation: 0 (the support size is drawn per sample; there is no validation split)")
-        self.noise = float(s.get("noise", 0.0))
+        # `noise:` is a scalar (legacy relative-Gaussian on y, unchanged semantics) OR a
+        # mapping (the mixture prior -- see symbolic_data.noise). With a mixture, the
+        # realized per-instance draw lands on Problem.noise; the scalar channel stays off.
+        raw_noise = s.get("noise", 0.0)
+        self.noise_spec = NoiseSpec.parse(raw_noise) if isinstance(raw_noise, Mapping) else None
+        self.noise = 0.0 if self.noise_spec is not None else float(raw_noise)
         self.problems_per_expression = int(s.get("problems_per_expression", 1))
         self.layout = s.get("layout", "random")          # X-point layout passed to the distribution
         self.max_trials = int(s.get("max_trials", _DEFAULT_MAX_TRIALS))
@@ -246,13 +252,28 @@ class ProblemSource:
                 xs, xv, ys, yv = _split_support_validation(realized.x, realized.y, split_at)
                 if xs.size == 0:
                     continue
+                ground_truth = dict(
+                    skeleton=realized.skeleton, expression=realized.expression,
+                    constants=realized.constants, variables=realized.variables, complexity=realized.complexity,
+                    eq_id=realized.eq_id, meta=realized.meta, gt_kind="exact",
+                )
+                if self.noise_spec is not None:
+                    noised = apply_noise(self.noise_spec, ys, yv, rng)
+                    if noised is None:
+                        # This noise draw pushed a target past the float32 boundary (measured:
+                        # 5e-5 of instance-draws): reject the trial like an invalid support draw.
+                        continue
+                    ys_noisy, yv_noisy, mask_support, mask_validation, draw = noised
+                    return Problem(
+                        x_support=xs, y_support=ys, y_support_noisy=ys_noisy,
+                        x_validation=xv, y_validation=yv, y_validation_noisy=yv_noisy,
+                        outlier_mask_support=mask_support, outlier_mask_validation=mask_validation,
+                        noise=draw, **ground_truth,
+                    )
                 return Problem(
                     x_support=xs, y_support=ys, y_support_noisy=_inject_noise(ys, self.noise, rng),
                     x_validation=xv, y_validation=yv, y_validation_noisy=_inject_noise(yv, self.noise, rng),
-                    skeleton=realized.skeleton, expression=realized.expression,
-                    constants=realized.constants, variables=realized.variables, complexity=realized.complexity,
-                    noise=self.noise, eq_id=realized.eq_id, meta=realized.meta,
-                    gt_kind="exact",
+                    noise=self.noise, **ground_truth,
                 )
         except CatalogEntryError as exc:
             return Problem.placeholder(variables=_entry_variables(entry), reason=str(exc), eq_id=eq_id)

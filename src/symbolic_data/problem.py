@@ -67,6 +67,11 @@ class Problem:
     # derives reference_fvu without ever re-evaluating expressions. None <=> synthetic problem.
     y_reference_support: np.ndarray | None = None
     y_reference_validation: np.ndarray | None = None
+    # noise-mixture channel: per-point contamination masks (True = the outlier channel
+    # touched this point -- the generative label, not a statistical judgment). None <=>
+    # the source ran without a mixture spec (legacy scalar noise, or no noise at all).
+    outlier_mask_support: np.ndarray | None = None
+    outlier_mask_validation: np.ndarray | None = None
 
     def __post_init__(self) -> None:
         if self.gt_kind is None:
@@ -118,6 +123,8 @@ class Problem:
             "gt_kind": self.gt_kind,
             "y_reference_support": self.y_reference_support,
             "y_reference_validation": self.y_reference_validation,
+            "outlier_mask_support": self.outlier_mask_support,
+            "outlier_mask_validation": self.outlier_mask_validation,
         }
 
     @classmethod
