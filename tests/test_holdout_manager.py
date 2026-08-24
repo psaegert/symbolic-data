@@ -103,3 +103,28 @@ def test_hash_layer_matches_renamed_and_literal_skeletons():
     manager.skeleton_hashes.add(tuple(manager._normalize_tokens(["+", "x1", "3.5"])))
     assert tuple(manager._normalize_tokens(["+", "v1", "<constant>"])) in manager.skeleton_hashes
     assert tuple(manager._normalize_tokens(["+", "x1", "2.7"])) in manager.skeleton_hashes
+
+
+def test_unevaluable_candidate_keys_to_the_sentinel_and_never_matches():
+    """A lambdify-folded arbitrary-precision int makes numpy ufuncs raise TypeError
+    (np.exp(bigint) killed a streaming worker live, 2026-08-24). The evaluation keys
+    such a candidate to a sentinel instead of propagating -- it can only over-reject,
+    never crash the producer."""
+    import numpy as np
+    from symbolic_data._generate.holdout import HoldoutManager
+
+    manager = HoldoutManager.__new__(HoldoutManager)
+    manager.holdout_X = np.linspace(-1, 1, 8).reshape(-1, 1)
+    manager.holdout_C = np.ones(4)
+    manager.n_variables = 1
+
+    def bigint_exp(x):
+        return np.exp(10 ** 400)
+
+    key = manager._evaluate_to_key(bigint_exp, num_constants=0, n_variables=1)
+    assert key == ("__unevaluable__",)
+
+    def fine(x):
+        return x + 1.0
+
+    assert manager._evaluate_to_key(fine, num_constants=0, n_variables=1) != key

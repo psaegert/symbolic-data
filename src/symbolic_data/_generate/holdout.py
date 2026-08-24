@@ -105,8 +105,18 @@ class HoldoutManager:
         constants_slice = self.holdout_C[:num_constants]
         constants_arg = None if num_constants == 0 else constants_slice
 
-        image = safe_f(compiled_fn, samples, constants_arg)
-        image = np.asarray(image, dtype=np.float64)
+        try:
+            image = safe_f(compiled_fn, samples, constants_arg)
+            image = np.asarray(image, dtype=np.float64)
+        except (TypeError, OverflowError, ValueError):
+            # A pathological integer-structure candidate: lambdify folds pure-int
+            # subtrees into arbitrary-precision Python ints, and numpy ufuncs refuse
+            # them (seen live 2026-08-24: np.exp(bigint) TypeError killed a streaming
+            # worker mid-run). Such a candidate cannot match any pool entry -- every
+            # holdout item evaluates -- so it keys to a sentinel no real image
+            # produces. Conservative: two unevaluable expressions share the sentinel,
+            # which can only ever over-reject.
+            return ("__unevaluable__",)
         image = np.round(image, 4)
 
         if np.isnan(image).any():
