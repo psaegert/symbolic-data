@@ -145,3 +145,15 @@ def test_safe_f_returns_nan_on_ufunc_refusal():
     assert np.isnan(y).all()
     y = safe_f(lambda x: x + 1.0, X)
     assert np.allclose(y, X.ravel() + 1.0)
+
+
+def test_direct_expression_calls_survive_ufunc_refusal():
+    """The box search and data evaluation call the lambdified function DIRECTLY --
+    not through safe_f -- and killed workers three times on 2026-08-24 (exp, sinh,
+    cosh of lambdify-folded bigints). The direct-call guard returns NaN there."""
+    import numpy as np
+    from symbolic_data.generative import _call_expression
+
+    assert np.isnan(_call_expression(lambda x: np.cosh(3 ** 500), np.ones(4)))
+    out = _call_expression(lambda x: x * 2.0, np.ones(4))
+    assert np.allclose(out, 2.0)

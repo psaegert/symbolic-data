@@ -49,6 +49,19 @@ _NO_ROW_EVIDENCE = float("inf")
 _VALIDITY_PROBE_ROWS = 32
 
 
+
+def _call_expression(expression_callable, *args):
+    """Evaluate a lambdified expression; a ufunc refusal (lambdify's bigint folds:
+    np.exp/sinh/cosh(arbitrary-precision int) raise TypeError, the int-to-f64
+    boundary raises OverflowError) returns NaN instead of killing the producer --
+    the same contract as compilation.safe_f, applied at the DIRECT call sites
+    (three worker deaths on 2026-08-24 came through these, not through safe_f)."""
+    try:
+        return expression_callable(*args)
+    except (TypeError, OverflowError):
+        return np.nan
+
+
 def _gt_metadata(skeleton: Sequence[str], literals: Any) -> tuple[list[str] | None, int | None]:
     """Normalized ground-truth expression + its token-length complexity.
 
@@ -945,7 +958,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             lit_args = ()
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=RuntimeWarning)
-            y_flat = expression_callable(*x_flat.T, *lit_args)
+            y_flat = _call_expression(expression_callable, *x_flat.T, *lit_args)
 
         if np.iscomplexobj(y_flat) or not (
                 np.issubdtype(np.asarray(y_flat).dtype, np.floating)
@@ -979,7 +992,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                 return (probes[j], y_rows_all[j], lit_sets[j]), evidence
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
-                y_rest = expression_callable(*x_rest.astype(np.float64).T, *lit_sets[j].astype(np.float64))
+                y_rest = _call_expression(expression_callable, *x_rest.astype(np.float64).T, *lit_sets[j].astype(np.float64))
             if np.iscomplexobj(y_rest) or not (
                     np.issubdtype(np.asarray(y_rest).dtype, np.floating)
                     or np.issubdtype(np.asarray(y_rest).dtype, np.integer)):
@@ -1093,7 +1106,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                 probe = x_support[:_VALIDITY_PROBE_ROWS]
                 with warnings.catch_warnings():
                     warnings.filterwarnings("ignore", category=RuntimeWarning)
-                    y_probe = expression_callable(*probe.astype(np.float64).T, *literals.astype(np.float64))
+                    y_probe = _call_expression(expression_callable, *probe.astype(np.float64).T, *literals.astype(np.float64))
                 if (isinstance(y_probe, np.ndarray) and len(y_probe) == _VALIDITY_PROBE_ROWS
                         and not np.iscomplexobj(y_probe) and np.issubdtype(y_probe.dtype, np.number)):
                     with warnings.catch_warnings():
@@ -1116,7 +1129,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             # tree containing an f64-upcasting realization -- rootn -- on every draw.)
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
-                y_evaluated = expression_callable(*x_support.astype(np.float64).T, *literals.astype(np.float64))
+                y_evaluated = _call_expression(expression_callable, *x_support.astype(np.float64).T, *literals.astype(np.float64))
 
             if not isinstance(y_evaluated, np.ndarray):
                 y_evaluated = np.full((x_support.shape[0], 1), y_evaluated, dtype=np.float64)
