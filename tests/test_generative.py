@@ -157,7 +157,9 @@ def test_register_holdout_pool_frozen_wider_than_catalog_keeps_image_layer(tmp_p
         catalog.register_holdout_pool(npz)
     try:
         assert ("/", "*", "x1", "x2", "x3") in catalog.holdout_skeletons
-        assert len(catalog.holdout_y) == 1               # the image layer survived the width gap
+        # image layer survived the width gap: >= 1 key (the hardened manager adds
+        # one fingerprint PER PROBE GRID, so the exact count tracks the grid set)
+        assert len(catalog.holdout_y) >= 1
     finally:
         catalog.clear_holdouts()
 

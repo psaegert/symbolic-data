@@ -116,18 +116,21 @@ def test_unevaluable_candidate_keys_to_the_sentinel_and_never_matches():
     manager = HoldoutManager.__new__(HoldoutManager)
     manager.holdout_X = np.linspace(-1, 1, 8).reshape(-1, 1)
     manager.holdout_C = np.ones(4)
+    manager.extra_grids = ()
+    manager.extra_constant_fills = np.ones((0, 4))
     manager.n_variables = 1
 
     def bigint_exp(x):
         return np.exp(10 ** 400)
 
-    key = manager._evaluate_to_key(bigint_exp, num_constants=0, n_variables=1)
-    assert key == ("__unevaluable__",)
+    keys = manager._evaluate_to_keys(bigint_exp, num_constants=0, n_variables=1)
+    assert keys == {(0, "__unevaluable__")}
 
     def fine(x):
         return x + 1.0
 
-    assert manager._evaluate_to_key(fine, num_constants=0, n_variables=1) != key
+    # the sentinel matches ONLY other unevaluable images, never a real one
+    assert manager._evaluate_to_keys(fine, num_constants=0, n_variables=1).isdisjoint(keys)
 
 
 def test_safe_f_returns_nan_on_ufunc_refusal():
