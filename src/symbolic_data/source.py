@@ -258,7 +258,7 @@ class ProblemSource:
                     eq_id=realized.eq_id, meta=realized.meta, gt_kind="exact",
                 )
                 if self.noise_spec is not None:
-                    noised = apply_noise(self.noise_spec, ys, yv, rng)
+                    noised = apply_noise(self.noise_spec, ys, yv, rng, x_support=xs, x_validation=xv)
                     if noised is None:
                         # This noise draw pushed a target past the float32 boundary (measured:
                         # 5e-5 of instance-draws): reject the trial like an invalid support draw.

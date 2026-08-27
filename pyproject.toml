@@ -14,6 +14,7 @@ keywords = ["symbolic-regression", "dataset", "sampling", "holdout", "expression
 dependencies = [
     "numpy",
     "scikit-learn",
+    "scipy",
     "simplipy>=0.14,<0.15",
     "pyyaml",
     "tqdm",
