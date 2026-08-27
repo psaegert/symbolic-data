@@ -39,6 +39,15 @@ from symbolic_data.token_ops import desugar_sqrt, flatten_nested_list
 from symbolic_data.errors import NoValidSampleFoundError
 from symbolic_data.catalog import Catalog, ProblemCatalog, RealizedExpression
 
+# The rewrite strength the holdout family quotient runs at. `permissive` carries every
+# judged tier (core + f64 + real), so it is the most capable canonicalizer available;
+# effort 4 is the owner ruling of 2026-08-27 ("effort=4 everywhere"). Measured on 300 real
+# v24 draws: permissive/effort=4 costs 0.94 ms per prototype and is FASTER than
+# permissive/effort=0 (1.24 ms) -- more effort reaches a smaller fixpoint sooner. The full
+# simplify-then-mask fold costs 1.85 ms, ~2% of the 96 ms/instance generation budget.
+HOLDOUT_SIMPLIFY_MODE = "permissive"
+HOLDOUT_EFFORT = 4
+
 # Sentinel for "no failed draw produced row-validity evidence" in sample_data (all
 # failures were sampling errors / complex results, which carry no row counts).
 _NO_ROW_EVIDENCE = float("inf")
@@ -47,7 +56,6 @@ _NO_ROW_EVIDENCE = float("inf")
 # box. Any invalid probe row already decides the draw, so this is a pure evaluation-order
 # optimization: acceptance, the rng stream and every accepted sample are bit-identical.
 _VALIDITY_PROBE_ROWS = 32
-
 
 
 def _call_expression(expression_callable, *args):
@@ -555,28 +563,59 @@ class LampleChartonCatalog(GenerativeCatalog):
         exist by construction. The quotient is deliberately aggressive, per the ruled
         doctrine (families, not spellings; over-rejection over contamination):
 
+          engine canonicalization FIRST, on the raw literals
+              (simplipy AC-canon, Mode.permissive at HOLDOUT_EFFORT)
           literals -> <constant>  (normalize_skeleton: the affine/scale family)
-          engine canonicalization (simplipy AC-canon at effort 0: respellings,
-              associativity, commutativity, constant collection)
           variable relabeling to first-occurrence order, re-canonicalized to a
-              fixpoint (renumbered twins)
+              fixpoint (renumbered twins; each pass re-masks)
           constants folded out    (get_structural_prototype)
+
+        SIMPLIFY BEFORE MASKING (2026-08-27). Masking first replaces every literal with a
+        symbolic ``<constant>``, which stops the AC core doing exact rational arithmetic --
+        so the mask-first order could not collect like terms or distribute. Measured on the
+        pairs below, simplify-first strictly dominates it:
+
+            x + x  ==  2x            x * x  ==  x^2
+            (x*y)/(x*y)  ==  1       2(x+1)  ==  2x+2   <- ONLY simplify-first gets this
+
+        It is also more PRECISE, not merely more aggressive: ``pow x 1`` collapses to ``x``
+        while ``pow x 3`` survives, so x^1 and x^3 separate instead of both merging into
+        ``pow x <constant>`` -- that merge was pure over-rejection.
+
+        The loop re-masks on every pass: literals the SIMPLIFIER introduces (the ``2`` in
+        x+x -> 2x, the ``1`` from a cancellation) must be masked too, or the same family
+        lands in two prototypes.
+
+        NOT closed by this, and not closable here: ``(x+1)^2`` vs ``x^2+2x+1``. The two are
+        different FAMILIES under independent constant binding, and no rewrite can equate a
+        family with its subfamily. Expansion cannot be mined (the mu(T) < mu(S) bound: 0 of
+        acj-4's 5,338 rules grow) and the factoring direction is inexpressible (it needs the
+        constraint b = a^2/4 between two constant leaves, which the matcher binds
+        independently -- 0 rules carry >1 LHS ``<constant>``). Measured residual leak from
+        this class: <= 0.33% of accepted draws, and that single hit is unverified.
 
         Returns None only for token lists normalize_skeleton cannot read; the probe
         side treats that as held out (fail-closed)."""
+        def _canonicalize(current: list[str]) -> list[str]:
+            try:
+                return list(self.simplipy_engine.simplify(
+                    current, mode=HOLDOUT_SIMPLIFY_MODE, effort=HOLDOUT_EFFORT))
+            except Exception:
+                return current
+
         try:
-            masked = normalize_skeleton(list(tokens))
+            canonical = normalize_skeleton(_canonicalize(list(tokens)))
         except Exception:
             return None    # unreadable token stream -> probe side fails closed
-        if masked is None:
+        if canonical is None:
             return None
-        canonical = list(masked)
+        canonical = list(canonical)
         for _ in range(3):
             try:
-                simplified = list(self.simplipy_engine.simplify(canonical, effort=0))
+                relabeled = list(normalize_skeleton(
+                    _relabel_variables_first_occurrence(_canonicalize(canonical))))
             except Exception:
-                simplified = canonical
-            relabeled = _relabel_variables_first_occurrence(simplified)
+                break
             if relabeled == canonical:
                 break
             canonical = relabeled
@@ -790,14 +829,19 @@ class LampleChartonCatalog(GenerativeCatalog):
             code = codify(code_string, bound_variables + constants)
             compiled_fn = engine.code_to_lambda(code)
 
-            with warnings.catch_warnings():
-                warnings.filterwarnings("ignore", category=RuntimeWarning)
-                self.holdout_manager.register_skeleton(
-                    no_constant_expression,
-                    compiled_fn,
-                    num_constants=len(constants),
-                    n_variables=width,
-                )
+            # NO blanket RuntimeWarning filter here. register_skeleton already wraps the noisy
+            # part -- the numeric evaluation -- in its own catch_warnings, and it raises its
+            # coverage-degradation diagnostics AS RuntimeWarning immediately after. A filter at
+            # this call site therefore mutes exactly the warnings the callee exists to raise:
+            # measured 2026-08-27, erbench-syneq raised 10 "unevaluable sentinel on every probe
+            # grid" warnings and this caller saw 0. That is the silent-loss state the audit
+            # calls indistinguishable from full coverage.
+            self.holdout_manager.register_skeleton(
+                no_constant_expression,
+                compiled_fn,
+                num_constants=len(constants),
+                n_variables=width,
+            )
 
         self._purge_contaminated_skeletons()
 

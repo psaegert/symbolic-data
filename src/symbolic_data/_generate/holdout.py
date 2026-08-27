@@ -91,16 +91,27 @@ class HoldoutManager:
                 RuntimeWarning, stacklevel=2)
             return
 
-        if all(key[1] == "__unevaluable__" for key in keys):
-            # Fail-closed, but LOUD: the sentinel rejects every unevaluable candidate, yet
-            # this law now has no discriminating image on any grid -- structure-only
-            # protection plus blanket unevaluable rejection (the audit found the silent
-            # variant of this state indistinguishable from full coverage).
+        # The '__unevaluable__' sentinel is NOT registered (owner ruling 2026-08-27). It says
+        # "this law could not be evaluated on grid g" -- a property of the GRID and the law's
+        # domain, not a fingerprint of the law. Registering it made every candidate that also
+        # fails on grid g match, so 2 sentinel keys out of 9,499 caused 137 of 252 rejections:
+        # 4.57% of all draws discarded for a reason unrelated to any benchmark overlap.
+        #
+        # Dropping it costs no real protection. A rederivation that a benchmark could SCORE
+        # must be evaluable, so the sentinel could never catch one; exact-structure matches
+        # stay covered by skeleton_hashes. The accepted consequence, stated plainly: a
+        # STRUCTURALLY DIFFERENT rederivation of a law that is NaN everywhere is no longer
+        # caught -- vacuous, since such a law is not a scoreable benchmark item either (you
+        # cannot compute FVU against an all-NaN target).
+        discriminating = {key for key in keys if key[1] != "__unevaluable__"}
+        if not discriminating:
+            # Loud, and now actually audible: register_holdout_pool no longer filters
+            # RuntimeWarning at the call site (it was muting exactly this).
             warnings.warn(
-                f"holdout image for skeleton {skeleton_key!r} is the unevaluable sentinel "
-                f"on every probe grid; only the exact-structure layer discriminates it",
+                f"holdout image for skeleton {skeleton_key!r} is unevaluable on every probe "
+                f"grid; only the exact-structure layer discriminates it",
                 RuntimeWarning, stacklevel=2)
-        self.expression_images.update(keys)
+        self.expression_images.update(discriminating)
 
     def is_held_out(
         self,
@@ -117,6 +128,10 @@ class HoldoutManager:
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=RuntimeWarning)
             keys = self._evaluate_to_keys(compiled_fn, num_constants, n_variables)
+        # Symmetric with registration: an unevaluable CANDIDATE cannot be shown equivalent to
+        # anything, so its sentinel is not a match either. Registration no longer emits one,
+        # but a manager restored from an older key set could still carry them.
+        keys = {key for key in keys if key[1] != "__unevaluable__"}
         return not keys.isdisjoint(self.expression_images)
 
     @staticmethod
