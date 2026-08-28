@@ -33,7 +33,7 @@ from symbolic_data.config_io import load_config, save_config
 from symbolic_data.paths import substitute_root_path
 from symbolic_data.sympy_timeout import _sympy_simplify_with_timeout
 from simplipy.utils import codify
-from symbolic_data.prior_factory import build_prior_callable
+from symbolic_data.prior_factory import build_iid_prior_callable
 from symbolic_data._generate.holdout import HoldoutManager
 from symbolic_data._generate.skeleton_sampling import SkeletonSampler
 from symbolic_data._generate.support_sampling import SupportSampler, SupportSamplingError
@@ -256,7 +256,10 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         if isinstance(literal_prior, (dict, list)):
             self.literal_prior_config = literal_prior
-            self.literal_prior: Callable = build_prior_callable(literal_prior)
+            # Every literal of an expression is its own draw, matching the skeleton
+            # sampler's per-leaf contract: a mixture resolves per VALUE, so a two-constant
+            # expression can take one constant from each component.
+            self.literal_prior: Callable = build_iid_prior_callable(literal_prior)
         elif callable(literal_prior):
             self.literal_prior = literal_prior
         else:
@@ -1102,7 +1105,14 @@ class LampleChartonCatalog(GenerativeCatalog):
         """
         n_boxes, n_probe, _ = probes.shape
         evidence = _NO_ROW_EVIDENCE
-        lit_sets = [self.literal_prior(size=n_constants, rng=rng).astype(STORAGE_DTYPE) for _ in range(n_boxes)]
+        # One draw for every box's constants at once. The prior is i.i.d. per literal, so
+        # this is the same distribution as a draw per box, at one call instead of n_boxes.
+        if n_constants:
+            drawn = np.asarray(self.literal_prior(size=n_boxes * n_constants, rng=rng),
+                               dtype=np.float64).reshape(n_boxes, n_constants)
+            lit_sets = [row.astype(STORAGE_DTYPE) for row in drawn]
+        else:
+            lit_sets = [np.empty(0, dtype=STORAGE_DTYPE) for _ in range(n_boxes)]
 
         x_flat = probes.reshape(n_boxes * n_probe, -1)
         if n_constants:

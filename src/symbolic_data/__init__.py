@@ -18,7 +18,7 @@ except PackageNotFoundError:  # pragma: no cover - source tree without installed
 
 from symbolic_data.errors import NoValidSampleFoundError, CatalogEntryError
 from symbolic_data.distributions import get_distribution, fastsrb_dist, DISTRIBUTIONS, BASE_DISTRIBUTIONS
-from symbolic_data.prior_factory import build_prior_callable
+from symbolic_data.prior_factory import build_iid_prior_callable, build_prior_callable
 from symbolic_data.registry import Registry
 from symbolic_data.problem import Problem
 from symbolic_data.catalog import Catalog, ProblemCatalog, CatalogEntry, RealizedExpression, load_catalog, CATALOGS

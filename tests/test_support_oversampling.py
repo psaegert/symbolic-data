@@ -2,7 +2,7 @@
 keeps the first ``n_support`` in-domain rows, so a domain-restricted expression no
 longer needs EVERY row of a draw to land inside its domain at once. The default
 (``support_oversampling_max`` absent or 1) keeps whole-draw semantics; its rng
-stream is pinned below (re-captured 2026-08-23 for the vectorized support draw)."""
+stream is pinned below."""
 import hashlib
 from pathlib import Path
 
@@ -31,16 +31,12 @@ CONFIG = Path(__file__).resolve().parent.parent / "configs" / "test" / "catalog_
 # whenever the storage WIDTH moves even if every value is identical -- it cannot tell a
 # changed rng stream from a changed dtype, which is exactly the question worth pinning.
 # The next-draw witness is dtype-independent: it changes if and only if the number of rng
-# draws consumed changes.
-#
-# Re-captured at the v25 widening (S6). The digests moved because x and the literals are no
-# longer snapped to the f32 grid before evaluation, so y is computed at different inputs.
-# The next-draw values did NOT move -- verified against the pre-change tree, all three seeds
-# byte-identical -- so removing the casts added and removed no draws.
+# draws consumed changes. Both are here to make a change to the sampling schedule
+# deliberate: re-pin only alongside a measurement that the distribution still holds.
 GOLDEN_DRAWS = {
-    7: ("4d9119c88a36578e", 0.62459884746661409),
-    20260822: ("60b63fefbddaf385", 0.13525227612495472),
-    424242: ("b31dd2794be21072", 0.73630587419628135),
+    7: ('e45e9b40f332e503', 0.2702201072089526),
+    20260822: ('0b04554fd5e17536', 0.8294641969621286),
+    424242: ('c8119e9edac8caed', 0.10252521820208205),
 }
 
 # A fixed symmetric support prior. The test config's meta-sampler draws its own
