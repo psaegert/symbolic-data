@@ -432,6 +432,21 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         return catalog
 
+    def __getstate__(self) -> dict[str, Any]:
+        """Compiled skeleton code does not pickle, and does not need to.
+
+        ``skeleton_codes`` is a cache derived from ``skeletons``; a catalog that has to
+        cross a process boundary (a spawned data worker) rebuilds it on arrival rather
+        than shipping code objects Python refuses to serialize.
+        """
+        state = dict(self.__dict__)
+        state["skeleton_codes"] = None
+        return state
+
+    def __setstate__(self, state: dict[str, Any]) -> None:
+        self.__dict__.update(state)
+        self.skeleton_codes = self.compile_codes() if getattr(self, "skeletons", None) else {}
+
     def compile_codes(self, verbose: bool = False) -> dict[tuple[str], tuple[CodeType, list[str]]]:
         '''
         Compile the skeletons in the pool into executable code.
