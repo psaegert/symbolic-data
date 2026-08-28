@@ -6,6 +6,23 @@ All notable changes to `symbolic-data` are documented here. The format follows
 ## [Unreleased]
 
 ### Changed
+- **Every literal of an expression is drawn independently.** A mixture `literal_prior`
+  resolved its component once per CALL, so `literal_prior(size=n)` handed an n-constant
+  expression n values from a single component -- an expression could never mix an integer
+  from a `choice` component with a float from a `rounded` one, although the skeleton
+  sampler's per-leaf contract says each literal is its own draw. `build_iid_prior_callable`
+  (also exported) resolves the component per VALUE. `build_prior_callable` keeps the
+  per-call semantics for priors that genuinely share one regime across a draw.
+
+  One consequence is speed: with a per-value mixture, one `size=n` call is identical to n
+  `size=1` calls, so `_first_valid_box` draws every box's constants in a single call.
+  Measured on the v25 prior over 300 problems x 5 reps: **32.24 -> 18.33 ms/problem
+  (1.76x)**, with non-overlapping rep ranges. Literal marginals are unchanged (KS p=0.59
+  against the previous builder; a same-builder control gives the same p-value spread).
+
+  The rng call schedule changes, so a fixed seed yields a different sequence and the
+  default-path golden pin in `tests/test_support_oversampling.py` is re-captured.
+
 - **Realized data is stored and judged at float64** (BREAKING for distribution
   reproducibility). Every realized array -- support X, targets y, noisy targets, sampled
   literals -- now carries `symbolic_data.numeric.STORAGE_DTYPE`, which is `float64`. The
