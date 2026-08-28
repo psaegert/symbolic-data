@@ -91,7 +91,7 @@ class HoldoutManager:
                 RuntimeWarning, stacklevel=2)
             return
 
-        # The '__unevaluable__' sentinel is NOT registered (owner ruling 2026-08-27). It says
+        # The '__unevaluable__' sentinel is NOT registered. It says
         # "this law could not be evaluated on grid g" -- a property of the GRID and the law's
         # domain, not a fingerprint of the law. Registering it made every candidate that also
         # fails on grid g match, so 2 sentinel keys out of 9,499 caused 137 of 252 rejections:

@@ -43,7 +43,7 @@ from symbolic_data.catalog import Catalog, ProblemCatalog, RealizedExpression
 
 # The rewrite strength the holdout family quotient runs at. `permissive` carries every
 # judged tier (core + f64 + real), so it is the most capable canonicalizer available;
-# effort 4 is the owner ruling of 2026-08-27 ("effort=4 everywhere"). Measured on 300 real
+# effort 4 is the pinned simplification effort everywhere. Measured on 300 real
 # v24 draws: permissive/effort=4 costs 0.94 ms per prototype and is FASTER than
 # permissive/effort=0 (1.24 ms) -- more effort reaches a smaller fixpoint sooner. The full
 # simplify-then-mask fold costs 1.85 ms, ~2% of the 96 ms/instance generation budget.
@@ -1272,13 +1272,10 @@ class LampleChartonCatalog(GenerativeCatalog):
                         min_invalid_rows = min(min_invalid_rows, int((~rows_ok).sum()))
                         continue
 
-            # f64 END TO END, now literally (owner rulings 2026-08-23 and 2026-08-27).
-            # The 2026-08-23 version evaluated in f64 but at f32-REPRESENTABLE points and
-            # cast back at the end, because the consumer's boundary -- flash-ansr's support
-            # tensors and its 32-bit <ieee754> constants format -- was f32. That boundary is
-            # gone: constants serialize as 8 IEEE-754 bytes at binary64. So X and the
-            # literals are no longer snapped to the f32 grid, and a finite f64 value is no
-            # longer rejected for overflowing a format nothing uses.
+            # f64 end to end: simplipy's evaluation contract is f64, the support points and
+            # literals are f64, and the result is stored at that width. A value is rejected
+            # only for being non-finite at the storage width -- never for exceeding the range
+            # of a narrower format.
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
                 y_evaluated = _call_expression(expression_callable, *x_support.T, *literals)

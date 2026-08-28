@@ -243,9 +243,8 @@ class ProblemCatalog(Catalog):
         data = np.load(path, allow_pickle=False)
         blob = json.loads(str(data["_meta"].item()))
         cat = blob["catalog"]
-        # Absent marker = written before the v25 widening, i.e. float32 content in whatever
-        # container Problem now uses. Recorded, not refused: those catalogs are deliberately
-        # frozen (Q4), and a consumer that cares can read `.storage_dtype`.
+        # A catalog that records no width was written at float32. Recorded, not refused:
+        # a consumer that cares reads `.storage_dtype`.
         storage_dtype = cat.get("storage_dtype", "float32")
         problems: list[Problem] = []
         for i, scalar in enumerate(blob["problems"]):
@@ -308,10 +307,8 @@ class ProblemCatalog(Catalog):
                     "placeholder_reason": p.placeholder_reason,
                     "gt_kind": p.gt_kind,
                 })
-            # storage_dtype (owner ruling Q4): the six frozen catalogs shipped before the v25
-            # widening are NOT rebuilt -- that would move every stored value by up to one f32
-            # ulp and invalidate every number ever published against them. They stay f32 and
-            # simply carry no marker, so a mixed corpus is detectable rather than silent.
+            # Record the width the arrays were written at, so a corpus mixing widths is
+            # detectable from the files themselves rather than by inspection.
             blob = json.dumps({"catalog": {"name": self.name, "version": self.version,
                                            "meta": self.meta, "storage_dtype": STORAGE_DTYPE_MARKER},
                                "problems": scalars})
@@ -407,10 +404,8 @@ class ProblemCatalog(Catalog):
         # entries (e.g. sqrt(x1+x2) over a box straddling the domain) exhaust max_trials.
         # An attempts cap keeps truly degenerate entries (f ~ 0) on the honest placeholder path.
         # Validity is judged in the STORAGE dtype, so a point that would ship as inf in the
-        # frozen Problem arrays is rejected here. That dtype is float64 now, so the
-        # fast-growing integer-sequence formulas this used to drop near their support edge
-        # are kept -- the top-up loop below must agree, or the first batch and the adaptive
-        # batches would disagree about what a valid point is.
+        # frozen Problem arrays is rejected here. The adaptive top-up below must judge it the
+        # same way, or the first batch and the later batches disagree about what is valid.
         finite_mask = (np.isfinite(x_all.astype(STORAGE_DTYPE)).all(axis=1)
                        & np.isfinite(y_all.astype(STORAGE_DTYPE)).all(axis=1))
         if finite_mask.all() and n_first > n_points:

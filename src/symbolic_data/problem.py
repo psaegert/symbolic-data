@@ -220,11 +220,9 @@ class Problem:
         if gt_kind == "none" and (y_reference_support is not None or y_reference_validation is not None):
             raise ValueError("y_reference_* requires a reference/exact structure; a black-box "
                              "(gt_kind='none') problem has no reference law to predict with")
-        # normalize the reference predictions like their y counterparts (storage width, column
-        # vectors); reject non-finite baselines -- a reference law must be finite on its own
-        # support, and an inf here would poison every reference_fvu downstream. The narrowing
-        # that used to MANUFACTURE those infs (a wide-dynamic-range law rendered outside f32
-        # range) is gone; what remains is a genuine f64 overflow or a bad rendering.
+        # normalize the reference predictions like their y counterparts (storage width,
+        # column vectors); reject non-finite baselines -- a reference law must be finite on
+        # its own support, and an inf here would poison every reference_fvu downstream.
         if y_reference_support is not None:
             y_reference_support = np.asarray(y_reference_support, dtype=STORAGE_DTYPE).reshape(-1, 1)
             if y_reference_support.shape != y.shape:

@@ -11,7 +11,7 @@ All notable changes to `symbolic-data` are documented here. The format follows
   literals -- now carries `symbolic_data.numeric.STORAGE_DTYPE`, which is `float64`. The
   f32 grid the generator used to snap to existed for one reason: the consumer's boundary,
   flash-ansr's support tensors and its 32-bit `<ieee754>` constants format. That boundary
-  is gone (flash-ansr serializes constants as 8 IEEE-754 bytes at binary64), so the snap,
+  is gone -- flash-ansr serializes constants as 8 IEEE-754 bytes at binary64 -- so the snap,
   the f32 validity bar and the f32 overflow rejection go with it.
 
   Two consequences worth naming, both measured:
@@ -37,7 +37,7 @@ All notable changes to `symbolic-data` are documented here. The format follows
   the stream. The rejection guard itself stays, at the f64 boundary: a multiplicative noise
   draw and the outlier shove multiply, and can still carry a finite target out of range.
 
-- **Frozen `.npz` catalogs are NOT rebuilt** and stay float32 (owner ruling). Rebuilding
+- **Frozen `.npz` catalogs are not rebuilt** and stay float32. Rebuilding
   would move every stored value by up to one f32 ulp and invalidate every number ever
   published against them. Catalogs written from now on record `storage_dtype` in their
   `_meta` blob and expose it as `ProblemCatalog.storage_dtype`; an absent marker reads back
