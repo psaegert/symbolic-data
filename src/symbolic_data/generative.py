@@ -22,6 +22,8 @@ from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 import numpy as np
 
+from symbolic_data.numeric import STORAGE_DTYPE
+
 from simplipy import SimpliPyEngine
 
 from symbolic_data.token_ops import normalize_expression, normalize_skeleton
@@ -1100,11 +1102,11 @@ class LampleChartonCatalog(GenerativeCatalog):
         """
         n_boxes, n_probe, _ = probes.shape
         evidence = _NO_ROW_EVIDENCE
-        lit_sets = [self.literal_prior(size=n_constants, rng=rng).astype(np.float32) for _ in range(n_boxes)]
+        lit_sets = [self.literal_prior(size=n_constants, rng=rng).astype(STORAGE_DTYPE) for _ in range(n_boxes)]
 
-        x_flat = probes.reshape(n_boxes * n_probe, -1).astype(np.float64)
+        x_flat = probes.reshape(n_boxes * n_probe, -1)
         if n_constants:
-            lit64 = np.stack([lit.astype(np.float64) for lit in lit_sets])
+            lit64 = np.stack(lit_sets)
             lit_args: tuple = tuple(np.repeat(lit64[:, c], n_probe) for c in range(n_constants))
         else:
             lit_args = ()
@@ -1118,21 +1120,21 @@ class LampleChartonCatalog(GenerativeCatalog):
             return None, evidence
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=RuntimeWarning)
-            y32 = np.asarray(y_flat, dtype=np.float64).astype(np.float32)
+            y_probe = np.asarray(y_flat, dtype=STORAGE_DTYPE)
 
-        if y32.ndim == 0 or y32.size == 1:
+        if y_probe.ndim == 0 or y_probe.size == 1:
             # Constant expression: one value decides every row of every box; box 0 is
             # the first try, exactly as the sequential loop would accept or exhaust.
-            value = float(np.ravel(y32)[0])
+            value = float(np.ravel(y_probe)[0])
             if not np.isfinite(value) or not bool(np.isfinite(probes[0]).all()):
                 return None, evidence
             x_rest = draw_rest(0)
             if x_rest.shape[0] and not bool(np.isfinite(x_rest).all()):
                 return None, evidence
             x_support = np.concatenate([probes[0], x_rest], axis=0)
-            return (x_support, np.full((x_support.shape[0], 1), value, dtype=np.float32), lit_sets[0]), evidence
+            return (x_support, np.full((x_support.shape[0], 1), value, dtype=STORAGE_DTYPE), lit_sets[0]), evidence
 
-        y_rows_all = y32.reshape(n_boxes, n_probe, -1)
+        y_rows_all = y_probe.reshape(n_boxes, n_probe, -1)
         rows_ok = np.isfinite(probes).all(axis=2) & np.isfinite(y_rows_all).all(axis=2)
         for j in range(n_boxes):
             if not bool(rows_ok[j].all()):
@@ -1144,22 +1146,22 @@ class LampleChartonCatalog(GenerativeCatalog):
                 return (probes[j], y_rows_all[j], lit_sets[j]), evidence
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
-                y_rest = _call_expression(expression_callable, *x_rest.astype(np.float64).T, *lit_sets[j].astype(np.float64))
+                y_rest = _call_expression(expression_callable, *x_rest.T, *lit_sets[j])
             if np.iscomplexobj(y_rest) or not (
                     np.issubdtype(np.asarray(y_rest).dtype, np.floating)
                     or np.issubdtype(np.asarray(y_rest).dtype, np.integer)):
                 continue
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
-                y_rest32 = np.asarray(y_rest, dtype=np.float64).astype(np.float32)
+                y_rest_stored = np.asarray(y_rest, dtype=STORAGE_DTYPE)
             if not isinstance(y_rest, np.ndarray) or len(np.atleast_1d(y_rest)) != x_rest.shape[0]:
-                y_rest32 = np.full((x_rest.shape[0],), float(np.ravel(y_rest32)[0]), dtype=np.float32)
-            rest_ok = np.isfinite(x_rest).all(axis=1) & np.isfinite(y_rest32.reshape(x_rest.shape[0], -1)).all(axis=1)
+                y_rest_stored = np.full((x_rest.shape[0],), float(np.ravel(y_rest_stored)[0]), dtype=STORAGE_DTYPE)
+            rest_ok = np.isfinite(x_rest).all(axis=1) & np.isfinite(y_rest_stored.reshape(x_rest.shape[0], -1)).all(axis=1)
             if not bool(rest_ok.all()):
                 evidence = min(evidence, int((~rest_ok).sum()))
                 continue
             x_support = np.concatenate([probes[j], x_rest], axis=0)
-            y_rows = np.concatenate([y_rows_all[j], y_rest32.reshape(x_rest.shape[0], -1)], axis=0)
+            y_rows = np.concatenate([y_rows_all[j], y_rest_stored.reshape(x_rest.shape[0], -1)], axis=0)
             return (x_support, y_rows, lit_sets[j]), evidence
         return None, evidence
 
@@ -1233,7 +1235,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                 return x_support, y_rows.reshape(-1, 1), literals
 
         for _ in range(self.sample_strategy['max_tries']):
-            literals = self.literal_prior(size=n_constants, rng=rng).astype(np.float32)
+            literals = self.literal_prior(size=n_constants, rng=rng).astype(STORAGE_DTYPE)
 
             override_support_prior = SupportSampler.ensure_prior_callable(support_prior) if support_prior is not None else None
             override_support_scale = SupportSampler.ensure_prior_callable(support_scale_prior) if support_scale_prior is not None else None
@@ -1258,30 +1260,28 @@ class LampleChartonCatalog(GenerativeCatalog):
                 probe = x_support[:_VALIDITY_PROBE_ROWS]
                 with warnings.catch_warnings():
                     warnings.filterwarnings("ignore", category=RuntimeWarning)
-                    y_probe = _call_expression(expression_callable, *probe.astype(np.float64).T, *literals.astype(np.float64))
+                    y_probe = _call_expression(expression_callable, *probe.T, *literals)
                 if (isinstance(y_probe, np.ndarray) and len(y_probe) == _VALIDITY_PROBE_ROWS
                         and not np.iscomplexobj(y_probe) and np.issubdtype(y_probe.dtype, np.number)):
                     with warnings.catch_warnings():
                         warnings.filterwarnings("ignore", category=RuntimeWarning)
-                        y_probe32 = np.asarray(y_probe, dtype=np.float64).astype(np.float32)
-                    rows_ok = np.isfinite(probe).all(axis=1) & np.isfinite(y_probe32.reshape(_VALIDITY_PROBE_ROWS, -1)).all(axis=1)
+                        y_probe_stored = np.asarray(y_probe, dtype=STORAGE_DTYPE)
+                    rows_ok = np.isfinite(probe).all(axis=1) & np.isfinite(y_probe_stored.reshape(_VALIDITY_PROBE_ROWS, -1)).all(axis=1)
                     if not bool(rows_ok.all()):
                         # Evidence is a lower bound here (only the probe was evaluated).
                         min_invalid_rows = min(min_invalid_rows, int((~rows_ok).sum()))
                         continue
 
-            # f64 END TO END (owner ruling 2026-08-23): simplipy's evaluation contract is
-            # f64, so the expression is evaluated in f64 -- at f32-REPRESENTABLE points,
-            # because flash-ansr's boundary (the support tensors, the 32-bit <ieee754>
-            # constants format) is f32. X and literals are snapped to the f32 grid first
-            # and upcast, so y is the f64-true value at exactly the coordinates the
-            # consumer will see. The f32 cast happens once, at the end: a finite f64
-            # value beyond f32 range becomes inf there and rejects like a domain nan.
-            # (This retires the old `dtype != float32` gate, which silently rejected any
-            # tree containing an f64-upcasting realization -- rootn -- on every draw.)
+            # f64 END TO END, now literally (owner rulings 2026-08-23 and 2026-08-27).
+            # The 2026-08-23 version evaluated in f64 but at f32-REPRESENTABLE points and
+            # cast back at the end, because the consumer's boundary -- flash-ansr's support
+            # tensors and its 32-bit <ieee754> constants format -- was f32. That boundary is
+            # gone: constants serialize as 8 IEEE-754 bytes at binary64. So X and the
+            # literals are no longer snapped to the f32 grid, and a finite f64 value is no
+            # longer rejected for overflowing a format nothing uses.
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
-                y_evaluated = _call_expression(expression_callable, *x_support.astype(np.float64).T, *literals.astype(np.float64))
+                y_evaluated = _call_expression(expression_callable, *x_support.T, *literals)
 
             if not isinstance(y_evaluated, np.ndarray):
                 y_evaluated = np.full((x_support.shape[0], 1), y_evaluated, dtype=np.float64)
@@ -1295,11 +1295,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                     np.issubdtype(y_evaluated.dtype, np.floating) or np.issubdtype(y_evaluated.dtype, np.integer)):
                 continue
 
-            with warnings.catch_warnings():
-                # A finite f64 value beyond f32 range warns on the cast; the resulting
-                # inf is exactly the boundary-rejection signal, not an error.
-                warnings.filterwarnings("ignore", category=RuntimeWarning)
-                y_support = np.asarray(y_evaluated, dtype=np.float64).astype(np.float32)
+            y_support = np.asarray(y_evaluated, dtype=STORAGE_DTYPE)
 
             if not self.allow_nan:
                 y_rows = y_support.reshape(x_support.shape[0], -1)

@@ -1,5 +1,7 @@
 """gt_kind + measured-data schema (0.11.0): inference, validation, from_data, npz round-trip."""
 import numpy as np
+
+from symbolic_data.numeric import STORAGE_DTYPE
 import pytest
 
 from symbolic_data import Problem, ProblemCatalog
@@ -8,7 +10,7 @@ from symbolic_data.tensor_ops import mask_unused_variable_columns
 
 
 def _arrays(n=8, d=2):
-    x = np.arange(n * d, dtype=np.float32).reshape(n, d)
+    x = np.arange(n * d, dtype=STORAGE_DTYPE).reshape(n, d)
     y = x[:, :1] * 2.0
     return x, y
 
@@ -57,12 +59,12 @@ def test_from_data_reference_conventions():
 
 
 def test_from_data_normalizes_reference_arrays():
-    # reference predictions get the SAME normalization as y: float32 column vectors, shape-checked
+    # reference predictions get the SAME normalization as y: storage-width column vectors, shape-checked
     # (a raw float64 1-d law prediction must not survive to the npz as-is).
     x, y = _arrays()
     p = Problem.from_data(x, y, expression=["*", "x1", "2.0"],
                           y_reference_support=np.asarray(y, dtype=np.float64).ravel())
-    assert p.y_reference_support.dtype == np.float32
+    assert p.y_reference_support.dtype == STORAGE_DTYPE
     assert p.y_reference_support.shape == p.y_support.shape
     with pytest.raises(ValueError, match="y_reference_support shape"):
         Problem.from_data(x, y, expression=["*", "x1", "2.0"], y_reference_support=y[:3])
@@ -73,7 +75,7 @@ def test_round_trip_mixed_catalog_npz(tmp_path):
     problems = [
         _synthetic(eq_id="syn1"),
         Problem.from_data(x, y, expression=["*", "x1", "2.0"], y_reference_support=y + 1.0,
-                          y_reference_validation=np.zeros((0, 1), np.float32), eq_id="ref1"),
+                          y_reference_validation=np.zeros((0, 1), STORAGE_DTYPE), eq_id="ref1"),
         Problem.from_data(x, y, eq_id="bb1"),
     ]
     cat = ProblemCatalog.from_problems(problems, name="mixed-smoke")
@@ -102,14 +104,18 @@ def test_mask_unused_variable_columns_noop_without_skeleton():
 
 
 def test_from_data_rejects_nonfinite_and_orphan_reference():
-    # (1) A reference baseline must be finite on its own support: the float32 cast silently maps
-    # out-of-range float64 (e.g. 1e50 from a non-log-space law rendering) to inf, which would
-    # poison every downstream reference_fvu. (2) y_reference_* without a reference/exact structure
-    # (gt_kind='none') is an inconsistent record and is rejected outright.
+    # (1) A reference baseline must be finite on its own support: an inf here would poison
+    # every downstream reference_fvu. The witness has to be genuinely non-finite now -- 1e50
+    # was one only because the f32 cast MANUFACTURED the inf, and at f64 storage it is an
+    # ordinary value that must be accepted. (2) y_reference_* without a reference/exact
+    # structure (gt_kind='none') is an inconsistent record and is rejected outright.
     x, y = _arrays()
+    # 1e50 is finite at f64 and must now pass, where the f32 narrowing used to reject it.
+    Problem.from_data(x, y, expression=["*", "x1", "2.0"],
+                      y_reference_support=np.full(len(y), 1e50, dtype=np.float64))
     with pytest.raises(ValueError, match="non-finite"):
         Problem.from_data(x, y, expression=["*", "x1", "2.0"],
-                          y_reference_support=np.full(len(y), 1e50, dtype=np.float64))
+                          y_reference_support=np.full(len(y), np.inf, dtype=np.float64))
     with pytest.raises(ValueError, match="non-finite"):
         ref = np.asarray(y, dtype=np.float64).copy()
         ref[0] = np.nan

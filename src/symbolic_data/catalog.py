@@ -24,6 +24,8 @@ from pathlib import Path
 from typing import Any, Iterator
 
 import numpy as np
+
+from symbolic_data.numeric import STORAGE_DTYPE, STORAGE_DTYPE_MARKER
 import yaml
 
 from symbolic_data._evaluation import broadcast_target, compile_expression, evaluate
@@ -241,6 +243,10 @@ class ProblemCatalog(Catalog):
         data = np.load(path, allow_pickle=False)
         blob = json.loads(str(data["_meta"].item()))
         cat = blob["catalog"]
+        # Absent marker = written before the v25 widening, i.e. float32 content in whatever
+        # container Problem now uses. Recorded, not refused: those catalogs are deliberately
+        # frozen (Q4), and a consumer that cares can read `.storage_dtype`.
+        storage_dtype = cat.get("storage_dtype", "float32")
         problems: list[Problem] = []
         for i, scalar in enumerate(blob["problems"]):
             kwargs = dict(scalar)
@@ -252,7 +258,9 @@ class ProblemCatalog(Catalog):
                 if key in data:
                     kwargs[fld] = data[key]
             problems.append(Problem.from_dict(kwargs))
-        return cls(name=cat["name"], version=cat.get("version"), entries={}, meta=cat.get("meta", {}), frozen=True, problems=problems, source="local")
+        catalog = cls(name=cat["name"], version=cat.get("version"), entries={}, meta=cat.get("meta", {}), frozen=True, problems=problems, source="local")
+        catalog.storage_dtype = storage_dtype
+        return catalog
 
     # --- persistence --------------------------------------------------------------------------
     def to_mapping(self) -> dict[str, Any]:
@@ -300,7 +308,13 @@ class ProblemCatalog(Catalog):
                     "placeholder_reason": p.placeholder_reason,
                     "gt_kind": p.gt_kind,
                 })
-            blob = json.dumps({"catalog": {"name": self.name, "version": self.version, "meta": self.meta}, "problems": scalars})
+            # storage_dtype (owner ruling Q4): the six frozen catalogs shipped before the v25
+            # widening are NOT rebuilt -- that would move every stored value by up to one f32
+            # ulp and invalidate every number ever published against them. They stay f32 and
+            # simply carry no marker, so a mixed corpus is detectable rather than silent.
+            blob = json.dumps({"catalog": {"name": self.name, "version": self.version,
+                                           "meta": self.meta, "storage_dtype": STORAGE_DTYPE_MARKER},
+                               "problems": scalars})
             np.savez(path, _meta=np.array(blob), **arrays)
         else:
             if path.suffix not in (".yaml", ".yml"):
@@ -392,11 +406,13 @@ class ProblemCatalog(Catalog):
         # This only removes the exponential cost (f^-n vs 1/f draws) that made partial-domain
         # entries (e.g. sqrt(x1+x2) over a box straddling the domain) exhaust max_trials.
         # An attempts cap keeps truly degenerate entries (f ~ 0) on the honest placeholder path.
-        # Validity is judged in the STORAGE dtype (float32): a point whose y is finite in float64
-        # but overflows float32 (e.g. fast-growing integer-sequence formulas near their support
-        # edge) would otherwise ship as inf in the frozen Problem arrays.
-        finite_mask = (np.isfinite(x_all.astype(np.float32)).all(axis=1)
-                       & np.isfinite(y_all.astype(np.float32)).all(axis=1))
+        # Validity is judged in the STORAGE dtype, so a point that would ship as inf in the
+        # frozen Problem arrays is rejected here. That dtype is float64 now, so the
+        # fast-growing integer-sequence formulas this used to drop near their support edge
+        # are kept -- the top-up loop below must agree, or the first batch and the adaptive
+        # batches would disagree about what a valid point is.
+        finite_mask = (np.isfinite(x_all.astype(STORAGE_DTYPE)).all(axis=1)
+                       & np.isfinite(y_all.astype(STORAGE_DTYPE)).all(axis=1))
         if finite_mask.all() and n_first > n_points:
             x_all, y_all = x_all[:n_points], y_all[:n_points]
         elif not finite_mask.all():
@@ -420,8 +436,8 @@ class ProblemCatalog(Catalog):
                     yb = broadcast_target(evaluate(compiled, vb), batch, entry.id).reshape(-1, 1)
                 except Exception as exc:
                     raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
-                mask = (np.isfinite(xb.astype(np.float32)).all(axis=1)
-                        & np.isfinite(yb.astype(np.float32)).all(axis=1))
+                mask = (np.isfinite(xb.astype(STORAGE_DTYPE)).all(axis=1)
+                        & np.isfinite(yb.astype(STORAGE_DTYPE)).all(axis=1))
                 keep_x.append(xb[mask])
                 keep_y.append(yb[mask])
                 collected += int(mask.sum())

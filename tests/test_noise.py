@@ -6,6 +6,7 @@ import pytest
 
 from symbolic_data import load_catalog
 from symbolic_data.noise import NoiseSpec, apply_noise
+from symbolic_data.numeric import STORAGE_DTYPE
 from symbolic_data.source import ProblemSource
 
 NGUYEN = str(Path(__file__).resolve().parent.parent / "assets" / "catalogs" / "nguyen.yaml")
@@ -66,8 +67,8 @@ def test_parse_refuses_malformed_specs(mutate, needle):
 
 def test_clean_draw_is_the_identity():
     spec = _spec(p_clean=1.0, outliers={"p_instance": 0.0, "rate": [0.005, 0.1], "magnitude": [3.0, 100.0]})
-    ys = np.linspace(-2, 2, 32, dtype=np.float32).reshape(-1, 1)
-    yv = np.linspace(3, 4, 8, dtype=np.float32).reshape(-1, 1)
+    ys = np.linspace(-2, 2, 32, dtype=STORAGE_DTYPE).reshape(-1, 1)
+    yv = np.linspace(3, 4, 8, dtype=STORAGE_DTYPE).reshape(-1, 1)
     ys_n, yv_n, mask_s, mask_v, draw = apply_noise(spec, ys, yv, np.random.default_rng(0))
     np.testing.assert_array_equal(ys_n, ys)
     np.testing.assert_array_equal(yv_n, yv)
@@ -77,8 +78,8 @@ def test_clean_draw_is_the_identity():
 
 def test_outlier_mask_marks_exactly_the_touched_points():
     spec = _spec(p_clean=1.0, outliers={"p_instance": 1.0, "rate": [0.2, 0.2], "magnitude": [3.0, 3.0]})
-    ys = np.linspace(-2, 2, 256, dtype=np.float32).reshape(-1, 1)
-    yv = np.empty((0, 1), dtype=np.float32)
+    ys = np.linspace(-2, 2, 256, dtype=STORAGE_DTYPE).reshape(-1, 1)
+    yv = np.empty((0, 1), dtype=STORAGE_DTYPE)
     ys_n, _, mask_s, _, draw = apply_noise(spec, ys, yv, np.random.default_rng(1))
     assert mask_s.any(), "rate 0.2 over 256 points must hit"
     np.testing.assert_array_equal(ys_n[~mask_s], ys[~mask_s])
@@ -92,26 +93,37 @@ def test_constant_targets_skip_outliers_and_survive_multiplicative():
     # multiplicative draw on constant zero leaves zero.
     spec = _spec(p_clean=0.0, types={"multiplicative": 1.0},
                  outliers={"p_instance": 1.0, "rate": [0.1, 0.1], "magnitude": [3.0, 3.0]})
-    ys = np.zeros((16, 1), dtype=np.float32)
-    ys_n, _, mask_s, _, draw = apply_noise(spec, ys, np.empty((0, 1), np.float32), np.random.default_rng(2))
+    ys = np.zeros((16, 1), dtype=STORAGE_DTYPE)
+    ys_n, _, mask_s, _, draw = apply_noise(spec, ys, np.empty((0, 1), STORAGE_DTYPE), np.random.default_rng(2))
     np.testing.assert_array_equal(ys_n, ys)
     assert not mask_s.any() and draw["outlier_rate"] == 0.0 and draw["type"] == "multiplicative"
 
 
-def test_f32_overflow_rejects_the_draw():
+def test_overflow_past_the_storage_boundary_rejects_the_draw():
+    """The guard moved to the f64 boundary rather than being deleted: multiplicative noise
+    and the outlier shove MULTIPLY, so they can still carry a finite clean target out of
+    range. A target near f32 max no longer triggers it -- that is the migration."""
     spec = _spec(p_clean=0.0, types={"multiplicative": 1.0}, level=[0.3, 0.3],
                  outliers={"p_instance": 0.0, "rate": [0.005, 0.1], "magnitude": [3.0, 100.0]})
-    ys = np.full((64, 1), np.finfo(np.float32).max * 0.99, dtype=np.float32)
+    empty = np.empty((0, 1), STORAGE_DTYPE)
+
+    at_f64_edge = np.full((64, 1), np.finfo(np.float64).max * 0.99, dtype=STORAGE_DTYPE)
     rng = np.random.default_rng(3)
-    results = [apply_noise(spec, ys, np.empty((0, 1), np.float32), rng) for _ in range(10)]
-    assert any(result is None for result in results), "lambda=0.3 at the f32 boundary must overflow"
+    results = [apply_noise(spec, at_f64_edge, empty, rng) for _ in range(10)]
+    assert any(r is None for r in results), "lambda=0.3 at the f64 boundary must overflow"
+
+    # The old bar: a target near float32 max is now comfortably inside range and must survive.
+    at_f32_edge = np.full((64, 1), np.finfo(np.float32).max * 0.99, dtype=STORAGE_DTYPE)
+    rng = np.random.default_rng(3)
+    results = [apply_noise(spec, at_f32_edge, empty, rng) for _ in range(10)]
+    assert all(r is not None for r in results), "the f32 boundary is not a boundary any more"
 
 
 def test_draw_statistics_match_the_ruled_prior():
     spec = NoiseSpec.parse(RULED)
     rng = np.random.default_rng(4)
-    ys = np.linspace(-1, 1, 32, dtype=np.float32).reshape(-1, 1)
-    draws = [apply_noise(spec, ys, np.empty((0, 1), np.float32), rng)[4] for _ in range(2000)]
+    ys = np.linspace(-1, 1, 32, dtype=STORAGE_DTYPE).reshape(-1, 1)
+    draws = [apply_noise(spec, ys, np.empty((0, 1), STORAGE_DTYPE), rng)[4] for _ in range(2000)]
     clean = sum(d["type"] == "clean" for d in draws) / len(draws)
     contaminated = sum(d["outlier_rate"] > 0 for d in draws) / len(draws)
     assert clean == pytest.approx(0.30, abs=0.04)
@@ -128,7 +140,7 @@ def test_source_mixture_populates_masks_and_realized_draw(engine):
     problems = [p for _, p in zip(range(8), iter(src))]
     assert problems
     for p in problems:
-        assert p.y_support_noisy.dtype == np.float32
+        assert p.y_support_noisy.dtype == STORAGE_DTYPE
         assert p.outlier_mask_support.dtype == np.bool_
         assert p.outlier_mask_support.shape == p.y_support.shape
         assert p.outlier_mask_validation.shape == p.y_validation.shape

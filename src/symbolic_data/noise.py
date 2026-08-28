@@ -5,9 +5,9 @@ the sampling it augments, so a training pipeline and an evaluation harness can n
 drift apart on what a noise level means. It is applied strictly AFTER support
 acceptance -- the expression prior is shaped by rejection sampling over CLEAN values
 only, and noise never feeds back into acceptance. The one deliberate exception: a
-noised instance whose float32 cast goes non-finite is rejected outright (measured on
+noised instance that goes non-finite at the storage width is rejected outright (measured on
 the v24 training prior: 5e-5 of instance-draws, confined to targets already within
-~1.3x of the float32 boundary -- the prior perturbation is bounded by that rate).
+~1.3x of the boundary -- the prior perturbation is bounded by that rate).
 
 Config form (``sampling.noise`` as a mapping; every key is REQUIRED -- priors are
 pinned explicitly, never defaulted):
@@ -51,7 +51,7 @@ contamination relative to the typical spread, not the extremes. Multiplicative n
 ``y * (1 + eps)``, ``eps ~ N(0, lambda^2)``. The outlier channel adds
 ``sign * kappa * s`` at Bernoulli(r) points on top of either (or of a clean draw), and
 is skipped when ``s == 0`` -- a constant target has no spread to deviate from. All
-arithmetic runs in float64 and casts to float32 at the end. The scalar ``noise:``
+arithmetic runs in float64 and stays there. The scalar ``noise:``
 config form keeps its legacy semantics (additive, std-scaled) untouched in
 :mod:`symbolic_data.source`.
 """
@@ -62,6 +62,8 @@ from dataclasses import dataclass
 from typing import Any, Mapping
 
 import numpy as np
+
+from symbolic_data.numeric import STORAGE_DTYPE
 
 __all__ = ["Distribution", "NoiseSpec", "apply_noise"]
 
@@ -287,7 +289,6 @@ def _outlier_positions(
     return mask
 
 
-
 def apply_noise(
         spec: NoiseSpec,
         y_support: np.ndarray,
@@ -299,10 +300,10 @@ def apply_noise(
     """One per-instance draw of the mixture, applied to both target arrays.
 
     Returns ``(y_support_noisy, y_validation_noisy, outlier_mask_support,
-    outlier_mask_validation, draw)`` -- float32 noisy targets, bool masks marking
+    outlier_mask_validation, draw)`` -- noisy targets at the storage width, bool masks marking
     exactly the points the outlier channel touched (the generative label, not a
     statistical judgment), and the realized-noise provenance ``draw`` stored on the
-    Problem. Returns ``None`` when the float32 cast of a noised array goes non-finite:
+    Problem. Returns ``None`` when a noised array goes non-finite at the storage width:
     the caller rejects the trial.
     """
     ys64 = np.asarray(y_support, dtype=np.float64)
@@ -357,13 +358,18 @@ def apply_noise(
             else:
                 sign = np.where(rng.random(noisy.shape) < 0.5, -1.0, 1.0)
             noisy = np.where(mask, noisy + sign * kappa * outlier_scale, noisy)
+        # The guard STAYS, at the storage boundary rather than an f32 one: a multiplicative
+        # draw and the outlier shove MULTIPLY, so they can still carry a finite clean target
+        # past the f64 range, and that overflow warns in the arithmetic above -- which is the
+        # condition being tested for, not a bug, hence the suppression. What is gone is
+        # rejecting a draw for overflowing a format nothing downstream uses.
         with warnings.catch_warnings():
-            # the cast itself flags the overflow we are about to test for
             warnings.simplefilter("ignore", RuntimeWarning)
-            noisy32 = noisy.astype(np.float32)
-        if noisy32.size and not np.all(np.isfinite(noisy32)):
+            stored = noisy.astype(STORAGE_DTYPE)
+            finite = bool(np.all(np.isfinite(stored))) if stored.size else True
+        if not finite:
             return None
-        arrays.append(noisy32)
+        arrays.append(stored)
         masks.append(mask)
 
     draw = {"type": kind, "level": level, "outlier_rate": rate, "scale": scale,

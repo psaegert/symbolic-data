@@ -24,6 +24,8 @@ from typing import Any
 
 import numpy as np
 
+from symbolic_data.numeric import STORAGE_DTYPE
+
 __all__ = ["Problem", "GT_KINDS"]
 
 # Ground-truth kinds: "exact" = synthetic GT that generated y; "reference" = the historically
@@ -36,7 +38,7 @@ GT_KINDS = ("exact", "reference", "none")
 class Problem:
     """One model-agnostic symbolic-regression problem (skeleton + sampled data)."""
 
-    # realized data (float32). Noise is on the target y only; X is never noised.
+    # realized data, at the storage width. Noise is on the target y only; X is never noised.
     x_support: np.ndarray
     y_support: np.ndarray
     y_support_noisy: np.ndarray
@@ -143,8 +145,8 @@ class Problem:
     ) -> "Problem":
         """An empty, marked placeholder for a slot the source could not fill."""
         n_variables = len(variables)
-        empty_x = np.empty((0, n_variables), dtype=np.float32)
-        empty_y = np.empty((0, 1), dtype=np.float32)
+        empty_x = np.empty((0, n_variables), dtype=STORAGE_DTYPE)
+        empty_y = np.empty((0, 1), dtype=STORAGE_DTYPE)
         return cls(
             x_support=empty_x,
             y_support=empty_y,
@@ -192,18 +194,18 @@ class Problem:
         explicitly for frozen synthetic data. When an ``expression`` is given without a
         ``skeleton``, the skeleton is best-effort derived via simplipy so decontamination
         and recovery metrics keep working for reference problems."""
-        x = np.asarray(x, dtype=np.float32)
+        x = np.asarray(x, dtype=STORAGE_DTYPE)
         if x.ndim == 1:
             x = x.reshape(-1, 1)
-        y = np.asarray(y, dtype=np.float32).reshape(-1, 1)
+        y = np.asarray(y, dtype=STORAGE_DTYPE).reshape(-1, 1)
         if x_validation is None or y_validation is None:
-            x_validation = np.empty((0, x.shape[1]), dtype=np.float32)
-            y_validation = np.empty((0, 1), dtype=np.float32)
+            x_validation = np.empty((0, x.shape[1]), dtype=STORAGE_DTYPE)
+            y_validation = np.empty((0, 1), dtype=STORAGE_DTYPE)
         else:
-            x_validation = np.asarray(x_validation, dtype=np.float32)
+            x_validation = np.asarray(x_validation, dtype=STORAGE_DTYPE)
             if x_validation.ndim == 1:
                 x_validation = x_validation.reshape(-1, 1)
-            y_validation = np.asarray(y_validation, dtype=np.float32).reshape(-1, 1)
+            y_validation = np.asarray(y_validation, dtype=STORAGE_DTYPE).reshape(-1, 1)
         if variables is None:
             variables = [f"x{i}" for i in range(1, x.shape[1] + 1)]
         if skeleton is None and expression is not None:
@@ -218,25 +220,26 @@ class Problem:
         if gt_kind == "none" and (y_reference_support is not None or y_reference_validation is not None):
             raise ValueError("y_reference_* requires a reference/exact structure; a black-box "
                              "(gt_kind='none') problem has no reference law to predict with")
-        # normalize the reference predictions like their y counterparts (float32, column vectors);
-        # reject non-finite baselines -- a reference law must be finite on its own support, and the
-        # float32 cast silently maps out-of-range float64 values (e.g. a non-log-space rendering of
-        # a wide-dynamic-range law) to inf, which would poison every reference_fvu downstream.
+        # normalize the reference predictions like their y counterparts (storage width, column
+        # vectors); reject non-finite baselines -- a reference law must be finite on its own
+        # support, and an inf here would poison every reference_fvu downstream. The narrowing
+        # that used to MANUFACTURE those infs (a wide-dynamic-range law rendered outside f32
+        # range) is gone; what remains is a genuine f64 overflow or a bad rendering.
         if y_reference_support is not None:
-            y_reference_support = np.asarray(y_reference_support, dtype=np.float32).reshape(-1, 1)
+            y_reference_support = np.asarray(y_reference_support, dtype=STORAGE_DTYPE).reshape(-1, 1)
             if y_reference_support.shape != y.shape:
                 raise ValueError(f"y_reference_support shape {y_reference_support.shape} != y shape {y.shape}")
             if not np.all(np.isfinite(y_reference_support)):
                 raise ValueError("y_reference_support contains non-finite values (possibly a "
-                                 "float32-range overflow); fix the reference rendering or exclude the points")
+                                 "range overflow); fix the reference rendering or exclude the points")
         if y_reference_validation is not None:
-            y_reference_validation = np.asarray(y_reference_validation, dtype=np.float32).reshape(-1, 1)
+            y_reference_validation = np.asarray(y_reference_validation, dtype=STORAGE_DTYPE).reshape(-1, 1)
             if y_reference_validation.shape != y_validation.shape:
                 raise ValueError(f"y_reference_validation shape {y_reference_validation.shape} != "
                                  f"y_validation shape {y_validation.shape}")
             if not np.all(np.isfinite(y_reference_validation)):
                 raise ValueError("y_reference_validation contains non-finite values (possibly a "
-                                 "float32-range overflow); fix the reference rendering or exclude the points")
+                                 "range overflow); fix the reference rendering or exclude the points")
         return cls(
             x_support=x,
             y_support=y,

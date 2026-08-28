@@ -3,6 +3,46 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [Unreleased]
+
+### Changed
+- **Realized data is stored and judged at float64** (BREAKING for distribution
+  reproducibility). Every realized array -- support X, targets y, noisy targets, sampled
+  literals -- now carries `symbolic_data.numeric.STORAGE_DTYPE`, which is `float64`. The
+  f32 grid the generator used to snap to existed for one reason: the consumer's boundary,
+  flash-ansr's support tensors and its 32-bit `<ieee754>` constants format. That boundary
+  is gone (flash-ansr serializes constants as 8 IEEE-754 bytes at binary64), so the snap,
+  the f32 validity bar and the f32 overflow rejection go with it.
+
+  Two consequences worth naming, both measured:
+
+  - **The `rounded` literal prior works again.** `rounded_dist` exists for
+    description-length control -- an unrounded float64 draw denotes a rational with a
+    ~17-digit numerator. The f32 snap silently undid it: a draw of `1.01139` was stored as
+    `1.011389970779419`, and `substitute_constants` recorded THAT into the expression.
+    Measured on the v24 float branch, **98.31% of literals changed spelling** and the mean
+    literal `repr` ran **10.79 -> 18.09 characters**; over the full 50/50 float/integer
+    prior that is ~49% of all literals (integers survive the snap exactly).
+  - **`tools/audit_finite_fraction.py` and the sampler now agree.** The tool measured
+    `finite_fraction` in float64 while `catalog.py` rejected points in float32, so the
+    shipped metadata over-estimated the realizable fraction and undersized the oversampling
+    budget for exactly the extreme-magnitude entries. Closed for free -- the tool needed no
+    change, the bar moved to meet it.
+
+  Acceptance widens: points a partial-domain expression could not realize at f32 are
+  realizable now (`exp(60x)` is finite across all of [0, 10] at binary64, where the f32 bar
+  kept only the ~15% low-x slice), so the accepted sequence for a given seed diverges. RNG
+  CONSUMPTION does not change -- verified against the pre-change tree, byte-identical next
+  draw on all three pinned seeds -- so this is a change of which draws are accepted, not of
+  the stream. The rejection guard itself stays, at the f64 boundary: a multiplicative noise
+  draw and the outlier shove multiply, and can still carry a finite target out of range.
+
+- **Frozen `.npz` catalogs are NOT rebuilt** and stay float32 (owner ruling). Rebuilding
+  would move every stored value by up to one f32 ulp and invalidate every number ever
+  published against them. Catalogs written from now on record `storage_dtype` in their
+  `_meta` blob and expose it as `ProblemCatalog.storage_dtype`; an absent marker reads back
+  as `"float32"`, so a mixed corpus is detectable rather than silent.
+
 ## [0.15.0] - 2026-08-11
 
 ### Changed

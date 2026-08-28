@@ -85,12 +85,25 @@ def test_partial_domain_realizes_in_few_rounds(tmp_path):
     assert not p.is_placeholder and p.x_support.shape[0] == 64
 
 
-def test_rejection_is_float32_storage_aware(tmp_path):
-    # A point finite in float64 but overflowing float32 (y ~ 1e50) must be REJECTED like any
-    # invalid point: the frozen Problem stores float32, and pre-fix such points shipped as inf.
-    # exp(60x) exceeds float32 max (3.4e38) for x > ~1.48, so on [0, 10] the float32-valid
-    # fraction is ~0.148 -- realizable per point, but ONLY from the low-x slice.
+def test_rejection_is_storage_dtype_aware(tmp_path):
+    """Rejection is judged in the STORAGE dtype, so what counts as valid moves with it.
+
+    At f32 storage this expression was the witness: exp(60x) passes 3.4e38 at x ~ 1.48, so
+    only the low-x slice of [0, 10] survived and x_support.max() had to stay under 1.5. At
+    f64 storage the same expression is finite across the whole interval (it reaches ~1e260,
+    well inside 1.8e308), so the slice is the WHOLE box -- the migration hands back the
+    ~85% of this domain the f32 bar was discarding."""
     p = _one(_catalog(tmp_path, "exp(60*v1)", 0.0, 10.0))
     assert not p.is_placeholder
-    assert np.isfinite(p.y_support).all()        # in the STORED float32 arrays
-    assert p.x_support.max() < 1.5               # accepted points = the float32-valid slice
+    assert np.isfinite(p.y_support).all()
+    assert p.x_support.max() > 5.0, "the high-x slice f32 used to reject must now be reachable"
+    assert p.y_support.max() > 1e40, "and it must carry values f32 could never have stored"
+
+
+def test_rejection_still_fires_past_the_f64_boundary(tmp_path):
+    """The bar moved; it did not disappear. exp(800x) passes 1.8e308 at x ~ 0.89, so on
+    [0, 10] only the low-x slice is realizable and the rest must still be rejected."""
+    p = _one(_catalog(tmp_path, "exp(800*v1)", 0.0, 10.0))
+    assert not p.is_placeholder
+    assert np.isfinite(p.y_support).all()
+    assert p.x_support.max() < 1.0

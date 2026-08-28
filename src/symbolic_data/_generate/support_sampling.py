@@ -7,6 +7,8 @@ from typing import Any, Callable, Dict
 
 import numpy as np
 
+from symbolic_data.numeric import STORAGE_DTYPE
+
 from symbolic_data.distributions import ELEMENTWISE_IID_BASES, VECTOR_PARAM_BASES, sampler_box_batch, sampler_dist
 from symbolic_data.prior_factory import build_prior_callable
 
@@ -55,7 +57,7 @@ class ScaleTransform:
     def apply(self, support: np.ndarray, rng: np.random.Generator) -> np.ndarray:
         scale_factor = 10.0 ** _to_scalar(self._scale_prior(size=1, rng=rng))
         support *= scale_factor
-        return support.astype(np.float32, copy=False)
+        return support.astype(STORAGE_DTYPE, copy=False)
 
 
 class QuantizeTransform:
@@ -103,7 +105,7 @@ class QuantizeTransform:
 
         dims = rng.choice(n_dims, size=d_quantized, replace=False)
         if dims.size == 0:
-            return support.astype(np.float32, copy=False)
+            return support.astype(STORAGE_DTYPE, copy=False)
 
         columns = support[:, dims]
         mins = np.min(columns, axis=0)
@@ -116,7 +118,7 @@ class QuantizeTransform:
         finite = np.isfinite(mins) & np.isfinite(maxs)
         active_mask = finite & (span > tolerance)
         if not np.any(active_mask):
-            return support.astype(np.float32, copy=False)
+            return support.astype(STORAGE_DTYPE, copy=False)
 
         active_dims = dims[active_mask]
         active_columns = columns[:, active_mask]
@@ -127,7 +129,7 @@ class QuantizeTransform:
         if quantized is not None:
             support[:, active_dims] = quantized
 
-        return support.astype(np.float32, copy=False)
+        return support.astype(STORAGE_DTYPE, copy=False)
 
     def _quantize_dimensions(
         self,
@@ -381,7 +383,7 @@ class SupportSampler:
             support = transform.apply(support, rng)
 
         self._maybe_check_unique(support, n_support)
-        return support.astype(np.float32, copy=False)
+        return support.astype(STORAGE_DTYPE, copy=False)
 
     def sample_box_batch(
         self,
@@ -415,14 +417,16 @@ class SupportSampler:
         draw_all, draw_one = batch
 
         probes = np.asarray(draw_all(n_probe), dtype=np.float64)
-        probes = probes.reshape(n_boxes, n_probe, self.n_variables).astype(np.float32)
+        probes = probes.reshape(n_boxes, n_probe, self.n_variables).astype(STORAGE_DTYPE)
         n_rest = n_total - n_probe
 
         def draw_rest(j: int) -> np.ndarray:
             if n_rest <= 0:
-                return np.zeros((0, self.n_variables), dtype=np.float32)
+                # Must match the probes' dtype: this sentinel flows into np.concatenate
+                # alongside them, and a narrower one silently downcasts the whole box.
+                return np.zeros((0, self.n_variables), dtype=STORAGE_DTYPE)
             arr = np.asarray(draw_one(j, n_rest), dtype=np.float64).reshape(n_rest, self.n_variables)
-            return arr.astype(np.float32)
+            return arr.astype(STORAGE_DTYPE)
 
         return probes, draw_rest
 
@@ -450,7 +454,7 @@ class SupportSampler:
         else:
             base = support_prior(size=(n_support, self.n_variables), rng=rng)
             support = np.asarray(base, dtype=np.float64).reshape(n_support, self.n_variables)
-        return support.astype(np.float32)
+        return support.astype(STORAGE_DTYPE)
 
     def _initialize_transforms(self, transforms_cfg: Any) -> None:
         if not isinstance(transforms_cfg, list):

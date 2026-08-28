@@ -17,6 +17,8 @@ from pathlib import Path
 from typing import Any, Iterator, Mapping
 
 import numpy as np
+
+from symbolic_data.numeric import STORAGE_DTYPE
 import yaml
 
 from symbolic_data._evaluation import compile_expression, load_engine
@@ -45,12 +47,12 @@ def _entry_variables(entry: Any) -> list[str]:
 
 
 def _split_support_validation(x_all: np.ndarray, y_all: np.ndarray, n_support: int) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    """First ``n_support`` points -> support, the rest -> validation (float32)."""
+    """First ``n_support`` points -> support, the rest -> validation."""
     n_support = max(1, min(n_support, x_all.shape[0]))
-    xs = x_all[:n_support].astype(np.float32, copy=True)
-    ys = y_all[:n_support].astype(np.float32, copy=True)
-    xv = x_all[n_support:].astype(np.float32, copy=True)
-    yv = y_all[n_support:].astype(np.float32, copy=True)
+    xs = x_all[:n_support].astype(STORAGE_DTYPE, copy=True)
+    ys = y_all[:n_support].astype(STORAGE_DTYPE, copy=True)
+    xv = x_all[n_support:].astype(STORAGE_DTYPE, copy=True)
+    yv = y_all[n_support:].astype(STORAGE_DTYPE, copy=True)
     return xs, xv, ys, yv
 
 
@@ -61,8 +63,8 @@ def _inject_noise(array: np.ndarray, noise_level: float, rng: np.random.Generato
     std = float(np.std(array))
     if not np.isfinite(std) or std <= 0:
         return array.copy()
-    noise = rng.standard_normal(size=array.shape).astype(np.float32)
-    return (array + noise_level * std * noise).astype(np.float32)
+    noise = rng.standard_normal(size=array.shape).astype(STORAGE_DTYPE)
+    return (array + noise_level * std * noise).astype(STORAGE_DTYPE)
 
 
 class ProblemSource:
@@ -260,8 +262,10 @@ class ProblemSource:
                 if self.noise_spec is not None:
                     noised = apply_noise(self.noise_spec, ys, yv, rng, x_support=xs, x_validation=xv)
                     if noised is None:
-                        # This noise draw pushed a target past the float32 boundary (measured:
-                        # 5e-5 of instance-draws): reject the trial like an invalid support draw.
+                        # This noise draw pushed a target past the FLOAT64 boundary: reject the
+                        # trial like an invalid support draw. Rare now that the bar is f64 --
+                        # it was 5e-5 of instance-draws at the f32 bar -- but multiplicative
+                        # noise and the outlier shove can still overflow, so the guard stays.
                         continue
                     ys_noisy, yv_noisy, mask_support, mask_validation, draw = noised
                     return Problem(

@@ -2,6 +2,8 @@
 from pathlib import Path
 
 import numpy as np
+
+from symbolic_data.numeric import STORAGE_DTYPE
 import pytest
 
 from symbolic_data import Problem, ProblemSource
@@ -33,7 +35,7 @@ def test_set_mode_iterates_catalog_into_problems(engine):
         assert p.x_support.shape == (8, nv) and p.y_support.shape == (8, 1)
         assert p.x_validation.shape == (4, nv) and p.y_validation.shape == (4, 1)
         assert p.is_finite() and p.expression and p.n_variables_used >= 1
-        assert p.x_support.dtype == np.float32
+        assert p.x_support.dtype == STORAGE_DTYPE
         eq_ids.add(p.eq_id)
     assert len(eq_ids) == 12  # all distinct nguyen equations
 

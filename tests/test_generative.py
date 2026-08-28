@@ -193,4 +193,3 @@ def test_register_holdout_pool_frozen_sqrt_spelling_desugars(tmp_path):
         assert len(catalog.holdout_y) >= 1
     finally:
         catalog.clear_holdouts()
-

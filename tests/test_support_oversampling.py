@@ -25,7 +25,23 @@ CONFIG = Path(__file__).resolve().parent.parent / "configs" / "test" / "catalog_
 # then, each deliberately: the vectorized per-column-params draw changed the stream,
 # f64 end-to-end evaluation changed y's low bits at the f32 boundary cast, and
 # try-batching now draws every box's parameters and probe block up front.)
-GOLDEN_DRAWS = {7: "99fecd30e20cc50f", 20260822: "27ddc7083a9101c0", 424242: "5f96eb693231aa09"}
+# (value digest, the generator's NEXT draw after sample_data returns).
+#
+# The second element is the load-bearing one. The digest hashes .tobytes(), so it moves
+# whenever the storage WIDTH moves even if every value is identical -- it cannot tell a
+# changed rng stream from a changed dtype, which is exactly the question worth pinning.
+# The next-draw witness is dtype-independent: it changes if and only if the number of rng
+# draws consumed changes.
+#
+# Re-captured at the v25 widening (S6). The digests moved because x and the literals are no
+# longer snapped to the f32 grid before evaluation, so y is computed at different inputs.
+# The next-draw values did NOT move -- verified against the pre-change tree, all three seeds
+# byte-identical -- so removing the casts added and removed no draws.
+GOLDEN_DRAWS = {
+    7: ("4d9119c88a36578e", 0.62459884746661409),
+    20260822: ("60b63fefbddaf385", 0.13525227612495472),
+    424242: ("b31dd2794be21072", 0.73630587419628135),
+}
 
 # A fixed symmetric support prior. The test config's meta-sampler draws its own
 # low/high per call, which sometimes lands entirely positive -- that would let the
@@ -58,10 +74,13 @@ def _catalog(engine: SimpliPyEngine, **sample_strategy_overrides):
 def test_the_default_path_rng_stream_is_pinned(engine: SimpliPyEngine) -> None:
     catalog, cfg = _catalog(engine)
     code = codify("x1 * c0 + c1", cfg["variables"] + ["c0", "c1"])
-    for seed, expected in GOLDEN_DRAWS.items():
-        x, y, literals = catalog.sample_data(code, n_constants=2, n_support=48, rng=np.random.default_rng(seed))
+    for seed, (expected_digest, expected_next) in GOLDEN_DRAWS.items():
+        rng = np.random.default_rng(seed)
+        x, y, literals = catalog.sample_data(code, n_constants=2, n_support=48, rng=rng)
+        assert rng.random() == expected_next, \
+            f"seed {seed}: the default path consumed a different NUMBER of rng draws"
         digest = hashlib.sha256(x.tobytes() + y.tobytes() + np.asarray(literals).tobytes()).hexdigest()[:16]
-        assert digest == expected, f"seed {seed}: rng consumption of the default path changed"
+        assert digest == expected_digest, f"seed {seed}: the accepted values changed"
 
 
 def test_whole_draw_rejection_starves_a_domain_restricted_expression(engine: SimpliPyEngine) -> None:
