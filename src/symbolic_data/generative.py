@@ -220,6 +220,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
             simplify: bool | str = True,
+            simplify_mode: str = 'f64',
             name: str = "lample_charton",
             decontaminate: bool = True) -> None:
         self.name = name
@@ -278,6 +279,13 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         self.allow_nan = allow_nan
         self.simplify = simplify
+        # The mode the TARGET canonicalization runs in. Data is generated FROM the
+        # simplified skeleton (target == data by construction), so every licensed
+        # rewrite -- including the permissive corpus tier -- is sound here; the mode
+        # is a corpus-design choice, never a soundness one. Explicit because the
+        # 0.14 migration silently inherited Mode.f64 at this site when `mode`
+        # became a per-call argument (the intent was the corpus tier).
+        self.simplify_mode = simplify_mode
 
         independent_dims = self.sample_strategy.get('independent_dimensions', False)
         self.support_sampler = SupportSampler(
@@ -336,6 +344,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             holdout_pools=config_.get("holdout_pools", []),
             allow_nan=config_.get("allow_nan", False),
             simplify=config_.get("simplify", True),
+            simplify_mode=config_.get("simplify_mode", "f64"),
             name=config_.get("name", "lample_charton"),
             decontaminate=config_.get("decontaminate", True),
         )
@@ -1048,7 +1057,8 @@ class LampleChartonCatalog(GenerativeCatalog):
                         # one too -- which every downstream consumer here (validation,
                         # codify, prefix_to_infix) requires. The form= escape it
                         # replaces is removed.
-                        skeleton = self.simplipy_engine.simplify(skeleton)
+                        skeleton = self.simplipy_engine.simplify(
+                            skeleton, mode=self.simplify_mode)
                     except TypeError:
                         # A call-signature error is a BUG, not a rejectable sample: wrapped as
                         # NoValidSampleFoundError it sends the retry loop into an infinite
