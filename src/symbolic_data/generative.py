@@ -333,8 +333,19 @@ class LampleChartonCatalog(GenerativeCatalog):
             if key in config_ and key not in support_sampler_cfg:
                 support_sampler_cfg[key] = config_[key]
 
+        # `simplipy_engine_modes` (optional; needs simplipy >= 0.14.2): the lazy-loading
+        # profile handed to `SimpliPyEngine.load(modes=...)`. The corpus worker profile is
+        # ['f64', 'permissive'] -- f64 is the engine's always-eager construction substrate and
+        # permissive carries both the target canon and the holdout family key -- and a SPAWNED
+        # worker inherits the lean profile through pickle. Any deferred mode still loads
+        # additively on first use, so the key can never change an output, only memory and
+        # startup time. Absent = the full artifact, exactly as before.
+        engine_modes = config_.get("simplipy_engine_modes")
+
         catalog = cls(
-            simplipy_engine=SimpliPyEngine.load(config_["simplipy_engine"], install=True),
+            simplipy_engine=SimpliPyEngine.load(
+                config_["simplipy_engine"], install=True,
+                **({} if engine_modes is None else {"modes": tuple(engine_modes)})),
             sample_strategy=config_["sample_strategy"],
             literal_prior=config_["literal_prior"],
             variables=config_["variables"],

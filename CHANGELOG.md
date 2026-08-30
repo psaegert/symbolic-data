@@ -5,6 +5,17 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.16.1] - 2026-08-30
+
+### Added
+- **`simplipy_engine_modes`** (optional catalog key; needs simplipy >= 0.14.2): the lazy-loading
+  profile handed to `SimpliPyEngine.load(modes=...)`. The corpus worker profile is
+  `['f64', 'permissive']` -- f64 is the engine's always-eager construction substrate, permissive
+  carries both the target canon and the holdout family key -- and a spawned worker inherits the
+  lean profile through pickle. A deferred mode still loads additively on first use, so the key
+  can never change an output, only memory and startup time. Absent = the full artifact, and the
+  loader is called without the kwarg, so older simplipy keeps working without the key.
+
 ## [0.16.0] - 2026-08-30
 
 ### Added
