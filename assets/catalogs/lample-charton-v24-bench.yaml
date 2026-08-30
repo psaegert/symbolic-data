@@ -28,7 +28,7 @@
 type: lample_charton
 name: lample-charton-v24-bench
 license: MIT
-simplipy_engine: acj-4-3
+simplipy_engine: acj-4
 
 sample_strategy:
   n_operator_distribution: length_exponential

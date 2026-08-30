@@ -22,7 +22,7 @@ SLOT_PRIOR = {"name": "choice", "kwargs": {"values": [2, -2, 3, -3], "weights": 
 
 @pytest.fixture(scope="module")
 def engine():
-    return SimpliPyEngine.load("acj-4-3", install=True)
+    return SimpliPyEngine.load("acj-4", install=True)
 
 
 def _cfg() -> dict:

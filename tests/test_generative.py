@@ -81,7 +81,7 @@ def test_build_catalog_dispatch():
     cat = build_catalog(spec)
     assert isinstance(cat, LampleChartonCatalog)
     with pytest.raises(ValueError, match="type"):
-        build_catalog({"simplipy_engine": "acj-4-3"})  # mapping without a type
+        build_catalog({"simplipy_engine": "acj-4"})  # mapping without a type
     with pytest.raises(ValueError, match="unknown generative catalog"):
         build_catalog({"type": "does_not_exist"})
 
@@ -157,6 +157,39 @@ def test_register_holdout_pool_frozen_wider_than_catalog_keeps_image_layer(tmp_p
         catalog.register_holdout_pool(npz)
     try:
         assert ("/", "*", "x1", "x2", "x3") in catalog.holdout_skeletons
-        assert len(catalog.holdout_y) == 1               # the image layer survived the width gap
+        # image layer survived the width gap: >= 1 key (the hardened manager adds
+        # one fingerprint PER PROBE GRID, so the exact count tracks the grid set)
+        assert len(catalog.holdout_y) >= 1
+    finally:
+        catalog.clear_holdouts()
+
+
+def test_register_holdout_pool_frozen_sqrt_spelling_desugars(tmp_path):
+    # Canonical benchmark artifacts (fastsrb) spell the square root as `sqrt`, which the
+    # generation-2 vocabulary does not contain (`rootn` carries it). Pre-fix, the prototype
+    # derivation passed the alien token through: build_catalog crashed in prefix_to_infix
+    # ("too many operands remain" -- the T13 pilot launch, 2026-08-22), and any candidate
+    # that survived would register a sqrt-shaped prototype no generated skeleton can match.
+    from symbolic_data import Problem, ProblemCatalog
+
+    x = np.linspace(0.5, 2.5, 16)
+    p = Problem.from_data(x, np.sqrt(x), expression=["sqrt", "x1"], eq_id="rooted",
+                          meta={"alternate_renderings": ["sqrt(v1)"]})
+    frozen = ProblemCatalog.from_problems([p], name="sqrt-probe")
+    npz = str(frozen.save(tmp_path / "sqrt-probe"))
+
+    catalog = LampleChartonCatalog.from_config(_cfg())
+    catalog.register_holdout_pool(npz)
+    try:
+        # The structural prototype COLLAPSES to ('x1',): rootn's index is a numeric
+        # literal, and the established stripping policy replaces an operator node whose
+        # distinguishing operand was stripped with the surviving operand (same collapse
+        # as div(1.0, x1) -> x1 in the alternate-renderings fixture). That is symmetric
+        # -- a generated `rootn x1 2` prototype collapses identically, so the structure
+        # layer still binds -- and the functional-image layer registers the actual law.
+        assert ("x1",) in catalog.holdout_skeletons
+        flat = [token for proto in catalog.holdout_skeletons for token in proto]
+        assert "sqrt" not in flat
+        assert len(catalog.holdout_y) >= 1
     finally:
         catalog.clear_holdouts()

@@ -24,6 +24,8 @@ from pathlib import Path
 from typing import Any, Iterator
 
 import numpy as np
+
+from symbolic_data.numeric import STORAGE_DTYPE, STORAGE_DTYPE_MARKER
 import yaml
 
 from symbolic_data._evaluation import broadcast_target, compile_expression, evaluate
@@ -56,8 +58,10 @@ def _adaptive_batch(needed: int, collected: int, drawn: int, budget_left: int) -
 
 
 _PROBLEM_ARRAY_FIELDS = ("x_support", "y_support", "y_support_noisy", "x_validation", "y_validation", "y_validation_noisy")
-# optional per-problem arrays (absent for synthetic problems): reference-law predictions
-_PROBLEM_OPTIONAL_ARRAY_FIELDS = ("y_reference_support", "y_reference_validation")
+# optional per-problem arrays: reference-law predictions (absent for synthetic problems)
+# and noise-mixture outlier masks (absent without a mixture spec)
+_PROBLEM_OPTIONAL_ARRAY_FIELDS = ("y_reference_support", "y_reference_validation",
+                                  "outlier_mask_support", "outlier_mask_validation")
 
 
 @dataclass
@@ -239,6 +243,9 @@ class ProblemCatalog(Catalog):
         data = np.load(path, allow_pickle=False)
         blob = json.loads(str(data["_meta"].item()))
         cat = blob["catalog"]
+        # A catalog that records no width was written at float32. Recorded, not refused:
+        # a consumer that cares reads `.storage_dtype`.
+        storage_dtype = cat.get("storage_dtype", "float32")
         problems: list[Problem] = []
         for i, scalar in enumerate(blob["problems"]):
             kwargs = dict(scalar)
@@ -250,7 +257,9 @@ class ProblemCatalog(Catalog):
                 if key in data:
                     kwargs[fld] = data[key]
             problems.append(Problem.from_dict(kwargs))
-        return cls(name=cat["name"], version=cat.get("version"), entries={}, meta=cat.get("meta", {}), frozen=True, problems=problems, source="local")
+        catalog = cls(name=cat["name"], version=cat.get("version"), entries={}, meta=cat.get("meta", {}), frozen=True, problems=problems, source="local")
+        catalog.storage_dtype = storage_dtype
+        return catalog
 
     # --- persistence --------------------------------------------------------------------------
     def to_mapping(self) -> dict[str, Any]:
@@ -281,7 +290,7 @@ class ProblemCatalog(Catalog):
             for i, p in enumerate(self.problems or []):
                 for fld in _PROBLEM_ARRAY_FIELDS:
                     arrays[f"p{i}__{fld}"] = np.asarray(getattr(p, fld))
-                for fld in _PROBLEM_OPTIONAL_ARRAY_FIELDS:      # reference-law predictions
+                for fld in _PROBLEM_OPTIONAL_ARRAY_FIELDS:      # reference predictions / outlier masks
                     value = getattr(p, fld)
                     if value is not None:
                         arrays[f"p{i}__{fld}"] = np.asarray(value)
@@ -298,7 +307,11 @@ class ProblemCatalog(Catalog):
                     "placeholder_reason": p.placeholder_reason,
                     "gt_kind": p.gt_kind,
                 })
-            blob = json.dumps({"catalog": {"name": self.name, "version": self.version, "meta": self.meta}, "problems": scalars})
+            # Record the width the arrays were written at, so a corpus mixing widths is
+            # detectable from the files themselves rather than by inspection.
+            blob = json.dumps({"catalog": {"name": self.name, "version": self.version,
+                                           "meta": self.meta, "storage_dtype": STORAGE_DTYPE_MARKER},
+                               "problems": scalars})
             np.savez(path, _meta=np.array(blob), **arrays)
         else:
             if path.suffix not in (".yaml", ".yml"):
@@ -390,11 +403,11 @@ class ProblemCatalog(Catalog):
         # This only removes the exponential cost (f^-n vs 1/f draws) that made partial-domain
         # entries (e.g. sqrt(x1+x2) over a box straddling the domain) exhaust max_trials.
         # An attempts cap keeps truly degenerate entries (f ~ 0) on the honest placeholder path.
-        # Validity is judged in the STORAGE dtype (float32): a point whose y is finite in float64
-        # but overflows float32 (e.g. fast-growing integer-sequence formulas near their support
-        # edge) would otherwise ship as inf in the frozen Problem arrays.
-        finite_mask = (np.isfinite(x_all.astype(np.float32)).all(axis=1)
-                       & np.isfinite(y_all.astype(np.float32)).all(axis=1))
+        # Validity is judged in the STORAGE dtype, so a point that would ship as inf in the
+        # frozen Problem arrays is rejected here. The adaptive top-up below must judge it the
+        # same way, or the first batch and the later batches disagree about what is valid.
+        finite_mask = (np.isfinite(x_all.astype(STORAGE_DTYPE)).all(axis=1)
+                       & np.isfinite(y_all.astype(STORAGE_DTYPE)).all(axis=1))
         if finite_mask.all() and n_first > n_points:
             x_all, y_all = x_all[:n_points], y_all[:n_points]
         elif not finite_mask.all():
@@ -418,8 +431,8 @@ class ProblemCatalog(Catalog):
                     yb = broadcast_target(evaluate(compiled, vb), batch, entry.id).reshape(-1, 1)
                 except Exception as exc:
                     raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
-                mask = (np.isfinite(xb.astype(np.float32)).all(axis=1)
-                        & np.isfinite(yb.astype(np.float32)).all(axis=1))
+                mask = (np.isfinite(xb.astype(STORAGE_DTYPE)).all(axis=1)
+                        & np.isfinite(yb.astype(STORAGE_DTYPE)).all(axis=1))
                 keep_x.append(xb[mask])
                 keep_y.append(yb[mask])
                 collected += int(mask.sum())

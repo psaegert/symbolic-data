@@ -10,12 +10,45 @@ import numpy as np
 from simplipy import SimpliPyEngine
 
 from symbolic_data._generate.structure import generate_ubi_dist
-from symbolic_data.prior_factory import build_prior_callable
+from symbolic_data.prior_factory import build_iid_prior_callable, build_prior_callable
 
 # Selection-time placeholder for "this leaf is a number". It never reaches the output:
 # every occurrence is materialized independently by ``_constant_literal``. Repeating the
 # symbol is how the leaf ALPHABET repeats, not a claim that two constants are equal.
 _CONSTANT_SLOT = "<constant>"
+
+#: Literals are drawn a block at a time and handed out one per site. The prior is i.i.d.
+#: per literal, so a block is distributionally identical to that many single draws while
+#: paying the prior's per-call overhead once instead of once per literal.
+_LITERAL_BLOCK = 512
+
+
+class _BlockDraw:
+    """Hands out values from a prior one at a time, refilling in blocks.
+
+    The block is drawn from the caller's own generator, and a generator it has not seen
+    starts a fresh block, so the values a session sees always come from that session's
+    stream. Draws left over from a previous generator are dropped, not reused.
+    """
+
+    __slots__ = ("_draw", "_size", "_values", "_cursor", "_rng")
+
+    def __init__(self, draw: Callable[..., Any], size: int = _LITERAL_BLOCK) -> None:
+        self._draw = draw
+        self._size = size
+        self._values: np.ndarray | None = None
+        self._cursor = 0
+        self._rng: np.random.Generator | None = None
+
+    def next(self, rng: np.random.Generator) -> float:
+        if self._values is None or self._cursor >= self._values.size or rng is not self._rng:
+            self._values = np.asarray(self._draw(size=self._size, rng=rng),
+                                      dtype=np.float64).reshape(-1)
+            self._cursor = 0
+            self._rng = rng
+        value = float(self._values[self._cursor])
+        self._cursor += 1
+        return value
 
 
 class SkeletonSampler:
@@ -65,6 +98,10 @@ class SkeletonSampler:
         self.n_variables = len(variables)
         self.operator_weights = operator_weights
         self.literal_prior = self._resolve_prior(literal_prior) if literal_prior is not None else None
+        # A prior handed in as a bare callable has unknown per-call semantics, so only a
+        # config-built one is blocked.
+        self._literal_block = (_BlockDraw(build_iid_prior_callable(literal_prior))
+                               if isinstance(literal_prior, (dict, list)) else None)
         self.typed_slots = self._validate_typed_slots(typed_slots or {})
 
         self._n_leaves = 1
@@ -122,8 +159,12 @@ class SkeletonSampler:
                     f"[0, {arity[operator]}), got {argument!r}")
             if spec.get("prior") is None:
                 raise ValueError(f"typed_slots[{operator!r}]: missing 'prior'")
-            resolved[operator] = {"argument": argument,
-                                  "prior": self._resolve_prior(spec["prior"])}
+            slot_prior = spec["prior"]
+            resolved[operator] = {
+                "argument": argument,
+                "prior": self._resolve_prior(slot_prior),
+                "block": (_BlockDraw(build_iid_prior_callable(slot_prior))
+                          if isinstance(slot_prior, (dict, list)) else None)}
         return resolved
 
     def _build_probability_vector(self, operators: Sequence[str]) -> np.ndarray:
@@ -144,13 +185,17 @@ class SkeletonSampler:
 
     def _slot_literal(self, operator: str, rng: np.random.Generator) -> str:
         """Draw one literal for ``operator``'s constrained slot."""
-        draw = self.typed_slots[operator]["prior"](size=1, rng=rng)
-        return self._format_literal(np.atleast_1d(draw)[0])
+        slot = self.typed_slots[operator]
+        if slot["block"] is not None:
+            return self._format_literal(slot["block"].next(rng))
+        return self._format_literal(np.atleast_1d(slot["prior"](size=1, rng=rng))[0])
 
     def _constant_literal(self, rng: np.random.Generator) -> str:
         """Draw one literal for a constant LEAF (each occurrence is independent)."""
         if self.literal_prior is None:
             raise ValueError("a constant leaf was sampled but no 'literal_prior' is configured")
+        if self._literal_block is not None:
+            return self._format_literal(self._literal_block.next(rng))
         return self._format_literal(np.atleast_1d(self.literal_prior(size=1, rng=rng))[0])
 
     def _sample_next_pos_ubi(self, n_empty_nodes: int, n_operators: int, rng: np.random.Generator) -> tuple[int, int]:

@@ -7,7 +7,7 @@ import warnings
 import numpy as np
 
 from symbolic_data.compilation import safe_f
-from simplipy import normalize_skeleton
+from symbolic_data.token_ops import normalize_skeleton
 
 
 # Fixed seed for the default holdout grid. Previously each HoldoutManager drew a fresh
@@ -29,6 +29,27 @@ def _default_holdout_grid() -> tuple[np.ndarray, np.ndarray]:
     return holdout_X, holdout_C
 
 
+@functools.lru_cache(maxsize=1)
+def _default_extra_grids() -> tuple[np.ndarray, ...]:
+    """A second, positive log-scale probe grid. Half-domain respellings of a held-out law
+    (exp(log(x)), sqrt(x)^2) agree with it exactly where BOTH are defined; a grid that
+    lives inside that shared domain makes their images collide with the law's instead of
+    being pushed apart by the NaN->0 fill on the mixed-sign grid (audit L4, 2026-08-25)."""
+    rng = np.random.default_rng(_DEFAULT_HOLDOUT_GRID_SEED + 1)
+    positive_X = 10.0 ** rng.uniform(-3, 1, (512, 100))
+    return (positive_X,)
+
+
+@functools.lru_cache(maxsize=1)
+def _default_constant_fills() -> np.ndarray:
+    """Extra per-slot constant fills for parametric (constant-bearing) skeletons: a pair
+    equivalent only under PERMUTING its constant slots images differently under one fill
+    but identically under some transposed fill; matching on ANY fill closes that gap
+    (audit L8) at zero cost for the constant-free catalog path."""
+    rng = np.random.default_rng(_DEFAULT_HOLDOUT_GRID_SEED + 2)
+    return rng.uniform(-10, 10, (3, 100))
+
+
 @dataclass
 class HoldoutManager:
     """Track held-out expressions by both skeleton hash AND functional image (evaluated on a
@@ -39,6 +60,8 @@ class HoldoutManager:
     allow_nan: bool
     holdout_X: np.ndarray = field(default_factory=lambda: _default_holdout_grid()[0].copy())
     holdout_C: np.ndarray = field(default_factory=lambda: _default_holdout_grid()[1].copy())
+    extra_grids: tuple = field(default_factory=_default_extra_grids)
+    extra_constant_fills: np.ndarray = field(default_factory=lambda: _default_constant_fills().copy())
     skeleton_hashes: set[Tuple[str, ...]] = field(default_factory=set)
     expression_images: set[Tuple[float, ...] | Tuple[Tuple[float, ...], ...]] = field(default_factory=set)
 
@@ -56,7 +79,7 @@ class HoldoutManager:
         try:
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
-                key = self._evaluate_to_key(compiled_fn, num_constants, n_variables)
+                keys = self._evaluate_to_keys(compiled_fn, num_constants, n_variables)
         except (OverflowError, NameError) as exc:
             # The structure layer is registered; only the functional-image layer is lost. That
             # is a real degradation of the equivalence backstop for THIS skeleton, so say so
@@ -68,7 +91,27 @@ class HoldoutManager:
                 RuntimeWarning, stacklevel=2)
             return
 
-        self.expression_images.add(key)
+        # The '__unevaluable__' sentinel is NOT registered. It says
+        # "this law could not be evaluated on grid g" -- a property of the GRID and the law's
+        # domain, not a fingerprint of the law. Registering it made every candidate that also
+        # fails on grid g match, so 2 sentinel keys out of 9,499 caused 137 of 252 rejections:
+        # 4.57% of all draws discarded for a reason unrelated to any benchmark overlap.
+        #
+        # Dropping it costs no real protection. A rederivation that a benchmark could SCORE
+        # must be evaluable, so the sentinel could never catch one; exact-structure matches
+        # stay covered by skeleton_hashes. The accepted consequence, stated plainly: a
+        # STRUCTURALLY DIFFERENT rederivation of a law that is NaN everywhere is no longer
+        # caught -- vacuous, since such a law is not a scoreable benchmark item either (you
+        # cannot compute FVU against an all-NaN target).
+        discriminating = {key for key in keys if key[1] != "__unevaluable__"}
+        if not discriminating:
+            # Loud, and now actually audible: register_holdout_pool no longer filters
+            # RuntimeWarning at the call site (it was muting exactly this).
+            warnings.warn(
+                f"holdout image for skeleton {skeleton_key!r} is unevaluable on every probe "
+                f"grid; only the exact-structure layer discriminates it",
+                RuntimeWarning, stacklevel=2)
+        self.expression_images.update(discriminating)
 
     def is_held_out(
         self,
@@ -84,8 +127,12 @@ class HoldoutManager:
 
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=RuntimeWarning)
-            key = self._evaluate_to_key(compiled_fn, num_constants, n_variables)
-        return key in self.expression_images
+            keys = self._evaluate_to_keys(compiled_fn, num_constants, n_variables)
+        # Symmetric with registration: an unevaluable CANDIDATE cannot be shown equivalent to
+        # anything, so its sentinel is not a match either. Registration no longer emits one,
+        # but a manager restored from an older key set could still carry them.
+        keys = {key for key in keys if key[1] != "__unevaluable__"}
+        return not keys.isdisjoint(self.expression_images)
 
     @staticmethod
     def _normalize_tokens(tokens: Sequence[str]) -> list[str]:
@@ -94,26 +141,83 @@ class HoldoutManager:
         # otherwise leak through BOTH holdout layers (mirror of the flash-ansr fix).
         return list(normalize_skeleton([str(token) for token in tokens]))
 
-    def _evaluate_to_key(
+    def _evaluate_to_keys(
         self,
         compiled_fn: Callable[..., np.ndarray | float],
         num_constants: int,
         n_variables: int | None = None,
-    ) -> Tuple[Tuple[float, ...], ...] | Tuple[float, ...]:
+    ) -> set:
+        """Image keys over every probe grid (and, for parametric skeletons, every
+        constant fill). One key per (grid, fill); registration stores them all and a
+        probe matches on ANY -- strictly more conservative than a single key.
+
+        Each image is standardized (mean 0, std 1, leading-sign canonical) before the
+        4-dp rounding: a held-out law's whole output-affine family (a*f + b, either
+        sign of a) shares one key, and large-magnitude laws stop failing the ABSOLUTE
+        4-dp tolerance on f64 associativity noise (audit L6). A constant image
+        standardizes to zeros -- every constant law shares one key, over-rejection in
+        the ruled direction. All-NaN / unevaluable images key to a per-grid sentinel
+        that matches only other unevaluable images: fail-closed, never a leak.
+        """
         variable_count = n_variables if n_variables is not None else self.n_variables
-        samples = self.holdout_X[:, :variable_count]
-        constants_slice = self.holdout_C[:num_constants]
-        constants_arg = None if num_constants == 0 else constants_slice
+        grids = (self.holdout_X,) + tuple(self.extra_grids)
+        if num_constants == 0:
+            fills: list[np.ndarray | None] = [None]
+        else:
+            fills = [self.holdout_C[:num_constants]]
+            for row in self.extra_constant_fills:
+                if len(row) >= num_constants:
+                    fills.append(np.asarray(row[:num_constants]))
 
-        image = safe_f(compiled_fn, samples, constants_arg)
-        image = np.asarray(image, dtype=np.float64)
-        image = np.round(image, 4)
-
-        if np.isnan(image).any():
-            image = image.copy()
-            image[np.isnan(image)] = 0.0
-
-        if image.ndim == 1:
-            return tuple(float(value) for value in image.tolist())
-
-        return tuple(tuple(float(value) for value in row.tolist()) for row in image.tolist())
+        keys: set = set()
+        for grid_index, grid in enumerate(grids):
+            samples = grid[:, :variable_count]
+            for fill in fills:
+                try:
+                    image = safe_f(compiled_fn, samples, fill)
+                    image = np.asarray(image, dtype=np.float64)
+                except (TypeError, OverflowError, ValueError):
+                    # A pathological integer-structure candidate: lambdify folds pure-int
+                    # subtrees into arbitrary-precision Python ints, and numpy ufuncs
+                    # refuse them. Such a candidate cannot match any real image; the
+                    # sentinel matches only other unevaluable images. Conservative:
+                    # over-rejects, never leaks.
+                    keys.add((grid_index, "__unevaluable__"))
+                    continue
+                if np.isnan(image).all():
+                    # safe_f signals a refused evaluation as an all-NaN vector; key it to
+                    # the sentinel BEFORE the nan->0 fill, which would otherwise collide
+                    # with a genuine zero image.
+                    keys.add((grid_index, "__unevaluable__"))
+                    continue
+                # +-inf is masked like NaN: an inf-bearing mean/std is nonfinite and
+                # previously dumped every overflowing draw into one shared "const"
+                # bucket with every overflowing LAW (a collision class, measured as
+                # most of a 7% rejection rate). The finite part of the image still
+                # fingerprints the function; all-nonfinite images fall through to the
+                # value-keyed constant branch as const-0.
+                image = np.where(np.isfinite(image), image, 0.0)
+                flat = image.reshape(-1)
+                std = float(flat.std())
+                mean = float(flat.mean())
+                if not (np.isfinite(std) and std > 1e-12 and np.isfinite(mean)):
+                    # A CONSTANT image keys by its VALUE, not by a shared canonical form:
+                    # a single canonical key made every grid-saturating draw (tanh, atan,
+                    # cosh chains flatten to a constant on the probe range) collide with
+                    # any constant-imaged law -- measured 7.9% over-rejection, almost all
+                    # from this one class. Value-keyed, only draws constant at the SAME
+                    # value match: still conservative, no collision class.
+                    keys.add((grid_index, "const",
+                              round(mean, 4) if np.isfinite(mean) else "nonfinite"))
+                    continue
+                image = (image - mean) / std
+                nonzero = flat[np.abs(flat - mean) > 1e-12 * max(std, 1.0)]
+                if nonzero.size and nonzero[0] < mean:
+                    image = -image
+                image = np.round(image, 4)
+                if image.ndim == 1:
+                    keys.add((grid_index, tuple(float(v) for v in image.tolist())))
+                else:
+                    keys.add((grid_index, tuple(tuple(float(v) for v in row)
+                                                for row in image.tolist())))
+        return keys

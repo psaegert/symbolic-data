@@ -22,20 +22,54 @@ from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 import numpy as np
 
-from simplipy import SimpliPyEngine, normalize_expression, normalize_skeleton
+from symbolic_data.numeric import STORAGE_DTYPE
+
+from simplipy import SimpliPyEngine
+
+from symbolic_data.token_ops import normalize_expression, normalize_skeleton
 from simplipy.utils import explicit_constant_placeholders, substitute_constants
 
 from symbolic_data.config_io import load_config, save_config
 from symbolic_data.paths import substitute_root_path
 from symbolic_data.sympy_timeout import _sympy_simplify_with_timeout
 from simplipy.utils import codify
-from symbolic_data.prior_factory import build_prior_callable
+from symbolic_data.prior_factory import build_iid_prior_callable
 from symbolic_data._generate.holdout import HoldoutManager
 from symbolic_data._generate.skeleton_sampling import SkeletonSampler
 from symbolic_data._generate.support_sampling import SupportSampler, SupportSamplingError
 from symbolic_data.token_ops import desugar_sqrt, flatten_nested_list
 from symbolic_data.errors import NoValidSampleFoundError
 from symbolic_data.catalog import Catalog, ProblemCatalog, RealizedExpression
+
+# The rewrite strength the holdout family quotient runs at. `permissive` carries every
+# judged tier (core + f64 + real), so it is the most capable canonicalizer available;
+# effort 4 is the pinned simplification effort everywhere. Measured on 300 real
+# v24 draws: permissive/effort=4 costs 0.94 ms per prototype and is FASTER than
+# permissive/effort=0 (1.24 ms) -- more effort reaches a smaller fixpoint sooner. The full
+# simplify-then-mask fold costs 1.85 ms, ~2% of the 96 ms/instance generation budget.
+HOLDOUT_SIMPLIFY_MODE = "permissive"
+HOLDOUT_EFFORT = 4
+
+# Sentinel for "no failed draw produced row-validity evidence" in sample_data (all
+# failures were sampling errors / complex results, which carry no row counts).
+_NO_ROW_EVIDENCE = float("inf")
+
+# Rows evaluated by the all-or-nothing fast-reject probe before committing to the full
+# box. Any invalid probe row already decides the draw, so this is a pure evaluation-order
+# optimization: acceptance, the rng stream and every accepted sample are bit-identical.
+_VALIDITY_PROBE_ROWS = 32
+
+
+def _call_expression(expression_callable, *args):
+    """Evaluate a lambdified expression; a ufunc refusal (lambdify's bigint folds:
+    np.exp/sinh/cosh(arbitrary-precision int) raise TypeError, the int-to-f64
+    boundary raises OverflowError) returns NaN instead of killing the producer --
+    the same contract as compilation.safe_f, applied at the DIRECT call sites
+    (three worker deaths on 2026-08-24 came through these, not through safe_f)."""
+    try:
+        return expression_callable(*args)
+    except (TypeError, OverflowError):
+        return np.nan
 
 
 def _gt_metadata(skeleton: Sequence[str], literals: Any) -> tuple[list[str] | None, int | None]:
@@ -107,6 +141,22 @@ def _constantify_skeleton(skeleton: list[str]) -> list[str]:
     return result
 
 
+def _relabel_variables_first_occurrence(tokens: list[str]) -> list[str]:
+    """Relabel x<i> variables to x1, x2, ... in order of first appearance. Together with
+    engine canonicalization this makes the holdout family key invariant under variable
+    RENUMBERING (audit L3): x2/x1 and x1/x2 spell the same family member."""
+    mapping: dict[str, str] = {}
+    out: list[str] = []
+    for token in tokens:
+        if token.startswith("x") and token[1:].isdigit():
+            if token not in mapping:
+                mapping[token] = f"x{len(mapping) + 1}"
+            out.append(mapping[token])
+        else:
+            out.append(token)
+    return out
+
+
 class LampleChartonCatalog(GenerativeCatalog):
     '''
     A generative catalog that grows random unary-binary operator trees (Lample-Charton recipe).
@@ -170,6 +220,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
             simplify: bool | str = True,
+            simplify_mode: str = 'f64',
             name: str = "lample_charton",
             decontaminate: bool = True) -> None:
         self.name = name
@@ -206,7 +257,10 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         if isinstance(literal_prior, (dict, list)):
             self.literal_prior_config = literal_prior
-            self.literal_prior: Callable = build_prior_callable(literal_prior)
+            # Every literal of an expression is its own draw, matching the skeleton
+            # sampler's per-leaf contract: a mixture resolves per VALUE, so a two-constant
+            # expression can take one constant from each component.
+            self.literal_prior: Callable = build_iid_prior_callable(literal_prior)
         elif callable(literal_prior):
             self.literal_prior = literal_prior
         else:
@@ -225,6 +279,13 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         self.allow_nan = allow_nan
         self.simplify = simplify
+        # The mode the TARGET canonicalization runs in. Data is generated FROM the
+        # simplified skeleton (target == data by construction), so every licensed
+        # rewrite -- including the permissive corpus tier -- is sound here; the mode
+        # is a corpus-design choice, never a soundness one. Explicit because the
+        # 0.14 migration silently inherited Mode.f64 at this site when `mode`
+        # became a per-call argument (the intent was the corpus tier).
+        self.simplify_mode = simplify_mode
 
         independent_dims = self.sample_strategy.get('independent_dimensions', False)
         self.support_sampler = SupportSampler(
@@ -283,6 +344,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             holdout_pools=config_.get("holdout_pools", []),
             allow_nan=config_.get("allow_nan", False),
             simplify=config_.get("simplify", True),
+            simplify_mode=config_.get("simplify_mode", "f64"),
             name=config_.get("name", "lample_charton"),
             decontaminate=config_.get("decontaminate", True),
         )
@@ -379,6 +441,21 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         return catalog
 
+    def __getstate__(self) -> dict[str, Any]:
+        """Compiled skeleton code does not pickle, and does not need to.
+
+        ``skeleton_codes`` is a cache derived from ``skeletons``; a catalog that has to
+        cross a process boundary (a spawned data worker) rebuilds it on arrival rather
+        than shipping code objects Python refuses to serialize.
+        """
+        state = dict(self.__dict__)
+        state["skeleton_codes"] = None
+        return state
+
+    def __setstate__(self, state: dict[str, Any]) -> None:
+        self.__dict__.update(state)
+        self.skeleton_codes = self.compile_codes() if getattr(self, "skeletons", None) else {}
+
     def compile_codes(self, verbose: bool = False) -> dict[tuple[str], tuple[CodeType, list[str]]]:
         '''
         Compile the skeletons in the pool into executable code.
@@ -449,12 +526,17 @@ class LampleChartonCatalog(GenerativeCatalog):
             raise ValueError("Need constants for test of functional equivalence")
 
         variable_count = n_variables if n_variables is not None else self.n_variables
-        no_constant_expression = self.get_structural_prototype(skeleton)
+        no_constant_expression = self.holdout_family_prototype(skeleton)
+        if no_constant_expression is None:
+            return True    # cannot canonicalize -> fail closed (ruled doctrine)
 
         if code is None:
-            executable_prefix_expression = self.simplipy_engine.operators_to_realizations(no_constant_expression)
-            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
-            code_string = self.simplipy_engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
+            try:
+                executable_prefix_expression = self.simplipy_engine.operators_to_realizations(no_constant_expression)
+                prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
+                code_string = self.simplipy_engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
+            except Exception:
+                return True    # a probe the engine cannot realize -> fail closed
             # Bind exactly the queried width: foreign skeletons may use more (or fewer)
             # variables than this pool declares.
             if variable_count <= len(self.variables):
@@ -503,6 +585,73 @@ class LampleChartonCatalog(GenerativeCatalog):
     def holdout_C(self) -> np.ndarray:
         """The fixed constant values substituted when evaluating held-out expressions to images."""
         return self.holdout_manager.holdout_C
+
+    def holdout_family_prototype(self, tokens: list[str] | tuple[str, ...]) -> list[str] | None:
+        """THE holdout family key -- registration and probing both call exactly this
+        function, so a fold-order asymmetry between the two sides (audit L2) cannot
+        exist by construction. The quotient is deliberately aggressive, per the ruled
+        doctrine (families, not spellings; over-rejection over contamination):
+
+          engine canonicalization FIRST, on the raw literals
+              (simplipy AC-canon, Mode.permissive at HOLDOUT_EFFORT)
+          literals -> <constant>  (normalize_skeleton: the affine/scale family)
+          variable relabeling to first-occurrence order, re-canonicalized to a
+              fixpoint (renumbered twins; each pass re-masks)
+          constants folded out    (get_structural_prototype)
+
+        SIMPLIFY BEFORE MASKING (2026-08-27). Masking first replaces every literal with a
+        symbolic ``<constant>``, which stops the AC core doing exact rational arithmetic --
+        so the mask-first order could not collect like terms or distribute. Measured on the
+        pairs below, simplify-first strictly dominates it:
+
+            x + x  ==  2x            x * x  ==  x^2
+            (x*y)/(x*y)  ==  1       2(x+1)  ==  2x+2   <- ONLY simplify-first gets this
+
+        It is also more PRECISE, not merely more aggressive: ``pow x 1`` collapses to ``x``
+        while ``pow x 3`` survives, so x^1 and x^3 separate instead of both merging into
+        ``pow x <constant>`` -- that merge was pure over-rejection.
+
+        The loop re-masks on every pass: literals the SIMPLIFIER introduces (the ``2`` in
+        x+x -> 2x, the ``1`` from a cancellation) must be masked too, or the same family
+        lands in two prototypes.
+
+        NOT closed by this, and not closable here: ``(x+1)^2`` vs ``x^2+2x+1``. The two are
+        different FAMILIES under independent constant binding, and no rewrite can equate a
+        family with its subfamily. Expansion cannot be mined (the mu(T) < mu(S) bound: 0 of
+        acj-4's 5,338 rules grow) and the factoring direction is inexpressible (it needs the
+        constraint b = a^2/4 between two constant leaves, which the matcher binds
+        independently -- 0 rules carry >1 LHS ``<constant>``). Measured residual leak from
+        this class: <= 0.33% of accepted draws, and that single hit is unverified.
+
+        Returns None only for token lists normalize_skeleton cannot read; the probe
+        side treats that as held out (fail-closed)."""
+        def _canonicalize(current: list[str]) -> list[str]:
+            try:
+                return list(self.simplipy_engine.simplify(
+                    current, mode=HOLDOUT_SIMPLIFY_MODE, effort=HOLDOUT_EFFORT))
+            except Exception:
+                return current
+
+        try:
+            canonical = normalize_skeleton(_canonicalize(list(tokens)))
+        except Exception:
+            return None    # unreadable token stream -> probe side fails closed
+        if canonical is None:
+            return None
+        canonical = list(canonical)
+        for _ in range(3):
+            try:
+                relabeled = list(normalize_skeleton(
+                    _relabel_variables_first_occurrence(_canonicalize(canonical))))
+            except Exception:
+                break
+            if relabeled == canonical:
+                break
+            canonical = relabeled
+        try:
+            return self.get_structural_prototype(canonical)
+        except Exception:
+            return None    # cannot fold -> probe side fails closed
 
     def get_structural_prototype(self, expression: list[str] | tuple[str, ...], verbose: bool = False, debug: bool = False) -> list[str]:
         '''
@@ -638,11 +787,23 @@ class LampleChartonCatalog(GenerativeCatalog):
                     continue
                 registered_any = False
                 for candidate in candidates:
-                    canonical = normalize_skeleton(candidate)
-                    if canonical is None:
+                    # Canonical benchmark spellings (sqrt) are sugar over this catalog's
+                    # vocabulary; rewrite BEFORE deriving the prototype, or the alien token
+                    # ends up inside it and no generated skeleton can ever match. A token
+                    # list the walk cannot consume is non-canonicalizable, same as below.
+                    try:
+                        # operator_arity_compat: `**` (infix_to_prefix's power spelling)
+                        # lives only in the compat table; the plain table made the walk
+                        # treat it as a leaf and EVERY power-bearing law silently vanished
+                        # from both holdout layers (audit L1: 64 of fastsrb's 120).
+                        candidate = desugar_sqrt(candidate, self.simplipy_engine.operator_arity_compat)
+                    except ValueError:
+                        continue
+                    prototype = self.holdout_family_prototype(candidate)
+                    if prototype is None:
                         continue
                     registered_any = True
-                    items.append((self.get_structural_prototype(canonical), self.simplipy_engine,
+                    items.append((prototype, self.simplipy_engine,
                                   self.variables, self.n_variables))
                 if candidates and not registered_any and getattr(problem, "gt_kind", None) != "none":
                     warnings.warn(
@@ -651,19 +812,33 @@ class LampleChartonCatalog(GenerativeCatalog):
                         RuntimeWarning, stacklevel=2)
         else:
             items = []
+            dropped: list[str] = []
+            n_entries = 0
             for entry in holdout_pool_obj.iter_entries(np.random.default_rng()):
                 expression = getattr(entry, "prepared", None) or getattr(entry, "raw", None)
                 if expression is None:
                     continue
-                prefix = self.simplipy_engine.infix_to_prefix(expression)
-                # normalize_skeleton canonicalizes the declarative source's variable names (e.g. v1->x1)
-                # into THIS catalog's space and abstracts numeric literals to <constant>; then take the
-                # structural prototype (constants removed) -- the same form the generative path registers.
-                canonical = normalize_skeleton(prefix)
-                if canonical is None:
+                n_entries += 1
+                entry_id = str(getattr(entry, "eq_id", None) or expression)[:60]
+                try:
+                    prefix = self.simplipy_engine.infix_to_prefix(expression)
+                    prefix = desugar_sqrt(prefix, self.simplipy_engine.operator_arity_compat)
+                except (ValueError, KeyError) as exc:
+                    dropped.append(f"{entry_id} ({type(exc).__name__}: {exc})")
                     continue
-                items.append((self.get_structural_prototype(canonical), self.simplipy_engine,
+                prototype = self.holdout_family_prototype(prefix)
+                if prototype is None:
+                    dropped.append(f"{entry_id} (not canonicalizable)")
+                    continue
+                items.append((prototype, self.simplipy_engine,
                               self.variables, self.n_variables))
+            if dropped:
+                # A law that fails to register is a law that silently TRAINS. The audit
+                # found 64 of fastsrb's 120 in that state behind a bare `continue`; a
+                # partial holdout pool is a config error, never a warning.
+                raise ValueError(
+                    f"holdout pool {holdout_pool_obj.name!r}: {len(dropped)} of {n_entries} "
+                    f"laws failed to register and would silently train: {dropped}")
 
         for no_constant_expression, engine, variables, n_variables in items:
             executable_prefix_expression = engine.operators_to_realizations(no_constant_expression)
@@ -683,14 +858,55 @@ class LampleChartonCatalog(GenerativeCatalog):
             code = codify(code_string, bound_variables + constants)
             compiled_fn = engine.code_to_lambda(code)
 
-            with warnings.catch_warnings():
-                warnings.filterwarnings("ignore", category=RuntimeWarning)
-                self.holdout_manager.register_skeleton(
-                    no_constant_expression,
-                    compiled_fn,
-                    num_constants=len(constants),
-                    n_variables=width,
-                )
+            # NO blanket RuntimeWarning filter here. register_skeleton already wraps the noisy
+            # part -- the numeric evaluation -- in its own catch_warnings, and it raises its
+            # coverage-degradation diagnostics AS RuntimeWarning immediately after. A filter at
+            # this call site therefore mutes exactly the warnings the callee exists to raise:
+            # measured 2026-08-27, erbench-syneq raised 10 "unevaluable sentinel on every probe
+            # grid" warnings and this caller saw 0. That is the silent-loss state the audit
+            # calls indistinguishable from full coverage.
+            self.holdout_manager.register_skeleton(
+                no_constant_expression,
+                compiled_fn,
+                num_constants=len(constants),
+                n_variables=width,
+            )
+
+        self._purge_contaminated_skeletons()
+
+    def _purge_contaminated_skeletons(self) -> None:
+        """Drop pre-seeded skeletons that the CURRENTLY registered pools hold out.
+
+        The reuse branch of ``sample_skeleton`` never re-checks its fixed set, so a
+        skeleton loaded from ``skeletons.pkl`` (or frozen inline) before a pool grew --
+        or contaminated at build time -- streamed into training unchecked (audit L7).
+        Purging at registration and load time keeps the reuse branch's no-check
+        fast path honest instead of taxing every draw."""
+        skeletons = getattr(self, "skeletons", None)
+        if not self.holdout_pools or not skeletons:
+            return    # nothing pre-seeded yet (construction-time registration lands here)
+        contaminated = []
+        for skeleton in list(skeletons):
+            code_entry = self.skeleton_codes.get(skeleton) if self.skeleton_codes else None
+            code, constants = code_entry if code_entry else (None, [])
+            try:
+                if self.is_held_out(list(skeleton), list(constants), code):
+                    contaminated.append(skeleton)
+            except Exception:
+                contaminated.append(skeleton)     # cannot judge -> fail closed
+        for skeleton in contaminated:
+            if hasattr(skeletons, "discard"):
+                skeletons.discard(skeleton)
+            else:
+                skeletons.remove(skeleton)
+            if self.skeleton_codes:
+                self.skeleton_codes.pop(skeleton, None)
+        self._skeletons_tuple = None
+        if contaminated:
+            warnings.warn(
+                f"purged {len(contaminated)} pre-seeded skeleton(s) held out by the "
+                f"registered pools; they would have streamed into training unchecked",
+                RuntimeWarning, stacklevel=2)
 
     def clear_holdouts(self) -> None:
         """Remove all registered holdout pools and associated constraints."""
@@ -753,6 +969,7 @@ class LampleChartonCatalog(GenerativeCatalog):
 
             pool.skeleton_codes = pool.compile_codes(verbose=verbose)
 
+        pool._purge_contaminated_skeletons()
         return pool
 
     def _sympy_simplify_skeleton(self, skeleton: list[str], rng: np.random.Generator) -> list[str]:
@@ -782,8 +999,8 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         # Parse back to prefix notation; SymPy's printer spells square roots as `sqrt(...)`,
         # which is not in the engine's vocabulary -- rewrite to `rootn(u, 2)`.
-        prefix = self.simplipy_engine.parse(simplified_infix)
-        prefix = desugar_sqrt(prefix, self.simplipy_engine.operator_arity)
+        prefix = self.simplipy_engine.read_infix(simplified_infix)
+        prefix = desugar_sqrt(prefix, self.simplipy_engine.operator_arity_compat)
 
         # Literals stay CONCRETE, matching the SimpliPy branch: the catalog yields
         # expressions, never `<constant>` templates (abstraction is a downstream,
@@ -835,13 +1052,13 @@ class LampleChartonCatalog(GenerativeCatalog):
                 skeleton = self.skeleton_sampler.sample(n_operators, rng)
                 if self.simplify is True:
                     try:
-                        # form='explicit': simplipy >= 0.12 returns its native TAGGED
-                        # dialect (<add> ... </add>) by default, which every downstream
-                        # consumer here (validation, codify, prefix_to_infix) reads as a
-                        # malformed prefix expression. The explicit binary-prefix dialect
-                        # is the documented escape until tagged notation is adopted
-                        # end-to-end.
-                        skeleton = self.simplipy_engine.simplify(skeleton, form='explicit')
+                        # simplipy >= 0.14 simplify is dialect-preserving: the sampled
+                        # skeleton is an explicit binary-prefix list, so the answer is
+                        # one too -- which every downstream consumer here (validation,
+                        # codify, prefix_to_infix) requires. The form= escape it
+                        # replaces is removed.
+                        skeleton = self.simplipy_engine.simplify(
+                            skeleton, mode=self.simplify_mode)
                     except TypeError:
                         # A call-signature error is a BUG, not a rejectable sample: wrapped as
                         # NoValidSampleFoundError it sends the retry loop into an infinite
@@ -894,6 +1111,95 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         raise NoValidSampleFoundError(f"Failed to sample a non-contaminated skeleton after {self.sample_strategy['max_tries']} retries")
 
+    def _first_valid_box(
+            self,
+            probes: np.ndarray,
+            draw_rest: Callable[[int], np.ndarray],
+            expression_callable: Callable[..., Any],
+            n_constants: int,
+            rng: np.random.Generator,
+    ) -> tuple[tuple[np.ndarray, np.ndarray, np.ndarray] | None, float]:
+        """Scan the batched boxes in order and realize the FIRST fully valid one.
+
+        Each box gets its own literal draw (like each sequential try would); all probe
+        blocks are evaluated in one expression pass, with each box's constants repeated
+        across its rows. Returns ``((x_support, y_rows, literals), evidence)`` for the
+        accepted box, or ``(None, evidence)`` when every box fails -- ``evidence`` is
+        the smallest invalid-row count observed (``_NO_ROW_EVIDENCE`` when no row
+        evidence was produced).
+        """
+        n_boxes, n_probe, _ = probes.shape
+        evidence = _NO_ROW_EVIDENCE
+        # One draw for every box's constants at once. The prior is i.i.d. per literal, so
+        # this is the same distribution as a draw per box, at one call instead of n_boxes.
+        if n_constants:
+            drawn = np.asarray(self.literal_prior(size=n_boxes * n_constants, rng=rng),
+                               dtype=np.float64).reshape(n_boxes, n_constants)
+            lit_sets = [row.astype(STORAGE_DTYPE) for row in drawn]
+        else:
+            lit_sets = [np.empty(0, dtype=STORAGE_DTYPE) for _ in range(n_boxes)]
+
+        x_flat = probes.reshape(n_boxes * n_probe, -1)
+        if n_constants:
+            lit64 = np.stack(lit_sets)
+            lit_args: tuple = tuple(np.repeat(lit64[:, c], n_probe) for c in range(n_constants))
+        else:
+            lit_args = ()
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=RuntimeWarning)
+            y_flat = _call_expression(expression_callable, *x_flat.T, *lit_args)
+
+        if np.iscomplexobj(y_flat) or not (
+                np.issubdtype(np.asarray(y_flat).dtype, np.floating)
+                or np.issubdtype(np.asarray(y_flat).dtype, np.integer)):
+            return None, evidence
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=RuntimeWarning)
+            y_probe = np.asarray(y_flat, dtype=STORAGE_DTYPE)
+
+        if y_probe.ndim == 0 or y_probe.size == 1:
+            # Constant expression: one value decides every row of every box; box 0 is
+            # the first try, exactly as the sequential loop would accept or exhaust.
+            value = float(np.ravel(y_probe)[0])
+            if not np.isfinite(value) or not bool(np.isfinite(probes[0]).all()):
+                return None, evidence
+            x_rest = draw_rest(0)
+            if x_rest.shape[0] and not bool(np.isfinite(x_rest).all()):
+                return None, evidence
+            x_support = np.concatenate([probes[0], x_rest], axis=0)
+            return (x_support, np.full((x_support.shape[0], 1), value, dtype=STORAGE_DTYPE), lit_sets[0]), evidence
+
+        y_rows_all = y_probe.reshape(n_boxes, n_probe, -1)
+        rows_ok = np.isfinite(probes).all(axis=2) & np.isfinite(y_rows_all).all(axis=2)
+        for j in range(n_boxes):
+            if not bool(rows_ok[j].all()):
+                # Lower-bound evidence: only this box's probe was evaluated.
+                evidence = min(evidence, int(n_probe - int(np.count_nonzero(rows_ok[j]))))
+                continue
+            x_rest = draw_rest(j)
+            if x_rest.shape[0] == 0:
+                return (probes[j], y_rows_all[j], lit_sets[j]), evidence
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", category=RuntimeWarning)
+                y_rest = _call_expression(expression_callable, *x_rest.T, *lit_sets[j])
+            if np.iscomplexobj(y_rest) or not (
+                    np.issubdtype(np.asarray(y_rest).dtype, np.floating)
+                    or np.issubdtype(np.asarray(y_rest).dtype, np.integer)):
+                continue
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", category=RuntimeWarning)
+                y_rest_stored = np.asarray(y_rest, dtype=STORAGE_DTYPE)
+            if not isinstance(y_rest, np.ndarray) or len(np.atleast_1d(y_rest)) != x_rest.shape[0]:
+                y_rest_stored = np.full((x_rest.shape[0],), float(np.ravel(y_rest_stored)[0]), dtype=STORAGE_DTYPE)
+            rest_ok = np.isfinite(x_rest).all(axis=1) & np.isfinite(y_rest_stored.reshape(x_rest.shape[0], -1)).all(axis=1)
+            if not bool(rest_ok.all()):
+                evidence = min(evidence, int((~rest_ok).sum()))
+                continue
+            x_support = np.concatenate([probes[j], x_rest], axis=0)
+            y_rows = np.concatenate([y_rows_all[j], y_rest_stored.reshape(x_rest.shape[0], -1)], axis=0)
+            return (x_support, y_rows, lit_sets[j]), evidence
+        return None, evidence
+
     def sample_data(
             self, code: CodeType, n_constants: int = 0, n_support: int | None = None,
             support_prior: Callable | None = None, support_scale_prior: Callable | None = None,
@@ -924,15 +1230,54 @@ class LampleChartonCatalog(GenerativeCatalog):
         if n_support is None:
             n_support = self.support_sampler.sample_n_support(rng=rng)
 
+        # Domain-aware oversampling (v24, opt-in): a domain-restricted expression (log,
+        # rootn, atanh, ...) rejects a WHOLE draw when any single row lands outside its
+        # domain, so P(success/try) decays exponentially in n_support and ~45% of
+        # domain-heavy instances fail even 512 tries (night-2 finding). With
+        # `sample_strategy['support_oversampling_max'] = k_max > 1`, a failed try doubles
+        # the per-try draw (one sampler call, so ONE scale-transform application -- the
+        # per-instance support scale stays unified) and the first n_support in-domain
+        # rows are kept: per-row conditioning on validity instead of all-rows-at-once.
+        # The default (1) consumes the rng identically to the pre-v24 loop and is pinned
+        # byte-identical by test. Only the allow_nan=False regime selects rows: when NaNs
+        # are data (allow_nan=True), dropping rows would reshape the distribution.
+        max_oversampling = int(self.sample_strategy.get('support_oversampling_max', 1))
+        oversampling = 1
+        min_invalid_rows = _NO_ROW_EVIDENCE
+
+        # Try-batching (all-or-nothing regime, no per-call prior overrides): draw ALL
+        # max_tries boxes' parameters and probe blocks at once, evaluate every probe in
+        # ONE expression pass, and finish the first box IN ORDER whose probe and
+        # remaining rows both validate. Tries are iid and the first-valid selection is
+        # preserved, so this is distribution-identical to the sequential loop below;
+        # only the rng call schedule differs. Falls through to the loop whenever the
+        # sampler's shape cannot be block-drawn safely.
+        if (not self.allow_nan and max_oversampling == 1
+                and support_prior is None and support_scale_prior is None):
+            n_probe = min(_VALIDITY_PROBE_ROWS, n_support)
+            batch = self.support_sampler.sample_box_batch(
+                int(self.sample_strategy['max_tries']), n_probe, n_support, rng)
+            if batch is not None:
+                probes, draw_rest = batch
+                accepted, evidence = self._first_valid_box(
+                    probes, draw_rest, expression_callable, n_constants, rng)
+                if accepted is None:
+                    error = NoValidSampleFoundError(
+                        f"Failed to generate a valid expression after {self.sample_strategy['max_tries']} retries")
+                    error.min_invalid_rows = None if evidence == _NO_ROW_EVIDENCE else int(evidence)
+                    raise error
+                x_support, y_rows, literals = accepted
+                return x_support, y_rows.reshape(-1, 1), literals
+
         for _ in range(self.sample_strategy['max_tries']):
-            literals = self.literal_prior(size=n_constants, rng=rng).astype(np.float32)
+            literals = self.literal_prior(size=n_constants, rng=rng).astype(STORAGE_DTYPE)
 
             override_support_prior = SupportSampler.ensure_prior_callable(support_prior) if support_prior is not None else None
             override_support_scale = SupportSampler.ensure_prior_callable(support_scale_prior) if support_scale_prior is not None else None
 
             try:
                 x_support = self.support_sampler.sample(
-                    n_support=n_support,
+                    n_support=oversampling * n_support,
                     support_prior=override_support_prior,
                     support_scale_prior=override_support_scale,
                     rng=rng,
@@ -940,27 +1285,63 @@ class LampleChartonCatalog(GenerativeCatalog):
             except SupportSamplingError:
                 continue
 
+            # All-or-nothing fast reject (pure evaluation-order optimization): in the
+            # whole-draw regime a single invalid row already decides the draw, so a small
+            # row prefix is evaluated first and the full-box evaluation is skipped when
+            # the prefix fails. Scalar/complex/odd-shaped results fall through to the
+            # full path, which re-evaluates the prefix (deterministically identical), so
+            # acceptance and every accepted sample stay bit-identical.
+            if not self.allow_nan and max_oversampling == 1 and x_support.shape[0] > _VALIDITY_PROBE_ROWS:
+                probe = x_support[:_VALIDITY_PROBE_ROWS]
+                with warnings.catch_warnings():
+                    warnings.filterwarnings("ignore", category=RuntimeWarning)
+                    y_probe = _call_expression(expression_callable, *probe.T, *literals)
+                if (isinstance(y_probe, np.ndarray) and len(y_probe) == _VALIDITY_PROBE_ROWS
+                        and not np.iscomplexobj(y_probe) and np.issubdtype(y_probe.dtype, np.number)):
+                    with warnings.catch_warnings():
+                        warnings.filterwarnings("ignore", category=RuntimeWarning)
+                        y_probe_stored = np.asarray(y_probe, dtype=STORAGE_DTYPE)
+                    rows_ok = np.isfinite(probe).all(axis=1) & np.isfinite(y_probe_stored.reshape(_VALIDITY_PROBE_ROWS, -1)).all(axis=1)
+                    if not bool(rows_ok.all()):
+                        # Evidence is a lower bound here (only the probe was evaluated).
+                        min_invalid_rows = min(min_invalid_rows, int((~rows_ok).sum()))
+                        continue
+
+            # f64 end to end: simplipy's evaluation contract is f64, the support points and
+            # literals are f64, and the result is stored at that width. A value is rejected
+            # only for being non-finite at the storage width -- never for exceeding the range
+            # of a narrower format.
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
-                y_support = expression_callable(*x_support.T, *literals)
+                y_evaluated = _call_expression(expression_callable, *x_support.T, *literals)
 
-            if not isinstance(y_support, np.ndarray):
-                y_support = np.full((n_support, 1), y_support, dtype=np.float32)
+            if not isinstance(y_evaluated, np.ndarray):
+                y_evaluated = np.full((x_support.shape[0], 1), y_evaluated, dtype=np.float64)
 
-            if len(y_support) == 1:
+            if len(y_evaluated) == 1:
                 # Repeat y to match the shape of x
-                y_support = np.repeat(y_support, x_support.shape[0])
+                y_evaluated = np.repeat(y_evaluated, x_support.shape[0])
 
-            # Complex numbers are not supported
-            if np.iscomplex(y_support).any() or y_support.dtype != np.float32:
+            # Complex (or any non-numeric) results are not supported
+            if np.iscomplexobj(y_evaluated) or not (
+                    np.issubdtype(y_evaluated.dtype, np.floating) or np.issubdtype(y_evaluated.dtype, np.integer)):
                 continue
 
+            y_support = np.asarray(y_evaluated, dtype=STORAGE_DTYPE)
+
             if not self.allow_nan:
-                # If any of the support points are NaN, skip the expression
-                if np.isnan(x_support).any() or np.isinf(x_support).any():
-                    continue
-                if np.isnan(y_support).any() or np.isinf(y_support).any():
-                    continue
+                y_rows = y_support.reshape(x_support.shape[0], -1)
+                valid = np.isfinite(x_support).all(axis=1) & np.isfinite(y_rows).all(axis=1)
+                if int(valid.sum()) >= n_support:
+                    keep = np.flatnonzero(valid)[:n_support]
+                    x_support = x_support[keep]
+                    y_support = y_rows[keep]
+                    break
+                # Evidence for the caller's retry policy: how far the BEST draw so far was
+                # from a fully valid box (0 == a draw was one row short of acceptance).
+                min_invalid_rows = min(min_invalid_rows, int((~valid).sum()))
+                oversampling = min(oversampling * 2, max_oversampling)
+                continue
             elif np.isnan(y_support).all():
                 # Even if NaNs are allowed, if all support points are NaN, skip the expression
                 continue
@@ -968,7 +1349,12 @@ class LampleChartonCatalog(GenerativeCatalog):
             # All checks passed, break the loop
             break
         else:
-            raise NoValidSampleFoundError(f"Failed to generate a valid expression after {self.sample_strategy['max_tries']} retries")
+            error = NoValidSampleFoundError(f"Failed to generate a valid expression after {self.sample_strategy['max_tries']} retries")
+            # The retry policy upstream (ProblemSource._realize_problem) reads this to
+            # abort skeletons whose draws never come close to a fully valid box; None
+            # when no draw produced row evidence (sampling/complex failures only).
+            error.min_invalid_rows = None if min_invalid_rows == _NO_ROW_EVIDENCE else min_invalid_rows
+            raise error
 
         return x_support, y_support.reshape(-1, 1), literals
 

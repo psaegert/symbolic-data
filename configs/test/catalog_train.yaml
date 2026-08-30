@@ -2,7 +2,7 @@
 # scale. Binds the current-generation engine and exercises the full modern sampling
 # surface on the default path -- concrete numeric literals (choice + rounded mixture)
 # and typed exponent slots for pow / rootn.
-simplipy_engine: 'acj-4-3'
+simplipy_engine: 'acj-4'
 holdout_pools: []
 
 sample_strategy:

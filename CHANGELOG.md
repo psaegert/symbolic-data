@@ -3,6 +3,147 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [Unreleased]
+
+## [0.16.0] - 2026-08-30
+
+### Added
+- **The target canon is a config choice: `simplify_mode`** on the generative catalog. Data is
+  generated FROM the simplified skeleton -- target == data by construction -- so every licensed
+  rewrite, including the permissive corpus tier, is sound at this site; the mode is a
+  corpus-design decision, never a soundness one. The simplipy 0.14 migration had silently
+  inherited `Mode.f64` here when `mode` became a per-call argument; the key restores the choice
+  (default `'f64'` = current behavior, no silent drift in either direction), and a regression
+  test spies the configured mode into the actual `simplify` call.
+- **Noise as a mixture, with an outlier channel** (`sampling.noise` accepts a mapping): a
+  `p_clean` point mass, additive/multiplicative components with LogUniform level, and an
+  orthogonal outlier channel. One definition for training AND evaluation, applied strictly
+  post-accept so the expression prior stays rejection-shaped over clean values. `Problem` gains
+  `outlier_mask_support`/`outlier_mask_validation` -- the generative contamination labels -- and
+  carries the realized per-instance draw; the scalar `noise:` form keeps its legacy semantics
+  untouched.
+- **The outlier prior is rebuilt on literature-ruled numbers.** `rate` and `magnitude` become
+  named distributions (uniform, loguniform, beta, lognormal); the `[lo, hi]` pair forms still
+  parse and mean what they always meant -- verified byte-identical against the pre-change module
+  over 600 instances. `scale: neighbour` measures magnitude against what the nearest neighbour
+  in x fails to predict (the previous residual-sigma ruler put outliers at a median of ~3,000
+  sigma; robust statistics places them at 1-25). `sign` becomes a per-problem property drawn
+  once, and `min_count` conditions the realized count on being at least one by redrawing, not
+  clamping.
+- **Domain-aware support oversampling**, opt-in via
+  `sample_strategy['support_oversampling_max']` (default 1 = the previous loop, pinned
+  byte-identical by golden rng-consumption hashes): a failed try doubles the per-try draw in one
+  sampler call and keeps the first n in-domain rows, instead of requiring every row of a draw
+  in-domain at once.
+- **`token_ops.tagged_canonical(engine, expression)`** -- simplify IN the tagged dialect. 796 of
+  3,628 curated-catalog expressions canonicalize differently between dialects, so a tagged
+  canonical target cannot be obtained by converting the prefix canonical; the counterexample is
+  pinned in the tests.
+
+### Changed
+- **simplipy 0.14 migration.** The removed `engine.parse` becomes `read_infix` -- the same raw
+  reader renamed, tolerant of unknown vocabulary and spelling-preserving, reproduced
+  byte-identically over all 6,780 curated prepared expressions and every frozen SymPy output.
+  The `normalize_*` walks move HERE, consumer-side, into `token_ops`: recorded expressions and
+  constants are concrete ground truth, and the decontamination key must be stable across engine
+  artifacts, so neither may canonicalize through the engine's AC state.
+  `masking.mask_values_keep_structure` becomes `mask_fittable`. Engine defaults, v24 catalogs
+  and test fixtures pin `acj-4`. simplipy pin: `>=0.14.1,<0.15`.
+- **The holdout is ONE family key, used identically by both sides.** The adversarial audit
+  reproduced seven leak classes -- worst, 64 of fastsrb's 120 laws never registered at all, and
+  the literal-affine family of every registered law trained. `holdout_family_prototype`
+  (literals masked -> engine AC-canonicalization -> variable relabeling to a fixpoint ->
+  constants folded out) is now THE key for registration and probing, so fold-order asymmetry
+  cannot exist by construction. Registration desugars `sqrt` before deriving prototypes; a
+  declarative pool that drops ANY law raises with the law list instead of warning; holdout
+  images are standardized before rounding, with a positive log-scale grid for half-domain
+  respellings. fastsrb registers 120/120 laws as 79 canonical families (was 56 laws as 33
+  spellings); over-rejection 0.30% at 2.9 ms/probe, all 13 audit leak probes rejected.
+- **The holdout fold simplifies BEFORE masking, at permissive/effort=4.** Mask-first replaced
+  every literal with a symbolic `<constant>`, so the AC core could not do exact rational
+  arithmetic: `x + x == 2x`, `x * x == x^2` and `2(x+1) == 2x+2` each split one family into two
+  prototypes, and a draw of one spelling escaped a holdout registered under the other. The
+  fixpoint loop re-masks on every pass, so literals the simplifier introduces are masked too.
+  The `'__unevaluable__'` sentinel is retired: it fingerprinted the grid, not the law -- 2 keys
+  caused 137 of 252 rejections (4.57% of ALL draws) for a reason unrelated to any benchmark
+  overlap. 0.94 ms per prototype, ~5% of the per-instance generation budget, O(1) in pool size.
+- **Generation is 17x faster single-core** (2.2 -> 37.5 delivered instances/s on the v24
+  catalog; the 8-worker flash-ansr pipeline reaches 182): the independent-dimensions support
+  draw is vectorized, a 32-row probe block decides a draw before the full box is paid for, and
+  all max_tries boxes are drawn and probed in one expression pass with first-valid-in-order
+  selection. The accepted-sample distribution is unchanged (golden pins; 500-instance
+  distribution spot-check within noise) -- only the rng call schedule moves, where stated.
+- **Every literal of an expression is drawn independently.** A mixture `literal_prior`
+  resolved its component once per CALL, so `literal_prior(size=n)` handed an n-constant
+  expression n values from a single component -- an expression could never mix an integer
+  from a `choice` component with a float from a `rounded` one, although the skeleton
+  sampler's per-leaf contract says each literal is its own draw. `build_iid_prior_callable`
+  (also exported) resolves the component per VALUE. `build_prior_callable` keeps the
+  per-call semantics for priors that genuinely share one regime across a draw.
+
+  One consequence is speed: with a per-value mixture, one `size=n` call is identical to n
+  `size=1` calls, so `_first_valid_box` draws every box's constants in a single call.
+  Measured on the v25 prior over 300 problems x 5 reps: **32.24 -> 18.33 ms/problem
+  (1.76x)**, with non-overlapping rep ranges. Literal marginals are unchanged (KS p=0.59
+  against the previous builder; a same-builder control gives the same p-value spread).
+
+  The rng call schedule changes, so a fixed seed yields a different sequence and the
+  default-path golden pin in `tests/test_support_oversampling.py` is re-captured.
+
+- **Realized data is stored and judged at float64** (BREAKING for distribution
+  reproducibility). Every realized array -- support X, targets y, noisy targets, sampled
+  literals -- now carries `symbolic_data.numeric.STORAGE_DTYPE`, which is `float64`. The
+  f32 grid the generator used to snap to existed for one reason: the consumer's boundary,
+  flash-ansr's support tensors and its 32-bit `<ieee754>` constants format. That boundary
+  is gone -- flash-ansr serializes constants as 8 IEEE-754 bytes at binary64 -- so the snap,
+  the f32 validity bar and the f32 overflow rejection go with it.
+
+  Two consequences worth naming, both measured:
+
+  - **The `rounded` literal prior works again.** `rounded_dist` exists for
+    description-length control -- an unrounded float64 draw denotes a rational with a
+    ~17-digit numerator. The f32 snap silently undid it: a draw of `1.01139` was stored as
+    `1.011389970779419`, and `substitute_constants` recorded THAT into the expression.
+    Measured on the v24 float branch, **98.31% of literals changed spelling** and the mean
+    literal `repr` ran **10.79 -> 18.09 characters**; over the full 50/50 float/integer
+    prior that is ~49% of all literals (integers survive the snap exactly).
+  - **`tools/audit_finite_fraction.py` and the sampler now agree.** The tool measured
+    `finite_fraction` in float64 while `catalog.py` rejected points in float32, so the
+    shipped metadata over-estimated the realizable fraction and undersized the oversampling
+    budget for exactly the extreme-magnitude entries. Closed for free -- the tool needed no
+    change, the bar moved to meet it.
+
+  Acceptance widens: points a partial-domain expression could not realize at f32 are
+  realizable now (`exp(60x)` is finite across all of [0, 10] at binary64, where the f32 bar
+  kept only the ~15% low-x slice), so the accepted sequence for a given seed diverges. RNG
+  CONSUMPTION does not change -- verified against the pre-change tree, byte-identical next
+  draw on all three pinned seeds -- so this is a change of which draws are accepted, not of
+  the stream. The rejection guard itself stays, at the f64 boundary: a multiplicative noise
+  draw and the outlier shove multiply, and can still carry a finite target out of range.
+
+- **Frozen `.npz` catalogs are not rebuilt** and stay float32. Rebuilding
+  would move every stored value by up to one f32 ulp and invalidate every number ever
+  published against them. Catalogs written from now on record `storage_dtype` in their
+  `_meta` blob and expose it as `ProblemCatalog.storage_dtype`; an absent marker reads back
+  as `"float32"`, so a mixed corpus is detectable rather than silent.
+
+### Fixed
+- **A lambdified bigint no longer kills a worker.** `lambdify` folds pure-integer subtrees into
+  arbitrary-precision Python ints, and numpy ufuncs refuse them (three separate streaming-worker
+  deaths in one training run: `exp`, `sinh`, `cosh`). `safe_f` catches the refusal and returns
+  all-NaN -- the universal reject signal -- the four direct call sites route through the same
+  contract, and the holdout key maps an all-NaN image to a sentinel BEFORE its nan->0 fill,
+  which would otherwise collide with a genuine zero image.
+- **The `dtype != float32` gate made rootn extinct.** Any tree containing an f64-upcasting
+  realization was silently rejected on every draw: rootn ran at a 1/149 skeleton realize rate
+  and 0.8% of delivered instances for that reason alone, not because of its domain (now 35.4%,
+  against a 37.2% canonical-skeleton rate). Retired with the f32 boundary.
+- **Priors and catalogs survive a process boundary.** A spawned data worker receives its source
+  by pickle, and both compiled `skeleton_codes` and the mixture-prior closures refused. Mixtures
+  are now a picklable `_MixturePrior` object (per-call vs per-value is data on the object);
+  `skeleton_codes` drops on `__getstate__` and rebuilds on arrival. Measured: pickle 25 ms /
+  1.6 MB, unpickle + recompile 48 ms.
+
 ## [0.15.0] - 2026-08-11
 
 ### Changed

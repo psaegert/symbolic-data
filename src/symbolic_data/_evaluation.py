@@ -12,7 +12,9 @@ import warnings
 from typing import Any, Dict, List, Mapping
 
 import numpy as np
-from simplipy import SimpliPyEngine, masking, normalize_expression
+from simplipy import SimpliPyEngine, masking
+
+from symbolic_data.token_ops import normalize_expression
 from simplipy.utils import codify
 
 from symbolic_data.token_ops import desugar_sqrt
@@ -33,7 +35,7 @@ def load_engine(engine: SimpliPyEngine | str | None) -> SimpliPyEngine:
     """Resolve an engine id / None to a loaded :class:`SimpliPyEngine` (instances pass through)."""
     if isinstance(engine, SimpliPyEngine):
         return engine
-    return SimpliPyEngine.load(engine or "acj-4-3", install=True)
+    return SimpliPyEngine.load(engine or "acj-4", install=True)
 
 
 def resolve_variable_order(vars_info: Mapping[str, Mapping[str, Any]]) -> List[str]:
@@ -83,21 +85,22 @@ def compile_expression(
     prepared_text = _normalize_prepared(prepared)
     variable_order = resolve_variable_order(vars_info)
 
-    prefix_parsed = engine.parse(prepared_text, mask_numbers=False)
+    prefix_parsed = engine.read_infix(prepared_text, mask_numbers=False)
     # Curated formulas spell the square root as `sqrt(...)`; translate to `rootn(u, 2)`
     # before anything walks the prefix (the parser passes unknown names through as leaves).
     prefix_parsed = desugar_sqrt(prefix_parsed, engine.operator_arity)
     try:
-        # form='explicit': simplipy >= 0.12 defaults to its tagged n-ary dialect, which the
-        # downstream prefix consumers (codify, prefix_to_infix) reject.
-        prefix_simplified = engine.simplify(prefix_parsed, form='explicit')
+        # simplipy >= 0.14 simplify is dialect-preserving: explicit binary prefix in,
+        # explicit binary prefix out -- exactly what the downstream prefix consumers
+        # (codify, prefix_to_infix) require, with no form= to ask for it.
+        prefix_simplified = engine.simplify(prefix_parsed)
         if mask:
             # Terminal representation step (never re-simplified): value-position literals ->
             # `<constant>`, while exponent / root-index literals stay visible -- they are
             # structure, not fittable constants. simplipy >= 0.12 masks via the policy
             # module, not the engine.
             prefix_simplified = masking.mask(
-                prefix_simplified, engine, masking.mask_values_keep_structure)
+                prefix_simplified, engine, masking.mask_fittable)
     except Exception as exc:  # pragma: no cover - defensive against SimpliPy regressions
         warnings.warn(
             f"Failed to simplify {name} expression {eq_id}: {exc}. Falling back to unsimplified prefix.",

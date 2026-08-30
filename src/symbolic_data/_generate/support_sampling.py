@@ -1,12 +1,36 @@
 """Helpers for sampling mixed continuous/quantized support points."""
 from __future__ import annotations
 
+import functools
 from copy import deepcopy
 from typing import Any, Callable, Dict
 
 import numpy as np
 
+from symbolic_data.numeric import STORAGE_DTYPE
+
+from symbolic_data.distributions import ELEMENTWISE_IID_BASES, VECTOR_PARAM_BASES, sampler_box_batch, sampler_dist
 from symbolic_data.prior_factory import build_prior_callable
+
+
+def _independent_columns_fast_path(prior: Callable[..., np.ndarray]) -> str | None:
+    """How to draw k independent columns in ONE call, if provably safe for ``prior``.
+
+    ``"sampler"``: a ``sampler``-form prior over a vectorizable base -- one call with
+    ``per_column_params=True`` draws each column's parameters independently.
+    ``"iid"``: an elementwise-iid builtin -- one ``(n, k)`` call IS k independent columns.
+    ``None``: anything else (mixtures, custom callables, hierarchical non-vector bases)
+    keeps the per-column loop, because a single ``(n, k)`` call would let one internal
+    parameter draw correlate the columns.
+    """
+    if isinstance(prior, functools.partial):
+        if prior.func is sampler_dist:
+            if prior.keywords.get("base_dist_name") in VECTOR_PARAM_BASES:
+                return "sampler"
+            return None
+        if prior.func in ELEMENTWISE_IID_BASES:
+            return "iid"
+    return None
 
 
 class SupportSamplingError(Exception):
@@ -33,7 +57,7 @@ class ScaleTransform:
     def apply(self, support: np.ndarray, rng: np.random.Generator) -> np.ndarray:
         scale_factor = 10.0 ** _to_scalar(self._scale_prior(size=1, rng=rng))
         support *= scale_factor
-        return support.astype(np.float32, copy=False)
+        return support.astype(STORAGE_DTYPE, copy=False)
 
 
 class QuantizeTransform:
@@ -81,7 +105,7 @@ class QuantizeTransform:
 
         dims = rng.choice(n_dims, size=d_quantized, replace=False)
         if dims.size == 0:
-            return support.astype(np.float32, copy=False)
+            return support.astype(STORAGE_DTYPE, copy=False)
 
         columns = support[:, dims]
         mins = np.min(columns, axis=0)
@@ -94,7 +118,7 @@ class QuantizeTransform:
         finite = np.isfinite(mins) & np.isfinite(maxs)
         active_mask = finite & (span > tolerance)
         if not np.any(active_mask):
-            return support.astype(np.float32, copy=False)
+            return support.astype(STORAGE_DTYPE, copy=False)
 
         active_dims = dims[active_mask]
         active_columns = columns[:, active_mask]
@@ -105,7 +129,7 @@ class QuantizeTransform:
         if quantized is not None:
             support[:, active_dims] = quantized
 
-        return support.astype(np.float32, copy=False)
+        return support.astype(STORAGE_DTYPE, copy=False)
 
     def _quantize_dimensions(
         self,
@@ -359,7 +383,52 @@ class SupportSampler:
             support = transform.apply(support, rng)
 
         self._maybe_check_unique(support, n_support)
-        return support.astype(np.float32, copy=False)
+        return support.astype(STORAGE_DTYPE, copy=False)
+
+    def sample_box_batch(
+        self,
+        n_boxes: int,
+        n_probe: int,
+        n_total: int,
+        rng: np.random.Generator | None = None,
+    ) -> "tuple[np.ndarray, Callable[[int], np.ndarray]] | None":
+        """``n_boxes`` boxes at once, each split into an ``n_probe``-row probe block
+        (returned eagerly as ``(n_boxes, n_probe, k)``) and a ``draw_rest(j)`` callable
+        producing the remaining rows of box ``j`` on demand. Rows are iid given each
+        box's parameters, so any schedule of blocks is distribution-identical to
+        drawing every box in one piece -- and boxes never drawn to completion (probe
+        failed, or a box after the accepted one) simply consume nothing further.
+        Returns ``None`` whenever block drawing is unsafe: transforms or uniqueness
+        checking configured (they act on the whole matrix with their own per-call
+        draws), a prior the block drawer cannot classify, or a ``sampler``-form prior
+        under dependent dimensions (its single parameter set spans all columns, which
+        the per-column drawer would redraw)."""
+        if self.require_unique or self.scale_transform is not None or self._post_scale_transforms:
+            return None
+        if self.support_prior is None or n_boxes <= 0 or n_probe <= 0 or n_total < n_probe:
+            return None
+        if (isinstance(self.support_prior, functools.partial)
+                and self.support_prior.func is sampler_dist and not self.independent_dimensions):
+            return None
+        rng = rng if rng is not None else np.random.default_rng()
+        batch = sampler_box_batch(self.support_prior, self.n_variables, n_boxes, rng)
+        if batch is None:
+            return None
+        draw_all, draw_one = batch
+
+        probes = np.asarray(draw_all(n_probe), dtype=np.float64)
+        probes = probes.reshape(n_boxes, n_probe, self.n_variables).astype(STORAGE_DTYPE)
+        n_rest = n_total - n_probe
+
+        def draw_rest(j: int) -> np.ndarray:
+            if n_rest <= 0:
+                # Must match the probes' dtype: this sentinel flows into np.concatenate
+                # alongside them, and a narrower one silently downcasts the whole box.
+                return np.zeros((0, self.n_variables), dtype=STORAGE_DTYPE)
+            arr = np.asarray(draw_one(j, n_rest), dtype=np.float64).reshape(n_rest, self.n_variables)
+            return arr.astype(STORAGE_DTYPE)
+
+        return probes, draw_rest
 
     def _draw_continuous_support(
         self,
@@ -368,16 +437,24 @@ class SupportSampler:
         rng: np.random.Generator,
     ) -> np.ndarray:
         if self.independent_dimensions:
-            columns = []
-            for _ in range(self.n_variables):
-                samples = support_prior(size=(n_support, 1), rng=rng)
-                column = np.asarray(samples, dtype=np.float64).reshape(n_support)
-                columns.append(column)
-            support = np.stack(columns, axis=1)
+            fast_path = _independent_columns_fast_path(support_prior)
+            if fast_path == "sampler":
+                base = support_prior(size=(n_support, self.n_variables), rng=rng, per_column_params=True)
+                support = np.asarray(base, dtype=np.float64).reshape(n_support, self.n_variables)
+            elif fast_path == "iid":
+                base = support_prior(size=(n_support, self.n_variables), rng=rng)
+                support = np.asarray(base, dtype=np.float64).reshape(n_support, self.n_variables)
+            else:
+                columns = []
+                for _ in range(self.n_variables):
+                    samples = support_prior(size=(n_support, 1), rng=rng)
+                    column = np.asarray(samples, dtype=np.float64).reshape(n_support)
+                    columns.append(column)
+                support = np.stack(columns, axis=1)
         else:
             base = support_prior(size=(n_support, self.n_variables), rng=rng)
             support = np.asarray(base, dtype=np.float64).reshape(n_support, self.n_variables)
-        return support.astype(np.float32)
+        return support.astype(STORAGE_DTYPE)
 
     def _initialize_transforms(self, transforms_cfg: Any) -> None:
         if not isinstance(transforms_cfg, list):

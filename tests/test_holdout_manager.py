@@ -103,3 +103,60 @@ def test_hash_layer_matches_renamed_and_literal_skeletons():
     manager.skeleton_hashes.add(tuple(manager._normalize_tokens(["+", "x1", "3.5"])))
     assert tuple(manager._normalize_tokens(["+", "v1", "<constant>"])) in manager.skeleton_hashes
     assert tuple(manager._normalize_tokens(["+", "x1", "2.7"])) in manager.skeleton_hashes
+
+
+def test_unevaluable_candidate_keys_to_the_sentinel_and_never_matches():
+    """A lambdify-folded arbitrary-precision int makes numpy ufuncs raise TypeError
+    (np.exp(bigint) killed a streaming worker live, 2026-08-24). The evaluation keys
+    such a candidate to a sentinel instead of propagating -- it can only over-reject,
+    never crash the producer."""
+    import numpy as np
+    from symbolic_data._generate.holdout import HoldoutManager
+
+    manager = HoldoutManager.__new__(HoldoutManager)
+    manager.holdout_X = np.linspace(-1, 1, 8).reshape(-1, 1)
+    manager.holdout_C = np.ones(4)
+    manager.extra_grids = ()
+    manager.extra_constant_fills = np.ones((0, 4))
+    manager.n_variables = 1
+
+    def bigint_exp(x):
+        return np.exp(10 ** 400)
+
+    keys = manager._evaluate_to_keys(bigint_exp, num_constants=0, n_variables=1)
+    assert keys == {(0, "__unevaluable__")}
+
+    def fine(x):
+        return x + 1.0
+
+    # the sentinel matches ONLY other unevaluable images, never a real one
+    assert manager._evaluate_to_keys(fine, num_constants=0, n_variables=1).isdisjoint(keys)
+
+
+def test_safe_f_returns_nan_on_ufunc_refusal():
+    """The single choke point: every evaluation path flows through safe_f, and a
+    bigint the ufunc refuses becomes an all-NaN vector (the universal reject
+    signal), never an exception (np.sinh(bigint) killed a T16 worker through the
+    data sampler after the holdout-only guard, 2026-08-24)."""
+    import numpy as np
+    from symbolic_data.compilation import safe_f
+
+    X = np.linspace(-1, 1, 8).reshape(-1, 1)
+    y = safe_f(lambda x: np.sinh(3 ** 500), X)
+    assert y.shape == (8,) and np.isnan(y).all()
+    y = safe_f(lambda x: np.exp(10 ** 400), X)
+    assert np.isnan(y).all()
+    y = safe_f(lambda x: x + 1.0, X)
+    assert np.allclose(y, X.ravel() + 1.0)
+
+
+def test_direct_expression_calls_survive_ufunc_refusal():
+    """The box search and data evaluation call the lambdified function DIRECTLY --
+    not through safe_f -- and killed workers three times on 2026-08-24 (exp, sinh,
+    cosh of lambdify-folded bigints). The direct-call guard returns NaN there."""
+    import numpy as np
+    from symbolic_data.generative import _call_expression
+
+    assert np.isnan(_call_expression(lambda x: np.cosh(3 ** 500), np.ones(4)))
+    out = _call_expression(lambda x: x * 2.0, np.ones(4))
+    assert np.allclose(out, 2.0)

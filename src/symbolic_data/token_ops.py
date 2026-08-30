@@ -1,8 +1,62 @@
 """Token-level helpers for manipulating prefix expressions."""
 import re
-from typing import Any
+from typing import Any, Sequence
 
 import numpy as np
+from simplipy import SimpliPyEngine, normalize_variable_token
+from simplipy.utils import is_numeric_string
+
+
+def normalize_expression(tokens: Sequence[str | Any] | None) -> list[str] | None:
+    """Canonical variable names, everything else verbatim -- a positional token walk.
+
+    Until simplipy 0.13 this lived in simplipy as ``normalize_expression``; 0.14
+    replaced that surface with ``to_expression``, which canonicalises through the
+    engine's AC state (constants fold, an engine is required). This site's subject is
+    the CONCRETE ground truth -- the recorded expression and its literal values must
+    stay exactly as parsed -- so the positional walk moves here, to the consumer,
+    built on the two per-token primitives simplipy keeps (``normalize_variable_token``,
+    ``is_numeric_string``).
+    """
+    if tokens is None:
+        return None
+    normalized: list[str] = []
+    for token in tokens:
+        token_str = str(token)
+        normalized_token, is_var = normalize_variable_token(token_str)
+        normalized.append(normalized_token if is_var else token_str)
+    return normalized
+
+
+def normalize_skeleton(tokens: Sequence[str | Any] | None) -> list[str] | None:
+    """The positional skeleton key: variables canonicalised, numerics masked.
+
+    The decontamination / holdout matching key (same 0.14 provenance as
+    ``normalize_expression`` above). simplipy's ``to_skeleton`` is NOT this: it
+    re-runs the engine, so its skeleton depends on the loaded rule artifact --
+    the wrong property for an exclusion key that must be stable across engine
+    versions. Numerics are classified by the normative token grammar
+    (``is_numeric_string``), never a bare ``float()`` probe: the reserved
+    spellings (``inf``/``nan``/underscore groupings) pass through verbatim and can
+    never compare equal to a genuinely numeric site.
+    """
+    if tokens is None:
+        return None
+    normalized: list[str] = []
+    for token in tokens:
+        token_str = str(token)
+        normalized_token, is_var = normalize_variable_token(token_str)
+        if is_var:
+            normalized.append(normalized_token)
+            continue
+        if token_str in {"<constant>", "<c>"}:
+            normalized.append("<constant>")
+            continue
+        if is_numeric_string(token_str):
+            normalized.append("<constant>")
+            continue
+        normalized.append(token_str)
+    return normalized
 
 
 def substitute_constants(
@@ -101,3 +155,19 @@ def desugar_sqrt(tokens: list[str], operator_arity: dict[str, int]) -> list[str]
     if end != len(tokens):
         raise ValueError(f"sqrt desugaring consumed {end} of {len(tokens)} tokens")
     return out
+
+
+def tagged_canonical(engine: SimpliPyEngine, expression: Sequence[str]) -> list[str]:
+    """The engine's canonical form of a concrete ``expression``, in the TAGGED dialect.
+
+    This is ``simplify`` OPERATING IN the tagged dialect (dialect-preserving in
+    simplipy >= 0.14), NOT a spelling conversion of the prefix-dialect canonical form.
+    The two are different normal forms: measured over the curated catalogs
+    (2026-08-22), 796 of 3,628 expressions canonicalize differently between the
+    dialects -- exact-rational literal spellings (``1.4`` becomes ``<mul> 7 <div> 5
+    </mul>``), negative exponents absorbed into ``pow`` instead of an ``inv`` wrapper,
+    negation distributed into bag sections. The v24 target contract (A3) names the
+    tagged canonical, so the consumer must simplify IN the tagged dialect; converting
+    the prefix canonical yields a different (equal-valued, differently-spelled) form.
+    """
+    return list(engine.simplify(engine.to_tagged(list(expression))))

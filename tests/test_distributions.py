@@ -141,3 +141,43 @@ if __name__ == "__main__":
     GOLDEN_PATH.parent.mkdir(parents=True, exist_ok=True)
     np.savez(GOLDEN_PATH, **arrays)
     print(f"wrote {len(arrays)} golden arrays -> {GOLDEN_PATH}")
+
+
+class TestIidMixturePrior:
+    """A mixture prior resolves per VALUE, so one call of size n == n calls of size 1."""
+
+    CONFIG = [
+        {"weight": 0.5, "name": "constant", "kwargs": {"value": -100.0}},
+        {"weight": 0.5, "name": "constant", "kwargs": {"value": 100.0}},
+    ]
+
+    def test_one_call_mixes_components(self) -> None:
+        from symbolic_data.prior_factory import build_iid_prior_callable, build_prior_callable
+
+        rng = np.random.default_rng(0)
+        # The per-call builder resolves one component for the whole draw, so every value
+        # of a single call is identical; the per-value builder mixes within the call.
+        per_call = {len(set(build_prior_callable(self.CONFIG)(size=64, rng=rng)))
+                    for _ in range(20)}
+        assert per_call == {1}
+
+        iid = build_iid_prior_callable(self.CONFIG)
+        assert any(len(set(iid(size=64, rng=rng))) == 2 for _ in range(20))
+
+    def test_marginal_matches_single_draws(self) -> None:
+        from symbolic_data.prior_factory import build_iid_prior_callable
+
+        iid = build_iid_prior_callable(self.CONFIG)
+        blocked = np.asarray(iid(size=20000, rng=np.random.default_rng(1)))
+        singles = np.array([float(np.atleast_1d(iid(size=1, rng=np.random.default_rng(2 + i)))[0])
+                            for i in range(2000)])
+        assert abs((blocked > 0).mean() - 0.5) < 0.02
+        assert abs((singles > 0).mean() - (blocked > 0).mean()) < 0.05
+
+    def test_a_single_dict_config_is_unchanged(self) -> None:
+        from symbolic_data.prior_factory import build_iid_prior_callable, build_prior_callable
+
+        config = {"name": "constant", "kwargs": {"value": 7.0}}
+        rng_a, rng_b = np.random.default_rng(3), np.random.default_rng(3)
+        assert list(build_iid_prior_callable(config)(size=5, rng=rng_a)) == \
+            list(build_prior_callable(config)(size=5, rng=rng_b))
