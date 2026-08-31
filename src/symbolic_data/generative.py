@@ -24,7 +24,7 @@ import numpy as np
 
 from symbolic_data.numeric import STORAGE_DTYPE
 
-from simplipy import SimpliPyEngine
+from simplipy import DEFAULT_EFFORT as simplipy_DEFAULT_EFFORT, SimpliPyEngine
 
 from symbolic_data.token_ops import normalize_expression, normalize_skeleton
 from simplipy.utils import explicit_constant_placeholders, substitute_constants
@@ -509,8 +509,17 @@ class LampleChartonCatalog(GenerativeCatalog):
         '''
         return tuple(skeleton) in self.skeletons
 
+    @property
+    def _skeleton_is_holdout_canonical(self) -> bool:
+        """True iff the generate path's target canonicalization IS the holdout fold's
+        opening call: same mode, and the site's defaulted effort equals HOLDOUT_EFFORT.
+        Exactly then may the fold skip its (idempotent, hence no-op) first pass."""
+        return (self.simplify is True
+                and str(self.simplify_mode) == HOLDOUT_SIMPLIFY_MODE
+                and simplipy_DEFAULT_EFFORT == HOLDOUT_EFFORT)
+
     def is_held_out(self, skeleton: tuple[str] | list[str], constants: list[str], code: CodeType | None = None,
-                    n_variables: int | None = None) -> bool:
+                    n_variables: int | None = None, assume_canonical: bool = False) -> bool:
         '''
         Check if a skeleton is held out from the pool.
 
@@ -527,6 +536,12 @@ class LampleChartonCatalog(GenerativeCatalog):
             ``n_variables``. Pass the source pool's value for foreign/benchmark skeletons
             (mirrors ``register_holdout_pool``); otherwise wider skeletons NameError into the
             blanket except and are falsely reported held out.
+        assume_canonical : bool, optional
+            Caller's proof that ``skeleton`` is already at the holdout canon's fixpoint
+            (``HOLDOUT_SIMPLIFY_MODE`` at ``HOLDOUT_EFFORT``), letting the family fold skip
+            its opening canonicalization -- which is the identity there, by idempotence, so
+            the family KEY is unchanged. Only the generate path may set this (it just ran
+            that exact call); registration and foreign probes must leave it False.
 
         Returns
         -------
@@ -537,7 +552,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             raise ValueError("Need constants for test of functional equivalence")
 
         variable_count = n_variables if n_variables is not None else self.n_variables
-        no_constant_expression = self.holdout_family_prototype(skeleton)
+        no_constant_expression = self.holdout_family_prototype(skeleton, assume_canonical=assume_canonical)
         if no_constant_expression is None:
             return True    # cannot canonicalize -> fail closed (ruled doctrine)
 
@@ -597,7 +612,8 @@ class LampleChartonCatalog(GenerativeCatalog):
         """The fixed constant values substituted when evaluating held-out expressions to images."""
         return self.holdout_manager.holdout_C
 
-    def holdout_family_prototype(self, tokens: list[str] | tuple[str, ...]) -> list[str] | None:
+    def holdout_family_prototype(self, tokens: list[str] | tuple[str, ...],
+                                 assume_canonical: bool = False) -> list[str] | None:
         """THE holdout family key -- registration and probing both call exactly this
         function, so a fold-order asymmetry between the two sides (audit L2) cannot
         exist by construction. The quotient is deliberately aggressive, per the ruled
@@ -643,8 +659,16 @@ class LampleChartonCatalog(GenerativeCatalog):
             except Exception:
                 return current
 
+        # assume_canonical: the caller proves `tokens` is already the fixpoint of exactly
+        # the call below (HOLDOUT_SIMPLIFY_MODE at HOLDOUT_EFFORT) -- on the generate path
+        # the target canonicalization at the sampling site IS that call, run moments
+        # earlier. simplify is idempotent, so skipping the re-run cannot change the key;
+        # it removes ~21% of generation wall time (measured 2026-08-31, task #92 S1).
         try:
-            canonical = normalize_skeleton(_canonicalize(list(tokens)))
+            if assume_canonical:
+                canonical = normalize_skeleton(list(tokens))
+            else:
+                canonical = normalize_skeleton(_canonicalize(list(tokens)))
         except Exception:
             return None    # unreadable token stream -> probe side fails closed
         if canonical is None:
@@ -1104,7 +1128,9 @@ class LampleChartonCatalog(GenerativeCatalog):
                         raise NoValidSampleFoundError(f"Malformed prefix expression after simplification: {skeleton}")
                     code = codify(code_string, self.variables + constants)
 
-                    if not decontaminate or not self.is_held_out(skeleton, constants):
+                    if not decontaminate or not self.is_held_out(
+                            skeleton, constants,
+                            assume_canonical=self._skeleton_is_holdout_canonical):
                         return tuple(skeleton), code, constants   # type: ignore
         else:
             # Resample the existing (fixed / append-only) skeleton set. Cache the indexable tuple and
