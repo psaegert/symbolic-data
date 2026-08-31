@@ -5,6 +5,23 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.16.2] - 2026-08-31
+
+### Changed
+- **The holdout fold skips its opening canonicalization when it is provably the identity.**
+  On the generate path the target canonicalization at the sampling site is byte-for-byte the
+  call the fold opens with (same mode, effort, max_passes), applied moments earlier -- and
+  `simplify` is idempotent, so the fold's first pass re-derived its own input.
+  `is_held_out`/`holdout_family_prototype` gain an opt-in `assume_canonical` flag that only
+  the generate call site sets, and only when `simplify_mode` equals the holdout canon;
+  registration and foreign probes are untouched, so the family key cannot drift by
+  construction (golden test: same seed -> identical skeletons, constants and prototypes).
+  Measured on 300 real v25.0-T3 draws: **18.52 -> 25.82 problems/s (+39%)**.
+- **`tagged_canonical` takes the consumer's target canon** (`mode=`, owner ruling
+  2026-08-31): a corpus whose prefix targets are permissive-canonical is
+  permissive-canonical in the tagged dialect too. `None` (default) keeps the engine-default
+  call byte-identical, so nothing changes without the consumer asking.
+
 ## [0.16.1] - 2026-08-30
 
 ### Added

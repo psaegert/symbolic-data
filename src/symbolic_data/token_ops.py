@@ -157,7 +157,8 @@ def desugar_sqrt(tokens: list[str], operator_arity: dict[str, int]) -> list[str]
     return out
 
 
-def tagged_canonical(engine: SimpliPyEngine, expression: Sequence[str]) -> list[str]:
+def tagged_canonical(engine: SimpliPyEngine, expression: Sequence[str],
+                     mode: str | None = None) -> list[str]:
     """The engine's canonical form of a concrete ``expression``, in the TAGGED dialect.
 
     This is ``simplify`` OPERATING IN the tagged dialect (dialect-preserving in
@@ -169,5 +170,12 @@ def tagged_canonical(engine: SimpliPyEngine, expression: Sequence[str]) -> list[
     negation distributed into bag sections. The v24 target contract (A3) names the
     tagged canonical, so the consumer must simplify IN the tagged dialect; converting
     the prefix canonical yields a different (equal-valued, differently-spelled) form.
+
+    ``mode`` is the consumer's target-canon choice (owner ruling 2026-08-31: the tagged
+    canonicalization follows the SAME configured canon as the prefix target -- a corpus
+    whose targets are permissive-canonical is permissive-canonical in the tagged dialect
+    too). ``None`` keeps the engine's default mode, byte-identical to the historical call.
     """
-    return list(engine.simplify(engine.to_tagged(list(expression))))
+    if mode is None:
+        return list(engine.simplify(engine.to_tagged(list(expression))))
+    return list(engine.simplify(engine.to_tagged(list(expression)), mode=mode))
