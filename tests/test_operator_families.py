@@ -15,8 +15,9 @@ EXPLOG = {"exp", "log"}
 POW = {"pow", "rootn"}
 ARITH = {"+", "-", "*", "/"}
 
+STRUCT = {"abs", "inv", "neg"}   # the catalog's structural unaries ride in the base family
 FAMILIES = [
-    {"name": "arith", "p": 1.0, "operators": sorted(ARITH)},
+    {"name": "arith", "p": 1.0, "operators": sorted(ARITH | STRUCT)},
     {"name": "pow", "p": 0.30, "operators": sorted(POW)},
     {"name": "trig", "p": 0.20, "operators": sorted(TRIG)},
     {"name": "explog", "p": 0.20, "operators": sorted(EXPLOG)},
@@ -50,7 +51,7 @@ def test_families_restrict_operators_to_the_drawn_subset(engine, cfg):
     for _ in range(300):
         ops = _ops(engine, s.sample(6, rng))
         # every operator belongs to a family, and arithmetic is always allowed
-        assert ops <= ARITH | POW | TRIG | EXPLOG | HYP, ops
+        assert ops <= ARITH | STRUCT | POW | TRIG | EXPLOG | HYP, ops
 
 
 def test_coin_rates_match_p(engine, cfg):
@@ -76,20 +77,26 @@ def test_coin_rates_match_p(engine, cfg):
 
 def test_present_family_carries_the_base_mass_uniformly(engine, cfg):
     s = make_sampler(engine, cfg, families=FAMILIES)
-    base_mass = sum(cfg["operator_weights"][op] for op in ARITH)
+    base_mass = sum(cfg["operator_weights"][op] for op in ARITH | STRUCT)
     profile = s._family_profile((0, 2))   # arith + trig
     unary = dict(zip(profile["unary_operators"], profile["unary_probs"]))
-    assert set(unary) == TRIG
-    assert all(abs(p - 1 / len(TRIG)) < 1e-12 for p in unary.values())
-    # equal mass -> the legacy (1, 1) unary/binary multiplicities
-    assert abs(profile["n_unary"] - 1.0) < 1e-12 and abs(profile["n_binary"] - 1.0) < 1e-12
+    assert TRIG <= set(unary) <= TRIG | STRUCT
+    trig_share = sum(v for k, v in unary.items() if k in TRIG)
+    # the trig family carries the whole base mass, split uniformly over its six members
+    assert all(abs(unary[k] - trig_share / len(TRIG)) < 1e-12 for k in TRIG)
     assert s._families[2]["mass"] == base_mass
 
 
-def test_base_only_subset_is_binary_only(engine, cfg):
+def test_base_only_subset_draws_only_base_operators(engine, cfg):
     s = make_sampler(engine, cfg, families=FAMILIES)
     profile = s._family_profile((0,))
-    assert profile["unary_operators"] == [] and profile["n_unary"] == 0.0
+    assert set(profile["unary_operators"]) <= STRUCT and set(profile["binary_operators"]) == ARITH
+
+
+def test_every_weighted_operator_needs_a_family(engine, cfg):
+    # Dropping an operator by omission is an error, not a silent prior change.
+    with pytest.raises(ValueError, match="belong to no family"):
+        make_sampler(engine, cfg, families=[{"p": 1.0, "operators": sorted(ARITH)}])
 
 
 def test_family_profiles_are_cached_per_subset(engine, cfg):

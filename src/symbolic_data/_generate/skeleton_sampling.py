@@ -233,6 +233,12 @@ class SkeletonSampler:
         base_mass = float(sum(self.operator_weights.get(op, 0) for f in base for op in f['operators']))
         if base_mass <= 0:
             raise ValueError('operator_families: the base families carry zero operator_weight')
+        # No operator is dropped by omission (owner ruling 2026-09-02): every operator the
+        # catalog weights above zero must belong to some family, or it would never be drawn.
+        covered = {op for f in out for op in f['operators']}
+        uncovered = sorted(op for op, w in self.operator_weights.items() if w > 0 and op in known and op not in covered)
+        if uncovered:
+            raise ValueError(f'operator_families: operators with positive operator_weight belong to no family: {uncovered}')
         for f in out:
             f['mass'] = base_mass
         return out

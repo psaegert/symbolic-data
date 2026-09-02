@@ -29,7 +29,8 @@ All notable changes to `symbolic-data` are documented here. The format follows
   fixed per expression whatever its length. Owner ruling 2026-09-02: priors follow elegant,
   accurate ideas and are only minimally shaped by the benchmark distribution -- the coins
   (pow/root 0.30, trig 0.20, exp/log 0.20, hyperbolic 0.10 in v25.0-T6) are heuristic and
-  rounded to 5%. Absent = legacy (no RNG consumed).
+  rounded to 5%. Every operator the catalog weights above zero must belong to a family (an
+  omission is an error, never a silent drop). Absent = legacy (no RNG consumed).
 
 ### Changed
 
