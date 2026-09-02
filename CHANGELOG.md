@@ -21,6 +21,23 @@ All notable changes to `symbolic-data` are documented here. The format follows
   of distinct leaf symbols, truncated to `[1, min(leaves, n_variables)]`. The legacy draw is
   uniform up to the leaf count, so long expressions use most available variables (T4 prior: 49%
   of delivered skeletons use 6+ distinct variables vs 12% of the benchmark laws). Absent = legacy.
+- **`operator_families`** (optional catalog key, mutually exclusive with `operator_profiles`):
+  per-expression operator families with one independent coin each --
+  `{name?, p, operators}`, where `p = 1` marks the always-present base (arithmetic). Every
+  present family carries the same total weight as the base, uniform within the family, so the
+  unary/binary balance is derived rather than tuned; the number of families in an expression is
+  fixed per expression whatever its length. Owner ruling 2026-09-02: priors follow elegant,
+  accurate ideas and are only minimally shaped by the benchmark distribution -- the coins
+  (pow/root 0.30, trig 0.20, exp/log 0.20, hyperbolic 0.10 in v25.0-T6) are heuristic and
+  rounded to 5%. Absent = legacy (no RNG consumed).
+
+### Changed
+
+- **Cancellation artefacts are rejected.** A drawn skeleton whose simplification removes every
+  variable it was sampled with (`x - x`, `x / x`) is resampled instead of delivered. Measured on
+  the T6 prior: 5% of simplified skeletons, delivered as constant functions (mostly the bare `0`)
+  on 2.7% of training instances. A skeleton drawn without variables (the constant slot alone)
+  is a deliberate constant law and still passes.
 
 ## [0.16.2] - 2026-08-31
 

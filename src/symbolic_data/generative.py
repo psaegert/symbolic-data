@@ -196,6 +196,10 @@ class LampleChartonCatalog(GenerativeCatalog):
         Per-operator constrained argument slots (``pow`` exponent, ``rootn`` index): the
         named argument is filled by a literal drawn from the slot's ``prior`` rather than
         by a general subtree. See :class:`SkeletonSampler`.
+    operator_families : list of dict, optional
+        Per-expression operator families, one independent coin each
+        (``{name, p, operators}``; ``p = 1`` is the always-present base). Mutually
+        exclusive with ``operator_profiles``. See :class:`SkeletonSampler`.
 
     Notes
     -----
@@ -218,6 +222,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_weights: dict[str, float] | None = None,
             operator_profiles: list[dict[str, Any]] | None = None,
             n_unique_variables_prior: dict[str, Any] | list[dict[str, Any]] | None = None,
+            operator_families: list[dict[str, Any]] | None = None,
             typed_slots: dict[str, Any] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
@@ -231,9 +236,11 @@ class LampleChartonCatalog(GenerativeCatalog):
         self.sample_strategy = sample_strategy
         self.variables = variables
         self.n_variables = len(self.variables)
+        self._variable_set = set(self.variables)
         self.operator_weights = operator_weights or {op: 1.0 for op in self.simplipy_engine.operator_arity.keys()}
         self.operator_profiles = operator_profiles
         self.n_unique_variables_prior = n_unique_variables_prior
+        self.operator_families = operator_families
         # Constrained argument slots (``pow`` exponent, ``rootn`` index). The retired
         # hyper-operator vocabulary carried this constraint in the vocabulary itself;
         # on the 23-operator vocabulary it has to live here or the tree sampler fills
@@ -257,6 +264,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_weights=self.operator_weights,
             operator_profiles=self.operator_profiles,
             n_unique_variables_prior=self.n_unique_variables_prior,
+            operator_families=self.operator_families,
             literal_prior=literal_prior,
             typed_slots=self.typed_slots,
         )
@@ -359,6 +367,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_weights=config_.get("operator_weights"),
             operator_profiles=config_.get("operator_profiles"),
             n_unique_variables_prior=config_.get("n_unique_variables_prior"),
+            operator_families=config_.get("operator_families"),
             typed_slots=config_.get("typed_slots"),
             holdout_pools=config_.get("holdout_pools", []),
             allow_nan=config_.get("allow_nan", False),
@@ -391,6 +400,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_weights: dict[str, float] | None = None,
             operator_profiles: list[dict[str, Any]] | None = None,
             n_unique_variables_prior: dict[str, Any] | list[dict[str, Any]] | None = None,
+            operator_families: list[dict[str, Any]] | None = None,
             typed_slots: dict[str, Any] | None = None,
             skeleton_codes: dict[tuple[str], tuple[CodeType, list[str]]] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
@@ -449,6 +459,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_weights=operator_weights,
             operator_profiles=operator_profiles,
             n_unique_variables_prior=n_unique_variables_prior,
+            operator_families=operator_families,
             typed_slots=typed_slots,
             holdout_pools=holdout_pools,
             allow_nan=allow_nan,
@@ -1097,6 +1108,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                         raise ValueError(f"Invalid n_operator_distribution: {self.sample_strategy['n_operator_distribution']}")
 
                 skeleton = self.skeleton_sampler.sample(n_operators, rng)
+                had_variable = any(token in self._variable_set for token in skeleton)
                 if self.simplify is True:
                     try:
                         # simplipy >= 0.14 simplify is dialect-preserving: the sampled
@@ -1117,6 +1129,13 @@ class LampleChartonCatalog(GenerativeCatalog):
 
                     if any(forbidden_token in skeleton for forbidden_token in ['float("inf")', 'float("-inf")', 'float("nan")']):
                         raise NoValidSampleFoundError(f"Skeleton contains forbidden tokens: {skeleton}")
+                    # A cancellation artefact (`x - x`, `x / x`): simplification removed every
+                    # variable the draw placed. Measured on the T6 prior: 5% of simplified
+                    # skeletons, delivered as constant functions (mostly `0`) on 2.7% of
+                    # training instances. A skeleton drawn WITHOUT variables (the constant
+                    # slot alone) is a deliberate constant law and passes.
+                    if had_variable and not any(token in self._variable_set for token in skeleton):
+                        continue
                 elif self.simplify == 'sympy':
                     try:
                         skeleton = self._sympy_simplify_skeleton(skeleton, rng)
@@ -1562,6 +1581,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_weights=self.operator_weights,
             operator_profiles=self.operator_profiles,
             n_unique_variables_prior=self.n_unique_variables_prior,
+            operator_families=self.operator_families,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
         test_pool = LampleChartonCatalog.from_dict(
@@ -1575,6 +1595,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_weights=self.operator_weights,
             operator_profiles=self.operator_profiles,
             n_unique_variables_prior=self.n_unique_variables_prior,
+            operator_families=self.operator_families,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
 
