@@ -95,6 +95,7 @@ class SkeletonSampler:
         n_unique_variables_prior: Callable[..., Any] | dict[str, Any] | list[dict[str, Any]] | None = None,
         operator_families: list[dict[str, Any]] | None = None,
         operators_per_coin: int | None = None,
+        operator_subset: bool = False,
     ) -> None:
         self.simplipy_engine = simplipy_engine
         self.sample_strategy = sample_strategy
@@ -177,6 +178,22 @@ class SkeletonSampler:
         # Optional: a fresh coin per block of `operators_per_coin` operators, so a longer
         # expression gets more chances to mix families (P(present | n) = 1 - (1-p)^ceil(n/m)).
         self._operators_per_coin = int(operators_per_coin) if operators_per_coin else 0
+        # Per-expression operator SUBSET (owner design 2026-09-02), the operator-side twin of
+        # the variable draw: how many distinct operators the expression uses is uniform up to
+        # its operator count (as the distinct-variable count is uniform up to the leaf count),
+        # which ones is a weighted draw without replacement from the catalog, and every node
+        # then draws from that subset with the catalog weights. Short expressions come out
+        # pure, long ones mix, and no expression collects every class. Exclusive with the
+        # other two modes.
+        if operator_subset and (operator_families or operator_profiles):
+            raise ValueError("operator_subset is exclusive with operator_families / operator_profiles")
+        self._operator_subset = bool(operator_subset)
+        if self._operator_subset:
+            self._subset_ops = [op for op in self.operator_weights if op in simplipy_engine.operator_arity
+                                and float(self.operator_weights[op]) > 0]
+            w = np.array([float(self.operator_weights[op]) for op in self._subset_ops])
+            self._subset_probs = w / w.sum()
+            self._subset_profiles: dict[frozenset, dict[str, Any]] = {}
 
     @staticmethod
     def _resolve_prior(prior: Any) -> Callable[..., Any]:
@@ -410,7 +427,18 @@ class SkeletonSampler:
 
     def sample(self, n_operators: int, rng: np.random.Generator | None = None) -> list[str]:
         rng = rng if rng is not None else np.random.default_rng()
-        if self._families:
+        if self._operator_subset:
+            k = int(rng.integers(1, min(n_operators, len(self._subset_ops)) + 1)) if n_operators > 0 else 1
+            chosen = frozenset(rng.choice(self._subset_ops, size=k, replace=False, p=self._subset_probs).tolist())
+            profile = self._subset_profiles.get(chosen)
+            if profile is None:
+                profile = self._build_profile({'name': '+'.join(sorted(chosen)), 'weight': 1.0,
+                                               'operators': {op: float(self.operator_weights[op]) for op in chosen}},
+                                              self._max_operators, -1)
+                if len(self._subset_profiles) < 4096:
+                    self._subset_profiles[chosen] = profile
+            self._activate_profile(profile)
+        elif self._families:
             # One coin per optional family, in config order (the base families need none).
             flips = max(1, -(-n_operators // self._operators_per_coin)) if self._operators_per_coin else 1
             subset = tuple(i for i, f in enumerate(self._families)

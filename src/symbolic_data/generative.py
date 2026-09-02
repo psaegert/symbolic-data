@@ -224,6 +224,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_unique_variables_prior: dict[str, Any] | list[dict[str, Any]] | None = None,
             operator_families: list[dict[str, Any]] | None = None,
             operators_per_coin: int | None = None,
+            operator_subset: bool = False,
             typed_slots: dict[str, Any] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
@@ -243,6 +244,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         self.n_unique_variables_prior = n_unique_variables_prior
         self.operator_families = operator_families
         self.operators_per_coin = operators_per_coin
+        self.operator_subset = bool(operator_subset)
         # Constrained argument slots (``pow`` exponent, ``rootn`` index). The retired
         # hyper-operator vocabulary carried this constraint in the vocabulary itself;
         # on the 23-operator vocabulary it has to live here or the tree sampler fills
@@ -268,6 +270,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_unique_variables_prior=self.n_unique_variables_prior,
             operator_families=self.operator_families,
             operators_per_coin=self.operators_per_coin,
+            operator_subset=self.operator_subset,
             literal_prior=literal_prior,
             typed_slots=self.typed_slots,
         )
@@ -372,6 +375,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_unique_variables_prior=config_.get("n_unique_variables_prior"),
             operator_families=config_.get("operator_families"),
             operators_per_coin=config_.get("operators_per_coin"),
+            operator_subset=bool(config_.get("operator_subset", False)),
             typed_slots=config_.get("typed_slots"),
             holdout_pools=config_.get("holdout_pools", []),
             allow_nan=config_.get("allow_nan", False),
@@ -406,6 +410,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_unique_variables_prior: dict[str, Any] | list[dict[str, Any]] | None = None,
             operator_families: list[dict[str, Any]] | None = None,
             operators_per_coin: int | None = None,
+            operator_subset: bool = False,
             typed_slots: dict[str, Any] | None = None,
             skeleton_codes: dict[tuple[str], tuple[CodeType, list[str]]] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
@@ -466,6 +471,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_unique_variables_prior=n_unique_variables_prior,
             operator_families=operator_families,
             operators_per_coin=operators_per_coin,
+            operator_subset=operator_subset,
             typed_slots=typed_slots,
             holdout_pools=holdout_pools,
             allow_nan=allow_nan,
@@ -1589,6 +1595,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_unique_variables_prior=self.n_unique_variables_prior,
             operator_families=self.operator_families,
             operators_per_coin=self.operators_per_coin,
+            operator_subset=self.operator_subset,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
         test_pool = LampleChartonCatalog.from_dict(
@@ -1604,6 +1611,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_unique_variables_prior=self.n_unique_variables_prior,
             operator_families=self.operator_families,
             operators_per_coin=self.operators_per_coin,
+            operator_subset=self.operator_subset,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
 

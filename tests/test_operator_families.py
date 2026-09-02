@@ -153,3 +153,23 @@ def test_no_families_consumes_no_rng(engine, cfg):
     a = legacy.sample(5, np.random.default_rng(9))
     b = also.sample(5, np.random.default_rng(9))
     assert a == b
+
+
+def test_operator_subset_draws_only_from_the_drawn_subset(engine, cfg):
+    # The operator-side twin of the variable draw: k distinct operators (k <= n_ops), then every
+    # node draws from that subset -- so a k-operator expression never uses more than k kinds.
+    s = SkeletonSampler(simplipy_engine=engine, sample_strategy=cfg["sample_strategy"], variables=cfg["variables"],
+                        operator_weights=cfg["operator_weights"], literal_prior=cfg["literal_prior"],
+                        typed_slots=cfg["typed_slots"], operator_subset=True)
+    rng = np.random.default_rng(3)
+    for n_ops in (1, 2, 4, 8):
+        for _ in range(100):
+            ops = [t for t in s.sample(n_ops, rng) if t in engine.operator_arity]
+            assert len(ops) == n_ops and len(set(ops)) <= n_ops
+
+
+def test_operator_subset_is_exclusive_with_families(engine, cfg):
+    with pytest.raises(ValueError, match="exclusive"):
+        SkeletonSampler(simplipy_engine=engine, sample_strategy=cfg["sample_strategy"], variables=cfg["variables"],
+                        operator_weights=cfg["operator_weights"], literal_prior=cfg["literal_prior"],
+                        typed_slots=cfg["typed_slots"], operator_families=FAMILIES, operator_subset=True)
