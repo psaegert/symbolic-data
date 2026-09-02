@@ -91,6 +91,9 @@ class SkeletonSampler:
         operator_weights: dict[str, float],
         literal_prior: Callable[..., Any] | dict[str, Any] | list[dict[str, Any]] | None = None,
         typed_slots: dict[str, Any] | None = None,
+        operator_profiles: list[dict[str, Any]] | None = None,
+        n_unique_variables_prior: Callable[..., Any] | dict[str, Any] | list[dict[str, Any]] | None = None,
+        operator_families: list[dict[str, Any]] | None = None,
     ) -> None:
         self.simplipy_engine = simplipy_engine
         self.sample_strategy = sample_strategy
@@ -103,6 +106,14 @@ class SkeletonSampler:
         self._literal_block = (_BlockDraw(build_iid_prior_callable(literal_prior))
                                if isinstance(literal_prior, (dict, list)) else None)
         self.typed_slots = self._validate_typed_slots(typed_slots or {})
+        # Per-expression prior on the number of distinct leaf symbols (variables + the constant
+        # slot). The legacy draw is UNIFORM up to the leaf count, so long expressions use most
+        # of the available variables: measured on the T4 prior, 49% of delivered skeletons use
+        # >= 6 distinct variables (31% use 8+) against 12% (1%) of the benchmark laws. The prior
+        # is drawn per expression and truncated to [1, min(leaves, n_variables)]; `None` keeps
+        # the legacy uniform draw (byte-identical).
+        self.n_unique_variables_prior = (self._resolve_prior(n_unique_variables_prior)
+                                         if n_unique_variables_prior is not None else None)
 
         self._n_leaves = 1
         self._n_unary_operators = 1
@@ -121,6 +132,11 @@ class SkeletonSampler:
 
         self.unary_operators = [name for name in simplipy_engine.operator_arity if _effective_arity(name) == 1]
         self.binary_operators = [name for name in simplipy_engine.operator_arity if _effective_arity(name) == 2]
+        # The full per-arity lists: `_activate_profile` narrows the working lists to the active
+        # subset, so a profile built AFTER an activation (family subsets are built lazily) must
+        # filter against these, not the working ones.
+        self._all_unary_operators = list(self.unary_operators)
+        self._all_binary_operators = list(self.binary_operators)
 
         self.unary_operator_probs = self._build_probability_vector(self.unary_operators)
         self.binary_operator_probs = self._build_probability_vector(self.binary_operators)
@@ -132,6 +148,31 @@ class SkeletonSampler:
             self._n_unary_operators,
             self._n_binary_operators,
         )
+        # Per-EXPRESSION operator profiles (2026-09-02, measured on the T4 prior): the per-node
+        # draw dilutes every expression -- with p_trans ~ 0.23 per draw and unary draws 82%
+        # transcendental, 89% of delivered skeletons contain a transcendental and 0.9% are
+        # single-class, against 45% / 19% for the benchmark laws. A profile is drawn ONCE per
+        # expression; nodes then sample from the profile's operator subset, and the
+        # unary/binary tree recursion runs on the profile's WEIGHT MASS per arity class
+        # instead of the legacy fixed (1, 1) multiplicities, so a profile without unary
+        # operators grows binary-only trees. `None` is the legacy sampler, byte-identical
+        # (no profile draw consumes RNG).
+        self._profiles = self._build_profiles(operator_profiles, max_operators)
+        self._profile_probs = (np.array([p['weight'] for p in self._profiles], dtype=np.float64)
+                               / sum(p['weight'] for p in self._profiles)) if self._profiles else None
+        self._active_profile: dict[str, Any] | None = None
+        # Per-EXPRESSION operator FAMILIES (owner ruling 2026-09-02): one independent coin per
+        # family decides whether the family is available in this expression; a family with
+        # p = 1 is always present (the arithmetic base). Every present family carries the same
+        # total weight as the base, uniform within the family, so the arity balance is derived,
+        # not tuned. The number of families is fixed per expression regardless of length --
+        # the per-node draw let every long expression collect every class. Mutually exclusive
+        # with `operator_profiles`; `None` is the legacy sampler (no RNG consumed).
+        if operator_families and operator_profiles:
+            raise ValueError("operator_families and operator_profiles are mutually exclusive")
+        self._families = self._validate_families(operator_families)
+        self._family_profiles: dict[tuple[int, ...], dict[str, Any]] = {}
+        self._max_operators = max_operators
 
     @staticmethod
     def _resolve_prior(prior: Any) -> Callable[..., Any]:
@@ -166,6 +207,113 @@ class SkeletonSampler:
                 "block": (_BlockDraw(build_iid_prior_callable(slot_prior))
                           if isinstance(slot_prior, (dict, list)) else None)}
         return resolved
+
+    def _build_profiles(self, specs: list[dict[str, Any]] | None, max_operators: int) -> list[dict[str, Any]]:
+        if not specs:
+            return []
+        return [self._build_profile(spec, max_operators, i) for i, spec in enumerate(specs)]
+
+    def _validate_families(self, specs: list[dict[str, Any]] | None) -> list[dict[str, Any]]:
+        if not specs:
+            return []
+        known = set(self.simplipy_engine.operator_arity)
+        out: list[dict[str, Any]] = []
+        for i, spec in enumerate(specs):
+            ops = list(spec.get('operators') or [])
+            p = float(spec.get('p', 1.0))
+            unknown = [op for op in ops if op not in known]
+            if unknown:
+                raise ValueError(f'operator_families[{i}]: unknown operators {unknown}')
+            if not ops or not 0.0 < p <= 1.0:
+                raise ValueError(f'operator_families[{i}]: needs a non-empty operators list and 0 < p <= 1')
+            out.append({'name': spec.get('name', '+'.join(ops)), 'p': p, 'operators': ops})
+        base = [f for f in out if f['p'] >= 1.0]
+        if not base:
+            raise ValueError('operator_families: at least one family needs p = 1 (the always-present base)')
+        base_mass = float(sum(self.operator_weights.get(op, 0) for f in base for op in f['operators']))
+        if base_mass <= 0:
+            raise ValueError('operator_families: the base families carry zero operator_weight')
+        # No operator is dropped by omission (owner ruling 2026-09-02): every operator the
+        # catalog weights above zero must belong to some family, or it would never be drawn.
+        covered = {op for f in out for op in f['operators']}
+        uncovered = sorted(op for op, w in self.operator_weights.items() if w > 0 and op in known and op not in covered)
+        if uncovered:
+            raise ValueError(f'operator_families: operators with positive operator_weight belong to no family: {uncovered}')
+        for f in out:
+            f['mass'] = base_mass
+        return out
+
+    def _family_profile(self, subset: tuple[int, ...]) -> dict[str, Any]:
+        """The profile for a drawn family subset (built once per subset, then cached)."""
+        profile = self._family_profiles.get(subset)
+        if profile is None:
+            wt: dict[str, float] = {}
+            names: list[str] = []
+            for i in subset:
+                f = self._families[i]
+                names.append(f['name'])
+                if f['p'] >= 1.0:
+                    for op in f['operators']:
+                        wt[op] = float(self.operator_weights.get(op, 0))
+                else:
+                    share = f['mass'] / len(f['operators'])
+                    for op in f['operators']:
+                        wt[op] = share
+            profile = self._build_profile({'name': '+'.join(names), 'weight': 1.0, 'operators': wt},
+                                          self._max_operators, -1)
+            self._family_profiles[subset] = profile
+        return profile
+
+    def _build_profile(self, spec: dict[str, Any], max_operators: int, i: int) -> dict[str, Any]:
+        """One profile: operator subset, per-arity draw probabilities and the ubi table built on
+        the subset's weight mass. `operators` is a list (catalog weights apply) or a
+        {op: weight} mapping (profile-local weights -- a 'trig' profile with sin/cos at the
+        catalog's unary weight 1 next to binaries at 10 would otherwise almost never place a
+        unary node)."""
+        known = set(self.simplipy_engine.operator_arity)
+        raw_ops = spec.get('operators') or []
+        local = dict(raw_ops) if isinstance(raw_ops, dict) else {}
+        ops = list(local) if local else list(raw_ops)
+        weight = float(spec.get('weight', 1.0))
+        unknown = [op for op in ops if op not in known]
+        if unknown:
+            raise ValueError(f'operator_profiles[{i}]: unknown operators {unknown}')
+        if not ops or weight <= 0:
+            raise ValueError(f'operator_profiles[{i}]: needs a non-empty operators list and weight > 0')
+        unary = [op for op in self._all_unary_operators if op in ops]
+        binary = [op for op in self._all_binary_operators if op in ops]
+        wt = {op: float(local.get(op, self.operator_weights.get(op, 0))) for op in ops}
+        u = float(sum(wt[op] for op in unary))
+        b = float(sum(wt[op] for op in binary))
+        if u + b <= 0:
+            raise ValueError(f'operator_profiles[{i}]: every listed operator has zero operator_weight')
+        # Mass-weighted arity multiplicities, scaled to the legacy total (1 + 1 = 2).
+        n_unary, n_binary = 2.0 * u / (u + b), 2.0 * b / (u + b)
+        return {
+            'name': spec.get('name', '+'.join(ops)), 'weight': weight,
+            'unary_operators': unary, 'binary_operators': binary,
+            'unary_probs': self._probs_from(unary, wt), 'binary_probs': self._probs_from(binary, wt),
+            'n_unary': n_unary, 'n_binary': n_binary,
+            'ubi': generate_ubi_dist(max_operators, self._n_leaves, n_unary, n_binary),
+        }
+
+    @staticmethod
+    def _probs_from(operators: Sequence[str], weights: dict[str, float]) -> np.ndarray:
+        if not operators:
+            return np.zeros(0)
+        p = np.array([weights[op] for op in operators], dtype=np.float64)
+        return p / p.sum()
+
+    def _activate_profile(self, profile: dict[str, Any]) -> None:
+        """Point the node-level draws at ``profile`` (legacy mode never calls this)."""
+        self._active_profile = profile
+        self.unary_operators = profile['unary_operators']
+        self.binary_operators = profile['binary_operators']
+        self.unary_operator_probs = profile['unary_probs']
+        self.binary_operator_probs = profile['binary_probs']
+        self._n_unary_operators = profile['n_unary']
+        self._n_binary_operators = profile['n_binary']
+        self.unary_binary_distribution = profile['ubi']
 
     def _build_probability_vector(self, operators: Sequence[str]) -> np.ndarray:
         probs = np.array([self.operator_weights.get(op, 0) for op in operators], dtype=np.float64)
@@ -232,7 +380,12 @@ class SkeletonSampler:
         return position, arity
 
     def _get_leaves(self, t_leaves: int, rng: np.random.Generator) -> list[str]:
-        n_unique_variables = rng.integers(1, min(t_leaves, self.n_variables) + 1)
+        cap = min(t_leaves, self.n_variables)
+        if self.n_unique_variables_prior is None:
+            n_unique_variables = rng.integers(1, cap + 1)
+        else:
+            drawn = float(np.atleast_1d(self.n_unique_variables_prior(size=1, rng=rng))[0])
+            n_unique_variables = int(min(cap, max(1, round(drawn))))
         unique_variables = rng.choice(self.variables + [_CONSTANT_SLOT], n_unique_variables, replace=False)
 
         guaranteed_part = unique_variables.copy()
@@ -245,6 +398,13 @@ class SkeletonSampler:
 
     def sample(self, n_operators: int, rng: np.random.Generator | None = None) -> list[str]:
         rng = rng if rng is not None else np.random.default_rng()
+        if self._families:
+            # One coin per optional family, in config order (the base families need none).
+            subset = tuple(i for i, f in enumerate(self._families)
+                           if f['p'] >= 1.0 or rng.random() < f['p'])
+            self._activate_profile(self._family_profile(subset))
+        elif self._profiles:
+            self._activate_profile(self._profiles[int(rng.choice(len(self._profiles), p=self._profile_probs))])
         stack: list[str | None] = [None]
         n_empty_nodes = 1
         left_leaves = 0
@@ -289,5 +449,8 @@ class SkeletonSampler:
             if stack[index] is None:
                 stack = stack[:index] + [leaves.pop()] + stack[index + 1:]
         assert len(leaves) == 0
+
+        if self._active_profile is not None:
+            self._active_profile['ubi'] = self.unary_binary_distribution  # keep any table growth
 
         return stack  # type: ignore[return-value]
