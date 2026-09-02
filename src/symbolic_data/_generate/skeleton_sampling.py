@@ -94,6 +94,7 @@ class SkeletonSampler:
         operator_profiles: list[dict[str, Any]] | None = None,
         n_unique_variables_prior: Callable[..., Any] | dict[str, Any] | list[dict[str, Any]] | None = None,
         operator_families: list[dict[str, Any]] | None = None,
+        operators_per_coin: int | None = None,
     ) -> None:
         self.simplipy_engine = simplipy_engine
         self.sample_strategy = sample_strategy
@@ -173,6 +174,9 @@ class SkeletonSampler:
         self._families = self._validate_families(operator_families)
         self._family_profiles: dict[tuple[int, ...], dict[str, Any]] = {}
         self._max_operators = max_operators
+        # Optional: a fresh coin per block of `operators_per_coin` operators, so a longer
+        # expression gets more chances to mix families (P(present | n) = 1 - (1-p)^ceil(n/m)).
+        self._operators_per_coin = int(operators_per_coin) if operators_per_coin else 0
 
     @staticmethod
     def _resolve_prior(prior: Any) -> Callable[..., Any]:
@@ -233,6 +237,13 @@ class SkeletonSampler:
         base_mass = float(sum(self.operator_weights.get(op, 0) for f in base for op in f['operators']))
         if base_mass <= 0:
             raise ValueError('operator_families: the base families carry zero operator_weight')
+        # Families choose the VOCABULARY; the catalog keeps the TREE SHAPE. The optional
+        # families together carry exactly the catalog mass of the operators they cover, split
+        # equally among the families present and uniformly within each, so the per-arity
+        # unary/binary balance the ubi recursion sees is the catalog's whatever subset is drawn.
+        base_ops = {op for f in base for op in f['operators']}
+        self._optional_mass = float(sum(self.operator_weights.get(op, 0) for f in out if f['p'] < 1.0
+                                        for op in f['operators'] if op not in base_ops))
         # No operator is dropped by omission (owner ruling 2026-09-02): every operator the
         # catalog weights above zero must belong to some family, or it would never be drawn.
         covered = {op for f in out for op in f['operators']}
@@ -249,6 +260,7 @@ class SkeletonSampler:
         if profile is None:
             wt: dict[str, float] = {}
             names: list[str] = []
+            optional = [self._families[i] for i in subset if self._families[i]['p'] < 1.0]
             for i in subset:
                 f = self._families[i]
                 names.append(f['name'])
@@ -256,7 +268,7 @@ class SkeletonSampler:
                     for op in f['operators']:
                         wt[op] = float(self.operator_weights.get(op, 0))
                 else:
-                    share = f['mass'] / len(f['operators'])
+                    share = self._optional_mass / len(optional) / len(f['operators'])
                     for op in f['operators']:
                         wt[op] = share
             profile = self._build_profile({'name': '+'.join(names), 'weight': 1.0, 'operators': wt},
@@ -400,8 +412,9 @@ class SkeletonSampler:
         rng = rng if rng is not None else np.random.default_rng()
         if self._families:
             # One coin per optional family, in config order (the base families need none).
+            flips = max(1, -(-n_operators // self._operators_per_coin)) if self._operators_per_coin else 1
             subset = tuple(i for i, f in enumerate(self._families)
-                           if f['p'] >= 1.0 or rng.random() < f['p'])
+                           if f['p'] >= 1.0 or any(rng.random() < f['p'] for _ in range(flips)))
             self._activate_profile(self._family_profile(subset))
         elif self._profiles:
             self._activate_profile(self._profiles[int(rng.choice(len(self._profiles), p=self._profile_probs))])

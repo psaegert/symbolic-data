@@ -75,16 +75,45 @@ def test_coin_rates_match_p(engine, cfg):
     assert 0.05 < rates["hyp"] <= 0.13, rates
 
 
-def test_present_family_carries_the_base_mass_uniformly(engine, cfg):
+def test_present_families_share_the_catalog_mass_of_the_operators_they_cover(engine, cfg):
+    # Families choose the vocabulary; the catalog keeps the tree shape: the optional families
+    # present carry exactly the catalog mass of all optional operators, split equally per
+    # present family and uniformly within, so the unary/binary balance the recursion sees is
+    # the catalog's whatever subset is drawn.
     s = make_sampler(engine, cfg, families=FAMILIES)
-    base_mass = sum(cfg["operator_weights"][op] for op in ARITH | STRUCT)
-    profile = s._family_profile((0, 2))   # arith + trig
+    w = cfg["operator_weights"]
+    optional_mass = sum(w[op] for op in POW | TRIG | EXPLOG | HYP)
+    profile = s._family_profile((0, 2))   # arith + trig: trig alone carries the whole optional mass
     unary = dict(zip(profile["unary_operators"], profile["unary_probs"]))
     assert TRIG <= set(unary) <= TRIG | STRUCT
-    trig_share = sum(v for k, v in unary.items() if k in TRIG)
-    # the trig family carries the whole base mass, split uniformly over its six members
-    assert all(abs(unary[k] - trig_share / len(TRIG)) < 1e-12 for k in TRIG)
-    assert s._families[2]["mass"] == base_mass
+    total = sum(w[op] for op in ARITH | STRUCT) + optional_mass
+    assert all(abs(unary[op] - unary["sin"]) < 1e-12 for op in TRIG)   # uniform within the family
+    # the unary mass equals what the catalog gives ALL unary-effective operators
+    u_mass = profile["n_unary"] / (profile["n_unary"] + profile["n_binary"]) * total
+    assert abs(u_mass - (optional_mass + sum(w[op] for op in STRUCT))) < 1e-9
+    two = s._family_profile((0, 2, 3))    # trig + explog split the same optional mass
+    unary2 = dict(zip(two["unary_operators"], two["unary_probs"]))
+    assert abs(unary2["exp"] / unary2["sin"] - len(TRIG) / len(EXPLOG)) < 1e-9
+    assert abs(two["n_unary"] - profile["n_unary"]) < 1e-12
+
+
+def test_operators_per_coin_scales_mixing_with_length(engine, cfg):
+    # One coin per block of m operators: a long expression mixes more, a short one stays pure.
+    s = make_sampler(engine, cfg, families=FAMILIES)
+    s5 = SkeletonSampler(simplipy_engine=engine, sample_strategy=cfg["sample_strategy"], variables=cfg["variables"],
+                         operator_weights=cfg["operator_weights"], literal_prior=cfg["literal_prior"],
+                         typed_slots=cfg["typed_slots"], operator_families=FAMILIES, operators_per_coin=5)
+    rng = np.random.default_rng(5)
+    def families_present(sampler, n_ops, draws=800):
+        cnt = 0
+        for _ in range(draws):
+            ops = _ops(engine, sampler.sample(n_ops, rng))
+            cnt += sum(bool(ops & fam) for fam in (POW, TRIG, EXPLOG, HYP))
+        return cnt / draws
+    short_one, long_one = families_present(s, 3), families_present(s, 15)
+    short_five, long_five = families_present(s5, 3), families_present(s5, 15)
+    assert abs(short_five - short_one) < 0.12          # <= 5 operators: a single coin either way
+    assert long_five > long_one + 0.3                  # 15 operators: three coins per family
 
 
 def test_base_only_subset_draws_only_base_operators(engine, cfg):

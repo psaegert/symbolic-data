@@ -3,6 +3,27 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.17.1] - unreleased
+
+### Changed
+
+- **`operator_families`: families choose the vocabulary, the catalog keeps the tree shape.**
+  A present family used to carry the same total weight as the arithmetic base, which made
+  half of all nodes unary inside a single-family expression and concentrated them on two to
+  six operators (measured on the v25.0-T6 prior: same-function nesting `f(f(x))` in 6.1% of
+  skeletons vs 1.6% under the per-node draw, `exp(exp(x))` 2.1% vs 0.1%). The optional
+  families present now share exactly the catalog mass of the operators they cover, split
+  equally per present family and uniformly within, so the unary/binary balance the recursion
+  sees is the catalog's whatever subset is drawn (nesting 2.3%, `exp(exp)` 0.9%).
+
+### Added
+
+- **`operators_per_coin`** (optional catalog key next to `operator_families`): one fresh
+  coin per family per block of that many operators, so a longer expression gets more chances
+  to mix families -- `P(present | n) = 1 - (1 - p)^ceil(n / m)`. Absent = one coin per
+  expression. With the T6 coins and `m = 5`: two or more optional families in 29% of 4-6
+  operator skeletons and 60% of 16+ (one coin: 11% and 21%).
+
 ## [0.17.0] - 2026-09-02
 
 ### Added
