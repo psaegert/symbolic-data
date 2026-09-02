@@ -101,7 +101,8 @@ def test_every_weighted_operator_needs_a_family(engine, cfg):
 
 def test_family_profiles_are_cached_per_subset(engine, cfg):
     s = make_sampler(engine, cfg, families=FAMILIES)
-    a = s._family_profile((0, 1)); b = s._family_profile((0, 1))
+    a = s._family_profile((0, 1))
+    b = s._family_profile((0, 1))
     assert a is b
 
 
@@ -120,5 +121,6 @@ def test_no_families_consumes_no_rng(engine, cfg):
     # `None` is the legacy sampler: the same seed yields the same skeleton with or without the key.
     legacy = make_sampler(engine, cfg)
     also = make_sampler(engine, cfg, families=None)
-    a = legacy.sample(5, np.random.default_rng(9)); b = also.sample(5, np.random.default_rng(9))
+    a = legacy.sample(5, np.random.default_rng(9))
+    b = also.sample(5, np.random.default_rng(9))
     assert a == b
