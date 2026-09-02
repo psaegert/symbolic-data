@@ -17,6 +17,10 @@ All notable changes to `symbolic-data` are documented here. The format follows
   transcendental and 0.9% are single-class, against 45% and 19% for the 656 benchmark laws.
   Without the key the sampler is byte-identical (regression fixture
   `tests/fixtures/skeleton_sampler_legacy.json`).
+- **`n_unique_variables_prior`** (optional catalog key): a per-expression prior on the number
+  of distinct leaf symbols, truncated to `[1, min(leaves, n_variables)]`. The legacy draw is
+  uniform up to the leaf count, so long expressions use most available variables (T4 prior: 49%
+  of delivered skeletons use 6+ distinct variables vs 12% of the benchmark laws). Absent = legacy.
 
 ## [0.16.2] - 2026-08-31
 

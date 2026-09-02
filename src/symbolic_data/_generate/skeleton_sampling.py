@@ -92,6 +92,7 @@ class SkeletonSampler:
         literal_prior: Callable[..., Any] | dict[str, Any] | list[dict[str, Any]] | None = None,
         typed_slots: dict[str, Any] | None = None,
         operator_profiles: list[dict[str, Any]] | None = None,
+        n_unique_variables_prior: Callable[..., Any] | dict[str, Any] | list[dict[str, Any]] | None = None,
     ) -> None:
         self.simplipy_engine = simplipy_engine
         self.sample_strategy = sample_strategy
@@ -104,6 +105,14 @@ class SkeletonSampler:
         self._literal_block = (_BlockDraw(build_iid_prior_callable(literal_prior))
                                if isinstance(literal_prior, (dict, list)) else None)
         self.typed_slots = self._validate_typed_slots(typed_slots or {})
+        # Per-expression prior on the number of distinct leaf symbols (variables + the constant
+        # slot). The legacy draw is UNIFORM up to the leaf count, so long expressions use most
+        # of the available variables: measured on the T4 prior, 49% of delivered skeletons use
+        # >= 6 distinct variables (31% use 8+) against 12% (1%) of the benchmark laws. The prior
+        # is drawn per expression and truncated to [1, min(leaves, n_variables)]; `None` keeps
+        # the legacy uniform draw (byte-identical).
+        self.n_unique_variables_prior = (self._resolve_prior(n_unique_variables_prior)
+                                         if n_unique_variables_prior is not None else None)
 
         self._n_leaves = 1
         self._n_unary_operators = 1
@@ -300,7 +309,12 @@ class SkeletonSampler:
         return position, arity
 
     def _get_leaves(self, t_leaves: int, rng: np.random.Generator) -> list[str]:
-        n_unique_variables = rng.integers(1, min(t_leaves, self.n_variables) + 1)
+        cap = min(t_leaves, self.n_variables)
+        if self.n_unique_variables_prior is None:
+            n_unique_variables = rng.integers(1, cap + 1)
+        else:
+            drawn = float(np.atleast_1d(self.n_unique_variables_prior(size=1, rng=rng))[0])
+            n_unique_variables = int(min(cap, max(1, round(drawn))))
         unique_variables = rng.choice(self.variables + [_CONSTANT_SLOT], n_unique_variables, replace=False)
 
         guaranteed_part = unique_variables.copy()

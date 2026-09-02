@@ -26,10 +26,10 @@ def engine(cfg):
     return SimpliPyEngine.load(cfg.get("simplipy_engine", "acj-4"), install=True)
 
 
-def make_sampler(engine, cfg, profiles=None):
+def make_sampler(engine, cfg, profiles=None, n_vars_prior=None):
     return SkeletonSampler(simplipy_engine=engine, sample_strategy=cfg["sample_strategy"], variables=cfg["variables"],
                            operator_weights=cfg["operator_weights"], literal_prior=cfg["literal_prior"],
-                           typed_slots=cfg["typed_slots"], operator_profiles=profiles)
+                           typed_slots=cfg["typed_slots"], operator_profiles=profiles, n_unique_variables_prior=n_vars_prior)
 
 
 def test_legacy_sampler_is_byte_identical(engine, cfg):
@@ -76,3 +76,13 @@ def test_validation(engine, cfg):
         make_sampler(engine, cfg, profiles=[{"weight": 1.0, "operators": ["+", "nope"]}])
     with pytest.raises(ValueError, match="weight > 0"):
         make_sampler(engine, cfg, profiles=[{"weight": 0.0, "operators": ["+"]}])
+
+
+def test_n_unique_variables_prior_caps_distinct_symbols(engine, cfg):
+    # A prior concentrated on 1-2 distinct leaf symbols must never produce an expression with 3+.
+    s = make_sampler(engine, cfg, n_vars_prior={"name": "choice", "kwargs": {"values": [1, 2], "weights": [1, 1]}})
+    rng = np.random.default_rng(5)
+    for _ in range(200):
+        sk = s.sample(8, rng)
+        leaves = {t for t in sk if t not in engine.operator_arity}
+        assert len(leaves) <= 2, sk
