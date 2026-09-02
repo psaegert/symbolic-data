@@ -2,6 +2,7 @@
 sample from its operator subset, and the unary/binary tree recursion runs on the profile's
 weight mass per arity class. The legacy sampler (no `operator_profiles`) must stay byte-identical."""
 import json
+import re
 from pathlib import Path
 
 import numpy as np
@@ -84,5 +85,5 @@ def test_n_unique_variables_prior_caps_distinct_symbols(engine, cfg):
     rng = np.random.default_rng(5)
     for _ in range(200):
         sk = s.sample(8, rng)
-        leaves = {t for t in sk if t not in engine.operator_arity}
-        assert len(leaves) <= 2, sk
+        variables = {t for t in sk if re.fullmatch(r"x\d+", t)}
+        assert len(variables) <= 2, sk  # constants render as distinct literals; only variables count
