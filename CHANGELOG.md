@@ -5,6 +5,19 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- **`operator_profiles`** (optional catalog key): per-EXPRESSION operator-class profiles for the
+  skeleton sampler. A profile `{name?, weight, operators}` is drawn once per expression; nodes then
+  sample from its operator subset (`operators` is a list under the catalog's `operator_weights`, or a
+  `{op: weight}` mapping with profile-local weights), and the unary/binary tree recursion runs on
+  the profile's weight mass per arity class instead of the fixed `(1, 1)` multiplicities, so a
+  profile without unary operators grows binary-only trees. Motivation, measured on the v25.0-T4
+  prior: the per-node draw dilutes every expression -- 89% of delivered skeletons contain a
+  transcendental and 0.9% are single-class, against 45% and 19% for the 656 benchmark laws.
+  Without the key the sampler is byte-identical (regression fixture
+  `tests/fixtures/skeleton_sampler_legacy.json`).
+
 ## [0.16.2] - 2026-08-31
 
 ### Changed

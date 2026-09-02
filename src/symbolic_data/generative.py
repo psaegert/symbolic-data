@@ -216,6 +216,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_support_prior: dict[str, Any] | list[dict[str, Any]] | Callable | None = None,
             support_sampler_config: dict[str, Any] | None = None,
             operator_weights: dict[str, float] | None = None,
+            operator_profiles: list[dict[str, Any]] | None = None,
             typed_slots: dict[str, Any] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
@@ -230,6 +231,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         self.variables = variables
         self.n_variables = len(self.variables)
         self.operator_weights = operator_weights or {op: 1.0 for op in self.simplipy_engine.operator_arity.keys()}
+        self.operator_profiles = operator_profiles
         # Constrained argument slots (``pow`` exponent, ``rootn`` index). The retired
         # hyper-operator vocabulary carried this constraint in the vocabulary itself;
         # on the 23-operator vocabulary it has to live here or the tree sampler fills
@@ -251,6 +253,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             sample_strategy=self.sample_strategy,
             variables=self.variables,
             operator_weights=self.operator_weights,
+            operator_profiles=self.operator_profiles,
             literal_prior=literal_prior,
             typed_slots=self.typed_slots,
         )
@@ -351,6 +354,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             variables=config_["variables"],
             support_sampler_config=support_sampler_cfg,
             operator_weights=config_.get("operator_weights"),
+            operator_profiles=config_.get("operator_profiles"),
             typed_slots=config_.get("typed_slots"),
             holdout_pools=config_.get("holdout_pools", []),
             allow_nan=config_.get("allow_nan", False),
@@ -381,6 +385,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             support_scale_prior: dict[str, Any] | list[dict[str, Any]] | Callable | None = None,
             n_support_prior: dict[str, Any] | list[dict[str, Any]] | Callable | None = None,
             operator_weights: dict[str, float] | None = None,
+            operator_profiles: list[dict[str, Any]] | None = None,
             typed_slots: dict[str, Any] | None = None,
             skeleton_codes: dict[tuple[str], tuple[CodeType, list[str]]] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
@@ -437,6 +442,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_support_prior=n_support_prior,
             support_sampler_config=support_sampler_config,
             operator_weights=operator_weights,
+            operator_profiles=operator_profiles,
             typed_slots=typed_slots,
             holdout_pools=holdout_pools,
             allow_nan=allow_nan,
@@ -1548,6 +1554,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             variables=self.variables,
             support_sampler_config=deepcopy(self.support_sampler_config),
             operator_weights=self.operator_weights,
+            operator_profiles=self.operator_profiles,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
         test_pool = LampleChartonCatalog.from_dict(
@@ -1559,6 +1566,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             variables=self.variables,
             support_sampler_config=deepcopy(self.support_sampler_config),
             operator_weights=self.operator_weights,
+            operator_profiles=self.operator_profiles,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
 

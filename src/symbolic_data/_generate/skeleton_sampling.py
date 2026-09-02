@@ -91,6 +91,7 @@ class SkeletonSampler:
         operator_weights: dict[str, float],
         literal_prior: Callable[..., Any] | dict[str, Any] | list[dict[str, Any]] | None = None,
         typed_slots: dict[str, Any] | None = None,
+        operator_profiles: list[dict[str, Any]] | None = None,
     ) -> None:
         self.simplipy_engine = simplipy_engine
         self.sample_strategy = sample_strategy
@@ -132,6 +133,19 @@ class SkeletonSampler:
             self._n_unary_operators,
             self._n_binary_operators,
         )
+        # Per-EXPRESSION operator profiles (2026-09-02, measured on the T4 prior): the per-node
+        # draw dilutes every expression -- with p_trans ~ 0.23 per draw and unary draws 82%
+        # transcendental, 89% of delivered skeletons contain a transcendental and 0.9% are
+        # single-class, against 45% / 19% for the benchmark laws. A profile is drawn ONCE per
+        # expression; nodes then sample from the profile's operator subset, and the
+        # unary/binary tree recursion runs on the profile's WEIGHT MASS per arity class
+        # instead of the legacy fixed (1, 1) multiplicities, so a profile without unary
+        # operators grows binary-only trees. `None` is the legacy sampler, byte-identical
+        # (no profile draw consumes RNG).
+        self._profiles = self._build_profiles(operator_profiles, max_operators)
+        self._profile_probs = (np.array([p['weight'] for p in self._profiles], dtype=np.float64)
+                               / sum(p['weight'] for p in self._profiles)) if self._profiles else None
+        self._active_profile: dict[str, Any] | None = None
 
     @staticmethod
     def _resolve_prior(prior: Any) -> Callable[..., Any]:
@@ -166,6 +180,60 @@ class SkeletonSampler:
                 "block": (_BlockDraw(build_iid_prior_callable(slot_prior))
                           if isinstance(slot_prior, (dict, list)) else None)}
         return resolved
+
+    def _build_profiles(self, specs: list[dict[str, Any]] | None, max_operators: int) -> list[dict[str, Any]]:
+        if not specs:
+            return []
+        known = set(self.simplipy_engine.operator_arity)
+        out: list[dict[str, Any]] = []
+        for i, spec in enumerate(specs):
+            raw_ops = spec.get('operators') or []
+            # `operators` is a list (catalog weights apply) or a {op: weight} mapping (profile-local
+            # weights -- a 'trig' profile with sin/cos at the catalog's unary weight 1 next to
+            # binaries at 10 would otherwise almost never place a unary node).
+            local = dict(raw_ops) if isinstance(raw_ops, dict) else {}
+            ops = list(local) if local else list(raw_ops)
+            weight = float(spec.get('weight', 1.0))
+            unknown = [op for op in ops if op not in known]
+            if unknown:
+                raise ValueError(f'operator_profiles[{i}]: unknown operators {unknown}')
+            if not ops or weight <= 0:
+                raise ValueError(f'operator_profiles[{i}]: needs a non-empty operators list and weight > 0')
+            unary = [op for op in self.unary_operators if op in ops]
+            binary = [op for op in self.binary_operators if op in ops]
+            wt = {op: float(local.get(op, self.operator_weights.get(op, 0))) for op in ops}
+            u = float(sum(wt[op] for op in unary))
+            b = float(sum(wt[op] for op in binary))
+            if u + b <= 0:
+                raise ValueError(f'operator_profiles[{i}]: every listed operator has zero operator_weight')
+            # Mass-weighted arity multiplicities, scaled to the legacy total (1 + 1 = 2).
+            n_unary, n_binary = 2.0 * u / (u + b), 2.0 * b / (u + b)
+            out.append({
+                'name': spec.get('name', '+'.join(ops)), 'weight': weight,
+                'unary_operators': unary, 'binary_operators': binary,
+                'unary_probs': self._probs_from(unary, wt), 'binary_probs': self._probs_from(binary, wt),
+                'n_unary': n_unary, 'n_binary': n_binary,
+                'ubi': generate_ubi_dist(max_operators, self._n_leaves, n_unary, n_binary),
+            })
+        return out
+
+    @staticmethod
+    def _probs_from(operators: Sequence[str], weights: dict[str, float]) -> np.ndarray:
+        if not operators:
+            return np.zeros(0)
+        p = np.array([weights[op] for op in operators], dtype=np.float64)
+        return p / p.sum()
+
+    def _activate_profile(self, profile: dict[str, Any]) -> None:
+        """Point the node-level draws at ``profile`` (legacy mode never calls this)."""
+        self._active_profile = profile
+        self.unary_operators = profile['unary_operators']
+        self.binary_operators = profile['binary_operators']
+        self.unary_operator_probs = profile['unary_probs']
+        self.binary_operator_probs = profile['binary_probs']
+        self._n_unary_operators = profile['n_unary']
+        self._n_binary_operators = profile['n_binary']
+        self.unary_binary_distribution = profile['ubi']
 
     def _build_probability_vector(self, operators: Sequence[str]) -> np.ndarray:
         probs = np.array([self.operator_weights.get(op, 0) for op in operators], dtype=np.float64)
@@ -245,6 +313,8 @@ class SkeletonSampler:
 
     def sample(self, n_operators: int, rng: np.random.Generator | None = None) -> list[str]:
         rng = rng if rng is not None else np.random.default_rng()
+        if self._profiles:
+            self._activate_profile(self._profiles[int(rng.choice(len(self._profiles), p=self._profile_probs))])
         stack: list[str | None] = [None]
         n_empty_nodes = 1
         left_leaves = 0
@@ -289,5 +359,8 @@ class SkeletonSampler:
             if stack[index] is None:
                 stack = stack[:index] + [leaves.pop()] + stack[index + 1:]
         assert len(leaves) == 0
+
+        if self._active_profile is not None:
+            self._active_profile['ubi'] = self.unary_binary_distribution  # keep any table growth
 
         return stack  # type: ignore[return-value]
