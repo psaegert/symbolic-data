@@ -37,14 +37,16 @@ def switch_rate(cat, skeletons):
 
         def walk(parent_class):
             nonlocal switches, binaries
-            tok = sk[pos[0]]; pos[0] += 1
+            tok = sk[pos[0]]
+            pos[0] += 1
             if tok not in arity:
                 return
             if arity[tok] == 2 and tok in ADD | MUL:
                 cls = "A" if tok in ADD else "M"
                 binaries += 1
                 switches += int(parent_class is not None and cls != parent_class)
-                walk(cls); walk(cls)
+                walk(cls)
+                walk(cls)
             elif tok in ("neg", "inv"):
                 walk(parent_class)
             else:
