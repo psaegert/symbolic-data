@@ -82,3 +82,50 @@ def test_prototype_is_idempotent(catalog):
     for tokens in (["+", "x1", "x1"], ["/", "*", "x1", "x2", "x3"], ["sin", "*", "2.0", "x1"]):
         once = catalog.holdout_family_prototype(tokens)
         assert catalog.holdout_family_prototype(once) == once
+
+
+# --- the power spelling (2026-09-03) -------------------------------------------------------------
+# infix_to_prefix spells powers as ``**``; the engine's simplify rejects that token, and the
+# registration side used to swallow the error and register the prototype of the RAW spelling.
+# A sampler draw of the same law arrives AC-canonical, so the two prototypes differed wherever
+# the canon restructures the law: 584 of 1,602 power-bearing holdout laws were not held out.
+
+@pytest.mark.parametrize("label,raw,canonical_spelling", [
+    ("x**2 == pow(x, 2)", ["**", "x1", "2"], ["pow", "x1", "2"]),
+    ("1/2 m (v^2 + u^2) 1/2 w^2 (I.24.6)", ["*", "*", "*", "/", "1", "2", "x1", "+", "**", "x2", "2", "**", "x3", "2", "*", "/", "1", "2", "**", "x4", "2"],
+     ["*", "*", "*", "/", "1", "2", "x1", "+", "pow", "x2", "2", "pow", "x3", "2", "*", "/", "1", "2", "pow", "x4", "2"]),
+    ("exp(-(x/y)^2 / 2) (I.6.2)", ["exp", "/", "neg", "**", "/", "x1", "x2", "2", "2"], ["exp", "/", "neg", "pow", "/", "x1", "x2", "2", "2"]),
+])
+def test_power_spelling_registers_the_canonical_family(catalog, label, raw, canonical_spelling):
+    engine = catalog.simplipy_engine
+    canonical = list(engine.simplify(canonical_spelling, mode=HOLDOUT_SIMPLIFY_MODE, effort=HOLDOUT_EFFORT))
+    assert catalog.holdout_family_prototype(raw) == catalog.holdout_family_prototype(canonical, assume_canonical=True), label
+    assert catalog.holdout_family_prototype(raw) == catalog.holdout_family_prototype(canonical_spelling), label
+
+
+def test_strict_prototype_refuses_an_uncanonicalizable_law(catalog):
+    """On the registration path a canonicalization failure must not fall back to the raw spelling."""
+    alien = ["frobnicate", "x1"]
+    assert catalog.holdout_family_prototype(alien, strict=True) is None
+
+
+@pytest.mark.parametrize("name", ["nguyen", "keijzer"])
+def test_every_catalog_law_is_held_out_in_canonical_form(catalog, name):
+    """The leak test: register a curated catalog, then canonicalize each of its laws exactly as
+    the sampler would and ask is_held_out. Every law must be held out."""
+    from symbolic_data.catalog import load_catalog
+    from symbolic_data.token_ops import desugar_sqrt
+    import numpy as np
+    import re
+    engine = catalog.simplipy_engine
+    catalog.clear_holdouts()
+    catalog.register_holdout_pool(name)
+    missed = []
+    for entry in load_catalog(name).iter_entries(np.random.default_rng(0)):
+        prefix = desugar_sqrt(engine.infix_to_prefix(entry.prepared), engine.operator_arity_compat)
+        prefix = [("x" + t[1:]) if re.fullmatch(r"v\d+", t) else ("pow" if t in ("**", "^") else t) for t in prefix]
+        canonical = list(engine.simplify(prefix, mode=HOLDOUT_SIMPLIFY_MODE, effort=HOLDOUT_EFFORT))
+        if not catalog.is_held_out(canonical, [], assume_canonical=catalog._skeleton_is_holdout_canonical):
+            missed.append((entry.id, entry.prepared))
+    catalog.clear_holdouts()
+    assert not missed, f"{len(missed)} laws of {name} are not held out in canonical form: {missed[:5]}"

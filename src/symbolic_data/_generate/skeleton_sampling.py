@@ -23,6 +23,19 @@ _CONSTANT_SLOT = "<constant>"
 _LITERAL_BLOCK = 512
 
 
+class _Slot:
+    """An empty slot that remembers the behaviour classes on its root path (class-budget mode).
+    Legacy mode keeps ``None`` for empties, so its RNG stream and output are byte-identical."""
+    __slots__ = ("classes",)
+
+    def __init__(self, classes: frozenset) -> None:
+        self.classes = classes
+
+
+def _is_empty(value: Any) -> bool:
+    return value is None or isinstance(value, _Slot)
+
+
 class _BlockDraw:
     """Hands out values from a prior one at a time, refilling in blocks.
 
@@ -95,7 +108,15 @@ class SkeletonSampler:
         n_unique_variables_prior: Callable[..., Any] | dict[str, Any] | list[dict[str, Any]] | None = None,
         operator_families: list[dict[str, Any]] | None = None,
         operators_per_coin: int | None = None,
-        operator_subset: bool = False,
+        operator_subset: bool | dict[str, Any] = False,
+        unary_mass: float = 1.0,
+        division_coin: float | None = None,
+        class_budget: dict[str, Any] | None = None,
+        term_grammar: dict[str, Any] | None = None,
+        nesting_decay: float | None = None,
+        nesting_transparent: Sequence[str] | None = None,
+        alternation_decay: float | None = None,
+        alternation_mode: str = 'label',
     ) -> None:
         self.simplipy_engine = simplipy_engine
         self.sample_strategy = sample_strategy
@@ -118,7 +139,14 @@ class SkeletonSampler:
                                          if n_unique_variables_prior is not None else None)
 
         self._n_leaves = 1
-        self._n_unary_operators = 1
+        # Shape dial (2026-09-03 prior comparison, arm A): the unary multiplicity the tree
+        # recursion sees, against binary = leaf = 1. 1.0 is the legacy uniform shape; 0.25 is
+        # "a node is one of five kinds -- four arithmetic combinations or apply-a-function".
+        # Applies to the legacy per-node draw and to class-budget mode; profiles, families and
+        # subsets derive their own arity masses.
+        if not float(unary_mass) > 0:
+            raise ValueError(f'unary_mass must be positive, got {unary_mass!r}')
+        self._n_unary_operators = float(unary_mass)
         self._n_binary_operators = 1
 
         # STRUCTURAL slots: a slot-bearing operator exposes only its GROWING seats to the
@@ -189,11 +217,259 @@ class SkeletonSampler:
             raise ValueError("operator_subset is exclusive with operator_families / operator_profiles")
         self._operator_subset = bool(operator_subset)
         if self._operator_subset:
+            # `operator_subset: {always: [...]}` keeps the listed operators in every subset (the
+            # arithmetic base, say) and draws k >= 0 EXTRA operators from the rest.
+            always = list(operator_subset.get('always', [])) if isinstance(operator_subset, dict) else []
+            unknown = [op for op in always if op not in simplipy_engine.operator_arity]
+            if unknown:
+                raise ValueError(f'operator_subset.always: unknown operators {unknown}')
+            self._subset_always = always
+            # `usage: uniform` -- once chosen, the operators of a subset are peers at every node
+            # (the variable draw's rule: identities weighted, usage uniform); default keeps the
+            # catalog weights at the node draw as well.
+            usage = str(operator_subset.get('usage', 'weighted')) if isinstance(operator_subset, dict) else 'weighted'
+            if usage not in ('weighted', 'uniform'):
+                raise ValueError("operator_subset.usage must be 'weighted' or 'uniform'")
+            self._subset_usage = usage
             self._subset_ops = [op for op in self.operator_weights if op in simplipy_engine.operator_arity
-                                and float(self.operator_weights[op]) > 0]
+                                and float(self.operator_weights[op]) > 0 and op not in always]
             w = np.array([float(self.operator_weights[op]) for op in self._subset_ops])
             self._subset_probs = w / w.sum()
             self._subset_profiles: dict[frozenset, dict[str, Any]] = {}
+        # Per-expression division coin: '/' is available to an expression with this probability
+        # (the binary shape mass is untouched; only the vocabulary of the binary draw changes).
+        self._division_coin = None if division_coin is None else float(division_coin)
+        if self._division_coin is not None and not 0.0 <= self._division_coin <= 1.0:
+            raise ValueError(f'division_coin must lie in [0, 1], got {division_coin!r}')
+        # Class budget (arm C): per expression m ~ U{0..min(max_classes, 1 + n // per_operators)}
+        # behaviour classes are opened; at a unary node the base and each open class are PEERS
+        # (peer uniform, then member: base by catalog weight, class uniform); a class never
+        # appears twice on a root-to-leaf path; a class's binary members ('/') join the binary
+        # pool while it is open.
+        if class_budget and (operator_families or operator_profiles or operator_subset or term_grammar):
+            raise ValueError('class_budget is exclusive with the other operator modes')
+        self._class_budget = self._validate_class_budget(class_budget)
+        # Depth-decaying unary prior (owner design 2026-09-03): a unary node in F (every unary-
+        # effective operator except the transparent ones, default neg/inv) at CHAIN depth c
+        # (consecutive F-ancestors directly above it, transparent operators looked through, any
+        # binary node resets to 0) carries weight unary_mass * nesting_decay^c; transparent
+        # unaries carry unary_mass and leave the depth unchanged. Sampled by the recursive
+        # exact-size draw on the depth-indexed count table (the prefix loop cannot carry a
+        # per-slot depth), so the operator count is exact and p(skeleton) stays a product.
+        self._nesting: dict[str, Any] | None = None
+        if nesting_decay is not None:
+            if operator_families or operator_profiles or operator_subset or class_budget or term_grammar:
+                raise ValueError('nesting_decay is exclusive with the other operator modes')
+            gamma = float(nesting_decay)
+            if not 0.0 < gamma <= 1.0:
+                raise ValueError(f'nesting_decay must lie in (0, 1], got {nesting_decay!r}')
+            transparent = list(nesting_transparent) if nesting_transparent is not None else ['neg', 'inv']
+            unknown = [op for op in transparent if op not in self.unary_operators]
+            if unknown:
+                raise ValueError(f'nesting_transparent: not unary-effective operators of this engine: {unknown}')
+            w = {op: float(self.operator_weights.get(op, 0)) for op in self.unary_operators}
+            F = [op for op in self.unary_operators if op not in transparent and w[op] > 0]
+            S = [op for op in self.unary_operators if op in transparent and w[op] > 0]
+            total = sum(w.values())
+            self._nesting = {
+                'gamma': gamma,
+                'F': F, 'pF': self._probs_from(F, w), 'mF': sum(w[op] for op in F) / total,
+                'S': S, 'pS': self._probs_from(S, w), 'mS': sum(w[op] for op in S) / total,
+                'table': None, 'nmax': -1, 'delta': 1.0, 'mode': 'label', 'ctable': None, 'cnmax': -1}
+            # Width prior (owner design 2026-09-03, WIDTH_PRIOR.md): a binary node whose class
+            # (additive {+, -} or multiplicative {*, /}) differs from its PARENT BACKBONE class
+            # (nearest binary ancestor, looked through transparent unaries; a counted unary or the
+            # root gives no parent class) costs alternation_decay, once per switch (the Markov
+            # rule). mode 'label': the tree shape is the depth prior's exact-size draw, unchanged,
+            # and delta only reweights the binary-operator draw given the parent class (delta = 1
+            # is byte-identical to the plain nesting draw). mode 'shape': delta enters the
+            # exact-size table as a weight, so the shape itself changes with delta.
+            if alternation_decay is not None:
+                delta = float(alternation_decay)
+                if not 0.0 < delta <= 1.0:
+                    raise ValueError(f'alternation_decay must lie in (0, 1], got {alternation_decay!r}')
+                if alternation_mode not in ('label', 'shape'):
+                    raise ValueError(f"alternation_mode must be 'label' or 'shape', got {alternation_mode!r}")
+                cls_of = {'+': 'A', '-': 'A', '*': 'M', '/': 'M'}
+                bin_class = [cls_of.get(op, op) for op in self.binary_operators]
+                classes = sorted(set(bin_class))
+                pb = np.asarray(self.binary_operator_probs, dtype=np.float64)
+                self._nesting.update({
+                    'delta': delta, 'mode': alternation_mode, 'bin_class': bin_class, 'classes': classes,
+                    'mK': {k: float(pb[[i for i, kk in enumerate(bin_class) if kk == k]].sum()) for k in classes},
+                    'ops_of': {k: [op for op, kk in zip(self.binary_operators, bin_class) if kk == k] for k in classes},
+                    'p_of': {k: self._probs_from([op for op, kk in zip(self.binary_operators, bin_class) if kk == k],
+                                                 dict(zip(self.binary_operators, pb.tolist()))) for k in classes}})
+            self._nesting_table(max_operators)
+            if self._nesting['mode'] == 'shape' and self._nesting['delta'] < 1.0:
+                self._nesting_table_classes(max_operators)
+        # Term grammar (arm B): replaces the tree walk and the per-node draw entirely.
+        self._term_grammar = None
+        if term_grammar:
+            if operator_families or operator_profiles or operator_subset:
+                raise ValueError('term_grammar is exclusive with the other operator modes')
+            from symbolic_data._generate.term_grammar import TermGrammar
+            spec = dict(term_grammar)
+            self._term_grammar = TermGrammar(
+                simplipy_engine, self.operator_weights, self.typed_slots, spec['classes'],
+                slot_literal=self._slot_literal,
+                roster_weights=spec.get('roster_weights', (1.0, 1.0, 0.5, 0.25)),
+                response_weights=spec.get('response_weights', (1.0, 0.25, 0.125)),
+                power_coin=spec.get('power_coin', 0.25),
+                nest=spec.get('nest', 0.125),
+                term_count=spec.get('term_count', 'until_spent'),
+                per_operators=spec.get('per_operators', 4),
+                division_coin=spec.get('division_coin', self._division_coin))
+
+    def _nesting_table(self, nmax: int) -> list[list[float]]:
+        """C[c][m]: total weight of trees with m operators grown under a slot of chain depth c.
+        C[c][0] = 1;  C[c][m] = w1 (mF g^c C[c+1][m-1] + mS C[c][m-1]) + w2 sum_{i+j=m-1} C[0][i] C[0][j]."""
+        ns = self._nesting
+        assert ns is not None
+        if ns['table'] is not None and ns['nmax'] >= nmax:
+            return ns['table']
+        w1, w2, g, mF, mS = self._n_unary_operators, self._n_binary_operators, ns['gamma'], ns['mF'], ns['mS']
+        D = nmax + 2
+        C = [[1.0] + [0.0] * nmax for _ in range(D + 1)]
+        for m in range(1, nmax + 1):
+            binary = w2 * sum(C[0][i] * C[0][m - 1 - i] for i in range(m))
+            for c in range(D, -1, -1):
+                C[c][m] = w1 * (mF * g ** c * C[min(c + 1, D)][m - 1] + mS * C[c][m - 1]) + binary
+        ns['table'], ns['nmax'] = C, nmax
+        return C
+
+    def _nesting_table_classes(self, nmax: int) -> tuple[list[list[float]], dict[Any, int]]:
+        """Shape-weight width prior: C[s][m] over states s = (c, None) for chain depth c and
+        (0, k) for a parent binary class k.  C[s][0] = 1;
+        C[(c,k)][m] = w1 (mF g^c C[(c+1,None)][m-1] + mS C[(c,k)][m-1])
+                    + w2 sum_k' m_k' delta^[k != None and k' != k] sum_{i+j=m-1} C[(0,k')][i] C[(0,k')][j]."""
+        ns = self._nesting
+        assert ns is not None
+        if ns['ctable'] is not None and ns['cnmax'] >= nmax:
+            return ns['ctable']
+        w1, w2, g, mF, mS, delta = self._n_unary_operators, self._n_binary_operators, ns['gamma'], ns['mF'], ns['mS'], ns['delta']
+        D = nmax + 2
+        states = [(c, None) for c in range(D + 1)] + [(0, k) for k in ns['classes']]
+        idx = {st: i for i, st in enumerate(states)}
+        C = [[1.0] + [0.0] * nmax for _ in states]
+        for m in range(1, nmax + 1):
+            pair = {k: sum(C[idx[(0, k)]][i] * C[idx[(0, k)]][m - 1 - i] for i in range(m)) for k in ns['classes']}
+            for st in reversed(states):
+                c, k = st
+                up = w1 * (mF * g ** c * C[idx[(min(c + 1, D), None)]][m - 1] + mS * C[idx[st]][m - 1])
+                binary = w2 * sum(ns['mK'][k2] * (delta if (k is not None and k2 != k) else 1.0) * pair[k2] for k2 in ns['classes'])
+                C[idx[st]][m] = up + binary
+        ns['ctable'], ns['cnmax'] = (C, idx), nmax
+        return ns['ctable']
+
+    def _sample_nesting(self, n_operators: int, rng: np.random.Generator) -> list[Any]:
+        """Recursive exact-size draw from the depth-decaying prior (and the width prior when
+        alternation_decay is set); leaves are ``None``."""
+        ns = self._nesting
+        assert ns is not None
+        w1, w2, g, delta = self._n_unary_operators, self._n_binary_operators, ns['gamma'], ns['delta']
+        shape_mode = ns['mode'] == 'shape' and delta < 1.0
+        label_mode = ns['mode'] == 'label' and delta < 1.0
+        if shape_mode:
+            CT, idx = self._nesting_table_classes(max(n_operators, ns['cnmax']))
+            D = max(c for c, k in idx if k is None)
+        else:
+            C = self._nesting_table(max(n_operators, ns['nmax']))
+            D = len(C) - 1
+        arity = self.simplipy_engine.operator_arity
+        out: list[Any] = []
+
+        def emit(operator: str, children: list[tuple[int, int, Any]]) -> None:
+            slot_spec = self.typed_slots.get(operator)
+            out.append(operator)
+            child_iter = iter(children)
+            for argument in range(arity[operator]):
+                if slot_spec is not None and argument == slot_spec['argument']:
+                    out.append(self._slot_literal(operator, rng))
+                else:
+                    grow(*next(child_iter))
+
+        def grow(c: int, m: int, k: Any) -> None:
+            # k: the parent backbone class (None under the root or a counted unary)
+            if m == 0:
+                out.append(None)
+                return
+            if shape_mode:
+                st = idx[(c, None) if k is None else (0, k)]
+                pF = w1 * ns['mF'] * g ** c * CT[idx[(min(c + 1, D), None)]][m - 1] if ns['F'] else 0.0
+                pS = w1 * ns['mS'] * CT[st][m - 1] if ns['S'] else 0.0
+                pairs = {k2: np.array([CT[idx[(0, k2)]][i] * CT[idx[(0, k2)]][m - 1 - i] for i in range(m)], dtype=np.float64)
+                         for k2 in ns['classes']}
+                pB = {k2: w2 * ns['mK'][k2] * (delta if (k is not None and k2 != k) else 1.0) * float(pairs[k2].sum())
+                      for k2 in ns['classes']}
+                r = rng.random() * (pF + pS + sum(pB.values()))
+                if r < pF:
+                    emit(str(rng.choice(ns['F'], p=ns['pF'])), [(min(c + 1, D), m - 1, None)])
+                    return
+                if r < pF + pS:
+                    emit(str(rng.choice(ns['S'], p=ns['pS'])), [(c, m - 1, k)])
+                    return
+                r -= pF + pS
+                k2 = ns['classes'][-1]
+                for cand in ns['classes']:
+                    if r < pB[cand]:
+                        k2 = cand
+                        break
+                    r -= pB[cand]
+                i = int(rng.choice(m, p=pairs[k2] / float(pairs[k2].sum())))
+                emit(str(rng.choice(ns['ops_of'][k2], p=ns['p_of'][k2])), [(0, i, k2), (0, m - 1 - i, k2)])
+                return
+            pF = w1 * ns['mF'] * g ** c * C[min(c + 1, D)][m - 1] if ns['F'] else 0.0
+            pS = w1 * ns['mS'] * C[c][m - 1] if ns['S'] else 0.0
+            splits = np.array([w2 * C[0][i] * C[0][m - 1 - i] for i in range(m)], dtype=np.float64)
+            pB = float(splits.sum())
+            r = rng.random() * (pF + pS + pB)
+            if r < pF:
+                emit(str(rng.choice(ns['F'], p=ns['pF'])), [(min(c + 1, D), m - 1, None)])
+            elif r < pF + pS:
+                emit(str(rng.choice(ns['S'], p=ns['pS'])), [(c, m - 1, k)])
+            else:
+                i = int(rng.choice(m, p=splits / pB))
+                if label_mode and k is not None:
+                    pw = np.array([pb * (1.0 if kk == k else delta) for pb, kk in zip(self.binary_operator_probs, ns['bin_class'])],
+                                  dtype=np.float64)
+                    op = str(rng.choice(self.binary_operators, p=pw / pw.sum()))
+                else:
+                    op = str(rng.choice(self.binary_operators, p=self.binary_operator_probs))
+                k2 = ns['bin_class'][self.binary_operators.index(op)] if (label_mode or shape_mode) else None
+                emit(op, [(0, i, k2), (0, m - 1 - i, k2)])
+
+        grow(0, int(n_operators), None)
+        assert sum(1 for t in out if isinstance(t, str) and t in arity) == n_operators
+        return out
+
+    def _validate_class_budget(self, spec: dict[str, Any] | None) -> dict[str, Any] | None:
+        if not spec:
+            return None
+        arity = self.simplipy_engine.operator_arity
+        classes: dict[str, dict[str, list[str]]] = {}
+        for name, ops in dict(spec.get('classes') or {}).items():
+            ops = list(ops)
+            unknown = [op for op in ops if op not in arity]
+            if not ops or unknown:
+                raise ValueError(f'class_budget.classes[{name!r}]: unknown operators {unknown or ops}')
+            classes[name] = {'unary': [op for op in ops if op in self._all_unary_operators],
+                             'binary': [op for op in ops if op in self._all_binary_operators]}
+        base_unary = [op for op in spec.get('base_unary', []) if op in self._all_unary_operators]
+        base_binary = [op for op in spec.get('base_binary', []) if op in self._all_binary_operators]
+        if not base_binary:
+            raise ValueError('class_budget.base_binary must not be empty')
+        if not base_unary:
+            raise ValueError('class_budget.base_unary must not be empty (the base is a peer at every unary node)')
+        covered = set(base_unary) | set(base_binary) | {op for c in classes.values() for k in c.values() for op in k}
+        uncovered = sorted(op for op, w in self.operator_weights.items() if w > 0 and op in arity and op not in covered)
+        if uncovered:
+            raise ValueError(f'class_budget: operators with positive operator_weight belong to no class: {uncovered}')
+        return {'names': list(classes), 'classes': classes,
+                'base_unary': base_unary, 'base_unary_probs': self._build_probability_vector(base_unary),
+                'base_binary': base_binary,
+                'per_operators': max(1, int(spec.get('per_operators', 4))),
+                'max_classes': int(spec.get('max_classes', 3))}
 
     @staticmethod
     def _resolve_prior(prior: Any) -> Callable[..., Any]:
@@ -427,13 +703,31 @@ class SkeletonSampler:
 
     def sample(self, n_operators: int, rng: np.random.Generator | None = None) -> list[str]:
         rng = rng if rng is not None else np.random.default_rng()
+        if self._nesting is not None:
+            stack = self._sample_nesting(n_operators, rng)
+            leaves = self._get_leaves(t_leaves=sum(1 for value in stack if value is None), rng=rng)
+            for index in range(len(stack) - 1, -1, -1):
+                if stack[index] is None:
+                    stack[index] = leaves.pop()
+            assert len(leaves) == 0
+            return stack  # type: ignore[return-value]
+        if self._term_grammar is not None:
+            stack = self._term_grammar.sample(n_operators, rng)
+            leaves = self._get_leaves(t_leaves=sum(1 for value in stack if value is None), rng=rng)
+            for index in range(len(stack) - 1, -1, -1):
+                if stack[index] is None:
+                    stack[index] = leaves.pop()
+            assert len(leaves) == 0
+            return stack  # type: ignore[return-value]
         if self._operator_subset:
-            k = int(rng.integers(1, min(n_operators, len(self._subset_ops)) + 1)) if n_operators > 0 else 1
-            chosen = frozenset(rng.choice(self._subset_ops, size=k, replace=False, p=self._subset_probs).tolist())
+            lo = 0 if self._subset_always else 1
+            k = int(rng.integers(lo, min(n_operators, len(self._subset_ops)) + 1)) if n_operators > 0 else lo
+            extra = rng.choice(self._subset_ops, size=k, replace=False, p=self._subset_probs).tolist() if k else []
+            chosen = frozenset(self._subset_always + extra)
             profile = self._subset_profiles.get(chosen)
             if profile is None:
-                profile = self._build_profile({'name': '+'.join(sorted(chosen)), 'weight': 1.0,
-                                               'operators': {op: float(self.operator_weights[op]) for op in chosen}},
+                node_w = {op: (1.0 if self._subset_usage == 'uniform' else float(self.operator_weights[op])) for op in chosen}
+                profile = self._build_profile({'name': '+'.join(sorted(chosen)), 'weight': 1.0, 'operators': node_w},
                                               self._max_operators, -1)
                 if len(self._subset_profiles) < 4096:
                     self._subset_profiles[chosen] = profile
@@ -446,17 +740,48 @@ class SkeletonSampler:
             self._activate_profile(self._family_profile(subset))
         elif self._profiles:
             self._activate_profile(self._profiles[int(rng.choice(len(self._profiles), p=self._profile_probs))])
-        stack: list[str | None] = [None]
+        binary_operators, binary_probs = self.binary_operators, self.binary_operator_probs
+        budget = self._class_budget
+        if budget is not None:
+            cap = min(budget['max_classes'], 1 + n_operators // budget['per_operators'])
+            m = int(rng.integers(0, cap + 1))
+            names = budget['names']
+            open_classes = [names[int(i)] for i in rng.choice(len(names), m, replace=False)] if m else []
+            binary_operators = list(budget['base_binary']) + [op for c in open_classes for op in budget['classes'][c]['binary']]
+            binary_probs = self._build_probability_vector(binary_operators)
+            unary_peers = [c for c in open_classes if budget['classes'][c]['unary']]
+        if self._division_coin is not None and '/' in binary_operators and not rng.random() < self._division_coin:
+            keep = [op != '/' for op in binary_operators]
+            binary_probs = binary_probs[np.array(keep)]
+            binary_probs = binary_probs / binary_probs.sum()
+            binary_operators = [op for op, k in zip(binary_operators, keep) if k]
+        stack: list[Any] = [_Slot(frozenset())] if budget is not None else [None]
         n_empty_nodes = 1
         left_leaves = 0
         total_leaves = 1
 
         for remaining in range(n_operators, 0, -1):
             position, arity = self._sample_next_pos_ubi(n_empty_nodes, remaining, rng)
+            insert_index = [index for index, value in enumerate(stack) if _is_empty(value)][left_leaves + position]
+            child_classes: frozenset | None = None
             if arity == 1:
-                operator = rng.choice(self.unary_operators, p=self.unary_operator_probs)
+                if budget is not None:
+                    ctx = stack[insert_index]
+                    peers = ['<base>'] + [c for c in unary_peers if c not in ctx.classes]
+                    peer = peers[int(rng.integers(len(peers)))]
+                    if peer == '<base>':
+                        operator = rng.choice(budget['base_unary'], p=budget['base_unary_probs'])
+                        child_classes = ctx.classes
+                    else:
+                        members = budget['classes'][peer]['unary']
+                        operator = members[int(rng.integers(len(members)))]
+                        child_classes = ctx.classes | {peer}
+                else:
+                    operator = rng.choice(self.unary_operators, p=self.unary_operator_probs)
             else:
-                operator = rng.choice(self.binary_operators, p=self.binary_operator_probs)
+                operator = rng.choice(binary_operators, p=binary_probs)
+                if budget is not None:
+                    child_classes = stack[insert_index].classes
 
             operator = str(operator)
             slot_spec = self.typed_slots.get(operator)
@@ -468,11 +793,11 @@ class SkeletonSampler:
             total_leaves += growing_arity - 1
             left_leaves += position
 
-            children: list[str | None] = [None] * true_arity
+            empty: Any = _Slot(child_classes) if budget is not None else None
+            children: list[Any] = [empty] * true_arity
             if slot_spec is not None:
                 children[slot_spec["argument"]] = self._slot_literal(operator, rng)
 
-            insert_index = [index for index, value in enumerate(stack) if value is None][left_leaves]
             stack = (
                 stack[:insert_index]
                 + [operator]
@@ -480,14 +805,14 @@ class SkeletonSampler:
                 + stack[insert_index + 1:]
             )
 
-        assert len([1 for value in stack if value in self.simplipy_engine.operator_arity]) == n_operators
-        assert len([1 for value in stack if value is None]) == total_leaves
+        assert len([1 for value in stack if isinstance(value, str) and value in self.simplipy_engine.operator_arity]) == n_operators
+        assert len([1 for value in stack if _is_empty(value)]) == total_leaves
 
         leaves = self._get_leaves(t_leaves=total_leaves, rng=rng)
         assert len(leaves) == total_leaves, f"Expected {total_leaves} leaves, got {len(leaves)}"
 
         for index in range(len(stack) - 1, -1, -1):
-            if stack[index] is None:
+            if _is_empty(stack[index]):
                 stack = stack[:index] + [leaves.pop()] + stack[index + 1:]
         assert len(leaves) == 0
 

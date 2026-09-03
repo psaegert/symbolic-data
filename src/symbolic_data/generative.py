@@ -224,7 +224,15 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_unique_variables_prior: dict[str, Any] | list[dict[str, Any]] | None = None,
             operator_families: list[dict[str, Any]] | None = None,
             operators_per_coin: int | None = None,
-            operator_subset: bool = False,
+            operator_subset: bool | dict[str, Any] = False,
+            unary_mass: float = 1.0,
+            division_coin: float | None = None,
+            class_budget: dict[str, Any] | None = None,
+            term_grammar: dict[str, Any] | None = None,
+            nesting_decay: float | None = None,
+            nesting_transparent: list[str] | None = None,
+            alternation_decay: float | None = None,
+            alternation_mode: str = "label",
             typed_slots: dict[str, Any] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
@@ -244,7 +252,15 @@ class LampleChartonCatalog(GenerativeCatalog):
         self.n_unique_variables_prior = n_unique_variables_prior
         self.operator_families = operator_families
         self.operators_per_coin = operators_per_coin
-        self.operator_subset = bool(operator_subset)
+        self.operator_subset = operator_subset if isinstance(operator_subset, dict) else bool(operator_subset)
+        self.unary_mass = float(unary_mass)
+        self.division_coin = division_coin
+        self.class_budget = class_budget
+        self.term_grammar = term_grammar
+        self.nesting_decay = nesting_decay
+        self.nesting_transparent = nesting_transparent
+        self.alternation_decay = alternation_decay
+        self.alternation_mode = alternation_mode
         # Constrained argument slots (``pow`` exponent, ``rootn`` index). The retired
         # hyper-operator vocabulary carried this constraint in the vocabulary itself;
         # on the 23-operator vocabulary it has to live here or the tree sampler fills
@@ -271,6 +287,14 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_families=self.operator_families,
             operators_per_coin=self.operators_per_coin,
             operator_subset=self.operator_subset,
+            unary_mass=self.unary_mass,
+            division_coin=self.division_coin,
+            class_budget=self.class_budget,
+            term_grammar=self.term_grammar,
+            nesting_decay=self.nesting_decay,
+            nesting_transparent=self.nesting_transparent,
+            alternation_decay=self.alternation_decay,
+            alternation_mode=self.alternation_mode,
             literal_prior=literal_prior,
             typed_slots=self.typed_slots,
         )
@@ -375,7 +399,15 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_unique_variables_prior=config_.get("n_unique_variables_prior"),
             operator_families=config_.get("operator_families"),
             operators_per_coin=config_.get("operators_per_coin"),
-            operator_subset=bool(config_.get("operator_subset", False)),
+            operator_subset=config_.get("operator_subset", False),
+            unary_mass=config_.get("unary_mass", 1.0),
+            division_coin=config_.get("division_coin"),
+            class_budget=config_.get("class_budget"),
+            term_grammar=config_.get("term_grammar"),
+            nesting_decay=config_.get("nesting_decay"),
+            nesting_transparent=config_.get("nesting_transparent"),
+            alternation_decay=config_.get("alternation_decay"),
+            alternation_mode=config_.get("alternation_mode", "label"),
             typed_slots=config_.get("typed_slots"),
             holdout_pools=config_.get("holdout_pools", []),
             allow_nan=config_.get("allow_nan", False),
@@ -410,7 +442,15 @@ class LampleChartonCatalog(GenerativeCatalog):
             n_unique_variables_prior: dict[str, Any] | list[dict[str, Any]] | None = None,
             operator_families: list[dict[str, Any]] | None = None,
             operators_per_coin: int | None = None,
-            operator_subset: bool = False,
+            operator_subset: bool | dict[str, Any] = False,
+            unary_mass: float = 1.0,
+            division_coin: float | None = None,
+            class_budget: dict[str, Any] | None = None,
+            term_grammar: dict[str, Any] | None = None,
+            nesting_decay: float | None = None,
+            nesting_transparent: list[str] | None = None,
+            alternation_decay: float | None = None,
+            alternation_mode: str = "label",
             typed_slots: dict[str, Any] | None = None,
             skeleton_codes: dict[tuple[str], tuple[CodeType, list[str]]] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
@@ -472,6 +512,14 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_families=operator_families,
             operators_per_coin=operators_per_coin,
             operator_subset=operator_subset,
+            unary_mass=unary_mass,
+            division_coin=division_coin,
+            class_budget=class_budget,
+            term_grammar=term_grammar,
+            nesting_decay=nesting_decay,
+            nesting_transparent=nesting_transparent,
+            alternation_decay=alternation_decay,
+            alternation_mode=alternation_mode,
             typed_slots=typed_slots,
             holdout_pools=holdout_pools,
             allow_nan=allow_nan,
@@ -648,7 +696,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         return self.holdout_manager.holdout_C
 
     def holdout_family_prototype(self, tokens: list[str] | tuple[str, ...],
-                                 assume_canonical: bool = False) -> list[str] | None:
+                                 assume_canonical: bool = False, strict: bool = False) -> list[str] | None:
         """THE holdout family key -- registration and probing both call exactly this
         function, so a fold-order asymmetry between the two sides (audit L2) cannot
         exist by construction. The quotient is deliberately aggressive, per the ruled
@@ -687,11 +735,25 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         Returns None only for token lists normalize_skeleton cannot read; the probe
         side treats that as held out (fail-closed)."""
+        # POWER SPELLING (2026-09-03). infix_to_prefix spells a power as ``**`` (``^`` in
+        # some curated sources); the engine's simplify rejects that token as malformed. Before
+        # this rewrite the registration side swallowed the error below and registered the
+        # prototype of the RAW spelling, while the sampler delivers the AC-canonical one --
+        # 584 of the 1,602 power-bearing holdout laws were not held out in canonical form
+        # (fastsrb 14/120, feynman 10/100, feynman-bonus 14/20). The L1 audit fix made these
+        # laws register (the fold walk no longer treats ``**`` as a leaf); this makes them
+        # register CANONICALIZED.
+        tokens = ["pow" if token in ("**", "^") else token for token in tokens]
+
         def _canonicalize(current: list[str]) -> list[str]:
             try:
                 return list(self.simplipy_engine.simplify(
                     current, mode=HOLDOUT_SIMPLIFY_MODE, effort=HOLDOUT_EFFORT))
             except Exception:
+                if strict:
+                    # registration path: an uncanonicalized prototype is a law that silently
+                    # TRAINS; the caller turns the resulting None into a config error.
+                    raise
                 return current
 
         # assume_canonical: the caller proves `tokens` is already the fixpoint of exactly
@@ -869,7 +931,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                         candidate = desugar_sqrt(candidate, self.simplipy_engine.operator_arity_compat)
                     except ValueError:
                         continue
-                    prototype = self.holdout_family_prototype(candidate)
+                    prototype = self.holdout_family_prototype(candidate, strict=True)
                     if prototype is None:
                         continue
                     registered_any = True
@@ -896,7 +958,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                 except (ValueError, KeyError) as exc:
                     dropped.append(f"{entry_id} ({type(exc).__name__}: {exc})")
                     continue
-                prototype = self.holdout_family_prototype(prefix)
+                prototype = self.holdout_family_prototype(prefix, strict=True)
                 if prototype is None:
                     dropped.append(f"{entry_id} (not canonicalizable)")
                     continue
@@ -1596,6 +1658,14 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_families=self.operator_families,
             operators_per_coin=self.operators_per_coin,
             operator_subset=self.operator_subset,
+            unary_mass=self.unary_mass,
+            division_coin=self.division_coin,
+            class_budget=self.class_budget,
+            term_grammar=self.term_grammar,
+            nesting_decay=self.nesting_decay,
+            nesting_transparent=self.nesting_transparent,
+            alternation_decay=self.alternation_decay,
+            alternation_mode=self.alternation_mode,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
         test_pool = LampleChartonCatalog.from_dict(
@@ -1612,6 +1682,14 @@ class LampleChartonCatalog(GenerativeCatalog):
             operator_families=self.operator_families,
             operators_per_coin=self.operators_per_coin,
             operator_subset=self.operator_subset,
+            unary_mass=self.unary_mass,
+            division_coin=self.division_coin,
+            class_budget=self.class_budget,
+            term_grammar=self.term_grammar,
+            nesting_decay=self.nesting_decay,
+            nesting_transparent=self.nesting_transparent,
+            alternation_decay=self.alternation_decay,
+            alternation_mode=self.alternation_mode,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
 
