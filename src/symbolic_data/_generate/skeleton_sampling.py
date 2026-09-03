@@ -94,6 +94,10 @@ class SkeletonSampler:
         operator_profiles: list[dict[str, Any]] | None = None,
         n_unique_variables_prior: Callable[..., Any] | dict[str, Any] | list[dict[str, Any]] | None = None,
         operator_families: list[dict[str, Any]] | None = None,
+        unary_mass: float = 1.0,
+        nesting_decay: float | None = None,
+        nesting_transparent: Sequence[str] | None = None,
+        alternation_decay: float | None = None,
     ) -> None:
         self.simplipy_engine = simplipy_engine
         self.sample_strategy = sample_strategy
@@ -116,7 +120,14 @@ class SkeletonSampler:
                                          if n_unique_variables_prior is not None else None)
 
         self._n_leaves = 1
-        self._n_unary_operators = 1
+        # The SHAPE dial (owner design 2026-09-03): the unary multiplicity the tree recursion
+        # sees, against binary = leaf = 1. 1.0 is the legacy uniform shape; 0.5 halves the
+        # mass of "apply a function" against the four arithmetic combinations at every node.
+        # Orthogonal to the catalog weights, which decide WHICH function or operator fills a
+        # node of the chosen kind.
+        if not float(unary_mass) > 0:
+            raise ValueError(f'unary_mass must be positive, got {unary_mass!r}')
+        self._n_unary_operators = float(unary_mass)
         self._n_binary_operators = 1
 
         # STRUCTURAL slots: a slot-bearing operator exposes only its GROWING seats to the
@@ -173,6 +184,117 @@ class SkeletonSampler:
         self._families = self._validate_families(operator_families)
         self._family_profiles: dict[tuple[int, ...], dict[str, Any]] = {}
         self._max_operators = max_operators
+        # DEPTH PRIOR (owner design 2026-09-03): a unary node in F -- every unary-effective
+        # operator except the transparent ones, default neg/inv -- at CHAIN depth c (consecutive
+        # F-ancestors directly above it, transparent operators looked through, any binary node
+        # resets to 0) carries weight unary_mass * nesting_decay^c; transparent unaries carry
+        # unary_mass and leave the depth unchanged. Sampled by the recursive exact-size draw on
+        # the depth-indexed count table (the prefix loop cannot carry a per-slot depth), so the
+        # operator count is exact and p(skeleton) stays a product of local factors.
+        # WIDTH PRIOR (same day): a binary node whose class -- additive {+, -} or multiplicative
+        # {*, /} -- differs from its PARENT BACKBONE class (the nearest binary ancestor, looked
+        # through transparent unaries; a counted unary or the root gives no parent class) has
+        # its weight multiplied by alternation_decay, once per switch. A LABEL prior: the tree
+        # shape is the depth prior's draw, unchanged, and delta only reweights which binary
+        # operator fills an already-placed binary node, so alternation_decay 1 is byte-identical
+        # to the plain depth-prior draw, and everything but alternation and bag width is untouched.
+        self._nesting: dict[str, Any] | None = None
+        if alternation_decay is not None and nesting_decay is None:
+            raise ValueError('alternation_decay requires nesting_decay (the width prior lives on the exact-size draw)')
+        if nesting_decay is not None:
+            if operator_families or operator_profiles:
+                raise ValueError('nesting_decay is exclusive with operator_families / operator_profiles')
+            gamma = float(nesting_decay)
+            if not 0.0 < gamma <= 1.0:
+                raise ValueError(f'nesting_decay must lie in (0, 1], got {nesting_decay!r}')
+            transparent = list(nesting_transparent) if nesting_transparent is not None else ['neg', 'inv']
+            unknown = [op for op in transparent if op not in self.unary_operators]
+            if unknown:
+                raise ValueError(f'nesting_transparent: not unary-effective operators of this engine: {unknown}')
+            w = {op: float(self.operator_weights.get(op, 0)) for op in self.unary_operators}
+            F = [op for op in self.unary_operators if op not in transparent and w[op] > 0]
+            S = [op for op in self.unary_operators if op in transparent and w[op] > 0]
+            total = sum(w.values())
+            self._nesting = {
+                'gamma': gamma,
+                'F': F, 'pF': self._probs_from(F, w), 'mF': sum(w[op] for op in F) / total,
+                'S': S, 'pS': self._probs_from(S, w), 'mS': sum(w[op] for op in S) / total,
+                'table': None, 'nmax': -1, 'delta': 1.0, 'bin_class': None}
+            if alternation_decay is not None:
+                delta = float(alternation_decay)
+                if not 0.0 < delta <= 1.0:
+                    raise ValueError(f'alternation_decay must lie in (0, 1], got {alternation_decay!r}')
+                cls_of = {'+': 'A', '-': 'A', '*': 'M', '/': 'M'}
+                self._nesting.update({'delta': delta, 'bin_class': [cls_of.get(op, op) for op in self.binary_operators]})
+            self._nesting_table(max_operators)
+
+    def _nesting_table(self, nmax: int) -> list[list[float]]:
+        """C[c][m]: total weight of trees with m operators grown under a slot of chain depth c.
+        C[c][0] = 1;  C[c][m] = w1 (mF g^c C[c+1][m-1] + mS C[c][m-1]) + w2 sum_{i+j=m-1} C[0][i] C[0][j]."""
+        ns = self._nesting
+        assert ns is not None
+        if ns['table'] is not None and ns['nmax'] >= nmax:
+            return ns['table']
+        w1, w2, g, mF, mS = self._n_unary_operators, self._n_binary_operators, ns['gamma'], ns['mF'], ns['mS']
+        D = nmax + 2
+        C = [[1.0] + [0.0] * nmax for _ in range(D + 1)]
+        for m in range(1, nmax + 1):
+            binary = w2 * sum(C[0][i] * C[0][m - 1 - i] for i in range(m))
+            for c in range(D, -1, -1):
+                C[c][m] = w1 * (mF * g ** c * C[min(c + 1, D)][m - 1] + mS * C[c][m - 1]) + binary
+        ns['table'], ns['nmax'] = C, nmax
+        return C
+
+    def _sample_nesting(self, n_operators: int, rng: np.random.Generator) -> list[Any]:
+        """Recursive exact-size draw from the depth prior, with the width prior's class-conditional
+        binary draw when alternation_decay is set; leaves are ``None``."""
+        ns = self._nesting
+        assert ns is not None
+        C = self._nesting_table(max(n_operators, ns['nmax']))
+        D = len(C) - 1
+        w1, w2, g, delta = self._n_unary_operators, self._n_binary_operators, ns['gamma'], ns['delta']
+        sticky = delta < 1.0
+        arity = self.simplipy_engine.operator_arity
+        out: list[Any] = []
+
+        def emit(operator: str, children: list[tuple[int, int, Any]]) -> None:
+            slot_spec = self.typed_slots.get(operator)
+            out.append(operator)
+            child_iter = iter(children)
+            for argument in range(arity[operator]):
+                if slot_spec is not None and argument == slot_spec['argument']:
+                    out.append(self._slot_literal(operator, rng))
+                else:
+                    grow(*next(child_iter))
+
+        def grow(c: int, m: int, k: Any) -> None:
+            # c: chain depth; k: the parent backbone class (None under the root or a counted unary)
+            if m == 0:
+                out.append(None)
+                return
+            pF = w1 * ns['mF'] * g ** c * C[min(c + 1, D)][m - 1] if ns['F'] else 0.0
+            pS = w1 * ns['mS'] * C[c][m - 1] if ns['S'] else 0.0
+            splits = np.array([w2 * C[0][i] * C[0][m - 1 - i] for i in range(m)], dtype=np.float64)
+            pB = float(splits.sum())
+            r = rng.random() * (pF + pS + pB)
+            if r < pF:
+                emit(str(rng.choice(ns['F'], p=ns['pF'])), [(min(c + 1, D), m - 1, None)])
+            elif r < pF + pS:
+                emit(str(rng.choice(ns['S'], p=ns['pS'])), [(c, m - 1, k)])
+            else:
+                i = int(rng.choice(m, p=splits / pB))
+                if sticky and k is not None:
+                    pw = np.array([pb * (1.0 if kk == k else delta)
+                                   for pb, kk in zip(self.binary_operator_probs, ns['bin_class'])], dtype=np.float64)
+                    op = str(rng.choice(self.binary_operators, p=pw / pw.sum()))
+                else:
+                    op = str(rng.choice(self.binary_operators, p=self.binary_operator_probs))
+                k2 = ns['bin_class'][self.binary_operators.index(op)] if sticky else None
+                emit(op, [(0, i, k2), (0, m - 1 - i, k2)])
+
+        grow(0, int(n_operators), None)
+        assert sum(1 for t in out if isinstance(t, str) and t in arity) == n_operators
+        return out
 
     @staticmethod
     def _resolve_prior(prior: Any) -> Callable[..., Any]:
@@ -398,6 +520,14 @@ class SkeletonSampler:
 
     def sample(self, n_operators: int, rng: np.random.Generator | None = None) -> list[str]:
         rng = rng if rng is not None else np.random.default_rng()
+        if self._nesting is not None:
+            stack = self._sample_nesting(n_operators, rng)
+            leaves = self._get_leaves(t_leaves=sum(1 for value in stack if value is None), rng=rng)
+            for index in range(len(stack) - 1, -1, -1):
+                if stack[index] is None:
+                    stack[index] = leaves.pop()
+            assert len(leaves) == 0
+            return stack  # type: ignore[return-value]
         if self._families:
             # One coin per optional family, in config order (the base families need none).
             subset = tuple(i for i, f in enumerate(self._families)

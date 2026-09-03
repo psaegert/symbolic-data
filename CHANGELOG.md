@@ -3,6 +3,42 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [0.18.0] - 2026-09-03
+
+### Added
+
+- **`unary_mass`** (optional catalog key, default 1.0): the SHAPE dial of the skeleton sampler -- the
+  unary multiplicity the tree recursion sees against binary = leaf = 1. Orthogonal to the operator
+  weights, which decide which function or operator fills a node of the chosen kind. 0.5 halves the
+  mass of "apply a function" at every node.
+- **`nesting_decay`** / **`nesting_transparent`** (optional): the DEPTH PRIOR. A unary node in F (every
+  unary-effective operator except the transparent ones, default `[neg, inv]`) at chain depth c
+  (consecutive F-ancestors directly above it, transparent operators looked through, any binary node
+  resets to 0) carries weight `unary_mass * nesting_decay^c`. Sampled by a recursive exact-size draw on
+  a depth-indexed count table, so the operator count stays exact and p(skeleton) a product of local
+  factors. At `nesting_decay: 1` the draw samples the legacy measure (validated against the prefix
+  loop on 3,000 delivered skeletons). Exclusive with `operator_families` / `operator_profiles`.
+- **`alternation_decay`** (optional, requires `nesting_decay`): the WIDTH PRIOR. A binary node whose
+  class (additive `+ -` or multiplicative `* /`) differs from its parent backbone class (the nearest
+  binary ancestor, looked through transparent unaries; a counted unary or the root gives no parent
+  class) has its weight multiplied by `alternation_decay`, once per switch. A label prior: the tree
+  shape is the depth prior's draw, unchanged, and delta only reweights which binary operator fills an
+  already-placed binary node, so `alternation_decay: 1` is byte-identical to the plain depth-prior
+  draw. Measured (3,000 delivered skeletons per cell, `w1 = 1/2, gamma = 1/4`): delta 1/2 moves the
+  alternation profile of the arithmetic backbone from `alt <= 2` 11% to 28% at 8-11 arithmetic
+  operators, delta 1/4 to 48%, with function density, failures, chains and the variable count unmoved.
+
+### Fixed
+
+- **Power-bearing holdout laws register canonicalized.** `infix_to_prefix` spells a power as `**`,
+  the engine's simplify rejects that token, and `holdout_family_prototype` swallowed the error and
+  registered the prototype of the RAW spelling while the sampler delivers the AC-canonical one: 584 of
+  the 1,602 power-bearing laws of the 29-catalog pool were not held out in canonical form (fastsrb
+  14/120, feynman 10/100, feynman-bonus 14/20, livermore2 63/150). `**` / `^` are now rewritten to
+  `pow` before canonicalization, and the registration paths run strictly: a canonicalization failure
+  surfaces as the existing "laws failed to register and would silently train" config error. Every law
+  of nguyen and keijzer is now asserted held out in canonical form after registration.
+
 ## [0.17.0] - 2026-09-02
 
 ### Added
