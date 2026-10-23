@@ -4,7 +4,8 @@ A ``ProblemSource`` turns a level-1 :class:`~symbolic_data.catalog.ProblemCatalo
 or inline problems) into :class:`~symbolic_data.problem.Problem`s, applying the *usage policy* the
 catalog deliberately omits: draw ``method``, ``n_support`` / ``n_validation``, ``noise``,
 ``problems_per_expression``, holdouts/filters, and (for sets lacking intrinsic ranges) a global
-sampling fallback. It is ONE concrete class -- no ABC, no subclasses; the mode is INFERRED from the
+sampling fallback. For a frozen data catalog (:mod:`symbolic_data.pools`) ``n_support`` / ``n_validation`` cap
+the rows each pass draws from the problem's pools. It is ONE concrete class -- no ABC, no subclasses; the mode is INFERRED from the
 config (a ``catalog:`` ref -> SET or GENERATE (a generative ``catalog: {type: ...}`` mapping streams on-the-fly), inline ``problems:`` ->
 FIXED).
 
@@ -26,6 +27,7 @@ from symbolic_data.catalog import Catalog, ProblemCatalog
 from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.generative import GenerativeCatalog, build_catalog, is_open_generative_ref
 from symbolic_data.noise import NoiseSpec, apply_noise
+from symbolic_data.pools import draw_from_pools, has_pools
 from symbolic_data.problem import Problem
 from symbolic_data.token_ops import normalize_skeleton
 
@@ -212,13 +214,29 @@ class ProblemSource:
         n_validation = int(self.n_validation) if self.n_validation is not None else n_support
         return n_support, n_validation
 
+    def _pool_caps(self) -> tuple[int | None, int | None]:
+        """The most fitting / test rows a data problem's draw takes: ``n_support`` and ``n_validation``
+        (which defaults to ``n_support``); unset means the whole pool."""
+        if self._n_support_from_prior:
+            raise ValueError("sampling.n_support: 'prior' cannot cap a data catalog's pools (it draws support sizes from a generative prior)")
+        n_support = int(self.n_support) if self.n_support is not None else None
+        n_validation = int(self.n_validation) if self.n_validation is not None else n_support
+        return n_support, n_validation
+
     def _iter_catalog(self) -> Iterator[Problem]:
         catalog = self._get_catalog()
         if getattr(catalog, "frozen", False):
             # A frozen/materialized catalog already holds realized Problems -- iterate them
-            # directly (no sampling), like a fixed source.
+            # directly (no sampling), like a fixed source. A data problem (it declares a split
+            # rule, symbolic_data.pools) holds pools of rows instead: each pass draws at most
+            # n_support fitting and n_validation test rows from them afresh.
             for problem in (catalog.problems or []):
-                if problem.is_placeholder or self._passes_filters(problem):
+                if problem.is_placeholder:
+                    yield problem
+                    continue
+                if has_pools(problem):
+                    problem = draw_from_pools(problem, *self._pool_caps(), self._get_rng())
+                if self._passes_filters(problem):
                     yield problem
             return
         if self._n_support_from_prior and not isinstance(catalog, GenerativeCatalog):
