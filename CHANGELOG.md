@@ -3,6 +3,19 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [Unreleased]
+
+### Added
+
+- **Data catalogs: problems that hold pools of rows** (`symbolic_data.pools`). A frozen problem whose `meta` carries
+  a `test_split` rule holds every row available for fitting (support arrays) and, for `"given"`, the authors' test
+  rows (validation arrays); `"none"` means no test split (validation stays empty); `{"random": f}` means the
+  authors' procedure is a random split with test fraction `f`, cut anew on every pass (`ceil(f * N)` test rows, as
+  scikit-learn counts them). The `ProblemSource` draws at most `n_support` fitting and `n_validation` test rows from
+  the pools on every pass, without replacement and in pool order; a pool no larger than its cap is used whole.
+  `data_problem(...)` builds such a problem; `draw_from_pools(...)` is the draw. Frozen problems without a split
+  rule (materialized formula catalogs, frozen evaluation subsets) are used exactly as stored, as before.
+
 ## [0.18.0] - 2026-09-03
 
 ### Added
