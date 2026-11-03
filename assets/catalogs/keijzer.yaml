@@ -1,6 +1,6 @@
 metadata:
   name: keijzer
-  version: 1
+  version: 2
   description: Keijzer symbolic-regression suite.
   sources:
   - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
@@ -161,8 +161,8 @@ expressions:
         function_set: Keijzer
       finite_fraction: 1.0
   Keijzer-5:
-    raw: div(30*x1*x3,(x1-10)*pow(x2,2))
-    prepared: ((30*v1*v3)/((v1-10)*((v2)**(2))))
+    raw: 30*x*z/((x - 10)*y**2)
+    prepared: 30*v1*v3/(v2**2*(v1 - 10))
     n_variables: 3
     sources:
     - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
@@ -180,56 +180,23 @@ expressions:
       v2:
         name: x2
         sample_range:
-        - -1.0
         - 1.0
+        - 2.0
         sample_type:
         - uni
         - pos
       v3:
         name: x3
         sample_range:
+        - -1.0
         - 1.0
-        - 2.0
         sample_type:
         - uni
         - pos
       v0:
         name: y
+    source_audit: the authors' definition (catalog-prep fresh-10) replaces the DSO transcription
     meta:
-      dso_spec:
-        train:
-          x1:
-            U:
-            - -1
-            - 1
-            - 1000
-          x2:
-            U:
-            - -1
-            - 1
-            - 1000
-          x3:
-            U:
-            - 1
-            - 2
-            - 1000
-        test:
-          x1:
-            U:
-            - -1
-            - 1
-            - 10000
-          x2:
-            U:
-            - -1
-            - 1
-            - 10000
-          x3:
-            U:
-            - 1
-            - 2
-            - 10000
-        function_set: Keijzer
       finite_fraction: 1.0
   Keijzer-6:
     raw: div(x1*(x1+1),2)

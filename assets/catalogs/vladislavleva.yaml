@@ -1,6 +1,6 @@
 metadata:
   name: vladislavleva
-  version: 1
+  version: 2
   description: Vladislavleva order-of-nonlinearity suite.
   sources:
   - Vladislavleva, Smits, den Hertog 2009 (IEEE TEC)
@@ -333,8 +333,8 @@ expressions:
         function_set: Vladislavleva-B
       finite_fraction: 1.0
   Vladislavleva-7:
-    raw: (x1-3)*(x2-3)+2*sin(x1-4)*(x2-4)
-    prepared: (v1-3)*(v2-3)+2*sin(v1-4)*(v2-4)
+    raw: (x1 - 3)*(x2 - 3) + 2*sin((x1 - 4)*(x2 - 4))
+    prepared: (v1 - 3)*(v2 - 3) + 2*sin((v1 - 4)*(v2 - 4))
     n_variables: 2
     sources:
     - Vladislavleva, Smits, den Hertog 2009 (IEEE TEC)
@@ -359,21 +359,8 @@ expressions:
         - pos
       v0:
         name: y
+    source_audit: the authors' definition (catalog-prep fresh-13) replaces the DSO transcription
     meta:
-      dso_spec:
-        train:
-          all:
-            U:
-            - 0.05
-            - 6.05
-            - 300
-        test:
-          all:
-            U:
-            - -0.25
-            - 6.35
-            - 1000
-        function_set: Vladislavleva-C
       finite_fraction: 1.0
   Vladislavleva-8:
     raw: div(pow((x1-3),4)+pow((x2-3),3)-(x2-3),pow((x2-2),4)+10)

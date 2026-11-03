@@ -1,6 +1,6 @@
 metadata:
   name: nguyen
-  version: 1
+  version: 2
   description: Nguyen symbolic-regression suite (Uy et al. 2011), 12 equations.
   sources:
   - Nguyen benchmark (Uy et al. 2011)
@@ -178,7 +178,7 @@ expressions:
       v1:
         name: x1
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -186,13 +186,16 @@ expressions:
       v2:
         name: x2
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
         - pos
       v0:
         name: y
+    source_audit: 'range of Uy et al. 2011 Table 3 ([-1, 1]^2; DSO: [0, 1]^2)'
+    meta:
+      finite_fraction: 1.0
   Nguyen-10:
     raw: 2 * sin(x1) * cos(x2)
     prepared: 2 * sin(v1) * cos(v2)
@@ -205,7 +208,7 @@ expressions:
       v1:
         name: x1
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -213,13 +216,16 @@ expressions:
       v2:
         name: x2
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
         - pos
       v0:
         name: y
+    source_audit: 'range of Uy et al. 2011 Table 3 ([-1, 1]^2; DSO: [0, 1]^2)'
+    meta:
+      finite_fraction: 1.0
   Nguyen-11:
     raw: x1 ** x2
     prepared: v1 ** v2
@@ -274,3 +280,33 @@ expressions:
         - pos
       v0:
         name: y
+  Nguyen-12*:
+    raw: x**4 - x**3 + y**2/2 - y
+    prepared: v1**4 - v1**3 + v2**2/2 - v2
+    n_variables: 2
+    sources:
+    - Nguyen benchmark (Uy et al. 2011)
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (Petersen
+      et al. 2021)
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    source_audit: the authors' member (catalog-prep fresh-5), missing from the DSO transcription
+    meta:
+      finite_fraction: 1.0
