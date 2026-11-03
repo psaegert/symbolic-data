@@ -3,6 +3,23 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [Unreleased]
+
+### Added
+
+- **`family_affinity`** (optional catalog key, requires `nesting_decay`): the COHERENCE prior, a label prior
+  on the depth prior's draw. `{concentration: alpha, families: {name: [operator, ...]}, independent:
+  [operator, ...]}`: the function nodes of one expression draw their family from a Dirichlet-multinomial
+  (Polya urn) -- the k-th takes family f with probability `(alpha * pi_f + n_f) / (alpha + k - 1)`, `pi_f`
+  the family's share of the operator weights, `n_f` the nodes already in f -- and the operator weights
+  decide inside a family. `independent` operators (pow and rootn, unary here through their literal
+  exponent) keep the independent draw. The tree shape is unchanged and the urn is exchangeable, so every
+  family keeps its share on average; alpha -> infinity is the independent draw. Motivation, measured
+  2026-11-03 on 1,610 Wikidata defining formulas: two function nodes of one formula share a family 85 % of
+  the time against 30 % for independent labels with the same shares (Dirichlet-multinomial MLE alpha 0.30,
+  95 % bootstrap 0.16-0.49); the per-node draw gives 17 % (alpha ~500). Every counted unary operator must
+  be in a family or in `independent` (an omission is an error). Absent = legacy (byte-identical).
+
 ## [0.18.0] - 2026-09-03
 
 ### Added
