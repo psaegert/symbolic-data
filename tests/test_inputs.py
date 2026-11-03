@@ -79,3 +79,15 @@ def test_a_folded_normal_is_a_normal_folded_onto_the_half_line():
     x = draw_variable({"dist": {"name": "folded_normal", "kwargs": {"loc": 2.0, "scale": 3.0 ** 0.5}}}, 20000, np.random.default_rng(6))
     folded = np.abs(np.random.default_rng(6).normal(2.0, 3.0 ** 0.5, 20000))
     assert (x >= 0).all() and np.allclose(x, folded)
+
+
+def test_the_e2e_mixture_draws_whitened_clusters_of_the_functions_shape():
+    rng = np.random.default_rng(8)
+    for shape in ("gaussian", "uniform"):
+        x = JOINT_INPUTS.get("e2e_mixture")(size=600, n_variables=3, rng=rng, shape=shape, k=2)
+        assert x.shape == (600, 3)
+        assert np.allclose(x.mean(axis=0), 0.0, atol=1e-9) and np.allclose(x.std(axis=0), 1.0)
+    one = JOINT_INPUTS.get("e2e_mixture")(size=200, n_variables=1, rng=rng, shape="uniform", k=1, scale=4.0)
+    assert np.isclose(one.std(), 4.0)
+    with pytest.raises(ValueError):
+        JOINT_INPUTS.get("e2e_mixture")(size=5, n_variables=1, rng=rng, shape="laplace")

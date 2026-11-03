@@ -99,3 +99,39 @@ def constraint_mask(meta: Mapping[str, Any], x: np.ndarray, variable_order: Sequ
         for expr in constraints:
             ok &= np.broadcast_to(np.asarray(_evaluate(expr, names), dtype=bool), ok.shape)
     return ok
+
+
+def e2e_mixture(size: int, n_variables: int, rng: np.random.Generator, shape: str = "gaussian", k: int = 1,
+                scale: float = 1.0) -> np.ndarray:
+    """E2E's input distribution (Kamienny et al. 2022, Sec. 1.2; symbolicregression envs/generators.py): a mixture of
+    ``k`` clusters, each with a centroid mu ~ N(0, 1)^D, variances s ~ U(0, 1)^D and a Haar rotation R on SO(D)
+    (identity for D = 1), weights ~ U(0, 1) normalized and counts ~ Multinomial(size, weights). A Gaussian cluster
+    draws N(mu, diag s) @ R, a uniform one (mu + U(-1, 1)^D sqrt(s)) @ R. The rows are whitened per dimension (sample
+    mean and population std) and multiplied by ``scale``. The shape and k are fixed per function; everything else is
+    drawn afresh for every point set, i.e. every call."""
+    if shape not in ("gaussian", "uniform"):
+        raise ValueError(f"e2e_mixture shape must be 'gaussian' or 'uniform', got {shape!r}")
+    d = n_variables
+    mu = rng.normal(0.0, 1.0, (k, d))
+    var = rng.uniform(0.0, 1.0, (k, d))
+    if d > 1:
+        from scipy.stats import special_ortho_group
+        rot = [special_ortho_group.rvs(d, random_state=rng) for _ in range(k)]
+    else:
+        rot = [np.eye(1) for _ in range(k)]
+    w = rng.uniform(0.0, 1.0, k)
+    counts = rng.multinomial(size, w / w.sum())
+    parts = []
+    for i, n in enumerate(counts):
+        if shape == "gaussian":
+            z = rng.normal(0.0, 1.0, (n, d)) * np.sqrt(var[i]) + mu[i]
+        else:
+            z = mu[i] + rng.uniform(-1.0, 1.0, (n, d)) * np.sqrt(var[i])
+        parts.append(z @ rot[i])
+    x = np.concatenate(parts)
+    std = x.std(axis=0)
+    x = (x - x.mean(axis=0)) / np.where(std > 0, std, 1.0)
+    return rng.permutation(x * scale)
+
+
+JOINT_INPUTS.register_builtin("e2e_mixture", e2e_mixture)
