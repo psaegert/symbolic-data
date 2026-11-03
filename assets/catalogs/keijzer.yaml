@@ -1,6 +1,7 @@
 metadata:
   name: keijzer
   version: 2
+  companion: "keijzer-points: Keijzer-6, the authors pinned points (a data catalog)"
   description: Keijzer symbolic-regression suite.
   sources:
   - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
@@ -197,41 +198,6 @@ expressions:
         name: y
     source_audit: the authors' definition (catalog-prep fresh-10) replaces the DSO transcription
     meta:
-      finite_fraction: 1.0
-  Keijzer-6:
-    raw: div(x1*(x1+1),2)
-    prepared: ((v1*(v1+1))/(2))
-    n_variables: 1
-    sources:
-    - Keijzer 2003 (EuroGP), interval arithmetic + linear scaling
-    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
-      Petersen et al. 2021, Mundhenk et al. 2021)
-    vars:
-      v1:
-        name: x1
-        sample_range:
-        - 1.0
-        - 50.0
-        sample_type:
-        - int
-        - pos
-      v0:
-        name: y
-    meta:
-      dso_spec:
-        train:
-          all:
-            E:
-            - 1
-            - 50
-            - 1
-        test:
-          all:
-            E:
-            - 1
-            - 120
-            - 1
-        function_set: Keijzer
       finite_fraction: 1.0
   Keijzer-7:
     raw: log(x1)

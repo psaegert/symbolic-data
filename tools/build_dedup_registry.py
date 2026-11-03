@@ -24,7 +24,7 @@ from symbolic_data.token_ops import normalize_skeleton
 CATALOG_FILES = {"fastsrb": "fastsrb.v2.yaml"}
 CATALOGS = ["constant", "grammarvae", "jin", "keijzer", "korns", "koza", "livermore",
             "livermore2", "meier", "neat", "nonic", "pagie", "poly", "r-rationals",
-            "sine", "vladislavleva", "nguyen", "fastsrb", "feynman", "srsd-dummy",
+            "vladislavleva", "nguyen", "fastsrb", "feynman", "srsd-dummy",
             "physo-astro", "physo-class", "soose-nc", "soose-wc", "soose-fc",
             "erbench-syneq", "erbench-phybench", "erbench-densities", "feynman-bonus"]
 # SA-firewalled declarative catalogs (assets_sa/; clusters reference names only, no SA prose)

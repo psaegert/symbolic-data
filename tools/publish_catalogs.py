@@ -55,8 +55,8 @@ CATALOGS = {
     "constant": ("constant.yaml", 10, "problem_catalog"),
     "grammarvae": ("grammarvae.yaml", 1, "problem_catalog"),
     "jin": ("jin.yaml", 6, "problem_catalog"),
-    "keijzer": ("keijzer.yaml", 15, "problem_catalog"),
-    "korns": ("korns.yaml", 12, "problem_catalog"),
+    "keijzer": ("keijzer.yaml", 14, "problem_catalog"),
+    "korns": ("korns.yaml", 15, "problem_catalog"),
     "koza": ("koza.yaml", 2, "problem_catalog"),
     "livermore": ("livermore.yaml", 25, "problem_catalog"),
     "livermore2": ("livermore2.yaml", 150, "problem_catalog"),
@@ -66,8 +66,8 @@ CATALOGS = {
     "pagie": ("pagie.yaml", 1, "problem_catalog"),
     "poly": ("poly.yaml", 6, "problem_catalog"),
     "r-rationals": ("r-rationals.yaml", 6, "problem_catalog"),
-    "sine": ("sine.yaml", 1, "problem_catalog"),
-    "vladislavleva": ("vladislavleva.yaml", 8, "problem_catalog"),
+    # sine (1 entry) retired 2026-11: the authors pin Sine's points, so it is the data catalog sine-points
+    "vladislavleva": ("vladislavleva.yaml", 6, "problem_catalog"),
     # P2 Feynman variant 3/3 (fastsrb + feynman already published)
     "srsd-dummy": ("srsd-dummy.yaml", 120, "problem_catalog"),
     # P3 real-world GT: SRBench-2.0 phenomenological track (PMLB first_principles_*, MIT).
