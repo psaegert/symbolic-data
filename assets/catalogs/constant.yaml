@@ -1,6 +1,7 @@
 metadata:
   name: constant
-  version: 1
+  version: 2
+  dropped: "Const-Test-1, Const-Test-2: DSO repository sanity tests, not a benchmark (owner 2026-11-03)"
   description: Constant-optimization suite (incl. Const-Test sanity checks).
   sources:
   - Petersen et al. 2021 (ICLR), Deep Symbolic Regression, Appendix
@@ -282,75 +283,5 @@ expressions:
             - 2
             - 20
         test: null
-        function_set: CKoza
-      finite_fraction: 1.0
-  Const-Test-1:
-    raw: 3.14159265358979323846*x1*x1
-    prepared: 3.14159265358979323846*v1*v1
-    n_variables: 1
-    sources:
-    - null
-    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
-      Petersen et al. 2021, Mundhenk et al. 2021)
-    vars:
-      v1:
-        name: x1
-        sample_range:
-        - -1.0
-        - 1.0
-        sample_type:
-        - uni
-        - pos
-      v0:
-        name: y
-    meta:
-      dso_spec:
-        train:
-          all:
-            E:
-            - -1
-            - 1
-            - 20
-        test:
-          all:
-            E:
-            - -1
-            - 1
-            - 20
-        function_set: KozaUserConst
-      finite_fraction: 1.0
-  Const-Test-2:
-    raw: 3.14159265358979323846*x1*x1
-    prepared: 3.14159265358979323846*v1*v1
-    n_variables: 1
-    sources:
-    - null
-    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
-      Petersen et al. 2021, Mundhenk et al. 2021)
-    vars:
-      v1:
-        name: x1
-        sample_range:
-        - -1.0
-        - 1.0
-        sample_type:
-        - uni
-        - pos
-      v0:
-        name: y
-    meta:
-      dso_spec:
-        train:
-          all:
-            E:
-            - -1
-            - 1
-            - 20
-        test:
-          all:
-            E:
-            - -1
-            - 1
-            - 20
         function_set: CKoza
       finite_fraction: 1.0

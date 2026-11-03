@@ -18,7 +18,7 @@ def _local(name: str) -> ProblemCatalog:
 
 
 CURATED_VERSIONS = {"keijzer": 2, "korns": 2, "nguyen": 2, "poly": 2, "vladislavleva": 2, "fastsrb.v2": 3, "neat": 2,
-                    "jin": 2, "soose-nc": 2, "soose-wc": 2, "soose-fc": 2}
+                    "jin": 2, "soose-nc": 2, "soose-wc": 2, "soose-fc": 2, "constant": 2}
 
 
 @pytest.mark.parametrize("name,count", CURATED_COUNTS.items())

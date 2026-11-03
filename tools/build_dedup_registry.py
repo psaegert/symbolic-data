@@ -23,7 +23,7 @@ from symbolic_data.token_ops import normalize_skeleton
 # found by the 2026-07-10 program audit) and carried malformed III.21.20 ranges.
 CATALOG_FILES = {"fastsrb": "fastsrb.v2.yaml"}
 CATALOGS = ["constant", "grammarvae", "jin", "keijzer", "korns", "koza", "livermore",
-            "livermore2", "meier", "neat", "nonic", "pagie", "poly", "r-rationals",
+            "livermore2", "meier", "neat", "pagie", "poly",
             "vladislavleva", "nguyen", "fastsrb", "feynman", "srsd-dummy",
             "physo-astro", "physo-class", "soose-nc", "soose-wc", "soose-fc",
             "erbench-syneq", "erbench-phybench", "erbench-densities", "feynman-bonus"]

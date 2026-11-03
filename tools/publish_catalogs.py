@@ -52,20 +52,20 @@ CATALOGS = {
     "lample-charton-v24": ("lample-charton-v24.yaml", None, "generative_catalog"),
     "lample-charton-v24-bench": ("lample-charton-v24-bench.yaml", None, "generative_catalog"),
     # P1 GP-toy suites (DSO benchmarks.csv, BSD-3; validated 2026-07-10, 16/16)
-    "constant": ("constant.yaml", 10, "problem_catalog"),
+    "constant": ("constant.yaml", 8, "problem_catalog"),
     "grammarvae": ("grammarvae.yaml", 1, "problem_catalog"),
     "jin": ("jin.yaml", 18, "problem_catalog"),
-    "keijzer": ("keijzer.yaml", 14, "problem_catalog"),
+    "keijzer": ("keijzer.yaml", 7, "problem_catalog"),
     "korns": ("korns.yaml", 15, "problem_catalog"),
     "koza": ("koza.yaml", 2, "problem_catalog"),
     "livermore": ("livermore.yaml", 25, "problem_catalog"),
     "livermore2": ("livermore2.yaml", 150, "problem_catalog"),
     "meier": ("meier.yaml", 2, "problem_catalog"),
     "neat": ("neat.yaml", 8, "problem_catalog"),
-    "nonic": ("nonic.yaml", 1, "problem_catalog"),
+    # nonic (1) and r-rationals (6) retired 2026-11: their authors pin the points, so they are nonic-points and
+    # r-rationals-points (data catalogs)
     "pagie": ("pagie.yaml", 1, "problem_catalog"),
     "poly": ("poly.yaml", 6, "problem_catalog"),
-    "r-rationals": ("r-rationals.yaml", 6, "problem_catalog"),
     # sine (1 entry) retired 2026-11: the authors pin Sine's points, so it is the data catalog sine-points
     "vladislavleva": ("vladislavleva.yaml", 6, "problem_catalog"),
     # P2 Feynman variant 3/3 (fastsrb + feynman already published)
