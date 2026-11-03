@@ -26,6 +26,7 @@ from symbolic_data._evaluation import compile_expression, load_engine
 from symbolic_data.catalog import Catalog, ProblemCatalog
 from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.generative import GenerativeCatalog, build_catalog, is_open_generative_ref
+from symbolic_data.inputs import has_test_spec
 from symbolic_data.noise import NoiseSpec, apply_noise
 from symbolic_data.pools import draw_from_pools, has_pools
 from symbolic_data.problem import Problem
@@ -258,18 +259,28 @@ class ProblemSource:
         the placeholder protocol: a transient ``NoValidSampleFoundError`` is retried up to
         ``max_trials``, a permanent ``CatalogEntryError`` becomes a placeholder immediately. When
         ``n_support`` is ``None`` (prior mode) the catalog draws the support size and ALL realized
-        rows become support (no validation split).
+        rows become support (no validation split). An entry with a ``test`` block
+        (:func:`~symbolic_data.inputs.has_test_spec`) draws its validation rows separately, from that block.
         """
         n_points = None if n_support is None else n_support + n_validation
         eq_id = getattr(entry, "id", None)
+        test_apart = n_support is not None and n_validation > 0 and has_test_spec(getattr(entry, "meta", None) or {})
         try:
             for _ in range(self.max_trials):
                 try:
-                    realized = catalog.realize(entry, n_points, rng, engine=engine, layout=self.layout)
+                    if test_apart:
+                        realized = catalog.realize(entry, n_support, rng, engine=engine, layout=self.layout)
+                        test = catalog.realize(entry, n_validation, rng, engine=engine, layout=self.layout, part="test")
+                    else:
+                        realized = catalog.realize(entry, n_points, rng, engine=engine, layout=self.layout)
                 except NoValidSampleFoundError:
                     continue
-                split_at = realized.x.shape[0] if n_support is None else n_support
-                xs, xv, ys, yv = _split_support_validation(realized.x, realized.y, split_at)
+                if test_apart:
+                    xs, ys = realized.x.astype(STORAGE_DTYPE, copy=True), realized.y.astype(STORAGE_DTYPE, copy=True)
+                    xv, yv = test.x.astype(STORAGE_DTYPE, copy=True), test.y.astype(STORAGE_DTYPE, copy=True)
+                else:
+                    split_at = realized.x.shape[0] if n_support is None else n_support
+                    xs, xv, ys, yv = _split_support_validation(realized.x, realized.y, split_at)
                 if xs.size == 0:
                     continue
                 ground_truth = dict(

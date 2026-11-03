@@ -17,6 +17,12 @@ variables (``v1 > v2``) that every accepted row satisfies (not ``constraints``: 
 their own notes). A constraint acts like the expression's
 domain: rows that violate it are redrawn, so the accepted rows follow the declared distribution
 conditioned on the constraint.
+
+A benchmark that defines its test points apart from its fitting points gives the entry a ``test`` block: its
+``vars``, ``inputs``, ``latent`` and ``row_constraints`` replace the entry's own for the test rows (a variable's
+``name`` and ``units`` stay), and the test rows are drawn separately from the fitting rows. ``test: {}`` is the
+entry's own distribution drawn afresh, which is what E2E asks for: its test points come from a fresh instance of its
+mixture. An entry without ``test`` draws its fitting and test rows together, as before.
 """
 from __future__ import annotations
 
@@ -91,6 +97,29 @@ def draw_rows(variables: Mapping[str, Mapping[str, Any]], meta: Mapping[str, Any
     return np.column_stack(columns).astype(float)
 
 
+#: What an entry's ``test`` block may change about how its test rows are drawn.
+TEST_KEYS = ("vars", "inputs", "latent", "row_constraints")
+_SAMPLING_KEYS = ("sample_range", "sample_type", "dist", "expr")
+
+
+def has_test_spec(meta: Mapping[str, Any]) -> bool:
+    """Whether the entry draws its test rows apart from its fitting rows (it has a ``test`` block)."""
+    return isinstance(meta.get("test"), Mapping)
+
+
+def spec_for_test_rows(variables: Mapping[str, Mapping[str, Any]], meta: Mapping[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
+    """The ``(variables, meta)`` the entry's test rows are drawn from: its ``test`` block over its own spec."""
+    spec = meta.get("test") or {}
+    unknown = set(spec) - set(TEST_KEYS)
+    if unknown:
+        raise ValueError(f"test block: unknown keys {sorted(unknown)} (allowed: {', '.join(TEST_KEYS)})")
+    out = {key: dict(s) for key, s in variables.items()}
+    for key, s in (spec.get("vars") or {}).items():
+        kept = {k: v for k, v in out.get(key, {}).items() if k not in _SAMPLING_KEYS}
+        out[key] = {**kept, **dict(s)}
+    return out, {**meta, **{k: spec[k] for k in TEST_KEYS[1:] if k in spec}}
+
+
 def constraint_mask(meta: Mapping[str, Any], x: np.ndarray, variable_order: Sequence[str]) -> np.ndarray:
     """The rows that satisfy every one of the entry's ``row_constraints`` (all rows when it has none)."""
     constraints = meta.get("row_constraints") or []
@@ -135,4 +164,62 @@ def e2e_mixture(size: int, n_variables: int, rng: np.random.Generator, shape: st
     return rng.permutation(x * scale)
 
 
+def _erbench_samples(a: float, b: float, n: int, dtype: str, rng: np.random.Generator, max_parts: int) -> np.ndarray:
+    """ERBench's ``get_samples``: ``n`` values on [a, b] from a fresh mixture of 1..``max_parts`` parts, in part order."""
+    if n == 0:
+        return np.empty(0)
+    k = int(rng.integers(1, max_parts + 1))
+    w = rng.random(k)
+    counts = (w / w.sum() * n).astype(int)
+    if k > 1:
+        counts[0] = n - counts[1:].sum()
+    parts = []
+    for c in counts:
+        uniform = rng.random() < 0.5            # ERBench picks the part's family from two, uniformly
+        if dtype == "int":
+            lo, hi = np.sort(rng.integers(int(a), int(b) + 1, size=2))
+            parts.append(rng.integers(lo, hi + 1, size=c) if uniform else rng.binomial(hi - lo, 0.5, size=c) + lo)
+        elif uniform:
+            lo, hi = np.sort(rng.random(2)) * (b - a) + a
+            parts.append(rng.random(c) * (hi - lo) + lo)
+        else:
+            mean = rng.random() * (b - a) + a
+            parts.append(rng.normal(mean, min(b - mean, mean - a) / 3, size=c))
+    return np.clip(np.concatenate(parts).astype(float), a, b)
+
+
+def erbench_mixture(size: int, n_variables: int, rng: np.random.Generator, supports: Sequence[Sequence[float]],
+                    alpha: float = 0.5, region: str = "fit", dtype: str = "float", max_parts: int = 3) -> np.ndarray:
+    """ERBench's input distribution (Kahlmeyer et al. 2026, App. A.3; src/benchmark.py ``get_samples`` and
+    ``generate_problem``). Every variable has its own mixture of 1..``max_parts`` parts, each part uniform on a random
+    sub-interval or normal with mean ~ U(a, b) and sigma = (distance to the nearer edge) / 3 (for integers: uniform or
+    binomial), clipped to the interval. The fitting rows (``region: fit``) come from a window of half the support's
+    width, a1 = a + alpha (b - a) / 2 to a1 + (b - a) / 2 (floored and ceiled for integers); the test rows (``region:
+    test``) from the rest of the support, split between its two sides by length. A support of zero width is the same in
+    both. As in ERBench, a column's values stay in part order and the rows are permuted together, so the parts are
+    aligned across the variables; every call draws fresh mixtures (one point set)."""
+    if region not in ("fit", "test"):
+        raise ValueError(f"erbench_mixture region must be 'fit' or 'test', got {region!r}")
+    if len(supports) != n_variables:
+        raise ValueError(f"erbench_mixture has {len(supports)} supports for {n_variables} variables")
+    columns = []
+    for a, b in ((float(lo), float(hi)) for lo, hi in supports):
+        if a == b:
+            columns.append(_erbench_samples(a, b, size, dtype, rng, max_parts))
+            continue
+        a1 = max(a + alpha * (b - a) / 2, a)
+        b1 = min(a1 + (b - a) / 2, b)
+        if dtype == "int":
+            a1, b1 = float(np.floor(a1)), float(np.ceil(b1))
+        if region == "fit":
+            columns.append(_erbench_samples(a1, b1, size, dtype, rng, max_parts))
+        elif (a1 - a) + (b - b1) == 0:
+            columns.append(_erbench_samples(a, b, size, dtype, rng, max_parts))
+        else:
+            left = _erbench_samples(a, a1, int((a1 - a) * size / ((a1 - a) + (b - b1))), dtype, rng, max_parts)
+            columns.append(np.concatenate([left, _erbench_samples(b1, b, size - left.size, dtype, rng, max_parts)]))
+    return np.column_stack(columns)[rng.permutation(size)]
+
+
 JOINT_INPUTS.register_builtin("e2e_mixture", e2e_mixture)
+JOINT_INPUTS.register_builtin("erbench_mixture", erbench_mixture)
