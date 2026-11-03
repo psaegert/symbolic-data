@@ -91,9 +91,9 @@ CATALOGS = {
     "soose-fc": ("soose-fc.yaml", 400, "problem_catalog"),
     # P5 ERBench permissive novel families (MIT/BSD-3; arXiv:2606.09276). The CC-BY-SA families
     # (erbench-oeis, erbench-eponymous) publish to the SEPARATE SA repo via publish_catalogs_sa.py.
-    "erbench-syneq": ("erbench-syneq.yaml", 5301, "problem_catalog"),
-    "erbench-phybench": ("erbench-phybench.yaml", 90, "problem_catalog"),
-    "erbench-densities": ("erbench-densities.yaml", 33, "problem_catalog"),
+    "erbench-syneq": ("erbench-syneq.yaml", 15903, "problem_catalog"),
+    "erbench-phybench": ("erbench-phybench.yaml", 270, "problem_catalog"),
+    "erbench-densities": ("erbench-densities.yaml", 99, "problem_catalog"),
     # P6 black-box tier (gt_kind='none', eval-only): GT-free cp3-bench discovery sets.
     "cp3-blackbox": ("cp3-blackbox.npz", 11, "problem_catalog"),
     # P6: SRBench 2.0 black-box 12-selection (PMLB, MIT; fri_c0 pair = verified z-scored

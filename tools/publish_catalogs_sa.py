@@ -30,8 +30,8 @@ SA_DIR = os.path.join(HERE, "..", "assets_sa")
 
 CATALOGS = {
     # P5 ERBench SA families (OEIS-/Wikipedia-derived, CC-BY-SA-4.0; see assets_sa/LICENSE)
-    "erbench-oeis": ("catalogs/erbench-oeis.yaml", 3499, "problem_catalog"),
-    "erbench-eponymous": ("catalogs/erbench-eponymous.yaml", 195, "problem_catalog"),
+    "erbench-oeis": ("catalogs/erbench-oeis.yaml", 10497, "problem_catalog"),
+    "erbench-eponymous": ("catalogs/erbench-eponymous.yaml", 585, "problem_catalog"),
 }
 
 CARD = """---
