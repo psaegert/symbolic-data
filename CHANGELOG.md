@@ -15,9 +15,12 @@ All notable changes to `symbolic-data` are documented here. The format follows
   decide inside a family. `independent` operators (pow and rootn, unary here through their literal
   exponent) keep the independent draw. The tree shape is unchanged and the urn is exchangeable, so every
   family keeps its share on average; alpha -> infinity is the independent draw. Motivation, measured
-  2026-11-03 on 1,610 Wikidata defining formulas: two function nodes of one formula share a family 85 % of
-  the time against 30 % for independent labels with the same shares (Dirichlet-multinomial MLE alpha 0.30,
-  95 % bootstrap 0.16-0.49); the per-node draw gives 17 % (alpha ~500). Every counted unary operator must
+  2026-11-03 on 11,668 real formulas (1,610 Wikidata defining formulas and 10,058 definition lines from
+  16,168 Wikipedia science articles; no benchmark sets): two function nodes of one formula share a family
+  87 % of the time against 29 % for independent labels with the same shares (Dirichlet-multinomial MLE
+  alpha 0.36, 95 % bootstrap 0.26-0.45); the per-node draw gives 17 %. The families exclude each other
+  (log odds ratio of co-presence trig|exp -3.8, trig|log -3.7, exp|log -3.1) while powers travel with all
+  of them (square|root +0.85, square|trig +0.41, square|exp 0), hence `independent`. Every counted unary operator must
   be in a family or in `independent` (an omission is an error). Absent = legacy (byte-identical).
 
 ## [0.18.0] - 2026-09-03
