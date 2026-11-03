@@ -10,6 +10,10 @@ On-disk a catalog is a single yaml with two top-level blocks::
     expressions:
       <eq_id>: {raw, prepared, n_variables, vars: {vN: {name, sample_range, sample_type, ...}}, ...}
 
+A variable is drawn from its fastsrb shorthand (``sample_range``/``sample_type``), a ``dist`` config or
+mixture, or derived from the entry's ``latent`` variables (``expr``); an entry may draw its rows jointly
+(``inputs``) and restrict them (``constraints``). See :mod:`symbolic_data.inputs`.
+
 Catalogs are loaded through :func:`load_catalog`, which resolves a reference (a local path, a
 ``name[@version]`` against the official Hugging Face manifest, or ``repo_id:name[@version]`` against
 a third-party one) via :mod:`symbolic_data.resolver`. Curated catalogs are HF artifacts, not bundled
@@ -29,7 +33,7 @@ from symbolic_data.numeric import STORAGE_DTYPE, STORAGE_DTYPE_MARKER
 import yaml
 
 from symbolic_data._evaluation import broadcast_target, compile_expression, evaluate
-from symbolic_data.distributions import fastsrb_dist
+from symbolic_data.inputs import constraint_mask, draw_rows
 from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.problem import Problem
 from symbolic_data.resolver import resolve
@@ -376,19 +380,13 @@ class ProblemCatalog(Catalog):
         if isinstance(f_meta, (int, float)) and 0.0 < f_meta < 1.0:
             n_first = min(int(n_points / max(f_meta, 1.0 / _PER_POINT_REJECTION_CAP) * 1.25) + 8,
                           _PER_POINT_REJECTION_CAP * n_points)
-        columns = []
         try:
-            for key in variable_order:
-                spec = entry.variables[key]
-                base, sign = spec["sample_type"]
-                low, high = spec["sample_range"]
-                columns.append(fastsrb_dist(low, high, base=base, sign=sign, layout=layout, size=n_first, rng=rng))
-        except (KeyError, ValueError, TypeError) as exc:
+            x_all = draw_rows(entry.variables, entry.meta, variable_order, n_first, rng, layout)
+        except (KeyError, ValueError, TypeError, NameError, SyntaxError) as exc:
             # A missing/malformed per-variable spec is a permanent entry defect (not a transient draw
             # failure): raise CatalogEntryError so the source yields a placeholder instead of crashing
             # the whole iteration -- mirroring _compiled()'s compile_failed handling.
             raise CatalogEntryError(f"malformed variable spec for {entry.id!r}: {exc}") from exc
-        x_all = np.column_stack(columns).astype(float)
         value_map = {var: x_all[:, i] for i, var in enumerate(variable_order)}
         try:
             y_all = broadcast_target(evaluate(compiled, value_map), n_first, entry.id).reshape(-1, 1)
@@ -407,7 +405,8 @@ class ProblemCatalog(Catalog):
         # frozen Problem arrays is rejected here. The adaptive top-up below must judge it the
         # same way, or the first batch and the later batches disagree about what is valid.
         finite_mask = (np.isfinite(x_all.astype(STORAGE_DTYPE)).all(axis=1)
-                       & np.isfinite(y_all.astype(STORAGE_DTYPE)).all(axis=1))
+                       & np.isfinite(y_all.astype(STORAGE_DTYPE)).all(axis=1)
+                       & constraint_mask(entry.meta, x_all, variable_order))
         if finite_mask.all() and n_first > n_points:
             x_all, y_all = x_all[:n_points], y_all[:n_points]
         elif not finite_mask.all():
@@ -417,22 +416,15 @@ class ProblemCatalog(Catalog):
             max_draws = _PER_POINT_REJECTION_CAP * n_points
             while collected < n_points and drawn < max_draws:
                 batch = _adaptive_batch(n_points - collected, collected, drawn, max_draws - drawn)
-                cols = [
-                    fastsrb_dist(entry.variables[key]["sample_range"][0],
-                                 entry.variables[key]["sample_range"][1],
-                                 base=entry.variables[key]["sample_type"][0],
-                                 sign=entry.variables[key]["sample_type"][1],
-                                 layout=layout, size=batch, rng=rng)
-                    for key in variable_order
-                ]
-                xb = np.column_stack(cols).astype(float)
+                xb = draw_rows(entry.variables, entry.meta, variable_order, batch, rng, layout)
                 vb = {var: xb[:, i] for i, var in enumerate(variable_order)}
                 try:
                     yb = broadcast_target(evaluate(compiled, vb), batch, entry.id).reshape(-1, 1)
                 except Exception as exc:
                     raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
                 mask = (np.isfinite(xb.astype(STORAGE_DTYPE)).all(axis=1)
-                        & np.isfinite(yb.astype(STORAGE_DTYPE)).all(axis=1))
+                        & np.isfinite(yb.astype(STORAGE_DTYPE)).all(axis=1)
+                        & constraint_mask(entry.meta, xb, variable_order))
                 keep_x.append(xb[mask])
                 keep_y.append(yb[mask])
                 collected += int(mask.sum())
