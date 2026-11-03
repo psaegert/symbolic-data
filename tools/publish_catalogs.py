@@ -54,7 +54,7 @@ CATALOGS = {
     # P1 GP-toy suites (DSO benchmarks.csv, BSD-3; validated 2026-07-10, 16/16)
     "constant": ("constant.yaml", 10, "problem_catalog"),
     "grammarvae": ("grammarvae.yaml", 1, "problem_catalog"),
-    "jin": ("jin.yaml", 6, "problem_catalog"),
+    "jin": ("jin.yaml", 18, "problem_catalog"),
     "keijzer": ("keijzer.yaml", 14, "problem_catalog"),
     "korns": ("korns.yaml", 15, "problem_catalog"),
     "koza": ("koza.yaml", 2, "problem_catalog"),
@@ -86,9 +86,9 @@ CATALOGS = {
     # P4 neural-SR bespoke: SOOSE NC/WC/FC (NeSymReS, MIT; WC/FC recovered from deleted history
     # @0cfff79 — the only surviving concrete instantiation). SSDNC (no license + no canonical
     # artifact), TPSR-400 (protocol, not a file), SymbolicGPT (generator configs only) = skips.
-    "soose-nc": ("soose-nc.yaml", 200, "problem_catalog"),
-    "soose-wc": ("soose-wc.yaml", 200, "problem_catalog"),
-    "soose-fc": ("soose-fc.yaml", 200, "problem_catalog"),
+    "soose-nc": ("soose-nc.yaml", 400, "problem_catalog"),
+    "soose-wc": ("soose-wc.yaml", 400, "problem_catalog"),
+    "soose-fc": ("soose-fc.yaml", 400, "problem_catalog"),
     # P5 ERBench permissive novel families (MIT/BSD-3; arXiv:2606.09276). The CC-BY-SA families
     # (erbench-oeis, erbench-eponymous) publish to the SEPARATE SA repo via publish_catalogs_sa.py.
     "erbench-syneq": ("erbench-syneq.yaml", 5301, "problem_catalog"),

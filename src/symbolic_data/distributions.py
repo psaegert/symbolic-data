@@ -107,6 +107,21 @@ def choice_dist(
     return value_array[indices]
 
 
+def grid_dist(
+    low: float,
+    high: float,
+    step: float,
+    size: Any = 1,
+    rng: np.random.Generator | None = None,
+) -> np.ndarray:
+    """Uniform over the evenly spaced points ``low, low + step, ..., high`` (both ends included): a benchmark's
+    test mesh (Keijzer 2003's ``[-3:0.01:3]``) without writing out its points."""
+    if step <= 0 or high < low:
+        raise ValueError(f"grid distribution needs step > 0 and high >= low, got {low}, {high}, {step}")
+    n = int(round((high - low) / step)) + 1
+    return np.round(low + step * _resolve_rng(rng).integers(0, n, size=size), 12)
+
+
 def rounded_dist(
     base: Callable[..., np.ndarray] | dict[str, Any],
     precision: Callable[..., np.ndarray] | dict[str, Any] | None = None,
@@ -334,6 +349,7 @@ BASE_DISTRIBUTIONS: dict[str, Callable[..., np.ndarray]] = {
     "normal": normal_dist,
     "folded_normal": folded_normal_dist,
     "choice": choice_dist,
+    "grid": grid_dist,
     "rounded": rounded_dist,
     "log_uniform": log_uniform_dist,
     "log_normal": log_normal_dist,

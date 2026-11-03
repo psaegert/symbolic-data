@@ -253,6 +253,28 @@ expressions:
         - pos
       v0:
         name: y
+    meta:
+      finite_fraction: 1.0
+    test:
+      vars:
+        v1:
+          dist:
+            name: grid
+            kwargs:
+              low: 0.0
+              high: 1.0
+              step: 0.01
+        v2:
+          dist:
+            name: grid
+            kwargs:
+              low: 0.0
+              high: 1.0
+              step: 0.01
+    test_source: 'M. Keijzer, EuroGP 2003, author preprint p. 9 Table 3 (page crop /home/psaegert/srbf_eval_local/workflow_archive/catalog-prep/raw/fresh-10/keijzer2003_p9_table3.png,
+      opened); caption: ''The training and testing ranges are denoted using [start:step:stop]
+      notation when the set is created using regular intervals. The notation rnd(min,max)
+      defines random (uniform) sampling in the range, while the mesh('
   Nguyen-12:
     raw: x1 ** 4 - x1 ** 3 + x2 ** 2 / 2 - x2
     prepared: v1 ** 4 - v1 ** 3 + v2 ** 2 / 2 - v2

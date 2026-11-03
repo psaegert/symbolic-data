@@ -64,6 +64,26 @@ expressions:
             - 0.05
         function_set: Vladislavleva-B
       finite_fraction: 1.0
+    test:
+      vars:
+        v1:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.2
+              high: 4.2
+              step: 0.1
+        v2:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.2
+              high: 4.2
+              step: 0.1
+    test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
+      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
   Vladislavleva-4:
     raw: div(10,(5+(pow((x1-3),2)+pow((x2-3),2)+pow((x3-3),2)+pow((x4-3),2)+pow((x5-3),2))))
     prepared: ((10)/((5+((((v1-3))**(2))+(((v2-3))**(2))+(((v3-3))**(2))+(((v4-3))**(2))+(((v5-3))**(2))))))
@@ -131,6 +151,42 @@ expressions:
             - 5000
         function_set: Vladislavleva-A
       finite_fraction: 1.0
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+        v3:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+        v4:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+        v5:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+    test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
+      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
   Vladislavleva-5:
     raw: 30*(x1-1)*div(x3-1,(x1-10)*pow(x2,2))
     prepared: 30*(v1-1)*((v3-1)/((v1-10)*((v2)**(2))))
@@ -202,6 +258,33 @@ expressions:
             - 0.15
         function_set: Vladislavleva-A
       finite_fraction: 1.0
+    test:
+      vars:
+        v1:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.05
+              high: 2.1
+              step: 0.15
+        v2:
+          dist:
+            name: grid
+            kwargs:
+              low: 0.95
+              high: 2.05
+              step: 0.1
+        v3:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.05
+              high: 2.1
+              step: 0.15
+    test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
+      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
   Vladislavleva-6:
     raw: 6*sin(x1)*cos(x2)
     prepared: 6*sin(v1)*cos(v2)
@@ -245,6 +328,26 @@ expressions:
             - 0.02
         function_set: Vladislavleva-B
       finite_fraction: 1.0
+    test:
+      vars:
+        v1:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.05
+              high: 6.05
+              step: 0.02
+        v2:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.05
+              high: 6.05
+              step: 0.02
+    test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
+      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
   Vladislavleva-7:
     raw: (x1 - 3)*(x2 - 3) + 2*sin((x1 - 4)*(x2 - 4))
     prepared: (v1 - 3)*(v2 - 3) + 2*sin((v1 - 4)*(v2 - 4))
@@ -275,6 +378,24 @@ expressions:
     source_audit: the authors' definition (catalog-prep fresh-13) replaces the DSO transcription
     meta:
       finite_fraction: 1.0
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+    test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
+      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
   Vladislavleva-8:
     raw: div(pow((x1-3),4)+pow((x2-3),3)-(x2-3),pow((x2-2),4)+10)
     prepared: (((((v1-3))**(4))+(((v2-3))**(3))-(v2-3))/((((v2-2))**(4))+10))
@@ -318,3 +439,23 @@ expressions:
             - 0.2
         function_set: Vladislavleva-A
       finite_fraction: 1.0
+    test:
+      vars:
+        v1:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.25
+              high: 6.35
+              step: 0.2
+        v2:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.25
+              high: 6.35
+              step: 0.2
+    test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
+      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'

@@ -178,3 +178,9 @@ def test_an_erbench_dummy_takes_the_point_sets_own_values():
                                             supports=[[0.0, 1.0], [10.0, 20.0]], alpha=0.0, dummies=1)
     assert x.shape == (200, 3) and set(x[:, 2]) <= set(x[:, :2].reshape(-1))
     assert (x[:, 2] < 1.0).any() and (x[:, 2] > 10.0).any()           # from both variables' values
+
+
+def test_a_grid_draws_the_mesh_points_uniformly():
+    x = draw_variable({"dist": {"name": "grid", "kwargs": {"low": -3.0, "high": 3.0, "step": 0.01}}}, 60000, np.random.default_rng(13))
+    assert np.allclose(x * 100, np.round(x * 100)) and x.min() == -3.0 and x.max() == 3.0
+    assert len(np.unique(x)) == 601 and abs(x.mean()) < 0.03
