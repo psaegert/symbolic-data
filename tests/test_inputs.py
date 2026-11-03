@@ -171,3 +171,10 @@ def test_the_erbench_mixture_fits_in_the_window_and_tests_outside_it():
     assert np.array_equal(ints, np.round(ints)) and ints.min() >= 1 and ints.max() <= 251
     with pytest.raises(ValueError):
         erb(size=5, n_variables=1, rng=rng, supports=[[0.0, 1.0]], region="eval")
+
+
+def test_an_erbench_dummy_takes_the_point_sets_own_values():
+    x = JOINT_INPUTS.get("erbench_mixture")(size=200, n_variables=3, rng=np.random.default_rng(12),
+                                            supports=[[0.0, 1.0], [10.0, 20.0]], alpha=0.0, dummies=1)
+    assert x.shape == (200, 3) and set(x[:, 2]) <= set(x[:, :2].reshape(-1))
+    assert (x[:, 2] < 1.0).any() and (x[:, 2] > 10.0).any()           # from both variables' values

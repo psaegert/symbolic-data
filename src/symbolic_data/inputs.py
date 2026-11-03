@@ -189,7 +189,8 @@ def _erbench_samples(a: float, b: float, n: int, dtype: str, rng: np.random.Gene
 
 
 def erbench_mixture(size: int, n_variables: int, rng: np.random.Generator, supports: Sequence[Sequence[float]],
-                    alpha: float = 0.5, region: str = "fit", dtype: str = "float", max_parts: int = 3) -> np.ndarray:
+                    alpha: float = 0.5, region: str = "fit", dtype: str = "float", max_parts: int = 3,
+                    dummies: int = 0) -> np.ndarray:
     """ERBench's input distribution (Kahlmeyer et al. 2026, App. A.3; src/benchmark.py ``get_samples`` and
     ``generate_problem``). Every variable has its own mixture of 1..``max_parts`` parts, each part uniform on a random
     sub-interval or normal with mean ~ U(a, b) and sigma = (distance to the nearer edge) / 3 (for integers: uniform or
@@ -197,11 +198,12 @@ def erbench_mixture(size: int, n_variables: int, rng: np.random.Generator, suppo
     width, a1 = a + alpha (b - a) / 2 to a1 + (b - a) / 2 (floored and ceiled for integers); the test rows (``region:
     test``) from the rest of the support, split between its two sides by length. A support of zero width is the same in
     both. As in ERBench, a column's values stay in part order and the rows are permuted together, so the parts are
-    aligned across the variables; every call draws fresh mixtures (one point set)."""
+    aligned across the variables; every call draws fresh mixtures (one point set). ``dummies`` columns follow the
+    variables (ERBench draws 0 or 1 per problem), each value drawn from all of the point set's variable values."""
     if region not in ("fit", "test"):
         raise ValueError(f"erbench_mixture region must be 'fit' or 'test', got {region!r}")
-    if len(supports) != n_variables:
-        raise ValueError(f"erbench_mixture has {len(supports)} supports for {n_variables} variables")
+    if len(supports) + dummies != n_variables:
+        raise ValueError(f"erbench_mixture has {len(supports)} supports and {dummies} dummies for {n_variables} variables")
     columns = []
     for a, b in ((float(lo), float(hi)) for lo, hi in supports):
         if a == b:
@@ -218,7 +220,10 @@ def erbench_mixture(size: int, n_variables: int, rng: np.random.Generator, suppo
         else:
             left = _erbench_samples(a, a1, int((a1 - a) * size / ((a1 - a) + (b - b1))), dtype, rng, max_parts)
             columns.append(np.concatenate([left, _erbench_samples(b1, b, size - left.size, dtype, rng, max_parts)]))
-    return np.column_stack(columns)[rng.permutation(size)]
+    x = np.column_stack(columns)
+    if dummies:
+        x = np.column_stack([x, rng.choice(x.reshape(-1), size=(size, dummies), replace=True)])
+    return x[rng.permutation(size)]
 
 
 JOINT_INPUTS.register_builtin("e2e_mixture", e2e_mixture)
