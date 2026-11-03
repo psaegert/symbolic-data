@@ -98,6 +98,7 @@ class SkeletonSampler:
         nesting_decay: float | None = None,
         nesting_transparent: Sequence[str] | None = None,
         alternation_decay: float | None = None,
+        family_affinity: dict[str, Any] | None = None,
     ) -> None:
         self.simplipy_engine = simplipy_engine
         self.sample_strategy = sample_strategy
@@ -201,6 +202,8 @@ class SkeletonSampler:
         self._nesting: dict[str, Any] | None = None
         if alternation_decay is not None and nesting_decay is None:
             raise ValueError('alternation_decay requires nesting_decay (the width prior lives on the exact-size draw)')
+        if family_affinity is not None and nesting_decay is None:
+            raise ValueError('family_affinity requires nesting_decay (the coherence prior lives on the exact-size draw)')
         if nesting_decay is not None:
             if operator_families or operator_profiles:
                 raise ValueError('nesting_decay is exclusive with operator_families / operator_profiles')
@@ -226,7 +229,62 @@ class SkeletonSampler:
                     raise ValueError(f'alternation_decay must lie in (0, 1], got {alternation_decay!r}')
                 cls_of = {'+': 'A', '-': 'A', '*': 'M', '/': 'M'}
                 self._nesting.update({'delta': delta, 'bin_class': [cls_of.get(op, op) for op in self.binary_operators]})
+            # COHERENCE PRIOR (owner request 2026-11-03, for T8.3): which function fills a counted unary
+            # node. Real formulas speak one family of functions at a time -- among the Wikidata defining
+            # formulas with two or more function nodes, two of them share a family 85 % of the time against
+            # 30 % for labels drawn independently from the same shares, while the independent per-node draw
+            # gives 17 % (2026-11-03). The labels of one expression are a Dirichlet-multinomial (Polya urn)
+            # draw: the k-th function node takes family f with probability
+            #     (alpha * pi_f + n_f) / (alpha + k - 1),
+            # pi_f the family's share of the operator weights, n_f the nodes already in f; inside a family
+            # the operator weights decide. Operators listed as `independent` (pow and rootn, whose literal
+            # exponent makes them unary here) stay outside the urn: a node is theirs with their weight share,
+            # drawn independently, because real formulas square and root inside every family. A LABEL prior like the width prior: the tree shape is the depth
+            # prior's draw, unchanged, and the urn is exchangeable, so the fill order does not matter and
+            # each family keeps its share pi_f on average; alpha -> infinity is the independent draw.
+            self._nesting['affinity'] = self._validate_affinity(family_affinity, F, w) if family_affinity is not None else None
             self._nesting_table(max_operators)
+
+    @staticmethod
+    def _validate_affinity(spec: dict[str, Any], F: Sequence[str], w: dict[str, float]) -> dict[str, Any]:
+        """The coherence prior's urn: families over the counted unary operators F, each with its weight
+        share and its within-family operator probabilities. ``independent`` operators stay outside the urn
+        and keep the independent draw (powers and roots: real formulas square and root inside every family).
+        Every operator of F is in exactly one family or in ``independent`` (an omission is an error, never a
+        silent drop)."""
+        if not isinstance(spec, dict) or not {'concentration', 'families'} <= set(spec) <= {'concentration', 'families', 'independent'}:
+            raise ValueError("family_affinity is {concentration: alpha, families: {name: [operator, ...]}, "
+                             "independent: [operator, ...]}")
+        alpha = float(spec['concentration'])
+        if not alpha > 0:
+            raise ValueError(f'family_affinity.concentration must be positive, got {alpha!r}')
+        families = spec['families']
+        if not isinstance(families, dict) or not families:
+            raise ValueError('family_affinity.families maps each family name to its operators')
+        members: list[list[str]] = []
+        seen: dict[str, str] = {}
+        independent = [str(op) for op in spec.get('independent', [])]
+        for name, ops in [('independent', independent)] + list(families.items()):
+            ops = [str(op) for op in ops]
+            for op in ops:
+                if op in seen:
+                    raise ValueError(f'family_affinity: {op!r} is in both {seen[op]!r} and {name!r}')
+                if op not in F:
+                    raise ValueError(f'family_affinity: {op!r} ({name}) is not a counted unary operator with weight > 0')
+                seen[op] = name
+            if name != 'independent':
+                members.append(ops)
+        missing = [op for op in F if op not in seen]
+        if missing:
+            raise ValueError(f'family_affinity: every counted unary operator needs a family; missing {missing}')
+        mass = np.array([sum(w[op] for op in ops) for ops in members], dtype=np.float64)
+        free_mass = sum(w[op] for op in independent)
+        return {'alpha': alpha, 'names': list(families), 'members': members, 'pi': mass / mass.sum(),
+                'within': [np.array([w[op] for op in ops], dtype=np.float64) / sum(w[op] for op in ops)
+                           for ops in members],
+                'independent': independent, 'p_independent': free_mass / (free_mass + mass.sum()),
+                'within_independent': (np.array([w[op] for op in independent], dtype=np.float64) / free_mass
+                                       if independent else None)}
 
     def _nesting_table(self, nmax: int) -> list[list[float]]:
         """C[c][m]: total weight of trees with m operators grown under a slot of chain depth c.
@@ -256,6 +314,19 @@ class SkeletonSampler:
         sticky = delta < 1.0
         arity = self.simplipy_engine.operator_arity
         out: list[Any] = []
+        urn = ns.get('affinity')
+        family_counts = np.zeros(len(urn['members']), dtype=np.float64) if urn is not None else None
+
+        def function_label() -> str:
+            if urn is None:
+                return str(rng.choice(ns['F'], p=ns['pF']))
+            if urn['independent'] and rng.random() < urn['p_independent']:
+                return str(rng.choice(urn['independent'], p=urn['within_independent']))
+            p = urn['alpha'] * urn['pi'] + family_counts
+            f = int(rng.choice(len(p), p=p / p.sum()))
+            family_counts[f] += 1
+            members = urn['members'][f]
+            return members[0] if len(members) == 1 else str(rng.choice(members, p=urn['within'][f]))
 
         def emit(operator: str, children: list[tuple[int, int, Any]]) -> None:
             slot_spec = self.typed_slots.get(operator)
@@ -278,7 +349,7 @@ class SkeletonSampler:
             pB = float(splits.sum())
             r = rng.random() * (pF + pS + pB)
             if r < pF:
-                emit(str(rng.choice(ns['F'], p=ns['pF'])), [(min(c + 1, D), m - 1, None)])
+                emit(function_label(), [(min(c + 1, D), m - 1, None)])
             elif r < pF + pS:
                 emit(str(rng.choice(ns['S'], p=ns['pS'])), [(c, m - 1, k)])
             else:

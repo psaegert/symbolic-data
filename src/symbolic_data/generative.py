@@ -200,6 +200,12 @@ class LampleChartonCatalog(GenerativeCatalog):
         Per-expression operator families, one independent coin each
         (``{name, p, operators}``; ``p = 1`` is the always-present base). Mutually
         exclusive with ``operator_profiles``. See :class:`SkeletonSampler`.
+    family_affinity : dict, optional
+        The family-coherence label prior on the depth prior's draw: ``{concentration: alpha,
+        families: {name: [operator, ...]}}``. Each expression's function nodes draw their family
+        from a Dirichlet-multinomial urn of concentration ``alpha`` around the families' weight
+        shares, so one expression tends to stay in one family. Requires ``nesting_decay``. See
+        :class:`SkeletonSampler`.
 
     Notes
     -----
@@ -227,6 +233,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             nesting_decay: float | None = None,
             nesting_transparent: list[str] | None = None,
             alternation_decay: float | None = None,
+            family_affinity: dict[str, Any] | None = None,
             typed_slots: dict[str, Any] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
@@ -249,6 +256,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         self.nesting_decay = nesting_decay
         self.nesting_transparent = nesting_transparent
         self.alternation_decay = alternation_decay
+        self.family_affinity = family_affinity
         # Constrained argument slots (``pow`` exponent, ``rootn`` index). The retired
         # hyper-operator vocabulary carried this constraint in the vocabulary itself;
         # on the 23-operator vocabulary it has to live here or the tree sampler fills
@@ -277,6 +285,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             nesting_decay=self.nesting_decay,
             nesting_transparent=self.nesting_transparent,
             alternation_decay=self.alternation_decay,
+            family_affinity=self.family_affinity,
             literal_prior=literal_prior,
             typed_slots=self.typed_slots,
         )
@@ -384,6 +393,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             nesting_decay=config_.get("nesting_decay"),
             nesting_transparent=config_.get("nesting_transparent"),
             alternation_decay=config_.get("alternation_decay"),
+            family_affinity=config_.get("family_affinity"),
             typed_slots=config_.get("typed_slots"),
             holdout_pools=config_.get("holdout_pools", []),
             allow_nan=config_.get("allow_nan", False),
@@ -421,6 +431,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             nesting_decay: float | None = None,
             nesting_transparent: list[str] | None = None,
             alternation_decay: float | None = None,
+            family_affinity: dict[str, Any] | None = None,
             typed_slots: dict[str, Any] | None = None,
             skeleton_codes: dict[tuple[str], tuple[CodeType, list[str]]] | None = None,
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
@@ -484,6 +495,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             nesting_decay=nesting_decay,
             nesting_transparent=nesting_transparent,
             alternation_decay=alternation_decay,
+            family_affinity=family_affinity,
             typed_slots=typed_slots,
             holdout_pools=holdout_pools,
             allow_nan=allow_nan,
@@ -1624,6 +1636,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             nesting_decay=self.nesting_decay,
             nesting_transparent=self.nesting_transparent,
             alternation_decay=self.alternation_decay,
+            family_affinity=self.family_affinity,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
         test_pool = LampleChartonCatalog.from_dict(
@@ -1642,6 +1655,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             nesting_decay=self.nesting_decay,
             nesting_transparent=self.nesting_transparent,
             alternation_decay=self.alternation_decay,
+            family_affinity=self.family_affinity,
             holdout_pools=self.holdout_pools,
             allow_nan=self.allow_nan)
 
