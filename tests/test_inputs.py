@@ -73,3 +73,9 @@ def test_realize_draws_from_a_dist_and_rejects_a_malformed_spec(engine):
     bad = _catalog({"prepared": "v1", "vars": {"v1": {"dist": {"name": "no_such_distribution"}}}})
     with pytest.raises(CatalogEntryError):
         bad.realize(bad["e"], 10, np.random.default_rng(5), engine=engine)
+
+
+def test_a_folded_normal_is_a_normal_folded_onto_the_half_line():
+    x = draw_variable({"dist": {"name": "folded_normal", "kwargs": {"loc": 2.0, "scale": 3.0 ** 0.5}}}, 20000, np.random.default_rng(6))
+    folded = np.abs(np.random.default_rng(6).normal(2.0, 3.0 ** 0.5, 20000))
+    assert (x >= 0).all() and np.allclose(x, folded)

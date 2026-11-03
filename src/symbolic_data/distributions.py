@@ -156,6 +156,16 @@ def rounded_dist(
     return out.reshape(shape)
 
 
+def folded_normal_dist(
+    loc: float,
+    scale: float,
+    size: Any = 1,
+    rng: np.random.Generator | None = None,
+) -> np.ndarray:
+    """|X| for X ~ N(loc, scale^2): a normal draw folded onto the non-negative half-line."""
+    return np.abs(_resolve_rng(rng).normal(loc, max(scale, 1e-9), size=size))
+
+
 def log_uniform_dist(
     low: float,
     high: float,
@@ -322,6 +332,7 @@ def fastsrb_dist(
 BASE_DISTRIBUTIONS: dict[str, Callable[..., np.ndarray]] = {
     "uniform": uniform_dist,
     "normal": normal_dist,
+    "folded_normal": folded_normal_dist,
     "choice": choice_dist,
     "rounded": rounded_dist,
     "log_uniform": log_uniform_dist,
