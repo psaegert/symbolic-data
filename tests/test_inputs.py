@@ -55,13 +55,13 @@ def test_a_joint_sampler_draws_all_inputs_at_once():
 
 def test_constraints_mask_rows():
     x = np.array([[2.0, 1.0], [1.0, 2.0], [3.0, 3.0]])
-    assert constraint_mask({"constraints": ["v1 > v2"]}, x, ["v1", "v2"]).tolist() == [True, False, False]
+    assert constraint_mask({"row_constraints": ["v1 > v2"]}, x, ["v1", "v2"]).tolist() == [True, False, False]
     assert constraint_mask({}, x, ["v1", "v2"]).all()
 
 
 def test_realize_keeps_only_rows_that_satisfy_the_constraints(engine):
     box = {"sample_range": [0.0, 1.0], "sample_type": ["uni", "pos"]}
-    cat = _catalog({"prepared": "v1 - v2", "vars": {"v1": dict(box), "v2": dict(box)}, "constraints": ["v1 > v2"]})
+    cat = _catalog({"prepared": "v1 - v2", "vars": {"v1": dict(box), "v2": dict(box)}, "row_constraints": ["v1 > v2"]})
     rex = cat.realize(cat["e"], 200, np.random.default_rng(3), engine=engine)
     assert rex.x.shape == (200, 2) and (rex.x[:, 0] > rex.x[:, 1]).all() and (rex.y > 0).all()
 
@@ -91,3 +91,8 @@ def test_the_e2e_mixture_draws_whitened_clusters_of_the_functions_shape():
     assert np.isclose(one.std(), 4.0)
     with pytest.raises(ValueError):
         JOINT_INPUTS.get("e2e_mixture")(size=5, n_variables=1, rng=rng, shape="laplace")
+
+
+def test_fastsrb_constraints_are_notes_not_row_constraints():
+    # FastSRB entries carry their own `constraints` (e.g. ['v4 != 0'], with ^ for powers): never enforced
+    assert constraint_mask({"constraints": ["v1 ^ 2 > 0"]}, np.ones((3, 1)), ["v1"]).all()

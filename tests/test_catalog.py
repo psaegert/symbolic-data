@@ -17,12 +17,15 @@ def _local(name: str) -> ProblemCatalog:
     return load_catalog(str(ASSETS / f"{name}.yaml"))
 
 
+CURATED_VERSIONS = {"keijzer": 2, "korns": 2, "nguyen": 2, "poly": 2, "vladislavleva": 2, "fastsrb.v2": 3}
+
+
 @pytest.mark.parametrize("name,count", CURATED_COUNTS.items())
 def test_load_curated_catalog_counts_and_metadata(name, count):
     cat = _local(name)
     assert isinstance(cat, ProblemCatalog)
     assert cat.name == name
-    assert cat.version == 1
+    assert cat.version == CURATED_VERSIONS.get(name, 1)   # bumped where the 2026-10-05 source audit fixed an entry
     assert cat.source == "local"
     assert len(cat) == count
     assert len(list(cat.iter_expressions())) == count

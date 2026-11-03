@@ -12,7 +12,7 @@ On-disk a catalog is a single yaml with two top-level blocks::
 
 A variable is drawn from its fastsrb shorthand (``sample_range``/``sample_type``), a ``dist`` config or
 mixture, or derived from the entry's ``latent`` variables (``expr``); an entry may draw its rows jointly
-(``inputs``) and restrict them (``constraints``). See :mod:`symbolic_data.inputs`.
+(``inputs``) and restrict them (``row_constraints``). See :mod:`symbolic_data.inputs`.
 
 Catalogs are loaded through :func:`load_catalog`, which resolves a reference (a local path, a
 ``name[@version]`` against the official Hugging Face manifest, or ``repo_id:name[@version]`` against

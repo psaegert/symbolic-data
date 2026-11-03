@@ -12,8 +12,9 @@ A variable's spec in an entry's ``vars`` block takes one of three forms:
 
 An entry may instead draw all its inputs jointly, ``inputs: {name: ..., kwargs: {...}}``, with a sampler
 from :data:`JOINT_INPUTS` (for distributions that are not a product over variables, such as clusters
-rotated in the whole input space), and may restrict its rows with ``constraints``: expressions over the
-variables (``v1 > v2``) that every accepted row satisfies. A constraint acts like the expression's
+rotated in the whole input space), and may restrict its rows with ``row_constraints``: expressions over the
+variables (``v1 > v2``) that every accepted row satisfies (not ``constraints``: FastSRB's entries use that key for
+their own notes). A constraint acts like the expression's
 domain: rows that violate it are redrawn, so the accepted rows follow the declared distribution
 conditioned on the constraint.
 """
@@ -91,8 +92,8 @@ def draw_rows(variables: Mapping[str, Mapping[str, Any]], meta: Mapping[str, Any
 
 
 def constraint_mask(meta: Mapping[str, Any], x: np.ndarray, variable_order: Sequence[str]) -> np.ndarray:
-    """The rows that satisfy every one of the entry's ``constraints`` (all rows when it has none)."""
-    constraints = meta.get("constraints") or []
+    """The rows that satisfy every one of the entry's ``row_constraints`` (all rows when it has none)."""
+    constraints = meta.get("row_constraints") or []
     ok = np.ones(x.shape[0], dtype=bool)
     if constraints:
         names = {key: x[:, i] for i, key in enumerate(variable_order)}
