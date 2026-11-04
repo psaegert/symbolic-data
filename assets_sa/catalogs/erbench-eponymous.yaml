@@ -1,6 +1,7 @@
 metadata:
   name: erbench-eponymous
   version: 2
+  tags: {"origin": "science formula", "tags": ["extrapolation", "dummy inputs"]}
   description: ERBench Eponymous family (195 entries after deduplication; headline eval tier); one problem per formula and
     alpha (ERBench's generator).
   sources:

@@ -1,6 +1,7 @@
 metadata:
   name: physo-class
-  version: 1
+  version: 2
+  tags: {"origin": "science formula", "tags": []}
   description: The 8 Class-SR benchmark laws (Tenachi et al. 2024, arXiv:2312.01816, Table 1 =
     ClassEquations.csv), flattened to one representative realization each. Upstream protocol
     draws the `spe` constants uniformly per realization; here each spe is frozen at a documented

@@ -1,6 +1,7 @@
 metadata:
   name: pagie
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   description: Pagie coevolution benchmark.
   sources:
   - Pagie & Hogeweg 1997 (Evolutionary Computation)

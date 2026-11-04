@@ -1,6 +1,7 @@
 metadata:
   name: meier
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   description: Meier suite.
   sources:
   - Meier et al. (via GP benchmark surveys)

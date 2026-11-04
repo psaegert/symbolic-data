@@ -1,6 +1,7 @@
 metadata:
   name: soose-fc
   version: 2
+  tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
   description: 'SOOSE-FC: 200 out-of-training-sample NeSymReS skeletons, full constants: EVERY placeholder
     slot sampled (''one constant per term''), then sympy.simplify (which compounds literals beyond the
     sampling ranges); 2-6 literals per expression, no constant-free rows; frozen historical instantiation.'

@@ -1,6 +1,7 @@
 metadata:
   name: nguyen
   version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   description: Nguyen symbolic-regression suite (Uy et al. 2011), 12 equations.
   sources:
   - Nguyen benchmark (Uy et al. 2011)

@@ -1,6 +1,7 @@
 metadata:
   name: feynman-bonus
-  version: 1
+  version: 2
+  tags: {"origin": "science formula", "tags": []}
   description: AI-Feynman BONUS set (20 named physics results), aifeynman-original rendering — the 3rd rendering
     of the bonus set alongside fastsrb B1-B20 (SRSD) and srsd-dummy B1-B20, mirroring the main set's variant structure.
   sources: &id001

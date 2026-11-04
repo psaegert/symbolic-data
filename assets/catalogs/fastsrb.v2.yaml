@@ -1,6 +1,7 @@
 metadata:
   name: fastsrb
   version: 3
+  tags: {"origin": "science formula", "tags": []}
   license: MIT (viktmar/FastSRB; see THIRD_PARTY_LICENSES + upstream PR viktmar/FastSRB#1)
   description: FastSRB benchmark (Martinek, arXiv:2508.14481), 120 equations.
   sources:

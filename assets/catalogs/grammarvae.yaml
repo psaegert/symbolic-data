@@ -1,6 +1,7 @@
 metadata:
   name: grammarvae
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   description: GrammarVAE equation benchmark.
   sources:
   - Kusner et al. 2017 (ICML), Grammar Variational Autoencoder

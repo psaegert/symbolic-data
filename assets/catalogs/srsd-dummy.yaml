@@ -1,6 +1,7 @@
 metadata:
   name: srsd-dummy
-  version: 1
+  version: 2
+  tags: {"origin": "science formula", "tags": ["dummy inputs"]}
   description: 'SRSD Feynman dummy-variable variant (120): the fastsrb/SRSD-lineage
     problems with 1-3 irrelevant variables inserted at random positions (feature-selection
     axis).'

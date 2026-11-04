@@ -1,6 +1,7 @@
 metadata:
   name: korns
   version: 2
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
   description: Korns accuracy suite (5-variable, constant-heavy).
   sources:
   - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression

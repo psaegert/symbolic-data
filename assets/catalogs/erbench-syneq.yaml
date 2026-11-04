@@ -1,6 +1,7 @@
 metadata:
   name: erbench-syneq
   version: 2
+  tags: {"origin": "generated formulas", "tags": ["extrapolation", "dummy inputs"]}
   description: ERBench SynEq family (5301 entries after deduplication; extended eval tier); one problem per formula and alpha
     (ERBench's generator).
   sources:

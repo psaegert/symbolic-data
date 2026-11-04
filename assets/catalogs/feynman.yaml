@@ -1,6 +1,7 @@
 metadata:
   name: feynman
-  version: 1
+  version: 2
+  tags: {"origin": "science formula", "tags": []}
   description: Feynman Symbolic Regression Database (Udrescu & Tegmark 2020), 100
     equations.
   sources:

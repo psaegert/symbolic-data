@@ -1,6 +1,7 @@
 metadata:
   name: koza
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   description: Koza classic GP problems (quintic/sextic).
   sources:
   - Koza 1992/1994 (MIT Press), Genetic Programming I/II

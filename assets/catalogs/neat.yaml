@@ -1,6 +1,7 @@
 metadata:
   name: neat
   version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   description: neat-GP suite (aggregated classics).
   sources:
   - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming

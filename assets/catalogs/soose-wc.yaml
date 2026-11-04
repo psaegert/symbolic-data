@@ -1,6 +1,7 @@
 metadata:
   name: soose-wc
   version: 2
+  tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
   description: 'SOOSE-WC: 200 out-of-training-sample NeSymReS skeletons, with constants: upstream sampled
     0-3 of the placeholder slots (repo config: additive U(-2,2), multiplicative U(0.1,5)), then sympy.simplify
     — 47/200 rows end constant-free (kept as upstream ships them); literals are the FROZEN historical

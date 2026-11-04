@@ -1,6 +1,7 @@
 metadata:
   name: poly
   version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   description: Poly suite incl. Poly-10.
   sources:
   - Poli 2003 lineage (via DSO aggregation)

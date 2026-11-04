@@ -1,6 +1,7 @@
 metadata:
   name: erbench-oeis
   version: 2
+  tags: {"origin": "science formula", "tags": ["extrapolation", "dummy inputs", "integer inputs"]}
   description: ERBench OEIS family (3499 entries after deduplication; extended eval tier); one problem per formula and alpha
     (ERBench's generator).
   sources:

@@ -1,6 +1,7 @@
 metadata:
   name: jin
   version: 2
+  tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
   description: Jin Bayesian-SR suite.
   sources:
   - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression

@@ -1,6 +1,7 @@
 metadata:
   name: constant
   version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   dropped: "Const-Test-1, Const-Test-2: DSO repository sanity tests, not a benchmark (owner 2026-11-03)"
   description: Constant-optimization suite (incl. Const-Test sanity checks).
   sources:

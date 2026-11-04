@@ -1,6 +1,7 @@
 metadata:
   name: physo-astro
-  version: 1
+  version: 2
+  tags: {"origin": "science formula", "tags": []}
   description: PhySO paper astrophysics panel (arXiv:2303.03192 Appendix A) — the two genuinely
     new laws only. Declarative specs authored from the paper (no upstream data or generator is
     shipped); constants exactly as printed in Tables 6-8.

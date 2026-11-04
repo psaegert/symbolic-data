@@ -1,6 +1,7 @@
 metadata:
   name: livermore
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   description: Livermore suite (LLNL/DSR).
   sources:
   - Petersen et al. 2021 (ICLR) + Mundhenk et al. 2021 (NeurIPS), LLNL

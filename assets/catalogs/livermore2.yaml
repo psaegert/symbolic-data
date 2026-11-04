@@ -1,6 +1,7 @@
 metadata:
   name: livermore2
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   description: Livermore2 suite (Vars2-7 groups, 25 each).
   sources:
   - Mundhenk et al. 2021 (NeurIPS), LLNL neural-guided GP seeding

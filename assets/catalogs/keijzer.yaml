@@ -1,6 +1,7 @@
 metadata:
   name: keijzer
   version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
   companion: "keijzer-points: Keijzer-1, Keijzer-2, Keijzer-3, Keijzer-4, Keijzer-6, Keijzer-7, Keijzer-8, Keijzer-9, the authors pinned points (a data catalog)"
   description: Keijzer symbolic-regression suite.
   sources:

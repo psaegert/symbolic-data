@@ -1,6 +1,7 @@
 metadata:
   name: soose-nc
   version: 2
+  tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
   description: 'SOOSE-NC: 200 out-of-training-sample NeSymReS skeletons, no constants: all multiplicative
     placeholders = 1, additive = 0.'
   sources: &id001
