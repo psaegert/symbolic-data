@@ -2,6 +2,7 @@ metadata:
   name: scrbenchmark
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  license: "MIT (prescriptiveanalytics/SCR-Benchmarks; SRSD laws: omron-sinicx/srsd-benchmark, MIT)"
   description: SCRBenchmark (shape-constrained regression on SRSD-Feynman; Bachinger, Werth, Zenisek, Haider & de Franca,
     GECCO 2025 Companion)
   sources:

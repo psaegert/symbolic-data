@@ -2,6 +2,7 @@ metadata:
   name: knowledge-integration-newtonian-cases
   version: 1
   tags: {"origin": "science formula", "tags": ["dummy inputs"]}
+  license: "Apache-2.0 (bilgesi/SR-LLM-Integration) + CC BY 4.0 (Taskin et al. 2026, Sci. Rep. 16:1614)"
   description: Knowledge-integration Newtonian cases
   sources:
   - https://arxiv.org/abs/2509.03036

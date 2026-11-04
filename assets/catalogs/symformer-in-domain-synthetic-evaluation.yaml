@@ -2,6 +2,7 @@ metadata:
   name: symformer-in-domain-synthetic-evaluation
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
+  license: "CC BY 4.0 (Vastl et al. 2024, SymFormer, IEEE Access 12:37840); formulas drawn by srbf from the authors' generator"
   description: SymFormer in-domain synthetic evaluation
   sources:
   - https://arxiv.org/abs/2205.15764

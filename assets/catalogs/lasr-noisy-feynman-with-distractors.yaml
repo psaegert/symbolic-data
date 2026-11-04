@@ -2,6 +2,7 @@ metadata:
   name: lasr-noisy-feynman-with-distractors
   version: 1
   tags: {"origin": "science formula", "tags": ["dummy inputs"]}
+  license: "Apache-2.0 (trishullab/LibraryAugmentedSymbolicRegression.jl; Grayeli et al. 2024, arXiv:2409.09359)"
   description: LaSR noisy Feynman with distractors
   sources:
   - https://arxiv.org/abs/2409.09359

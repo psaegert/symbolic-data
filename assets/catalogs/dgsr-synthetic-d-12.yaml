@@ -2,6 +2,7 @@ metadata:
   name: dgsr-synthetic-d-12
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
+  license: "BSD-3-Clause (benchmarks.csv, DSO fork in samholt/DeepGenerativeSymbolicRegression; Holt et al. 2023, arXiv:2401.00282)"
   description: DGSR synthetic d=12
   sources:
   - https://arxiv.org/abs/2401.00282

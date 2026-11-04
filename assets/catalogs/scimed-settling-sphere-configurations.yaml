@@ -2,6 +2,7 @@ metadata:
   name: scimed-settling-sphere-configurations
   version: 1
   tags: {"origin": "science formula", "tags": ["dummy inputs"]}
+  license: "MIT (LironSimon/SciMED) + CC BY 4.0 (Keren et al. 2023, Sci. Rep. 13:1249)"
   description: SciMED settling-sphere configurations
   sources:
   - https://www.nature.com/articles/s41598-023-28328-2

@@ -2,6 +2,7 @@ metadata:
   name: symantic-synthetic-set
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  license: "facts only: formulas and ranges cited from Muthyala et al. 2025 (SyMANTIC, Ind. Eng. Chem. Res. 64:3354; arXiv:2502.03367, CC BY-NC-ND 4.0); no text or tables reproduced"
   description: SyMANTIC synthetic set
   sources:
   - https://arxiv.org/abs/2502.03367v1

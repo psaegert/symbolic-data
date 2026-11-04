@@ -2,6 +2,7 @@ metadata:
   name: ddrsr-simple-test-and-complex-test
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "facts only: formulas and ranges cited from Deng et al. 2026 (DDRSR, arXiv:2608.02628), Table 5; no upstream license"
   description: DDRSR simple_test and complex-test
   sources:
   - https://arxiv.org/abs/2608.02628

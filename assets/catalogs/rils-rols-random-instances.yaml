@@ -2,6 +2,7 @@ metadata:
   name: rils-rols-random-instances
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
+  license: "MIT (kartelj/rils-rols; Kartelj & Djukanovic 2023, J. Big Data 10:71)"
   description: RILS-ROLS random instances
   sources:
   - https://doi.org/10.1186/s40537-023-00743-2

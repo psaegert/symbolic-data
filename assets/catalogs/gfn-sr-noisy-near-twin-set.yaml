@@ -2,6 +2,7 @@ metadata:
   name: gfn-sr-noisy-near-twin-set
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "CC BY 4.0 (Li, Marinescu & Musslick 2023, GFN-SR, arXiv:2312.00396)"
   description: GFN-SR noisy near-twin set
   sources:
   - https://arxiv.org/abs/2312.00396

@@ -2,6 +2,7 @@ metadata:
   name: heuristiclab-regression-instance-providers
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  license: "facts only: formulas cited from the defining authors and instances generated with HeuristicLab's providers (heal-research/HeuristicLab, GPL-3.0 code, not copied)"
   description: HeuristicLab regression instance providers
   sources:
   - https://github.com/heal-research/HeuristicLab

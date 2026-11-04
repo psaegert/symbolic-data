@@ -15,12 +15,14 @@ A catalog carries a tag when it holds for at least half of its problems; the cou
 ``facts`` reads what the catalog files state (test blocks, inputs absent from the formula, integer laws, pinned points,
 splits, the '*'); the judgement tags (origin; extrapolation, noise and outliers of data catalogs) were read from the
 catalog-prep set records once, each with its source sentence (judged.json); ``merge`` applies the rules above and
-``apply`` writes ``tags: {origin, tags}`` into each catalog's metadata (a published catalog whose metadata changes
-gets its next version). Run ``apply`` after every build or patch of the catalogs, then count_release.py.
+``apply`` writes ``tags: {origin, tags}`` into each catalog's metadata, and its ``license`` from the license pass
+(tags/licenses.json: the license of what each catalog took, with its evidence; a catalog that may not be shared gets
+none) (a published catalog whose metadata changes gets its next version). Run ``apply`` after every build or patch of
+the catalogs, then count_release.py.
 
     catalog_tags.py facts --counts <release_counts.json> --out <facts.json>
     catalog_tags.py merge --facts <facts.json> --judged <judged.json> --out <tags.json>
-    catalog_tags.py apply --tags <tags.json> --counts <release_counts.json> [--published <manifest.json> ...]
+    catalog_tags.py apply --tags <tags.json> [--licenses <licenses.json>] [--published <manifest.json> ...]
 """
 from __future__ import annotations
 
@@ -198,21 +200,27 @@ def _tags_line(row: dict[str, Any]) -> str:
     return "  tags: " + json.dumps({"origin": row["origin"], "tags": row["tags"]}, ensure_ascii=False) + "\n"
 
 
-def apply_yaml(path: Path, row: dict[str, Any], published: dict[str, int]) -> str:
-    """Write the tags as one flow line after the metadata's ``version``; bump a published version once."""
-    text = path.read_text()
-    line = _tags_line(row)
-    old = re.search(r"(?m)^  tags: .*\n", text)
-    if old and old.group(0) == line:
-        return "unchanged"
+def _set_line(text: str, key: str, line: str, after: str) -> str:
+    """The metadata's ``key`` line replaced by ``line``, or inserted after its ``after`` line."""
+    old = re.search(rf"(?m)^  {key}: .*\n", text)
     if old:
-        text = text.replace(old.group(0), line, 1)
-    else:
-        text = re.sub(r"(?m)^(  version: \d+\n)", lambda m: m.group(1) + line, text, count=1)
+        return text.replace(old.group(0), line, 1)
+    return re.sub(rf"(?m)^(  {after}: .*\n)", lambda m: m.group(1) + line, text, count=1)
+
+
+def apply_yaml(path: Path, row: dict[str, Any], published: dict[str, int]) -> str:
+    """Write the tags as one flow line after the metadata's ``version`` (and the license after them); bump a published
+    version once."""
+    before = path.read_text()
+    text = _set_line(before, "tags", _tags_line(row), after="version")
+    if row.get("license"):
+        text = _set_line(text, "license", "  license: " + json.dumps(row["license"], ensure_ascii=False) + "\n", "tags")
+    if text == before:
+        return "unchanged"
     m = re.search(r"(?m)^  name: (\S+)$", text)
     v = re.search(r"(?m)^  version: (\d+)$", text)
     name, version = (m.group(1) if m else None), int(v.group(1))
-    note = "tags written"
+    note = "written"
     if name in published and version <= published[name]:
         text = re.sub(r"(?m)^(  version: )(\d+)$", lambda mm: f"{mm.group(1)}{published[name] + 1}", text, count=1)
         note += f", version {version} -> {published[name] + 1}"
@@ -228,24 +236,31 @@ def apply_npz(path: Path, row: dict[str, Any]) -> str:
     meta = json.loads(str(arrays["_meta"]))
     md = meta["catalog"].setdefault("meta", {})
     tags = {"origin": row["origin"], "tags": row["tags"]}
-    if md.get("tags") == tags:
+    if md.get("tags") == tags and md.get("license") == (row.get("license") or md.get("license")):
         return "unchanged"
     md["tags"] = tags
+    if row.get("license"):
+        md["license"] = row["license"]
     arrays["_meta"] = np.array(json.dumps(meta))
     tmp = path.with_name(path.stem + ".tmp.npz")
     np.savez(tmp, **arrays)
     os.replace(tmp, path)
-    return "tags written"
+    return "written"
 
 
-def apply(tags_path: Path, published_paths: list[Path]) -> None:
+def apply(tags_path: Path, published_paths: list[Path], licenses_path: Path | None = None) -> None:
     published: dict[str, int] = {}
     for p in published_paths:
         for name, v in json.load(open(p)).items():
             if isinstance(v, dict) and v.get("default_version") is not None:
                 published[name] = int(max(int(x) for x in (v.get("versions") or {"1": None})))
+    # the license pass (tags/licenses.json): the license line of every catalog that may be shared (not where unclear)
+    licenses = {r["catalog"]: r["license"] for r in json.load(open(licenses_path))
+                if r["redistribute"].startswith("yes")} \
+        if licenses_path and licenses_path.exists() else {}
     done = Counter()
     for row in json.load(open(tags_path)):
+        row = {**row, "license": licenses.get(row["catalog"])}
         path = Path(row["file"]) if Path(row["file"]).is_absolute() else paths.REPO / row["file"]
         note = apply_yaml(path, row, published) if path.suffix == ".yaml" else apply_npz(path, row)
         done[note.split(",")[0]] += 1
@@ -267,6 +282,7 @@ def main() -> None:
     a3 = sub.add_parser("apply")
     a3.add_argument("--tags", required=True)
     a3.add_argument("--published", nargs="*", default=[], help="hosted manifest.json files: the published versions")
+    a3.add_argument("--licenses", default=str(Path(__file__).resolve().parent / "tags" / "licenses.json"))
     a = ap.parse_args()
     if a.cmd == "facts":
         rows = facts(Path(a.counts))
@@ -280,7 +296,7 @@ def main() -> None:
               f"tags {dict(Counter(t for r in rows for t in r['tags']))}; "
               f"below half {dict(Counter(t for r in rows for t in r['below_half']))} -> {a.out}")
     else:
-        apply(Path(a.tags), [Path(p) for p in a.published])
+        apply(Path(a.tags), [Path(p) for p in a.published], Path(a.licenses))
 
 
 if __name__ == "__main__":

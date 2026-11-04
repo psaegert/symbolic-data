@@ -2,6 +2,7 @@ metadata:
   name: erbench-public-legacy-formulas
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  license: "facts only: formulas and ranges cited from the original family authors (Korns 2011; Uy et al. 2011; Udrescu et al. 2020; DSO benchmarks.csv, BSD-3-Clause); ERBench ids for mapping only"
   description: 'ERBench public: legacy formulas'
   sources:
   - https://arxiv.org/abs/2606.09276

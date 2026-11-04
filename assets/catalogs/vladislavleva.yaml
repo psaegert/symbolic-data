@@ -2,6 +2,7 @@ metadata:
   name: vladislavleva
   version: 2
   tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   companion: "vladislavleva-points: Vladislavleva-2, Vladislavleva-3, the authors pinned points (a data catalog)"
   description: Vladislavleva order-of-nonlinearity suite.
   sources:

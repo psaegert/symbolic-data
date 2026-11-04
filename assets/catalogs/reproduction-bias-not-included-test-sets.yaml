@@ -2,6 +2,7 @@ metadata:
   name: reproduction-bias-not-included-test-sets
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
+  license: "MIT (Shun-0922/Mem-Bias-NSR; Sato & Sato 2025, arXiv:2505.22081)"
   description: Reproduction-bias 'not included' test sets
   sources:
   - https://arxiv.org/abs/2505.22081

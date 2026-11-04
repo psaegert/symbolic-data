@@ -2,6 +2,7 @@ metadata:
   name: dgsr-additional-feynman
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  license: "CC BY 4.0 (Holt et al. 2023, DGSR, arXiv:2401.00282, Table 35) + BSD-3-Clause (benchmarks.csv, DSO fork in samholt/DeepGenerativeSymbolicRegression)"
   description: DGSR Additional Feynman
   sources:
   - https://arxiv.org/abs/2401.00282

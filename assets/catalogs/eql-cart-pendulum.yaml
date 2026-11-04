@@ -2,6 +2,7 @@ metadata:
   name: eql-cart-pendulum
   version: 1
   tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs"]}
+  license: "facts only: equations and input ranges cited from Sahoo, Lampert & Martius 2018 (ICML, arXiv:1806.07259) and their EQL generator; no upstream license"
   description: EQL cart-pendulum
   sources:
   - https://proceedings.mlr.press/v80/sahoo18a.html

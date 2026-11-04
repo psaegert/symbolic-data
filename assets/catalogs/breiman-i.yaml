@@ -2,6 +2,7 @@ metadata:
   name: breiman-i
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs", "integer inputs"]}
+  license: "facts only: formula and input distribution cited from Breiman et al. 1984 (CART, Ch. 8); no upstream license"
   description: Breiman-I
   sources:
   - Breiman, Friedman, Olshen & Stone (1984), Classification and Regression Trees, Wadsworth, Ch. 8, pp. 237-238 (definition;

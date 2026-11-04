@@ -2,6 +2,7 @@ metadata:
   name: e2e-in-domain-synthetic-validation-set
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
+  license: "Apache-2.0 (facebookresearch/symbolicregression; Kamienny et al. 2022, arXiv:2204.10532)"
   description: E2E in-domain synthetic validation set
   sources:
   - https://arxiv.org/abs/2204.10532

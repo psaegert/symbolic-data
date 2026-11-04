@@ -2,6 +2,7 @@ metadata:
   name: occamnet-analytic-and-non-analytic-suites
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "facts only: target functions and ranges cited from Dugan et al. 2023 (OccamNet, arXiv:2007.10784); no upstream license"
   description: OccamNet analytic and non-analytic suites
   sources:
   - https://arxiv.org/abs/2007.10784

@@ -2,6 +2,7 @@ metadata:
   name: poly
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   description: Poly suite incl. Poly-10.
   sources:
   - Poli 2003 lineage (via DSO aggregation)

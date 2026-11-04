@@ -2,6 +2,7 @@ metadata:
   name: gplearn-documentation-examples
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "BSD-3-Clause (trevorstephens/gplearn documentation example)"
   description: gplearn documentation examples
   sources:
   - https://gplearn.readthedocs.io/en/stable/examples.html

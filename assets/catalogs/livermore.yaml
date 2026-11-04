@@ -2,6 +2,7 @@ metadata:
   name: livermore
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   description: Livermore suite (LLNL/DSR).
   sources:
   - Petersen et al. 2021 (ICLR) + Mundhenk et al. 2021 (NeurIPS), LLNL

@@ -2,6 +2,7 @@ metadata:
   name: esr-cosmology-datasets
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  license: "MIT (DeaglanBartlett/ESR; Bartlett, Desmond & Ferreira 2024, IEEE TEVC 28:950, arXiv:2211.11461)"
   description: ESR cosmology datasets
   sources:
   - https://arxiv.org/abs/2211.11461

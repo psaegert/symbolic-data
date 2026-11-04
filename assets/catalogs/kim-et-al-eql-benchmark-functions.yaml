@@ -2,6 +2,7 @@ metadata:
   name: kim-et-al-eql-benchmark-functions
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
+  license: "MIT (samuelkim314/DeepSymReg) + CC BY 4.0 (Kim et al. 2020, IEEE TNNLS)"
   description: Kim et al. EQL benchmark functions
   sources:
   - https://arxiv.org/abs/1912.04825

@@ -2,6 +2,7 @@ metadata:
   name: errless-synthetic-posterior-set
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
+  license: "CC BY 4.0 (ERRLESS, arXiv:2608.09617, Table 4)"
   description: ERRLESS synthetic posterior set
   sources:
   - https://arxiv.org/abs/2608.09617

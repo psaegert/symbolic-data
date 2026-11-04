@@ -2,6 +2,7 @@ metadata:
   name: hep-llm-sr-angular-distribution-problems
   version: 1
   tags: {"origin": "science formula", "tags": ["extrapolation"]}
+  license: "CC BY 4.0 (Morales-Alvarado 2025, arXiv:2510.03397)"
   description: HEP LLM-SR angular-distribution problems
   sources:
   - https://arxiv.org/abs/2510.03397

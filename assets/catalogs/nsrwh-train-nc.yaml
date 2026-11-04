@@ -2,6 +2,7 @@ metadata:
   name: nsrwh-train-nc
   version: 1
   tags: {"origin": "generated formulas", "tags": ["extrapolation"]}
+  license: "MIT (SymposiumOrganization/ControllableNeuralSymbolicRegression)"
   description: NSRwH train_nc
   sources:
   - https://arxiv.org/abs/2304.10336

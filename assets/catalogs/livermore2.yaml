@@ -2,6 +2,7 @@ metadata:
   name: livermore2
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   description: Livermore2 suite (Vars2-7 groups, 25 each).
   sources:
   - Mundhenk et al. 2021 (NeurIPS), LLNL neural-guided GP seeding

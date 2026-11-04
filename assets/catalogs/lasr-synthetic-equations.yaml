@@ -2,6 +2,7 @@ metadata:
   name: lasr-synthetic-equations
   version: 1
   tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
+  license: "Apache-2.0 (trishullab/LibraryAugmentedSymbolicRegression.jl; Grayeli et al. 2024, arXiv:2409.09359)"
   description: LaSR synthetic equations
   sources:
   - https://arxiv.org/abs/2409.09359

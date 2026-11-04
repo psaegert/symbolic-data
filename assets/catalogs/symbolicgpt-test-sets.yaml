@@ -2,6 +2,7 @@ metadata:
   name: symbolicgpt-test-sets
   version: 1
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "dummy inputs"]}
+  license: "MIT (mojivalipour/symbolicgpt; HF DataAnalyticsLab/SymbolicGPT)"
   description: SymbolicGPT test sets
   sources:
   - https://arxiv.org/abs/2106.14131

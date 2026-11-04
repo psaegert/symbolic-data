@@ -2,6 +2,7 @@ metadata:
   name: feynman
   version: 2
   tags: {"origin": "science formula", "tags": []}
+  license: "facts only: formulas and ranges from the Feynman Symbolic Regression Database (Udrescu & Tegmark 2020); its data files are not redistributed"
   description: Feynman Symbolic Regression Database (Udrescu & Tegmark 2020), 100
     equations.
   sources:

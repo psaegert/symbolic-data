@@ -2,6 +2,7 @@ metadata:
   name: eql-robotic-arm-forward-kinematics
   version: 1
   tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs", "srbf-modified"]}
+  license: "facts only: task geometry and ranges cited from Martius & Lampert 2016 (arXiv:1610.02995); formulas derived by srbf; no upstream license"
   description: EQL robotic-arm forward kinematics
   display_name: EQL robotic-arm forward kinematics*
   modified_by_srbf: 'the authors'' input generator is unpublished: srbf draws each joint angle as (pi/2) sin(u), u ~ U[0,

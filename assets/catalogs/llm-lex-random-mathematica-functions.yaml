@@ -2,6 +2,7 @@ metadata:
   name: llm-lex-random-mathematica-functions
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "CC BY 4.0 (Harvey et al. 2025, arXiv:2505.07956; Mach. Learn.: Sci. Technol. 7:045040)"
   description: LLM-LEx random Mathematica functions
   sources:
   - https://arxiv.org/abs/2505.07956

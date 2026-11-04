@@ -2,6 +2,7 @@ metadata:
   name: dgsr-feynman-d-2-d-5-subsets
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  license: "CC BY 4.0 (Holt et al. 2023, DGSR, arXiv:2401.00282) + BSD-3-Clause (benchmarks.csv, DSO fork in samholt/DeepGenerativeSymbolicRegression)"
   description: DGSR Feynman d=2 / d=5 subsets
   sources:
   - https://arxiv.org/abs/2401.00282

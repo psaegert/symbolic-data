@@ -2,6 +2,7 @@ metadata:
   name: eql-pendulum-vector-field
   version: 1
   tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs"]}
+  license: "facts only: formulas and ranges cited from Martius & Lampert 2016 (arXiv:1610.02995); no upstream license"
   description: EQL pendulum vector field
   sources:
   - https://arxiv.org/abs/1610.02995v1

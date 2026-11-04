@@ -2,6 +2,7 @@ metadata:
   name: multi-view-sr-synthetic-benchmarks
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  license: "CC BY 4.0 (Russeil et al. 2024, arXiv:2402.04298)"
   description: Multi-view SR synthetic benchmarks
   sources:
   - https://arxiv.org/abs/2402.04298

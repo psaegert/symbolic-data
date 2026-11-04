@@ -2,6 +2,7 @@ metadata:
   name: grammarvae
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   description: GrammarVAE equation benchmark.
   sources:
   - Kusner et al. 2017 (ICML), Grammar Variational Autoencoder

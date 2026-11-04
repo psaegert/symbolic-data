@@ -2,6 +2,7 @@ metadata:
   name: evomo-sr-random-expression-datasets-p1-p4
   version: 1
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
+  license: "CC BY 4.0 (Rossetti et al. 2026, EvoMO-SR, arXiv:2609.36187, Table 3)"
   description: EvoMO-SR random-expression datasets P1-P4
   sources:
   - https://arxiv.org/abs/2609.36187

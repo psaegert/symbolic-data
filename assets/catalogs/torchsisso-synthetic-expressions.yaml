@@ -2,6 +2,7 @@ metadata:
   name: torchsisso-synthetic-expressions
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "facts only: formulas and ranges cited from Muthyala et al. 2024 (TorchSISSO, Digit. Chem. Eng. 13:100198; arXiv:2410.01752, CC BY-NC-ND 4.0); no text or tables reproduced"
   description: TorchSISSO synthetic expressions
   sources:
   - https://arxiv.org/abs/2410.01752

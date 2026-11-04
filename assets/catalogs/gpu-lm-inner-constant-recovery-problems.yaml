@@ -2,6 +2,7 @@ metadata:
   name: gpu-lm-inner-constant-recovery-problems
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "facts only: formulas and ranges cited from the CuSR e3 corpus manifest (TensorConv/CuSR; arXiv:2609.03352); no upstream license"
   description: GPU-LM inner-constant recovery problems
   sources:
   - https://arxiv.org/abs/2609.03352

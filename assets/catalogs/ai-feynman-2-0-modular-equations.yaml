@@ -2,6 +2,7 @@ metadata:
   name: ai-feynman-2-0-modular-equations
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "facts only: formulas cited from Udrescu et al. 2020 (AI Feynman 2.0, NeurIPS 33, arXiv:2006.10782), Table 4; no upstream license"
   description: AI Feynman 2.0 modular equations
   sources:
   - https://arxiv.org/abs/2006.10782

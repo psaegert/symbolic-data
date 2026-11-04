@@ -2,6 +2,7 @@ metadata:
   name: nguyen
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   description: Nguyen symbolic-regression suite (Uy et al. 2011), 12 equations.
   sources:
   - Nguyen benchmark (Uy et al. 2011)

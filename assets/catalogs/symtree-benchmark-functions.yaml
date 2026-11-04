@@ -2,6 +2,7 @@ metadata:
   name: symtree-benchmark-functions
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "facts only: functions and ranges cited from de Franca 2018 (Inf. Sci. 442:18, arXiv:1801.01807) and the original Kattan et al. papers; no upstream license"
   description: SymTree benchmark functions
   sources:
   - https://arxiv.org/abs/1801.01807

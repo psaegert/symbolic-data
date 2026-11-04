@@ -2,6 +2,7 @@ metadata:
   name: dso-benchmark-registry
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization)"
   description: DSO benchmark registry (benchmarks.csv)
   sources:
   - https://github.com/dso-org/deep-symbolic-optimization/blob/master/dso/dso/task/regression/benchmarks.csv

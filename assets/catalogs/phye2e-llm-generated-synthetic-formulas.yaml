@@ -2,6 +2,7 @@ metadata:
   name: phye2e-llm-generated-synthetic-formulas
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
+  license: "Apache-2.0 (figshare 10.6084/m9.figshare.29615831, PhyE2E_datas; Ying et al. 2025, Nat. Mach. Intell. 7:1726)"
   description: PhyE2E LLM-generated synthetic formulas
   sources:
   - https://arxiv.org/abs/2503.07994

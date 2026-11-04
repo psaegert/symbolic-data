@@ -2,6 +2,7 @@ metadata:
   name: geobench
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  license: "facts only: geometric formulas and ranges cited from Xu et al. 2024 (GeoBench, OpenReview TqzNI4v9DT); no upstream license"
   description: GeoBench (SR with geometric expressions)
   sources:
   - https://openreview.net/forum?id=TqzNI4v9DT

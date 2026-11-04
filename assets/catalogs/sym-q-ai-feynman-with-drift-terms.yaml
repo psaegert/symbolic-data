@@ -2,6 +2,7 @@ metadata:
   name: sym-q-ai-feynman-with-drift-terms
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  license: "MIT (EPFL-IMOS/Sym-Q) + CC0 1.0 (Tian et al., arXiv:2402.05306)"
   description: Sym-Q AI-Feynman with drift terms
   sources:
   - 'https://arxiv.org/abs/2402.05306 (Sym-Q; v2 PDF https://arxiv.org/pdf/2402.05306v2: drift text p.8-9, Fig. 4 p.10, Table

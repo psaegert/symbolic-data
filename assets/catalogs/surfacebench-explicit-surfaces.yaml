@@ -2,6 +2,7 @@ metadata:
   name: surfacebench-explicit-surfaces
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
+  license: "CC BY 4.0 (Kabra et al. 2026, SurfaceBench, arXiv:2511.10833, Table 7)"
   description: SurfaceBench explicit surfaces
   sources:
   - https://arxiv.org/abs/2511.10833

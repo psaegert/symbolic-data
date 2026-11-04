@@ -2,6 +2,7 @@ metadata:
   name: ai-feynman-database-100-main-equations
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  license: "facts only: formulas, ranges and units cited from the Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, Sci. Adv. 6:eaay2631); no upstream license"
   description: 'AI Feynman database: 100 main equations (FSReD)'
   sources:
   - https://arxiv.org/abs/1905.11481

@@ -2,6 +2,7 @@ metadata:
   name: pysr-empiricalbench-formulas
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  license: "MIT (MilesCranmer/pysr_paper)"
   description: PySR EmpiricalBench
   sources:
   - https://arxiv.org/abs/2305.01582

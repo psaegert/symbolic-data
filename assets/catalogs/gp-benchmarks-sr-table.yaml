@@ -2,6 +2,7 @@ metadata:
   name: gp-benchmarks-sr-table
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  license: "facts only: formulas and ranges cited from McDermott et al. 2012 (GECCO, Table 3) and the original family papers; no upstream license"
   description: GP benchmarks SR table (McDermott et al. 2012)
   sources:
   - https://doi.org/10.1145/2330163.2330273

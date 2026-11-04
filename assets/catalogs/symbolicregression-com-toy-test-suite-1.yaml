@@ -2,6 +2,7 @@ metadata:
   name: symbolicregression-com-toy-test-suite-1
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
+  license: "facts only: formulas cited from Vladislavleva's symbolicregression.com Toy Test Suite 1 (2008-2013) and Vladislavleva et al. 2009 (IEEE TEVC); no upstream license"
   description: symbolicregression.com Toy Test Suite 1
   sources:
   - http://web.archive.org/web/20131208225350/http://symbolicregression.com/?q=node/5

@@ -2,6 +2,7 @@ metadata:
   name: pse-high-dimensional-distractor-set
   version: 1
   tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
+  license: "MIT (intell-sci-comput/PSE; Ruan et al. 2026, arXiv:2407.04405)"
   description: PSE high-dimensional distractor set
   sources:
   - https://arxiv.org/abs/2407.04405

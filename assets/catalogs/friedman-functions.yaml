@@ -2,6 +2,7 @@ metadata:
   name: friedman-functions
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  license: "facts only: test functions and input distributions cited from Friedman 1991 (Ann. Stat. 19:1-67); no upstream license"
   description: Friedman functions
   sources:
   - http://web.archive.org/web/20170304074826/http://www.dtic.mil/dtic/tr/fulltext/u2/a578458.pdf

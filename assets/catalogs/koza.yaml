@@ -2,6 +2,7 @@ metadata:
   name: koza
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   description: Koza classic GP problems (quintic/sextic).
   sources:
   - Koza 1992/1994 (MIT Press), Genetic Programming I/II

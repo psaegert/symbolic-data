@@ -2,6 +2,7 @@ metadata:
   name: ai-hilbert-problem-set
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  license: "MIT (IBM/AI-Hilbert)"
   description: AI Hilbert problem set
   sources:
   - https://arxiv.org/abs/2308.09474v3

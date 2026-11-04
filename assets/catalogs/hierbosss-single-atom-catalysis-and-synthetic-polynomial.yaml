@@ -2,6 +2,7 @@ metadata:
   name: hierbosss-single-atom-catalysis-and-synthetic-polynomial
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  license: "CC BY 4.0 (Roy et al. 2025, HierBOSSS, arXiv:2509.19710v1) + MIT (Roy-SR-007/HierBOSSS)"
   description: HierBOSSS single-atom catalysis and synthetic polynomial
   sources:
   - https://arxiv.org/abs/2509.19710v1
