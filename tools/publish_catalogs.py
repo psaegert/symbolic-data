@@ -14,17 +14,20 @@ Run from the repo root: ``python tools/publish_catalogs.py`` (dry run; add ``--e
 publish — requires HF auth: ``huggingface_hub.whoami``).
 
 Versioning discipline (forward-only, enforced): the publish is INCREMENTAL against the hosted
-manifest. Unchanged published versions are skipped; a version absent from the hosted entry is
-uploaded and the entry extended; hosted entries absent from CATALOGS (retired catalogs) are
-preserved verbatim so pinned legacy stacks keep resolving; and a content change to a published
-version is refused — ship it as a NEW version (add ``"2": {...}`` to ``MULTI_VERSION`` and bump
-``default``), so a pinned ``name@1`` always resolves to identical bytes.
+manifest. A local file publishes as the version its own metadata states (``metadata.version`` of a
+yaml, ``catalog.version`` of an npz). Unchanged published versions are skipped; a version absent
+from the hosted entry is uploaded and the entry extended (its newest version becomes the default);
+hosted versions and entries absent locally (older versions, retired catalogs) are preserved
+verbatim, so pinned stacks keep resolving; and a content change to a published version is refused:
+edit the file AND bump its ``metadata.version``, so a pinned ``name@1`` always resolves to
+identical bytes. ``MULTI_VERSION`` lists catalogs that keep several versions as local files.
 """
 from __future__ import annotations
 
 import hashlib
 import json
 import os
+import re
 
 from huggingface_hub import HfApi, CommitOperationAdd
 
@@ -36,8 +39,9 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "catalogs")
 # bare name resolves to. v1 files stay byte-identical forever (pinned refs keep resolving);
 # content fixes ship as NEW versions. fastsrb@2 = the 2026-07-10 audit repair (III.21.20
 # unrealizable, string bounds, missing n_variables); see the changelog inside fastsrb.v2.yaml.
+# fastsrb.v2.yaml now holds fastsrb@3 (the 2026-11 source-audit fixes); fastsrb@2 stays hosted.
 MULTI_VERSION = {
-    "fastsrb": {"versions": {"1": "fastsrb.yaml", "2": "fastsrb.v2.yaml"}, "default": 2},
+    "fastsrb": {"versions": {"1": "fastsrb.yaml", "3": "fastsrb.v2.yaml"}, "default": 3},
 }
 
 # logical name -> (filename, entry/skeleton count for the log, manifest type)
@@ -111,63 +115,75 @@ def sha256(path: str) -> str:
     return digest.hexdigest()
 
 
-def main(execute: bool = False) -> None:
-    """Incremental, forward-only publish: hosted state is the baseline, never rebuilt.
+def file_version(path: str) -> int:
+    """The version a catalog file states about itself: a yaml's ``metadata.version``, an npz's ``catalog.version``."""
+    if path.endswith(".npz"):
+        import numpy as np
+        return int(json.loads(str(np.load(path)["_meta"]))["catalog"].get("version") or 1)
+    with open(path, "r", encoding="utf-8") as handle:
+        head = handle.read(1 << 16)                      # the metadata block opens the file
+    m = re.search(r"(?m)^  version: (\d+)\s*$", head)
+    return int(m.group(1)) if m else 1
 
-    * a CATALOGS name absent from the hosted manifest -> its file uploads and a new entry
-      is added (revision = the fresh files commit);
-    * a hosted name absent from CATALOGS (a retired catalog) -> its entry is PRESERVED
-      verbatim, so pinned legacy stacks keep resolving;
-    * a hosted name whose local file bytes differ from the pinned sha256 -> REFUSED:
-      published versions are immutable, ship the change as a NEW version in MULTI_VERSION.
 
-    Dry-run by default; pass ``--execute`` to publish.
+def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execute: bool = False,
+            extra_ops: tuple = ()) -> None:
+    """Incremental, forward-only publish of ``catalogs`` ({name: (path under data_dir, count, type)}) to ``repo``;
+    the files land flat at the repo root.
+
+    * a version absent from the hosted entry (or a name absent from the manifest) -> its file uploads and
+      the entry is extended (revision = the fresh files commit; default = the newest version);
+    * hosted versions and names absent locally -> PRESERVED verbatim, so pinned stacks keep resolving;
+    * a version whose local bytes differ from the pinned sha256 -> REFUSED: published versions are
+      immutable; bump the file's metadata.version.
+
+    Dry-run by default; ``execute=True`` publishes.
     """
     from lint_catalogs import lint_paths
     assert lint_paths(), "catalog lint failed -- fix errors before publishing"
-    import json as _json
+
+    def local(rel: str) -> str:
+        return os.path.abspath(os.path.join(data_dir, rel))
 
     api = HfApi()
-    manifest_path = api.hf_hub_download(repo_id=REPO, repo_type=REPO_TYPE, filename="manifest.json")
+    manifest_path = api.hf_hub_download(repo_id=repo, repo_type=REPO_TYPE, filename="manifest.json")
     with open(manifest_path, "r", encoding="utf-8") as handle:
-        hosted = _json.load(handle)
-    print(f"hosted manifest: {len(hosted)} entries")
+        hosted = json.load(handle)
+    print(f"hosted manifest ({repo}): {len(hosted)} entries")
 
-    # Per-VERSION comparison: an unchanged published version skips, a version absent from
-    # the hosted entry publishes (extending the entry), a content change to a published
-    # version is refused. `new_versions[name]` maps version -> filename to upload.
     new_versions: dict[str, dict[str, str]] = {}
     unchanged, conflicts = [], []
-    for name, (fn, _cnt, _ctype) in CATALOGS.items():
-        spec = MULTI_VERSION.get(name)
-        local_versions = spec["versions"] if spec else {"1": fn}
-        for vfn in local_versions.values():
-            assert os.path.isfile(os.path.abspath(os.path.join(DATA_DIR, vfn))), f"missing catalog file: {vfn}"
+    for name, (fn, _cnt, _ctype) in catalogs.items():
+        spec = multi_version.get(name)
+        local_versions = spec["versions"] if spec else {str(file_version(local(fn))): fn}
+        for v, rel in local_versions.items():
+            assert os.path.isfile(local(rel)), f"missing catalog file: {rel}"
+            stated = file_version(local(rel))
+            assert stated == int(v), f"{name}: {rel} states version {stated}, MULTI_VERSION says {v}"
         hosted_versions = hosted.get(name, {}).get("versions", {})
         missing, changed = {}, []
-        for v, vfn in local_versions.items():
-            local_sha = sha256(os.path.abspath(os.path.join(DATA_DIR, vfn)))
+        for v, rel in local_versions.items():
             hosted_version = hosted_versions.get(str(v))
             if hosted_version is None:
-                missing[str(v)] = vfn
-            elif hosted_version["sha256"].get(vfn) != local_sha:
+                missing[str(v)] = rel
+            elif hosted_version["sha256"].get(os.path.basename(rel)) != sha256(local(rel)):
                 changed.append(v)
         if changed:
-            conflicts.append(name)
+            conflicts.append(f"{name}@{','.join(changed)}")
         elif missing:
             new_versions[name] = missing
         else:
             unchanged.append(name)
     new_names = sorted(new_versions)
-    preserved = [name for name in hosted if name not in CATALOGS]
+    preserved = [name for name in hosted if name not in catalogs]
 
-    print(f"new: {sorted(new_names)}")
+    print(f"new: {', '.join(f'{n}@{v}' for n in new_names for v in new_versions[n])}")
     print(f"unchanged (skipped): {len(unchanged)}")
     print(f"preserved retired entries: {sorted(preserved)}")
     if conflicts:
         raise SystemExit(
-            f"REFUSED: content changed for published catalogs {sorted(conflicts)} -- published "
-            f"versions are immutable; ship the change as a NEW version via MULTI_VERSION.")
+            f"REFUSED: content changed for published versions {sorted(conflicts)} -- published "
+            f"versions are immutable; bump the file's metadata.version.")
     if not new_names:
         print("nothing to publish")
         return
@@ -179,48 +195,50 @@ def main(execute: bool = False) -> None:
     print(f"HF user: {who}")
 
     # 1. upload only the MISSING-version files, in one commit so a single revision pins them
-    ops = []
-    filenames: list[str] = []
+    ops = list(extra_ops)
+    uploaded: list[str] = []
     for versions in new_versions.values():
-        for vfn in versions.values():
-            if vfn not in filenames:
-                filenames.append(vfn)
-    for fn in filenames:
-        local = os.path.abspath(os.path.join(DATA_DIR, fn))
-        ops.append(CommitOperationAdd(path_in_repo=fn, path_or_fileobj=local))
+        for rel in versions.values():
+            if rel not in uploaded:
+                uploaded.append(rel)
+                ops.append(CommitOperationAdd(path_in_repo=os.path.basename(rel), path_or_fileobj=local(rel)))
     commit = api.create_commit(
-        repo_id=REPO, repo_type=REPO_TYPE, operations=ops,
-        commit_message=f"Publish {len(filenames)} catalog artifacts: {', '.join(new_names)}",
+        repo_id=repo, repo_type=REPO_TYPE, operations=ops,
+        commit_message=f"Publish {len(uploaded)} catalog artifacts: {', '.join(new_names)}",
     )
     revision = commit.oid
     print(f"files commit: {revision}")
 
-    # 2. merge: hosted entries verbatim (incl. retired names); a new name gets a fresh
-    # entry, an existing multi-version name is EXTENDED (published versions untouched)
+    # 2. merge: hosted entries verbatim (incl. retired names and older versions); a new name gets a
+    # fresh entry, an existing one is EXTENDED (published versions untouched)
     manifest = dict(hosted)
     for name, missing in new_versions.items():
-        fn, _cnt, ctype = CATALOGS[name]
-        spec = MULTI_VERSION.get(name)
-        entry = dict(hosted.get(name) or {"type": ctype, "repo_id": REPO, "versions": {}})
-        entry["default_version"] = spec["default"] if spec else 1
+        _fn, _cnt, ctype = catalogs[name]
+        spec = multi_version.get(name)
+        entry = dict(hosted.get(name) or {"type": ctype, "repo_id": repo, "versions": {}})
         entry["versions"] = dict(entry["versions"])
-        for v, vfn in missing.items():
+        for v, rel in missing.items():
             entry["versions"][v] = {
-                "repo_id": REPO,
+                "repo_id": repo,
                 "directory": "",
-                "files": [vfn],
+                "files": [os.path.basename(rel)],
                 "revision": revision,
-                "sha256": {vfn: sha256(os.path.abspath(os.path.join(DATA_DIR, vfn)))},
+                "sha256": {os.path.basename(rel): sha256(local(rel))},
             }
+        entry["default_version"] = spec["default"] if spec else max(int(v) for v in entry["versions"])
         manifest[name] = entry
     manifest_bytes = (json.dumps(manifest, indent=2) + "\n").encode("utf-8")
     api.upload_file(
         path_or_fileobj=manifest_bytes, path_in_repo="manifest.json",
-        repo_id=REPO, repo_type=REPO_TYPE,
+        repo_id=repo, repo_type=REPO_TYPE,
         commit_message=f"Manifest: add {', '.join(sorted(new_names))} (hosted entries preserved)",
     )
     print(f"manifest.json uploaded: {len(manifest)} entries "
           f"({len(new_names)} new, {len(preserved)} preserved-retired)")
+
+
+def main(execute: bool = False) -> None:
+    publish(REPO, DATA_DIR, CATALOGS, MULTI_VERSION, execute=execute)
 
 
 if __name__ == "__main__":
