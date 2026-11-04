@@ -381,11 +381,13 @@ class ProblemCatalog(Catalog):
             variables, meta = (entry.variables, entry.meta) if part == "fit" else spec_for_test_rows(entry.variables, entry.meta)
         except ValueError as exc:
             raise CatalogEntryError(f"malformed test block for {entry.id!r}: {exc}") from exc
-        # First-draw oversampling: when the entry discloses its valid-domain fraction
-        # (meta.finite_fraction, written by tools/audit_finite_fraction.py), size the first
-        # batch to land the full n_points in one round instead of topping up iteratively.
+        # First-draw oversampling: when the entry discloses its valid-domain fraction (the yaml entry's
+        # ``meta: {finite_fraction: ...}``, written by tools/audit_finite_fraction.py; it arrives as
+        # entry.meta["meta"], since every key outside the structured fields lands in entry.meta), size
+        # the first batch to land the full n_points in one round instead of topping up iteratively.
         # The fraction is the fitting distribution's, so the test rows are not oversampled.
-        f_meta = entry.meta.get("finite_fraction") if part == "fit" and isinstance(getattr(entry, "meta", None), dict) else None
+        disclosed = entry.meta.get("meta") if isinstance(getattr(entry, "meta", None), dict) else None
+        f_meta = disclosed.get("finite_fraction") if part == "fit" and isinstance(disclosed, dict) else None
         n_first = n_points
         if isinstance(f_meta, (int, float)) and 0.0 < f_meta < 1.0:
             n_first = min(int(n_points / max(f_meta, 1.0 / _PER_POINT_REJECTION_CAP) * 1.25) + 8,
