@@ -234,6 +234,30 @@
   "notes": null
  },
  {
+  "catalog": "mvsr-2024",
+  "display_name": "Multi-view SR (2024) real data",
+  "kind": "data",
+  "problems": 501,
+  "file": "build/data-catalogs/mvsr-2024.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-60.json notes: 'Three real-data multi-view SR tasks ... no ground truth': UV-visible absorption, SN Ia light curves (ZTF), stock prices (Kaggle)",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     501,
+     501
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": "No 'several tests': the 480 finance test assets are separate no-split problems in their own subsets, not second tests of one fit."
+ },
+ {
   "catalog": "soose-fc",
   "display_name": "soose-fc",
   "kind": "formula",
@@ -545,6 +569,20 @@
   "notes": "How Livermore2 was made is undocumented; the formulas look randomly generated, so 'generated formulas' may fit better."
  },
  {
+  "catalog": "srbench-2021-blackbox",
+  "display_name": "SRBench 2021 black-box",
+  "kind": "data",
+  "problems": 122,
+  "file": "build/data-catalogs/srbench-2021-blackbox.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/done-0.json notes: '122 PMLB regression datasets'; 'The paper also states 46 real-world and 76 synthetic problems'; friedman subset = 62 Friedman-generator sets",
+  "origin_proposal": "mixed real and synthetic data: PMLB compilation, 76 of 122 synthetic (62 Friedman-generator sets)",
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "Not tagged: fri_* members likely carry generator noise and irrelevant features, but the record states it only for 564_fried (OpenML description)."
+ },
+ {
   "catalog": "fastsrb",
   "display_name": "fastsrb",
   "kind": "formula",
@@ -713,6 +751,30 @@
   "notes": null
  },
  {
+  "catalog": "sldbench",
+  "display_name": "SLDBench (scaling-law discovery)",
+  "kind": "data",
+  "problems": 77,
+  "file": "build/data-catalogs/sldbench.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-94.json notes: 'fixed real measurements (5145 train + 491 test = 5636 rows from >5000 LLM training runs)'",
+  "origin_proposal": null,
+  "tags": [
+   "extrapolation"
+  ],
+  "detail": {
+   "extrapolation": {
+    "share": [
+     77,
+     77
+    ],
+    "source": "sets/fresh-94.json datasets[].split, App. A.2.5: 'unseen uses a fixed larger size of 8.19 x 10^5 tokens; seen covers up to 4.10 x 10^5 tokens'; parallel: test 8-way vs seen 1-4 way"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
   "catalog": "ai-feynman-database-100-main-equations",
   "display_name": "ai-feynman-database-100-main-equations",
   "kind": "formula",
@@ -749,6 +811,63 @@
   "notes": "Origin is a stand-in (geometry, not physics). Settled 'dummy inputs' questionable: 4 problems declare inputs their printed formula does not use (Table 3); no stated design."
  },
  {
+  "catalog": "scilaws-real",
+  "display_name": "SciLaws-Bench SciLaws-Real (Type I)",
+  "kind": "data",
+  "problems": 66,
+  "file": "build/data-catalogs/scilaws-real.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-95.json notes: '118 law-discovery tasks on real published measurements' in six disciplines (SciLaws-Bench, arXiv:2609.01552)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {
+   "extrapolation": {
+    "share": null,
+    "source": "sets/fresh-95.json datasets[].split: 'single-group splits are task-specific (interpolation, input-range extrapolation, temporal transfer or cross-condition generalization; paper Sec. 2.3 and App. B.3)'"
+   }
+  },
+  "notes": "Extrapolation applies to an unknown share of the 66 tasks: the release does not label each task's split kind."
+ },
+ {
+  "catalog": "gp-challenge-protein",
+  "display_name": "GP Challenge (protein energy function)",
+  "kind": "data",
+  "problems": 54,
+  "file": "build/data-catalogs/gp-challenge-protein.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-40.json notes: 'each row is one I-TASSER decoy (candidate structure) of one protein, the 8 inputs are the authors' re-implementations of I-TASSER energy terms', target RMSD rank",
+  "origin_proposal": "simulator output: energy terms computed on computer-generated decoy structures, not measurements",
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     54,
+     54
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "mvsr-2025",
+  "display_name": "Multi-view SR (2025) real-world data",
+  "kind": "data",
+  "problems": 51,
+  "file": "build/data-catalogs/mvsr-2025.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-61.json notes: '51 views in 5 author-defined groups ... all 1-D, real measured or derived data' (supernovae, galaxies, Michaelis-Menten, Nikuradse, network degrees)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
+ },
+ {
   "catalog": "lasr-synthetic-equations",
   "display_name": "lasr-synthetic-equations",
   "kind": "formula",
@@ -771,6 +890,190 @@
   },
   "below_half": {},
   "notes": "Settled 'dummy inputs' is right: 7 dummy columns A..G plus unused y's are added on purpose (add_extra_vars=True)."
+ },
+ {
+  "catalog": "gecco-2022-exact-rediscovery",
+  "display_name": "GECCO 2022 synthetic: exact rediscovery",
+  "kind": "data",
+  "problems": 40,
+  "file": "build/data-catalogs/gecco-2022-exact-rediscovery.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/done-11.json notes: 'the 40 frozen competition datasets (10 data seeds x 4 levels)' generated from f1-f4 of the authors' Table I by create_data_exact_formula.py",
+  "origin_proposal": "synthetic data: files the competition organizers generated from their own formulas with create_data.py",
+  "tags": [
+   "dummy inputs"
+  ],
+  "detail": {
+   "dummy inputs": {
+    "share": [
+     40,
+     40
+    ],
+    "source": "sets/done-11.json notes: 'inputs U[-5,5] with the dummy columns from the authors' own generator' (create_data.py)"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "gecco-2022-noise",
+  "display_name": "GECCO 2022 synthetic: noise sensitivity",
+  "kind": "data",
+  "problems": 40,
+  "file": "build/data-catalogs/gecco-2022-noise.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/done-15.json notes: 40 published datasets of the rational (0.11x^4 - 1.4x^3)/(0.68x^2 + 1), generated by create_data.py generate_noise_data",
+  "origin_proposal": "synthetic data: files the competition organizers generated from their own formulas with create_data.py",
+  "tags": [
+   "noisy data"
+  ],
+  "detail": {
+   "noisy data": {
+    "share": [
+     40,
+     40
+    ],
+    "source": "sets/done-15.json notes: 'noise baked in'; 'The released levels are base (ratio 0, noiseless), easy 0.05, medium 0.1, hard 0.15'"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "implied-volatility-slices",
+  "display_name": "Implied-volatility slices",
+  "kind": "data",
+  "problems": 34,
+  "file": "build/data-catalogs/implied-volatility-slices.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-170.json notes: 34 one-input implied-volatility slices (SVI5, C6, C8 types) digitized from VolaDynamics plots; 'the C6/C8 parametrizations are VolaDynamics' proprietary forms'",
+  "origin_proposal": "fitted model output: points digitized from plotted parametric fits to option quotes, not raw quotes",
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     34,
+     34
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "gecco-2022-extrapolation",
+  "display_name": "GECCO 2022 synthetic: extrapolation",
+  "kind": "data",
+  "problems": 30,
+  "file": "build/data-catalogs/gecco-2022-extrapolation.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/done-14.json notes: '30 published datasets (3 difficulty levels x 10 noise seeds)' of the erf + sin formula (Eq. 5), generated by the organizers",
+  "origin_proposal": "synthetic data: files the competition organizers generated from their own formulas with create_data.py",
+  "tags": [
+   "extrapolation",
+   "noisy data"
+  ],
+  "detail": {
+   "extrapolation": {
+    "share": [
+     30,
+     30
+    ],
+    "source": "facts split_readings: 'given: the published _train (x <= 15) / _test (x > 15) files'; sets/done-14.json: 'support [-15, 15], validation (15, 40]'"
+   },
+   "noisy data": {
+    "share": [
+     30,
+     30
+    ],
+    "source": "sets/done-14.json notes: 'noise baked in'; 'code and released data 0.025/0.05/0.1'"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "gecco-2022-feature-selection",
+  "display_name": "GECCO 2022 synthetic: feature selection",
+  "kind": "data",
+  "problems": 30,
+  "file": "build/data-catalogs/gecco-2022-feature-selection.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/done-12.json notes: '30 datasets (3 levels x 10 seeds), 1000 rows x 20 features each' from a 20-input polynomial, regenerated from create_data.py",
+  "origin_proposal": "synthetic data: files the competition organizers generated from their own formulas with create_data.py",
+  "tags": [
+   "dummy inputs",
+   "noisy data"
+  ],
+  "detail": {
+   "dummy inputs": {
+    "share": [
+     30,
+     30
+    ],
+    "source": "sets/done-12.json notes: 'a 20-input polynomial (10 relevant, 10 dummies, all U[-10,10])'"
+   },
+   "noisy data": {
+    "share": [
+     30,
+     30
+    ],
+    "source": "sets/done-12.json notes: '1000 rows x 20 features each, fixed 500/500 split, noisy targets'"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "gecco-2022-local-optima",
+  "display_name": "GECCO 2022 synthetic: escaping local optima",
+  "kind": "data",
+  "problems": 30,
+  "file": "build/data-catalogs/gecco-2022-local-optima.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/done-13.json notes: '30 datasets (3 levels x 10 seeds)' of f_3, f_4, f_5 (paper Eq. 4) from the organizers' generator, reproduced to 1.4e-14",
+  "origin_proposal": "synthetic data: files the competition organizers generated from their own formulas with create_data.py",
+  "tags": [
+   "dummy inputs"
+  ],
+  "detail": {
+   "dummy inputs": {
+    "share": [
+     30,
+     30
+    ],
+    "source": "sets/done-13.json notes: 'derived noisy input columns x6..x(5+n) (noisy copies of the terms g_i)' not used by the target; 'At easy, x5 is an independent unused input'"
+   }
+  },
+  "below_half": {},
+  "notes": "Not tagged 'noisy data': the noise sits in the decoy columns; the target is noise-free."
+ },
+ {
+  "catalog": "physo-milky-way-streams",
+  "display_name": "PhySO Milky Way stellar streams",
+  "kind": "data",
+  "problems": 29,
+  "file": "build/data-catalogs/physo-milky-way-streams.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-58.json notes: 'The law is exact and closed form ... the authors define the inputs only through the shipped orbit samples'; target v^2/2 = E_t + A*log(B*r+1)/r",
+  "origin_proposal": "simulator output: stellar-stream orbit samples in a known potential, not observations",
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     29,
+     29
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": "Rows are noise-free orbit samples (simulated streams)."
  },
  {
   "catalog": "eql-robotic-arm-forward-kinematics",
@@ -819,6 +1122,35 @@
   },
   "below_half": {},
   "notes": "Settled 'dummy inputs' questionable: kin-5-all outputs ignore later joints only because the multi-output task is split per coordinate ('the authors do not use the word')."
+ },
+ {
+  "catalog": "cp3-bench",
+  "display_name": "CP3-bench cosmology",
+  "kind": "data",
+  "problems": 28,
+  "file": "build/data-catalogs/cp3-bench.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-54.json notes: 28 cosmology datasets C1-C6 (Thing & Koksbang, JCAP 2025): 17 with a ground-truth law, C3/C4 test sets 'from the authors' numerical simulations'",
+  "origin_proposal": "synthetic data: datasets generated from cosmological laws or the authors' simulations, not observations",
+  "tags": [],
+  "detail": {},
+  "below_half": {
+   "noisy data": {
+    "share": [
+     3,
+     28
+    ],
+    "source": "sets/fresh-54.json problems: C1b/C5b/C5c are 'the frozen-noise copies of C1a/C5a', e.g. C1b 'Same law as C1a with 10% Gaussian noise on H(z)'"
+   },
+   "dummy inputs": {
+    "share": [
+     8,
+     28
+    ],
+    "source": "sets/fresh-54.json notes: 'SUPERFLUOUS COLUMNS by design: C3e/C3f H0 (constant), C3h H (varying, unused by the law), C5a-e x (constant)'"
+   }
+  },
+  "notes": "Noise covers 3 of 28 datasets; most 'superfluous columns' are constants, only C3h's H varies."
  },
  {
   "catalog": "livermore",
@@ -1026,6 +1358,20 @@
   "notes": null
  },
  {
+  "catalog": "gecco-2013-2017-real",
+  "display_name": "GECCO 2013-2017 GP regression compilation (real data)",
+  "kind": "data",
+  "problems": 18,
+  "file": "build/data-catalogs/gecco-2013-2017-real.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-33.json notes: the 21 real-world members of Oliveira et al. 2018's compilation (UCI tables: abalone, airfoil, Boston, CCPP, concrete, energy, ozone, wine, yacht, Dow, Tower, ...)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
+ },
+ {
   "catalog": "gsr-symset",
   "display_name": "gsr-symset",
   "kind": "formula",
@@ -1052,6 +1398,30 @@
   "detail": {},
   "below_half": {},
   "notes": null
+ },
+ {
+  "catalog": "phye2e-space-physics",
+  "display_name": "PhyE2E space-physics applications",
+  "kind": "data",
+  "problems": 16,
+  "file": "build/data-catalogs/phye2e-space-physics.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-103.json notes: PhyE2E applications: sunspot numbers (SILSO), plasma pressure (Geotail/THEMIS), solar rotation, Fe X contribution function (CHIANTI)",
+  "origin_proposal": null,
+  "tags": [
+   "extrapolation"
+  ],
+  "detail": {
+   "extrapolation": {
+    "share": [
+     16,
+     16
+    ],
+    "source": "facts split_readings: 'the near side r < 28 RE fits, the far side r > 28 RE tests' (12), 'T < 2.8e6 K fits, T >= 2.8e6 K tests' (2), sunspots 1855-1976 fit / next cycles test (1); 15 of 16"
+   }
+  },
+  "below_half": {},
+  "notes": "Fe X targets come from the CHIANTI atomic database (computed), the rest are observations."
  },
  {
   "catalog": "korns",
@@ -1144,6 +1514,34 @@
    }
   },
   "notes": "4 of 14 members are HL Physics cases (physics laws). Dummies mostly by design (Korns, Breiman-I, Friedman); Poly-10's x8 is the exception."
+ },
+ {
+  "catalog": "heuristiclab-real-world",
+  "display_name": "HeuristicLab regression instances (real-world data)",
+  "kind": "data",
+  "problems": 14,
+  "file": "build/data-catalogs/heuristiclab-real-world.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-46.json notes: RealWorld (Chemical-I, Housing, Powermeter, SARCOS, Tower) and Miba friction data sets shipped by HeuristicLab",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "No extrapolation: HL's split is a fixed contiguous partition, not a stated region or time design."
+ },
+ {
+  "catalog": "srbench-2021-strogatz",
+  "display_name": "SRBench 2021 Strogatz",
+  "kind": "data",
+  "problems": 14,
+  "file": "build/data-catalogs/srbench-2021-strogatz.npz",
+  "origin": "synthetic data",
+  "origin_source": "srbench-2021-strogatz npz _meta: PMLB strogatz_* ODE systems from lacava/ode-strogatz, e.g. formula_as_published \"x' = 20 - x - (x * y)/(1+0.5 * x**2)\", formula_fvu_on_file ~5e-29",
+  "origin_proposal": "simulator output: rows sampled along numerically integrated ODE trajectories, targets the exact derivatives",
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "Rows are noise-free samples along simulated ODE trajectories."
  },
  {
   "catalog": "chen-luo-jiang-block-building-test-cases",
@@ -1254,6 +1652,56 @@
   "notes": "No extrapolation: the one test block (Nguyen-11 = Keijzer mesh) lies inside the fit range."
  },
  {
+  "catalog": "ffx-high-dimensional-circuits",
+  "display_name": "FFX high-dimensional circuit problems",
+  "kind": "data",
+  "problems": 12,
+  "file": "build/data-catalogs/ffx-high-dimensional-circuits.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-143.json notes: '12 targets from HSPICE simulations of 6 industrial circuits at Monte Carlo process points'",
+  "origin_proposal": "simulator output: HSPICE circuit simulations, not measurements",
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "No extrapolation: test = every 4th point by sorted y (interleaved)."
+ },
+ {
+  "catalog": "srbench-2.0-blackbox",
+  "display_name": "SRBench 2.0 black-box",
+  "kind": "data",
+  "problems": 12,
+  "file": "build/data-catalogs/srbench-2.0-blackbox.npz",
+  "origin": "measured data",
+  "origin_source": "sets/done-7.json notes: '12 PMLB 1.0 regression datasets' chosen by clustering SRBench 1.0 results; 'The three fri_* datasets come from Friedman's generator'",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "3 of 12 members are Friedman-generator data."
+ },
+ {
+  "catalog": "srbench-2.0-first-principles",
+  "display_name": "SRBench 2.0 first-principles",
+  "kind": "data",
+  "problems": 12,
+  "file": "build/data-catalogs/srbench-2.0-first-principles.npz",
+  "origin": "measured data",
+  "origin_source": "sets/done-8.json notes: 12 PMLB first_principles_* datasets: 'the others are historical or real measurements' (7 of 12); 5 generated from laws",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {
+   "noisy data": {
+    "share": [
+     5,
+     12
+    ],
+    "source": "sets/done-8.json notes: 'the five generated sets carry the creators' noise (Table 1: ideal_gas, newton, planck 10%; rydberg 1%; schechter 20%)'"
+   }
+  },
+  "notes": "Noise tag covers 5 of 12 datasets (the generated ones)."
+ },
+ {
   "catalog": "gp-benchmarks-sr-table",
   "display_name": "gp-benchmarks-sr-table",
   "kind": "formula",
@@ -1278,6 +1726,30 @@
   "notes": "Settled 'dummy inputs' is right: 'the only dummies are Korns' unused inputs'."
  },
  {
+  "catalog": "falling-balls",
+  "display_name": "Free-falling balls with air resistance",
+  "kind": "data",
+  "problems": 11,
+  "file": "build/data-catalogs/falling-balls.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-62.json notes: 'June 2013, Alex Fraser Bridge, about 35 m, 11 balls dropped ..., hand-held iPad video at 15 fps, heights from ball tracking' (de Silva et al. 2020)",
+  "origin_proposal": null,
+  "tags": [
+   "extrapolation"
+  ],
+  "detail": {
+   "extrapolation": {
+    "share": [
+     11,
+     11
+    ],
+    "source": "sets/fresh-62.json split: 'Deterministic time split ... train = drop-1 rows with Time (s) <= 2, test = drop-1 rows with Time (s) > 2 (forecast/extrapolation in t)'"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
   "catalog": "symantic-synthetic-set",
   "display_name": "symantic-synthetic-set",
   "kind": "formula",
@@ -1300,6 +1772,20 @@
   },
   "below_half": {},
   "notes": "Settled 'dummy inputs' is right: subset 'noise-and-dummy-features' is the authors' own."
+ },
+ {
+  "catalog": "gp-gomea-real-world",
+  "display_name": "GP-GOMEA real-world set",
+  "kind": "data",
+  "problems": 10,
+  "file": "build/data-catalogs/gp-gomea-real-world.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-35.json notes: '10 fixed real-world tabular regression datasets with no ground-truth formula' (Virgolin et al. 2021; mostly UCI)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
  },
  {
   "catalog": "ai-hilbert-problem-set",
@@ -1720,6 +2206,20 @@
   "notes": null
  },
  {
+  "catalog": "gsgp-real-world",
+  "display_name": "GSGP real-world regression set",
+  "kind": "data",
+  "problems": 7,
+  "file": "build/data-catalogs/gsgp-real-world.npz",
+  "origin": "measured data",
+  "origin_source": "sets/critic-3.json notes: 'DATA set with no ground truth (real-world tables)': UCI airfoil, concrete, slump, Parkinson's, and Archetti et al.'s bioav, ppb, ld50",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
+ },
+ {
   "catalog": "eql-pendulum-vector-field",
   "display_name": "eql-pendulum-vector-field",
   "kind": "formula",
@@ -1844,6 +2344,121 @@
   "notes": "No extrapolation: tests are random points of the training range or the training points (facts split_readings)."
  },
  {
+  "catalog": "ai-descartes-real-data",
+  "display_name": "AI Descartes real-data laws",
+  "kind": "data",
+  "problems": 6,
+  "file": "build/data-catalogs/ai-descartes-real-data.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-3.json notes: 'DATA set (measured tables, 4-20 points each)': Kepler (solar system, exoplanets, binary stars), relativistic time dilation, Langmuir adsorption",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     6,
+     6
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "ffx-cmos-ota",
+  "display_name": "FFX CMOS OTA circuit targets",
+  "kind": "data",
+  "problems": 6,
+  "file": "build/data-catalogs/ffx-cmos-ota.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-142.json notes: 'fixed SPICE-simulated design-of-experiments samples, no ground-truth formula'",
+  "origin_proposal": "simulator output: SPICE circuit simulations, not measurements",
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "No extrapolation: train and test are two DOEs over the same three levels per input."
+ },
+ {
+  "catalog": "ideasearch-pdf",
+  "display_name": "IdeaSearchFitter parton distributions (CT18NNLO)",
+  "kind": "data",
+  "problems": 6,
+  "file": "build/data-catalogs/ideasearch-pdf.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-132.json notes: 'the 2-input map (x, Q) -> x f_i(x, Q) from the CT18NNLO PDF set' via LHAPDF interpolation",
+  "origin_proposal": "fitted model output: values of a global PDF fit (CT18NNLO), not raw measurements",
+  "tags": [
+   "extrapolation"
+  ],
+  "detail": {
+   "extrapolation": {
+    "share": [
+     6,
+     6
+    ],
+    "source": "facts split_readings: 'given: the authors' grids, Q in [2, 5] GeV fits, Q = 100 GeV tests (extrapolation)'; sets/fresh-132.json: 'the authors' split is an extrapolation in Q'"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "mcdermott-predictive-modelling",
+  "display_name": "McDermott et al. predictive-modelling sets",
+  "kind": "data",
+  "problems": 6,
+  "file": "build/data-catalogs/mcdermott-predictive-modelling.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-48.json notes: QSAR tables (%F, LD50, %PPB), Mackey-Glass series, sunspots (McDermott et al. 2012 Table 1, predictive-modelling sets)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {
+   "extrapolation": {
+    "share": [
+     2,
+     6
+    ],
+    "source": "2 of 6 problems: facts split_readings: 'given: the authors' years split, 1700-1920 fits, 1921-1955 tests' and 1956-1979 tests (Jaske 1996)"
+   },
+   "several tests": {
+    "share": [
+     2,
+     6
+    ],
+    "source": "subsets 'sunspots test 1921-1955' and 'sunspots test 1956-1979': BUILD_NOTES.md item 6, 'sunspots = two problems (the authors' two test periods ...)'"
+   }
+  },
+  "notes": "Mackey-Glass is a simulated delay-differential series; the other 5 are measured."
+ },
+ {
+  "catalog": "treloar-rubber",
+  "display_name": "Treloar rubber hyperelasticity",
+  "kind": "data",
+  "problems": 6,
+  "file": "build/data-catalogs/treloar-rubber.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-125.json notes: 'real experimental stress-stretch curves, no ground-truth formula' (Treloar 1944, as tabulated by Linka & Kuhl 2023)",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     6,
+     6
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
   "catalog": "erbench-public-legacy-formulas",
   "display_name": "erbench-public-legacy-formulas",
   "kind": "formula",
@@ -1880,6 +2495,34 @@
   "detail": {},
   "below_half": {},
   "notes": null
+ },
+ {
+  "catalog": "dimensionless-learning",
+  "display_name": "Dimensionless-learning scaling laws (Xie et al. 2022)",
+  "kind": "data",
+  "problems": 5,
+  "file": "build/data-catalogs/dimensionless-learning.npz",
+  "origin": "measured data",
+  "origin_source": "sets/critic-6.json notes: 'three fixed tables of noisy literature measurements' (Rayleigh-Benard convection, keyhole dynamics, porosity; Xie et al. 2022)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "symbolfit-lhc-spectra",
+  "display_name": "SymbolFit LHC background spectra",
+  "kind": "data",
+  "problems": 5,
+  "file": "build/data-catalogs/symbolfit-lhc-spectra.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-166.json notes: '5 one-dimensional binned CMS invariant-mass spectra' (HEPData)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "Not tagged extrapolation: the test is the authors' blinded signal window, a held-out mass window rather than a region beyond the fit bins (window position not checked per spectrum)."
  },
  {
   "catalog": "dso-benchmark-registry",
@@ -1964,6 +2607,90 @@
   },
   "below_half": {},
   "notes": null
+ },
+ {
+  "catalog": "eql-double-pendulum",
+  "display_name": "EQL double-pendulum kinematics",
+  "kind": "data",
+  "problems": 4,
+  "file": "build/data-catalogs/eql-double-pendulum.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-152.json notes: 'the published Schmidt & Lipson recording real_double_pend_h_1.txt' of a real double pendulum (Science SOM Table S3)",
+  "origin_proposal": null,
+  "tags": [
+   "extrapolation"
+  ],
+  "detail": {
+   "extrapolation": {
+    "share": [
+     4,
+     4
+    ],
+    "source": "sets/fresh-152.json notes: 'The task's point is extrapolation (test angles span [-pi, pi]^2, training covers about [-1.39, 1.42] x [-2.14, 2.15])'; split by trajectory"
+   }
+  },
+  "below_half": {},
+  "notes": "x2 unused for y1/y3 comes from the per-output split, not a design; not tagged 'dummy inputs'."
+ },
+ {
+  "catalog": "langlaw-perovskites",
+  "display_name": "LangLaw perovskite datasets",
+  "kind": "data",
+  "problems": 4,
+  "file": "build/data-catalogs/langlaw-perovskites.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-120.json notes: 'real DFT (bulk modulus, band gap) and experimental (OER) tables with no ground-truth formulas'",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "2 of 4 datasets are DFT-computed, not measured."
+ },
+ {
+  "catalog": "pysr-empiricalbench",
+  "display_name": "PySR EmpiricalBench",
+  "kind": "data",
+  "problems": 4,
+  "file": "build/data-catalogs/pysr-empiricalbench.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-2.json notes: '4 laws use original data (hubble, kepler, leavitt, bode)', used as the authors evaluated them (Cranmer 2023)",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     4,
+     4
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "shape-constrained-real-world",
+  "display_name": "Shape-constrained SR real-world set",
+  "kind": "data",
+  "problems": 4,
+  "file": "build/data-catalogs/shape-constrained-real-world.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-50.json notes: friction test-bench data (Miba), flow stress, UCI Auto MPG; the authors' own train/test files (Kronberger et al. 2022)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {
+   "extrapolation": {
+    "share": [
+     1,
+     4
+    ],
+    "source": "1 of 4 problems: sets/fresh-50.json cars split 'model years 70-76 vs 76-82. Sequential, i.e. temporal and extrapolative (test mpg reaches 46.6 vs train max 35.0)'"
+   }
+  },
+  "notes": "Extrapolation rests on 1 of 4 problems (cars); friction test points lie inside the train box."
  },
  {
   "catalog": "knowledge-integration-newtonian-cases",
@@ -2062,6 +2789,124 @@
      3
     ],
     "source": "facts split_readings 'fit on the authors' grid points in [0, 100], test on [-100, -1]'; sets/fresh-111.json: 'give the SR methods only x >= 0 and score ... on x in [-100, 0)'"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "bms-real-data",
+  "display_name": "Bayesian machine scientist real datasets",
+  "kind": "data",
+  "problems": 3,
+  "file": "build/data-catalogs/bms-real-data.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-63.json notes: R&D funding, cell adhesion (Trepat) and salmon recruitment (LogYe) tables from the Bayesian machine scientist repository",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     3,
+     3
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "evogp-uci",
+  "display_name": "EvoGP regression datasets",
+  "kind": "data",
+  "problems": 3,
+  "file": "build/data-catalogs/evogp-uci.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-140.json notes: '3 fixed real-world tables': UCI Daily Demand, Auto MPG, California housing (EvoGP)",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     3,
+     3
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "gecco-2022-covid-ny",
+  "display_name": "GECCO 2022 real-world: COVID-19 New York",
+  "kind": "data",
+  "problems": 3,
+  "file": "build/data-catalogs/gecco-2022-covid-ny.npz",
+  "origin": "measured data",
+  "origin_source": "sets/done-16.json notes: 'three fixed real-world tabular forecasting datasets' from NY State COVID-19 cases, deaths, hospitalisations (reichlab truth data)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "Not tagged extrapolation: test chunks interleave with training chunks (35 train / 21 test days per 56-day window); create_data.py replaced outliers by medians."
+ },
+ {
+  "catalog": "gecco-2023-performance",
+  "display_name": "GECCO 2023 competition Track 1 (performance)",
+  "kind": "data",
+  "problems": 3,
+  "file": "build/data-catalogs/gecco-2023-performance.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/done-17.json notes: f1 Shubert and f3 Vincent from the organizers' create_data.py; dataset_2 a NASA_dset_1 subsample; the competition page calls all three 'synthetic'",
+  "origin_proposal": "synthetic data: organizer-generated files from optimization test functions (Shubert, Vincent) plus an unexplained NASA table",
+  "tags": [
+   "dummy inputs",
+   "noisy data"
+  ],
+  "detail": {
+   "dummy inputs": {
+    "share": [
+     3,
+     3
+    ],
+    "source": "sets/done-17.json notes: 'correlated decoy columns (noisy copies and noisy linear combinations of the true variables) ... These decoys are the distinctive part of the benchmark'"
+   },
+   "noisy data": {
+    "share": [
+     3,
+     3
+    ],
+    "source": "sets/done-17.json datasets[].notes: 'Target noise in the training file only: Gaussian, noise_ratio 0.05' (dataset_1), 0.02 (dataset_3)"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "tisr-air-density",
+  "display_name": "TiSR air-mixture density data",
+  "kind": "data",
+  "problems": 3,
+  "file": "build/data-catalogs/tisr-air-density.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-149.json notes: air-mixture density p = f(T, rho): air-exp (58 measured/extrapolated points), air-ms-grid and air-ms-at-exp (molecular simulation)",
+  "origin_proposal": "simulator output: 2 of 3 datasets are molecular-simulation points",
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     3,
+     3
+    ],
+    "source": "the catalog files"
    }
   },
   "below_half": {},
@@ -2256,6 +3101,224 @@
     "source": "facts split_readings 'fit on the authors' training mesh, test on their test mesh': fit x in [0.05, 9.95], test meshes on [-0.5, 10.5] (Vladislavleva et al. 2009 Table I)"
    }
   },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "ai-hilbert-real-data",
+  "display_name": "AI Hilbert real data",
+  "kind": "data",
+  "problems": 2,
+  "file": "build/data-catalogs/ai-hilbert-real-data.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-4.json notes: 'the 2 real-data sets (Kepler binary stars, 4 rows; relativistic time dilation, 7 rows)'",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "drsr-debcat",
+  "display_name": "DRSR DEBCat mass-luminosity",
+  "kind": "data",
+  "problems": 2,
+  "file": "build/data-catalogs/drsr-debcat.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-137.json notes: 'the DEBCat mass-luminosity data in the authors' two settings (linear units, log-log)' (CDS catalogue V/152, 324 stars)",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "llm-pysr-battery",
+  "display_name": "LLM-PySR battery cycle life",
+  "kind": "data",
+  "problems": 2,
+  "file": "build/data-catalogs/llm-pysr-battery.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-126.json notes: 'log10 cycle life of 124 LFP/graphite cells (Severson et al. 2019) from 9 z-scored early-cycle features'",
+  "origin_proposal": null,
+  "tags": [
+   "several tests"
+  ],
+  "detail": {
+   "several tests": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "subsets 'battery in-distribution' / 'battery out-of-distribution': test_id.csv and test_ood.csv (BUILD_NOTES.md item 15, ruling 9)"
+   }
+  },
+  "below_half": {},
+  "notes": "Not tagged extrapolation: test_ood is Severson's secondary cell batch; the record shows no range shift."
+ },
+ {
+  "catalog": "llm-sr-bactgrow",
+  "display_name": "LLM-SR E. coli growth rate",
+  "kind": "data",
+  "problems": 2,
+  "file": "build/data-catalogs/llm-sr-bactgrow.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/interrupted-0.json notes: E. coli growth-rate law printed in LLM-SR App. D.2; the released files reproduce the instantiated law to <= 1.3e-15",
+  "origin_proposal": "synthetic data: noise-free files generated from a biology law, not measurements",
+  "tags": [
+   "extrapolation",
+   "several tests"
+  ],
+  "detail": {
+   "extrapolation": {
+    "share": [
+     1,
+     2
+    ],
+    "source": "1 of 2 problems: sets/interrupted-0.json notes: in-domain box b, s ~ U[1,5], temp U[1,40], pH U[2,12]; 'out-of-domain test box: b, s ~ U[1,10], temp ~ U[1,60], pH ~ U[1,14]'"
+   },
+   "several tests": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "subsets 'bactgrow in-domain' / 'bactgrow out-of-domain': published test_id.csv and test_ood.csv (facts split_readings)"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "llm-sr-stress-strain",
+  "display_name": "LLM-SR stress-strain (Al 6061-T651)",
+  "kind": "data",
+  "problems": 2,
+  "file": "build/data-catalogs/llm-sr-stress-strain.npz",
+  "origin": "measured data",
+  "origin_source": "sets/done-31.json notes: 'real uniaxial tensile curves of Al 6061-T651 (20-300 C)' (Mendeley data, as used by LLM-SR)",
+  "origin_proposal": null,
+  "tags": [
+   "several tests"
+  ],
+  "detail": {
+   "several tests": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "subsets 'stress-strain in-domain' / 'stress-strain out-of-domain': published test_id.csv and test_ood.csv (facts split_readings)"
+   }
+  },
+  "below_half": {},
+  "notes": "Not tagged extrapolation: 'OOD is interpolation in temperature (200 C lies between ...)' (sets/done-31.json split)."
+ },
+ {
+  "catalog": "nikuradse",
+  "display_name": "Nikuradse rough-pipe friction",
+  "kind": "data",
+  "problems": 2,
+  "file": "build/data-catalogs/nikuradse.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-51.json notes: PMLB nikuradse_1/_2, Nikuradse's rough-pipe friction measurements (362 rows)",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": "BMS's own extrapolation hold-outs exist in the authors' original file but srbf uses PMLB without a split."
+ },
+ {
+  "catalog": "nuclear-misr",
+  "display_name": "Nuclear binding energies and charge radii (MISR)",
+  "kind": "data",
+  "problems": 2,
+  "file": "build/data-catalogs/nuclear-misr.npz",
+  "origin": "measured data",
+  "origin_source": "sets/critic-5.json notes: 'fixed real nuclear data': AME2020 binding energies and measured charge radii",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "No extrapolation: the published files are a random 20% split."
+ },
+ {
+  "catalog": "oxygen-ion-conductors",
+  "display_name": "Oxygen-ion conductor database",
+  "kind": "data",
+  "problems": 2,
+  "file": "build/data-catalogs/oxygen-ion-conductors.npz",
+  "origin": "measured data",
+  "origin_source": "sets/critic-7.json notes: 'two real-world targets (activation energy Ea ...; log10 of the Arrhenius prefactor A) on 472 oxides' from a 60-year literature database",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "Not tagged extrapolation: the 'stratified' folds are contiguous database blocks, so tests are out-of-class by accident, not by design."
+ },
+ {
+  "catalog": "shadow-economies",
+  "display_name": "Shadow Economies",
+  "kind": "data",
+  "problems": 2,
+  "file": "build/data-catalogs/shadow-economies.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-39.json notes: 'Real-world tabular data set from the defunct symbolicregression.com Real World benchmark page' (Truscott & Korns 2011), country-year indicators",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "superconductor-tc",
+  "display_name": "Superconducting Tc (Allen-Dynes data)",
+  "kind": "data",
+  "problems": 2,
+  "file": "build/data-catalogs/superconductor-tc.npz",
+  "origin": "measured data",
+  "origin_source": "sets/critic-4.json notes: 'fixed real measurements (tabulated lambda, mu*, omega_log and measured T_c)' (Allen-Dynes data, Xie et al. 2019)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
   "below_half": {},
   "notes": null
  },
@@ -2712,6 +3775,272 @@
     "source": "sets/fresh-32.json notes: 'White's test sets for Keijzer-6 (E[1,120,1]) ... are deliberate extrapolation ranges (require extrapolation, not just interpolation)'; fit E[1,50,1]"
    }
   },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "black-hole-spiral-plane",
+  "display_name": "Black-hole mass scaling in spiral galaxies",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/black-hole-spiral-plane.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-164.json notes: Davis & Jin 2023 Table 1, 41 spiral galaxies: pitch angle, vmax, log black-hole mass",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "dow-chemical-evostar-2010",
+  "display_name": "Dow Chemical (EvoStar 2010 competition)",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/dow-chemical-evostar-2010.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-36.json notes: 'One real-world DATA problem'; 'the target is already a noisy lab measurement' (Dow Chemical, EvoStar 2010 competition)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "dow-distillation-tower",
+  "display_name": "Tower (Dow distillation tower)",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/dow-distillation-tower.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-37.json notes: 'One real-world dataset (Dow distillation tower, 4999 x 25 + response)'",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "dow-emulator",
+  "display_name": "Emulator problem (Dow)",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/dow-emulator.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-38.json notes: 'the outputs come from Dow's proprietary first-principles plant model (~20-25 min per prediction)'",
+  "origin_proposal": "simulator output: emulator targets from a first-principles plant model",
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": "No extrapolation: test points 'randomly generated within the training range'."
+ },
+ {
+  "catalog": "eql-xray-kalpha2",
+  "display_name": "EQL X-ray transition energies",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/eql-xray-kalpha2.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-156.json notes: 'the authors' 94 points ... each matches one NIST SRD 128 KL2 value exactly (93 Direct + Cf-249 Theory)'",
+  "origin_proposal": null,
+  "tags": [
+   "extrapolation"
+  ],
+  "detail": {
+   "extrapolation": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "facts split_readings: 'given: Z in [10, 91] fits (the authors' train + validation), Z in [92, 100] tests (extrapolation)'"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "esr-cosmology",
+  "display_name": "ESR cosmology datasets",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/esr-cosmology.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-53.json notes: cc-hubble, cosmic-chronometer H(z) data, 32 points (Moresco 2022 Table 1)",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "gplearn-diabetes",
+  "display_name": "gplearn documentation example (diabetes)",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/gplearn-diabetes.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-146.json notes: 'one real-world data set (sklearn Diabetes, 442 x 10, no ground truth, gplearn's split 300/142 from RandomState(0))'",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "hierbosss-single-atom",
+  "display_name": "HierBOSSS single-atom catalysis",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/hierbosss-single-atom.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-123.json datasets[0].target: 'BE(eV): DFT binding (adsorption) energy of the single metal adatom on the oxide surface' (O'Connor et al. 2018, 91 rows)",
+  "origin_proposal": "simulator output: DFT-computed binding energies, not measurements",
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "lasr-bigbench",
+  "display_name": "LaSR BIG-bench scaling-law task",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/lasr-bigbench.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-93.json notes: the BIG-bench scaling-law task (LaSR): MCQ grades of language models, one dataset",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "materials-laws-multi-agent",
+  "display_name": "Multi-agent materials law datasets",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/materials-laws-multi-agent.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-122.json notes: built member vickers_hardness_tantardini61: 'experimental Vickers hardness H_V in GPa' of 61 compounds with DFT-derived features (Tantardini et al. 2024; sets/fresh-122.json datasets[].target)",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "sisso-octet-binaries",
+  "display_name": "SISSO octet binaries (rock-salt vs zinc-blende)",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/sisso-octet-binaries.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-117.json notes: 82 octet binaries, target dE = E(RS) - E(ZB) from DFT (Ghiringhelli et al. PRL 2015 SI Table 8; 'Raw DFT inputs/outputs: NOMAD')",
+  "origin_proposal": "simulator output: DFT energy differences, not measurements",
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "sparc-radial-acceleration",
+  "display_name": "Radial acceleration relation (SPARC)",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/sparc-radial-acceleration.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-52.json notes: 'observed SPARC RAR, rebuildable exactly from two public SPARC files' (Desmond, Bartlett & Ferreira 2023; 2696 points)",
+  "origin_proposal": null,
+  "tags": [
+   "no test split"
+  ],
+  "detail": {
+   "no test split": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "torchsisso-specific-energy",
+  "display_name": "Specific energy of organic compounds (TorchSISSO)",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/torchsisso-specific-energy.npz",
+  "origin": "synthetic data",
+  "origin_source": "sets/fresh-116.json datasets[0].target: 'Specific Energy = (E - E_anode) n F / (3600 M_W); E = DFT redox potential' (TorchSISSO Sec. 4.3, Eq. 11), 1444 PaDEL descriptors",
+  "origin_proposal": "simulator output: targets derived from DFT redox potentials, not measurements",
+  "tags": [
+   "extrapolation"
+  ],
+  "detail": {
+   "extrapolation": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "sets/fresh-116.json split: train.dat 115 paraquinones, test 1000 quinones; 'Extrapolation split by chemical class and target range: 156 of 1000 test targets lie below the training minimum'"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "white-2013-proposed",
+  "display_name": "White et al. 2013 proposed SR set",
+  "kind": "data",
+  "problems": 1,
+  "file": "build/data-catalogs/white-2013-proposed.npz",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-32.json notes: data member Dow-Chemical, 'fixed 747/319 split' of the organiser's workbook (White et al. 2013 Table 5)",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
   "below_half": {},
   "notes": null
  }

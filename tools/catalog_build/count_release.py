@@ -5,7 +5,8 @@ The totals come from the built catalogs and their frozen subsamples (srbf ruling
 - the curated catalogs in assets/catalogs and assets_sa/catalogs (YAML and the pinned-point .npz companions) except the
   generative ones, FastSRB at its default version, and ERBench SynEq and OEIS at their frozen 1,024;
 - the older data catalogs (.npz) in assets/catalogs only where a newer build replaces none (SUPERSEDED);
-- the data catalogs built outside the repo (--catalogs: its data/*.npz and srbench-*.npz), while they live there.
+- the data catalogs, built outside git (--catalogs, default build/data-catalogs: its *.npz, or data/*.npz and
+  srbench-*.npz) and published to Hugging Face only.
 
 A problem's subset is its entry's ``subset``, else release_subsets.json's tiers (FastSRB, SRSD), else ``all``. Subsets
 with fewer than 20 problems in a catalog with several subsets are listed (the floor was lifted 2026-11-04: a benchmark
@@ -32,9 +33,9 @@ VERSIONED = {"fastsrb.yaml": "fastsrb.v2.yaml"}              # publish_catalogs.
 FROZEN = {"erbench-syneq": "release__erbench-syneq.json", "erbench-oeis": "erbench-oeis.json"}
 # symbolic-data's frozen data catalogs that a local build replaces (the 2026-10-17 drops: AI Descartes FSRD_noise,
 # SRBench 2.0's supernovae_zg; CP3-bench as one catalog)
-SUPERSEDED = {"ai-descartes.npz": "data/ai-descartes-real-data.npz", "cp3-blackbox.npz": "data/cp3-bench.npz",
-              "cp3-cosmo.npz": "data/cp3-bench.npz", "first-principles.npz": "srbench-2.0-first-principles.npz",
-              "physo-streams.npz": "data/physo-milky-way-streams.npz", "srbench2-blackbox.npz": "srbench-2.0-blackbox.npz"}
+SUPERSEDED = {"ai-descartes.npz": "ai-descartes-real-data.npz", "cp3-blackbox.npz": "cp3-bench.npz",
+              "cp3-cosmo.npz": "cp3-bench.npz", "first-principles.npz": "srbench-2.0-first-principles.npz",
+              "physo-streams.npz": "physo-milky-way-streams.npz", "srbench2-blackbox.npz": "srbench-2.0-blackbox.npz"}
 FLOOR = 20
 
 
@@ -72,7 +73,7 @@ def from_npz(path: Path) -> dict[str, Any]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--symbolic-data", default=str(paths.REPO))
-    ap.add_argument("--catalogs", default=None, help="the locally built data catalogs (data/, srbench-*.npz), if any")
+    ap.add_argument("--catalogs", default=str(paths.DATA_BUILD), help="the built data catalogs (*.npz), if any")
     ap.add_argument("--out", default=str(paths.REPO / "build/release_counts.json"))
     a = ap.parse_args()
     sd = Path(a.symbolic_data)
@@ -86,10 +87,9 @@ def main() -> None:
         for path in sorted(folder.glob("*.npz")):
             if path.name not in SUPERSEDED:
                 rows.append({**from_npz(path), "source": "symbolic-data"})
-    if a.catalogs:
-        local = Path(a.catalogs)
-        for path in sorted([*(local / "data").glob("*.npz"), *local.glob("srbench-*.npz")]):
-            rows.append({**from_npz(path), "source": "local build"})
+    local = Path(a.catalogs)
+    for path in sorted([*local.glob("*.npz"), *(local / "data").glob("*.npz")]):
+        rows.append({**from_npz(path), "source": "data build"})
     names = Counter(r["name"] for r in rows)
     clash = sorted(n for n, c in names.items() if c > 1)   # srbf needs unique names: reported, both counted
     for r in rows:

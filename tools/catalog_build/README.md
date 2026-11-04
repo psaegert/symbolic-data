@@ -17,8 +17,14 @@ own generator, and the release catalogs' corrections. Run them from the reposito
 5. `python tools/catalog_build/catalog_tags.py facts ...`, `merge ...`, `apply ...` — the catalog tags (origin and
    what the catalog tests) into every catalog's metadata; `tags/judged.json` is the reading of the set records each
    judgement tag rests on. A rebuild drops a catalog's tags, so run `apply` after every build.
-6. `python tools/catalog_build/count_release.py` — the release's problem and subset counts.
+6. `python tools/catalog_build/build_data_catalogs.py` and `build_srbench_catalogs.py` — the data catalogs: each
+   benchmark's published data as frozen pools (`symbolic_data.pools`), one reader per set in `data_catalog_readers.py`,
+   and the four SRBench tracks from PMLB. They are written to `build/data-catalogs` (git-ignored) and published to
+   Hugging Face only. Their input files are not in the repository: `data_sets.json` names each file, its source and
+   its sha256, and `SYMBOLIC_DATA_CATALOG_RAW` points at a folder holding them (files with a URL are downloaded).
+   Run `catalog_tags.py apply` on them too.
+7. `python tools/catalog_build/count_release.py` — the release's problem and subset counts (the curated catalogs and
+   the data build).
 
 `SYMBOLIC_DATA_CATALOG_PREP` points the builders at another copy of the survey's records (`paths.py`). Text copied
-from the records into a catalog passes `paths.public` (no local paths). The data catalogs (measured data, the SRBench
-tracks) are built outside the repository for now; `count_release.py --catalogs <dir>` counts them.
+from the records into a catalog passes `paths.public` (no local paths, no internal wording).

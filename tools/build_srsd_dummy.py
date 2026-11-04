@@ -1,6 +1,6 @@
 """srsd-dummy: FastSRB's laws (fastsrb.v2.yaml) with SRSD's PUBLISHED dummy columns.
 
-Rule (owner, 2026-11-04): dummies come from the benchmark. SRSD publishes its dummy configuration only as
+Rule (srbf, 2026-11-04): dummies come from the benchmark. SRSD publishes its dummy configuration only as
 data: the Hugging Face datasets yoshitomo-matsubara/srsd-feynman_{easy,medium,hard}_dummy (CC BY 4.0). No
 seed exists anywhere in omron-sinicx/srsd-benchmark (dummy_column_mixer.py uses the unseeded `random`
 module), so re-running the recipe cannot reproduce the published layout; the files are the record.
