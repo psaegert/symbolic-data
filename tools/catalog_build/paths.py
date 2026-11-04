@@ -52,12 +52,19 @@ def set_record(tag: str) -> dict[str, Any]:
     if (PREP / "sets").is_dir():
         with open(PREP / "sets" / f"{tag}.json", encoding="utf-8") as fh:
             return json.load(fh)
-    return _sets()[tag]
+    return _sets()[tag] if tag in _sets() else _data_sets()[tag]
 
 
 @lru_cache(maxsize=1)
 def _sets() -> dict[str, dict[str, Any]]:
     return _read("sets.json")
+
+
+def set_tags() -> set[str]:
+    """The tags of every recorded set."""
+    if (PREP / "sets").is_dir():
+        return {p.stem for p in (PREP / "sets").glob("*.json")}
+    return set(_sets()) | set(_data_sets())
 
 
 @lru_cache(maxsize=None)
@@ -100,10 +107,12 @@ def release_subsets() -> dict[str, Any]:
 
 
 # text copied from the records into a catalog is public: no local paths, no internal wording
-_LOCAL = [(re.compile(r"/home/[^/\s]+/srbf_eval_local/workflow_archive/"), ""),
-          (re.compile(r"/home/[^/\s]+/srbf_eval_local/"), ""),
-          (re.compile(r"/home/[^/\s]+/Projects/symbolic-data(-wt-[\w-]+)?/"), "symbolic-data/"),
-          (re.compile(r"/home/[^/\s]+/"), "~/"),
+# (a path, not a web address: /home/ right after a host name, as in space.mit.edu/home/tegmark/, stays)
+_PATH = r"(?<![\w.-])/home/[^/\s]+/"
+_LOCAL = [(re.compile(_PATH + r"srbf_eval_local/workflow_archive/"), ""),
+          (re.compile(_PATH + r"srbf_eval_local/"), ""),
+          (re.compile(_PATH + r"Projects/symbolic-data(-wt-[\w-]+)?/"), "symbolic-data/"),
+          (re.compile(_PATH), "~/"),
           (re.compile(r"\bOWNER DECISION\b"), "DECISION"),
           (re.compile(r"\bowner call\b"), "srbf's call"),
           # the survey's notes name srbf's maintainer as "the owner"; a data owner and owner-occupied homes stay

@@ -17,8 +17,9 @@ keeps the subsets its authors define).
 from __future__ import annotations
 
 import argparse
-import sys
 import json
+import re
+import sys
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -45,6 +46,12 @@ def tiers() -> dict[str, dict[str, str]]:
             for cat in ("fastsrb", "srsd-dummy") if cat in rel}
 
 
+def described(md: dict[str, Any]) -> dict[str, Any]:
+    """What a list of the benchmarks shows next to a catalog: its tags, description, sources and license."""
+    return {"tags": md.get("tags"), "description": md.get("description"), "sources": md.get("sources") or [],
+            "license": md.get("license")}
+
+
 def from_yaml(path: Path, tier: dict[str, dict[str, str]]) -> dict[str, Any]:
     doc = yaml.safe_load(open(path))
     name = doc["metadata"]["name"]
@@ -58,16 +65,17 @@ def from_yaml(path: Path, tier: dict[str, dict[str, str]]) -> dict[str, Any]:
     return {"name": name, "kind": "formula", "file": str(path), "version": md.get("version"),
             "source_record": md.get("source_record"),
             "display_name": md.get("display_name") or name, "of": len(doc["expressions"]) if keep is not None else None,
-            "subsets": dict(subsets)}
+            "subsets": dict(subsets), **described(md)}
 
 
 def from_npz(path: Path) -> dict[str, Any]:
     meta = json.loads(str(np.load(path)["_meta"]))
     cat = meta["catalog"]
     subsets = Counter((p.get("meta") or {}).get("subset") or "all" for p in meta["problems"])
+    md = cat.get("meta") or {}
     return {"name": cat["name"], "kind": "data", "file": str(path), "version": cat.get("version"),
-            "source_record": (cat.get("meta") or {}).get("source_record"),
-            "display_name": (cat.get("meta") or {}).get("display_name") or cat["name"], "subsets": dict(subsets)}
+            "source_record": md.get("source_record"),
+            "display_name": md.get("display_name") or cat["name"], "subsets": dict(subsets), **described(md)}
 
 
 def main() -> None:
@@ -94,6 +102,11 @@ def main() -> None:
     clash = sorted(n for n, c in names.items() if c > 1)   # srbf needs unique names: reported, both counted
     for r in rows:
         r["problems"] = sum(r["subsets"].values())
+        tag = (re.findall(r"\b(?:fresh|done|critic|interrupted)-\d+\b", str(r.get("source_record") or "")) or [None])[0]
+        if tag:                                   # the survey's set: its name, and its sources where the catalog has none
+            rec = paths.set_record(tag) if tag in paths.set_tags() else {}
+            r["set"], r["set_name"] = tag, rec.get("name")
+            r["sources"] = r["sources"] or rec.get("sources") or []
     empty = sorted(r["file"] for r in rows if not r["problems"])   # a build that kept no problem is not in the release
     rows = [r for r in rows if r["problems"]]
     small = sorted((r["name"], s, n) for r in rows if len(r["subsets"]) > 1 for s, n in r["subsets"].items() if n < FLOOR)

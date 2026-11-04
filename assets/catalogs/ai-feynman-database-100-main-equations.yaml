@@ -6,10 +6,10 @@ metadata:
   sources:
   - https://arxiv.org/abs/1905.11481
   - https://doi.org/10.1126/sciadv.aay2631
-  - https://web.archive.org/web/2022id_/https://space.mit.edu~/main_aifeynman.html
+  - https://web.archive.org/web/2022id_/https://space.mit.edu/home/tegmark/main_aifeynman.html
   - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5322ec8a446cf75e96ec9b3bb904f4d1970eff1e/datasets/FeynmanEquationsDimensionless.csv
   - https://github.com/intell-sci-comput/PSE/blob/9a7d5711152a89abbac0328faa2f440cc5498fb5/baselines/algorithms/DGSR/datasets/FeynmanEquationsDimensionless.csv
-  - https://web.archive.org/web/2022id_/https://space.mit.edu~/aifeynman/FeynmanEquations.csv
+  - https://web.archive.org/web/2022id_/https://space.mit.edu/home/tegmark/aifeynman/FeynmanEquations.csv
   - https://github.com/WassimTenachi/PhySO/blob/04c7bb9535f1fdde9acaec7c8e273a3a9f694ab4/physo/benchmark/FeynmanDataset/units.csv
   - https://github.com/SJ001/AI-Feynman/blob/a05bc4a5be23d6eb3e1d0b2f7eb1ab5b78a920ad/aifeynman/dimensionalAnalysis.py
   - https://www.dropbox.com/s/9i05v6yw1kbkup3/Feynman_without_units.tar.gz

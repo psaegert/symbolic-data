@@ -20,7 +20,7 @@ metadata:
   - https://github.com/folivetti/ITEA/blob/9edf15755ab2d7ff649be54e8facb5527f3d2bc7/configs/aircraft_lift_0.cfg
   - https://github.com/folivetti/ITEA/blob/9edf15755ab2d7ff649be54e8facb5527f3d2bc7/configs/flow_psi_0.cfg
   - https://arxiv.org/abs/2107.09458
-  - https://space.mit.edu~/aifeynman.html
+  - https://space.mit.edu/home/tegmark/aifeynman.html
   sampling_defaults:
     n_points: 512
     method: random
