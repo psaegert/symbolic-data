@@ -344,10 +344,10 @@ expressions:
               low: -6.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-1.beyond:
     raw: 2.5*pow(x1,4)-1.3*pow(x1,3)+0.5*pow(x2,2)-1.7*x2
     prepared: 2.5*((v1)**(4))-1.3*((v1)**(3))+0.5*((v2)**(2))-1.7*v2
@@ -407,10 +407,10 @@ expressions:
               low: 3.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-2.wide:
     raw: 8.0*pow(x1,2)+8.0*pow(x2,3)-15.0
     prepared: 8.0*((v1)**(2))+8.0*((v2)**(3))-15.0
@@ -470,10 +470,10 @@ expressions:
               low: -6.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-2.beyond:
     raw: 8.0*pow(x1,2)+8.0*pow(x2,3)-15.0
     prepared: 8.0*((v1)**(2))+8.0*((v2)**(3))-15.0
@@ -533,10 +533,10 @@ expressions:
               low: 3.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-3.wide:
     raw: 0.2*pow(x1,3)+0.5*pow(x2,3)-1.2*x2-0.5*x1
     prepared: 0.2*((v1)**(3))+0.5*((v2)**(3))-1.2*v2-0.5*v1
@@ -596,10 +596,10 @@ expressions:
               low: -6.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-3.beyond:
     raw: 0.2*pow(x1,3)+0.5*pow(x2,3)-1.2*x2-0.5*x1
     prepared: 0.2*((v1)**(3))+0.5*((v2)**(3))-1.2*v2-0.5*v1
@@ -659,10 +659,10 @@ expressions:
               low: 3.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-4.wide:
     raw: 1.5*exp(x1)+5.0*cos(x2)
     prepared: 1.5*exp(v1)+5.0*cos(v2)
@@ -722,10 +722,10 @@ expressions:
               low: -6.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-4.beyond:
     raw: 1.5*exp(x1)+5.0*cos(x2)
     prepared: 1.5*exp(v1)+5.0*cos(v2)
@@ -785,10 +785,10 @@ expressions:
               low: 3.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-5.wide:
     raw: 6.0*sin(x1)*cos(x2)
     prepared: 6.0*sin(v1)*cos(v2)
@@ -848,10 +848,10 @@ expressions:
               low: -6.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-5.beyond:
     raw: 6.0*sin(x1)*cos(x2)
     prepared: 6.0*sin(v1)*cos(v2)
@@ -911,10 +911,10 @@ expressions:
               low: 3.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-6.wide:
     raw: 1.35*x1*x2+5.5*sin((x1-1.0)*(x2-1.0))
     prepared: 1.35*v1*v2+5.5*sin((v1-1.0)*(v2-1.0))
@@ -974,10 +974,10 @@ expressions:
               low: -6.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '
   Jin-6.beyond:
     raw: 1.35*x1*x2+5.5*sin((x1-1.0)*(x2-1.0))
     prepared: 1.35*v1*v2+5.5*sin((v1-1.0)*(v2-1.0))
@@ -1037,7 +1037,7 @@ expressions:
               low: 3.0
               high: 6.0
     test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
-      Sec. 4 ''Datasets'' pp. 5-6 (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
       opened): ''For each target formula, we have one training dataset and three testing
       datasets. The training set consists of 100 samples with predictors generated independently
-      from U[-3, 3] ..'
+      from U[-3, 3] ... We consider three different testing sets, all '

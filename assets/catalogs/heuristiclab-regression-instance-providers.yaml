@@ -1,0 +1,974 @@
+metadata:
+  name: heuristiclab-regression-instance-providers
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  description: HeuristicLab regression instance providers
+  sources:
+  - https://github.com/heal-research/HeuristicLab
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Data/RegressionRealWorld.zip
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Data/MibaFriction.zip
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Data/PennML.zip
+  - https://doi.org/10.1007/3-540-36599-0_7
+  - http://www.korns.com/Accuracy%20in%20Symbolic%20Regression.pdf
+  - https://web.archive.org/web/20141006102506/http://symbolicregression.com/sites/SRDocuments/NonlinearityPreprint.pdf
+  - https://doi.org/10.1214/aos/1176347963
+  - https://projecteuclid.org/journals/annals-of-statistics/volume-19/issue-1/Multivariate-Adaptive-Regression-Splines/10.1214/aos/1176347963.pdf
+  - https://arxiv.org/abs/1101.0689
+  - https://arxiv.org/abs/1706.02281
+  - https://doi.org/10.1016/j.eswa.2018.05.021
+  - https://doi.org/10.1016/j.apples.2021.100049
+  - https://doi.org/10.1007/3-540-36599-0_19
+  - https://doi.org/10.1214/aos/1013203451
+  - https://arxiv.org/abs/1804.09331
+  - https://raw.githubusercontent.com/EpistasisLab/pmlb/7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68/pmlb/all_summary_stats.tsv
+  - https://github.com/EpistasisLab/pmlb/tree/master/datasets
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-46.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  Keijzer-5:
+    raw: 30*x*z/((x - 10)*y**2)
+    prepared: 30*v1*v3/(v2**2*(v1 - 10))
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1.0,1.0]
+      y: uniform U[1.0,2.0]
+      z: uniform U[-1.0,1.0]
+    meta:
+      finite_fraction: 1.0
+  Korns-7:
+    raw: 213.80940889 - (213.80940889*exp(-0.54723748542*x0))
+    prepared: 213.80940889 - 213.80940889*exp(-0.54723748542*v1)
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-50.0,50.0]
+      x1: uniform U[-50.0,50.0]
+      x2: uniform U[-50.0,50.0]
+      x3: uniform U[-50.0,50.0]
+      x4: uniform U[-50.0,50.0]
+    meta:
+      finite_fraction: 1.0
+  Korns-13:
+    raw: 32.0 - (3.0*((tan(x0)/tan(x1))*(tan(x2)/tan(x3))))
+    prepared: -3.0*tan(v1)*tan(v3)/(tan(v2)*tan(v4)) + 32.0
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-50.0,50.0]
+      x1: uniform U[-50.0,50.0]
+      x2: uniform U[-50.0,50.0]
+      x3: uniform U[-50.0,50.0]
+      x4: uniform U[-50.0,50.0]
+    meta:
+      finite_fraction: 1.0
+  Korns-14:
+    raw: 22.0 - (4.2*((cos(x0)-tan(x1))*(tanh(x2)/sin(x3))))
+    prepared: -4.2*(cos(v1) - tan(v2))*tanh(v3)/sin(v4) + 22.0
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-50.0,50.0]
+      x1: uniform U[-50.0,50.0]
+      x2: uniform U[-50.0,50.0]
+      x3: uniform U[-50.0,50.0]
+      x4: uniform U[-50.0,50.0]
+    meta:
+      finite_fraction: 1.0
+  Korns-15:
+    raw: 12.0 - (6.0*((tan(x0)/exp(x1))*(log(x2)-tan(x3))))
+    prepared: -6.0*(log(v3) - tan(v4))*exp(-v2)*tan(v1) + 12.0
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-50.0,50.0]
+      x1: uniform U[-50.0,50.0]
+      x2: uniform U[-50.0,50.0]
+      x3: uniform U[-50.0,50.0]
+      x4: uniform U[-50.0,50.0]
+    meta:
+      finite_fraction: 0.494
+  Vladislavleva-7:
+    raw: (x1 - 3)*(x2 - 3) + 2*sin((x1 - 4)*(x2 - 4))
+    prepared: (v1 - 3)*(v2 - 3) + 2*sin((v1 - 4)*(v2 - 4))
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.05
+        - 6.05
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.05
+        - 6.05
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[0.05,6.05]
+      x2: uniform U[0.05,6.05]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+    test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p. 10 Table I ''Sampling strategy for training
+      and test data'' (source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png and vladislavleva2009_nonlinearity_preprint.pdf,
+      opened). Notation: ''x = Rand(a, b) means that the x variable is sampled randomly from an interval [a, b]. Notation
+      x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
+    meta:
+      finite_fraction: 1.0
+  Poly-10:
+    raw: x1*x2 + x3*x4 + x5*x6 + x1*x7*x9 + x3*x6*x10
+    prepared: v1*v2 + v1*v7*v9 + v10*v3*v6 + v3*v4 + v5*v6
+    n_variables: 10
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[-1.0,1.0]
+      x2: uniform U[-1.0,1.0]
+      x3: uniform U[-1.0,1.0]
+      x4: uniform U[-1.0,1.0]
+      x5: uniform U[-1.0,1.0]
+      x6: uniform U[-1.0,1.0]
+      x7: uniform U[-1.0,1.0]
+      x8: uniform U[-1.0,1.0]
+      x9: uniform U[-1.0,1.0]
+      x10: uniform U[-1.0,1.0]
+    meta:
+      finite_fraction: 1.0
+  Breiman-I:
+    raw: Piecewise((3 + 3*X2 + 2*X3 + X4, Eq(X1, 1)), (-3 + 3*X5 + 2*X6 + X7, True))
+    prepared: (-(floor((1 - v1)/(abs(v1 - 1) + 1)) + 1)*(floor((v1 - 1)/(abs(v1 - 1) + 1)) + 1) + 1)*(3*v5 + 2*v6 + v7 - 3)
+      + (floor((1 - v1)/(abs(v1 - 1) + 1)) + 1)*(floor((v1 - 1)/(abs(v1 - 1) + 1)) + 1)*(3*v2 + 2*v3 + v4 + 3)
+    n_variables: 10
+    subset: all
+    vars:
+      v1:
+        name: X1
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 1.0
+      v2:
+        name: X2
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v3:
+        name: X3
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v4:
+        name: X4
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v5:
+        name: X5
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v6:
+        name: X6
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v7:
+        name: X7
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v8:
+        name: X8
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v9:
+        name: X9
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v10:
+        name: X10
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v0:
+        name: y
+    input_distributions:
+      X1: discrete {-1, 1}, each with probability 1/2
+      X2: discrete {-1, 0, 1}, each with probability 1/3
+      X3: discrete {-1, 0, 1}, each with probability 1/3
+      X4: discrete {-1, 0, 1}, each with probability 1/3
+      X5: discrete {-1, 0, 1}, each with probability 1/3
+      X6: discrete {-1, 0, 1}, each with probability 1/3
+      X7: discrete {-1, 0, 1}, each with probability 1/3
+      X8: discrete {-1, 0, 1}, each with probability 1/3
+      X9: discrete {-1, 0, 1}, each with probability 1/3
+      X10: discrete {-1, 0, 1}, each with probability 1/3
+    needs_simplipy: '0.15'
+  Friedman-I:
+    raw: 0.1*exp(4*x1) + 4/(1 + exp(-20*(x2 - 1/2))) + 3*x3 + 2*x4 + x5
+    prepared: 3*v3 + 2*v4 + v5 + 0.1*exp(4*v1) + 4/(exp(-20*v2 + 20*1/2) + 1)
+    n_variables: 10
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[0.0,1.0]
+      x2: uniform U[0.0,1.0]
+      x3: uniform U[0.0,1.0]
+      x4: uniform U[0.0,1.0]
+      x5: uniform U[0.0,1.0]
+      x6: uniform U[0.0,1.0]
+      x7: uniform U[0.0,1.0]
+      x8: uniform U[0.0,1.0]
+      x9: uniform U[0.0,1.0]
+      x10: uniform U[0.0,1.0]
+    meta:
+      finite_fraction: 1.0
+  Friedman-II:
+    raw: 10*sin(pi*x1*x2) + 20*(x3 - 1/2)**2 + 10*x4 + 5*x5
+    prepared: 10*v4 + 5*v5 + 20*(v3 - 1*1/2)**2 + 10*sin(3.141592653589793*v1*v2)
+    n_variables: 10
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[0.0,1.0]
+      x2: uniform U[0.0,1.0]
+      x3: uniform U[0.0,1.0]
+      x4: uniform U[0.0,1.0]
+      x5: uniform U[0.0,1.0]
+      x6: uniform U[0.0,1.0]
+      x7: uniform U[0.0,1.0]
+      x8: uniform U[0.0,1.0]
+      x9: uniform U[0.0,1.0]
+      x10: uniform U[0.0,1.0]
+    meta:
+      finite_fraction: 1.0
+  RocketFuelFlow:
+    raw: 4*10**3*x1*x2/sqrt(x3)
+    prepared: 4000*v1*v2/sqrt(v3)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.5
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 250.0
+        - 260.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[4.0,6.0]
+      x2: uniform U[0.5,1.5]
+      x3: uniform U[250.0,260.0]
+    meta:
+      finite_fraction: 1.0
+  AircraftLift:
+    raw: x1*(x2 - 2) + x3*x4*x5/x6
+    prepared: v1*(v2 - 2) + v3*v4*v5/v6
+    n_variables: 6
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.4
+        - 0.8
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 5.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 0.4
+        - 0.8
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 5.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - 5.0
+        - 7.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[0.4,0.8]
+      x2: uniform U[5.0,10.0]
+      x3: uniform U[0.4,0.8]
+      x4: uniform U[5.0,10.0]
+      x5: uniform U[1.0,1.5]
+      x6: uniform U[5.0,7.0]
+    meta:
+      finite_fraction: 1.0
+  FluidDynamics:
+    raw: x1*x2*x5*(1 - x4**2/x5**2) + 1/(2*pi)*x3*log(x5/x4)
+    prepared: v1*v2*v5*(-v4**2/v5**2 + 1) + (1/(2*3.141592653589793))*v3*log(v5/v4)
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 60.0
+        - 65.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 30.0
+        - 40.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 5.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 0.5
+        - 0.8
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 0.2
+        - 0.5
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[60.0,65.0]
+      x2: uniform U[30.0,40.0]
+      x3: uniform U[5.0,10.0]
+      x4: uniform U[0.5,0.8]
+      x5: uniform U[0.2,0.5]
+    meta:
+      finite_fraction: 1.0
+  SheetBendingProcess:
+    raw: 210000/(210000 + h)*(sigma_y*t**2/(wR*Rt*t) + h*t**3/(3*(Rt*t)*(wR*Rt*t)) - 4*sigma_y**3*(Rt*t)**2/(3*(wR*Rt*t)*210000**2))*(1
+      + 4*t/(wR*Rt*t))
+    prepared: 210000*(1 + 4/(v4*v5))*(v1*v3/(3*v4**2*v5) - v2**3*v3*v4/(33075000000*v5) + v2*v3/(v4*v5))/(v1 + 210000)
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: h
+        sample_range:
+        - 0.1
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: sigma_y
+        sample_range:
+        - 250.0
+        - 1000.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: t
+        sample_range:
+        - 0.5
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: Rt
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: wR
+        sample_range:
+        - 0.5
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      h: uniform U[0.1,5.0]
+      sigma_y: uniform U[250.0,1000.0]
+      t: uniform U[0.5,5.0]
+      Rt: uniform U[1.0,100.0]
+      wR: uniform U[0.5,1.5]
+    meta:
+      finite_fraction: 1.0

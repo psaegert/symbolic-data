@@ -1,0 +1,412 @@
+metadata:
+  name: evomo-sr-random-expression-datasets-p1-p4
+  version: 1
+  tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
+  description: EvoMO-SR random-expression datasets P1-P4
+  sources:
+  - https://arxiv.org/abs/2609.36187
+  - https://arxiv.org/pdf/2609.36187v1
+  - https://arxiv.org/src/2609.36187v1
+  - https://anonymous.4open.science/r/EvoMO-SR-47B6
+  - https://anonymous.4open.science/api/repo/EvoMO-SR-47B6/file/random_data/random_functions/manifest.csv
+  - https://anonymous.4open.science/api/repo/EvoMO-SR-47B6/file/random_data/random_functions/specs.csv
+  - https://anonymous.4open.science/api/repo/EvoMO-SR-47B6/file/random_data/random_functions/generation_config.json
+  - https://anonymous.4open.science/api/repo/EvoMO-SR-47B6/file/random_data/generate_random_datasets.py
+  - https://anonymous.4open.science/api/repo/EvoMO-SR-47B6/file/random_data/README_random_dataset_generator.md
+  - https://anonymous.4open.science/api/repo/EvoMO-SR-47B6/file/README.md
+  - https://anonymous.4open.science/api/repo/EvoMO-SR-47B6/file/pyproject.toml
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-136.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  P1:
+    raw: 1.883*sin(x1) + 1.61*cos(x0)
+    prepared: 1.883*sin(v2) + 1.61*cos(v1)
+    n_variables: 2
+    subset: simple-id
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x1: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+    meta:
+      finite_fraction: 1.0
+  P1.ood:
+    raw: 1.883*sin(x1) + 1.61*cos(x0)
+    prepared: 1.883*sin(v2) + 1.61*cos(v1)
+    n_variables: 2
+    subset: simple-ood
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x1: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+      row_constraints:
+      - 1*(abs(v1) > 1.2) + 1*(abs(v2) > 1.2) == 1
+      - 1*(abs(v1) <= 1.0) + 1*(abs(v2) <= 1.0) == 1
+    test_source: 'EvoMO-SR random-expression generator, raw/fresh-136/random_data/generate_random_datasets.py l.425-474 and
+      random_functions/generation_config.json + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower
+      -1.0, id_upper 1.0, ood_mode ''axis'', ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one
+      balanced, randomly ordered coordinate outside ID support'''
+    meta:
+      finite_fraction: 1.0
+  P2:
+    raw: 1.1*x0**3 + 2.016*x0**2 - 1.694*x1
+    prepared: 1.1*v1**3 + 2.016*v1**2 - 1.694*v2
+    n_variables: 2
+    subset: simple-id
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x1: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+    meta:
+      finite_fraction: 1.0
+  P2.ood:
+    raw: 1.1*x0**3 + 2.016*x0**2 - 1.694*x1
+    prepared: 1.1*v1**3 + 2.016*v1**2 - 1.694*v2
+    n_variables: 2
+    subset: simple-ood
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x1: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+      row_constraints:
+      - 1*(abs(v1) > 1.2) + 1*(abs(v2) > 1.2) == 1
+      - 1*(abs(v1) <= 1.0) + 1*(abs(v2) <= 1.0) == 1
+    test_source: 'EvoMO-SR random-expression generator, raw/fresh-136/random_data/generate_random_datasets.py l.425-474 and
+      random_functions/generation_config.json + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower
+      -1.0, id_upper 1.0, ood_mode ''axis'', ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one
+      balanced, randomly ordered coordinate outside ID support'''
+    meta:
+      finite_fraction: 1.0
+  P3:
+    raw: -1.951*x0**2 - 0.351*x1*sin(x1) + 2.365*x2**2 + 2.885
+    prepared: -1.951*v1**2 - 0.351*v2*sin(v2) + 2.365*v3**2 + 2.885
+    n_variables: 3
+    subset: medium-id
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x1: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x2: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+    meta:
+      finite_fraction: 1.0
+  P3.ood:
+    raw: -1.951*x0**2 - 0.351*x1*sin(x1) + 2.365*x2**2 + 2.885
+    prepared: -1.951*v1**2 - 0.351*v2*sin(v2) + 2.365*v3**2 + 2.885
+    n_variables: 3
+    subset: medium-ood
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x1: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x2: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v3:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+      row_constraints:
+      - 1*(abs(v1) > 1.2) + 1*(abs(v2) > 1.2) + 1*(abs(v3) > 1.2) == 1
+      - 1*(abs(v1) <= 1.0) + 1*(abs(v2) <= 1.0) + 1*(abs(v3) <= 1.0) == 2
+    test_source: 'EvoMO-SR random-expression generator, raw/fresh-136/random_data/generate_random_datasets.py l.425-474 and
+      random_functions/generation_config.json + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower
+      -1.0, id_upper 1.0, ood_mode ''axis'', ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one
+      balanced, randomly ordered coordinate outside ID support'''
+    meta:
+      finite_fraction: 1.0
+  P4:
+    raw: 1.903*x1**2 + 2.379*x1*x2 - 2.165*sin(x0) - 1.081*cos(x0) - 2.233*cos(x2) - 2.102
+    prepared: 1.903*v2**2 + 2.379*v2*v3 - 2.165*sin(v1) - 1.081*cos(v1) - 2.233*cos(v3) - 2.102
+    n_variables: 3
+    subset: complex-id
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x1: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x2: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+    meta:
+      finite_fraction: 1.0
+  P4.ood:
+    raw: 1.903*x1**2 + 2.379*x1*x2 - 2.165*sin(x0) - 1.081*cos(x0) - 2.233*cos(x2) - 2.102
+    prepared: 1.903*v2**2 + 2.379*v2*v3 - 2.165*sin(v1) - 1.081*cos(v1) - 2.233*cos(v3) - 2.102
+    n_variables: 3
+    subset: complex-ood
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x1: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+      x2: uniform U[-1, 1] (each marginal of a Latin hypercube design over [-1,1]^d; scipy.stats.qmc.LatinHypercube scaled
+        to [-1,1])
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v3:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+      row_constraints:
+      - 1*(abs(v1) > 1.2) + 1*(abs(v2) > 1.2) + 1*(abs(v3) > 1.2) == 1
+      - 1*(abs(v1) <= 1.0) + 1*(abs(v2) <= 1.0) + 1*(abs(v3) <= 1.0) == 2
+    test_source: 'EvoMO-SR random-expression generator, raw/fresh-136/random_data/generate_random_datasets.py l.425-474 and
+      random_functions/generation_config.json + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower
+      -1.0, id_upper 1.0, ood_mode ''axis'', ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one
+      balanced, randomly ordered coordinate outside ID support'''
+    meta:
+      finite_fraction: 1.0

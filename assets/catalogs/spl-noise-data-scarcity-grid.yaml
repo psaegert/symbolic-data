@@ -1,0 +1,43 @@
+metadata:
+  name: spl-noise-data-scarcity-grid
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": []}
+  description: SPL noise/data-scarcity grid
+  sources:
+  - https://arxiv.org/abs/2205.13134v2
+  - https://arxiv.org/pdf/2205.13134v2
+  - https://arxiv.org/e-print/2205.13134v2
+  - https://github.com/isds-neu/SymbolicPhysicsLearner/tree/c0c18c90d61510a78ff2d24ac5299ad92c8acc59
+  - https://github.com/isds-neu/SymbolicPhysicsLearner/blob/c0c18c90d61510a78ff2d24ac5299ad92c8acc59/regression_task/make_datasets.py
+  - https://github.com/isds-neu/SymbolicPhysicsLearner/blob/c0c18c90d61510a78ff2d24ac5299ad92c8acc59/regression_task/task_info.py
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-150.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  spl-noise-scarcity-cubic:
+    raw: 0.3*x**3 + 0.5*x**2 + 2*x
+    prepared: 0.3*v1**3 + 0.5*v1**2 + 2*v1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-10, 10]
+    meta:
+      finite_fraction: 1.0

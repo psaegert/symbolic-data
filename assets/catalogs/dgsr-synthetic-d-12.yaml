@@ -1,0 +1,861 @@
+metadata:
+  name: dgsr-synthetic-d-12
+  version: 1
+  tags: {"origin": "generated formulas", "tags": []}
+  description: DGSR synthetic d=12
+  sources:
+  - https://arxiv.org/abs/2401.00282
+  - https://arxiv.org/pdf/2401.00282
+  - https://openreview.net/forum?id=o7koEEMA1bR
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/tree/5dbf04d413b2e67f7431407dfbd2597215723ca8
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv
+  - https://raw.githubusercontent.com/samholt/DeepGenerativeSymbolicRegression/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/run_recovery_multi.py
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/dataset.py
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/function_sets.csv
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/process_results/results/all_run_recovery_multi-20220924-180429-l_cd_12_log_f.txt
+  - https://github.com/vanderschaarlab/DeepGenerativeSymbolicRegression
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-86.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  l_cd_12_1:
+    raw: x12+x9*(x10+x11)*(x1+x2+x3+x4+x5+x6+x7*x8)
+    prepared: v12 + v9*(v10 + v11)*(v1 + v2 + v3 + v4 + v5 + v6 + v7*v8)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: x11
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: x12
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[-1,1]
+      x2: U[-1,1]
+      x3: U[-1,1]
+      x4: U[-1,1]
+      x5: U[-1,1]
+      x6: U[-1,1]
+      x7: U[-1,1]
+      x8: U[-1,1]
+      x9: U[-1,1]
+      x10: U[-1,1]
+      x11: U[-1,1]
+      x12: U[-1,1]
+    meta:
+      finite_fraction: 1.0
+  l_cd_12_2:
+    raw: x10+x11+x12+x3*(x1+x2)*(x4*x5+x6)+x7+x8+x9
+    prepared: v10 + v11 + v12 + v3*(v1 + v2)*(v4*v5 + v6) + v7 + v8 + v9
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: x11
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: x12
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[-1,1]
+      x2: U[-1,1]
+      x3: U[-1,1]
+      x4: U[-1,1]
+      x5: U[-1,1]
+      x6: U[-1,1]
+      x7: U[-1,1]
+      x8: U[-1,1]
+      x9: U[-1,1]
+      x10: U[-1,1]
+      x11: U[-1,1]
+      x12: U[-1,1]
+    meta:
+      finite_fraction: 1.0
+  l_cd_12_4:
+    raw: x10*x9*(x1+x2+x3+x4+x5+x6+x7+x8)+x11+x12
+    prepared: v10*v9*(v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8) + v11 + v12
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: x11
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: x12
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[-1,1]
+      x2: U[-1,1]
+      x3: U[-1,1]
+      x4: U[-1,1]
+      x5: U[-1,1]
+      x6: U[-1,1]
+      x7: U[-1,1]
+      x8: U[-1,1]
+      x9: U[-1,1]
+      x10: U[-1,1]
+      x11: U[-1,1]
+      x12: U[-1,1]
+    meta:
+      finite_fraction: 1.0
+  l_cd_12_13:
+    raw: x8*(x6+x7)*(x10+x11*x12+x9)*(x1+x2+x3+x4+x5)
+    prepared: v8*(v6 + v7)*(v10 + v11*v12 + v9)*(v1 + v2 + v3 + v4 + v5)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: x11
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: x12
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[-1,1]
+      x2: U[-1,1]
+      x3: U[-1,1]
+      x4: U[-1,1]
+      x5: U[-1,1]
+      x6: U[-1,1]
+      x7: U[-1,1]
+      x8: U[-1,1]
+      x9: U[-1,1]
+      x10: U[-1,1]
+      x11: U[-1,1]
+      x12: U[-1,1]
+    meta:
+      finite_fraction: 1.0
+  l_cd_12_11:
+    raw: x10+x11+x12+x9*(x1+x2+x3+x4+x5+x6+x7+x8)
+    prepared: v10 + v11 + v12 + v9*(v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: x11
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: x12
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[-1,1]
+      x2: U[-1,1]
+      x3: U[-1,1]
+      x4: U[-1,1]
+      x5: U[-1,1]
+      x6: U[-1,1]
+      x7: U[-1,1]
+      x8: U[-1,1]
+      x9: U[-1,1]
+      x10: U[-1,1]
+      x11: U[-1,1]
+      x12: U[-1,1]
+    meta:
+      finite_fraction: 1.0
+  l_cd_12_45:
+    raw: x1*(x10-x11-x12+x2+x3+x4+x5+x6+x7+x8+x9)
+    prepared: v1*(v10 - v11 - v12 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: x11
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: x12
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[-1,1]
+      x2: U[-1,1]
+      x3: U[-1,1]
+      x4: U[-1,1]
+      x5: U[-1,1]
+      x6: U[-1,1]
+      x7: U[-1,1]
+      x8: U[-1,1]
+      x9: U[-1,1]
+      x10: U[-1,1]
+      x11: U[-1,1]
+      x12: U[-1,1]
+    meta:
+      finite_fraction: 1.0
+  l_cd_12_67:
+    raw: x1*x2-x11*(-x10+x6+x7+x8-x9)+x12+x3+x4+x5
+    prepared: v1*v2 - v11*(-v10 + v6 + v7 + v8 - v9) + v12 + v3 + v4 + v5
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: x11
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: x12
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[-1,1]
+      x2: U[-1,1]
+      x3: U[-1,1]
+      x4: U[-1,1]
+      x5: U[-1,1]
+      x6: U[-1,1]
+      x7: U[-1,1]
+      x8: U[-1,1]
+      x9: U[-1,1]
+      x10: U[-1,1]
+      x11: U[-1,1]
+      x12: U[-1,1]
+    meta:
+      finite_fraction: 1.0

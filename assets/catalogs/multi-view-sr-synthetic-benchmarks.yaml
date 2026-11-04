@@ -1,0 +1,440 @@
+metadata:
+  name: multi-view-sr-synthetic-benchmarks
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  description: Multi-view SR synthetic benchmarks
+  sources:
+  - https://arxiv.org/abs/2402.04298
+  - https://arxiv.org/pdf/2402.04298v4
+  - https://arxiv.org/pdf/2402.04298v1
+  - https://doi.org/10.1145/3638529.3654087
+  - https://github.com/erusseil/MvSR-analysis/tree/ec5abd674c466d4d22957122db7b26680c457e59
+  - https://github.com/erusseil/MvSR-analysis/blob/ec5abd674c466d4d22957122db7b26680c457e59/generate_toy.py
+  - https://github.com/erusseil/MvSR-analysis/blob/ec5abd674c466d4d22957122db7b26680c457e59/analysis.py
+  - https://github.com/erusseil/MvSR-analysis/blob/ec5abd674c466d4d22957122db7b26680c457e59/run_all.sh
+  - https://github.com/erusseil/MvSR-analysis/blob/ec5abd674c466d4d22957122db7b26680c457e59/README.md
+  - https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_friedman1.html
+  - https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_friedman2.html
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-59.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  f2-view1:
+    raw: sin(2*x0*x1) + 2*x2**2 + x4
+    prepared: 2*v3**2 + v5 + sin(2*v1*v2)
+    n_variables: 5
+    subset: f2 views
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0,1]
+      x1: uniform U[0,1]
+      x2: uniform U[0,1]
+      x3: uniform U[0,1]
+      x4: uniform U[0,1]
+    meta:
+      finite_fraction: 1.0
+  f2-view2:
+    raw: 2*(x2 - 2)**2 + x4
+    prepared: v5 + 2*(v3 - 2)**2
+    n_variables: 5
+    subset: f2 views
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0,1]
+      x1: uniform U[0,1]
+      x2: uniform U[0,1]
+      x3: uniform U[0,1]
+      x4: uniform U[0,1]
+    meta:
+      finite_fraction: 1.0
+  f2-view3:
+    raw: 2*x3 + x4
+    prepared: 2*v4 + v5
+    n_variables: 5
+    subset: f2 views
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0,1]
+      x1: uniform U[0,1]
+      x2: uniform U[0,1]
+      x3: uniform U[0,1]
+      x4: uniform U[0,1]
+    meta:
+      finite_fraction: 1.0
+  f2-view4:
+    raw: sin(2*x0*x1) + 2*x3 + x4
+    prepared: 2*v4 + v5 + sin(2*v1*v2)
+    n_variables: 5
+    subset: f2 views
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0,1]
+      x1: uniform U[0,1]
+      x2: uniform U[0,1]
+      x3: uniform U[0,1]
+      x4: uniform U[0,1]
+    meta:
+      finite_fraction: 1.0
+  f3-view1:
+    raw: sqrt(2*x0**2 + (2*x1*x2)**2)
+    prepared: sqrt(2*v1**2 + 4*v2**2*v3**2)
+    n_variables: 4
+    subset: f3 views
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - 125.66370614359172
+        - 1759.291886010284
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - 1.0
+        - 11.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0,100]
+      x1: uniform U[40*pi,560*pi]
+      x2: uniform U[0,1]
+      x3: uniform U[1,11]
+    meta:
+      finite_fraction: 1.0
+  f3-view2:
+    raw: sqrt((2*x1*x2 - 2)**2)
+    prepared: sqrt((2*v2*v3 - 2)**2)
+    n_variables: 4
+    subset: f3 views
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - 125.66370614359172
+        - 1759.291886010284
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - 1.0
+        - 11.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0,100]
+      x1: uniform U[40*pi,560*pi]
+      x2: uniform U[0,1]
+      x3: uniform U[1,11]
+    meta:
+      finite_fraction: 1.0
+  f3-view3:
+    raw: sqrt((-2/(2*x1*x3 + 1))**2)
+    prepared: 2*sqrt((2*v2*v4 + 1)**(-2))
+    n_variables: 4
+    subset: f3 views
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - 125.66370614359172
+        - 1759.291886010284
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - 1.0
+        - 11.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0,100]
+      x1: uniform U[40*pi,560*pi]
+      x2: uniform U[0,1]
+      x3: uniform U[1,11]
+    meta:
+      finite_fraction: 1.0
+  f3-view4:
+    raw: sqrt(2*x0**2)
+    prepared: sqrt(2)*sqrt(v1**2)
+    n_variables: 4
+    subset: f3 views
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - 125.66370614359172
+        - 1759.291886010284
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - 1.0
+        - 11.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0,100]
+      x1: uniform U[40*pi,560*pi]
+      x2: uniform U[0,1]
+      x3: uniform U[1,11]
+    meta:
+      finite_fraction: 1.0

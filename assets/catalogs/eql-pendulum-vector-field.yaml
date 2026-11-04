@@ -1,0 +1,279 @@
+metadata:
+  name: eql-pendulum-vector-field
+  version: 1
+  tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs"]}
+  description: EQL pendulum vector field
+  sources:
+  - https://arxiv.org/abs/1610.02995v1
+  - https://arxiv.org/pdf/1610.02995v1
+  - https://arxiv.org/e-print/1610.02995v1
+  - https://openreview.net/forum?id=BkgRp0FYe
+  - https://mlanthology.org/iclr/2017/martius2017iclr-extrapolation
+  - https://github.com/martius-lab/EQL/tree/cd93824ccd330b814ddd334dd25e8b0fd5eb3f77
+  - https://github.com/martius-lab/EQL/blob/cd93824ccd330b814ddd334dd25e8b0fd5eb3f77/EQL-DIV-ICML/ICML-Datasets.ipynb
+  - https://github.com/martius-lab/EQL_Tensorflow/tree/95f6de7e9e4494fd838fbabf3622f3d76623fe2f
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-151.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  eql-pendulum-y1:
+    raw: x2/9.81
+    prepared: 0.101936799184506*v2
+    n_variables: 2
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[-2, 2]
+      x2: uniform U[-2, 2]
+    meta:
+      finite_fraction: 1.0
+  eql-pendulum-y1.extrap-near:
+    raw: x2/9.81
+    prepared: 0.101936799184506*v2
+    n_variables: 2
+    subset: extrap-near
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[-2, 2]
+      x2: uniform U[-2, 2]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -3.0
+              high: 3.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -3.0
+              high: 3.0
+      row_constraints:
+      - maximum(abs(v1), abs(v2)) > 2.0
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  eql-pendulum-y1.extrap-far:
+    raw: x2/9.81
+    prepared: 0.101936799184506*v2
+    n_variables: 2
+    subset: extrap-far
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[-2, 2]
+      x2: uniform U[-2, 2]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -4.0
+              high: 4.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -4.0
+              high: 4.0
+      row_constraints:
+      - maximum(abs(v1), abs(v2)) > 2.0
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  eql-pendulum-y2:
+    raw: -sin(x1)
+    prepared: -sin(v1)
+    n_variables: 2
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[-2, 2]
+      x2: uniform U[-2, 2]
+    meta:
+      finite_fraction: 1.0
+  eql-pendulum-y2.extrap-near:
+    raw: -sin(x1)
+    prepared: -sin(v1)
+    n_variables: 2
+    subset: extrap-near
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[-2, 2]
+      x2: uniform U[-2, 2]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -3.0
+              high: 3.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -3.0
+              high: 3.0
+      row_constraints:
+      - maximum(abs(v1), abs(v2)) > 2.0
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  eql-pendulum-y2.extrap-far:
+    raw: -sin(x1)
+    prepared: -sin(v1)
+    n_variables: 2
+    subset: extrap-far
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[-2, 2]
+      x2: uniform U[-2, 2]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -4.0
+              high: 4.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -4.0
+              high: 4.0
+      row_constraints:
+      - maximum(abs(v1), abs(v2)) > 2.0
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0

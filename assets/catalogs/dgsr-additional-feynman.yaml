@@ -1,0 +1,478 @@
+metadata:
+  name: dgsr-additional-feynman
+  version: 1
+  tags: {"origin": "science formula", "tags": []}
+  description: DGSR Additional Feynman
+  sources:
+  - https://arxiv.org/abs/2401.00282
+  - https://arxiv.org/pdf/2401.00282
+  - https://openreview.net/forum?id=o7koEEMA1bR
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/tree/5dbf04d413b2e67f7431407dfbd2597215723ca8
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv
+  - https://raw.githubusercontent.com/samholt/DeepGenerativeSymbolicRegression/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/datasets/process.py
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/datasets/FeynmanEquations.csv
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/datasets/BonusEquations.csv
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/dataset.py
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/function_sets.csv
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/run_recovery_multi.py
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/process_results/results/all_run_recovery_multi-20220924-180429-fn_d_all_log_f.txt
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/interrupted-5.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  Feynman-A-1:
+    raw: x3*x1*x2/((x5-x4)**2+(x7-x6)**2+(x9-x8)**2)
+    prepared: v1*v2*v3/((-v4 + v5)**2 + (-v6 + v7)**2 + (-v8 + v9)**2)
+    n_variables: 9
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[1,2]
+      x2: U[1,2]
+      x3: U[1,2]
+      x4: U[1,2]
+      x5: U[1,2]
+      x6: U[1,2]
+      x7: U[1,2]
+      x8: U[1,2]
+      x9: U[1,2]
+    meta:
+      finite_fraction: 1.0
+  Feynman-A-6:
+    raw: x1*(1+x3)*x2
+    prepared: v1*v2*(v3 + 1)
+    n_variables: 6
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[1,5]
+      x2: U[1,5]
+      x3: U[1,5]
+      x4: U[1,5]
+      x5: U[1,5]
+      x6: U[1,5]
+    meta:
+      finite_fraction: 1.0
+  Feynman-A-9:
+    raw: 1/(x1-1)*x2*x4/x3
+    prepared: v2*v4/(v3*(v1 - 1))
+    n_variables: 4
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[2,5]
+      x2: U[2,5]
+      x3: U[2,5]
+      x4: U[2,5]
+    meta:
+      finite_fraction: 1.0
+  Feynman-A-21:
+    raw: 1/(x1-1)*x2*x3
+    prepared: v2*v3/(v1 - 1)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[2,5]
+      x2: U[2,5]
+      x3: U[2,5]
+    meta:
+      finite_fraction: 1.0
+  Feynman-A-22:
+    raw: x3/(1-x2/x1)
+    prepared: v3/(1 - v2/v1)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[3,10]
+      x2: U[3,10]
+      x3: U[3,10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-A-29:
+    raw: (x1*x2*x3*x4*x5/(4*x6*sin(x7/2)**2))**2
+    prepared: v1**2*v2**2*v3**2*v4**2*v5**2/(16*v6**2*sin(v7/2)**4)
+    n_variables: 7
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[1,2]
+      x2: U[1,2]
+      x3: U[1,2]
+      x4: U[1,2]
+      x5: U[1,2]
+      x6: U[1,2]
+      x7: U[1,2]
+    meta:
+      finite_fraction: 1.0
+  Feynman-A-31:
+    raw: x1*(1-x2**2)/(1+x2*cos(x3-x4))
+    prepared: v1*(1 - v2**2)/(v2*cos(v3 - v4) + 1)
+    n_variables: 4
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[1,3]
+      x2: U[1,3]
+      x3: U[1,3]
+      x4: U[1,3]
+    meta:
+      finite_fraction: 1.0
+  Feynman-A-32:
+    raw: x1*(sin(x2/2)*sin(x4*x3/2)/(x2/2*sin(x3/2)))**2
+    prepared: 4*v1*sin(v2/2)**2*sin(v3*v4/2)**2/(v2**2*sin(v3/2)**2)
+    n_variables: 4
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[4,6]
+      x2: U[4,6]
+      x3: U[4,6]
+      x4: U[4,6]
+    meta:
+      finite_fraction: 1.0

@@ -3854,6 +3854,8 @@ expressions:
     source_audit: '1 accept form(s) dropped: not equal to the formula'
     meta:
       finite_fraction: 1.0
+    accept_dropped:
+    - (-(v1)/(v2*((-3.711322364871929e-19*v3)-1.1126264541953286e-10)))
   II.34.2a:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -5357,6 +5359,9 @@ expressions:
       (+); 2 accept form(s) dropped: not equal to the formula'
     meta:
       finite_fraction: 1.0
+    accept_dropped:
+    - (1.4142135623730951*(((v1*v2*((-1.0)*cos((v3-v4))-1.0))+(0.5*((v1-v2)^2.0)))^0.5))
+    - sqrt(((v1^2.0)-(v2*((2.0*v1*sin((-(v3)+v4+1.5707963267948966)))-v2))))
   I.15.3x:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -5982,9 +5987,11 @@ expressions:
     - v3 / v4 > 0
     n_variables: 4
     source_audit: 'n on [1e24, 1e26], as SRSD''s problem table and published data (code:
-      [1e25, 1e27]; owner to confirm); 1 accept form(s) dropped: not equal to the formula'
+      [1e25, 1e27]; kept, 2026-11-03); 1 accept form(s) dropped: not equal to the formula'
     meta:
       finite_fraction: 1.0
+    accept_dropped:
+    - (-1.3806e-23*v1*v2*log((v4/v3)))
   I.50.26:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -8332,8 +8339,8 @@ expressions:
         - -1
     constraints: null
     n_variables: 4
-    source_audit: 'integer inputs on {lo..hi-1}, as SRSD''s IntegerSampling (numpy randint)
-      and published data; 1 accept form(s) dropped: not equal to the formula'
+    source_audit: integer inputs on {lo..hi-1}, as SRSD's IntegerSampling (numpy randint)
+      and published data
     meta:
       finite_fraction: 1.0
   B12:

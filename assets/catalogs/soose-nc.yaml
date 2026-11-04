@@ -7213,11 +7213,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-001.ood:
     raw: sin(x_3) + sin(x_3/(x_1 - x_2))
     prepared: sin(v3)+sin(v3/(v1-v2))
@@ -7278,11 +7278,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-002.ood:
     raw: x_2*cos(x_1*x_3 - x_2) - 1
     prepared: v2*cos(v1*v3-v2)-1
@@ -7343,11 +7343,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-003.ood:
     raw: x_2 + tan(x_1 - 1/(x_1 - 1))
     prepared: v2+tan(v1-1/(v1-1))
@@ -7394,11 +7394,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-004.ood:
     raw: x_1 - x_2**2 - log(x_2)
     prepared: v1-v2**2-log(v2)
@@ -7445,11 +7445,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-005.ood:
     raw: x_1 - tan(exp(x_1 - 1))
     prepared: v1-tan(exp(v1-1))
@@ -7482,11 +7482,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-006.ood:
     raw: x_1*(x_1 + 1)/(x_1 - 1)
     prepared: v1*(v1+1)/(v1-1)
@@ -7519,11 +7519,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-007.ood:
     raw: x_1*x_3/(-x_1 + x_2) - x_3
     prepared: v1*v3/(-v1+v2)-v3
@@ -7584,11 +7584,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-008.ood:
     raw: tan(x_2 + x_3)/(-x_1 - 1)
     prepared: tan(v2+v3)/(-v1-1)
@@ -7649,11 +7649,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-009.ood:
     raw: x_1 + cos(x_1 - x_2*x_3)
     prepared: v1+cos(v1-v2*v3)
@@ -7714,11 +7714,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-010.ood:
     raw: x_3 + x_3/(x_1 + x_2 + x_3)
     prepared: v3+v3/(v1+v2+v3)
@@ -7779,11 +7779,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-011.ood:
     raw: sqrt(-x_1*x_2 + x_3/x_1)
     prepared: sqrt(-v1*v2+v3/v1)
@@ -7844,11 +7844,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-012.ood:
     raw: x_1/(x_1 + x_3 + log(x_2**4))
     prepared: v1/(v1+v3+log(v2**4))
@@ -7909,11 +7909,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-013.ood:
     raw: sin(x_2/(-x_1 + x_2)) - tan(1)
     prepared: sin(v2/(-v1+v2))-tan(1)
@@ -7960,11 +7960,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-014.ood:
     raw: cos(x_2 + sin(x_1)/cos(x_3))
     prepared: cos(v2+sin(v1)/cos(v3))
@@ -8025,11 +8025,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-015.ood:
     raw: x_1**2 + x_2 - tan(1) - 1
     prepared: v1**2+v2-tan(1)-1
@@ -8076,11 +8076,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-016.ood:
     raw: x_2*sin(x_1**2 + x_1*x_2)
     prepared: v2*sin(v1**2+v1*v2)
@@ -8127,11 +8127,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-017.ood:
     raw: -x_1/(x_1 - x_2 + x_3 - 1) + x_3
     prepared: -v1/(v1-v2+v3-1)+v3
@@ -8192,11 +8192,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-018.ood:
     raw: x_2/(x_2 + cos(x_1*x_3))
     prepared: v2/(v2+cos(v1*v3))
@@ -8257,11 +8257,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-019.ood:
     raw: 1 + tan(x_2)/(x_2*(-x_1 + x_2))
     prepared: 1+tan(v2)/(v2*(-v1+v2))
@@ -8308,11 +8308,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-020.ood:
     raw: 1/(x_1 - sin(cos(x_2)))
     prepared: 1/(v1-sin(cos(v2)))
@@ -8359,11 +8359,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-021.ood:
     raw: (x_1 + 1)/(x_2 + 1) + 1
     prepared: (v1+1)/(v2+1)+1
@@ -8410,11 +8410,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-022.ood:
     raw: log(-x_1 + x_2)/(x_2*(x_2 - 1))
     prepared: log(-v1+v2)/(v2*(v2-1))
@@ -8461,11 +8461,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-023.ood:
     raw: (x_3 - 1)*sin(x_1 + x_1/x_2)
     prepared: (v3-1)*sin(v1+v1/v2)
@@ -8526,11 +8526,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-024.ood:
     raw: x_2*x_3*cos(x_1 + x_2) + x_2
     prepared: v2*v3*cos(v1+v2)+v2
@@ -8591,11 +8591,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-025.ood:
     raw: sin(x_2*tan(x_1**3 - x_2))
     prepared: sin(v2*tan(v1**3-v2))
@@ -8642,11 +8642,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-026.ood:
     raw: x_1*cos(sqrt(log(x_2))) + x_3
     prepared: v1*cos(sqrt(log(v2)))+v3
@@ -8707,11 +8707,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-027.ood:
     raw: x_1*sqrt(-x_3 + sin(x_2))
     prepared: v1*sqrt(-v3+sin(v2))
@@ -8772,11 +8772,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-028.ood:
     raw: cos(x_1 - tan(x_2**3))
     prepared: cos(v1-tan(v2**3))
@@ -8823,11 +8823,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-029.ood:
     raw: sqrt(x_2**2 - x_2 - exp(x_1))
     prepared: sqrt(v2**2-v2-exp(v1))
@@ -8874,11 +8874,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-030.ood:
     raw: -x_2 + (x_3 + sin(x_1/x_2))/x_3
     prepared: -v2+(v3+sin(v1/v2))/v3
@@ -8939,11 +8939,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-031.ood:
     raw: x_3 + 1/(x_2 - log(x_1 + x_2))
     prepared: v3+1/(v2-log(v1+v2))
@@ -9004,11 +9004,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-032.ood:
     raw: sin(x_1**2) + 1/x_2
     prepared: sin(v1**2)+1/v2
@@ -9055,11 +9055,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-033.ood:
     raw: -x_2 + log(x_1*(-x_2 + exp(-1)))
     prepared: -v2+log(v1*(-v2+exp(-1)))
@@ -9106,11 +9106,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-034.ood:
     raw: (x_1 + cos(1))*log(x_2)
     prepared: (v1+cos(1))*log(v2)
@@ -9157,11 +9157,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-035.ood:
     raw: x_2 + sqrt(1 + x_3/(x_1*x_2))
     prepared: v2+sqrt(1+v3/(v1*v2))
@@ -9222,11 +9222,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-036.ood:
     raw: (x_1 - x_3)/sin(x_1*x_2)
     prepared: (v1-v3)/sin(v1*v2)
@@ -9287,11 +9287,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-037.ood:
     raw: x_2*sqrt(x_1/x_3 + x_2)/x_3
     prepared: v2*sqrt(v1/v3+v2)/v3
@@ -9352,11 +9352,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-038.ood:
     raw: sin(x_2/x_1) + sin(x_1 - x_2)
     prepared: sin(v2/v1)+sin(v1-v2)
@@ -9403,11 +9403,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-039.ood:
     raw: cos(x_1) - sqrt(cos(x_2))
     prepared: cos(v1)-sqrt(cos(v2))
@@ -9454,11 +9454,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-040.ood:
     raw: x_1*(x_1 + x_2 + x_3 + sin(x_2))
     prepared: v1*(v1+v2+v3+sin(v2))
@@ -9519,11 +9519,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-041.ood:
     raw: x_2*(x_1 + log(cos(x_3)))/x_1
     prepared: v2*(v1+log(cos(v3)))/v1
@@ -9584,11 +9584,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-042.ood:
     raw: x_1 + sin(log(x_2*(x_2 - 1)))
     prepared: v1+sin(log(v2*(v2-1)))
@@ -9635,11 +9635,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-043.ood:
     raw: (-x_1 + x_3)*log(-x_1 + x_2)
     prepared: (-v1+v3)*log(-v1+v2)
@@ -9700,11 +9700,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-044.ood:
     raw: x_3 - cos(x_1**3*x_2**3)
     prepared: v3-cos(v1**3*v2**3)
@@ -9765,11 +9765,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-045.ood:
     raw: cos((-x_1 + sin(x_2) - 1)**3)
     prepared: cos((-v1+sin(v2)-1)**3)
@@ -9816,11 +9816,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-046.ood:
     raw: x_2 + sin(x_1**5 + x_3)
     prepared: v2+sin(v1**5+v3)
@@ -9881,11 +9881,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-047.ood:
     raw: x_1 + x_2/(exp(x_2) - 1)
     prepared: v1+v2/(exp(v2)-1)
@@ -9932,11 +9932,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-048.ood:
     raw: tan(cos(x_1) + tan(1))
     prepared: tan(cos(v1)+tan(1))
@@ -9969,11 +9969,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-049.ood:
     raw: x_1 + 1 + 1/(x_1 + 1)
     prepared: v1+1+1/(v1+1)
@@ -10006,11 +10006,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-050.ood:
     raw: cos(sin(x_1)) - 1/x_1
     prepared: cos(sin(v1))-1/v1
@@ -10043,11 +10043,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-051.ood:
     raw: x_1*log(sin(tan(x_1)))
     prepared: v1*log(sin(tan(v1)))
@@ -10080,11 +10080,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-052.ood:
     raw: (x_1 + sin(x_2))*(sqrt(x_2) + x_3)
     prepared: (v1+sin(v2))*(sqrt(v2)+v3)
@@ -10145,11 +10145,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-053.ood:
     raw: tan(sin(x_1*tan(x_2) - x_3))
     prepared: tan(sin(v1*tan(v2)-v3))
@@ -10210,11 +10210,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-054.ood:
     raw: sin(x_2*(-x_1 + x_2 - x_3 + 1))
     prepared: sin(v2*(-v1+v2-v3+1))
@@ -10275,11 +10275,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-055.ood:
     raw: log(cos(x_1**2 - x_2*x_3))
     prepared: log(cos(v1**2-v2*v3))
@@ -10340,11 +10340,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-056.ood:
     raw: sin(sin(x_2*x_3/x_1**2))
     prepared: sin(sin(v2*v3/v1**2))
@@ -10405,11 +10405,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-057.ood:
     raw: x_1 + sin(exp(x_2) + cos(x_2))
     prepared: v1+sin(exp(v2)+cos(v2))
@@ -10456,11 +10456,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-058.ood:
     raw: x_1 + sqrt(x_1 - x_3) + sin(x_2)
     prepared: v1+sqrt(v1-v3)+sin(v2)
@@ -10521,11 +10521,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-059.ood:
     raw: 1 - sin(x_1*(x_1 + sin(x_1)))
     prepared: 1-sin(v1*(v1+sin(v1)))
@@ -10558,11 +10558,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-060.ood:
     raw: x_1/(x_2 + (x_1 + tan(x_3))/x_2)
     prepared: v1/(v2+(v1+tan(v3))/v2)
@@ -10623,11 +10623,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-061.ood:
     raw: -log((x_1 + x_2)**2)
     prepared: -log((v1+v2)**2)
@@ -10674,11 +10674,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-062.ood:
     raw: x_1*(-x_1 + cos(sqrt(x_2))**2)
     prepared: v1*(-v1+cos(sqrt(v2))**2)
@@ -10725,11 +10725,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-063.ood:
     raw: -exp(cos(x_1)) + sin(x_1)
     prepared: -exp(cos(v1))+sin(v1)
@@ -10762,11 +10762,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-064.ood:
     raw: x_2 + 1/(-x_1*(x_3 - 1) + x_2)
     prepared: v2+1/(-v1*(v3-1)+v2)
@@ -10827,11 +10827,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-065.ood:
     raw: x_1 + cos(1 + 1/x_2)
     prepared: v1+cos(1+1/v2)
@@ -10878,11 +10878,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-066.ood:
     raw: x_3/(x_1 - x_2*exp(x_2) - 1)
     prepared: v3/(v1-v2*exp(v2)-1)
@@ -10943,11 +10943,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-067.ood:
     raw: tan(exp(x_1 - x_2)) - 1
     prepared: tan(exp(v1-v2))-1
@@ -10994,11 +10994,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-068.ood:
     raw: cos(x_1**5*(x_2 - x_3)**5)/x_1
     prepared: cos(v1**5*(v2-v3)**5)/v1
@@ -11059,11 +11059,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-069.ood:
     raw: x_1*cos(x_2)*tan(x_2)
     prepared: v1*cos(v2)*tan(v2)
@@ -11110,11 +11110,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-070.ood:
     raw: exp(cos((x_1 + x_2 + 1)**4))
     prepared: exp(cos((v1+v2+1)**4))
@@ -11161,11 +11161,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-071.ood:
     raw: x_3/(x_2*(x_3**2 + tan(x_1)))
     prepared: v3/(v2*(v3**2+tan(v1)))
@@ -11226,11 +11226,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-072.ood:
     raw: -x_3 + (-x_1 + x_2)/log(x_2) - 1
     prepared: -v3+(-v1+v2)/log(v2)-1
@@ -11291,11 +11291,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-073.ood:
     raw: x_2 + cos(tan(x_1 - cos(1)))
     prepared: v2+cos(tan(v1-cos(1)))
@@ -11342,11 +11342,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-074.ood:
     raw: -x_2 + cos(x_2 - 1)/x_1
     prepared: -v2+cos(v2-1)/v1
@@ -11393,11 +11393,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-075.ood:
     raw: log(x_1/sin(1/x_1))
     prepared: log(v1/sin(1/v1))
@@ -11430,11 +11430,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-076.ood:
     raw: x_3/(x_2 + cos(x_1/cos(x_2)))
     prepared: v3/(v2+cos(v1/cos(v2)))
@@ -11495,11 +11495,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-077.ood:
     raw: x_1 + x_1/(x_2*(x_1 + cos(x_2)))
     prepared: v1+v1/(v2*(v1+cos(v2)))
@@ -11546,11 +11546,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-078.ood:
     raw: x_2/((x_1 + tan(x_2))*(x_2 + x_3))
     prepared: v2/((v1+tan(v2))*(v2+v3))
@@ -11611,11 +11611,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-079.ood:
     raw: x_1 - x_2*(cos(x_2) - cos(x_3))
     prepared: v1-v2*(cos(v2)-cos(v3))
@@ -11676,11 +11676,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-080.ood:
     raw: x_3*cos(x_2 + x_3) + cos(x_1)
     prepared: v3*cos(v2+v3)+cos(v1)
@@ -11741,11 +11741,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-081.ood:
     raw: x_2**2 - cos(cos(x_1))
     prepared: v2**2-cos(cos(v1))
@@ -11792,11 +11792,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-082.ood:
     raw: -x_2*sin(x_1*(x_3 - 1))
     prepared: -v2*sin(v1*(v3-1))
@@ -11857,11 +11857,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-083.ood:
     raw: tan(cos(x_1) - tan(1)) - 1
     prepared: tan(cos(v1)-tan(1))-1
@@ -11894,11 +11894,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-084.ood:
     raw: (x_2 + x_3 - cos(x_1))/x_3
     prepared: (v2+v3-cos(v1))/v3
@@ -11959,11 +11959,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-085.ood:
     raw: x_1*(sin(x_2) - sin(x_3)/x_2)
     prepared: v1*(sin(v2)-sin(v3)/v2)
@@ -12024,11 +12024,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-086.ood:
     raw: x_3*cos(x_1**2 + x_2)**3
     prepared: v3*cos(v1**2+v2)**3
@@ -12089,11 +12089,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-087.ood:
     raw: tan((x_1 - x_2**5)*sin(x_3))
     prepared: tan((v1-v2**5)*sin(v3))
@@ -12154,11 +12154,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-088.ood:
     raw: -x_1*sin(tan(x_1*x_2)) + x_1
     prepared: -v1*sin(tan(v1*v2))+v1
@@ -12205,11 +12205,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-089.ood:
     raw: cos(1 - (x_2*x_3 + x_2)/x_1)
     prepared: cos(1-(v2*v3+v2)/v1)
@@ -12270,11 +12270,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-090.ood:
     raw: x_1 - (x_2 + x_3)*sin(x_1) + 1
     prepared: v1-(v2+v3)*sin(v1)+1
@@ -12335,11 +12335,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-091.ood:
     raw: -1/tan(x_1*x_2)
     prepared: -1/tan(v1*v2)
@@ -12386,11 +12386,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-092.ood:
     raw: sin(x_1) + tan(tan(exp(x_1)))
     prepared: sin(v1)+tan(tan(exp(v1)))
@@ -12423,11 +12423,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-093.ood:
     raw: (x_2 + x_3 + (x_2 - 1)/x_2)/x_1
     prepared: (v2+v3+(v2-1)/v2)/v1
@@ -12488,11 +12488,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-094.ood:
     raw: x_1/(x_2*(-x_2 + x_3)) - x_2
     prepared: v1/(v2*(-v2+v3))-v2
@@ -12553,11 +12553,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-095.ood:
     raw: x_2 + log(x_1*(x_1 + sin(x_2)))
     prepared: v2+log(v1*(v1+sin(v2)))
@@ -12604,11 +12604,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-096.ood:
     raw: x_2 + x_3/(-x_1*x_3 - x_2)
     prepared: v2+v3/(-v1*v3-v2)
@@ -12669,11 +12669,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-097.ood:
     raw: sin(x_3*(x_1 - x_2 + 1))
     prepared: sin(v3*(v1-v2+1))
@@ -12734,11 +12734,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-098.ood:
     raw: -x_2 + x_3*sin(cos(tan(x_1)))
     prepared: -v2+v3*sin(cos(tan(v1)))
@@ -12799,11 +12799,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-099.ood:
     raw: sin(x_2*(x_1 + x_3)**2 + x_2)
     prepared: sin(v2*(v1+v3)**2+v2)
@@ -12864,11 +12864,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-100.ood:
     raw: x_1*(x_2 - asin(1/x_1))
     prepared: v1*(v2-asin(1/v1))
@@ -12915,11 +12915,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-101.ood:
     raw: cos(sqrt(x_1**2 - 1))
     prepared: cos(sqrt(v1**2-1))
@@ -12952,11 +12952,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-102.ood:
     raw: x_1*(x_1 + x_2*cos(x_3)) + 1
     prepared: v1*(v1+v2*cos(v3))+1
@@ -13017,11 +13017,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-103.ood:
     raw: x_1*cos(x_2**3 + x_2)
     prepared: v1*cos(v2**3+v2)
@@ -13068,11 +13068,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-104.ood:
     raw: sin(exp((x_2 + x_3)/x_1))
     prepared: sin(exp((v2+v3)/v1))
@@ -13133,11 +13133,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-105.ood:
     raw: tan(x_2 + (x_1 + x_3)/(x_2*x_3))
     prepared: tan(v2+(v1+v3)/(v2*v3))
@@ -13198,11 +13198,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-106.ood:
     raw: exp(1 - cos(x_1)) + 1
     prepared: exp(1-cos(v1))+1
@@ -13235,11 +13235,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-107.ood:
     raw: x_1 - sqrt(x_1 + x_2)/x_2
     prepared: v1-sqrt(v1+v2)/v2
@@ -13286,11 +13286,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-108.ood:
     raw: x_1/(x_1 + tan(sin(x_1)))
     prepared: v1/(v1+tan(sin(v1)))
@@ -13323,11 +13323,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-109.ood:
     raw: (x_3 + sin(x_1)/x_2)/x_3
     prepared: (v3+sin(v1)/v2)/v3
@@ -13388,11 +13388,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-110.ood:
     raw: x_2*x_3/(x_1*(x_1 + sqrt(x_2)))
     prepared: v2*v3/(v1*(v1+sqrt(v2)))
@@ -13453,11 +13453,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-111.ood:
     raw: x_1*sin(x_2 + x_3*sin(x_1))
     prepared: v1*sin(v2+v3*sin(v1))
@@ -13518,11 +13518,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-112.ood:
     raw: cos((x_1 + x_2)*(x_1 + x_3 + 1))
     prepared: cos((v1+v2)*(v1+v3+1))
@@ -13583,11 +13583,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-113.ood:
     raw: x_2**2*sin(x_1 - 1) - 1
     prepared: v2**2*sin(v1-1)-1
@@ -13634,11 +13634,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-114.ood:
     raw: x_2/(x_1*(x_2 + sin(x_1 + x_3)))
     prepared: v2/(v1*(v2+sin(v1+v3)))
@@ -13699,11 +13699,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-115.ood:
     raw: x_3 - 1/(x_1 + exp(x_2))
     prepared: v3-1/(v1+exp(v2))
@@ -13764,11 +13764,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-116.ood:
     raw: x_2**2 - cos(sin(x_1))
     prepared: v2**2-cos(sin(v1))
@@ -13815,11 +13815,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-117.ood:
     raw: sqrt(x_1*(x_2/x_3 + x_3))
     prepared: sqrt(v1*(v2/v3+v3))
@@ -13880,11 +13880,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-118.ood:
     raw: log(exp(x_1 + x_2) + log(x_2))
     prepared: log(exp(v1+v2)+log(v2))
@@ -13931,11 +13931,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-119.ood:
     raw: x_1*x_2/log(log(-x_1))
     prepared: v1*v2/log(log(-v1))
@@ -13982,11 +13982,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-120.ood:
     raw: sqrt(-1 + (x_1*x_2 + x_2)/x_3)
     prepared: sqrt(-1+(v1*v2+v2)/v3)
@@ -14047,11 +14047,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-121.ood:
     raw: x_2*sin(x_1 - x_3**2)
     prepared: v2*sin(v1-v3**2)
@@ -14112,11 +14112,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-122.ood:
     raw: cos(sin(x_2) + x_3/x_1)
     prepared: cos(sin(v2)+v3/v1)
@@ -14177,11 +14177,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-123.ood:
     raw: x_2 - log((x_1 - 1)**2)
     prepared: v2-log((v1-1)**2)
@@ -14228,11 +14228,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-124.ood:
     raw: sqrt(tan(x_2*(-x_1 + exp(-1))))
     prepared: sqrt(tan(v2*(-v1+exp(-1))))
@@ -14279,11 +14279,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-125.ood:
     raw: -x_2*sin(x_1*x_3 + 1) - 1
     prepared: -v2*sin(v1*v3+1)-1
@@ -14344,11 +14344,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-126.ood:
     raw: -x_1 + exp(-sin(x_1/x_2))
     prepared: -v1+exp(-sin(v1/v2))
@@ -14395,11 +14395,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-127.ood:
     raw: x_1 - x_2**2 + x_2 + x_3 - 1
     prepared: v1-v2**2+v2+v3-1
@@ -14460,11 +14460,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-128.ood:
     raw: log(cos(exp(-1/cos(x_1))))
     prepared: log(cos(exp(-1/cos(v1))))
@@ -14497,11 +14497,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-129.ood:
     raw: x_1 - x_2*cos(x_1**3)
     prepared: v1-v2*cos(v1**3)
@@ -14548,11 +14548,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-130.ood:
     raw: sin(x_2*x_3/x_1) - 1
     prepared: sin(v2*v3/v1)-1
@@ -14613,11 +14613,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-131.ood:
     raw: sqrt(x_2/(x_1 + x_1/sin(x_1)))
     prepared: sqrt(v2/(v1+v1/sin(v1)))
@@ -14664,11 +14664,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-132.ood:
     raw: sin(cos(x_1*tan(x_1) + x_1))
     prepared: sin(cos(v1*tan(v1)+v1))
@@ -14701,11 +14701,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-133.ood:
     raw: x_2/(x_2 + sqrt(x_1*x_3)) + x_3
     prepared: v2/(v2+sqrt(v1*v3))+v3
@@ -14766,11 +14766,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-134.ood:
     raw: log(sqrt(x_1*sin(x_2)))
     prepared: log(sqrt(v1*sin(v2)))
@@ -14817,11 +14817,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-135.ood:
     raw: x_3 + 1 - 1/(x_1 + x_2*x_3)
     prepared: v3+1-1/(v1+v2*v3)
@@ -14882,11 +14882,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-136.ood:
     raw: -x_1 + x_2*cos(x_3 - sin(x_3))
     prepared: -v1+v2*cos(v3-sin(v3))
@@ -14947,11 +14947,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-137.ood:
     raw: x_2*(x_2 + x_3) - cos(tan(x_1))
     prepared: v2*(v2+v3)-cos(tan(v1))
@@ -15012,11 +15012,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-138.ood:
     raw: cos(x_2)/cos(x_1/x_3)
     prepared: cos(v2)/cos(v1/v3)
@@ -15077,11 +15077,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-139.ood:
     raw: -x_1 + tan(x_1*x_2**2 - x_3)
     prepared: -v1+tan(v1*v2**2-v3)
@@ -15142,11 +15142,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-140.ood:
     raw: x_1**2 + x_2 - cos(x_2 - x_3)
     prepared: v1**2+v2-cos(v2-v3)
@@ -15207,11 +15207,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-141.ood:
     raw: x_2*cos(x_2) + cos(x_1/x_2)
     prepared: v2*cos(v2)+cos(v1/v2)
@@ -15258,11 +15258,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-142.ood:
     raw: cos(x_1 - tan(x_2)**2)
     prepared: cos(v1-tan(v2)**2)
@@ -15309,11 +15309,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-143.ood:
     raw: log(x_1 - x_2 + x_3 + exp(x_2))
     prepared: log(v1-v2+v3+exp(v2))
@@ -15374,11 +15374,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-144.ood:
     raw: tan(x_1*cos(1/x_1)/x_2)
     prepared: tan(v1*cos(1/v1)/v2)
@@ -15425,11 +15425,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-145.ood:
     raw: -x_1*(x_1 + sin(x_1 + x_2))
     prepared: -v1*(v1+sin(v1+v2))
@@ -15476,11 +15476,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-146.ood:
     raw: sin(log(-x_1/x_2 + x_2))
     prepared: sin(log(-v1/v2+v2))
@@ -15527,11 +15527,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-147.ood:
     raw: tan(log(-x_1*x_2 + x_1))
     prepared: tan(log(-v1*v2+v1))
@@ -15578,11 +15578,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-148.ood:
     raw: x_1 + x_2 + sin(x_1 + x_3) + 1
     prepared: v1+v2+sin(v1+v3)+1
@@ -15643,11 +15643,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-149.ood:
     raw: x_2 + x_3 - tan(x_2/x_1)
     prepared: v2+v3-tan(v2/v1)
@@ -15708,11 +15708,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-150.ood:
     raw: x_2*(x_1 + log(x_2) + 1) + x_3
     prepared: v2*(v1+log(v2)+1)+v3
@@ -15773,11 +15773,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-151.ood:
     raw: sin(x_3)/(x_1**5 + x_2)
     prepared: sin(v3)/(v1**5+v2)
@@ -15838,11 +15838,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-152.ood:
     raw: x_1 + (x_2 + sin(x_1 + 1))/x_3
     prepared: v1+(v2+sin(v1+1))/v3
@@ -15903,11 +15903,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-153.ood:
     raw: asin(sin(x_1)/x_1)
     prepared: asin(sin(v1)/v1)
@@ -15940,11 +15940,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-154.ood:
     raw: -x_2 + (x_1 + sqrt(x_2))**2
     prepared: -v2+(v1+sqrt(v2))**2
@@ -15991,11 +15991,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-155.ood:
     raw: x_2 + 1 + (x_1 + cos(x_1))/x_3
     prepared: v2+1+(v1+cos(v1))/v3
@@ -16056,11 +16056,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-156.ood:
     raw: cos(x_1*(-x_1 + x_2**2*x_3))
     prepared: cos(v1*(-v1+v2**2*v3))
@@ -16121,11 +16121,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-157.ood:
     raw: (tan(x_2/x_1) - 1)/x_2
     prepared: (tan(v2/v1)-1)/v2
@@ -16172,11 +16172,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-158.ood:
     raw: x_2*cos(x_1*x_2*x_3 + x_1)
     prepared: v2*cos(v1*v2*v3+v1)
@@ -16237,11 +16237,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-159.ood:
     raw: x_2**2 + sin(x_1*x_2)
     prepared: v2**2+sin(v1*v2)
@@ -16288,11 +16288,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-160.ood:
     raw: x_1*(-x_2 + sqrt(x_1 - x_3))
     prepared: v1*(-v2+sqrt(v1-v3))
@@ -16353,11 +16353,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-161.ood:
     raw: x_3**2/(x_1*exp(x_2) + x_3)
     prepared: v3**2/(v1*exp(v2)+v3)
@@ -16418,11 +16418,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-162.ood:
     raw: (-x_1 + (-x_1 + x_2)*log(x_2))/x_1
     prepared: (-v1+(-v1+v2)*log(v2))/v1
@@ -16469,11 +16469,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-163.ood:
     raw: x_3 + sin(x_1) - 1/(x_2*x_3)
     prepared: v3+sin(v1)-1/(v2*v3)
@@ -16534,11 +16534,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-164.ood:
     raw: x_1 - x_2 + tan(x_1**2 - x_3)
     prepared: v1-v2+tan(v1**2-v3)
@@ -16599,11 +16599,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-165.ood:
     raw: sqrt(-x_1 + x_2*x_3/x_1)
     prepared: sqrt(-v1+v2*v3/v1)
@@ -16664,11 +16664,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-166.ood:
     raw: x_1 - sin(x_3/(x_1 + x_2 + 1))
     prepared: v1-sin(v3/(v1+v2+1))
@@ -16729,11 +16729,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-167.ood:
     raw: cos(x_1 + x_2 + (x_2 + x_3)**2)
     prepared: cos(v1+v2+(v2+v3)**2)
@@ -16794,11 +16794,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-168.ood:
     raw: (-x_2 + x_3*(-x_1 + x_3))**(-3)
     prepared: (-v2+v3*(-v1+v3))**(-3)
@@ -16859,11 +16859,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-169.ood:
     raw: -x_1 + cos(1 + 1/x_1)
     prepared: -v1+cos(1+1/v1)
@@ -16896,11 +16896,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-170.ood:
     raw: -x_3 + tan(x_3/(x_1*x_2))
     prepared: -v3+tan(v3/(v1*v2))
@@ -16961,11 +16961,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-171.ood:
     raw: -x_1**2 + x_1/x_2 + x_2 + x_3
     prepared: -v1**2+v1/v2+v2+v3
@@ -17026,11 +17026,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-172.ood:
     raw: cos((x_1 - x_2 - 1/x_2)**5)
     prepared: cos((v1-v2-1/v2)**5)
@@ -17077,11 +17077,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-173.ood:
     raw: x_2 + x_3 - x_3/(x_1 - 1)
     prepared: v2+v3-v3/(v1-1)
@@ -17142,11 +17142,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-174.ood:
     raw: x_1 - x_3*(x_2 - 1) + tan(x_3)
     prepared: v1-v3*(v2-1)+tan(v3)
@@ -17207,11 +17207,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-175.ood:
     raw: x_2 - cos(sin(x_1) - 1)**2
     prepared: v2-cos(sin(v1)-1)**2
@@ -17258,11 +17258,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-176.ood:
     raw: x_1 + x_2 + (x_1 + x_2*x_3)/x_3
     prepared: v1+v2+(v1+v2*v3)/v3
@@ -17323,11 +17323,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-177.ood:
     raw: x_2/(-exp(x_1) + tan(x_1)) - 1
     prepared: v2/(-exp(v1)+tan(v1))-1
@@ -17374,11 +17374,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-178.ood:
     raw: x_2*(x_2 - (-x_1 - 1)/x_2)
     prepared: v2*(v2-(-v1-1)/v2)
@@ -17425,11 +17425,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-179.ood:
     raw: cos(sin(exp(x_1) + 1))
     prepared: cos(sin(exp(v1)+1))
@@ -17462,11 +17462,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-180.ood:
     raw: log(x_2 + cos(x_2))/(x_1 + x_3)
     prepared: log(v2+cos(v2))/(v1+v3)
@@ -17527,11 +17527,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-181.ood:
     raw: -1 - sin(x_1)**2/x_2
     prepared: -1-sin(v1)**2/v2
@@ -17578,11 +17578,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-182.ood:
     raw: sin(tan(x_2))*cos(x_1)
     prepared: sin(tan(v2))*cos(v1)
@@ -17629,11 +17629,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-183.ood:
     raw: cos(x_1*(x_2 + 1) + sin(x_1))
     prepared: cos(v1*(v2+1)+sin(v1))
@@ -17680,11 +17680,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-184.ood:
     raw: sin((x_1 - x_3)/(x_2*x_3))
     prepared: sin((v1-v3)/(v2*v3))
@@ -17745,11 +17745,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-185.ood:
     raw: cos(cos(x_2)**2/(-x_1 + x_3)**2)
     prepared: cos(cos(v2)**2/(-v1+v3)**2)
@@ -17810,11 +17810,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-186.ood:
     raw: x_3 + (-x_2 + x_3)*cos(x_1 + x_3)
     prepared: v3+(-v2+v3)*cos(v1+v3)
@@ -17875,11 +17875,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-187.ood:
     raw: x_2 + x_3 + cos(x_1 + 1) + 1
     prepared: v2+v3+cos(v1+1)+1
@@ -17940,11 +17940,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-188.ood:
     raw: asin(x_1**3/(x_3*(x_2 + x_3)))
     prepared: asin(v1**3/(v3*(v2+v3)))
@@ -18005,11 +18005,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-189.ood:
     raw: cos((x_1 - 1)**3)**2
     prepared: cos((v1-1)**3)**2
@@ -18042,11 +18042,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-190.ood:
     raw: x_1*(x_1 + x_3 + 1) + sqrt(x_2)
     prepared: v1*(v1+v3+1)+sqrt(v2)
@@ -18107,11 +18107,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-191.ood:
     raw: -x_1 + x_2 - sin(x_2*x_3)
     prepared: -v1+v2-sin(v2*v3)
@@ -18172,11 +18172,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-192.ood:
     raw: sin(x_2*x_3*(x_1*x_2 + x_3))
     prepared: sin(v2*v3*(v1*v2+v3))
@@ -18237,11 +18237,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-193.ood:
     raw: sin((-x_2 + x_3)**2/(x_1 + x_2))
     prepared: sin((-v2+v3)**2/(v1+v2))
@@ -18302,11 +18302,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-194.ood:
     raw: (x_1*x_2 + sqrt(x_2))/x_1
     prepared: (v1*v2+sqrt(v2))/v1
@@ -18353,11 +18353,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-195.ood:
     raw: x_1 - x_3 + (x_2 + x_3)*sin(x_3)
     prepared: v1-v3+(v2+v3)*sin(v3)
@@ -18418,11 +18418,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-196.ood:
     raw: x_1 + log(x_2 + tan(x_2)) + 1
     prepared: v1+log(v2+tan(v2))+1
@@ -18469,11 +18469,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-197.ood:
     raw: x_1 - x_2*x_3 + x_2 + cos(x_3)
     prepared: v1-v2*v3+v2+cos(v3)
@@ -18534,11 +18534,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-198.ood:
     raw: x_1/(x_1 + x_2**2 + tan(x_3))
     prepared: v1/(v1+v2**2+tan(v3))
@@ -18599,11 +18599,11 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-199.ood:
     raw: x_2 + x_3 - tan(x_1 - x_2)/x_3
     prepared: v2+v3-tan(v1-v2)/v3
@@ -18664,8 +18664,8 @@ expressions:
             kwargs:
               low: -30.0
               high: 30.0
-    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; /home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/C1/nesymres_2106.06427.pdf,
+    test_source: 'NeSymReS (Biggio et al., ICML 2021, arXiv:2106.06427; source-audit/raw/C1/nesymres_2106.06427.pdf,
       opened) Sec. 4.6: ''Aiid is computed with 10k points sampled uniformly in the
       training support. Aood is computed with 10k points in an extended support as detailed
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
-      an equation wi'
+      an equation with in-sample support of (lo, hi), we extend the '

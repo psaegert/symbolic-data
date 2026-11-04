@@ -82,9 +82,10 @@ expressions:
               high: 4.2
               step: 0.1
     test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
-      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      10 Table I ''Sampling strategy for training and test data'' (source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
       and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
-      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation
+      x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Vladislavleva-4:
     raw: div(10,(5+(pow((x1-3),2)+pow((x2-3),2)+pow((x3-3),2)+pow((x4-3),2)+pow((x5-3),2))))
     prepared: ((10)/((5+((((v1-3))**(2))+(((v2-3))**(2))+(((v3-3))**(2))+(((v4-3))**(2))+(((v5-3))**(2))))))
@@ -185,9 +186,10 @@ expressions:
               low: -0.25
               high: 6.35
     test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
-      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      10 Table I ''Sampling strategy for training and test data'' (source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
       and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
-      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation
+      x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Vladislavleva-5:
     raw: 30*(x1-1)*div(x3-1,(x1-10)*pow(x2,2))
     prepared: 30*(v1-1)*((v3-1)/((v1-10)*((v2)**(2))))
@@ -283,9 +285,10 @@ expressions:
               high: 2.1
               step: 0.15
     test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
-      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      10 Table I ''Sampling strategy for training and test data'' (source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
       and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
-      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation
+      x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Vladislavleva-6:
     raw: 6*sin(x1)*cos(x2)
     prepared: 6*sin(v1)*cos(v2)
@@ -346,9 +349,10 @@ expressions:
               high: 6.05
               step: 0.02
     test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
-      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      10 Table I ''Sampling strategy for training and test data'' (source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
       and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
-      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation
+      x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Vladislavleva-7:
     raw: (x1 - 3)*(x2 - 3) + 2*sin((x1 - 4)*(x2 - 4))
     prepared: (v1 - 3)*(v2 - 3) + 2*sin((v1 - 4)*(v2 - 4))
@@ -394,9 +398,10 @@ expressions:
               low: -0.25
               high: 6.35
     test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
-      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      10 Table I ''Sampling strategy for training and test data'' (source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
       and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
-      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation
+      x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Vladislavleva-8:
     raw: div(pow((x1-3),4)+pow((x2-3),3)-(x2-3),pow((x2-2),4)+10)
     prepared: (((((v1-3))**(4))+(((v2-3))**(3))-(v2-3))/((((v2-2))**(4))+10))
@@ -457,6 +462,7 @@ expressions:
               high: 6.35
               step: 0.2
     test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
-      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      10 Table I ''Sampling strategy for training and test data'' (source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
       and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
-      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation
+      x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'

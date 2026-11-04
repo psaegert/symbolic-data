@@ -1,0 +1,3884 @@
+metadata:
+  name: newtonbench
+  version: 1
+  tags: {"origin": "science formula", "tags": []}
+  description: NewtonBench
+  sources:
+  - https://arxiv.org/abs/2510.07172
+  - https://arxiv.org/pdf/2510.07172v3
+  - https://arxiv.org/e-print/2510.07172v3
+  - https://arxiv.org/e-print/2510.07172v1
+  - https://github.com/HKUST-KnowComp/NewtonBench
+  - https://github.com/HKUST-KnowComp/NewtonBench/tree/912a4ba5f4356ddd06acc16e44460ca30be4abc2/modules
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-97.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  gravity-easy-v0:
+    raw: 6.674e-5*mass1*mass2/distance**1.5
+    prepared: 6.674e-5*v1*v2/v3**1.5
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: mass1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: mass2
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      mass1: log-uniform U_log[1, 1000]
+      mass2: log-uniform U_log[1, 1000]
+      distance: log-uniform U_log[1, 10]
+    meta:
+      finite_fraction: 1.0
+  gravity-easy-v1:
+    raw: 6.674e-5*mass1/distance**2
+    prepared: 6.674e-5*v1/v3**2
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: mass1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: mass2
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      mass1: log-uniform U_log[1, 1000]
+      mass2: log-uniform U_log[1, 1000]
+      distance: log-uniform U_log[1, 10]
+    meta:
+      finite_fraction: 1.0
+  gravity-easy-v2:
+    raw: 6.674e-5*mass1**2*mass2**2/distance**2
+    prepared: 6.674e-5*v1**2*v2**2/v3**2
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: mass1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: mass2
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      mass1: log-uniform U_log[1, 1000]
+      mass2: log-uniform U_log[1, 1000]
+      distance: log-uniform U_log[1, 10]
+    meta:
+      finite_fraction: 1.0
+  gravity-medium-v0:
+    raw: 6.674e-5*(mass1*mass2)**2/distance**1.5
+    prepared: 6.674e-5*v1**2*v2**2/v3**1.5
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: mass1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: mass2
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      mass1: log-uniform U_log[1, 1000]
+      mass2: log-uniform U_log[1, 1000]
+      distance: log-uniform U_log[1, 10]
+    meta:
+      finite_fraction: 1.0
+  gravity-medium-v1:
+    raw: 6.674e-5*mass1/distance**2.6
+    prepared: 6.674e-5*v1/v3**2.6
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: mass1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: mass2
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      mass1: log-uniform U_log[1, 1000]
+      mass2: log-uniform U_log[1, 1000]
+      distance: log-uniform U_log[1, 10]
+    meta:
+      finite_fraction: 1.0
+  gravity-medium-v2:
+    raw: 6.674e-5*mass1**2*mass2**2*distance**2
+    prepared: 6.674e-5*v1**2*v2**2*v3**2
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: mass1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: mass2
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      mass1: log-uniform U_log[1, 1000]
+      mass2: log-uniform U_log[1, 1000]
+      distance: log-uniform U_log[1, 10]
+    meta:
+      finite_fraction: 1.0
+  gravity-hard-v0:
+    raw: 6.674e-5*(mass1 + mass2)**2/distance**1.5
+    prepared: 6.674e-5*(v1 + v2)**2/v3**1.5
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: mass1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: mass2
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      mass1: log-uniform U_log[1, 1000]
+      mass2: log-uniform U_log[1, 1000]
+      distance: log-uniform U_log[1, 10]
+    meta:
+      finite_fraction: 1.0
+  gravity-hard-v1:
+    raw: 6.674e-5*mass1**1.3/distance**2.6
+    prepared: 6.674e-5*v1**1.3/v3**2.6
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: mass1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: mass2
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      mass1: log-uniform U_log[1, 1000]
+      mass2: log-uniform U_log[1, 1000]
+      distance: log-uniform U_log[1, 10]
+    meta:
+      finite_fraction: 1.0
+  gravity-hard-v2:
+    raw: 6.674e-5*(mass1**2 + mass2**2)*distance**2
+    prepared: 6.674e-5*v3**2*(v1**2 + v2**2)
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: mass1
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: mass2
+        sample_range:
+        - 1.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      mass1: log-uniform U_log[1, 1000]
+      mass2: log-uniform U_log[1, 1000]
+      distance: log-uniform U_log[1, 10]
+    meta:
+      finite_fraction: 1.0
+  coulomb_force-easy-v0:
+    raw: 2.0*q1*q2/distance**3
+    prepared: 2.0*v1*v2/v3**3
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: q1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q1: log-uniform U_log[0.1, 10]
+      q2: log-uniform U_log[0.1, 10]
+      distance: log-uniform U_log[0.1, 10]
+    meta:
+      finite_fraction: 1.0
+  coulomb_force-easy-v1:
+    raw: 2.0*(q1*q2)**3/distance**2
+    prepared: 2.0*v1**3*v2**3/v3**2
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: q1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q1: log-uniform U_log[0.1, 10]
+      q2: log-uniform U_log[0.1, 10]
+      distance: log-uniform U_log[0.1, 10]
+    meta:
+      finite_fraction: 1.0
+  coulomb_force-easy-v2:
+    raw: 2.0*q1**3*q2/distance**2
+    prepared: 2.0*v1**3*v2/v3**2
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: q1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q1: log-uniform U_log[0.1, 10]
+      q2: log-uniform U_log[0.1, 10]
+      distance: log-uniform U_log[0.1, 10]
+    meta:
+      finite_fraction: 1.0
+  coulomb_force-medium-v0:
+    raw: 2.0*q1*q2*(q1 + q2)/distance**2
+    prepared: 2.0*v1*v2*(v1 + v2)/v3**2
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: q1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q1: log-uniform U_log[0.1, 10]
+      q2: log-uniform U_log[0.1, 10]
+      distance: log-uniform U_log[0.1, 10]
+    meta:
+      finite_fraction: 1.0
+  coulomb_force-medium-v1:
+    raw: 2.0*(q1 + q2)**3/distance**2
+    prepared: 2.0*(v1 + v2)**3/v3**2
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: q1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q1: log-uniform U_log[0.1, 10]
+      q2: log-uniform U_log[0.1, 10]
+      distance: log-uniform U_log[0.1, 10]
+    meta:
+      finite_fraction: 1.0
+  coulomb_force-medium-v2:
+    raw: 2.0*q1**3*q2**2/distance**2.5
+    prepared: 2.0*v1**3*v2**2/v3**2.5
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: q1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q1: log-uniform U_log[0.1, 10]
+      q2: log-uniform U_log[0.1, 10]
+      distance: log-uniform U_log[0.1, 10]
+    meta:
+      finite_fraction: 1.0
+  coulomb_force-hard-v0:
+    raw: 2.0*q1*q2*(q1 + q2)/distance**E
+    prepared: 2.0*v1*v2*(v1 + v2)/v3**2.718281828459045
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: q1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q1: log-uniform U_log[0.1, 10]
+      q2: log-uniform U_log[0.1, 10]
+      distance: log-uniform U_log[0.1, 10]
+    meta:
+      finite_fraction: 1.0
+  coulomb_force-hard-v1:
+    raw: 2.0*q2**2*(q1 + q2)**3/distance**2
+    prepared: 2.0*v2**2*(v1 + v2)**3/v3**2
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: q1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q1: log-uniform U_log[0.1, 10]
+      q2: log-uniform U_log[0.1, 10]
+      distance: log-uniform U_log[0.1, 10]
+    meta:
+      finite_fraction: 1.0
+  coulomb_force-hard-v2:
+    raw: 2.0*q1**3*q2**2/distance**E
+    prepared: 2.0*v1**3*v2**2/v3**2.718281828459045
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: q1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q1: log-uniform U_log[0.1, 10]
+      q2: log-uniform U_log[0.1, 10]
+      distance: log-uniform U_log[0.1, 10]
+    meta:
+      finite_fraction: 1.0
+  magnetic_force-easy-v0:
+    raw: 4.78e-2*current1*current2/distance**3
+    prepared: 0.0478*v1*v2/v3**3
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: current1
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: current2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      current1: log-uniform U_log[0.001, 0.1]
+      current2: log-uniform U_log[0.001, 0.1]
+      distance: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  magnetic_force-easy-v1:
+    raw: 4.78e-2*(current1*current2)**2/distance
+    prepared: 0.0478*v1**2*v2**2/v3
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: current1
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: current2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      current1: log-uniform U_log[0.001, 0.1]
+      current2: log-uniform U_log[0.001, 0.1]
+      distance: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  magnetic_force-easy-v2:
+    raw: 4.78e-2*current2/distance
+    prepared: 0.0478*v2/v3
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: current1
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: current2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      current1: log-uniform U_log[0.001, 0.1]
+      current2: log-uniform U_log[0.001, 0.1]
+      distance: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  magnetic_force-medium-v0:
+    raw: 4.78e-2*(current1*current2)**1.5/distance**3
+    prepared: 0.0478*(v1*v2)**1.5/v3**3
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: current1
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: current2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      current1: log-uniform U_log[0.001, 0.1]
+      current2: log-uniform U_log[0.001, 0.1]
+      distance: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  magnetic_force-medium-v1:
+    raw: 4.78e-2*(current1*current2)**2*distance
+    prepared: 0.0478*v1**2*v2**2*v3
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: current1
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: current2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      current1: log-uniform U_log[0.001, 0.1]
+      current2: log-uniform U_log[0.001, 0.1]
+      distance: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  magnetic_force-medium-v2:
+    raw: 4.78e-2*current2/distance**3.8
+    prepared: 0.0478*v2/v3**3.8
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: current1
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: current2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      current1: log-uniform U_log[0.001, 0.1]
+      current2: log-uniform U_log[0.001, 0.1]
+      distance: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  magnetic_force-hard-v0:
+    raw: 4.78e-2*(current1 + current2)**1.5/distance**3
+    prepared: 0.0478*(v1 + v2)**1.5/v3**3
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: current1
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: current2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      current1: log-uniform U_log[0.001, 0.1]
+      current2: log-uniform U_log[0.001, 0.1]
+      distance: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  magnetic_force-hard-v1:
+    raw: 4.78e-2*(current1 - current2)**2*distance
+    prepared: 0.0478*v3*(v1 - v2)**2
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: current1
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: current2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      current1: log-uniform U_log[0.001, 0.1]
+      current2: log-uniform U_log[0.001, 0.1]
+      distance: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  magnetic_force-hard-v2:
+    raw: 4.78e-2*current2**0.9/distance**3.8
+    prepared: 0.0478*v2**0.9/v3**3.8
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: current1
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: current2
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: distance
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      current1: log-uniform U_log[0.001, 0.1]
+      current2: log-uniform U_log[0.001, 0.1]
+      distance: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  fourier_law-easy-v0:
+    raw: k*A*delta_T/d**2
+    prepared: v1*v2*v3/v4**2
+    n_variables: 4
+    subset: easy
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: A
+        sample_range:
+        - 0.0001
+        - 0.01
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[0.1, 10]
+      A: log-uniform U_log[0.0001, 0.01]
+      delta_T: log-uniform U_log[10, 1000]
+      d: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  fourier_law-easy-v1:
+    raw: k*A**0.5*delta_T/d
+    prepared: v1*v2**0.5*v3/v4
+    n_variables: 4
+    subset: easy
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: A
+        sample_range:
+        - 0.0001
+        - 0.01
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[0.1, 10]
+      A: log-uniform U_log[0.0001, 0.01]
+      delta_T: log-uniform U_log[10, 1000]
+      d: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  fourier_law-easy-v2:
+    raw: k*A*delta_T**2/d
+    prepared: v1*v2*v3**2/v4
+    n_variables: 4
+    subset: easy
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: A
+        sample_range:
+        - 0.0001
+        - 0.01
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[0.1, 10]
+      A: log-uniform U_log[0.0001, 0.01]
+      delta_T: log-uniform U_log[10, 1000]
+      d: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  fourier_law-medium-v0:
+    raw: k*A**0.5*delta_T/d**2
+    prepared: v1*v2**0.5*v3/v4**2
+    n_variables: 4
+    subset: medium
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: A
+        sample_range:
+        - 0.0001
+        - 0.01
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[0.1, 10]
+      A: log-uniform U_log[0.0001, 0.01]
+      delta_T: log-uniform U_log[10, 1000]
+      d: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  fourier_law-medium-v1:
+    raw: k*A**0.5*delta_T**2.7/d
+    prepared: v1*v2**0.5*v3**2.7/v4
+    n_variables: 4
+    subset: medium
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: A
+        sample_range:
+        - 0.0001
+        - 0.01
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[0.1, 10]
+      A: log-uniform U_log[0.0001, 0.01]
+      delta_T: log-uniform U_log[10, 1000]
+      d: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  fourier_law-medium-v2:
+    raw: k*delta_T**2/(d*A**3.4)
+    prepared: v1*v3**2/(v2**3.4*v4)
+    n_variables: 4
+    subset: medium
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: A
+        sample_range:
+        - 0.0001
+        - 0.01
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[0.1, 10]
+      A: log-uniform U_log[0.0001, 0.01]
+      delta_T: log-uniform U_log[10, 1000]
+      d: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  fourier_law-hard-v0:
+    raw: k*A**0.5*delta_T**1.3/d**2
+    prepared: v1*v2**0.5*v3**1.3/v4**2
+    n_variables: 4
+    subset: hard
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: A
+        sample_range:
+        - 0.0001
+        - 0.01
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[0.1, 10]
+      A: log-uniform U_log[0.0001, 0.01]
+      delta_T: log-uniform U_log[10, 1000]
+      d: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  fourier_law-hard-v1:
+    raw: k*A**0.5*delta_T**2.7/d**(3/7)
+    prepared: v1*v2**0.5*v3**2.7/v4**(3/7)
+    n_variables: 4
+    subset: hard
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: A
+        sample_range:
+        - 0.0001
+        - 0.01
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[0.1, 10]
+      A: log-uniform U_log[0.0001, 0.01]
+      delta_T: log-uniform U_log[10, 1000]
+      d: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  fourier_law-hard-v2:
+    raw: k*delta_T**2/(sqrt(d)*A**3.4)
+    prepared: v1*v3**2/(v2**3.4*sqrt(v4))
+    n_variables: 4
+    subset: hard
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: A
+        sample_range:
+        - 0.0001
+        - 0.01
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[0.1, 10]
+      A: log-uniform U_log[0.0001, 0.01]
+      delta_T: log-uniform U_log[10, 1000]
+      d: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  snell_law-easy-v0:
+    raw: acos(n1*sin(theta1)/n2)
+    prepared: acos(v1*sin(v3)/v2)
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: n1
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: n2
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n1: uniform U[1, 1.5]
+      n2: uniform U[1, 1.5]
+      theta1: uniform U[0, pi/2]
+    meta:
+      finite_fraction: 0.8534
+  snell_law-easy-v1:
+    raw: asin(n2*sin(theta1)/n1)
+    prepared: asin(v2*sin(v3)/v1)
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: n1
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: n2
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n1: uniform U[1, 1.5]
+      n2: uniform U[1, 1.5]
+      theta1: uniform U[0, pi/2]
+    meta:
+      finite_fraction: 0.849
+  snell_law-easy-v2:
+    raw: atan(n1*sin(theta1)/n2)
+    prepared: atan(v1*sin(v3)/v2)
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: n1
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: n2
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n1: uniform U[1, 1.5]
+      n2: uniform U[1, 1.5]
+      theta1: uniform U[0, pi/2]
+    meta:
+      finite_fraction: 1.0
+  snell_law-medium-v0:
+    raw: acos(n1*cos(theta1)/n2)
+    prepared: acos(v1*cos(v3)/v2)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: n1
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: n2
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n1: uniform U[1, 1.5]
+      n2: uniform U[1, 1.5]
+      theta1: uniform U[0, pi/2]
+    meta:
+      finite_fraction: 0.8508
+  snell_law-medium-v1:
+    raw: acos(n2*sin(theta1)/n1)
+    prepared: acos(v2*sin(v3)/v1)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: n1
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: n2
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n1: uniform U[1, 1.5]
+      n2: uniform U[1, 1.5]
+      theta1: uniform U[0, pi/2]
+    meta:
+      finite_fraction: 0.849
+  snell_law-medium-v2:
+    raw: atan(n1*tan(theta1)/n2)
+    prepared: atan(v1*tan(v3)/v2)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: n1
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: n2
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n1: uniform U[1, 1.5]
+      n2: uniform U[1, 1.5]
+      theta1: uniform U[0, pi/2]
+    meta:
+      finite_fraction: 1.0
+  snell_law-hard-v0:
+    raw: acos(n1**2*cos(theta1)/n2)
+    prepared: acos(v1**2*cos(v3)/v2)
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: n1
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: n2
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n1: uniform U[1, 1.5]
+      n2: uniform U[1, 1.5]
+      theta1: uniform U[0, pi/2]
+    meta:
+      finite_fraction: 0.6435
+  snell_law-hard-v1:
+    raw: acos(n2*sin(theta1)/n1**2.5)
+    prepared: acos(v2*sin(v3)/v1**2.5)
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: n1
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: n2
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n1: uniform U[1, 1.5]
+      n2: uniform U[1, 1.5]
+      theta1: uniform U[0, pi/2]
+    meta:
+      finite_fraction: 0.945
+  snell_law-hard-v2:
+    raw: atan((n1/n2)**2*tan(theta1))
+    prepared: atan(v1**2*tan(v3)/v2**2)
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: n1
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: n2
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n1: uniform U[1, 1.5]
+      n2: uniform U[1, 1.5]
+      theta1: uniform U[0, pi/2]
+    meta:
+      finite_fraction: 1.0
+  radioactive_decay-easy-v0:
+    raw: N0*exp(-lambda_constant*t**1.5)
+    prepared: v1*exp(-v2*v3**1.5)
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: N0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: lambda_constant
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: t
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      N0: log-uniform U_log[1, 100]
+      lambda_constant: log-uniform U_log[0.001, 0.1]
+      t: log-uniform U_log[0.01, 10]
+    meta:
+      finite_fraction: 1.0
+  radioactive_decay-easy-v1:
+    raw: N0*exp(-lambda_constant**1.5*t)
+    prepared: v1*exp(-v2**1.5*v3)
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: N0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: lambda_constant
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: t
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      N0: log-uniform U_log[1, 100]
+      lambda_constant: log-uniform U_log[0.001, 0.1]
+      t: log-uniform U_log[0.01, 10]
+    meta:
+      finite_fraction: 1.0
+  radioactive_decay-easy-v2:
+    raw: N0*exp(-(lambda_constant*t)**1.5)
+    prepared: v1*exp(-(v2*v3)**1.5)
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: N0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: lambda_constant
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: t
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      N0: log-uniform U_log[1, 100]
+      lambda_constant: log-uniform U_log[0.001, 0.1]
+      t: log-uniform U_log[0.01, 10]
+    meta:
+      finite_fraction: 1.0
+  radioactive_decay-medium-v0:
+    raw: N0**1.2*exp(-lambda_constant*t**1.5)
+    prepared: v1**1.2*exp(-v2*v3**1.5)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: N0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: lambda_constant
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: t
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      N0: log-uniform U_log[1, 100]
+      lambda_constant: log-uniform U_log[0.001, 0.1]
+      t: log-uniform U_log[0.01, 10]
+    meta:
+      finite_fraction: 1.0
+  radioactive_decay-medium-v1:
+    raw: N0**1.4*exp(-lambda_constant**1.5*t)
+    prepared: v1**1.4*exp(-v2**1.5*v3)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: N0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: lambda_constant
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: t
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      N0: log-uniform U_log[1, 100]
+      lambda_constant: log-uniform U_log[0.001, 0.1]
+      t: log-uniform U_log[0.01, 10]
+    meta:
+      finite_fraction: 1.0
+  radioactive_decay-medium-v2:
+    raw: N0**1.8*exp(-(lambda_constant*t)**1.5)
+    prepared: v1**1.8*exp(-(v2*v3)**1.5)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: N0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: lambda_constant
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: t
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      N0: log-uniform U_log[1, 100]
+      lambda_constant: log-uniform U_log[0.001, 0.1]
+      t: log-uniform U_log[0.01, 10]
+    meta:
+      finite_fraction: 1.0
+  radioactive_decay-hard-v0:
+    raw: N0**1.2*exp(-lambda_constant**E*t**1.5)
+    prepared: v1**1.2*exp(-v2**2.718281828459045*v3**1.5)
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: N0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: lambda_constant
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: t
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      N0: log-uniform U_log[1, 100]
+      lambda_constant: log-uniform U_log[0.001, 0.1]
+      t: log-uniform U_log[0.01, 10]
+    meta:
+      finite_fraction: 1.0
+  radioactive_decay-hard-v1:
+    raw: N0**1.4*exp(-lambda_constant**1.5*t**E)
+    prepared: v1**1.4*exp(-v2**1.5*v3**2.718281828459045)
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: N0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: lambda_constant
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: t
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      N0: log-uniform U_log[1, 100]
+      lambda_constant: log-uniform U_log[0.001, 0.1]
+      t: log-uniform U_log[0.01, 10]
+    meta:
+      finite_fraction: 1.0
+  radioactive_decay-hard-v2:
+    raw: N0**1.8*exp(-(lambda_constant*t)**(E + 1.5))
+    prepared: v1**1.8*exp(-(v2*v3)**(1.5 + 2.718281828459045))
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: N0
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: lambda_constant
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: t
+        sample_range:
+        - 0.01
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      N0: log-uniform U_log[1, 100]
+      lambda_constant: log-uniform U_log[0.001, 0.1]
+      t: log-uniform U_log[0.01, 10]
+    meta:
+      finite_fraction: 1.0
+  underdamped_harmonic-easy-v0:
+    raw: sqrt(k/m - b/(2*m))
+    prepared: sqrt(v1/v2 - v3/(2*v2))
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: b
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[100, 10000]
+      m: log-uniform U_log[0.1, 10]
+      b: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  underdamped_harmonic-easy-v1:
+    raw: (k/m - (b/(2*m))**2)**2
+    prepared: (v1/v2 - v3**2/(4*v2**2))**2
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: b
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[100, 10000]
+      m: log-uniform U_log[0.1, 10]
+      b: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  underdamped_harmonic-easy-v2:
+    raw: k/m - (b/(2*m))**2
+    prepared: v1/v2 - v3**2/(4*v2**2)
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: b
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[100, 10000]
+      m: log-uniform U_log[0.1, 10]
+      b: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  underdamped_harmonic-medium-v0:
+    raw: sqrt(k/m - b/(2*m**2))
+    prepared: sqrt(v1/v2 - v3/(2*v2**2))
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: b
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[100, 10000]
+      m: log-uniform U_log[0.1, 10]
+      b: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  underdamped_harmonic-medium-v1:
+    raw: (k/m**2 - (b/(2*m))**2)**2
+    prepared: (v1/v2**2 - v3**2/(4*v2**2))**2
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: b
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[100, 10000]
+      m: log-uniform U_log[0.1, 10]
+      b: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  underdamped_harmonic-medium-v2:
+    raw: k/m**1.3 - (b/(2*m))**2
+    prepared: v1/v2**1.3 - v3**2/(4*v2**2)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: b
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[100, 10000]
+      m: log-uniform U_log[0.1, 10]
+      b: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  underdamped_harmonic-hard-v0:
+    raw: (k/m - b/(2*m**2))**1.5
+    prepared: (v1/v2 - v3/(2*v2**2))**1.5
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: b
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[100, 10000]
+      m: log-uniform U_log[0.1, 10]
+      b: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  underdamped_harmonic-hard-v1:
+    raw: (k*m**2 - (b/(2*m))**2)**2
+    prepared: (v1*v2**2 - v3**2/(4*v2**2))**2
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: b
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[100, 10000]
+      m: log-uniform U_log[0.1, 10]
+      b: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  underdamped_harmonic-hard-v2:
+    raw: k/m**1.3 - (b/(2*m))**0.7
+    prepared: v1/v2**1.3 - 0.615572206672458*(v3/v2)**0.7
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: k
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: b
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k: log-uniform U_log[100, 10000]
+      m: log-uniform U_log[0.1, 10]
+      b: log-uniform U_log[0.01, 1]
+    meta:
+      finite_fraction: 1.0
+  malus_law-easy-v0:
+    raw: I_0*(sin(theta) + cos(theta))**2
+    prepared: v1*(sin(v2) + cos(v2))**2
+    n_variables: 2
+    subset: easy
+    vars:
+      v1:
+        name: I_0
+        sample_range:
+        - 100.0
+        - 2000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0e-06
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      I_0: log-uniform U_log[100, 2000]
+      theta: uniform U[1e-06, pi/2]
+    meta:
+      finite_fraction: 1.0
+  malus_law-easy-v1:
+    raw: I_0*(sin(theta)/cos(theta))**2
+    prepared: v1*sin(v2)**2/cos(v2)**2
+    n_variables: 2
+    subset: easy
+    vars:
+      v1:
+        name: I_0
+        sample_range:
+        - 100.0
+        - 2000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0e-06
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      I_0: log-uniform U_log[100, 2000]
+      theta: uniform U[1e-06, pi/2]
+    meta:
+      finite_fraction: 1.0
+  malus_law-easy-v2:
+    raw: I_0*(cos(theta)/sin(theta))**2
+    prepared: v1*cos(v2)**2/sin(v2)**2
+    n_variables: 2
+    subset: easy
+    vars:
+      v1:
+        name: I_0
+        sample_range:
+        - 100.0
+        - 2000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0e-06
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      I_0: log-uniform U_log[100, 2000]
+      theta: uniform U[1e-06, pi/2]
+    meta:
+      finite_fraction: 1.0
+  malus_law-medium-v0:
+    raw: I_0*(2*sin(theta) + cos(theta))**2
+    prepared: v1*(2*sin(v2) + cos(v2))**2
+    n_variables: 2
+    subset: medium
+    vars:
+      v1:
+        name: I_0
+        sample_range:
+        - 100.0
+        - 2000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0e-06
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      I_0: log-uniform U_log[100, 2000]
+      theta: uniform U[1e-06, pi/2]
+    meta:
+      finite_fraction: 1.0
+  malus_law-medium-v1:
+    raw: I_0*sin(theta)**2/cos(theta)**3
+    prepared: v1*sin(v2)**2/cos(v2)**3
+    n_variables: 2
+    subset: medium
+    vars:
+      v1:
+        name: I_0
+        sample_range:
+        - 100.0
+        - 2000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0e-06
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      I_0: log-uniform U_log[100, 2000]
+      theta: uniform U[1e-06, pi/2]
+    meta:
+      finite_fraction: 1.0
+  malus_law-medium-v2:
+    raw: I_0*(cos(theta)/sin(theta))**E
+    prepared: v1*(cos(v2)/sin(v2))**2.718281828459045
+    n_variables: 2
+    subset: medium
+    vars:
+      v1:
+        name: I_0
+        sample_range:
+        - 100.0
+        - 2000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0e-06
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      I_0: log-uniform U_log[100, 2000]
+      theta: uniform U[1e-06, pi/2]
+    meta:
+      finite_fraction: 1.0
+  malus_law-hard-v0:
+    raw: I_0*(2*sin(theta) + 1.5*cos(theta))**2
+    prepared: v1*(2*sin(v2) + 1.5*cos(v2))**2
+    n_variables: 2
+    subset: hard
+    vars:
+      v1:
+        name: I_0
+        sample_range:
+        - 100.0
+        - 2000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0e-06
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      I_0: log-uniform U_log[100, 2000]
+      theta: uniform U[1e-06, pi/2]
+    meta:
+      finite_fraction: 1.0
+  malus_law-hard-v1:
+    raw: I_0*(sin(theta)**2/cos(theta)**3)**E
+    prepared: v1*(sin(v2)**2/cos(v2)**3)**2.718281828459045
+    n_variables: 2
+    subset: hard
+    vars:
+      v1:
+        name: I_0
+        sample_range:
+        - 100.0
+        - 2000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0e-06
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      I_0: log-uniform U_log[100, 2000]
+      theta: uniform U[1e-06, pi/2]
+    meta:
+      finite_fraction: 1.0
+  malus_law-hard-v2:
+    raw: I_0*(sin(theta)**2/cos(theta))**E
+    prepared: v1*(sin(v2)**2/cos(v2))**2.718281828459045
+    n_variables: 2
+    subset: hard
+    vars:
+      v1:
+        name: I_0
+        sample_range:
+        - 100.0
+        - 2000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0e-06
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      I_0: log-uniform U_log[100, 2000]
+      theta: uniform U[1e-06, pi/2]
+    meta:
+      finite_fraction: 1.0
+  sound_speed-easy-v0:
+    raw: sqrt(Symbol('gamma')*3.516e2*T**2/M)
+    prepared: 18.7509999733348*sqrt(v1*v2**2/v3)
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: gamma
+        sample_range:
+        - 1.3
+        - 1.7
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: M
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      gamma: uniform U[1.3, 1.7]
+      T: log-uniform U_log[10, 1000]
+      M: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  sound_speed-easy-v1:
+    raw: Symbol('gamma')*3.516e2*T/M
+    prepared: 351.6*v1*v2/v3
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: gamma
+        sample_range:
+        - 1.3
+        - 1.7
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: M
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      gamma: uniform U[1.3, 1.7]
+      T: log-uniform U_log[10, 1000]
+      M: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  sound_speed-easy-v2:
+    raw: sqrt(3.516e2*T/M)
+    prepared: 18.7509999733348*sqrt(v2/v3)
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: gamma
+        sample_range:
+        - 1.3
+        - 1.7
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: M
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      gamma: uniform U[1.3, 1.7]
+      T: log-uniform U_log[10, 1000]
+      M: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  sound_speed-medium-v0:
+    raw: sqrt(Symbol('gamma')*3.516e2*T**2/M**1.5)
+    prepared: 18.7509999733348*sqrt(v1*v2**2/v3**1.5)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: gamma
+        sample_range:
+        - 1.3
+        - 1.7
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: M
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      gamma: uniform U[1.3, 1.7]
+      T: log-uniform U_log[10, 1000]
+      M: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  sound_speed-medium-v1:
+    raw: Symbol('gamma')*3.516e2*T/M**(1/3)
+    prepared: 351.6*v1*v2/v3**(1/3)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: gamma
+        sample_range:
+        - 1.3
+        - 1.7
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: M
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      gamma: uniform U[1.3, 1.7]
+      T: log-uniform U_log[10, 1000]
+      M: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  sound_speed-medium-v2:
+    raw: sqrt(3.516e2*T*M**1.5)
+    prepared: 18.7509999733348*sqrt(v2*v3**1.5)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: gamma
+        sample_range:
+        - 1.3
+        - 1.7
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: M
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      gamma: uniform U[1.3, 1.7]
+      T: log-uniform U_log[10, 1000]
+      M: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  sound_speed-hard-v0:
+    raw: sqrt(exp(Symbol('gamma'))*3.516e2*T**2/M**1.5)
+    prepared: 18.7509999733348*sqrt(v2**2*exp(v1)/v3**1.5)
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: gamma
+        sample_range:
+        - 1.3
+        - 1.7
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: M
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      gamma: uniform U[1.3, 1.7]
+      T: log-uniform U_log[10, 1000]
+      M: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  sound_speed-hard-v1:
+    raw: log(Symbol('gamma'))*3.516e2*T/M**(1/3)
+    prepared: 351.6*v2*log(v1)/v3**(1/3)
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: gamma
+        sample_range:
+        - 1.3
+        - 1.7
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: M
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      gamma: uniform U[1.3, 1.7]
+      T: log-uniform U_log[10, 1000]
+      M: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  sound_speed-hard-v2:
+    raw: (3.516e2*T*M**1.5)**(-2.8)
+    prepared: 7.43127228058959e-8/(v2*v3**1.5)**2.8
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: gamma
+        sample_range:
+        - 1.3
+        - 1.7
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: M
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      gamma: uniform U[1.3, 1.7]
+      T: log-uniform U_log[10, 1000]
+      M: log-uniform U_log[0.001, 0.1]
+    meta:
+      finite_fraction: 1.0
+  hooke_law-easy-v0:
+    raw: 2*231.141*x**2
+    prepared: 462.282*v1**2
+    n_variables: 1
+    subset: easy
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: log-uniform U_log[0.001, 1]
+    meta:
+      finite_fraction: 1.0
+  hooke_law-easy-v1:
+    raw: 2*231.141*x**0.5
+    prepared: 462.282*v1**0.5
+    n_variables: 1
+    subset: easy
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: log-uniform U_log[0.001, 1]
+    meta:
+      finite_fraction: 1.0
+  hooke_law-easy-v2:
+    raw: 2*231.141*x**3.4
+    prepared: 462.282*v1**3.4
+    n_variables: 1
+    subset: easy
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: log-uniform U_log[0.001, 1]
+    meta:
+      finite_fraction: 1.0
+  hooke_law-medium-v0:
+    raw: 2*231.141*x**2 + 1241.9012*x
+    prepared: 462.282*v1**2 + 1241.9012*v1
+    n_variables: 1
+    subset: medium
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: log-uniform U_log[0.001, 1]
+    meta:
+      finite_fraction: 1.0
+  hooke_law-medium-v1:
+    raw: 2*231.141*x**0.5 + 1241.9012*x**3
+    prepared: 462.282*v1**0.5 + 1241.9012*v1**3
+    n_variables: 1
+    subset: medium
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: log-uniform U_log[0.001, 1]
+    meta:
+      finite_fraction: 1.0
+  hooke_law-medium-v2:
+    raw: 2*231.141*x**3.4 + 1241.9012*x**0.5
+    prepared: 1241.9012*v1**0.5 + 462.282*v1**3.4
+    n_variables: 1
+    subset: medium
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: log-uniform U_log[0.001, 1]
+    meta:
+      finite_fraction: 1.0
+  hooke_law-hard-v0:
+    raw: 2*231.141*x**2 + 1241.9012*x + 12.578*x**(-0.5)
+    prepared: 12.578/v1**0.5 + 462.282*v1**2 + 1241.9012*v1
+    n_variables: 1
+    subset: hard
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: log-uniform U_log[0.001, 1]
+    meta:
+      finite_fraction: 1.0
+  hooke_law-hard-v1:
+    raw: 2*231.141*x**0.5 + 1241.9012*x**3 + 12.578*x**(-0.3)
+    prepared: 12.578/v1**0.3 + 462.282*v1**0.5 + 1241.9012*v1**3
+    n_variables: 1
+    subset: hard
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: log-uniform U_log[0.001, 1]
+    meta:
+      finite_fraction: 1.0
+  hooke_law-hard-v2:
+    raw: 2*231.141*x**3.4 + 1241.9012*x**0.5 + 12.578*x**(-10/3)
+    prepared: 1241.9012*v1**0.5 + 462.282*v1**3.4 + 12.578/v1**(10/3)
+    n_variables: 1
+    subset: hard
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.001
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: log-uniform U_log[0.001, 1]
+    meta:
+      finite_fraction: 1.0
+  be_distribution-easy-v0:
+    raw: 1/(exp(1.0513e-14*omega/T) + 1)
+    prepared: 1/(exp(1.0513e-14*v1/v2) + 1)
+    n_variables: 2
+    subset: easy
+    vars:
+      v1:
+        name: omega
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      omega: log-uniform U_log[1e+08, 1e+10]
+      T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  be_distribution-easy-v1:
+    raw: 1/(exp(1.0513e-14*omega**0.5/T) - 1)
+    prepared: 1/(exp(1.0513e-14*v1**0.5/v2) - 1)
+    n_variables: 2
+    subset: easy
+    vars:
+      v1:
+        name: omega
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      omega: log-uniform U_log[1e+08, 1e+10]
+      T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  be_distribution-easy-v2:
+    raw: 1/(exp(1.0513e-14*omega/T**3) - 1)
+    prepared: 1/(exp(1.0513e-14*v1/v2**3) - 1)
+    n_variables: 2
+    subset: easy
+    vars:
+      v1:
+        name: omega
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      omega: log-uniform U_log[1e+08, 1e+10]
+      T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  be_distribution-medium-v0:
+    raw: 1/(exp(1.0513e-14*omega**1.5/T) + 1)
+    prepared: 1/(exp(1.0513e-14*v1**1.5/v2) + 1)
+    n_variables: 2
+    subset: medium
+    vars:
+      v1:
+        name: omega
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      omega: log-uniform U_log[1e+08, 1e+10]
+      T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  be_distribution-medium-v1:
+    raw: 1/(exp(1.0513e-14*omega**0.5*T) - 1)
+    prepared: 1/(exp(1.0513e-14*v1**0.5*v2) - 1)
+    n_variables: 2
+    subset: medium
+    vars:
+      v1:
+        name: omega
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      omega: log-uniform U_log[1e+08, 1e+10]
+      T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  be_distribution-medium-v2:
+    raw: 1/(exp(1.0513e-14*omega**1.5/T**3) - 1)
+    prepared: 1/(exp(1.0513e-14*v1**1.5/v2**3) - 1)
+    n_variables: 2
+    subset: medium
+    vars:
+      v1:
+        name: omega
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      omega: log-uniform U_log[1e+08, 1e+10]
+      T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  be_distribution-hard-v0:
+    raw: 1/(exp(1.0513e-14*omega**1.5/T**2) + 1)
+    prepared: 1/(exp(1.0513e-14*v1**1.5/v2**2) + 1)
+    n_variables: 2
+    subset: hard
+    vars:
+      v1:
+        name: omega
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      omega: log-uniform U_log[1e+08, 1e+10]
+      T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  be_distribution-hard-v1:
+    raw: 1/(exp(1.0513e-14*omega**0.5*T**2.3) - 1)
+    prepared: 1/(exp(1.0513e-14*v1**0.5*v2**2.3) - 1)
+    n_variables: 2
+    subset: hard
+    vars:
+      v1:
+        name: omega
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      omega: log-uniform U_log[1e+08, 1e+10]
+      T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  be_distribution-hard-v2:
+    raw: 1/(-log(1.0513e-14*omega**1.5/T**3) - 1)
+    prepared: 1/(-log(1.0513e-14*v1**1.5/v2**3) - 1)
+    n_variables: 2
+    subset: hard
+    vars:
+      v1:
+        name: omega
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      omega: log-uniform U_log[1e+08, 1e+10]
+      T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  heat_transfer-easy-v0:
+    raw: m*c*delta_T**2.5
+    prepared: v1*v2*v3**2.5
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: log-uniform U_log[0.001, 1000]
+      c: log-uniform U_log[100, 10000]
+      delta_T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  heat_transfer-easy-v1:
+    raw: m**2.5*c*delta_T
+    prepared: v1**2.5*v2*v3
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: log-uniform U_log[0.001, 1000]
+      c: log-uniform U_log[100, 10000]
+      delta_T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  heat_transfer-easy-v2:
+    raw: (m*delta_T)**2.5*c
+    prepared: v2*(v1*v3)**2.5
+    n_variables: 3
+    subset: easy
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: log-uniform U_log[0.001, 1000]
+      c: log-uniform U_log[100, 10000]
+      delta_T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  heat_transfer-medium-v0:
+    raw: c/(m*delta_T**2.5)
+    prepared: v2/(v1*v3**2.5)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: log-uniform U_log[0.001, 1000]
+      c: log-uniform U_log[100, 10000]
+      delta_T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  heat_transfer-medium-v1:
+    raw: c/(m**2.5*delta_T)
+    prepared: v2/(v1**2.5*v3)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: log-uniform U_log[0.001, 1000]
+      c: log-uniform U_log[100, 10000]
+      delta_T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  heat_transfer-medium-v2:
+    raw: c/(m**2.5*delta_T**2.5)
+    prepared: v2/(v1**2.5*v3**2.5)
+    n_variables: 3
+    subset: medium
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: log-uniform U_log[0.001, 1000]
+      c: log-uniform U_log[100, 10000]
+      delta_T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  heat_transfer-hard-v0:
+    raw: c/(m**(E + 1)*delta_T**2.5)
+    prepared: v1**(-2.718281828459045 - 1)*v2/v3**2.5
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: log-uniform U_log[0.001, 1000]
+      c: log-uniform U_log[100, 10000]
+      delta_T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  heat_transfer-hard-v1:
+    raw: c/(m**2.5*delta_T**(E + 1))
+    prepared: v2*v3**(-2.718281828459045 - 1)/v1**2.5
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: log-uniform U_log[0.001, 1000]
+      c: log-uniform U_log[100, 10000]
+      delta_T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0
+  heat_transfer-hard-v2:
+    raw: c/(m*delta_T)**(E + 1)
+    prepared: v2*(v1*v3)**(-2.718281828459045 - 1)
+    n_variables: 3
+    subset: hard
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 0.001
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 100.0
+        - 10000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: delta_T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: log-uniform U_log[0.001, 1000]
+      c: log-uniform U_log[100, 10000]
+      delta_T: log-uniform U_log[10, 1000]
+    meta:
+      finite_fraction: 1.0

@@ -1,0 +1,588 @@
+metadata:
+  name: gp-benchmarks-sr-table
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  description: GP benchmarks SR table (McDermott et al. 2012)
+  sources:
+  - https://doi.org/10.1145/2330163.2330273
+  - https://gpbenchmarks.org/wp-content/uploads/2019/08/paper1.pdf
+  - https://github.com/GMUEClab/ecj/blob/0ce5a2cd446b66c821ed4ae82662d60250da2666/ecj/src/main/java/ec/app/regression/Benchmarks.java
+  - http://www.korns.com/Accuracy%20in%20Symbolic%20Regression.pdf
+  - https://doi.org/10.1007/s10710-010-9121-2
+  - https://mural.maynoothuniversity.ie/id/eprint/12336/1/Galvan_Semantically_2011.pdf
+  - https://doi.org/10.1007/3-540-36599-0_7 (Keijzer 2003; read by sets/fresh-10.json)
+  - https://doi.org/10.1109/TEVC.2008.926486 (Vladislavleva et al. 2009; read by sets/fresh-13.json)
+  - 'local: symbolic-data/assets/catalogs/{koza,nguyen,pagie,korns,keijzer,vladislavleva,neat}.yaml (what srbf holds)'
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-31.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  Korns-13:
+    raw: 32 - 3*(tan(x)/tan(y))*(tan(z)/tan(v))
+    prepared: -3*tan(v1)*tan(v3)/(tan(v2)*tan(v4)) + 32
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: v
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: w
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-50, 50]
+      y: uniform U[-50, 50]
+      z: uniform U[-50, 50]
+      v: uniform U[-50, 50]
+      w: uniform U[-50, 50]
+    meta:
+      finite_fraction: 1.0
+  Korns-14:
+    raw: 22 - 4.2*(cos(x) - tan(y))*(tanh(z)/sin(v))
+    prepared: -4.2*(cos(v1) - tan(v2))*tanh(v3)/sin(v4) + 22
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: v
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: w
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-50, 50]
+      y: uniform U[-50, 50]
+      z: uniform U[-50, 50]
+      v: uniform U[-50, 50]
+      w: uniform U[-50, 50]
+    meta:
+      finite_fraction: 1.0
+  Korns-15:
+    raw: 12 - 6*(tan(x)/exp(y))*(log(z) - tan(v))
+    prepared: -6*(log(v3) - tan(v4))*exp(-v2)*tan(v1) + 12
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: v
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: w
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-50, 50]
+      y: uniform U[-50, 50]
+      z: uniform U[-50, 50]
+      v: uniform U[-50, 50]
+      w: uniform U[-50, 50]
+    meta:
+      finite_fraction: 0.494
+  Korns-7:
+    raw: 213.80940889*(1 - exp(-0.54723748542*x))
+    prepared: 213.80940889 - 213.80940889*exp(-0.54723748542*v1)
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: v
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: w
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-50, 50]
+      y: uniform U[-50, 50]
+      z: uniform U[-50, 50]
+      v: uniform U[-50, 50]
+      w: uniform U[-50, 50]
+    meta:
+      finite_fraction: 1.0
+  Korns-5:
+    raw: 3 + 2.13*log(w)
+    prepared: 2.13*log(v5) + 3
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: v
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: w
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-50, 50]
+      y: uniform U[-50, 50]
+      z: uniform U[-50, 50]
+      v: uniform U[-50, 50]
+      w: uniform U[-50, 50]
+    meta:
+      finite_fraction: 0.5034
+  Korns-6:
+    raw: 1.3 + 0.13*sqrt(x)
+    prepared: 0.13*sqrt(v1) + 1.3
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: v
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: w
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-50, 50]
+      y: uniform U[-50, 50]
+      z: uniform U[-50, 50]
+      v: uniform U[-50, 50]
+      w: uniform U[-50, 50]
+    meta:
+      finite_fraction: 0.505
+  Korns-8:
+    raw: 6.87 + 11*sqrt(7.23*x*v*w)
+    prepared: 29.5775252514473*sqrt(v1*v4*v5) + 6.87
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: v
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: w
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-50, 50]
+      y: uniform U[-50, 50]
+      z: uniform U[-50, 50]
+      v: uniform U[-50, 50]
+      w: uniform U[-50, 50]
+    meta:
+      finite_fraction: 0.5043
+  Korns-9:
+    raw: (sqrt(x)/log(y))*(exp(z)/v**2)
+    prepared: sqrt(v1)*exp(v3)/(v4**2*log(v2))
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: v
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: w
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-50, 50]
+      y: uniform U[-50, 50]
+      z: uniform U[-50, 50]
+      v: uniform U[-50, 50]
+      w: uniform U[-50, 50]
+    meta:
+      finite_fraction: 0.2522
+  Nguyen-9:
+    raw: sin(x) + sin(y**2)
+    prepared: sin(v1) + sin(v2**2)
+    n_variables: 2
+    subset: Nguyen
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1, 1]
+      y: uniform U[-1, 1]
+    meta:
+      finite_fraction: 1.0
+  Keijzer-5:
+    raw: 30*x*z/((x - 10)*y**2)
+    prepared: 30*v1*v3/(v2**2*(v1 - 10))
+    n_variables: 3
+    subset: Keijzer
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1, 1]
+      y: uniform U[1, 2]
+      z: uniform U[-1, 1]
+    meta:
+      finite_fraction: 1.0
+  Vladislavleva-7:
+    raw: (x - 3)*(y - 3) + 2*sin((x - 4)*(y - 4))
+    prepared: (v1 - 3)*(v2 - 3) + 2*sin((v1 - 4)*(v2 - 4))
+    n_variables: 2
+    subset: Vladislavleva
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.05
+        - 6.05
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 0.05
+        - 6.05
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[0.05, 6.05]
+      y: uniform U[0.05, 6.05]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.25
+              high: 6.35
+    test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p. 10 Table I ''Sampling strategy for training
+      and test data'' (source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png and vladislavleva2009_nonlinearity_preprint.pdf,
+      opened). Notation: ''x = Rand(a, b) means that the x variable is sampled randomly from an interval [a, b]. Notation
+      x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
+    meta:
+      finite_fraction: 1.0

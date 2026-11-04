@@ -1,0 +1,268 @@
+metadata:
+  name: physo-class-sr-benchmark
+  version: 1
+  tags: {"origin": "science formula", "tags": []}
+  description: PhySO Class SR benchmark
+  sources:
+  - https://arxiv.org/abs/2312.01816
+  - https://arxiv.org/html/2312.01816v2
+  - https://doi.org/10.3847/2041-8213/ad5970
+  - https://github.com/WassimTenachi/PhySO/blob/v1.1.0/physo/benchmark/ClassDataset/ClassEquations.csv
+  - https://github.com/WassimTenachi/PhySO/blob/v1.1.0/physo/benchmark/ClassDataset/ClassProblem.py
+  - https://github.com/WassimTenachi/PhySO/blob/v1.1.0/benchmarking/ClassBenchmark/classbench_config.py
+  - https://github.com/WassimTenachi/PhySO/blob/v1.1.0/benchmarking/ClassBenchmark/classbench_run.py
+  - https://github.com/WassimTenachi/PhySO/blob/v1.1.0/benchmarking/ClassBenchmark/results/results_summary.csv
+  - https://doi.org/10.5281/zenodo.11663147
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-56.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  harmonic-oscillator:
+    raw: A*cos(omega*t+Phi)
+    prepared: 0.6307235436992683*cos(1.4522688010225138*v1 + 1.102213949606074)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: t
+        sample_range:
+        - 0.0
+        - 9.42
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      t: uniform U[0,9.42]
+    constants_drawn:
+      A:
+        distribution: uniform U[0.6,1.2], one draw per realization (per dataset), shared by all points of that realization
+        seed: 11443452549794680740
+        value: 0.6307235436992683
+      Phi:
+        distribution: uniform U[0.95,1.15], one draw per realization (per dataset), shared by all points of that realization
+        seed: 3285039411733021427
+        value: 1.102213949606074
+      omega:
+        distribution: uniform U[0.2,1.5], one draw per realization (per dataset), shared by all points of that realization
+        seed: 7052497585242900262
+        value: 1.4522688010225138
+    meta:
+      finite_fraction: 1.0
+  radioactive-decay:
+    raw: n0*exp(-t/T)
+    prepared: 0.49254870192903333*exp(-0.7748183910216704*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: t
+        sample_range:
+        - 0.5
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      t: uniform U[0.5,6]
+    constants_drawn:
+      T:
+        distribution: uniform U[0.9,1.4], one draw per realization (per dataset), shared by all points of that realization
+        seed: 1410096926895940638
+        value: 1.2906250181818821
+      n0:
+        distribution: uniform U[0.4,2], one draw per realization (per dataset), shared by all points of that realization
+        seed: 2211663404099936088
+        value: 0.49254870192903333
+    meta:
+      finite_fraction: 1.0
+  free-fall:
+    raw: -0.5*9.81*t**2+v0*t+z0
+    prepared: -4.905*v1**2 + 5.9003468064243085*v1 - 0.31209009699183454
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: t
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      t: uniform U[0,1]
+    constants_drawn:
+      v0:
+        distribution: uniform U[-2,8], one draw per realization (per dataset), shared by all points of that realization
+        seed: 11622028546073489150
+        value: 5.9003468064243085
+      z0:
+        distribution: uniform U[-3,3], one draw per realization (per dataset), shared by all points of that realization
+        seed: 1423840327507204981
+        value: -0.31209009699183454
+    meta:
+      finite_fraction: 1.0
+  damped-harmonic-oscillator-a:
+    raw: exp(-k*t)*cos(1.389*t+Phi)
+    prepared: exp(-0.5401911000932795*v1)*cos(1.389*v1 + 0.0009169132637459887)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: t
+        sample_range:
+        - 0.0
+        - 9.42
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      t: uniform U[0,9.42]
+    constants_drawn:
+      Phi:
+        distribution: uniform U[-0.2,0.3], one draw per realization (per dataset), shared by all points of that realization
+        seed: 4607303593518035499
+        value: 0.0009169132637459887
+      k:
+        distribution: uniform U[0.2,1], one draw per realization (per dataset), shared by all points of that realization
+        seed: 11015431310319557416
+        value: 0.5401911000932795
+    meta:
+      finite_fraction: 1.0
+  damped-harmonic-oscillator-b:
+    raw: exp(-0.345*t)*cos(omega*t+Phi)
+    prepared: exp(-0.345*v1)*cos(1.2615497638551996*v1 - 0.11270430564176293)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: t
+        sample_range:
+        - 0.0
+        - 9.42
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      t: uniform U[0,9.42]
+    constants_drawn:
+      Phi:
+        distribution: uniform U[-0.2,0.3], one draw per realization (per dataset), shared by all points of that realization
+        seed: 9916467744935106572
+        value: -0.11270430564176293
+      omega:
+        distribution: uniform U[0.6,1.4], one draw per realization (per dataset), shared by all points of that realization
+        seed: 12245916550014511764
+        value: 1.2615497638551996
+    meta:
+      finite_fraction: 1.0
+  black-body-photon-count:
+    raw: 1/(exp(5.90*nu/T)-1)
+    prepared: 1/(exp(1.441993548245382*v1) - 1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: nu
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      nu: uniform U[1,5]
+    constants_drawn:
+      T:
+        distribution: uniform U[1,5], one draw per realization (per dataset), shared by all points of that realization
+        seed: 13934837857117068918
+        value: 4.091557834762243
+    meta:
+      finite_fraction: 1.0
+  ideal-gas-law:
+    raw: n*8.314*T/V
+    prepared: 14.022087345445505*v1/v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: T
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: V
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      T: uniform U[1,5]
+      V: uniform U[1,5]
+    constants_drawn:
+      n:
+        distribution: uniform U[1,5], one draw per realization (per dataset), shared by all points of that realization
+        seed: 10033326089214880626
+        value: 1.6865633083287834
+    meta:
+      finite_fraction: 1.0
+  terminal-velocity:
+    raw: sqrt(2*m*9.807/(rho*A*0.470))
+    prepared: 3.2445784315470982*sqrt(v1/v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: A
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: uniform U[1,10]
+      A: uniform U[1,5]
+    constants_drawn:
+      rho:
+        distribution: uniform U[1,6], one draw per realization (per dataset), shared by all points of that realization
+        seed: 5297342132373524273
+        value: 3.9641653332483116
+    meta:
+      finite_fraction: 1.0

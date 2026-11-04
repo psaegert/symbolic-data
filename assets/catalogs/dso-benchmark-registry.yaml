@@ -1,0 +1,242 @@
+metadata:
+  name: dso-benchmark-registry
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  description: DSO benchmark registry (benchmarks.csv)
+  sources:
+  - https://github.com/dso-org/deep-symbolic-optimization/blob/master/dso/dso/task/regression/benchmarks.csv
+  - https://raw.githubusercontent.com/dso-org/deep-symbolic-optimization/2069d4e/dso/dso/task/regression/benchmarks.csv
+  - https://raw.githubusercontent.com/dso-org/deep-symbolic-optimization/a49c228/dso/dso/task/regression/benchmarks.csv
+  - https://raw.githubusercontent.com/dso-org/deep-symbolic-optimization/57778611/dsr/dsr/task/regression/benchmarks.csv
+  - https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4e/dso/dso/functions.py
+  - https://arxiv.org/abs/2111.00053
+  - https://arxiv.org/e-print/2111.00053
+  - https://arxiv.org/abs/1912.04871
+  - https://doi.org/10.1016/j.ins.2015.11.010
+  - https://www.cs.nuim.ie/~egalvan/papers/neat_Galvan_2016.pdf
+  - https://doi.org/10.1007/3-540-36599-0_7
+  - https://doi.org/10.1007/978-1-4614-1770-5_8
+  - http://www.korns.com/Accuracy%20in%20Symbolic%20Regression.pdf
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-30.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  Nguyen-12a:
+    raw: x**4 - x**3 + y**2/2 - y
+    prepared: v1**4 - v1**3 + v2**2/2 - v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 0.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[0,10]
+      y: uniform U[0,10]
+    meta:
+      finite_fraction: 1.0
+  Korns-13:
+    raw: 32.0 - (3.0*((tan(x0)/tan(x1))*(tan(x2)/tan(x3))))
+    prepared: -3.0*tan(v1)*tan(v3)/(tan(v2)*tan(v4)) + 32.0
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x1: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x2: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x3: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x4: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+    meta:
+      finite_fraction: 1.0
+  Korns-14:
+    raw: 22.0 - (4.2*((cos(x0)-tan(x1))*(tanh(x2)/sin(x3))))
+    prepared: -4.2*(cos(v1) - tan(v2))*tanh(v3)/sin(v4) + 22.0
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x1: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x2: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x3: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x4: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+    meta:
+      finite_fraction: 1.0
+  Korns-15:
+    raw: 12.0 - (6.0*((tan(x0)/exp(x1))*(log(x2)-tan(x3))))
+    prepared: -6.0*(log(v3) - tan(v4))*exp(-v2)*tan(v1) + 12.0
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x1: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x2: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x3: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+      x4: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
+        +50''; same rule for the testing matrix and for all five features)'
+    meta:
+      finite_fraction: 0.494

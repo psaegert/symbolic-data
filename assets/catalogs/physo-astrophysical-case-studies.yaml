@@ -1,0 +1,322 @@
+metadata:
+  name: physo-astrophysical-case-studies
+  version: 1
+  tags: {"origin": "science formula", "tags": []}
+  description: PhySO astrophysical case studies
+  sources:
+  - https://arxiv.org/abs/2303.03192
+  - https://arxiv.org/pdf/2303.03192v2
+  - https://doi.org/10.3847/1538-4357/ad014c
+  - https://iopscience.iop.org/article/10.3847/1538-4357/ad014c/pdf
+  - https://github.com/WassimTenachi/PhySO/tree/bfbfa88d5def09d3d0cd47f3e2252b5a25836721/demos/sr/_deprecated-interface/demos_natural_const_discovery
+  - https://github.com/WassimTenachi/PhySO/tree/f26877143e91f36ca0cafa45032015166a6c274d/Experiments-Wassim
+  - https://github.com/dscolnic/Pantheon/tree/7eb29dc87ba223b4ec8457cd3cccba1216c36fb7
+  - https://arxiv.org/abs/1710.00845
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-57.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  relativistic-energy:
+    raw: m*10**2/sqrt(1 - v**2/10**2)
+    prepared: 100*v1/sqrt(1 - v2**2/100)
+    n_variables: 2
+    subset: astrophysical-case-studies
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: v
+        sample_range:
+        - -9.0
+        - 9.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: uniform U[-10.0,10.0]
+      v: uniform U[-9.0,9.0]
+    meta:
+      finite_fraction: 1.0
+  isochrone-action:
+    raw: 0.467/sqrt(-2*E0) - (1/2)*(L + (1/2)*sqrt(L**2 - 4*0.467*1.234))
+    prepared: -v1/2 - sqrt(v1**2 - 1*4*0.467*1.234)/4 + 0.2335*sqrt(2)/sqrt(-v2)
+    n_variables: 2
+    subset: astrophysical-case-studies
+    vars:
+      v1:
+        name: L
+        sample_range:
+        - 2.3
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: E0
+        sample_range:
+        - -6.0
+        - -4.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      L: uniform U[2.3,3.0]
+      E0: uniform U[-6.0,-4.0]
+    meta:
+      finite_fraction: 1.0
+  damped-harmonic-oscillator:
+    raw: exp(-0.101*t)*cos(0.784*t + 0.997)
+    prepared: exp(-0.101*v1)*cos(0.784*v1 + 0.997)
+    n_variables: 1
+    subset: astrophysical-case-studies
+    vars:
+      v1:
+        name: t
+        sample_range:
+        - 4.71238898038469
+        - 21.991148575128552
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      t: uniform U[1.5*pi, 7*pi]
+    meta:
+      finite_fraction: 1.0
+  classical-gravity:
+    raw: 1.184*m1*m2/r**2
+    prepared: 1.184*v1*v2/v3**2
+    n_variables: 3
+    subset: astrophysical-case-studies
+    vars:
+      v1:
+        name: m1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: m2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: r
+        sample_range:
+        - 1.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m1: uniform U[0.0,1.0]
+      m2: uniform U[0.0,1.0]
+      r: uniform U[1.0,4.0]
+    meta:
+      finite_fraction: 1.0
+  appb-ideal-gas-law:
+    raw: n*8.314*T/V
+    prepared: 8.314*v1*v2/v3
+    n_variables: 3
+    subset: constants-of-nature
+    vars:
+      v1:
+        name: n
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: V
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n: uniform U[1.0,5.0]
+      T: uniform U[1.0,5.0]
+      V: uniform U[1.0,5.0]
+    meta:
+      finite_fraction: 1.0
+  appb-terminal-velocity:
+    raw: sqrt(2*m*9.807/(rho*A*0.470))
+    prepared: 6.460024372525*sqrt(v1/(v2*v3))
+    n_variables: 3
+    subset: constants-of-nature
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: rho
+        sample_range:
+        - 1.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: A
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: uniform U[1.0,10.0]
+      rho: uniform U[1.0,6.0]
+      A: uniform U[1.0,5.0]
+    meta:
+      finite_fraction: 1.0
+  appb-classical-gravity:
+    raw: 6.674*m1*m2/r**2
+    prepared: 6.674*v1*v2/v3**2
+    n_variables: 3
+    subset: constants-of-nature
+    vars:
+      v1:
+        name: m1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: m2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: r
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m1: uniform U[1.0,5.0]
+      m2: uniform U[1.0,5.0]
+      r: uniform U[1.0,5.0]
+    meta:
+      finite_fraction: 1.0
+  appb-black-body-photon-count:
+    raw: 1/(exp(6.626*nu/(1.123*T)) - 1)
+    prepared: 1/(exp(5.90026714158504*v1/v2) - 1)
+    n_variables: 2
+    subset: constants-of-nature
+    vars:
+      v1:
+        name: nu
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      nu: uniform U[1.0,5.0]
+      T: uniform U[1.0,5.0]
+    meta:
+      finite_fraction: 1.0
+  appb-wave-interference:
+    raw: E_1 + E_2 + 2*sqrt(E_1*E_2)*cos(dPhi)
+    prepared: v1 + v2 + 2*sqrt(v1*v2)*cos(v3)
+    n_variables: 3
+    subset: constants-of-nature
+    vars:
+      v1:
+        name: E_1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: E_2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: dPhi
+        sample_range:
+        - -5.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      E_1: uniform U[1.0,5.0]
+      E_2: uniform U[1.0,5.0]
+      dPhi: uniform U[-5.0,5.0]
+    meta:
+      finite_fraction: 1.0

@@ -1,0 +1,67 @@
+metadata:
+  name: ai-feynman-2-0-modular-equations
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": []}
+  description: AI Feynman 2.0 modular equations
+  sources:
+  - https://arxiv.org/abs/2006.10782
+  - https://arxiv.org/pdf/2006.10782v2
+  - https://arxiv.org/pdf/2006.10782v1
+  - https://arxiv.org/e-print/2006.10782v2
+  - https://proceedings.neurips.cc/paper_files/paper/2020/hash/33a854e247155d590883b93bca53848a-Abstract.html
+  - https://proceedings.neurips.cc/paper_files/paper/2020/file/33a854e247155d590883b93bca53848a-Paper.pdf
+  - https://proceedings.neurips.cc/paper_files/paper/2020/file/33a854e247155d590883b93bca53848a-Supplemental.pdf
+  - https://proceedings.neurips.cc/paper_files/paper/2020/file/33a854e247155d590883b93bca53848a-Review.html
+  - https://proceedings.neurips.cc/paper_files/paper/2020/file/33a854e247155d590883b93bca53848a-AuthorFeedback.pdf
+  - https://github.com/SJ001/AI-Feynman
+  - https://web.archive.org/web/2024id_/https://space.mit.edu~/main_aifeynman.html
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-0.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  table4-eq12:
+    raw: x*y*z - z*sqrt(1 - x**2)*sqrt(1 - y**2) - y*sqrt(1 - x**2)*sqrt(1 - z**2) - x*sqrt(1 - y**2)*sqrt(1 - z**2)
+    prepared: v1*v2*v3 - v1*sqrt(1 - v2**2)*sqrt(1 - v3**2) - v2*sqrt(1 - v1**2)*sqrt(1 - v3**2) - v3*sqrt(1 - v1**2)*sqrt(1
+      - v2**2)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: range [-1, 1] stated; distribution (uniform or other) not stated
+      y: range [-1, 1] stated; distribution (uniform or other) not stated
+      z: range [-1, 1] stated; distribution (uniform or other) not stated
+    meta:
+      finite_fraction: 1.0

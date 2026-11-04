@@ -272,9 +272,10 @@ expressions:
               high: 4.2
               step: 0.1
     test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
-      10 Table I ''Sampling strategy for training and test data'' (/home/psaegert/srbf_eval_local/workflow_archive/source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      10 Table I ''Sampling strategy for training and test data'' (source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
       and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
-      b) means that the x variable is sampled randomly from an interval [a, b]. Notation'
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation
+      x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Neat-9:
     raw: div(1,(1+pow(x1,-4)))+div(1,(1+pow(x2,-4)))
     prepared: ((1)/((1+((v1)**(-4)))))+((1)/((1+((v2)**(-4)))))

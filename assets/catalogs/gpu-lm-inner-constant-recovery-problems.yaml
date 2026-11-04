@@ -1,0 +1,389 @@
+metadata:
+  name: gpu-lm-inner-constant-recovery-problems
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": []}
+  description: GPU-LM inner-constant recovery problems
+  sources:
+  - https://arxiv.org/abs/2609.03352
+  - https://arxiv.org/pdf/2609.03352v1
+  - https://github.com/TensorConv/CuSR/tree/cbfd47211a1969f79beffb130156740b9e7fff23
+  - https://github.com/TensorConv/CuSR/blob/414b9057ca0289befcc5e0bb270f87c0f430bb58/experiments/e3_admit_criterion/out/corpus_manifest.json
+  - https://github.com/TensorConv/CuSR/blob/414b9057ca0289befcc5e0bb270f87c0f430bb58/experiments/e3_admit_criterion/prereg.py
+  - https://github.com/TensorConv/CuSR/blob/414b9057ca0289befcc5e0bb270f87c0f430bb58/experiments/e3_admit_criterion/skel_problems.py
+  - https://github.com/TensorConv/CuSR/blob/cbfd47211a1969f79beffb130156740b9e7fff23/cusr/demonstrator/seed_bench.py
+  - https://github.com/TensorConv/CuSR/blob/cbfd47211a1969f79beffb130156740b9e7fff23/experiments/e4_study_b/corpus.py
+  - https://github.com/TensorConv/CuSR/blob/cbfd47211a1969f79beffb130156740b9e7fff23/experiments/e4_study_b/run_study_b.py
+  - https://github.com/TensorConv/CuSR/blob/cbfd47211a1969f79beffb130156740b9e7fff23/experiments/e4_study_b/out/report.json
+  - https://github.com/TensorConv/CuSR/blob/cbfd47211a1969f79beffb130156740b9e7fff23/experiments/e3_admit_criterion/REPORT.md
+  - https://github.com/TensorConv/CuSR/blob/d59ac46df245b2ab355ec44be5243467330bda37/experiments/e4_study_b/out/extension_manifest.json
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-139.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  constructed_freq_cos_x_1.5:
+    raw: 1.7*cos(1.5*x0)
+    prepared: 1.7*cos(1.5*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-3.0, 3.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_freq_cos_x_3:
+    raw: 1.7*cos(3.0*x0)
+    prepared: 1.7*cos(3.0*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-3.0, 3.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_freq_cos_x_5:
+    raw: 1.7*cos(5.0*x0)
+    prepared: 1.7*cos(5.0*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-3.0, 3.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_freq_cos_x_7:
+    raw: 1.7*cos(7.0*x0)
+    prepared: 1.7*cos(7.0*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-3.0, 3.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_freq_sin_x2_3:
+    raw: 1.7*sin(3.0*x0**2)
+    prepared: 1.7*sin(3.0*v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -2.5
+        - 2.5
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-2.5, 2.5]
+    meta:
+      finite_fraction: 1.0
+  constructed_decay_exp_0.4:
+    raw: 1.7*exp(-0.4*x0)
+    prepared: 1.7*exp(-0.4*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.1
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0.1, 5.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_decay_exp_0.9:
+    raw: 1.7*exp(-0.9*x0)
+    prepared: 1.7*exp(-0.9*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.1
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0.1, 5.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_decay_exp_1.7:
+    raw: 1.7*exp(-1.7*x0)
+    prepared: 1.7*exp(-1.7*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.1
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0.1, 5.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_decay_exp_3:
+    raw: 1.7*exp(-3.0*x0)
+    prepared: 1.7*exp(-3.0*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.1
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0.1, 5.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_saturation_0.55:
+    raw: 1.7 - 1.7*exp(-0.55*x0)
+    prepared: 1.7 - 1.7*exp(-0.55*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.1
+        - 8.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0.1, 8.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_saturation_1.3:
+    raw: 1.7 - 1.7*exp(-1.3*x0)
+    prepared: 1.7 - 1.7*exp(-1.3*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.1
+        - 8.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0.1, 8.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_saturation_2.5:
+    raw: 1.7 - 1.7*exp(-2.5*x0)
+    prepared: 1.7 - 1.7*exp(-2.5*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.1
+        - 8.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0.1, 8.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_shift_recip_6.5:
+    raw: 1.7/(x0 - 6.5)
+    prepared: 1.7/(v1 - 6.5)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -4.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-4.0, 4.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_shift_recip_8:
+    raw: 1.7/(x0 - 8.0)
+    prepared: 1.7/(v1 - 8.0)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -4.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-4.0, 4.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_shift_recip_9.5:
+    raw: 1.7/(x0 - 9.5)
+    prepared: 1.7/(v1 - 9.5)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -4.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-4.0, 4.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_power_1.3:
+    raw: 1.7*x0**1.3
+    prepared: 1.7*v1**1.3
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.2
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0.2, 4.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_power_2.4:
+    raw: 1.7*x0**2.4
+    prepared: 1.7*v1**2.4
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.2
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0.2, 4.0]
+    meta:
+      finite_fraction: 1.0
+  constructed_power_3.7:
+    raw: 1.7*x0**3.7
+    prepared: 1.7*v1**3.7
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - 0.2
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[0.2, 4.0]
+    meta:
+      finite_fraction: 1.0

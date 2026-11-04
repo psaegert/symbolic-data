@@ -1,0 +1,48 @@
+metadata:
+  name: esr-cosmology-datasets
+  version: 1
+  tags: {"origin": "science formula", "tags": []}
+  description: ESR cosmology datasets
+  sources:
+  - https://arxiv.org/abs/2211.11461
+  - https://doi.org/10.1109/TEVC.2023.3280250
+  - https://github.com/DeaglanBartlett/ESR/tree/23c3907a0fb08301d5e89fb666ae01bec0398faa/esr/data
+  - https://github.com/DeaglanBartlett/ESR/blob/23c3907a0fb08301d5e89fb666ae01bec0398faa/esr/fitting/likelihood.py
+  - https://github.com/DeaglanBartlett/ESR/blob/23c3907a0fb08301d5e89fb666ae01bec0398faa/examples/mock_cc.py
+  - https://arxiv.org/abs/2201.07241
+  - https://github.com/PantheonPlusSH0ES/DataRelease/tree/c447f0fea703fcd0fff57de5000947b5ca81286b/Pantheon%2B_Data/4_DISTANCES_AND_COVAR
+  - https://arxiv.org/abs/2112.03863
+  - https://arxiv.org/abs/2202.04077
+  - https://arxiv.org/abs/2112.04510
+  - https://doi.org/10.5281/zenodo.7339113
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-53.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  lcdm-mock-cc:
+    raw: 67.4*sqrt(0.315*x**3 + 1 - 0.315)
+    prepared: 67.4*sqrt(0.315*v1**3 - 0.315 + 1)
+    n_variables: 1
+    subset: mock
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 1.07
+        - 3.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: log-uniform on [1.07, 3.0] (x = 1 + z; z = 10**U[log10(1.07), log10(3)] - 1)
+    meta:
+      finite_fraction: 1.0

@@ -1,0 +1,310 @@
+metadata:
+  name: errless-synthetic-posterior-set
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
+  description: ERRLESS synthetic posterior set
+  sources:
+  - https://arxiv.org/abs/2608.09617
+  - https://arxiv.org/pdf/2608.09617v2
+  - https://arxiv.org/src/2608.09617v2
+  - https://github.com/jaggbow/ERRLESS/tree/b7ae7843fb79faca411c3e6e21919e69a75cf80a
+  - https://github.com/jaggbow/ERRLESS/blob/b7ae7843fb79faca411c3e6e21919e69a75cf80a/notebooks/synthetic_dataset.ipynb
+  - https://github.com/jaggbow/ERRLESS/tree/b7ae7843fb79faca411c3e6e21919e69a75cf80a/datasets
+  - https://github.com/jaggbow/ERRLESS/tree/b7ae7843fb79faca411c3e6e21919e69a75cf80a/configs/environment
+  - https://github.com/jaggbow/ERRLESS/blob/b7ae7843fb79faca411c3e6e21919e69a75cf80a/sbatch_scripts/synthetic.sh
+  - https://github.com/jaggbow/ERRLESS/blob/4d633093e9/notebooks/synthetic_dataset.ipynb
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-138.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  synthetic_1:
+    raw: x + sin(5.5*x)
+    prepared: v1 + sin(5.5*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -0.5
+        - 0.5
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U(-0.5, 0.5) (training range)
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
+      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
+      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
+      raw/fresh-138/synthetic_*.pkl.'
+    meta:
+      finite_fraction: 1.0
+  synthetic_2:
+    raw: 4.567*exp(x) + y
+    prepared: v2 + 4.567*exp(v1)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U(-1, 1) (training range)
+      y: uniform U(-1, 1) (training range)
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
+      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
+      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
+      raw/fresh-138/synthetic_*.pkl.'
+    meta:
+      finite_fraction: 1.0
+  synthetic_3:
+    raw: sin(y + 2.5*x)
+    prepared: sin(2.5*v1 + v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U(0, 1) (training range)
+      y: uniform U(0, 1) (training range)
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: 0.0
+              high: 3.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: 0.0
+              high: 3.0
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
+      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
+      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
+      raw/fresh-138/synthetic_*.pkl.'
+    meta:
+      finite_fraction: 1.0
+  synthetic_4:
+    raw: sqrt(x**2 + y**2)
+    prepared: sqrt(v1**2 + v2**2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U(0, 1) (training range)
+      y: uniform U(0, 1) (training range)
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: 0.0
+              high: 3.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: 0.0
+              high: 3.0
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
+      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
+      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
+      raw/fresh-138/synthetic_*.pkl.'
+    meta:
+      finite_fraction: 1.0
+  synthetic_5:
+    raw: sin(x)*cos(y)
+    prepared: sin(v1)*cos(v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U(0, 1) (training range)
+      y: uniform U(0, 1) (training range)
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: 0.0
+              high: 3.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: 0.0
+              high: 3.0
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
+      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
+      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
+      raw/fresh-138/synthetic_*.pkl.'
+    meta:
+      finite_fraction: 1.0
+  synthetic_6:
+    raw: 1/sqrt(1 - x**2)
+    prepared: 1/sqrt(1 - v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -0.6
+        - 0.6
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U(-0.6, 0.6) (training range)
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -0.99
+              high: 0.99
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
+      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
+      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
+      raw/fresh-138/synthetic_*.pkl.'
+    meta:
+      finite_fraction: 1.0
+  synthetic_7:
+    raw: 2.37*x + 3.02
+    prepared: 2.37*v1 + 3.02
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -0.5
+        - 0.5
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U(-0.5, 0.5) (training range)
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -1.0
+              high: 1.0
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
+      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
+      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
+      raw/fresh-138/synthetic_*.pkl.'
+    meta:
+      finite_fraction: 1.0

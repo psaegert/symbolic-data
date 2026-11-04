@@ -1,0 +1,659 @@
+metadata:
+  name: occamnet-analytic-and-non-analytic-suites
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": []}
+  description: OccamNet analytic and non-analytic suites
+  sources:
+  - https://arxiv.org/abs/2007.10784
+  - https://arxiv.org/pdf/2007.10784v3
+  - https://arxiv.org/abs/2007.10784v1
+  - https://arxiv.org/abs/2007.10784v2
+  - https://github.com/druidowm/OccamNet_Public/blob/a67304c1a1db2c5e68e21047007152e8ccd32d96/analytic-benchmarks/Benchmarks.py
+  - https://github.com/druidowm/OccamNet_Public/blob/a67304c1a1db2c5e68e21047007152e8ccd32d96/analytic-and-programs/targets.py
+  - https://github.com/druidowm/OccamNet_Public/blob/a67304c1a1db2c5e68e21047007152e8ccd32d96/analytic-and-programs/experiment.py
+  - https://github.com/druidowm/OccamNet_Public/blob/a67304c1a1db2c5e68e21047007152e8ccd32d96/constant-fitting/ConstantFittingDemo.py
+  - https://github.com/druidowm/OccamNet_Versions
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-68.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  OccamNet-A1:
+    raw: 2*x**2 + 3*x
+    prepared: 2*v1**2 + 3*v1
+    n_variables: 1
+    subset: analytic
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-10,10]
+    meta:
+      finite_fraction: 1.0
+  OccamNet-A2:
+    raw: sin(3*x + 2)
+    prepared: sin(3*v1 + 2)
+    n_variables: 1
+    subset: analytic
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-10,10]
+    meta:
+      finite_fraction: 1.0
+  OccamNet-A3:
+    raw: sin(x) + sin(2*x) + sin(3*x)
+    prepared: sin(v1) + sin(2*v1) + sin(3*v1)
+    n_variables: 1
+    subset: analytic
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -20.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-20,20]
+    meta:
+      finite_fraction: 1.0
+  OccamNet-A4:
+    raw: (x**2 + x)/(x + 2)
+    prepared: (v1**2 + v1)/(v1 + 2)
+    n_variables: 1
+    subset: analytic
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -6.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-6,6]
+    meta:
+      finite_fraction: 1.0
+  OccamNet-A5:
+    raw: x0**2*(x0 + 1)/x1**5
+    prepared: v1**2*(v1 + 1)/v2**5
+    n_variables: 2
+    subset: analytic
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - 0.1
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-10,10]
+      x1: uniform U[0.1,3]
+    meta:
+      finite_fraction: 1.0
+  OccamNet-A6:
+    raw: x0**2/2 + (x1 + 1)**2/2
+    prepared: v1**2/2 + (v2 + 1)**2/2
+    n_variables: 2
+    subset: analytic
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -20.0
+        - -2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - 2.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-20,-2]
+      x1: uniform U[2,20]
+    meta:
+      finite_fraction: 1.0
+  OccamNet-P1:
+    raw: Piecewise((3*x, x > 0), (x, True))
+    prepared: v1*(floor(-v1/(abs(v1) + 1)) + 1) - 3*v1*floor(-v1/(abs(v1) + 1))
+    n_variables: 1
+    subset: non-analytic
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -20.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-20,20]
+    needs_simplipy: '0.15'
+  OccamNet-P2:
+    raw: Piecewise((x**2, x > 0), (-x, True))
+    prepared: -v1**2*floor(-v1/(abs(v1) + 1)) - v1*(floor(-v1/(abs(v1) + 1)) + 1)
+    n_variables: 1
+    subset: non-analytic
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -20.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-20,20]
+    needs_simplipy: '0.15'
+  OccamNet-P3:
+    raw: Piecewise((x, x > 0), (sin(x), True))
+    prepared: -v1*floor(-v1/(abs(v1) + 1)) + (floor(-v1/(abs(v1) + 1)) + 1)*sin(v1)
+    n_variables: 1
+    subset: non-analytic
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -20.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-20,20]
+    needs_simplipy: '0.15'
+  OccamNet-P4-max:
+    raw: Max(x0, x1, x2)
+    prepared: Max(v1, v2, v3)
+    n_variables: 3
+    subset: non-analytic
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-50,50]
+      x1: uniform U[-50,50]
+      x2: uniform U[-50,50]
+    needs_simplipy: '0.15'
+  OccamNet-P4-median:
+    raw: Max(Min(x0, x1), Min(Max(x0, x1), x2))
+    prepared: Max(Min(v1, v2), Min(v3, Max(v1, v2)))
+    n_variables: 3
+    subset: non-analytic
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-50,50]
+      x1: uniform U[-50,50]
+      x2: uniform U[-50,50]
+    needs_simplipy: '0.15'
+  OccamNet-P4-min:
+    raw: Min(x0, x1, x2)
+    prepared: Min(v1, v2, v3)
+    n_variables: 3
+    subset: non-analytic
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-50,50]
+      x1: uniform U[-50,50]
+      x2: uniform U[-50,50]
+    needs_simplipy: '0.15'
+  OccamNet-P5-y0:
+    raw: Mod(x0 + x3, 2)
+    prepared: Mod(v1 + v4, 2)
+    n_variables: 4
+    subset: non-analytic
+    vars:
+      v1:
+        name: x0
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v2:
+        name: x1
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v3:
+        name: x2
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v4:
+        name: x3
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v0:
+        name: y
+    input_distributions:
+      x0: discrete set {0, 1}, each value equally likely
+      x1: discrete set {0, 1}, each value equally likely
+      x2: discrete set {0, 1}, each value equally likely
+      x3: discrete set {0, 1}, each value equally likely
+    needs_simplipy: '0.15'
+  OccamNet-P5-y1:
+    raw: x0
+    prepared: v1
+    n_variables: 4
+    subset: non-analytic
+    vars:
+      v1:
+        name: x0
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v2:
+        name: x1
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v3:
+        name: x2
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v4:
+        name: x3
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v0:
+        name: y
+    input_distributions:
+      x0: discrete set {0, 1}, each value equally likely
+      x1: discrete set {0, 1}, each value equally likely
+      x2: discrete set {0, 1}, each value equally likely
+      x3: discrete set {0, 1}, each value equally likely
+    meta:
+      finite_fraction: 1.0
+  OccamNet-P5-y2:
+    raw: x1
+    prepared: v2
+    n_variables: 4
+    subset: non-analytic
+    vars:
+      v1:
+        name: x0
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v2:
+        name: x1
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v3:
+        name: x2
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v4:
+        name: x3
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v0:
+        name: y
+    input_distributions:
+      x0: discrete set {0, 1}, each value equally likely
+      x1: discrete set {0, 1}, each value equally likely
+      x2: discrete set {0, 1}, each value equally likely
+      x3: discrete set {0, 1}, each value equally likely
+    meta:
+      finite_fraction: 1.0
+  OccamNet-P5-y3:
+    raw: x2
+    prepared: v3
+    n_variables: 4
+    subset: non-analytic
+    vars:
+      v1:
+        name: x0
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v2:
+        name: x1
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v3:
+        name: x2
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v4:
+        name: x3
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+      v0:
+        name: y
+    input_distributions:
+      x0: discrete set {0, 1}, each value equally likely
+      x1: discrete set {0, 1}, each value equally likely
+      x2: discrete set {0, 1}, each value equally likely
+      x3: discrete set {0, 1}, each value equally likely
+    meta:
+      finite_fraction: 1.0
+  OccamNet-P6-y0:
+    raw: Piecewise((x1, x0 < 2), (-x1, True))
+    prepared: -v2*(floor((v1 - 2)/(abs(v1 - 2) + 1)) + 1) - v2*floor((v1 - 2)/(abs(v1 - 2) + 1))
+    n_variables: 2
+    subset: non-analytic
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -5.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -5.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-5,5]
+      x1: uniform U[-5,5]
+    needs_simplipy: '0.15'
+  OccamNet-P6-y1:
+    raw: Piecewise((x0, x1 < 0), (x1**2, True))
+    prepared: -v1*floor(v2/(abs(v2) + 1)) + v2**2*(floor(v2/(abs(v2) + 1)) + 1)
+    n_variables: 2
+    subset: non-analytic
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -5.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -5.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: uniform U[-5,5]
+      x1: uniform U[-5,5]
+    needs_simplipy: '0.15'
+  OccamNet-P8:
+    raw: Piecewise((Piecewise((x + 2, x < 2), (x - 1, True)) + 2, Piecewise((x + 2, x < 2), (x - 1, True)) < 2), (Piecewise((x
+      + 2, x < 2), (x - 1, True)) - 1, True))
+    prepared: (-(floor((v1 - 2)/(abs(v1 - 2) + 1)) + 1)*floor((v1 - 3)/(abs(v1 - 3) + 1)) + floor(v1/(abs(v1) + 1))*floor((v1
+      - 2)/(abs(v1 - 2) + 1)))*((v1 - 1)*(floor((v1 - 2)/(abs(v1 - 2) + 1)) + 1) - (v1 + 2)*floor((v1 - 2)/(abs(v1 - 2) +
+      1)) + 2) + ((v1 - 1)*(floor((v1 - 2)/(abs(v1 - 2) + 1)) + 1) - (v1 + 2)*floor((v1 - 2)/(abs(v1 - 2) + 1)) - 1)*((floor((v1
+      - 2)/(abs(v1 - 2) + 1)) + 1)*floor((v1 - 3)/(abs(v1 - 3) + 1)) - floor(v1/(abs(v1) + 1))*floor((v1 - 2)/(abs(v1 - 2)
+      + 1)) + 1)
+    n_variables: 1
+    subset: non-analytic
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -3.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-3,6]
+    needs_simplipy: '0.15'
+  OccamNet-S1:
+    raw: 10.5*x**3.1
+    prepared: 10.5*v1**3.1
+    n_variables: 1
+    subset: small-experiments
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[0,1]
+    meta:
+      finite_fraction: 1.0
+  OccamNet-S2:
+    raw: cos(x)
+    prepared: cos(v1)
+    n_variables: 1
+    subset: small-experiments
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -100.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-100,100]
+    meta:
+      finite_fraction: 1.0
+  OccamNet-S3:
+    raw: exp(x)
+    prepared: exp(v1)
+    n_variables: 1
+    subset: small-experiments
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[0,1]
+    meta:
+      finite_fraction: 1.0

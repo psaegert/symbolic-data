@@ -1,0 +1,78 @@
+metadata:
+  name: hep-llm-sr-angular-distribution-problems
+  version: 1
+  tags: {"origin": "science formula", "tags": ["extrapolation"]}
+  description: HEP LLM-SR angular-distribution problems
+  sources:
+  - https://arxiv.org/abs/2510.03397
+  - https://arxiv.org/pdf/2510.03397
+  - https://arxiv.org/e-print/2510.03397
+  - https://arxiv.org/abs/2508.00989
+  - https://arxiv.org/e-print/2508.00989
+  - https://doi.org/10.1007/JHEP02(2026)081
+  - https://arxiv.org/abs/2412.07839
+  - https://arxiv.org/e-print/2412.07839
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-127.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  ee_mumu_angular_id:
+    raw: alpha**2/(4*s)*(1 + cos_theta**2)
+    prepared: 1.4250625e-11*v1**2 + 1.4250625e-11
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: cos_theta
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      cos_theta: U[-1, 1]
+    meta:
+      finite_fraction: 1.0
+  ee_mumu_angular_ood:
+    raw: alpha**2/(4*s)*(1 + cos_theta**2)
+    prepared: 1.4250625e-11*v1**2 + 1.4250625e-11
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: cos_theta
+        sample_range:
+        - -0.3333333333333333
+        - 0.3333333333333333
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      cos_theta: fit U[-1/3, 1/3]; evaluate U[-1, 1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.9666666666666667
+              high: 0.9666666666666667
+              step: 0.06666666666666667
+    test_source: 'Morales-Alvarado, arXiv:2510.03397, main.tex l.148-150 and l.187, as quoted in the records: ''interpolation
+      (in-domain), where it is trained across the full kinematic range''; ''we train the regressor on a random 80% subsample
+      of the data and evaluate its performance across the domain''; OOD: ''trained only on data from the central region around
+      cos theta ~ 0, and its predictions are evaluated across t'
+    meta:
+      finite_fraction: 1.0

@@ -1,0 +1,125 @@
+metadata:
+  name: llm-lex-random-mathematica-functions
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": []}
+  description: LLM-LEx random Mathematica functions
+  sources:
+  - https://arxiv.org/abs/2505.07956
+  - https://arxiv.org/pdf/2505.07956v1 (Table 1 p. 10, Table 2 p. 11, Sec. 2.3 p. 8, Sec. 2.5 p. 13, Sec. 3.2 pp. 19-22)
+  - 'https://arxiv.org/e-print/2505.07956v1 (LaTeX source sn-article.tex: Table 1 = lines 273-375, Sec. 3.2 = lines 695-788)'
+  - 'https://iopscience.iop.org/article/10.1088/2632-2153/ae8b73 (journal version, Mach. Learn.: Sci. Technol. 7 045040 (2026);
+    Table 2 = the same 20 expressions)'
+  - https://github.com/harveyThomas4692/llmlex/tree/9f02b58c5efb6d3c973c2ad2552ecc3a57998f81
+  - https://github.com/harveyThomas4692/llmlex/blob/9f02b58c5efb6d3c973c2ad2552ecc3a57998f81/Examples/Mathematica/fit_functions.nb
+  - https://github.com/harveyThomas4692/llmlex/blob/9f02b58c5efb6d3c973c2ad2552ecc3a57998f81/Examples/fit_functions.ipynb
+  - https://github.com/harveyThomas4692/llmlex/blob/9f02b58c5efb6d3c973c2ad2552ecc3a57998f81/Examples/Example%20Paper%20UniKAN.ipynb
+  - https://github.com/harveyThomas4692/llmlex/blob/9f02b58c5efb6d3c973c2ad2552ecc3a57998f81/Examples/Example%20Paper%20MultiKAN.ipynb
+  - https://github.com/harveyThomas4692/llmlex/blob/9f02b58c5efb6d3c973c2ad2552ecc3a57998f81/llmlex/kanlex.py#L149-L167
+  - https://github.com/KindXiaoming/pykan/blob/915726a6770bf439021f1bac38bfe39fd424159e/kan/utils.py#L37-L45
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-131.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  kanlex-ex1:
+    raw: exp(sin(pi*x) + y**2)
+    prepared: exp(v2**2 + sin(3.141592653589793*v1))
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-1,1]
+      y: U[-1,1]
+    meta:
+      finite_fraction: 1.0
+  kanlex-ex2:
+    raw: x*y
+    prepared: v1*v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[1,2]
+      y: U[1,2]
+    meta:
+      finite_fraction: 1.0
+  kanlex-ex3:
+    raw: x*y/z
+    prepared: v1*v2/v3
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.5
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 0.5
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - 0.5
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[0.5,3]
+      y: U[0.5,3]
+      z: U[0.5,3]
+    meta:
+      finite_fraction: 1.0
