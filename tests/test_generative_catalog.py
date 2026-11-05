@@ -14,6 +14,9 @@ def test_simplify_mode_reaches_the_target_canonicalization(monkeypatch):
     if not os.path.exists(ref):
         pytest.skip("reference run config not present in this checkout")
     cfg = dict(yaml.safe_load(open(ref)))
+    # The reference run config names a pre-0.15 engine, whose rule files SimpliPy 0.15 refuses; the
+    # test is about the config reaching the engine, not about which engine it is.
+    cfg["simplipy_engine"] = "acj2-4-llm"
     cfg["holdout_pools"] = []
     cfg["simplify_mode"] = "permissive"
     cat = LampleChartonCatalog.from_config(cfg)
@@ -50,6 +53,9 @@ def test_simplipy_engine_modes_reaches_the_loader(monkeypatch):
     if not os.path.exists(ref):
         pytest.skip("reference run config not present in this checkout")
     cfg = dict(yaml.safe_load(open(ref)))
+    # The reference run config names a pre-0.15 engine, whose rule files SimpliPy 0.15 refuses; the
+    # test is about the config reaching the engine, not about which engine it is.
+    cfg["simplipy_engine"] = "acj2-4-llm"
     cfg["holdout_pools"] = []
 
     seen: list[dict] = []
@@ -87,6 +93,9 @@ def test_the_fold_skip_is_provably_free(monkeypatch):
     if not os.path.exists(ref):
         pytest.skip("reference run config not present in this checkout")
     cfg = dict(yaml.safe_load(open(ref)))
+    # The reference run config names a pre-0.15 engine, whose rule files SimpliPy 0.15 refuses; the
+    # test is about the config reaching the engine, not about which engine it is.
+    cfg["simplipy_engine"] = "acj2-4-llm"
     cfg["holdout_pools"] = []
     cfg["simplify_mode"] = "permissive"
 
@@ -138,6 +147,9 @@ def test_the_fold_skip_key_is_identical_on_canonical_inputs():
     if not os.path.exists(ref):
         pytest.skip("reference run config not present in this checkout")
     cfg = dict(yaml.safe_load(open(ref)))
+    # The reference run config names a pre-0.15 engine, whose rule files SimpliPy 0.15 refuses; the
+    # test is about the config reaching the engine, not about which engine it is.
+    cfg["simplipy_engine"] = "acj2-4-llm"
     cfg["holdout_pools"] = []
     cfg["simplify_mode"] = "permissive"
     cat = gen.LampleChartonCatalog.from_config(cfg)

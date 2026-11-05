@@ -1,6 +1,9 @@
 """``tagged_canonical`` is simplify IN the tagged dialect -- a different normal form
 from the prefix-dialect canonical, not a respelling of it. Specimens below are
-measured engine output (acj-4, 2026-08-23), pinned."""
+measured engine output (acj-4, simplipy 0.14, 2026-08-23), pinned. Two of them spell differently in SimpliPy 0.15's
+canonical form (the rules do not matter: 0.14's acj-4 rules read by 0.15 give the same new answers). They are a
+strict xfail, so the test flags the moment re-pinning is due; re-pin after SimpliPy's restructuring (phase D) or at
+the release mine (H)."""
 import pytest
 
 from simplipy import SimpliPyEngine
@@ -10,26 +13,31 @@ from symbolic_data.token_ops import tagged_canonical
 
 @pytest.fixture(scope="module")
 def engine() -> SimpliPyEngine:
-    return SimpliPyEngine.load("acj-4", install=True)
+    return SimpliPyEngine.load("acj2-4-llm", install=True)
 
+
+_REMEASURE_ON_015 = pytest.mark.xfail(
+    reason="pinned on 0.14; SimpliPy 0.15's canonical form (not its rules) spells it differently: a negative power "
+           "is the reciprocal inside the product, a negation a -1 coefficient. Re-pin after SimpliPy's phase D or at H.",
+    strict=True)
 
 # infix -> the tagged canonical (measured, not derived)
 SPECIMENS = [
     ("log(v1+1.4)+log(((v1)**(2))+1.3)",
      ["<add>", "log", "<add>", "v1", "<mul>", "7", "<div>", "5", "</mul>", "</add>",
       "log", "<add>", "pow", "v1", "2", "1.3", "</add>", "</add>"]),
-    ("(1+2*v1)**(-3/2)",
-     ["pow", "<add>", "<mul>", "2", "v1", "</mul>", "1", "</add>",
-      "<mul>", "-3", "<div>", "2", "</mul>"]),
-    ("exp(-(1+v1)**(-1))*(1+v1)**(-2)",
-     ["<mul>", "exp", "neg", "inv", "<add>", "v1", "1", "</add>",
-      "<div>", "pow", "<add>", "v1", "1", "</add>", "2", "</mul>"]),
+    pytest.param("(1+2*v1)**(-3/2)",
+                 ["pow", "<add>", "<mul>", "2", "v1", "</mul>", "1", "</add>",
+                  "<mul>", "-3", "<div>", "2", "</mul>"], marks=_REMEASURE_ON_015),
+    pytest.param("exp(-(1+v1)**(-1))*(1+v1)**(-2)",
+                 ["<mul>", "exp", "neg", "inv", "<add>", "v1", "1", "</add>",
+                  "<div>", "pow", "<add>", "v1", "1", "</add>", "2", "</mul>"], marks=_REMEASURE_ON_015),
     ("exp(-(v1+exp(-v1)))",
      ["exp", "<add>", "<sub>", "v1", "exp", "neg", "v1", "</add>"]),
 ]
 
 
-@pytest.mark.parametrize("infix,expected", SPECIMENS, ids=[s[0] for s in SPECIMENS])
+@pytest.mark.parametrize("infix,expected", SPECIMENS)
 def test_tagged_canonical_is_simplify_in_the_tagged_dialect(engine: SimpliPyEngine, infix: str, expected: list[str]) -> None:
     assert tagged_canonical(engine, engine.read_infix(infix)) == expected
 

@@ -470,7 +470,7 @@ def main() -> None:
     ap.add_argument("--rederive", action="store_true", help="re-read the HF files even if the spec exists")
     ap.add_argument("--verify", action="store_true")
     ap.add_argument("--validate-loader", action="store_true")
-    ap.add_argument("--engine", default="acj-4")
+    ap.add_argument("--engine", default="acj2-4-llm")
     args = ap.parse_args()
 
     spec_path = args.spec

@@ -166,8 +166,12 @@ def tagged_canonical(engine: SimpliPyEngine, expression: Sequence[str],
     The two are different normal forms: measured over the curated catalogs
     (2026-08-22), 796 of 3,628 expressions canonicalize differently between the
     dialects -- exact-rational literal spellings (``1.4`` becomes ``<mul> 7 <div> 5
-    </mul>``), negative exponents absorbed into ``pow`` instead of an ``inv`` wrapper,
-    negation distributed into bag sections. The v24 target contract (A3) names the
+    </mul>``), negation distributed into bag sections. SimpliPy 0.15 spells two forms
+    differently from 0.14 (measured 2026-11-05): a negative power is the reciprocal of the
+    positive power inside the product (``(1+2*v1)**(-3/2)`` is ``<mul> 1 <div> pow <add> ...
+    </add> <mul> 3 <div> 2 </mul> </mul>``, no longer ``pow`` with a negative exponent), and a
+    negation is a ``-1`` coefficient in the product (``<mul> -1 <div> ... </mul>``, no longer
+    ``neg inv``). The v24 target contract (A3) names the
     tagged canonical, so the consumer must simplify IN the tagged dialect; converting
     the prefix canonical yields a different (equal-valued, differently-spelled) form.
 
