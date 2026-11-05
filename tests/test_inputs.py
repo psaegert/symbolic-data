@@ -184,3 +184,51 @@ def test_a_grid_draws_the_mesh_points_uniformly():
     x = draw_variable({"dist": {"name": "grid", "kwargs": {"low": -3.0, "high": 3.0, "step": 0.01}}}, 60000, np.random.default_rng(13))
     assert np.allclose(x * 100, np.round(x * 100)) and x.min() == -3.0 and x.max() == 3.0
     assert len(np.unique(x)) == 601 and abs(x.mean()) < 0.03
+
+
+_UNIT = {"sample_range": [0.0, 1.0], "sample_type": ["uni", "pos"]}
+
+
+def _numbers(tokens):
+    out = []
+    for t in tokens:
+        try:
+            out.append(float(t))
+        except (TypeError, ValueError):
+            pass
+    return out
+
+
+def test_per_run_values_are_drawn_anew_for_every_run_and_written_into_its_ground_truth(engine):
+    cat = _catalog({"prepared": "1.5 * v1", "vars": {"v1": {"sample_range": [1.0, 2.0], "sample_type": ["uni", "pos"]}},
+                    "per_run": {"params": {"c1": {"sample_range": [1.0, 2.0], "sample_type": ["uni", "pos"]}},
+                                "prepared": "c1 * v1"}})
+    rng, seen = np.random.default_rng(0), set()
+    for _ in range(5):
+        r = cat.realize(cat["e"], 32, rng, engine=engine)
+        c1 = r.meta["per_run_values"]["c1"]
+        assert 1.0 <= c1 <= 2.0 and np.allclose(r.y.ravel(), c1 * r.x[:, 0])      # one value for the whole run
+        assert any(abs(v - c1) < 1e-9 for v in _numbers(r.expression))          # the run's ground truth holds it
+        seen.add(round(c1, 9))
+    assert len(seen) == 5                                                            # a new value every run
+
+
+def test_per_run_values_drive_derived_inputs_and_are_shared_by_the_fit_and_test_rows(engine):
+    # an input whose range the authors draw per run: lo ~ U(-10, 9), hi ~ U(lo + 1, 10)
+    box = {"params": {"lo": {"sample_range": [-10.0, 9.0], "sample_type": ["uni", "pos"]}, "w": dict(_UNIT)},
+           "latent": {"t": dict(_UNIT)}, "vars": {"v1": {"expr": "lo + (1 + w * (9 - lo)) * t"}}}
+    cat = _catalog({"prepared": "v1", "vars": {"v1": {"name": "x", "sample_range": [0.0, 1.0], "sample_type": ["uni", "pos"]}},
+                    "per_run": box, "test": {}})
+    p = _first_problem(cat, engine, 64, 32, seed=4)
+    lo, w = p.meta["per_run_values"]["lo"], p.meta["per_run_values"]["w"]
+    hi = lo + 1 + w * (9 - lo)
+    for x in (p.x_support, p.x_validation):                                         # the test rows use the same box
+        assert x.min() >= lo - 1e-12 and x.max() <= hi + 1e-12
+    assert hi <= 10.0 + 1e-12 and not (p.x_support.min() >= 0.0 and p.x_support.max() <= 1.0)
+
+
+def test_a_per_run_block_is_checked(engine):
+    for bad in ({"params": {"v1": dict(_UNIT)}}, {"params": {"exp": dict(_UNIT)}}, {"draws": {}}):
+        cat = _catalog({"prepared": "v1", "vars": {"v1": dict(_UNIT)}, "per_run": bad})
+        with pytest.raises(CatalogEntryError, match="per_run"):
+            cat.realize(cat["e"], 8, np.random.default_rng(0), engine=engine)

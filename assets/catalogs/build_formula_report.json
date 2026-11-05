@@ -1806,7 +1806,7 @@
   "needs_simplipy_015": []
  },
  "fresh-56": {
-  "catalog": "physo-class-sr-benchmark",
+  "catalog": "physo-class",
   "problems": 8,
   "built": 8,
   "pinned_points": 0,
@@ -1973,35 +1973,11 @@
  "fresh-80": {
   "catalog": "symbolicgpt-bivariate-set",
   "problems": 1024,
-  "built": 999,
+  "built": 1023,
   "pinned_points": 0,
   "skipped": {},
   "check_failed": {
-   "symdiff-valv9-0028": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0028': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0251": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0251': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0274": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0274': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0282": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0282': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0293": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0293': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0328": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0328': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0361": "no real value: the formula is complex everywhere on the authors' input range",
-   "symdiff-valv9-0374": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0374': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0482": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0482': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0520": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0520': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0539": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0539': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0588": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0588': only 29/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0595": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0595': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0605": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0605': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0656": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0656': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0673": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0673': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0727": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0727': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0735": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0735': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0741": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0741': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0763": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0763': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0806": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0806': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0813": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0813': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0876": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0876': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0914": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0914': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-1011": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-1011': only 0/64 valid points within 12800 draws (valid-domain fraction too low)"
+   "symdiff-valv9-0361": "no real value: the formula is complex everywhere on the authors' input range"
   },
   "needs_simplipy_015": []
  },
@@ -2035,14 +2011,10 @@
  "fresh-87": {
   "catalog": "reproduction-bias-not-included-test-sets",
   "problems": 300,
-  "built": 297,
+  "built": 300,
   "pinned_points": 0,
   "skipped": {},
-  "check_failed": {
-   "not_included-056": "NoValidSampleFoundError: non-finite support/target for 'not_included-056': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "not_included-078": "NoValidSampleFoundError: non-finite support/target for 'not_included-078': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "not_included-138": "NoValidSampleFoundError: non-finite support/target for 'not_included-138': only 0/64 valid points within 12800 draws (valid-domain fraction too low)"
-  },
+  "check_failed": {},
   "needs_simplipy_015": []
  },
  "fresh-88": {

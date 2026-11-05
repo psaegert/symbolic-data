@@ -10,6 +10,10 @@ A variable's spec in an entry's ``vars`` block takes one of three forms:
 * ``expr``: a value derived from the entry's ``latent`` variables, ``x2 / x1`` -- a push-forward of the
   distributions the benchmark's authors give for quantities that are not inputs themselves.
 
+Values the benchmark's authors draw anew for every run (a constant, an input's range, which of two distributions
+the inputs follow) are an entry's ``per_run`` block (:func:`draw_per_run`): ``params`` are drawn once per run, before
+its rows, and a derived variable's ``expr`` may use them next to the latent variables.
+
 An entry may instead draw all its inputs jointly, ``inputs: {name: ..., kwargs: {...}}``, with a sampler
 from :data:`JOINT_INPUTS` (for distributions that are not a product over variables, such as clusters
 rotated in the whole input space), and may restrict its rows with ``row_constraints``: expressions over the
@@ -26,6 +30,7 @@ mixture. An entry without ``test`` draws its fitting and test rows together, as 
 """
 from __future__ import annotations
 
+import re
 from typing import Any, Callable, Mapping, Sequence
 
 import numpy as np
@@ -77,9 +82,10 @@ def draw_variable(spec: Mapping[str, Any], size: int, rng: np.random.Generator, 
 
 
 def draw_rows(variables: Mapping[str, Mapping[str, Any]], meta: Mapping[str, Any], variable_order: Sequence[str],
-              size: int, rng: np.random.Generator, layout: str = "random") -> np.ndarray:
+              size: int, rng: np.random.Generator, layout: str = "random",
+              params: Mapping[str, float] | None = None) -> np.ndarray:
     """``(size, len(variable_order))`` input rows of one entry: its joint sampler, else its latent variables
-    then each variable in order (drawn or derived)."""
+    then each variable in order (drawn, or derived from the latent variables and the run's ``params``)."""
     joint = meta.get("inputs")
     if joint is not None:
         sampler: Callable[..., np.ndarray] = JOINT_INPUTS.get(joint["name"])
@@ -88,6 +94,7 @@ def draw_rows(variables: Mapping[str, Mapping[str, Any]], meta: Mapping[str, Any
             raise ValueError(f"joint sampler {joint['name']!r} returned {x.shape}, expected {(size, len(variable_order))}")
         return x
     latent = {name: draw_variable(cfg, size, rng, layout) for name, cfg in (meta.get("latent") or {}).items()}
+    latent.update({name: np.float64(value) for name, value in (params or {}).items()})
     columns = []
     for key in variable_order:
         spec = variables[key]
@@ -96,6 +103,35 @@ def draw_rows(variables: Mapping[str, Mapping[str, Any]], meta: Mapping[str, Any
         else:
             columns.append(draw_variable(spec, size, rng, layout))
     return np.column_stack(columns).astype(float)
+
+
+#: What an entry's ``per_run`` block holds: the values drawn once per run, and the formula, inputs and latent
+#: variables that use them (each replaces the entry's own while a run is drawn).
+PER_RUN_KEYS = ("params", "prepared", "vars", "latent")
+_PARAM_NAME = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+
+
+def draw_per_run(per_run: Mapping[str, Any] | None, rng: np.random.Generator) -> dict[str, float]:
+    """One run's values of an entry's ``per_run`` params, each drawn from its spec (as a variable's)."""
+    if not per_run:
+        return {}
+    unknown = set(per_run) - set(PER_RUN_KEYS)
+    if unknown:
+        raise ValueError(f"per_run block: unknown keys {sorted(unknown)} (allowed: {', '.join(PER_RUN_KEYS)})")
+    out = {}
+    for name, spec in (per_run.get("params") or {}).items():
+        if not _PARAM_NAME.match(name) or name in _MATH or re.fullmatch(r"v\d+", name):
+            raise ValueError(f"per_run param {name!r}: a name that is not an input (vN) or a function")
+        out[name] = float(draw_variable(spec, 1, rng)[0])
+    return out
+
+
+def with_per_run(template: str, values: Mapping[str, float]) -> str:
+    """``template`` (a formula over the inputs and the per-run params) with this run's values written in."""
+    if not values:
+        return template
+    names = "|".join(re.escape(n) for n in sorted(values, key=len, reverse=True))
+    return re.sub(rf"(?<![\w.])({names})(?![\w(])", lambda m: f"({values[m.group(1)]!r})", template)
 
 
 #: What an entry's ``test`` block may change about how its test rows are drawn.
@@ -114,11 +150,17 @@ def spec_for_test_rows(variables: Mapping[str, Mapping[str, Any]], meta: Mapping
     unknown = set(spec) - set(TEST_KEYS)
     if unknown:
         raise ValueError(f"test block: unknown keys {sorted(unknown)} (allowed: {', '.join(TEST_KEYS)})")
+    return override_vars(variables, spec.get("vars")), {**meta, **{k: spec[k] for k in TEST_KEYS[1:] if k in spec}}
+
+
+def override_vars(variables: Mapping[str, Mapping[str, Any]],
+                  overrides: Mapping[str, Mapping[str, Any]] | None) -> dict[str, dict[str, Any]]:
+    """``variables`` with each overridden variable's sampling replaced (its ``name`` and ``units`` stay)."""
     out = {key: dict(s) for key, s in variables.items()}
-    for key, s in (spec.get("vars") or {}).items():
+    for key, s in (overrides or {}).items():
         kept = {k: v for k, v in out.get(key, {}).items() if k not in _SAMPLING_KEYS}
         out[key] = {**kept, **dict(s)}
-    return out, {**meta, **{k: spec[k] for k in TEST_KEYS[1:] if k in spec}}
+    return out
 
 
 def constraint_mask(meta: Mapping[str, Any], x: np.ndarray, variable_order: Sequence[str]) -> np.ndarray:

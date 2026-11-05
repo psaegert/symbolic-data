@@ -269,8 +269,11 @@ class ProblemSource:
             for _ in range(self.max_trials):
                 try:
                     if test_apart:
-                        realized = catalog.realize(entry, n_support, rng, engine=engine, layout=self.layout)
-                        test = catalog.realize(entry, n_validation, rng, engine=engine, layout=self.layout, part="test")
+                        # one run's per-run values (an entry's ``per_run`` params) are shared by its fitting and test rows
+                        shared = ({"per_run_values": catalog.draw_per_run(entry, rng)}
+                                  if (getattr(entry, "meta", None) or {}).get("per_run") else {})
+                        realized = catalog.realize(entry, n_support, rng, engine=engine, layout=self.layout, **shared)
+                        test = catalog.realize(entry, n_validation, rng, engine=engine, layout=self.layout, part="test", **shared)
                     else:
                         realized = catalog.realize(entry, n_points, rng, engine=engine, layout=self.layout)
                 except NoValidSampleFoundError:
