@@ -130,3 +130,13 @@ def test_a_ground_constant_changes_sign_as_a_whole(catalog, law, negated):
     variants = catalog.holdout_sign_variants(catalog.simplipy_engine.infix_to_prefix(law))
     assert len(variants) == 1
     assert _value(catalog, variants[0], 1.3) == pytest.approx(negated(1.3))
+
+
+def test_any_leaf_that_is_not_a_literal_is_a_variable():
+    """alpha + exp(-2): the site is exp(-2), not the whole sum. A name pattern (x/v + digits) read alpha as ground and
+    flipped the sum, which leaves the family."""
+    arity = {"+": 2, "*": 2, "exp": 1}
+    tokens = ["+", "alpha", "exp", "-2"]
+    assert generative._ground_sign_sites(tokens, arity, literals={3}, fittable={3}) == [2]
+    # a typed literal (here: not fittable) is still a literal, not a variable: its ground subtree is no site
+    assert generative._ground_sign_sites(["*", "alpha", "exp", "2"], arity, literals={3}, fittable=set()) == []

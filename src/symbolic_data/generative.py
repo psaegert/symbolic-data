@@ -180,16 +180,18 @@ def _is_zero(value: Any) -> bool:
         return False
 
 
-def _ground_sign_sites(tokens: list[str], arity: Mapping[str, int], fittable: set[int]) -> list[int]:
+def _ground_sign_sites(tokens: list[str], arity: Mapping[str, int], literals: set[int], fittable: set[int]) -> list[int]:
     """Start indices (prefix order) of the maximal variable-free subtrees that hold a fittable literal: the degrees
-    of freedom whose sign a sign variant flips."""
+    of freedom whose sign a sign variant flips. A variable is any leaf that is not a literal (``literals``: every
+    literal site, fittable or not), whatever its name -- a name pattern would read ``alpha`` as ground and flip a whole
+    sum, which leaves the family."""
     end = [0] * len(tokens)
     has_variable = [False] * len(tokens)
     has_fittable = [False] * len(tokens)
 
     def measure(index: int) -> int:
         token = tokens[index]
-        variable = bool(re.fullmatch(r"[xv]\d+", token))
+        variable = arity.get(token, 0) == 0 and index not in literals
         holds = index in fittable
         child = index + 1
         for _ in range(arity.get(token, 0)):
@@ -835,9 +837,11 @@ class LampleChartonCatalog(GenerativeCatalog):
         tokens = ["pow" if token in ("**", "^") else token for token in tokens]
         try:
             canonical = list(engine.simplify(tokens, mode=HOLDOUT_SIMPLIFY_MODE, effort=HOLDOUT_EFFORT))
-            fittable = {index for index, value, role in masking.literal_sites(canonical, engine)
+            literal_sites = list(masking.literal_sites(canonical, engine))
+            fittable = {index for index, value, role in literal_sites
                         if masking.mask_fittable(value, role) is not None and not _is_zero(value)}
-            sites = _ground_sign_sites(canonical, engine.operator_arity_compat, fittable)
+            literals = {index for index, _, _ in literal_sites}
+            sites = _ground_sign_sites(canonical, engine.operator_arity_compat, literals, fittable)
         except Exception:
             return None
         k = len(sites)
