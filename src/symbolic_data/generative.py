@@ -8,9 +8,11 @@ unary-binary operator trees (the Lample-Charton recipe) and realizes their suppo
 The skeleton/support/holdout machinery is private (``_generate``); this module is the public face.
 """
 import os
+import random
 import re
 import warnings
 import pickle
+import zlib
 from abc import ABC, abstractmethod
 from copy import deepcopy
 from dataclasses import dataclass
@@ -24,7 +26,7 @@ import numpy as np
 
 from symbolic_data.numeric import STORAGE_DTYPE
 
-from simplipy import DEFAULT_EFFORT as simplipy_DEFAULT_EFFORT, SimpliPyEngine
+from simplipy import DEFAULT_EFFORT as simplipy_DEFAULT_EFFORT, SimpliPyEngine, masking
 
 from symbolic_data.token_ops import normalize_expression, normalize_skeleton
 from simplipy.utils import explicit_constant_placeholders, substitute_constants
@@ -49,6 +51,15 @@ from symbolic_data.catalog import Catalog, ProblemCatalog, RealizedExpression
 # simplify-then-mask fold costs 1.85 ms, ~2% of the 96 ms/instance generation budget.
 HOLDOUT_SIMPLIFY_MODE = "permissive"
 HOLDOUT_EFFORT = 4
+
+# The registration-side SIGN CLOSURE (2026-11-05). A held-out law leaves its fittable constants free, so every sign
+# of one is inside its family -- but the canonical form writes a constant's sign into STRUCTURE (-c*x/(...) becomes
+# c*x/(-...)), so a sign variant can land on another prototype AND another image (the image layer evaluates with
+# fixed constant fills). Measured over the 29 T8 holdout pools: 2.3% of laws (simplipy 0.14.7) and 4.3% (0.15) had
+# a sign variant that was not held out. Each law therefore also registers the prototypes of its sign variants
+# (holdout_sign_variants): every pattern while 2**k - 1 <= HOLDOUT_SIGN_PATTERNS for k fittable constants, else
+# each single flip plus seeded random patterns up to that many. The probe side is unchanged: one lookup per draw.
+HOLDOUT_SIGN_PATTERNS = 63
 
 # Sentinel for "no failed draw produced row-validity evidence" in sample_data (all
 # failures were sampling errors / complex results, which carry no row counts).
@@ -155,6 +166,57 @@ def _relabel_variables_first_occurrence(tokens: list[str]) -> list[str]:
         else:
             out.append(token)
     return out
+
+
+def _count_variables(tokens: list[str]) -> int:
+    """How many distinct x<i> variables a (normalized) token list uses."""
+    return len({token for token in tokens if token.startswith("x") and token[1:].isdigit()})
+
+
+def _is_zero(value: Any) -> bool:
+    try:
+        return float(value) == 0.0
+    except (TypeError, ValueError):
+        return False
+
+
+def _ground_sign_sites(tokens: list[str], arity: Mapping[str, int], literals: set[int], fittable: set[int]) -> list[int]:
+    """Start indices (prefix order) of the maximal variable-free subtrees that hold a fittable literal: the degrees
+    of freedom whose sign a sign variant flips. A variable is any leaf that is not a literal (``literals``: every
+    literal site, fittable or not), whatever its name -- a name pattern would read ``alpha`` as ground and flip a whole
+    sum, which leaves the family."""
+    end = [0] * len(tokens)
+    has_variable = [False] * len(tokens)
+    has_fittable = [False] * len(tokens)
+
+    def measure(index: int) -> int:
+        token = tokens[index]
+        variable = arity.get(token, 0) == 0 and index not in literals
+        holds = index in fittable
+        child = index + 1
+        for _ in range(arity.get(token, 0)):
+            start, child = child, measure(child)
+            variable = variable or has_variable[start]
+            holds = holds or has_fittable[start]
+        end[index], has_variable[index], has_fittable[index] = child, variable, holds
+        return child
+
+    sites: list[int] = []
+
+    def collect(index: int) -> None:
+        if not has_variable[index]:
+            if has_fittable[index]:
+                sites.append(index)
+            return
+        child = index + 1
+        for _ in range(arity.get(tokens[index], 0)):
+            collect(child)
+            child = end[child]
+
+    if measure(0) != len(tokens):
+        raise ValueError("not a single prefix expression")
+    collect(0)
+    return sites
 
 
 class LampleChartonCatalog(GenerativeCatalog):
@@ -761,6 +823,79 @@ class LampleChartonCatalog(GenerativeCatalog):
         except Exception:
             return None    # cannot fold -> probe side fails closed
 
+    def holdout_sign_variants(self, tokens: list[str] | tuple[str, ...]) -> list[list[str]] | None:
+        """A law's sign variants (see HOLDOUT_SIGN_PATTERNS): its holdout-canonical form with the signs of its fittable
+        degrees of freedom flipped, each by wrapping it in ``neg`` (exact in float64 and in the reals).
+
+        A degree of freedom is what masking abstracts into ONE ``<constant>``: the maximal variable-free subtree around
+        a fittable literal (``masking.mask_fittable``). A lone literal is its own subtree, but a ground constant is not:
+        the canonical form keeps ``exp(-2)`` and ``cos(2)`` whole, and flipping the literal inside them leaves the
+        constant's sign (``cos``, ``cosh``) or keeps it positive (``exp``). A structural literal (an exponent, a root
+        index, a Bessel J/I order) keeps its sign, since flipping it leaves the family; a zero has no sign to flip.
+        Empty when the law has no fittable degree of freedom; None when the law cannot be canonicalized here."""
+        engine = self.simplipy_engine
+        tokens = ["pow" if token in ("**", "^") else token for token in tokens]
+        try:
+            canonical = list(engine.simplify(tokens, mode=HOLDOUT_SIMPLIFY_MODE, effort=HOLDOUT_EFFORT))
+            literal_sites = list(masking.literal_sites(canonical, engine))
+            fittable = {index for index, value, role in literal_sites
+                        if masking.mask_fittable(value, role) is not None and not _is_zero(value)}
+            literals = {index for index, _, _ in literal_sites}
+            sites = _ground_sign_sites(canonical, engine.operator_arity_compat, literals, fittable)
+        except Exception:
+            return None
+        k = len(sites)
+        if k == 0:
+            return []
+        if 2 ** k - 1 <= HOLDOUT_SIGN_PATTERNS:
+            patterns: list[int] = list(range(1, 2 ** k))
+        else:
+            # every single flip, then seeded random patterns; the seed is the law itself, so registration is the
+            # same in every process
+            patterns = [1 << bit for bit in range(min(k, HOLDOUT_SIGN_PATTERNS))]
+            seen = set(patterns)
+            rng = random.Random(zlib.crc32(" ".join(canonical).encode()))
+            while len(patterns) < HOLDOUT_SIGN_PATTERNS:
+                pattern = rng.getrandbits(k)
+                if pattern and pattern not in seen:
+                    seen.add(pattern)
+                    patterns.append(pattern)
+        bit_at = {site: bit for bit, site in enumerate(sites)}
+        variants = []
+        for pattern in patterns:
+            variant: list[str] = []
+            for index, token in enumerate(canonical):
+                bit = bit_at.get(index)
+                if bit is not None and pattern >> bit & 1:
+                    variant.append("neg")
+                variant.append(token)
+            variants.append(variant)
+        return variants
+
+    def _holdout_law_prototypes(self, tokens: list[str]) -> tuple[list[tuple[list[str], bool]], bool]:
+        """What one held-out law registers: its own prototype (none when it cannot be canonicalized, which the caller
+        reports) and the distinct prototypes of its sign variants, each flagged ``True`` as a variant; and whether
+        the variants could be derived (the caller reports a law registered without them).
+
+        A variant that loses a variable is dropped. Flipping the sign of one occurrence of a value the law writes
+        twice can cancel terms exactly ((a - x)/(x - a) is constant), which no member of the family with independent
+        constants does; registered, such a collapse held out every constant law (measured: most of the closure's
+        extra rejections were constant draws)."""
+        prototype = self.holdout_family_prototype(tokens, strict=True)
+        if prototype is None:
+            return [], True
+        prototypes = [(prototype, False)]
+        seen = {tuple(prototype)}
+        n_variables = _count_variables(prototype)
+        variants = self.holdout_sign_variants(tokens)
+        for variant in variants or []:
+            variant_prototype = self.holdout_family_prototype(variant, strict=True)
+            if (variant_prototype is not None and tuple(variant_prototype) not in seen
+                    and _count_variables(variant_prototype) == n_variables):
+                seen.add(tuple(variant_prototype))
+                prototypes.append((variant_prototype, True))
+        return prototypes, variants is not None
+
     def get_structural_prototype(self, expression: list[str] | tuple[str, ...], verbose: bool = False, debug: bool = False) -> list[str]:
         '''
         Reduce a prefix expression to its constant-free structural skeleton.
@@ -858,10 +993,13 @@ class LampleChartonCatalog(GenerativeCatalog):
         # A generative (skeleton-bearing) holdout exposes its own skeletons + engine/variables; a
         # declarative ProblemCatalog (e.g. the canonical `fastsrb`) does not, so derive its structural
         # prototypes from its expressions in THIS catalog's space (self.simplipy_engine / self.variables).
+        # laws registered without their sign variants (the variants could not be derived): the law itself is held
+        # out, so this fails safe, but it is a coverage loss and is reported below
+        without_variants: list[str] = []
         if isinstance(holdout_pool_obj, GenerativeCatalog):
             items = [
                 (holdout_pool_obj.get_structural_prototype(sk), holdout_pool_obj.simplipy_engine,
-                 holdout_pool_obj.variables, holdout_pool_obj.n_variables)
+                 holdout_pool_obj.variables, holdout_pool_obj.n_variables, False)
                 for sk in holdout_pool_obj.skeletons
             ]
         elif getattr(holdout_pool_obj, "frozen", False):
@@ -907,12 +1045,14 @@ class LampleChartonCatalog(GenerativeCatalog):
                         candidate = desugar_sqrt(candidate, self.simplipy_engine.operator_arity_compat)
                     except ValueError:
                         continue
-                    prototype = self.holdout_family_prototype(candidate, strict=True)
-                    if prototype is None:
+                    prototypes, variants_derived = self._holdout_law_prototypes(candidate)
+                    if not prototypes:
                         continue
+                    if not variants_derived:
+                        without_variants.append(str(problem.eq_id))
                     registered_any = True
-                    items.append((prototype, self.simplipy_engine,
-                                  self.variables, self.n_variables))
+                    items.extend((prototype, self.simplipy_engine, self.variables, self.n_variables, sign_variant)
+                                 for prototype, sign_variant in prototypes)
                 if candidates and not registered_any and getattr(problem, "gt_kind", None) != "none":
                     warnings.warn(
                         f"holdout pool {holdout_pool_obj.name!r}: no rendering of {problem.eq_id!r} "
@@ -934,12 +1074,14 @@ class LampleChartonCatalog(GenerativeCatalog):
                 except (ValueError, KeyError) as exc:
                     dropped.append(f"{entry_id} ({type(exc).__name__}: {exc})")
                     continue
-                prototype = self.holdout_family_prototype(prefix, strict=True)
-                if prototype is None:
+                prototypes, variants_derived = self._holdout_law_prototypes(prefix)
+                if not prototypes:
                     dropped.append(f"{entry_id} (not canonicalizable)")
                     continue
-                items.append((prototype, self.simplipy_engine,
-                              self.variables, self.n_variables))
+                if not variants_derived:
+                    without_variants.append(entry_id)
+                items.extend((prototype, self.simplipy_engine, self.variables, self.n_variables, sign_variant)
+                             for prototype, sign_variant in prototypes)
             if dropped:
                 # A law that fails to register is a law that silently TRAINS. The audit
                 # found 64 of fastsrb's 120 in that state behind a bare `continue`; a
@@ -948,7 +1090,15 @@ class LampleChartonCatalog(GenerativeCatalog):
                     f"holdout pool {holdout_pool_obj.name!r}: {len(dropped)} of {n_entries} "
                     f"laws failed to register and would silently train: {dropped}")
 
-        for no_constant_expression, engine, variables, n_variables in items:
+        if without_variants:
+            warnings.warn(
+                f"holdout pool {getattr(holdout_pool_obj, 'name', holdout_pool_obj)!r}: {len(without_variants)} law(s) are "
+                f"held out without their sign variants (the variants could not be derived): {without_variants[:10]}",
+                RuntimeWarning, stacklevel=2)
+
+        for no_constant_expression, engine, variables, n_variables, sign_variant in items:
+            if sign_variant and self.holdout_manager.has_skeleton(no_constant_expression):
+                continue    # another law (or rendering) already registered this variant, both layers
             executable_prefix_expression = engine.operators_to_realizations(no_constant_expression)
             prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
             code_string = engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
@@ -978,6 +1128,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                 compiled_fn,
                 num_constants=len(constants),
                 n_variables=width,
+                report=not sign_variant,
             )
 
         self._purge_contaminated_skeletons()
