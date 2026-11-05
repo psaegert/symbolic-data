@@ -220,15 +220,19 @@ def named_constants(p: dict[str, Any]) -> dict[str, float]:
     return out
 
 
-def prepared_of(formula: str, names: list[str], constants: dict[str, float], params: dict[str, str] | None = None) -> str:
+def prepared_of(formula: str, names: list[str], constants: dict[str, float], params: dict[str, str] | None = None,
+                signs: dict[str, str] | None = None, groups: dict[str, str] | None = None) -> str:
     """The formula over v1..vN with the given constants, in SimpliPy's infix; ``params`` (values drawn per run, the
-    formula's name -> the name they take in the per-run formula) stay as names. Parsed WITHOUT evaluation, so the
-    authors' structure reaches SimpliPy as written (its simplification is the judge's, as for the release catalogs)."""
-    params = params or {}
+    formula's name -> the name they take in the per-run formula) stay as names, read with the sign their range gives
+    them (``signs``: "positive", "nonnegative", ...), and the factors and terms that hold only them become one name
+    each, defined in ``groups`` (see :func:`_grouped`). Parsed WITHOUT evaluation, so the authors' structure reaches
+    SimpliPy as written (its simplification is the judge's, as for the release catalogs)."""
+    params, signs = params or {}, signs or {}
 
     def read(real: bool) -> sympy.Expr:
         local = {n: sympy.Symbol(n, real=True) if real and n in names else sympy.Symbol(n) for n in [*names, *constants]}
-        local.update({n: sympy.Symbol(t, real=True) if real else sympy.Symbol(t) for n, t in params.items()})
+        local.update({n: sympy.Symbol(t, **({signs[t]: True} if t in signs else {"real": True} if real else {}))
+                      for n, t in params.items()})
         e = parse_expr(formula, local_dict=local, evaluate=False)
         if constants:
             e = e.xreplace({sympy.Symbol(k): sympy.Float(repr(v)) for k, v in constants.items()})
@@ -247,10 +251,42 @@ def prepared_of(formula: str, names: list[str], constants: dict[str, float], par
     if e.has(sympy.re, sympy.im, sympy.I):
         # sympy takes a symbol to be complex and rewrites |exp(x)| as exp(re(x)): the inputs are real, so read them so
         e = over_v(real=True)
-    s = sympy.sstr(e, full_prec=False)
+    s = _grouped(e, {sym for sym in e.free_symbols if sym.name in params.values()}, groups if groups is not None else {})
     s = re.sub(r"\bAbs\(", "abs(", s)
     s = re.sub(r"\bpi\b", repr(math.pi), s)
     s = re.sub(r"\bE\b", repr(math.e), s)
+    return s
+
+
+def _grouped(e: sympy.Expr, params: set[sympy.Symbol], groups: dict[str, str]) -> str:
+    """``e`` printed with the factors of each product (and the terms of each sum) that hold only per-run values and
+    numbers replaced by one name, defined in ``groups`` as a per-run value computed from the drawn ones. A run's
+    formula then holds one number where the reference draw holds one (c2*v2/(c3*v1) -> g1*v2/v1 with g1 = c2/c3;
+    6.46*sqrt(m/(rho*A)) -> g1*sqrt(m/A) with g1 = 6.46/sqrt(rho)), which SimpliPy does not fold by itself. Without
+    ``params`` this is sympy's own print."""
+    found: dict[str, sympy.Expr] = {}
+
+    def walk(a: sympy.Expr) -> sympy.Expr:
+        if not a.args or a.free_symbols <= params:
+            return a
+        args = [walk(x) for x in a.args]
+        if isinstance(a, (sympy.Mul, sympy.Add)):
+            alone = [x for x in args if x.free_symbols <= params]
+            rest = [x for x in args if not x.free_symbols <= params]
+            if rest and any(x.free_symbols for x in alone) and not (len(alone) == 1 and alone[0].is_Symbol):
+                name = f"g{len(found) + 1}"
+                found[name] = a.func(*alone)
+                return a.func(sympy.Symbol(name), *rest, evaluate=False)
+            return a.func(*args, evaluate=False)
+        return a.func(*args)
+
+    taken = {sym.name for sym in e.free_symbols}
+    if any(f"g{k}" in taken for k in range(1, 100)):
+        raise Unsupported("a per-run value named like a group (g1, g2, ...)")
+    s = sympy.sstr(walk(e) if params else e, full_prec=False)
+    for name, group in found.items():
+        text = re.sub(r"\bAbs\(", "abs(", sympy.sstr(group, full_prec=False))
+        groups[name] = re.sub(r"\bE\b", repr(math.e), text)
     return s
 
 
@@ -578,8 +614,12 @@ def entry_of(p: dict[str, Any]) -> dict[str, Any]:
     if record:      # constants the authors draw per run: their distributions, and the formula over them
         as_param = {n: n if re.fullmatch(r"[A-Za-z_]\w*", n) and not re.fullmatch(r"v\d+", n) and n not in _RESERVED
                     else f"c_{n}" for n in record}            # FreeFall's v0 is not the target column v0
-        run = {**run, "params": {**{as_param[n]: _uniform(*r["range"]) for n, r in record.items()}, **run.get("params", {})},
-               "prepared": prepared_of(target, names, named, params=as_param)}
+        signs = {as_param[n]: s for n, r in record.items() if (s := _sign_of(*r["range"]))}
+        groups: dict[str, str] = {}
+        template = prepared_of(target, names, named, params=as_param, signs=signs, groups=groups)
+        run = {**run, "params": {**{as_param[n]: _uniform(*r["range"]) for n, r in record.items()}, **run.get("params", {}),
+                                 **{g: {"expr": text} for g, text in groups.items()}},
+               "prepared": template}
     if run:
         entry["per_run"] = run
     return entry
@@ -650,16 +690,34 @@ def real_anywhere(entry: dict[str, Any], n: int = 4096) -> bool:
     return bool((np.isfinite(y) & (y.imag == 0)).any())
 
 
+def _sign_of(lo: float, hi: float) -> str | None:
+    """The sign every value of [lo, hi] has, as a sympy assumption (a positive value leaves a root, as a number does)."""
+    return ("positive" if lo > 0 else "nonnegative" if lo == 0 else "negative" if hi < 0 else "nonpositive" if hi == 0
+            else None)
+
+
 # names a per-run value cannot take: the functions a derived input may use (symbolic_data.inputs)
 _RESERVED = {"pi", "e", "sqrt", "exp", "log", "log10", "sin", "cos", "tan", "arcsin", "arccos", "arctan", "sinh", "cosh",
              "tanh", "abs", "minimum", "maximum", "floor", "ceil"}
 PER_RUN_ATTEMPTS = 20   # runs' values tried before an entry whose authors draw values per run counts as unrealizable
+PER_RUN_SKELETON_RUNS = 5   # runs whose ground-truth skeleton is compared with the reference draw's
 
 
-def check(entries: dict[str, dict[str, Any]], n: int, engine) -> dict[str, str]:
-    """Compile and draw ``n`` rows of every entry, and record its valid-domain fraction; the failures by id."""
+def _realized_or_none(cat, entry, rng, engine):
+    from symbolic_data.errors import NoValidSampleFoundError
+    try:
+        return cat.realize(entry, 8, rng, engine=engine)
+    except NoValidSampleFoundError:
+        return None
+
+
+def check(entries: dict[str, dict[str, Any]], n: int, engine, skeleton_differs: dict[str, str] | None = None) -> dict[str, str]:
+    """Compile and draw ``n`` rows of every entry, and record its valid-domain fraction; the failures by id. An entry
+    with per-run values is also realized a few more times: a run whose ground truth masks to another skeleton than the
+    reference draw's is reported in ``skeleton_differs`` (the per-run formula should fold as the reference does)."""
     from symbolic_data.catalog import ProblemCatalog
     from symbolic_data.errors import NoValidSampleFoundError
+    from symbolic_data.token_ops import normalize_skeleton
     cat = ProblemCatalog.from_yaml({"metadata": {"name": "check", "version": 1}, "expressions": entries})
     failed = {}
     rng = np.random.default_rng(0)
@@ -679,6 +737,12 @@ def check(entries: dict[str, dict[str, Any]], n: int, engine) -> dict[str, str]:
                 except Exception as exc:   # the authors' test region has no valid point: keep the problem, test in range
                     del entries[eq_id]["test"]
                     entries[eq_id]["authors_test_unrealizable"] = f"{type(exc).__name__}: {exc}"[:200]
+            if "per_run" in entries[eq_id] and skeleton_differs is not None:
+                ref = normalize_skeleton(list(cat._compiled(entry, engine)["prefix"]))
+                runs = [r for r in (_realized_or_none(cat, entry, rng, engine) for _ in range(PER_RUN_SKELETON_RUNS)) if r]
+                differ = sum(normalize_skeleton(list(r.skeleton)) != ref for r in runs)
+                if differ:
+                    skeleton_differs[eq_id] = f"{differ} of {len(runs)} runs"
             f = round(finite_fraction(cat, entry, engine), 4)
             entries[eq_id].setdefault("meta", {})["finite_fraction"] = f
             if f < 0.05:
@@ -833,7 +897,9 @@ def main() -> None:
             ProblemCatalog.from_problems(pinned, name=f"{slug}-points", version=1, meta={
                 "display_name": points_display, **modified, "kind": "data", "rules": RULES,
                 "source_record": f"catalog-prep/sets/{tag}.json"}).save(out / f"{slug}-points.npz")
-        failed = check(entries, a.check, engine) if a.check and entries else {}
+        differs: dict[str, str] = {}
+        failed = check(entries, a.check, engine, differs) if a.check and entries else {}
+        differs = {k: v for k, v in differs.items() if k not in failed}      # a dropped entry is reported as failed
         pending = {}
         for eq_id, why in list(failed.items()):
             if "compile_failed" in why and NEEDS_015.search(entries[eq_id]["prepared"]):
@@ -851,9 +917,10 @@ def main() -> None:
             (out / f"{slug}.yaml").write_text(yaml.safe_dump(paths.public(doc), sort_keys=False, allow_unicode=True, width=120))
         report[tag] = {"catalog": slug, "problems": len(by_set[tag]), "built": len(entries), "pinned_points": len(pinned),
                        "skipped": skipped,
-                       "check_failed": failed, "needs_simplipy_015": sorted(pending)}
+                       "check_failed": failed, "needs_simplipy_015": sorted(pending),
+                       **({"per_run_skeleton_differs": differs} if differs else {})}
         print(f"{tag:14s} {slug:50s} built {len(entries):5d}+{len(pinned)}/{len(by_set[tag]):5d} skipped {len(skipped):4d} "
-              f"check-failed {len(failed):4d}", flush=True)
+              f"check-failed {len(failed):4d}" + (f" per-run skeleton differs {len(differs)}" if differs else ""), flush=True)
         report_path.write_text(json.dumps(report, indent=1) + "\n")
 
 

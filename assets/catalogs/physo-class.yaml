@@ -105,7 +105,9 @@ expressions:
           sample_type:
           - uni
           - pos
-      prepared: n0*exp(-v1/T)
+        g1:
+          expr: -1/T
+      prepared: n0*exp(g1*v1)
     meta:
       finite_fraction: 1.0
   free-fall:
@@ -179,7 +181,9 @@ expressions:
           sample_type:
           - uni
           - pos
-      prepared: exp(-k*v1)*cos(Phi + 1.389*v1)
+        g1:
+          expr: -k
+      prepared: exp(g1*v1)*cos(Phi + 1.389*v1)
     meta:
       finite_fraction: 1.0
   damped-harmonic-oscillator-b:
@@ -246,7 +250,9 @@ expressions:
           sample_type:
           - uni
           - pos
-      prepared: 1/(exp(5.9*v1/T) - 1)
+        g1:
+          expr: 5.9/T
+      prepared: 1/(exp(g1*v1) - 1)
     meta:
       finite_fraction: 1.0
   ideal-gas-law:
@@ -285,7 +291,9 @@ expressions:
           sample_type:
           - uni
           - pos
-      prepared: 8.314*n*v1/v2
+        g1:
+          expr: 8.314*n
+      prepared: g1*v1/v2
     meta:
       finite_fraction: 1.0
   terminal-velocity:
@@ -324,6 +332,8 @@ expressions:
           sample_type:
           - uni
           - pos
-      prepared: 6.460024372525*sqrt(v1/(rho*v2))
+        g1:
+          expr: 6.460024372525/sqrt(rho)
+      prepared: g1*sqrt(v1/v2)
     meta:
       finite_fraction: 1.0

@@ -12,7 +12,8 @@ A variable's spec in an entry's ``vars`` block takes one of three forms:
 
 Values the benchmark's authors draw anew for every run (a constant, an input's range, which of two distributions
 the inputs follow) are an entry's ``per_run`` block (:func:`draw_per_run`): ``params`` are drawn once per run, before
-its rows, and a derived variable's ``expr`` may use them next to the latent variables.
+its rows (a param given by an ``expr`` is computed from the ones before it), and a derived variable's ``expr`` may use
+them next to the latent variables.
 
 An entry may instead draw all its inputs jointly, ``inputs: {name: ..., kwargs: {...}}``, with a sampler
 from :data:`JOINT_INPUTS` (for distributions that are not a product over variables, such as clusters
@@ -118,11 +119,12 @@ def draw_per_run(per_run: Mapping[str, Any] | None, rng: np.random.Generator) ->
     unknown = set(per_run) - set(PER_RUN_KEYS)
     if unknown:
         raise ValueError(f"per_run block: unknown keys {sorted(unknown)} (allowed: {', '.join(PER_RUN_KEYS)})")
-    out = {}
+    out: dict[str, float] = {}
     for name, spec in (per_run.get("params") or {}).items():
         if not _PARAM_NAME.match(name) or name in _MATH or re.fullmatch(r"v\d+", name):
             raise ValueError(f"per_run param {name!r}: a name that is not an input (vN) or a function")
-        out[name] = float(draw_variable(spec, 1, rng)[0])
+        # a param with an ``expr`` is computed from the params before it (a run's values folded into one number)
+        out[name] = float(_evaluate(spec["expr"], out)) if "expr" in spec else float(draw_variable(spec, 1, rng)[0])
     return out
 
 
