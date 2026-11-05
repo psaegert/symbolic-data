@@ -72,7 +72,11 @@ class HoldoutManager:
         num_constants: int,
         *,
         n_variables: int | None = None,
+        report: bool = True,
     ) -> None:
+        """Register a held-out skeleton in both layers. ``report=False`` registers a law's sign variant: extra
+        coverage for a law that is registered on its own, so its image degradations are not warned about (the
+        law's own are)."""
         skeleton_key = tuple(self._normalize_tokens(skeleton_tokens))
         self.skeleton_hashes.add(skeleton_key)
 
@@ -81,6 +85,8 @@ class HoldoutManager:
                 warnings.filterwarnings("ignore", category=RuntimeWarning)
                 keys = self._evaluate_to_keys(compiled_fn, num_constants, n_variables)
         except (OverflowError, NameError) as exc:
+            if not report:
+                return
             # The structure layer is registered; only the functional-image layer is lost. That
             # is a real degradation of the equivalence backstop for THIS skeleton, so say so
             # instead of silently returning (a swallowed NameError here hid a variable-binding
@@ -104,7 +110,7 @@ class HoldoutManager:
         # caught -- vacuous, since such a law is not a scoreable benchmark item either (you
         # cannot compute FVU against an all-NaN target).
         discriminating = {key for key in keys if key[1] != "__unevaluable__"}
-        if not discriminating:
+        if not discriminating and report:
             # Loud, and now actually audible: register_holdout_pool no longer filters
             # RuntimeWarning at the call site (it was muting exactly this).
             warnings.warn(
@@ -112,6 +118,10 @@ class HoldoutManager:
                 f"grid; only the exact-structure layer discriminates it",
                 RuntimeWarning, stacklevel=2)
         self.expression_images.update(discriminating)
+
+    def has_skeleton(self, skeleton_tokens: Sequence[str]) -> bool:
+        """Whether this exact skeleton (normalized) is already registered."""
+        return tuple(self._normalize_tokens(skeleton_tokens)) in self.skeleton_hashes
 
     def is_held_out(
         self,
