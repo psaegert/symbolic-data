@@ -18,7 +18,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -127,14 +126,12 @@ def main() -> None:
         if catalog in FROZEN:
             frozen = freeze(catalog, doc)
             target = paths.frozen_path(f"{FROZEN[catalog].replace('/', '__')}.json")
-            if target.exists() and not target.with_suffix(".json.bak-20261103").exists():
-                shutil.copy(target, target.with_suffix(".json.bak-20261103"))
-            target.write_text(json.dumps(frozen, indent=1))
+            target.write_text(json.dumps(frozen, indent=1) + "\n")
             rec["frozen"] = {"k": len(frozen["ids"]), "formulas": len({i.rsplit("_alpha", 1)[0] for i in frozen["ids"]}),
-                             "file": str(target)}
+                             "file": str(target.relative_to(paths.PREP.parent))}
         report[catalog] = rec
         print(catalog, {k: (v if not isinstance(v, (dict, list)) else len(v)) for k, v in rec.items()}, flush=True)
-    paths.frozen_path("ERBENCH_2026-11-03.json").write_text(json.dumps(report, indent=1))
+    paths.frozen_path("ERBENCH_2026-11-03.json").write_text(json.dumps(report, indent=1) + "\n")
 
 
 if __name__ == "__main__":

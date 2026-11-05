@@ -17,8 +17,8 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    sampling: 'ERBench''s own generator (src/benchmark.py generate_problem / get_samples; srbf ruling 2026-11-03): one problem per
-      formula and alpha in {0, 0.5, 1}; every variable a fresh 1-3 part mixture (uniform sub-interval or normal with sigma
+    sampling: 'ERBench''s own generator (src/benchmark.py generate_problem / get_samples; srbf ruling 2026-11-03): one problem
+      per formula and alpha in {0, 0.5, 1}; every variable a fresh 1-3 part mixture (uniform sub-interval or normal with sigma
       = distance to the nearer edge / 3; integers: uniform-integer or binomial), clipped to the support; fitting rows in the
       window [a1, a1 + (b - a)/2], a1 = a + alpha (b - a)/2; test rows on the rest of the support, split by length; 0 or 1
       dummy column per problem (drawn once, seeded), its values drawn from the point set''s own values. srbf sets the number
