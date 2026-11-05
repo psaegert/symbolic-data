@@ -4,6 +4,7 @@ canonical form writes that sign into structure (here a sum becomes a difference)
 import os
 import warnings
 
+import numpy as np
 import pytest
 import yaml
 
@@ -107,3 +108,25 @@ def test_a_variant_that_loses_a_variable_is_not_registered(catalog):
         assert all(generative._count_variables(list(key)) == 2 for key in catalog.holdout_manager.skeleton_hashes)
     finally:
         catalog.clear_holdouts()
+
+
+def _value(catalog, tokens, x1):
+    """A prefix expression over x1 at one point, through the engine's own realization."""
+    from simplipy.utils import codify
+    engine = catalog.simplipy_engine
+    code = codify(engine.prefix_to_infix(engine.operators_to_realizations(list(tokens)), realization=True), ["x1"])
+    return float(engine.code_to_lambda(code)(x1))
+
+
+@pytest.mark.parametrize("law, negated", [
+    ("exp(-2)*x1", lambda x: -np.exp(-2) * x),
+    ("cos(-2)*x1", lambda x: -np.cos(2) * x),
+    ("cosh(-2)*x1", lambda x: -np.cosh(2) * x),
+    ("x1 + exp(-2)", lambda x: x - np.exp(-2)),
+])
+def test_a_ground_constant_changes_sign_as_a_whole(catalog, law, negated):
+    """The canonical form can keep a ground constant whole (exp(-2), cos(2)): masking makes it ONE <constant>, so its
+    sign variant negates the whole constant. Flipping the literal inside left cos/cosh unchanged and exp positive."""
+    variants = catalog.holdout_sign_variants(catalog.simplipy_engine.infix_to_prefix(law))
+    assert len(variants) == 1
+    assert _value(catalog, variants[0], 1.3) == pytest.approx(negated(1.3))
