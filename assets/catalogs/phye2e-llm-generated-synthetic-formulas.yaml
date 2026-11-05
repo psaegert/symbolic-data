@@ -2,6 +2,7 @@ metadata:
   name: phye2e-llm-generated-synthetic-formulas
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
+  srbf_changes: [{"kind": "filled", "problems": 600, "text": "For each formula the authors' code picks one of two input distributions at random (a folded normal or a uniform), anew in every evaluation run and without a seed; srbf picks it once per problem with its own seed and keeps it."}]
   license: "Apache-2.0 (figshare 10.6084/m9.figshare.29615831, PhyE2E_datas; Ying et al. 2025, Nat. Mach. Intell. 7:1726)"
   citation: {"paper": {"short": "Ying et al. 2025", "title": "A neural symbolic model for space physics", "venue": "Nature Machine Intelligence 7(10):1726-1741", "url": "https://doi.org/10.1038/s42256-025-01126-3"}, "data": {"short": "figshare 10.6084/m9.figshare.29615831.v1", "title": "PhyE2E_datas", "url": "https://doi.org/10.6084/m9.figshare.29615831.v1"}}
   description: PhyE2E LLM-generated synthetic formulas

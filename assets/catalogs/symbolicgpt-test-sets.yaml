@@ -2,6 +2,7 @@ metadata:
   name: symbolicgpt-test-sets
   version: 1
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "dummy inputs"]}
+  srbf_changes: [{"kind": "part", "problems": 2792, "text": "srbf runs 988 problems of a fixed sample of 1,024 of the 3,780 published test formulas (the paper speaks of 4,000): 21 have no point where they are defined and 15 have no real value at all."}, {"kind": "changed", "problems": 2, "text": "For 2 formulas the authors' test region contains no point where the formula is defined; srbf tests them on the training range."}]
   license: "MIT (mojivalipour/symbolicgpt; HF DataAnalyticsLab/SymbolicGPT)"
   citation: {"paper": {"short": "Valipour et al. 2021", "title": "SymbolicGPT: A Generative Transformer Model for Symbolic Regression", "venue": "arXiv preprint arXiv:2106.14131", "url": "https://arxiv.org/abs/2106.14131"}, "data": {"short": "SymbolicGPT Dropbox data folder (authors' release)", "title": "SymbolicGPT datasets, Test files of the 1/2/3/1-5-variable settings", "url": "https://www.dropbox.com/sh/yq03daorth1h4kj/AADolbgySCjOO18qGoP5Abqfa?dl=0"}}
   description: SymbolicGPT test sets

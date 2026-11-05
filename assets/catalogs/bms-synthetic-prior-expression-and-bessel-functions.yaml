@@ -2,6 +2,7 @@ metadata:
   name: bms-synthetic-prior-expression-and-bessel-functions
   version: 1
   tags: {"origin": "generated formulas", "tags": ["integer inputs", "srbf-modified"]}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 2 of the 3 problems here; the noise-free Bessel study is in 'BMS synthetic prior expression and Bessel functions* (fixed points)'."}, {"kind": "filled", "problems": 1, "text": "For the noisy Bessel study the authors give only the range x in [0, 4], not how the points are placed; srbf samples x uniformly on [0, 4] and the order nu uniformly from 0 to 4."}]
   license: "facts only: formulas cited from Guimera et al. 2020 (Bayesian machine scientist, Sci. Adv. 6:eaav6971, CC BY-NC 4.0); no text or tables reproduced"
   citation: {"paper": {"short": "Guimerà et al. 2020", "title": "A Bayesian machine scientist to aid in the solution of challenging scientific problems", "venue": "Science Advances 6(5):eaav6971", "url": "https://doi.org/10.1126/sciadv.aav6971"}}
   description: BMS synthetic prior expression and Bessel functions

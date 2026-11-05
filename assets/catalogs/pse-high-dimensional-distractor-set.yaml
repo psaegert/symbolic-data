@@ -2,6 +2,7 @@ metadata:
   name: pse-high-dimensional-distractor-set
   version: 1
   tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
+  srbf_changes: []
   license: "MIT (intell-sci-comput/PSE; Ruan et al. 2026, arXiv:2407.04405)"
   citation: {"paper": {"short": "Ruan et al. 2025", "title": "Discovering physical laws with parallel symbolic enumeration", "venue": "Nature Computational Science 6(1):53-66", "url": "https://doi.org/10.1038/s43588-025-00904-8"}, "data": {"short": "GitHub intell-sci-comput/PSE@7105cab", "title": "PSE data/many_input generate.py + synthetic_50d_datasets_with_gt (MIT)", "url": "https://github.com/intell-sci-comput/PSE/tree/7105caba63e754150dd3b160443984456ec99cd7/data/many_input"}}
   description: PSE high-dimensional distractor set

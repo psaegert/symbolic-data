@@ -2,6 +2,7 @@ metadata:
   name: friedman-random-function-generator-instances
   version: 1
   tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
+  srbf_changes: []
   license: "facts only: 12 random-function instances generated with HeuristicLab's FriedmanRandomFunction provider (GPL-3.0 code, not copied; Friedman 2001, Ann. Stat. 29:1189)"
   citation: {"paper": {"short": "Friedman 2001", "title": "Greedy function approximation: A gradient boosting machine.", "venue": "The Annals of Statistics 29(5):1189-1232", "url": "https://doi.org/10.1214/aos/1013203451"}, "data": {"short": "GitHub heal-research/HeuristicLab@ecf4b5c", "title": "HeuristicLab v3.3.16 FriedmanRandomFunction instance provider (GPL-3.0)", "url": "https://github.com/heal-research/HeuristicLab/tree/ecf4b5c9ed412464fa967d981db3f9b0cfb8b378/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Friedman"}}
   description: Friedman random-function generator instances (HeuristicLab)

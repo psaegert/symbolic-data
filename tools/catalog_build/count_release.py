@@ -78,7 +78,7 @@ def _citation(name: str) -> dict[str, Any] | None:
 def described(md: dict[str, Any]) -> dict[str, Any]:
     """What a list of the benchmarks shows next to a catalog: its tags, description, sources and license."""
     return {"tags": md.get("tags"), "description": md.get("description"), "sources": md.get("sources") or [],
-            "license": md.get("license"), "citation": md.get("citation")}
+            "license": md.get("license"), "citation": md.get("citation"), "srbf_changes": md.get("srbf_changes")}
 
 
 def from_yaml(path: Path, tier: dict[str, dict[str, str]]) -> dict[str, Any]:

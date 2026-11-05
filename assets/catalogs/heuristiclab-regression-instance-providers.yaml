@@ -2,6 +2,7 @@ metadata:
   name: heuristiclab-regression-instance-providers
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  srbf_changes: [{"kind": "part", "problems": 362, "text": "srbf runs 14 of HeuristicLab's 376 problems here and 1 in its pinned-points set: 164 are run in other srbf sets (Keijzer, Korns, Nguyen, Vladislavleva, Feynman, ...), the 88 generated instances have no published formula, the 94 PennML datasets are run in SRBench, the 14 real-world and Miba datasets have no clear license, and AircraftMaximumLift has inputs without a range."}]
   license: "facts only: formulas cited from the defining authors and instances generated with HeuristicLab's providers (heal-research/HeuristicLab, GPL-3.0 code, not copied)"
   citation: {"data": {"short": "GitHub heal-research/HeuristicLab@c57538b", "title": "HeuristicLab regression instance providers (GPL-3.0)", "url": "https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression"}}
   description: HeuristicLab regression instance providers

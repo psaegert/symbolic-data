@@ -2,6 +2,7 @@ metadata:
   name: scimed-settling-sphere-configurations
   version: 1
   tags: {"origin": "science formula", "tags": ["dummy inputs"]}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 4 of the 5 configurations: D is the authors' control without a formula."}]
   license: "MIT (LironSimon/SciMED) + CC BY 4.0 (Keren et al. 2023, Sci. Rep. 13:1249)"
   citation: {"paper": {"short": "Keren et al. 2023", "title": "A computational framework for physics-informed symbolic regression with straightforward integration of domain knowledge", "venue": "Scientific Reports 13(1):1249", "url": "https://doi.org/10.1038/s41598-023-28328-2"}, "data": {"short": "GitHub LironSimon/SciMED@2779587", "title": "SciMED data_generators/ (MIT)", "url": "https://github.com/LironSimon/SciMED/tree/27795878fd565d5aa238250bc9047eac27cebe25/data_generators"}}
   description: SciMED settling-sphere configurations

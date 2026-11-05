@@ -2,6 +2,7 @@ metadata:
   name: errless-synthetic-posterior-set
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
+  srbf_changes: []
   license: "CC BY 4.0 (ERRLESS, arXiv:2608.09617, Table 4)"
   citation: {"paper": {"short": "Boussif et al. 2026", "title": "Bayesian Symbolic Regression with Entropic Reinforcement Learning", "venue": "UAI 2026", "url": "https://arxiv.org/abs/2608.09617"}}
   description: ERRLESS synthetic posterior set

@@ -2,6 +2,7 @@ metadata:
   name: reproduction-bias-not-included-test-sets
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 3, "text": "srbf runs 297 of the 300 expressions: 3 have no point where they are defined."}, {"kind": "filled", "problems": 297, "text": "The authors give every input a random interval inside [-10, 10], chosen anew in every run; srbf chooses the interval once per problem with its own seed and keeps it."}]
   license: "MIT (Shun-0922/Mem-Bias-NSR; Sato & Sato 2025, arXiv:2505.22081)"
   citation: {"paper": {"short": "Sato & Sato 2025", "title": "Can Test-time Computation Mitigate Reproduction Bias in Neural Symbolic Regression?", "venue": "arXiv preprint arXiv:2505.22081", "url": "https://arxiv.org/abs/2505.22081"}, "data": {"short": "GitHub Shun-0922/Mem-Bias-NSR@7a153ec", "title": "Mem-Bias-NSR not_included.json + baseline.json (MIT)", "url": "https://github.com/Shun-0922/Mem-Bias-NSR/tree/7a153ec94f59caffbd9404094a2e1eab58aa0c2e/test_datasets/original_datasets"}}
   description: Reproduction-bias 'not included' test sets

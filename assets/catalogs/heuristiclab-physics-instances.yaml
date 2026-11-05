@@ -2,6 +2,7 @@ metadata:
   name: heuristiclab-physics-instances
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  srbf_changes: []
   license: "facts only: formulas and ranges cited from the HeuristicLab Physics instance provider (heal-research/HeuristicLab, GPL-3.0 code, not copied) and Chen et al. 2018 (arXiv:1706.02281)"
   citation: {"paper": {"short": "Chen et al. 2018", "title": "A multilevel block building algorithm for fast modeling generalized separable systems", "venue": "Expert Systems with Applications 109:25-34", "url": "https://doi.org/10.1016/j.eswa.2018.05.021"}, "data": {"short": "GitHub heal-research/HeuristicLab@c57538b", "title": "HeuristicLab Physics Benchmark Problems provider (GPL-3.0)", "url": "https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Physics"}}
   description: HeuristicLab Physics instances

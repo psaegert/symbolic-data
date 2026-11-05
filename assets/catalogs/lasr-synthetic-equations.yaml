@@ -2,6 +2,7 @@ metadata:
   name: lasr-synthetic-equations
   version: 1
   tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
+  srbf_changes: []
   license: "Apache-2.0 (trishullab/LibraryAugmentedSymbolicRegression.jl; Grayeli et al. 2024, arXiv:2409.09359)"
   citation: {"paper": {"short": "Grayeli et al. 2024", "title": "Symbolic Regression with a Learned Concept Library", "venue": "NeurIPS 2024", "url": "https://arxiv.org/abs/2409.09359"}, "data": {"short": "GitHub trishullab/LibraryAugmentedSymbolicRegression.jl@de6b22d", "title": "LaSR experiments/dataset.py synthetic_equations() (Apache-2.0)", "url": "https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/experiments/dataset.py"}}
   description: LaSR synthetic equations

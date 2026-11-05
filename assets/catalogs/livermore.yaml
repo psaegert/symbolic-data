@@ -2,6 +2,7 @@ metadata:
   name: livermore
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "changed", "problems": 3, "text": "srbf also runs 3 problems that are not in the published Livermore set, taken from a later DSO code release: a new Livermore-19 and exact copies of Livermore-7 and -8 (7a, 8a); as a result the paper's Livermore-19 to -22 appear as Livermore-20 to -23."}]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   citation: {"paper": {"short": "Mundhenk et al. 2021", "title": "Symbolic Regression via Neural-Guided Genetic Programming Population Seeding", "venue": "NeurIPS 2021", "url": "https://arxiv.org/abs/2111.00053"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: Livermore suite (LLNL/DSR).

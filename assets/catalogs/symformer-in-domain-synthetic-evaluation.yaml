@@ -2,6 +2,7 @@ metadata:
   name: symformer-in-domain-synthetic-evaluation
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 18976, "text": "The authors never published their evaluation formulas; srbf regenerated the 20,000 with the authors' generator and seed and runs a fixed sample of 1,024 of them."}]
   license: "CC BY 4.0 (Vastl et al. 2024, SymFormer, IEEE Access 12:37840); formulas drawn by srbf from the authors' generator"
   citation: {"paper": {"short": "Vastl et al. 2024", "title": "SymFormer: End-to-End Symbolic Regression Using Transformer-Based Architecture", "venue": "IEEE Access 12:37840-37849", "url": "https://doi.org/10.1109/ACCESS.2024.3374649"}, "data": {"short": "GitHub vastlik/symformer@35bc93c", "title": "SymFormer generator and configs (no licence file)", "url": "https://github.com/vastlik/symformer/tree/35bc93c6c563c68a07a3a9adcf9b10d5b87a9d46"}}
   description: SymFormer in-domain synthetic evaluation

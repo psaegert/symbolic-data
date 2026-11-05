@@ -2,6 +2,7 @@ metadata:
   name: sym-q-ai-feynman-with-drift-terms
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 15, "text": "srbf runs the 15 AI-Feynman expressions without the drift terms that Sym-Q adds in its drift experiment; the paper never lists which drift goes with which expression, so no drift variant is run."}]
   license: "MIT (EPFL-IMOS/Sym-Q) + CC0 1.0 (Tian et al., arXiv:2402.05306)"
   citation: {"paper": {"short": "Tian et al. 2025", "title": "Interactive symbolic regression with co-design mechanism through offline reinforcement learning", "venue": "Nature Communications 16(1):3930", "url": "https://doi.org/10.1038/s41467-025-59288-y"}, "data": {"short": "GitHub EPFL-IMOS/Sym-Q@104a486", "title": "Sym-Q utils.py BENCHMARK (MIT)", "url": "https://github.com/EPFL-IMOS/Sym-Q/blob/104a486070f615cd4fdb93a0e95adfd59625ee64/utils.py"}}
   description: Sym-Q AI-Feynman with drift terms

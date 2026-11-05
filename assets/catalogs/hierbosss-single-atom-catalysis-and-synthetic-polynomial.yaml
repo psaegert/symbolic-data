@@ -2,6 +2,7 @@ metadata:
   name: hierbosss-single-atom-catalysis-and-synthetic-polynomial
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 1 of the 2 HierBOSSS problems here (the synthetic polynomial); the catalysis data are in 'HierBOSSS single-atom catalysis'."}]
   license: "CC BY 4.0 (Roy et al. 2025, HierBOSSS, arXiv:2509.19710v1) + MIT (Roy-SR-007/HierBOSSS)"
   citation: {"paper": {"short": "Roy et al. 2025", "title": "Probabilistic Symbolic Regression for Equation Discovery via Operator-induced and Regularized Symbolic Forests", "venue": "arXiv preprint (v1)", "url": "https://arxiv.org/abs/2509.19710"}, "data": {"short": "HierBOSSS_simulated_example.R (Wayback; repository deleted)", "title": "Roy-SR-007/HierBOSSS simulated example script (MIT)", "url": "https://web.archive.org/web/20260609230815/https://github.com/Roy-SR-007/HierBOSSS/blob/c9c72931e18ce0cb791c42ff6a6b214dcab28d75/HierBOSSS_simulated_example.R"}}
   description: HierBOSSS single-atom catalysis and synthetic polynomial

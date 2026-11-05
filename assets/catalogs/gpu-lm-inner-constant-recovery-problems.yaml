@@ -2,6 +2,7 @@ metadata:
   name: gpu-lm-inner-constant-recovery-problems
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: []
   license: "facts only: formulas and ranges cited from the CuSR e3 corpus manifest (TensorConv/CuSR; arXiv:2609.03352); no upstream license"
   citation: {"paper": {"short": "Mao et al. 2026", "title": "Efficient Constant Optimization for Symbolic Regression with GPU-Accelerated Tree-Based Genetic Programming", "venue": "IEEE HPEC 2026", "url": "https://arxiv.org/abs/2609.03352"}, "data": {"short": "GitHub TensorConv/CuSR@414b905", "title": "CuSR e3 corpus_manifest.json", "url": "https://github.com/TensorConv/CuSR/blob/414b9057ca0289befcc5e0bb270f87c0f430bb58/experiments/e3_admit_criterion/out/corpus_manifest.json"}}
   description: GPU-LM inner-constant recovery problems

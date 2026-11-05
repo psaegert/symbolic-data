@@ -2,6 +2,7 @@ metadata:
   name: koza
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: []
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   citation: {"paper": {"short": "Koza 1994", "title": "Genetic Programming II: Automatic Discovery of Reusable Programs", "venue": "MIT Press, 1994 (Sec. 5.1)", "url": "https://archive.org/details/geneticprogrammi0000koza_a3i3"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: Koza classic GP problems (quintic/sextic).

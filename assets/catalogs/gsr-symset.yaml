@@ -2,6 +2,7 @@ metadata:
   name: gsr-symset
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: []
   license: "facts only: formulas and ranges cited from Tohme et al. 2023 (GSR, TMLR, arXiv:2205.15569), Table 20; no upstream license"
   citation: {"paper": {"short": "Tohme et al. 2022", "title": "GSR: A Generalized Symbolic Regression Approach", "venue": "Transactions on Machine Learning Research (12/2022)", "url": "https://arxiv.org/abs/2205.15569"}}
   description: GSR SymSet

@@ -2,6 +2,7 @@ metadata:
   name: eql-robotic-arm-forward-kinematics
   version: 1
   tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs", "srbf-modified"]}
+  srbf_changes: [{"kind": "filled", "problems": 28, "text": "The authors never published how the joint angles were generated, only that they follow sinusoids of amplitude up to pi/2 (pi for the extrapolation test); srbf samples each angle as (pi/2) sin(u) with u uniform on [0, 2 pi), and with amplitude pi for the extrapolation test."}, {"kind": "filled", "problems": 28, "text": "The authors never print the arm's formulas; srbf derives them from the stated geometry (a planar arm with segments of length 0.5)."}]
   license: "facts only: task geometry and ranges cited from Martius & Lampert 2016 (arXiv:1610.02995); formulas derived by srbf; no upstream license"
   citation: {"paper": {"short": "Martius & Lampert 2016", "title": "Extrapolation and learning equations", "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)", "url": "https://arxiv.org/abs/1610.02995"}}
   description: EQL robotic-arm forward kinematics

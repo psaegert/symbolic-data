@@ -2,6 +2,7 @@ metadata:
   name: ai-feynman-database-100-main-equations
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 74 of the 100 equations: in the other 26 no input is left once the units are removed, so the target is a constant."}]
   license: "facts only: formulas, ranges and units cited from the Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, Sci. Adv. 6:eaay2631); no upstream license"
   citation: {"paper": {"short": "Udrescu & Tegmark 2020", "title": "AI Feynman: A physics-inspired method for symbolic regression", "venue": "Science Advances 6(16):eaay2631", "url": "https://doi.org/10.1126/sciadv.aay2631"}, "data": {"short": "Feynman Symbolic Regression Database (FSReD), Wayback 2021-10-19", "title": "AI Feynman / Feynman Symbolic Regression Database download page (space.mit.edu, host now dead)", "url": "https://web.archive.org/web/20211019022249/https://space.mit.edu/home/tegmark/main_aifeynman.html"}}
   description: 'AI Feynman database: 100 main equations (FSReD)'

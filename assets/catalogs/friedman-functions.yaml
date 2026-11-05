@@ -2,6 +2,7 @@ metadata:
   name: friedman-functions
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  srbf_changes: []
   license: "facts only: test functions and input distributions cited from Friedman 1991 (Ann. Stat. 19:1-67); no upstream license"
   citation: {"paper": {"short": "Friedman 1991", "title": "Multivariate Adaptive Regression Splines", "venue": "The Annals of Statistics 19(1):1-67", "url": "https://doi.org/10.1214/aos/1176347963"}}
   description: Friedman functions

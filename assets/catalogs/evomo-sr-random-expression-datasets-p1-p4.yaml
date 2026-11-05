@@ -2,6 +2,7 @@ metadata:
   name: evomo-sr-random-expression-datasets-p1-p4
   version: 1
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
+  srbf_changes: [{"kind": "changed", "problems": 4, "text": "In the out-of-range test the authors move each input out of the box equally often; srbf picks the moved input at random for each point, which matches only on average."}]
   license: "CC BY 4.0 (Rossetti et al. 2026, EvoMO-SR, arXiv:2609.36187, Table 3)"
   citation: {"paper": {"short": "Rossetti et al. 2026", "title": "EvoMO-SR: Multiobjective LLM-based Evolution of Symbolic Expressions with substructure guidance", "venue": "arXiv preprint arXiv:2609.36187", "url": "https://arxiv.org/abs/2609.36187"}, "data": {"short": "anonymous.4open.science EvoMO-SR-47B6 manifest.csv", "title": "EvoMO-SR anonymised code release, random_data/random_functions/manifest.csv", "url": "https://anonymous.4open.science/api/repo/EvoMO-SR-47B6/file/random_data/random_functions/manifest.csv"}}
   description: EvoMO-SR random-expression datasets P1-P4

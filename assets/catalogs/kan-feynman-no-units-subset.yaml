@@ -2,6 +2,7 @@ metadata:
   name: kan-feynman-no-units-subset
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 1 of the 27 formulas: 20 have no input range from the authors, and 6 are identical to problems srbf runs in its Feynman set."}]
   license: "CC BY 4.0 (Liu et al. 2024, KAN, arXiv:2404.19756, Table 2)"
   citation: {"paper": {"short": "Liu et al. 2025", "title": "KAN: Kolmogorov-Arnold Networks", "venue": "ICLR 2025", "url": "https://arxiv.org/abs/2404.19756"}}
   description: KAN Feynman_no_units subset

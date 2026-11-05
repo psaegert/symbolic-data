@@ -2,6 +2,7 @@ metadata:
   name: e2e-in-domain-synthetic-validation-set
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 8976, "text": "srbf runs a fixed sample of 1,024 of the 10,000 validation functions, which it regenerated with the authors' own code and seed (the authors publish no list)."}]
   license: "Apache-2.0 (facebookresearch/symbolicregression; Kamienny et al. 2022, arXiv:2204.10532)"
   citation: {"paper": {"short": "Kamienny et al. 2022", "title": "End-to-end symbolic regression with transformers", "venue": "NeurIPS 2022", "url": "https://arxiv.org/abs/2204.10532"}, "data": {"short": "GitHub facebookresearch/symbolicregression@c4144c9", "title": "symbolicregression generator (Apache-2.0)", "url": "https://github.com/facebookresearch/symbolicregression/tree/c4144c99d078dd611795338e24fb3da49a32b9d8"}}
   description: E2E in-domain synthetic validation set

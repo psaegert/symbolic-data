@@ -2,6 +2,7 @@ metadata:
   name: erbench-syneq
   version: 2
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "dummy inputs"]}
+  srbf_changes: [{"kind": "changed", "problems": 6, "text": "2 of ERBench's 5,303 SynEq formulas are exact copies of others and are kept once (5,301 formulas, 15,903 problems)."}, {"kind": "part", "problems": 14879, "text": "srbf runs a fixed sample of 1,024 of these 15,903 problems, chosen by a hash of each name."}]
   citation: {"paper": {"short": "Kahlmeyer et al. 2026", "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms", "venue": "arXiv preprint arXiv:2606.09276", "url": "https://arxiv.org/abs/2606.09276"}, "data": {"short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c", "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)", "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"}}
   description: ERBench SynEq family (5301 entries after deduplication; extended eval tier); one problem per formula and alpha
     (ERBench's generator).

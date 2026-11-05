@@ -2,6 +2,7 @@ metadata:
   name: multi-view-sr-synthetic-benchmarks
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  srbf_changes: [{"kind": "part", "problems": 8, "text": "srbf runs 8 of the 16 views here; the 8 views of the first family, which use fixed grids, are in its pinned-points set."}, {"kind": "changed", "problems": 8, "text": "The authors pose one task per family: one formula, with constants refitted per view, fitted to all 4 views at once, on targets rescaled to 10 y / max|y|; srbf runs each view as a separate problem on the unscaled target."}]
   license: "CC BY 4.0 (Russeil et al. 2024, arXiv:2402.04298)"
   citation: {"paper": {"short": "Russeil et al. 2024", "title": "Multiview Symbolic Regression", "venue": "Proceedings of the Genetic and Evolutionary Computation Conference (GECCO '24), pp. 961-970", "url": "https://doi.org/10.1145/3638529.3654087"}, "data": {"short": "GitHub erusseil/MvSR-analysis@ec5abd6", "title": "MvSR-analysis generate_toy.py (no licence file)", "url": "https://github.com/erusseil/MvSR-analysis/blob/ec5abd674c466d4d22957122db7b26680c457e59/generate_toy.py"}}
   description: Multi-view SR synthetic benchmarks

@@ -2,6 +2,7 @@ metadata:
   name: hep-llm-sr-angular-distribution-problems
   version: 1
   tags: {"origin": "science formula", "tags": ["extrapolation"]}
+  srbf_changes: [{"kind": "part", "problems": 3, "text": "srbf runs the 2 formula problems of the paper; its 3 data tasks were never published."}, {"kind": "changed", "problems": 2, "text": "The authors work with binned data (30 bins in cos theta); srbf samples cos theta uniformly at random, and tests the out-of-domain problem on the 30 bin centres."}]
   license: "CC BY 4.0 (Morales-Alvarado 2025, arXiv:2510.03397)"
   citation: {"paper": {"short": "Morales-Alvarado 2025", "title": "Foundation models for equation discovery in high energy physics", "venue": "arXiv preprint arXiv:2510.03397", "url": "https://arxiv.org/abs/2510.03397"}}
   description: HEP LLM-SR angular-distribution problems

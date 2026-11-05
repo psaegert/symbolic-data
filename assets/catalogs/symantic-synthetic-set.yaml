@@ -2,6 +2,7 @@ metadata:
   name: symantic-synthetic-set
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  srbf_changes: []
   license: "facts only: formulas and ranges cited from Muthyala et al. 2025 (SyMANTIC, Ind. Eng. Chem. Res. 64:3354; arXiv:2502.03367, CC BY-NC-ND 4.0); no text or tables reproduced"
   citation: {"paper": {"short": "Muthyala et al. 2025", "title": "SyMANTIC: An Efficient Symbolic Regression Method for Interpretable and Parsimonious Model Discovery in Science and Beyond", "venue": "Industrial & Engineering Chemistry Research 64(6):3354-3369", "url": "https://doi.org/10.1021/acs.iecr.4c03503"}}
   description: SyMANTIC synthetic set

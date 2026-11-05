@@ -2,6 +2,7 @@ metadata:
   name: shape-constrained-sr-synthetic
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 12, "text": "srbf runs 7 of the 19 problems: the other 12 are identical to problems in srbf's Feynman sets."}, {"kind": "changed", "problems": 7, "text": "srbf does not check the shape constraints that the authors set for each problem."}]
   license: "facts only: formulas and input spaces cited from Kronberger et al. 2022 (Evol. Comput. 30(1):75, arXiv:2103.15624); no upstream license"
   citation: {"paper": {"short": "Kronberger et al. 2022", "title": "Shape-Constrained Symbolic Regression—Improving Extrapolation with Prior Knowledge", "venue": "Evolutionary Computation 30(1):75-98", "url": "https://doi.org/10.1162/evco_a_00294"}}
   description: Shape-constrained SR synthetic (FDE + FEY)

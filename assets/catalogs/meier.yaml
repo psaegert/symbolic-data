@@ -2,6 +2,7 @@ metadata:
   name: meier
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 2, "text": "srbf runs 2 of the 4 functions of Meier et al. (2013): the other two are Koza's quintic and sextic, run in srbf's Koza set."}]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   citation: {"paper": {"short": "Meier et al. 2013", "title": "Accelerating convergence in cartesian genetic programming by using a new genetic operator", "venue": "Proceedings of the 15th annual conference on Genetic and evolutionary computation (GECCO '13), pp. 981-988", "url": "https://doi.org/10.1145/2463372.2463481"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: Meier suite.

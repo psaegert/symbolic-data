@@ -2,6 +2,7 @@ metadata:
   name: kim-et-al-eql-benchmark-functions
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 12 of the 13 functions: Kim-8 (exp(-x^2) on [-1, 1]) is run as Livermore-21, without Kim et al.'s extrapolation test."}]
   license: "MIT (samuelkim314/DeepSymReg) + CC BY 4.0 (Kim et al. 2020, IEEE TNNLS)"
   citation: {"paper": {"short": "Kim et al. 2021", "title": "Integration of Neural Network-Based Symbolic Regression in Deep Learning for Scientific Discovery", "venue": "IEEE Transactions on Neural Networks and Learning Systems 32(9):4166-4177", "url": "https://doi.org/10.1109/TNNLS.2020.3017010"}, "data": {"short": "GitHub samuelkim314/DeepSymReg@57bbe2e", "title": "DeepSymReg benchmark.py (no licence file)", "url": "https://github.com/samuelkim314/DeepSymReg/blob/57bbe2e2c7f0cd07dc34ed99c7dc75bdd1445d87/benchmark.py"}}
   description: Kim et al. EQL benchmark functions

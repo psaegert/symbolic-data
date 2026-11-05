@@ -2,6 +2,7 @@ metadata:
   name: soose-nc
   version: 2
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
+  srbf_changes: []
   citation: {"paper": {"short": "Biggio et al. 2021", "title": "Neural Symbolic Regression that Scales", "venue": "ICML 2021 (PMLR 139)", "url": "https://arxiv.org/abs/2106.06427"}, "data": {"short": "GitHub SymposiumOrganization/NeuralSymbolicRegressionThatScales@09f5af4", "title": "NeSymReS SOOSE NC test set (test_set/nc.csv)", "url": "https://github.com/SymposiumOrganization/NeuralSymbolicRegressionThatScales/blob/09f5af4b0e142b23a9cca82e682d92229c986df1/test_set/nc.csv"}}
   description: 'SOOSE-NC: 200 out-of-training-sample NeSymReS skeletons, no constants: all multiplicative
     placeholders = 1, additive = 0.'

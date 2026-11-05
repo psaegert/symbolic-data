@@ -2,6 +2,7 @@ metadata:
   name: torchsisso-synthetic-expressions
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 9 of the 10 expressions: expression 9 is Feynman I.44.4 and is run in srbf's Feynman set."}]
   license: "facts only: formulas and ranges cited from Muthyala et al. 2024 (TorchSISSO, Digit. Chem. Eng. 13:100198; arXiv:2410.01752, CC BY-NC-ND 4.0); no text or tables reproduced"
   citation: {"paper": {"short": "Muthyala et al. 2024", "title": "TorchSISSO: A PyTorch-based implementation of the sure independence screening and sparsifying operator for efficient and interpretable model discovery", "venue": "Digital Chemical Engineering 13:100198", "url": "https://doi.org/10.1016/j.dche.2024.100198"}}
   description: TorchSISSO synthetic expressions

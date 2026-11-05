@@ -2,6 +2,7 @@ metadata:
   name: dso-benchmark-registry
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  srbf_changes: [{"kind": "part", "problems": 264, "text": "srbf runs here only the registry problems that no other srbf set covers (Nguyen-12a and Korns-13 to -15; Neat-6 is in the pinned-points set); the registry's other rows are run in the sets of their own benchmarks, apart from its two software sanity tests."}]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization)"
   citation: {"paper": {"short": "Petersen et al. 2021", "title": "Deep symbolic regression: Recovering mathematical expressions from data via risk-seeking policy gradients", "venue": "ICLR 2021", "url": "https://arxiv.org/abs/1912.04871"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: DSO benchmark registry (benchmarks.csv)

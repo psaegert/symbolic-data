@@ -2,6 +2,7 @@ metadata:
   name: scrbenchmark
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 105, "text": "srbf runs 15 of the 120 equations: the other 105 are identical to problems srbf runs in FastSRB and SRSD-dummy."}, {"kind": "changed", "problems": 15, "text": "srbf uses neither the shape constraints that define this benchmark nor its fixed validation sets (uniform over each input's range); it tests on new points from the training distribution."}]
   license: "MIT (prescriptiveanalytics/SCR-Benchmarks; SRSD laws: omron-sinicx/srsd-benchmark, MIT)"
   citation: {"paper": {"short": "Bachinger et al. 2025", "title": "SCRBenchmark: A Benchmarking Library for Shape-Constrained Regression", "venue": "Proceedings of the Genetic and Evolutionary Computation Conference Companion (GECCO '25 Companion), pp. 2505-2513", "url": "https://doi.org/10.1145/3712255.3734280"}, "data": {"short": "GitHub prescriptiveanalytics/SCR-Benchmarks@2869bd5", "title": "SCR-Benchmarks (MIT)", "url": "https://github.com/prescriptiveanalytics/SCR-Benchmarks/tree/2869bd564ff5eaa859577f02504752411bed817f"}}
   description: SCRBenchmark (shape-constrained regression on SRSD-Feynman; Bachinger, Werth, Zenisek, Haider & de Franca,

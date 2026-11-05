@@ -2,6 +2,7 @@ metadata:
   name: esr-cosmology-datasets
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 2, "text": "srbf runs 1 of the 3 ESR problems here (the mock problem); the cosmic-chronometer data are in 'ESR cosmology data', and the Pantheon+ task is not y = f(x)."}, {"kind": "changed", "problems": 1, "text": "ESR searches for H^2 as a function of x = 1 + z; srbf asks for H itself."}]
   license: "MIT (DeaglanBartlett/ESR; Bartlett, Desmond & Ferreira 2024, IEEE TEVC 28:950, arXiv:2211.11461)"
   citation: {"paper": {"short": "Bartlett et al. 2024", "title": "Exhaustive Symbolic Regression", "venue": "IEEE Transactions on Evolutionary Computation 28(4):950-964", "url": "https://doi.org/10.1109/TEVC.2023.3280250"}, "data": {"short": "GitHub DeaglanBartlett/ESR@23c3907", "title": "ESR examples/mock_cc.py (LCDM mock)", "url": "https://github.com/DeaglanBartlett/ESR/blob/23c3907a0fb08301d5e89fb666ae01bec0398faa/examples/mock_cc.py"}}
   description: ESR cosmology datasets

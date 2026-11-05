@@ -2,6 +2,7 @@ metadata:
   name: surfacebench-explicit-surfaces
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
+  srbf_changes: [{"kind": "part", "problems": 2, "text": "srbf runs 128 of the 129 explicit surfaces (each with an in-range and an out-of-range test): NCS10 has no input range from the authors."}]
   license: "CC BY 4.0 (Kabra et al. 2026, SurfaceBench, arXiv:2511.10833, Table 7)"
   citation: {"paper": {"short": "Kabra et al. 2026", "title": "SURFACEBENCH: A Geometry-Aware Benchmark for Symbolic Surface Discovery", "venue": "Transactions on Machine Learning Research (03/2026)", "url": "https://arxiv.org/abs/2511.10833"}}
   description: SurfaceBench explicit surfaces

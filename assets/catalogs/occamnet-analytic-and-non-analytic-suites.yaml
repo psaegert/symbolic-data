@@ -2,6 +2,7 @@ metadata:
   name: occamnet-analytic-and-non-analytic-suites
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 22 of the 23 problems: OccamNet-P7 (a function iterated four times) is left out because its formula is too long for srbf's formula parser."}]
   license: "facts only: target functions and ranges cited from Dugan et al. 2023 (OccamNet, arXiv:2007.10784); no upstream license"
   citation: {"paper": {"short": "Dugan et al. 2020", "title": "OccamNet: A Fast Neural Model for Symbolic Regression at Scale", "venue": "arXiv preprint arXiv:2007.10784", "url": "https://arxiv.org/abs/2007.10784"}}
   description: OccamNet analytic and non-analytic suites

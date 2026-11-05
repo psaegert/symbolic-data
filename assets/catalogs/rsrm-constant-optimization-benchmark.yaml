@@ -2,6 +2,7 @@ metadata:
   name: rsrm-constant-optimization-benchmark
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 4, "text": "srbf runs 93 of the 97 pairs of expression and input range: 4 are identical to problems srbf runs in its Constant and Keijzer sets."}, {"kind": "filled", "problems": 93, "text": "The appendix gives only a range for the inputs, not how points are spread over it or whether all inputs share it; srbf samples every input uniformly on the same range."}]
   license: "facts only: formulas and ranges cited from Xu, Liu & Sun 2024 (RSRM, ICLR 2024, Appendix C.6, Table S8); no upstream license"
   citation: {"paper": {"short": "Xu et al. 2024", "title": "Reinforcement Symbolic Regression Machine", "venue": "ICLR 2024 (proceedings version, App. C.6)", "url": "https://proceedings.iclr.cc/paper_files/paper/2024/file/ef3a55fa15aa5fe39b7a2617b3a5d06e-Paper-Conference.pdf"}}
   description: RSRM constant-optimization benchmark

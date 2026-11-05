@@ -2,6 +2,7 @@ metadata:
   name: ai-feynman-2-0-modular-equations
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 11, "text": "srbf runs 1 of the 12 modular equations: the authors give an input range only for equation 12."}, {"kind": "filled", "problems": 1, "text": "For equation 12 the authors state the range [-1, 1] but not how inputs are spread over it; srbf samples them uniformly."}]
   license: "facts only: formulas cited from Udrescu et al. 2020 (AI Feynman 2.0, NeurIPS 33, arXiv:2006.10782), Table 4; no upstream license"
   citation: {"paper": {"short": "Udrescu et al. 2020", "title": "AI Feynman 2.0: Pareto-optimal symbolic regression exploiting graph modularity", "venue": "NeurIPS 2020 (Adv. Neural Inf. Process. Syst. 33)", "url": "https://arxiv.org/abs/2006.10782"}}
   description: AI Feynman 2.0 modular equations

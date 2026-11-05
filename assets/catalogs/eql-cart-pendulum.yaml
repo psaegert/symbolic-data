@@ -2,6 +2,7 @@ metadata:
   name: eql-cart-pendulum
   version: 1
   tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs"]}
+  srbf_changes: []
   license: "facts only: equations and input ranges cited from Sahoo, Lampert & Martius 2018 (ICML, arXiv:1806.07259) and their EQL generator; no upstream license"
   citation: {"paper": {"short": "Sahoo et al. 2018", "title": "Learning Equations for Extrapolation and Control", "venue": "ICML 2018 (PMLR 80)", "url": "https://arxiv.org/abs/1806.07259"}, "data": {"short": "GitHub martius-lab/EQL@28521ae", "title": "EQL-DIV-ICML data generator (GPL-3.0)", "url": "https://github.com/martius-lab/EQL/tree/28521aed7a213299a52982430b2b83917fadae20/EQL-DIV-ICML"}}
   description: EQL cart-pendulum

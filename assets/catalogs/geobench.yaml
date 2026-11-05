@@ -2,6 +2,7 @@ metadata:
   name: geobench
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  srbf_changes: []
   license: "facts only: geometric formulas and ranges cited from Xu et al. 2024 (GeoBench, OpenReview TqzNI4v9DT); no upstream license"
   citation: {"paper": {"short": "Xu et al. 2024", "title": "GeoBench: A new benchmark on Symbolic Regression with Geometric Expressions", "venue": "ICLR 2025 submission (OpenReview TqzNI4v9DT, not accepted)", "url": "https://web.archive.org/web/20260118085022/https://openreview.net/pdf?id=TqzNI4v9DT"}}
   description: GeoBench (SR with geometric expressions)

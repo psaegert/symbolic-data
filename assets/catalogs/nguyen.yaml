@@ -2,6 +2,7 @@ metadata:
   name: nguyen
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "changed", "problems": 2, "text": "Nguyen-11 and Nguyen-12 are not in Uy et al. (2011), which defines Nguyen-1 to -10; srbf keeps them as later benchmark lists define them, and tests Nguyen-11 on the grid Keijzer (2003) uses for the same formula."}]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   citation: {"paper": {"short": "Uy et al. 2011", "title": "Semantically-based crossover in genetic programming: application to real-valued symbolic regression", "venue": "Genetic Programming and Evolvable Machines 12(2):91-119", "url": "https://doi.org/10.1007/s10710-010-9121-2"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: Nguyen symbolic-regression suite (Uy et al. 2011), 12 equations.

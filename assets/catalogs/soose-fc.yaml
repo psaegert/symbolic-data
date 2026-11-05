@@ -2,6 +2,7 @@ metadata:
   name: soose-fc
   version: 2
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
+  srbf_changes: []
   citation: {"paper": {"short": "Biggio et al. 2021", "title": "Neural Symbolic Regression that Scales", "venue": "ICML 2021 (PMLR 139)", "url": "https://arxiv.org/abs/2106.06427"}, "data": {"short": "GitHub SymposiumOrganization/NeuralSymbolicRegressionThatScales@0cfff79", "title": "NeSymReS benchmark file data/benchmark/old_test.csv (SOOSE WC/FC instantiation; deleted at HEAD)", "url": "https://github.com/SymposiumOrganization/NeuralSymbolicRegressionThatScales/blob/0cfff793553f02c950c4350058a97aaea9a93322/data/benchmark/old_test.csv"}}
   description: 'SOOSE-FC: 200 out-of-training-sample NeSymReS skeletons, full constants: EVERY placeholder
     slot sampled (''one constant per term''), then sympy.simplify (which compounds literals beyond the

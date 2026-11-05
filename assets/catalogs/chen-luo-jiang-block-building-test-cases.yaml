@@ -2,6 +2,7 @@ metadata:
   name: chen-luo-jiang-block-building-test-cases
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 13 of the 14 cases: Case 14 has two inputs without a meaning or a range."}, {"kind": "filled", "problems": 10, "text": "For the 10 toy cases the authors fix only the input box and recommend Latin-hypercube or orthogonal designs; srbf samples the inputs uniformly at random in the box."}]
   license: "facts only: formulas and ranges cited from Chen, Luo & Jiang 2018 (Expert Syst. Appl., arXiv:1706.02281); no upstream license"
   citation: {"paper": {"short": "Chen et al. 2018", "title": "A multilevel block building algorithm for fast modeling generalized separable systems", "venue": "Expert Systems with Applications 109:25-34", "url": "https://doi.org/10.1016/j.eswa.2018.05.021"}}
   description: Chen-Luo-Jiang block-building test cases

@@ -2,6 +2,7 @@ metadata:
   name: ai-hilbert-problem-set
   version: 1
   tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 8, "text": "srbf runs 9 problems here (8 of the paper's 17 plus a second, synthetic version of the Kepler problem): the real-data Kepler and time-dilation problems are in 'AI Hilbert real data', the 6 problems taken from the Feynman database are run once in srbf's Feynman set, and the Bell-inequality problem, which has no data, is not run."}]
   license: "MIT (IBM/AI-Hilbert)"
   citation: {"paper": {"short": "Cory-Wright et al. 2024", "title": "Evolving scientific discovery by unifying data and background knowledge with AI Hilbert", "venue": "Nature Communications 15(1):5922", "url": "https://doi.org/10.1038/s41467-024-50074-w"}, "data": {"short": "Zenodo 10.5281/zenodo.11453179", "title": "IBM/AI-Hilbert: AI-Hilbert Open-Source Code Release v1.0.1", "url": "https://doi.org/10.5281/zenodo.11453179"}}
   description: AI Hilbert problem set
