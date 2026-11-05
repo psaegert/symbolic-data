@@ -2,6 +2,7 @@ metadata:
   name: erbench-oeis
   version: 2
   tags: {"origin": "science formula", "tags": ["extrapolation", "dummy inputs", "integer inputs"]}
+  srbf_changes: [{"kind": "changed", "problems": 774, "text": "258 of ERBench's 3,757 OEIS formulas are exact copies of another formula in the set; srbf keeps each once (3,499 formulas, 10,497 problems)."}, {"kind": "part", "problems": 9473, "text": "srbf runs a fixed sample of 1,024 of these 10,497 problems, chosen by a hash of each name."}]
   citation: {"paper": {"short": "Kahlmeyer et al. 2026", "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms", "venue": "arXiv preprint arXiv:2606.09276", "url": "https://arxiv.org/abs/2606.09276"}, "data": {"short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c", "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)", "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"}}
   description: ERBench OEIS family (3499 entries after deduplication; extended eval tier); one problem per formula and alpha
     (ERBench's generator).
@@ -16,8 +17,8 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    sampling: 'ERBench''s own generator (src/benchmark.py generate_problem / get_samples; srbf ruling 2026-11-03): one problem per
-      formula and alpha in {0, 0.5, 1}; every variable a fresh 1-3 part mixture (uniform sub-interval or normal with sigma
+    sampling: 'ERBench''s own generator (src/benchmark.py generate_problem / get_samples; srbf ruling 2026-11-03): one problem
+      per formula and alpha in {0, 0.5, 1}; every variable a fresh 1-3 part mixture (uniform sub-interval or normal with sigma
       = distance to the nearer edge / 3; integers: uniform-integer or binomial), clipped to the support; fitting rows in the
       window [a1, a1 + (b - a)/2], a1 = a + alpha (b - a)/2; test rows on the rest of the support, split by length; 0 or 1
       dummy column per problem (drawn once, seeded), its values drawn from the point set''s own values. srbf sets the number

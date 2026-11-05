@@ -12,7 +12,7 @@ metadata:
   sources:
   - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
   - SRSD realistic ranges (Matsubara et al. 2024, CC BY 4.0 datasets / MIT code)
-  - 'FastSRB (Martinek, arXiv:2508.14481, MIT): base laws from fastsrb.v2.yaml (metadata.version 3, sha256 f7997fb4e979067b)'
+  - 'FastSRB (Martinek, arXiv:2508.14481, MIT): base laws from fastsrb.v2.yaml (metadata.version 3, sha256 80f80fd067a449ab)'
   - 'dummy configuration: huggingface.co/datasets/yoshitomo-matsubara/srsd-feynman_easy_dummy @ 67a1cac8420adf421fd0a18d91fbee5f1c0bca2d'
   - 'dummy configuration: huggingface.co/datasets/yoshitomo-matsubara/srsd-feynman_medium_dummy @ e373ffb9b2ee1f46f1eb8204fe35c6abeb589e65'
   - 'dummy configuration: huggingface.co/datasets/yoshitomo-matsubara/srsd-feynman_hard_dummy @ 223c23c15837aa998e43010f125b3da5fd8cb7a8'
