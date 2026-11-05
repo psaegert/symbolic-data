@@ -7,8 +7,10 @@ srbf draws the points (512 + 512 per run) and sets the noise (srbf rulings 4 and
 * an input is the fastsrb shorthand where it is a uniform or log-uniform range, a ``dist`` config otherwise
   (normal, a discrete set), derived from ``latent`` variables where the authors give a push-forward, and drawn by a
   joint sampler where the authors' inputs are not a product over variables (symbolic_data.inputs);
-* a constant the authors draw from a distribution is drawn ONCE per problem (ruling 9(6)), seeded by the problem's
-  identity, and written into ``prepared``; the spec and the seed stay in the entry's meta;
+* a value the authors draw anew for every run (a constant, an input's range, PhyE2E's input branch) is drawn anew
+  in every srbf run (srbf ruling 2026-11-05, revising 9(6)): the entry's ``per_run`` block holds its distribution
+  and the formula and inputs that use it (symbolic_data.catalog); ``prepared`` and ``vars`` hold one reference
+  draw, seeded by the problem's identity, for readers that need only the formula's structure;
 * the formula is parsed with sympy and written in SimpliPy's infix: cot -> 1/tan, acot(u) -> atan(1/u), a Piecewise
   -> its exact floor/Abs indicator form (piecewise.py), finite sums expanded.
 
@@ -94,7 +96,9 @@ FAMILY_POINTS = {("fresh-10", "Keijzer-6"): "keijzer", ("fresh-27", "Neat-6"): "
 # A set whose data problems build a data catalog of the same name (build_data_catalogs.py): its formula half is named
 # apart, since srbf needs unique catalog names. PySR's EmpiricalBench (Cranmer 2023): hubble, kepler, leavitt and bode
 # are measured data, newton, planck, schechter and ideal_gas are formulas.
-SLUGS = {"fresh-2": "pysr-empiricalbench-formulas"}
+# fresh-56 is the release catalog physo-class at its next version: the same 8 laws, the constants drawn per run (srbf
+# ruling 2026-11-05: one PhySO Class SR set, as the authors draw them)
+SLUGS = {"fresh-2": "pysr-empiricalbench-formulas", "fresh-56": "physo-class"}
 
 
 class Unsupported(Exception):
@@ -171,8 +175,8 @@ def _seed(*parts: str) -> int:
 
 
 def baked_constants(p: dict[str, Any]) -> tuple[dict[str, float], dict[str, Any]]:
-    """The constants the authors draw from a distribution, drawn once for this problem (seeded by its identity), and
-    a record of each draw. Constants given as numbers or exact expressions are in the formula already."""
+    """The constants the authors draw from a distribution: one reference draw (seeded by the problem's identity) and
+    each one's distribution. Constants given as numbers or exact expressions are in the formula already."""
     values, record = {}, {}
     for name, spec in sorted((p.get("constants") or {}).items()):
         text = spec.get("distribution") if isinstance(spec, dict) else spec
@@ -184,7 +188,7 @@ def baked_constants(p: dict[str, Any]) -> tuple[dict[str, float], dict[str, Any]
         seed = _seed(p["set"], p["id"], name)
         lo, hi = float(m.group(1)), float(m.group(2))
         values[name] = float(np.random.default_rng(seed).uniform(lo, hi))
-        record[name] = {"distribution": text.strip(), "seed": seed, "value": values[name]}
+        record[name] = {"distribution": text.strip(), "range": [lo, hi]}
     return values, record
 
 
@@ -216,15 +220,19 @@ def named_constants(p: dict[str, Any]) -> dict[str, float]:
     return out
 
 
-def prepared_of(formula: str, names: list[str], constants: dict[str, float]) -> str:
-    """The formula over v1..vN with the baked constants, in SimpliPy's infix. Parsed WITHOUT evaluation, so the
+def prepared_of(formula: str, names: list[str], constants: dict[str, float], params: dict[str, str] | None = None) -> str:
+    """The formula over v1..vN with the given constants, in SimpliPy's infix; ``params`` (values drawn per run, the
+    formula's name -> the name they take in the per-run formula) stay as names. Parsed WITHOUT evaluation, so the
     authors' structure reaches SimpliPy as written (its simplification is the judge's, as for the release catalogs)."""
+    params = params or {}
+
     def read(real: bool) -> sympy.Expr:
         local = {n: sympy.Symbol(n, real=True) if real and n in names else sympy.Symbol(n) for n in [*names, *constants]}
+        local.update({n: sympy.Symbol(t, real=True) if real else sympy.Symbol(t) for n, t in params.items()})
         e = parse_expr(formula, local_dict=local, evaluate=False)
         if constants:
             e = e.xreplace({sympy.Symbol(k): sympy.Float(repr(v)) for k, v in constants.items()})
-        free = {s.name for s in e.free_symbols} - set(names)
+        free = {s.name for s in e.free_symbols} - set(names) - set(params.values())
         if free:
             raise Unsupported(f"free symbols {sorted(free)} in {formula[:80]}")
         return _rewrite(e)
@@ -234,7 +242,7 @@ def prepared_of(formula: str, names: list[str], constants: dict[str, float]) -> 
         if e.has(sympy.hyper):
             raise Unsupported("the formula needs the hypergeometric function, which SimpliPy does not have")
         return e.xreplace({sym: sympy.Symbol(f"v{names.index(sym.name) + 1}", **({"real": True} if real else {}))
-                           for sym in e.free_symbols})
+                           for sym in e.free_symbols if sym.name in names})
     e = over_v(real=False)
     if e.has(sympy.re, sympy.im, sympy.I):
         # sympy takes a symbol to be complex and rewrites |exp(x)| as exp(re(x)): the inputs are real, so read them so
@@ -433,13 +441,14 @@ def row_constraints(p: dict[str, Any]) -> list[str]:
 
 
 def inputs_of(p: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]], dict[str, Any]]:
-    """(vars, latent, baked): each input's spec. A push-forward ("derived: var1 = x2/x1 with x1 ~ U[1,5], ...") draws
+    """(vars, latent, per_run): each input's spec. A push-forward ("derived: var1 = x2/x1 with x1 ~ U[1,5], ...") draws
     its latent variables and derives the input; an input conditional on another ("t | h ~ U[0, sqrt(2*h/9.81)]",
     "U[0, R]") draws a latent U[0,1] and scales it to the range the other input sets, which is drawn as a latent
-    variable too; a box the authors draw per problem and variable is drawn once, seeded."""
+    variable too. What the authors draw per run (PhyE2E's branch, a box per variable) goes into per_run, with one
+    reference draw (seeded) in vars."""
     variables: dict[str, dict[str, Any]] = {}
     latent: dict[str, dict[str, Any]] = {}
-    baked: dict[str, Any] = {}
+    run: dict[str, dict[str, Any]] = {"params": {}, "latent": {}, "vars": {}}   # what the authors draw per run
     by_name = {v["name"]: v for v in p["variables"]}
     conditioned = {c for v in p["variables"]
                    for c in (v.get("conditional_on") or ([v["dependent_on"]] if v.get("dependent_on") else []))}
@@ -448,14 +457,17 @@ def inputs_of(p: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, d
     for i, v in enumerate(p["variables"]):
         key, text = f"v{i + 1}", str(v.get("distribution") or "")
         if text.startswith("mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)|"):
-            # PhyE2E: one branch per problem for all its inputs, |N(2, 3)| or U[2 - sqrt 3, 2 + sqrt 3] (drawn once, seeded)
+            # PhyE2E: one branch per run for all its inputs, |N(2, 3)| or U[2 - sqrt 3, 2 + sqrt 3]; the reference draw
+            # (seeded) in vars, the branch drawn per run in per_run
             if phye2e is None:
-                seed = _seed(p["set"], p["id"], "branch")
-                folded = np.random.default_rng(seed).random() < 0.5
+                folded = np.random.default_rng(_seed(p["set"], p["id"], "branch")).random() < 0.5
                 phye2e = ({"dist": {"name": "folded_normal", "kwargs": {"loc": 2.0, "scale": math.sqrt(3.0)}}} if folded
                           else _uniform(2.0 - math.sqrt(3.0), 2.0 + math.sqrt(3.0)))
-                baked["branch"] = {"distribution": text[:120], "seed": seed, "drawn": "folded normal" if folded else "uniform"}
+                run["params"]["branch"] = _uniform(0.0, 1.0)
             variables[key] = {"name": v["name"], **phye2e}
+            run["latent"][f"f_{key}"] = {"dist": {"name": "folded_normal", "kwargs": {"loc": 2.0, "scale": math.sqrt(3.0)}}}
+            run["latent"][f"u_{key}"] = _uniform(2.0 - math.sqrt(3.0), 2.0 + math.sqrt(3.0))
+            run["vars"][key] = {"expr": f"(branch < 0.5) * f_{key} + (branch >= 0.5) * u_{key}"}
             continue
         d = _DERIVED.search(text)
         if d:
@@ -484,15 +496,18 @@ def inputs_of(p: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, d
             variables[key] = {"name": v["name"], "expr": v["name"]}
             continue
         if re.search(r"x_min_j ~ U\(-10, 9\) and x_max_j ~ U\(x_min_j \+ 1, 10\)", text):
-            seed = _seed(p["set"], p["id"], "box", v["name"])
-            rng = np.random.default_rng(seed)
+            # the box is drawn per run: lo ~ U(-10, 9), hi ~ U(lo + 1, 10) = lo + 1 + w (9 - lo); the reference box in vars
+            rng = np.random.default_rng(_seed(p["set"], p["id"], "box", v["name"]))
             lo = float(rng.uniform(-10.0, 9.0))
             hi = float(rng.uniform(lo + 1.0, 10.0))
             variables[key] = {"name": v["name"], **_uniform(lo, hi)}
-            baked[v["name"]] = {"distribution": text, "seed": seed, "drawn": [lo, hi]}
+            run["params"][f"lo_{key}"] = _uniform(-10.0, 9.0)
+            run["params"][f"w_{key}"] = _uniform(0.0, 1.0)
+            run["latent"][f"t_{key}"] = _uniform(0.0, 1.0)
+            run["vars"][key] = {"expr": f"lo_{key} + (1 + w_{key} * (9 - lo_{key})) * t_{key}"}
             continue
         variables[key] = {"name": v["name"], **input_spec(v)}
-    return variables, latent, baked
+    return variables, latent, {k: v for k, v in run.items() if v}
 
 
 _E2E = re.compile(r"^E2E mixture ([01]) k=(\d+)$")
@@ -528,20 +543,21 @@ def entry_of(p: dict[str, Any]) -> dict[str, Any]:
         raise Unsupported("no inputs")
     if not p.get("formula"):
         raise Unsupported("no formula")
-    constants, record = baked_constants(p)
-    constants = {**named_constants(p), **constants}
+    drawn, record = baked_constants(p)
+    named = named_constants(p)
+    constants = {**named, **drawn}
     joint = joint_inputs_of(p)
     if joint:
-        variables, latent, boxes = {f"v{i + 1}": {"name": v["name"]} for i, v in enumerate(p["variables"])}, {}, {}
+        variables, latent, run = {f"v{i + 1}": {"name": v["name"]} for i, v in enumerate(p["variables"])}, {}, {}
     elif p["set"] == ARM:
-        (variables, latent), boxes = arm_inputs(p), {}
+        (variables, latent), run = arm_inputs(p), {}
     elif (p["set"], p["id"]) in SRBF_INPUTS:
         spec = SRBF_INPUTS[(p["set"], p["id"])]
-        variables, latent, boxes = {f"v{i + 1}": {"name": v["name"], **spec[v["name"]]} for i, v in enumerate(p["variables"])}, {}, {}
+        variables, latent, run = {f"v{i + 1}": {"name": v["name"], **spec[v["name"]]} for i, v in enumerate(p["variables"])}, {}, {}
     elif isinstance(p.get("joint_sampler"), dict) and p["joint_sampler"].get("base"):
-        (variables, latent), boxes = joint_sampler_inputs(p), {}
+        (variables, latent), run = joint_sampler_inputs(p), {}
     else:
-        variables, latent, boxes = inputs_of(p)
+        variables, latent, run = inputs_of(p)
     distinct_names(variables)
     variables["v0"] = {"name": "y"}
     # the target the authors fit, where it is not the published law itself (PySR EmpiricalBench fits ln y)
@@ -559,10 +575,13 @@ def entry_of(p: dict[str, Any]) -> dict[str, Any]:
             entry["test"] = {}     # E2E's test points: a fresh instance of the mixture (Kamienny et al. 2022, Sec. 3.1)
     if latent:
         entry["latent"] = latent
-    if record:
-        entry["constants_drawn"] = record
-    if boxes:
-        entry["input_ranges_drawn"] = boxes
+    if record:      # constants the authors draw per run: their distributions, and the formula over them
+        as_param = {n: n if re.fullmatch(r"[A-Za-z_]\w*", n) and not re.fullmatch(r"v\d+", n) and n not in _RESERVED
+                    else f"c_{n}" for n in record}            # FreeFall's v0 is not the target column v0
+        run = {**run, "params": {**{as_param[n]: _uniform(*r["range"]) for n, r in record.items()}, **run.get("params", {})},
+               "prepared": prepared_of(target, names, named, params=as_param)}
+    if run:
+        entry["per_run"] = run
     return entry
 
 
@@ -631,16 +650,29 @@ def real_anywhere(entry: dict[str, Any], n: int = 4096) -> bool:
     return bool((np.isfinite(y) & (y.imag == 0)).any())
 
 
+# names a per-run value cannot take: the functions a derived input may use (symbolic_data.inputs)
+_RESERVED = {"pi", "e", "sqrt", "exp", "log", "log10", "sin", "cos", "tan", "arcsin", "arccos", "arctan", "sinh", "cosh",
+             "tanh", "abs", "minimum", "maximum", "floor", "ceil"}
+PER_RUN_ATTEMPTS = 20   # runs' values tried before an entry whose authors draw values per run counts as unrealizable
+
+
 def check(entries: dict[str, dict[str, Any]], n: int, engine) -> dict[str, str]:
     """Compile and draw ``n`` rows of every entry, and record its valid-domain fraction; the failures by id."""
     from symbolic_data.catalog import ProblemCatalog
+    from symbolic_data.errors import NoValidSampleFoundError
     cat = ProblemCatalog.from_yaml({"metadata": {"name": "check", "version": 1}, "expressions": entries})
     failed = {}
     rng = np.random.default_rng(0)
     for eq_id, entry in cat.entries.items():
         try:
             too_long(engine, entries[eq_id]["prepared"])
-            cat.realize(entry, n, rng, engine=engine)
+            for attempt in range(PER_RUN_ATTEMPTS if "per_run" in entries[eq_id] else 1):
+                try:                       # a run whose values leave no valid point is drawn again, as srbf's runs are
+                    cat.realize(entry, n, rng, engine=engine)
+                    break
+                except NoValidSampleFoundError:
+                    if attempt + 1 == (PER_RUN_ATTEMPTS if "per_run" in entries[eq_id] else 1):
+                        raise
             if "test" in entry.meta:
                 try:
                     cat.realize(entry, n, rng, engine=engine, part="test")

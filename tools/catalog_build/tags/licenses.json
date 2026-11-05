@@ -1714,7 +1714,7 @@
   "evidence": "gh api repos/WassimTenachi/PhySO/license -> MIT; gh api repos/dscolnic/Pantheon/license -> null (no licence file); arXiv OAI 2303.03192 <license>http://creativecommons.org/licenses/by/4.0/</license>; Crossref 10.3847/1538-4357/ad014c (ApJ 959:99) CC BY 4.0"
  },
  {
-  "catalog": "physo-class-sr-benchmark",
+  "catalog": "physo-class",
   "license": "MIT (WassimTenachi/PhySO)",
   "verdict": "permissive",
   "redistribute": "yes",

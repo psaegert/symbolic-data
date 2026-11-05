@@ -1832,20 +1832,6 @@
   "notes": "Extrapolation rests on 1 of 8 problems (inherited from Vladislavleva-1)."
  },
  {
-  "catalog": "physo-class-sr-benchmark",
-  "display_name": "physo-class-sr-benchmark",
-  "kind": "formula",
-  "problems": 8,
-  "file": "assets/catalogs/physo-class-sr-benchmark.yaml",
-  "origin": "science formula",
-  "origin_source": "sets/fresh-56.json notes: 'the 8 Class SR challenges of Tenachi, Ibata, Francois & Diakogiannis, ApJL 969 L26 (2024)' with realization-specific constants drawn per realization",
-  "origin_proposal": null,
-  "tags": [],
-  "detail": {},
-  "below_half": {},
-  "notes": null
- },
- {
   "catalog": "physo-class",
   "display_name": "physo-class",
   "kind": "formula",

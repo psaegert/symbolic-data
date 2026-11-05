@@ -1314,14 +1314,6 @@
   "notes": null
  },
  {
-  "catalog": "physo-class-sr-benchmark",
-  "origin": "physics law",
-  "origin_source": "sets/fresh-56.json notes: 'the 8 Class SR challenges of Tenachi, Ibata, Francois & Diakogiannis, ApJL 969 L26 (2024)' with realization-specific constants drawn per realization",
-  "origin_proposal": null,
-  "tags": [],
-  "notes": null
- },
- {
   "catalog": "physo-milky-way-streams",
   "origin": "physics law",
   "origin_source": "sets/fresh-58.json notes: 'The law is exact and closed form ... the authors define the inputs only through the shipped orbit samples'; target v^2/2 = E_t + A*log(B*r+1)/r",

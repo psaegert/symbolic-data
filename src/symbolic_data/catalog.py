@@ -14,6 +14,12 @@ A variable is drawn from its fastsrb shorthand (``sample_range``/``sample_type``
 mixture, or derived from the entry's ``latent`` variables (``expr``); an entry may draw its rows jointly
 (``inputs``) and restrict them (``row_constraints``). See :mod:`symbolic_data.inputs`.
 
+Values the benchmark's authors draw anew in every run live in the entry's ``per_run`` block: its ``params`` are drawn
+once per realization (shared by the fitting and the test rows), and its ``prepared``, ``vars`` and ``latent`` use them
+in place of the entry's own. The entry's own ``prepared`` and ``vars`` then hold one reference draw, for readers that
+need only the formula's structure (holdouts, decontamination); every run draws its own values, and its ground truth
+is the formula with those values.
+
 Catalogs are loaded through :func:`load_catalog`, which resolves a reference (a local path, a
 ``name[@version]`` against the official Hugging Face manifest, or ``repo_id:name[@version]`` against
 a third-party one) via :mod:`symbolic_data.resolver`. Curated catalogs are HF artifacts, not bundled
@@ -33,7 +39,8 @@ from symbolic_data.numeric import STORAGE_DTYPE, STORAGE_DTYPE_MARKER
 import yaml
 
 from symbolic_data._evaluation import broadcast_target, compile_expression, evaluate
-from symbolic_data.inputs import constraint_mask, draw_rows, spec_for_test_rows
+from symbolic_data.inputs import (constraint_mask, draw_per_run, draw_rows, override_vars, spec_for_test_rows,
+                                  with_per_run)
 from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.problem import Problem
 from symbolic_data.resolver import resolve
@@ -366,19 +373,34 @@ class ProblemCatalog(Catalog):
         for eq_id in order:
             yield self.entries[eq_id]
 
+    def draw_per_run(self, entry: CatalogEntry, rng: np.random.Generator) -> dict[str, float]:
+        """One run's values of the entry's ``per_run`` params (empty when it has none)."""
+        try:
+            return draw_per_run(entry.meta.get("per_run"), rng)
+        except (KeyError, ValueError, TypeError) as exc:
+            raise CatalogEntryError(f"malformed per_run block for {entry.id!r}: {exc}") from exc
+
     def realize(self, entry: CatalogEntry, n_points: int, rng: np.random.Generator, *, engine: Any = None, layout: str = "random",
-                part: str = "fit") -> RealizedExpression:
+                part: str = "fit", per_run_values: dict[str, float] | None = None) -> RealizedExpression:
         """Realize one entry: sample each variable from its intrinsic ``fastsrb`` range and evaluate.
 
-        ``part="test"`` draws from the entry's ``test`` block over its own spec (:func:`~symbolic_data.inputs.spec_for_test_rows`)."""
+        ``part="test"`` draws from the entry's ``test`` block over its own spec (:func:`~symbolic_data.inputs.spec_for_test_rows`).
+        An entry with a ``per_run`` block draws its values here, unless ``per_run_values`` passes the ones its other
+        part used (the fitting and the test rows of one run share them)."""
         if engine is None:
             raise ValueError("declarative ProblemCatalog.realize requires a simplipy engine (pass engine=...)")
         if part not in ("fit", "test"):
             raise ValueError(f"part must be 'fit' or 'test', got {part!r}")
-        compiled = self._compiled(entry, engine)
+        per_run = entry.meta.get("per_run") or None
+        values = (per_run_values if per_run_values is not None else self.draw_per_run(entry, rng)) if per_run else {}
+        compiled = self._compiled(entry, engine) if not per_run else self._compiled_run(entry, engine, per_run, values)
         variable_order = compiled["variable_order"]
+        own_vars, own_meta = entry.variables, entry.meta
+        if per_run:
+            own_vars = override_vars(entry.variables, per_run.get("vars"))
+            own_meta = {**entry.meta, "latent": {**(entry.meta.get("latent") or {}), **(per_run.get("latent") or {})}}
         try:
-            variables, meta = (entry.variables, entry.meta) if part == "fit" else spec_for_test_rows(entry.variables, entry.meta)
+            variables, meta = (own_vars, own_meta) if part == "fit" else spec_for_test_rows(own_vars, own_meta)
         except ValueError as exc:
             raise CatalogEntryError(f"malformed test block for {entry.id!r}: {exc}") from exc
         # First-draw oversampling: when the entry discloses its valid-domain fraction (the yaml entry's
@@ -396,7 +418,7 @@ class ProblemCatalog(Catalog):
         def draw(size: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
             """``size`` rows, their targets, and which of them are valid."""
             try:
-                x = draw_rows(variables, meta, variable_order, size, rng, layout)
+                x = draw_rows(variables, meta, variable_order, size, rng, layout, **({"params": values} if values else {}))
             except (KeyError, ValueError, TypeError, NameError, SyntaxError) as exc:
                 # A missing/malformed per-variable spec is a permanent entry defect (not a transient draw
                 # failure): raise CatalogEntryError so the source yields a placeholder instead of crashing
@@ -466,8 +488,17 @@ class ProblemCatalog(Catalog):
             constants=list(compiled["constants"]), variables=list(variable_order),
             complexity=len(compiled["expression"]),
             eq_id=entry.id,
-            meta={"prepared_normalized": compiled["normalized_infix"], **{k: v for k, v in entry.meta.items() if k != "sources"}},
+            meta={"prepared_normalized": compiled["normalized_infix"], **{k: v for k, v in entry.meta.items() if k != "sources"},
+                  **({"per_run_values": dict(values)} if per_run else {})},
         )
+
+    def _compiled_run(self, entry: CatalogEntry, engine: Any, per_run: dict[str, Any], values: dict[str, float]) -> dict[str, Any]:
+        """The entry's formula with one run's values written in (compiled per run, not cached)."""
+        template = per_run.get("prepared") or entry.prepared
+        try:
+            return compile_expression(engine, entry.id, with_per_run(template, values), entry.variables, name=self.name)
+        except Exception as exc:  # malformed entry -> permanent failure (placeholder, no retry)
+            raise CatalogEntryError(f"compile_failed: {exc}") from exc
 
     def _compiled(self, entry: CatalogEntry, engine: Any) -> dict[str, Any]:
         cache = self.__dict__.setdefault("_compiled_cache", {})
