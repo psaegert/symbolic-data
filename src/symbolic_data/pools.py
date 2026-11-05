@@ -128,6 +128,9 @@ def draw_from_pools(problem: Problem, n_support: int | None, n_validation: int |
         arrays.update({v: None if pool[s] is None else pool[s][test_pick] for s, v in zip(_SUPPORT, _VALIDATION)})
         n_fit_pool, n_test_pool = int(fit_rows.size), int(test_rows.size)
     elif rule == "folds":
+        if _rows(problem, _VALIDATION):
+            raise ValueError(f"{problem.eq_id}: test_split 'folds' holds {_rows(problem, _VALIDATION)} test rows; the "
+                             "folds cut the support rows, so the validation arrays stay empty")
         n_pool = _rows(problem, _SUPPORT)
         folds = _folds(problem.meta[TEST_SPLIT_KEY], n_pool)
         fold = int(rng.integers(len(folds)))
