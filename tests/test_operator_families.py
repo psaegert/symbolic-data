@@ -32,7 +32,7 @@ def cfg():
 
 @pytest.fixture(scope="module")
 def engine(cfg):
-    return SimpliPyEngine.load(cfg.get("simplipy_engine", "acj-4"), install=True)
+    return SimpliPyEngine.load(cfg.get("simplipy_engine", "acj2-4-llm"), install=True)
 
 
 def make_sampler(engine, cfg, families=None, profiles=None):

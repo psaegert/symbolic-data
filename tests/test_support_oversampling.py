@@ -47,7 +47,7 @@ SYMMETRIC_SUPPORT = build_prior_callable({"name": "uniform", "kwargs": {"low": -
 
 @pytest.fixture(scope="module")
 def engine() -> SimpliPyEngine:
-    return SimpliPyEngine.load("acj-4", install=True)
+    return SimpliPyEngine.load("acj2-4-llm", install=True)
 
 
 def _catalog(engine: SimpliPyEngine, **sample_strategy_overrides):

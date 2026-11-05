@@ -41,14 +41,16 @@ from symbolic_data.token_ops import desugar_sqrt, flatten_nested_list
 from symbolic_data.errors import NoValidSampleFoundError
 from symbolic_data.catalog import Catalog, ProblemCatalog, RealizedExpression
 
-# The rewrite strength the holdout family quotient runs at. `permissive` carries every
-# judged tier (core + f64 + real), so it is the most capable canonicalizer available;
-# effort 4 is the pinned simplification effort everywhere. Measured on 300 real
-# v24 draws: permissive/effort=4 costs 0.94 ms per prototype and is FASTER than
-# permissive/effort=0 (1.24 ms) -- more effort reaches a smaller fixpoint sooner. The full
-# simplify-then-mask fold costs 1.85 ms, ~2% of the 96 ms/instance generation budget.
+# The rewrite strength the holdout family quotient runs at. `permissive` is the most capable
+# canonicalizer available. The effort is SimpliPy 0.15's default, `None`: the search runs until a round
+# finds nothing, so the canon is a true fixpoint (a second call returns it unchanged) and equals what the
+# generate path's target canonicalization produces, which lets the fold skip its first pass
+# (_skeleton_is_holdout_canonical). Under 0.14 the default and this pin were effort 4; measured then on
+# 300 real v24 draws, permissive/effort=4 cost 0.94 ms per prototype (faster than effort 0, 1.24 ms) and
+# the full simplify-then-mask fold 1.85 ms, ~2% of the 96 ms/instance generation budget. Re-measure on
+# 0.15's released rules.
 HOLDOUT_SIMPLIFY_MODE = "permissive"
-HOLDOUT_EFFORT = 4
+HOLDOUT_EFFORT: int | None = None
 
 # Sentinel for "no failed draw produced row-validity evidence" in sample_data (all
 # failures were sampling errors / complex results, which carry no row counts).
@@ -544,7 +546,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         for skeleton in tqdm(self.skeletons, desc="Compiling Skeletons", disable=not verbose, smoothing=0.0):
             # Codify the Expression
             executable_prefix_expression = self.simplipy_engine.operators_to_realizations(skeleton)
-            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
+            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
             code_string = self.simplipy_engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
             code = codify(code_string, self.variables + constants)
 
@@ -618,7 +620,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         if code is None:
             try:
                 executable_prefix_expression = self.simplipy_engine.operators_to_realizations(no_constant_expression)
-                prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
+                prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
                 code_string = self.simplipy_engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
             except Exception:
                 return True    # a probe the engine cannot realize -> fail closed
@@ -950,7 +952,7 @@ class LampleChartonCatalog(GenerativeCatalog):
 
         for no_constant_expression, engine, variables, n_variables in items:
             executable_prefix_expression = engine.operators_to_realizations(no_constant_expression)
-            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
+            prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
             code_string = engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
             # Bind exactly the prototype's own width (mirror of the is_held_out binding): a
             # holdout prototype may use MORE variables than this catalog declares; binding only
@@ -1086,7 +1088,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         expression = _constantify_skeleton(list(skeleton))
 
         # Extract constant placeholders
-        expression, constants = explicit_constant_placeholders(expression, convert_numbers_to_constant=False)
+        expression, constants = explicit_constant_placeholders(expression)
 
         # Convert prefix to infix for SymPy
         infix = self.simplipy_engine.prefix_to_infix(expression, power='**')
@@ -1202,7 +1204,7 @@ class LampleChartonCatalog(GenerativeCatalog):
                 # can emit), so it belongs to the consumer, not to the data layer.
                 if tuple(skeleton) not in self.skeletons and len(skeleton) <= self.sample_strategy['max_length']:
                     executable_prefix_expression = self.simplipy_engine.operators_to_realizations(skeleton)
-                    prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True, convert_numbers_to_constant=False)
+                    prefix_expression_with_constants, constants = explicit_constant_placeholders(executable_prefix_expression, inplace=True)
                     try:
                         code_string = self.simplipy_engine.prefix_to_infix(prefix_expression_with_constants, realization=True)
                     except ValueError:

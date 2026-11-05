@@ -5,6 +5,20 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed (SimpliPy 0.15)
+
+- **Requires SimpliPy 0.15** (`simplipy>=0.15,<0.16`). SimpliPy 0.15 refuses every pre-0.15 rule file, so the
+  engine names move with it: the default engine (`load_engine`, `ProblemSource`), the test fixtures and the builders
+  use `acj2-4-llm`, the length-4 analog of `acj-4`; training catalogs name their own (T8.3: `acj2-5-4-llm`).
+- **lample-charton-v24 and lample-charton-v24-bench are @2**: SimpliPy 0.15's engine, and the content changed on
+  main after @1 was published (publishing is forward-only).
+- **The holdout fold runs at SimpliPy 0.15's default effort** (`HOLDOUT_EFFORT = None`: the search runs until a round
+  finds nothing). 0.14's default and the old pin were effort 4; with 0.15's default the holdout canon is a fixpoint
+  that equals the generate path's target canonicalization again, so the fold's first-pass skip stays provably free.
+- `explicit_constant_placeholders(..., convert_numbers_to_constant=False)` lost its keyword in 0.15; 0.15 never
+  converts numerals, so the five calls behave as before.
+- Two pinned tagged-canonical specimens (measured on acj-4) are marked for re-measurement on 0.15's released rules.
+
 ### Added
 
 - **Data catalogs: problems that hold pools of rows** (`symbolic_data.pools`). A frozen problem whose `meta` carries
