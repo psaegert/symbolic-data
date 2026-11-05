@@ -80,6 +80,15 @@ def _data_sets() -> dict[str, dict[str, Any]]:
     return _read("data_sets.json")
 
 
+@lru_cache(maxsize=1)
+def licenses() -> dict[str, dict[str, Any]]:
+    """The license pass, by catalog (tags/licenses.json): ``license``, ``redistribute`` (``yes``, ``yes, share-alike
+    repo``, ``yes, these members``, ``no``, ``unclear``) and, for a catalog whose datasets differ, ``members``: per
+    problem its ``license`` and ``share`` (``yes``, ``share-alike``, ``no``, with the ``reason``)."""
+    with open(Path(__file__).resolve().parent / "tags" / "licenses.json", encoding="utf-8") as fh:
+        return {r["catalog"]: r for r in json.load(fh)}
+
+
 def input_file(name: str | os.PathLike) -> Path:
     """The local copy of a file a record names: ``catalog-prep/raw/...`` under RAW, ``symbolic-data/...`` in this
     repository, anything else as given (the survey's working tree names its files by absolute path)."""

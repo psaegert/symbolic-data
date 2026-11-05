@@ -46,6 +46,28 @@ def tiers() -> dict[str, dict[str, str]]:
             for cat in ("fastsrb", "srsd-dummy") if cat in rel}
 
 
+# why a dataset is left out (srbf ruling 2026-11-05: what may not be shared is left out and listed), by the verdict of
+# the license pass
+REASONS = {"no license found": "no license", "terms forbid redistribution": "terms that forbid sharing it",
+           "non-commercial": "a non-commercial license", "share-alike": "a copyleft license (GPL)",
+           "unclear": "no license that clearly allows sharing it"}
+
+
+def license_left_out() -> list[dict[str, Any]]:
+    """What the license pass leaves out: whole data catalogs, and members of the catalogs whose datasets differ."""
+    out = []
+    for name, r in sorted(paths.licenses().items()):
+        if r["redistribute"] in ("no", "unclear"):
+            out.append({"catalog": name, "name": r.get("name"), "set": r.get("set"), "problems": r.get("problems"),
+                        "sources": r.get("sources") or [], "reason": REASONS[r["verdict"]], "members": None})
+        elif r.get("members"):
+            gone = {k: m["reason"] for k, m in r["members"].items() if m["share"] == "no"}
+            if gone:
+                out.append({"catalog": name, "name": r.get("name"), "set": r.get("set"), "problems": len(gone),
+                            "sources": r.get("sources") or [], "reason": None, "members": gone})
+    return out
+
+
 def described(md: dict[str, Any]) -> dict[str, Any]:
     """What a list of the benchmarks shows next to a catalog: its tags, description, sources and license."""
     return {"tags": md.get("tags"), "description": md.get("description"), "sources": md.get("sources") or [],
@@ -98,6 +120,7 @@ def main() -> None:
     local = Path(a.catalogs)
     for path in sorted([*local.glob("*.npz"), *(local / "data").glob("*.npz")]):
         rows.append({**from_npz(path), "source": "data build"})
+    left_out = license_left_out()
     names = Counter(r["name"] for r in rows)
     clash = sorted(n for n, c in names.items() if c > 1)   # srbf needs unique names: reported, both counted
     for r in rows:
@@ -118,7 +141,8 @@ def main() -> None:
               "subsets": sum(len(r["subsets"]) for r in rows), "problems_by_kind": dict(by_kind),
               "subsets_below_floor": [{"catalog": c, "subset": s, "problems": n} for c, s, n in small],
               "name_clashes": {n: [r["file"] for r in rows if r["name"] == n] for n in clash}, "empty_catalogs": empty,
-              "superseded_in_symbolic_data": SUPERSEDED, "rows": sorted(rows, key=lambda r: -r["problems"])}
+              "superseded_in_symbolic_data": SUPERSEDED, "left_out_for_license": left_out,
+              "rows": sorted(rows, key=lambda r: -r["problems"])}
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     Path(a.out).write_text(json.dumps(report, indent=1))
     print(f"{len(rows)} catalogs, {total:,} problems ({', '.join(f'{k} {v:,}' for k, v in by_kind.items())}), "

@@ -5,7 +5,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "IBM/AI-Descartes data/ (https://github.com/IBM/AI-Descartes @88bda46) for 5 tables; Cornelio et al. 2023 Nat. Commun. 14:1777 SI Supplementary Table 2 (https://doi.org/10.1038/s41467-023-37236-y) for the exoplanet table",
-  "evidence": "gh api repos/IBM/AI-Descartes/license -> MIT; Crossref 10.1038/s41467-023-37236-y license http://creativecommons.org/licenses/by/4.0 (vor)"
+  "evidence": "gh api repos/IBM/AI-Descartes/license -> MIT; Crossref 10.1038/s41467-023-37236-y license http://creativecommons.org/licenses/by/4.0 (vor)",
+  "name": "AI Descartes real-data laws",
+  "set": "fresh-3",
+  "problems": 6,
+  "sources": [
+   "https://www.nature.com/articles/s41467-023-37236-y",
+   "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-023-37236-y/MediaObjects/41467_2023_37236_MOESM1_ESM.pdf",
+   "https://www.nature.com/articles/s41467-023-37236-y/tables/1"
+  ]
  },
  {
   "catalog": "ai-feynman-2-0-modular-equations",
@@ -37,7 +45,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "IBM/AI-Hilbert main_problems notebook rows (https://github.com/IBM/AI-Hilbert @621b08b); Zenodo 10.5281/zenodo.11453179",
-  "evidence": "gh api repos/IBM/AI-Hilbert/license -> MIT; https://zenodo.org/api/records/11453179 metadata.license.id = cc-by-4.0"
+  "evidence": "gh api repos/IBM/AI-Hilbert/license -> MIT; https://zenodo.org/api/records/11453179 metadata.license.id = cc-by-4.0",
+  "name": "AI Hilbert real data",
+  "set": "fresh-4",
+  "problems": 2,
+  "sources": [
+   "https://arxiv.org/abs/2308.09474v3",
+   "https://doi.org/10.1038/s41467-024-50074-w",
+   "https://www.nature.com/articles/s41467-024-50074-w"
+  ]
  },
  {
   "catalog": "autora-synthetic-behavioural-science-models-points",
@@ -45,7 +61,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "AutoResearch/autora-synthetic v2.2.0 factory defaults (np.linspace grids; @d04b439)",
-  "evidence": "gh api repos/AutoResearch/autora-synthetic/license -> MIT; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/AutoResearch/autora-synthetic/license -> MIT; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "AutoRA synthetic behavioural-science models (autora-synthetic: Weber-Fechner, Stevens power law, exponential learning, Luce choice ratio, expected value theory, prospect theory) (pinned points)",
+  "set": "critic-2",
+  "problems": 7,
+  "sources": [
+   "https://github.com/AutoResearch/autora-synthetic/tree/d04b4391444f000d9f3fb6038d8d2b9c7953a270",
+   "https://github.com/AutoResearch/autora-synthetic/releases/tag/v2.2.0",
+   "https://pypi.org/project/autora-synthetic/2.2.0/"
+  ]
  },
  {
   "catalog": "black-hole-spiral-plane",
@@ -53,7 +77,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Davis & Jin 2023, ApJL 956 L22, Table 1 machine-readable ASCII (https://doi.org/10.3847/2041-8213/acfa98)",
-  "evidence": "Crossref 10.3847/2041-8213/acfa98 license http://creativecommons.org/licenses/by/4.0/ (vor); survey record fresh-164: VoR p. 1 licence line 'CC BY 4.0'"
+  "evidence": "Crossref 10.3847/2041-8213/acfa98 license http://creativecommons.org/licenses/by/4.0/ (vor); survey record fresh-164: VoR p. 1 licence line 'CC BY 4.0'",
+  "name": "Black-hole mass scaling in spiral galaxies",
+  "set": "fresh-164",
+  "problems": 1,
+  "sources": [
+   "https://doi.org/10.3847/2041-8213/acfa98",
+   "https://iopscience.iop.org/article/10.3847/2041-8213/acfa98",
+   "https://iopscience.iop.org/article/10.3847/2041-8213/acfa98/pdf"
+  ]
  },
  {
   "catalog": "bms-real-data",
@@ -61,7 +93,15 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "rguimera/machine-scientist Validation/*/data (https://bitbucket.org/rguimera/machine-scientist @9defb7a): EU_nature_clean.csv, cadhesome_protein.csv, seymour.csv",
-  "evidence": "Bitbucket API src listing at 9defb7a: root = Images, Prior, Process-Formulas, Test, Validation, README.md, Tutorial.ipynb, mcmc.py, parallel.py (no LICENSE); Validation/*/data hold only data files, no README/licence"
+  "evidence": "Bitbucket API src listing at 9defb7a: root = Images, Prior, Process-Formulas, Test, Validation, README.md, Tutorial.ipynb, mcmc.py, parallel.py (no LICENSE); Validation/*/data hold only data files, no README/licence",
+  "name": "Bayesian machine scientist real datasets",
+  "set": "fresh-63",
+  "problems": 3,
+  "sources": [
+   "https://arxiv.org/abs/2004.12157",
+   "https://doi.org/10.1126/sciadv.aav6971",
+   "https://pmc.ncbi.nlm.nih.gov/articles/PMC6994216/"
+  ]
  },
  {
   "catalog": "bms-synthetic-prior-expression-and-bessel-functions",
@@ -77,7 +117,15 @@
   "verdict": "non-commercial",
   "redistribute": "yes",
   "upstream": "Guimera et al. 2020, Sci. Adv. 6:eaav6971 (Bessel J_nu on [0,4]; srbf draws 100 seeded uniform points per order)",
-  "evidence": "arXiv OAI 2004.12157 <license>http://creativecommons.org/licenses/by-nc-sa/4.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "arXiv OAI 2004.12157 <license>http://creativecommons.org/licenses/by-nc-sa/4.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "BMS synthetic prior expression and Bessel functions* (pinned points)",
+  "set": "fresh-64",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/2004.12157",
+   "https://arxiv.org/pdf/2004.12157",
+   "https://doi.org/10.1126/sciadv.aav6971"
+  ]
  },
  {
   "catalog": "breiman-i",
@@ -101,7 +149,15 @@
   "verdict": "facts only (no upstream license)",
   "redistribute": "yes",
   "upstream": "Schmidt & Lipson, GPTP IV 2006 Table 4 grids (F1-F3) and TEC 2008 Sec. V-C (100 evenly spaced points on [-2,2])",
-  "evidence": "catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "Coevolved fitness predictors test problems (pinned points)",
+  "set": "fresh-145",
+  "problems": 8,
+  "sources": [
+   "https://gpbib.cs.ucl.ac.uk/gp-html/Schmidt_2008_TEC.html",
+   "https://doi.org/10.1109/TEVC.2008.919006",
+   "http://web.archive.org/web/20100806140453/http://ccsl.mae.cornell.edu:80/papers/TEC08_Schmidt.pdf"
+  ]
  },
  {
   "catalog": "constant",
@@ -117,7 +173,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "CP3-Origins/Things-to-bench cosmo_data/C1a-C6c.csv (https://github.com/CP3-Origins/Things-to-bench @69a45dd, v1.1.0)",
-  "evidence": "gh api repos/CP3-Origins/Things-to-bench/license -> MIT; also CP3-Origins/cp3-bench -> MIT"
+  "evidence": "gh api repos/CP3-Origins/Things-to-bench/license -> MIT; also CP3-Origins/cp3-bench -> MIT",
+  "name": "CP3-bench cosmology",
+  "set": "fresh-54",
+  "problems": 28,
+  "sources": [
+   "https://arxiv.org/abs/2406.15531",
+   "https://doi.org/10.1088/1475-7516/2025/01/040",
+   "https://github.com/CP3-Origins/Things-to-bench/tree/69a45dda1d0b95f151cdd669b308fa9fefd6d77d"
+  ]
  },
  {
   "catalog": "cp3-bench-standard-tuning-datasets-points",
@@ -125,7 +189,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "Thing & Koksbang 2025 (JCAP 01:040, arXiv:2406.15531) App. A Table 6 equidistant grids; Things-to-bench datasets/F*.csv",
-  "evidence": "gh api repos/CP3-Origins/Things-to-bench/license -> MIT; arXiv OAI 2406.15531 <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/CP3-Origins/Things-to-bench/license -> MIT; arXiv OAI 2406.15531 <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "CP3-bench standard tuning datasets (pinned points)",
+  "set": "fresh-55",
+  "problems": 4,
+  "sources": [
+   "https://arxiv.org/abs/2406.15531",
+   "https://arxiv.org/e-print/2406.15531v2",
+   "https://arxiv.org/e-print/2406.15531v1"
+  ]
  },
  {
   "catalog": "cvgp-trigonometric-control-variable-datasets",
@@ -181,7 +253,15 @@
   "verdict": "share-alike",
   "redistribute": "unclear",
   "upstream": "xiaoyuxie-vico/PyDimension tag v1.0.0 dataset/*.csv (https://github.com/xiaoyuxie-vico/PyDimension @7f90b01 = Zenodo 10.5281/zenodo.7317017)",
-  "evidence": "gh api 'repos/xiaoyuxie-vico/PyDimension/license?ref=7f90b01aab4335ba816f73e022e9639f2163df44' -> GPL-3.0; gh api repos/xiaoyuxie-vico/PyDimension/license (main) -> MIT; https://zenodo.org/api/records/7317017 license.id = other-open"
+  "evidence": "gh api 'repos/xiaoyuxie-vico/PyDimension/license?ref=7f90b01aab4335ba816f73e022e9639f2163df44' -> GPL-3.0; gh api repos/xiaoyuxie-vico/PyDimension/license (main) -> MIT; https://zenodo.org/api/records/7317017 license.id = other-open",
+  "name": "Dimensionless-learning scaling laws (Xie et al. 2022)",
+  "set": "critic-6",
+  "problems": 5,
+  "sources": [
+   "https://doi.org/10.1038/s41467-022-35084-w",
+   "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9729234/fullTextXML",
+   "https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-022-35084-w/MediaObjects/41467_2022_35084_MOESM1_ESM.pdf"
+  ]
  },
  {
   "catalog": "dow-chemical-evostar-2010",
@@ -189,7 +269,15 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "EvoStar 2010 Symbolic Regression Competition data, SymbolicRegressionCompetition.xls (A. Kordon, The Dow Chemical Company), https://web.archive.org/web/20120628163816/http://casnew.iti.upv.es/cas/competitions/symreg/SymbolicRegressionCompetition.xls",
-  "evidence": "Competition page (Wayback 2012-06-28): 'The case is based on data from a real industrial application at Dow Chemical.' ... 'Copyright (c) 2012 Complex Adaptive Systems Group at ITI. All Rights Reserved.'; no data licence anywhere"
+  "evidence": "Competition page (Wayback 2012-06-28): 'The case is based on data from a real industrial application at Dow Chemical.' ... 'Copyright (c) 2012 Complex Adaptive Systems Group at ITI. All Rights Reserved.'; no data licence anywhere",
+  "name": "Dow Chemical (EvoStar 2010 competition)",
+  "set": "fresh-36",
+  "problems": 1,
+  "sources": [
+   "https://web.archive.org/web/20120628140646/http://casnew.iti.upv.es/index.php/evocompetitions/105-symregcompetition",
+   "http://web.archive.org/web/20201001115943/http://gpbenchmarks.org/wp-content/uploads/2019/08/Evostar_2010_Symbolic_Regression_Competition.pdf",
+   "https://web.archive.org/web/20120628163816/http://casnew.iti.upv.es/cas/competitions/symreg/SymbolicRegressionCompetition.xls"
+  ]
  },
  {
   "catalog": "dow-distillation-tower",
@@ -197,7 +285,15 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "towerData.txt from E. Vladislavleva's symbolicregression.com Tower Problem page (https://web.archive.org/web/20160707102934/http://symbolicregression.com/sites/default/files/DataSets/towerData.txt)",
-  "evidence": "Survey record fresh-37: page footer 'Copyright (c) 2011 SymbolicRegression.com. All rights reserved.'; no data licence; not in PMLB"
+  "evidence": "Survey record fresh-37: page footer 'Copyright (c) 2011 SymbolicRegression.com. All rights reserved.'; no data licence; not in PMLB",
+  "name": "Tower (Dow distillation tower)",
+  "set": "fresh-37",
+  "problems": 1,
+  "sources": [
+   "http://web.archive.org/web/20130719082855/http://www.symbolicregression.com:80/?q=towerProblem",
+   "https://web.archive.org/web/20160707102934/http://symbolicregression.com/sites/default/files/DataSets/towerData.txt",
+   "https://doi.org/10.1109/TEVC.2008.926486"
+  ]
  },
  {
   "catalog": "dow-emulator",
@@ -205,7 +301,15 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "Emulator problem data (A. Kordon, Dow), surviving copy emulators.csv on the HeuristicLab wiki (https://dev.heuristiclab.com/trac.fcgi/raw-attachment/wiki/Documentation/VideoTutorials/SymbolicRegression/emulators.csv)",
-  "evidence": "Survey record fresh-38: page says data 'kindly provided by dr. Arthur Kordon'; '(c) 2011 SymbolicRegression.com'; the HeuristicLab wiki states no licence"
+  "evidence": "Survey record fresh-38: page says data 'kindly provided by dr. Arthur Kordon'; '(c) 2011 SymbolicRegression.com'; the HeuristicLab wiki states no licence",
+  "name": "Emulator problem (Dow)",
+  "set": "fresh-38",
+  "problems": 1,
+  "sources": [
+   "http://web.archive.org/web/20131208231518/http://symbolicregression.com/?q=emulatorProblem",
+   "http://web.archive.org/web/20141008094848/http://www.symbolicregression.com/?q=emulatorProblem",
+   "http://symbolicregression.com/sites/SRDocuments/DataSets/EmulatorProblem.zip"
+  ]
  },
  {
   "catalog": "drsr-debcat",
@@ -213,7 +317,15 @@
   "verdict": "unclear",
   "redistribute": "unclear",
   "upstream": "DEBCat detached eclipsing binary catalogue (Southworth 2015, ASP Conf. Ser. 496, 164), VizieR V/152 debcat.dat (https://cdsarc.cds.unistra.fr/ftp/V/152/debcat.dat)",
-  "evidence": "VizieR 'Rules of usage' (https://cds.unistra.fr/vizier-org/licences_vizier.html, Wayback 2026-10-25): 'The data retrieved with VizieR are free of usage in a scientific context; however, ... the original authors and publication references including the publisher have to be explicitely cited' ... 'The commercial usage of the data is subject to rules depending of the origin'"
+  "evidence": "VizieR 'Rules of usage' (https://cds.unistra.fr/vizier-org/licences_vizier.html, Wayback 2026-10-25): 'The data retrieved with VizieR are free of usage in a scientific context; however, ... the original authors and publication references including the publisher have to be explicitely cited' ... 'The commercial usage of the data is subject to rules depending of the origin'",
+  "name": "DRSR DEBCat mass-luminosity",
+  "set": "fresh-137",
+  "problems": 2,
+  "sources": [
+   "https://arxiv.org/abs/2605.15809",
+   "https://arxiv.org/pdf/2605.15809v1",
+   "https://arxiv.org/src/2605.15809v1"
+  ]
  },
  {
   "catalog": "dso-benchmark-registry",
@@ -229,7 +341,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "dso-org/deep-symbolic-optimization benchmarks.csv Neat-6 (fit on integers 1..50, test 1..120)",
-  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "DSO benchmark registry (benchmarks.csv) (pinned points)",
+  "set": "fresh-30",
+  "problems": 1,
+  "sources": [
+   "https://github.com/dso-org/deep-symbolic-optimization/blob/master/dso/dso/task/regression/benchmarks.csv",
+   "https://raw.githubusercontent.com/dso-org/deep-symbolic-optimization/2069d4e/dso/dso/task/regression/benchmarks.csv",
+   "https://raw.githubusercontent.com/dso-org/deep-symbolic-optimization/a49c228/dso/dso/task/regression/benchmarks.csv"
+  ]
  },
  {
   "catalog": "e2e-in-domain-synthetic-validation-set",
@@ -253,7 +373,15 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "Schmidt & Lipson 2009, Science 324:81 SOM invar_datasets.zip -> real_double_pend_h_1.txt; mirrored at erwincoumans/tiny-differentiable-simulator data/schmidt-lipson-exp-data/ (@ab1d9be)",
-  "evidence": "gh api repos/erwincoumans/tiny-differentiable-simulator/license -> Apache-2.0 (code); data/schmidt-lipson-exp-data holds only the .txt files, no README/licence; Crossref 10.1126/science.1165893: no licence; survey: 'the Science SOM states none'"
+  "evidence": "gh api repos/erwincoumans/tiny-differentiable-simulator/license -> Apache-2.0 (code); data/schmidt-lipson-exp-data holds only the .txt files, no README/licence; Crossref 10.1126/science.1165893: no licence; survey: 'the Science SOM states none'",
+  "name": "EQL double-pendulum kinematics",
+  "set": "fresh-152",
+  "problems": 4,
+  "sources": [
+   "https://arxiv.org/abs/1610.02995v1",
+   "https://arxiv.org/pdf/1610.02995v1",
+   "https://arxiv.org/e-print/1610.02995v1"
+  ]
  },
  {
   "catalog": "eql-formulas-f-1-f-4-and-division-formula",
@@ -285,7 +413,15 @@
   "verdict": "terms forbid redistribution",
   "redistribute": "no",
   "upstream": "NIST X-ray Transition Energies Database (SRD 128), K-alpha2 (KL2) lines (https://physics.nist.gov/cgi-bin/XrayTrans/search.pl?download=tab&element=All&trans=KL2&units=eV)",
-  "evidence": "https://www.nist.gov/srd/public-law: 'Standard Reference Data (SRD) are copyrighted by the U.S. Secretary of Commerce on behalf of the United States of America. All rights reserved. None of our SRD may be reproduced, stored in a retrieval system or transmitted, in any form or by any means ... without prior permission.'"
+  "evidence": "https://www.nist.gov/srd/public-law: 'Standard Reference Data (SRD) are copyrighted by the U.S. Secretary of Commerce on behalf of the United States of America. All rights reserved. None of our SRD may be reproduced, stored in a retrieval system or transmitted, in any form or by any means ... without prior permission.'",
+  "name": "EQL X-ray transition energies",
+  "set": "fresh-156",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/1610.02995",
+   "https://arxiv.org/pdf/1610.02995v1",
+   "https://arxiv.org/e-print/1610.02995v1"
+  ]
  },
  {
   "catalog": "erbench-public-legacy-formulas",
@@ -309,7 +445,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Cosmic-chronometer H(z) table, Moresco et al. 2022, Living Rev. Relativ. 25:6, Table 1 (arXiv:2201.07241), as esr/data/CC_Hubble.dat in DeaglanBartlett/ESR @23c3907",
-  "evidence": "arXiv OAI 2201.07241 <license>http://creativecommons.org/licenses/by/4.0/</license>; ESR README 'The software is available on the MIT licence: Copyright 2022 Deaglan J. Bartlett'; gh api repos/DeaglanBartlett/ESR/license -> null (no LICENSE file)"
+  "evidence": "arXiv OAI 2201.07241 <license>http://creativecommons.org/licenses/by/4.0/</license>; ESR README 'The software is available on the MIT licence: Copyright 2022 Deaglan J. Bartlett'; gh api repos/DeaglanBartlett/ESR/license -> null (no LICENSE file)",
+  "name": "ESR cosmology datasets",
+  "set": "fresh-53",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/2211.11461",
+   "https://doi.org/10.1109/TEVC.2023.3280250",
+   "https://github.com/DeaglanBartlett/ESR/tree/23c3907a0fb08301d5e89fb666ae01bec0398faa/esr/data"
+  ]
  },
  {
   "catalog": "esr-cosmology-datasets",
@@ -325,7 +469,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "UCI 409 Daily Demand Forecasting Orders (doi:10.24432/C5BC8T); UCI 9 Auto MPG (doi:10.24432/C5859H); California housing (Pace & Barry 1997) via the scikit-learn figshare mirror (https://figshare.com/articles/dataset/cal_housing_tgz/3829992)",
-  "evidence": "UCI dataset page https://archive.ics.uci.edu/dataset/9/auto+mpg: 'licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license' (409 checked by the survey 2026-10-05); https://api.figshare.com/v2/articles/3829992 license = 'CC BY 4.0' (uploader Nelson Liu, 'Part of the California housing dataset used in scikit-learn')"
+  "evidence": "UCI dataset page https://archive.ics.uci.edu/dataset/9/auto+mpg: 'licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license' (409 checked by the survey 2026-10-05); https://api.figshare.com/v2/articles/3829992 license = 'CC BY 4.0' (uploader Nelson Liu, 'Part of the California housing dataset used in scikit-learn')",
+  "name": "EvoGP regression datasets",
+  "set": "fresh-140",
+  "problems": 3,
+  "sources": [
+   "https://arxiv.org/abs/2501.17168",
+   "https://arxiv.org/pdf/2501.17168v7",
+   "https://arxiv.org/pdf/2501.17168v6"
+  ]
  },
  {
   "catalog": "evomo-sr-random-expression-datasets-p1-p4",
@@ -341,7 +493,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "isds-neu/SymbolicPhysicsLearner physics_task/data/*_train/_test.csv (@c0c18c9), from de Silva et al. 2020 Ball_drops_data.xls (briandesilva/discovery-of-physics-from-data @b79c343)",
-  "evidence": "gh api repos/isds-neu/SymbolicPhysicsLearner/license -> MIT; gh api repos/briandesilva/discovery-of-physics-from-data/license -> MIT; Crossref 10.3389/frai.2020.00025 (de Silva et al. 2020) CC BY 4.0"
+  "evidence": "gh api repos/isds-neu/SymbolicPhysicsLearner/license -> MIT; gh api repos/briandesilva/discovery-of-physics-from-data/license -> MIT; Crossref 10.3389/frai.2020.00025 (de Silva et al. 2020) CC BY 4.0",
+  "name": "Free-falling balls with air resistance",
+  "set": "fresh-62",
+  "problems": 11,
+  "sources": [
+   "https://arxiv.org/abs/2205.13134",
+   "https://arxiv.org/pdf/2205.13134v2",
+   "https://github.com/isds-neu/SymbolicPhysicsLearner/tree/c0c18c90d61510a78ff2d24ac5299ad92c8acc59/physics_task/data"
+  ]
  },
  {
   "catalog": "feynman",
@@ -357,7 +517,15 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "trentmc/ffx2011-benchmarks med-dimensional_benchmark_datasets.zip (@1aa15f6)",
-  "evidence": "gh api repos/trentmc/ffx2011-benchmarks/license -> 404 (no licence file); README only lists the archives; trentmc/ffx2011 resources/FFX_license.txt: 'FFX Software Licence Agreement (like BSD, but adapted for non-commercial gain only) ... Usage does not involve commercial gain.'; survey: trent.st footer 'All rights reserved'"
+  "evidence": "gh api repos/trentmc/ffx2011-benchmarks/license -> 404 (no licence file); README only lists the archives; trentmc/ffx2011 resources/FFX_license.txt: 'FFX Software Licence Agreement (like BSD, but adapted for non-commercial gain only) ... Usage does not involve commercial gain.'; survey: trent.st footer 'All rights reserved'",
+  "name": "FFX CMOS OTA circuit targets",
+  "set": "fresh-142",
+  "problems": 6,
+  "sources": [
+   "https://doi.org/10.1007/978-1-4614-1770-5_13",
+   "http://trent.st/content/2011-GPTP-FFX-paper.pdf",
+   "https://github.com/trentmc/ffx2011-benchmarks/tree/1aa15f6317c5c5ed18bad4c487e7114c6a497580"
+  ]
  },
  {
   "catalog": "ffx-high-dimensional-circuits",
@@ -365,7 +533,15 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "trentmc/ffx2011-benchmarks high-dimensional_benchmark_datasets_part1-3.tar.gz (@1aa15f6)",
-  "evidence": "gh api repos/trentmc/ffx2011-benchmarks/license -> 404; survey: 'http://trent.st/ffx/ footer reads \"Copyright (c) 2026, Trent McConaghy. All rights reserved.\"'; FFX_license.txt is non-commercial software licence"
+  "evidence": "gh api repos/trentmc/ffx2011-benchmarks/license -> 404; survey: 'http://trent.st/ffx/ footer reads \"Copyright (c) 2026, Trent McConaghy. All rights reserved.\"'; FFX_license.txt is non-commercial software licence",
+  "name": "FFX high-dimensional circuit problems",
+  "set": "fresh-143",
+  "problems": 12,
+  "sources": [
+   "https://doi.org/10.1007/978-1-4614-1770-5_13",
+   "https://github.com/trentmc/ffx2011/blob/bf7f2b5f3458ee0cfef532cd568dcbd5e579fba3/resources/2011-GPTP-FFX-paper.pdf",
+   "https://doi.org/10.1109/CICC.2011.6055329"
+  ]
  },
  {
   "catalog": "friedman-functions",
@@ -385,11 +561,97 @@
  },
  {
   "catalog": "gecco-2013-2017-real",
-  "license": "mixed: CC BY 4.0 (UCI ML Repository members, per-dataset DOIs) + MIT (DALabNOVA/slim QSAR tables) + GPL-2 (mlbench Ozone); Boston, Dow Chemical and Tower unlicensed",
+  "license": "CC BY 4.0 (UCI Machine Learning Repository members) and MIT (the QSAR members, DALabNOVA/slim)",
   "verdict": "unclear",
-  "redistribute": "no",
+  "redistribute": "yes, these members",
   "upstream": "Oliveira et al. 2018 compilation (GECCO 2018 Companion, doi:10.1145/3205651.3208293): 11 UCI tables (ids 1, 29, 162, 165, 186 x2, 242 x2, 243, 291, 294), StatLib Boston, mlbench Ozone (via laic-ufmg/gp-benchmarks), Dow Chemical + Tower (Dow), QSAR %F/LD50/%PPB via DALabNOVA/slim",
-  "evidence": "UCI dataset pages: 'licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license' (ids 1, 29, 162, 165, 186, 242, 243, 291, 294 re-checked 2026-11-04); gh api repos/DALabNOVA/slim/license -> MIT (setup.py authors incl. Leonardo Vanneschi, a co-author of the QSAR data); gh api repos/laic-ufmg/gp-benchmarks/license -> GPL-2.0; Dow/Tower: see dow-chemical-evostar-2010, dow-d..."
+  "evidence": "UCI dataset pages: 'licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license' (ids 1, 29, 162, 165, 186, 242, 243, 291, 294 re-checked 2026-11-04); gh api repos/DALabNOVA/slim/license -> MIT (setup.py authors incl. Leonardo Vanneschi, a co-author of the QSAR data); gh api repos/laic-ufmg/gp-benchmarks/license -> GPL-2.0; Dow/Tower: see dow-chemical-evostar-2010, dow-d...",
+  "members": {
+   "ABA": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "AFN": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "CCP": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "CPU": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "CST": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "ENC": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "ENH": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "FFR": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "WIR": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "WIW": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "YAC": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "PPB": {
+    "license": "MIT (DALabNOVA/slim)",
+    "share": "yes"
+   },
+   "LD50": {
+    "license": "MIT (DALabNOVA/slim)",
+    "share": "yes"
+   },
+   "BIOAV": {
+    "license": "MIT (DALabNOVA/slim)",
+    "share": "yes"
+   },
+   "BOH": {
+    "license": "none found (StatLib Boston housing)",
+    "share": "no",
+    "reason": "no license"
+   },
+   "OZO": {
+    "license": "GPL-2 (R package mlbench)",
+    "share": "no",
+    "reason": "a copyleft software license (GPL)"
+   },
+   "DOW": {
+    "license": "all rights reserved (Dow Chemical)",
+    "share": "no",
+    "reason": "no license (industrial data, all rights reserved)"
+   },
+   "TOW": {
+    "license": "all rights reserved (Dow Chemical)",
+    "share": "no",
+    "reason": "no license (industrial data, all rights reserved)"
+   }
+  },
+  "name": "GECCO 2013-2017 GP regression compilation (real data)",
+  "set": "fresh-33",
+  "problems": 18,
+  "sources": [
+   "https://arxiv.org/abs/1805.10365",
+   "https://doi.org/10.1145/3205651.3208293",
+   "https://github.com/laic-ufmg/gp-benchmarks (HEAD 53b10dff51; rsc/gp_benchmarks_get_data.py @ 8bc249b; datasets.ods @ 0b01a92; rsc/data/{ozone,yacht}.data @ 24fb56b)"
+  ]
  },
  {
   "catalog": "gecco-2022-covid-ny",
@@ -397,7 +659,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage2/data/135_NY_value_{cases,deaths,hosp}_14_14_{train,test}.csv",
-  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* "
+  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* ",
+  "name": "GECCO 2022 real-world: COVID-19 New York",
+  "set": "done-16",
+  "problems": 3,
+  "sources": [
+   "https://arxiv.org/abs/2304.01117v3",
+   "https://arxiv.org/pdf/2304.01117v3",
+   "https://doi.org/10.1109/TEVC.2024.3423681"
+  ]
  },
  {
   "catalog": "gecco-2022-exact-rediscovery",
@@ -405,7 +675,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_exact_formula_*_data{,_train,_test}.csv (catalog URLs point at the byte-identical cavalab/srbench srcomp copies)",
-  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* (120 exact_formula CSVs)"
+  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* (120 exact_formula CSVs)",
+  "name": "GECCO 2022 synthetic: exact rediscovery",
+  "set": "done-11",
+  "problems": 40,
+  "sources": [
+   "https://arxiv.org/abs/2304.01117",
+   "https://arxiv.org/pdf/2304.01117v3",
+   "https://doi.org/10.1109/TEVC.2024.3423681"
+  ]
  },
  {
   "catalog": "gecco-2022-extrapolation",
@@ -413,7 +691,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_extrapolation_*_data*.csv",
-  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* "
+  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* ",
+  "name": "GECCO 2022 synthetic: extrapolation",
+  "set": "done-14",
+  "problems": 30,
+  "sources": [
+   "https://arxiv.org/abs/2304.01117",
+   "https://arxiv.org/pdf/2304.01117v3",
+   "https://arxiv.org/pdf/2304.01117v1"
+  ]
  },
  {
   "catalog": "gecco-2022-feature-selection",
@@ -421,7 +707,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_featureselection_*_data*.csv (catalog URLs point at the byte-identical cavalab/srbench srcomp copies)",
-  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* (90 featureselection CSVs); survey done-12: '30 CSVs at cavalab/srbench srcomp ... (identical to Zenodo 6842176 zip members)'"
+  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* (90 featureselection CSVs); survey done-12: '30 CSVs at cavalab/srbench srcomp ... (identical to Zenodo 6842176 zip members)'",
+  "name": "GECCO 2022 synthetic: feature selection",
+  "set": "done-12",
+  "problems": 30,
+  "sources": [
+   "https://arxiv.org/abs/2304.01117",
+   "https://arxiv.org/pdf/2304.01117v3",
+   "https://arxiv.org/pdf/2304.01117v1"
+  ]
  },
  {
   "catalog": "gecco-2022-local-optima",
@@ -429,7 +723,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_localopt_*_data*.csv",
-  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* "
+  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* ",
+  "name": "GECCO 2022 synthetic: escaping local optima",
+  "set": "done-13",
+  "problems": 30,
+  "sources": [
+   "https://arxiv.org/abs/2304.01117",
+   "https://arxiv.org/pdf/2304.01117v3",
+   "https://zenodo.org/records/6842176"
+  ]
  },
  {
   "catalog": "gecco-2022-noise",
@@ -437,7 +739,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_noise_*_data*.csv",
-  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* "
+  "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* ",
+  "name": "GECCO 2022 synthetic: noise sensitivity",
+  "set": "done-15",
+  "problems": 40,
+  "sources": [
+   "https://arxiv.org/abs/2304.01117",
+   "https://arxiv.org/pdf/2304.01117v3",
+   "https://arxiv.org/pdf/2304.01117v1"
+  ]
  },
  {
   "catalog": "gecco-2023-montreal-bikes",
@@ -453,7 +763,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Zenodo 10.5281/zenodo.8283005 'SRBench Competition 2023 - Datasets, Scripts, and Results' (de Franca, Virgolin, Kamienny, Bomarito 2023), srbench-competition-2023.zip datasets/dataset_{1,2,3}{,_test}.csv",
-  "evidence": "https://zenodo.org/api/records/8283005 metadata.license.id = cc-by-4.0; survey done-17: scripts BSD-3 (file headers)"
+  "evidence": "https://zenodo.org/api/records/8283005 metadata.license.id = cc-by-4.0; survey done-17: scripts BSD-3 (file headers)",
+  "name": "GECCO 2023 competition Track 1 (performance)",
+  "set": "done-17",
+  "problems": 3,
+  "sources": [
+   "https://cavalab.org/srbench/competition-2023/",
+   "https://zenodo.org/records/8283005",
+   "https://doi.org/10.5281/zenodo.8283005"
+  ]
  },
  {
   "catalog": "geobench",
@@ -485,7 +803,15 @@
   "verdict": "facts only (no upstream license)",
   "redistribute": "yes",
   "upstream": "McDermott et al. 2012 (GECCO) Table 3 grids for Keijzer-6, Vladislavleva-3, Pagie-2",
-  "evidence": "catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "GP benchmarks SR table (McDermott et al. 2012) (pinned points)",
+  "set": "fresh-31",
+  "problems": 3,
+  "sources": [
+   "https://doi.org/10.1145/2330163.2330273",
+   "https://gpbenchmarks.org/wp-content/uploads/2019/08/paper1.pdf",
+   "https://github.com/GMUEClab/ecj/blob/0ce5a2cd446b66c821ed4ae82662d60250da2666/ecj/src/main/java/ec/app/regression/Benchmarks.java"
+  ]
  },
  {
   "catalog": "gp-challenge-protein",
@@ -493,15 +819,76 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "ICOS GP challenge dataset (Widera, Garibaldi & Krasnogor 2010, GPEM 11:61-88), energy_terms.tar.gz + distances.tar.gz (http://ico2s.org/datasets/gp_challenge.html)",
-  "evidence": "http://ico2s.org/datasets/gp_challenge.html: 'We encourage everyone to test their algorithms on this dataset.' (no licence or redistribution statement); Crossref 10.1007/s10710-009-9087-0: Springer TDM licence only; Operon's copy sits in an MIT code repo"
+  "evidence": "http://ico2s.org/datasets/gp_challenge.html: 'We encourage everyone to test their algorithms on this dataset.' (no licence or redistribution statement); Crossref 10.1007/s10710-009-9087-0: Springer TDM licence only; Operon's copy sits in an MIT code repo",
+  "name": "GP Challenge (protein energy function)",
+  "set": "fresh-40",
+  "problems": 54,
+  "sources": [
+   "https://doi.org/10.1007/s10710-009-9087-0",
+   "https://web.archive.org/web/20170403201603/http://human-competitive.org/sites/default/files/widera-genp-paper_1.pdf",
+   "http://ico2s.org/datasets/gp_challenge.html"
+  ]
  },
  {
   "catalog": "gp-gomea-real-world",
-  "license": "mixed: CC BY 4.0 (UCI ML Repository: Airfoil, Concrete, Energy Efficiency, Wine Quality, Yacht; per-dataset DOIs) + unlicensed Boston, Dow Chemical, Tower",
+  "license": "CC BY 4.0 (UCI Machine Learning Repository)",
   "verdict": "unclear",
-  "redistribute": "no",
+  "redistribute": "yes, these members",
   "upstream": "GP-GOMEA authors' preprocessed copies on Google Drive (Virgolin et al. 2021, EC 29(2), arXiv:1904.02050) of UCI Airfoil, Concrete, Energy (x2), Wine (x2), Yacht; Boston housing; Dow Chemical; Tower",
-  "evidence": "UCI pages for ids 291, 165, 242, 186, 243: 'licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license' (checked 2026-11-04); gh api repos/marcovirgolin/GP-GOMEA/license -> Apache-2.0 (code repo, does not carry the Drive data); Dow/Tower: no licence (see dow-chemical-evostar-2010, dow-distillation-tower)"
+  "evidence": "UCI pages for ids 291, 165, 242, 186, 243: 'licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license' (checked 2026-11-04); gh api repos/marcovirgolin/GP-GOMEA/license -> Apache-2.0 (code repo, does not carry the Drive data); Dow/Tower: no licence (see dow-chemical-evostar-2010, dow-distillation-tower)",
+  "members": {
+   "airfoil": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "concrete": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "energycooling": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "energyheating": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "winered": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "winewhite": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "yacht": {
+    "license": "CC BY 4.0 (UCI Machine Learning Repository)",
+    "share": "yes"
+   },
+   "bostonhousing": {
+    "license": "none found (StatLib Boston housing)",
+    "share": "no",
+    "reason": "no license"
+   },
+   "dowchemical": {
+    "license": "all rights reserved (Dow Chemical)",
+    "share": "no",
+    "reason": "no license (industrial data, all rights reserved)"
+   },
+   "tower": {
+    "license": "all rights reserved (Dow Chemical)",
+    "share": "no",
+    "reason": "no license (industrial data, all rights reserved)"
+   }
+  },
+  "name": "GP-GOMEA real-world set",
+  "set": "fresh-35",
+  "problems": 10,
+  "sources": [
+   "https://arxiv.org/abs/1904.02050v4",
+   "https://arxiv.org/pdf/1904.02050v4",
+   "https://doi.org/10.1162/evco_a_00278"
+  ]
  },
  {
   "catalog": "gplearn-diabetes",
@@ -509,7 +896,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "scikit-learn sklearn/datasets/data/diabetes_data_raw.csv.gz (@866c0f5), the diabetes data of Efron, Hastie, Johnstone & Tibshirani 2004 (Ann. Stat. 32:407-499)",
-  "evidence": "gh api repos/scikit-learn/scikit-learn/license -> BSD-3-Clause (COPYING: 'BSD 3-Clause License, Copyright (c) 2007-2026 The scikit-learn developers'); hastie.su.domains/Papers/LARS/ and the NCSU copy state no licence (survey)"
+  "evidence": "gh api repos/scikit-learn/scikit-learn/license -> BSD-3-Clause (COPYING: 'BSD 3-Clause License, Copyright (c) 2007-2026 The scikit-learn developers'); hastie.su.domains/Papers/LARS/ and the NCSU copy state no licence (survey)",
+  "name": "gplearn documentation example (diabetes)",
+  "set": "fresh-146",
+  "problems": 1,
+  "sources": [
+   "https://gplearn.readthedocs.io/en/stable/examples.html",
+   "https://github.com/trevorstephens/gplearn/blob/64517a85fd6d6c50f9ee9e5599f97458da278951/doc/examples.rst",
+   "https://github.com/trevorstephens/gplearn/blob/0390aea8639ce5f6c0b388400e07b58c05acad6a/doc/gp_examples.ipynb"
+  ]
  },
  {
   "catalog": "gplearn-documentation-examples",
@@ -541,7 +936,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "UCI Airfoil (291), Concrete (165), Parkinsons Telemonitoring (189), Concrete Slump (182); QSAR %F/%PPB/LD50 via DALabNOVA/slim (@aca7357)",
-  "evidence": "UCI pages ids 291, 165, 189, 182: 'licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license' (checked 2026-11-04); gh api repos/DALabNOVA/slim/license -> MIT; slim setup.py authors include Leonardo Vanneschi, co-author of the QSAR data (Archetti, Lanzeni, Messina & Vanneschi 2006/2007)"
+  "evidence": "UCI pages ids 291, 165, 189, 182: 'licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license' (checked 2026-11-04); gh api repos/DALabNOVA/slim/license -> MIT; slim setup.py authors include Leonardo Vanneschi, co-author of the QSAR data (Archetti, Lanzeni, Messina & Vanneschi 2006/2007)",
+  "name": "GSGP real-world regression set",
+  "set": "critic-3",
+  "problems": 7,
+  "sources": [
+   "https://arxiv.org/abs/2305.16956",
+   "https://arxiv.org/pdf/2305.16956v1",
+   "https://arxiv.org/abs/2205.02598"
+  ]
  },
  {
   "catalog": "gsr-symset",
@@ -573,7 +976,15 @@
   "verdict": "unclear",
   "redistribute": "no",
   "upstream": "heal-research/HeuristicLab (@c57538b) Regression/Data/RegressionRealWorld.zip (Chemical-I, Housing, Powermeter, SARCOS, Tower) and MibaFriction.zip (CF1-4, NvhRating, Temp1-2, Wear1-2)",
-  "evidence": "gh api repos/heal-research/HeuristicLab/license -> GPL-3.0; Regression/Data holds only MibaFriction.zip, PennML.zip, RegressionRealWorld.zip (no README/licence); survey fresh-46: Miba data 'kindly provided by Miba frictec company' (HL); no licence stated"
+  "evidence": "gh api repos/heal-research/HeuristicLab/license -> GPL-3.0; Regression/Data holds only MibaFriction.zip, PennML.zip, RegressionRealWorld.zip (no README/licence); survey fresh-46: Miba data 'kindly provided by Miba frictec company' (HL); no licence stated",
+  "name": "HeuristicLab regression instances (real-world data)",
+  "set": "fresh-46",
+  "problems": 14,
+  "sources": [
+   "https://github.com/heal-research/HeuristicLab",
+   "https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression",
+   "https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Data/RegressionRealWorld.zip"
+  ]
  },
  {
   "catalog": "heuristiclab-regression-instance-providers",
@@ -589,7 +1000,15 @@
   "verdict": "facts only (no upstream license)",
   "redistribute": "yes",
   "upstream": "Keijzer-6 integer grid as defined by Keijzer 2003 / HeuristicLab provider",
-  "evidence": "gh api repos/heal-research/HeuristicLab/license -> GPL-3.0; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/heal-research/HeuristicLab/license -> GPL-3.0; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "HeuristicLab regression instance providers (pinned points)",
+  "set": "fresh-46",
+  "problems": 1,
+  "sources": [
+   "https://github.com/heal-research/HeuristicLab",
+   "https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression",
+   "https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Data/RegressionRealWorld.zip"
+  ]
  },
  {
   "catalog": "hierbosss-single-atom",
@@ -597,7 +1016,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "tsenftle/Metal-Oxide-LASSO-lo Step_1/Binding_energyV4.xlsx (@8501e29), data of O'Connor et al. 2018, Nat. Catal. 1:531-539",
-  "evidence": "gh api repos/tsenftle/Metal-Oxide-LASSO-lo/license -> MIT (LICENSE kept as raw/fresh-123/senftle_LICENSE)"
+  "evidence": "gh api repos/tsenftle/Metal-Oxide-LASSO-lo/license -> MIT (LICENSE kept as raw/fresh-123/senftle_LICENSE)",
+  "name": "HierBOSSS single-atom catalysis",
+  "set": "fresh-123",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/2509.19710v1",
+   "https://arxiv.org/pdf/2509.19710v1",
+   "https://web.archive.org/web/20260609230815/https://github.com/Roy-SR-007/HierBOSSS/blob/c9c72931e18ce0cb791c42ff6a6b214dcab28d75/HierBOSSS_simulated_example.R"
+  ]
  },
  {
   "catalog": "hierbosss-single-atom-catalysis-and-synthetic-polynomial",
@@ -613,7 +1040,15 @@
   "verdict": "no license found",
   "redistribute": "unclear",
   "upstream": "CT18NNLO PDF grid (Hou et al. 2021) from LHAPDF sets (https://lhapdfsets.web.cern.ch/current/CT18NNLO.tar.gz), evaluated at the IdeaSearchFitter points (arXiv IdeaSearch paper)",
-  "evidence": "Survey fresh-132: 'CT18NNLO grid none stated; LHAPDF GPL-3.0 (only its algorithm was re-implemented here, no code copied); IdeaSearch-framework MIT; paper under the arXiv non-exclusive licence'; gh api repos/IdeaSearch/IdeaSearch-fit/license -> null"
+  "evidence": "Survey fresh-132: 'CT18NNLO grid none stated; LHAPDF GPL-3.0 (only its algorithm was re-implemented here, no code copied); IdeaSearch-framework MIT; paper under the arXiv non-exclusive licence'; gh api repos/IdeaSearch/IdeaSearch-fit/license -> null",
+  "name": "IdeaSearchFitter parton distributions (CT18NNLO)",
+  "set": "fresh-132",
+  "problems": 6,
+  "sources": [
+   "https://arxiv.org/abs/2510.08317v1",
+   "https://arxiv.org/pdf/2510.08317v1",
+   "https://arxiv.org/e-print/2510.08317v1"
+  ]
  },
  {
   "catalog": "implied-volatility-slices",
@@ -621,7 +1056,15 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "hannesnikulski/master-thesis data/vola-dynamics (@1da1742): curves digitized with WebPlotDigitizer from VolaDynamics example plots (voladynamics.com)",
-  "evidence": "gh api repos/hannesnikulski/master-thesis/license -> null; survey fresh-170: 'Curves digitized with WebPlotDigitizer from VolaDynamics example plots (voladynamics.com, accessed 2025-05-26, \"All rights reserved\")'"
+  "evidence": "gh api repos/hannesnikulski/master-thesis/license -> null; survey fresh-170: 'Curves digitized with WebPlotDigitizer from VolaDynamics example plots (voladynamics.com, accessed 2025-05-26, \"All rights reserved\")'",
+  "name": "Implied-volatility slices",
+  "set": "fresh-170",
+  "problems": 34,
+  "sources": [
+   "https://arxiv.org/abs/2603.21892",
+   "https://arxiv.org/pdf/2603.21892v1",
+   "https://arxiv.org/html/2603.21892v1"
+  ]
  },
  {
   "catalog": "jin",
@@ -661,7 +1104,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "Keijzer 2003 grids via the released keijzer catalog (formulas + ranges from DSO benchmarks.csv)",
-  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "keijzer (pinned points)",
+  "set": "fresh-10",
+  "problems": 8,
+  "sources": [
+   "https://doi.org/10.1007/3-540-36599-0_7",
+   "http://web.archive.org/web/20070206014709/http://www.cs.vu.nl:80/~mkeijzer/publications/eurogp2003.ps.gz",
+   "https://gpbib.cs.ucl.ac.uk/gp-html/keijzer03.html"
+  ]
  },
  {
   "catalog": "kim-et-al-eql-benchmark-functions",
@@ -701,7 +1152,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "NAKONAKO4/langlaw data/{bulk_modulus,bandgap,oer_activity}.csv (@a69229c); Roy-SR-007/HierBOSSS perovskites_data/processed_data.csv (@0c6b856)",
-  "evidence": "LangLaw README: '## License  This project is licensed under the MIT License.' (gh api repos/NAKONAKO4/langlaw/license -> null: no LICENSE file); gh api repos/Roy-SR-007/HierBOSSS/license -> MIT; underlying: Weng et al. 2020 Nat. Commun. (Crossref CC BY 4.0), NOMAD (CC BY 4.0 per survey)"
+  "evidence": "LangLaw README: '## License  This project is licensed under the MIT License.' (gh api repos/NAKONAKO4/langlaw/license -> null: no LICENSE file); gh api repos/Roy-SR-007/HierBOSSS/license -> MIT; underlying: Weng et al. 2020 Nat. Commun. (Crossref CC BY 4.0), NOMAD (CC BY 4.0 per survey)",
+  "name": "LangLaw perovskite datasets",
+  "set": "fresh-120",
+  "problems": 4,
+  "sources": [
+   "https://arxiv.org/abs/2602.22967",
+   "https://arxiv.org/e-print/2602.22967",
+   "https://github.com/NAKONAKO4/langlaw/tree/a69229ce0c8f4549f5ba87514713c19e0e7974c2"
+  ]
  },
  {
   "catalog": "lasr-bigbench",
@@ -709,7 +1168,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "trishullab/LibraryAugmentedSymbolicRegression.jl bigbench/csvs.zip (@de6b22d, lasr-experiments branch), derived from google/BIG-bench results",
-  "evidence": "gh api repos/trishullab/LibraryAugmentedSymbolicRegression.jl/license -> Apache-2.0; gh api repos/google/BIG-bench/license -> Apache-2.0"
+  "evidence": "gh api repos/trishullab/LibraryAugmentedSymbolicRegression.jl/license -> Apache-2.0; gh api repos/google/BIG-bench/license -> Apache-2.0",
+  "name": "LaSR BIG-bench scaling-law task",
+  "set": "fresh-93",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/2409.09359",
+   "https://arxiv.org/html/2409.09359v3",
+   "https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl"
+  ]
  },
  {
   "catalog": "lasr-noisy-feynman-with-distractors",
@@ -757,7 +1224,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Harvey et al. 2025 (arXiv:2505.07956): 100 evenly spaced points on [0.1, 5]",
-  "evidence": "gh api repos/harveyThomas4692/llmlex/license -> null (no licence file); arXiv OAI 2505.07956 <license>http://creativecommons.org/licenses/by/4.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/harveyThomas4692/llmlex/license -> null (no licence file); arXiv OAI 2505.07956 <license>http://creativecommons.org/licenses/by/4.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "LLM-LEx random Mathematica functions (pinned points)",
+  "set": "fresh-131",
+  "problems": 20,
+  "sources": [
+   "https://arxiv.org/abs/2505.07956",
+   "https://arxiv.org/pdf/2505.07956v1 (Table 1 p. 10, Table 2 p. 11, Sec. 2.3 p. 8, Sec. 2.5 p. 13, Sec. 3.2 pp. 19-22)",
+   "https://arxiv.org/e-print/2505.07956v1 (LaTeX source sn-article.tex: Table 1 = lines 273-375, Sec. 3.2 = lines 695-788)"
+  ]
  },
  {
   "catalog": "llm-pysr-battery",
@@ -765,7 +1240,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "XieZikai/LLM-PySR data/battery_cycle_life_log_zscore (@dce2fae), features derived from Severson et al. 2019 (Nat. Energy 4:383) raw cycling data on data.matr.io",
-  "evidence": "gh api repos/XieZikai/LLM-PySR/license -> MIT; data.matr.io/1 is a JavaScript app whose HTML and JS bundles contain no licence text (checked 2026-11-04)"
+  "evidence": "gh api repos/XieZikai/LLM-PySR/license -> MIT; data.matr.io/1 is a JavaScript app whose HTML and JS bundles contain no licence text (checked 2026-11-04)",
+  "name": "LLM-PySR battery cycle life",
+  "set": "fresh-126",
+  "problems": 2,
+  "sources": [
+   "https://arxiv.org/abs/2607.04156",
+   "https://arxiv.org/pdf/2607.04156",
+   "https://github.com/XieZikai/LLM-PySR/tree/dce2fae1f51785634435861d9c6af30f27ea6513/data/battery_cycle_life_log_zscore"
+  ]
  },
  {
   "catalog": "llm-sr-bactgrow",
@@ -773,7 +1256,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "deep-symbolic-mathematics/LLM-SR data/bactgrow/{train,test_id,test_ood}.csv (@41c2123)",
-  "evidence": "gh api repos/deep-symbolic-mathematics/LLM-SR/license -> MIT; README 'licensed under MIT licence' (LICENSE holder is the template '[Your Name or Organization]')"
+  "evidence": "gh api repos/deep-symbolic-mathematics/LLM-SR/license -> MIT; README 'licensed under MIT licence' (LICENSE holder is the template '[Your Name or Organization]')",
+  "name": "LLM-SR E. coli growth rate",
+  "set": "interrupted-0",
+  "problems": 2,
+  "sources": [
+   "https://arxiv.org/abs/2404.18400",
+   "https://arxiv.org/pdf/2404.18400v3",
+   "https://arxiv.org/e-print/2404.18400v3"
+  ]
  },
  {
   "catalog": "llm-sr-stress-strain",
@@ -781,7 +1272,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "deep-symbolic-mathematics/LLM-SR data/stressstrain (@41c2123), derived from Mendeley Data 10.17632/rd6jm9tyb6.1 (Aakash, Connors & Shields 2019, Al 6061-T651 stress-strain)",
-  "evidence": "gh api repos/deep-symbolic-mathematics/LLM-SR/license -> MIT; DataCite 10.17632/rd6jm9tyb6.1 rightsList: 'Creative Commons Attribution 4.0 International' (cc-by-4.0)"
+  "evidence": "gh api repos/deep-symbolic-mathematics/LLM-SR/license -> MIT; DataCite 10.17632/rd6jm9tyb6.1 rightsList: 'Creative Commons Attribution 4.0 International' (cc-by-4.0)",
+  "name": "LLM-SR stress-strain (Al 6061-T651)",
+  "set": "done-31",
+  "problems": 2,
+  "sources": [
+   "https://arxiv.org/abs/2404.18400",
+   "https://arxiv.org/pdf/2404.18400v3",
+   "https://github.com/deep-symbolic-mathematics/LLM-SR/tree/41c212312df6c16d936c9cb395356a62774c47e3/data/stressstrain"
+  ]
  },
  {
   "catalog": "materials-laws-multi-agent",
@@ -789,15 +1288,60 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "AlexanderKvashnin/SISSO_hardness train.dat (@7f36d9b), the 61-compound Vickers-hardness training set of Tantardini et al. 2024 (J. Comput. Sci. 82:102402; arXiv:2304.12880)",
-  "evidence": "gh api repos/AlexanderKvashnin/SISSO_hardness/license -> null; survey: 'no LICENSE file ... The README asks users to cite Tantardini et al. 2024'; arXiv OAI 2304.12880 license CC BY 4.0; Crossref 10.1016/j.jocs.2024.102402 vor CC BY 4.0"
+  "evidence": "gh api repos/AlexanderKvashnin/SISSO_hardness/license -> null; survey: 'no LICENSE file ... The README asks users to cite Tantardini et al. 2024'; arXiv OAI 2304.12880 license CC BY 4.0; Crossref 10.1016/j.jocs.2024.102402 vor CC BY 4.0",
+  "name": "Multi-agent materials law datasets",
+  "set": "fresh-122",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/2411.16416",
+   "https://arxiv.org/html/2411.16416v1",
+   "https://arxiv.org/html/2411.16416v2"
+  ]
  },
  {
   "catalog": "mcdermott-predictive-modelling",
-  "license": "mixed: MIT (DALabNOVA/slim QSAR tables) + CC BY-NC 4.0 (WDC-SILSO, Royal Observatory of Belgium, sunspot number V1.0) + unlicensed Mackey-Glass series (R. Jang)",
+  "license": "MIT (DALabNOVA/slim QSAR tables)",
   "verdict": "non-commercial",
-  "redistribute": "no",
+  "redistribute": "yes, these members",
   "upstream": "QSAR %F/LD50/%PPB tables via DALabNOVA/slim (@aca7357); Mackey-Glass series mg.dat of R. Jang (Wayback copy of neural.cs.nthu.edu.tw/jang/dataset/mg/mg.dat); SILSO yearly sunspot number V1.0 (https://www.sidc.be/SILSO/DATA/ARCHIVE/V1.0/yearssn.dat)",
-  "evidence": "gh api repos/DALabNOVA/slim/license -> MIT; https://www.sidc.be/SILSO/infosnytot: 'SILSO data is under CC BY-NC4.0 license'; https://www.sidc.be/SILSO/datafiles: 'Data policy: CC BY-NC'; survey fresh-48: Mackey-Glass 'No licence stated'"
+  "evidence": "gh api repos/DALabNOVA/slim/license -> MIT; https://www.sidc.be/SILSO/infosnytot: 'SILSO data is under CC BY-NC4.0 license'; https://www.sidc.be/SILSO/datafiles: 'Data policy: CC BY-NC'; survey fresh-48: Mackey-Glass 'No licence stated'",
+  "members": {
+   "drug-bioavailability": {
+    "license": "MIT (DALabNOVA/slim)",
+    "share": "yes"
+   },
+   "median-oral-lethal-dose": {
+    "license": "MIT (DALabNOVA/slim)",
+    "share": "yes"
+   },
+   "plasma-protein-binding": {
+    "license": "MIT (DALabNOVA/slim)",
+    "share": "yes"
+   },
+   "mackey-glass": {
+    "license": "none found",
+    "share": "no",
+    "reason": "no license"
+   },
+   "sunspots/test-1921-1955": {
+    "license": "CC BY-NC 4.0 (SILSO, Royal Observatory of Belgium)",
+    "share": "no",
+    "reason": "a non-commercial license (CC BY-NC 4.0)"
+   },
+   "sunspots/test-1956-1979": {
+    "license": "CC BY-NC 4.0 (SILSO, Royal Observatory of Belgium)",
+    "share": "no",
+    "reason": "a non-commercial license (CC BY-NC 4.0)"
+   }
+  },
+  "name": "McDermott et al. predictive-modelling sets",
+  "set": "fresh-48",
+  "problems": 6,
+  "sources": [
+   "http://web.archive.org/web/20210125223903/http://gpbenchmarks.org/wp-content/uploads/2019/08/paper1.pdf",
+   "https://doi.org/10.1145/2330163.2330273",
+   "https://arxiv.org/abs/1805.10365"
+  ]
  },
  {
   "catalog": "mcdermott-table-1-predictive-modelling-sets-points",
@@ -805,7 +1349,15 @@
   "verdict": "facts only (no upstream license)",
   "redistribute": "yes",
   "upstream": "DyFor simulated series (piecewise law on x = 1..60), McDermott et al. 2012 Table 1 / Wagner et al. 2007 (IEEE TEVC)",
-  "evidence": "catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "McDermott Table 1 predictive-modelling sets (pinned points)",
+  "set": "fresh-48",
+  "problems": 1,
+  "sources": [
+   "http://web.archive.org/web/20210125223903/http://gpbenchmarks.org/wp-content/uploads/2019/08/paper1.pdf",
+   "https://doi.org/10.1145/2330163.2330273",
+   "https://arxiv.org/abs/1805.10365"
+  ]
  },
  {
   "catalog": "meier",
@@ -829,7 +1381,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Russeil et al. 2024 (arXiv:2402.04298) 20-point grids (np.arange in generate_toy.py)",
-  "evidence": "gh api repos/erusseil/MvSR-analysis/license -> null (no licence file); arXiv OAI 2402.04298 <license>http://creativecommons.org/licenses/by/4.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/erusseil/MvSR-analysis/license -> null (no licence file); arXiv OAI 2402.04298 <license>http://creativecommons.org/licenses/by/4.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "Multi-view SR synthetic benchmarks (pinned points)",
+  "set": "fresh-59",
+  "problems": 8,
+  "sources": [
+   "https://arxiv.org/abs/2402.04298",
+   "https://arxiv.org/pdf/2402.04298v4",
+   "https://arxiv.org/pdf/2402.04298v1"
+  ]
  },
  {
   "catalog": "mvsr-2024",
@@ -837,7 +1397,15 @@
   "verdict": "unclear",
   "redistribute": "no",
   "upstream": "erusseil/MvSR-analysis real_data/ (@ec5abd6): absorption spectra, ZTF supernova light curves, data_market (S&P500 + 10 companies); 480 finance views from Kaggle 'massive-yahoo-finance-dataset' (iveeaten3223times, v2 2023-11-29)",
-  "evidence": "gh api repos/erusseil/MvSR-analysis/license -> null (README has no licence statement); survey fresh-60: 'Kaggle API: v2 2023-11-29, licence field Apache 2.0, description defers to Yahoo Finance terms'; PMLB first_principles_absorption / _supernovae_zg / _supernovae_zr (MIT)"
+  "evidence": "gh api repos/erusseil/MvSR-analysis/license -> null (README has no licence statement); survey fresh-60: 'Kaggle API: v2 2023-11-29, licence field Apache 2.0, description defers to Yahoo Finance terms'; PMLB first_principles_absorption / _supernovae_zg / _supernovae_zr (MIT)",
+  "name": "Multi-view SR (2024) real data",
+  "set": "fresh-60",
+  "problems": 501,
+  "sources": [
+   "https://arxiv.org/abs/2402.04298",
+   "https://arxiv.org/pdf/2402.04298v4",
+   "https://doi.org/10.1145/3638529.3654087"
+  ]
  },
  {
   "catalog": "mvsr-2025",
@@ -845,7 +1413,15 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "erusseil/mvsr datasets/ (@b39ba79): galaxies (26 rotation curves from A&A 643 A161), supernovae (6), fluid_mechanics (6, Nikuradse), biology (5, Michaelis-Menten 1913 via Golicnik 2012), log_graphs (8 KONECT degree distributions)",
-  "evidence": "gh api repos/erusseil/mvsr/license -> null (README has no licence statement); arXiv OAI 1402.5500 (KONECT handbook) license CC BY-SA 4.0; Crossref 10.1051/0004-6361/201937079 licence: EDP Sciences copyright; Crossref 10.1098/rsta.2024.0592 (paper) CC BY 4.0"
+  "evidence": "gh api repos/erusseil/mvsr/license -> null (README has no licence statement); arXiv OAI 1402.5500 (KONECT handbook) license CC BY-SA 4.0; Crossref 10.1051/0004-6361/201937079 licence: EDP Sciences copyright; Crossref 10.1098/rsta.2024.0592 (paper) CC BY 4.0",
+  "name": "Multi-view SR (2025) real-world data",
+  "set": "fresh-61",
+  "problems": 51,
+  "sources": [
+   "https://arxiv.org/abs/2509.10500",
+   "https://arxiv.org/html/2509.10500v1",
+   "https://doi.org/10.1098/rsta.2024.0592"
+  ]
  },
  {
   "catalog": "neat",
@@ -861,7 +1437,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "Neat-6 integer grid via the released neat catalog (DSO benchmarks.csv)",
-  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "neat (pinned points)",
+  "set": "fresh-27",
+  "problems": 1,
+  "sources": [
+   "https://doi.org/10.1016/j.ins.2015.11.010",
+   "https://www.cs.nuim.ie/~egalvan/papers/neat_Galvan_2016.pdf",
+   "https://mural.maynoothuniversity.ie/id/eprint/12330/"
+  ]
  },
  {
   "catalog": "newtonbench",
@@ -885,7 +1469,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "Nguyen-2c of SPL: formula, arity and range in isds-neu/SymbolicPhysicsLearner regression_task/task_info.py (@c0c18c9); test grid E[0,100]",
-  "evidence": "gh api repos/isds-neu/SymbolicPhysicsLearner/license -> MIT; arXiv OAI 2205.13134 <license>http://creativecommons.org/licenses/by-sa/4.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/isds-neu/SymbolicPhysicsLearner/license -> MIT; arXiv OAI 2205.13134 <license>http://creativecommons.org/licenses/by-sa/4.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "Nguyen-c (SPL variant) (pinned points)",
+  "set": "fresh-7",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/2205.13134v2",
+   "https://openreview.net/forum?id=ZTK3SefE8_Z",
+   "https://github.com/isds-neu/SymbolicPhysicsLearner/tree/c0c18c90d61510a78ff2d24ac5299ad92c8acc59"
+  ]
  },
  {
   "catalog": "nikuradse",
@@ -893,7 +1485,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "PMLB nikuradse_1, nikuradse_2 (EpistasisLab/pmlb @7c1f4bd), Nikuradse 1933 rough-pipe data",
-  "evidence": "gh api repos/EpistasisLab/pmlb/license -> MIT; datasets nikuradse_1, nikuradse_2 present in the PMLB tree"
+  "evidence": "gh api repos/EpistasisLab/pmlb/license -> MIT; datasets nikuradse_1, nikuradse_2 present in the PMLB tree",
+  "name": "Nikuradse rough-pipe friction",
+  "set": "fresh-51",
+  "problems": 2,
+  "sources": [
+   "https://github.com/EpistasisLab/pmlb/tree/7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68/datasets/nikuradse_1",
+   "https://github.com/EpistasisLab/pmlb/tree/7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68/datasets/nikuradse_2",
+   "https://github.com/EpistasisLab/pmlb/commit/872ec0a1f99ca0b55a8c8c5491da09a7da66ce13"
+  ]
  },
  {
   "catalog": "nonic-points",
@@ -901,7 +1501,11 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "Nonic via the released nonic catalog (DSO benchmarks.csv); seeded pool of 10,000 random points",
-  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "nonic (pinned points)",
+  "set": null,
+  "problems": 1,
+  "sources": []
  },
  {
   "catalog": "nsrwh-only-five-variables-nc",
@@ -937,11 +1541,30 @@
  },
  {
   "catalog": "nuclear-misr",
-  "license": "CC BY 3.0 (AME2020, Wang et al. 2021, Chin. Phys. C 45:030003) for binding energies; charge radii (Angeli & Marinova 2013, IAEA) without licence; splits from munozariasjm/nuclear-misr (no licence)",
+  "license": "CC BY 3.0 (AME2020, Chin. Phys. C 45, 030003)",
   "verdict": "unclear",
-  "redistribute": "unclear",
+  "redistribute": "yes, these members",
   "upstream": "munozariasjm/nuclear-misr Data/Experimental/{be,rc}_{train,test}.csv (@791e28c); values: AME2020 binding energies (Wang et al. 2021, Chin. Phys. C 45:030003) and IAEA charge radii (Angeli & Marinova 2013)",
-  "evidence": "gh api repos/munozariasjm/nuclear-misr/license -> null (README: citation request only); Crossref 10.1088/1674-1137/abddaf licence http://creativecommons.org/licenses/by/3.0/ (vor); Crossref 10.1016/j.adt.2011.12.006 (Angeli & Marinova): Elsevier TDM only; Crossref 10.1038/s42005-025-02023-2 (MISR paper) CC BY-NC-ND 4.0"
+  "evidence": "gh api repos/munozariasjm/nuclear-misr/license -> null (README: citation request only); Crossref 10.1088/1674-1137/abddaf licence http://creativecommons.org/licenses/by/3.0/ (vor); Crossref 10.1016/j.adt.2011.12.006 (Angeli & Marinova): Elsevier TDM only; Crossref 10.1038/s42005-025-02023-2 (MISR paper) CC BY-NC-ND 4.0",
+  "members": {
+   "misr-be": {
+    "license": "CC BY 3.0 (AME2020, Chin. Phys. C 45, 030003; the same values)",
+    "share": "yes"
+   },
+   "misr-rc": {
+    "license": "none found (IAEA charge-radii compilation)",
+    "share": "no",
+    "reason": "no license"
+   }
+  },
+  "name": "Nuclear binding energies and charge radii (MISR)",
+  "set": "critic-5",
+  "problems": 2,
+  "sources": [
+   "https://arxiv.org/abs/2404.11477",
+   "https://arxiv.org/pdf/2404.11477v3",
+   "https://doi.org/10.1038/s42005-025-02023-2"
+  ]
  },
  {
   "catalog": "occamnet-analytic-and-non-analytic-suites",
@@ -957,7 +1580,15 @@
   "verdict": "unclear",
   "redistribute": "unclear",
   "upstream": "JerryGarcia1995/OxygenIonConductor modelling_GoodRegressor/DatabaseOnly featurized task files (@5ffef73); raw database = Zenodo 10.5281/zenodo.18947543",
-  "evidence": "gh api repos/JerryGarcia1995/OxygenIonConductor/license -> null; https://zenodo.org/api/records/18947543 metadata.license.id = cc-by-4.0; survey: database CSV byte-identical (md5 45f25ce4...) to the Zenodo deposit; Crossref 10.1038/s41597-026-07100-x (Sci Data article) CC BY-NC-ND 4.0"
+  "evidence": "gh api repos/JerryGarcia1995/OxygenIonConductor/license -> null; https://zenodo.org/api/records/18947543 metadata.license.id = cc-by-4.0; survey: database CSV byte-identical (md5 45f25ce4...) to the Zenodo deposit; Crossref 10.1038/s41597-026-07100-x (Sci Data article) CC BY-NC-ND 4.0",
+  "name": "Oxygen-ion conductor database",
+  "set": "critic-7",
+  "problems": 2,
+  "sources": [
+   "https://arxiv.org/abs/2601.16852",
+   "https://arxiv.org/pdf/2601.16852v1",
+   "https://doi.org/10.1038/s41597-026-07100-x"
+  ]
  },
  {
   "catalog": "pagie",
@@ -977,11 +1608,86 @@
  },
  {
   "catalog": "phye2e-space-physics",
-  "license": "Apache-2.0 (figshare 10.6084/m9.figshare.29615831, PhyE2E_datas, Ying et al. 2025) except ssn: CC BY-NC 4.0 (WDC-SILSO, Royal Observatory of Belgium)",
+  "license": "Apache-2.0 (the authors' figshare record)",
   "verdict": "non-commercial",
-  "redistribute": "no",
+  "redistribute": "yes, these members",
   "upstream": "figshare 'PhyE2E_datas' v1 (doi:10.6084/m9.figshare.29615831.v1; Ying et al. 2025, Nat. Mach. Intell. 7:1726): SN_m_tot_V2.0.txt (SILSO), 12 THEMIS/Geotail plasma quartile tables, solarDifferentialRotation.csv, 2 Fe X line tables (CHIANTI)",
-  "evidence": "https://api.figshare.com/v2/articles/29615831 license = 'Apache 2.0'; https://www.sidc.be/SILSO/datafiles: 'Data policy: CC BY-NC'"
+  "evidence": "https://api.figshare.com/v2/articles/29615831 license = 'Apache 2.0'; https://www.sidc.be/SILSO/datafiles: 'Data policy: CC BY-NC'",
+  "members": {
+   "plasma-Kp0-Pd1.5": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp0-Pd3.0": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp1-Pd1.5": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp1-Pd3.0": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp2-Pd1.5": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp2-Pd3.0": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp3-Pd1.5": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp3-Pd3.0": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp4-Pd1.5": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp4-Pd3.0": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp5-Pd1.5": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "plasma-Kp5-Pd3.0": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "diffrot": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "fex-174.531": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "fex-175.263": {
+    "license": "Apache-2.0 (the authors' figshare record)",
+    "share": "yes"
+   },
+   "ssn": {
+    "license": "CC BY-NC 4.0 (SILSO, Royal Observatory of Belgium)",
+    "share": "no",
+    "reason": "a non-commercial license (CC BY-NC 4.0)"
+   }
+  },
+  "name": "PhyE2E space-physics applications",
+  "set": "fresh-103",
+  "problems": 16,
+  "sources": [
+   "https://arxiv.org/abs/2503.07994v3",
+   "https://doi.org/10.1038/s42256-025-01126-3",
+   "https://doi.org/10.6084/m9.figshare.29615831.v1"
+  ]
  },
  {
   "catalog": "physo-astrophysical-case-studies",
@@ -1005,7 +1711,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "WassimTenachi/PhySO demos/class_sr/demo_milky_way_streams/streams.csv (@bfbfa88)",
-  "evidence": "gh api repos/WassimTenachi/PhySO/license -> MIT; Crossref 10.3847/2041-8213/ad5970 (Class SR paper) CC BY 4.0"
+  "evidence": "gh api repos/WassimTenachi/PhySO/license -> MIT; Crossref 10.3847/2041-8213/ad5970 (Class SR paper) CC BY 4.0",
+  "name": "PhySO Milky Way stellar streams",
+  "set": "fresh-58",
+  "problems": 29,
+  "sources": [
+   "https://arxiv.org/abs/2312.01816",
+   "https://arxiv.org/html/2312.01816v2",
+   "https://doi.org/10.3847/2041-8213/ad5970"
+  ]
  },
  {
   "catalog": "poly",
@@ -1029,7 +1743,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "MilesCranmer/pysr_paper src/data/empirical_bench/{hubble,leavitt}.csv + inline tables in equations.yml (@b306874)",
-  "evidence": "gh api repos/MilesCranmer/pysr_paper/license -> MIT"
+  "evidence": "gh api repos/MilesCranmer/pysr_paper/license -> MIT",
+  "name": "PySR EmpiricalBench",
+  "set": "fresh-2",
+  "problems": 4,
+  "sources": [
+   "https://arxiv.org/abs/2305.01582",
+   "https://arxiv.org/e-print/2305.01582v3 (LaTeX source: ms.tex Sec. 3.2, output/table.tex = Table 2, output/results.tex = Table 3; last_commit_sha.txt = pysr_paper 7d19225236fa7f95065e21291e3c7f7732ac533b)",
+   "https://github.com/MilesCranmer/pysr_paper/tree/b30687433fb32d3b9784fbedb1480d947dc46fc0"
+  ]
  },
  {
   "catalog": "pysr-empiricalbench-formulas",
@@ -1045,7 +1767,11 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "R1-R3, R1a-R3a via the released r-rationals catalog (DSO benchmarks.csv); seeded points",
-  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "r-rationals (pinned points)",
+  "set": null,
+  "problems": 6,
+  "sources": []
  },
  {
   "catalog": "reproduction-bias-not-included-test-sets",
@@ -1077,15 +1803,312 @@
   "verdict": "facts only (no upstream license)",
   "redistribute": "yes",
   "upstream": "Xu, Liu & Sun 2024 (RSRM, ICLR; arXiv:2305.14656) Gaussian-CDF curves on the 201-point grid E[-100,100,1]",
-  "evidence": "gh api repos/intell-sci-comput/RSRM/license -> MIT; arXiv OAI 2305.14656 <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/intell-sci-comput/RSRM/license -> MIT; arXiv OAI 2305.14656 <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "RSRM Gaussian-CDF extrapolation test (pinned points)",
+  "set": "fresh-111",
+  "problems": 3,
+  "sources": [
+   "https://proceedings.iclr.cc/paper_files/paper/2024/file/ef3a55fa15aa5fe39b7a2617b3a5d06e-Paper-Conference.pdf",
+   "https://arxiv.org/abs/2305.14656",
+   "https://arxiv.org/e-print/2305.14656v1"
+  ]
  },
  {
   "catalog": "scilaws-real",
-  "license": "mixed per task (SciLaws-Bench dataset/LICENSES.md, Huang et al. 2026, arXiv:2609.01552); each problem carries its upstream licence",
+  "license": "per problem (SciLaws-Bench dataset/LICENSES.md, RealSR/SciLaws-Bench): CC BY 2.5/3.0/4.0, CC0 1.0, public domain, MIT, etalab-2.0",
   "verdict": "unclear",
-  "redistribute": "no",
+  "redistribute": "yes, these members",
   "upstream": "Hugging Face RealSR/SciLaws-Bench @15b9325, tasks/typeI/* (66 Type I tasks), per-task licences in dataset/LICENSES.md (github.com/yiyihum/SciLaws-Bench, MIT harness)",
-  "evidence": "HF API cardData.license = 'other' (license_name: mixed-per-task, license_link .../dataset/LICENSES.md); LICENSES.md: 'Each task's data carries the license of its upstream source ... Datasets that disallow redistribution were excluded during curation.' Table rows e.g. 'binary_pulsar_post_keplerian_atnf__PBDOT ... GPL-3.0-or-later', 'geomagnetic_storm_dst__dDst_dt ... CC-BY-NC-4.0', 'baseball_pyt..."
+  "evidence": "HF API cardData.license = 'other' (license_name: mixed-per-task, license_link .../dataset/LICENSES.md); LICENSES.md: 'Each task's data carries the license of its upstream source ... Datasets that disallow redistribution were excluded during curation.' Table rows e.g. 'binary_pulsar_post_keplerian_atnf__PBDOT ... GPL-3.0-or-later', 'geomagnetic_storm_dst__dDst_dt ... CC-BY-NC-4.0', 'baseball_pyt...",
+  "members": {
+   "baseball_pythagorean_winpct_lahman__win_pct": {
+    "license": "CC-BY-SA-3.0",
+    "share": "share-alike"
+   },
+   "binary_pulsar_post_keplerian_atnf__PBDOT": {
+    "license": "GPL-3.0-or-later (ATNF psrcat v2.8.0 distribution, CSIRO/ATNF)",
+    "share": "no",
+    "reason": "a copyleft software license (GPL)"
+   },
+   "bird_flight_speed_alerstam__Ue": {
+    "license": "CC-BY-2.5",
+    "share": "yes"
+   },
+   "bns_merger_disk_ejecta__Mdisk": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "bns_merger_disk_ejecta__Mej": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "bns_merger_disk_ejecta__vej": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "bns_postmerger_waveform_core__f2": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "budyko_partitioning_mach__et_over_p": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "catchment_mean_runoff_camels__q_mean": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "cepheid_period_luminosity__M_W": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "cloud_cover_parameterization__cloud_cover": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "commuting_gravity_lodes__flow_Tij": {
+    "license": "CC0-1.0",
+    "share": "yes"
+   },
+   "dna_melting_temperature_khandelwal__Tm": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "drosophila_isolation_by_distance_dest__M_stat": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "eclipsing_binary_mass_luminosity_debcat__log_L_Lsun": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "exfor_neutron_capture_resonance_gold__sigma_E": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "exoplanet_mass_radius__R": {
+    "license": "CC0-1.0",
+    "share": "yes"
+   },
+   "galaxy_mass_metallicity_sdss__oh": {
+    "license": "Public Domain",
+    "share": "yes"
+   },
+   "galaxy_stellar_mass_sdss__log_M_star": {
+    "license": "Public Domain",
+    "share": "yes"
+   },
+   "geomagnetic_storm_dst__dDst_dt": {
+    "license": "CC-BY-NC-4.0",
+    "share": "no",
+    "reason": "a non-commercial license (CC BY-NC 4.0)"
+   },
+   "ghg_emission_drivers__CDE": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "ghg_emission_drivers__EC": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "ghg_emission_drivers__ME": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "ghg_emission_drivers__NOE": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "gravity_wgs84_somigliana__g0": {
+    "license": "Public Domain",
+    "share": "yes"
+   },
+   "ground_motion_ita18__log10_pga": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "gutenberg_richter_b_value_usgs__gr_freq_mag": {
+    "license": "CC0-1.0",
+    "share": "yes"
+   },
+   "hacks_law_river_length_hydrosheds__main_length_km": {
+    "license": "HydroSHEDS-v1-Derivative",
+    "share": "no",
+    "reason": "the HydroSHEDS terms"
+   },
+   "hea_hardness_lattice_distortion_couzinie__HV": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "her_hor_pt_acid_kucernak__current_density": {
+    "license": "CC0-1.0",
+    "share": "yes"
+   },
+   "island_species_richness_terceira__S_terceira": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "lake_thermocline_depth_pilla__z_t": {
+    "license": "CC0-1.0",
+    "share": "yes"
+   },
+   "life_expectancy_preston__e0_vs_gdppc": {
+    "license": "CC0-1.0",
+    "share": "yes"
+   },
+   "liion_capacity_fade_nasa_pcoe__capacity_Ah": {
+    "license": "NASA-Public",
+    "share": "yes"
+   },
+   "liquid_dispersion_glycols__refractive_index": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "lpbf_meltpool_rosenthal_inconel__depth": {
+    "license": "Public Domain",
+    "share": "yes"
+   },
+   "magnet_3c90_core_loss__log_P_vol": {
+    "license": "MIT",
+    "share": "yes"
+   },
+   "mars_crater_size_frequency__N_cum": {
+    "license": "LicenseRef-NASA-PublicDomain",
+    "share": "yes"
+   },
+   "materials_project_elastic_birch_murnaghan__K_VRH": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "mauna_loa_co2_keeling_curve_noaa__co2_ppm": {
+    "license": "Public-Domain",
+    "share": "yes"
+   },
+   "metabolic_scaling_anage__log_bmr_W": {
+    "license": "CC-BY-3.0",
+    "share": "yes"
+   },
+   "mincer_earnings_acs_pums__log_wage": {
+    "license": "Public-Domain-US-Gov",
+    "share": "yes"
+   },
+   "neo_size_frequency_distribution__N_cum_H": {
+    "license": "LicenseRef-NASA-PublicDomain",
+    "share": "yes"
+   },
+   "nuclear_binding_energy_ame2020__BE_per_A": {
+    "license": "CC0-1.0",
+    "share": "yes"
+   },
+   "ocean_mesoscale_eddy_closure__Sx": {
+    "license": "MIT",
+    "share": "yes"
+   },
+   "parker_spiral_imf__B_phi": {
+    "license": "Public Domain",
+    "share": "yes"
+   },
+   "pfas_soil_sorption__log_kd": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "pp_total_cross_section_donnachie_landshoff__sigma_tot": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "proton_em_form_factor__GE_over_GD": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "protoplanetary_disk_mmflux__F_mm": {
+    "license": "VizieR-custom-free",
+    "share": "no",
+    "reason": "terms for scientific use only (VizieR)"
+   },
+   "pv_module_temperature_efficiency_pvpmc__P_max": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "red_giant_asteroseismology__delta_nu": {
+    "license": "VizieR-CDS academic (free for scientific use with citation)",
+    "share": "no",
+    "reason": "terms for scientific use only (VizieR)"
+   },
+   "red_giant_asteroseismology__nu_max": {
+    "license": "VizieR-CDS academic (free for scientific use with citation)",
+    "share": "no",
+    "reason": "terms for scientific use only (VizieR)"
+   },
+   "rock_core_permeability_norweg__log_k": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "running_endurance_iaaf__velocity": {
+    "license": "CC-BY-SA-4.0",
+    "share": "share-alike"
+   },
+   "smbh_mass_sigma_relation__log_M_BH": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "sne_ia_distance_modulus_pantheonplus__mu": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "solar_flat_plate_collector_graz_efficiency__eta_thermal": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "spirometry_nhanes__FEV1_L": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "spirometry_nhanes__FVC_L": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "trade_gravity_cepii__log_tradeflow": {
+    "license": "etalab-2.0",
+    "share": "yes"
+   },
+   "traffic_flow_density_ngsim__q_flow": {
+    "license": "CC0-1.0",
+    "share": "yes"
+   },
+   "tree_biomass_allometry_chave__agb": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "ttauri_accretion__L_acc": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "volcanic_column_mer_ivespa__H_top": {
+    "license": "CC-BY-4.0",
+    "share": "yes"
+   },
+   "wind_turbine_power_curve_engie__power_kW": {
+    "license": "ODbL",
+    "share": "no",
+    "reason": "a share-alike database license (ODbL)"
+   }
+  },
+  "name": "SciLaws-Bench SciLaws-Real (Type I)",
+  "set": "fresh-95",
+  "problems": 66,
+  "sources": [
+   "https://arxiv.org/abs/2609.01552",
+   "https://github.com/yiyihum/SciLaws-Bench/blob/9239f66b921cb89c7a9d14061f782fdce49dcfb5/docs/assets/scilaws_bench_paper.pdf",
+   "https://huggingface.co/datasets/RealSR/SciLaws-Bench/tree/15b93258fabc8f1785c5a5ffd4d3e51fc15dd860"
+  ]
+ },
+ {
+  "catalog": "scilaws-real-share-alike",
+  "license": "per problem: CC BY-SA 3.0 and CC BY-SA 4.0 (SciLaws-Bench dataset/LICENSES.md)",
+  "verdict": "share-alike",
+  "redistribute": "yes, share-alike repo",
+  "upstream": "Hugging Face RealSR/SciLaws-Bench @15b9325, tasks/typeI/* (66 Type I tasks), per-task licences in dataset/LICENSES.md (github.com/yiyihum/SciLaws-Bench, MIT harness)",
+  "evidence": "the share-alike members of scilaws-real (see its members)"
  },
  {
   "catalog": "scimed-settling-sphere-configurations",
@@ -1109,15 +2132,52 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "ShadowEconomiesProblem.zip (SHADOW_ECONOMIES.xlsx) from symbolicregression.com, Truscott & Korns shadow-economy benchmark (Wayback 2017-03-04)",
-  "evidence": "Survey fresh-39: 'No licence is stated anywhere (page, readme, zip)'; data 'kindly provided by Prof. Philip Truscott'; predictors are World Bank Databank indicators (Dec 2010), shadow-economy estimates are third-party figures"
+  "evidence": "Survey fresh-39: 'No licence is stated anywhere (page, readme, zip)'; data 'kindly provided by Prof. Philip Truscott'; predictors are World Bank Databank indicators (Dec 2010), shadow-economy estimates are third-party figures",
+  "name": "Shadow Economies",
+  "set": "fresh-39",
+  "problems": 2,
+  "sources": [
+   "http://web.archive.org/web/20131208233428/http://symbolicregression.com/?q=shadowEconomiesProblem",
+   "http://web.archive.org/web/20170304231546/http://symbolicregression.com/sites/default/files/DataSets/ShadowEconomiesProblem.zip",
+   "https://doi.org/10.1007/978-1-4614-1770-5_11"
+  ]
  },
  {
   "catalog": "shape-constrained-real-world",
-  "license": "no data licence: folivetti/ITEA (GPL-3.0 code repo) knowledge datasets (Kronberger et al. 2022); cars = UCI Auto MPG (CC BY 4.0)",
+  "license": "CC BY 4.0 (UCI Auto MPG)",
   "verdict": "unclear",
-  "redistribute": "no",
+  "redistribute": "yes, these members",
   "upstream": "folivetti/ITEA datasets/knowledge/{F05128,FlowStress,Cars} (@8669fd1, first commit; removed from the tree 2020-09-19), data of Kronberger et al. 2022 (Evol. Comput. 30(1):75)",
-  "evidence": "gh api repos/folivetti/ITEA/license -> GPL-3.0; survey fresh-50: 'the data files carry no licence statement of their own ... friction data are industrial test-bench data (... Miba frictec GmbH ...), so redistribution may need the authors' OK'; UCI Auto MPG page CC BY 4.0"
+  "evidence": "gh api repos/folivetti/ITEA/license -> GPL-3.0; survey fresh-50: 'the data files carry no licence statement of their own ... friction data are industrial test-bench data (... Miba frictec GmbH ...), so redistribution may need the authors' OK'; UCI Auto MPG page CC BY 4.0",
+  "members": {
+   "cars": {
+    "license": "CC BY 4.0 (UCI Auto MPG; the same rows)",
+    "share": "yes"
+   },
+   "F05128_dyn": {
+    "license": "none found",
+    "share": "no",
+    "reason": "no license"
+   },
+   "F05128_stat": {
+    "license": "none found",
+    "share": "no",
+    "reason": "no license"
+   },
+   "FlowStress": {
+    "license": "none found",
+    "share": "no",
+    "reason": "no license"
+   }
+  },
+  "name": "Shape-constrained SR real-world set",
+  "set": "fresh-50",
+  "problems": 4,
+  "sources": [
+   "https://arxiv.org/abs/2103.15624",
+   "https://arxiv.org/pdf/2103.15624v2",
+   "https://doi.org/10.1162/evco_a_00294"
+  ]
  },
  {
   "catalog": "shape-constrained-sr-synthetic",
@@ -1133,7 +2193,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "Sine on x = 0.0..6.2 step 0.1 via the released sine catalog (DSO benchmarks.csv)",
-  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "sine (pinned points)",
+  "set": "fresh-18",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/2401.14424",
+   "http://www0.cs.ucl.ac.uk/staff/W.Langdon/ftp/papers/poli08_fieldguide.pdf",
+   "https://github.com/NicMcPhee/MICS-2014-GraphDB-EC/blob/d89ab10f292409c3868c60addbf48a2b110f394c/MICS_2014.tex"
+  ]
  },
  {
   "catalog": "sisso-octet-binaries",
@@ -1141,7 +2209,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Ghiringhelli et al. 2015, PRL 114:105503, Supplemental Material Critical_Role_SI.pdf (82 octet binaries, RS vs ZB energy differences + atomic features)",
-  "evidence": "Crossref 10.1103/PhysRevLett.114.105503 licence http://creativecommons.org/licenses/by/3.0/ (vor); journals.aps.org abstract page: 'It is not necessary to obtain permission to reuse this article or its components as it is available under the terms of the Creative Commons Attribution 3.0 License.'"
+  "evidence": "Crossref 10.1103/PhysRevLett.114.105503 licence http://creativecommons.org/licenses/by/3.0/ (vor); journals.aps.org abstract page: 'It is not necessary to obtain permission to reuse this article or its components as it is available under the terms of the Creative Commons Attribution 3.0 License.'",
+  "name": "SISSO octet binaries (rock-salt vs zinc-blende)",
+  "set": "fresh-117",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/1411.7437",
+   "https://doi.org/10.1103/PhysRevLett.114.105503",
+   "https://journals.aps.org/prl/supplemental/10.1103/PhysRevLett.114.105503/Critical_Role_SI.pdf"
+  ]
  },
  {
   "catalog": "sldbench",
@@ -1149,7 +2225,15 @@
   "verdict": "unclear",
   "redistribute": "unclear",
   "upstream": "Hugging Face pkuHaowei/sldbench @721b846 (8 scaling-law configs; Lin et al. 2025, 'Can Language Models Discover Scaling Laws?', arXiv:2507.21184), companion code linhaowei1/SLD",
-  "evidence": "HF API pkuHaowei/sldbench: cardData has no 'license', no license:* tag; linhaowei1/SLD README: 'This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.' but gh api repos/linhaowei1/SLD/license -> 404 and the root has no LICENSE; survey: rows compiled from the cited papers' public releases"
+  "evidence": "HF API pkuHaowei/sldbench: cardData has no 'license', no license:* tag; linhaowei1/SLD README: 'This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.' but gh api repos/linhaowei1/SLD/license -> 404 and the root has no LICENSE; survey: rows compiled from the cited papers' public releases",
+  "name": "SLDBench (scaling-law discovery)",
+  "set": "fresh-94",
+  "problems": 77,
+  "sources": [
+   "https://arxiv.org/abs/2507.21184",
+   "https://arxiv.org/pdf/2507.21184v5",
+   "https://arxiv.org/pdf/2507.21184v1"
+  ]
  },
  {
   "catalog": "sparc-radial-acceleration",
@@ -1157,13 +2241,21 @@
   "verdict": "no license found",
   "redistribute": "unclear",
   "upstream": "SPARC database (Lelli, McGaugh & Schombert 2016, AJ 152:157), MassModels_Lelli2016c.mrt at https://astroweb.case.edu/SPARC/ (RAR derived deterministically)",
-  "evidence": "https://astroweb.case.edu/SPARC/: 'If you are using data from this website in your scientific publications, please cite the SPARC master paper.' (no licence); Crossref 10.3847/0004-6256/152/6/157: IOP copyright page (not OA)"
+  "evidence": "https://astroweb.case.edu/SPARC/: 'If you are using data from this website in your scientific publications, please cite the SPARC master paper.' (no licence); Crossref 10.3847/0004-6256/152/6/157: IOP copyright page (not OA)",
+  "name": "Radial acceleration relation (SPARC)",
+  "set": "fresh-52",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/2301.04368",
+   "https://doi.org/10.1093/mnras/stad597",
+   "https://astroweb.case.edu/SPARC/"
+  ]
  },
  {
   "catalog": "spl-noise-data-scarcity-grid",
-  "license": "CC BY-SA 4.0 (Sun et al. 2023, Symbolic Physics Learner, ICLR, arXiv:2205.13134v2, Sec. 4.1)",
-  "verdict": "share-alike",
-  "redistribute": "yes, share-alike repo",
+  "license": "facts only: one formula and its range from Sun et al. 2023 (Symbolic Physics Learner, ICLR, arXiv:2205.13134v2, a CC BY-SA 4.0 paper)",
+  "verdict": "facts only (no upstream license)",
+  "redistribute": "yes",
   "upstream": "Sun, Liu, Wang & Sun, 'Symbolic Physics Learner', ICLR 2023, arXiv:2205.13134v2 Sec. 4.1 (f(x) = 0.3x^3 + 0.5x^2 + 2x, x ~ U[-10, 10])",
   "evidence": "gh api repos/isds-neu/SymbolicPhysicsLearner/license -> MIT; arXiv OAI 2205.13134 <license>http://creativecommons.org/licenses/by-sa/4.0/</license>"
  },
@@ -1173,7 +2265,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "PMLB (EpistasisLab/pmlb) datasets selected by SRBench 2.0 (Aldeia et al. 2025)",
-  "evidence": "gh api repos/EpistasisLab/pmlb/license -> MIT; PMLB metadata.yaml of every dataset used (148 fetched 2026-11-04) names no licence (fields are 'None yet' placeholders for the OpenML-derived sets)"
+  "evidence": "gh api repos/EpistasisLab/pmlb/license -> MIT; PMLB metadata.yaml of every dataset used (148 fetched 2026-11-04) names no licence (fields are 'None yet' placeholders for the OpenML-derived sets)",
+  "name": "SRBench 2.0 black-box",
+  "set": "done-7",
+  "problems": 12,
+  "sources": [
+   "https://arxiv.org/abs/2505.03977",
+   "https://arxiv.org/pdf/2505.03977",
+   "https://dl.acm.org/doi/10.1145/3712255.3734309"
+  ]
  },
  {
   "catalog": "srbench-2.0-first-principles",
@@ -1181,7 +2281,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "PMLB first_principles_* datasets (EpistasisLab/pmlb), selected by SRBench 2.0",
-  "evidence": "gh api repos/EpistasisLab/pmlb/license -> MIT; PMLB metadata.yaml of every dataset used (148 fetched 2026-11-04) names no licence (fields are 'None yet' placeholders for the OpenML-derived sets)"
+  "evidence": "gh api repos/EpistasisLab/pmlb/license -> MIT; PMLB metadata.yaml of every dataset used (148 fetched 2026-11-04) names no licence (fields are 'None yet' placeholders for the OpenML-derived sets)",
+  "name": "SRBench 2.0 first-principles",
+  "set": "done-8",
+  "problems": 12,
+  "sources": [
+   "https://arxiv.org/abs/2505.03977 (v1, 6 May 2025)",
+   "https://arxiv.org/html/2505.03977 (Sec. 3.1 + Table 1, 3.2, 3.3, 3.5, Sec. 4 Fig. 4 + Table 3, Sec. 5.4)",
+   "https://doi.org/10.1145/3712255.3734309 (GECCO '25 Companion, pp. 2529-2538; Crossref checked)"
+  ]
  },
  {
   "catalog": "srbench-2021-blackbox",
@@ -1189,7 +2297,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "PMLB regression datasets used by SRBench 2021 (La Cava et al. 2021), EpistasisLab/pmlb",
-  "evidence": "gh api repos/EpistasisLab/pmlb/license -> MIT; PMLB metadata.yaml of every dataset used (148 fetched 2026-11-04) names no licence (fields are 'None yet' placeholders for the OpenML-derived sets); 195_auto_price and 207_autoPrice now live under _deprecated_* in PMLB (metadata also without licence)"
+  "evidence": "gh api repos/EpistasisLab/pmlb/license -> MIT; PMLB metadata.yaml of every dataset used (148 fetched 2026-11-04) names no licence (fields are 'None yet' placeholders for the OpenML-derived sets); 195_auto_price and 207_autoPrice now live under _deprecated_* in PMLB (metadata also without licence)",
+  "name": "SRBench 2021 black-box",
+  "set": "done-0",
+  "problems": 122,
+  "sources": [
+   "https://arxiv.org/abs/2107.14351",
+   "https://arxiv.org/pdf/2107.14351v1",
+   "https://github.com/cavalab/srbench/tree/e5ded4715ed5721703353d3500a2fdb99004faf1"
+  ]
  },
  {
   "catalog": "srbench-2021-strogatz",
@@ -1197,7 +2313,11 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "PMLB strogatz_* datasets (EpistasisLab/pmlb), the ODE-Strogatz track of SRBench 2021",
-  "evidence": "gh api repos/EpistasisLab/pmlb/license -> MIT; PMLB metadata.yaml of every dataset used (148 fetched 2026-11-04) names no licence (fields are 'None yet' placeholders for the OpenML-derived sets)"
+  "evidence": "gh api repos/EpistasisLab/pmlb/license -> MIT; PMLB metadata.yaml of every dataset used (148 fetched 2026-11-04) names no licence (fields are 'None yet' placeholders for the OpenML-derived sets)",
+  "name": "SRBench 2021 Strogatz",
+  "set": null,
+  "problems": 14,
+  "sources": []
  },
  {
   "catalog": "superconductor-tc",
@@ -1205,7 +2325,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "henniggroup/symbolic-regression-utilities datasets/AllenDynes and examples/data_AD.txt (@11cf1f3), Allen-Dynes 1975 table (Xie et al. 2019, PRB 100:174513)",
-  "evidence": "gh api 'repos/henniggroup/symbolic-regression-utilities/license?ref=11cf1f31888afe3a29140557dc7b3871102b8204' -> Apache-2.0; survey critic-4: 'Apache License 2.0 since bca84f0 (2021-03-16, \"Change license for package release\"); the repo was GPL-3.0 from its initial commit'"
+  "evidence": "gh api 'repos/henniggroup/symbolic-regression-utilities/license?ref=11cf1f31888afe3a29140557dc7b3871102b8204' -> Apache-2.0; survey critic-4: 'Apache License 2.0 since bca84f0 (2021-03-16, \"Change license for package release\"); the repo was GPL-3.0 from its initial commit'",
+  "name": "Superconducting Tc (Allen-Dynes data)",
+  "set": "critic-4",
+  "problems": 2,
+  "sources": [
+   "https://doi.org/10.1103/PhysRevB.100.174513",
+   "https://link.aps.org/accepted/10.1103/PhysRevB.100.174513",
+   "https://arxiv.org/abs/1905.06780"
+  ]
  },
  {
   "catalog": "surfacebench-explicit-surfaces",
@@ -1237,7 +2365,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "hftsoi/symbolfit examples/datasets/{dijet,diphoton,trijet,dijet_pair,dimuon} (@3c81433), spectra from CMS/ATLAS HEPData records",
-  "evidence": "gh api 'repos/hftsoi/symbolfit/license?ref=3c814338f9d660baa3a1d44b13240024b90ba515' -> MIT; survey fresh-166: 'HEPData: CC0 unless specified otherwise (hepdata.net/terms)'; Crossref 10.1007/s41781-025-00140-9 (SymbolFit paper) CC BY 4.0"
+  "evidence": "gh api 'repos/hftsoi/symbolfit/license?ref=3c814338f9d660baa3a1d44b13240024b90ba515' -> MIT; survey fresh-166: 'HEPData: CC0 unless specified otherwise (hepdata.net/terms)'; Crossref 10.1007/s41781-025-00140-9 (SymbolFit paper) CC BY 4.0",
+  "name": "SymbolFit LHC background spectra",
+  "set": "fresh-166",
+  "problems": 5,
+  "sources": [
+   "https://arxiv.org/abs/2411.09851",
+   "https://arxiv.org/pdf/2411.09851v4",
+   "https://doi.org/10.1007/s41781-025-00140-9"
+  ]
  },
  {
   "catalog": "symbolicgpt-bivariate-set",
@@ -1285,7 +2421,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Frotscher et al. 2023, Int. J. Thermophys. 44:105 (doi:10.1007/s10765-023-03197-z), ESM1 Tables 4-5 (MS grid, MS densities at experimental state points, experimental densities); experimental values originate in von Preetzmann et al. 2021, Int. J. Thermophys. 42:127 (doi:10.1007/s10765-021-02871-4), Table 2; TU Berlin DepositOnce copy doi:10.14279/depositonce-18496",
-  "evidence": "Crossref 10.1007/s10765-023-03197-z and 10.1007/s10765-021-02871-4: licence http://creativecommons.org/licenses/by/4.0 (vor); Frotscher article PDF: 'Open Access This article is licensed under a Creative Commons Attribution 4.0 International License' and 'Availability of Data and Materials All data (e.g., parameters of equations, results from molecular simulations) ... are provided as supplemen..."
+  "evidence": "Crossref 10.1007/s10765-023-03197-z and 10.1007/s10765-021-02871-4: licence http://creativecommons.org/licenses/by/4.0 (vor); Frotscher article PDF: 'Open Access This article is licensed under a Creative Commons Attribution 4.0 International License' and 'Availability of Data and Materials All data (e.g., parameters of equations, results from molecular simulations) ... are provided as supplemen...",
+  "name": "TiSR air-mixture density data",
+  "set": "fresh-149",
+  "problems": 3,
+  "sources": [
+   "https://doi.org/10.1007/s10765-023-03197-z",
+   "https://media.springernature.com/original/springer-static/esm/art%3A10.1007%2Fs10765-023-03197-z/MediaObjects/10765_2023_3197_MOESM1_ESM.pdf",
+   "https://depositonce.tu-berlin.de/items/da36698d-54ca-4f95-8a43-c7bd9d58b8db"
+  ]
  },
  {
   "catalog": "torchsisso-specific-energy",
@@ -1293,7 +2437,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "PaulsonLab/TorchSISSO examples/Specific_Energy/{train.dat,redox_test_pade.csv} (pinned @f869f95; blobs identical at HEAD)",
-  "evidence": "gh api repos/PaulsonLab/TorchSISSO/license -> MIT (LICENSE 'MIT License, Copyright (c) 2025 Madhav Reddy Muthyala', added 2025-06-18); examples/Specific_Energy blob shas at HEAD equal those at f869f95 (README b13478a, redox_test_pade.csv f83cba7, train.dat ffe8eba)"
+  "evidence": "gh api repos/PaulsonLab/TorchSISSO/license -> MIT (LICENSE 'MIT License, Copyright (c) 2025 Madhav Reddy Muthyala', added 2025-06-18); examples/Specific_Energy blob shas at HEAD equal those at f869f95 (README b13478a, redox_test_pade.csv f83cba7, train.dat ffe8eba)",
+  "name": "Specific energy of organic compounds (TorchSISSO)",
+  "set": "fresh-116",
+  "problems": 1,
+  "sources": [
+   "https://arxiv.org/abs/2410.01752",
+   "https://arxiv.org/html/2410.01752v2",
+   "https://doi.org/10.1016/j.dche.2024.100198"
+  ]
  },
  {
   "catalog": "torchsisso-synthetic-expressions",
@@ -1309,7 +2461,15 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "Linka & Kuhl 2023, Comput. Methods Appl. Mech. Eng. 403:115731, Table 2 (arXiv:2210.02202v2), tabulating Treloar 1944 (Trans. Faraday Soc. 40:59) at 20 C and 50 C",
-  "evidence": "Crossref 10.1016/j.cma.2022.115731 licence http://creativecommons.org/licenses/by/4.0/ (vor); survey fresh-125: 'Linka & Kuhl 2023 Table 2 (25/17/14 points, CC BY 4.0) -- the recommended copy'; builder reads raw/fresh-125/derived/linka_kuhl_2023_table2_treloar.csv (tools/catalog_build/data_catalog_readers.py, reader fresh-125)"
+  "evidence": "Crossref 10.1016/j.cma.2022.115731 licence http://creativecommons.org/licenses/by/4.0/ (vor); survey fresh-125: 'Linka & Kuhl 2023 Table 2 (25/17/14 points, CC BY 4.0) -- the recommended copy'; builder reads raw/fresh-125/derived/linka_kuhl_2023_table2_treloar.csv (tools/catalog_build/data_catalog_readers.py, reader fresh-125)",
+  "name": "Treloar rubber hyperelasticity",
+  "set": "fresh-125",
+  "problems": 6,
+  "sources": [
+   "https://doi.org/10.1039/TF9444000059",
+   "https://pubs.rsc.org/en/content/articlelanding/1944/tf/tf9444000059",
+   "https://arxiv.org/abs/2603.19241"
+  ]
  },
  {
   "catalog": "vladislavleva",
@@ -1325,7 +2485,15 @@
   "verdict": "permissive",
   "redistribute": "yes",
   "upstream": "Vladislavleva-2/-3 meshes (Vladislavleva et al. 2009, IEEE TEVC, Table I) via the released vladislavleva catalog",
-  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "gh api repos/dso-org/deep-symbolic-optimization/license -> BSD-3-Clause; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "vladislavleva (pinned points)",
+  "set": "fresh-13",
+  "problems": 2,
+  "sources": [
+   "https://doi.org/10.1109/TEVC.2008.926486",
+   "https://web.archive.org/web/20141006102506/http://symbolicregression.com/sites/SRDocuments/NonlinearityPreprint.pdf",
+   "http://www.cs.ucl.ac.uk/staff/W.Langdon/ftp/papers/vladislavleva_2008_thesis.pdf"
+  ]
  },
  {
   "catalog": "white-2013-proposed",
@@ -1333,7 +2501,15 @@
   "verdict": "no license found",
   "redistribute": "no",
   "upstream": "Dow Chemical EvoStar 2010 data via gpbenchmarks.org mirror (SymbolicRegressionCompetitionData.xls), member of White et al. 2013 (GPEM 14:3) proposed set",
-  "evidence": "Same data as dow-chemical-evostar-2010: organiser page 'The case is based on data from a real industrial application at Dow Chemical.' ... 'All Rights Reserved.'; gpbenchmarks.org mirror states no licence"
+  "evidence": "Same data as dow-chemical-evostar-2010: organiser page 'The case is based on data from a real industrial application at Dow Chemical.' ... 'All Rights Reserved.'; gpbenchmarks.org mirror states no licence",
+  "name": "White et al. 2013 proposed SR set",
+  "set": "fresh-32",
+  "problems": 1,
+  "sources": [
+   "https://doi.org/10.1007/s10710-012-9177-2",
+   "http://gpbenchmarks.org/wp-content/uploads/2019/08/GP-Benchmarks-GPEM-2013-preprint-correction-v2.pdf",
+   "https://doi.org/10.1007/3-540-36599-0_7"
+  ]
  },
  {
   "catalog": "white-et-al-2013-proposed-sr-set-points",
@@ -1341,6 +2517,14 @@
   "verdict": "facts only (no upstream license)",
   "redistribute": "yes",
   "upstream": "Keijzer-6 grid as specified by White et al. 2013 (GPEM 14:3) Table 5",
-  "evidence": "catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied"
+  "evidence": "catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
+  "name": "White et al. 2013 proposed SR set (pinned points)",
+  "set": "fresh-32",
+  "problems": 1,
+  "sources": [
+   "https://doi.org/10.1007/s10710-012-9177-2",
+   "http://gpbenchmarks.org/wp-content/uploads/2019/08/GP-Benchmarks-GPEM-2013-preprint-correction-v2.pdf",
+   "https://doi.org/10.1007/3-540-36599-0_7"
+  ]
  }
 ]

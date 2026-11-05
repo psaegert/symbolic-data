@@ -1755,5 +1755,18 @@
   "origin_proposal": null,
   "tags": [],
   "notes": "0 problems built (no target layout or split fixed by the organisers)."
+ },
+ {
+  "catalog": "scilaws-real-share-alike",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-95.json notes: '118 law-discovery tasks on real published measurements' in six disciplines (SciLaws-Bench, arXiv:2609.01552)",
+  "origin_proposal": null,
+  "tags": [
+   {
+    "tag": "extrapolation",
+    "source": "sets/fresh-95.json datasets[].split: 'single-group splits are task-specific (interpolation, input-range extrapolation, temporal transfer or cross-condition generalization; paper Sec. 2.3 and App. B.3)'"
+   }
+  ],
+  "notes": "Extrapolation applies to an unknown share of the 66 tasks: the release does not label each task's split kind."
  }
 ]
