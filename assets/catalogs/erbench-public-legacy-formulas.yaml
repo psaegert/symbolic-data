@@ -1,0 +1,270 @@
+metadata:
+  name: erbench-public-legacy-formulas
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  srbf_changes: [{"kind": "part", "problems": 601, "text": "srbf runs 5 of ERBench's 606 legacy rows here: most rows are run in the sets of the benchmarks they come from (Feynman, Korns, Nguyen, ...), 13 AI Feynman 2.0 rows have no input range from their authors, and the 14 Strogatz rows are differential-equation tasks."}, {"kind": "changed", "problems": 5, "text": "srbf samples these problems uniformly over the original authors' input ranges, not with ERBench's own generator (fitting window, extrapolation test, random extra input) that it uses for the other ERBench sets."}, {"kind": "filled", "problems": 1, "text": "For AI Feynman 2.0 equation 12 the authors state the range [-1, 1] but not how inputs are spread over it; srbf samples them uniformly."}]
+  license: "facts only: formulas and ranges cited from the original family authors (Korns 2011; Uy et al. 2011; Udrescu et al. 2020; DSO benchmarks.csv, BSD-3-Clause); ERBench ids for mapping only"
+  citation: {"paper": {"short": "Kahlmeyer et al. 2026", "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms", "venue": "arXiv preprint arXiv:2606.09276", "url": "https://arxiv.org/abs/2606.09276"}, "data": {"short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c", "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)", "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"}}
+  description: 'ERBench public: legacy formulas'
+  sources:
+  - https://arxiv.org/abs/2606.09276
+  - https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/resolve/95bf15c27de68c3f170ca6140d2e4a811c60344f/train.csv
+  - https://arxiv.org/abs/2006.10782
+  - https://arxiv.org/e-print/2006.10782v2
+  - https://arxiv.org/pdf/2006.10782v2
+  - https://arxiv.org/e-print/1905.11481
+  - https://github.com/SJ001/AI-Feynman
+  - https://doi.org/10.1007/978-1-4614-1770-5_8
+  - http://www.korns.com/Accuracy%20in%20Symbolic%20Regression.pdf
+  - https://doi.org/10.1007/s10710-010-9121-2
+  - https://mural.maynoothuniversity.ie/id/eprint/12336/1/Galvan_Semantically_2011.pdf
+  - https://github.com/dso-org/deep-symbolic-optimization/blob/a49c22858b3cd81683803f6898e0725943934494/dso/dso/task/regression/benchmarks.csv
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/interrupted-1.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  AIF2-table4-eq12:
+    raw: x*y*z - z*sqrt(1 - x**2)*sqrt(1 - y**2) - y*sqrt(1 - x**2)*sqrt(1 - z**2) - x*sqrt(1 - y**2)*sqrt(1 - z**2)
+    prepared: v1*v2*v3 - v1*sqrt(1 - v2**2)*sqrt(1 - v3**2) - v2*sqrt(1 - v1**2)*sqrt(1 - v3**2) - v3*sqrt(1 - v1**2)*sqrt(1
+      - v2**2)
+    n_variables: 3
+    subset: Feynman / AIF2 12 modular equations (Table 4 rows 5-16)
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: range [-1, 1] stated by the authors; sampling law (uniform or other) not stated
+      y: range [-1, 1] stated by the authors; sampling law (uniform or other) not stated
+      z: range [-1, 1] stated by the authors; sampling law (uniform or other) not stated
+    meta:
+      finite_fraction: 1.0
+  Korns-13:
+    raw: 32.0 - (3.0*((tan(x0)/tan(x1))*(tan(x2)/tan(x3))))
+    prepared: -3.0*tan(v1)*tan(v3)/(tan(v2)*tan(v4)) + 32.0
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x1: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x2: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x3: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x4: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+    meta:
+      finite_fraction: 1.0
+  Korns-14:
+    raw: 22.0 - (4.2*((cos(x0)-tan(x1))*(tanh(x2)/sin(x3))))
+    prepared: -4.2*(cos(v1) - tan(v2))*tanh(v3)/sin(v4) + 22.0
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x1: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x2: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x3: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x4: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+    meta:
+      finite_fraction: 1.0
+  Korns-15:
+    raw: 12.0 - (6.0*((tan(x0)/exp(x1))*(log(x2)-tan(x3))))
+    prepared: -6.0*(log(v3) - tan(v4))*exp(-v2)*tan(v1) + 12.0
+    n_variables: 5
+    subset: Korns
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x0: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x1: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x2: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x3: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+      x4: 'U[-50,50] (paper: ''pseudo random numbers between -50 and +50''; the word ''uniform'' is not used)'
+    meta:
+      finite_fraction: 0.494
+  Uy2011-F9:
+    raw: sin(x) + sin(y**2)
+    prepared: sin(v1) + sin(v2**2)
+    n_variables: 2
+    subset: Nguyen / Uy 2011 bivariate functions
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: 'random in [-1,1] (Table 3 ''Fitcases'': ''100 random points ⊆ [-1,1] x [-1,1]''); the sampling law is not named
+        (uniform is the plain reading)'
+      y: 'random in [-1,1] (Table 3 ''Fitcases'': ''100 random points ⊆ [-1,1] x [-1,1]''); the sampling law is not named
+        (uniform is the plain reading)'
+    meta:
+      finite_fraction: 1.0

@@ -1,0 +1,11 @@
+srsd_dummy_spec.json: the dummy-column configuration of SRSD's dummy datasets, derived by
+tools/build_srsd_dummy.py (stage "derive") from the published files of
+
+  huggingface.co/datasets/yoshitomo-matsubara/srsd-feynman_easy_dummy   @ 67a1cac8420adf421fd0a18d91fbee5f1c0bca2d
+  huggingface.co/datasets/yoshitomo-matsubara/srsd-feynman_medium_dummy @ e373ffb9b2ee1f46f1eb8204fe35c6abeb589e65
+  huggingface.co/datasets/yoshitomo-matsubara/srsd-feynman_hard_dummy   @ 223c23c15837aa998e43010f125b3da5fd8cb7a8
+
+(Matsubara, Chiba, Igarashi & Ushiku, "Rethinking Symbolic Regression Datasets and Benchmarks for
+Scientific Discovery", DMLR 2024; datasets CC BY 4.0, code omron-sinicx/srsd-benchmark MIT). Per
+problem: which input columns are dummies (supp_info.json dummy_vars) and each dummy's law
+(DefaultSampling(10^(k-1), 10^(k+1), uses_negative=u), k and u read off the published rows).

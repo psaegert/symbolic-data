@@ -1,0 +1,60 @@
+metadata:
+  name: kan-feynman-no-units-subset
+  version: 1
+  tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 1 of the 27 formulas: 20 have no input range from the authors, and 6 are identical to problems srbf runs in its Feynman set."}]
+  license: "CC BY 4.0 (Liu et al. 2024, KAN, arXiv:2404.19756, Table 2)"
+  citation: {"paper": {"short": "Liu et al. 2025", "title": "KAN: Kolmogorov-Arnold Networks", "venue": "ICLR 2025", "url": "https://arxiv.org/abs/2404.19756"}}
+  description: KAN Feynman_no_units subset
+  sources:
+  - https://arxiv.org/abs/2404.19756
+  - https://arxiv.org/e-print/2404.19756v5
+  - https://github.com/KindXiaoming/pykan (kan/utils.py create_dataset; kan/feynman.py; HEAD ecde4ec3274d3bef1ad737479cf126aed38ab530)
+  - https://github.com/KindXiaoming/pykan/issues/377
+  - https://github.com/KindXiaoming/pykan/issues/549
+  - https://raw.githubusercontent.com/samholt/DeepGenerativeSymbolicRegression/master/datasets/FeynmanEquationsDimensionless.csv
+  - https://raw.githubusercontent.com/samholt/DeepGenerativeSymbolicRegression/master/datasets/FeynmanEquations.csv
+  - https://www.dropbox.com/s/9i05v6yw1kbkup3/Feynman_without_units.tar.gz?dl=0
+  - https://arxiv.org/abs/2511.08570
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/interrupted-6.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  I.16.6:
+    raw: (a+b)/(1+a*b)
+    prepared: (v1 + v2)/(v1*v2 + 1)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: a
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: b
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      a: 'random on the open interval (-1,1), stated for this equation only; the paper does not name the distribution (the
+        authors'' generator pykan create_dataset draws uniformly: torch.rand*(hi-lo)+lo, kan/utils.py L119-121)'
+      b: 'random on the open interval (-1,1), stated for this equation only; the paper does not name the distribution (the
+        authors'' generator pykan create_dataset draws uniformly: torch.rand*(hi-lo)+lo, kan/utils.py L119-121)'
+    meta:
+      finite_fraction: 1.0

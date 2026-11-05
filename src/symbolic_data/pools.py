@@ -9,7 +9,10 @@ every row available for fitting (the ``support`` arrays) and, when the authors g
   stay empty ("if people fail to tell us what to test on, we don't", owner 2026-10-17);
 * ``{"random": f}``: the authors' procedure is a random split with a test fraction ``f`` (SRBench's 75/25 is
   ``{"random": 0.25}``); the support arrays hold all rows and every draw splits them anew, ``ceil(f * N)`` test
-  rows as scikit-learn's ``train_test_split`` counts them.
+  rows as scikit-learn's ``train_test_split`` counts them;
+* ``{"folds": [[rows], ...]}``: the authors test on fixed folds (k-fold cross-validation): the support arrays hold all
+  rows, the lists partition their positions, and every draw tests on one fold, picked at random, and fits on the
+  others, so each run uses one of the authors' own splits.
 
 Every draw then takes at most ``n_support`` fitting rows and ``n_validation`` test rows (srbf: 512 each), without
 replacement and in the pool's row order; a pool no larger than its cap is used whole, in its stored order. The draw
@@ -46,7 +49,8 @@ def has_pools(problem: Problem) -> bool:
 
 
 def split_rule(value: Any) -> str | float:
-    """The split rule of a ``meta["test_split"]`` value: ``"given"``, ``"none"`` or the random test fraction."""
+    """The split rule of a ``meta["test_split"]`` value: ``"given"``, ``"none"``, ``"folds"`` or the random test
+    fraction."""
     if value in ("given", "none"):
         return value
     if isinstance(value, Mapping) and set(value) == {"random"}:
@@ -54,7 +58,20 @@ def split_rule(value: Any) -> str | float:
         if not 0.0 < fraction < 1.0:
             raise ValueError(f"a random test fraction must lie strictly between 0 and 1 (got {fraction})")
         return fraction
-    raise ValueError(f"test_split must be 'given', 'none' or {{'random': f}} (got {value!r})")
+    if isinstance(value, Mapping) and set(value) == {"folds"}:
+        return "folds"
+    raise ValueError(f"test_split must be 'given', 'none', {{'random': f}} or {{'folds': [[rows], ...]}} (got {value!r})")
+
+
+def _folds(value: Mapping[str, Any], n_rows: int) -> list[np.ndarray]:
+    """The test rows of each fold, checked to partition the ``n_rows`` pool rows into at least two folds."""
+    folds = [np.asarray(f, dtype=np.int64).ravel() for f in value["folds"]]
+    if len(folds) < 2 or any(f.size == 0 for f in folds):
+        raise ValueError(f"folds need at least two non-empty folds (got sizes {[int(f.size) for f in folds]})")
+    every = np.sort(np.concatenate(folds))
+    if every.size != n_rows or not np.array_equal(every, np.arange(n_rows)):
+        raise ValueError(f"the folds must partition the {n_rows} pool rows (each row in exactly one fold)")
+    return folds
 
 
 def _rows(problem: Problem, fields: Sequence[str]) -> int:
@@ -110,6 +127,19 @@ def draw_from_pools(problem: Problem, n_support: int | None, n_validation: int |
         arrays = {name: None if value is None else value[fit_pick] for name, value in pool.items()}
         arrays.update({v: None if pool[s] is None else pool[s][test_pick] for s, v in zip(_SUPPORT, _VALIDATION)})
         n_fit_pool, n_test_pool = int(fit_rows.size), int(test_rows.size)
+    elif rule == "folds":
+        if _rows(problem, _VALIDATION):
+            raise ValueError(f"{problem.eq_id}: test_split 'folds' holds {_rows(problem, _VALIDATION)} test rows; the "
+                             "folds cut the support rows, so the validation arrays stay empty")
+        n_pool = _rows(problem, _SUPPORT)
+        folds = _folds(problem.meta[TEST_SPLIT_KEY], n_pool)
+        fold = int(rng.integers(len(folds)))
+        test_rows = np.sort(folds[fold])
+        fit_rows = np.setdiff1d(np.arange(n_pool), test_rows)
+        arrays = _cut(problem, _SUPPORT, fit_rows[_take(fit_rows.size, n_support, rng)])
+        test = _cut(problem, _SUPPORT, test_rows[_take(test_rows.size, n_validation, rng)])
+        arrays.update({v: test[s] for s, v in zip(_SUPPORT, _VALIDATION)})
+        n_fit_pool, n_test_pool = int(fit_rows.size), int(test_rows.size)
     else:
         n_fit_pool = _rows(problem, _SUPPORT)
         n_test_pool = _rows(problem, _VALIDATION)
@@ -120,15 +150,18 @@ def draw_from_pools(problem: Problem, n_support: int | None, n_validation: int |
         arrays.update(_cut(problem, _VALIDATION, _take(n_test_pool, n_validation, rng)))
     meta = dict(problem.meta)
     meta.update(n_fit_pool=n_fit_pool, n_test_pool=n_test_pool)
+    if rule == "folds":
+        meta["fold"] = fold + 1                        # which of the authors' folds this draw tests on (1-based)
     return dataclasses.replace(problem, meta=meta, **arrays)
 
 
-def data_problem(x_fit: np.ndarray, y_fit: np.ndarray, *, variables: Sequence[str], test_split: str | Mapping[str, float],
+def data_problem(x_fit: np.ndarray, y_fit: np.ndarray, *, variables: Sequence[str], test_split: str | Mapping[str, Any],
                  x_test: np.ndarray | None = None, y_test: np.ndarray | None = None, eq_id: str | None = None,
                  expression: Sequence[str] | None = None, skeleton: Sequence[str] | None = None,
                  constants: Sequence[float] = (), gt_kind: str | None = None,
                  meta: Mapping[str, Any] | None = None) -> Problem:
-    """A data problem: its fitting rows, the authors' test rows when ``test_split="given"``, and its ground truth
+    """A data problem: its fitting rows (all rows for a random or a folds rule), the authors' test rows when
+    ``test_split="given"``, and its ground truth
     when there is one (``gt_kind`` "exact" for pinned points of a known formula, "reference" for an accepted law
     with measured data, "none" for black-box data). The targets are used as given: no noise is added."""
     rule = split_rule(test_split)
@@ -145,12 +178,15 @@ def data_problem(x_fit: np.ndarray, y_fit: np.ndarray, *, variables: Sequence[st
             raise ValueError(f"{eq_id}: x_test {x_test.shape} and y_test {y_test.shape} do not match x_fit {x_fit.shape}")
     else:
         if x_test is not None or y_test is not None:
-            raise ValueError(f"{eq_id}: test rows are only stored for test_split 'given' (a random split cuts the "
-                             "fitting rows itself; 'none' has no test)")
+            raise ValueError(f"{eq_id}: test rows are only stored for test_split 'given' (a random or a folds split "
+                             "cuts the fitting rows itself; 'none' has no test)")
         x_test = np.empty((0, x_fit.shape[1]), dtype=STORAGE_DTYPE)
         y_test = np.empty((0, 1), dtype=STORAGE_DTYPE)
     merged = dict(meta or {})
-    merged[TEST_SPLIT_KEY] = test_split if isinstance(test_split, str) else {"random": float(rule)}
+    if rule == "folds":
+        merged[TEST_SPLIT_KEY] = {"folds": [f.tolist() for f in _folds(test_split, x_fit.shape[0])]}
+    else:
+        merged[TEST_SPLIT_KEY] = test_split if isinstance(test_split, str) else {"random": float(rule)}
     return Problem(
         x_support=x_fit, y_support=y_fit, y_support_noisy=y_fit.copy(),
         x_validation=x_test, y_validation=y_test, y_validation_noisy=y_test.copy(),

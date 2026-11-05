@@ -1,0 +1,202 @@
+metadata:
+  name: pysr-empiricalbench-formulas
+  version: 1
+  tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 4, "text": "srbf runs the 5 formula problems here; the authors' 4 measured-data problems are in 'PySR EmpiricalBench data'."}]
+  license: "MIT (MilesCranmer/pysr_paper)"
+  citation: {"paper": {"short": "Cranmer 2023", "title": "Interpretable Machine Learning for Science with PySR and SymbolicRegression.jl", "venue": "arXiv preprint arXiv:2305.01582", "url": "https://arxiv.org/abs/2305.01582"}, "data": {"short": "GitHub MilesCranmer/pysr_paper@b306874", "title": "pysr_paper equations.yml (MIT)", "url": "https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/data/empirical_bench/equations.yml"}}
+  description: PySR EmpiricalBench
+  sources:
+  - https://arxiv.org/abs/2305.01582
+  - 'https://arxiv.org/e-print/2305.01582v3 (LaTeX source: ms.tex Sec. 3.2, output/table.tex = Table 2, output/results.tex
+    = Table 3; last_commit_sha.txt = pysr_paper 7d19225236fa7f95065e21291e3c7f7732ac533b)'
+  - https://github.com/MilesCranmer/pysr_paper/tree/b30687433fb32d3b9784fbedb1480d947dc46fc0
+  - https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/data/empirical_bench/equations.yml
+  - https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/data/empirical_bench/hubble.csv
+  - https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/data/empirical_bench/leavitt.csv
+  - https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/data/empirical_bench/tully.csv
+  - https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/scripts/benchmark.py
+  - https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/scripts/equations.py
+  - https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/benchmark/evaluate_method.py
+  - https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/benchmark/generate_tasks.sh
+  - https://github.com/EpistasisLab/pmlb/tree/7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68/datasets (first_principles_*)
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-2.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  newton:
+    raw: 6.67408e-11*m1*m2/r**2
+    prepared: log(6.67408e-11*v2*v3/v1**2)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: r
+        sample_range:
+        - 370000000.0
+        - 7375930000000.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m1
+        sample_range:
+        - 1.3e+22
+        - 2.0e+30
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: m2
+        sample_range:
+        - 1.3e+22
+        - 2.0e+30
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      r: log-uniform LU[3.7e8, 7.37593e12]
+      m1: log-uniform LU[1.3e22, 2e30]
+      m2: log-uniform LU[1.3e22, 2e30]
+    target: the authors fit log(6.67408e-11*m1*m2/r**2), not the published law itself
+    meta:
+      finite_fraction: 1.0
+  planck:
+    raw: 2*6.62607004e-34*nu**3/(299792458**2)*(1/(exp(6.62607004e-34*nu/(1.38064852e-23*T)) - 1))
+    prepared: log(1.47449944028424e-50*v1**3/(exp(4.79924466221135e-11*v1/v2) - 1))
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: nu
+        sample_range:
+        - 1000000000.0
+        - 1.0e+16
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 100.0
+        - 6000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      nu: log-uniform LU[1e9, 1e16]
+      T: log-uniform LU[100, 6000]
+    target: the authors fit log(2*6.62607004e-34*nu**3/(299792458**2)*(1/(exp(6.62607004e-34*nu/(1.38064852e-23*T)) - 1))),
+      not the published law itself
+    meta:
+      finite_fraction: 0.9721
+  schechter:
+    raw: (0.002/2.5e8)*(L/2.5e8)**(-1.20)*exp(-L/2.5e8)
+    prepared: log(0.0956352499790036*exp(-4.0e-9*v1)/v1**1.2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: L
+        sample_range:
+        - 1000000.0
+        - 3000000000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      L: log-uniform LU[1e6, 3e9]
+    target: the authors fit log((0.002/2.5e8)*(L/2.5e8)**(-1.20)*exp(-L/2.5e8)), not the published law itself
+    meta:
+      finite_fraction: 1.0
+  ideal_gas:
+    raw: n*8.314*T/V
+    prepared: log(8.314*v1*v2/v3)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: n
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 300.0
+        - 400.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: V
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n: U[1, 100]
+      T: U[300, 400]
+      V: U[1, 100]
+    target: the authors fit log(n*8.314*T/V), not the published law itself
+    meta:
+      finite_fraction: 1.0
+  rydberg:
+    raw: 1/(1.097e7*(1/n_1**2 - 1/n_2**2))
+    prepared: log(1/(-10970000.0/v2**2 + 10970000.0/v1**2))
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: n_1
+        expr: n_1
+      v2:
+        name: n_2
+        expr: n_1 + 1 + floor(u_n_2 * (7 - n_1 - 1 + 1))
+      v0:
+        name: y
+    input_distributions:
+      n_1: integer uniform on {1, 2, 3, 4, 5, 6}
+      n_2: integer uniform on {n_1+1, ..., 7}, conditional on n_1
+    target: the authors fit log(1/(1.097e7*(1/n_1**2 - 1/n_2**2))), not the published law itself
+    latent:
+      n_1:
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 1.0
+            - 2.0
+            - 3.0
+            - 4.0
+            - 5.0
+            - 6.0
+      u_n_2:
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0

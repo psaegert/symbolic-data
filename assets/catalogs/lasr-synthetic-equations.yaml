@@ -1,0 +1,4913 @@
+metadata:
+  name: lasr-synthetic-equations
+  version: 1
+  tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
+  srbf_changes: []
+  license: "Apache-2.0 (trishullab/LibraryAugmentedSymbolicRegression.jl; Grayeli et al. 2024, arXiv:2409.09359)"
+  citation: {"paper": {"short": "Grayeli et al. 2024", "title": "Symbolic Regression with a Learned Concept Library", "venue": "NeurIPS 2024", "url": "https://arxiv.org/abs/2409.09359"}, "data": {"short": "GitHub trishullab/LibraryAugmentedSymbolicRegression.jl@de6b22d", "title": "LaSR experiments/dataset.py synthetic_equations() (Apache-2.0)", "url": "https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/experiments/dataset.py"}}
+  description: LaSR synthetic equations
+  sources:
+  - https://arxiv.org/abs/2409.09359
+  - https://arxiv.org/pdf/2409.09359v3
+  - https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/experiments/dataset.py
+  - https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/experiments/utils.py
+  - https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/experiments/config.py
+  - https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/experiments/main.py
+  - https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/r2_run.py
+  - https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/run.sh
+  - https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/dataset_generation.jl
+  - https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/tree/lasr-experiments
+  - https://trishullab.github.io/lasr-web/
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-92.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  eq0:
+    raw: exp(((1.485035504085099 - log(y2)) / (-0.5917667741788188 - y4)) + (sqrt(y1 + y4) + sqrt(y2)))
+    prepared: exp(sqrt(v2) + (1.485035504085099 - log(v2))/(-v4 - 0.5917667741788188) + sqrt(v1 + v4))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq1:
+    raw: ((y1 + -0.2281497263470263) + (sqrt(y3) * (y1 * ((0.6069324861405777 - y3) * y3)))) / cos(cos(y1))
+    prepared: (v1*v3**(3/2)*(0.6069324861405777 - v3) + v1 - 0.2281497263470263)/cos(cos(v1))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq2:
+    raw: sqrt(exp(y1) * y1) * (cos(y1) + (y1 + y1))
+    prepared: sqrt(v1*exp(v1))*(2*v1 + cos(v1))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq3:
+    raw: (((exp(y3) + -0.12616306381744816) - (y4 + 0.030015044238449563)) * (-0.10809170430638036 * cos(sqrt(y2) / exp(y4))))
+      - 1.3429435542734653
+    prepared: -0.10809170430638036*(-v4 + exp(v3) - 0.15617810805589772)*cos(sqrt(v2)*exp(-v4)) - 1.3429435542734653
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq4:
+    raw: exp(log(y4 + (y2 * y1))) * ((cos(y2) - sqrt(y1)) + ((y3 / -1.3646587706285505) - 0.1494997716589463))
+    prepared: (v1*v2 + v4)*(-sqrt(v1) - 0.73278391750591857*v3 + cos(v2) - 0.1494997716589463)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq5:
+    raw: (y3 + y2) * ((((y3 + 1.2909882620958377) * y2) + (y1 + y3)) - 0.4061091838418741)
+    prepared: (v2 + v3)*(v1 + v2*(v3 + 1.2909882620958377) + v3 - 0.4061091838418741)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq6:
+    raw: (sqrt(y2) + exp(-1.3938382096701456 + sqrt(y2))) * ((y4 * y3) * log(y3))
+    prepared: v3*v4*(sqrt(v2) + 0.24812113371424945*exp(sqrt(v2)))*log(v3)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq7:
+    raw: ((0.3850755754421437 * y3) * exp(sqrt(y2) - y1)) / (-0.09373867256287108 / (y2 + y1))
+    prepared: 0.3850755754421437*v3*(-10.66795563303176*v1 - 10.66795563303176*v2)*exp(-v1 + sqrt(v2))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq8:
+    raw: (((y2 + 0.8837196826797421) * sqrt(y1)) / -1.5836242846038588) * sqrt(exp(y1) / y1)
+    prepared: -0.63146291056666163*sqrt(v1)*sqrt(exp(v1)/v1)*(v2 + 0.8837196826797421)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq9:
+    raw: y1 * (((y1 * y1) / (2.189911201366985 / cos((1.2114819663272414 - y4) + -0.20111570724898717))) / exp(-0.08661496242802426
+      * y5))
+    prepared: 0.456639520075417*v1**3*exp(0.08661496242802426*v5)*cos(v4 - 1.0103662590782542)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq10:
+    raw: exp(log(y3) * sqrt(y2)) - exp(sqrt((y3 + y4) + (y1 * y2)) * 0.22969901281819288)
+    prepared: exp(sqrt(v2)*log(v3)) - exp(0.22969901281819288*sqrt(v1*v2 + v3 + v4))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq11:
+    raw: exp(sqrt((y3 + y2) + (y1 / 1.796444089382479)))
+    prepared: exp(sqrt(0.556655231248386*v1 + v2 + v3))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq12:
+    raw: log(0.2530649444334089 * y2) * (y1 - sqrt(exp(y3 - y1)))
+    prepared: (v1 - sqrt(exp(-v1 + v3)))*log(0.2530649444334089*v2)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq13:
+    raw: (((((sqrt(y1) / exp(y2)) + 1.1081588306633263) - (y1 * y2)) * log(y1)) + y2) * y1
+    prepared: v1*(v2 + (sqrt(v1)*exp(-v2) - v1*v2 + 1.1081588306633263)*log(v1))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq14:
+    raw: (y1 * exp(sqrt(y1) + cos(y1 / 1.1226221361137747))) * cos((0.849151055078886 - y1) * (0.9750675999994569 * y1))
+    prepared: v1*exp(sqrt(v1) + cos(0.89077167448500474*v1))*cos(0.9750675999994569*v1*(0.849151055078886 - v1))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq15:
+    raw: (exp(y1) + (y4 - 0.6051935187513243)) / sqrt(exp(y1 * 0.35644852479483746) + y3)
+    prepared: (v4 + exp(v1) - 0.6051935187513243)/sqrt(v3 + exp(0.35644852479483746*v1))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq16:
+    raw: ((-0.9527141152352505 * y1) * (y2 + y3)) - ((y3 / 0.28681680743642923) * (exp(cos(y2 - 0.3200766662509227)) - 1.0430778756174919))
+    prepared: -0.9527141152352505*v1*(v2 + v3) - 3.4865460254509053*v3*(exp(cos(v2 - 0.3200766662509227)) - 1.0430778756174919)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq17:
+    raw: (y2 + (y5 + -0.6496448318659299)) + ((((y2 - y1) + y3) * exp(sqrt(y4))) + 0.4531634210300153)
+    prepared: v2 + v5 + (-v1 + v2 + v3)*exp(sqrt(v4)) - 0.1964814108359146
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq18:
+    raw: ((y1 + y3) / cos(sqrt(y1 + y4))) / exp(1.0829032955388451 + y1)
+    prepared: 0.33861100933278177*(v1 + v3)*exp(-v1)/cos(sqrt(v1 + v4))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq19:
+    raw: (1.2493094004268066 - y1) - (log(sqrt(y3)) * (y4 * ((-0.2586753997576587 * y4) * (y3 - cos(y4)))))
+    prepared: -v1 + 0.2586753997576587*v4**2*(v3 - cos(v4))*log(sqrt(v3)) + 1.2493094004268066
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq20:
+    raw: (y1 * (y1 - -0.2997757954427672)) * ((1.615015710213039 * (y1 / -1.259234825417202)) - cos(cos(y1 / 0.7034932537870883)))
+    prepared: v1*(-1.282537361272519*v1 - cos(cos(1.42147773929137*v1)))*(v1 + 0.2997757954427672)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq21:
+    raw: log((sqrt(y3) + -0.6783545650051788) + exp(y2)) / (-0.13494117998537 / y4)
+    prepared: -7.41063624987137*v4*log(sqrt(v3) + exp(v2) - 0.6783545650051788)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq22:
+    raw: (((-0.7020083837396962 * (y1 * y1)) / (y1 - (log(y5) + y5))) / exp(sqrt(y5))) * 0.26068741801247797
+    prepared: -0.18300475298021423*v1**2*exp(-sqrt(v5))/(v1 - v5 - log(v5))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq23:
+    raw: (-0.8531552969749455 * (y2 * (-0.9826822517958028 * log(y2)))) * exp(sqrt((y3 + 1.4730564073819723) - -0.7225654101129367))
+    prepared: 0.8383805683628563*v2*exp(sqrt(v3 + 0.7225654101129367 + 1.4730564073819723))*log(v2)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq24:
+    raw: (-0.781987400765949 / exp(y1)) * (((-0.6868296552024491 - y3) / (log(y2) - (exp(cos(y1)) * y2))) / y2)
+    prepared: -0.781987400765949*(-v3 - 0.6868296552024491)*exp(-v1)/(v2*(-v2*exp(cos(v1)) + log(v2)))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq25:
+    raw: (((y2 * y5) - -0.04091973891240853) + exp(y5 * 0.8492536663999203)) - (y3 / cos(cos(y5 * y4)))
+    prepared: v2*v5 - v3/cos(cos(v4*v5)) + exp(0.8492536663999203*v5) + 0.04091973891240853
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq26:
+    raw: (cos(log(y2)) * exp(y2)) / ((y2 * 0.8866496129486751) + (-0.12233894135460263 + y1))
+    prepared: exp(v2)*cos(log(v2))/(v1 + 0.8866496129486751*v2 - 0.12233894135460263)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq27:
+    raw: (sqrt(exp(y1) - 0.4324725952426049) + cos(y1)) * (sqrt(y1) * y1)
+    prepared: v1**(3/2)*(sqrt(exp(v1) - 0.4324725952426049) + cos(v1))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq28:
+    raw: ((sqrt(y2) * y2) * y4) + (sqrt(sqrt(y3)) * (((y2 / 4.378755308349022) - y3) / 0.1201673737199319))
+    prepared: v2**(3/2)*v4 + 8.321726347541306*v3**(1/4)*(0.2283754011312961*v2 - v3)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq29:
+    raw: ((y2 - y1) * cos(sqrt(y2))) * ((-1.5290360532523042 / exp((-1.5532664019564584 - y2) * 0.5494791521253727)) - 1.8329895143477763)
+    prepared: (-v1 + v2)*(-3.5899023869629452*exp(0.5494791521253727*v2) - 1.8329895143477763)*cos(sqrt(v2))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq30:
+    raw: (cos(y1 * -1.487605784281181) - (0.4644107533597082 - (y1 * y1))) * (y2 / sqrt(y1))
+    prepared: v2*(v1**2 + cos(1.487605784281181*v1) - 0.4644107533597082)/sqrt(v1)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq31:
+    raw: ((y3 + (0.6558304543577124 + (0.7621321253168721 + y2))) * (0.06492075219036358 * (y2 - (y3 - y2)))) * (y2 + -2.208176675173205)
+    prepared: 0.06492075219036358*(v2 - 2.208176675173205)*(2*v2 - v3)*(v2 + v3 + 1.417962579674585)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq32:
+    raw: (cos(0.9728047253922968 + y5) * (exp(y5) / ((y5 * -0.9321235805389282) - y3))) * (1.131234209598357 + (0.5756313995888583
+      * y3))
+    prepared: (0.5756313995888583*v3 + 1.131234209598357)*exp(v5)*cos(v5 + 0.9728047253922968)/(-v3 - 0.9321235805389282*v5)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq33:
+    raw: sqrt(y3 * y2) / ((-0.9232383232272274 / ((1.2349525541432025 / log(y1)) + y2)) - (y3 / y4))
+    prepared: sqrt(v2*v3)/(-v3/v4 - 0.9232383232272274/(v2 + 1.2349525541432025/log(v1)))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq34:
+    raw: (((sqrt(exp(y1)) * cos(y2)) / -0.333327335830982) * cos(y2)) - exp(-2.0178108091651836 * (y3 / 1.9978366796712463))
+    prepared: -3.00005397849237*sqrt(exp(v1))*cos(v2)**2 - exp(-1.0099978790544701*v3)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq35:
+    raw: sqrt(exp(y1) - -0.7391706051004766) - (y1 * y1)
+    prepared: -v1**2 + sqrt(exp(v1) + 0.7391706051004766)
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq36:
+    raw: exp(cos(y3)) * ((y3 + (0.689367154622428 / exp(y4))) * (y2 / 0.23835709388480572))
+    prepared: 4.1953859383907595*v2*(v3 + 0.689367154622428*exp(-v4))*exp(cos(v3))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq37:
+    raw: exp(0.5468331960693928 * (((0.829867349578025 + (y1 - (y1 * -2.702140567522345))) + sqrt(y1)) / exp(y1 + -1.6079113070964928)))
+    prepared: exp(2.7299951723663379*(sqrt(v1) + 3.702140567522345*v1 + 0.829867349578025)*exp(-v1))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq38:
+    raw: exp(((y1 * 1.3985029137652467) / 0.5126851665088263) / (cos(y1) + sqrt(y1 * y1)))
+    prepared: exp(2.7278006174597804*v1/(sqrt(v1**2) + cos(v1)))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq39:
+    raw: (y3 * (cos(cos(y1 + y4)) * y3)) * (-0.03533937466533261 * (y3 + exp(cos(y1))))
+    prepared: -0.03533937466533261*v3**2*(v3 + exp(cos(v1)))*cos(cos(v1 + v4))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0
+  eq40:
+    raw: (((y1 * exp(sqrt(y2))) + log(y1)) * cos(sqrt(y2) * -0.9577782191948018)) - sqrt(exp(y2))
+    prepared: (v1*exp(sqrt(v2)) + log(v1))*cos(0.9577782191948018*sqrt(v2)) - sqrt(exp(v2))
+    n_variables: 12
+    subset: all
+    vars:
+      v1:
+        name: y1
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y2
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: y3
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: y4
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y5
+        sample_range:
+        - 1.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: A
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: B
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: C
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: D
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: E
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v11:
+        name: F
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v12:
+        name: G
+        sample_range:
+        - 1.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      y1: uniform U(1,10)
+      y2: uniform U(1,10)
+      y3: uniform U(1,10)
+      y4: uniform U(1,10)
+      y5: uniform U(1,10)
+      A: uniform U(1,20)
+      B: uniform U(1,20)
+      C: uniform U(1,20)
+      D: uniform U(1,20)
+      E: uniform U(1,20)
+      F: uniform U(1,20)
+      G: uniform U(1,20)
+    meta:
+      finite_fraction: 1.0

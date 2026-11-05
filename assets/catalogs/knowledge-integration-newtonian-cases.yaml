@@ -1,0 +1,209 @@
+metadata:
+  name: knowledge-integration-newtonian-cases
+  version: 1
+  tags: {"origin": "science formula", "tags": ["dummy inputs"]}
+  srbf_changes: []
+  license: "Apache-2.0 (bilgesi/SR-LLM-Integration) + CC BY 4.0 (Taskin et al. 2026, Sci. Rep. 16:1614)"
+  citation: {"paper": {"short": "Taskin et al. 2026", "title": "Knowledge integration for physics-informed symbolic regression using pre-trained large language models", "venue": "Scientific Reports 16(1):1614", "url": "https://doi.org/10.1038/s41598-026-35327-6"}, "data": {"short": "GitHub bilgesi/SR-LLM-Integration@1508a37", "title": "SR-LLM-Integration generator (Apache-2.0)", "url": "https://github.com/bilgesi/SR-LLM-Integration/blob/1508a3701c2d30c6c776b33762656639d999bc42/src/run_main_claim.py"}}
+  description: Knowledge-integration Newtonian cases
+  sources:
+  - https://arxiv.org/abs/2509.03036
+  - https://arxiv.org/pdf/2509.03036v1
+  - https://arxiv.org/e-print/2509.03036v1
+  - https://www.nature.com/articles/s41598-026-35327-6
+  - https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41598-026-35327-6/MediaObjects/41598_2026_35327_MOESM1_ESM.docx
+  - https://github.com/bilgesi/SR-LLM-Integration/blob/1508a3701c2d30c6c776b33762656639d999bc42/src/run_main_claim.py
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-133.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  ball_drop:
+    raw: sqrt(2*9.81*h)
+    prepared: 4.42944691807002*sqrt(v1)
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: h
+        expr: h
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: r
+        sample_range:
+        - 0.01
+        - 0.5
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: air_res
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: t
+        expr: 0.0 + u_t * ((sqrt(2*h/9.81)) - 0.0)
+      v0:
+        name: y
+    input_distributions:
+      h: U[1.0, 100.0]
+      m: U[0.1, 10.0]
+      r: U[0.01, 0.5]
+      air_res: U[0.0, 1.0]
+      t: 'conditional on h: t | h ~ U[0, sqrt(2*h/9.81)] (one draw per row)'
+    latent:
+      h:
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      u_t:
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  shm:
+    raw: 1.0*cos(sqrt(1.0/m)*t + 0.0)
+    prepared: 1.0*cos(1.0*v2*sqrt(1/v1))
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: t
+        expr: 0.0 + u_t * ((sqrt(2*h/9.81)) - 0.0)
+      v3:
+        name: r
+        sample_range:
+        - 0.01
+        - 0.5
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: h
+        expr: h
+      v5:
+        name: air_res
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      m: U[0.1, 10.0]
+      t: 'conditional on h: t | h ~ U[0, sqrt(2*h/9.81)] (one draw per row)'
+      r: U[0.01, 0.5]
+      h: U[1.0, 100.0]
+      air_res: U[0.0, 1.0]
+    latent:
+      h:
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      u_t:
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  wave:
+    raw: exp(-0.1*t/2)*cos(1.0*0 - 2*pi*t)
+    prepared: exp(-0.05*v1)*cos(-2*3.141592653589793*v1 + 0)
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: t
+        expr: 0.0 + u_t * ((sqrt(2*h/9.81)) - 0.0)
+      v2:
+        name: m
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: r
+        sample_range:
+        - 0.01
+        - 0.5
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: h
+        expr: h
+      v5:
+        name: air_res
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      t: 'conditional on h: t | h ~ U[0, sqrt(2*h/9.81)] (one draw per row)'
+      m: U[0.1, 10.0]
+      r: U[0.01, 0.5]
+      h: U[1.0, 100.0]
+      air_res: U[0.0, 1.0]
+    latent:
+      h:
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      u_t:
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0

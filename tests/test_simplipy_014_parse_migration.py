@@ -126,7 +126,8 @@ def test_evaluation_site_concrete_ground_truth_is_preserved(engine: SimpliPyEngi
     compiled = compile_expression(engine, 'Constant-2', entry['prepared'], entry['vars'])
     assert compiled['constants'] == [2.0, 0.75]
 
-    entry = entries['Const-Test-1']          # 3.14159...*v1*v1
+    # the former constant:Const-Test-1 (dropped from the catalog 2026-11; the parse probe stays)
+    entry = {'prepared': '3.14159265358979323846*v1*v1', 'vars': {'v1': {'name': 'x1'}}}
     compiled = compile_expression(engine, 'Const-Test-1', entry['prepared'], entry['vars'])
     assert compiled['constants'] == [3.141592653589793]
 

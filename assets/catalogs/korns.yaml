@@ -1,6 +1,10 @@
 metadata:
   name: korns
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  srbf_changes: []
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
+  citation: {"paper": {"short": "Korns 2011", "title": "Accuracy in Symbolic Regression", "venue": "Genetic Programming Theory and Practice IX, Genetic and Evolutionary Computation, pp. 129-151", "url": "https://doi.org/10.1007/978-1-4614-1770-5_8"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: Korns accuracy suite (5-variable, constant-heavy).
   sources:
   - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
@@ -289,8 +293,8 @@ expressions:
         function_set: Korns
       finite_fraction: 1.0
   Korns-5:
-    raw: 3+2.13*log(abs(x5))
-    prepared: 3+2.13*log(abs(v5))
+    raw: 3.0 + (2.13*log(x4))
+    prepared: 2.13*log(v5) + 3.0
     n_variables: 5
     sources:
     - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
@@ -339,25 +343,12 @@ expressions:
         - pos
       v0:
         name: y
+    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
     meta:
-      dso_spec:
-        train:
-          all:
-            U:
-            - -50
-            - 50
-            - 100
-        test:
-          all:
-            U:
-            - -50
-            - 50
-            - 100
-        function_set: Korns
-      finite_fraction: 1.0
+      finite_fraction: 0.5034
   Korns-6:
-    raw: 1.3+0.13*sqrt(abs(x1))
-    prepared: 1.3+0.13*sqrt(abs(v1))
+    raw: 1.3 + (0.13*sqrt(x0))
+    prepared: 0.13*sqrt(v1) + 1.3
     n_variables: 5
     sources:
     - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
@@ -406,25 +397,12 @@ expressions:
         - pos
       v0:
         name: y
+    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
     meta:
-      dso_spec:
-        train:
-          all:
-            U:
-            - -50
-            - 50
-            - 100
-        test:
-          all:
-            U:
-            - -50
-            - 50
-            - 100
-        function_set: Korns
-      finite_fraction: 1.0
+      finite_fraction: 0.505
   Korns-7:
-    raw: 2.1380940889*(1-exp(-0.54723748542*x1))
-    prepared: 2.1380940889*(1-exp(-0.54723748542*v1))
+    raw: 213.80940889 - (213.80940889*exp(-0.54723748542*x0))
+    prepared: 213.80940889 - 213.80940889*exp(-0.54723748542*v1)
     n_variables: 5
     sources:
     - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
@@ -473,25 +451,12 @@ expressions:
         - pos
       v0:
         name: y
+    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
     meta:
-      dso_spec:
-        train:
-          all:
-            U:
-            - -50
-            - 50
-            - 100
-        test:
-          all:
-            U:
-            - -50
-            - 50
-            - 100
-        function_set: Korns
       finite_fraction: 1.0
   Korns-8:
-    raw: 6.87+11*sqrt(abs(7.23*x1*x4*x5))
-    prepared: 6.87+11*sqrt(abs(7.23*v1*v4*v5))
+    raw: 6.87 + (11*sqrt(7.23*x0*x3*x4))
+    prepared: 29.5775252514473*sqrt(v1*v4*v5) + 6.87
     n_variables: 5
     sources:
     - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
@@ -540,25 +505,12 @@ expressions:
         - pos
       v0:
         name: y
+    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
     meta:
-      dso_spec:
-        train:
-          all:
-            U:
-            - -50
-            - 50
-            - 100
-        test:
-          all:
-            U:
-            - -50
-            - 50
-            - 100
-        function_set: Korns
-      finite_fraction: 1.0
+      finite_fraction: 0.5043
   Korns-9:
-    raw: div(sqrt(abs(x1)),log(abs(x2)))*div(exp(x3),pow(x4,2))
-    prepared: ((sqrt(abs(v1)))/(log(abs(v2))))*((exp(v3))/(((v4)**(2))))
+    raw: ((sqrt(x0)/log(x1))*(exp(x2)/x3**2))
+    prepared: sqrt(v1)*exp(v3)/(v4**2*log(v2))
     n_variables: 5
     sources:
     - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
@@ -607,22 +559,9 @@ expressions:
         - pos
       v0:
         name: y
+    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
     meta:
-      dso_spec:
-        train:
-          all:
-            U:
-            - -50
-            - 50
-            - 100
-        test:
-          all:
-            U:
-            - -50
-            - 50
-            - 100
-        function_set: Korns
-      finite_fraction: 1.0
+      finite_fraction: 0.2522
   Korns-10:
     raw: 0.81+24.3*div(2*x2+3*pow(x3,2),((4*pow(x4,3)+5*pow(x5,4))))
     prepared: 0.81+24.3*((2*v2+3*((v3)**(2)))/(((4*((v4)**(3))+5*((v5)**(4))))))
@@ -824,3 +763,168 @@ expressions:
             - 100
         function_set: Korns
       finite_fraction: 1.0
+  Korns-13:
+    raw: 32.0 - (3.0*((tan(x0)/tan(x1))*(tan(x2)/tan(x3))))
+    prepared: -3.0*tan(v1)*tan(v3)/(tan(v2)*tan(v4)) + 32.0
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    source_audit: the authors' member (catalog-prep fresh-11), missing from the DSO
+      transcription
+    meta:
+      finite_fraction: 1.0
+  Korns-14:
+    raw: 22.0 - (4.2*((cos(x0)-tan(x1))*(tanh(x2)/sin(x3))))
+    prepared: -4.2*(cos(v1) - tan(v2))*tanh(v3)/sin(v4) + 22.0
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    source_audit: the authors' member (catalog-prep fresh-11), missing from the DSO
+      transcription
+    meta:
+      finite_fraction: 1.0
+  Korns-15:
+    raw: 12.0 - (6.0*((tan(x0)/exp(x1))*(log(x2)-tan(x3))))
+    prepared: -6.0*(log(v3) - tan(v4))*exp(-v2)*tan(v1) + 12.0
+    n_variables: 5
+    sources:
+    - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x0
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x1
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x3
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x4
+        sample_range:
+        - -50.0
+        - 50.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    source_audit: the authors' member (catalog-prep fresh-11), missing from the DSO
+      transcription
+    meta:
+      finite_fraction: 0.494

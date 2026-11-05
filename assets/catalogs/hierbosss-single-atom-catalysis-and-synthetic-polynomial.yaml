@@ -1,0 +1,65 @@
+metadata:
+  name: hierbosss-single-atom-catalysis-and-synthetic-polynomial
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 1 of the 2 HierBOSSS problems here (the synthetic polynomial); the catalysis data are in 'HierBOSSS single-atom catalysis'."}]
+  license: "CC BY 4.0 (Roy et al. 2025, HierBOSSS, arXiv:2509.19710v1) + MIT (Roy-SR-007/HierBOSSS)"
+  citation: {"paper": {"short": "Roy et al. 2025", "title": "Probabilistic Symbolic Regression for Equation Discovery via Operator-induced and Regularized Symbolic Forests", "venue": "arXiv preprint (v1)", "url": "https://arxiv.org/abs/2509.19710"}, "data": {"short": "HierBOSSS_simulated_example.R (Wayback; repository deleted)", "title": "Roy-SR-007/HierBOSSS simulated example script (MIT)", "url": "https://web.archive.org/web/20260609230815/https://github.com/Roy-SR-007/HierBOSSS/blob/c9c72931e18ce0cb791c42ff6a6b214dcab28d75/HierBOSSS_simulated_example.R"}}
+  description: HierBOSSS single-atom catalysis and synthetic polynomial
+  sources:
+  - https://arxiv.org/abs/2509.19710v1
+  - https://arxiv.org/pdf/2509.19710v1
+  - https://web.archive.org/web/20260609230815/https://github.com/Roy-SR-007/HierBOSSS/blob/c9c72931e18ce0cb791c42ff6a6b214dcab28d75/HierBOSSS_simulated_example.R
+  - https://web.archive.org/web/20250925021136/https://github.com/Roy-SR-007/HierBOSSS
+  - https://github.com/tsenftle/Metal-Oxide-LASSO-lo/tree/8501e2941839902bc1544d3500da5aff2851ec1b
+  - https://www.nature.com/articles/s41929-018-0094-5
+  - https://doi.org/10.1038/s41929-018-0094-5
+  - https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41929-018-0094-5/MediaObjects/41929_2018_94_MOESM1_ESM.pdf
+  - https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41929-018-0094-5/MediaObjects/41929_2018_94_MOESM2_ESM.xlsx
+  - https://github.com/mattsheng/iBART/blob/7d7a9b06866f96c25f633db4e0dbf81987006566/data/catalysis.rda
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-123.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  hierbosss-v1-sim-eq5.2:
+    raw: 5*(x1 + x2)*x3
+    prepared: 5*v3*(v1 + v2)
+    n_variables: 3
+    subset: simulated-example
+    vars:
+      v1:
+        name: x1
+        dist:
+          name: normal
+          kwargs:
+            loc: 4.0
+            scale: 1.0
+      v2:
+        name: x2
+        dist:
+          name: normal
+          kwargs:
+            loc: 6.0
+            scale: 1.0
+      v3:
+        name: x3
+        dist:
+          name: normal
+          kwargs:
+            loc: 8.0
+            scale: 1.0
+      v0:
+        name: y
+    input_distributions:
+      x1: normal N(mean=4, var=1) (sd 1)
+      x2: normal N(mean=6, var=1) (sd 1)
+      x3: normal N(mean=8, var=1) (sd 1)
+    meta:
+      finite_fraction: 1.0
