@@ -2,7 +2,7 @@ metadata:
   name: physo-class-sr-benchmark
   version: 1
   tags: {"origin": "science formula", "tags": []}
-  srbf_changes: [{"kind": "filled", "problems": 8, "text": "The authors pick each law's realization-specific constants at random for every dataset; srbf picks them once per problem with its own seed and keeps them."}, {"kind": "changed", "problems": 8, "text": "Class SR asks for one formula shared by several datasets whose constants differ; srbf runs each law as a single dataset."}]
+  srbf_changes: [{"kind": "filled", "problems": 8, "text": "The authors pick each law's realization-specific constants at random for every dataset; srbf draws them once, when the problem set is built, from a seed fixed by the problem's name, and every run uses those values."}, {"kind": "changed", "problems": 8, "text": "Class SR asks for one formula shared by several datasets whose constants differ; srbf runs each law as a single dataset."}]
   license: "MIT (WassimTenachi/PhySO)"
   citation: {"paper": {"short": "Tenachi et al. 2024", "title": "Class Symbolic Regression: Gotta Fit ’Em All", "venue": "The Astrophysical Journal Letters 969(2):L26", "url": "https://doi.org/10.3847/2041-8213/ad5970"}, "data": {"short": "Zenodo 10.5281/zenodo.11663147", "title": "PhySO-v1.1.0", "url": "https://doi.org/10.5281/zenodo.11663147"}}
   description: PhySO Class SR benchmark
