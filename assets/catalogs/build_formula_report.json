@@ -1536,11 +1536,9 @@
  "fresh-159": {
   "catalog": "scimed-settling-sphere-configurations",
   "problems": 5,
-  "built": 2,
+  "built": 4,
   "pinned_points": 0,
   "skipped": {
-   "B": "derived input y1: derived (joint sampler, see joint_sampler): y1 = 9.81*d/(nu*sqrt(9.81*(rhop - rh",
-   "C": "derived input rhop: derived (joint sampler): rhop = rhoa + delta_rho, delta_rho ~ U[0, 5000)",
    "D": "no formula"
   },
   "check_failed": {},
@@ -1551,21 +1549,19 @@
   "problems": 2,
   "built": 0,
   "pinned_points": 0,
-  "skipped": {},
-  "check_failed": {
-   "wider-2f1-comoving": "CatalogEntryError: compile_failed: sqrt desugaring consumed 1 of 9 tokens",
-   "wider-2f1-growth": "CatalogEntryError: compile_failed: sqrt desugaring consumed 1 of 9 tokens"
+  "skipped": {
+   "wider-2f1-comoving": "the formula needs the hypergeometric function, which SimpliPy does not have",
+   "wider-2f1-growth": "the formula needs the hypergeometric function, which SimpliPy does not have"
   },
+  "check_failed": {},
   "needs_simplipy_015": []
  },
  "fresh-2": {
   "catalog": "pysr-empiricalbench-formulas",
   "problems": 5,
-  "built": 4,
+  "built": 5,
   "pinned_points": 0,
-  "skipped": {
-   "rydberg": "discrete input without values: integer uniform on {n_1+1, ..., 7}, conditional on n_1"
-  },
+  "skipped": {},
   "check_failed": {},
   "needs_simplipy_015": []
  },
@@ -1628,12 +1624,9 @@
  "fresh-42": {
   "catalog": "friedman-functions",
   "problems": 4,
-  "built": 2,
+  "built": 4,
   "pinned_points": 0,
-  "skipped": {
-   "friedman2": "conditional range: uniform U[40*pi, 560*pi] (rad/s), i.e. f ~ U[20,280] hertz with omega = 2*pi*f",
-   "friedman3": "conditional range: uniform U[40*pi, 560*pi] (rad/s), i.e. f ~ U[20,280] hertz with omega = 2*pi*f"
-  },
+  "skipped": {},
   "check_failed": {},
   "needs_simplipy_015": []
  },
@@ -1658,11 +1651,9 @@
  "fresh-45": {
   "catalog": "heuristiclab-physics-instances",
   "problems": 5,
-  "built": 4,
+  "built": 5,
   "pinned_points": 0,
-  "skipped": {
-   "AircraftMaximumLift": "discrete input without values: constant 1.0 (a degenerate input column: code line 89 'var x6 = Enumerable.Repea"
-  },
+  "skipped": {},
   "check_failed": {},
   "needs_simplipy_015": []
  },
@@ -1889,10 +1880,8 @@
   "catalog": "nguyen-c",
   "problems": 2,
   "built": 0,
-  "pinned_points": 1,
-  "skipped": {
-   "Nguyen-9c": "pinned grid: TypeError: _lambdifygenerated() missing 1 required positional argument: 'y'"
-  },
+  "pinned_points": 2,
+  "skipped": {},
   "check_failed": {},
   "needs_simplipy_015": []
  },
@@ -1938,7 +1927,7 @@
  "fresh-79": {
   "catalog": "symbolicgpt-test-sets",
   "problems": 1024,
-  "built": 987,
+  "built": 988,
   "pinned_points": 0,
   "skipped": {},
   "check_failed": {
@@ -1958,26 +1947,25 @@
    "sgpt-3v-403": "NoValidSampleFoundError: non-finite support/target for 'sgpt-3v-403': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
    "sgpt-3v-630": "NoValidSampleFoundError: non-finite support/target for 'sgpt-3v-630': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
    "sgpt-gen-d1-038": "NoValidSampleFoundError: non-finite support/target for 'sgpt-gen-d1-038': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "sgpt-gen-d1-053": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d1-053': name 'I' is not defined",
-   "sgpt-gen-d1-073": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d1-073': name 'I' is not defined",
-   "sgpt-gen-d1-109": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d1-109': name 'I' is not defined",
+   "sgpt-gen-d1-053": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d1-073": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d1-109": "no real value: the formula is complex everywhere on the authors' input range",
    "sgpt-gen-d1-125": "NoValidSampleFoundError: non-finite support/target for 'sgpt-gen-d1-125': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
    "sgpt-gen-d1-142": "NoValidSampleFoundError: non-finite support/target for 'sgpt-gen-d1-142': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "sgpt-gen-d2-020": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d2-020': name 'I' is not defined",
+   "sgpt-gen-d2-020": "no real value: the formula is complex everywhere on the authors' input range",
    "sgpt-gen-d2-117": "NoValidSampleFoundError: non-finite support/target for 'sgpt-gen-d2-117': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "sgpt-gen-d2-169": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d2-169': name 'I' is not defined",
-   "sgpt-gen-d2-185": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d2-185': name 'I' is not defined",
-   "sgpt-gen-d3-027": "CatalogEntryError: compile_failed: sqrt desugaring consumed 20 of 21 tokens",
-   "sgpt-gen-d3-065": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d3-065': name 'I' is not defined",
-   "sgpt-gen-d3-141": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d3-141': name 'I' is not defined",
-   "sgpt-gen-d3-162": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d3-162': name 'I' is not defined",
-   "sgpt-gen-d4-000": "CatalogEntryError: compile_failed: sqrt desugaring consumed 10 of 11 tokens",
-   "sgpt-gen-d4-020": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d4-020': name 'I' is not defined",
-   "sgpt-gen-d4-043": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d4-043': name 'I' is not defined",
+   "sgpt-gen-d2-169": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d2-185": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d3-065": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d3-141": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d3-162": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d4-000": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d4-020": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d4-043": "no real value: the formula is complex everywhere on the authors' input range",
    "sgpt-gen-d4-054": "NoValidSampleFoundError: non-finite support/target for 'sgpt-gen-d4-054': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "sgpt-gen-d4-068": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d4-068': name 'I' is not defined",
-   "sgpt-gen-d4-079": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d4-079': name 'I' is not defined",
-   "sgpt-gen-d4-152": "NoValidSampleFoundError: evaluation failed for 'sgpt-gen-d4-152': name 'I' is not defined",
+   "sgpt-gen-d4-068": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d4-079": "no real value: the formula is complex everywhere on the authors' input range",
+   "sgpt-gen-d4-152": "no real value: the formula is complex everywhere on the authors' input range",
    "sgpt-gen-d5-076": "NoValidSampleFoundError: non-finite support/target for 'sgpt-gen-d5-076': only 0/64 valid points within 12800 draws (valid-domain fraction too low)"
   },
   "needs_simplipy_015": []
@@ -1995,7 +1983,7 @@
    "symdiff-valv9-0282": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0282': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
    "symdiff-valv9-0293": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0293': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
    "symdiff-valv9-0328": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0328': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
-   "symdiff-valv9-0361": "NoValidSampleFoundError: evaluation failed for 'symdiff-valv9-0361': name 'I' is not defined",
+   "symdiff-valv9-0361": "no real value: the formula is complex everywhere on the authors' input range",
    "symdiff-valv9-0374": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0374': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
    "symdiff-valv9-0482": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0482': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",
    "symdiff-valv9-0520": "NoValidSampleFoundError: non-finite support/target for 'symdiff-valv9-0520': only 0/64 valid points within 12800 draws (valid-domain fraction too low)",

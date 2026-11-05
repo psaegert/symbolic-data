@@ -49314,6 +49314,87 @@ expressions:
       1/2 ... paper: x in ([-5,-3] U [3,5])^d. Verified '
     meta:
       finite_fraction: 1.0
+  sgpt-gen-d3-027:
+    raw: 0.7314850527624137*sqrt(0.24905301707921268*Abs(-0.9972366760342146*exp(1.434339629981066*x3)))+0.44866908360656277*sin(1.4493694781449231*log(-0.9976374161393875*x3)+1.3358949102548658)+1.0629314498356677
+    prepared: 0.36454444183194434*exp(0.717169814990533*v3) + 0.44866908360656277*sin(1.4493694781449231*log(-0.9976374161393875*v3)
+      + 1.3358949102548658) + 1.0629314498356677
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[-3,3]
+      x2: U[-3,3]
+      x3: U[-3,3]
+    test:
+      vars:
+        v1:
+          dist:
+          - name: uniform
+            kwargs:
+              low: -5.0
+              high: -3.0
+            weight: 2.0
+          - name: uniform
+            kwargs:
+              low: 3.0
+              high: 5.0
+            weight: 2.0
+        v2:
+          dist:
+          - name: uniform
+            kwargs:
+              low: -5.0
+              high: -3.0
+            weight: 2.0
+          - name: uniform
+            kwargs:
+              low: 3.0
+              high: 5.0
+            weight: 2.0
+        v3:
+          dist:
+          - name: uniform
+            kwargs:
+              low: -5.0
+              high: -3.0
+            weight: 2.0
+          - name: uniform
+            kwargs:
+              low: 3.0
+              high: 5.0
+            weight: 2.0
+    test_source: 'SymbolicGPT (Valipour et al. 2021, arXiv:2106.14131v1) Sec. 4 (main.tex l.334-349) and config.txt testRange
+      = [[-5.0, 3.0], [-3.0, 5.0]] read as min_x/max_x pairs (utils.py l.583-587 @ 6aef07c), as recorded in sets/fresh-79.json:
+      ''The authors score on separate points XT where every coordinate independently picks U(-5,-3) or U(3,5) with probability
+      1/2 ... paper: x in ([-5,-3] U [3,5])^d. Verified '
+    meta:
+      finite_fraction: 0.506
   sgpt-gen-d3-033:
     raw: 0.2628847305607316*cos(-0.7058121935672792*exp(1.0992005566392598*x2))+0.5015179371541834
     prepared: 0.2628847305607316*cos(0.7058121935672792*exp(1.0992005566392598*v2)) + 0.5015179371541834

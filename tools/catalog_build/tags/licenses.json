@@ -931,6 +931,14 @@
   "evidence": "assets/hf_card/THIRD_PARTY_NOTICES.md (program audit 2026-07-10): license keys deferred to each catalog's next version"
  },
  {
+  "catalog": "grammarvae-points",
+  "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)",
+  "verdict": "permissive",
+  "redistribute": "yes",
+  "upstream": "dso-org/deep-symbolic-optimization benchmarks.csv (Petersen et al.)",
+  "evidence": "assets/hf_card/THIRD_PARTY_NOTICES.md (program audit 2026-07-10): license keys deferred to each catalog's next version"
+ },
+ {
   "catalog": "gsgp-real-world",
   "license": "CC BY 4.0 (UCI ML Repository: Airfoil Self-Noise, Concrete Compressive Strength, Parkinsons Telemonitoring, Concrete Slump Test; per-dataset DOIs) + MIT (DALabNOVA/slim QSAR tables; Archetti et al. 2007)",
   "verdict": "attribution (CC BY)",
@@ -1592,6 +1600,14 @@
  },
  {
   "catalog": "pagie",
+  "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)",
+  "verdict": "permissive",
+  "redistribute": "yes",
+  "upstream": "dso-org/deep-symbolic-optimization benchmarks.csv (Petersen et al.)",
+  "evidence": "assets/hf_card/THIRD_PARTY_NOTICES.md (program audit 2026-07-10): license keys deferred to each catalog's next version"
+ },
+ {
+  "catalog": "pagie-points",
   "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)",
   "verdict": "permissive",
   "redistribute": "yes",

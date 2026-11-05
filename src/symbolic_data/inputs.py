@@ -41,6 +41,7 @@ _MATH: dict[str, Any] = {
     "pi": np.pi, "e": np.e, "sqrt": np.sqrt, "exp": np.exp, "log": np.log, "log10": np.log10,
     "sin": np.sin, "cos": np.cos, "tan": np.tan, "arcsin": np.arcsin, "arccos": np.arccos, "arctan": np.arctan,
     "sinh": np.sinh, "cosh": np.cosh, "tanh": np.tanh, "abs": np.abs, "minimum": np.minimum, "maximum": np.maximum,
+    "floor": np.floor, "ceil": np.ceil,
 }
 
 

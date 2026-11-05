@@ -57,7 +57,6 @@ CATALOGS = {
     "lample-charton-v24-bench": ("lample-charton-v24-bench.yaml", None, "generative_catalog"),
     # P1 GP-toy suites (DSO benchmarks.csv, BSD-3; validated 2026-07-10, 16/16)
     "constant": ("constant.yaml", 8, "problem_catalog"),
-    "grammarvae": ("grammarvae.yaml", 1, "problem_catalog"),
     "jin": ("jin.yaml", 18, "problem_catalog"),
     "keijzer": ("keijzer.yaml", 7, "problem_catalog"),
     "korns": ("korns.yaml", 15, "problem_catalog"),
@@ -68,7 +67,8 @@ CATALOGS = {
     "neat": ("neat.yaml", 8, "problem_catalog"),
     # nonic (1) and r-rationals (6) retired 2026-11: their authors pin the points, so they are nonic-points and
     # r-rationals-points (data catalogs)
-    "pagie": ("pagie.yaml", 1, "problem_catalog"),
+    # pagie (1) and grammarvae (1) retired 2026-11: their authors pin the points, so they are pagie-points and
+    # grammarvae-points (data catalogs)
     "poly": ("poly.yaml", 6, "problem_catalog"),
     # sine (1 entry) retired 2026-11: the authors pin Sine's points, so it is the data catalog sine-points
     "vladislavleva": ("vladislavleva.yaml", 6, "problem_catalog"),
@@ -182,6 +182,8 @@ CATALOGS = {
     "scrbenchmark": ("scrbenchmark.yaml", 15, "problem_catalog"),
     "shape-constrained-sr-synthetic": ("shape-constrained-sr-synthetic.yaml", 7, "problem_catalog"),
     "sine-points": ("sine-points.npz", 1, "problem_catalog"),
+    "pagie-points": ("pagie-points.npz", 1, "problem_catalog"),
+    "grammarvae-points": ("grammarvae-points.npz", 1, "problem_catalog"),
     "spl-noise-data-scarcity-grid": ("spl-noise-data-scarcity-grid.yaml", 1, "problem_catalog"),
     "surfacebench-explicit-surfaces": ("surfacebench-explicit-surfaces.yaml", 256, "problem_catalog"),
     "sym-q-ai-feynman-with-drift-terms": ("sym-q-ai-feynman-with-drift-terms.yaml", 15, "problem_catalog"),

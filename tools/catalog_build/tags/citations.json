@@ -1012,6 +1012,21 @@
   "notes": "GrammarVAE-1 as defined by Kusner et al.; formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
  },
  {
+  "catalog": "grammarvae-points",
+  "paper": {
+   "short": "Kusner et al. 2017",
+   "title": "Grammar Variational Autoencoder",
+   "venue": "ICML 2017 (PMLR 70)",
+   "url": "https://arxiv.org/abs/1703.01925"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "GrammarVAE-1 as defined by Kusner et al.; formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
   "catalog": "gsgp-real-world",
   "paper": {
    "short": "Anselmi et al. 2023",
@@ -1757,6 +1772,21 @@
  },
  {
   "catalog": "pagie",
+  "paper": {
+   "short": "Pagie & Hogeweg 1997",
+   "title": "Evolutionary Consequences of Coevolving Targets",
+   "venue": "Evolutionary Computation 5(4):401-418",
+   "url": "https://doi.org/10.1162/evco.1997.5.4.401"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Pagie-1 (source audit A2). formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "pagie-points",
   "paper": {
    "short": "Pagie & Hogeweg 1997",
    "title": "Evolutionary Consequences of Coevolving Targets",

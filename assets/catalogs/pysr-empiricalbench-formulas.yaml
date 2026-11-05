@@ -32,7 +32,7 @@ metadata:
 expressions:
   newton:
     raw: 6.67408e-11*m1*m2/r**2
-    prepared: 6.67408e-11*v2*v3/v1**2
+    prepared: log(6.67408e-11*v2*v3/v1**2)
     n_variables: 3
     subset: all
     vars:
@@ -66,11 +66,12 @@ expressions:
       r: log-uniform LU[3.7e8, 7.37593e12]
       m1: log-uniform LU[1.3e22, 2e30]
       m2: log-uniform LU[1.3e22, 2e30]
+    target: the authors fit log(6.67408e-11*m1*m2/r**2), not the published law itself
     meta:
       finite_fraction: 1.0
   planck:
     raw: 2*6.62607004e-34*nu**3/(299792458**2)*(1/(exp(6.62607004e-34*nu/(1.38064852e-23*T)) - 1))
-    prepared: 1.47449944028424e-50*v1**3/(exp(4.79924466221135e-11*v1/v2) - 1)
+    prepared: log(1.47449944028424e-50*v1**3/(exp(4.79924466221135e-11*v1/v2) - 1))
     n_variables: 2
     subset: all
     vars:
@@ -95,11 +96,13 @@ expressions:
     input_distributions:
       nu: log-uniform LU[1e9, 1e16]
       T: log-uniform LU[100, 6000]
+    target: the authors fit log(2*6.62607004e-34*nu**3/(299792458**2)*(1/(exp(6.62607004e-34*nu/(1.38064852e-23*T)) - 1))),
+      not the published law itself
     meta:
-      finite_fraction: 1.0
+      finite_fraction: 0.9721
   schechter:
     raw: (0.002/2.5e8)*(L/2.5e8)**(-1.20)*exp(-L/2.5e8)
-    prepared: 0.0956352499790036*exp(-4.0e-9*v1)/v1**1.2
+    prepared: log(0.0956352499790036*exp(-4.0e-9*v1)/v1**1.2)
     n_variables: 1
     subset: all
     vars:
@@ -115,11 +118,12 @@ expressions:
         name: y
     input_distributions:
       L: log-uniform LU[1e6, 3e9]
+    target: the authors fit log((0.002/2.5e8)*(L/2.5e8)**(-1.20)*exp(-L/2.5e8)), not the published law itself
     meta:
       finite_fraction: 1.0
   ideal_gas:
     raw: n*8.314*T/V
-    prepared: 8.314*v1*v2/v3
+    prepared: log(8.314*v1*v2/v3)
     n_variables: 3
     subset: all
     vars:
@@ -153,5 +157,45 @@ expressions:
       n: U[1, 100]
       T: U[300, 400]
       V: U[1, 100]
+    target: the authors fit log(n*8.314*T/V), not the published law itself
+    meta:
+      finite_fraction: 1.0
+  rydberg:
+    raw: 1/(1.097e7*(1/n_1**2 - 1/n_2**2))
+    prepared: log(1/(-10970000.0/v2**2 + 10970000.0/v1**2))
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: n_1
+        expr: n_1
+      v2:
+        name: n_2
+        expr: n_1 + 1 + floor(u_n_2 * (7 - n_1 - 1 + 1))
+      v0:
+        name: y
+    input_distributions:
+      n_1: integer uniform on {1, 2, 3, 4, 5, 6}
+      n_2: integer uniform on {n_1+1, ..., 7}, conditional on n_1
+    target: the authors fit log(1/(1.097e7*(1/n_1**2 - 1/n_2**2))), not the published law itself
+    latent:
+      n_1:
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 1.0
+            - 2.0
+            - 3.0
+            - 4.0
+            - 5.0
+            - 6.0
+      u_n_2:
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
     meta:
       finite_fraction: 1.0

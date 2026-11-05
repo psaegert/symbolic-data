@@ -129,6 +129,8 @@ def input_spec(v: dict[str, Any]) -> dict[str, Any]:
         return {"dist": {"name": "choice", "kwargs": {"values": [float(x) for x in np.linspace(float(lo), float(hi), n)]}}}
     if "grid" in t or re.search(r"\be\[", t) or "evenly spaced" in t or "equidistant" in t:
         raise Unsupported(f"pinned grid (a data problem): {text[:80]}")
+    if lo is not None and hi is not None and float(lo) == float(hi):     # a constant column the authors pass as an input
+        return {"dist": {"name": "choice", "kwargs": {"values": [float(lo)]}}}
     if v.get("discrete") or "discrete" in t or "integer" in t:
         values = re.search(r"\{([^}]*)\}", text)
         if values and "..." not in values.group(1):
@@ -156,7 +158,8 @@ def input_spec(v: dict[str, Any]) -> dict[str, Any]:
     if re.search(r"x_min|x_max|\bdrawn per variable\b", t):
         raise Unsupported(f"a per-problem random box: {text[:80]}")
     if lo is not None and hi is not None:
-        if re.search(r"\b[a-z]\s*~", t) and "u[" not in t[:6]:
+        # "t ~ U[0, h]" names a range set by another input; "uniform U[a, b] ..., i.e. f ~ ..." only restates the law
+        if re.search(r"\b[a-z]\s*~", t) and "u[" not in t[:6] and not t.startswith("uniform u["):
             raise Unsupported(f"conditional range: {text[:80]}")
         return {"sample_range": [float(lo), float(hi)], "sample_type": ["uni", "pos"]}
     raise Unsupported(f"no range: {text[:80]}")
@@ -216,15 +219,26 @@ def named_constants(p: dict[str, Any]) -> dict[str, float]:
 def prepared_of(formula: str, names: list[str], constants: dict[str, float]) -> str:
     """The formula over v1..vN with the baked constants, in SimpliPy's infix. Parsed WITHOUT evaluation, so the
     authors' structure reaches SimpliPy as written (its simplification is the judge's, as for the release catalogs)."""
-    local = {n: sympy.Symbol(n) for n in [*names, *constants]}
-    e = parse_expr(formula, local_dict=local, evaluate=False)
-    if constants:
-        e = e.xreplace({sympy.Symbol(k): sympy.Float(repr(v)) for k, v in constants.items()})
-    free = {s.name for s in e.free_symbols} - set(names)
-    if free:
-        raise Unsupported(f"free symbols {sorted(free)} in {formula[:80]}")
-    e = _rewrite(e)
-    e = e.xreplace({sympy.Symbol(n): sympy.Symbol(f"v{i + 1}") for i, n in enumerate(names)})
+    def read(real: bool) -> sympy.Expr:
+        local = {n: sympy.Symbol(n, real=True) if real and n in names else sympy.Symbol(n) for n in [*names, *constants]}
+        e = parse_expr(formula, local_dict=local, evaluate=False)
+        if constants:
+            e = e.xreplace({sympy.Symbol(k): sympy.Float(repr(v)) for k, v in constants.items()})
+        free = {s.name for s in e.free_symbols} - set(names)
+        if free:
+            raise Unsupported(f"free symbols {sorted(free)} in {formula[:80]}")
+        return _rewrite(e)
+
+    def over_v(real: bool) -> sympy.Expr:
+        e = read(real)
+        if e.has(sympy.hyper):
+            raise Unsupported("the formula needs the hypergeometric function, which SimpliPy does not have")
+        return e.xreplace({sym: sympy.Symbol(f"v{names.index(sym.name) + 1}", **({"real": True} if real else {}))
+                           for sym in e.free_symbols})
+    e = over_v(real=False)
+    if e.has(sympy.re, sympy.im, sympy.I):
+        # sympy takes a symbol to be complex and rewrites |exp(x)| as exp(re(x)): the inputs are real, so read them so
+        e = over_v(real=True)
     s = sympy.sstr(e, full_prec=False)
     s = re.sub(r"\bAbs\(", "abs(", s)
     s = re.sub(r"\bpi\b", repr(math.pi), s)
@@ -246,9 +260,18 @@ SPLIT_RANGES = {("fresh-111", f"Curve-{k}"): ((0.0, 100.0), (-100.0, -1.0)) for 
 # The input order is (x, nu), as recorded.
 SRBF_TESTS = {("fresh-64", "bessel-J0-4-xmax2"): (0.0, 4.0, 100)}
 MODIFIED_POINTS = {"fresh-64": "the authors measure the Bessel problem's error on [0, 4] without stating its points: srbf "
-                               "tests on 100 points per order nu drawn uniformly on [0, 4], once, seeded"}
-# Vladislavleva et al. 2009 Table I: the authors' test mesh per input, (start:step:stop)
+                               "tests on 100 points per order nu drawn uniformly on [0, 4], once, seeded",
+                   "fresh-145": "the authors test F1-F3 on 200 random points without stating their law: srbf draws them "
+                                "uniformly on the training range, once, seeded"}
+# Vladislavleva et al. 2009 Table I: the authors' test mesh per input, (start:step:stop); the GP-benchmarks table
+# writes it "testing 'x: E[start, stop, step]'"
 _TEST_MESH = re.compile(rf"test mesh \w+\s*=\s*\(({_NUM}):({_NUM}):({_NUM})\)")
+_TESTING_E = re.compile(rf"testing '\w+:\s*E\[\s*({_NUM})\s*,\s*({_NUM})\s*,\s*({_NUM})\s*\]'")
+# McDermott et al. 2012 (DyFor): the series is fitted on its first 14 values and forecast on the rest
+SPLIT_COUNT = {("fresh-48", "dyfor-simulated"): 14}
+# Tests the authors run on random points without stating their law: srbf draws them uniformly on the training range
+# (marked '*'). Schmidt & Lipson's coevolved fitness predictors test F1-F3 on 200 additional random points.
+SRBF_RANDOM_TESTS = {("fresh-145", f): 200 for f in ("F1", "F2", "F3")}
 
 
 def grid_values(v: dict[str, Any]) -> np.ndarray:
@@ -289,12 +312,13 @@ def points_problem(p: dict[str, Any], slug: str, display: str, engine) -> Any:
     if p["id"] in ("Keijzer-6", "Neat-6"):
         x = np.arange(1.0, 51.0)[:, None]
         x_test, split, note = np.arange(1.0, 121.0)[:, None], "given", "given: fit on x = 1..50, test on x = 1..120"
-    elif _TEST_GRID.search(str(p["variables"][0].get("distribution"))):
-        m = _TEST_GRID.search(str(p["variables"][0].get("distribution")))
-        v = p["variables"][0]
+    elif all(_TEST_GRID.search(str(v.get("distribution"))) for v in p["variables"]):
+        # random training draws and a test grid per input; with several inputs the grids are paired, point i of each
+        # (SPL's make_datasets.py: np.linspace per variable)
         rng = np.random.default_rng(_seed(p["set"], p["id"], "fit-pool"))
-        x = rng.uniform(float(v["low"]), float(v["high"]), (10000, 1))
-        x_test = np.linspace(float(m.group(1)), float(m.group(2)), int(m.group(3)))[:, None]
+        x = np.column_stack([rng.uniform(float(v["low"]), float(v["high"]), 10000) for v in p["variables"]])
+        grids = [_TEST_GRID.search(str(v.get("distribution"))) for v in p["variables"]]
+        x_test = np.column_stack([np.linspace(float(m.group(1)), float(m.group(2)), int(m.group(3))) for m in grids])
         split, note = "given", "given: the authors' test grid; fit rows from the training range (a seeded pool of 10,000)"
     elif (p["set"], p["id"]) in SPLIT_RANGES:
         (fa, fb), (ta, tb) = SPLIT_RANGES[(p["set"], p["id"])]
@@ -305,11 +329,24 @@ def points_problem(p: dict[str, Any], slug: str, display: str, engine) -> Any:
         axes = [grid_values(v) for v in p["variables"]]
         x = np.array(np.meshgrid(*axes, indexing="ij")).reshape(len(axes), -1).T
         meshes = [_TEST_MESH.search(str(v.get("notes") or "")) for v in p["variables"]]
-        if all(meshes):                                    # the authors' test mesh (Vladislavleva-2/3)
-            axes = [np.round(np.arange(float(m.group(1)), float(m.group(3)) + float(m.group(2)) / 2, float(m.group(2))), 12)
-                    for m in meshes]
+        steps = [(float(m.group(1)), float(m.group(2)), float(m.group(3))) for m in meshes] if all(meshes) else None
+        e_meshes = [_TESTING_E.search(str(v.get("notes") or "")) for v in p["variables"]]
+        if steps is None and all(e_meshes):                # E[start, stop, step]
+            steps = [(float(m.group(1)), float(m.group(3)), float(m.group(2))) for m in e_meshes]
+        if steps:                                          # the authors' test mesh (Vladislavleva-2/3)
+            axes = [np.round(np.arange(a, b + st / 2, st), 12) for a, st, b in steps]
             x_test = np.array(np.meshgrid(*axes, indexing="ij")).reshape(len(axes), -1).T
             split, note = "given", "given: fit on the authors' training mesh, test on their test mesh"
+        if (p["set"], p["id"]) in SPLIT_COUNT:
+            k = SPLIT_COUNT[(p["set"], p["id"])]
+            x, x_test = x[:k], x[k:]
+            split, note = "given", f"given: the authors fit the first {k} values and forecast the rest"
+        if (p["set"], p["id"]) in SRBF_RANDOM_TESTS:
+            per = SRBF_RANDOM_TESTS[(p["set"], p["id"])]
+            rng = np.random.default_rng(_seed(p["set"], p["id"], "test-pool"))
+            x_test = np.column_stack([rng.uniform(x[:, i].min(), x[:, i].max(), per) for i in range(x.shape[1])])
+            split, note = "given", (f"srbf: the authors test on {per} random points without stating their law; "
+                                    "uniform on the training range, seeded")
     if (p["set"], p["id"]) in SRBF_TESTS:
         lo, hi, per = SRBF_TESTS[(p["set"], p["id"])]
         orders = grid_values(p["variables"][1])
@@ -332,6 +369,8 @@ def points_problem(p: dict[str, Any], slug: str, display: str, engine) -> Any:
         gt = {"gt_kind": "none"}
         meta["formula_pending"] = {"formula": p["formula"], "error": f"{type(exc).__name__}: {exc}"[:200]}
     keep = np.isfinite(y)
+    if not keep.all():                     # points where the formula is undefined: not a row of the problem
+        meta["undefined_points_left_out"] = int((~keep).sum())
     test = {"x_test": x_test[np.isfinite(yt)], "y_test": yt[np.isfinite(yt)]} if split == "given" else {}
     return data_problem(x[keep], y[keep], variables=[f"v{i + 1}" for i in range(len(names))], test_split=split,
                         eq_id=p["id"], meta=meta, **test, **gt)
@@ -344,11 +383,53 @@ def slug_of(name: str) -> str:
 
 
 _DERIVED = re.compile(r"derived:\s*([A-Za-z_]\w*)\s*=\s*(.+?)\s+with\s+(.+?)(?:\s*\(|,\s*i\.e\.|$)")
+# "integer uniform on {n_1+1, ..., 7}, conditional on n_1" (PySR EmpiricalBench's Rydberg formula)
+_INT_AFTER = re.compile(r"integer uniform on \{\s*(\w+)\s*\+\s*(\d+)\s*,\s*\.\.\.\s*,\s*(\d+)\s*\},\s*conditional on (\w+)")
 _LATENT = re.compile(rf"([A-Za-z_]\w*)\s*~\s*U[\[(]\s*({_NUM})\s*,\s*({_NUM})\s*[\])]")
 
 
 def _uniform(lo: float, hi: float) -> dict[str, Any]:
     return {"sample_range": [float(lo), float(hi)], "sample_type": ["uni", "pos"]}
+
+
+def joint_sampler_inputs(p: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
+    """(vars, latent) of a problem whose authors draw a few base quantities and derive its inputs from them (SciMED's
+    settling sphere: rhoa, nu, Re and rhop - rhoa uniform; d, V, ... derived): each input is its formula in the base
+    quantities, the derived ones substituted."""
+    js = p["joint_sampler"]
+    base = {name: sympy.Symbol(name) for name in js["base"]}
+    latent = {}
+    for name, text in js["base"].items():
+        b = _bounds(text)
+        if not b:
+            raise Unsupported(f"joint sampler base without a range: {name}: {text[:60]}")
+        latent[name] = _uniform(*b)
+    derived: dict[str, sympy.Expr] = {}
+    for name, expr in js.get("derived", {}).items():          # in the authors' order: each may use the ones before
+        derived[name] = sympy.sympify(expr, locals={**base, **{k: sympy.Symbol(k) for k in derived}}).xreplace(
+            {sympy.Symbol(k): v for k, v in derived.items()})
+    variables = {}
+    for i, v in enumerate(p["variables"]):
+        if v["name"] in base:
+            e: sympy.Expr = base[v["name"]]
+        elif v["name"] in derived:
+            e = derived[v["name"]]
+        else:
+            e = sympy.sympify(v.get("derived_from") or "", locals={**base, **{k: sympy.Symbol(k) for k in derived}})
+            e = e.xreplace({sympy.Symbol(k): d for k, d in derived.items()})
+        free = {x.name for x in e.free_symbols} - set(base)
+        if free:
+            raise Unsupported(f"joint sampler: {v['name']} needs {sorted(free)}")
+        variables[f"v{i + 1}"] = {"name": v["name"], "expr": re.sub(r"\bAbs\(", "abs(", sympy.sstr(e))}
+    return variables, latent
+
+
+def row_constraints(p: dict[str, Any]) -> list[str]:
+    """The authors' constraints on a row (GeoBench: the triangle inequality, angles summing below pi), over v1..vN."""
+    names = [v["name"] for v in p["variables"]]
+    pattern = re.compile(r"\b(" + "|".join(map(re.escape, sorted(names, key=len, reverse=True))) + r")\b")
+    return [re.sub(r"\bpi\b", repr(math.pi), pattern.sub(lambda m: f"v{names.index(m.group(1)) + 1}", c))
+            for c in p.get("constraints") or []]
 
 
 def inputs_of(p: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]], dict[str, Any]]:
@@ -362,6 +443,7 @@ def inputs_of(p: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, d
     by_name = {v["name"]: v for v in p["variables"]}
     conditioned = {c for v in p["variables"]
                    for c in (v.get("conditional_on") or ([v["dependent_on"]] if v.get("dependent_on") else []))}
+    conditioned |= {m.group(4) for v in p["variables"] if (m := _INT_AFTER.search(str(v.get("distribution") or "")))}
     phye2e = None
     for i, v in enumerate(p["variables"]):
         key, text = f"v{i + 1}", str(v.get("distribution") or "")
@@ -379,6 +461,13 @@ def inputs_of(p: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, d
             for name, lo, hi in _LATENT.findall(d.group(3)):
                 latent.setdefault(name, _uniform(float(lo), float(hi)))
             variables[key] = {"name": v["name"], "expr": d.group(2).strip()}
+            continue
+        after = _INT_AFTER.search(text)
+        if after:                                     # uniform on {a + k, ..., top}: a, plus k, plus floor(u * count)
+            a, k, top = after.group(4), int(after.group(2)), int(after.group(3))
+            latent.setdefault(a, input_spec(by_name[a]))
+            latent[f"u_{v['name']}"] = _uniform(0.0, 1.0)
+            variables[key] = {"name": v["name"], "expr": f"{a} + {k} + floor(u_{v['name']} * ({top} - {a} - {k} + 1))"}
             continue
         cond = v.get("conditional_on") or ([v["dependent_on"]] if v.get("dependent_on") else [])
         if cond:
@@ -417,6 +506,20 @@ def joint_inputs_of(p: dict[str, Any]) -> dict[str, Any] | None:
     return None
 
 
+def distinct_names(variables: dict[str, dict[str, Any]]) -> None:
+    """An input that repeats an earlier input's name gets the next free capital letter (LaSR names its added unused
+    inputs A, B, C, ..., which can repeat a formula input such as B or F; the formula reads the first one)."""
+    used = {v["name"] for v in variables.values()}
+    seen: set[str] = set()
+    for key in sorted(variables, key=lambda k: int(k[1:])):
+        name = variables[key]["name"]
+        if name in seen:
+            new = next(c for c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" if c not in used)
+            used.add(new)
+            variables[key]["name"] = new
+        seen.add(variables[key]["name"])
+
+
 def entry_of(p: dict[str, Any]) -> dict[str, Any]:
     names = [v["name"] for v in p["variables"]]
     if not names:
@@ -433,12 +536,21 @@ def entry_of(p: dict[str, Any]) -> dict[str, Any]:
     elif (p["set"], p["id"]) in SRBF_INPUTS:
         spec = SRBF_INPUTS[(p["set"], p["id"])]
         variables, latent, boxes = {f"v{i + 1}": {"name": v["name"], **spec[v["name"]]} for i, v in enumerate(p["variables"])}, {}, {}
+    elif isinstance(p.get("joint_sampler"), dict) and p["joint_sampler"].get("base"):
+        (variables, latent), boxes = joint_sampler_inputs(p), {}
     else:
         variables, latent, boxes = inputs_of(p)
+    distinct_names(variables)
     variables["v0"] = {"name": "y"}
-    entry = {"raw": p["formula"], "prepared": prepared_of(p["formula"], names, constants), "n_variables": len(names),
+    # the target the authors fit, where it is not the published law itself (PySR EmpiricalBench fits ln y)
+    target = p.get("target_as_evaluated") or p["formula"]
+    entry = {"raw": p["formula"], "prepared": prepared_of(target, names, constants), "n_variables": len(names),
              "subset": p["unit"].split(":", 1)[1], "vars": variables,
              "input_distributions": {v["name"]: v.get("distribution") for v in p["variables"]}}
+    if target != p["formula"]:
+        entry["target"] = f"the authors fit {target}, not the published law itself"
+    if p.get("constraints"):
+        entry["row_constraints"] = row_constraints(p)
     if joint:
         entry["inputs"] = joint
         if joint["name"] == "e2e_mixture":
@@ -499,6 +611,24 @@ def too_long(engine, prepared: str) -> None:
             raise ValueError(f"the judge's parser refuses it: {exc}") from exc
 
 
+def real_anywhere(entry: dict[str, Any], n: int = 4096) -> bool:
+    """Whether the published formula takes a real, finite value anywhere on its inputs' ranges (numpy, no complex
+    numbers): a formula such as sqrt(-0.2 * |x|) has none, and sympy reads it with the imaginary unit."""
+    names = [k for k in entry["vars"] if k != "v0"]             # the prepared formula: v1..vN, constants as numbers
+    rng = np.random.default_rng(0)
+    cols = []
+    for k, v in entry["vars"].items():
+        if k == "v0":
+            continue
+        lo, hi = (v.get("sample_range") or [-1.0, 1.0])[:2]
+        cols.append(rng.uniform(float(lo), float(hi), n))
+    with np.errstate(all="ignore"):
+        f = sympy.lambdify([sympy.Symbol(x) for x in names],
+                           parse_expr(entry["prepared"], local_dict={x: sympy.Symbol(x) for x in names}), modules="numpy")
+        y = np.asarray(f(*cols), dtype=complex).reshape(-1)
+    return bool((np.isfinite(y) & (y.imag == 0)).any())
+
+
 def check(entries: dict[str, dict[str, Any]], n: int, engine) -> dict[str, str]:
     """Compile and draw ``n`` rows of every entry, and record its valid-domain fraction; the failures by id."""
     from symbolic_data.catalog import ProblemCatalog
@@ -521,6 +651,9 @@ def check(entries: dict[str, dict[str, Any]], n: int, engine) -> dict[str, str]:
                 entries[eq_id]["meta"]["low_validity"] = True
         except Exception as exc:
             failed[eq_id] = f"{type(exc).__name__}: {exc}"[:200]
+            if ("name 'I' is not defined" in str(exc) or "I" in re.findall(r"\b\w+\b", entries[eq_id]["prepared"])) \
+                    and not real_anywhere(entries[eq_id]):
+                failed[eq_id] = "no real value: the formula is complex everywhere on the authors' input range"
     return failed
 
 
@@ -529,8 +662,12 @@ def check(entries: dict[str, dict[str, Any]], n: int, engine) -> dict[str, str]:
 # as (start, stop, step) grids, ("linspace", a, b, n), "uniform" (a seeded pool of 10,000 on the training range) or
 # "train" (the test is the training points). Keijzer 2003 Table 3; Krawiec & Pawlak 2013 Table 2 (Nonic, R1-R3:
 # 20 equidistant points on [-1, 1], tested on random points); Mundhenk et al. 2021 (R1a-R3a: E(-10, 10, 20), test =
-# train). Const-Test-1/2 (DSO repository sanity tests) are dropped, not moved.
+# train). Pagie & Hogeweg 1997: Pagie-1 on the 26 x 26 grid E[-5, 5, 0.4] per input, no test stated (their 100 x 100 test
+# grid has no stated step); Kusner et al. 2017: GrammarVAE-1 on 1,000 evenly spaced points of [-10, 10], no test. A
+# grid with several inputs is given per input and meshed. Const-Test-1/2 (DSO repository sanity tests) are dropped, not
+# moved.
 _K1 = "0.3*v1*sin(2*3.141592653589793*v1)"
+GRAMMARVAE_1 = "1./3+v1+sin(((v1)**(2)))"
 _R = {"R1": "((((v1+1)**(3)))/(((v1)**(2))-v1+1))",
       "R2": "(((((v1)**(5))-3*((v1)**(3))+1))/((((v1)**(2))+1)))",
       "R3": "(((((v1)**(6))+((v1)**(5))))/((((v1)**(4))+((v1)**(3))+((v1)**(2))+v1+1)))"}
@@ -545,6 +682,8 @@ RELEASE_POINTS = {
     ("nonic", "Nonic"): ("+".join(f"((v1)**({k}))" for k in range(9, 1, -1)) + "+v1", ("linspace", -1, 1, 20), "uniform"),
     **{("r-rationals", r): (f, ("linspace", -1, 1, 20), "uniform") for r, f in _R.items()},
     **{("r-rationals", f"{r}a"): (f, ("linspace", -10, 10, 20), "train") for r, f in _R.items()},
+    ("pagie", "Pagie-1"): ("((1)/((1+((v1)**(-4)))))+((1)/((1+((v2)**(-4)))))", ((-5, 5, 0.4), (-5, 5, 0.4)), None),
+    ("grammarvae", "GrammarVAE-1"): (GRAMMARVAE_1, ("linspace", -10, 10, 1000), None),
 }
 DROPPED = {"constant": ["Const-Test-1", "Const-Test-2"]}
 
@@ -561,9 +700,13 @@ def release_points_problem(catalog: str, eq_id: str, engine) -> Any:
     from symbolic_data import data_problem
     from symbolic_data._evaluation import compile_expression, evaluate
     prepared, train, test = RELEASE_POINTS[(catalog, eq_id)]
-    compiled = compile_expression(engine, eq_id, prepared, {"v1": {}}, name=f"{catalog}-points")
-    x = _points(train)[:, None]
-    if test == "train":
+    axes = [_points(t) for t in train] if isinstance(train[0], tuple) else [_points(train)]
+    keys = [f"v{i + 1}" for i in range(len(axes))]
+    compiled = compile_expression(engine, eq_id, prepared, {k: {} for k in keys}, name=f"{catalog}-points")
+    x = np.array(np.meshgrid(*axes, indexing="ij")).reshape(len(axes), -1).T
+    if test is None:
+        x_test, note = None, "none: the authors pin the points and state no test"
+    elif test == "train":
         x_test, note = x.copy(), "given: the authors test on their training points"
     elif test == "uniform":
         rng = np.random.default_rng(_seed(f"release/{catalog}", eq_id, "test-pool"))
@@ -571,14 +714,18 @@ def release_points_problem(catalog: str, eq_id: str, engine) -> Any:
         note = "given: the authors test on random points of the training range (a seeded pool of 10,000)"
     else:
         x_test, note = _points(test)[:, None], "given: the authors' test grid"
-    y = np.asarray(evaluate(compiled, {"v1": x[:, 0]}), dtype=float).reshape(-1) * np.ones(len(x))
-    yt = np.asarray(evaluate(compiled, {"v1": x_test[:, 0]}), dtype=float).reshape(-1) * np.ones(len(x_test))
+    y = np.asarray(evaluate(compiled, {k: x[:, i] for i, k in enumerate(keys)}), dtype=float).reshape(-1) * np.ones(len(x))
     meta = {"catalog": f"{catalog}-points", "catalog_display": f"{catalog} (pinned points)", "source_id": eq_id,
             "moved_from": catalog, "split_reading": note}
-    keep, keep_t = np.isfinite(y), np.isfinite(yt)
-    return data_problem(x[keep], y[keep], variables=["v1"], test_split="given", eq_id=eq_id, meta=meta,
-                        x_test=x_test[keep_t], y_test=yt[keep_t], gt_kind="exact", expression=compiled["expression"],
-                        skeleton=compiled["prefix"], constants=compiled["constants"])
+    keep = np.isfinite(y)
+    test: dict[str, Any] = {}
+    if x_test is not None:
+        yt = np.asarray(evaluate(compiled, {k: x_test[:, i] for i, k in enumerate(keys)}), dtype=float).reshape(-1) * np.ones(len(x_test))
+        keep_t = np.isfinite(yt)
+        test = {"x_test": x_test[keep_t], "y_test": yt[keep_t]}
+    return data_problem(x[keep], y[keep], variables=keys, test_split="given" if test else "none", eq_id=eq_id, meta=meta,
+                        gt_kind="exact", expression=compiled["expression"], skeleton=compiled["prefix"],
+                        constants=compiled["constants"], **test)
 
 
 def build_family_points(problems: list[dict[str, Any]], out: Path, engine) -> dict[str, list[str]]:

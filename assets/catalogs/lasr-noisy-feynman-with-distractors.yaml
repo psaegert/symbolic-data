@@ -1242,7 +1242,7 @@ expressions:
       finite_fraction: 1.0
   I.12.11:
     raw: q*(Ef+B*v*sin(theta))
-    prepared: v1*(v2 + v4*v7*sin(v5))
+    prepared: v1*(v2 + v3*v4*sin(v5))
     n_variables: 11
     subset: all
     vars:
@@ -1295,7 +1295,7 @@ expressions:
         - uni
         - pos
       v7:
-        name: B
+        name: G
         sample_range:
         - 1.0
         - 20.0
@@ -2341,7 +2341,7 @@ expressions:
       finite_fraction: 1.0
   I.18.12:
     raw: r*F*sin(theta)
-    prepared: v1*v9*sin(v3)
+    prepared: v1*v2*sin(v3)
     n_variables: 11
     subset: all
     vars:
@@ -2410,7 +2410,7 @@ expressions:
         - uni
         - pos
       v9:
-        name: F
+        name: I
         sample_range:
         - 1.0
         - 20.0
@@ -2670,7 +2670,7 @@ expressions:
       finite_fraction: 1.0
   I.25.13:
     raw: q/C
-    prepared: v1/v5
+    prepared: v1/v2
     n_variables: 11
     subset: all
     vars:
@@ -2707,7 +2707,7 @@ expressions:
         - uni
         - pos
       v5:
-        name: C
+        name: J
         sample_range:
         - 1.0
         - 20.0
@@ -3659,7 +3659,7 @@ expressions:
       finite_fraction: 1.0
   I.34.8:
     raw: q*v*B/p
-    prepared: v1*v2*v6/v4
+    prepared: v1*v2*v3/v4
     n_variables: 11
     subset: all
     vars:
@@ -3704,7 +3704,7 @@ expressions:
         - uni
         - pos
       v6:
-        name: B
+        name: H
         sample_range:
         - 1.0
         - 20.0
@@ -5088,7 +5088,7 @@ expressions:
       finite_fraction: 1.0
   I.43.43:
     raw: 1/(gamma-1)*kb*v/A
-    prepared: v2*v4/(v5*(v1 - 1))
+    prepared: v2*v4/(v3*(v1 - 1))
     n_variables: 11
     subset: all
     vars:
@@ -5125,7 +5125,7 @@ expressions:
         - uni
         - pos
       v5:
-        name: A
+        name: H
         sample_range:
         - 1.0
         - 20.0
@@ -5637,7 +5637,7 @@ expressions:
       finite_fraction: 1.0
   II.2.42:
     raw: kappa*(T2-T1)*A/d
-    prepared: v1*v6*(-v2 + v3)/v5
+    prepared: v1*v4*(-v2 + v3)/v5
     n_variables: 11
     subset: all
     vars:
@@ -5682,7 +5682,7 @@ expressions:
         - uni
         - pos
       v6:
-        name: A
+        name: G
         sample_range:
         - 1.0
         - 20.0
@@ -7506,7 +7506,7 @@ expressions:
       finite_fraction: 1.0
   II.15.4:
     raw: -mom*B*cos(theta)
-    prepared: -v1*v5*cos(v3)
+    prepared: -v1*v2*cos(v3)
     n_variables: 11
     subset: all
     vars:
@@ -7543,7 +7543,7 @@ expressions:
         - uni
         - pos
       v5:
-        name: B
+        name: I
         sample_range:
         - 1.0
         - 20.0
@@ -8385,7 +8385,7 @@ expressions:
       finite_fraction: 1.0
   II.34.11:
     raw: g_*q*B/(2*m)
-    prepared: v1*v2*v6/(2*v4)
+    prepared: v1*v2*v3/(2*v4)
     n_variables: 11
     subset: all
     vars:
@@ -8430,7 +8430,7 @@ expressions:
         - uni
         - pos
       v6:
-        name: B
+        name: H
         sample_range:
         - 1.0
         - 20.0
@@ -8604,7 +8604,7 @@ expressions:
       finite_fraction: 1.0
   II.34.29b:
     raw: g_*mom*B*Jz/(h/(2*pi))
-    prepared: 6.283185307179586*v1*v3*v4*v7/v2
+    prepared: 6.283185307179586*v1*v3*v4*v5/v2
     n_variables: 11
     subset: all
     vars:
@@ -8657,7 +8657,7 @@ expressions:
         - uni
         - pos
       v7:
-        name: B
+        name: G
         sample_range:
         - 1.0
         - 20.0
@@ -8713,7 +8713,7 @@ expressions:
       finite_fraction: 1.0
   II.35.18:
     raw: n_0/(exp(mom*B/(kb*T))+exp(-mom*B/(kb*T)))
-    prepared: v1/(exp(v4*v7/(v2*v3)) + exp(-v4*v7/(v2*v3)))
+    prepared: v1/(exp(v4*v5/(v2*v3)) + exp(-v4*v5/(v2*v3)))
     n_variables: 11
     subset: all
     vars:
@@ -8766,7 +8766,7 @@ expressions:
         - uni
         - pos
       v7:
-        name: B
+        name: G
         sample_range:
         - 1.0
         - 20.0
@@ -8822,7 +8822,7 @@ expressions:
       finite_fraction: 1.0
   II.35.21:
     raw: n_rho*mom*tanh(mom*B/(kb*T))
-    prepared: v1*v2*tanh(v2*v7/(v4*v5))
+    prepared: v1*v2*tanh(v2*v3/(v4*v5))
     n_variables: 11
     subset: all
     vars:
@@ -8875,7 +8875,7 @@ expressions:
         - uni
         - pos
       v7:
-        name: B
+        name: G
         sample_range:
         - 1.0
         - 20.0
@@ -9041,7 +9041,7 @@ expressions:
       finite_fraction: 1.0
   II.37.1:
     raw: mom*(1+chi)*B
-    prepared: v1*v5*(v3 + 1)
+    prepared: v1*v2*(v3 + 1)
     n_variables: 11
     subset: all
     vars:
@@ -9078,7 +9078,7 @@ expressions:
         - uni
         - pos
       v5:
-        name: B
+        name: I
         sample_range:
         - 1.0
         - 20.0
@@ -9150,7 +9150,7 @@ expressions:
       finite_fraction: 1.0
   II.38.3:
     raw: Y*A*x/d
-    prepared: v1*v4*v5/v3
+    prepared: v1*v2*v4/v3
     n_variables: 11
     subset: all
     vars:
@@ -9187,7 +9187,7 @@ expressions:
         - uni
         - pos
       v5:
-        name: A
+        name: H
         sample_range:
         - 1.0
         - 20.0
@@ -9589,7 +9589,7 @@ expressions:
       finite_fraction: 1.0
   III.7.38:
     raw: 2*mom*B/(h/(2*pi))
-    prepared: 12.56637061435917*v1*v5/v3
+    prepared: 12.56637061435917*v1*v2/v3
     n_variables: 11
     subset: all
     vars:
@@ -9626,7 +9626,7 @@ expressions:
         - uni
         - pos
       v5:
-        name: B
+        name: I
         sample_range:
         - 1.0
         - 20.0

@@ -159,7 +159,7 @@
   "catalog": "symbolicgpt-test-sets",
   "display_name": "symbolicgpt-test-sets",
   "kind": "formula",
-  "problems": 987,
+  "problems": 988,
   "file": "assets/catalogs/symbolicgpt-test-sets.yaml",
   "origin": "generated formulas",
   "origin_source": "sets/fresh-79.json notes: SymbolicGPT's own test sets: 'random balanced parse trees of depth k = 4', constants from [-2.1, 2.1] (Valipour et al. 2021, Sec. 3.1, Sec. 4)",
@@ -171,15 +171,15 @@
   "detail": {
    "dummy inputs": {
     "share": [
-     586,
-     987
+     587,
+     988
     ],
     "source": "the catalog files"
    },
    "extrapolation": {
     "share": [
-     987,
-     987
+     988,
+     988
     ],
     "source": "formula YAML test_source / sets/fresh-79.json notes: fit x in [-3,3]^d; 'the authors score on separate points XT where every coordinate independently picks U(-5,-3) or U(3,5)' (paper Sec. 4)"
    }
@@ -1861,7 +1861,7 @@
  },
  {
   "catalog": "coevolved-fitness-predictors-test-problems-points",
-  "display_name": "Coevolved fitness predictors test problems (pinned points)",
+  "display_name": "Coevolved fitness predictors test problems* (pinned points)",
   "kind": "data",
   "problems": 8,
   "file": "assets/catalogs/coevolved-fitness-predictors-test-problems-points.npz",
@@ -1869,8 +1869,8 @@
   "origin_source": "sets/fresh-145.json notes: Schmidt & Lipson (GECCO 2005, GPTP 2006, TEC 2008) test problems F1-F3 plus 'random-generated' problems",
   "origin_proposal": null,
   "tags": [
-   "no test split",
-   "fixed points"
+   "fixed points",
+   "srbf-modified"
   ],
   "detail": {
    "fixed points": {
@@ -1880,7 +1880,7 @@
     ],
     "source": "the catalog files"
    },
-   "no test split": {
+   "srbf-modified": {
     "share": [
      8,
      8
@@ -2278,6 +2278,28 @@
   "notes": "Settled 'dummy inputs' is right: 'Korns: all 5 features U[-50,50] (x4 is a dummy in P13-P15)'."
  },
  {
+  "catalog": "heuristiclab-physics-instances",
+  "display_name": "heuristiclab-physics-instances",
+  "kind": "formula",
+  "problems": 5,
+  "file": "assets/catalogs/heuristiclab-physics-instances.yaml",
+  "origin": "science formula",
+  "origin_source": "sets/fresh-45.json notes: HeuristicLab 'Physics Benchmark Problems' provider: rocket fuel flow, aircraft lift, flow psi, maximum lift, sheet bending",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {
+   "integer inputs": {
+    "share": [
+     1,
+     5
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "notes": null
+ },
+ {
   "catalog": "kan-toy-functions",
   "display_name": "kan-toy-functions",
   "kind": "formula",
@@ -2285,6 +2307,20 @@
   "file": "assets/catalogs/kan-toy-functions.yaml",
   "origin": "classic benchmark",
   "origin_source": "sets/fresh-66.json notes: KAN paper Sec. 3.1 toy datasets (Liu et al. 2024), U[-1,1] from pykan create_dataset defaults",
+  "origin_proposal": null,
+  "tags": [],
+  "detail": {},
+  "below_half": {},
+  "notes": null
+ },
+ {
+  "catalog": "pysr-empiricalbench-formulas",
+  "display_name": "pysr-empiricalbench-formulas",
+  "kind": "formula",
+  "problems": 5,
+  "file": "assets/catalogs/pysr-empiricalbench-formulas.yaml",
+  "origin": "science formula",
+  "origin_source": "sets/fresh-2.json notes: EmpiricalBench laws generated from formulas: newton, planck, schechter, ideal_gas (Cranmer 2023, Table 2)",
   "origin_proposal": null,
   "tags": [],
   "detail": {},
@@ -2330,32 +2366,52 @@
   "notes": "Settled 'dummy inputs' is right: Korns-13..15 keep Korns' five inputs (x4 unused)."
  },
  {
-  "catalog": "heuristiclab-physics-instances",
-  "display_name": "heuristiclab-physics-instances",
+  "catalog": "friedman-functions",
+  "display_name": "friedman-functions",
   "kind": "formula",
   "problems": 4,
-  "file": "assets/catalogs/heuristiclab-physics-instances.yaml",
-  "origin": "science formula",
-  "origin_source": "sets/fresh-45.json notes: HeuristicLab 'Physics Benchmark Problems' provider: rocket fuel flow, aircraft lift, flow psi, maximum lift, sheet bending",
+  "file": "assets/catalogs/friedman-functions.yaml",
+  "origin": "classic benchmark",
+  "origin_source": "sets/fresh-42.json notes: 'Set = the four simulated test functions of Friedman's MARS paper (1991), Sec. 4.2-4.4'",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "dummy inputs"
+  ],
+  "detail": {
+   "dummy inputs": {
+    "share": [
+     2,
+     4
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
-  "notes": null
+  "notes": "Settled 'dummy inputs' is right: Friedman's test functions carry inputs with no effect on y by design."
  },
  {
-  "catalog": "pysr-empiricalbench-formulas",
-  "display_name": "pysr-empiricalbench-formulas",
+  "catalog": "scimed-settling-sphere-configurations",
+  "display_name": "scimed-settling-sphere-configurations",
   "kind": "formula",
   "problems": 4,
-  "file": "assets/catalogs/pysr-empiricalbench-formulas.yaml",
+  "file": "assets/catalogs/scimed-settling-sphere-configurations.yaml",
   "origin": "science formula",
-  "origin_source": "sets/fresh-2.json notes: EmpiricalBench laws generated from formulas: newton, planck, schechter, ideal_gas (Cranmer 2023, Table 2)",
+  "origin_source": "sets/fresh-159.json notes: SciMED settling-sphere target equations (Keren, Liberzon & Lazebnik 2023, Table 3); built members A (v0 + a*t) and E (drag force)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "dummy inputs"
+  ],
+  "detail": {
+   "dummy inputs": {
+    "share": [
+     2,
+     4
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
-  "notes": null
+  "notes": "Settled 'dummy inputs' is right: E carries the authors' decoy inputs."
  },
  {
   "catalog": "cp3-bench-standard-tuning-datasets-points",
@@ -2699,30 +2755,6 @@
   "notes": null
  },
  {
-  "catalog": "friedman-functions",
-  "display_name": "friedman-functions",
-  "kind": "formula",
-  "problems": 2,
-  "file": "assets/catalogs/friedman-functions.yaml",
-  "origin": "classic benchmark",
-  "origin_source": "sets/fresh-42.json notes: 'Set = the four simulated test functions of Friedman's MARS paper (1991), Sec. 4.2-4.4'",
-  "origin_proposal": null,
-  "tags": [
-   "dummy inputs"
-  ],
-  "detail": {
-   "dummy inputs": {
-    "share": [
-     2,
-     2
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "below_half": {},
-  "notes": "Settled 'dummy inputs' is right: Friedman's test functions carry inputs with no effect on y by design."
- },
- {
   "catalog": "hep-llm-sr-angular-distribution-problems",
   "display_name": "hep-llm-sr-angular-distribution-problems",
   "kind": "formula",
@@ -2789,28 +2821,36 @@
   "notes": null
  },
  {
-  "catalog": "scimed-settling-sphere-configurations",
-  "display_name": "scimed-settling-sphere-configurations",
-  "kind": "formula",
+  "catalog": "nguyen-c-points",
+  "display_name": "Nguyen-c (SPL variant) (pinned points)",
+  "kind": "data",
   "problems": 2,
-  "file": "assets/catalogs/scimed-settling-sphere-configurations.yaml",
-  "origin": "science formula",
-  "origin_source": "sets/fresh-159.json notes: SciMED settling-sphere target equations (Keren, Liberzon & Lazebnik 2023, Table 3); built members A (v0 + a*t) and E (drag force)",
+  "file": "assets/catalogs/nguyen-c-points.npz",
+  "origin": "classic benchmark",
+  "origin_source": "sets/fresh-7.json notes: Nguyen-c (SPL variant): Nguyen-2c / Nguyen-9c from the SPL authors' repository task_info.py (Sun et al., ICLR 2023)",
   "origin_proposal": null,
   "tags": [
-   "dummy inputs"
+   "extrapolation",
+   "fixed points"
   ],
   "detail": {
-   "dummy inputs": {
+   "fixed points": {
     "share": [
-     1,
+     2,
      2
     ],
     "source": "the catalog files"
+   },
+   "extrapolation": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "facts split_readings 'the authors' test grid; fit rows from the training range': npz fit x in [-10, 10], test grid on [0, 100] (SPL task_info.py, tests on E[0,100])"
    }
   },
   "below_half": {},
-  "notes": "Settled 'dummy inputs' is right: E carries the authors' decoy inputs."
+  "notes": null
  },
  {
   "catalog": "vladislavleva-points",
@@ -3085,20 +3125,6 @@
   "notes": null
  },
  {
-  "catalog": "grammarvae",
-  "display_name": "grammarvae",
-  "kind": "formula",
-  "problems": 1,
-  "file": "assets/catalogs/grammarvae.yaml",
-  "origin": "classic benchmark",
-  "origin_source": "release_subsets.json grammarvae notes: 'A single problem (Kusner et al. 2017, used as the GrammarVAE benchmark in Petersen et al. 2021 Table 2/6)'",
-  "origin_proposal": null,
-  "tags": [],
-  "detail": {},
-  "below_half": {},
-  "notes": null
- },
- {
   "catalog": "hierbosss-single-atom-catalysis-and-synthetic-polynomial",
   "display_name": "hierbosss-single-atom-catalysis-and-synthetic-polynomial",
   "kind": "formula",
@@ -3120,20 +3146,6 @@
   "file": "assets/catalogs/kan-feynman-no-units-subset.yaml",
   "origin": "science formula",
   "origin_source": "sets/interrupted-6.json notes: KAN Table 2 dimensionless Feynman formulas; built member I.16.6, (a+b)/(1+a*b) (relativistic velocity addition), u, v in (-1,1)",
-  "origin_proposal": null,
-  "tags": [],
-  "detail": {},
-  "below_half": {},
-  "notes": null
- },
- {
-  "catalog": "pagie",
-  "display_name": "pagie",
-  "kind": "formula",
-  "problems": 1,
-  "file": "assets/catalogs/pagie.yaml",
-  "origin": "classic benchmark",
-  "origin_source": "release_subsets.json pagie: defined_by 'Pagie & Hogeweg 1997', as encoded in DSO benchmarks.csv",
   "origin_proposal": null,
   "tags": [],
   "detail": {},
@@ -3251,6 +3263,38 @@
   "notes": null
  },
  {
+  "catalog": "grammarvae-points",
+  "display_name": "grammarvae (pinned points)",
+  "kind": "data",
+  "problems": 1,
+  "file": "assets/catalogs/grammarvae-points.npz",
+  "origin": "classic benchmark",
+  "origin_source": "release_subsets.json grammarvae notes: 'A single problem (Kusner et al. 2017, used as the GrammarVAE benchmark in Petersen et al. 2021 Table 2/6)'",
+  "origin_proposal": null,
+  "tags": [
+   "no test split",
+   "fixed points"
+  ],
+  "detail": {
+   "fixed points": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   },
+   "no test split": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
   "catalog": "heuristiclab-regression-instance-providers-points",
   "display_name": "HeuristicLab regression instance providers (pinned points)",
   "kind": "data",
@@ -3292,18 +3336,10 @@
   "origin_source": "sets/fresh-48.json problems[dyfor-simulated]: 'The simulated series of the DyFor Time Series Forecasting entry, a step function of three segments' (Wagner et al. 2007, Eq. 7) on x = 1..60",
   "origin_proposal": null,
   "tags": [
-   "no test split",
    "fixed points"
   ],
   "detail": {
    "fixed points": {
-    "share": [
-     1,
-     1
-    ],
-    "source": "the catalog files"
-   },
-   "no test split": {
     "share": [
      1,
      1
@@ -3347,38 +3383,6 @@
   "notes": null
  },
  {
-  "catalog": "nguyen-c-points",
-  "display_name": "Nguyen-c (SPL variant) (pinned points)",
-  "kind": "data",
-  "problems": 1,
-  "file": "assets/catalogs/nguyen-c-points.npz",
-  "origin": "classic benchmark",
-  "origin_source": "sets/fresh-7.json notes: Nguyen-c (SPL variant): Nguyen-2c / Nguyen-9c from the SPL authors' repository task_info.py (Sun et al., ICLR 2023)",
-  "origin_proposal": null,
-  "tags": [
-   "extrapolation",
-   "fixed points"
-  ],
-  "detail": {
-   "fixed points": {
-    "share": [
-     1,
-     1
-    ],
-    "source": "the catalog files"
-   },
-   "extrapolation": {
-    "share": [
-     1,
-     1
-    ],
-    "source": "facts split_readings 'the authors' test grid; fit rows from the training range': npz fit x in [-10, 10], test grid on [0, 100] (SPL task_info.py, tests on E[0,100])"
-   }
-  },
-  "below_half": {},
-  "notes": null
- },
- {
   "catalog": "nonic-points",
   "display_name": "nonic (pinned points)",
   "kind": "data",
@@ -3401,6 +3405,38 @@
   },
   "below_half": {},
   "notes": "No extrapolation: test points are random draws in the training range."
+ },
+ {
+  "catalog": "pagie-points",
+  "display_name": "pagie (pinned points)",
+  "kind": "data",
+  "problems": 1,
+  "file": "assets/catalogs/pagie-points.npz",
+  "origin": "classic benchmark",
+  "origin_source": "release_subsets.json pagie: defined_by 'Pagie & Hogeweg 1997', as encoded in DSO benchmarks.csv",
+  "origin_proposal": null,
+  "tags": [
+   "no test split",
+   "fixed points"
+  ],
+  "detail": {
+   "fixed points": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   },
+   "no test split": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
  },
  {
   "catalog": "sine-points",

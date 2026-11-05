@@ -46,12 +46,16 @@ RANGE_FIXES = {("nguyen", "Nguyen-9"): [-1.0, 1.0], ("nguyen", "Nguyen-10"): [-1
 # the pinned-grid members that move to '<catalog>-points'
 MOVED = {"keijzer": ["Keijzer-1", "Keijzer-2", "Keijzer-3", "Keijzer-4", "Keijzer-6", "Keijzer-7", "Keijzer-8", "Keijzer-9"],
          "neat": ["Neat-6"], "vladislavleva": ["Vladislavleva-2", "Vladislavleva-3"], "sine": ["Sine"], "nonic": ["Nonic"],
-         "r-rationals": ["R1", "R2", "R3", "R1a", "R2a", "R3a"]}
+         "r-rationals": ["R1", "R2", "R3", "R1a", "R2a", "R3a"], "pagie": ["Pagie-1"], "grammarvae": ["GrammarVAE-1"]}
+# Livermore2 is defined only by DSO's code (Mundhenk et al. 2021's repository), whose datasets keep only points with a
+# finite |y| < 100 (source audit B1): srbf applies the same rule to every member, as a row constraint
+Y_BOUND = {"livermore2": 100.0}
 # dropped outright (srbf ruling 2026-11-03): DSO's repository sanity tests, not a published benchmark
 DROPPED = {"constant": ["Const-Test-1", "Const-Test-2"]}
 # the versions published on the Hub; a patched catalog becomes the next one (once per release, however often this runs)
 RELEASED = {"keijzer": 1, "korns": 1, "nguyen": 1, "poly": 1, "vladislavleva": 1, "fastsrb.v2": 2, "neat": 1, "sine": 1,
-            "jin": 1, "soose-nc": 1, "soose-wc": 1, "soose-fc": 1, "nonic": 1, "r-rationals": 1, "constant": 1}
+            "jin": 1, "soose-nc": 1, "soose-wc": 1, "soose-fc": 1, "nonic": 1, "r-rationals": 1, "constant": 1,
+            "livermore2": 1, "pagie": 1, "grammarvae": 1}
 # the release catalogs with authors' test sets (rulings 9(1), 9(7); authors_tests.py); pinned-training members wait
 TEST_CATALOGS = ["vladislavleva", "keijzer", "nguyen", "neat", "jin", "soose-nc", "soose-wc", "soose-fc"]
 
@@ -272,6 +276,25 @@ def main() -> None:
             raise SystemExit(f"{catalog}:{eq_id} fails its check")
         texts[catalog] = put_entry(text, eq_id, doc)
         changed.setdefault(catalog, []).append(eq_id)
+    for catalog, bound in Y_BOUND.items():
+        text = texts.setdefault(catalog, (root / f"{catalog}.yaml").read_text())
+        bounded = {}
+        for eq_id, doc in yaml.safe_load(text)["expressions"].items():
+            rule = [f"abs({doc['prepared']}) < {bound:g}"]
+            if doc.get("row_constraints") == rule:
+                continue
+            doc["row_constraints"] = rule
+            doc["y_rule"] = f"DSO's datasets keep only points with |y| < {bound:g}"
+            doc.get("meta", {}).pop("finite_fraction", None)
+            bounded[eq_id] = doc
+        failed = B.check(bounded, 64, engine)
+        if failed:
+            raise SystemExit(f"{catalog}: {failed}")
+        for eq_id, doc in bounded.items():
+            text = put_entry(text, eq_id, doc)
+        texts[catalog] = text
+        if bounded:
+            changed.setdefault(catalog, []).append(f"|y| < {bound:g} on {len(bounded)} entries")
     text = (root / "fastsrb.v2.yaml").read_text()
     entries = yaml.safe_load(text)["expressions"]
     fixed = {}

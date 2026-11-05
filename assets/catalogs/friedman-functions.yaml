@@ -227,3 +227,97 @@ expressions:
       x10: uniform U[0,1]
     meta:
       finite_fraction: 1.0
+  friedman2:
+    raw: sqrt(R**2 + (omega*L - 1/(omega*C))**2)
+    prepared: sqrt(v1**2 + (v2*v3 - 1/(v2*v4))**2)
+    n_variables: 4
+    subset: all
+    vars:
+      v1:
+        name: R
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: omega
+        sample_range:
+        - 125.66370614359172
+        - 1759.291886010284
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: L
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: C
+        sample_range:
+        - 1.0e-06
+        - 1.1e-05
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      R: uniform U[0,100] (ohms)
+      omega: uniform U[40*pi, 560*pi] (rad/s), i.e. f ~ U[20,280] hertz with omega = 2*pi*f
+      L: uniform U[0,1] (henries)
+      C: uniform U[1e-6, 11e-6] (farads), published as U[1,11] micro farads
+    meta:
+      finite_fraction: 1.0
+  friedman3:
+    raw: atan((omega*L - 1/(omega*C))/R)
+    prepared: atan((v2*v3 - 1/(v2*v4))/v1)
+    n_variables: 4
+    subset: all
+    vars:
+      v1:
+        name: R
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: omega
+        sample_range:
+        - 125.66370614359172
+        - 1759.291886010284
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: L
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: C
+        sample_range:
+        - 1.0e-06
+        - 1.1e-05
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      R: uniform U[0,100] (ohms)
+      omega: uniform U[40*pi, 560*pi] (rad/s), i.e. f ~ U[20,280] hertz with omega = 2*pi*f
+      L: uniform U[0,1] (henries)
+      C: uniform U[1e-6, 11e-6] (farads), published as U[1,11] micro farads
+    meta:
+      finite_fraction: 1.0
