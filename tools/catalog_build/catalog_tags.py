@@ -109,7 +109,8 @@ def yaml_facts(path: Path) -> dict[str, Any]:
 def npz_facts(path: Path) -> dict[str, Any]:
     meta = json.loads(str(np.load(path)["_meta"]))
     md = meta["catalog"].get("meta") or {}
-    split = Counter(str((p.get("meta") or {}).get("test_split") or "none") for p in meta["problems"])
+    rules = [(p.get("meta") or {}).get("test_split") or "none" for p in meta["problems"]]
+    split = Counter(str({"folds": len(r["folds"])} if isinstance(r, dict) and "folds" in r else r) for r in rules)
     readings = Counter(str((p.get("meta") or {}).get("split_reading") or "")[:120] for p in meta["problems"])
     return {"entries": len(meta["problems"]), "test_split": dict(split),
             "split_readings": dict(readings.most_common(4)),

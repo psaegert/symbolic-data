@@ -6,6 +6,8 @@ split it reads from the record's ``split`` text:
 
 * ``GIVEN``: the authors pin the test rows (files, indices, a deterministic rule, one seeded split with known rows);
 * ``random(f)``: the authors redraw a random split per run (holdout ``f``; k-fold CV is ``1/k``);
+* ``folds(test_rows)``: the authors test on fixed folds whose rows are known (published, or drawn again with the
+  authors' own code and seed): every run tests on one of them and fits on the others;
 * ``NONE``: no split and no procedure.
 
 Every file is checked against the record's sha256 before it is read. A record names a file by its place in the survey's
@@ -35,8 +37,13 @@ def random(f: float) -> dict:
     return {"random": float(f)}
 
 
+def folds(test_rows) -> dict:
+    """The authors' fixed folds, each given by its test rows (0-based positions in the problem's rows)."""
+    return {"folds": [sorted(int(i) for i in f) for f in test_rows]}
+
+
 def rule_of(split) -> str:
-    return split if isinstance(split, str) else "random"
+    return split if isinstance(split, str) else next(iter(split))
 
 
 @dataclass
@@ -59,6 +66,10 @@ class Rows:
         """float64 arrays; rows with a non-finite value dropped (counted in meta); the split's shape checked."""
         self.x = _matrix(self.x)
         self.y = np.asarray(self.y, dtype=np.float64).reshape(-1)
+        if rule_of(self.split) == "folds":       # the folds follow their rows when a non-finite row is dropped
+            keep = np.isfinite(self.x).all(axis=1) & np.isfinite(self.y)
+            at = np.cumsum(keep) - 1
+            self.split = folds([[at[i] for i in f if keep[i]] for f in self.split["folds"]])
         dropped = 0
         self.x, self.y, n = _finite(self.x, self.y)
         dropped += n
@@ -309,10 +320,24 @@ def cp3_bench(rec, prob, _set):
                 x_test=x[te], y_test=y[te])
 
 
-# Oliveira et al. 2018 (GECCO 2013-2017 compilation): the compilers' protocol is one shuffled 5-fold CV per dataset,
-# so a member without a split of its own data authors is read as random 0.2 (as SRBench's 75/25 is for SRBench).
+# Oliveira et al. 2018 (GECCO 2013-2017 compilation): the compilers' protocol is one shuffled 5-fold partition per
+# dataset, run i testing on fold (i-1) mod 5. They published no indices; their script draws the partition from fixed
+# seeds, so the folds are drawn again with it (raw/fresh-33/oliveira2018_real_partitions_reconstructed.json), and a
+# member without a split of its own data authors tests on one of those folds per run.
 _OLIVEIRA_CV = "random 0.2: the compilers' shuffled 5-fold CV (Oliveira et al. 2018); the data authors give no split"
+_OLIVEIRA_FOLDS = ("folds: the compilers' 5-fold partition (Oliveira et al. 2018), drawn again with their script and "
+                   "seeds; each run tests on one fold and fits on the other four")
+_OLIVEIRA_NAMES = {"ABA": "Abalone", "AFN": "Airfoil", "BOH": "Boston", "CCP": "Combined-cycle", "CPU": "Computer-hardware",
+                   "CST": "Concrete-strength", "ENC": "Energy-cooling", "ENH": "Energy-heating", "FFR": "Forest-fire",
+                   "OZO": "Ozone", "WIR": "Wine-quality-red", "WIW": "Wine-quality-white", "YAC": "Yacht"}
 _OLIVEIRA_PARTS = None
+
+
+def _oliveira_parts() -> dict:
+    global _OLIVEIRA_PARTS
+    if _OLIVEIRA_PARTS is None:
+        _OLIVEIRA_PARTS = json.loads(paths.input_file("catalog-prep/raw/fresh-33/oliveira2018_real_partitions_reconstructed.json").read_text())
+    return _OLIVEIRA_PARTS
 
 
 def _xls(data: bytes, **kw) -> pd.DataFrame:
@@ -321,17 +346,24 @@ def _xls(data: bytes, **kw) -> pd.DataFrame:
 
 @reader("fresh-33", "gecco-2013-2017-real", "GECCO 2013-2017 GP regression compilation (real data)")
 def oliveira_2018(rec, prob, _set):
-    global _OLIVEIRA_PARTS
+    rows = _oliveira_rows(rec)
+    if rows.split_note == _OLIVEIRA_CV:
+        part = _oliveira_parts()["datasets"][_OLIVEIRA_NAMES[rec["id"]]]
+        if part["n_rows"] != len(rows.y):
+            raise ValueError(f"{rec['id']}: {len(rows.y)} rows, the compilers' partition covers {part['n_rows']}")
+        rows.split, rows.split_note = folds(part["test_fold_positions"]), _OLIVEIRA_FOLDS
+    return rows
+
+
+def _oliveira_rows(rec):
     k = rec["id"]
     data = checked(rec["file"], rec["sha256"]) if rec.get("file") else None
     names = [str(n) for n in (rec.get("feature_names") or [])]
     if k == "ABA":   # the compilation's abalone: sex one-hot (F, I, M first), then its 500-row sample
-        if _OLIVEIRA_PARTS is None:
-            _OLIVEIRA_PARTS = json.loads(paths.input_file("catalog-prep/raw/fresh-33/oliveira2018_real_partitions_reconstructed.json").read_text())
         df = csv(data, header=None)
         sex = pd.get_dummies(df[0]).astype(float)[["F", "I", "M"]]
         x = np.column_stack([sex.to_numpy(), df.iloc[:, 1:8].to_numpy(dtype=float)])
-        rows = np.asarray(_OLIVEIRA_PARTS["abalone_sample_rows"], dtype=int)
+        rows = np.asarray(_oliveira_parts()["abalone_sample_rows"], dtype=int)
         return Rows(x[rows], df.iloc[:, 8].to_numpy(dtype=float)[rows], ["sex=F", "sex=I", "sex=M", *names[1:]],
                     random(0.2), _OLIVEIRA_CV,
                     transforms=["sex one-hot encoded", "the compilation's 500-row sample (RandomState 4567)"])
@@ -705,8 +737,14 @@ def langlaw(rec, prob, _set):
     x, y = columns(df, feats, target)
     if rec["id"].startswith("hierbosss"):
         return Rows(x, y, feats, random(0.1), "random 0.1: the authors' 5 independent random 90/10 splits")
-    return Rows(x, y, feats, random(0.2), "random 0.2: the authors' shuffled 5-fold CV",
-                transforms=["rows with a missing input or target dropped (the authors' loader)"])
+    # the authors' KFold(n_splits=5, shuffle=True, random_state=42) over these rows, drawn again with their code
+    # (raw/fresh-120/splits.json; rows named by their place in the published CSV)
+    split = json.loads(paths.input_file("catalog-prep/raw/fresh-120/splits.json").read_text())["datasets"][rec["id"]]
+    split = split["no_preprocessor"] if rec["id"] == "langlaw_bulk_modulus" else split["repo_pipeline"]
+    at = {int(csv_row): i for i, csv_row in enumerate(df.index)}
+    return Rows(x, y, feats, folds([[at[r] for r in f["test_rows"]] for f in split["folds"]]),
+                "folds: the authors' 5 folds (KFold, shuffle, random_state 42); each run tests on one fold and fits on "
+                "the other four", transforms=["rows with a missing input or target dropped (the authors' loader)"])
 
 
 _PENDULUM_TARGETS = {"eql-dpk-y1": lambda a, b: np.cos(a), "eql-dpk-y2": lambda a, b: np.cos(a) + np.cos(a + b),
@@ -934,7 +972,10 @@ def nikuradse(rec, prob, _set):
 def esr_cosmology(rec, prob, _set):
     if rec["id"] == "cc-hubble":
         t = np.loadtxt(io.BytesIO(checked(rec["file"], rec["sha256"])))
-        return Rows(t[:, 0], t[:, 1], ["z"], NONE, "none: every function is fitted and scored on all 32 points")
+        # srbf ruling 2026-11-05 (e): the function ESR searches, H^2 of x = 1 + z (it scores sqrt(y) against H)
+        return Rows(1.0 + t[:, 0], t[:, 1] ** 2, ["x"], NONE, "none: every function is fitted and scored on all 32 points",
+                    transforms=["x = 1 + z and y = H^2, the input and the function ESR fits (likelihood.py)"],
+                    meta={"target": "H^2 [km^2 s^-2 Mpc^-2] of x = 1 + z"})
     raise SkipDataset("pantheon-plus: not y = f(x) (ESR's H(z)^2 enters through the luminosity-distance integral)")
 
 

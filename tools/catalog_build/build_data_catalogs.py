@@ -7,7 +7,9 @@ row). There is a test split ONLY where the benchmark's authors give one:
 * ``"given"``: the authors pin the test rows: published files, row indices, a deterministic rule (by value, time,
   group), or one seeded split whose rows are known;
 * ``{"random": f}``: the authors' procedure redraws a random split per run (holdout fraction ``f``; k-fold CV is
-  ``1/k``; repeated random splits);
+  ``1/k`` where its folds are not known; repeated random splits);
+* ``{"folds": [[rows], ...]}``: the authors test on fixed folds whose rows are known (published, or drawn again with
+  the authors' code and seeds): every run tests on one fold and fits on the others (srbf ruling 2026-11-05);
 * ``"none"``: no split and no procedure ("if people fail to tell us what to test on, we don't"): the test metrics
   stay empty and the catalog is marked.
 
@@ -52,6 +54,12 @@ from symbolic_data.catalog import ProblemCatalog  # noqa: E402
 BUILT_ELSEWHERE = {"done-0", "done-7", "done-8"}  # the SRBench tracks: build_srbench_catalogs.py
 RULES = ("srbf data catalogs (2026-10-17): pools; <= 512 fitting + 512 test rows drawn per run; a test split only "
          "where the authors give one")
+
+
+def _split_key(p) -> str:
+    """A problem's split rule for the reports; a folds rule is named by its number of folds, not its rows."""
+    rule = p.meta["test_split"]
+    return json.dumps({"folds": len(rule["folds"])} if isinstance(rule, dict) and "folds" in rule else rule)
 
 
 def wanted() -> dict[str, list[dict]]:
@@ -169,17 +177,17 @@ def build(tag: str, probs: list[dict], out: Path, formulas: Formulas) -> dict:
         return {"tag": tag, "catalog": spec.slug, "problems": 0, "skipped": skipped, "left_out": left_out}
     meta = {"display_name": spec.display, "kind": "data", "source_record": f"catalog-prep/sets/{tag}.json",
             "source_name": rec["name"], "built_from": "build_data_catalogs.py", "rules": RULES,
-            "test_splits": sorted({json.dumps(p.meta["test_split"]) for p in problems})}
+            "test_splits": sorted({_split_key(p) for p in problems})}
     path = ProblemCatalog.from_problems(problems, name=spec.slug, version=1, meta=meta).save(out / f"{spec.slug}.npz")
     if share_alike:
         name = f"{spec.slug}-share-alike"
         sa_meta = {**meta, "display_name": f"{spec.display} (share-alike)", "share_alike": True,
-                   "test_splits": sorted({json.dumps(p.meta["test_split"]) for p in share_alike})}
+                   "test_splits": sorted({_split_key(p) for p in share_alike})}
         ProblemCatalog.from_problems(share_alike, name=name, version=1, meta=sa_meta).save(out / f"{name}.npz")
     return {"tag": tag, "catalog": spec.slug, "display": spec.display, "problems": len(problems),
             "share_alike": len(share_alike), "left_out": left_out,
             "path": str(path), "bytes": os.path.getsize(path),
-            "splits": dict(sorted(_count(json.dumps(p.meta["test_split"]) for p in problems).items())),
+            "splits": dict(sorted(_count(_split_key(p) for p in problems).items())),
             "gt_kinds": dict(_count(p.gt_kind for p in problems)),
             "formula_pending": sum(1 for p in problems if "formula_pending" in p.meta),
             "rows_fit": [int(min(p.x_support.shape[0] for p in problems)), int(max(p.x_support.shape[0] for p in problems))],

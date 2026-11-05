@@ -2,7 +2,7 @@ metadata:
   name: phye2e-llm-generated-synthetic-formulas
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
-  srbf_changes: [{"kind": "filled", "problems": 600, "text": "For each formula the authors' code picks one of two input distributions at random (a folded normal or a uniform), anew in every evaluation run and without a seed; srbf picks it once per problem with its own seed and keeps it."}]
+  srbf_changes: [{"kind": "filled", "problems": 600, "text": "For each formula the authors' code picks one of two input distributions at random (a folded normal or a uniform), anew in every evaluation run and without a seed; srbf picks it once, when the problem set is built, from a seed fixed by the problem's name, and every run uses that choice."}]
   license: "Apache-2.0 (figshare 10.6084/m9.figshare.29615831, PhyE2E_datas; Ying et al. 2025, Nat. Mach. Intell. 7:1726)"
   citation: {"paper": {"short": "Ying et al. 2025", "title": "A neural symbolic model for space physics", "venue": "Nature Machine Intelligence 7(10):1726-1741", "url": "https://doi.org/10.1038/s42256-025-01126-3"}, "data": {"short": "figshare 10.6084/m9.figshare.29615831.v1", "title": "PhyE2E_datas", "url": "https://doi.org/10.6084/m9.figshare.29615831.v1"}}
   description: PhyE2E LLM-generated synthetic formulas
@@ -77,6 +77,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7829209856451040279
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -143,6 +144,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15810581606891588381
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -195,6 +197,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6135223170752692060
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -265,6 +268,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10474307206308161563
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -311,6 +315,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9251211959411788271
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -363,6 +368,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8843820290066074778
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -433,6 +439,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17553902398505141855
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -494,6 +501,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13674756225751027494
         drawn: folded normal
     meta:
       finite_fraction: 0.5069
@@ -546,6 +554,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2148933722527150155
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -607,6 +616,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15258670018339724784
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -693,6 +703,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17979016847866740805
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -749,6 +760,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13436700697350259018
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -819,6 +831,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 905002855555153511
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -875,6 +888,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5718228022017959869
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -961,6 +975,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12821437566280704042
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -1013,6 +1028,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6956031270374687871
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1065,6 +1081,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16353553395924472492
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1126,6 +1143,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3585980188785429689
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1182,6 +1200,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16367306210845489257
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -1234,6 +1253,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14189072656112937880
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1277,6 +1297,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7031154688268730725
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1353,6 +1374,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15666670789913934644
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -1423,6 +1445,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14874498294736450359
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1475,6 +1498,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18405931959135443186
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1551,6 +1575,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12330086013824625802
         drawn: uniform
     meta:
       finite_fraction: 0.4981
@@ -1621,6 +1646,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16511730475860660743
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1682,6 +1708,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 602295873458560598
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1738,6 +1765,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5712150812933081604
         drawn: uniform
     meta:
       finite_fraction: 0.4979
@@ -1790,6 +1818,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14318329391282493639
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1833,6 +1862,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5596563217753221170
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1894,6 +1924,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15387639643381119539
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -1960,6 +1991,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9448124440191303890
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2003,6 +2035,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7097889471302938980
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -2049,6 +2082,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17207739168014298368
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2115,6 +2149,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11612865849304550826
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -2176,6 +2211,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4530885822339388746
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -2232,6 +2268,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4420756845559801186
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2288,6 +2325,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18054411340395790267
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2364,6 +2402,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12713965152659369473
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2440,6 +2479,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8233771669423385088
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2496,6 +2536,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16667096632757419377
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2542,6 +2583,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15979182618686181364
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2608,6 +2650,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10135388230490692421
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2669,6 +2712,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5467627787085899615
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -2730,6 +2774,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1308727226863732949
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -2796,6 +2841,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8690307967296376109
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2862,6 +2908,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1296441995763199250
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -2928,6 +2975,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12991983837963399758
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -2994,6 +3042,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13891263200642981277
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -3055,6 +3104,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6090836380359476259
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3121,6 +3171,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3858980812983330147
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -3191,6 +3242,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6888305738774817490
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3252,6 +3304,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7739669827500994792
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3295,6 +3348,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8792302202043970464
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3356,6 +3410,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11362563248448583582
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3432,6 +3487,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16076054123402624904
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -3484,6 +3540,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8682449722435506297
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3545,6 +3602,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18436697388037072601
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3606,6 +3664,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1721979607214353622
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3658,6 +3717,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14293136648714117652
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3719,6 +3779,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3458829860490598130
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3771,6 +3832,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1371204328494826954
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3837,6 +3899,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14386725485705132322
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -3871,6 +3934,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11138395091555573623
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -3923,6 +3987,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9158347000304046027
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4002,6 +4067,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17110335739253330820
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4072,6 +4138,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3503300944594499093
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4108,6 +4175,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16139407677878588587
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -4178,6 +4246,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10151249104965534310
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4248,6 +4317,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15056623534605484877
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4304,6 +4374,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10725860180236442891
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -4347,6 +4418,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 458332088008948539
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4403,6 +4475,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17141756726473580555
         drawn: uniform
     meta:
       finite_fraction: 0.5056
@@ -4459,6 +4532,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5834025217531172735
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -4502,6 +4576,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18204637673153058259
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4563,6 +4638,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10255076928963466659
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4624,6 +4700,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12502272560108719146
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4694,6 +4771,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4909417932900980447
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4746,6 +4824,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5348123813311512477
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4798,6 +4877,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3468668658291388127
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -4874,6 +4954,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8716545183981479498
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -4935,6 +5016,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5972566832152941598
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -5001,6 +5083,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6420344440796449258
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -5071,6 +5154,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14530142516138463000
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -5157,6 +5241,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16550536837456594547
         drawn: uniform
     meta:
       finite_fraction: 0.4993
@@ -5209,6 +5294,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3479710745428989649
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -5265,6 +5351,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2061681284911800147
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -5308,6 +5395,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 978528657820265629
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -5360,6 +5448,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13565197340633694405
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -5426,6 +5515,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7039324537587572113
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -5469,6 +5559,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17263895371110110993
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -5503,6 +5594,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14417567051243169350
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -5579,6 +5671,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10196595888909633879
         drawn: uniform
     meta:
       finite_fraction: 0.4981
@@ -5635,6 +5728,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3009696724657275905
         drawn: uniform
     meta:
       finite_fraction: 0.5021
@@ -5701,6 +5795,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12842126270490640313
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -5753,6 +5848,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15781404907474802270
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -5819,6 +5915,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10786282234824912669
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -5898,6 +5995,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9690144309304744640
         drawn: folded normal
     meta:
       finite_fraction: 0.4991
@@ -5964,6 +6062,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11030906327833210854
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -6016,6 +6115,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1046751050541597757
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -6082,6 +6182,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16281539969005092801
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -6158,6 +6259,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15763817076919211772
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -6210,6 +6312,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12077826971180305147
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -6271,6 +6374,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9107842557451476794
         drawn: folded normal
     meta:
       finite_fraction: 0.5028
@@ -6317,6 +6421,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7403675788909333356
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -6369,6 +6474,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11953994160368989656
         drawn: folded normal
     meta:
       finite_fraction: 0.5069
@@ -6430,6 +6536,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13840921974132984595
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -6486,6 +6593,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13568250587183481342
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -6562,6 +6670,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5341566248552749607
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -6648,6 +6757,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17142448106196817708
         drawn: uniform
     meta:
       finite_fraction: 0.5
@@ -6694,6 +6804,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6063656055690303752
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -6746,6 +6857,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11663766674336784333
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -6780,6 +6892,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6952942324964773592
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -6832,6 +6945,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11630906252900537243
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -6908,6 +7022,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1827005689512821467
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -6969,6 +7084,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4523441691670542933
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -7015,6 +7131,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6173415716317578052
         drawn: uniform
     meta:
       finite_fraction: 0.4925
@@ -7071,6 +7188,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11203111770774136873
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -7123,6 +7241,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6495445882130526726
         drawn: folded normal
     meta:
       finite_fraction: 0.5069
@@ -7199,6 +7318,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12653943598677916986
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -7265,6 +7385,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15216486376675108373
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -7317,6 +7438,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5731106806827006311
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -7373,6 +7495,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13110836658167801204
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -7429,6 +7552,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8495778343635208765
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -7499,6 +7623,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13678899963706690932
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -7551,6 +7676,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10971514372230297169
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -7627,6 +7753,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3916778799509725505
         drawn: uniform
     meta:
       finite_fraction: 0.4981
@@ -7688,6 +7815,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8045981967478172359
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -7734,6 +7862,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15901609969261351762
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -7786,6 +7915,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2241054138361187927
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -7847,6 +7977,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16269176441816219846
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -7890,6 +8021,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 456711085605407134
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -7951,6 +8083,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16692460976878781663
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -8021,6 +8154,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12212222874422049531
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -8057,6 +8191,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17628702869216592034
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -8123,6 +8258,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8182782328082584952
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -8189,6 +8325,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15405931706036942406
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -8265,6 +8402,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16331489459619681243
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -8326,6 +8464,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6074387605473550396
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -8372,6 +8511,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6065111334145051674
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -8433,6 +8573,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4913589700940345438
         drawn: folded normal
     meta:
       finite_fraction: 0.5069
@@ -8485,6 +8626,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2383682623867418826
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -8546,6 +8688,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17950329906795202622
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -8612,6 +8755,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13218874826814750479
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -8668,6 +8812,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5541474981430480331
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -8720,6 +8865,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7390390307133591867
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -8799,6 +8945,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4569274274686549381
         drawn: folded normal
     meta:
       finite_fraction: 0.4991
@@ -8855,6 +9002,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 183937453576259602
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -8931,6 +9079,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2157383067278419313
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -9001,6 +9150,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17393440901456039681
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -9071,6 +9221,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6719800806899604755
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -9137,6 +9288,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9475932562851332153
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -9193,6 +9345,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17156904272926472639
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -9229,6 +9382,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3111980422276709791
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -9281,6 +9435,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1924630978998849157
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -9333,6 +9488,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7754140575240410584
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -9367,6 +9523,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10660446321563394216
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -9433,6 +9590,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2902986499971845574
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -9494,6 +9652,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14784371134019896308
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -9560,6 +9719,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11918768213220228015
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -9626,6 +9786,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16115363668221674668
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -9696,6 +9857,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3503534991395063045
         drawn: folded normal
     meta:
       finite_fraction: 0.5014
@@ -9757,6 +9919,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8739774417968272241
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -9823,6 +9986,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5706376718093738158
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -9889,6 +10053,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13558493869381024523
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -9955,6 +10120,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4555921377504519382
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -10031,6 +10197,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14257344353214817787
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -10087,6 +10254,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17907214528128533498
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -10139,6 +10307,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10705497828748385199
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -10205,6 +10374,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14559888908557009112
         drawn: uniform
     meta:
       finite_fraction: 0.5046
@@ -10261,6 +10431,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11870833409205965065
         drawn: uniform
     meta:
       finite_fraction: 0.5056
@@ -10317,6 +10488,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2130460290067844133
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -10373,6 +10545,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8914526573989850530
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -10449,6 +10622,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 663847859802855183
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -10501,6 +10675,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11814118550354272130
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -10587,6 +10762,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2977511938654120407
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -10663,6 +10839,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13474026949042811773
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -10733,6 +10910,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15166173462815337641
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -10789,6 +10967,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14738086009629425137
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -10832,6 +11011,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13792512355555641279
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -10875,6 +11055,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9676466900546518008
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -10936,6 +11117,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14481051161011367687
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11002,6 +11184,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1978994413573310092
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -11048,6 +11231,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3060828180533251776
         drawn: uniform
     meta:
       finite_fraction: 0.4925
@@ -11104,6 +11288,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15851062038671322558
         drawn: uniform
     meta:
       finite_fraction: 0.4979
@@ -11150,6 +11335,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2285931892438182756
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -11193,6 +11379,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12953327818037942309
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11245,6 +11432,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6404755067573378627
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11306,6 +11494,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 626349962484775392
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11349,6 +11538,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15071212654914839952
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11410,6 +11600,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6349917698876949643
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11462,6 +11653,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7589799494320736368
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11505,6 +11697,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16002419482034303688
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11548,6 +11741,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6021018715435876027
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11600,6 +11794,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8469323458636470856
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11666,6 +11861,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2559722308398066800
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -11712,6 +11908,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14890937232525362041
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -11782,6 +11979,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4703089396260969567
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11843,6 +12041,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 252688310042035691
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11904,6 +12103,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12240721078839198855
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -11970,6 +12170,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11149956551859603007
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -12031,6 +12232,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17566891412528759110
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -12107,6 +12309,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11378186175046670440
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -12193,6 +12396,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2470001016783015872
         drawn: uniform
     meta:
       finite_fraction: 0.4993
@@ -12259,6 +12463,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16278085143093011756
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -12329,6 +12534,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17678899142179925211
         drawn: folded normal
     meta:
       finite_fraction: 0.502
@@ -12385,6 +12591,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15143596009515466469
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -12464,6 +12671,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12752284951645571637
         drawn: folded normal
     meta:
       finite_fraction: 0.4991
@@ -12540,6 +12748,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2789736181854018183
         drawn: uniform
     meta:
       finite_fraction: 0.5037
@@ -12592,6 +12801,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1976771793696340775
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -12638,6 +12848,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10490547870109591613
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -12690,6 +12901,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1099396804356934897
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -12756,6 +12968,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4479677480856553365
         drawn: uniform
     meta:
       finite_fraction: 0.5056
@@ -12799,6 +13012,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15120784912918796682
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -12845,6 +13059,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10795069602682268037
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -12906,6 +13121,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18022628469835615023
         drawn: folded normal
     meta:
       finite_fraction: 0.5028
@@ -12992,6 +13208,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14821576227919800128
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -13035,6 +13252,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3949003362758798702
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -13091,6 +13309,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7334902882406357653
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -13147,6 +13366,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7119370527688856530
         drawn: uniform
     meta:
       finite_fraction: 0.4979
@@ -13217,6 +13437,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6433697453247297216
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -13251,6 +13472,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4570413711689522433
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -13312,6 +13534,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11153083388572566484
         drawn: folded normal
     meta:
       finite_fraction: 0.5028
@@ -13358,6 +13581,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1860322488191281679
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -13414,6 +13638,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8419876536660133190
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -13484,6 +13709,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14950918547408369179
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -13554,6 +13780,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7071294665874756509
         drawn: folded normal
     meta:
       finite_fraction: 0.5014
@@ -13630,6 +13857,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15434334241000425764
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -13686,6 +13914,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1757636307369808447
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -13738,6 +13967,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 837822057859325436
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -13781,6 +14011,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16503518300045444960
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -13842,6 +14073,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7309224818890801125
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -13908,6 +14140,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5131070843412346606
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -13974,6 +14207,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3165401809938925818
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -14030,6 +14264,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14392824216955136381
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -14096,6 +14331,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7597411226233618671
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -14162,6 +14398,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3113635544564637759
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -14214,6 +14451,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17514581927546956560
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -14290,6 +14528,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3093601287010856304
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -14342,6 +14581,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 256590828118181272
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -14403,6 +14643,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18410444436114688396
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -14437,6 +14678,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11232249898629653860
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -14480,6 +14722,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17758793536740338229
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -14532,6 +14775,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7960313740168113759
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -14598,6 +14842,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11204450105538695195
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -14641,6 +14886,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12551718958581871233
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -14707,6 +14953,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14475302876427426461
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -14783,6 +15030,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4836439923778046385
         drawn: uniform
     meta:
       finite_fraction: 0.498
@@ -14844,6 +15092,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13045286448660118462
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -14890,6 +15139,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5368530274734191706
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -14951,6 +15201,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3136697135790867610
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -15017,6 +15268,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7236849791665682248
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -15073,6 +15325,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11644285070024658380
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -15125,6 +15378,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1594402382269239557
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -15177,6 +15431,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3730326560771456066
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -15243,6 +15498,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3047155187941663236
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -15286,6 +15542,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18009485225969966424
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -15338,6 +15595,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11451549734918420148
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -15394,6 +15652,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9175639746270567976
         drawn: uniform
     meta:
       finite_fraction: 0.5056
@@ -15473,6 +15732,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 490863121536478869
         drawn: folded normal
     meta:
       finite_fraction: 0.5059
@@ -15525,6 +15785,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3456785652831897715
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -15591,6 +15852,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5454070157902858199
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -15647,6 +15909,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6866695068658733047
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -15703,6 +15966,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1445481169949854047
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -15739,6 +16003,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1571764217384220198
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -15805,6 +16070,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1508832472218637553
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -15871,6 +16137,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12835223042456188243
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -15937,6 +16204,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4933872723958966517
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -15998,6 +16266,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16280224878831849658
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -16059,6 +16328,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6685337537386719547
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -16138,6 +16408,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17827381195151878915
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -16194,6 +16465,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12727650688934539871
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -16264,6 +16536,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4465032646417670030
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -16325,6 +16598,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10377365727445782702
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -16377,6 +16651,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13570344827636931941
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -16429,6 +16704,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8857917780391857373
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -16517,6 +16793,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 782966611219545316
         drawn: folded normal
     meta:
       finite_fraction: 0.4989
@@ -16569,6 +16846,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 442431907043658554
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -16635,6 +16913,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16758082058935077961
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -16711,6 +16990,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6968956776517655140
         drawn: uniform
     meta:
       finite_fraction: 0.5056
@@ -16772,6 +17052,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4026887180349395250
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -16815,6 +17096,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16714071851941181256
         drawn: folded normal
     meta:
       finite_fraction: 0.4973
@@ -16876,6 +17158,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16971539536649222018
         drawn: folded normal
     meta:
       finite_fraction: 0.4987
@@ -16964,6 +17247,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16645301817841455638
         drawn: folded normal
     meta:
       finite_fraction: 0.4989
@@ -17030,6 +17314,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13984053451849832977
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -17082,6 +17367,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6125501096408316841
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -17148,6 +17434,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9030204319575199328
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -17200,6 +17487,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16528371868653850266
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -17261,6 +17549,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12623252379457238742
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -17347,6 +17636,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3113168430640513730
         drawn: uniform
     meta:
       finite_fraction: 0.4993
@@ -17403,6 +17693,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14114494791367185464
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -17469,6 +17760,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16591327571807685860
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -17530,6 +17822,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8910932920842654351
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -17573,6 +17866,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16365785862420632311
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -17616,6 +17910,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17987987406604598698
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -17692,6 +17987,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6915448816225639193
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -17738,6 +18034,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15943498648970113468
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -17814,6 +18111,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3597682915984145730
         drawn: uniform
     meta:
       finite_fraction: 0.4981
@@ -17875,6 +18173,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17323511322018722505
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -17927,6 +18226,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8961534382709866401
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -17983,6 +18283,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1067523111454874386
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -18029,6 +18330,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3019743091743396047
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -18090,6 +18392,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15201432607417402628
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -18156,6 +18459,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6680643848956124219
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -18222,6 +18526,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 88003407126736626
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -18268,6 +18573,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10358882537120437083
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -18344,6 +18650,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15962899740722250025
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -18396,6 +18703,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2644428200635915882
         drawn: folded normal
     meta:
       finite_fraction: 0.5069
@@ -18452,6 +18760,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4796738879951574708
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -18522,6 +18831,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5400810621891955224
         drawn: folded normal
     meta:
       finite_fraction: 0.4986
@@ -18592,6 +18902,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3162806430821051317
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -18668,6 +18979,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14476746018418630613
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -18734,6 +19046,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15493219231463217311
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -18820,6 +19133,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7218252020516471960
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -18876,6 +19190,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11880590452431185431
         drawn: uniform
     meta:
       finite_fraction: 0.4978
@@ -18946,6 +19261,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3055092068352974735
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -19002,6 +19318,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11355024597829679082
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -19048,6 +19365,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10383840623541873172
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -19124,6 +19442,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6152191839512309524
         drawn: uniform
     meta:
       finite_fraction: 0.4981
@@ -19185,6 +19504,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11834547328937702873
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -19241,6 +19561,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13765233442123178990
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -19287,6 +19608,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4772497459643652329
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -19333,6 +19655,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1292975799871812741
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -19385,6 +19708,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 356075324168722594
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -19441,6 +19765,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2496158121611807773
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -19493,6 +19818,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14334843278982117849
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -19545,6 +19871,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15350106931552576170
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -19606,6 +19933,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1856114609256668543
         drawn: folded normal
     meta:
       finite_fraction: 0.5028
@@ -19682,6 +20010,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16636605245005515200
         drawn: uniform
     meta:
       finite_fraction: 0.4981
@@ -19758,6 +20087,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4939368357041537300
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -19834,6 +20164,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2133598746442628070
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -19910,6 +20241,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3553266369501493442
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -19971,6 +20303,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9067009031808503808
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -20041,6 +20374,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11972981292672757704
         drawn: folded normal
     meta:
       finite_fraction: 0.4993
@@ -20127,6 +20461,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3646724562110416274
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -20188,6 +20523,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4305751721738506574
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -20264,6 +20600,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4933778853763419248
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -20340,6 +20677,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1262991516497755540
         drawn: uniform
     meta:
       finite_fraction: 0.4981
@@ -20401,6 +20739,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16604342414713086613
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -20467,6 +20806,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8164833379129043261
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -20523,6 +20863,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11974519050195998794
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -20569,6 +20910,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10045252817852330014
         drawn: uniform
     meta:
       finite_fraction: 0.4983
@@ -20635,6 +20977,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5940696909818640676
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -20678,6 +21021,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4224364520511903873
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -20754,6 +21098,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16703403686394619171
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -20797,6 +21142,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13003974613651635912
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -20867,6 +21213,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12421407275906433325
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -20933,6 +21280,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17865330032130674202
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -20985,6 +21333,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12058305032238001253
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -21055,6 +21404,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5620564654672198267
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -21125,6 +21475,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16600391862892774476
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -21195,6 +21546,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15765532225678314056
         drawn: folded normal
     meta:
       finite_fraction: 0.4986
@@ -21265,6 +21617,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6541214607513509304
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -21335,6 +21688,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12275738179666280556
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -21378,6 +21732,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14439479557926549214
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -21434,6 +21789,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10987854798343111202
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -21513,6 +21869,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12081229637138792473
         drawn: folded normal
     meta:
       finite_fraction: 0.4991
@@ -21583,6 +21940,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7267050801377881428
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -21659,6 +22017,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7330739819619136770
         drawn: uniform
     meta:
       finite_fraction: 0.4981
@@ -21695,6 +22054,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 39970072640489652
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -21756,6 +22116,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2188034108022472136
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -21842,6 +22203,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17399837315802700096
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -21894,6 +22256,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9401188446789723252
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -21970,6 +22333,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9836315249049679851
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -22013,6 +22377,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5795606008861187224
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -22089,6 +22454,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13444083875350727046
         drawn: uniform
     meta:
       finite_fraction: 0.4981
@@ -22150,6 +22516,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11793597284274195716
         drawn: folded normal
     meta:
       finite_fraction: 0.5028
@@ -22206,6 +22573,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1074280374244175578
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -22272,6 +22640,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14344017489082416417
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -22358,6 +22727,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15505015449172998139
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -22419,6 +22789,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 895051842983590697
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -22505,6 +22876,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18241000695783239566
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -22571,6 +22943,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 653914571806310129
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -22647,6 +23020,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11000269729456593452
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -22699,6 +23073,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9259153161789144989
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -22769,6 +23144,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7009731439308546675
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -22835,6 +23211,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11362437527423263656
         drawn: uniform
     meta:
       finite_fraction: 0.4978
@@ -22921,6 +23298,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6794264938204711317
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -22991,6 +23369,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 880079178156770892
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -23070,6 +23449,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1734477514119838732
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -23131,6 +23511,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5492251237307537032
         drawn: folded normal
     meta:
       finite_fraction: 0.5036
@@ -23210,6 +23591,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11297448633702407312
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -23276,6 +23658,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1812694755614827292
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -23322,6 +23705,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2696835765732846679
         drawn: uniform
     meta:
       finite_fraction: 0.4983
@@ -23401,6 +23785,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10913782944894776813
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -23457,6 +23842,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15357387645982794018
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -23509,6 +23895,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1427914940815897859
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -23595,6 +23982,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14836577284463668042
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -23656,6 +24044,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9320449426833904470
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -23717,6 +24106,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17801115669961586605
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -23769,6 +24159,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17782857113441599203
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -23855,6 +24246,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11635801675785269566
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -23921,6 +24313,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1984718117564171408
         drawn: uniform
     meta:
       finite_fraction: 0.5025
@@ -23991,6 +24384,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8476412900379576633
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -24070,6 +24464,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12846581656909801135
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -24131,6 +24526,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13070171104810187603
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -24207,6 +24603,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2680594904134988747
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -24259,6 +24656,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11438873450410959505
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -24325,6 +24723,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7331960109516460270
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -24381,6 +24780,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13077092874849324972
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -24427,6 +24827,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12314698098627754912
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -24452,6 +24853,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17856148281477301544
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -24548,6 +24950,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14618761968970155704
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -24594,6 +24997,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11755669680197932549
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -24673,6 +25077,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12533750292722446852
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -24725,6 +25130,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3779335805785700987
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -24777,6 +25183,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13206863618011914288
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -24853,6 +25260,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 315845611815475307
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -24939,6 +25347,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1002635448521957191
         drawn: uniform
     meta:
       finite_fraction: 0.5008
@@ -24973,6 +25382,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18189620957457849655
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -25049,6 +25459,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11834515155669540297
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -25092,6 +25503,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17809584104760099675
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -25144,6 +25556,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11215787573544934819
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -25187,6 +25600,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11548643676934436392
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -25230,6 +25644,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 845984939001820489
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -25291,6 +25706,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11504231694108485184
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -25343,6 +25759,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13311140013484397367
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -25413,6 +25830,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18277969693156974511
         drawn: folded normal
     meta:
       finite_fraction: 0.4953
@@ -25447,6 +25865,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3816764223867640423
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -25508,6 +25927,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 679480025589649321
         drawn: folded normal
     meta:
       finite_fraction: 0.4965
@@ -25604,6 +26024,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12021974015303718355
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -25700,6 +26121,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1196489694099295202
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -25746,6 +26168,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4160134830066929417
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -25812,6 +26235,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12789355768843280452
         drawn: uniform
     meta:
       finite_fraction: 0.5025
@@ -25888,6 +26312,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10400103365213395199
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -25934,6 +26359,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13634601487060520334
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -26000,6 +26426,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9470769079701302444
         drawn: uniform
     meta:
       finite_fraction: 0.5046
@@ -26052,6 +26479,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17726503679578138202
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -26098,6 +26526,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10032208612373991794
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -26154,6 +26583,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3128287055866994901
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -26206,6 +26636,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15988099870349190821
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -26249,6 +26680,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13136953300196078894
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -26325,6 +26757,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18172236792427635174
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -26411,6 +26844,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5540741331353755821
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -26497,6 +26931,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3785738171717292268
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -26573,6 +27008,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1458157501522502122
         drawn: uniform
     meta:
       finite_fraction: 0.4925
@@ -26652,6 +27088,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15086582571401760320
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -26695,6 +27132,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12500531689564340273
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -26751,6 +27189,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4288440831012563226
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -26803,6 +27242,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10659593291219224250
         drawn: folded normal
     meta:
       finite_fraction: 0.4974
@@ -26849,6 +27289,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15369392374224950120
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -26901,6 +27342,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15962218720519785223
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -26947,6 +27389,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8101258604049847069
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -26981,6 +27424,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4682010980845884630
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -27042,6 +27486,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12734831721725138810
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -27103,6 +27548,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16634877861127196578
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -27169,6 +27615,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3672276685578186586
         drawn: uniform
     meta:
       finite_fraction: 0.5025
@@ -27221,6 +27668,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17712238663368744804
         drawn: folded normal
     meta:
       finite_fraction: 0.4931
@@ -27287,6 +27735,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16845398369169309066
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -27373,6 +27822,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6423471310362528605
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -27434,6 +27884,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4608188898945090948
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -27540,6 +27991,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4437497147113919818
         drawn: uniform
     meta:
       finite_fraction: 0.5033
@@ -27616,6 +28068,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18130752301069504953
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -27682,6 +28135,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14450230390526451823
         drawn: uniform
     meta:
       finite_fraction: 0.5016
@@ -27738,6 +28192,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4556754093068582372
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -27804,6 +28259,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3393200923610809322
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -27856,6 +28312,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10871937517542645745
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -27912,6 +28369,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 57001864705353383
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -27955,6 +28413,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15692285028253334326
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -28001,6 +28460,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17183668388868232420
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -28089,6 +28549,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13302375257321618844
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -28141,6 +28602,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18359729084986089431
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -28197,6 +28659,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13816407595240952778
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -28263,6 +28726,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11078169645266494591
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -28306,6 +28770,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3923791496601178256
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -28362,6 +28827,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10270651644313854789
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -28418,6 +28884,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4995224459982827150
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -28470,6 +28937,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2972648407655045399
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -28531,6 +28999,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13353647031245240041
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -28597,6 +29066,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14091784485154758837
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -28658,6 +29128,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5773530395831076290
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -28719,6 +29190,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3607388893604484057
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -28765,6 +29237,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8057030639814490009
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -28821,6 +29294,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12730653164025910462
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -28887,6 +29361,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8743703458597822352
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -28983,6 +29458,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6145360503436956341
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -29059,6 +29535,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13454186624234161951
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -29145,6 +29622,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17188622631569486242
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -29215,6 +29693,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14215105495666869277
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -29276,6 +29755,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5682007190184216751
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -29342,6 +29822,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9619628110296801120
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -29394,6 +29875,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 432356024134525781
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -29450,6 +29932,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7242472424308900078
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -29516,6 +29999,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7073351524406890489
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -29592,6 +30076,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3034187693811302746
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -29635,6 +30120,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5637872574848758598
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -29691,6 +30177,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12063710805453958446
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -29767,6 +30254,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8836094072447515188
         drawn: uniform
     meta:
       finite_fraction: 0.4981
@@ -29819,6 +30307,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11353482367854662124
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -29885,6 +30374,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2284621358676542280
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -29928,6 +30418,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 323183368774907798
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -29984,6 +30475,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3030447103442146030
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -30036,6 +30528,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2010583466892451332
         drawn: folded normal
     meta:
       finite_fraction: 0.4974
@@ -30082,6 +30575,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1323945791456843661
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -30168,6 +30662,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9281663315131291207
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -30211,6 +30706,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17365399008956593741
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -30245,6 +30741,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14696259096164273446
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -30324,6 +30821,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12701252609051269722
         drawn: folded normal
     meta:
       finite_fraction: 0.4957
@@ -30400,6 +30898,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1691135483415484373
         drawn: uniform
     meta:
       finite_fraction: 0.4925
@@ -30497,6 +30996,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13579318331503043464
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -30540,6 +31040,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1075151740865396710
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -30626,6 +31127,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10733679540563993434
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -30682,6 +31184,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1380940325604771520
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -30734,6 +31237,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16035613938724496713
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -30768,6 +31272,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16907677000402246624
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -30847,6 +31352,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13244751626413362883
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -30893,6 +31399,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 201221763431352935
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -30939,6 +31446,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8897431003088811608
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -30985,6 +31493,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17959332059719958268
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -31028,6 +31537,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6385492729879272812
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -31064,6 +31574,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18042842674982494236
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -31116,6 +31627,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16090226779581533760
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -31182,6 +31694,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18308187516123125941
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -31225,6 +31738,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9332465283198716591
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -31321,6 +31835,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2141481726632703963
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -31364,6 +31879,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 544725348052271051
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -31400,6 +31916,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18121756708098987897
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -31466,6 +31983,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3293038348029356895
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -31502,6 +32020,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10729549654942962257
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -31545,6 +32064,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1574834430713123053
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -31615,6 +32135,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11856721200775059341
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -31681,6 +32202,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9289897412720309936
         drawn: uniform
     meta:
       finite_fraction: 0.4978
@@ -31733,6 +32255,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 89400970062745135
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -31803,6 +32326,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6812496088906023875
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -31855,6 +32379,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6607357150720893197
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -31911,6 +32436,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17203235907681350764
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -31981,6 +32507,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7386472351343958466
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -32037,6 +32564,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6904239965576852743
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -32113,6 +32641,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1710451176593063880
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -32156,6 +32685,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11218969070090607921
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -32217,6 +32747,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9606172365437243598
         drawn: folded normal
     meta:
       finite_fraction: 0.5028
@@ -32269,6 +32800,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16029174170205611390
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -32345,6 +32877,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1612845765782100622
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -32421,6 +32954,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10727087900574611200
         drawn: uniform
     meta:
       finite_fraction: 0.4957
@@ -32482,6 +33016,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4855071815635128522
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -32534,6 +33069,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6934077023224431046
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -32577,6 +33113,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2594302551621097431
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -32623,6 +33160,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6680894676987147592
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -32699,6 +33237,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17669029514121667440
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -32765,6 +33304,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9899739915354105834
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -32835,6 +33375,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5232334470087232599
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -32887,6 +33428,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3046061909930047466
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -32943,6 +33485,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10653732148208228549
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33004,6 +33547,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4175944289747606012
         drawn: folded normal
     meta:
       finite_fraction: 0.4957
@@ -33060,6 +33604,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14223402245070489115
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33139,6 +33684,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6586564551039960089
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -33195,6 +33741,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11073911469049941402
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33231,6 +33778,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15037603416544313959
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33274,6 +33822,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7512964071237051087
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -33353,6 +33902,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5757077690143003514
         drawn: folded normal
     meta:
       finite_fraction: 0.5014
@@ -33409,6 +33959,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3634572459477993211
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33465,6 +34016,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9600092256472933297
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33501,6 +34053,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10184818821859783982
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33537,6 +34090,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2945718926030095611
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33613,6 +34167,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18070379926939337117
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33659,6 +34214,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 308156203911367421
         drawn: uniform
     meta:
       finite_fraction: 0.3347
@@ -33755,6 +34311,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 631799034386944999
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33807,6 +34364,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10380665429153616933
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -33883,6 +34441,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2838674842132023205
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -33953,6 +34512,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10017538288195551226
         drawn: folded normal
     meta:
       finite_fraction: 0.5028
@@ -33987,6 +34547,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10774174001502915827
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -34048,6 +34609,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 9047624793725664993
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -34104,6 +34666,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 1297151799641088553
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -34170,6 +34733,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17663181970885578396
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -34236,6 +34800,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16911603064619227868
         drawn: uniform
     meta:
       finite_fraction: 0.4978
@@ -34292,6 +34857,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 10235560223737599451
         drawn: uniform
     meta:
       finite_fraction: 0.5732
@@ -34348,6 +34914,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14773578966639823202
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -34434,6 +35001,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17115144571490458978
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -34500,6 +35068,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 13636083529224802471
         drawn: uniform
     meta:
       finite_fraction: 0.5016
@@ -34570,6 +35139,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15555421771434374889
         drawn: folded normal
     meta:
       finite_fraction: 0.4984
@@ -34631,6 +35201,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5151158966383385863
         drawn: folded normal
     meta:
       finite_fraction: 0.5033
@@ -34697,6 +35268,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8162401148674075610
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -34753,6 +35325,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17243604937495309759
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -34832,6 +35405,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7587821920990920325
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -34898,6 +35472,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6826376346410344480
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -34959,6 +35534,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15594002470790188726
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -35025,6 +35601,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 14180929698852141388
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35091,6 +35668,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 668340119354380395
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35157,6 +35735,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 5103609657167858706
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35213,6 +35792,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7565669598987477985
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35283,6 +35863,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12818259970530671709
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -35309,6 +35890,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11666669535129708403
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35343,6 +35925,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 12609247017511576040
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -35389,6 +35972,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8039720052173681968
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35445,6 +36029,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 144383123900906359
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35481,6 +36066,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7168098122203658637
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35557,6 +36143,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15879195938834468855
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35627,6 +36214,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 15271898710292299207
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -35697,6 +36285,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 11842101266081323522
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -35773,6 +36362,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 3948789744836673216
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35829,6 +36419,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 17824093542703982911
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -35881,6 +36472,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 920072503685354293
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -35947,6 +36539,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 18083360940453289636
         drawn: uniform
     meta:
       finite_fraction: 0.5022
@@ -36026,6 +36619,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 6438643833624239782
         drawn: folded normal
     meta:
       finite_fraction: 0.7473
@@ -36092,6 +36686,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 7786654582621404817
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -36168,6 +36763,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2640758778157566314
         drawn: uniform
     meta:
       finite_fraction: 0.5043
@@ -36238,6 +36834,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 4582481741235998232
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -36274,6 +36871,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 8738591209096124349
         drawn: uniform
     meta:
       finite_fraction: 1.0
@@ -36326,6 +36924,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 2495350094914203997
         drawn: folded normal
     meta:
       finite_fraction: 1.0
@@ -36382,6 +36981,7 @@ expressions:
       branch:
         distribution: 'mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)| (folded normal), p=0.5 U[2-sqrt(3),
           2+sqrt(3)] = U[0.26'
+        seed: 16385365428893824780
         drawn: uniform
     meta:
       finite_fraction: 1.0
