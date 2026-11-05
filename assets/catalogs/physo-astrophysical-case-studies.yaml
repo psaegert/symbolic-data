@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "science formula", "tags": []}
   license: "CC BY 4.0 (Tenachi et al. 2023, ApJ 959:99, arXiv:2303.03192, Appendices A-B) + MIT (WassimTenachi/PhySO)"
+  citation: {"paper": {"short": "Tenachi et al. 2023", "title": "Deep Symbolic Regression for Physics Guided by Units Constraints: Toward the Automated Discovery of Physical Laws", "venue": "The Astrophysical Journal 959(2):99", "url": "https://doi.org/10.3847/1538-4357/ad014c"}}
   description: PhySO astrophysical case studies
   sources:
   - https://arxiv.org/abs/2303.03192

@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "science formula", "tags": []}
   license: "CC BY 4.0 (Liu et al. 2024, KAN, arXiv:2404.19756, Table 2)"
+  citation: {"paper": {"short": "Liu et al. 2025", "title": "KAN: Kolmogorov-Arnold Networks", "venue": "ICLR 2025", "url": "https://arxiv.org/abs/2404.19756"}}
   description: KAN Feynman_no_units subset
   sources:
   - https://arxiv.org/abs/2404.19756

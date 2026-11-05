@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
   license: "facts only: formulas and ranges cited from Chen, Luo & Jiang 2018 (Expert Syst. Appl., arXiv:1706.02281); no upstream license"
+  citation: {"paper": {"short": "Chen et al. 2018", "title": "A multilevel block building algorithm for fast modeling generalized separable systems", "venue": "Expert Systems with Applications 109:25-34", "url": "https://doi.org/10.1016/j.eswa.2018.05.021"}}
   description: Chen-Luo-Jiang block-building test cases
   sources:
   - https://arxiv.org/abs/1706.02281

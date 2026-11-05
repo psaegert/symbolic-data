@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "science formula", "tags": ["dummy inputs"]}
   license: "Apache-2.0 (bilgesi/SR-LLM-Integration) + CC BY 4.0 (Taskin et al. 2026, Sci. Rep. 16:1614)"
+  citation: {"paper": {"short": "Taskin et al. 2026", "title": "Knowledge integration for physics-informed symbolic regression using pre-trained large language models", "venue": "Scientific Reports 16(1):1614", "url": "https://doi.org/10.1038/s41598-026-35327-6"}, "data": {"short": "GitHub bilgesi/SR-LLM-Integration@1508a37", "title": "SR-LLM-Integration generator (Apache-2.0)", "url": "https://github.com/bilgesi/SR-LLM-Integration/blob/1508a3701c2d30c6c776b33762656639d999bc42/src/run_main_claim.py"}}
   description: Knowledge-integration Newtonian cases
   sources:
   - https://arxiv.org/abs/2509.03036

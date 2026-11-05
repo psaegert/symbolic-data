@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
   license: "MIT (kartelj/rils-rols; Kartelj & Djukanovic 2023, J. Big Data 10:71)"
+  citation: {"paper": {"short": "Kartelj & Djukanović 2023", "title": "RILS-ROLS: robust symbolic regression via iterated local search and ordinary least squares", "venue": "Journal of Big Data 10(1):71", "url": "https://doi.org/10.1186/s40537-023-00743-2"}, "data": {"short": "GitHub kartelj/rils-rols@54861c1", "title": "rils-rols paper_resources/random_12345_truth/all.f (MIT)", "url": "https://github.com/kartelj/rils-rols/tree/54861c1c8dc4a521da6885bdcfdc54ecb7b38c31/paper_resources/random_12345_truth"}}
   description: RILS-ROLS random instances
   sources:
   - https://doi.org/10.1186/s40537-023-00743-2

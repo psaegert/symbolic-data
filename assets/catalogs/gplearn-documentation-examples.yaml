@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
   license: "BSD-3-Clause (trevorstephens/gplearn documentation example)"
+  citation: {"data": {"short": "GitHub trevorstephens/gplearn@64517a8", "title": "gplearn documentation, SymbolicRegressor example (BSD-3-Clause)", "url": "https://github.com/trevorstephens/gplearn/blob/64517a85fd6d6c50f9ee9e5599f97458da278951/doc/examples.rst"}}
   description: gplearn documentation examples
   sources:
   - https://gplearn.readthedocs.io/en/stable/examples.html

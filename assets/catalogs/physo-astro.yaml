@@ -2,6 +2,7 @@ metadata:
   name: physo-astro
   version: 2
   tags: {"origin": "science formula", "tags": []}
+  citation: {"paper": {"short": "Tenachi et al. 2023", "title": "Deep Symbolic Regression for Physics Guided by Units Constraints: Toward the Automated Discovery of Physical Laws", "venue": "The Astrophysical Journal 959(2):99", "url": "https://doi.org/10.3847/1538-4357/ad014c"}}
   description: PhySO paper astrophysics panel (arXiv:2303.03192 Appendix A) — the two genuinely
     new laws only. Declarative specs authored from the paper (no upstream data or generator is
     shipped); constants exactly as printed in Tables 6-8.

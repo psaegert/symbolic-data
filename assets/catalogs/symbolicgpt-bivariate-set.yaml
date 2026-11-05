@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
   license: "MIT (mojivalipour/symbolicgpt; HF DataAnalyticsLab/SymbolicGPT)"
+  citation: {"paper": {"short": "Tymkow et al. 2025", "title": "Symbolic-Diffusion: Deep Learning Based Symbolic Regression with D3PM Discrete Token Diffusion", "venue": "arXiv preprint arXiv:2510.07570", "url": "https://arxiv.org/abs/2510.07570"}, "data": {"short": "GitHub rtymk/Symbolic_Diffusion@07439d1", "title": "Symbolic-Diffusion repository (evaluation notebooks; GPL-3.0)", "url": "https://github.com/rtymk/Symbolic_Diffusion/tree/07439d164d64891c9b006b11dd75cdeb2c45f6d0"}}
   description: SymbolicGPT bivariate set (Symbolic-Diffusion split)
   sources:
   - https://arxiv.org/abs/2510.07570

@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "science formula", "tags": ["extrapolation"]}
   license: "CC BY 4.0 (Morales-Alvarado 2025, arXiv:2510.03397)"
+  citation: {"paper": {"short": "Morales-Alvarado 2025", "title": "Foundation models for equation discovery in high energy physics", "venue": "arXiv preprint arXiv:2510.03397", "url": "https://arxiv.org/abs/2510.03397"}}
   description: HEP LLM-SR angular-distribution problems
   sources:
   - https://arxiv.org/abs/2510.03397

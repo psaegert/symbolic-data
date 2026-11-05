@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
   license: "MIT (samuelkim314/DeepSymReg) + CC BY 4.0 (Kim et al. 2020, IEEE TNNLS)"
+  citation: {"paper": {"short": "Kim et al. 2021", "title": "Integration of Neural Network-Based Symbolic Regression in Deep Learning for Scientific Discovery", "venue": "IEEE Transactions on Neural Networks and Learning Systems 32(9):4166-4177", "url": "https://doi.org/10.1109/TNNLS.2020.3017010"}, "data": {"short": "GitHub samuelkim314/DeepSymReg@57bbe2e", "title": "DeepSymReg benchmark.py (no licence file)", "url": "https://github.com/samuelkim314/DeepSymReg/blob/57bbe2e2c7f0cd07dc34ed99c7dc75bdd1445d87/benchmark.py"}}
   description: Kim et al. EQL benchmark functions
   sources:
   - https://arxiv.org/abs/1912.04825

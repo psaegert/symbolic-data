@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "science formula", "tags": []}
   license: "MIT (IBM/AI-Hilbert)"
+  citation: {"paper": {"short": "Cory-Wright et al. 2024", "title": "Evolving scientific discovery by unifying data and background knowledge with AI Hilbert", "venue": "Nature Communications 15(1):5922", "url": "https://doi.org/10.1038/s41467-024-50074-w"}, "data": {"short": "Zenodo 10.5281/zenodo.11453179", "title": "IBM/AI-Hilbert: AI-Hilbert Open-Source Code Release v1.0.1", "url": "https://doi.org/10.5281/zenodo.11453179"}}
   description: AI Hilbert problem set
   sources:
   - https://arxiv.org/abs/2308.09474v3

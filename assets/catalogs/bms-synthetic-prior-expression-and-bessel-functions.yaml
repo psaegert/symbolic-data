@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "generated formulas", "tags": ["integer inputs", "srbf-modified"]}
   license: "facts only: formulas cited from Guimera et al. 2020 (Bayesian machine scientist, Sci. Adv. 6:eaav6971, CC BY-NC 4.0); no text or tables reproduced"
+  citation: {"paper": {"short": "Guimerà et al. 2020", "title": "A Bayesian machine scientist to aid in the solution of challenging scientific problems", "venue": "Science Advances 6(5):eaav6971", "url": "https://doi.org/10.1126/sciadv.aav6971"}}
   description: BMS synthetic prior expression and Bessel functions
   display_name: BMS synthetic prior expression and Bessel functions*
   modified_by_srbf: 'the authors give the noisy Bessel problem''s range, x in [0, 4], but not how its points are placed: srbf

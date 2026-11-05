@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
   license: "CC BY 4.0 (Russeil et al. 2024, arXiv:2402.04298)"
+  citation: {"paper": {"short": "Russeil et al. 2024", "title": "Multiview Symbolic Regression", "venue": "Proceedings of the Genetic and Evolutionary Computation Conference (GECCO '24), pp. 961-970", "url": "https://doi.org/10.1145/3638529.3654087"}, "data": {"short": "GitHub erusseil/MvSR-analysis@ec5abd6", "title": "MvSR-analysis generate_toy.py (no licence file)", "url": "https://github.com/erusseil/MvSR-analysis/blob/ec5abd674c466d4d22957122db7b26680c457e59/generate_toy.py"}}
   description: Multi-view SR synthetic benchmarks
   sources:
   - https://arxiv.org/abs/2402.04298

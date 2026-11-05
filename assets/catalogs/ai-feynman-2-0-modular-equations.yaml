@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
   license: "facts only: formulas cited from Udrescu et al. 2020 (AI Feynman 2.0, NeurIPS 33, arXiv:2006.10782), Table 4; no upstream license"
+  citation: {"paper": {"short": "Udrescu et al. 2020", "title": "AI Feynman 2.0: Pareto-optimal symbolic regression exploiting graph modularity", "venue": "NeurIPS 2020 (Adv. Neural Inf. Process. Syst. 33)", "url": "https://arxiv.org/abs/2006.10782"}}
   description: AI Feynman 2.0 modular equations
   sources:
   - https://arxiv.org/abs/2006.10782

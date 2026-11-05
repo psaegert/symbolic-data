@@ -3,6 +3,7 @@ metadata:
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
+  citation: {"paper": {"short": "Kusner et al. 2017", "title": "Grammar Variational Autoencoder", "venue": "ICML 2017 (PMLR 70)", "url": "https://arxiv.org/abs/1703.01925"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: GrammarVAE equation benchmark.
   sources:
   - Kusner et al. 2017 (ICML), Grammar Variational Autoencoder

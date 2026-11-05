@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "science formula", "tags": []}
   license: "MIT (MilesCranmer/pysr_paper)"
+  citation: {"paper": {"short": "Cranmer 2023", "title": "Interpretable Machine Learning for Science with PySR and SymbolicRegression.jl", "venue": "arXiv preprint arXiv:2305.01582", "url": "https://arxiv.org/abs/2305.01582"}, "data": {"short": "GitHub MilesCranmer/pysr_paper@b306874", "title": "pysr_paper equations.yml (MIT)", "url": "https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/data/empirical_bench/equations.yml"}}
   description: PySR EmpiricalBench
   sources:
   - https://arxiv.org/abs/2305.01582

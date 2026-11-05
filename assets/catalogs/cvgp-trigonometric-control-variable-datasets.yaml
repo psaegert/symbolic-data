@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
   license: "MIT (jiangnanhugo/egg-sr scibench copy of the CVGP expressions; Jiang & Xue 2023, arXiv:2306.08057)"
+  citation: {"paper": {"short": "Jiang & Xue 2023", "title": "Symbolic Regression via Control Variable Genetic Programming", "venue": "Machine Learning and Knowledge Discovery in Databases: Research Track, Lecture Notes in Computer Science, pp. 178-195", "url": "https://doi.org/10.1007/978-3-031-43421-1_11"}, "data": {"short": "GitHub jiangnanhugo/cvgp@e79202e", "title": "CVGP expression files data/ (authors' repository, no licence file)", "url": "https://github.com/jiangnanhugo/cvgp/tree/e79202e2e3b859a97fe139453b3871b5793e33b9/data"}}
   description: CVGP trigonometric / control-variable datasets
   sources:
   - https://arxiv.org/abs/2306.08057

@@ -89,6 +89,13 @@ def licenses() -> dict[str, dict[str, Any]]:
         return {r["catalog"]: r for r in json.load(fh)}
 
 
+@lru_cache(maxsize=1)
+def citations() -> dict[str, dict[str, Any]]:
+    """Each catalog's ``paper`` and ``data`` citation (tags/citations.json), where they exist."""
+    with open(Path(__file__).resolve().parent / "tags" / "citations.json", encoding="utf-8") as fh:
+        return {c["catalog"]: c for c in json.load(fh)}
+
+
 def input_file(name: str | os.PathLike) -> Path:
     """The local copy of a file a record names: ``catalog-prep/raw/...`` under RAW, ``symbolic-data/...`` in this
     repository, anything else as given (the survey's working tree names its files by absolute path)."""

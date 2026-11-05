@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
   license: "MIT (NISL-MSU/MultiSetSR; Morales & Sheppard 2026, arXiv:2511.04124)"
+  citation: {"paper": {"short": "Morales & Sheppard 2024", "title": "Univariate Skeleton Prediction in Multivariate Systems Using Transformers", "venue": "Machine Learning and Knowledge Discovery in Databases. Research Track and Demo Track, Lecture Notes in Computer Science, pp. 107-125 (ECML PKDD 2024)", "url": "https://doi.org/10.1007/978-3-031-70371-3_7"}, "data": {"short": "GitHub NISL-MSU/MultiSetSR@d5ba2ec", "title": "MultiSetSR GenerateDatasets.py (E1-E9, CS1-CS4)", "url": "https://github.com/NISL-MSU/MultiSetSR/blob/d5ba2ecb6f5a82054d957e9b8c6842e3d6d92831/src/EquationLearning/Data/GenerateDatasets.py"}}
   description: Decomposable NSR synthetic E1-E13
   sources:
   - https://arxiv.org/abs/2511.04124

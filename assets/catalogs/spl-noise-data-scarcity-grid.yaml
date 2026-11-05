@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
   license: "facts only: one formula and its range from Sun et al. 2023 (Symbolic Physics Learner, ICLR, arXiv:2205.13134v2, a CC BY-SA 4.0 paper)"
+  citation: {"paper": {"short": "Sun et al. 2023", "title": "Symbolic Physics Learner: Discovering governing equations via Monte Carlo tree search", "venue": "ICLR 2023", "url": "https://arxiv.org/abs/2205.13134"}}
   description: SPL noise/data-scarcity grid
   sources:
   - https://arxiv.org/abs/2205.13134v2

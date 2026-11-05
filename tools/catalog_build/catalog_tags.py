@@ -17,12 +17,14 @@ splits, the '*'); the judgement tags (origin; extrapolation, noise and outliers 
 catalog-prep set records once, each with its source sentence (judged.json); ``merge`` applies the rules above and
 ``apply`` writes ``tags: {origin, tags}`` into each catalog's metadata, and its ``license`` from the license pass
 (tags/licenses.json: the license of what each catalog took, with its evidence; a catalog that may not be shared gets
-none) (a published catalog whose metadata changes gets its next version). Run ``apply`` after every build or patch of
+none), and its ``citation`` (tags/citations.json: its paper and its dataset, where they exist) (a published
+catalog whose metadata changes gets its next version). Run ``apply`` after every build or patch of
 the catalogs, then count_release.py.
 
     catalog_tags.py facts --counts <release_counts.json> --out <facts.json>
     catalog_tags.py merge --facts <facts.json> --judged <judged.json> --out <tags.json>
-    catalog_tags.py apply --tags <tags.json> [--licenses <licenses.json>] [--published <manifest.json> ...]
+    catalog_tags.py apply --tags <tags.json> [--licenses <licenses.json>] [--citations <citations.json>]
+                          [--published <manifest.json> ...]
 """
 from __future__ import annotations
 
@@ -215,6 +217,9 @@ def apply_yaml(path: Path, row: dict[str, Any], published: dict[str, int]) -> st
     text = _set_line(before, "tags", _tags_line(row), after="version")
     if row.get("license"):
         text = _set_line(text, "license", "  license: " + json.dumps(row["license"], ensure_ascii=False) + "\n", "tags")
+    if row.get("citation"):
+        text = _set_line(text, "citation", "  citation: " + json.dumps(row["citation"], ensure_ascii=False) + "\n",
+                         "license" if row.get("license") else "tags")
     if text == before:
         return "unchanged"
     m = re.search(r"(?m)^  name: (\S+)$", text)
@@ -236,11 +241,12 @@ def apply_npz(path: Path, row: dict[str, Any]) -> str:
     meta = json.loads(str(arrays["_meta"]))
     md = meta["catalog"].setdefault("meta", {})
     tags = {"origin": row["origin"], "tags": row["tags"]}
-    if md.get("tags") == tags and md.get("license") == (row.get("license") or md.get("license")):
+    if md.get("tags") == tags and all(md.get(k) == (row.get(k) or md.get(k)) for k in ("license", "citation")):
         return "unchanged"
     md["tags"] = tags
-    if row.get("license"):
-        md["license"] = row["license"]
+    for key in ("license", "citation"):
+        if row.get(key):
+            md[key] = row[key]
     arrays["_meta"] = np.array(json.dumps(meta))
     tmp = path.with_name(path.stem + ".tmp.npz")
     np.savez(tmp, **arrays)
@@ -248,7 +254,8 @@ def apply_npz(path: Path, row: dict[str, Any]) -> str:
     return "written"
 
 
-def apply(tags_path: Path, published_paths: list[Path], licenses_path: Path | None = None) -> None:
+def apply(tags_path: Path, published_paths: list[Path], licenses_path: Path | None = None,
+          citations_path: Path | None = None) -> None:
     published: dict[str, int] = {}
     for p in published_paths:
         for name, v in json.load(open(p)).items():
@@ -258,9 +265,12 @@ def apply(tags_path: Path, published_paths: list[Path], licenses_path: Path | No
     licenses = {r["catalog"]: r["license"] for r in json.load(open(licenses_path))
                 if r["redistribute"].startswith("yes")} \
         if licenses_path and licenses_path.exists() else {}
+    # the citations (tags/citations.json): the paper and the dataset of each catalog, where they exist
+    citations = {c["catalog"]: {k: c[k] for k in ("paper", "data") if c.get(k)}
+                 for c in json.load(open(citations_path))} if citations_path and citations_path.exists() else {}
     done = Counter()
     for row in json.load(open(tags_path)):
-        row = {**row, "license": licenses.get(row["catalog"])}
+        row = {**row, "license": licenses.get(row["catalog"]), "citation": citations.get(row["catalog"]) or None}
         path = Path(row["file"]) if Path(row["file"]).is_absolute() else paths.REPO / row["file"]
         note = apply_yaml(path, row, published) if path.suffix == ".yaml" else apply_npz(path, row)
         done[note.split(",")[0]] += 1
@@ -283,6 +293,7 @@ def main() -> None:
     a3.add_argument("--tags", required=True)
     a3.add_argument("--published", nargs="*", default=[], help="hosted manifest.json files: the published versions")
     a3.add_argument("--licenses", default=str(Path(__file__).resolve().parent / "tags" / "licenses.json"))
+    a3.add_argument("--citations", default=str(Path(__file__).resolve().parent / "tags" / "citations.json"))
     a = ap.parse_args()
     if a.cmd == "facts":
         rows = facts(Path(a.counts))
@@ -296,7 +307,7 @@ def main() -> None:
               f"tags {dict(Counter(t for r in rows for t in r['tags']))}; "
               f"below half {dict(Counter(t for r in rows for t in r['below_half']))} -> {a.out}")
     else:
-        apply(Path(a.tags), [Path(p) for p in a.published], Path(a.licenses))
+        apply(Path(a.tags), [Path(p) for p in a.published], Path(a.licenses), Path(a.citations))
 
 
 if __name__ == "__main__":

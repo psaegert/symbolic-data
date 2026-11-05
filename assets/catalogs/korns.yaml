@@ -3,6 +3,7 @@ metadata:
   version: 2
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
+  citation: {"paper": {"short": "Korns 2011", "title": "Accuracy in Symbolic Regression", "venue": "Genetic Programming Theory and Practice IX, Genetic and Evolutionary Computation, pp. 129-151", "url": "https://doi.org/10.1007/978-1-4614-1770-5_8"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: Korns accuracy suite (5-variable, constant-heavy).
   sources:
   - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression

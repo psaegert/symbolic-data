@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
   license: "facts only: formulas and ranges cited from Deng et al. 2026 (DDRSR, arXiv:2608.02628), Table 5; no upstream license"
+  citation: {"paper": {"short": "Deng et al. 2026", "title": "Deep Divide-and-Reduce in Symbolic Regression", "venue": "arXiv preprint arXiv:2608.02628", "url": "https://arxiv.org/abs/2608.02628"}}
   description: DDRSR simple_test and complex-test
   sources:
   - https://arxiv.org/abs/2608.02628

@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
   license: "facts only: formulas and ranges cited from McDermott et al. 2012 (GECCO, Table 3) and the original family papers; no upstream license"
+  citation: {"paper": {"short": "McDermott et al. 2012", "title": "Genetic programming needs better benchmarks", "venue": "Proceedings of the 14th annual conference on Genetic and evolutionary computation (GECCO '12), pp. 791-798", "url": "https://doi.org/10.1145/2330163.2330273"}}
   description: GP benchmarks SR table (McDermott et al. 2012)
   sources:
   - https://doi.org/10.1145/2330163.2330273

@@ -3,6 +3,7 @@ metadata:
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
+  citation: {"paper": {"short": "Trujillo et al. 2016", "title": "neat Genetic Programming: Controlling bloat naturally", "venue": "Information Sciences 333:21-43", "url": "https://doi.org/10.1016/j.ins.2015.11.010"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: neat-GP suite (aggregated classics).
   sources:
   - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming

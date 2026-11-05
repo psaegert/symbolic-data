@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
   license: "facts only: formulas and ranges cited from Martius & Lampert 2016 (arXiv:1610.02995) and Sahoo et al. 2018 (arXiv:1806.07259); no upstream license"
+  citation: {"paper": {"short": "Martius & Lampert 2016", "title": "Extrapolation and learning equations", "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)", "url": "https://arxiv.org/abs/1610.02995"}}
   description: EQL formulas F-1..F-4 and division formula
   sources:
   - https://arxiv.org/abs/1610.02995

@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "science formula", "tags": []}
   license: "MIT (EPFL-IMOS/Sym-Q) + CC0 1.0 (Tian et al., arXiv:2402.05306)"
+  citation: {"paper": {"short": "Tian et al. 2025", "title": "Interactive symbolic regression with co-design mechanism through offline reinforcement learning", "venue": "Nature Communications 16(1):3930", "url": "https://doi.org/10.1038/s41467-025-59288-y"}, "data": {"short": "GitHub EPFL-IMOS/Sym-Q@104a486", "title": "Sym-Q utils.py BENCHMARK (MIT)", "url": "https://github.com/EPFL-IMOS/Sym-Q/blob/104a486070f615cd4fdb93a0e95adfd59625ee64/utils.py"}}
   description: Sym-Q AI-Feynman with drift terms
   sources:
   - 'https://arxiv.org/abs/2402.05306 (Sym-Q; v2 PDF https://arxiv.org/pdf/2402.05306v2: drift text p.8-9, Fig. 4 p.10, Table

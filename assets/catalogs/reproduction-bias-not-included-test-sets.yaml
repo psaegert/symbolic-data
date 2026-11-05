@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "generated formulas", "tags": []}
   license: "MIT (Shun-0922/Mem-Bias-NSR; Sato & Sato 2025, arXiv:2505.22081)"
+  citation: {"paper": {"short": "Sato & Sato 2025", "title": "Can Test-time Computation Mitigate Reproduction Bias in Neural Symbolic Regression?", "venue": "arXiv preprint arXiv:2505.22081", "url": "https://arxiv.org/abs/2505.22081"}, "data": {"short": "GitHub Shun-0922/Mem-Bias-NSR@7a153ec", "title": "Mem-Bias-NSR not_included.json + baseline.json (MIT)", "url": "https://github.com/Shun-0922/Mem-Bias-NSR/tree/7a153ec94f59caffbd9404094a2e1eab58aa0c2e/test_datasets/original_datasets"}}
   description: Reproduction-bias 'not included' test sets
   sources:
   - https://arxiv.org/abs/2505.22081

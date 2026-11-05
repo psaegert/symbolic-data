@@ -3,6 +3,7 @@ metadata:
   version: 2
   tags: {"origin": "classic benchmark", "tags": []}
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
+  citation: {"paper": {"short": "Keijzer 2003", "title": "Improving Symbolic Regression with Interval Arithmetic and Linear Scaling", "venue": "Genetic Programming, Lecture Notes in Computer Science, pp. 70-82", "url": "https://doi.org/10.1007/3-540-36599-0_7"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   companion: "keijzer-points: Keijzer-1, Keijzer-2, Keijzer-3, Keijzer-4, Keijzer-6, Keijzer-7, Keijzer-8, Keijzer-9, the authors pinned points (a data catalog)"
   description: Keijzer symbolic-regression suite.
   sources:

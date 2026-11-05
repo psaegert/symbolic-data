@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
   license: "facts only: formulas and ranges cited from the original family authors (Korns 2011; Uy et al. 2011; Udrescu et al. 2020; DSO benchmarks.csv, BSD-3-Clause); ERBench ids for mapping only"
+  citation: {"paper": {"short": "Kahlmeyer et al. 2026", "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms", "venue": "arXiv preprint arXiv:2606.09276", "url": "https://arxiv.org/abs/2606.09276"}, "data": {"short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c", "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)", "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"}}
   description: 'ERBench public: legacy formulas'
   sources:
   - https://arxiv.org/abs/2606.09276

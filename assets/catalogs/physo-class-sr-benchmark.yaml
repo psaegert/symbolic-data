@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "science formula", "tags": []}
   license: "MIT (WassimTenachi/PhySO)"
+  citation: {"paper": {"short": "Tenachi et al. 2024", "title": "Class Symbolic Regression: Gotta Fit ’Em All", "venue": "The Astrophysical Journal Letters 969(2):L26", "url": "https://doi.org/10.3847/2041-8213/ad5970"}, "data": {"short": "Zenodo 10.5281/zenodo.11663147", "title": "PhySO-v1.1.0", "url": "https://doi.org/10.5281/zenodo.11663147"}}
   description: PhySO Class SR benchmark
   sources:
   - https://arxiv.org/abs/2312.01816

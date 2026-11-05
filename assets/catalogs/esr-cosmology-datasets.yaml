@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "science formula", "tags": []}
   license: "MIT (DeaglanBartlett/ESR; Bartlett, Desmond & Ferreira 2024, IEEE TEVC 28:950, arXiv:2211.11461)"
+  citation: {"paper": {"short": "Bartlett et al. 2024", "title": "Exhaustive Symbolic Regression", "venue": "IEEE Transactions on Evolutionary Computation 28(4):950-964", "url": "https://doi.org/10.1109/TEVC.2023.3280250"}, "data": {"short": "GitHub DeaglanBartlett/ESR@23c3907", "title": "ESR examples/mock_cc.py (LCDM mock)", "url": "https://github.com/DeaglanBartlett/ESR/blob/23c3907a0fb08301d5e89fb666ae01bec0398faa/examples/mock_cc.py"}}
   description: ESR cosmology datasets
   sources:
   - https://arxiv.org/abs/2211.11461

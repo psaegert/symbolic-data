@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
   license: "CC BY 4.0 (Li, Marinescu & Musslick 2023, GFN-SR, arXiv:2312.00396)"
+  citation: {"paper": {"short": "Li et al. 2023", "title": "GFN-SR: Symbolic Regression with Generative Flow Networks", "venue": "NeurIPS 2023 AI4Science Workshop", "url": "https://arxiv.org/abs/2312.00396"}}
   description: GFN-SR noisy near-twin set
   sources:
   - https://arxiv.org/abs/2312.00396

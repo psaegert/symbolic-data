@@ -3,6 +3,7 @@ metadata:
   version: 2
   tags: {"origin": "science formula", "tags": []}
   license: "facts only: formulas and ranges from the Feynman Symbolic Regression Database (Udrescu & Tegmark 2020); its data files are not redistributed"
+  citation: {"paper": {"short": "Udrescu & Tegmark 2020", "title": "AI Feynman: A physics-inspired method for symbolic regression", "venue": "Science Advances 6(16):eaay2631", "url": "https://doi.org/10.1126/sciadv.aay2631"}, "data": {"short": "FSReD FeynmanEquations.csv (Wayback 2025-06-30)", "title": "Feynman Symbolic Regression Database, FeynmanEquations.csv (authors' host, now dead)", "url": "https://web.archive.org/web/20250630050842/https://space.mit.edu/home/tegmark/aifeynman/FeynmanEquations.csv"}}
   description: Feynman Symbolic Regression Database (Udrescu & Tegmark 2020), 100
     equations.
   sources:

@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
   license: "CC BY 4.0 (Harvey et al. 2025, arXiv:2505.07956; Mach. Learn.: Sci. Technol. 7:045040)"
+  citation: {"paper": {"short": "Harvey et al. 2026", "title": "Symbolic regression with multimodal large language models and Kolmogorov–Arnold networks", "venue": "Machine Learning: Science and Technology 7(4):045040", "url": "https://doi.org/10.1088/2632-2153/ae8b73"}}
   description: LLM-LEx random Mathematica functions
   sources:
   - https://arxiv.org/abs/2505.07956

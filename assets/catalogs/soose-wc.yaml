@@ -2,6 +2,7 @@ metadata:
   name: soose-wc
   version: 2
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
+  citation: {"paper": {"short": "Biggio et al. 2021", "title": "Neural Symbolic Regression that Scales", "venue": "ICML 2021 (PMLR 139)", "url": "https://arxiv.org/abs/2106.06427"}, "data": {"short": "GitHub SymposiumOrganization/NeuralSymbolicRegressionThatScales@0cfff79", "title": "NeSymReS benchmark file data/benchmark/old_test.csv (SOOSE WC/FC instantiation; deleted at HEAD)", "url": "https://github.com/SymposiumOrganization/NeuralSymbolicRegressionThatScales/blob/0cfff793553f02c950c4350058a97aaea9a93322/data/benchmark/old_test.csv"}}
   description: 'SOOSE-WC: 200 out-of-training-sample NeSymReS skeletons, with constants: upstream sampled
     0-3 of the placeholder slots (repo config: additive U(-2,2), multiplicative U(0.1,5)), then sympy.simplify
     — 47/200 rows end constant-free (kept as upstream ships them); literals are the FROZEN historical

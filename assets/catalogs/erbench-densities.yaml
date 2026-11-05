@@ -2,6 +2,7 @@ metadata:
   name: erbench-densities
   version: 2
   tags: {"origin": "science formula", "tags": ["extrapolation", "dummy inputs"]}
+  citation: {"paper": {"short": "Kahlmeyer et al. 2026", "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms", "venue": "arXiv preprint arXiv:2606.09276", "url": "https://arxiv.org/abs/2606.09276"}, "data": {"short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c", "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)", "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"}}
   description: ERBench Densities family (33 entries after deduplication; headline eval tier); one problem per formula and
     alpha (ERBench's generator).
   sources:

@@ -3,6 +3,7 @@ metadata:
   version: 2
   tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
+  citation: {"paper": {"short": "Jin et al. 2019", "title": "Bayesian Symbolic Regression", "venue": "arXiv preprint arXiv:1910.08892", "url": "https://arxiv.org/abs/1910.08892"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: Jin Bayesian-SR suite.
   sources:
   - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression

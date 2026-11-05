@@ -59,19 +59,26 @@ def license_left_out() -> list[dict[str, Any]]:
     for name, r in sorted(paths.licenses().items()):
         if r["redistribute"] in ("no", "unclear"):
             out.append({"catalog": name, "name": r.get("name"), "set": r.get("set"), "problems": r.get("problems"),
-                        "sources": r.get("sources") or [], "reason": REASONS[r["verdict"]], "members": None})
+                        "sources": r.get("sources") or [], "reason": REASONS[r["verdict"]], "members": None,
+                        "citation": _citation(name)})
         elif r.get("members"):
             gone = {k: m["reason"] for k, m in r["members"].items() if m["share"] == "no"}
             if gone:
                 out.append({"catalog": name, "name": r.get("name"), "set": r.get("set"), "problems": len(gone),
-                            "sources": r.get("sources") or [], "reason": None, "members": gone})
+                            "sources": r.get("sources") or [], "reason": None, "members": gone,
+                            "citation": _citation(name)})
     return out
+
+
+def _citation(name: str) -> dict[str, Any] | None:
+    c = paths.citations().get(name) or {}
+    return {k: c[k] for k in ("paper", "data") if c.get(k)} or None
 
 
 def described(md: dict[str, Any]) -> dict[str, Any]:
     """What a list of the benchmarks shows next to a catalog: its tags, description, sources and license."""
     return {"tags": md.get("tags"), "description": md.get("description"), "sources": md.get("sources") or [],
-            "license": md.get("license")}
+            "license": md.get("license"), "citation": md.get("citation")}
 
 
 def from_yaml(path: Path, tier: dict[str, dict[str, str]]) -> dict[str, Any]:

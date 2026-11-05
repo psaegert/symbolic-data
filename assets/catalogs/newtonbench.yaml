@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "science formula", "tags": []}
   license: "MIT (HKUST-KnowComp/NewtonBench)"
+  citation: {"paper": {"short": "Zheng et al. 2026", "title": "NewtonBench: Benchmarking Generalizable Scientific Law Discovery in LLM Agents", "venue": "ICLR 2026", "url": "https://arxiv.org/abs/2510.07172"}, "data": {"short": "GitHub HKUST-KnowComp/NewtonBench@912a4ba", "title": "NewtonBench modules/*/LAW_REGISTRY (MIT)", "url": "https://github.com/HKUST-KnowComp/NewtonBench/tree/912a4ba5f4356ddd06acc16e44460ca30be4abc2/modules"}}
   description: NewtonBench
   sources:
   - https://arxiv.org/abs/2510.07172

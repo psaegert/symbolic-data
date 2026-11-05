@@ -2,6 +2,7 @@ metadata:
   name: srsd-dummy
   version: 2
   tags: {"origin": "science formula", "tags": ["dummy inputs"]}
+  citation: {"paper": {"short": "Matsubara et al. 2024", "title": "Rethinking Symbolic Regression Datasets and Benchmarks for Scientific Discovery", "venue": "Journal of Data-centric Machine Learning Research (DMLR) 2024", "url": "https://arxiv.org/abs/2206.10540"}}
   license: 'MIT (base laws: viktmar/FastSRB; dummy recipe: omron-sinicx/srsd-benchmark) + CC BY 4.0 (dummy configuration:
     SRSD''s Hugging Face datasets); see THIRD_PARTY_LICENSES'
   description: 'SRSD-Feynman with dummy variables (120): FastSRB''s laws (fastsrb@3) with SRSD''s published dummy columns

@@ -3,6 +3,7 @@ metadata:
   version: 1
   tags: {"origin": "classic benchmark", "tags": []}
   license: "facts only: functions and ranges cited from de Franca 2018 (Inf. Sci. 442:18, arXiv:1801.01807) and the original Kattan et al. papers; no upstream license"
+  citation: {"paper": {"short": "Olivetti de França 2018", "title": "A greedy search tree heuristic for symbolic regression", "venue": "Information Sciences 442-443:18-32", "url": "https://doi.org/10.1016/j.ins.2018.02.040"}}
   description: SymTree benchmark functions
   sources:
   - https://arxiv.org/abs/1801.01807
