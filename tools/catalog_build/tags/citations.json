@@ -1868,21 +1868,6 @@
   "notes": "Table 1 of arXiv:2312.01816 = ClassEquations.csv, vendored at bfbfa88. Released as PhySO v1.1.0 (Zenodo 10.5281/zenodo.11663147)."
  },
  {
-  "catalog": "physo-class-sr-benchmark",
-  "paper": {
-   "short": "Tenachi et al. 2024",
-   "title": "Class Symbolic Regression: Gotta Fit ’Em All",
-   "venue": "The Astrophysical Journal Letters 969(2):L26",
-   "url": "https://doi.org/10.3847/2041-8213/ad5970"
-  },
-  "data": {
-   "short": "Zenodo 10.5281/zenodo.11663147",
-   "title": "PhySO-v1.1.0",
-   "url": "https://doi.org/10.5281/zenodo.11663147"
-  },
-  "notes": "ClassEquations.csv + ClassProblem.generate_data_points in PhySO v1.1.0 (MIT). Preprint arXiv:2312.01816."
- },
- {
   "catalog": "physo-milky-way-streams",
   "paper": {
    "short": "Tenachi et al. 2024",
