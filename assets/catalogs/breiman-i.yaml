@@ -1,0 +1,142 @@
+metadata:
+  name: breiman-i
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs", "integer inputs"]}
+  srbf_changes: []
+  license: "facts only: formula and input distribution cited from Breiman et al. 1984 (CART, Ch. 8); no upstream license"
+  citation: {"paper": {"short": "Breiman et al. 1984", "title": "Classification And Regression Trees", "venue": "Wadsworth, 1984, Ch. 8 pp. 237-238 (DOI is the Routledge/CRC 2017 reprint)", "url": "https://doi.org/10.1201/9781315139470"}}
+  description: Breiman-I
+  sources:
+  - Breiman, Friedman, Olshen & Stone (1984), Classification and Regression Trees, Wadsworth, Ch. 8, pp. 237-238 (definition;
+    book not openly available)
+  - https://arxiv.org/abs/1101.0689v1
+  - https://arxiv.org/pdf/1101.0689v1
+  - http://web.archive.org/web/20070612082633/http://www.liacc.up.pt/~ltorgo/Regression/2dplanes.html
+  - https://www.openml.org/api/v1/json/data/215
+  - https://www.openml.org/d/215
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Various/BreimanOne.cs
+  - https://github.com/heal-research/operon/blob/d4b53a63e94b628b3fc89ca117aef46c3a7a443a/data/Breiman-I.csv
+  - https://github.com/heal-research/operon/blob/d4b53a63e94b628b3fc89ca117aef46c3a7a443a/data/Breiman-I.json
+  - https://github.com/EpistasisLab/pmlb/tree/master/datasets/215_2dplanes
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-41.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  breiman-i:
+    raw: Piecewise((3 + 3*X2 + 2*X3 + X4, Eq(X1, 1)), (-3 + 3*X5 + 2*X6 + X7, Eq(X1, -1)))
+    prepared: (-(floor((1 - v1)/(abs(v1 - 1) + 1)) + 1)*(floor((v1 - 1)/(abs(v1 - 1) + 1)) + 1) + 1)*(floor((-v1 - 1)/(abs(v1
+      + 1) + 1)) + 1)*(floor((v1 + 1)/(abs(v1 + 1) + 1)) + 1)*(3*v5 + 2*v6 + v7 - 3) + (floor((1 - v1)/(abs(v1 - 1) + 1))
+      + 1)*(floor((v1 - 1)/(abs(v1 - 1) + 1)) + 1)*(3*v2 + 2*v3 + v4 + 3)
+    n_variables: 10
+    subset: all
+    vars:
+      v1:
+        name: X1
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 1.0
+      v2:
+        name: X2
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v3:
+        name: X3
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v4:
+        name: X4
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v5:
+        name: X5
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v6:
+        name: X6
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v7:
+        name: X7
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v8:
+        name: X8
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v9:
+        name: X9
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v10:
+        name: X10
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v0:
+        name: y
+    input_distributions:
+      X1: 'discrete uniform on {-1, 1}: P(X1 = -1) = P(X1 = 1) = 1/2'
+      X2: 'discrete uniform on {-1, 0, 1}: P = 1/3 each'
+      X3: 'discrete uniform on {-1, 0, 1}: P = 1/3 each'
+      X4: 'discrete uniform on {-1, 0, 1}: P = 1/3 each'
+      X5: 'discrete uniform on {-1, 0, 1}: P = 1/3 each'
+      X6: 'discrete uniform on {-1, 0, 1}: P = 1/3 each'
+      X7: 'discrete uniform on {-1, 0, 1}: P = 1/3 each'
+      X8: 'discrete uniform on {-1, 0, 1}: P = 1/3 each'
+      X9: 'discrete uniform on {-1, 0, 1}: P = 1/3 each'
+      X10: 'discrete uniform on {-1, 0, 1}: P = 1/3 each'
+    needs_simplipy: '0.15'

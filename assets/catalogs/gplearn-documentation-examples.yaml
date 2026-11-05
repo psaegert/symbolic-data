@@ -1,0 +1,65 @@
+metadata:
+  name: gplearn-documentation-examples
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 1 of the 2 gplearn examples here (the toy formula); the diabetes data example is in 'gplearn documentation example (diabetes)'."}]
+  license: "BSD-3-Clause (trevorstephens/gplearn documentation example)"
+  citation: {"data": {"short": "GitHub trevorstephens/gplearn@64517a8", "title": "gplearn documentation, SymbolicRegressor example (BSD-3-Clause)", "url": "https://github.com/trevorstephens/gplearn/blob/64517a85fd6d6c50f9ee9e5599f97458da278951/doc/examples.rst"}}
+  description: gplearn documentation examples
+  sources:
+  - https://gplearn.readthedocs.io/en/stable/examples.html
+  - https://github.com/trevorstephens/gplearn/blob/64517a85fd6d6c50f9ee9e5599f97458da278951/doc/examples.rst
+  - https://github.com/trevorstephens/gplearn/blob/0390aea8639ce5f6c0b388400e07b58c05acad6a/doc/gp_examples.ipynb
+  - https://github.com/trevorstephens/gplearn/blob/0390aea8639ce5f6c0b388400e07b58c05acad6a/gplearn/tests/test_examples.py
+  - https://github.com/trevorstephens/gplearn/blob/0390aea8639ce5f6c0b388400e07b58c05acad6a/gplearn/genetic.py
+  - https://github.com/trevorstephens/gplearn/commit/e8ec9cb1fb97516991f478366454fdc00f6ba11a
+  - https://hastie.su.domains/Papers/LARS/
+  - https://hastie.su.domains/Papers/LARS/diabetes.data
+  - https://www4.stat.ncsu.edu/~boos/var.select/diabetes.html
+  - https://www4.stat.ncsu.edu/~boos/var.select/diabetes.tab.txt
+  - https://doi.org/10.1214/009053604000000067
+  - https://github.com/scikit-learn/scikit-learn/tree/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/sklearn/datasets/data
+  - https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/sklearn/datasets/_base.py
+  - https://scikit-learn.org/stable/datasets/toy_dataset.html
+  - https://github.com/scikit-learn/scikit-learn/pull/16605
+  - https://github.com/scikit-learn/scikit-learn/pull/31977
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-146.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  toy-polynomial:
+    raw: X0**2 - X1**2 + X1 - 1
+    prepared: v1**2 - v2**2 + v2 - 1
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: X0
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: X1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      X0: uniform U[-1,1]
+      X1: uniform U[-1,1]
+    meta:
+      finite_fraction: 1.0

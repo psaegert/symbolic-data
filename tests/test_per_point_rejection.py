@@ -107,3 +107,33 @@ def test_rejection_still_fires_past_the_f64_boundary(tmp_path):
     assert not p.is_placeholder
     assert np.isfinite(p.y_support).all()
     assert p.x_support.max() < 1.0
+
+
+def test_disclosed_finite_fraction_sizes_the_first_draw(monkeypatch):
+    """The yaml entry's ``meta: {finite_fraction: f}`` sizes the first batch to n/f x 1.25 + 8 rows, so a
+    partial domain lands its n points in one round (the fraction used to be looked up one level too high)."""
+    import symbolic_data.catalog as C
+    from symbolic_data._evaluation import load_engine
+    from symbolic_data.catalog import ProblemCatalog
+    sizes = []
+    real = C.draw_rows
+
+    def counting(variables, meta, order, size, rng, layout=None):
+        sizes.append(size)
+        return real(variables, meta, order, size, rng, layout)
+    monkeypatch.setattr(C, "draw_rows", counting)
+    entry = {"raw": "v1 ** (1/2)", "prepared": "v1 ** (1/2)", "n_variables": 1,
+             "vars": {"v1": {"name": "x1", "sample_range": [-1.0, 1.0], "sample_type": ["uni", "pos"]}, "v0": {"name": "y"}}}
+    cat = ProblemCatalog.from_yaml({"metadata": {"name": "f", "version": 1},
+                                    "expressions": {"E1": {**entry, "meta": {"finite_fraction": 0.5}}, "E2": entry}})
+    engine, rng = load_engine(None), np.random.default_rng(0)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        cat.realize(cat.entries["E1"], 64, rng, engine=engine)
+        assert sizes[0] == int(64 / 0.5 * 1.25) + 8
+        sizes.clear()
+        cat.realize(cat.entries["E2"], 64, rng, engine=engine)
+        assert sizes[0] == 64                            # nothing disclosed: no oversampling
+        sizes.clear()
+        cat.realize(cat.entries["E1"], 64, rng, engine=engine, part="test")
+        assert sizes[0] == 64                            # the test rows are not oversampled

@@ -1,0 +1,324 @@
+metadata:
+  name: friedman-functions
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  srbf_changes: []
+  license: "facts only: test functions and input distributions cited from Friedman 1991 (Ann. Stat. 19:1-67); no upstream license"
+  citation: {"paper": {"short": "Friedman 1991", "title": "Multivariate Adaptive Regression Splines", "venue": "The Annals of Statistics 19(1):1-67", "url": "https://doi.org/10.1214/aos/1176347963"}}
+  description: Friedman functions
+  sources:
+  - http://web.archive.org/web/20170304074826/http://www.dtic.mil/dtic/tr/fulltext/u2/a578458.pdf
+  - https://apps.dtic.mil/sti/pdfs/ADA578458.pdf
+  - https://doi.org/10.1214/aos/1176347963
+  - https://www.stat.berkeley.edu/~breiman/bagging.pdf
+  - https://doi.org/10.1007/BF00058655
+  - https://github.com/scikit-learn/scikit-learn/blob/a442e4bb39551feb7b0af4c00075e2cb91cf9b77/sklearn/datasets/_samples_generator.py
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Various/FriedmanOne.cs
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Various/FriedmanTwo.cs
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-42.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  friedman-additive:
+    raw: 0.1*exp(4*x1) + 4/(1 + exp(-20*(x2 - 1/2))) + 3*x3 + 2*x4 + x5
+    prepared: 3*v3 + 2*v4 + v5 + 0.1*exp(4*v1) + 4/(exp(-20*v2 + 20*1/2) + 1)
+    n_variables: 10
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[0,1]
+      x2: uniform U[0,1]
+      x3: uniform U[0,1]
+      x4: uniform U[0,1]
+      x5: uniform U[0,1]
+      x6: uniform U[0,1]
+      x7: uniform U[0,1]
+      x8: uniform U[0,1]
+      x9: uniform U[0,1]
+      x10: uniform U[0,1]
+    meta:
+      finite_fraction: 1.0
+  friedman1:
+    raw: 10*sin(pi*x1*x2) + 20*(x3 - 1/2)**2 + 10*x4 + 5*x5
+    prepared: 10*v4 + 5*v5 + 20*(v3 - 1*1/2)**2 + 10*sin(3.141592653589793*v1*v2)
+    n_variables: 10
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: x8
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: x9
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v10:
+        name: x10
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[0,1]
+      x2: uniform U[0,1]
+      x3: uniform U[0,1]
+      x4: uniform U[0,1]
+      x5: uniform U[0,1]
+      x6: uniform U[0,1]
+      x7: uniform U[0,1]
+      x8: uniform U[0,1]
+      x9: uniform U[0,1]
+      x10: uniform U[0,1]
+    meta:
+      finite_fraction: 1.0
+  friedman2:
+    raw: sqrt(R**2 + (omega*L - 1/(omega*C))**2)
+    prepared: sqrt(v1**2 + (v2*v3 - 1/(v2*v4))**2)
+    n_variables: 4
+    subset: all
+    vars:
+      v1:
+        name: R
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: omega
+        sample_range:
+        - 125.66370614359172
+        - 1759.291886010284
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: L
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: C
+        sample_range:
+        - 1.0e-06
+        - 1.1e-05
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      R: uniform U[0,100] (ohms)
+      omega: uniform U[40*pi, 560*pi] (rad/s), i.e. f ~ U[20,280] hertz with omega = 2*pi*f
+      L: uniform U[0,1] (henries)
+      C: uniform U[1e-6, 11e-6] (farads), published as U[1,11] micro farads
+    meta:
+      finite_fraction: 1.0
+  friedman3:
+    raw: atan((omega*L - 1/(omega*C))/R)
+    prepared: atan((v2*v3 - 1/(v2*v4))/v1)
+    n_variables: 4
+    subset: all
+    vars:
+      v1:
+        name: R
+        sample_range:
+        - 0.0
+        - 100.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: omega
+        sample_range:
+        - 125.66370614359172
+        - 1759.291886010284
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: L
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: C
+        sample_range:
+        - 1.0e-06
+        - 1.1e-05
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      R: uniform U[0,100] (ohms)
+      omega: uniform U[40*pi, 560*pi] (rad/s), i.e. f ~ U[20,280] hertz with omega = 2*pi*f
+      L: uniform U[0,1] (henries)
+      C: uniform U[1e-6, 11e-6] (farads), published as U[1,11] micro farads
+    meta:
+      finite_fraction: 1.0

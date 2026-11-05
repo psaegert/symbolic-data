@@ -1,6 +1,9 @@
 metadata:
   name: fastsrb
-  version: 2
+  version: 3
+  tags: {"origin": "science formula", "tags": []}
+  srbf_changes: []
+  citation: {"paper": {"short": "Martinek 2025", "title": "Fast Symbolic Regression Benchmarking", "venue": "Advances in Swarm Intelligence, Lecture Notes in Computer Science, pp. 307-317", "url": "https://doi.org/10.1007/978-981-95-0985-0_25"}, "data": {"short": "GitHub viktmar/FastSRB@bcd094b", "title": "FastSRB src/expressions.yaml (MIT)", "url": "https://github.com/viktmar/FastSRB/blob/bcd094b2a79e7d0b9ddb6436416b8024a69ddf32/src/expressions.yaml"}}
   license: MIT (viktmar/FastSRB; see THIRD_PARTY_LICENSES + upstream PR viktmar/FastSRB#1)
   description: FastSRB benchmark (Martinek, arXiv:2508.14481), 120 equations.
   sources:
@@ -240,12 +243,12 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - 1.0
-        - 100.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: grid
+          kwargs:
+            low: 1.0
+            high: 99.0
+            step: 1.0
       v0:
         name: L
         type: (float)
@@ -257,6 +260,10 @@ expressions:
         - 0
     constraints: null
     n_variables: 1
+    source_audit: integer inputs on {lo..hi-1}, as SRSD's IntegerSampling (numpy randint)
+      and published data
+    meta:
+      finite_fraction: 1.0
   III.15.27:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -278,12 +285,208 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - -100.0
-        - 100.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -99.0
+            - -98.0
+            - -97.0
+            - -96.0
+            - -95.0
+            - -94.0
+            - -93.0
+            - -92.0
+            - -91.0
+            - -90.0
+            - -89.0
+            - -88.0
+            - -87.0
+            - -86.0
+            - -85.0
+            - -84.0
+            - -83.0
+            - -82.0
+            - -81.0
+            - -80.0
+            - -79.0
+            - -78.0
+            - -77.0
+            - -76.0
+            - -75.0
+            - -74.0
+            - -73.0
+            - -72.0
+            - -71.0
+            - -70.0
+            - -69.0
+            - -68.0
+            - -67.0
+            - -66.0
+            - -65.0
+            - -64.0
+            - -63.0
+            - -62.0
+            - -61.0
+            - -60.0
+            - -59.0
+            - -58.0
+            - -57.0
+            - -56.0
+            - -55.0
+            - -54.0
+            - -53.0
+            - -52.0
+            - -51.0
+            - -50.0
+            - -49.0
+            - -48.0
+            - -47.0
+            - -46.0
+            - -45.0
+            - -44.0
+            - -43.0
+            - -42.0
+            - -41.0
+            - -40.0
+            - -39.0
+            - -38.0
+            - -37.0
+            - -36.0
+            - -35.0
+            - -34.0
+            - -33.0
+            - -32.0
+            - -31.0
+            - -30.0
+            - -29.0
+            - -28.0
+            - -27.0
+            - -26.0
+            - -25.0
+            - -24.0
+            - -23.0
+            - -22.0
+            - -21.0
+            - -20.0
+            - -19.0
+            - -18.0
+            - -17.0
+            - -16.0
+            - -15.0
+            - -14.0
+            - -13.0
+            - -12.0
+            - -11.0
+            - -10.0
+            - -9.0
+            - -8.0
+            - -7.0
+            - -6.0
+            - -5.0
+            - -4.0
+            - -3.0
+            - -2.0
+            - -1.0
+            - 1.0
+            - 2.0
+            - 3.0
+            - 4.0
+            - 5.0
+            - 6.0
+            - 7.0
+            - 8.0
+            - 9.0
+            - 10.0
+            - 11.0
+            - 12.0
+            - 13.0
+            - 14.0
+            - 15.0
+            - 16.0
+            - 17.0
+            - 18.0
+            - 19.0
+            - 20.0
+            - 21.0
+            - 22.0
+            - 23.0
+            - 24.0
+            - 25.0
+            - 26.0
+            - 27.0
+            - 28.0
+            - 29.0
+            - 30.0
+            - 31.0
+            - 32.0
+            - 33.0
+            - 34.0
+            - 35.0
+            - 36.0
+            - 37.0
+            - 38.0
+            - 39.0
+            - 40.0
+            - 41.0
+            - 42.0
+            - 43.0
+            - 44.0
+            - 45.0
+            - 46.0
+            - 47.0
+            - 48.0
+            - 49.0
+            - 50.0
+            - 51.0
+            - 52.0
+            - 53.0
+            - 54.0
+            - 55.0
+            - 56.0
+            - 57.0
+            - 58.0
+            - 59.0
+            - 60.0
+            - 61.0
+            - 62.0
+            - 63.0
+            - 64.0
+            - 65.0
+            - 66.0
+            - 67.0
+            - 68.0
+            - 69.0
+            - 70.0
+            - 71.0
+            - 72.0
+            - 73.0
+            - 74.0
+            - 75.0
+            - 76.0
+            - 77.0
+            - 78.0
+            - 79.0
+            - 80.0
+            - 81.0
+            - 82.0
+            - 83.0
+            - 84.0
+            - 85.0
+            - 86.0
+            - 87.0
+            - 88.0
+            - 89.0
+            - 90.0
+            - 91.0
+            - 92.0
+            - 93.0
+            - 94.0
+            - 95.0
+            - 96.0
+            - 97.0
+            - 98.0
+            - 99.0
       v2:
         name: n
         type: (integer, positive)
@@ -293,12 +496,12 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - 1.0
-        - 100.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: grid
+          kwargs:
+            low: 1.0
+            high: 99.0
+            step: 1.0
       v3:
         name: d
         type: (float, positive)
@@ -327,6 +530,11 @@ expressions:
     - v2 != 0
     - v3 != 0
     n_variables: 3
+    source_audit: alpha in +-{1..99} (SRSD IntegerSampling(1, 100) with a random sign;
+      no 0); integer inputs on {lo..hi-1}, as SRSD's IntegerSampling (numpy randint)
+      and published data
+    meta:
+      finite_fraction: 1.0
   I.12.1:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -965,12 +1173,12 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - 1.0
-        - 100.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: grid
+          kwargs:
+            low: 1.0
+            high: 99.0
+            step: 1.0
       v3:
         name: theta
         type: (float, positive)
@@ -1000,6 +1208,10 @@ expressions:
     - v3 != 0
     - v3 != pi
     n_variables: 3
+    source_audit: integer inputs on {lo..hi-1}, as SRSD's IntegerSampling (numpy randint)
+      and published data
+    meta:
+      finite_fraction: 1.0
   I.43.16:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -3577,7 +3789,6 @@ expressions:
     accept:
     - ((-8.98774243798848e9*v1)/(v2*((3.33564095198152e-9*v3)-1.0)))
     - ((-2.6944573973554796e18*v1)/(v2*(v3-2.9979245800000006e8)))
-    - (-(v1)/(v2*((-3.711322364871929e-19*v3)-1.1126264541953286e-10)))
     vars:
       v1:
         name: q
@@ -3642,6 +3853,11 @@ expressions:
     - v2 != 0
     - 2.99792458e8 - v3 > 0
     n_variables: 3
+    source_audit: '1 accept form(s) dropped: not equal to the formula'
+    meta:
+      finite_fraction: 1.0
+    accept_dropped:
+    - (-(v1)/(v2*((-3.711322364871929e-19*v3)-1.1126264541953286e-10)))
   II.34.2a:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -4360,9 +4576,10 @@ expressions:
     - moniker generated by ChatGPT
     difficulty: medium
     moniker: hydrogen_energy_level
-    raw: -m * q ^ 4 / (2 * (4 * pi * 8.854e-12) ^ 2 * (6.626e-34 / (2 * pi)) ^ 2) * (1 / n ^ 2)
-    prepared: neg(v1) * v2 ^ 4 / (2 * (4 * 3.1415926535897 * 8.854e-12) ^ 2 * (6.626e-34 / (2 * 3.1415926535897))
-      ^ 2) * (1 / v3 ^ 2)
+    raw: -m * q ^ 4 / (2 * (4 * pi * 8.854e-12) ^ 2 * (6.626e-34 / (2 * pi)) ^ 2) *
+      (1 / n ^ 2)
+    prepared: neg(v1) * v2 ^ 4 / (2 * (4 * 3.1415926535897 * 8.854e-12) ^ 2 * (6.626e-34
+      / (2 * 3.1415926535897)) ^ 2) * (1 / v3 ^ 2)
     accept:
     - ((-3.63185176721637e87*v1*(v2^4.0))/(v3^2.0))
     vars:
@@ -4405,12 +4622,12 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - 1.0
-        - 100.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: grid
+          kwargs:
+            low: 1.0
+            high: 99.0
+            step: 1.0
       v0:
         name: E_n
         type: (float)
@@ -4423,6 +4640,10 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 3
+    source_audit: integer inputs on {lo..hi-1}, as SRSD's IntegerSampling (numpy randint)
+      and published data
+    meta:
+      finite_fraction: 1.0
   B8:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -5054,18 +5275,16 @@ expressions:
     - moniker generated by ChatGPT
     difficulty: hard
     moniker: law_of_cosines
-    raw: sqrt(x1 ^ 2 + x2 ^ 2 - 2 * x1 * x2 * cos(theta1 - theta2))
-    prepared: sqrt(v1 ^ 2 + v2 ^ 2 - 2 * v1 * v2 * cos(v3 - v4))
+    raw: sqrt(x1 ^ 2 + x2 ^ 2 + 2 * x1 * x2 * cos(theta1 - theta2))
+    prepared: sqrt(v1 ^ 2 + v2 ^ 2 + 2 * v1 * v2 * cos(v3 - v4))
     accept:
-    - sqrt((((v1^2.0)-(2.0*v1*v2*cos((v3-v4))))+(v2^2.0)))
-    - sqrt(((-(v1)*v2*((2.0*cos((v3-v4)))+2.0))+((v1+v2)^2.0)))
-    - sqrt(((-(v1)*v2*((2.0*cos((v3-v4)))-2.0))+((v1-v2)^2.0)))
-    - sqrt(((v1*(v1-(2.0*v2*cos((v3-v4)))))+(v2^2.0)))
-    - sqrt(((-2.0*v1*v2*cos((v3-v4)))+(v1^2.0)+(v2^2.0)))
-    - (1.4142135623730951*sqrt(((-(v1)*v2*(cos((v3-v4))-1.0))+(0.5*((v1-v2)^2.0)))))
-    - sqrt(((v1^2.0)-(v2*((2.0*v1*cos((v3-v4)))-v2))))
-    - sqrt(((v1^2.0)-(v2*((2.0*v1*sin((-(v3)+v4+1.5707963267948966)))-v2))))
-    - (1.4142135623730951*(((v1*v2*(cos((v3-v4))-1.0))+(0.5*((v1-v2)^2.0)))^0.5))
+    - sqrt((((v1^2.0)-(2.0*v1*v2*(-1.0)*cos((v3-v4))))+(v2^2.0)))
+    - sqrt(((-(v1)*v2*((2.0*(-1.0)*cos((v3-v4)))+2.0))+((v1+v2)^2.0)))
+    - sqrt(((-(v1)*v2*((2.0*(-1.0)*cos((v3-v4)))-2.0))+((v1-v2)^2.0)))
+    - sqrt(((v1*(v1-(2.0*v2*(-1.0)*cos((v3-v4)))))+(v2^2.0)))
+    - sqrt(((-2.0*v1*v2*(-1.0)*cos((v3-v4)))+(v1^2.0)+(v2^2.0)))
+    - (1.4142135623730951*sqrt(((-(v1)*v2*((-1.0)*cos((v3-v4))-1.0))+(0.5*((v1-v2)^2.0)))))
+    - sqrt(((v1^2.0)-(v2*((2.0*v1*(-1.0)*cos((v3-v4)))-v2))))
     vars:
       v1:
         name: x1
@@ -5138,6 +5357,13 @@ expressions:
         - 0
     constraints: null
     n_variables: 4
+    source_audit: 'the cosine term''s sign as SRSD''s code, true_eq and published data
+      (+); 2 accept form(s) dropped: not equal to the formula'
+    meta:
+      finite_fraction: 1.0
+    accept_dropped:
+    - (1.4142135623730951*(((v1*v2*((-1.0)*cos((v3-v4))-1.0))+(0.5*((v1-v2)^2.0)))^0.5))
+    - sqrt(((v1^2.0)-(v2*((2.0*v1*sin((-(v3)+v4+1.5707963267948966)))-v2))))
   I.15.3x:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -5256,12 +5482,12 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - 10.0
-        - 1000.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: grid
+          kwargs:
+            low: 10.0
+            high: 999.0
+            step: 1.0
       v3:
         name: theta
         type: (float)
@@ -5289,6 +5515,10 @@ expressions:
     constraints:
     - sin(v3 / 2) != 0
     n_variables: 3
+    source_audit: integer inputs on {lo..hi-1}, as SRSD's IntegerSampling (numpy randint)
+      and published data
+    meta:
+      finite_fraction: 1.0
   I.32.17:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -5682,7 +5912,6 @@ expressions:
     prepared: v1 * 1.380649e-23 * v2 * log(v3 / v4)
     accept:
     - (1.380649e-23*v1*v2*log((v3/v4)))
-    - (-1.3806e-23*v1*v2*log((v4/v3)))
     - (1.380649e-23*v1*v2*(log(v3)-log(v4)))
     - (-1.380649e-23*v1*v2*(log(v4)-log(v3)))
     vars:
@@ -5696,8 +5925,8 @@ expressions:
         - 0
         - 0
         sample_range:
-        - 1.0e+25
-        - 1.0e+27
+        - 1.0e+24
+        - 1.0e+26
         sample_type:
         - log
         - pos
@@ -5759,6 +5988,12 @@ expressions:
     - v4 != 0
     - v3 / v4 > 0
     n_variables: 4
+    source_audit: 'n on [1e24, 1e26], as SRSD''s problem table and published data (code:
+      [1e25, 1e27]; kept, 2026-11-03); 1 accept form(s) dropped: not equal to the formula'
+    meta:
+      finite_fraction: 1.0
+    accept_dropped:
+    - (-1.3806e-23*v1*v2*log((v4/v3)))
   I.50.26:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -7102,7 +7337,7 @@ expressions:
         - 1.0e-27
         sample_type:
         - log
-        - pos_neg
+        - neg
       v2:
         name: q
         type: (float, positive)
@@ -7117,7 +7352,7 @@ expressions:
         - 1.0e-09
         sample_type:
         - log
-        - pos_neg
+        - neg
       v3:
         name: A_vec
         type: (float)
@@ -7160,6 +7395,10 @@ expressions:
     constraints:
     - v4 != 0
     n_variables: 4
+    source_audit: rho_c_0 and q negative only (SRSD code uses_positive=False; FastSRB
+      bcd094b)
+    meta:
+      finite_fraction: 1.0
   B1:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -7167,8 +7406,10 @@ expressions:
     - moniker generated by ChatGPT
     difficulty: hard
     moniker: rutherford_scattering
-    raw: (Z_1 * Z_2 * alpha * 1.054571817e-34 * c / (4 * E_n * sin(theta / 2) ^ 2)) ^ 2
-    prepared: (v1 * v2 * 7.2973525693e-3 * 1.054571817e-34 * 2.99792458e8 / (4 * v3 * sin(v4 / 2) ^ 2)) ^ 2
+    raw: (Z_1 * Z_2 * alpha * 1.054571817e-34 * c / (4 * E_n * sin(theta / 2) ^ 2))
+      ^ 2
+    prepared: (v1 * v2 * 7.2973525693e-3 * 1.054571817e-34 * 2.99792458e8 / (4 * v3
+      * sin(v4 / 2) ^ 2)) ^ 2
     accept:
     - ((3.32662926626791e-57*(v1^2.0)*(v2^2.0))/((v3^2.0)*(sin((v4/2.0))^4.0)))
     - ((3.32662926626791e-57*(v1^2.0)*(v2^2.0))/((v3^2.0)*(sin((0.5*v4))^4.0)))
@@ -7184,12 +7425,12 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - 1.0
-        - 10.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: grid
+          kwargs:
+            low: 1.0
+            high: 9.0
+            step: 1.0
       v2:
         name: Z_2
         type: (integer, positive)
@@ -7199,12 +7440,12 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - 1.0
-        - 10.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: grid
+          kwargs:
+            low: 1.0
+            high: 9.0
+            step: 1.0
       v3:
         name: E_n
         type: (float, positive)
@@ -7253,6 +7494,10 @@ expressions:
     - v3 != 0
     - sin(v4 / 2) != 0
     n_variables: 4
+    source_audit: integer inputs on {lo..hi-1}, as SRSD's IntegerSampling (numpy randint)
+      and published data
+    meta:
+      finite_fraction: 1.0
   B2:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -7651,11 +7896,11 @@ expressions:
     difficulty: hard
     moniker: relativistic_orbit_shift
     feyn_name: 3.99 Goldstein
-    raw: sqrt(1 + 2 * epsilon ^ 2 * E_n * L ^ 2 / (m * (Z_1 * Z_2 * q ^ 2) ^ 2))
-    prepared: sqrt(1 + 2 * v1 ^ 2 * v2 * v3 ^ 2 / (v4 * (v5 * v6 * v7 ^ 2) ^ 2))
+    raw: sqrt(1 + 2 * epsilon * E_n * L ^ 2 / (m * (Z_1 * Z_2 * q ^ 2) ^ 2))
+    prepared: sqrt(1 + 2 * v1 * v2 * v3 ^ 2 / (v4 * (v5 * v6 * v7 ^ 2) ^ 2))
     accept:
-    - sqrt((((2.0*(v1^2.0)*v2*(v3^2.0))/(v4*(v5^2.0)*(v6^2.0)*(v7^4.0)))+1.0))
-    - (1.4142135623730951*sqrt(((((v1^2.0)*v2*(v3^2.0))/(v4*(v5^2.0)*(v6^2.0)*(v7^4.0)))+0.5)))
+    - sqrt((((2.0*v1*v2*(v3^2.0))/(v4*(v5^2.0)*(v6^2.0)*(v7^4.0)))+1.0))
+    - (1.4142135623730951*sqrt((((v1*v2*(v3^2.0))/(v4*(v5^2.0)*(v6^2.0)*(v7^4.0)))+0.5)))
     vars:
       v1:
         name: epsilon
@@ -7726,12 +7971,12 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - 1.0
-        - 10.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: grid
+          kwargs:
+            low: 1.0
+            high: 9.0
+            step: 1.0
       v6:
         name: Z_2
         type: (integer, positive)
@@ -7741,12 +7986,12 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - 1.0
-        - 10.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: grid
+          kwargs:
+            low: 1.0
+            high: 9.0
+            step: 1.0
       v7:
         name: q
         type: (float)
@@ -7778,6 +8023,11 @@ expressions:
     - v7 != 0
     - 1 + 2 * v1 * v2 * v3 ^ 2 / (v4 * (v5 * v6 * v7 ^ 2) ^ 2) >= 0
     n_variables: 7
+    source_audit: epsilon not squared, as SRSD's code, true_eq and published data; integer
+      inputs on {lo..hi-1}, as SRSD's IntegerSampling (numpy randint) and published
+      data
+    meta:
+      finite_fraction: 0.5041
   B7:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -7787,7 +8037,8 @@ expressions:
     moniker: cosmological_expansion_rate
     feyn_name: Friedman Equation
     raw: sqrt(8 * pi * G * rho / 3 - alpha * c ^ 2 / d ^ 2)
-    prepared: sqrt(8 * 3.1415926535897 * 6.67430e-11 * v1 / 3 - v2 * 2.99792458e8 ^ 2 / v3 ^ 2)
+    prepared: sqrt(8 * 3.1415926535897 * 6.67430e-11 * v1 / 3 - v2 * 2.99792458e8 ^
+      2 / v3 ^ 2)
     accept:
     - (2.99792458e8*sqrt(((6.22132547889144e-27*v1)-(v2/(v3^2.0)))))
     vars:
@@ -7815,12 +8066,13 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - -1.0
-        - 2.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
       v3:
         name: d
         type: (float, positive)
@@ -7858,6 +8110,10 @@ expressions:
     - v3 != 0
     - 6.67430e-11 * v1 * v3 ^ 2 / 3 >= v2 * 2.99792458e8 ^ 2
     n_variables: 3
+    source_audit: the curvature in {-1, 0, 1}, each 1/3 (SRSD code, table and published
+      data)
+    meta:
+      finite_fraction: 0.7304
   B9:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
@@ -8009,10 +8265,10 @@ expressions:
     difficulty: hard
     moniker: diffraction_intensity_pattern
     feyn_name: N-slit diffraction
-    raw: I_0 * (sin(alpha / 2) * sin(n * delta / 2) / (alpha / 2 * sin(delta / 2))) ^ 2
+    raw: I_0 * (sin(alpha / 2) * sin(n * delta / 2) / (alpha / 2 * sin(delta / 2)))
+      ^ 2
     prepared: v1 * (sin(v2 / 2) * sin(v3 * v4 / 2) / (v2 / 2 * sin(v4 / 2))) ^ 2
-    accept:
-    - ((8.0*v1*(sin((v2/2.0))^2.0)*(sin(((v3*v4)/2.0))^2.0))/((v2^2.0)*(1.0-cos(v4))))
+    accept: []
     vars:
       v1:
         name: I_0
@@ -8053,12 +8309,12 @@ expressions:
         - 0
         - 0
         - 0
-        sample_range:
-        - 1.0
-        - 100.0
-        sample_type:
-        - int
-        - pos
+        dist:
+          name: grid
+          kwargs:
+            low: 1.0
+            high: 99.0
+            step: 1.0
       v4:
         name: delta
         type: (float, positive)
@@ -8085,6 +8341,10 @@ expressions:
         - -1
     constraints: null
     n_variables: 4
+    source_audit: integer inputs on {lo..hi-1}, as SRSD's IntegerSampling (numpy randint)
+      and published data
+    meta:
+      finite_fraction: 1.0
   B12:
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark

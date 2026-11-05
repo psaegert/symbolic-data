@@ -1,6 +1,9 @@
 metadata:
   name: physo-class
-  version: 1
+  version: 2
+  tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "filled", "problems": 8, "text": "The authors pick each law's realization-specific constants at random from given ranges; srbf fixes each at one representative value (the middle of its range, or a quarter point)."}, {"kind": "changed", "problems": 8, "text": "Class SR asks for one formula shared by several datasets whose constants differ; srbf runs each law as a single dataset."}]
+  citation: {"paper": {"short": "Tenachi et al. 2024", "title": "Class Symbolic Regression: Gotta Fit ’Em All", "venue": "The Astrophysical Journal Letters 969(2):L26", "url": "https://doi.org/10.3847/2041-8213/ad5970"}, "data": {"short": "GitHub WassimTenachi/PhySO@bfbfa88", "title": "PhySO ClassEquations.csv (MIT)", "url": "https://github.com/WassimTenachi/PhySO/blob/bfbfa88d5def09d3d0cd47f3e2252b5a25836721/physo/benchmark/ClassDataset/ClassEquations.csv"}}
   description: The 8 Class-SR benchmark laws (Tenachi et al. 2024, arXiv:2312.01816, Table 1 =
     ClassEquations.csv), flattened to one representative realization each. Upstream protocol
     draws the `spe` constants uniformly per realization; here each spe is frozen at a documented

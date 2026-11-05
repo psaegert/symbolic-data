@@ -1,0 +1,2561 @@
+[
+ {
+  "catalog": "ai-descartes-real-data",
+  "paper": {
+   "short": "Cornelio et al. 2023",
+   "title": "Combining data and theory for derivable scientific discovery with AI-Descartes",
+   "venue": "Nature Communications 14(1):1777",
+   "url": "https://doi.org/10.1038/s41467-023-37236-y"
+  },
+  "data": {
+   "short": "GitHub IBM/AI-Descartes@88bda46",
+   "title": "IBM/AI-Descartes data/ (MIT)",
+   "url": "https://github.com/IBM/AI-Descartes/tree/88bda466c605aaff235c160b5bcb7fc61efd1cf0/data"
+  },
+  "notes": "Five tables from the authors' repository; the 20-point exoplanet table is transcribed from the paper's Supplementary Table 2 (Nat. Commun. SI, CC BY 4.0) because the repository ships only rows 9-20. Preprint arXiv:2109.01634. Primary origins of the tables are cited in the SI (e.g. NASA Planetary Fact Sheet, Chou et al. 2010 Science 329:1630 for time dilation)."
+ },
+ {
+  "catalog": "ai-feynman-2-0-modular-equations",
+  "paper": {
+   "short": "Udrescu et al. 2020",
+   "title": "AI Feynman 2.0: Pareto-optimal symbolic regression exploiting graph modularity",
+   "venue": "NeurIPS 2020 (Adv. Neural Inf. Process. Syst. 33)",
+   "url": "https://arxiv.org/abs/2006.10782"
+  },
+  "data": null,
+  "notes": "Formulas read from the paper, Table 4 rows 5-16 (identical in arXiv v1/v2 and the NeurIPS version). Code: github.com/SJ001/AI-Feynman (MIT); no data file."
+ },
+ {
+  "catalog": "ai-feynman-database-100-main-equations",
+  "paper": {
+   "short": "Udrescu & Tegmark 2020",
+   "title": "AI Feynman: A physics-inspired method for symbolic regression",
+   "venue": "Science Advances 6(16):eaay2631",
+   "url": "https://doi.org/10.1126/sciadv.aay2631"
+  },
+  "data": {
+   "short": "Feynman Symbolic Regression Database (FSReD), Wayback 2021-10-19",
+   "title": "AI Feynman / Feynman Symbolic Regression Database download page (space.mit.edu, host now dead)",
+   "url": "https://web.archive.org/web/20211019022249/https://space.mit.edu/home/tegmark/main_aifeynman.html"
+  },
+  "notes": "Dimensionless (without-units) rendering of the 100 FSReD laws plus the unit table. Machine-readable copies consulted: Feynman_without_units.tar.gz (Dropbox, linked from the FSReD page), FeynmanEquationsDimensionless.csv in samholt/DeepGenerativeSymbolicRegression@5322ec8 and its PSE copy, units.csv in WassimTenachi/PhySO@04c7bb9. Preprint arXiv:1905.11481."
+ },
+ {
+  "catalog": "ai-hilbert-problem-set",
+  "paper": {
+   "short": "Cory-Wright et al. 2024",
+   "title": "Evolving scientific discovery by unifying data and background knowledge with AI Hilbert",
+   "venue": "Nature Communications 15(1):5922",
+   "url": "https://doi.org/10.1038/s41467-024-50074-w"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.11453179",
+   "title": "IBM/AI-Hilbert: AI-Hilbert Open-Source Code Release v1.0.1",
+   "url": "https://doi.org/10.5281/zenodo.11453179"
+  },
+  "notes": "Formulas as printed in the paper (SI / arXiv:2308.09474v3); ranges and constants from the generators data_generation/data_gen_mix.py and data_gen_kepler.py. The survey read GitHub IBM/AI-Hilbert@621b08b, which differs from the Zenodo-archived tag 1.0.1 only in CITATION.cff, README.md and figures (gh compare)."
+ },
+ {
+  "catalog": "ai-hilbert-real-data",
+  "paper": {
+   "short": "Cory-Wright et al. 2024",
+   "title": "Evolving scientific discovery by unifying data and background knowledge with AI Hilbert",
+   "venue": "Nature Communications 15(1):5922",
+   "url": "https://doi.org/10.1038/s41467-024-50074-w"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.11453179",
+   "title": "IBM/AI-Hilbert: AI-Hilbert Open-Source Code Release v1.0.1",
+   "url": "https://doi.org/10.5281/zenodo.11453179"
+  },
+  "notes": "Two small tables from the notebook main_problems/hagen_einstein_kepler[3.3][3.5][3.6].ipynb (read at GitHub IBM/AI-Hilbert@621b08b, identical to the Zenodo tag 1.0.1 apart from CITATION.cff/README/figures). Origins: binary-star Kepler data and Chou et al. 2010 optical-clock data via AI-Descartes (Cornelio et al. 2023, doi:10.1038/s41467-023-37236-y)."
+ },
+ {
+  "catalog": "autora-synthetic-behavioural-science-models-points",
+  "paper": {
+   "short": "Musslick et al. 2024",
+   "title": "AutoRA: Automated Research Assistant for Closed-Loop Empirical Research",
+   "venue": "Journal of Open Source Software 9(104):6839",
+   "url": "https://doi.org/10.21105/joss.06839"
+  },
+  "data": {
+   "short": "GitHub AutoResearch/autora-synthetic@d04b439",
+   "title": "autora-synthetic v2.2.0 synthetic experiment runners (MIT)",
+   "url": "https://github.com/AutoResearch/autora-synthetic/tree/d04b4391444f000d9f3fb6038d8d2b9c7953a270/src/autora/experiment_runner/synthetic"
+  },
+  "notes": "Formulas, constants and grids are the factory defaults of autora-synthetic v2.2.0 (tag = commit d04b439); the JOSS paper describes the package only in prose. Points are srbf-generated on those grids; no upstream data file. Four of the laws are also printed in the same lab's BMS paper (Hewson et al. 2023, per the survey record)."
+ },
+ {
+  "catalog": "black-hole-spiral-plane",
+  "paper": {
+   "short": "Davis & Jin 2023",
+   "title": "Discovery of a Planar Black Hole Mass Scaling Relation for Spiral Galaxies",
+   "venue": "The Astrophysical Journal Letters 956(1):L22",
+   "url": "https://doi.org/10.3847/2041-8213/acfa98"
+  },
+  "data": {
+   "short": "Davis & Jin 2023, ApJL 956 L22, Table 1 (machine-readable)",
+   "title": "Table 1 machine-readable ASCII (41 spiral galaxies; CC BY 4.0)",
+   "url": "https://iopscience.iop.org/2041-8205/956/1/L22/suppdata/apjlacfa98t1_ascii.txt?doi=10.3847/2041-8213/acfa98"
+  },
+  "notes": "Preprint arXiv:2309.08986. The authors' repository ZehaoJin/Ultimate_black_hole_mass_scaling_relations_Symbolic_Regression@0ef9d4c holds the compiled SMBH tables; the publisher's table is the licensed (CC BY 4.0) copy."
+ },
+ {
+  "catalog": "bms-real-data",
+  "paper": {
+   "short": "Guimerà et al. 2020",
+   "title": "A Bayesian machine scientist to aid in the solution of challenging scientific problems",
+   "venue": "Science Advances 6(5):eaav6971",
+   "url": "https://doi.org/10.1126/sciadv.aav6971"
+  },
+  "data": {
+   "short": "Bitbucket rguimera/machine-scientist@9defb7a",
+   "title": "Bayesian machine scientist repository, Validation/ data folders (no licence file)",
+   "url": "https://bitbucket.org/rguimera/machine-scientist/src/9defb7aa2a1382b4a8518f3060e8dd87a20acb99/Validation/"
+  },
+  "notes": "Members: RDFunding (EU_nature_clean.csv; De Domenico & Arenas 2016, Nature 531:580, doi:10.1038/531580c), Trepat (cadhesome_protein.csv; Bazellieres et al. 2015, Nat. Cell Biol. 17:409, doi:10.1038/ncb3135), LogYe (seymour.csv; Ye et al. 2015, PNAS 112(13), doi:10.1073/pnas.1417063112). Preprint arXiv:2004.12157."
+ },
+ {
+  "catalog": "bms-synthetic-prior-expression-and-bessel-functions",
+  "paper": {
+   "short": "Guimerà et al. 2020",
+   "title": "A Bayesian machine scientist to aid in the solution of challenging scientific problems",
+   "venue": "Science Advances 6(5):eaav6971",
+   "url": "https://doi.org/10.1126/sciadv.aav6971"
+  },
+  "data": null,
+  "notes": "Formulas read from the paper and its supplement (aav6971_SM.pdf via Europe PMC PMC6994216); preprint arXiv:2004.12157."
+ },
+ {
+  "catalog": "bms-synthetic-prior-expression-and-bessel-functions-points",
+  "paper": {
+   "short": "Guimerà et al. 2020",
+   "title": "A Bayesian machine scientist to aid in the solution of challenging scientific problems",
+   "venue": "Science Advances 6(5):eaav6971",
+   "url": "https://doi.org/10.1126/sciadv.aav6971"
+  },
+  "data": null,
+  "notes": "Bessel J_nu on [0, 4]; points are srbf-generated (100 seeded uniform draws per order); no upstream data file."
+ },
+ {
+  "catalog": "breiman-i",
+  "paper": {
+   "short": "Breiman et al. 1984",
+   "title": "Classification And Regression Trees",
+   "venue": "Wadsworth, 1984, Ch. 8 pp. 237-238 (DOI is the Routledge/CRC 2017 reprint)",
+   "url": "https://doi.org/10.1201/9781315139470"
+  },
+  "data": null,
+  "notes": "Definition from the CART book (Breiman, Friedman, Olshen & Stone 1984), read via Sauve & Tuleau-Malot 2011 (arXiv:1101.0689), Torgo's 2dplanes page and HeuristicLab BreimanOne.cs; the book itself was not read. A realization is OpenML 215 / PMLB 215_2dplanes. Year 1984 from the survey record (the DOI's Crossref year is the 2017 reprint)."
+ },
+ {
+  "catalog": "chen-luo-jiang-block-building-test-cases",
+  "paper": {
+   "short": "Chen et al. 2018",
+   "title": "A multilevel block building algorithm for fast modeling generalized separable systems",
+   "venue": "Expert Systems with Applications 109:25-34",
+   "url": "https://doi.org/10.1016/j.eswa.2018.05.021"
+  },
+  "data": null,
+  "notes": "Formulas and ranges from arXiv:1706.02281v3 Appendices A-B (toy and real-world cases)."
+ },
+ {
+  "catalog": "coevolved-fitness-predictors-test-problems-points",
+  "paper": {
+   "short": "Schmidt & Lipson 2008",
+   "title": "Coevolution of Fitness Predictors",
+   "venue": "IEEE Transactions on Evolutionary Computation 12(6):736-749",
+   "url": "https://doi.org/10.1109/TEVC.2008.919006"
+  },
+  "data": null,
+  "notes": "F1-F3 formulas and grids follow GPTP IV 2006 Table 4 (Schmidt & Lipson, doi:10.1007/978-0-387-49650-4_8; also GECCO 2005 late-breaking paper); TEC 2008 Sec. V-C for the evenly spaced grid. Points are srbf-generated; no upstream data file."
+ },
+ {
+  "catalog": "constant",
+  "paper": {
+   "short": "Petersen et al. 2021",
+   "title": "Deep symbolic regression: Recovering mathematical expressions from data via risk-seeking policy gradients",
+   "venue": "ICLR 2021",
+   "url": "https://arxiv.org/abs/1912.04871"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Constant-1..8 are defined in the DSO repository's benchmarks.csv; five of them first appear in the DSR paper as Nguyen-1c/5c/7c/8c/10c (source audit B1). formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30). Const-Test-1/2 dropped (repo sanity tests)."
+ },
+ {
+  "catalog": "cp3-bench",
+  "paper": {
+   "short": "Thing & Koksbang 2025",
+   "title": "cp3-bench: a tool for benchmarking symbolic regression algorithms demonstrated with cosmology",
+   "venue": "Journal of Cosmology and Astroparticle Physics 2025(01):040",
+   "url": "https://doi.org/10.1088/1475-7516/2025/01/040"
+  },
+  "data": {
+   "short": "GitHub CP3-Origins/Things-to-bench@69a45dd",
+   "title": "Things-to-bench v1.1.0 cosmo_data/C1a-C6c.csv (MIT)",
+   "url": "https://github.com/CP3-Origins/Things-to-bench/tree/69a45dda1d0b95f151cdd669b308fa9fefd6d77d/cosmo_data"
+  },
+  "notes": "Preprint arXiv:2406.15531."
+ },
+ {
+  "catalog": "cp3-bench-standard-tuning-datasets-points",
+  "paper": {
+   "short": "Thing & Koksbang 2025",
+   "title": "cp3-bench: a tool for benchmarking symbolic regression algorithms demonstrated with cosmology",
+   "venue": "Journal of Cosmology and Astroparticle Physics 2025(01):040",
+   "url": "https://doi.org/10.1088/1475-7516/2025/01/040"
+  },
+  "data": {
+   "short": "GitHub CP3-Origins/Things-to-bench@69a45dd",
+   "title": "Things-to-bench v1.1.0 datasets/F*.csv (MIT)",
+   "url": "https://github.com/CP3-Origins/Things-to-bench/tree/69a45dda1d0b95f151cdd669b308fa9fefd6d77d/datasets"
+  },
+  "notes": "Definitions from App. A Table 6 (a selection from Makke & Chawla, arXiv:2211.10873, App. A with modified ranges). srbf regenerates the points on the authors' equidistant grids; the authors' own files are cited as data."
+ },
+ {
+  "catalog": "cvgp-trigonometric-control-variable-datasets",
+  "paper": {
+   "short": "Jiang & Xue 2023",
+   "title": "Symbolic Regression via Control Variable Genetic Programming",
+   "venue": "Machine Learning and Knowledge Discovery in Databases: Research Track, Lecture Notes in Computer Science, pp. 178-195",
+   "url": "https://doi.org/10.1007/978-3-031-43421-1_11"
+  },
+  "data": {
+   "short": "GitHub jiangnanhugo/cvgp@e79202e",
+   "title": "CVGP expression files data/ (authors' repository, no licence file)",
+   "url": "https://github.com/jiangnanhugo/cvgp/tree/e79202e2e3b859a97fe139453b3871b5793e33b9/data"
+  },
+  "notes": "Preprint arXiv:2306.08057. The same expressions are shipped under MIT in jiangnanhugo/egg-sr@c9f8dce datasets/scibench (the copy the release licence cites); related sets in Racing-CVGP and VSR-DPG."
+ },
+ {
+  "catalog": "ddrsr-simple-test-and-complex-test",
+  "paper": {
+   "short": "Deng et al. 2026",
+   "title": "Deep Divide-and-Reduce in Symbolic Regression",
+   "venue": "arXiv preprint arXiv:2608.02628",
+   "url": "https://arxiv.org/abs/2608.02628"
+  },
+  "data": null,
+  "notes": "Formulas and ranges read from arXiv:2608.02628v3, App. F Table 5."
+ },
+ {
+  "catalog": "decomposable-nsr-synthetic-e1-e13",
+  "paper": {
+   "short": "Morales & Sheppard 2024",
+   "title": "Univariate Skeleton Prediction in Multivariate Systems Using Transformers",
+   "venue": "Machine Learning and Knowledge Discovery in Databases. Research Track and Demo Track, Lecture Notes in Computer Science, pp. 107-125 (ECML PKDD 2024)",
+   "url": "https://doi.org/10.1007/978-3-031-70371-3_7"
+  },
+  "data": {
+   "short": "GitHub NISL-MSU/MultiSetSR@d5ba2ec",
+   "title": "MultiSetSR GenerateDatasets.py (E1-E9, CS1-CS4)",
+   "url": "https://github.com/NISL-MSU/MultiSetSR/blob/d5ba2ecb6f5a82054d957e9b8c6842e3d6d92831/src/EquationLearning/Data/GenerateDatasets.py"
+  },
+  "notes": "The set first appeared as Table 4.1 of this ECML PKDD 2024 paper (arXiv:2406.17834) and is repeated as Table 2 of Morales & Sheppard, \"Decomposable Neural Symbolic Regression\", TMLR 2026 (arXiv:2511.04124)."
+ },
+ {
+  "catalog": "dgsr-additional-feynman",
+  "paper": {
+   "short": "Holt et al. 2023",
+   "title": "Deep Generative Symbolic Regression",
+   "venue": "ICLR 2023",
+   "url": "https://arxiv.org/abs/2401.00282"
+  },
+  "data": {
+   "short": "GitHub samholt/DeepGenerativeSymbolicRegression@5dbf04d",
+   "title": "DGSR benchmarks.csv (DSO fork in the authors' repository)",
+   "url": "https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Paper Table 35 (A-1..A-32); repo rows agree except A-32's range. Base laws from FSReD (Udrescu & Tegmark 2020). OpenReview o7koEEMA1bR."
+ },
+ {
+  "catalog": "dgsr-feynman-d-2-d-5-subsets",
+  "paper": {
+   "short": "Holt et al. 2023",
+   "title": "Deep Generative Symbolic Regression",
+   "venue": "ICLR 2023",
+   "url": "https://arxiv.org/abs/2401.00282"
+  },
+  "data": {
+   "short": "GitHub samholt/DeepGenerativeSymbolicRegression@5dbf04d",
+   "title": "DGSR benchmarks.csv (DSO fork in the authors' repository)",
+   "url": "https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Paper Table 2 subsets Feynman d=2 / d=5; base laws from FSReD. OpenReview o7koEEMA1bR."
+ },
+ {
+  "catalog": "dgsr-synthetic-d-12",
+  "paper": {
+   "short": "Holt et al. 2023",
+   "title": "Deep Generative Symbolic Regression",
+   "venue": "ICLR 2023",
+   "url": "https://arxiv.org/abs/2401.00282"
+  },
+  "data": {
+   "short": "GitHub samholt/DeepGenerativeSymbolicRegression@5dbf04d",
+   "title": "DGSR benchmarks.csv (DSO fork in the authors' repository)",
+   "url": "https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Code rows l_cd_12_* of benchmarks.csv (what was run; paper and code disagree on 6 of 7 formulas)."
+ },
+ {
+  "catalog": "dimensionless-learning",
+  "paper": {
+   "short": "Xie et al. 2022",
+   "title": "Data-driven discovery of dimensionless numbers and governing laws from scarce measurements",
+   "venue": "Nature Communications 13(1):7562",
+   "url": "https://doi.org/10.1038/s41467-022-35084-w"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.7317017",
+   "title": "xiaoyuxie-vico/PyDimension: PyDimension 0.1 (v1.0.0)",
+   "url": "https://doi.org/10.5281/zenodo.7317017"
+  },
+  "notes": "Zenodo record = PyDimension tag v1.0.0 (commit 7f90b01), the version cited in the paper's Code availability; files dataset/*.csv. Preprint arXiv:2111.03583. Repository licence at that tag GPL-3.0 (main: MIT)."
+ },
+ {
+  "catalog": "dow-chemical-evostar-2010",
+  "paper": null,
+  "data": {
+   "short": "EvoStar 2010 SR competition data (Wayback 2012-06-28)",
+   "title": "SymbolicRegressionCompetition.xls (A. Kordon, The Dow Chemical Company), organiser's file",
+   "url": "https://web.archive.org/web/20120628163816/http://casnew.iti.upv.es/cas/competitions/symreg/SymbolicRegressionCompetition.xls"
+  },
+  "notes": "No paper introduces the data: the definition is the organiser's competition page and PDF (EvoStar 2010 EvoCompetitions). Copies: gpbenchmarks.org SymbolicRegressionCompetitionData.xls; heal-research/operon@191dc93 data/Chemical-II.csv. No data licence stated anywhere."
+ },
+ {
+  "catalog": "dow-distillation-tower",
+  "paper": {
+   "short": "Vladislavleva et al. 2009",
+   "title": "Order of Nonlinearity as a Complexity Measure for Models Generated by Symbolic Regression via Pareto Genetic Programming",
+   "venue": "IEEE Transactions on Evolutionary Computation 13(2):333-349",
+   "url": "https://doi.org/10.1109/TEVC.2008.926486"
+  },
+  "data": {
+   "short": "symbolicregression.com towerData.txt (Wayback 2016-07-07)",
+   "title": "Tower problem data (Dow distillation tower; E. Vladislavleva's site)",
+   "url": "https://web.archive.org/web/20160707102934/http://symbolicregression.com/sites/default/files/DataSets/towerData.txt"
+  },
+  "notes": "Data provided by A. Kordon (Dow) and published on Vladislavleva's symbolicregression.com Tower Problem page; the Tower problem is used in Vladislavleva, Smits & den Hertog 2009. Copies also in folivetti/ITEA and HeuristicLab. No data licence."
+ },
+ {
+  "catalog": "dow-emulator",
+  "paper": {
+   "short": "Kordon et al. 2003",
+   "title": "Empirical Emulators for Process Monitoring and Optimization",
+   "venue": "Proc. 11th Mediterranean Conference on Control and Automation (MED 2003), paper T7-059",
+   "url": "http://web.archive.org/web/20100714033929/http://med.ee.nd.edu/MED11.zip"
+  },
+  "data": {
+   "short": "HeuristicLab wiki emulators.csv",
+   "title": "Emulator problem data (A. Kordon, Dow), surviving copy on the HeuristicLab wiki",
+   "url": "https://dev.heuristiclab.com/trac.fcgi/raw-attachment/wiki/Documentation/VideoTutorials/SymbolicRegression/emulators.csv"
+  },
+  "notes": "Paper: title and authors read from the PDF inside the archived MED 2003 proceedings zip (MED11/pdf/papers/t7-059.pdf); no DOI found on Crossref. The original EmulatorProblem.zip (symbolicregression.com) is lost; only output y2 survives. No data licence."
+ },
+ {
+  "catalog": "drsr-debcat",
+  "paper": {
+   "short": "Ikeda et al. 2026",
+   "title": "Diversified Residual Symbolic Regression",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference (GECCO '26), pp. 771-779",
+   "url": "https://doi.org/10.1145/3795095.3805087"
+  },
+  "data": {
+   "short": "VizieR V/152 (DEBCat)",
+   "title": "DEBCat detached eclipsing binary catalogue (Southworth 2015), debcat.dat 2017/10/10 version",
+   "url": "http://web.archive.org/web/20260518064827/https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=V/152"
+  },
+  "notes": "Benchmark (mass-luminosity task, linear and log-log settings) from DRSR, GECCO '26 (arXiv:2605.15809). Data: Southworth 2015, ASP Conf. Ser. 496, 164 (arXiv:1411.1219) via VizieR; VizieR usage rules require citing the original authors. CDS hosts were unreachable from this machine on 2026-11-05, so the URL is the Wayback capture (2026-05-18) of https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=V/152; file: cdsarc.cds.unistra.fr/ftp/V/152/debcat.dat."
+ },
+ {
+  "catalog": "dso-benchmark-registry",
+  "paper": {
+   "short": "Petersen et al. 2021",
+   "title": "Deep symbolic regression: Recovering mathematical expressions from data via risk-seeking policy gradients",
+   "venue": "ICLR 2021",
+   "url": "https://arxiv.org/abs/1912.04871"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "The registry exists in three versions: 57778611 (ICLR 2021 DSR release, 37 rows), a49c228 (NeurIPS 2021 release, 113 rows; Mundhenk et al. 2021, arXiv:2111.00053), 2069d4e (uDSR release, 268 rows). Members follow their own authors (Nguyen-12a from NGGP; Neat-6 from Trujillo et al. 2016/Keijzer 2003; Korns-13..15 from Korns 2011)."
+ },
+ {
+  "catalog": "dso-benchmark-registry-points",
+  "paper": {
+   "short": "Petersen et al. 2021",
+   "title": "Deep symbolic regression: Recovering mathematical expressions from data via risk-seeking policy gradients",
+   "venue": "ICLR 2021",
+   "url": "https://arxiv.org/abs/1912.04871"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "One problem: Neat-6 (harmonic sum, = Keijzer-6; Trujillo et al. 2016, doi:10.1016/j.ins.2015.11.010; Keijzer 2003), fit on x = 1..50, test 1..120; points srbf-generated on that grid."
+ },
+ {
+  "catalog": "e2e-in-domain-synthetic-validation-set",
+  "paper": {
+   "short": "Kamienny et al. 2022",
+   "title": "End-to-end symbolic regression with transformers",
+   "venue": "NeurIPS 2022",
+   "url": "https://arxiv.org/abs/2204.10532"
+  },
+  "data": {
+   "short": "GitHub facebookresearch/symbolicregression@c4144c9",
+   "title": "symbolicregression generator (Apache-2.0)",
+   "url": "https://github.com/facebookresearch/symbolicregression/tree/c4144c99d078dd611795338e24fb3da49a32b9d8"
+  },
+  "notes": "Generator-only set: srbf freezes a 10,000-function draw from the authors' generator with their seed; no formula list or data dump is published."
+ },
+ {
+  "catalog": "eql-cart-pendulum",
+  "paper": {
+   "short": "Sahoo et al. 2018",
+   "title": "Learning Equations for Extrapolation and Control",
+   "venue": "ICML 2018 (PMLR 80)",
+   "url": "https://arxiv.org/abs/1806.07259"
+  },
+  "data": {
+   "short": "GitHub martius-lab/EQL@28521ae",
+   "title": "EQL-DIV-ICML data generator (GPL-3.0)",
+   "url": "https://github.com/martius-lab/EQL/tree/28521aed7a213299a52982430b2b83917fadae20/EQL-DIV-ICML"
+  },
+  "notes": "Formulas from the paper, Eq. (12); input ranges from the authors' generator."
+ },
+ {
+  "catalog": "eql-double-pendulum",
+  "paper": {
+   "short": "Martius & Lampert 2016",
+   "title": "Extrapolation and learning equations",
+   "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)",
+   "url": "https://arxiv.org/abs/1610.02995"
+  },
+  "data": {
+   "short": "GitHub erwincoumans/tiny-differentiable-simulator@ab1d9be",
+   "title": "real_double_pend_h_1.txt (Schmidt & Lipson 2009 SOM invar_datasets.zip), byte-identical mirror",
+   "url": "https://github.com/erwincoumans/tiny-differentiable-simulator/blob/ab1d9bec404e82cd660d8b249b00c585c91bb8c4/data/schmidt-lipson-exp-data/real_double_pend_h_1.txt"
+  },
+  "notes": "Task from EQL (arXiv:1610.02995v1, p. 6). The recording is Schmidt & Lipson 2009, Science 324:81 (doi:10.1126/science.1165893), Supporting Online Material invar_datasets.zip, whose original URLs return HTTP 403; the cited file is a byte-identical mirror. No licence stated."
+ },
+ {
+  "catalog": "eql-formulas-f-1-f-4-and-division-formula",
+  "paper": {
+   "short": "Martius & Lampert 2016",
+   "title": "Extrapolation and learning equations",
+   "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)",
+   "url": "https://arxiv.org/abs/1610.02995"
+  },
+  "data": null,
+  "notes": "F-1..F-3 from Martius & Lampert 2016, Eqs. (10)-(12); F-4 and the division formula from Sahoo, Lampert & Martius, ICML 2018 (arXiv:1806.07259), Eq. (11) / Sec. 4.2."
+ },
+ {
+  "catalog": "eql-pendulum-vector-field",
+  "paper": {
+   "short": "Martius & Lampert 2016",
+   "title": "Extrapolation and learning equations",
+   "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)",
+   "url": "https://arxiv.org/abs/1610.02995"
+  },
+  "data": null,
+  "notes": "Pendulum task read from arXiv:1610.02995v1."
+ },
+ {
+  "catalog": "eql-robotic-arm-forward-kinematics",
+  "paper": {
+   "short": "Martius & Lampert 2016",
+   "title": "Extrapolation and learning equations",
+   "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)",
+   "url": "https://arxiv.org/abs/1610.02995"
+  },
+  "data": null,
+  "notes": "Formulas derived by srbf from the kinematics tasks' stated geometry (arXiv:1610.02995)."
+ },
+ {
+  "catalog": "eql-xray-kalpha2",
+  "paper": {
+   "short": "Martius & Lampert 2016",
+   "title": "Extrapolation and learning equations",
+   "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)",
+   "url": "https://arxiv.org/abs/1610.02995"
+  },
+  "data": {
+   "short": "NIST SRD 10.18434/T4859Z",
+   "title": "X-ray Transition Energies, NIST Standard Reference Database 128",
+   "url": "https://doi.org/10.18434/T4859Z"
+  },
+  "notes": "K-alpha2 (KL2) transition energies queried from NIST SRD 128 (Deslattes et al. 2003, Rev. Mod. Phys. 75:35, doi:10.1103/RevModPhys.75.35). NIST SRD is copyrighted by the U.S. Secretary of Commerce."
+ },
+ {
+  "catalog": "erbench-densities",
+  "paper": {
+   "short": "Kahlmeyer et al. 2026",
+   "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms",
+   "venue": "arXiv preprint arXiv:2606.09276",
+   "url": "https://arxiv.org/abs/2606.09276"
+  },
+  "data": {
+   "short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c",
+   "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)",
+   "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"
+  },
+  "notes": "Densities family: SciPy probability densities with fixed shape parameters. srbf vendored the HF dataset at revision 95bf15c (assets/upstream/erbench/NOTICE)."
+ },
+ {
+  "catalog": "erbench-eponymous",
+  "paper": {
+   "short": "Kahlmeyer et al. 2026",
+   "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms",
+   "venue": "arXiv preprint arXiv:2606.09276",
+   "url": "https://arxiv.org/abs/2606.09276"
+  },
+  "data": {
+   "short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c",
+   "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)",
+   "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"
+  },
+  "notes": "Eponymous family (Wikipedia-derived, CC BY-SA 4.0). srbf vendored the HF dataset at revision 95bf15c (assets/upstream/erbench/NOTICE)."
+ },
+ {
+  "catalog": "erbench-oeis",
+  "paper": {
+   "short": "Kahlmeyer et al. 2026",
+   "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms",
+   "venue": "arXiv preprint arXiv:2606.09276",
+   "url": "https://arxiv.org/abs/2606.09276"
+  },
+  "data": {
+   "short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c",
+   "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)",
+   "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"
+  },
+  "notes": "OEIS family (OEIS-derived, CC BY-SA 4.0). srbf vendored the HF dataset at revision 95bf15c (assets/upstream/erbench/NOTICE)."
+ },
+ {
+  "catalog": "erbench-phybench",
+  "paper": {
+   "short": "Kahlmeyer et al. 2026",
+   "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms",
+   "venue": "arXiv preprint arXiv:2606.09276",
+   "url": "https://arxiv.org/abs/2606.09276"
+  },
+  "data": {
+   "short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c",
+   "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)",
+   "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"
+  },
+  "notes": "PHYBench family: answers of PHYBench (Qiu et al. 2025, Eureka-Lab/PHYBench) turned into regression tasks with sampling domains by the ERBench authors. srbf vendored the HF dataset at revision 95bf15c (assets/upstream/erbench/NOTICE)."
+ },
+ {
+  "catalog": "erbench-public-legacy-formulas",
+  "paper": {
+   "short": "Kahlmeyer et al. 2026",
+   "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms",
+   "venue": "arXiv preprint arXiv:2606.09276",
+   "url": "https://arxiv.org/abs/2606.09276"
+  },
+  "data": {
+   "short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c",
+   "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)",
+   "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"
+  },
+  "notes": "ERBench's legacy block (Sec. 4.3) repackages classic families; srbf takes every member from its own authors (Korns 2011; Uy et al. 2011; DSO benchmarks.csv; AI Feynman, Udrescu et al. 2020) and keeps ERBench ids only for mapping."
+ },
+ {
+  "catalog": "erbench-syneq",
+  "paper": {
+   "short": "Kahlmeyer et al. 2026",
+   "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms",
+   "venue": "arXiv preprint arXiv:2606.09276",
+   "url": "https://arxiv.org/abs/2606.09276"
+  },
+  "data": {
+   "short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c",
+   "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)",
+   "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"
+  },
+  "notes": "SynEq family: synthetic formulas generated by the ERBench authors. srbf vendored the HF dataset at revision 95bf15c (assets/upstream/erbench/NOTICE)."
+ },
+ {
+  "catalog": "errless-synthetic-posterior-set",
+  "paper": {
+   "short": "Boussif et al. 2026",
+   "title": "Bayesian Symbolic Regression with Entropic Reinforcement Learning",
+   "venue": "UAI 2026",
+   "url": "https://arxiv.org/abs/2608.09617"
+  },
+  "data": null,
+  "notes": "Formulas and ranges from arXiv:2608.09617v2 App. B.1 Table 4; the authors' code jaggbow/ERRLESS@b7ae784 matches."
+ },
+ {
+  "catalog": "esr-cosmology",
+  "paper": {
+   "short": "Bartlett et al. 2024",
+   "title": "Exhaustive Symbolic Regression",
+   "venue": "IEEE Transactions on Evolutionary Computation 28(4):950-964",
+   "url": "https://doi.org/10.1109/TEVC.2023.3280250"
+  },
+  "data": {
+   "short": "GitHub DeaglanBartlett/ESR@23c3907",
+   "title": "ESR esr/data/CC_Hubble.dat (cosmic-chronometer H(z) table)",
+   "url": "https://github.com/DeaglanBartlett/ESR/blob/23c3907a0fb08301d5e89fb666ae01bec0398faa/esr/data/CC_Hubble.dat"
+  },
+  "notes": "Preprint arXiv:2211.11461. The file reproduces Moresco et al. 2022, Living Rev. Relativ. 25:6, Table 1 (arXiv:2201.07241, CC BY 4.0). The survey set also records Pantheon+ (PantheonPlusSH0ES/DataRelease@c447f0f); the release catalog holds the cosmic-chronometer table."
+ },
+ {
+  "catalog": "esr-cosmology-datasets",
+  "paper": {
+   "short": "Bartlett et al. 2024",
+   "title": "Exhaustive Symbolic Regression",
+   "venue": "IEEE Transactions on Evolutionary Computation 28(4):950-964",
+   "url": "https://doi.org/10.1109/TEVC.2023.3280250"
+  },
+  "data": {
+   "short": "GitHub DeaglanBartlett/ESR@23c3907",
+   "title": "ESR examples/mock_cc.py (LCDM mock)",
+   "url": "https://github.com/DeaglanBartlett/ESR/blob/23c3907a0fb08301d5e89fb666ae01bec0398faa/examples/mock_cc.py"
+  },
+  "notes": "Exact LCDM law of the authors' mock. Zenodo 10.5281/zenodo.7339113 holds ESR's function sets, not this data."
+ },
+ {
+  "catalog": "evogp-uci",
+  "paper": {
+   "short": "Wu et al. 2026",
+   "title": "Enabling Population-Level Parallelism in Tree-Based Genetic Programming for GPU Acceleration",
+   "venue": "IEEE Transactions on Evolutionary Computation",
+   "url": "https://doi.org/10.1109/tevc.2026.3663396"
+  },
+  "data": null,
+  "notes": "No single collection record. Members: UCI 409 Daily Demand Forecasting Orders (doi:10.24432/C5BC8T), UCI 9 Auto MPG (doi:10.24432/C5859H), California housing (Pace & Barry 1997) via figshare article 3829992 (scikit-learn mirror). Preprint arXiv:2501.17168."
+ },
+ {
+  "catalog": "evomo-sr-random-expression-datasets-p1-p4",
+  "paper": {
+   "short": "Rossetti et al. 2026",
+   "title": "EvoMO-SR: Multiobjective LLM-based Evolution of Symbolic Expressions with substructure guidance",
+   "venue": "arXiv preprint arXiv:2609.36187",
+   "url": "https://arxiv.org/abs/2609.36187"
+  },
+  "data": {
+   "short": "anonymous.4open.science EvoMO-SR-47B6 manifest.csv",
+   "title": "EvoMO-SR anonymised code release, random_data/random_functions/manifest.csv",
+   "url": "https://anonymous.4open.science/api/repo/EvoMO-SR-47B6/file/random_data/random_functions/manifest.csv"
+  },
+  "notes": "Definitions from the paper (Table 3, Sec. 4.3, App. A.4) and the anonymised release; the release is mutable and has no commit pin (repository page: anonymous.4open.science/r/EvoMO-SR-47B6)."
+ },
+ {
+  "catalog": "falling-balls",
+  "paper": {
+   "short": "de Silva et al. 2020",
+   "title": "Discovery of Physics From Data: Universal Laws and Discrepancies",
+   "venue": "Frontiers in Artificial Intelligence 3:25",
+   "url": "https://doi.org/10.3389/frai.2020.00025"
+  },
+  "data": {
+   "short": "GitHub isds-neu/SymbolicPhysicsLearner@c0c18c9",
+   "title": "SPL physics_task/data ball-drop train/test CSVs (MIT)",
+   "url": "https://github.com/isds-neu/SymbolicPhysicsLearner/tree/c0c18c90d61510a78ff2d24ac5299ad92c8acc59/physics_task/data"
+  },
+  "notes": "Drop data of de Silva et al. 2020 (raw Ball_drops_data.xls in briandesilva/discovery-of-physics-from-data@b79c343, MIT); the task and the t <= 2 s train / t > 2 s test split are those of Symbolic Physics Learner (Sun et al., ICLR 2023, arXiv:2205.13134, Sec. 5 + App. D), whose files are used."
+ },
+ {
+  "catalog": "fastsrb",
+  "paper": {
+   "short": "Martinek 2025",
+   "title": "Fast Symbolic Regression Benchmarking",
+   "venue": "Advances in Swarm Intelligence, Lecture Notes in Computer Science, pp. 307-317",
+   "url": "https://doi.org/10.1007/978-981-95-0985-0_25"
+  },
+  "data": {
+   "short": "GitHub viktmar/FastSRB@bcd094b",
+   "title": "FastSRB src/expressions.yaml (MIT)",
+   "url": "https://github.com/viktmar/FastSRB/blob/bcd094b2a79e7d0b9ddb6436416b8024a69ddf32/src/expressions.yaml"
+  },
+  "notes": "Preprint arXiv:2508.14481. srbf vendored FastSRB from master on 2026-07-10 (commit not recorded); the cited commit is the one the 2026-10-05 source audit read. Sampling follows SRSD (Matsubara et al. 2024); laws from FSReD."
+ },
+ {
+  "catalog": "feynman",
+  "paper": {
+   "short": "Udrescu & Tegmark 2020",
+   "title": "AI Feynman: A physics-inspired method for symbolic regression",
+   "venue": "Science Advances 6(16):eaay2631",
+   "url": "https://doi.org/10.1126/sciadv.aay2631"
+  },
+  "data": {
+   "short": "FSReD FeynmanEquations.csv (Wayback 2025-06-30)",
+   "title": "Feynman Symbolic Regression Database, FeynmanEquations.csv (authors' host, now dead)",
+   "url": "https://web.archive.org/web/20250630050842/https://space.mit.edu/home/tegmark/aifeynman/FeynmanEquations.csv"
+  },
+  "notes": "Formulas and ranges only (the 10^5-row data files are not redistributed). The archived CSV is byte-identical to PhySO's physo/benchmark/FeynmanDataset/FeynmanEquations.csv (source audit C1). Preprint arXiv:1905.11481."
+ },
+ {
+  "catalog": "feynman-bonus",
+  "paper": {
+   "short": "Udrescu & Tegmark 2020",
+   "title": "AI Feynman: A physics-inspired method for symbolic regression",
+   "venue": "Science Advances 6(16):eaay2631",
+   "url": "https://doi.org/10.1126/sciadv.aay2631"
+  },
+  "data": {
+   "short": "GitHub WassimTenachi/PhySO@bfbfa88",
+   "title": "BonusEquations.csv (PhySO copy; MIT)",
+   "url": "https://github.com/WassimTenachi/PhySO/blob/bfbfa88d5def09d3d0cd47f3e2252b5a25836721/physo/benchmark/FeynmanDataset/BonusEquations.csv"
+  },
+  "notes": "The authors' BonusEquations.csv is not in the Wayback Machine; PhySO's copy is the surviving one (its sibling FeynmanEquations.csv is byte-identical to the authors' archived file). Bonus set: arXiv:1905.11481 Table VI."
+ },
+ {
+  "catalog": "ffx-cmos-ota",
+  "paper": {
+   "short": "McConaghy 2011",
+   "title": "FFX: Fast, Scalable, Deterministic Symbolic Regression Technology",
+   "venue": "Genetic Programming Theory and Practice IX, Genetic and Evolutionary Computation, pp. 235-260",
+   "url": "https://doi.org/10.1007/978-1-4614-1770-5_13"
+  },
+  "data": {
+   "short": "GitHub trentmc/ffx2011-benchmarks@1aa15f6",
+   "title": "FFX medium-dimensional benchmark datasets (CMOS OTA)",
+   "url": "https://github.com/trentmc/ffx2011-benchmarks/blob/1aa15f6317c5c5ed18bad4c487e7114c6a497580/med-dimensional_benchmark_datasets.zip"
+  },
+  "notes": "Data released by the author; repository has no licence file. Circuit and variables per CAFFEINE (McConaghy et al., DATE 2005) and Daems et al. 2003 (doi:10.1109/TCAD.2003.810742)."
+ },
+ {
+  "catalog": "ffx-high-dimensional-circuits",
+  "paper": {
+   "short": "McConaghy 2011",
+   "title": "FFX: Fast, Scalable, Deterministic Symbolic Regression Technology",
+   "venue": "Genetic Programming Theory and Practice IX, Genetic and Evolutionary Computation, pp. 235-260",
+   "url": "https://doi.org/10.1007/978-1-4614-1770-5_13"
+  },
+  "data": {
+   "short": "GitHub trentmc/ffx2011-benchmarks@1aa15f6",
+   "title": "FFX high-dimensional benchmark datasets part1-3.tar.gz",
+   "url": "https://github.com/trentmc/ffx2011-benchmarks/tree/1aa15f6317c5c5ed18bad4c487e7114c6a497580"
+  },
+  "notes": "Also used in McConaghy, CICC 2011 (doi:10.1109/CICC.2011.6055329). Repository has no licence file."
+ },
+ {
+  "catalog": "friedman-functions",
+  "paper": {
+   "short": "Friedman 1991",
+   "title": "Multivariate Adaptive Regression Splines",
+   "venue": "The Annals of Statistics 19(1):1-67",
+   "url": "https://doi.org/10.1214/aos/1176347963"
+  },
+  "data": null,
+  "notes": "Four simulated test functions, Sec. 4.2-4.4; read from the revised tech report (DTIC ADA578458)."
+ },
+ {
+  "catalog": "friedman-random-function-generator-instances",
+  "paper": {
+   "short": "Friedman 2001",
+   "title": "Greedy function approximation: A gradient boosting machine.",
+   "venue": "The Annals of Statistics 29(5):1189-1232",
+   "url": "https://doi.org/10.1214/aos/1013203451"
+  },
+  "data": {
+   "short": "GitHub heal-research/HeuristicLab@ecf4b5c",
+   "title": "HeuristicLab v3.3.16 FriedmanRandomFunction instance provider (GPL-3.0)",
+   "url": "https://github.com/heal-research/HeuristicLab/tree/ecf4b5c9ed412464fa967d981db3f9b0cfb8b378/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Friedman"
+  },
+  "notes": "Friedman 2001 defines the random-function family; the 12 instances are regenerated from HeuristicLab's provider (release v3.3.16, provider seed 0). Generator-only: no formula list or data is published."
+ },
+ {
+  "catalog": "gecco-2013-2017-real",
+  "paper": {
+   "short": "Oliveira et al. 2018",
+   "title": "Analysing symbolic regression benchmarks under a meta-learning approach",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference Companion (GECCO '18), pp. 1342-1349",
+   "url": "https://doi.org/10.1145/3205651.3208293"
+  },
+  "data": {
+   "short": "GitHub laic-ufmg/gp-benchmarks@53b10df",
+   "title": "gp-benchmarks compilation repository (script + spreadsheet of the 2013-2017 GECCO datasets)",
+   "url": "https://github.com/laic-ufmg/gp-benchmarks/tree/53b10dff51b9d773e1b91868208cf2e6cccf5ad6"
+  },
+  "notes": "Preprint arXiv:1805.10365. Member data come from their own records: UCI ML Repository (ids 1, 29, 162, 165, 186, 242, 243, 291, 294; CC BY 4.0) and the QSAR %F/LD50/%PPB tables via DALabNOVA/slim@aca7357 (MIT)."
+ },
+ {
+  "catalog": "gecco-2022-covid-ny",
+  "paper": {
+   "short": "de Franca et al. 2025",
+   "title": "SRBench++: Principled Benchmarking of Symbolic Regression With Domain-Expert Interpretation",
+   "venue": "IEEE Transactions on Evolutionary Computation 29(4):1127-1137",
+   "url": "https://doi.org/10.1109/TEVC.2024.3423681"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.6842176",
+   "title": "Results files from the 2022 SRBench Competition: Interpretable Symbolic Regression for Data Science",
+   "url": "https://doi.org/10.5281/zenodo.6842176"
+  },
+  "notes": "Competition organizers' analysis: arXiv:2304.01117 (de Franca et al., \"Interpretable Symbolic Regression for Data Science: Analysis of the 2022 Competition\"), published as SRBench++ in IEEE TEVC. Data = organizers' Zenodo release srbench_competition_results.zip (CC BY 4.0). Real-world track; raw sources include health.data.ny.gov and the reichlab covid19-forecast-hub."
+ },
+ {
+  "catalog": "gecco-2022-exact-rediscovery",
+  "paper": {
+   "short": "de Franca et al. 2025",
+   "title": "SRBench++: Principled Benchmarking of Symbolic Regression With Domain-Expert Interpretation",
+   "venue": "IEEE Transactions on Evolutionary Computation 29(4):1127-1137",
+   "url": "https://doi.org/10.1109/TEVC.2024.3423681"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.6842176",
+   "title": "Results files from the 2022 SRBench Competition: Interpretable Symbolic Regression for Data Science",
+   "url": "https://doi.org/10.5281/zenodo.6842176"
+  },
+  "notes": "Competition organizers' analysis: arXiv:2304.01117 (de Franca et al., \"Interpretable Symbolic Regression for Data Science: Analysis of the 2022 Competition\"), published as SRBench++ in IEEE TEVC. Data = organizers' Zenodo release srbench_competition_results.zip (CC BY 4.0). Same files at cavalab/srbench@c2ddb27 competition-2022/."
+ },
+ {
+  "catalog": "gecco-2022-extrapolation",
+  "paper": {
+   "short": "de Franca et al. 2025",
+   "title": "SRBench++: Principled Benchmarking of Symbolic Regression With Domain-Expert Interpretation",
+   "venue": "IEEE Transactions on Evolutionary Computation 29(4):1127-1137",
+   "url": "https://doi.org/10.1109/TEVC.2024.3423681"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.6842176",
+   "title": "Results files from the 2022 SRBench Competition: Interpretable Symbolic Regression for Data Science",
+   "url": "https://doi.org/10.5281/zenodo.6842176"
+  },
+  "notes": "Competition organizers' analysis: arXiv:2304.01117 (de Franca et al., \"Interpretable Symbolic Regression for Data Science: Analysis of the 2022 Competition\"), published as SRBench++ in IEEE TEVC. Data = organizers' Zenodo release srbench_competition_results.zip (CC BY 4.0)."
+ },
+ {
+  "catalog": "gecco-2022-feature-selection",
+  "paper": {
+   "short": "de Franca et al. 2025",
+   "title": "SRBench++: Principled Benchmarking of Symbolic Regression With Domain-Expert Interpretation",
+   "venue": "IEEE Transactions on Evolutionary Computation 29(4):1127-1137",
+   "url": "https://doi.org/10.1109/TEVC.2024.3423681"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.6842176",
+   "title": "Results files from the 2022 SRBench Competition: Interpretable Symbolic Regression for Data Science",
+   "url": "https://doi.org/10.5281/zenodo.6842176"
+  },
+  "notes": "Competition organizers' analysis: arXiv:2304.01117 (de Franca et al., \"Interpretable Symbolic Regression for Data Science: Analysis of the 2022 Competition\"), published as SRBench++ in IEEE TEVC. Data = organizers' Zenodo release srbench_competition_results.zip (CC BY 4.0). Same files at cavalab/srbench@c2ddb27 competition-2022/."
+ },
+ {
+  "catalog": "gecco-2022-local-optima",
+  "paper": {
+   "short": "de Franca et al. 2025",
+   "title": "SRBench++: Principled Benchmarking of Symbolic Regression With Domain-Expert Interpretation",
+   "venue": "IEEE Transactions on Evolutionary Computation 29(4):1127-1137",
+   "url": "https://doi.org/10.1109/TEVC.2024.3423681"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.6842176",
+   "title": "Results files from the 2022 SRBench Competition: Interpretable Symbolic Regression for Data Science",
+   "url": "https://doi.org/10.5281/zenodo.6842176"
+  },
+  "notes": "Competition organizers' analysis: arXiv:2304.01117 (de Franca et al., \"Interpretable Symbolic Regression for Data Science: Analysis of the 2022 Competition\"), published as SRBench++ in IEEE TEVC. Data = organizers' Zenodo release srbench_competition_results.zip (CC BY 4.0)."
+ },
+ {
+  "catalog": "gecco-2022-noise",
+  "paper": {
+   "short": "de Franca et al. 2025",
+   "title": "SRBench++: Principled Benchmarking of Symbolic Regression With Domain-Expert Interpretation",
+   "venue": "IEEE Transactions on Evolutionary Computation 29(4):1127-1137",
+   "url": "https://doi.org/10.1109/TEVC.2024.3423681"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.6842176",
+   "title": "Results files from the 2022 SRBench Competition: Interpretable Symbolic Regression for Data Science",
+   "url": "https://doi.org/10.5281/zenodo.6842176"
+  },
+  "notes": "Competition organizers' analysis: arXiv:2304.01117 (de Franca et al., \"Interpretable Symbolic Regression for Data Science: Analysis of the 2022 Competition\"), published as SRBench++ in IEEE TEVC. Data = organizers' Zenodo release srbench_competition_results.zip (CC BY 4.0)."
+ },
+ {
+  "catalog": "gecco-2023-performance",
+  "paper": null,
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.8283005",
+   "title": "SRBench Competition 2023 - Datasets, Scripts, and Results",
+   "url": "https://doi.org/10.5281/zenodo.8283005"
+  },
+  "notes": "No organizer paper or report on the 2023 competition was found (survey done-17, web searches 2026-10-04); the Zenodo archive and cavalab.org/srbench/competition-2023/ are the only definitions."
+ },
+ {
+  "catalog": "geobench",
+  "paper": {
+   "short": "Xu et al. 2024",
+   "title": "GeoBench: A new benchmark on Symbolic Regression with Geometric Expressions",
+   "venue": "ICLR 2025 submission (OpenReview TqzNI4v9DT, not accepted)",
+   "url": "https://web.archive.org/web/20260118085022/https://openreview.net/pdf?id=TqzNI4v9DT"
+  },
+  "data": null,
+  "notes": "Only the OpenReview PDF exists (no code or data released). Title and authors are taken from the survey record (critic-0), which read the PDF; OpenReview itself was not queried here (scripted access blocked), so the URL is the Wayback copy of the PDF. Forum: openreview.net/forum?id=TqzNI4v9DT."
+ },
+ {
+  "catalog": "gfn-sr-noisy-near-twin-set",
+  "paper": {
+   "short": "Li et al. 2023",
+   "title": "GFN-SR: Symbolic Regression with Generative Flow Networks",
+   "venue": "NeurIPS 2023 AI4Science Workshop",
+   "url": "https://arxiv.org/abs/2312.00396"
+  },
+  "data": null,
+  "notes": "Six functions from Sec. 3.2 and Table 2."
+ },
+ {
+  "catalog": "gp-benchmarks-sr-table",
+  "paper": {
+   "short": "McDermott et al. 2012",
+   "title": "Genetic programming needs better benchmarks",
+   "venue": "Proceedings of the 14th annual conference on Genetic and evolutionary computation (GECCO '12), pp. 791-798",
+   "url": "https://doi.org/10.1145/2330163.2330273"
+  },
+  "data": null,
+  "notes": "Table 3 of the corrected Version 3 (gpbenchmarks.org); members are defined by their own authors (Koza, Nguyen, Korns, Keijzer, Vladislavleva, Pagie)."
+ },
+ {
+  "catalog": "gp-benchmarks-sr-table-points",
+  "paper": {
+   "short": "McDermott et al. 2012",
+   "title": "Genetic programming needs better benchmarks",
+   "venue": "Proceedings of the 14th annual conference on Genetic and evolutionary computation (GECCO '12), pp. 791-798",
+   "url": "https://doi.org/10.1145/2330163.2330273"
+  },
+  "data": null,
+  "notes": "Keijzer-6, Vladislavleva-3 and Pagie-2 on the Table 3 grids; points srbf-generated; no upstream data file."
+ },
+ {
+  "catalog": "gp-challenge-protein",
+  "paper": {
+   "short": "Widera et al. 2010",
+   "title": "GP challenge: evolving energy function for protein structure prediction",
+   "venue": "Genetic Programming and Evolvable Machines 11(1):61-88",
+   "url": "https://doi.org/10.1007/s10710-009-9087-0"
+  },
+  "data": {
+   "short": "ICOS GP challenge dataset",
+   "title": "GP challenge protein energy-function data (energy_terms.tar.gz + distances.tar.gz)",
+   "url": "http://ico2s.org/datasets/gp_challenge.html"
+  },
+  "notes": "Authors' release page (no licence; \"We encourage everyone to test their algorithms on this dataset\"). Decoys from I-TASSER (Wu, Skolnick & Zhang 2007, doi:10.1186/1741-7007-5-17)."
+ },
+ {
+  "catalog": "gp-gomea-real-world",
+  "paper": {
+   "short": "Virgolin et al. 2021",
+   "title": "Improving Model-Based Genetic Programming for Symbolic Regression of Small Expressions",
+   "venue": "Evolutionary Computation 29(2):211-237",
+   "url": "https://doi.org/10.1162/evco_a_00278"
+  },
+  "data": {
+   "short": "GP-GOMEA authors' Google Drive folder DatasetsGP/Regression",
+   "title": "Preprocessed regression datasets of Virgolin et al.",
+   "url": "https://drive.google.com/drive/folders/1w-uTuSA-3d07LKyWIcVk3FdnysDz-QaV"
+  },
+  "notes": "Preprint arXiv:1904.02050. Members originate from UCI (Airfoil 291, Concrete 165, Energy 242, Wine 186, Yacht 243; CC BY 4.0), Boston housing, Dow Chemical (EvoStar 2010) and Tower (Vladislavleva)."
+ },
+ {
+  "catalog": "gplearn-diabetes",
+  "paper": {
+   "short": "Efron et al. 2004",
+   "title": "Least angle regression",
+   "venue": "The Annals of Statistics 32(2):407-499",
+   "url": "https://doi.org/10.1214/009053604000000067"
+  },
+  "data": {
+   "short": "GitHub scikit-learn/scikit-learn@866c0f5",
+   "title": "scikit-learn diabetes data (BSD-3-Clause)",
+   "url": "https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/sklearn/datasets/data/diabetes_data_raw.csv.gz"
+  },
+  "notes": "The diabetes data of Efron et al. 2004 as loaded by sklearn.datasets.load_diabetes in the gplearn documentation's SymbolicRegressor example (gplearn has no paper). Original file: hastie.su.domains/Papers/LARS/diabetes.data."
+ },
+ {
+  "catalog": "gplearn-documentation-examples",
+  "paper": null,
+  "data": {
+   "short": "GitHub trevorstephens/gplearn@64517a8",
+   "title": "gplearn documentation, SymbolicRegressor example (BSD-3-Clause)",
+   "url": "https://github.com/trevorstephens/gplearn/blob/64517a85fd6d6c50f9ee9e5599f97458da278951/doc/examples.rst"
+  },
+  "notes": "gplearn has no associated paper; the toy polynomial is defined in its documentation."
+ },
+ {
+  "catalog": "gpu-lm-inner-constant-recovery-problems",
+  "paper": {
+   "short": "Mao et al. 2026",
+   "title": "Efficient Constant Optimization for Symbolic Regression with GPU-Accelerated Tree-Based Genetic Programming",
+   "venue": "IEEE HPEC 2026",
+   "url": "https://arxiv.org/abs/2609.03352"
+  },
+  "data": {
+   "short": "GitHub TensorConv/CuSR@414b905",
+   "title": "CuSR e3 corpus_manifest.json",
+   "url": "https://github.com/TensorConv/CuSR/blob/414b9057ca0289befcc5e0bb270f87c0f430bb58/experiments/e3_admit_criterion/out/corpus_manifest.json"
+  },
+  "notes": "The paper gives only the count; the 18 single-inner ADMIT records are defined by the authors' manifest (unchanged at cbfd472). Repository has no top-level licence."
+ },
+ {
+  "catalog": "grammarvae",
+  "paper": {
+   "short": "Kusner et al. 2017",
+   "title": "Grammar Variational Autoencoder",
+   "venue": "ICML 2017 (PMLR 70)",
+   "url": "https://arxiv.org/abs/1703.01925"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "GrammarVAE-1 as defined by Kusner et al.; formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "grammarvae-points",
+  "paper": {
+   "short": "Kusner et al. 2017",
+   "title": "Grammar Variational Autoencoder",
+   "venue": "ICML 2017 (PMLR 70)",
+   "url": "https://arxiv.org/abs/1703.01925"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "GrammarVAE-1 as defined by Kusner et al.; formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "gsgp-real-world",
+  "paper": {
+   "short": "Anselmi et al. 2023",
+   "title": "Local Search, Semantics, and Genetic Programming: a Global Analysis",
+   "venue": "arXiv preprint arXiv:2305.16956",
+   "url": "https://arxiv.org/abs/2305.16956"
+  },
+  "data": null,
+  "notes": "Membership from Anselmi et al. 2023, Table 1 (GSGP lineage of Castelli, Vanneschi et al.). No collection record; members: UCI Airfoil Self-Noise (id 291, doi:10.24432/C5VW2C), Concrete Compressive Strength (165), Parkinsons Telemonitoring (189), Concrete Slump (182), all CC BY 4.0; QSAR %F/%PPB/LD50 via DALabNOVA/slim@aca7357 (MIT; Archetti et al. 2007, doi:10.1007/s10710-007-9040-z)."
+ },
+ {
+  "catalog": "gsr-symset",
+  "paper": {
+   "short": "Tohme et al. 2022",
+   "title": "GSR: A Generalized Symbolic Regression Approach",
+   "venue": "Transactions on Machine Learning Research (12/2022)",
+   "url": "https://arxiv.org/abs/2205.15569"
+  },
+  "data": null,
+  "notes": "SymSet = Table 20 of arXiv:2205.15569v2 (OpenReview lheUXtDNvP; MERL TR2023-002)."
+ },
+ {
+  "catalog": "hep-llm-sr-angular-distribution-problems",
+  "paper": {
+   "short": "Morales-Alvarado 2025",
+   "title": "Foundation models for equation discovery in high energy physics",
+   "venue": "arXiv preprint arXiv:2510.03397",
+   "url": "https://arxiv.org/abs/2510.03397"
+  },
+  "data": null,
+  "notes": "LO QED angular law in two windows; alpha from Bendavid et al. 2025 (arXiv:2508.00989, JHEP 02 (2026) 081, doi:10.1007/JHEP02(2026)081)."
+ },
+ {
+  "catalog": "heuristiclab-physics-instances",
+  "paper": {
+   "short": "Chen et al. 2018",
+   "title": "A multilevel block building algorithm for fast modeling generalized separable systems",
+   "venue": "Expert Systems with Applications 109:25-34",
+   "url": "https://doi.org/10.1016/j.eswa.2018.05.021"
+  },
+  "data": {
+   "short": "GitHub heal-research/HeuristicLab@c57538b",
+   "title": "HeuristicLab Physics Benchmark Problems provider (GPL-3.0)",
+   "url": "https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Physics"
+  },
+  "notes": "The set is HeuristicLab's provider (no paper of its own). Four of five problems derive from Chen, Luo & Jiang 2018 (cited as paper); SheetBendingProcess from Asadzadeh, Ganser & Mucke 2021 (doi:10.1016/j.apples.2021.100049)."
+ },
+ {
+  "catalog": "heuristiclab-real-world",
+  "paper": null,
+  "data": {
+   "short": "GitHub heal-research/HeuristicLab@c57538b",
+   "title": "HeuristicLab RegressionRealWorld.zip + MibaFriction.zip",
+   "url": "https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Data"
+  },
+  "notes": "HeuristicLab's real-world instance providers have no introducing paper. Members: Chemical-I (Dow), Housing (Boston), Powermeter, SARCOS, Tower (RegressionRealWorld.zip) and Miba friction CF1-4, NvhRating, Temp1-2, Wear1-2 (MibaFriction.zip). No licence on the data files (repository GPL-3.0)."
+ },
+ {
+  "catalog": "heuristiclab-regression-instance-providers",
+  "paper": null,
+  "data": {
+   "short": "GitHub heal-research/HeuristicLab@c57538b",
+   "title": "HeuristicLab regression instance providers (GPL-3.0)",
+   "url": "https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression"
+  },
+  "notes": "Software collection without an introducing paper. Fixed formulas are taken from their defining authors (Keijzer 2003, Korns 2011, Vladislavleva et al. 2009, Breiman et al. 1984, Friedman 1991, Chen et al. 2018); the generated instances come from HeuristicLab's providers."
+ },
+ {
+  "catalog": "heuristiclab-regression-instance-providers-points",
+  "paper": {
+   "short": "Keijzer 2003",
+   "title": "Improving Symbolic Regression with Interval Arithmetic and Linear Scaling",
+   "venue": "Genetic Programming, Lecture Notes in Computer Science, pp. 70-82",
+   "url": "https://doi.org/10.1007/3-540-36599-0_7"
+  },
+  "data": {
+   "short": "GitHub heal-research/HeuristicLab@c57538b",
+   "title": "HeuristicLab KeijzerFunctionSix provider",
+   "url": "https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Keijzer/KeijzerFunctionSix.cs"
+  },
+  "notes": "One problem: Keijzer-6 (harmonic sum) on the integer grid 1..50, test 1..120, as defined by Keijzer 2003 and provided by HeuristicLab; points srbf-generated."
+ },
+ {
+  "catalog": "hierbosss-single-atom",
+  "paper": {
+   "short": "Roy et al. 2025",
+   "title": "Probabilistic Symbolic Regression for Equation Discovery via Operator-induced and Regularized Symbolic Forests",
+   "venue": "arXiv preprint (v1)",
+   "url": "https://arxiv.org/abs/2509.19710"
+  },
+  "data": {
+   "short": "GitHub tsenftle/Metal-Oxide-LASSO-lo@8501e29",
+   "title": "Binding_energyV4.xlsx (O'Connor et al. 2018 data; MIT)",
+   "url": "https://github.com/tsenftle/Metal-Oxide-LASSO-lo/blob/8501e2941839902bc1544d3500da5aff2851ec1b/Step_1/Binding_energyV4.xlsx"
+  },
+  "notes": "Set exists only in HierBOSSS arXiv:2509.19710v1 (dropped in v2/v3). Data of O'Connor, Jonayat, Janik & Senftle 2018, Nat. Catal. 1:531 (doi:10.1038/s41929-018-0094-5)."
+ },
+ {
+  "catalog": "hierbosss-single-atom-catalysis-and-synthetic-polynomial",
+  "paper": {
+   "short": "Roy et al. 2025",
+   "title": "Probabilistic Symbolic Regression for Equation Discovery via Operator-induced and Regularized Symbolic Forests",
+   "venue": "arXiv preprint (v1)",
+   "url": "https://arxiv.org/abs/2509.19710"
+  },
+  "data": {
+   "short": "HierBOSSS_simulated_example.R (Wayback; repository deleted)",
+   "title": "Roy-SR-007/HierBOSSS simulated example script (MIT)",
+   "url": "https://web.archive.org/web/20260609230815/https://github.com/Roy-SR-007/HierBOSSS/blob/c9c72931e18ce0cb791c42ff6a6b214dcab28d75/HierBOSSS_simulated_example.R"
+  },
+  "notes": "Synthetic polynomial from arXiv:2509.19710v1 eq. 5.2 / Sec. 5.1 and the archived authors' script."
+ },
+ {
+  "catalog": "ideasearch-pdf",
+  "paper": {
+   "short": "Song et al. 2026",
+   "title": "Iterated agent for symbolic regression",
+   "venue": "Communications in Theoretical Physics 78(12):125802",
+   "url": "https://doi.org/10.1088/1572-9494/aea105"
+  },
+  "data": {
+   "short": "LHAPDF set CT18NNLO (ID 14000)",
+   "title": "CT18NNLO parton distribution grid",
+   "url": "https://lhapdfsets.web.cern.ch/current/CT18NNLO.tar.gz"
+  },
+  "notes": "Not published as data: srbf re-evaluates CT18NNLO (Hou et al. 2021, arXiv:1908.11394) at the IdeaSearchFitter points of arXiv:2510.08317v1 Sec. 4.2. Grid licence: none stated."
+ },
+ {
+  "catalog": "implied-volatility-slices",
+  "paper": {
+   "short": "Keller-Ressel & Nikulski 2026",
+   "title": "Discovering parametrizations of implied volatility with symbolic regression",
+   "venue": "arXiv preprint arXiv:2603.21892",
+   "url": "https://arxiv.org/abs/2603.21892"
+  },
+  "data": {
+   "short": "GitHub hannesnikulski/master-thesis@1da1742",
+   "title": "master-thesis data/vola-dynamics (no licence)",
+   "url": "https://github.com/hannesnikulski/master-thesis/tree/1da174236b507799cec6bb6d42f042484d9007ed/data/vola-dynamics"
+  },
+  "notes": "Data set D2 of the paper: curves digitized with WebPlotDigitizer from VolaDynamics example plots (voladynamics.com)."
+ },
+ {
+  "catalog": "jin",
+  "paper": {
+   "short": "Jin et al. 2019",
+   "title": "Bayesian Symbolic Regression",
+   "venue": "arXiv preprint arXiv:1910.08892",
+   "url": "https://arxiv.org/abs/1910.08892"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Authors' code: github.com/ying531/MCMC-SymReg. formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "kan-feynman-no-units-subset",
+  "paper": {
+   "short": "Liu et al. 2025",
+   "title": "KAN: Kolmogorov-Arnold Networks",
+   "venue": "ICLR 2025",
+   "url": "https://arxiv.org/abs/2404.19756"
+  },
+  "data": null,
+  "notes": "Table 2 (27 dimensionless Feynman formulas); KAN released no data for them."
+ },
+ {
+  "catalog": "kan-toy-functions",
+  "paper": {
+   "short": "Liu et al. 2025",
+   "title": "KAN: Kolmogorov-Arnold Networks",
+   "venue": "ICLR 2025",
+   "url": "https://arxiv.org/abs/2404.19756"
+  },
+  "data": null,
+  "notes": "Sec. 3.1 toy functions; input range from pykan's create_dataset defaults (github.com/KindXiaoming/pykan, MIT)."
+ },
+ {
+  "catalog": "keijzer",
+  "paper": {
+   "short": "Keijzer 2003",
+   "title": "Improving Symbolic Regression with Interval Arithmetic and Linear Scaling",
+   "venue": "Genetic Programming, Lecture Notes in Computer Science, pp. 70-82",
+   "url": "https://doi.org/10.1007/3-540-36599-0_7"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "keijzer-points",
+  "paper": {
+   "short": "Keijzer 2003",
+   "title": "Improving Symbolic Regression with Interval Arithmetic and Linear Scaling",
+   "venue": "Genetic Programming, Lecture Notes in Computer Science, pp. 70-82",
+   "url": "https://doi.org/10.1007/3-540-36599-0_7"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Keijzer's fixed grids; points srbf-generated. formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "kim-et-al-eql-benchmark-functions",
+  "paper": {
+   "short": "Kim et al. 2021",
+   "title": "Integration of Neural Network-Based Symbolic Regression in Deep Learning for Scientific Discovery",
+   "venue": "IEEE Transactions on Neural Networks and Learning Systems 32(9):4166-4177",
+   "url": "https://doi.org/10.1109/TNNLS.2020.3017010"
+  },
+  "data": {
+   "short": "GitHub samuelkim314/DeepSymReg@57bbe2e",
+   "title": "DeepSymReg benchmark.py (no licence file)",
+   "url": "https://github.com/samuelkim314/DeepSymReg/blob/57bbe2e2c7f0cd07dc34ed99c7dc75bdd1445d87/benchmark.py"
+  },
+  "notes": "Paper benchmark table (arXiv:1912.04825) plus two code-only functions from benchmark.py."
+ },
+ {
+  "catalog": "knowledge-integration-newtonian-cases",
+  "paper": {
+   "short": "Taskin et al. 2026",
+   "title": "Knowledge integration for physics-informed symbolic regression using pre-trained large language models",
+   "venue": "Scientific Reports 16(1):1614",
+   "url": "https://doi.org/10.1038/s41598-026-35327-6"
+  },
+  "data": {
+   "short": "GitHub bilgesi/SR-LLM-Integration@1508a37",
+   "title": "SR-LLM-Integration generator (Apache-2.0)",
+   "url": "https://github.com/bilgesi/SR-LLM-Integration/blob/1508a3701c2d30c6c776b33762656639d999bc42/src/run_main_claim.py"
+  },
+  "notes": "Eqs. (2)-(4) of the paper (arXiv:2509.03036)."
+ },
+ {
+  "catalog": "korns",
+  "paper": {
+   "short": "Korns 2011",
+   "title": "Accuracy in Symbolic Regression",
+   "venue": "Genetic Programming Theory and Practice IX, Genetic and Evolutionary Computation, pp. 129-151",
+   "url": "https://doi.org/10.1007/978-1-4614-1770-5_8"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "koza",
+  "paper": {
+   "short": "Koza 1994",
+   "title": "Genetic Programming II: Automatic Discovery of Reusable Programs",
+   "venue": "MIT Press, 1994 (Sec. 5.1)",
+   "url": "https://archive.org/details/geneticprogrammi0000koza_a3i3"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Koza-2 (quintic) and Koza-3 (sextic), GP II Sec. 5.1 (source audit A1; no DOI found on Crossref; archive.org scan is lending-restricted). formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "langlaw-perovskites",
+  "paper": {
+   "short": "Guan et al. 2026",
+   "title": "Discovery of Interpretable Physical Laws in Materials via Language-Model-Guided Symbolic Regression",
+   "venue": "arXiv preprint arXiv:2602.22967",
+   "url": "https://arxiv.org/abs/2602.22967"
+  },
+  "data": {
+   "short": "GitHub NAKONAKO4/langlaw@a69229c",
+   "title": "LangLaw data/{bulk_modulus,bandgap,oer_activity}.csv (README: MIT)",
+   "url": "https://github.com/NAKONAKO4/langlaw/tree/a69229ce0c8f4549f5ba87514713c19e0e7974c2/data"
+  },
+  "notes": "Fourth member from Roy-SR-007/HierBOSSS@0c6b856 perovskites_data/processed_data.csv (MIT). Underlying data: Weng et al. 2020, Nat. Commun. 11:3513 (doi:10.1038/s41467-020-17263-9) and the NOMAD dataset \"Cubic ABO3 perovskites\" (Foppa 2022, doi:10.17172/NOMAD/2022.02.21-3)."
+ },
+ {
+  "catalog": "lasr-bigbench",
+  "paper": {
+   "short": "Grayeli et al. 2024",
+   "title": "Symbolic Regression with a Learned Concept Library",
+   "venue": "NeurIPS 2024",
+   "url": "https://arxiv.org/abs/2409.09359"
+  },
+  "data": {
+   "short": "GitHub trishullab/LibraryAugmentedSymbolicRegression.jl@de6b22d",
+   "title": "LaSR bigbench/csvs.zip (lasr-experiments branch; Apache-2.0)",
+   "url": "https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/tree/de6b22d5282e7de3432b0d52758a6ec3f583527d/bigbench"
+  },
+  "notes": "Derived from BIG-bench results (Srivastava et al. 2022, TMLR; arXiv:2206.04615; google/BIG-bench, Apache-2.0)."
+ },
+ {
+  "catalog": "lasr-noisy-feynman-with-distractors",
+  "paper": {
+   "short": "Grayeli et al. 2024",
+   "title": "Symbolic Regression with a Learned Concept Library",
+   "venue": "NeurIPS 2024",
+   "url": "https://arxiv.org/abs/2409.09359"
+  },
+  "data": {
+   "short": "GitHub trishullab/LibraryAugmentedSymbolicRegression.jl@de6b22d",
+   "title": "LaSR data/FeynmanEquations.csv + experiments dummy recipe (Apache-2.0)",
+   "url": "https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/data/FeynmanEquations.csv"
+  },
+  "notes": "Base laws = FSReD (identical to srbf feynman); distractor recipe from the authors' experiments/*.py."
+ },
+ {
+  "catalog": "lasr-synthetic-equations",
+  "paper": {
+   "short": "Grayeli et al. 2024",
+   "title": "Symbolic Regression with a Learned Concept Library",
+   "venue": "NeurIPS 2024",
+   "url": "https://arxiv.org/abs/2409.09359"
+  },
+  "data": {
+   "short": "GitHub trishullab/LibraryAugmentedSymbolicRegression.jl@de6b22d",
+   "title": "LaSR experiments/dataset.py synthetic_equations() (Apache-2.0)",
+   "url": "https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/experiments/dataset.py"
+  },
+  "notes": "41 equations eq0..eq40 of synthetic_equations()."
+ },
+ {
+  "catalog": "livermore",
+  "paper": {
+   "short": "Mundhenk et al. 2021",
+   "title": "Symbolic Regression via Neural-Guided Genetic Programming Population Seeding",
+   "venue": "NeurIPS 2021",
+   "url": "https://arxiv.org/abs/2111.00053"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Defining paper for Livermore-1..22 (NGGP); four members first published in Petersen et al. 2021 (DSR) as Nguyen variants. The 2023 csv renumbers the paper's Livermore-19..22 to 20..23; Livermore-19 is repo-only. formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "livermore2",
+  "paper": null,
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Repository-only set (DSO uDSR release 2069d4e); no paper defines it (source audit B1). Pettit et al., DisCo-DSO, AAAI 2025 (arXiv:2412.11051) prints 31 of 150 members as skeletons only."
+ },
+ {
+  "catalog": "llm-lex-random-mathematica-functions",
+  "paper": {
+   "short": "Harvey et al. 2026",
+   "title": "Symbolic regression with multimodal large language models and Kolmogorov–Arnold networks",
+   "venue": "Machine Learning: Science and Technology 7(4):045040",
+   "url": "https://doi.org/10.1088/2632-2153/ae8b73"
+  },
+  "data": null,
+  "notes": "Table 1 of arXiv:2505.07956v1 (Table 2 of the journal version)."
+ },
+ {
+  "catalog": "llm-lex-random-mathematica-functions-points",
+  "paper": {
+   "short": "Harvey et al. 2026",
+   "title": "Symbolic regression with multimodal large language models and Kolmogorov–Arnold networks",
+   "venue": "Machine Learning: Science and Technology 7(4):045040",
+   "url": "https://doi.org/10.1088/2632-2153/ae8b73"
+  },
+  "data": null,
+  "notes": "100 evenly spaced points on [0.1, 5]; srbf-generated; no upstream data file."
+ },
+ {
+  "catalog": "llm-pysr-battery",
+  "paper": {
+   "short": "Xie et al. 2026",
+   "title": "Language models guide symbolic equation discovery by controlling search",
+   "venue": "arXiv preprint arXiv:2607.04156",
+   "url": "https://arxiv.org/abs/2607.04156"
+  },
+  "data": {
+   "short": "GitHub XieZikai/LLM-PySR@dce2fae",
+   "title": "LLM-PySR battery_cycle_life_log_zscore split files (MIT)",
+   "url": "https://github.com/XieZikai/LLM-PySR/tree/dce2fae1f51785634435861d9c6af30f27ea6513/data/battery_cycle_life_log_zscore"
+  },
+  "notes": "Features derived from Severson et al. 2019, Nat. Energy 4:383 (doi:10.1038/s41560-019-0356-8), raw data on data.matr.io."
+ },
+ {
+  "catalog": "llm-sr-bactgrow",
+  "paper": {
+   "short": "Shojaee et al. 2025",
+   "title": "LLM-SR: Scientific Equation Discovery via Programming with Large Language Models",
+   "venue": "ICLR 2025",
+   "url": "https://arxiv.org/abs/2404.18400"
+  },
+  "data": {
+   "short": "GitHub deep-symbolic-mathematics/LLM-SR@41c2123",
+   "title": "LLM-SR data/bactgrow train/test_id/test_ood (MIT)",
+   "url": "https://github.com/deep-symbolic-mathematics/LLM-SR/tree/41c212312df6c16d936c9cb395356a62774c47e3/data/bactgrow"
+  },
+  "notes": "E. coli growth-rate task, App. D.2."
+ },
+ {
+  "catalog": "llm-sr-stress-strain",
+  "paper": {
+   "short": "Shojaee et al. 2025",
+   "title": "LLM-SR: Scientific Equation Discovery via Programming with Large Language Models",
+   "venue": "ICLR 2025",
+   "url": "https://arxiv.org/abs/2404.18400"
+  },
+  "data": {
+   "short": "Mendeley Data 10.17632/rd6jm9tyb6.1",
+   "title": "Stress-strain data for aluminum 6061-T651 from 9 lots at 6 temperatures under uniaxial and plain strain tension",
+   "url": "https://doi.org/10.17632/rd6jm9tyb6.1"
+  },
+  "notes": "Split files from LLM-SR@41c2123 data/stressstrain (T = 200 C held out). Data article: Aakash, Connors & Shields 2019, Data in Brief (doi:10.1016/j.dib.2019.104085)."
+ },
+ {
+  "catalog": "materials-laws-multi-agent",
+  "paper": {
+   "short": "Hu et al. 2024",
+   "title": "A Multi-agent Framework for Physical Laws Discovery",
+   "venue": "arXiv preprint arXiv:2411.16416",
+   "url": "https://arxiv.org/abs/2411.16416"
+  },
+  "data": {
+   "short": "GitHub AlexanderKvashnin/SISSO_hardness@7f36d9b",
+   "title": "SISSO_hardness train.dat (61-compound Vickers hardness set; no licence)",
+   "url": "https://github.com/AlexanderKvashnin/SISSO_hardness/blob/7f36d9b5edabe3dfe3068adb27f68ed2daa23fd2/train.dat"
+  },
+  "notes": "Release member: the Vickers-hardness case study, data of Tantardini et al. 2024, J. Comput. Sci. 82:102402 (doi:10.1016/j.jocs.2024.102402). The paper's other datasets (elasisso, metallic-glass GFA) are not in the catalog."
+ },
+ {
+  "catalog": "mcdermott-predictive-modelling",
+  "paper": {
+   "short": "McDermott et al. 2012",
+   "title": "Genetic programming needs better benchmarks",
+   "venue": "Proceedings of the 14th annual conference on Genetic and evolutionary computation (GECCO '12), pp. 791-798",
+   "url": "https://doi.org/10.1145/2330163.2330273"
+  },
+  "data": {
+   "short": "GitHub DALabNOVA/slim@aca7357",
+   "title": "slim_gsgp datasets/data (QSAR %F, LD50, %PPB tables; MIT)",
+   "url": "https://github.com/DALabNOVA/slim/tree/aca73575c46a1a2d90dd55680e09f8b1c4d3a8cf/slim_gsgp/datasets/data"
+  },
+  "notes": "QSAR tables of Archetti et al. 2007 (doi:10.1007/s10710-007-9040-z). Other Table 1 members come from their own sources: SILSO yearly sunspot number (CC BY-NC) and Mackey-Glass mg.dat (R. Jang, Wayback copy)."
+ },
+ {
+  "catalog": "mcdermott-table-1-predictive-modelling-sets-points",
+  "paper": {
+   "short": "McDermott et al. 2012",
+   "title": "Genetic programming needs better benchmarks",
+   "venue": "Proceedings of the 14th annual conference on Genetic and evolutionary computation (GECCO '12), pp. 791-798",
+   "url": "https://doi.org/10.1145/2330163.2330273"
+  },
+  "data": null,
+  "notes": "DyFor simulated series (Wagner, Michalewicz, Khouja & McGregor 2007, IEEE TEVC 11:433, doi:10.1109/TEVC.2006.882430) on x = 1..60; points srbf-generated."
+ },
+ {
+  "catalog": "meier",
+  "paper": {
+   "short": "Meier et al. 2013",
+   "title": "Accelerating convergence in cartesian genetic programming by using a new genetic operator",
+   "venue": "Proceedings of the 15th annual conference on Genetic and evolutionary computation (GECCO '13), pp. 981-988",
+   "url": "https://doi.org/10.1145/2463372.2463481"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Meier-3/-4 = f3/f4 of Meier, Gonter & Kruse 2013 (source audit A1). formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "multi-view-sr-synthetic-benchmarks",
+  "paper": {
+   "short": "Russeil et al. 2024",
+   "title": "Multiview Symbolic Regression",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference (GECCO '24), pp. 961-970",
+   "url": "https://doi.org/10.1145/3638529.3654087"
+  },
+  "data": {
+   "short": "GitHub erusseil/MvSR-analysis@ec5abd6",
+   "title": "MvSR-analysis generate_toy.py (no licence file)",
+   "url": "https://github.com/erusseil/MvSR-analysis/blob/ec5abd674c466d4d22957122db7b26680c457e59/generate_toy.py"
+  },
+  "notes": "Preprint arXiv:2402.04298. Sec. 3.2 families f1-f3 (f2/f3 after sklearn make_friedman1/2)."
+ },
+ {
+  "catalog": "multi-view-sr-synthetic-benchmarks-points",
+  "paper": {
+   "short": "Russeil et al. 2024",
+   "title": "Multiview Symbolic Regression",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference (GECCO '24), pp. 961-970",
+   "url": "https://doi.org/10.1145/3638529.3654087"
+  },
+  "data": {
+   "short": "GitHub erusseil/MvSR-analysis@ec5abd6",
+   "title": "MvSR-analysis generate_toy.py (no licence file)",
+   "url": "https://github.com/erusseil/MvSR-analysis/blob/ec5abd674c466d4d22957122db7b26680c457e59/generate_toy.py"
+  },
+  "notes": "20-point np.arange grids of generate_toy.py; points srbf-generated."
+ },
+ {
+  "catalog": "mvsr-2024",
+  "paper": {
+   "short": "Russeil et al. 2024",
+   "title": "Multiview Symbolic Regression",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference (GECCO '24), pp. 961-970",
+   "url": "https://doi.org/10.1145/3638529.3654087"
+  },
+  "data": {
+   "short": "GitHub erusseil/MvSR-analysis@ec5abd6",
+   "title": "MvSR-analysis real_data/ (no licence file)",
+   "url": "https://github.com/erusseil/MvSR-analysis/tree/ec5abd674c466d4d22957122db7b26680c457e59/real_data"
+  },
+  "notes": "Chemistry (absorption), astrophysics (ZTF SN Ia light curves) and finance views; the 480 finance test assets come from Kaggle iveeaten3223times/massive-yahoo-finance-dataset."
+ },
+ {
+  "catalog": "mvsr-2025",
+  "paper": {
+   "short": "Russeil et al. 2026",
+   "title": "Exploring multi-view symbolic regression methods in physical sciences",
+   "venue": "Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences 384(2317):20240592",
+   "url": "https://doi.org/10.1098/rsta.2024.0592"
+  },
+  "data": {
+   "short": "GitHub erusseil/mvsr@b39ba79",
+   "title": "mvsr datasets/ (no licence file)",
+   "url": "https://github.com/erusseil/mvsr/tree/b39ba792605d8ab08071d0e4fd2acd40c220ab5e/datasets"
+  },
+  "notes": "Preprint arXiv:2509.10500. Groups: galaxies (Dehghani et al. 2020, A&A 643:A161), supernovae, Nikuradse (PMLB), Michaelis-Menten 1913 (via Golicnik 2012), network degree distributions (KONECT)."
+ },
+ {
+  "catalog": "neat",
+  "paper": {
+   "short": "Trujillo et al. 2016",
+   "title": "neat Genetic Programming: Controlling bloat naturally",
+   "venue": "Information Sciences 333:21-43",
+   "url": "https://doi.org/10.1016/j.ins.2015.11.010"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "neat-GP's Table 2 aggregates classic problems (Koza-1, Nguyen-3/5/7/10, Keijzer-6, Korns-12, Vladislavleva-1, Pagie-1) under DSO row numbers. formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "neat-points",
+  "paper": {
+   "short": "Trujillo et al. 2016",
+   "title": "neat Genetic Programming: Controlling bloat naturally",
+   "venue": "Information Sciences 333:21-43",
+   "url": "https://doi.org/10.1016/j.ins.2015.11.010"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Neat-6 (= Keijzer-6) on the integer grid 1..50, test 1..120; points srbf-generated. formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "newtonbench",
+  "paper": {
+   "short": "Zheng et al. 2026",
+   "title": "NewtonBench: Benchmarking Generalizable Scientific Law Discovery in LLM Agents",
+   "venue": "ICLR 2026",
+   "url": "https://arxiv.org/abs/2510.07172"
+  },
+  "data": {
+   "short": "GitHub HKUST-KnowComp/NewtonBench@912a4ba",
+   "title": "NewtonBench modules/*/LAW_REGISTRY (MIT)",
+   "url": "https://github.com/HKUST-KnowComp/NewtonBench/tree/912a4ba5f4356ddd06acc16e44460ca30be4abc2/modules"
+  },
+  "notes": "108 shifted laws; registry identical to the paper's Table 5."
+ },
+ {
+  "catalog": "nguyen",
+  "paper": {
+   "short": "Uy et al. 2011",
+   "title": "Semantically-based crossover in genetic programming: application to real-valued symbolic regression",
+   "venue": "Genetic Programming and Evolvable Machines 12(2):91-119",
+   "url": "https://doi.org/10.1007/s10710-010-9121-2"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Nguyen-1..10 = F1..F10 of Uy et al. 2011 Table 3 (names from McDermott et al. 2012); Nguyen-11/12 are Keijzer 2003 formulas (source audit A1). formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "nguyen-c-points",
+  "paper": {
+   "short": "Sun et al. 2023",
+   "title": "Symbolic Physics Learner: Discovering governing equations via Monte Carlo tree search",
+   "venue": "ICLR 2023",
+   "url": "https://arxiv.org/abs/2205.13134"
+  },
+  "data": {
+   "short": "GitHub isds-neu/SymbolicPhysicsLearner@c0c18c9",
+   "title": "SPL regression_task/task_info.py (MIT)",
+   "url": "https://github.com/isds-neu/SymbolicPhysicsLearner/blob/c0c18c90d61510a78ff2d24ac5299ad92c8acc59/regression_task/task_info.py"
+  },
+  "notes": "Nguyen-2c in SPL's variant (formula, arity and range from task_info.py; test grid E[0,100]); Nguyen-c variants go back to Petersen et al. 2021 (DSR). Points srbf-generated."
+ },
+ {
+  "catalog": "nikuradse",
+  "paper": {
+   "short": "Nikuradse 1950",
+   "title": "Laws of Flow in Rough Pipes",
+   "venue": "NACA Technical Memorandum 1292 (translation of VDI-Forschungsheft 361, 1933)",
+   "url": "https://ntrs.nasa.gov/citations/19930093938"
+  },
+  "data": {
+   "short": "PMLB (EpistasisLab/pmlb@7c1f4bd)",
+   "title": "PMLB nikuradse_1 and nikuradse_2 (MIT)",
+   "url": "https://github.com/EpistasisLab/pmlb/tree/7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68/datasets/nikuradse_1"
+  },
+  "notes": "Title, author and report number from the NASA NTRS API (19930093938); the 1933 original year from the survey record. PMLB transcription by G. Kronberger (PR #175, commit 872ec0a, unchanged at 7c1f4bd; nikuradse_2 is the sibling folder). SR use: Guimera et al. 2020 Sci. Adv. and Reichardt et al. 2020, PRL 124:084503 (doi:10.1103/PhysRevLett.124.084503)."
+ },
+ {
+  "catalog": "nonic-points",
+  "paper": {
+   "short": "Krawiec & Pawlak 2013",
+   "title": "Locally geometric semantic crossover: a study on the roles of semantics and homology in recombination operators",
+   "venue": "Genetic Programming and Evolvable Machines 14(1):31-63",
+   "url": "https://doi.org/10.1007/s10710-012-9172-7"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Nonic: Krawiec & Pawlak, GPEM 14(1) (Table 2) and GECCO 2013 (doi:10.1145/2463372.2463483, Table 1); 20 equidistant training points on [-1,1]. Points srbf-generated. formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "nsrwh-only-five-variables-nc",
+  "paper": {
+   "short": "Bendinelli et al. 2023",
+   "title": "Controllable Neural Symbolic Regression",
+   "venue": "ICML 2023 (PMLR 202)",
+   "url": "https://arxiv.org/abs/2304.10336"
+  },
+  "data": {
+   "short": "GitHub SymposiumOrganization/ControllableNeuralSymbolicRegression@3060cb8",
+   "title": "NSRwH test_set/only_five_variables_nc.csv (MIT)",
+   "url": "https://github.com/SymposiumOrganization/ControllableNeuralSymbolicRegression/blob/3060cb8d2b79071f80c51cd35c2808833ae15ec8/test_set/only_five_variables_nc.csv"
+  },
+  "notes": "Sec. 3.1 dataset 3."
+ },
+ {
+  "catalog": "nsrwh-only-five-variables-wc",
+  "paper": {
+   "short": "Bendinelli et al. 2023",
+   "title": "Controllable Neural Symbolic Regression",
+   "venue": "ICML 2023 (PMLR 202)",
+   "url": "https://arxiv.org/abs/2304.10336"
+  },
+  "data": {
+   "short": "GitHub SymposiumOrganization/ControllableNeuralSymbolicRegression@3060cb8",
+   "title": "NSRwH test_set/only_five_variables_wc.csv (MIT)",
+   "url": "https://github.com/SymposiumOrganization/ControllableNeuralSymbolicRegression/blob/3060cb8d2b79071f80c51cd35c2808833ae15ec8/test_set/only_five_variables_wc.csv"
+  },
+  "notes": "Sec. 3.1 dataset 4."
+ },
+ {
+  "catalog": "nsrwh-train-nc",
+  "paper": {
+   "short": "Bendinelli et al. 2023",
+   "title": "Controllable Neural Symbolic Regression",
+   "venue": "ICML 2023 (PMLR 202)",
+   "url": "https://arxiv.org/abs/2304.10336"
+  },
+  "data": {
+   "short": "GitHub SymposiumOrganization/ControllableNeuralSymbolicRegression@3060cb8",
+   "title": "NSRwH test_set/train_nc.csv (MIT)",
+   "url": "https://github.com/SymposiumOrganization/ControllableNeuralSymbolicRegression/blob/3060cb8d2b79071f80c51cd35c2808833ae15ec8/test_set/train_nc.csv"
+  },
+  "notes": "Sec. 3.1 dataset 1."
+ },
+ {
+  "catalog": "nsrwh-train-wc",
+  "paper": {
+   "short": "Bendinelli et al. 2023",
+   "title": "Controllable Neural Symbolic Regression",
+   "venue": "ICML 2023 (PMLR 202)",
+   "url": "https://arxiv.org/abs/2304.10336"
+  },
+  "data": {
+   "short": "GitHub SymposiumOrganization/ControllableNeuralSymbolicRegression@3060cb8",
+   "title": "NSRwH test_set/train_wc.csv (MIT)",
+   "url": "https://github.com/SymposiumOrganization/ControllableNeuralSymbolicRegression/blob/3060cb8d2b79071f80c51cd35c2808833ae15ec8/test_set/train_wc.csv"
+  },
+  "notes": "Sec. 3.1 dataset 2."
+ },
+ {
+  "catalog": "nuclear-misr",
+  "paper": {
+   "short": "Munoz et al. 2025",
+   "title": "Discovering nuclear models from symbolic machine learning",
+   "venue": "Communications Physics 8(1):101",
+   "url": "https://doi.org/10.1038/s42005-025-02023-2"
+  },
+  "data": {
+   "short": "AME2020 (Wang et al. 2021, Chin. Phys. C 45:030003)",
+   "title": "The AME 2020 atomic mass evaluation (II). Tables, graphs and references*",
+   "url": "https://doi.org/10.1088/1674-1137/abddaf"
+  },
+  "notes": "Binding energies from AME2020 (cited as data); charge radii from Angeli & Marinova 2013, ADNDT 99:69 (doi:10.1016/j.adt.2011.12.006; IAEA charge_radii.csv). srbf uses the MISR split files of munozariasjm/nuclear-misr@791e28c Data/Experimental (no licence file). Preprint arXiv:2404.11477."
+ },
+ {
+  "catalog": "occamnet-analytic-and-non-analytic-suites",
+  "paper": {
+   "short": "Dugan et al. 2020",
+   "title": "OccamNet: A Fast Neural Model for Symbolic Regression at Scale",
+   "venue": "arXiv preprint arXiv:2007.10784",
+   "url": "https://arxiv.org/abs/2007.10784"
+  },
+  "data": null,
+  "notes": "Tables 1, 2 and 5 of arXiv:2007.10784v3 (cross-checked with the authors' OccamNet_Public Benchmarks.py)."
+ },
+ {
+  "catalog": "oxygen-ion-conductors",
+  "paper": {
+   "short": "Jang et al. 2026",
+   "title": "Charting the Landscape of Oxygen Ion Conductors: A 60-Year Dataset with Interpretable Regression Models",
+   "venue": "Scientific Data 13(1):778",
+   "url": "https://doi.org/10.1038/s41597-026-07100-x"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.18947543",
+   "title": "Charting the Landscape of Oxygen Ion Conductors: A 60-Year Dataset",
+   "url": "https://doi.org/10.5281/zenodo.18947543"
+  },
+  "notes": "Preprint arXiv:2601.16852. srbf uses the authors' featurized task files (JerryGarcia1995/OxygenIonConductor@5ffef73 modelling_GoodRegressor/DatabaseOnly, no licence); the raw database is the CC BY 4.0 Zenodo record."
+ },
+ {
+  "catalog": "pagie",
+  "paper": {
+   "short": "Pagie & Hogeweg 1997",
+   "title": "Evolutionary Consequences of Coevolving Targets",
+   "venue": "Evolutionary Computation 5(4):401-418",
+   "url": "https://doi.org/10.1162/evco.1997.5.4.401"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Pagie-1 (source audit A2). formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "pagie-points",
+  "paper": {
+   "short": "Pagie & Hogeweg 1997",
+   "title": "Evolutionary Consequences of Coevolving Targets",
+   "venue": "Evolutionary Computation 5(4):401-418",
+   "url": "https://doi.org/10.1162/evco.1997.5.4.401"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Pagie-1 (source audit A2). formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "phye2e-llm-generated-synthetic-formulas",
+  "paper": {
+   "short": "Ying et al. 2025",
+   "title": "A neural symbolic model for space physics",
+   "venue": "Nature Machine Intelligence 7(10):1726-1741",
+   "url": "https://doi.org/10.1038/s42256-025-01126-3"
+  },
+  "data": {
+   "short": "figshare 10.6084/m9.figshare.29615831.v1",
+   "title": "PhyE2E_datas",
+   "url": "https://doi.org/10.6084/m9.figshare.29615831.v1"
+  },
+  "notes": "exprs_test_ranked.json (600 formulas). Preprint arXiv:2503.07994; code Zenodo 10.5281/zenodo.16305086."
+ },
+ {
+  "catalog": "phye2e-space-physics",
+  "paper": {
+   "short": "Ying et al. 2025",
+   "title": "A neural symbolic model for space physics",
+   "venue": "Nature Machine Intelligence 7(10):1726-1741",
+   "url": "https://doi.org/10.1038/s42256-025-01126-3"
+  },
+  "data": {
+   "short": "figshare 10.6084/m9.figshare.29615831.v1",
+   "title": "PhyE2E_datas",
+   "url": "https://doi.org/10.6084/m9.figshare.29615831.v1"
+  },
+  "notes": "The 17 application files of the figshare record (SILSO sunspot copy is CC BY-NC). Code Zenodo 10.5281/zenodo.16305086."
+ },
+ {
+  "catalog": "physo-astro",
+  "paper": {
+   "short": "Tenachi et al. 2023",
+   "title": "Deep Symbolic Regression for Physics Guided by Units Constraints: Toward the Automated Discovery of Physical Laws",
+   "venue": "The Astrophysical Journal 959(2):99",
+   "url": "https://doi.org/10.3847/1538-4357/ad014c"
+  },
+  "data": null,
+  "notes": "Two Appendix A mocks (Tables 6-8 of arXiv:2303.03192); the PhySO repository ships no data or generator for them."
+ },
+ {
+  "catalog": "physo-astrophysical-case-studies",
+  "paper": {
+   "short": "Tenachi et al. 2023",
+   "title": "Deep Symbolic Regression for Physics Guided by Units Constraints: Toward the Automated Discovery of Physical Laws",
+   "venue": "The Astrophysical Journal 959(2):99",
+   "url": "https://doi.org/10.3847/1538-4357/ad014c"
+  },
+  "data": null,
+  "notes": "Appendices A-B of arXiv:2303.03192 (Tables 6-8); the PhySO repository demos (WassimTenachi/PhySO@bfbfa88) were consulted."
+ },
+ {
+  "catalog": "physo-class",
+  "paper": {
+   "short": "Tenachi et al. 2024",
+   "title": "Class Symbolic Regression: Gotta Fit ’Em All",
+   "venue": "The Astrophysical Journal Letters 969(2):L26",
+   "url": "https://doi.org/10.3847/2041-8213/ad5970"
+  },
+  "data": {
+   "short": "GitHub WassimTenachi/PhySO@bfbfa88",
+   "title": "PhySO ClassEquations.csv (MIT)",
+   "url": "https://github.com/WassimTenachi/PhySO/blob/bfbfa88d5def09d3d0cd47f3e2252b5a25836721/physo/benchmark/ClassDataset/ClassEquations.csv"
+  },
+  "notes": "Table 1 of arXiv:2312.01816 = ClassEquations.csv, vendored at bfbfa88. Released as PhySO v1.1.0 (Zenodo 10.5281/zenodo.11663147)."
+ },
+ {
+  "catalog": "physo-class-sr-benchmark",
+  "paper": {
+   "short": "Tenachi et al. 2024",
+   "title": "Class Symbolic Regression: Gotta Fit ’Em All",
+   "venue": "The Astrophysical Journal Letters 969(2):L26",
+   "url": "https://doi.org/10.3847/2041-8213/ad5970"
+  },
+  "data": {
+   "short": "Zenodo 10.5281/zenodo.11663147",
+   "title": "PhySO-v1.1.0",
+   "url": "https://doi.org/10.5281/zenodo.11663147"
+  },
+  "notes": "ClassEquations.csv + ClassProblem.generate_data_points in PhySO v1.1.0 (MIT). Preprint arXiv:2312.01816."
+ },
+ {
+  "catalog": "physo-milky-way-streams",
+  "paper": {
+   "short": "Tenachi et al. 2024",
+   "title": "Class Symbolic Regression: Gotta Fit ’Em All",
+   "venue": "The Astrophysical Journal Letters 969(2):L26",
+   "url": "https://doi.org/10.3847/2041-8213/ad5970"
+  },
+  "data": {
+   "short": "GitHub WassimTenachi/PhySO@bfbfa88",
+   "title": "PhySO demos/class_sr/demo_milky_way_streams/streams.csv (MIT; same blob as tag v1.1.0)",
+   "url": "https://github.com/WassimTenachi/PhySO/blob/bfbfa88d5def09d3d0cd47f3e2252b5a25836721/demos/class_sr/demo_milky_way_streams/streams.csv"
+  },
+  "notes": "Stream orbit samples from Ibata et al. 2023 (arXiv:2311.17202). Also in PhySO v1.1.0 (Zenodo 10.5281/zenodo.11663147)."
+ },
+ {
+  "catalog": "poly",
+  "paper": {
+   "short": "Poli 2003",
+   "title": "A Simple but Theoretically-Motivated Method to Control Bloat in Genetic Programming",
+   "venue": "Genetic Programming, Lecture Notes in Computer Science, pp. 204-217",
+   "url": "https://doi.org/10.1007/3-540-36599-0_19"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Only Poly-10 is Poli's; Poly-1..5 are DSO's 2023 demo problems with no paper (source audit A2). formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "pse-high-dimensional-distractor-set",
+  "paper": {
+   "short": "Ruan et al. 2025",
+   "title": "Discovering physical laws with parallel symbolic enumeration",
+   "venue": "Nature Computational Science 6(1):53-66",
+   "url": "https://doi.org/10.1038/s43588-025-00904-8"
+  },
+  "data": {
+   "short": "GitHub intell-sci-comput/PSE@7105cab",
+   "title": "PSE data/many_input generate.py + synthetic_50d_datasets_with_gt (MIT)",
+   "url": "https://github.com/intell-sci-comput/PSE/tree/7105caba63e754150dd3b160443984456ec99cd7/data/many_input"
+  },
+  "notes": "Supplementary Note 7; preprint arXiv:2407.04405v4. Code archived as Zenodo 10.5281/zenodo.17266354."
+ },
+ {
+  "catalog": "pysr-empiricalbench",
+  "paper": {
+   "short": "Cranmer 2023",
+   "title": "Interpretable Machine Learning for Science with PySR and SymbolicRegression.jl",
+   "venue": "arXiv preprint arXiv:2305.01582",
+   "url": "https://arxiv.org/abs/2305.01582"
+  },
+  "data": {
+   "short": "GitHub MilesCranmer/pysr_paper@b306874",
+   "title": "pysr_paper src/data/empirical_bench (MIT)",
+   "url": "https://github.com/MilesCranmer/pysr_paper/tree/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/data/empirical_bench"
+  },
+  "notes": "EmpiricalBench, Sec. 3.2 / Table 2; data files hubble.csv, leavitt.csv and inline tables in equations.yml."
+ },
+ {
+  "catalog": "pysr-empiricalbench-formulas",
+  "paper": {
+   "short": "Cranmer 2023",
+   "title": "Interpretable Machine Learning for Science with PySR and SymbolicRegression.jl",
+   "venue": "arXiv preprint arXiv:2305.01582",
+   "url": "https://arxiv.org/abs/2305.01582"
+  },
+  "data": {
+   "short": "GitHub MilesCranmer/pysr_paper@b306874",
+   "title": "pysr_paper equations.yml (MIT)",
+   "url": "https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/data/empirical_bench/equations.yml"
+  },
+  "notes": "EmpiricalBench laws, Table 2."
+ },
+ {
+  "catalog": "r-rationals-points",
+  "paper": {
+   "short": "Krawiec & Pawlak 2013",
+   "title": "Approximating geometric crossover by semantic backpropagation",
+   "venue": "Proceedings of the 15th annual conference on Genetic and evolutionary computation (GECCO '13), pp. 941-948",
+   "url": "https://doi.org/10.1145/2463372.2463483"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "R1-R3 from Krawiec & Pawlak 2013 (R3 earliest accessible in Pawlak, Wieloch & Krawiec, IEEE TEVC 2015, doi:10.1109/TEVC.2014.2321259); R1a-R3a (R-1*..R-3*) from Mundhenk et al. 2021 (arXiv:2111.00053). Points srbf-generated. formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "reproduction-bias-not-included-test-sets",
+  "paper": {
+   "short": "Sato & Sato 2025",
+   "title": "Can Test-time Computation Mitigate Reproduction Bias in Neural Symbolic Regression?",
+   "venue": "arXiv preprint arXiv:2505.22081",
+   "url": "https://arxiv.org/abs/2505.22081"
+  },
+  "data": {
+   "short": "GitHub Shun-0922/Mem-Bias-NSR@7a153ec",
+   "title": "Mem-Bias-NSR not_included.json + baseline.json (MIT)",
+   "url": "https://github.com/Shun-0922/Mem-Bias-NSR/tree/7a153ec94f59caffbd9404094a2e1eab58aa0c2e/test_datasets/original_datasets"
+  },
+  "notes": "Formula files are the authors' own (150 equations each); paper v1 was titled \"...Memorization Bias...\"."
+ },
+ {
+  "catalog": "rils-rols-random-instances",
+  "paper": {
+   "short": "Kartelj & Djukanović 2023",
+   "title": "RILS-ROLS: robust symbolic regression via iterated local search and ordinary least squares",
+   "venue": "Journal of Big Data 10(1):71",
+   "url": "https://doi.org/10.1186/s40537-023-00743-2"
+  },
+  "data": {
+   "short": "GitHub kartelj/rils-rols@54861c1",
+   "title": "rils-rols paper_resources/random_12345_truth/all.f (MIT)",
+   "url": "https://github.com/kartelj/rils-rols/tree/54861c1c8dc4a521da6885bdcfdc54ecb7b38c31/paper_resources/random_12345_truth"
+  },
+  "notes": "235 random instances."
+ },
+ {
+  "catalog": "rsrm-constant-optimization-benchmark",
+  "paper": {
+   "short": "Xu et al. 2024",
+   "title": "Reinforcement Symbolic Regression Machine",
+   "venue": "ICLR 2024 (proceedings version, App. C.6)",
+   "url": "https://proceedings.iclr.cc/paper_files/paper/2024/file/ef3a55fa15aa5fe39b7a2617b3a5d06e-Paper-Conference.pdf"
+  },
+  "data": null,
+  "notes": "Appendix C.6, Tables S8-S9 exist only in the ICLR 2024 proceedings/OpenReview (PJVUWpPnZC) version; arXiv:2305.14656v1 (titled \"RSRM: Reinforcement Symbolic Regression Machine\") lacks them, so the URL is the proceedings PDF; title as printed there."
+ },
+ {
+  "catalog": "rsrm-gaussian-cdf-extrapolation-test-points",
+  "paper": {
+   "short": "Xu et al. 2024",
+   "title": "RSRM: Reinforcement Symbolic Regression Machine",
+   "venue": "ICLR 2024",
+   "url": "https://arxiv.org/abs/2305.14656"
+  },
+  "data": null,
+  "notes": "Three normal-CDF curves on the 201-point grid E[-100,100]; points srbf-generated."
+ },
+ {
+  "catalog": "scilaws-real",
+  "paper": {
+   "short": "Huang et al. 2026",
+   "title": "Can LLMs Discover Scientific Laws in Real and Parallel Worlds?",
+   "venue": "arXiv preprint arXiv:2609.01552",
+   "url": "https://arxiv.org/abs/2609.01552"
+  },
+  "data": {
+   "short": "Hugging Face RealSR/SciLaws-Bench@15b9325",
+   "title": "SciLaws-Bench (SciLaws-Real tasks; per-task licences)",
+   "url": "https://huggingface.co/datasets/RealSR/SciLaws-Bench/tree/15b93258fabc8f1785c5a5ffd4d3e51fc15dd860"
+  },
+  "notes": "66 Type I tasks; each task's data keep their upstream licence (dataset/LICENSES.md). Harness: github.com/yiyihum/SciLaws-Bench."
+ },
+ {
+  "catalog": "scilaws-real-share-alike",
+  "paper": {
+   "short": "Huang et al. 2026",
+   "title": "Can LLMs Discover Scientific Laws in Real and Parallel Worlds?",
+   "venue": "arXiv preprint arXiv:2609.01552",
+   "url": "https://arxiv.org/abs/2609.01552"
+  },
+  "data": {
+   "short": "Hugging Face RealSR/SciLaws-Bench@15b9325",
+   "title": "SciLaws-Bench (SciLaws-Real tasks; per-task licences)",
+   "url": "https://huggingface.co/datasets/RealSR/SciLaws-Bench/tree/15b93258fabc8f1785c5a5ffd4d3e51fc15dd860"
+  },
+  "notes": "the share-alike tasks of scilaws-real; 66 Type I tasks; each task's data keep their upstream licence (dataset/LICENSES.md). Harness: github.com/yiyihum/SciLaws-Bench."
+ },
+ {
+  "catalog": "scimed-settling-sphere-configurations",
+  "paper": {
+   "short": "Keren et al. 2023",
+   "title": "A computational framework for physics-informed symbolic regression with straightforward integration of domain knowledge",
+   "venue": "Scientific Reports 13(1):1249",
+   "url": "https://doi.org/10.1038/s41598-023-28328-2"
+  },
+  "data": {
+   "short": "GitHub LironSimon/SciMED@2779587",
+   "title": "SciMED data_generators/ (MIT)",
+   "url": "https://github.com/LironSimon/SciMED/tree/27795878fd565d5aa238250bc9047eac27cebe25/data_generators"
+  },
+  "notes": "Table 3 target equations; preprint arXiv:2209.06257."
+ },
+ {
+  "catalog": "scrbenchmark",
+  "paper": {
+   "short": "Bachinger et al. 2025",
+   "title": "SCRBenchmark: A Benchmarking Library for Shape-Constrained Regression",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference Companion (GECCO '25 Companion), pp. 2505-2513",
+   "url": "https://doi.org/10.1145/3712255.3734280"
+  },
+  "data": {
+   "short": "GitHub prescriptiveanalytics/SCR-Benchmarks@2869bd5",
+   "title": "SCR-Benchmarks (MIT)",
+   "url": "https://github.com/prescriptiveanalytics/SCR-Benchmarks/tree/2869bd564ff5eaa859577f02504752411bed817f"
+  },
+  "notes": "SRSD-Feynman laws (omron-sinicx/srsd-benchmark, MIT) annotated with shape constraints."
+ },
+ {
+  "catalog": "shadow-economies",
+  "paper": {
+   "short": "Truscott & Korns 2011",
+   "title": "Detecting Shadow Economy Sizes with Symbolic Regression",
+   "venue": "Genetic Programming Theory and Practice IX, Genetic and Evolutionary Computation, pp. 195-210",
+   "url": "https://doi.org/10.1007/978-1-4614-1770-5_11"
+  },
+  "data": {
+   "short": "symbolicregression.com ShadowEconomiesProblem.zip (Wayback 2017-03-04)",
+   "title": "SHADOW_ECONOMIES.xlsx (data provided by P. Truscott)",
+   "url": "http://web.archive.org/web/20170304231546/http://symbolicregression.com/sites/default/files/DataSets/ShadowEconomiesProblem.zip"
+  },
+  "notes": "Predictors are World Bank indicators (Dec 2010). No licence stated."
+ },
+ {
+  "catalog": "shape-constrained-real-world",
+  "paper": {
+   "short": "Kronberger et al. 2022",
+   "title": "Shape-Constrained Symbolic Regression—Improving Extrapolation with Prior Knowledge",
+   "venue": "Evolutionary Computation 30(1):75-98",
+   "url": "https://doi.org/10.1162/evco_a_00294"
+  },
+  "data": {
+   "short": "UCI ML Repository 10.24432/C5859H",
+   "title": "Auto MPG",
+   "url": "https://doi.org/10.24432/C5859H"
+  },
+  "notes": "Cars = UCI Auto MPG (the same rows; CC BY 4.0). Preprint arXiv:2103.15624. The set's other members (friction F05128, flow stress) come from the authors' files in folivetti/ITEA@8669fd1 datasets/knowledge (no licence; industrial / doi:10.1063/1.5112747)."
+ },
+ {
+  "catalog": "shape-constrained-sr-synthetic",
+  "paper": {
+   "short": "Kronberger et al. 2022",
+   "title": "Shape-Constrained Symbolic Regression—Improving Extrapolation with Prior Knowledge",
+   "venue": "Evolutionary Computation 30(1):75-98",
+   "url": "https://doi.org/10.1162/evco_a_00294"
+  },
+  "data": null,
+  "notes": "Tables 1 and 6 of arXiv:2103.15624v2: 3 FDE problems (Chen et al. 2018) and FEY variants of FSReD laws."
+ },
+ {
+  "catalog": "sine-points",
+  "paper": {
+   "short": "Poli et al. 2008",
+   "title": "A Field Guide to Genetic Programming",
+   "venue": "lulu.com, 2008 (freely available; App. B.2, TinyGP example)",
+   "url": "http://www.gp-field-guide.org.uk"
+  },
+  "data": null,
+  "notes": "The authors' Sine is sin(x) on x = 0.0, 0.1, ..., 6.2 (63 points); DSO's row \"Sine\" is Nguyen-6 instead (survey fresh-18, source audit A1). Re-used by McPhee et al., GECCO 2015 (doi:10.1145/2739480.2754778). Points srbf-generated."
+ },
+ {
+  "catalog": "sisso-octet-binaries",
+  "paper": {
+   "short": "Ghiringhelli et al. 2015",
+   "title": "Big Data of Materials Science: Critical Role of the Descriptor",
+   "venue": "Physical Review Letters 114(10):105503",
+   "url": "https://doi.org/10.1103/PhysRevLett.114.105503"
+  },
+  "data": {
+   "short": "PRL 114:105503 Supplemental Material",
+   "title": "Critical_Role_SI.pdf, Tables 7-8 (82 octet binaries; CC BY 3.0)",
+   "url": "https://journals.aps.org/prl/supplemental/10.1103/PhysRevLett.114.105503/Critical_Role_SI.pdf"
+  },
+  "notes": "Preprint arXiv:1411.7437. Related: SISSO (Ouyang et al. 2018, doi:10.1103/PhysRevMaterials.2.083802), whose SI the survey also searched. The 3 AB-dimer features of the original 23 are in no published file."
+ },
+ {
+  "catalog": "sldbench",
+  "paper": {
+   "short": "Lin et al. 2025",
+   "title": "Can Language Models Discover Scaling Laws?",
+   "venue": "arXiv preprint arXiv:2507.21184",
+   "url": "https://arxiv.org/abs/2507.21184"
+  },
+  "data": {
+   "short": "Hugging Face pkuHaowei/sldbench@721b846",
+   "title": "SLDBench (8 scaling-law configs; no licence stated)",
+   "url": "https://huggingface.co/datasets/pkuHaowei/sldbench/tree/721b846056f031737ff7fa72572c021324e3ec0e"
+  },
+  "notes": "Companion code github.com/linhaowei1/SLD."
+ },
+ {
+  "catalog": "soose-fc",
+  "paper": {
+   "short": "Biggio et al. 2021",
+   "title": "Neural Symbolic Regression that Scales",
+   "venue": "ICML 2021 (PMLR 139)",
+   "url": "https://arxiv.org/abs/2106.06427"
+  },
+  "data": {
+   "short": "GitHub SymposiumOrganization/NeuralSymbolicRegressionThatScales@0cfff79",
+   "title": "NeSymReS benchmark file data/benchmark/old_test.csv (SOOSE WC/FC instantiation; deleted at HEAD)",
+   "url": "https://github.com/SymposiumOrganization/NeuralSymbolicRegressionThatScales/blob/0cfff793553f02c950c4350058a97aaea9a93322/data/benchmark/old_test.csv"
+  },
+  "notes": "SOOSE = 200 out-of-training-sample skeletons of NeSymReS (Biggio et al. 2021, Sec. 4.4). srbf vendored nc.csv @09f5af4 and old_test.csv @0cfff79 (recovered from deleted history; see assets/upstream/soose/NOTICE)."
+ },
+ {
+  "catalog": "soose-nc",
+  "paper": {
+   "short": "Biggio et al. 2021",
+   "title": "Neural Symbolic Regression that Scales",
+   "venue": "ICML 2021 (PMLR 139)",
+   "url": "https://arxiv.org/abs/2106.06427"
+  },
+  "data": {
+   "short": "GitHub SymposiumOrganization/NeuralSymbolicRegressionThatScales@09f5af4",
+   "title": "NeSymReS SOOSE NC test set (test_set/nc.csv)",
+   "url": "https://github.com/SymposiumOrganization/NeuralSymbolicRegressionThatScales/blob/09f5af4b0e142b23a9cca82e682d92229c986df1/test_set/nc.csv"
+  },
+  "notes": "SOOSE = 200 out-of-training-sample skeletons of NeSymReS (Biggio et al. 2021, Sec. 4.4). srbf vendored nc.csv @09f5af4 and old_test.csv @0cfff79 (recovered from deleted history; see assets/upstream/soose/NOTICE)."
+ },
+ {
+  "catalog": "soose-wc",
+  "paper": {
+   "short": "Biggio et al. 2021",
+   "title": "Neural Symbolic Regression that Scales",
+   "venue": "ICML 2021 (PMLR 139)",
+   "url": "https://arxiv.org/abs/2106.06427"
+  },
+  "data": {
+   "short": "GitHub SymposiumOrganization/NeuralSymbolicRegressionThatScales@0cfff79",
+   "title": "NeSymReS benchmark file data/benchmark/old_test.csv (SOOSE WC/FC instantiation; deleted at HEAD)",
+   "url": "https://github.com/SymposiumOrganization/NeuralSymbolicRegressionThatScales/blob/0cfff793553f02c950c4350058a97aaea9a93322/data/benchmark/old_test.csv"
+  },
+  "notes": "SOOSE = 200 out-of-training-sample skeletons of NeSymReS (Biggio et al. 2021, Sec. 4.4). srbf vendored nc.csv @09f5af4 and old_test.csv @0cfff79 (recovered from deleted history; see assets/upstream/soose/NOTICE)."
+ },
+ {
+  "catalog": "sparc-radial-acceleration",
+  "paper": {
+   "short": "Desmond et al. 2023",
+   "title": "On the functional form of the radial acceleration relation",
+   "venue": "Monthly Notices of the Royal Astronomical Society 521(2):1817-1831",
+   "url": "https://doi.org/10.1093/mnras/stad597"
+  },
+  "data": {
+   "short": "SPARC database (Lelli, McGaugh & Schombert 2016)",
+   "title": "SPARC mass models (MassModels_Lelli2016c.mrt, SPARC_Lelli2016c.mrt)",
+   "url": "https://astroweb.case.edu/SPARC/"
+  },
+  "notes": "RAR derived deterministically from the SPARC files per Desmond, Bartlett & Ferreira 2023 (arXiv:2301.04368). SPARC master paper: Lelli et al. 2016, AJ 152:157 (doi:10.3847/0004-6256/152/6/157); the site asks to cite it, no licence."
+ },
+ {
+  "catalog": "spl-noise-data-scarcity-grid",
+  "paper": {
+   "short": "Sun et al. 2023",
+   "title": "Symbolic Physics Learner: Discovering governing equations via Monte Carlo tree search",
+   "venue": "ICLR 2023",
+   "url": "https://arxiv.org/abs/2205.13134"
+  },
+  "data": null,
+  "notes": "Sec. 4.1 of arXiv:2205.13134v2: f(x) = 0.3x^3 + 0.5x^2 + 2x on U[-10,10]."
+ },
+ {
+  "catalog": "srbench-2.0-blackbox",
+  "paper": {
+   "short": "Imai Aldeia et al. 2025",
+   "title": "Call for Action: towards the next generation of symbolic regression benchmark",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference Companion (GECCO '25 Companion), pp. 2529-2538",
+   "url": "https://doi.org/10.1145/3712255.3734309"
+  },
+  "data": {
+   "short": "PMLB (EpistasisLab/pmlb@7c1f4bd)",
+   "title": "PMLB datasets (MIT)",
+   "url": "https://github.com/EpistasisLab/pmlb/tree/7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68/datasets"
+  },
+  "notes": "Preprint arXiv:2505.03977. 12 PMLB black-box datasets, fetched from PMLB master (= 7c1f4bd, srbf PMLB_REVISION). PMLB: Romano et al., arXiv:2012.00058."
+ },
+ {
+  "catalog": "srbench-2.0-first-principles",
+  "paper": {
+   "short": "Imai Aldeia et al. 2025",
+   "title": "Call for Action: towards the next generation of symbolic regression benchmark",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference Companion (GECCO '25 Companion), pp. 2529-2538",
+   "url": "https://doi.org/10.1145/3712255.3734309"
+  },
+  "data": {
+   "short": "PMLB (EpistasisLab/pmlb@7c1f4bd)",
+   "title": "PMLB first_principles_* datasets (MIT)",
+   "url": "https://github.com/EpistasisLab/pmlb/tree/7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68/datasets"
+  },
+  "notes": "Preprint arXiv:2505.03977. The 12 first_principles_* datasets were added to PMLB by PR #181 (commit 7c1f4bd); sources include Cranmer 2023 EmpiricalBench and Russeil et al. 2024 MvSR."
+ },
+ {
+  "catalog": "srbench-2021-blackbox",
+  "paper": {
+   "short": "La Cava et al. 2021",
+   "title": "Contemporary Symbolic Regression Methods and their Relative Performance",
+   "venue": "NeurIPS 2021 Track on Datasets and Benchmarks",
+   "url": "https://arxiv.org/abs/2107.14351"
+  },
+  "data": {
+   "short": "PMLB (EpistasisLab/pmlb@5ed0151)",
+   "title": "PMLB v1.0.2a datasets (MIT)",
+   "url": "https://github.com/EpistasisLab/pmlb/tree/5ed0151f01919aff0d616d5e8ea463587a255745/datasets"
+  },
+  "notes": "122 black-box regression datasets; membership from cavalab/srbench v2.0 (e5ded47). PMLB: Romano et al., arXiv:2012.00058."
+ },
+ {
+  "catalog": "srbench-2021-strogatz",
+  "paper": {
+   "short": "La Cava et al. 2021",
+   "title": "Contemporary Symbolic Regression Methods and their Relative Performance",
+   "venue": "NeurIPS 2021 Track on Datasets and Benchmarks",
+   "url": "https://arxiv.org/abs/2107.14351"
+  },
+  "data": {
+   "short": "PMLB (EpistasisLab/pmlb@00f6bd3)",
+   "title": "PMLB strogatz_* datasets (MIT)",
+   "url": "https://github.com/EpistasisLab/pmlb/tree/00f6bd3f970c63771ebc42688b00711363734f31/datasets"
+  },
+  "notes": "14 ODE-Strogatz problems (strogatz_*), originally from github.com/lacava/ode-strogatz."
+ },
+ {
+  "catalog": "srsd-dummy",
+  "paper": {
+   "short": "Matsubara et al. 2024",
+   "title": "Rethinking Symbolic Regression Datasets and Benchmarks for Scientific Discovery",
+   "venue": "Journal of Data-centric Machine Learning Research (DMLR) 2024",
+   "url": "https://arxiv.org/abs/2206.10540"
+  },
+  "data": null,
+  "notes": "No single data record: the dummy-column configuration comes from three HF datasets, yoshitomo-matsubara/srsd-feynman_easy_dummy@67a1cac, _medium_dummy@e373ffb, _hard_dummy@223c23c (CC BY 4.0), and the recipe from omron-sinicx/srsd-benchmark@7d00b45 dummy_column_mixer.py (MIT); base laws from FastSRB (fastsrb@3) / FSReD."
+ },
+ {
+  "catalog": "superconductor-tc",
+  "paper": {
+   "short": "Xie et al. 2019",
+   "title": "Functional form of the superconducting critical temperature from machine learning",
+   "venue": "Physical Review B 100(17):174513",
+   "url": "https://doi.org/10.1103/PhysRevB.100.174513"
+  },
+  "data": {
+   "short": "GitHub henniggroup/symbolic-regression-utilities@11cf1f3",
+   "title": "symbolic-regression-utilities datasets/AllenDynes (Apache-2.0)",
+   "url": "https://github.com/henniggroup/symbolic-regression-utilities/tree/11cf1f31888afe3a29140557dc7b3871102b8204/datasets/AllenDynes"
+  },
+  "notes": "Values from Allen & Dynes 1975, PRB 12:905 (doi:10.1103/PhysRevB.12.905). Preprint arXiv:1905.06780."
+ },
+ {
+  "catalog": "surfacebench-explicit-surfaces",
+  "paper": {
+   "short": "Kabra et al. 2026",
+   "title": "SURFACEBENCH: A Geometry-Aware Benchmark for Symbolic Surface Discovery",
+   "venue": "Transactions on Machine Learning Research (03/2026)",
+   "url": "https://arxiv.org/abs/2511.10833"
+  },
+  "data": null,
+  "notes": "129 explicit surfaces from App. A.7 Table 7 of arXiv:2511.10833v2; HF copies exist (pandoradox/symbolic-regression-surfaces@61d4ca8; ishobhnik/SurfaceBench, gated)."
+ },
+ {
+  "catalog": "sym-q-ai-feynman-with-drift-terms",
+  "paper": {
+   "short": "Tian et al. 2025",
+   "title": "Interactive symbolic regression with co-design mechanism through offline reinforcement learning",
+   "venue": "Nature Communications 16(1):3930",
+   "url": "https://doi.org/10.1038/s41467-025-59288-y"
+  },
+  "data": {
+   "short": "GitHub EPFL-IMOS/Sym-Q@104a486",
+   "title": "Sym-Q utils.py BENCHMARK (MIT)",
+   "url": "https://github.com/EPFL-IMOS/Sym-Q/blob/104a486070f615cd4fdb93a0e95adfd59625ee64/utils.py"
+  },
+  "notes": "Sym-Q evaluates \"using the setup described by Li et al.\" (T-JSL, ICLR 2023, OpenReview ULzyv9M1j5), which defines the AI-Feynman rows and the [-10, 10] sampling; preprint arXiv:2402.05306. Base laws from FSReD."
+ },
+ {
+  "catalog": "symantic-synthetic-set",
+  "paper": {
+   "short": "Muthyala et al. 2025",
+   "title": "SyMANTIC: An Efficient Symbolic Regression Method for Interpretable and Parsimonious Model Discovery in Science and Beyond",
+   "venue": "Industrial & Engineering Chemistry Research 64(6):3354-3369",
+   "url": "https://doi.org/10.1021/acs.iecr.4c03503"
+  },
+  "data": null,
+  "notes": "Table 1 + SI S1.1-S1.10 of arXiv:2502.03367v1."
+ },
+ {
+  "catalog": "symbolfit-lhc-spectra",
+  "paper": {
+   "short": "Tsoi et al. 2025",
+   "title": "SymbolFit: Automatic Parametric Modeling with Symbolic Regression",
+   "venue": "Computing and Software for Big Science 9(1):12",
+   "url": "https://doi.org/10.1007/s41781-025-00140-9"
+  },
+  "data": {
+   "short": "GitHub hftsoi/symbolfit@3c81433",
+   "title": "SymbolFit examples/datasets (MIT)",
+   "url": "https://github.com/hftsoi/symbolfit/tree/3c814338f9d660baa3a1d44b13240024b90ba515/examples/datasets"
+  },
+  "notes": "Spectra from CMS HEPData records (CC0): doi:10.17182/hepdata.91059.v1/t3, 10.17182/hepdata.150677.v1/t2, 10.17182/hepdata.144165.v1/t1, 10.17182/hepdata.130817.v1/t18, 10.17182/hepdata.141455.v1/t8. Preprint arXiv:2411.09851."
+ },
+ {
+  "catalog": "symbolicgpt-bivariate-set",
+  "paper": {
+   "short": "Tymkow et al. 2025",
+   "title": "Symbolic-Diffusion: Deep Learning Based Symbolic Regression with D3PM Discrete Token Diffusion",
+   "venue": "arXiv preprint arXiv:2510.07570",
+   "url": "https://arxiv.org/abs/2510.07570"
+  },
+  "data": {
+   "short": "GitHub rtymk/Symbolic_Diffusion@07439d1",
+   "title": "Symbolic-Diffusion repository (evaluation notebooks; GPL-3.0)",
+   "url": "https://github.com/rtymk/Symbolic_Diffusion/tree/07439d164d64891c9b006b11dd75cdeb2c45f6d0"
+  },
+  "notes": "Symbolic-Diffusion's 7000-sample evaluation split of the SymbolicGPT 2-variable dataset (Valipour et al. 2021, arXiv:2106.14131; generator mojivalipour/symbolicgpt@6aef07c, MIT); formulas extracted from evaluate.ipynb."
+ },
+ {
+  "catalog": "symbolicgpt-test-sets",
+  "paper": {
+   "short": "Valipour et al. 2021",
+   "title": "SymbolicGPT: A Generative Transformer Model for Symbolic Regression",
+   "venue": "arXiv preprint arXiv:2106.14131",
+   "url": "https://arxiv.org/abs/2106.14131"
+  },
+  "data": {
+   "short": "SymbolicGPT Dropbox data folder (authors' release)",
+   "title": "SymbolicGPT datasets, Test files of the 1/2/3/1-5-variable settings",
+   "url": "https://www.dropbox.com/sh/yq03daorth1h4kj/AADolbgySCjOO18qGoP5Abqfa?dl=0"
+  },
+  "notes": "Mutable shared folder without checksums (linked from the repo README, mojivalipour/symbolicgpt@6aef07c). HF DataAnalyticsLab/SymbolicGPT@f492854 (MIT tag) holds only the 1-variable setting."
+ },
+ {
+  "catalog": "symbolicregression-com-toy-test-suite-1",
+  "paper": {
+   "short": "Vladislavleva et al. 2009",
+   "title": "Order of Nonlinearity as a Complexity Measure for Models Generated by Symbolic Regression via Pareto Genetic Programming",
+   "venue": "IEEE Transactions on Evolutionary Computation 13(2):333-349",
+   "url": "https://doi.org/10.1109/TEVC.2008.926486"
+  },
+  "data": {
+   "short": "symbolicregression.com Test Suite 1 (Wayback 2013-12-08)",
+   "title": "Toy Test Suite 1 page (E. Vladislavleva)",
+   "url": "http://web.archive.org/web/20131208225350/http://symbolicregression.com/?q=node/5"
+  },
+  "notes": "Formulas from the archived page (Mathematica syntax, no ranges); Ripple2d range from the same author's TEC 2009 paper and 2008 thesis."
+ },
+ {
+  "catalog": "symformer-in-domain-synthetic-evaluation",
+  "paper": {
+   "short": "Vastl et al. 2024",
+   "title": "SymFormer: End-to-End Symbolic Regression Using Transformer-Based Architecture",
+   "venue": "IEEE Access 12:37840-37849",
+   "url": "https://doi.org/10.1109/ACCESS.2024.3374649"
+  },
+  "data": {
+   "short": "GitHub vastlik/symformer@35bc93c",
+   "title": "SymFormer generator and configs (no licence file)",
+   "url": "https://github.com/vastlik/symformer/tree/35bc93c6c563c68a07a3a9adcf9b10d5b87a9d46"
+  },
+  "notes": "Frozen draw from the authors' generator and configs; preprint arXiv:2205.15764."
+ },
+ {
+  "catalog": "symtree-benchmark-functions",
+  "paper": {
+   "short": "Olivetti de França 2018",
+   "title": "A greedy search tree heuristic for symbolic regression",
+   "venue": "Information Sciences 442-443:18-32",
+   "url": "https://doi.org/10.1016/j.ins.2018.02.040"
+  },
+  "data": null,
+  "notes": "Table 1 + Sec. 5 of arXiv:1801.01807 (17 functions re-sampled on U[-5,5]); author's notebook in folivetti/ITSR@5f0e808."
+ },
+ {
+  "catalog": "tisr-air-density",
+  "paper": {
+   "short": "Frotscher et al. 2023",
+   "title": "Proof of Concept for Fast Equation of State Development Using an Integrated Experimental–Computational Approach",
+   "venue": "International Journal of Thermophysics 44(7):105",
+   "url": "https://doi.org/10.1007/s10765-023-03197-z"
+  },
+  "data": {
+   "short": "Frotscher et al. 2023, ESM1 (Tables 4-5)",
+   "title": "Electronic supplementary material 1 (CC BY 4.0)",
+   "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1007%2Fs10765-023-03197-z/MediaObjects/10765_2023_3197_MOESM1_ESM.pdf"
+  },
+  "notes": "Experimental densities originate in von Preetzmann et al. 2021, Int. J. Thermophys. 42:127, Table 2 (doi:10.1007/s10765-021-02871-4). Article copy also on DepositOnce (doi:10.14279/depositonce-18496). TiSR: arXiv:2309.02805."
+ },
+ {
+  "catalog": "torchsisso-specific-energy",
+  "paper": {
+   "short": "Muthyala et al. 2024",
+   "title": "TorchSISSO: A PyTorch-based implementation of the sure independence screening and sparsifying operator for efficient and interpretable model discovery",
+   "venue": "Digital Chemical Engineering 13:100198",
+   "url": "https://doi.org/10.1016/j.dche.2024.100198"
+  },
+  "data": {
+   "short": "GitHub PaulsonLab/TorchSISSO@f869f95",
+   "title": "TorchSISSO examples/Specific_Energy (MIT)",
+   "url": "https://github.com/PaulsonLab/TorchSISSO/tree/f869f9527bbe023402840c42c332b91cf58d738c/examples/Specific_Energy"
+  },
+  "notes": "Same files as SyMANTIC's quinone redox-potential example; underlying data Tabor et al. 2019, J. Mater. Chem. A (doi:10.1039/C9TA03219C). Preprint arXiv:2410.01752."
+ },
+ {
+  "catalog": "torchsisso-synthetic-expressions",
+  "paper": {
+   "short": "Muthyala et al. 2024",
+   "title": "TorchSISSO: A PyTorch-based implementation of the sure independence screening and sparsifying operator for efficient and interpretable model discovery",
+   "venue": "Digital Chemical Engineering 13:100198",
+   "url": "https://doi.org/10.1016/j.dche.2024.100198"
+  },
+  "data": null,
+  "notes": "Table 1 + Sec. 4.1 of arXiv:2410.01752."
+ },
+ {
+  "catalog": "treloar-rubber",
+  "paper": {
+   "short": "Treloar 1944",
+   "title": "Stress-strain data for vulcanised rubber under various types of deformation",
+   "venue": "Transactions of the Faraday Society 40:59",
+   "url": "https://doi.org/10.1039/TF9444000059"
+  },
+  "data": {
+   "short": "Linka & Kuhl 2023, Table 2",
+   "title": "A new family of Constitutive Artificial Neural Networks towards automated model discovery (Table 2: Treloar data at 20 C and 50 C)",
+   "url": "https://doi.org/10.1016/j.cma.2022.115731"
+  },
+  "notes": "Data tabulated by Linka & Kuhl 2023 (CC BY 4.0, arXiv:2210.02202v2), the recommended machine-readable copy; Treloar's original was not accessible. The SR task (UT+ET train / PS test) is defined by EO-SR (arXiv:2603.19241). Other copies: OVGU-CoMe/treloar_fit@40ed696; Holthusen et al. 2026 (arXiv:2608.14063; Zenodo 10.5281/zenodo.21915635)."
+ },
+ {
+  "catalog": "vladislavleva",
+  "paper": {
+   "short": "Vladislavleva et al. 2009",
+   "title": "Order of Nonlinearity as a Complexity Measure for Models Generated by Symbolic Regression via Pareto Genetic Programming",
+   "venue": "IEEE Transactions on Evolutionary Computation 13(2):333-349",
+   "url": "https://doi.org/10.1109/TEVC.2008.926486"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Vladislavleva-7 (Ripple) uses the authors' formula (Eq. 17), not DSO's. formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "vladislavleva-points",
+  "paper": {
+   "short": "Vladislavleva et al. 2009",
+   "title": "Order of Nonlinearity as a Complexity Measure for Models Generated by Symbolic Regression via Pareto Genetic Programming",
+   "venue": "IEEE Transactions on Evolutionary Computation 13(2):333-349",
+   "url": "https://doi.org/10.1109/TEVC.2008.926486"
+  },
+  "data": {
+   "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
+   "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
+   "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"
+  },
+  "notes": "Vladislavleva-2/-3 meshes from Table I; points srbf-generated. formulas and ranges transcribed from DSO benchmarks.csv (vendored 2026-07-10 from master, byte-identical to 2069d4e per survey fresh-30)."
+ },
+ {
+  "catalog": "white-2013-proposed",
+  "paper": {
+   "short": "White et al. 2013",
+   "title": "Better GP benchmarks: community survey results and proposals",
+   "venue": "Genetic Programming and Evolvable Machines 14(1):3-29",
+   "url": "https://doi.org/10.1007/s10710-012-9177-2"
+  },
+  "data": {
+   "short": "gpbenchmarks.org SymbolicRegressionCompetitionData.xls",
+   "title": "Dow Chemical (EvoStar 2010) data, gpbenchmarks.org mirror",
+   "url": "http://gpbenchmarks.org/wp-content/uploads/2020/07/SymbolicRegressionCompetitionData.xls"
+  },
+  "notes": "Member Dow-Chemical of White et al. 2013 Table 5; same data as dow-chemical-evostar-2010 (no licence)."
+ },
+ {
+  "catalog": "white-et-al-2013-proposed-sr-set-points",
+  "paper": {
+   "short": "White et al. 2013",
+   "title": "Better GP benchmarks: community survey results and proposals",
+   "venue": "Genetic Programming and Evolvable Machines 14(1):3-29",
+   "url": "https://doi.org/10.1007/s10710-012-9177-2"
+  },
+  "data": null,
+  "notes": "Keijzer-6 grid as specified in Table 5 (Keijzer 2003); points srbf-generated."
+ }
+]

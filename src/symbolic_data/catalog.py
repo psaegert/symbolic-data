@@ -10,6 +10,10 @@ On-disk a catalog is a single yaml with two top-level blocks::
     expressions:
       <eq_id>: {raw, prepared, n_variables, vars: {vN: {name, sample_range, sample_type, ...}}, ...}
 
+A variable is drawn from its fastsrb shorthand (``sample_range``/``sample_type``), a ``dist`` config or
+mixture, or derived from the entry's ``latent`` variables (``expr``); an entry may draw its rows jointly
+(``inputs``) and restrict them (``row_constraints``). See :mod:`symbolic_data.inputs`.
+
 Catalogs are loaded through :func:`load_catalog`, which resolves a reference (a local path, a
 ``name[@version]`` against the official Hugging Face manifest, or ``repo_id:name[@version]`` against
 a third-party one) via :mod:`symbolic_data.resolver`. Curated catalogs are HF artifacts, not bundled
@@ -29,7 +33,7 @@ from symbolic_data.numeric import STORAGE_DTYPE, STORAGE_DTYPE_MARKER
 import yaml
 
 from symbolic_data._evaluation import broadcast_target, compile_expression, evaluate
-from symbolic_data.distributions import fastsrb_dist
+from symbolic_data.inputs import constraint_mask, draw_rows, spec_for_test_rows
 from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.problem import Problem
 from symbolic_data.resolver import resolve
@@ -362,39 +366,53 @@ class ProblemCatalog(Catalog):
         for eq_id in order:
             yield self.entries[eq_id]
 
-    def realize(self, entry: CatalogEntry, n_points: int, rng: np.random.Generator, *, engine: Any = None, layout: str = "random") -> RealizedExpression:
-        """Realize one entry: sample each variable from its intrinsic ``fastsrb`` range and evaluate."""
+    def realize(self, entry: CatalogEntry, n_points: int, rng: np.random.Generator, *, engine: Any = None, layout: str = "random",
+                part: str = "fit") -> RealizedExpression:
+        """Realize one entry: sample each variable from its intrinsic ``fastsrb`` range and evaluate.
+
+        ``part="test"`` draws from the entry's ``test`` block over its own spec (:func:`~symbolic_data.inputs.spec_for_test_rows`)."""
         if engine is None:
             raise ValueError("declarative ProblemCatalog.realize requires a simplipy engine (pass engine=...)")
+        if part not in ("fit", "test"):
+            raise ValueError(f"part must be 'fit' or 'test', got {part!r}")
         compiled = self._compiled(entry, engine)
         variable_order = compiled["variable_order"]
-        # First-draw oversampling: when the entry discloses its valid-domain fraction
-        # (meta.finite_fraction, written by tools/audit_finite_fraction.py), size the first
-        # batch to land the full n_points in one round instead of topping up iteratively.
-        f_meta = entry.meta.get("finite_fraction") if isinstance(getattr(entry, "meta", None), dict) else None
+        try:
+            variables, meta = (entry.variables, entry.meta) if part == "fit" else spec_for_test_rows(entry.variables, entry.meta)
+        except ValueError as exc:
+            raise CatalogEntryError(f"malformed test block for {entry.id!r}: {exc}") from exc
+        # First-draw oversampling: when the entry discloses its valid-domain fraction (the yaml entry's
+        # ``meta: {finite_fraction: ...}``, written by tools/audit_finite_fraction.py; it arrives as
+        # entry.meta["meta"], since every key outside the structured fields lands in entry.meta), size
+        # the first batch to land the full n_points in one round instead of topping up iteratively.
+        # The fraction is the fitting distribution's, so the test rows are not oversampled.
+        disclosed = entry.meta.get("meta") if isinstance(getattr(entry, "meta", None), dict) else None
+        f_meta = disclosed.get("finite_fraction") if part == "fit" and isinstance(disclosed, dict) else None
         n_first = n_points
         if isinstance(f_meta, (int, float)) and 0.0 < f_meta < 1.0:
             n_first = min(int(n_points / max(f_meta, 1.0 / _PER_POINT_REJECTION_CAP) * 1.25) + 8,
                           _PER_POINT_REJECTION_CAP * n_points)
-        columns = []
-        try:
-            for key in variable_order:
-                spec = entry.variables[key]
-                base, sign = spec["sample_type"]
-                low, high = spec["sample_range"]
-                columns.append(fastsrb_dist(low, high, base=base, sign=sign, layout=layout, size=n_first, rng=rng))
-        except (KeyError, ValueError, TypeError) as exc:
-            # A missing/malformed per-variable spec is a permanent entry defect (not a transient draw
-            # failure): raise CatalogEntryError so the source yields a placeholder instead of crashing
-            # the whole iteration -- mirroring _compiled()'s compile_failed handling.
-            raise CatalogEntryError(f"malformed variable spec for {entry.id!r}: {exc}") from exc
-        x_all = np.column_stack(columns).astype(float)
-        value_map = {var: x_all[:, i] for i, var in enumerate(variable_order)}
-        try:
-            y_all = broadcast_target(evaluate(compiled, value_map), n_first, entry.id).reshape(-1, 1)
-        except Exception as exc:
-            raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
 
+        def draw(size: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+            """``size`` rows, their targets, and which of them are valid."""
+            try:
+                x = draw_rows(variables, meta, variable_order, size, rng, layout)
+            except (KeyError, ValueError, TypeError, NameError, SyntaxError) as exc:
+                # A missing/malformed per-variable spec is a permanent entry defect (not a transient draw
+                # failure): raise CatalogEntryError so the source yields a placeholder instead of crashing
+                # the whole iteration -- mirroring _compiled()'s compile_failed handling.
+                raise CatalogEntryError(f"malformed variable spec for {entry.id!r}: {exc}") from exc
+            try:
+                y = broadcast_target(evaluate(compiled, {var: x[:, i] for i, var in enumerate(variable_order)}), size, entry.id).reshape(-1, 1)
+            except Exception as exc:
+                raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
+            # Validity is judged in the STORAGE dtype, so a point that would ship as inf in the
+            # frozen Problem arrays is rejected here; every batch below is judged the same way.
+            valid = (np.isfinite(x.astype(STORAGE_DTYPE)).all(axis=1) & np.isfinite(y.astype(STORAGE_DTYPE)).all(axis=1)
+                     & constraint_mask(meta, x, variable_order))
+            return x, y, valid
+
+        x_all, y_all, finite_mask = draw(n_first)
         # Per-point rejection: keep finite rows and top up until n_points are collected.
         # Distributionally IDENTICAL to the previous whole-draw all-finite rejection -- points
         # are i.i.d. and validity is a per-point property, so conditioning the joint on
@@ -403,36 +421,31 @@ class ProblemCatalog(Catalog):
         # This only removes the exponential cost (f^-n vs 1/f draws) that made partial-domain
         # entries (e.g. sqrt(x1+x2) over a box straddling the domain) exhaust max_trials.
         # An attempts cap keeps truly degenerate entries (f ~ 0) on the honest placeholder path.
-        # Validity is judged in the STORAGE dtype, so a point that would ship as inf in the
-        # frozen Problem arrays is rejected here. The adaptive top-up below must judge it the
-        # same way, or the first batch and the later batches disagree about what is valid.
-        finite_mask = (np.isfinite(x_all.astype(STORAGE_DTYPE)).all(axis=1)
-                       & np.isfinite(y_all.astype(STORAGE_DTYPE)).all(axis=1))
+        # A joint sampler's rows are not i.i.d.: one call is one point set (E2E's clusters, ERBench's
+        # mixtures), so a point set short of valid rows is drawn again as a whole, larger, and its
+        # first n_points valid rows are kept (the samplers permute their rows).
+        max_draws = _PER_POINT_REJECTION_CAP * n_points
         if finite_mask.all() and n_first > n_points:
             x_all, y_all = x_all[:n_points], y_all[:n_points]
+        elif not finite_mask.all() and meta.get("inputs") is not None:
+            drawn = n_first
+            while (valid := int(finite_mask.sum())) < n_points:
+                size = min(2 * x_all.shape[0] if valid == 0 else int(n_points * x_all.shape[0] / valid * 1.25) + 8,
+                           max_draws - drawn)
+                if size < n_points:
+                    raise NoValidSampleFoundError(
+                        f"non-finite support/target for {entry.id!r}: no point set of {n_points} valid points "
+                        f"within {drawn} draws (valid-domain fraction too low)")
+                x_all, y_all, finite_mask = draw(size)
+                drawn += size
+            x_all, y_all = x_all[finite_mask][:n_points], y_all[finite_mask][:n_points]
         elif not finite_mask.all():
             keep_x, keep_y = [x_all[finite_mask]], [y_all[finite_mask]]
             collected = int(finite_mask.sum())
             drawn = n_first
-            max_draws = _PER_POINT_REJECTION_CAP * n_points
             while collected < n_points and drawn < max_draws:
                 batch = _adaptive_batch(n_points - collected, collected, drawn, max_draws - drawn)
-                cols = [
-                    fastsrb_dist(entry.variables[key]["sample_range"][0],
-                                 entry.variables[key]["sample_range"][1],
-                                 base=entry.variables[key]["sample_type"][0],
-                                 sign=entry.variables[key]["sample_type"][1],
-                                 layout=layout, size=batch, rng=rng)
-                    for key in variable_order
-                ]
-                xb = np.column_stack(cols).astype(float)
-                vb = {var: xb[:, i] for i, var in enumerate(variable_order)}
-                try:
-                    yb = broadcast_target(evaluate(compiled, vb), batch, entry.id).reshape(-1, 1)
-                except Exception as exc:
-                    raise NoValidSampleFoundError(f"evaluation failed for {entry.id!r}: {exc}") from exc
-                mask = (np.isfinite(xb.astype(STORAGE_DTYPE)).all(axis=1)
-                        & np.isfinite(yb.astype(STORAGE_DTYPE)).all(axis=1))
+                xb, yb, mask = draw(batch)
                 keep_x.append(xb[mask])
                 keep_y.append(yb[mask])
                 collected += int(mask.sum())

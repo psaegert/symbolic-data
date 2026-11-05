@@ -1,6 +1,10 @@
 metadata:
   name: poly
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: []
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
+  citation: {"paper": {"short": "Poli 2003", "title": "A Simple but Theoretically-Motivated Method to Control Bloat in Genetic Programming", "venue": "Genetic Programming, Lecture Notes in Computer Science, pp. 204-217", "url": "https://doi.org/10.1007/3-540-36599-0_19"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: Poly suite incl. Poly-10.
   sources:
   - Poli 2003 lineage (via DSO aggregation)
@@ -21,8 +25,8 @@ metadata:
       and need per-entry review.'
 expressions:
   Poly-10:
-    raw: x1*x2+x3*x4+x5*x6+x1*x7*x9+x3*x6*x10
-    prepared: v1*v2+v3*v4+v5*v6+v1*v7*v9+v3*v6*v10
+    raw: x1*x2 + x3*x4 + x5*x6 + x1*x7*x9 + x3*x6*x10
+    prepared: v1*v2 + v1*v7*v9 + v10*v3*v6 + v3*v4 + v5*v6
     n_variables: 10
     sources:
     - Poli 2003 lineage (via DSO aggregation)
@@ -32,7 +36,7 @@ expressions:
       v1:
         name: x1
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -40,7 +44,7 @@ expressions:
       v2:
         name: x2
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -48,7 +52,7 @@ expressions:
       v3:
         name: x3
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -56,7 +60,7 @@ expressions:
       v4:
         name: x4
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -64,7 +68,7 @@ expressions:
       v5:
         name: x5
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -72,7 +76,7 @@ expressions:
       v6:
         name: x6
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -80,7 +84,7 @@ expressions:
       v7:
         name: x7
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -88,7 +92,7 @@ expressions:
       v8:
         name: x8
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -96,7 +100,7 @@ expressions:
       v9:
         name: x9
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
@@ -104,28 +108,15 @@ expressions:
       v10:
         name: x10
         sample_range:
-        - 0.0
+        - -1.0
         - 1.0
         sample_type:
         - uni
         - pos
       v0:
         name: y
+    source_audit: the authors' definition (catalog-prep fresh-18) replaces the DSO transcription
     meta:
-      dso_spec:
-        train:
-          all:
-            U:
-            - 0
-            - 1
-            - 330
-        test:
-          all:
-            U:
-            - 0
-            - 1
-            - 170
-        function_set: None
       finite_fraction: 1.0
   Poly-1:
     raw: x2/sqrt(pow(x1,2)+pow(x2,2)+pow(x3,2))

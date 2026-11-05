@@ -1,6 +1,10 @@
 metadata:
   name: neat
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 8 of the 9 Neat problems here; Neat-6 trains on fixed points and is in 'Neat (fixed points)'."}]
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
+  citation: {"paper": {"short": "Trujillo et al. 2016", "title": "neat Genetic Programming: Controlling bloat naturally", "venue": "Information Sciences 333:21-43", "url": "https://doi.org/10.1016/j.ins.2015.11.010"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: neat-GP suite (aggregated classics).
   sources:
   - Trujillo et al. 2016 (Information Sciences), neat Genetic Programming
@@ -254,6 +258,27 @@ expressions:
         test: null
         function_set: Vladislavleva-B
       finite_fraction: 1.0
+    test:
+      vars:
+        v1:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.2
+              high: 4.2
+              step: 0.1
+        v2:
+          dist:
+            name: grid
+            kwargs:
+              low: -0.2
+              high: 4.2
+              step: 0.1
+    test_source: 'Vladislavleva, Smits & den Hertog 2009, IEEE TEC 13(2), preprint p.
+      10 Table I ''Sampling strategy for training and test data'' (source-audit/raw/A3/vladislavleva2009_preprint_p10_tableI.png
+      and vladislavleva2009_nonlinearity_preprint.pdf, opened). Notation: ''x = Rand(a,
+      b) means that the x variable is sampled randomly from an interval [a, b]. Notation
+      x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Neat-9:
     raw: div(1,(1+pow(x1,-4)))+div(1,(1+pow(x2,-4)))
     prepared: ((1)/((1+((v1)**(-4)))))+((1)/((1+((v2)**(-4)))))
