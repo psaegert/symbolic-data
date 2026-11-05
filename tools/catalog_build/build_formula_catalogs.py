@@ -450,10 +450,11 @@ def inputs_of(p: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, d
         if text.startswith("mixture, branch drawn once per problem: p=0.5 |N(2, variance 3)|"):
             # PhyE2E: one branch per problem for all its inputs, |N(2, 3)| or U[2 - sqrt 3, 2 + sqrt 3] (drawn once, seeded)
             if phye2e is None:
-                folded = np.random.default_rng(_seed(p["set"], p["id"], "branch")).random() < 0.5
+                seed = _seed(p["set"], p["id"], "branch")
+                folded = np.random.default_rng(seed).random() < 0.5
                 phye2e = ({"dist": {"name": "folded_normal", "kwargs": {"loc": 2.0, "scale": math.sqrt(3.0)}}} if folded
                           else _uniform(2.0 - math.sqrt(3.0), 2.0 + math.sqrt(3.0)))
-                baked["branch"] = {"distribution": text[:120], "drawn": "folded normal" if folded else "uniform"}
+                baked["branch"] = {"distribution": text[:120], "seed": seed, "drawn": "folded normal" if folded else "uniform"}
             variables[key] = {"name": v["name"], **phye2e}
             continue
         d = _DERIVED.search(text)
@@ -483,11 +484,12 @@ def inputs_of(p: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, d
             variables[key] = {"name": v["name"], "expr": v["name"]}
             continue
         if re.search(r"x_min_j ~ U\(-10, 9\) and x_max_j ~ U\(x_min_j \+ 1, 10\)", text):
-            rng = np.random.default_rng(_seed(p["set"], p["id"], "box", v["name"]))
+            seed = _seed(p["set"], p["id"], "box", v["name"])
+            rng = np.random.default_rng(seed)
             lo = float(rng.uniform(-10.0, 9.0))
             hi = float(rng.uniform(lo + 1.0, 10.0))
             variables[key] = {"name": v["name"], **_uniform(lo, hi)}
-            baked[v["name"]] = {"distribution": text, "drawn": [lo, hi]}
+            baked[v["name"]] = {"distribution": text, "seed": seed, "drawn": [lo, hi]}
             continue
         variables[key] = {"name": v["name"], **input_spec(v)}
     return variables, latent, baked
@@ -820,7 +822,7 @@ def main() -> None:
                        "check_failed": failed, "needs_simplipy_015": sorted(pending)}
         print(f"{tag:14s} {slug:50s} built {len(entries):5d}+{len(pinned)}/{len(by_set[tag]):5d} skipped {len(skipped):4d} "
               f"check-failed {len(failed):4d}", flush=True)
-        report_path.write_text(json.dumps(report, indent=1))
+        report_path.write_text(json.dumps(report, indent=1) + "\n")
 
 
 if __name__ == "__main__":

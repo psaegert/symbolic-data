@@ -88,6 +88,38 @@ def test_a_random_split_is_cut_anew_every_draw_as_sklearn_counts_it():
     assert _ids(c.x_validation) != _ids(a.x_validation)          # the split itself is drawn per pass
 
 
+def test_a_folds_split_tests_on_one_of_the_authors_folds_and_fits_on_the_others(tmp_path):
+    x, y = _rows(23)
+    folds = [[0, 5, 9, 14, 20], [1, 2, 11, 17, 22], [3, 6, 12, 18], [4, 8, 13, 19], [7, 10, 15, 16, 21]]
+    p = data_problem(x, y, variables=["x1", "x2"], test_split={"folds": folds}, eq_id="k", gt_kind="none")
+    assert p.x_validation.shape == (0, 2) and p.meta["test_split"] == {"folds": folds}
+    rng, seen = np.random.default_rng(0), set()
+    for _ in range(60):
+        d = draw_from_pools(p, None, None, rng)
+        test = folds[d.meta["fold"] - 1]
+        assert _ids(d.x_validation) == set(test) and _ids(d.x_support) == set(range(23)) - set(test)
+        np.testing.assert_array_equal(d.y_validation.ravel(), 2.0 * d.x_validation[:, 0] + 1.0)   # rows stay aligned
+        assert d.meta["n_fit_pool"] == 23 - len(test) and d.meta["n_test_pool"] == len(test)
+        seen.add(d.meta["fold"])
+    assert seen == {1, 2, 3, 4, 5}                                   # every fold is reachable
+    capped = draw_from_pools(p, 6, 2, rng)                           # the caps apply within the fold's sides
+    assert capped.x_support.shape[0] == 6 and capped.x_validation.shape[0] == 2
+    assert _ids(capped.x_validation) <= set(folds[capped.meta["fold"] - 1])
+    out = next(iter(ProblemSource({"catalog": _freeze([p], tmp_path), "sampling": {"n_support": 512, "n_validation": 512}})))
+    assert _ids(out.x_validation) == set(folds[out.meta["fold"] - 1])                    # through a saved catalog
+
+
+def test_folds_must_partition_the_rows():
+    x, y = _rows(6)
+    assert split_rule({"folds": [[0, 1, 2], [3, 4, 5]]}) == "folds"
+    for bad in ([[0, 1, 2, 3, 4, 5]], [[0, 1, 2], [3, 4]], [[0, 1, 2], [2, 3, 4, 5]], [[0, 1, 2], [3, 4, 6]], [[], [0, 1, 2, 3, 4, 5]]):
+        with pytest.raises(ValueError, match="folds"):
+            data_problem(x, y, variables=["x1", "x2"], test_split={"folds": bad}, gt_kind="none")
+    with pytest.raises(ValueError, match="only stored for test_split 'given'"):
+        data_problem(x, y, x_test=x[:2], y_test=y[:2], variables=["x1", "x2"], test_split={"folds": [[0, 1, 2], [3, 4, 5]]},
+                     gt_kind="none")
+
+
 def test_seeded_draws_reproduce():
     x, y = _rows(3000)
     xt, yt = _rows(3000, start=9000)
