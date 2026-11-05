@@ -118,6 +118,12 @@ def test_folds_must_partition_the_rows():
     with pytest.raises(ValueError, match="only stored for test_split 'given'"):
         data_problem(x, y, x_test=x[:2], y_test=y[:2], variables=["x1", "x2"], test_split={"folds": [[0, 1, 2], [3, 4, 5]]},
                      gt_kind="none")
+    stray = Problem(x_support=x, y_support=y.reshape(-1, 1), y_support_noisy=y.reshape(-1, 1), x_validation=x[:2],
+                    y_validation=y[:2].reshape(-1, 1), y_validation_noisy=y[:2].reshape(-1, 1), skeleton=None,
+                    expression=None, constants=[], variables=["x1", "x2"], complexity=None,
+                    meta={"test_split": {"folds": [[0, 1, 2], [3, 4, 5]]}})
+    with pytest.raises(ValueError, match="validation arrays stay empty"):           # a hand-built problem is checked too
+        draw_from_pools(stray, 512, 512, np.random.default_rng(0))
 
 
 def test_seeded_draws_reproduce():
