@@ -1,0 +1,777 @@
+metadata:
+  name: chen-luo-jiang-block-building-test-cases
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 13 of the 14 cases: Case 14 has two inputs without a meaning or a range."}, {"kind": "filled", "problems": 10, "text": "For the 10 toy cases the authors fix only the input box and recommend Latin-hypercube or orthogonal designs; srbf samples the inputs uniformly at random in the box."}]
+  license: "facts only: formulas and ranges cited from Chen, Luo & Jiang 2018 (Expert Syst. Appl., arXiv:1706.02281); no upstream license"
+  citation: {"paper": {"short": "Chen et al. 2018", "title": "A multilevel block building algorithm for fast modeling generalized separable systems", "venue": "Expert Systems with Applications 109:25-34", "url": "https://doi.org/10.1016/j.eswa.2018.05.021"}}
+  description: Chen-Luo-Jiang block-building test cases
+  sources:
+  - https://arxiv.org/abs/1706.02281
+  - https://arxiv.org/pdf/1706.02281v3
+  - https://arxiv.org/pdf/1706.02281v1
+  - https://arxiv.org/pdf/1706.02281v2
+  - https://arxiv.org/pdf/1708.04583v1
+  - https://doi.org/10.1016/j.eswa.2018.05.021
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Physics/RocketFuelFlow.cs
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Physics/AircraftLift.cs
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Physics/FluidDynamics.cs
+  - https://github.com/heal-research/HeuristicLab/blob/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Physics/AircraftMaximumLift.cs
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-44.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  Case-1:
+    raw: 0.5*exp(x1)*sin(2*x2)
+    prepared: 0.5*exp(v1)*sin(2*v2)
+    n_variables: 2
+    subset: toy-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x2: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+    meta:
+      finite_fraction: 1.0
+  Case-2:
+    raw: 2*cos(x1) + sin(3*x2 - x3)
+    prepared: sin(3*v2 - v3) + 2*cos(v1)
+    n_variables: 3
+    subset: toy-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x2: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x3: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+    meta:
+      finite_fraction: 1.0
+  Case-3:
+    raw: 1.2 + 10*sin(2*x1) - 3*x2**2*cos(x3)
+    prepared: -3*v2**2*cos(v3) + 10*sin(2*v1) + 1.2
+    n_variables: 3
+    subset: toy-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x2: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x3: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+    meta:
+      finite_fraction: 1.0
+  Case-4:
+    raw: x3*sin(x1) - 2*x3*cos(x2)
+    prepared: v3*sin(v1) - 2*v3*cos(v2)
+    n_variables: 3
+    subset: toy-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x2: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x3: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+    meta:
+      finite_fraction: 1.0
+  Case-5:
+    raw: 2*x1*sin(x2)*cos(x4) - 0.5*x4*cos(x3)
+    prepared: 2*v1*sin(v2)*cos(v4) - 0.5*v4*cos(v3)
+    n_variables: 4
+    subset: toy-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x2: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x3: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x4: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+    meta:
+      finite_fraction: 1.0
+  Case-6:
+    raw: 10 + 0.2*x1 - 0.2*x5**2*sin(x2) + cos(x5)*log(3*x3 + 1.2) - 1.2*exp(0.5*x4)
+    prepared: 0.2*v1 - 0.2*v5**2*sin(v2) - 1.2*exp(0.5*v4) + log(3*v3 + 1.2)*cos(v5) + 10
+    n_variables: 5
+    subset: toy-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 1.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 1.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: 'uniform box U[1,4] (Appendix A: ''x_i in [1, 4]''; CONFLICT: Sec. 5.1.1 p. 12 of the same paper and ISCID 2017
+        Sec. V say ''case 6 is [1, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled sampling methods
+        such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points; Sec. 5.1.1 p.
+        12: 200 sampling points per independent variable (information only).'
+      x2: 'uniform box U[1,4] (Appendix A: ''x_i in [1, 4]''; CONFLICT: Sec. 5.1.1 p. 12 of the same paper and ISCID 2017
+        Sec. V say ''case 6 is [1, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled sampling methods
+        such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points; Sec. 5.1.1 p.
+        12: 200 sampling points per independent variable (information only).'
+      x3: 'uniform box U[1,4] (Appendix A: ''x_i in [1, 4]''; CONFLICT: Sec. 5.1.1 p. 12 of the same paper and ISCID 2017
+        Sec. V say ''case 6 is [1, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled sampling methods
+        such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points; Sec. 5.1.1 p.
+        12: 200 sampling points per independent variable (information only).'
+      x4: 'uniform box U[1,4] (Appendix A: ''x_i in [1, 4]''; CONFLICT: Sec. 5.1.1 p. 12 of the same paper and ISCID 2017
+        Sec. V say ''case 6 is [1, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled sampling methods
+        such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points; Sec. 5.1.1 p.
+        12: 200 sampling points per independent variable (information only).'
+      x5: 'uniform box U[1,4] (Appendix A: ''x_i in [1, 4]''; CONFLICT: Sec. 5.1.1 p. 12 of the same paper and ISCID 2017
+        Sec. V say ''case 6 is [1, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled sampling methods
+        such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points; Sec. 5.1.1 p.
+        12: 200 sampling points per independent variable (information only).'
+    meta:
+      finite_fraction: 1.0
+  Case-7:
+    raw: 2*x4*x5*sin(x1) - x5*x2 + 0.5*exp(x3)*cos(x4)
+    prepared: -v2*v5 + 2*v4*v5*sin(v1) + 0.5*exp(v3)*cos(v4)
+    n_variables: 5
+    subset: toy-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x2: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x3: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x4: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x5: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+    meta:
+      finite_fraction: 1.0
+  Case-8:
+    raw: 1.2 + 2*x4*cos(x2) + 0.5*exp(1.2*x3)*sin(3*x1)*cos(x4) - 2*cos(1.5*x5 + 5)
+    prepared: 2*v4*cos(v2) + 0.5*exp(1.2*v3)*sin(3*v1)*cos(v4) - 2*cos(1.5*v5 + 5) + 1.2
+    n_variables: 5
+    subset: toy-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x2: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x3: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x4: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x5: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+    meta:
+      finite_fraction: 1.0
+  Case-9:
+    raw: 0.5*cos(x3*x4)/(exp(x1)*x2**2)*sin(1.5*x5 - 2*x6)
+    prepared: 0.5*exp(-v1)*sin(1.5*v5 - 2*v6)*cos(v3*v4)/v2**2
+    n_variables: 6
+    subset: toy-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x2: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x3: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x4: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x5: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x6: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+    meta:
+      finite_fraction: 1.0
+  Case-10:
+    raw: 1.2 - 2*(x1 + x2)/x3*cos(x7) + 0.5*exp(x7)*x4*sin(x5*x6)
+    prepared: 0.5*v4*exp(v7)*sin(v5*v6) + 1.2 - 2*(v1 + v2)*cos(v7)/v3
+    n_variables: 7
+    subset: toy-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: x7
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x2: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x3: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x4: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x5: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x6: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+      x7: 'uniform box U[-3,3] (Appendix A: ''x_i in [-3, 3]''). The authors fix only the region: Sec. 4.3 p. 11 prefers ''controlled
+        sampling methods such as Latin hypercube sampling ... and orthogonal sampling'' for ''as uniform as possible'' points;
+        Sec. 5.1.1 p. 12: 200 sampling points per independent variable (information only).'
+    meta:
+      finite_fraction: 1.0
+  Case-11:
+    raw: 4*10**3*x1*x2/sqrt(x3)
+    prepared: 4000*v1*v2/sqrt(v3)
+    n_variables: 3
+    subset: real-world-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.5
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 250.0
+        - 260.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[4, 6]
+      x2: U[0.5, 1.5]
+      x3: U[250, 260]
+    meta:
+      finite_fraction: 1.0
+  Case-12:
+    raw: x1*(x2 - 2) + x3*x4*x5/x6
+    prepared: v1*(v2 - 2) + v3*v4*v5/v6
+    n_variables: 6
+    subset: real-world-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.4
+        - 0.8
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 5.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 0.4
+        - 0.8
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 5.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 1.0
+        - 1.5
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: x6
+        sample_range:
+        - 5.0
+        - 7.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[0.4, 0.8]
+      x2: U[5, 10]
+      x3: U[0.4, 0.8]
+      x4: U[5, 10]
+      x5: U[1, 1.5]
+      x6: U[5, 7]
+    meta:
+      finite_fraction: 1.0
+  Case-13:
+    raw: x1*x2*x5*(1 - x4**2/x5**2) + 1/(2*pi)*x3*log(x5/x4)
+    prepared: v1*v2*v5*(-v4**2/v5**2 + 1) + (1/(2*3.141592653589793))*v3*log(v5/v4)
+    n_variables: 5
+    subset: real-world-cases
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 60.0
+        - 65.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 30.0
+        - 40.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 5.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 0.5
+        - 0.8
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x5
+        sample_range:
+        - 0.2
+        - 0.5
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[60, 65]
+      x2: U[30, 40]
+      x3: U[5, 10]
+      x4: U[0.5, 0.8]
+      x5: U[0.2, 0.5]
+    meta:
+      finite_fraction: 1.0

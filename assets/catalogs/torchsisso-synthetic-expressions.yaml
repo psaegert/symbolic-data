@@ -1,0 +1,352 @@
+metadata:
+  name: torchsisso-synthetic-expressions
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 9 of the 10 expressions: expression 9 is Feynman I.44.4 and is run in srbf's Feynman set."}]
+  license: "facts only: formulas and ranges cited from Muthyala et al. 2024 (TorchSISSO, Digit. Chem. Eng. 13:100198; arXiv:2410.01752, CC BY-NC-ND 4.0); no text or tables reproduced"
+  citation: {"paper": {"short": "Muthyala et al. 2024", "title": "TorchSISSO: A PyTorch-based implementation of the sure independence screening and sparsifying operator for efficient and interpretable model discovery", "venue": "Digital Chemical Engineering 13:100198", "url": "https://doi.org/10.1016/j.dche.2024.100198"}}
+  description: TorchSISSO synthetic expressions
+  sources:
+  - https://arxiv.org/abs/2410.01752
+  - https://arxiv.org/e-print/2410.01752v2
+  - https://arxiv.org/e-print/2410.01752v1
+  - https://doi.org/10.1016/j.dche.2024.100198
+  - https://github.com/PaulsonLab/TorchSISSO
+  - https://colab.research.google.com/drive/1q0TEEALkb1PzJuusGKyHphv7tfod66XA
+  - https://colab.research.google.com/drive/1ObQJJXTpz5l04pphSH1nHT-Rsd2zBszC
+  - https://arxiv.org/e-print/2502.03367
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-114.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  '1':
+    raw: 10*x1/(x2*(x3+x4))
+    prepared: 10*v1/(v2*(v3 + v4))
+    n_variables: 4
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x4
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[1,5]
+      x2: uniform U[1,5]
+      x3: uniform U[1,5]
+      x4: uniform U[1,5]
+    meta:
+      finite_fraction: 1.0
+  '2':
+    raw: 2*sin(x2) + 3*sqrt(x1)
+    prepared: 3*sqrt(v1) + 2*sin(v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[1,5]
+      x2: uniform U[1,5]
+    meta:
+      finite_fraction: 1.0
+  '3':
+    raw: 3*exp(x1)/(x2 + exp(x3))
+    prepared: 3*exp(v1)/(v2 + exp(v3))
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[1,5]
+      x2: uniform U[1,5]
+      x3: uniform U[1,5]
+    meta:
+      finite_fraction: 1.0
+  '4':
+    raw: 3*x3 + x2**2 + x1**3
+    prepared: v1**3 + v2**2 + 3*v3
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[1,5]
+      x2: uniform U[1,5]
+      x3: uniform U[1,5]
+    meta:
+      finite_fraction: 1.0
+  '5':
+    raw: (x2 + exp(x2))/(x1**2 - x2**2)
+    prepared: (v2 + exp(v2))/(v1**2 - v2**2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[1,5]
+      x2: uniform U[1,5]
+    meta:
+      finite_fraction: 1.0
+  '6':
+    raw: sqrt(x1**2 + x2**2)
+    prepared: sqrt(v1**2 + v2**2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[1,5]
+      x2: uniform U[1,5]
+    meta:
+      finite_fraction: 1.0
+  '7':
+    raw: sin(x1*x3) + 1.5*exp(-x1*x2)
+    prepared: sin(v1*v3) + 1.5*exp(-v1*v2)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[1,5]
+      x2: uniform U[1,5]
+      x3: uniform U[1,5]
+    meta:
+      finite_fraction: 1.0
+  '8':
+    raw: 5*(x1*x3**3) + x1**3 + 3*(x1*x2**2)
+    prepared: v1**3 + 3*v1*v2**2 + 5*v1*v3**3
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[1,5]
+      x2: uniform U[1,5]
+      x3: uniform U[1,5]
+    meta:
+      finite_fraction: 1.0
+  '10':
+    raw: exp(-x1/(x3*x2))
+    prepared: exp(-v1/(v2*v3))
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[1,5]
+      x2: uniform U[1,5]
+      x3: uniform U[1,5]
+    meta:
+      finite_fraction: 1.0

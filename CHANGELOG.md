@@ -3,6 +3,34 @@
 All notable changes to `symbolic-data` are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to semantic versioning.
 
+## [Unreleased]
+
+### Added
+
+- **Data catalogs: problems that hold pools of rows** (`symbolic_data.pools`). A frozen problem whose `meta` carries
+  a `test_split` rule holds every row available for fitting (support arrays) and, for `"given"`, the authors' test
+  rows (validation arrays); `"none"` means no test split (validation stays empty); `{"random": f}` means the
+  authors' procedure is a random split with test fraction `f`, cut anew on every pass (`ceil(f * N)` test rows, as
+  scikit-learn counts them). The `ProblemSource` draws at most `n_support` fitting and `n_validation` test rows from
+  the pools on every pass, without replacement and in pool order; a pool no larger than its cap is used whole.
+  `data_problem(...)` builds such a problem; `draw_from_pools(...)` is the draw. Frozen problems without a split
+  rule (materialized formula catalogs, frozen evaluation subsets) are used exactly as stored, as before.
+- **`family_affinity`** (optional catalog key, requires `nesting_decay`): the COHERENCE prior, a label prior
+  on the depth prior's draw. `{concentration: alpha, families: {name: [operator, ...]}, independent:
+  [operator, ...]}`: the function nodes of one expression draw their family from a Dirichlet-multinomial
+  (Polya urn) -- the k-th takes family f with probability `(alpha * pi_f + n_f) / (alpha + k - 1)`, `pi_f`
+  the family's share of the operator weights, `n_f` the nodes already in f -- and the operator weights
+  decide inside a family. `independent` operators (pow and rootn, unary here through their literal
+  exponent) keep the independent draw. The tree shape is unchanged and the urn is exchangeable, so every
+  family keeps its share on average; alpha -> infinity is the independent draw. Motivation, measured
+  2026-11-03 on 11,668 real formulas (1,610 Wikidata defining formulas and 10,058 definition lines from
+  16,168 Wikipedia science articles; no benchmark sets): two function nodes of one formula share a family
+  87 % of the time against 29 % for independent labels with the same shares (Dirichlet-multinomial MLE
+  alpha 0.36, 95 % bootstrap 0.26-0.45); the per-node draw gives 17 %. The families exclude each other
+  (log odds ratio of co-presence trig|exp -3.8, trig|log -3.7, exp|log -3.1) while powers travel with all
+  of them (square|root +0.85, square|trig +0.41, square|exp 0), hence `independent`. Every counted unary operator must
+  be in a family or in `independent` (an omission is an error). Absent = legacy (byte-identical).
+
 ## [0.18.0] - 2026-09-03
 
 ### Added

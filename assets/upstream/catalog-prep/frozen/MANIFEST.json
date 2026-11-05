@@ -1,0 +1,254 @@
+{
+ "rule": "Freeze the 1024-problem subsamples (owner 2026-10-04 ruling, freeze approved 2026-10-05).\n\nEvery subset with more than 1024 problems is subsampled ONCE; the frozen list is the only thing srbf ever evaluates.\nThe draw needs no random-number generator, so it reproduces on any machine and any library version:\n- each problem is ranked by sha256(\"srbf-1024:<set>:<subset>:<problem id>\"), lowest first;\n- the 1024 places are split over the authors' own groups in proportion to their sizes (largest remainder),\n  so the subsample keeps the set's composition; within a group the lowest-ranked problems are taken.\nWrites frozen/<set>.json (ids + provenance) and frozen/MANIFEST.json.",
+ "k": 1024,
+ "sets": {
+  "done-34": {
+   "set": "done-34",
+   "name": "ERBench public: OEIS",
+   "subset": "all",
+   "source_file": "raw/done-34/erbench_oeis_problems_full.json",
+   "source_sha256": "02fdabf789ee0473f44891d59052c94934e0b1ffc16d4f9ed2452d814484ca94",
+   "n_source": 3757,
+   "k": 1024,
+   "salt": "srbf-1024:done-34:all",
+   "groups": {
+    "OEIS": [
+     3757,
+     1024
+    ]
+   }
+  },
+  "fresh-79": {
+   "set": "fresh-79",
+   "name": "SymbolicGPT test sets",
+   "subset": "all",
+   "source_file": "raw/fresh-79/fresh-79_problems_full.json",
+   "source_sha256": "d5b8b120d3f36726abc2496afe629ffcf8c216223e9f0bd7b7f3ed7281e48c15",
+   "n_source": 3780,
+   "k": 1024,
+   "salt": "srbf-1024:fresh-79:all",
+   "groups": {
+    "1-variable": [
+     966,
+     262
+    ],
+    "2-variable": [
+     937,
+     254
+    ],
+    "3-variable": [
+     925,
+     250
+    ],
+    "general (1-5 variables)": [
+     952,
+     258
+    ]
+   }
+  },
+  "fresh-81": {
+   "set": "fresh-81",
+   "name": "E2E in-domain synthetic validation set",
+   "subset": "all",
+   "source_file": "raw/fresh-81/e2e_indomain_valid1_seed1_10000.jsonl",
+   "source_sha256": "2cfc173c1cb5b132a8dbaa23f5ac20aee2b7d732bfd709d8b9a40f556287585e",
+   "n_source": 10000,
+   "k": 1024,
+   "salt": "srbf-1024:fresh-81:all",
+   "groups": {
+    "remainder": [
+     10000,
+     1024
+    ]
+   }
+  },
+  "fresh-84": {
+   "set": "fresh-84",
+   "name": "SymFormer in-domain synthetic evaluation",
+   "subset": "all",
+   "source_file": "raw/fresh-84/symformer_valid_seed5678_uni10000_biv10000.json",
+   "source_sha256": "e6b4ccf7eb10b797c9225dbb9887c60cafd874e0e24809b20bcec9de210931f9",
+   "n_source": 20000,
+   "k": 1024,
+   "salt": "srbf-1024:fresh-84:all",
+   "groups": {
+    "bivariate": [
+     10000,
+     512
+    ],
+    "univariate": [
+     10000,
+     512
+    ]
+   }
+  },
+  "fresh-91": {
+   "set": "fresh-91",
+   "name": "CVGP trigonometric / control-variable datasets",
+   "subset": "all",
+   "source_file": "raw/fresh-91/fresh-91_problems.jsonl.gz",
+   "source_sha256": "85b342349032d55a60562ec9a1185f350e0c4ed547a1a53db9d04b5e3b464c29",
+   "n_source": 24000,
+   "k": 1024,
+   "salt": "srbf-1024:fresh-91:all",
+   "groups": {
+    "inv_nv10_nt1016": [
+     50,
+     3
+    ],
+    "inv_nv10_nt1020": [
+     50,
+     3
+    ],
+    "inv_nv2_nt11": [
+     50,
+     3
+    ],
+    "inv_nv3_nt22": [
+     50,
+     3
+    ],
+    "inv_nv4_nt46": [
+     50,
+     2
+    ],
+    "inv_nv5_nt55": [
+     50,
+     2
+    ],
+    "inv_nv5_nt58": [
+     50,
+     2
+    ],
+    "inv_nv6_nt610": [
+     50,
+     2
+    ],
+    "inv_nv6_nt68": [
+     50,
+     2
+    ],
+    "inv_nv8_nt812": [
+     50,
+     2
+    ],
+    "large_scale_10": [
+     4500,
+     192
+    ],
+    "large_scale_20": [
+     4500,
+     192
+    ],
+    "large_scale_30": [
+     4500,
+     192
+    ],
+    "large_scale_40": [
+     4500,
+     192
+    ],
+    "large_scale_50": [
+     4500,
+     192
+    ],
+    "sincos_nv10_nt1016": [
+     50,
+     2
+    ],
+    "sincos_nv10_nt1020": [
+     50,
+     2
+    ],
+    "sincos_nv2_nt11": [
+     50,
+     2
+    ],
+    "sincos_nv3_nt22": [
+     50,
+     2
+    ],
+    "sincos_nv4_nt46": [
+     50,
+     2
+    ],
+    "sincos_nv5_nt55": [
+     50,
+     2
+    ],
+    "sincos_nv5_nt58": [
+     50,
+     2
+    ],
+    "sincos_nv6_nt610": [
+     50,
+     2
+    ],
+    "sincos_nv6_nt68": [
+     50,
+     2
+    ],
+    "sincos_nv8_nt812": [
+     50,
+     2
+    ],
+    "sincosinv_nv10_nt1016": [
+     50,
+     2
+    ],
+    "sincosinv_nv10_nt1020": [
+     50,
+     2
+    ],
+    "sincosinv_nv2_nt11": [
+     50,
+     2
+    ],
+    "sincosinv_nv3_nt22": [
+     50,
+     2
+    ],
+    "sincosinv_nv4_nt46": [
+     50,
+     2
+    ],
+    "sincosinv_nv5_nt55": [
+     50,
+     2
+    ],
+    "sincosinv_nv5_nt58": [
+     50,
+     2
+    ],
+    "sincosinv_nv6_nt610": [
+     50,
+     2
+    ],
+    "sincosinv_nv6_nt68": [
+     50,
+     2
+    ],
+    "sincosinv_nv8_nt812": [
+     50,
+     2
+    ]
+   }
+  },
+  "release/erbench-syneq": {
+   "set": "release/erbench-syneq",
+   "name": "erbench-syneq (srbf release catalog)",
+   "subset": "all",
+   "source_file": "symbolic-data/assets/catalogs/erbench-syneq.yaml",
+   "source_sha256": "00e3cbadcc113037880f02707cfc96325956a57c5ce24bc1b650f21aeaaac3b2",
+   "n_source": 5301,
+   "k": 1024,
+   "salt": "srbf-1024:release/erbench-syneq:all",
+   "groups": {
+    "all": [
+     5301,
+     1024
+    ]
+   }
+  }
+ }
+}

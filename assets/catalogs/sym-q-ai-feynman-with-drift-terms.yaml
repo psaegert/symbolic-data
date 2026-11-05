@@ -1,0 +1,464 @@
+metadata:
+  name: sym-q-ai-feynman-with-drift-terms
+  version: 1
+  tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 15, "text": "srbf runs the 15 AI-Feynman expressions Sym-Q evaluates, without the drift terms of its drift experiment. Those problems cannot be rebuilt: Sym-Q names nine kinds of drift but not the equations it added them to (only 'all equations with three or fewer variables, excluding those exceeding the model's size limits') nor the input each drift uses."}]
+  license: "MIT (EPFL-IMOS/Sym-Q) + CC0 1.0 (Tian et al., arXiv:2402.05306)"
+  citation: {"paper": {"short": "Tian et al. 2025", "title": "Interactive symbolic regression with co-design mechanism through offline reinforcement learning", "venue": "Nature Communications 16(1):3930", "url": "https://doi.org/10.1038/s41467-025-59288-y"}, "data": {"short": "GitHub EPFL-IMOS/Sym-Q@104a486", "title": "Sym-Q utils.py BENCHMARK (MIT)", "url": "https://github.com/EPFL-IMOS/Sym-Q/blob/104a486070f615cd4fdb93a0e95adfd59625ee64/utils.py"}}
+  description: Sym-Q AI-Feynman with drift terms
+  sources:
+  - 'https://arxiv.org/abs/2402.05306 (Sym-Q; v2 PDF https://arxiv.org/pdf/2402.05306v2: drift text p.8-9, Fig. 4 p.10, Table
+    C5 p.28, Table C10 p.30, Table F11 p.34)'
+  - 'https://www.nature.com/articles/s41467-025-59288-y (Nat. Commun. 16:3930, PDF .pdf: drift text p.5, Data/Code availability
+    p.10, "setup described by Li et al." p.4)'
+  - 'https://openreview.net/forum?id=ULzyv9M1j5 (T-JSL, ICLR 2023; PDF via http://web.archive.org/web/20230314215653id_/https://openreview.net/pdf?id=ULzyv9M1j5:
+    Sec. 4 p.8, Table 2 p.8, Fig. 6 caption p.9, App. B Table 4 p.12-13, App. E Table 8 p.15)'
+  - https://github.com/AILWQ/Joint_Supervised_Learning_for_SR/blob/a7d1f841255bfa61d6000798b65906f95f1a3801/Inference/fit_func_single.py
+    (lines 61-66, 110-122, 136; file unchanged since init commit 45d143e, 2022-09-29)
+  - https://github.com/AILWQ/Joint_Supervised_Learning_for_SR/blob/a7d1f841255bfa61d6000798b65906f95f1a3801/src/utils.py (generateDataFast,
+    lines 91-141)
+  - https://github.com/AILWQ/Joint_Supervised_Learning_for_SR/blob/a7d1f841255bfa61d6000798b65906f95f1a3801/config.yaml (fun_support
+    min -10 / max 10)
+  - https://github.com/EPFL-IMOS/Sym-Q/blob/104a486070f615cd4fdb93a0e95adfd59625ee64/utils.py (BENCHMARK, lines 72-83) and
+    /symq_v2/util.py (line 99 ff.)
+  - 'https://github.com/EPFL-IMOS/Sym-Q/blob/104a486070f615cd4fdb93a0e95adfd59625ee64/beam_search.py (lines 218-235: fix_seed(0),
+    generateDataFast(..., 100, 2, 8, -10, 10))'
+  - 'https://doi.org/10.5281/zenodo.15105239 (Sym-Q data: no AIF or drift data)'
+  - https://space.mit.edu/home/tegmark/aifeynman.html (base AI-Feynman equations and ranges)
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/interrupted-9.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  Feynman-1:
+    raw: exp(-x**2/2)/sqrt(2*pi)
+    prepared: 0.3989422804014327*exp(-v1**2/2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-2:
+    raw: exp(-(x*y**(-1))**2/2)/(sqrt(2*pi)*y)
+    prepared: 0.3989422804014327*exp(-v1**2/(2*v2**2))/v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-3:
+    raw: x*y
+    prepared: v1*v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-4:
+    raw: x*y
+    prepared: v1*v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-5:
+    raw: 1/2*x*y**2
+    prepared: v1*v2**2/2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-6:
+    raw: x/y
+    prepared: v1/v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-7:
+    raw: sin(theta1)/sin(theta2)
+    prepared: sin(v1)/sin(v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: theta2
+        sample_range:
+        - 0.0
+        - 1.5707963267948966
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      theta1: U[0, pi/2]
+      theta2: U[0, pi/2]
+    meta:
+      finite_fraction: 1.0
+  Feynman-8:
+    raw: x/y
+    prepared: v1/v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-9:
+    raw: x*y/(2*pi)
+    prepared: 0.1591549430918953*v1*v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-10:
+    raw: 1.5*x*y
+    prepared: 1.5*v1*v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-11:
+    raw: x/(4*pi*y**2)
+    prepared: v1/(4*3.141592653589793*v2**2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-12:
+    raw: x*y**2/2
+    prepared: v1*v2**2/2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-13:
+    raw: x*y**2
+    prepared: v1*v2**2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-14:
+    raw: x/(2*(1+y))
+    prepared: v1/(2*v2 + 2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0
+  Feynman-15:
+    raw: x*y/(2*pi)
+    prepared: (1/(2*3.141592653589793))*v1*v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: U[-10, 10]
+      y: U[-10, 10]
+    meta:
+      finite_fraction: 1.0

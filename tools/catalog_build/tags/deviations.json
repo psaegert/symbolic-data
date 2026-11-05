@@ -1,0 +1,1665 @@
+[
+ {
+  "catalog": "ai-descartes-real-data",
+  "authors_total": 6,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "ai-feynman-2-0-modular-equations",
+  "authors_total": 12,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 11,
+    "text": "srbf runs 1 of the 12 modular equations: the authors give an input range only for equation 12."
+   },
+   {
+    "kind": "filled",
+    "problems": 1,
+    "text": "For equation 12 the authors state the range [-1, 1] but not how inputs are spread over it; srbf samples them uniformly."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "ai-feynman-database-100-main-equations",
+  "authors_total": 100,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 26,
+    "text": "srbf runs 74 of the 100 equations: in the other 26 no input is left once the units are removed, so the target is a constant."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "ai-hilbert-problem-set",
+  "authors_total": 17,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 8,
+    "text": "srbf runs 9 problems here (8 of the paper's 17 plus a second, synthetic version of the Kepler problem): the real-data Kepler and time-dilation problems are in 'AI Hilbert real data', the 6 problems taken from the Feynman database are run once in srbf's Feynman set, and the Bell-inequality problem, which has no data, is not run."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "ai-hilbert-real-data",
+  "authors_total": 17,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 15,
+    "text": "srbf runs 2 of the 17 problems here (the real-data Kepler and time-dilation problems); the formula problems are in 'AI Hilbert problem set', 6 Feynman-database problems are run in srbf's Feynman set, and the Bell-inequality problem is not run."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "autora-synthetic-behavioural-science-models-points",
+  "authors_total": 10,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs 7 of the package's 10 models: the Q-learning agent is not a fixed function of its inputs, and the linear-mixed-model and template models have no fixed formula."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "black-hole-spiral-plane",
+  "authors_total": 1,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "bms-synthetic-prior-expression-and-bessel-functions",
+  "authors_total": 3,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 2 of the 3 problems here; the noise-free Bessel study is in 'BMS synthetic prior expression and Bessel functions* (fixed points)'."
+   },
+   {
+    "kind": "filled",
+    "problems": 1,
+    "text": "For the noisy Bessel study the authors give only the range x in [0, 4], not how the points are placed; srbf samples x uniformly on [0, 4] and the order nu uniformly from 0 to 4."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "bms-synthetic-prior-expression-and-bessel-functions-points",
+  "authors_total": 3,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 1 of the 3 problems here (the noise-free Bessel study); the other two are in 'BMS synthetic prior expression and Bessel functions*'."
+   },
+   {
+    "kind": "filled",
+    "problems": 1,
+    "text": "The authors measure the error 'in the range [0, 4]' without giving the points; srbf tests on 100 points per order placed uniformly at random on [0, 4], chosen once and then fixed."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "breiman-i",
+  "authors_total": 1,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "chen-luo-jiang-block-building-test-cases",
+  "authors_total": 14,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 13 of the 14 cases: Case 14 has two inputs without a meaning or a range."
+   },
+   {
+    "kind": "filled",
+    "problems": 10,
+    "text": "For the 10 toy cases the authors fix only the input box and recommend Latin-hypercube or orthogonal designs; srbf samples the inputs uniformly at random in the box."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "coevolved-fitness-predictors-test-problems-points",
+  "authors_total": 5003,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 4995,
+    "text": "srbf runs 8 problems: the 3 target functions and the 5 random functions the authors print; the other 4,995 random functions of the study were never published."
+   },
+   {
+    "kind": "filled",
+    "problems": 3,
+    "text": "The authors test F1 to F3 on 200 random points without saying how they are drawn; srbf draws them uniformly on the training range, once."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "Random-5 is undefined on 82 of its 100 grid points; srbf keeps only the 18 points where it is defined."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "constant",
+  "authors_total": 10,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 8 of the 10 'Constant' problems listed in the DSO repository: Const-Test-1 and -2 are software sanity tests, not benchmark problems."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "cp3-bench",
+  "authors_total": 28,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 11,
+    "text": "For C3a-C3f and C4a-C4e the paper also tests on extrapolation sets that were never published; srbf tests only on the published 80/20 split."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "cp3-bench-standard-tuning-datasets-points",
+  "authors_total": 8,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 4,
+    "text": "srbf runs 4 of the 8 tuning problems: F3 to F6 are treated as Keijzer-4, Jin-1, Jin-4 and Vladislavleva-1 and run in those benchmarks' sets, with those benchmarks' points rather than CP3-bench's grids."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "cvgp-trigonometric-control-variable-datasets",
+  "authors_total": 24000,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 22976,
+    "text": "srbf runs a fixed sample of 1,024 of the 24,000 expressions, chosen by a hash of each name and spread over the authors' configurations in proportion to their sizes."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "ddrsr-simple-test-and-complex-test",
+  "authors_total": 20,
+  "changes": [
+   {
+    "kind": "filled",
+    "problems": 20,
+    "text": "The authors give only the range (0, 1) for every input, not how points are spread over it; srbf samples uniformly."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "decomposable-nsr-synthetic-e1-e13",
+  "authors_total": 26,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 12 of the 13 functions, each with its interpolation and extrapolation test; E8 is the Pagie function and is run in srbf's Pagie and Neat sets, where its extrapolation test is not used."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "dgsr-additional-feynman",
+  "authors_total": 32,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 24,
+    "text": "srbf runs 8 of the 32 problems: the other 24 are identical to problems srbf already runs in its Feynman sets."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "dgsr-feynman-d-2-d-5-subsets",
+  "authors_total": 15,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 13,
+    "text": "srbf runs 2 of the 15 problems: the other 13 are identical to problems srbf already runs in its Feynman set."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "dgsr-synthetic-d-12",
+  "authors_total": 7,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "dso-benchmark-registry",
+  "authors_total": 268,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 264,
+    "text": "srbf runs here only the registry problems that no other srbf set covers (Nguyen-12a and Korns-13 to -15; Neat-6 is in the pinned-points set); the registry's other rows are run in the sets of their own benchmarks, apart from its two software sanity tests."
+   }
+  ],
+  "follows_first_publication": [
+   "Korns-15 uses Korns' own input range [-50, 50]; the registry's 2021 copy used [0, 50]."
+  ]
+ },
+ {
+  "catalog": "dso-benchmark-registry-points",
+  "authors_total": 268,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 267,
+    "text": "srbf runs here only Neat-6 (Keijzer's harmonic-number problem on fixed points); the registry's other rows are in 'DSO benchmark registry (benchmarks.csv)' or in their own benchmarks' sets."
+   }
+  ],
+  "follows_first_publication": [
+   "Neat-6 is Keijzer's harmonic number on x = 1..50, tested on x = 1..120 (Keijzer 2003); later copies differ."
+  ]
+ },
+ {
+  "catalog": "e2e-in-domain-synthetic-validation-set",
+  "authors_total": 10000,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 8976,
+    "text": "srbf runs a fixed sample of 1,024 of the 10,000 validation functions, which it regenerated with the authors' own code and seed (the authors publish no list)."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "eql-cart-pendulum",
+  "authors_total": 8,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "eql-formulas-f-1-f-4-and-division-formula",
+  "authors_total": 13,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "eql-pendulum-vector-field",
+  "authors_total": 6,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "eql-robotic-arm-forward-kinematics",
+  "authors_total": 28,
+  "changes": [
+   {
+    "kind": "filled",
+    "problems": 28,
+    "text": "The authors never published how the joint angles were generated, only that they follow sinusoids of amplitude up to pi/2 (pi for the extrapolation test); srbf samples each angle as (pi/2) sin(u) with u uniform on [0, 2 pi), and with amplitude pi for the extrapolation test."
+   },
+   {
+    "kind": "filled",
+    "problems": 28,
+    "text": "The authors never print the arm's formulas; srbf derives them from the stated geometry (a planar arm with segments of length 0.5)."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "erbench-densities",
+  "authors_total": 99,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "erbench-eponymous",
+  "authors_total": 633,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 48,
+    "text": "16 of ERBench's 211 Eponymous formulas are exact copies of another formula in the set (same expression, input box and type); srbf keeps each once, so it runs 585 of the 633 problems."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "erbench-oeis",
+  "authors_total": 11271,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 774,
+    "text": "258 of ERBench's 3,757 OEIS formulas are exact copies of another formula in the set; srbf keeps each once (3,499 formulas, 10,497 problems)."
+   },
+   {
+    "kind": "part",
+    "problems": 9473,
+    "text": "srbf runs a fixed sample of 1,024 of these 10,497 problems, chosen by a hash of each name."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "erbench-phybench",
+  "authors_total": 270,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "erbench-public-legacy-formulas",
+  "authors_total": 606,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 601,
+    "text": "srbf runs 5 of ERBench's 606 legacy rows here: most rows are run in the sets of the benchmarks they come from (Feynman, Korns, Nguyen, ...), 13 AI Feynman 2.0 rows have no input range from their authors, and the 14 Strogatz rows are differential-equation tasks."
+   },
+   {
+    "kind": "changed",
+    "problems": 5,
+    "text": "srbf samples these problems uniformly over the original authors' input ranges, not with ERBench's own generator (fitting window, extrapolation test, random extra input) that it uses for the other ERBench sets."
+   },
+   {
+    "kind": "filled",
+    "problems": 1,
+    "text": "For AI Feynman 2.0 equation 12 the authors state the range [-1, 1] but not how inputs are spread over it; srbf samples them uniformly."
+   }
+  ],
+  "follows_first_publication": [
+   "Korns-13 to -15 and Nguyen-9 (Uy et al.'s F9 on [-1, 1]^2) follow Korns 2011 and Uy et al. 2011, not ERBench's re-renderings."
+  ]
+ },
+ {
+  "catalog": "erbench-syneq",
+  "authors_total": 15909,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 6,
+    "text": "2 of ERBench's 5,303 SynEq formulas are exact copies of others and are kept once (5,301 formulas, 15,903 problems)."
+   },
+   {
+    "kind": "part",
+    "problems": 14879,
+    "text": "srbf runs a fixed sample of 1,024 of these 15,903 problems, chosen by a hash of each name."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "errless-synthetic-posterior-set",
+  "authors_total": 7,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "esr-cosmology",
+  "authors_total": 3,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 1 of the 3 ESR problems here (the cosmic-chronometer data): the Pantheon+ supernova task fits a function through an integral, not y = f(x), and the mock problem is in 'ESR cosmology formulas'."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "esr-cosmology-datasets",
+  "authors_total": 3,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 1 of the 3 ESR problems here (the mock problem); the cosmic-chronometer data are in 'ESR cosmology data', and the Pantheon+ task is not y = f(x)."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "evogp-uci",
+  "authors_total": 4,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 3 of EvoGP's 4 tasks: the fourth, Feynman I.9.18, is run in srbf's Feynman set."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "evomo-sr-random-expression-datasets-p1-p4",
+  "authors_total": 8,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 4,
+    "text": "In the out-of-range test the authors move each input out of the box equally often; srbf picks the moved input at random for each point, which matches only on average."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "falling-balls",
+  "authors_total": 11,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "fastsrb",
+  "authors_total": 120,
+  "changes": [],
+  "follows_first_publication": [
+   "Where SRSD's own files disagree, srbf follows SRSD's code and published data: I.44.4's n on [1e24, 1e26], integer inputs on lo..hi-1, and the signs and ranges of I.29.16, B6, B7, III.15.27 and III.21.20."
+  ]
+ },
+ {
+  "catalog": "feynman",
+  "authors_total": 100,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "feynman-bonus",
+  "authors_total": 20,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "friedman-functions",
+  "authors_total": 4,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "friedman-random-function-generator-instances",
+  "authors_total": 12,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gecco-2013-2017-real",
+  "authors_total": 21,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 7,
+    "text": "srbf runs 14 of the 21 real-world datasets: 4 have data that may not be shared (Boston housing, Ozone, Dow Chemical, Tower), the Million Song Dataset is left out for its size (375 MB), and NOX and WND were never published."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gecco-2022-covid-ny",
+  "authors_total": 3,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gecco-2022-exact-rediscovery",
+  "authors_total": 40,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gecco-2022-extrapolation",
+  "authors_total": 30,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gecco-2022-feature-selection",
+  "authors_total": 30,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gecco-2022-local-optima",
+  "authors_total": 30,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gecco-2022-noise",
+  "authors_total": 40,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gecco-2023-performance",
+  "authors_total": 3,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "geobench",
+  "authors_total": 71,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gfn-sr-noisy-near-twin-set",
+  "authors_total": 6,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gp-benchmarks-sr-table",
+  "authors_total": 51,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 40,
+    "text": "srbf runs 11 of the 51 problems of McDermott et al.'s table here and 2 more in its pinned-points set; the other 38 are run in the sets of the benchmarks they come from (Koza, Nguyen, Pagie, Korns, Keijzer, Vladislavleva)."
+   }
+  ],
+  "follows_first_publication": [
+   "Korns-7, Vladislavleva-7, Keijzer-5 and Nguyen-9 follow their original authors where later copies differ; Korns-5, -6, -8 and -9 use plain log and square root as printed."
+  ]
+ },
+ {
+  "catalog": "gp-benchmarks-sr-table-points",
+  "authors_total": 51,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 49,
+    "text": "srbf runs here the 2 problems of the table that train on fixed points (Keijzer-6, Vladislavleva-3) and Pagie-2 from the authors' reference code; the rest are in 'GP benchmarks SR table (McDermott et al. 2012)' or in their own benchmarks' sets."
+   }
+  ],
+  "follows_first_publication": [
+   "Keijzer-6 is Keijzer's harmonic number (Keijzer 2003) on x = 1..50, tested on 1..120."
+  ]
+ },
+ {
+  "catalog": "gp-gomea-real-world",
+  "authors_total": 10,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs 7 of the 10 datasets: Boston housing, Dow Chemical and Tower have data that may not be shared."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gplearn-diabetes",
+  "authors_total": 2,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 1 of the 2 gplearn examples here (diabetes data); the formula example is in 'gplearn documentation examples'."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gplearn-documentation-examples",
+  "authors_total": 2,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 1 of the 2 gplearn examples here (the toy formula); the diabetes data example is in 'gplearn documentation example (diabetes)'."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gpu-lm-inner-constant-recovery-problems",
+  "authors_total": 18,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "grammarvae-points",
+  "authors_total": 1,
+  "changes": [],
+  "follows_first_publication": [
+   "GrammarVAE-1 is fitted on the authors' 1,000 evenly spaced points on [-10, 10]."
+  ]
+ },
+ {
+  "catalog": "gsgp-real-world",
+  "authors_total": 7,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gsr-symset",
+  "authors_total": 17,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "hep-llm-sr-angular-distribution-problems",
+  "authors_total": 5,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs the 2 formula problems of the paper; its 3 data tasks were never published."
+   },
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "The authors work with binned data (30 bins in cos theta); srbf samples cos theta uniformly at random, and tests the out-of-domain problem on the 30 bin centres."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "heuristiclab-physics-instances",
+  "authors_total": 5,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "heuristiclab-regression-instance-providers",
+  "authors_total": 376,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 362,
+    "text": "srbf runs 14 of HeuristicLab's 376 problems here and 1 in its pinned-points set: 164 are run in other srbf sets (Keijzer, Korns, Nguyen, Vladislavleva, Feynman, ...), the 88 generated instances have no published formula, the 94 PennML datasets are run in SRBench, the 14 real-world and Miba datasets have no clear license, and AircraftMaximumLift has inputs without a range."
+   }
+  ],
+  "follows_first_publication": [
+   "Formulas and ranges follow the defining authors (Keijzer, Korns, Vladislavleva, Friedman, Chen et al.) rather than HeuristicLab's code where they differ (e.g. Korns-14's sign, Korns-15's range)."
+  ]
+ },
+ {
+  "catalog": "heuristiclab-regression-instance-providers-points",
+  "authors_total": 376,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 375,
+    "text": "srbf runs here only Keijzer-6 on its fixed points; HeuristicLab's other problems are in 'HeuristicLab regression instance providers', in other srbf sets, or not run."
+   }
+  ],
+  "follows_first_publication": [
+   "Keijzer-6 is Keijzer's harmonic number (Keijzer 2003) on x = 1..50, tested on 1..120."
+  ]
+ },
+ {
+  "catalog": "hierbosss-single-atom",
+  "authors_total": 2,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 1 of the 2 HierBOSSS problems here (the single-atom catalysis data); the synthetic polynomial is in 'HierBOSSS single-atom catalysis and synthetic polynomial'."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "hierbosss-single-atom-catalysis-and-synthetic-polynomial",
+  "authors_total": 2,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 1 of the 2 HierBOSSS problems here (the synthetic polynomial); the catalysis data are in 'HierBOSSS single-atom catalysis'."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "jin",
+  "authors_total": 18,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "kan-feynman-no-units-subset",
+  "authors_total": 27,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 26,
+    "text": "srbf runs 1 of the 27 formulas: 20 have no input range from the authors, and 6 are identical to problems srbf runs in its Feynman set."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "kan-toy-functions",
+  "authors_total": 5,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "keijzer",
+  "authors_total": 15,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 8,
+    "text": "srbf runs 7 of Keijzer's 15 problems here; the 8 that train on fixed points are in 'Keijzer (fixed points)'."
+   }
+  ],
+  "follows_first_publication": [
+   "Keijzer-5 samples its denominator variable on [1, 2] as Keijzer (2003) defines it; later copies swapped two input ranges."
+  ]
+ },
+ {
+  "catalog": "keijzer-points",
+  "authors_total": 15,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 7,
+    "text": "srbf runs here the 8 Keijzer problems that train on fixed points; the other 7 are in 'Keijzer'."
+   }
+  ],
+  "follows_first_publication": [
+   "Keijzer-6 is the harmonic number sum 1/i (Keijzer 2003, Eq. 7); later copies print x(x+1)/2.",
+   "Keijzer-4, -8 and -9 use Keijzer's own training and test grids (step 0.05; tests starting at 0) where later copies differ."
+  ]
+ },
+ {
+  "catalog": "kim-et-al-eql-benchmark-functions",
+  "authors_total": 13,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 12 of the 13 functions: Kim-8 (exp(-x^2) on [-1, 1]) is run as Livermore-21, without Kim et al.'s extrapolation test."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "knowledge-integration-newtonian-cases",
+  "authors_total": 3,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "korns",
+  "authors_total": 15,
+  "changes": [],
+  "follows_first_publication": [
+   "Korns-7 uses Korns' (2011) amplitude 213.80940889; later copies print 2.1380940889.",
+   "Korns-5, -6, -8 and -9 use plain log and square root as Korns prints them; later copies wrap the arguments in absolute values.",
+   "Korns-13 to -15, dropped from later copies, are included, Korns-15 on Korns' range [-50, 50]."
+  ]
+ },
+ {
+  "catalog": "koza",
+  "authors_total": 2,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "langlaw-perovskites",
+  "authors_total": 4,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "The out-of-distribution tests for bulk modulus (10 perovskites) and OER activity (5 perovskites) are not published in the authors' input form and are not used."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "lasr-bigbench",
+  "authors_total": 1,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "lasr-noisy-feynman-with-distractors",
+  "authors_total": 100,
+  "changes": [
+   {
+    "kind": "filled",
+    "problems": 100,
+    "text": "The paper adds 'random noise variables' without saying how many or how they are distributed, and the authors' released code switches them off for Feynman; srbf adds them with the authors' recipe from their other sets (pad to 11 inputs, extra inputs uniform on [1, 20]) and keeps the formula's own inputs in the first columns where that recipe shuffles the column order."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "lasr-synthetic-equations",
+  "authors_total": 41,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "livermore",
+  "authors_total": 22,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 3,
+    "text": "srbf also runs 3 problems that are not in the published Livermore set, taken from a later DSO code release: a new Livermore-19 and exact copies of Livermore-7 and -8 (7a, 8a); as a result the paper's Livermore-19 to -22 appear as Livermore-20 to -23."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "livermore2",
+  "authors_total": 150,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "llm-lex-random-mathematica-functions",
+  "authors_total": 23,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 20,
+    "text": "srbf runs 3 of the 23 functions here (the multivariate examples); the 20 univariate functions, which use a fixed grid, are in its pinned-points set."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "llm-lex-random-mathematica-functions-points",
+  "authors_total": 23,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs here the 20 univariate functions on the authors' 100-point grid; the 3 multivariate examples are in 'LLM-LEx random Mathematica functions'."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "llm-pysr-battery",
+  "authors_total": 2,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "llm-sr-bactgrow",
+  "authors_total": 2,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "llm-sr-stress-strain",
+  "authors_total": 2,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "mcdermott-predictive-modelling",
+  "authors_total": 12,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 9,
+    "text": "srbf runs 3 of the 12 problems of McDermott et al.'s list here: Mackey-Glass and the two sunspot problems have data that may not be shared, the two trading, the prime-number and the DyFor GDP and CPI problems have no published data, and the simulated DyFor series is in the pinned-points set."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "mcdermott-table-1-predictive-modelling-sets-points",
+  "authors_total": 12,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 11,
+    "text": "srbf runs here only the simulated DyFor series; the other problems are in 'McDermott et al. predictive-modelling sets' or not run."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "meier",
+  "authors_total": 4,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 2 of the 4 functions of Meier et al. (2013): the other two are Koza's quintic and sextic, run in srbf's Koza set."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "multi-view-sr-synthetic-benchmarks",
+  "authors_total": 16,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 8,
+    "text": "srbf runs 8 of the 16 views here; the 8 views of the first family, which use fixed grids, are in its pinned-points set."
+   },
+   {
+    "kind": "changed",
+    "problems": 8,
+    "text": "The authors pose one task per family: one formula, with constants refitted per view, fitted to all 4 views at once, on targets rescaled to 10 y / max|y|; srbf runs each view as a separate problem on the unscaled target."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "multi-view-sr-synthetic-benchmarks-points",
+  "authors_total": 16,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 8,
+    "text": "srbf runs here the 8 views of the first family on the authors' grids; the other 8 views are in 'Multi-view SR synthetic benchmarks'."
+   },
+   {
+    "kind": "changed",
+    "problems": 8,
+    "text": "The authors pose one task per family: one formula, with constants refitted per view, fitted to all 4 views at once, on targets rescaled to 10 y / max|y|; srbf runs each view as a separate problem on the unscaled target."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "neat",
+  "authors_total": 9,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 8 of the 9 Neat problems here; Neat-6 trains on fixed points and is in 'Neat (fixed points)'."
+   }
+  ],
+  "follows_first_publication": [
+   "Neat-9 (the Pagie function) is sampled at random on [-5, 5]^2, as the neat-GP paper samples its training sets; Pagie's own 26 x 26 grid is in 'Pagie (fixed points)'."
+  ]
+ },
+ {
+  "catalog": "neat-points",
+  "authors_total": 9,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 8,
+    "text": "srbf runs here only Neat-6 on its fixed points; the other 8 Neat problems are in 'Neat'."
+   }
+  ],
+  "follows_first_publication": [
+   "Neat-6 is Keijzer's harmonic number on x = 1..50, tested on x = 1..120 (Keijzer 2003); later copies print x(x+1)/2."
+  ]
+ },
+ {
+  "catalog": "newtonbench",
+  "authors_total": 324,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 216,
+    "text": "srbf runs the 108 laws of NewtonBench's 'vanilla equation' setting; the other 216 tasks embed the same laws in simulators that an agent explores step by step, which srbf's protocol cannot run."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "nguyen",
+  "authors_total": 10,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "Nguyen-11 and Nguyen-12 are not in Uy et al. (2011), which defines Nguyen-1 to -10; srbf keeps them as later benchmark lists define them, and tests Nguyen-11 on the grid Keijzer (2003) uses for the same formula."
+   }
+  ],
+  "follows_first_publication": [
+   "Nguyen-9 and Nguyen-10 sample their inputs on [-1, 1]^2 as Uy et al. (2011) define them; later copies use [0, 1]^2."
+  ]
+ },
+ {
+  "catalog": "nguyen-c-points",
+  "authors_total": 5,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs 2 of the 5 Nguyen-c problems here; Nguyen-1c, -5c and -8c are run as Constant-1, -2 and -5 (on DSR's input ranges, not SPL's)."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "nikuradse",
+  "authors_total": 2,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "nonic-points",
+  "authors_total": 1,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "nsrwh-only-five-variables-nc",
+  "authors_total": 301,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "For 2 expressions the authors' out-of-distribution test region [-25, 25] contains no point where the expression is defined; srbf tests them on the training range."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "nsrwh-only-five-variables-wc",
+  "authors_total": 301,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "nsrwh-train-nc",
+  "authors_total": 301,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "nsrwh-train-wc",
+  "authors_total": 301,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 299 of the 301 expressions: 2 have no point where they are defined on the input range [-10, 10]."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "nuclear-misr",
+  "authors_total": 4,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs 1 of the 4 datasets: the charge-radius data may not be shared, and the two KAN variants have no published data."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "occamnet-analytic-and-non-analytic-suites",
+  "authors_total": 23,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 22 of the 23 problems: OccamNet-P7 (a function iterated four times) is left out because its formula is too long for srbf's formula parser."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "pagie-points",
+  "authors_total": 1,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "Pagie and Hogeweg test on a 100 x 100 grid whose step and ends they do not state; srbf has no test."
+   }
+  ],
+  "follows_first_publication": [
+   "Pagie-1 is fitted on the authors' 26 x 26 grid with step 0.4 on [-5, 5]^2."
+  ]
+ },
+ {
+  "catalog": "phye2e-llm-generated-synthetic-formulas",
+  "authors_total": 600,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "phye2e-space-physics",
+  "authors_total": 17,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 15 of the 17 datasets: the sunspot data has a non-commercial license, and the lunar-tide data (13.3 million samples) needs a gridding the authors did not publish."
+   },
+   {
+    "kind": "changed",
+    "problems": 12,
+    "text": "For the plasma-pressure data the paper trains on several near-side radii (R = 8 to 28 Earth radii) and averages the far-side error; srbf uses only the largest, r < 28."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "physo-astro",
+  "authors_total": 12,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 10,
+    "text": "srbf runs 2 of the 12 problems of PhySO's astrophysics tests here; 9 more are in 'PhySO astrophysical case studies', and the Pantheon supernova task fits a function through an integral, not y = f(x)."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "physo-astrophysical-case-studies",
+  "authors_total": 12,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs 9 of the 12 problems here; the NFW profile and the expansion law are in 'PhySO astrophysics', and the Pantheon supernova task fits a function through an integral, not y = f(x)."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "physo-class",
+  "authors_total": 8,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 8,
+    "text": "Class SR asks for one formula shared by several datasets whose constants differ; srbf runs each law as a single dataset."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "physo-milky-way-streams",
+  "authors_total": 29,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 29,
+    "text": "srbf fits each stream on its own (the authors' single-stream setting); the authors' main task fits one law to many streams at once."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "poly",
+  "authors_total": 6,
+  "changes": [],
+  "follows_first_publication": [
+   "Poly-10 samples its inputs on [-1, 1] as Poli (2003) defines it; later copies use [0, 1]."
+  ]
+ },
+ {
+  "catalog": "pse-high-dimensional-distractor-set",
+  "authors_total": 20,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "pysr-empiricalbench",
+  "authors_total": 9,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 5,
+    "text": "srbf runs the 4 problems with measured data here; 4 formula problems are in 'PySR EmpiricalBench formulas', and the fifth (Rydberg) is missing."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "pysr-empiricalbench-formulas",
+  "authors_total": 9,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 4,
+    "text": "srbf runs the 5 formula problems here; the authors' 4 measured-data problems are in 'PySR EmpiricalBench data'."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "r-rationals-points",
+  "authors_total": 6,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "reproduction-bias-not-included-test-sets",
+  "authors_total": 300,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "rils-rols-random-instances",
+  "authors_total": 235,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "rsrm-constant-optimization-benchmark",
+  "authors_total": 97,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 4,
+    "text": "srbf runs 93 of the 97 pairs of expression and input range: 4 are identical to problems srbf runs in its Constant and Keijzer sets."
+   },
+   {
+    "kind": "filled",
+    "problems": 93,
+    "text": "The appendix gives only a range for the inputs, not how points are spread over it or whether all inputs share it; srbf samples every input uniformly on the same range."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "rsrm-gaussian-cdf-extrapolation-test-points",
+  "authors_total": 3,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 3,
+    "text": "srbf fits on every point RSRM's model saw (x = 0 to 100) and tests on the extrapolation x = -100 to -1; the appendix's test range [10, 25] lies inside the fitting range and is not used."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "scilaws-real",
+  "authors_total": 118,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 61,
+    "text": "srbf runs 57 of SciLaws-Real's 118 tasks: only the 66 single-group (Type I) tasks fit srbf's protocol; of these, 7 have data that may not be shared and 2 with share-alike licenses are in a separate set."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "scilaws-real-share-alike",
+  "authors_total": 118,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 116,
+    "text": "srbf runs here the 2 single-group tasks whose data carry a share-alike license; the other 57 shareable single-group tasks are in 'SciLaws-Bench SciLaws-Real (Type I)', the 52 multi-group tasks need a protocol srbf does not have, and 7 tasks have data that may not be shared."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "scimed-settling-sphere-configurations",
+  "authors_total": 5,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 4 of the 5 configurations: D is the authors' control without a formula."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "scrbenchmark",
+  "authors_total": 120,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 105,
+    "text": "srbf runs 15 of the 120 equations: the other 105 are identical to problems srbf runs in FastSRB and SRSD-dummy."
+   },
+   {
+    "kind": "changed",
+    "problems": 15,
+    "text": "srbf uses neither the shape constraints that define this benchmark nor its fixed validation sets (uniform over each input's range); it tests on new points from the training distribution."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "shape-constrained-real-world",
+  "authors_total": 4,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs 1 of the 4 problems: the friction and flow-stress data may not be shared."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "srbf does not check the shape constraints that the authors set for the problem."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "shape-constrained-sr-synthetic",
+  "authors_total": 19,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 12,
+    "text": "srbf runs 7 of the 19 problems: the other 12 are identical to problems in srbf's Feynman sets."
+   },
+   {
+    "kind": "changed",
+    "problems": 7,
+    "text": "srbf does not check the shape constraints that the authors set for each problem."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "sine-points",
+  "authors_total": 1,
+  "changes": [],
+  "follows_first_publication": [
+   "Sine is sin(x) on the 63 points x = 0, 0.1, ..., 6.2 as the Field Guide defines it; later copies replaced it with another formula sampled at random."
+  ]
+ },
+ {
+  "catalog": "sisso-octet-binaries",
+  "authors_total": 1,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "3 of the 23 input features of the original study (properties of the heteronuclear AB dimer) were never published and are missing."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "soose-fc",
+  "authors_total": 400,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "soose-nc",
+  "authors_total": 400,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "soose-wc",
+  "authors_total": 400,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "spl-noise-data-scarcity-grid",
+  "authors_total": 1,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "srbench-2.0-blackbox",
+  "authors_total": 12,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "srbench-2.0-first-principles",
+  "authors_total": 12,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "srbench-2021-blackbox",
+  "authors_total": 122,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "srbench-2021-strogatz",
+  "authors_total": 14,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "srsd-dummy",
+  "authors_total": 120,
+  "changes": [],
+  "follows_first_publication": [
+   "Built on the corrected FastSRB laws (SRSD's code and published data where SRSD's files disagree) with SRSD's own published dummy columns."
+  ]
+ },
+ {
+  "catalog": "superconductor-tc",
+  "authors_total": 2,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "For the 7-feature problem the authors validate by leave-one-out cross-validation; srbf fits all 29 rows and has no test."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "surfacebench-explicit-surfaces",
+  "authors_total": 258,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 128 of the 129 explicit surfaces (each with an in-range and an out-of-range test): NCS10 has no input range from the authors."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "sym-q-ai-feynman-with-drift-terms",
+  "authors_total": 15,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 15,
+    "text": "srbf runs the 15 AI-Feynman expressions Sym-Q evaluates, without the drift terms of its drift experiment. Those problems cannot be rebuilt: Sym-Q names nine kinds of drift but not the equations it added them to (only 'all equations with three or fewer variables, excluding those exceeding the model's size limits') nor the input each drift uses."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "symantic-synthetic-set",
+  "authors_total": 10,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "symbolfit-lhc-spectra",
+  "authors_total": 5,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "symbolicgpt-bivariate-set",
+  "authors_total": 7000,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 5977,
+    "text": "The authors evaluate 7,000 validation samples but publish the formulas of only 1,024; srbf runs 1,023 of these: 1 has no real value at all."
+   },
+   {
+    "kind": "filled",
+    "problems": 1023,
+    "text": "The authors publish these formulas with their constants masked; srbf draws the constants anew in every run, uniform on [-2.1, 2.1], the authors' generator law."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "symbolicgpt-test-sets",
+  "authors_total": 3780,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2792,
+    "text": "srbf runs 988 problems of a fixed sample of 1,024 of the 3,780 published test formulas (the paper speaks of 4,000): 21 have no point where they are defined and 15 have no real value at all."
+   },
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "For 2 formulas the authors' test region contains no point where the formula is defined; srbf tests them on the training range."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "symbolicregression-com-toy-test-suite-1",
+  "authors_total": 10,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 9,
+    "text": "srbf runs 1 of the suite's 10 functions here: 6 are run as Vladislavleva-2 to -6 and -8, and 3 have no input range from the author."
+   },
+   {
+    "kind": "filled",
+    "problems": 1,
+    "text": "The suite gives no input range for Ripple2d; srbf uses the range and test region the same author gives for this function in her thesis and journal paper."
+   }
+  ],
+  "follows_first_publication": [
+   "Ripple2d is 2 sin((x1 - 4)(x2 - 4)) as its author defines it; later copies misprint it."
+  ]
+ },
+ {
+  "catalog": "symformer-in-domain-synthetic-evaluation",
+  "authors_total": 20000,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 18976,
+    "text": "The authors never published their evaluation formulas; srbf regenerated the 20,000 with the authors' generator and seed and runs a fixed sample of 1,024 of them."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "symtree-benchmark-functions",
+  "authors_total": 917,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 901,
+    "text": "srbf runs 16 of SymTree's 17 benchmark functions (F7 is run as Nguyen-7); the paper's 900 random polynomials were never published and their generator has no seed."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "tisr-air-density",
+  "authors_total": 3,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "torchsisso-specific-energy",
+  "authors_total": 1,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "torchsisso-synthetic-expressions",
+  "authors_total": 10,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 9 of the 10 expressions: expression 9 is Feynman I.44.4 and is run in srbf's Feynman set."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "treloar-rubber",
+  "authors_total": 6,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 6,
+    "text": "The benchmark task built on these curves (EO-SR) uses only the 20 C curves, fitting the uniaxial and equibiaxial curves together and testing on the pure-shear curve; srbf fits each curve, including the three 50 C curves, on its own and has no test."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "vladislavleva",
+  "authors_total": 9,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs 6 of the 9 problems of Vladislavleva et al. (2009) here: Vladislavleva-2 and -3 train on fixed points and are in 'Vladislavleva (fixed points)', and the real-world Tower data may not be shared."
+   }
+  ],
+  "follows_first_publication": [
+   "Vladislavleva-7 is 2 sin((x1 - 4)(x2 - 4)) as Vladislavleva et al. (2009) define it; later copies print 2 sin(x1 - 4)(x2 - 4)."
+  ]
+ },
+ {
+  "catalog": "vladislavleva-points",
+  "authors_total": 9,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 7,
+    "text": "srbf runs here the 2 problems that train on fixed points (Vladislavleva-2 and -3); the others are in 'Vladislavleva' or, for the Tower data, not run."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "white-et-al-2013-proposed-sr-set-points",
+  "authors_total": 7,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 6,
+    "text": "srbf runs 1 of the 7 problems of White et al. (2013) here: Korns-12, Vladislavleva-4, Nguyen-7 and Pagie-1 are run in their own benchmarks' sets, and the Dow Chemical and GP Challenge data may not be shared."
+   }
+  ],
+  "follows_first_publication": [
+   "Keijzer-6 is Keijzer's harmonic number (Keijzer 2003) on x = 1..50, tested on 1..120; later copies print x(x+1)/2."
+  ]
+ }
+]

@@ -1,0 +1,2377 @@
+metadata:
+  name: eql-robotic-arm-forward-kinematics
+  version: 1
+  tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs", "srbf-modified"]}
+  srbf_changes: [{"kind": "filled", "problems": 28, "text": "The authors never published how the joint angles were generated, only that they follow sinusoids of amplitude up to pi/2 (pi for the extrapolation test); srbf samples each angle as (pi/2) sin(u) with u uniform on [0, 2 pi), and with amplitude pi for the extrapolation test."}, {"kind": "filled", "problems": 28, "text": "The authors never print the arm's formulas; srbf derives them from the stated geometry (a planar arm with segments of length 0.5)."}]
+  license: "facts only: task geometry and ranges cited from Martius & Lampert 2016 (arXiv:1610.02995); formulas derived by srbf; no upstream license"
+  citation: {"paper": {"short": "Martius & Lampert 2016", "title": "Extrapolation and learning equations", "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)", "url": "https://arxiv.org/abs/1610.02995"}}
+  description: EQL robotic-arm forward kinematics
+  display_name: EQL robotic-arm forward kinematics*
+  modified_by_srbf: 'the authors'' input generator is unpublished: srbf draws each joint angle as (pi/2) sin(u), u ~ U[0,
+    2 pi) (the time-sampled limit of their sinusoidal joint targets), and (pi) sin(u) for the extrapolation test'
+  sources:
+  - https://arxiv.org/abs/1610.02995
+  - https://arxiv.org/pdf/1610.02995v1
+  - https://arxiv.org/e-print/1610.02995v1
+  - https://openreview.net/forum?id=ryUPiRvge
+  - https://openreview.net/forum?id=BkgRp0FYe
+  - https://object.cloud.sdsc.edu/v1/AUTH_da4962d3368042ac8337e2dfdd3e7bf3/ml-papers-txt/ICLR/2017/extrapolation_and_learning_equations__4f62930c.txt
+  - https://github.com/martius-lab/EQL
+  - https://github.com/martius-lab/EQL_Tensorflow
+  - https://github.com/martius-lab/EQL-Pytorch
+  - https://arxiv.org/abs/1806.07259
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-153.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  kin-3-end_x:
+    raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3)
+    n_variables: 3
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-3-end_x.extrap:
+    raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3)
+    n_variables: 3
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-3-end_y:
+    raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3)
+    n_variables: 3
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-3-end_y.extrap:
+    raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3)
+    n_variables: 3
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-4-end_x:
+    raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4)
+    n_variables: 4
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-4-end_x.extrap:
+    raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4)
+    n_variables: 4
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-4-end_y:
+    raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4)
+    n_variables: 4
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-4-end_y.extrap:
+    raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4)
+    n_variables: 4
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg1_x:
+    raw: 0.5*(cos(x1))
+    prepared: 0.5*cos(v1)
+    n_variables: 5
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg1_x.extrap:
+    raw: 0.5*(cos(x1))
+    prepared: 0.5*cos(v1)
+    n_variables: 5
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+        v5:
+          expr: 3.141592653589793*sin(u5)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg2_x:
+    raw: 0.5*(cos(x1) + cos(x1 + x2))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2)
+    n_variables: 5
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg2_x.extrap:
+    raw: 0.5*(cos(x1) + cos(x1 + x2))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2)
+    n_variables: 5
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+        v5:
+          expr: 3.141592653589793*sin(u5)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg3_x:
+    raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3)
+    n_variables: 5
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg3_x.extrap:
+    raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3)
+    n_variables: 5
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+        v5:
+          expr: 3.141592653589793*sin(u5)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg4_x:
+    raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4)
+    n_variables: 5
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg4_x.extrap:
+    raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4)
+    n_variables: 5
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+        v5:
+          expr: 3.141592653589793*sin(u5)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg5_x:
+    raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4) + cos(x1 + x2 + x3 + x4 + x5))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4) + 0.5*cos(v1 + v2 + v3 +
+      v4 + v5)
+    n_variables: 5
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg5_x.extrap:
+    raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4) + cos(x1 + x2 + x3 + x4 + x5))
+    prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4) + 0.5*cos(v1 + v2 + v3 +
+      v4 + v5)
+    n_variables: 5
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+        v5:
+          expr: 3.141592653589793*sin(u5)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg1_y:
+    raw: 0.5*(sin(x1))
+    prepared: 0.5*sin(v1)
+    n_variables: 5
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg1_y.extrap:
+    raw: 0.5*(sin(x1))
+    prepared: 0.5*sin(v1)
+    n_variables: 5
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+        v5:
+          expr: 3.141592653589793*sin(u5)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg2_y:
+    raw: 0.5*(sin(x1) + sin(x1 + x2))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2)
+    n_variables: 5
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg2_y.extrap:
+    raw: 0.5*(sin(x1) + sin(x1 + x2))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2)
+    n_variables: 5
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+        v5:
+          expr: 3.141592653589793*sin(u5)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg3_y:
+    raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3)
+    n_variables: 5
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg3_y.extrap:
+    raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3)
+    n_variables: 5
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+        v5:
+          expr: 3.141592653589793*sin(u5)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg4_y:
+    raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4)
+    n_variables: 5
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg4_y.extrap:
+    raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4)
+    n_variables: 5
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+        v5:
+          expr: 3.141592653589793*sin(u5)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg5_y:
+    raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4) + sin(x1 + x2 + x3 + x4 + x5))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4) + 0.5*sin(v1 + v2 + v3 +
+      v4 + v5)
+    n_variables: 5
+    subset: interp
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    meta:
+      finite_fraction: 1.0
+  kin-5-all_seg5_y.extrap:
+    raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4) + sin(x1 + x2 + x3 + x4 + x5))
+    prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4) + 0.5*sin(v1 + v2 + v3 +
+      v4 + v5)
+    n_variables: 5
+    subset: extrap
+    vars:
+      v1:
+        name: x1
+        expr: 1.5707963267948966*sin(u1)
+      v2:
+        name: x2
+        expr: 1.5707963267948966*sin(u2)
+      v3:
+        name: x3
+        expr: 1.5707963267948966*sin(u3)
+      v4:
+        name: x4
+        expr: 1.5707963267948966*sin(u4)
+      v5:
+        name: x5
+        expr: 1.5707963267948966*sin(u5)
+      v0:
+        name: y
+    input_distributions:
+      x1: 'not given as a distribution: joint angle (rad) of joint 1, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x2: 'not given as a distribution: joint angle (rad) of joint 2, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x3: 'not given as a distribution: joint angle (rad) of joint 3, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x4: 'not given as a distribution: joint angle (rad) of joint 4, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+      x5: 'not given as a distribution: joint angle (rad) of joint 5, sampled by the authors as states along a trajectory
+        of the arm ''controlled by sinusoidal joint target angles with amplitude in [-pi/2, pi/2], each joint with a different
+        frequency'' (training and interpolation test); the extrapolation test used amplitude [-pi, pi]. Frequencies, phases,
+        controller and trajectory length are not published. Bounding range [-pi/2, pi/2]; U[-pi/2, pi/2] would be an srbf
+        approximation, not the authors'' distribution.'
+    latent:
+      u1:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u2:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u3:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u4:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+      u5:
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 6.283185307179586
+    test:
+      vars:
+        v1:
+          expr: 3.141592653589793*sin(u1)
+        v2:
+          expr: 3.141592653589793*sin(u2)
+        v3:
+          expr: 3.141592653589793*sin(u3)
+        v4:
+          expr: 3.141592653589793*sin(u4)
+        v5:
+          expr: 3.141592653589793*sin(u5)
+    test_source: 'Martius & Lampert 2016, ''Extrapolation and learning equations'', arXiv:1610.02995v1, results.tex (as quoted
+      in the records; no local copy of the paper): training ''uniformly in the hypercube [-h,h] x [-h,h]''; test sets: interpolation
+      (same distribution), extrapolation near [-3h/2,3h/2]^d \ [-h,h]^d and extrapolation far [-2h,2h]^d \ [-h,h]^d (results.tex
+      l.43-47); F-1..F-3: ''We follow the same proce'
+    meta:
+      finite_fraction: 1.0

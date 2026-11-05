@@ -1,0 +1,147 @@
+metadata:
+  name: gfn-sr-noisy-near-twin-set
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: []
+  license: "CC BY 4.0 (Li, Marinescu & Musslick 2023, GFN-SR, arXiv:2312.00396)"
+  citation: {"paper": {"short": "Li et al. 2023", "title": "GFN-SR: Symbolic Regression with Generative Flow Networks", "venue": "NeurIPS 2023 AI4Science Workshop", "url": "https://arxiv.org/abs/2312.00396"}}
+  description: GFN-SR noisy near-twin set
+  sources:
+  - https://arxiv.org/abs/2312.00396
+  - https://arxiv.org/pdf/2312.00396v1
+  - https://arxiv.org/src/2312.00396
+  - https://openreview.net/forum?id=r3fzEWnaY4
+  - https://mlanthology.org/neuripsw/2023/li2023neuripsw-gfnsr
+  - https://neurips.cc/virtual/2023/75693
+  - https://github.com/listar2000/gfn-sr
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-110.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  f1:
+    raw: x**3 + x**2 + x
+    prepared: v1**3 + v1**2 + v1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[0, 1]
+    meta:
+      finite_fraction: 1.0
+  g1:
+    raw: sin(x)*(sqrt(x) + exp(x))
+    prepared: (sqrt(v1) + exp(v1))*sin(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[0, 1]
+    meta:
+      finite_fraction: 1.0
+  f2:
+    raw: log(x + 1)
+    prepared: log(v1 + 1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -0.1
+        - 0.1
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-0.1, 0.1]
+    meta:
+      finite_fraction: 1.0
+  g2:
+    raw: 0.5*x
+    prepared: 0.5*v1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -0.1
+        - 0.1
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-0.1, 0.1]
+    meta:
+      finite_fraction: 1.0
+  f3:
+    raw: x**2 - 4*x + 3
+    prepared: v1**2 - 4*v1 + 3
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[0, 1]
+    meta:
+      finite_fraction: 1.0
+  g3:
+    raw: 4*(1 - sqrt(x))
+    prepared: 4 - 4*sqrt(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[0, 1]
+    meta:
+      finite_fraction: 1.0

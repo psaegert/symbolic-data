@@ -1,6 +1,11 @@
 metadata:
   name: constant
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 2, "text": "srbf runs 8 of the 10 'Constant' problems listed in the DSO repository: Const-Test-1 and -2 are software sanity tests, not benchmark problems."}]
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
+  citation: {"paper": {"short": "Petersen et al. 2021", "title": "Deep symbolic regression: Recovering mathematical expressions from data via risk-seeking policy gradients", "venue": "ICLR 2021", "url": "https://arxiv.org/abs/1912.04871"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
+  dropped: "Const-Test-1, Const-Test-2: DSO repository sanity tests, not a benchmark (srbf ruling 2026-11-03)"
   description: Constant-optimization suite (incl. Const-Test sanity checks).
   sources:
   - Petersen et al. 2021 (ICLR), Deep Symbolic Regression, Appendix
@@ -282,75 +287,5 @@ expressions:
             - 2
             - 20
         test: null
-        function_set: CKoza
-      finite_fraction: 1.0
-  Const-Test-1:
-    raw: 3.14159265358979323846*x1*x1
-    prepared: 3.14159265358979323846*v1*v1
-    n_variables: 1
-    sources:
-    - null
-    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
-      Petersen et al. 2021, Mundhenk et al. 2021)
-    vars:
-      v1:
-        name: x1
-        sample_range:
-        - -1.0
-        - 1.0
-        sample_type:
-        - uni
-        - pos
-      v0:
-        name: y
-    meta:
-      dso_spec:
-        train:
-          all:
-            E:
-            - -1
-            - 1
-            - 20
-        test:
-          all:
-            E:
-            - -1
-            - 1
-            - 20
-        function_set: KozaUserConst
-      finite_fraction: 1.0
-  Const-Test-2:
-    raw: 3.14159265358979323846*x1*x1
-    prepared: 3.14159265358979323846*v1*v1
-    n_variables: 1
-    sources:
-    - null
-    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
-      Petersen et al. 2021, Mundhenk et al. 2021)
-    vars:
-      v1:
-        name: x1
-        sample_range:
-        - -1.0
-        - 1.0
-        sample_type:
-        - uni
-        - pos
-      v0:
-        name: y
-    meta:
-      dso_spec:
-        train:
-          all:
-            E:
-            - -1
-            - 1
-            - 20
-        test:
-          all:
-            E:
-            - -1
-            - 1
-            - 20
         function_set: CKoza
       finite_fraction: 1.0

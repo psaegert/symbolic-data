@@ -4,7 +4,8 @@ A ``ProblemSource`` turns a level-1 :class:`~symbolic_data.catalog.ProblemCatalo
 or inline problems) into :class:`~symbolic_data.problem.Problem`s, applying the *usage policy* the
 catalog deliberately omits: draw ``method``, ``n_support`` / ``n_validation``, ``noise``,
 ``problems_per_expression``, holdouts/filters, and (for sets lacking intrinsic ranges) a global
-sampling fallback. It is ONE concrete class -- no ABC, no subclasses; the mode is INFERRED from the
+sampling fallback. For a frozen data catalog (:mod:`symbolic_data.pools`) ``n_support`` / ``n_validation`` cap
+the rows each pass draws from the problem's pools. It is ONE concrete class -- no ABC, no subclasses; the mode is INFERRED from the
 config (a ``catalog:`` ref -> SET or GENERATE (a generative ``catalog: {type: ...}`` mapping streams on-the-fly), inline ``problems:`` ->
 FIXED).
 
@@ -25,7 +26,9 @@ from symbolic_data._evaluation import compile_expression, load_engine
 from symbolic_data.catalog import Catalog, ProblemCatalog
 from symbolic_data.errors import CatalogEntryError, NoValidSampleFoundError
 from symbolic_data.generative import GenerativeCatalog, build_catalog, is_open_generative_ref
+from symbolic_data.inputs import has_test_spec
 from symbolic_data.noise import NoiseSpec, apply_noise
+from symbolic_data.pools import draw_from_pools, has_pools
 from symbolic_data.problem import Problem
 from symbolic_data.token_ops import normalize_skeleton
 
@@ -212,13 +215,29 @@ class ProblemSource:
         n_validation = int(self.n_validation) if self.n_validation is not None else n_support
         return n_support, n_validation
 
+    def _pool_caps(self) -> tuple[int | None, int | None]:
+        """The most fitting / test rows a data problem's draw takes: ``n_support`` and ``n_validation``
+        (which defaults to ``n_support``); unset means the whole pool."""
+        if self._n_support_from_prior:
+            raise ValueError("sampling.n_support: 'prior' cannot cap a data catalog's pools (it draws support sizes from a generative prior)")
+        n_support = int(self.n_support) if self.n_support is not None else None
+        n_validation = int(self.n_validation) if self.n_validation is not None else n_support
+        return n_support, n_validation
+
     def _iter_catalog(self) -> Iterator[Problem]:
         catalog = self._get_catalog()
         if getattr(catalog, "frozen", False):
             # A frozen/materialized catalog already holds realized Problems -- iterate them
-            # directly (no sampling), like a fixed source.
+            # directly (no sampling), like a fixed source. A data problem (it declares a split
+            # rule, symbolic_data.pools) holds pools of rows instead: each pass draws at most
+            # n_support fitting and n_validation test rows from them afresh.
             for problem in (catalog.problems or []):
-                if problem.is_placeholder or self._passes_filters(problem):
+                if problem.is_placeholder:
+                    yield problem
+                    continue
+                if has_pools(problem):
+                    problem = draw_from_pools(problem, *self._pool_caps(), self._get_rng())
+                if self._passes_filters(problem):
                     yield problem
             return
         if self._n_support_from_prior and not isinstance(catalog, GenerativeCatalog):
@@ -240,18 +259,31 @@ class ProblemSource:
         the placeholder protocol: a transient ``NoValidSampleFoundError`` is retried up to
         ``max_trials``, a permanent ``CatalogEntryError`` becomes a placeholder immediately. When
         ``n_support`` is ``None`` (prior mode) the catalog draws the support size and ALL realized
-        rows become support (no validation split).
+        rows become support (no validation split). An entry with a ``test`` block
+        (:func:`~symbolic_data.inputs.has_test_spec`) draws its validation rows separately, from that block.
         """
         n_points = None if n_support is None else n_support + n_validation
         eq_id = getattr(entry, "id", None)
+        test_apart = n_support is not None and n_validation > 0 and has_test_spec(getattr(entry, "meta", None) or {})
         try:
             for _ in range(self.max_trials):
                 try:
-                    realized = catalog.realize(entry, n_points, rng, engine=engine, layout=self.layout)
+                    if test_apart:
+                        # one run's per-run values (an entry's ``per_run`` params) are shared by its fitting and test rows
+                        shared = ({"per_run_values": catalog.draw_per_run(entry, rng)}
+                                  if (getattr(entry, "meta", None) or {}).get("per_run") else {})
+                        realized = catalog.realize(entry, n_support, rng, engine=engine, layout=self.layout, **shared)
+                        test = catalog.realize(entry, n_validation, rng, engine=engine, layout=self.layout, part="test", **shared)
+                    else:
+                        realized = catalog.realize(entry, n_points, rng, engine=engine, layout=self.layout)
                 except NoValidSampleFoundError:
                     continue
-                split_at = realized.x.shape[0] if n_support is None else n_support
-                xs, xv, ys, yv = _split_support_validation(realized.x, realized.y, split_at)
+                if test_apart:
+                    xs, ys = realized.x.astype(STORAGE_DTYPE, copy=True), realized.y.astype(STORAGE_DTYPE, copy=True)
+                    xv, yv = test.x.astype(STORAGE_DTYPE, copy=True), test.y.astype(STORAGE_DTYPE, copy=True)
+                else:
+                    split_at = realized.x.shape[0] if n_support is None else n_support
+                    xs, xv, ys, yv = _split_support_validation(realized.x, realized.y, split_at)
                 if xs.size == 0:
                     continue
                 ground_truth = dict(

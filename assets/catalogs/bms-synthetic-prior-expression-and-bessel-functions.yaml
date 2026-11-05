@@ -1,0 +1,88 @@
+metadata:
+  name: bms-synthetic-prior-expression-and-bessel-functions
+  version: 1
+  tags: {"origin": "generated formulas", "tags": ["integer inputs", "srbf-modified"]}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 2 of the 3 problems here; the noise-free Bessel study is in 'BMS synthetic prior expression and Bessel functions* (fixed points)'."}, {"kind": "filled", "problems": 1, "text": "For the noisy Bessel study the authors give only the range x in [0, 4], not how the points are placed; srbf samples x uniformly on [0, 4] and the order nu uniformly from 0 to 4."}]
+  license: "facts only: formulas cited from Guimera et al. 2020 (Bayesian machine scientist, Sci. Adv. 6:eaav6971, CC BY-NC 4.0); no text or tables reproduced"
+  citation: {"paper": {"short": "Guimerà et al. 2020", "title": "A Bayesian machine scientist to aid in the solution of challenging scientific problems", "venue": "Science Advances 6(5):eaav6971", "url": "https://doi.org/10.1126/sciadv.aav6971"}}
+  description: BMS synthetic prior expression and Bessel functions
+  display_name: BMS synthetic prior expression and Bessel functions*
+  modified_by_srbf: 'the authors give the noisy Bessel problem''s range, x in [0, 4], but not how its points are placed: srbf
+    draws x uniformly on [0, 4] and the order nu uniformly from {0, ..., 4}'
+  sources:
+  - https://arxiv.org/abs/2004.12157
+  - https://arxiv.org/pdf/2004.12157
+  - https://doi.org/10.1126/sciadv.aav6971
+  - https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6994216/supplementaryFiles
+  - https://bitbucket.org/rguimera/machine-scientist
+  - https://api.bitbucket.org/2.0/repositories/rguimera/machine-scientist/refs/branches
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-64.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  bms-prior-expression:
+    raw: x1*(-1.19 + x2)*cos(x1)/(0.29*log(0.29))
+    prepared: v1*(v2 - 1.19)*(3.44827586206897/log(0.29))*cos(v1)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -2.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: U[-2, 2]
+      x2: U[-2, 2]
+    meta:
+      finite_fraction: 1.0
+  bessel-J0-4-xmax4:
+    raw: besselj(nu, x)
+    prepared: besselj(v2, v1)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        dist:
+          name: uniform
+          kwargs:
+            low: 0.0
+            high: 4.0
+      v2:
+        name: nu
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 0.0
+            - 1.0
+            - 2.0
+            - 3.0
+            - 4.0
+      v0:
+        name: y
+    input_distributions:
+      x: 'not given (range only: x in [0, x_max], x_max = 4)'
+      nu: discrete set {0, 1, 2, 3, 4}, equal counts (100 points per value)
+    needs_simplipy: '0.15'

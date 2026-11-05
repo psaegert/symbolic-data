@@ -24,6 +24,7 @@ from symbolic_data.problem import Problem
 from symbolic_data.catalog import Catalog, ProblemCatalog, CatalogEntry, RealizedExpression, load_catalog, CATALOGS
 from symbolic_data.generative import GenerativeCatalog, LampleChartonCatalog, build_catalog, register_generative_catalog
 from symbolic_data.source import ProblemSource
+from symbolic_data.pools import data_problem, draw_from_pools
 from symbolic_data.tensor_ops import mask_unused_variable_columns
 from symbolic_data.paths import get_path, get_root, substitute_root_path
 from symbolic_data.config_io import load_config, save_config

@@ -1,0 +1,1121 @@
+metadata:
+  name: scrbenchmark
+  version: 1
+  tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 105, "text": "srbf runs 15 of the 120 equations: the other 105 are identical to problems srbf runs in FastSRB and SRSD-dummy."}, {"kind": "changed", "problems": 15, "text": "srbf uses neither the shape constraints that define this benchmark nor its fixed validation sets (uniform over each input's range); it tests on new points from the training distribution."}]
+  license: "MIT (prescriptiveanalytics/SCR-Benchmarks; SRSD laws: omron-sinicx/srsd-benchmark, MIT)"
+  citation: {"paper": {"short": "Bachinger et al. 2025", "title": "SCRBenchmark: A Benchmarking Library for Shape-Constrained Regression", "venue": "Proceedings of the Genetic and Evolutionary Computation Conference Companion (GECCO '25 Companion), pp. 2505-2513", "url": "https://doi.org/10.1145/3712255.3734280"}, "data": {"short": "GitHub prescriptiveanalytics/SCR-Benchmarks@2869bd5", "title": "SCR-Benchmarks (MIT)", "url": "https://github.com/prescriptiveanalytics/SCR-Benchmarks/tree/2869bd564ff5eaa859577f02504752411bed817f"}}
+  description: SCRBenchmark (shape-constrained regression on SRSD-Feynman; Bachinger, Werth, Zenisek, Haider & de Franca,
+    GECCO 2025 Companion)
+  sources:
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/tree/2869bd564ff5eaa859577f02504752411bed817f
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/2869bd564ff5eaa859577f02504752411bed817f/SCRBenchmark/SRSDFeynman/feynman.py
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/2869bd564ff5eaa859577f02504752411bed817f/SCRBenchmark/Data/feynman_srsd_info.py
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/2869bd564ff5eaa859577f02504752411bed817f/SCRBenchmark/sampling.py
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/2869bd564ff5eaa859577f02504752411bed817f/SCRBenchmark/base.py
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/2869bd564ff5eaa859577f02504752411bed817f/SCRBenchmark/suite.py
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/2869bd564ff5eaa859577f02504752411bed817f/SCRBenchmark/benchmark.py
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/2869bd564ff5eaa859577f02504752411bed817f/SCRBenchmark/seeds.py
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/2869bd564ff5eaa859577f02504752411bed817f/generate/2-generate_test_sets.py
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/2869bd564ff5eaa859577f02504752411bed817f/SCRBenchmark/Data/feynman_srsdf_constraint_info.py
+  - https://github.com/prescriptiveanalytics/SCR-Benchmarks/tree/2869bd564ff5eaa859577f02504752411bed817f/SCRBenchmark/Data/Test
+  - https://doi.org/10.1145/3712255.3734280
+  - https://pure.fh-ooe.at/de/publications/scrbenchmark-a-benchmarking-library-for-shape-constrained-regress/
+  - https://github.com/omron-sinicx/srsd-benchmark/blob/6f47a48/datasets/feynman.py
+  - https://github.com/omron-sinicx/srsd-benchmark/blob/6f47a48/datasets/sampling.py
+  - https://github.com/omron-sinicx/srsd-benchmark/commit/b72819c
+  - https://github.com/prescriptiveanalytics/SCR-Benchmark-SCSR
+  - https://github.com/prescriptiveanalytics/SCR-Benchmark-SCPR
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/critic-1.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  FeynmanICh9Eq18:
+    raw: 6.67430e-11*m1*m2/((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
+    prepared: 6.6743e-11*v1*v2/((v3 - v4)**2 + (v5 - v6)**2 + (v7 - v8)**2)
+    n_variables: 8
+    subset: hard
+    vars:
+      v1:
+        name: m1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: m2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: x2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos_neg
+      v4:
+        name: x1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos_neg
+      v5:
+        name: y2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos_neg
+      v6:
+        name: y1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos_neg
+      v7:
+        name: z2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos_neg
+      v8:
+        name: z1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos_neg
+      v0:
+        name: y
+    input_distributions:
+      m1: log-uniform (base 10) on [0.1, 10], positive (DefaultSampling(0.1, 10, uses_negative=False))
+      m2: log-uniform (base 10) on [0.1, 10], positive (DefaultSampling(0.1, 10, uses_negative=False))
+      x2: log-uniform (base 10) magnitude on [0.1, 10], sign + or - with probability 1/2 each, i.e. x in [-10, -0.1] U [0.1,
+        10] (DefaultSampling(0.1, 10), both signs)
+      x1: log-uniform (base 10) magnitude on [0.1, 10], sign + or - with probability 1/2 each, i.e. x in [-10, -0.1] U [0.1,
+        10] (DefaultSampling(0.1, 10), both signs)
+      y2: log-uniform (base 10) magnitude on [0.1, 10], sign + or - with probability 1/2 each, i.e. x in [-10, -0.1] U [0.1,
+        10] (DefaultSampling(0.1, 10), both signs)
+      y1: log-uniform (base 10) magnitude on [0.1, 10], sign + or - with probability 1/2 each, i.e. x in [-10, -0.1] U [0.1,
+        10] (DefaultSampling(0.1, 10), both signs)
+      z2: log-uniform (base 10) magnitude on [0.1, 10], sign + or - with probability 1/2 each, i.e. x in [-10, -0.1] U [0.1,
+        10] (DefaultSampling(0.1, 10), both signs)
+      z1: log-uniform (base 10) magnitude on [0.1, 10], sign + or - with probability 1/2 each, i.e. x in [-10, -0.1] U [0.1,
+        10] (DefaultSampling(0.1, 10), both signs)
+    meta:
+      finite_fraction: 1.0
+  FeynmanICh12Eq11:
+    raw: q*(Ef + B*v*sin(theta))
+    prepared: v1*(v2 + v3*v4*sin(v5))
+    n_variables: 5
+    subset: remainder
+    vars:
+      v1:
+        name: q
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos_neg
+      v2:
+        name: Ef
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: B
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: v
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v5:
+        name: theta
+        sample_range:
+        - 0.0
+        - 6.283185307179586
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q: log-uniform (base 10) magnitude on [0.1, 10], sign + or - with probability 1/2 each, i.e. x in [-10, -0.1] U [0.1,
+        10] (DefaultSampling(0.1, 10), both signs)
+      Ef: log-uniform (base 10) on [0.1, 10], positive (DefaultSampling(0.1, 10, uses_negative=False))
+      B: log-uniform (base 10) on [0.1, 10], positive (DefaultSampling(0.1, 10, uses_negative=False))
+      v: log-uniform (base 10) on [0.1, 10], positive (DefaultSampling(0.1, 10, uses_negative=False))
+      theta: uniform U[0, 2*pi] (SimpleSampling(0.0, 2 * np.pi, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanICh26Eq2:
+    raw: sin(theta1)/sin(theta2)
+    prepared: sin(v1)/sin(v2)
+    n_variables: 2
+    subset: remainder
+    vars:
+      v1:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 6.283185307179586
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: theta2
+        sample_range:
+        - 0.0
+        - 6.283185307179586
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      theta1: uniform U[0, 2*pi] (SimpleSampling(0, 2 * np.pi, uses_negative=False))
+      theta2: uniform U[0, 2*pi] (SimpleSampling(0, 2 * np.pi, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanICh27Eq6:
+    raw: 1/(1/d1 + n/d2)
+    prepared: 1/(v2/v3 + 1/v1)
+    n_variables: 3
+    subset: remainder
+    vars:
+      v1:
+        name: d1
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: n
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: d2
+        sample_range:
+        - 0.001
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      d1: log-uniform (base 10) on [0.001, 0.1], positive (DefaultSampling(0.001, 0.1, uses_negative=False))
+      n: log-uniform (base 10) on [0.1, 10], positive (DefaultSampling(0.1, 10, uses_negative=False))
+      d2: log-uniform (base 10) on [0.001, 10], positive (DefaultSampling(0.001, 10, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanICh29Eq16:
+    raw: sqrt(x1**2 + x2**2 + 2*x1*x2*cos(theta1 - theta2))
+    prepared: sqrt(v1**2 + 2*v1*v2*cos(v3 - v4) + v2**2)
+    n_variables: 4
+    subset: hard
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.1
+        - 10.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 0.0
+        - 6.283185307179586
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: theta2
+        sample_range:
+        - 0.0
+        - 6.283185307179586
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: log-uniform (base 10) on [0.1, 10], positive (DefaultSampling(0.1, 10, uses_negative=False))
+      x2: log-uniform (base 10) on [0.1, 10], positive (DefaultSampling(0.1, 10, uses_negative=False))
+      theta1: uniform U[0, 2*pi] (SimpleSampling(0, 2 * np.pi, uses_negative=False))
+      theta2: uniform U[0, 2*pi] (SimpleSampling(0, 2 * np.pi, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanICh30Eq5:
+    raw: lambd/(n*sin(theta))
+    prepared: v1/(v2*sin(v3))
+    n_variables: 3
+    subset: remainder
+    vars:
+      v1:
+        name: lambd
+        sample_range:
+        - 1.0e-11
+        - 1.0e-09
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: n
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 1.0
+            - 2.0
+            - 3.0
+            - 4.0
+            - 5.0
+            - 6.0
+            - 7.0
+            - 8.0
+            - 9.0
+            - 10.0
+            - 11.0
+            - 12.0
+            - 13.0
+            - 14.0
+            - 15.0
+            - 16.0
+            - 17.0
+            - 18.0
+            - 19.0
+            - 20.0
+            - 21.0
+            - 22.0
+            - 23.0
+            - 24.0
+            - 25.0
+            - 26.0
+            - 27.0
+            - 28.0
+            - 29.0
+            - 30.0
+            - 31.0
+            - 32.0
+            - 33.0
+            - 34.0
+            - 35.0
+            - 36.0
+            - 37.0
+            - 38.0
+            - 39.0
+            - 40.0
+            - 41.0
+            - 42.0
+            - 43.0
+            - 44.0
+            - 45.0
+            - 46.0
+            - 47.0
+            - 48.0
+            - 49.0
+            - 50.0
+            - 51.0
+            - 52.0
+            - 53.0
+            - 54.0
+            - 55.0
+            - 56.0
+            - 57.0
+            - 58.0
+            - 59.0
+            - 60.0
+            - 61.0
+            - 62.0
+            - 63.0
+            - 64.0
+            - 65.0
+            - 66.0
+            - 67.0
+            - 68.0
+            - 69.0
+            - 70.0
+            - 71.0
+            - 72.0
+            - 73.0
+            - 74.0
+            - 75.0
+            - 76.0
+            - 77.0
+            - 78.0
+            - 79.0
+            - 80.0
+            - 81.0
+            - 82.0
+            - 83.0
+            - 84.0
+            - 85.0
+            - 86.0
+            - 87.0
+            - 88.0
+            - 89.0
+            - 90.0
+            - 91.0
+            - 92.0
+            - 93.0
+            - 94.0
+            - 95.0
+            - 96.0
+            - 97.0
+            - 98.0
+            - 99.0
+      v3:
+        name: theta
+        sample_range:
+        - 0.0
+        - 6.283185307179586
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      lambd: log-uniform (base 10) on [1e-11, 1e-09], positive (DefaultSampling(1e-11, 1e-09, uses_negative=False))
+      n: integer, uniform on {1, ..., 99}, positive (IntegerSampling(1.0, 1.0e2, uses_negative=False) = numpy randint(1, 100),
+        whose upper bound is excluded)
+      theta: uniform U[0, 2*pi] (SimpleSampling(0, 2 * np.pi, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanICh38Eq12:
+    raw: 4*pi*8.854e-12*(6.626e-34/(2*pi))**2/(m*q**2)
+    prepared: 3.5416e-11*(1.0975969e-67/3.141592653589793**2)*3.141592653589793/(v1*v2**2)
+    n_variables: 2
+    subset: remainder
+    vars:
+      v1:
+        name: m
+        sample_range:
+        - 1.0e-28
+        - 1.0e-26
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q
+        sample_range:
+        - 1.0e-11
+        - 1.0e-09
+        sample_type:
+        - log
+        - pos_neg
+      v0:
+        name: y
+    input_distributions:
+      m: log-uniform (base 10) on [1e-28, 1e-26], positive (DefaultSampling(1e-28, 1e-26, uses_negative=False))
+      q: log-uniform (base 10) magnitude on [1e-11, 1e-09], sign + or - with probability 1/2 each, i.e. x in [-1e-09, -1e-11]
+        U [1e-11, 1e-09] (DefaultSampling(1e-11, 1e-09), both signs)
+    meta:
+      finite_fraction: 1.0
+  FeynmanICh44Eq4:
+    raw: n*1.380649e-23*T*log(V2/V1)
+    prepared: 1.380649e-23*v1*v2*log(v3/v4)
+    n_variables: 4
+    subset: hard
+    vars:
+      v1:
+        name: n
+        sample_range:
+        - 1.0e+24
+        - 1.0e+26
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: T
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: V2
+        sample_range:
+        - 1.0e-05
+        - 0.001
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: V1
+        sample_range:
+        - 1.0e-05
+        - 0.001
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n: log-uniform (base 10) on [1e+24, 1e+26], positive (DefaultSampling(1e+24, 1e+26, uses_negative=False))
+      T: log-uniform (base 10) on [10, 1000], positive (DefaultSampling(10, 1000, uses_negative=False))
+      V2: log-uniform (base 10) on [1e-05, 0.001], positive (DefaultSampling(1e-05, 0.001, uses_negative=False))
+      V1: log-uniform (base 10) on [1e-05, 0.001], positive (DefaultSampling(1e-05, 0.001, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanIIICh9Eq52:
+    raw: (p_d*Ef*t/(6.626e-34/(2*pi)))**2*sin((omega - omega_0)*t/2)**2/((omega - omega_0)*t/2)**2
+    prepared: 3.64432516163265e+67*3.141592653589793**2*v1**2*v2**2*sin(v3*(v4 - v5)/2)**2/(v4 - v5)**2
+    n_variables: 5
+    subset: hard
+    vars:
+      v1:
+        name: p_d
+        sample_range:
+        - 1.0e-22
+        - 1.0e-20
+        sample_type:
+        - log
+        - pos_neg
+      v2:
+        name: Ef
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos_neg
+      v3:
+        name: t
+        sample_range:
+        - 1.0e-18
+        - 1.0e-16
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: omega
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v5:
+        name: omega_0
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      p_d: log-uniform (base 10) magnitude on [1e-22, 1e-20], sign + or - with probability 1/2 each, i.e. x in [-1e-20, -1e-22]
+        U [1e-22, 1e-20] (DefaultSampling(1e-22, 1e-20), both signs)
+      Ef: log-uniform (base 10) magnitude on [10, 1000], sign + or - with probability 1/2 each, i.e. x in [-1000, -10] U [10,
+        1000] (DefaultSampling(10, 1000), both signs)
+      t: log-uniform (base 10) on [1e-18, 1e-16], positive (DefaultSampling(1e-18, 1e-16, uses_negative=False))
+      omega: log-uniform (base 10) on [1e+08, 1e+10], positive (DefaultSampling(1e+08, 1e+10, uses_negative=False))
+      omega_0: log-uniform (base 10) on [1e+08, 1e+10], positive (DefaultSampling(1e+08, 1e+10, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanIIICh15Eq27:
+    raw: 2*pi*alpha/(n*d)
+    prepared: 2*3.141592653589793*v1/(v2*v3)
+    n_variables: 3
+    subset: remainder
+    vars:
+      v1:
+        name: alpha
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -99.0
+            - -98.0
+            - -97.0
+            - -96.0
+            - -95.0
+            - -94.0
+            - -93.0
+            - -92.0
+            - -91.0
+            - -90.0
+            - -89.0
+            - -88.0
+            - -87.0
+            - -86.0
+            - -85.0
+            - -84.0
+            - -83.0
+            - -82.0
+            - -81.0
+            - -80.0
+            - -79.0
+            - -78.0
+            - -77.0
+            - -76.0
+            - -75.0
+            - -74.0
+            - -73.0
+            - -72.0
+            - -71.0
+            - -70.0
+            - -69.0
+            - -68.0
+            - -67.0
+            - -66.0
+            - -65.0
+            - -64.0
+            - -63.0
+            - -62.0
+            - -61.0
+            - -60.0
+            - -59.0
+            - -58.0
+            - -57.0
+            - -56.0
+            - -55.0
+            - -54.0
+            - -53.0
+            - -52.0
+            - -51.0
+            - -50.0
+            - -49.0
+            - -48.0
+            - -47.0
+            - -46.0
+            - -45.0
+            - -44.0
+            - -43.0
+            - -42.0
+            - -41.0
+            - -40.0
+            - -39.0
+            - -38.0
+            - -37.0
+            - -36.0
+            - -35.0
+            - -34.0
+            - -33.0
+            - -32.0
+            - -31.0
+            - -30.0
+            - -29.0
+            - -28.0
+            - -27.0
+            - -26.0
+            - -25.0
+            - -24.0
+            - -23.0
+            - -22.0
+            - -21.0
+            - -20.0
+            - -19.0
+            - -18.0
+            - -17.0
+            - -16.0
+            - -15.0
+            - -14.0
+            - -13.0
+            - -12.0
+            - -11.0
+            - -10.0
+            - -9.0
+            - -8.0
+            - -7.0
+            - -6.0
+            - -5.0
+            - -4.0
+            - -3.0
+            - -2.0
+            - -1.0
+            - 0.0
+            - 1.0
+            - 2.0
+            - 3.0
+            - 4.0
+            - 5.0
+            - 6.0
+            - 7.0
+            - 8.0
+            - 9.0
+            - 10.0
+            - 11.0
+            - 12.0
+            - 13.0
+            - 14.0
+            - 15.0
+            - 16.0
+            - 17.0
+            - 18.0
+            - 19.0
+            - 20.0
+            - 21.0
+            - 22.0
+            - 23.0
+            - 24.0
+            - 25.0
+            - 26.0
+            - 27.0
+            - 28.0
+            - 29.0
+            - 30.0
+            - 31.0
+            - 32.0
+            - 33.0
+            - 34.0
+            - 35.0
+            - 36.0
+            - 37.0
+            - 38.0
+            - 39.0
+            - 40.0
+            - 41.0
+            - 42.0
+            - 43.0
+            - 44.0
+            - 45.0
+            - 46.0
+            - 47.0
+            - 48.0
+            - 49.0
+            - 50.0
+            - 51.0
+            - 52.0
+            - 53.0
+            - 54.0
+            - 55.0
+            - 56.0
+            - 57.0
+            - 58.0
+            - 59.0
+            - 60.0
+            - 61.0
+            - 62.0
+            - 63.0
+            - 64.0
+            - 65.0
+            - 66.0
+            - 67.0
+            - 68.0
+            - 69.0
+            - 70.0
+            - 71.0
+            - 72.0
+            - 73.0
+            - 74.0
+            - 75.0
+            - 76.0
+            - 77.0
+            - 78.0
+            - 79.0
+            - 80.0
+            - 81.0
+            - 82.0
+            - 83.0
+            - 84.0
+            - 85.0
+            - 86.0
+            - 87.0
+            - 88.0
+            - 89.0
+            - 90.0
+            - 91.0
+            - 92.0
+            - 93.0
+            - 94.0
+            - 95.0
+            - 96.0
+            - 97.0
+            - 98.0
+            - 99.0
+      v2:
+        name: n
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - 1.0
+            - 2.0
+            - 3.0
+            - 4.0
+            - 5.0
+            - 6.0
+            - 7.0
+            - 8.0
+            - 9.0
+            - 10.0
+            - 11.0
+            - 12.0
+            - 13.0
+            - 14.0
+            - 15.0
+            - 16.0
+            - 17.0
+            - 18.0
+            - 19.0
+            - 20.0
+            - 21.0
+            - 22.0
+            - 23.0
+            - 24.0
+            - 25.0
+            - 26.0
+            - 27.0
+            - 28.0
+            - 29.0
+            - 30.0
+            - 31.0
+            - 32.0
+            - 33.0
+            - 34.0
+            - 35.0
+            - 36.0
+            - 37.0
+            - 38.0
+            - 39.0
+            - 40.0
+            - 41.0
+            - 42.0
+            - 43.0
+            - 44.0
+            - 45.0
+            - 46.0
+            - 47.0
+            - 48.0
+            - 49.0
+            - 50.0
+            - 51.0
+            - 52.0
+            - 53.0
+            - 54.0
+            - 55.0
+            - 56.0
+            - 57.0
+            - 58.0
+            - 59.0
+            - 60.0
+            - 61.0
+            - 62.0
+            - 63.0
+            - 64.0
+            - 65.0
+            - 66.0
+            - 67.0
+            - 68.0
+            - 69.0
+            - 70.0
+            - 71.0
+            - 72.0
+            - 73.0
+            - 74.0
+            - 75.0
+            - 76.0
+            - 77.0
+            - 78.0
+            - 79.0
+            - 80.0
+            - 81.0
+            - 82.0
+            - 83.0
+            - 84.0
+            - 85.0
+            - 86.0
+            - 87.0
+            - 88.0
+            - 89.0
+            - 90.0
+            - 91.0
+            - 92.0
+            - 93.0
+            - 94.0
+            - 95.0
+            - 96.0
+            - 97.0
+            - 98.0
+            - 99.0
+      v3:
+        name: d
+        sample_range:
+        - 1.0e-10
+        - 1.0e-08
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      alpha: 'integer, sign + or - with probability 1/2 and magnitude uniform on {1, ..., 99}: alpha in {-99, ..., -1} U {1,
+        ..., 99}, 0 excluded (IntegerSampling(1, 1.0e2), both signs = +-numpy randint(1, 100))'
+      n: integer, uniform on {1, ..., 99}, positive (IntegerSampling(1, 1.0e2, uses_negative=False) = numpy randint(1, 100))
+      d: log-uniform (base 10) on [1e-10, 1e-08], positive (DefaultSampling(1e-10, 1e-08, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanIIICh21Eq20:
+    raw: -rho_c_0*q*A_vec/m
+    prepared: -v1*v2*v3/v4
+    n_variables: 4
+    subset: hard
+    vars:
+      v1:
+        name: rho_c_0
+        sample_range:
+        - 1.0e+27
+        - 1.0e+29
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: q
+        sample_range:
+        - 1.0e-11
+        - 1.0e-09
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: A_vec
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos_neg
+      v4:
+        name: m
+        sample_range:
+        - 1.0e-30
+        - 1.0e-28
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      rho_c_0: 'declared: log-uniform (base 10) magnitude on [1e27, 1e29], negative sign, i.e. x in [-1e29, -1e27] (DefaultSampling(1.0e27,
+        1.0e29, uses_positive=False))'
+      q: 'declared: log-uniform (base 10) magnitude on [1e-11, 1e-9], negative sign, i.e. x in [-1e-9, -1e-11] (DefaultSampling(1.0e-11,
+        1.0e-9, uses_positive=False))'
+      A_vec: log-uniform (base 10) magnitude on [0.001, 0.1], sign + or - with probability 1/2 each, i.e. x in [-0.1, -0.001]
+        U [0.001, 0.1] (DefaultSampling(0.001, 0.1), both signs)
+      m: log-uniform (base 10) on [1e-30, 1e-28], positive (DefaultSampling(1e-30, 1e-28, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanBonus7:
+    raw: sqrt(8*pi*6.67430e-11*rho/3 - alpha*2.99792458e8**2/d**2)
+    prepared: sqrt(1.77981333333333e-10*3.141592653589793*v1 - 8.98755178736818e+16*v2/v3**2)
+    n_variables: 3
+    subset: remainder
+    vars:
+      v1:
+        name: rho
+        sample_range:
+        - 1.0e-27
+        - 1.0e-25
+        sample_type:
+        - log
+        - pos
+      v2:
+        name: alpha
+        dist:
+          name: choice
+          kwargs:
+            values:
+            - -1.0
+            - 0.0
+            - 1.0
+      v3:
+        name: d
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      rho: log-uniform (base 10) on [1e-27, 1e-25], positive (DefaultSampling(1e-27, 1e-25, uses_negative=False))
+      alpha: 'integer in {-1, 0, 1} (IntegerSampling(-1.0, 1.0), both signs: the positive half is numpy randint(-1, 1) in
+        {-1, 0}, the negative half is -randint(-1, 1) in {1, 0}), prior P(-1) = 1/4, P(0) = 1/2, P(1) = 1/4'
+      d: log-uniform (base 10) on [1e+08, 1e+10], positive (DefaultSampling(1e+08, 1e+10, uses_negative=False))
+    meta:
+      finite_fraction: 0.6631
+  FeynmanBonus10:
+    raw: (cos(theta2) - v/2.99792458e8)/(1 - v/2.99792458e8*cos(theta2))
+    prepared: (-3.33564095198152e-9*v2 + cos(v1))/(-3.33564095198152e-9*v2*cos(v1) + 1)
+    n_variables: 2
+    subset: hard
+    vars:
+      v1:
+        name: theta2
+        sample_range:
+        - 0.0
+        - 6.283185307179586
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: v
+        sample_range:
+        - 100000.0
+        - 10000000.0
+        sample_type:
+        - log
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      theta2: uniform U[0, 2*pi] (SimpleSampling(0, 2 * np.pi, uses_negative=False))
+      v: log-uniform (base 10) on [100000, 1e+07], positive (DefaultSampling(100000, 1e+07, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanBonus13:
+    raw: 1/(4*pi*8.854e-12)*q/sqrt(r**2 + d**2 - 2*r*d*cos(alpha))
+    prepared: (28235825615.541/3.141592653589793)*v1/sqrt(v2**2 - 2*v2*v3*cos(v4) + v3**2)
+    n_variables: 4
+    subset: hard
+    vars:
+      v1:
+        name: q
+        sample_range:
+        - 0.001
+        - 0.1
+        sample_type:
+        - log
+        - pos_neg
+      v2:
+        name: r
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: d
+        sample_range:
+        - 0.01
+        - 1.0
+        sample_type:
+        - log
+        - pos
+      v4:
+        name: alpha
+        sample_range:
+        - 0.0
+        - 3.141592653589793
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      q: log-uniform (base 10) magnitude on [0.001, 0.1], sign + or - with probability 1/2 each, i.e. x in [-0.1, -0.001]
+        U [0.001, 0.1] (DefaultSampling(0.001, 0.1), both signs)
+      r: log-uniform (base 10) on [0.01, 1], positive (DefaultSampling(0.01, 1, uses_negative=False))
+      d: log-uniform (base 10) on [0.01, 1], positive (DefaultSampling(0.01, 1, uses_negative=False))
+      alpha: uniform U[0, pi] (SimpleSampling(0, np.pi, uses_negative=False))
+    meta:
+      finite_fraction: 1.0
+  FeynmanBonus19:
+    raw: -1/(8*pi*6.67430e-11)*(2.99792458e8**4*k_f/r**2 + H_G**2*2.99792458e8**2*(1 - 2*alpha))
+    prepared: -1872855580.36049/3.141592653589793*(8.07760871306249e+33*v1/v2**2 + 8.98755178736818e+16*v3**2*(1 - 2*v4))
+    n_variables: 4
+    subset: hard
+    vars:
+      v1:
+        name: k_f
+        sample_range:
+        - 10.0
+        - 1000.0
+        sample_type:
+        - log
+        - pos_neg
+      v2:
+        name: r
+        sample_range:
+        - 100000000.0
+        - 10000000000.0
+        sample_type:
+        - log
+        - pos
+      v3:
+        name: H_G
+        sample_range:
+        - 1.0
+        - 100.0
+        sample_type:
+        - log
+        - pos_neg
+      v4:
+        name: alpha
+        sample_range:
+        - -10.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      k_f: log-uniform (base 10) magnitude on [10, 1000], sign + or - with probability 1/2 each, i.e. x in [-1000, -10] U
+        [10, 1000] (DefaultSampling(10, 1000), both signs)
+      r: log-uniform (base 10) on [1e+08, 1e+10], positive (DefaultSampling(1e+08, 1e+10, uses_negative=False))
+      H_G: log-uniform (base 10) magnitude on [1, 100], sign + or - with probability 1/2 each, i.e. x in [-100, -1] U [1,
+        100] (DefaultSampling(1, 100), both signs)
+      alpha: 'uniform U[-10, 10] (SimpleSampling(-10, 10), both signs: each half draws U(-10, 10) and the negative half is
+        negated, which leaves U[-10, 10]; simple_sampling also appends the box ends: [-10, 10] to the positive half and [10,
+        -10] to the negated half whenever that half has more than 2 points)'
+    meta:
+      finite_fraction: 1.0

@@ -107,6 +107,21 @@ def choice_dist(
     return value_array[indices]
 
 
+def grid_dist(
+    low: float,
+    high: float,
+    step: float,
+    size: Any = 1,
+    rng: np.random.Generator | None = None,
+) -> np.ndarray:
+    """Uniform over the evenly spaced points ``low, low + step, ..., high`` (both ends included): a benchmark's
+    test mesh (Keijzer 2003's ``[-3:0.01:3]``) without writing out its points."""
+    if step <= 0 or high < low:
+        raise ValueError(f"grid distribution needs step > 0 and high >= low, got {low}, {high}, {step}")
+    n = int(round((high - low) / step)) + 1
+    return np.round(low + step * _resolve_rng(rng).integers(0, n, size=size), 12)
+
+
 def rounded_dist(
     base: Callable[..., np.ndarray] | dict[str, Any],
     precision: Callable[..., np.ndarray] | dict[str, Any] | None = None,
@@ -154,6 +169,16 @@ def rounded_dist(
         # a consumer as negative zero, which prints as "-0.0" and denotes nothing useful.
         out[index] = round(value, decimals) + 0.0
     return out.reshape(shape)
+
+
+def folded_normal_dist(
+    loc: float,
+    scale: float,
+    size: Any = 1,
+    rng: np.random.Generator | None = None,
+) -> np.ndarray:
+    """|X| for X ~ N(loc, scale^2): a normal draw folded onto the non-negative half-line."""
+    return np.abs(_resolve_rng(rng).normal(loc, max(scale, 1e-9), size=size))
 
 
 def log_uniform_dist(
@@ -322,7 +347,9 @@ def fastsrb_dist(
 BASE_DISTRIBUTIONS: dict[str, Callable[..., np.ndarray]] = {
     "uniform": uniform_dist,
     "normal": normal_dist,
+    "folded_normal": folded_normal_dist,
     "choice": choice_dist,
+    "grid": grid_dist,
     "rounded": rounded_dist,
     "log_uniform": log_uniform_dist,
     "log_normal": log_normal_dist,
