@@ -232,3 +232,16 @@ def test_a_per_run_block_is_checked(engine):
         cat = _catalog({"prepared": "v1", "vars": {"v1": dict(_UNIT)}, "per_run": bad})
         with pytest.raises(CatalogEntryError, match="per_run"):
             cat.realize(cat["e"], 8, np.random.default_rng(0), engine=engine)
+
+
+def test_a_per_run_value_may_be_computed_from_the_ones_drawn_before_it(engine):
+    # c2*v1/c3 as the run's one constant g1 = c2/c3, so the run's ground truth holds one number there
+    cat = _catalog({"prepared": "0.5 * v1", "vars": {"v1": dict(_UNIT)},
+                    "per_run": {"params": {"c2": {"sample_range": [1.0, 2.0], "sample_type": ["uni", "pos"]},
+                                           "c3": {"sample_range": [3.0, 4.0], "sample_type": ["uni", "pos"]},
+                                           "g1": {"expr": "c2 / c3"}},
+                                "prepared": "g1 * v1"}})
+    r = cat.realize(cat["e"], 16, np.random.default_rng(5), engine=engine)
+    v = r.meta["per_run_values"]
+    assert v["g1"] == v["c2"] / v["c3"] and np.allclose(r.y.ravel(), v["g1"] * r.x[:, 0])
+    assert r.skeleton == cat.realize(cat["e"], 16, np.random.default_rng(6), engine=engine).skeleton
