@@ -1,8 +1,9 @@
 """``tagged_canonical`` is simplify IN the tagged dialect -- a different normal form
 from the prefix-dialect canonical, not a respelling of it. Specimens below are
-measured engine output (acj-4, simplipy 0.14, 2026-08-23), pinned. On SimpliPy 0.15 two of them read differently
-until they are re-measured on the released acj2-4-llm rules (the 0.15 rule mine, phase H): they are marked xfail
-until then, and the port's board tracks the re-measurement."""
+measured engine output (acj-4, simplipy 0.14, 2026-08-23), pinned. Two of them spell differently in SimpliPy 0.15's
+canonical form (the rules do not matter: 0.14's acj-4 rules read by 0.15 give the same new answers). They are a
+strict xfail, so the test flags the moment re-pinning is due; re-pin after SimpliPy's restructuring (phase D) or at
+the release mine (H)."""
 import pytest
 
 from simplipy import SimpliPyEngine
@@ -16,8 +17,9 @@ def engine() -> SimpliPyEngine:
 
 
 _REMEASURE_ON_015 = pytest.mark.xfail(
-    reason="measured on acj-4 (0.14); SimpliPy 0.15 reads it differently: re-measure on the released acj2-4-llm",
-    strict=False)
+    reason="pinned on 0.14; SimpliPy 0.15's canonical form (not its rules) spells it differently: a negative power "
+           "is the reciprocal inside the product, a negation a -1 coefficient. Re-pin after SimpliPy's phase D or at H.",
+    strict=True)
 
 # infix -> the tagged canonical (measured, not derived)
 SPECIMENS = [

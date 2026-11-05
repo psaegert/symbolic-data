@@ -14,10 +14,17 @@ All notable changes to `symbolic-data` are documented here. The format follows
   main after @1 was published (publishing is forward-only).
 - **The holdout fold runs at SimpliPy 0.15's default effort** (`HOLDOUT_EFFORT = None`: the search runs until a round
   finds nothing). 0.14's default and the old pin were effort 4; with 0.15's default the holdout canon is a fixpoint
-  that equals the generate path's target canonicalization again, so the fold's first-pass skip stays provably free.
+  that equals the generate path's target canonicalization again, so the fold's first-pass skip is free up to the
+  residuals SimpliPy documents (docs/formal.md, L6). Measured: 0 of 2,000 T8.1 draws change on a second call at None
+  (2 at effort 4), at the same cost as effort 4 within noise.
+- **The tagged target contract (A3) spells two forms differently under SimpliPy 0.15** (its canonical form, not
+  the rules): a negative power is the reciprocal of the positive power inside the product (`<mul> 1 <div> pow ...
+  </mul>` instead of `pow` with a negative exponent), and a negation is a `-1` coefficient in the product instead of
+  `neg inv`. Training targets built on 0.15 therefore differ from 0.14-built ones (flash-ansr T8.3 vs T8.1).
 - `explicit_constant_placeholders(..., convert_numbers_to_constant=False)` lost its keyword in 0.15; 0.15 never
   converts numerals, so the five calls behave as before.
-- Two pinned tagged-canonical specimens (measured on acj-4) are marked for re-measurement on 0.15's released rules.
+- Two pinned tagged-canonical specimens (measured on 0.14) spell differently in 0.15's canonical form; they are a
+  strict xfail until they are re-pinned after SimpliPy's restructuring (phase D) or at the release mine (H).
 
 ### Added
 

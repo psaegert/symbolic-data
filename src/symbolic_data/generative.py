@@ -43,9 +43,12 @@ from symbolic_data.catalog import Catalog, ProblemCatalog, RealizedExpression
 
 # The rewrite strength the holdout family quotient runs at. `permissive` is the most capable
 # canonicalizer available. The effort is SimpliPy 0.15's default, `None`: the search runs until a round
-# finds nothing, so the canon is a true fixpoint (a second call returns it unchanged) and equals what the
-# generate path's target canonicalization produces, which lets the fold skip its first pass
-# (_skeleton_is_holdout_canonical). Under 0.14 the default and this pin were effort 4; measured then on
+# finds nothing, so the canon is a fixpoint (a second call returns it unchanged, up to the residuals SimpliPy
+# documents: docs/formal.md, L6) and equals what the generate path's target canonicalization produces, which
+# lets the fold skip its first pass (_skeleton_is_holdout_canonical). Keeping None explicit (rather than reading
+# SimpliPy's default) means a future change of that default turns the skip off instead of skipping wrongly.
+# Measured by the SimpliPy session (2026-11-05, 2,000 T8.1 draws, permissive): 0 draws change on a second call
+# at None (2 at effort 4), at the same cost as effort 4 within noise. Under 0.14 the default and this pin were effort 4; measured then on
 # 300 real v24 draws, permissive/effort=4 cost 0.94 ms per prototype (faster than effort 0, 1.24 ms) and
 # the full simplify-then-mask fold 1.85 ms, ~2% of the 96 ms/instance generation budget. Re-measure on
 # 0.15's released rules.
