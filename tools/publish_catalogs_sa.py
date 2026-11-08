@@ -37,6 +37,9 @@ CATALOGS = {
 DATA_CATALOGS = {
     "scilaws-real-share-alike": ("scilaws-real-share-alike.npz", 2, "problem_catalog"),
 }
+# catalogs without a license-pass row: their notices are the derivation statement of assets_sa/LICENSE
+NOTICED_BEFORE_2026_11 = ("erbench-eponymous", "erbench-oeis")
+LEGAL_CODE = "The full CC BY-SA 4.0 legal code follows."
 
 CARD = """---
 license: cc-by-sa-4.0
@@ -66,10 +69,15 @@ Resolve by explicit repo syntax: `load_catalog("psaegert/symbolic-data-assets-sa
 
 def main(execute: bool = False) -> None:
     from publish_catalogs import publish
+    with open(os.path.join(SA_DIR, "LICENSE"), encoding="utf-8") as handle:
+        statement = handle.read().partition(LEGAL_CODE)[0]
+    unlisted = [name for name in NOTICED_BEFORE_2026_11 if name not in statement]
+    if unlisted:
+        raise SystemExit(f"REFUSED: NOTICED_BEFORE_2026_11 names {unlisted}, which assets_sa/LICENSE does not")
     card = [CommitOperationAdd(path_in_repo="README.md", path_or_fileobj=CARD.encode("utf-8")),
             CommitOperationAdd(path_in_repo="LICENSE", path_or_fileobj=os.path.join(SA_DIR, "LICENSE"))]
     publish(REPO, SA_DIR, CATALOGS, {}, execute=execute, extra_ops=tuple(card), built=DATA_CATALOGS,
-            shareable=("yes, share-alike repo",))
+            shareable=("yes, share-alike repo",), hand_noticed=NOTICED_BEFORE_2026_11)
 
 
 if __name__ == "__main__":

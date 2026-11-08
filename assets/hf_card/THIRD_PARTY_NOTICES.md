@@ -7,7 +7,7 @@ Full license texts and vendored upstream files live in the source repo
 
 | Catalog(s) | Upstream source | License |
 |---|---|---|
-| fastsrb (@1, @2) | FastSRB (viktmar/FastSRB; SRSD-lineage Feynman renderings, Matsubara et al. 2024 ranges) | MIT |
+| fastsrb (@1, @2, @3) | FastSRB (viktmar/FastSRB; SRSD-lineage Feynman renderings, Matsubara et al. 2024 ranges) | MIT |
 | feynman, feynman-bonus | Feynman Symbolic Regression Database (Udrescu & Tegmark 2020) — specs regenerated from the equation database (formulas + ranges as cited facts; original data files unlicensed, not redistributed); bonus csv via WassimTenachi/PhySO (MIT) | see note |
 | nguyen, constant, grammarvae, jin, keijzer, korns, koza, livermore, livermore2, meier, neat, nonic, pagie, poly, r-rationals, sine, vladislavleva | dso-org/deep-symbolic-optimization benchmarks.csv (Petersen et al.) | BSD-3-Clause |
 | srsd-dummy | SRSD recipe (Matsubara et al. 2024) applied to fastsrb entries | MIT |
@@ -18,7 +18,7 @@ Full license texts and vendored upstream files live in the source repo
 | soose-nc, soose-wc, soose-fc | SymposiumOrganization/NeuralSymbolicRegressionThatScales (Biggio et al. 2021) | MIT |
 | erbench-syneq, erbench-phybench, erbench-densities | ERBench (Kahlmeyer et al., arXiv:2606.09276; HF EquationDiscovery/Equation_Recovery_Benchmark) — SynEq author-generated MIT; PHYBench MIT (paper table + upstream Eureka-Lab/PHYBench); Densities BSD-3 (SciPy-derived) | MIT / BSD-3 |
 | srbench2-blackbox | PMLB data (EpistasisLab/pmlb, MIT); selection list from SRBench 2.0 (Aldeia et al., facts only — no GPL code/data) | MIT |
-| v23-val, lample-charton-v23 | self-generated (flash-ansr project artifacts) | project license |
+| v23-val, lample-charton-v23, lample-charton-v24, lample-charton-v24-bench | self-generated (flash-ansr project artifacts) | project license |
 
 Share-alike catalogs (erbench-oeis, erbench-eponymous — OEIS-/Wikipedia-derived, CC BY-SA 4.0;
 scilaws-real-share-alike — SciLaws-Bench tasks under CC BY-SA 3.0 and 4.0) are in the separate

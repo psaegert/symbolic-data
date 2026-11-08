@@ -25,7 +25,9 @@ identical bytes. ``MULTI_VERSION`` lists catalogs that keep several versions as 
 The data catalogs (``DATA_CATALOGS``: benchmarks' published data as frozen pools) are not in git: the builders in
 tools/catalog_build write them to ``build/data-catalogs`` and they are published from there only. A data catalog not
 built here keeps its hosted versions; one neither built nor hosted is refused. The license pass
-(tools/catalog_build/tags/licenses.json) gates every publish: a catalog it does not clear for this repo is refused.
+(tools/catalog_build/tags/licenses.json) gates every publish: a catalog it does not clear for this repo is refused,
+and so is a version to upload whose catalog has neither a license-pass row nor a hand-written notice
+(``NOTICED_BEFORE_2026_11``, each name checked against the notices' hand-written table).
 The dataset card (assets/hf_card) goes up with every publish; its THIRD_PARTY_NOTICES.md lists the license pass's
 row of every catalog published here (``python tools/publish_catalogs.py --notices`` rewrites that part, and a
 publish is refused while it is stale).
@@ -286,7 +288,7 @@ def license_pass() -> dict[str, dict]:
 
 def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execute: bool = False,
             extra_ops: tuple = (), built: dict | None = None, build_dir: str = DATA_BUILD,
-            shareable: tuple = SHAREABLE) -> None:
+            shareable: tuple = SHAREABLE, hand_noticed: tuple = ()) -> None:
     """Incremental, forward-only publish of ``catalogs`` ({name: (path under data_dir, count, type)}) and ``built``
     (the same, under build_dir) to ``repo``; the files land flat at the repo root.
 
@@ -296,7 +298,8 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
     * a version whose local bytes differ from the pinned sha256 -> REFUSED: published versions are
       immutable; bump the file's metadata.version;
     * a ``built`` catalog not built here keeps its hosted versions; one neither built nor hosted -> REFUSED;
-    * a catalog whose license-pass row does not say one of ``shareable`` -> REFUSED.
+    * a catalog whose license-pass row does not say one of ``shareable`` -> REFUSED;
+    * a version to upload whose catalog has no license-pass row and is not ``hand_noticed`` -> REFUSED.
 
     Dry-run by default; ``execute=True`` publishes.
     """
@@ -363,6 +366,10 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
     if barred:
         raise SystemExit(f"REFUSED: the license pass does not clear {barred} for {repo} "
                          f"(tools/catalog_build/tags/licenses.json).")
+    unnoticed = [name for name in new_names if name not in passed and name not in hand_noticed]
+    if unnoticed:
+        raise SystemExit(f"REFUSED: no license-pass row and no hand-written notice for {unnoticed} -- add its row to "
+                         f"tools/catalog_build/tags/licenses.json, or its notice and its name to the hand-noticed list.")
     if not new_names:
         print("nothing to publish")
         return
@@ -417,6 +424,22 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
 
 
 NOTICES_TABLE = "<!-- the table below: python tools/publish_catalogs.py --notices (from tools/catalog_build/tags/licenses.json) -->"
+# catalogs without a license-pass row: their notices are the hand-written table "Catalogs published before 2026-11"
+NOTICED_BEFORE_2026_11 = (
+    "ai-descartes", "cp3-blackbox", "cp3-cosmo", "erbench-densities", "erbench-phybench", "erbench-syneq", "fastsrb",
+    "feynman-bonus", "first-principles", "lample-charton-v24", "lample-charton-v24-bench", "physo-astro",
+    "physo-streams", "soose-fc", "soose-nc", "soose-wc", "srbench2-blackbox", "srsd-dummy",
+)
+
+
+def hand_noticed(text: str) -> set[str]:
+    """The catalogs named in the hand-written table of THIRD_PARTY_NOTICES.md ``text`` (the part before NOTICES_TABLE;
+    a version note in parentheses is dropped)."""
+    names: set[str] = set()
+    for line in text.partition(NOTICES_TABLE)[0].splitlines():
+        if line.startswith("| ") and not line.startswith("| Catalog"):
+            names |= {n.strip() for n in re.sub(r"\([^)]*\)", "", line.split("|")[1]).split(",")}
+    return names
 
 
 def notices(text: str) -> str:
@@ -444,9 +467,14 @@ def main(execute: bool = False, write_notices: bool = False) -> None:
     if notices(text) != text:
         raise SystemExit("REFUSED: assets/hf_card/THIRD_PARTY_NOTICES.md is stale -- run "
                          "python tools/publish_catalogs.py --notices")
+    unlisted = sorted(set(NOTICED_BEFORE_2026_11) - hand_noticed(text))
+    if unlisted:
+        raise SystemExit(f"REFUSED: NOTICED_BEFORE_2026_11 names {unlisted}, which the hand-written table of "
+                         f"assets/hf_card/THIRD_PARTY_NOTICES.md does not")
     card = tuple(CommitOperationAdd(path_in_repo=fn, path_or_fileobj=os.path.join(HF_CARD, fn))
                  for fn in ("README.md", "THIRD_PARTY_NOTICES.md"))
-    publish(REPO, DATA_DIR, CATALOGS, MULTI_VERSION, execute=execute, extra_ops=card, built=DATA_CATALOGS)
+    publish(REPO, DATA_DIR, CATALOGS, MULTI_VERSION, execute=execute, extra_ops=card, built=DATA_CATALOGS,
+            hand_noticed=NOTICED_BEFORE_2026_11)
 
 
 if __name__ == "__main__":
