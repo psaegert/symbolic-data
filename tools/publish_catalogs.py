@@ -21,6 +21,16 @@ hosted versions and entries absent locally (older versions, retired catalogs) ar
 verbatim, so pinned stacks keep resolving; and a content change to a published version is refused:
 edit the file AND bump its ``metadata.version``, so a pinned ``name@1`` always resolves to
 identical bytes. ``MULTI_VERSION`` lists catalogs that keep several versions as local files.
+
+The data catalogs (``DATA_CATALOGS``: benchmarks' published data as frozen pools) are not in git: the builders in
+tools/catalog_build write them to ``build/data-catalogs`` and they are published from there only. A data catalog not
+built here keeps its hosted versions; one neither built nor hosted is refused. The license pass
+(tools/catalog_build/tags/licenses.json) gates every publish: a catalog it does not clear for this repo is refused,
+and so is a version to upload whose catalog has neither a license-pass row nor a hand-written notice
+(``NOTICED_BEFORE_2026_11``, each name checked against the notices' hand-written table).
+The dataset card (assets/hf_card) goes up with every publish; its THIRD_PARTY_NOTICES.md lists the license pass's
+row of every catalog published here (``python tools/publish_catalogs.py --notices`` rewrites that part, and a
+publish is refused while it is stale).
 """
 from __future__ import annotations
 
@@ -34,6 +44,11 @@ from huggingface_hub import HfApi, CommitOperationAdd
 REPO = "psaegert/symbolic-data-assets"          # MUST match resolver.HF_MANIFEST_REPO
 REPO_TYPE = "dataset"
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "catalogs")
+DATA_BUILD = os.path.join(os.path.dirname(__file__), "..", "build", "data-catalogs")
+HF_CARD = os.path.join(os.path.dirname(__file__), "..", "assets", "hf_card")
+LICENSES = os.path.join(os.path.dirname(__file__), "catalog_build", "tags", "licenses.json")
+# what the license pass's ``redistribute`` must say for a catalog to publish here
+SHAREABLE = ("yes", "yes, these members")
 
 # Forward-only multi-version catalogs: name -> {version: filename}, plus the default version a
 # bare name resolves to. v1 files stay byte-identical forever (pinned refs keep resolving);
@@ -197,6 +212,54 @@ CATALOGS = {
     "white-et-al-2013-proposed-sr-set-points": ("white-et-al-2013-proposed-sr-set-points.npz", 1, "problem_catalog"),
 }
 
+# srbf 2026-11 release: the benchmarks' published data as frozen pools (symbolic_data.pools), built into DATA_BUILD by
+# tools/catalog_build/build_data_catalogs.py and build_srbench_catalogs.py (git-ignored; published here only). Their
+# share-alike members are scilaws-real-share-alike, published by publish_catalogs_sa.py.
+DATA_CATALOGS = {
+    "ai-descartes-real-data": ("ai-descartes-real-data.npz", 6, "problem_catalog"),
+    "ai-hilbert-real-data": ("ai-hilbert-real-data.npz", 2, "problem_catalog"),
+    "black-hole-spiral-plane": ("black-hole-spiral-plane.npz", 1, "problem_catalog"),
+    "cp3-bench": ("cp3-bench.npz", 28, "problem_catalog"),
+    "esr-cosmology": ("esr-cosmology.npz", 1, "problem_catalog"),
+    "evogp-uci": ("evogp-uci.npz", 3, "problem_catalog"),
+    "falling-balls": ("falling-balls.npz", 11, "problem_catalog"),
+    "gecco-2013-2017-real": ("gecco-2013-2017-real.npz", 14, "problem_catalog"),
+    "gecco-2022-covid-ny": ("gecco-2022-covid-ny.npz", 3, "problem_catalog"),
+    "gecco-2022-exact-rediscovery": ("gecco-2022-exact-rediscovery.npz", 40, "problem_catalog"),
+    "gecco-2022-extrapolation": ("gecco-2022-extrapolation.npz", 30, "problem_catalog"),
+    "gecco-2022-feature-selection": ("gecco-2022-feature-selection.npz", 30, "problem_catalog"),
+    "gecco-2022-local-optima": ("gecco-2022-local-optima.npz", 30, "problem_catalog"),
+    "gecco-2022-noise": ("gecco-2022-noise.npz", 40, "problem_catalog"),
+    "gecco-2023-performance": ("gecco-2023-performance.npz", 3, "problem_catalog"),
+    "gp-gomea-real-world": ("gp-gomea-real-world.npz", 7, "problem_catalog"),
+    "gplearn-diabetes": ("gplearn-diabetes.npz", 1, "problem_catalog"),
+    "gsgp-real-world": ("gsgp-real-world.npz", 7, "problem_catalog"),
+    "hierbosss-single-atom": ("hierbosss-single-atom.npz", 1, "problem_catalog"),
+    "langlaw-perovskites": ("langlaw-perovskites.npz", 4, "problem_catalog"),
+    "lasr-bigbench": ("lasr-bigbench.npz", 1, "problem_catalog"),
+    "llm-pysr-battery": ("llm-pysr-battery.npz", 2, "problem_catalog"),
+    "llm-sr-bactgrow": ("llm-sr-bactgrow.npz", 2, "problem_catalog"),
+    "llm-sr-stress-strain": ("llm-sr-stress-strain.npz", 2, "problem_catalog"),
+    "mcdermott-predictive-modelling": ("mcdermott-predictive-modelling.npz", 3, "problem_catalog"),
+    "nikuradse": ("nikuradse.npz", 2, "problem_catalog"),
+    "nuclear-misr": ("nuclear-misr.npz", 1, "problem_catalog"),
+    "phye2e-space-physics": ("phye2e-space-physics.npz", 15, "problem_catalog"),
+    "physo-milky-way-streams": ("physo-milky-way-streams.npz", 29, "problem_catalog"),
+    "pysr-empiricalbench": ("pysr-empiricalbench.npz", 4, "problem_catalog"),
+    "scilaws-real": ("scilaws-real.npz", 57, "problem_catalog"),
+    "shape-constrained-real-world": ("shape-constrained-real-world.npz", 1, "problem_catalog"),
+    "sisso-octet-binaries": ("sisso-octet-binaries.npz", 1, "problem_catalog"),
+    "srbench-2.0-blackbox": ("srbench-2.0-blackbox.npz", 12, "problem_catalog"),
+    "srbench-2.0-first-principles": ("srbench-2.0-first-principles.npz", 12, "problem_catalog"),
+    "srbench-2021-blackbox": ("srbench-2021-blackbox.npz", 122, "problem_catalog"),
+    "srbench-2021-strogatz": ("srbench-2021-strogatz.npz", 14, "problem_catalog"),
+    "superconductor-tc": ("superconductor-tc.npz", 2, "problem_catalog"),
+    "symbolfit-lhc-spectra": ("symbolfit-lhc-spectra.npz", 5, "problem_catalog"),
+    "tisr-air-density": ("tisr-air-density.npz", 3, "problem_catalog"),
+    "torchsisso-specific-energy": ("torchsisso-specific-energy.npz", 1, "problem_catalog"),
+    "treloar-rubber": ("treloar-rubber.npz", 6, "problem_catalog"),
+}
+
 
 def sha256(path: str) -> str:
     digest = hashlib.sha256()
@@ -217,24 +280,38 @@ def file_version(path: str) -> int:
     return int(m.group(1)) if m else 1
 
 
+def license_pass() -> dict[str, dict]:
+    """The license pass's row of every catalog it covers (``license``, ``upstream``, ``redistribute``, ...)."""
+    with open(LICENSES, encoding="utf-8") as handle:
+        return {row["catalog"]: row for row in json.load(handle)}
+
+
 def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execute: bool = False,
-            extra_ops: tuple = ()) -> None:
-    """Incremental, forward-only publish of ``catalogs`` ({name: (path under data_dir, count, type)}) to ``repo``;
-    the files land flat at the repo root.
+            extra_ops: tuple = (), built: dict | None = None, build_dir: str = DATA_BUILD,
+            shareable: tuple = SHAREABLE, hand_noticed: tuple = ()) -> None:
+    """Incremental, forward-only publish of ``catalogs`` ({name: (path under data_dir, count, type)}) and ``built``
+    (the same, under build_dir) to ``repo``; the files land flat at the repo root.
 
     * a version absent from the hosted entry (or a name absent from the manifest) -> its file uploads and
       the entry is extended (revision = the fresh files commit; default = the newest version);
     * hosted versions and names absent locally -> PRESERVED verbatim, so pinned stacks keep resolving;
     * a version whose local bytes differ from the pinned sha256 -> REFUSED: published versions are
-      immutable; bump the file's metadata.version.
+      immutable; bump the file's metadata.version;
+    * a ``built`` catalog not built here keeps its hosted versions; one neither built nor hosted -> REFUSED;
+    * a catalog whose license-pass row does not say one of ``shareable`` -> REFUSED;
+    * a version to upload whose catalog has no license-pass row and is not ``hand_noticed`` -> REFUSED.
 
     Dry-run by default; ``execute=True`` publishes.
     """
     from lint_catalogs import lint_paths
     assert lint_paths(), "catalog lint failed -- fix errors before publishing"
 
-    def local(rel: str) -> str:
-        return os.path.abspath(os.path.join(data_dir, rel))
+    built = built or {}
+    where = {name: build_dir if name in built else data_dir for name in {**catalogs, **built}}
+    catalogs = {**catalogs, **built}
+
+    def local(name: str, rel: str) -> str:
+        return os.path.abspath(os.path.join(where[name], rel))
 
     api = HfApi()
     manifest_path = api.hf_hub_download(repo_id=repo, repo_type=REPO_TYPE, filename="manifest.json")
@@ -242,14 +319,20 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
         hosted = json.load(handle)
     print(f"hosted manifest ({repo}): {len(hosted)} entries")
 
+    passed = license_pass()
+    barred = sorted(f"{name} ({passed[name]['redistribute']})" for name in catalogs
+                    if name in passed and passed[name]["redistribute"] not in shareable)
     new_versions: dict[str, dict[str, str]] = {}
-    unchanged, conflicts = [], []
+    unchanged, conflicts, not_built, never_built = [], [], [], []
     for name, (fn, _cnt, _ctype) in catalogs.items():
+        if name in built and not os.path.isfile(local(name, fn)):
+            (not_built if name in hosted else never_built).append(name)
+            continue
         spec = multi_version.get(name)
-        local_versions = spec["versions"] if spec else {str(file_version(local(fn))): fn}
+        local_versions = spec["versions"] if spec else {str(file_version(local(name, fn))): fn}
         for v, rel in local_versions.items():
-            assert os.path.isfile(local(rel)), f"missing catalog file: {rel}"
-            stated = file_version(local(rel))
+            assert os.path.isfile(local(name, rel)), f"missing catalog file: {rel}"
+            stated = file_version(local(name, rel))
             assert stated == int(v), f"{name}: {rel} states version {stated}, MULTI_VERSION says {v}"
         hosted_versions = hosted.get(name, {}).get("versions", {})
         missing, changed = {}, []
@@ -257,7 +340,7 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
             hosted_version = hosted_versions.get(str(v))
             if hosted_version is None:
                 missing[str(v)] = rel
-            elif hosted_version["sha256"].get(os.path.basename(rel)) != sha256(local(rel)):
+            elif hosted_version["sha256"].get(os.path.basename(rel)) != sha256(local(name, rel)):
                 changed.append(v)
         if changed:
             conflicts.append(f"{name}@{','.join(changed)}")
@@ -270,11 +353,23 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
 
     print(f"new: {', '.join(f'{n}@{v}' for n in new_names for v in new_versions[n])}")
     print(f"unchanged (skipped): {len(unchanged)}")
+    if not_built:
+        print(f"not built here (hosted versions kept): {sorted(not_built)}")
     print(f"preserved retired entries: {sorted(preserved)}")
     if conflicts:
         raise SystemExit(
             f"REFUSED: content changed for published versions {sorted(conflicts)} -- published "
             f"versions are immutable; bump the file's metadata.version.")
+    if never_built:
+        raise SystemExit(f"REFUSED: not built and not hosted: {sorted(never_built)} -- build them first "
+                         f"(tools/catalog_build/README.md).")
+    if barred:
+        raise SystemExit(f"REFUSED: the license pass does not clear {barred} for {repo} "
+                         f"(tools/catalog_build/tags/licenses.json).")
+    unnoticed = [name for name in new_names if name not in passed and name not in hand_noticed]
+    if unnoticed:
+        raise SystemExit(f"REFUSED: no license-pass row and no hand-written notice for {unnoticed} -- add its row to "
+                         f"tools/catalog_build/tags/licenses.json, or its notice and its name to the hand-noticed list.")
     if not new_names:
         print("nothing to publish")
         return
@@ -288,11 +383,11 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
     # 1. upload only the MISSING-version files, in one commit so a single revision pins them
     ops = list(extra_ops)
     uploaded: list[str] = []
-    for versions in new_versions.values():
+    for name, versions in new_versions.items():
         for rel in versions.values():
             if rel not in uploaded:
                 uploaded.append(rel)
-                ops.append(CommitOperationAdd(path_in_repo=os.path.basename(rel), path_or_fileobj=local(rel)))
+                ops.append(CommitOperationAdd(path_in_repo=os.path.basename(rel), path_or_fileobj=local(name, rel)))
     commit = api.create_commit(
         repo_id=repo, repo_type=REPO_TYPE, operations=ops,
         commit_message=f"Publish {len(uploaded)} catalog artifacts: {', '.join(new_names)}",
@@ -314,7 +409,7 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
                 "directory": "",
                 "files": [os.path.basename(rel)],
                 "revision": revision,
-                "sha256": {os.path.basename(rel): sha256(local(rel))},
+                "sha256": {os.path.basename(rel): sha256(local(name, rel))},
             }
         entry["default_version"] = spec["default"] if spec else max(int(v) for v in entry["versions"])
         manifest[name] = entry
@@ -328,10 +423,60 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
           f"({len(new_names)} new, {len(preserved)} preserved-retired)")
 
 
-def main(execute: bool = False) -> None:
-    publish(REPO, DATA_DIR, CATALOGS, MULTI_VERSION, execute=execute)
+NOTICES_TABLE = "<!-- the table below: python tools/publish_catalogs.py --notices (from tools/catalog_build/tags/licenses.json) -->"
+# catalogs without a license-pass row: their notices are the hand-written table "Catalogs published before 2026-11"
+NOTICED_BEFORE_2026_11 = (
+    "ai-descartes", "cp3-blackbox", "cp3-cosmo", "erbench-densities", "erbench-phybench", "erbench-syneq", "fastsrb",
+    "feynman-bonus", "first-principles", "lample-charton-v24", "lample-charton-v24-bench", "physo-astro",
+    "physo-streams", "soose-fc", "soose-nc", "soose-wc", "srbench2-blackbox", "srsd-dummy",
+)
+
+
+def hand_noticed(text: str) -> set[str]:
+    """The catalogs named in the hand-written table of THIRD_PARTY_NOTICES.md ``text`` (the part before NOTICES_TABLE;
+    a version note in parentheses is dropped)."""
+    names: set[str] = set()
+    for line in text.partition(NOTICES_TABLE)[0].splitlines():
+        if line.startswith("| ") and not line.startswith("| Catalog"):
+            names |= {n.strip() for n in re.sub(r"\([^)]*\)", "", line.split("|")[1]).split(",")}
+    return names
+
+
+def notices(text: str) -> str:
+    """THIRD_PARTY_NOTICES.md ``text`` with the table after NOTICES_TABLE rewritten: the license pass's row of every
+    catalog published here."""
+    passed = license_pass()
+
+    def cell(s: str) -> str:
+        return " ".join(s.split()).replace("|", "\\|")
+
+    rows = [f"| {name} | {cell(passed[name]['upstream'])} | {cell(passed[name]['license'])} |"
+            for name in sorted({**CATALOGS, **DATA_CATALOGS}) if name in passed]
+    head, _, _ = text.partition(NOTICES_TABLE)
+    return head + NOTICES_TABLE + "\n\n| Catalog | Upstream source | License |\n|---|---|---|\n" + "\n".join(rows) + "\n"
+
+
+def main(execute: bool = False, write_notices: bool = False) -> None:
+    path = os.path.join(HF_CARD, "THIRD_PARTY_NOTICES.md")
+    with open(path, encoding="utf-8") as handle:
+        text = handle.read()
+    if write_notices:
+        with open(path, "w", encoding="utf-8") as handle:
+            handle.write(notices(text))
+        return
+    if notices(text) != text:
+        raise SystemExit("REFUSED: assets/hf_card/THIRD_PARTY_NOTICES.md is stale -- run "
+                         "python tools/publish_catalogs.py --notices")
+    unlisted = sorted(set(NOTICED_BEFORE_2026_11) - hand_noticed(text))
+    if unlisted:
+        raise SystemExit(f"REFUSED: NOTICED_BEFORE_2026_11 names {unlisted}, which the hand-written table of "
+                         f"assets/hf_card/THIRD_PARTY_NOTICES.md does not")
+    card = tuple(CommitOperationAdd(path_in_repo=fn, path_or_fileobj=os.path.join(HF_CARD, fn))
+                 for fn in ("README.md", "THIRD_PARTY_NOTICES.md"))
+    publish(REPO, DATA_DIR, CATALOGS, MULTI_VERSION, execute=execute, extra_ops=card, built=DATA_CATALOGS,
+            hand_noticed=NOTICED_BEFORE_2026_11)
 
 
 if __name__ == "__main__":
     import sys
-    main(execute="--execute" in sys.argv)
+    main(execute="--execute" in sys.argv, write_notices="--notices" in sys.argv)

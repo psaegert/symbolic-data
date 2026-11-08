@@ -22,7 +22,11 @@ own generator, and the release catalogs' corrections. Run them from the reposito
    and the four SRBench tracks from PMLB. They are written to `build/data-catalogs` (git-ignored) and published to
    Hugging Face only. Their input files are not in the repository: `data_sets.json` names each file, its source and
    its sha256, and `SYMBOLIC_DATA_CATALOG_RAW` points at a folder holding them (files with a URL are downloaded).
-   Run `catalog_tags.py apply` on them too.
+   Run `catalog_tags.py apply` on them too. `tools/publish_catalogs.py` publishes them from `build/data-catalogs`
+   (`DATA_CATALOGS`; the share-alike members through `publish_catalogs_sa.py`). A data catalog not built keeps its
+   hosted versions. A rebuild writes new npz bytes even where nothing changed (the zip entries carry their write
+   time), and the publish refuses changed bytes under a published version: once published, rebuild only the
+   catalog you fix (`--only <set tag>`), with its version bumped.
 7. `python tools/catalog_build/count_release.py` — the release's problem and subset counts (the curated catalogs and
    the data build).
 
