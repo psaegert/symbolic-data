@@ -15,10 +15,16 @@ found by the 2026-07-10 program audit while `fastsrb@1` keeps resolving unchange
 
 The repo-level `license: mit` tag reflects the predominant licensing; **each catalog carries
 its own provenance** — see THIRD_PARTY_NOTICES.md for the per-catalog upstream sources,
-licenses, and copyright notices (MIT and BSD-3-Clause upstreams; plus self-generated
-artifacts). Share-alike (CC BY-SA 4.0) catalogs are deliberately NOT in this repo: they live
-in the separate [psaegert/symbolic-data-assets-sa](https://huggingface.co/datasets/psaegert/symbolic-data-assets-sa)
+licenses, and copyright notices (MIT, BSD-3-Clause and Apache-2.0 upstreams; data under
+CC BY 2.5, 3.0 and 4.0, Etalab 2.0, CC0 or in the public domain; formulas cited as facts;
+plus self-generated artifacts). Every catalog of srbf's 2026-11 release also names its license,
+its citations and what srbf changed in its own metadata. Share-alike (CC BY-SA) catalogs are
+deliberately NOT in this repo: they live in the separate
+[psaegert/symbolic-data-assets-sa](https://huggingface.co/datasets/psaegert/symbolic-data-assets-sa)
 repo behind a license firewall.
+
+The data catalogs (a benchmark's published data as frozen pools) are built from their authors'
+files by the source repo's builders (`tools/catalog_build`) and published only here.
 
 Curated in [psaegert/symbolic-data](https://github.com/psaegert/symbolic-data) (builders,
 vendored upstream files with NOTICEs, validation reports).

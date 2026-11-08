@@ -19,6 +19,15 @@ comments REMOVED (the vendored train_sa.csv drops the description column entirel
 canonicalized to the symbolic-data catalog format ('^'->'**', Abs->abs, log(u,10) rewrite,
 x_k->v{k+1} variable renaming); exact duplicates merged.
 
+The Hugging Face repo psaegert/symbolic-data-assets-sa also holds scilaws-real-share-alike, built
+by tools/catalog_build/build_data_catalogs.py (not stored under assets_sa/): two SciLaws-Real tasks
+of SciLaws-Bench (Huang et al. 2026, arXiv:2609.01552; Hugging Face dataset RealSR/SciLaws-Bench,
+per-task licenses in its dataset/LICENSES.md) whose data carry share-alike licenses:
+running_endurance_iaaf__velocity (CC BY-SA 4.0) and baseball_pythagorean_winpct_lahman__win_pct
+(CC BY-SA 3.0, legal code https://creativecommons.org/licenses/by-sa/3.0/legalcode). Each
+problem's metadata names its license. Modifications: the published train.csv and test.csv rows
+are stored as arrays (frozen pools); no value is changed.
+
 The full CC BY-SA 4.0 legal code follows.
 
 =====================================================================
