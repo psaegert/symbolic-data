@@ -1007,6 +1007,46 @@ def llm_sr_bactgrow(rec, prob, _set):
     return out
 
 
+_H5: dict = {}
+
+
+def _h5(entry: dict):
+    """An HDF5 file a record names, opened once and checked against its recorded sha256 first."""
+    import h5py
+    path = paths.input_file(entry["file"])
+    if path not in _H5:
+        h = hashlib.sha256()
+        with open(path, "rb") as fh:
+            for block in iter(lambda: fh.read(1 << 24), b""):
+                h.update(block)
+        if h.hexdigest() != entry["sha256"]:
+            raise ValueError(f"{path}: sha256 {h.hexdigest()} != recorded {entry['sha256']}")
+        _H5[path] = h5py.File(path, "r")
+    return _H5[path]
+
+
+@reader("llm-srbench", "llm-srbench", "LLM-SRBench")
+def llm_srbench(rec, prob, _set):
+    """The authors' frozen arrays (column 0 the target), each checked against the sha256 of its bytes; train to fit,
+    test the in-domain test and, for LSR-Synth, ood_test the out-of-domain test, each a problem of its own."""
+    group = _h5(rec)[rec["group"]]
+    arrays = {}
+    for role, want in rec["arrays"].items():
+        a = group[role][...]
+        if sha256(np.ascontiguousarray(a).tobytes()) != want["sha256"]:
+            raise ValueError(f"{rec['id']}/{role}: the array's bytes differ from the record")
+        arrays[role] = a
+    x, y, feats = arrays["train"][:, 1:], arrays["train"][:, 0], list(rec["feature_names"])
+    if "ood_test" not in arrays:
+        return Rows(x, y, feats, GIVEN, "given: the published train and test arrays", x_test=arrays["test"][:, 1:],
+                    y_test=arrays["test"][:, 0], eq_id=rec["id"])
+    subset = prob["unit"].split(":", 1)[1]
+    return [Rows(x, y, feats, GIVEN, f"given: the published train and {role} arrays ({label} test)",
+                 x_test=arrays[role][:, 1:], y_test=arrays[role][:, 0], eq_id=f"{rec['id']}/{role}",
+                 subset=f"{subset} {label}")
+            for role, label in (("test", "in-domain"), ("ood_test", "out-of-domain"))]
+
+
 @reader("fresh-116", "torchsisso-specific-energy", "Specific energy of organic compounds (TorchSISSO)")
 def specific_energy(rec, prob, _set):
     f = rec["files"]

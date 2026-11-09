@@ -22,7 +22,10 @@ own generator, and the release catalogs' corrections. Run them from the reposito
    and the four SRBench tracks from PMLB. They are written to `build/data-catalogs` (git-ignored) and published to
    Hugging Face only. Their input files are not in the repository: `data_sets.json` names each file, its source and
    its sha256, and `SYMBOLIC_DATA_CATALOG_RAW` points at a folder holding them (files with a URL are downloaded).
-   Run `catalog_tags.py apply` on them too. The license pass (`tags/licenses.json`) routes every set and member:
+   Run `catalog_tags.py apply` on them too. LLM-SRBench's records are not the survey's: `llm_srbench_records.py
+   --write` makes them from the authors' frozen release (its files under `SYMBOLIC_DATA_CATALOG_RAW/llm-srbench`),
+   with the formulas repaired and the constants the authors left without values fitted to the training rows, each
+   formula checked against every row. The license pass (`tags/licenses.json`) routes every set and member:
    licensed data to `tools/publish_catalogs.py` (the main repo), share-alike and copyleft data to
    `publish_catalogs_sa.py`, and data under non-commercial terms or with no license, each carrying a statement of
    its source, its terms and why srbf republishes it (owner 2026-11-09), to `publish_catalogs_restricted.py`; a set

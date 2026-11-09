@@ -354,6 +354,38 @@
   "notes": null
  },
  {
+  "catalog": "llm-srbench",
+  "display_name": "LLM-SRBench",
+  "kind": "data",
+  "problems": 369,
+  "file": "build/data-catalogs/llm-srbench.npz",
+  "origin": "synthetic data",
+  "origin_source": "Hugging Face card of nnheui/llm-srbench: 'LSR-Synth, which introduces synthetic, discovery-driven problems' (129 of 240, 258 of srbf's 369 problems); 'LSR-Transform, which transforms common physical models into less common mathematical representations' (111)",
+  "origin_proposal": "synthetic data: data files the authors computed from their formulas, LSR-Synth chemistry, biology and physics on simulated trajectories",
+  "tags": [
+   "several tests"
+  ],
+  "detail": {
+   "several tests": {
+    "share": [
+     258,
+     369
+    ],
+    "source": "258 of 369 problems: subsets 'LSR-Synth ... in-domain' / 'LSR-Synth ... out-of-domain', the published test and ood_test arrays (facts split_readings)"
+   }
+  },
+  "below_half": {
+   "extrapolation": {
+    "share": [
+     129,
+     369
+    ],
+    "source": "129 of 369 problems: each LSR-Synth out-of-domain test is the last stretch of time (chemistry, biology, physics) or the upper end of the strain and temperature line (materials science); sets/llm-srbench.json notes"
+   }
+  },
+  "notes": "LSR-Transform rewrites AI Feynman laws for another of their variables."
+ },
+ {
   "catalog": "nsrwh-only-five-variables-nc",
   "display_name": "nsrwh-only-five-variables-nc",
   "kind": "formula",
