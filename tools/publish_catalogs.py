@@ -29,8 +29,10 @@ built here keeps its hosted versions; one neither built nor hosted is refused. T
 and so is a version to upload whose catalog has neither a license-pass row nor a hand-written notice
 (``NOTICED_BEFORE_2026_11``, each name checked against the notices' hand-written table).
 The dataset card (assets/hf_card) goes up with every publish; its THIRD_PARTY_NOTICES.md lists the license pass's
-row of every catalog published here (``python tools/publish_catalogs.py --notices`` rewrites that part, and a
-publish is refused while it is stale).
+row of every catalog published here and the copyright notice of every MIT, BSD-3-Clause or Apache-2.0 source those
+catalogs took content from (tools/catalog_build/tags/copyrights.json), whose license texts ship in LICENSES/
+(``python tools/publish_catalogs.py --notices`` rewrites that part, and a publish is refused while it is stale or
+while such a catalog has no copyright entry).
 """
 from __future__ import annotations
 
@@ -47,8 +49,11 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "catalogs")
 DATA_BUILD = os.path.join(os.path.dirname(__file__), "..", "build", "data-catalogs")
 HF_CARD = os.path.join(os.path.dirname(__file__), "..", "assets", "hf_card")
 LICENSES = os.path.join(os.path.dirname(__file__), "catalog_build", "tags", "licenses.json")
+COPYRIGHTS = os.path.join(os.path.dirname(__file__), "catalog_build", "tags", "copyrights.json")
 # what the license pass's ``redistribute`` must say for a catalog to publish here
 SHAREABLE = ("yes", "yes, these members")
+# the licenses whose copies must carry the source's copyright notice and the license text (assets/hf_card/LICENSES)
+NOTICE_LICENSES = ("MIT", "BSD-3-Clause", "Apache-2.0")
 
 # Forward-only multi-version catalogs: name -> {version: filename}, plus the default version a
 # bare name resolves to. v1 files stay byte-identical forever (pinned refs keep resolving);
@@ -288,7 +293,7 @@ def license_pass() -> dict[str, dict]:
 
 def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execute: bool = False,
             extra_ops: tuple = (), built: dict | None = None, build_dir: str = DATA_BUILD,
-            shareable: tuple = SHAREABLE, hand_noticed: tuple = ()) -> None:
+            shareable: tuple = SHAREABLE, hand_noticed: tuple = (), retired: tuple = ()) -> None:
     """Incremental, forward-only publish of ``catalogs`` ({name: (path under data_dir, count, type)}) and ``built``
     (the same, under build_dir) to ``repo``; the files land flat at the repo root.
 
@@ -299,7 +304,8 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
       immutable; bump the file's metadata.version;
     * a ``built`` catalog not built here keeps its hosted versions; one neither built nor hosted -> REFUSED;
     * a catalog whose license-pass row does not say one of ``shareable`` -> REFUSED;
-    * a version to upload whose catalog has no license-pass row and is not ``hand_noticed`` -> REFUSED.
+    * a version to upload whose catalog has no license-pass row and is not ``hand_noticed`` -> REFUSED;
+    * a hosted entry absent locally that is not ``retired`` (so the card's notices do not know it) -> REFUSED.
 
     Dry-run by default; ``execute=True`` publishes.
     """
@@ -370,6 +376,10 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
     if unnoticed:
         raise SystemExit(f"REFUSED: no license-pass row and no hand-written notice for {unnoticed} -- add its row to "
                          f"tools/catalog_build/tags/licenses.json, or its notice and its name to the hand-noticed list.")
+    unknown = sorted(set(preserved) - set(retired))
+    if unknown:
+        raise SystemExit(f"REFUSED: hosted entries {unknown} are neither published here nor listed as retired -- add "
+                         f"them to the retired list with their notices.")
     if not new_names:
         print("nothing to publish")
         return
@@ -430,6 +440,9 @@ NOTICED_BEFORE_2026_11 = (
     "feynman-bonus", "first-principles", "lample-charton-v24", "lample-charton-v24-bench", "physo-astro",
     "physo-streams", "soose-fc", "soose-nc", "soose-wc", "srbench2-blackbox", "srsd-dummy",
 )
+# retired catalogs whose hosted versions stay so pinned refs keep resolving; their notices stay in the card's
+# hand-written table and their sources' copyright notices in the generated one
+RETIRED_HOSTED = ("bench-nv25", "grammarvae", "lample-charton-v23", "nonic", "pagie", "r-rationals", "sine", "v23-val")
 
 
 def hand_noticed(text: str) -> set[str]:
@@ -442,18 +455,50 @@ def hand_noticed(text: str) -> set[str]:
     return names
 
 
+def copyrights() -> list[dict]:
+    """The MIT, BSD-3-Clause and Apache-2.0 sources of the published catalogs: ``source``, ``license``, ``url``,
+    ``copyright`` (the notice lines as the source's license file states them), ``note``, ``catalogs``."""
+    with open(COPYRIGHTS, encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def without_copyright() -> list[str]:
+    """Catalogs on the main repo that need a copyright entry but have none: those whose license-pass license names an
+    MIT, BSD-3-Clause or Apache-2.0 source (not as cited facts), and every hand-noticed and retired hosted catalog
+    (all of them took content from such sources)."""
+    passed = license_pass()
+    covered = {name for source in copyrights() for name in source["catalogs"]}
+    pattern = r"\b(" + "|".join(re.escape(lic) for lic in NOTICE_LICENSES) + r")\b"
+    needed = {name for name in {**CATALOGS, **DATA_CATALOGS} if name in passed
+              and not passed[name]["license"].startswith("facts only") and re.search(pattern, passed[name]["license"])}
+    return sorted((needed | set(NOTICED_BEFORE_2026_11) | set(RETIRED_HOSTED)) - covered)
+
+
 def notices(text: str) -> str:
-    """THIRD_PARTY_NOTICES.md ``text`` with the table after NOTICES_TABLE rewritten: the license pass's row of every
-    catalog published here."""
+    """THIRD_PARTY_NOTICES.md ``text`` with the part after NOTICES_TABLE rewritten: the license pass's row of every
+    catalog published here, then the copyright notice of every MIT, BSD-3-Clause and Apache-2.0 source."""
     passed = license_pass()
 
     def cell(s: str) -> str:
         return " ".join(s.split()).replace("|", "\\|")
 
+    def notice(source: dict) -> str:
+        lines = "; ".join(source["copyright"]) or "none stated"
+        return cell(f"{lines} ({source['note']})" if source.get("note") else lines)
+
     rows = [f"| {name} | {cell(passed[name]['upstream'])} | {cell(passed[name]['license'])} |"
             for name in sorted({**CATALOGS, **DATA_CATALOGS}) if name in passed]
+    ordered = sorted(copyrights(), key=lambda s: s["source"].lower())
+    sources = [f"| [{cell(s['source'])}]({s['url']}) | {s['license']} | {notice(s)} | {', '.join(s['catalogs'])} |"
+               for s in ordered]
+    notice_files = "".join(f"\n### NOTICE of {s['source']}\n\n```\n{s['notice_file']}\n```\n"
+                           for s in ordered if s.get("notice_file"))
     head, _, _ = text.partition(NOTICES_TABLE)
-    return head + NOTICES_TABLE + "\n\n| Catalog | Upstream source | License |\n|---|---|---|\n" + "\n".join(rows) + "\n"
+    return (head + NOTICES_TABLE + "\n\n| Catalog | Upstream source | License |\n|---|---|---|\n" + "\n".join(rows)
+            + "\n\n## Copyright notices\n\nThe copyright notice of every MIT, BSD-3-Clause and Apache-2.0 source the catalogs "
+            "published here took content from, as the source's license file states it. The license texts are in "
+            "LICENSES/.\n\n| Source | License | Copyright notice | Catalogs |\n|---|---|---|---|\n" + "\n".join(sources)
+            + "\n" + notice_files)
 
 
 def main(execute: bool = False, write_notices: bool = False) -> None:
@@ -467,14 +512,18 @@ def main(execute: bool = False, write_notices: bool = False) -> None:
     if notices(text) != text:
         raise SystemExit("REFUSED: assets/hf_card/THIRD_PARTY_NOTICES.md is stale -- run "
                          "python tools/publish_catalogs.py --notices")
-    unlisted = sorted(set(NOTICED_BEFORE_2026_11) - hand_noticed(text))
+    unlisted = sorted(set(NOTICED_BEFORE_2026_11 + RETIRED_HOSTED) - hand_noticed(text))
     if unlisted:
-        raise SystemExit(f"REFUSED: NOTICED_BEFORE_2026_11 names {unlisted}, which the hand-written table of "
-                         f"assets/hf_card/THIRD_PARTY_NOTICES.md does not")
+        raise SystemExit(f"REFUSED: NOTICED_BEFORE_2026_11 or RETIRED_HOSTED names {unlisted}, which the hand-written "
+                         f"table of assets/hf_card/THIRD_PARTY_NOTICES.md does not")
+    uncovered = without_copyright()
+    if uncovered:
+        raise SystemExit(f"REFUSED: no copyright entry for {uncovered} (tools/catalog_build/tags/copyrights.json)")
     card = tuple(CommitOperationAdd(path_in_repo=fn, path_or_fileobj=os.path.join(HF_CARD, fn))
-                 for fn in ("README.md", "THIRD_PARTY_NOTICES.md"))
+                 for fn in ("README.md", "THIRD_PARTY_NOTICES.md",
+                            *(f"LICENSES/{lic}.txt" for lic in NOTICE_LICENSES)))
     publish(REPO, DATA_DIR, CATALOGS, MULTI_VERSION, execute=execute, extra_ops=card, built=DATA_CATALOGS,
-            hand_noticed=NOTICED_BEFORE_2026_11)
+            hand_noticed=NOTICED_BEFORE_2026_11, retired=RETIRED_HOSTED)
 
 
 if __name__ == "__main__":
