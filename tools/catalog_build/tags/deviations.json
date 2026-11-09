@@ -2134,7 +2134,7 @@
    {
     "kind": "changed",
     "problems": 258,
-    "text": "srbf follows the authors' data release, which holds 240 problems (44 in physics) named from 0: CRK0 is the paper's CRK1, and the materials science names skip 15, 17, 26 and 27. The paper counts 239 problems (43 in physics) and numbers them from 1."
+    "text": "srbf follows the authors' data release: 240 problems, 44 of them in physics, named from 0, where the paper's Table 4 numbers from 1 (CRK0 is its CRK1) and the materials science names skip 15, 17, 26 and 27 (MatSci28 is its MatSci25). The paper's text counts 239 problems, 43 in physics."
    },
    {
     "kind": "kept",

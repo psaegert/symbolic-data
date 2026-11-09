@@ -223,8 +223,9 @@ def record(raw: Path) -> tuple[dict, list[dict], dict]:
         "notes": (
             "Made by tools/catalog_build/llm_srbench_records.py from the authors' release. The release holds 240 "
             "problems (LSR-Transform 111; LSR-Synth chemistry 36, biology 24, physics 44, materials science 25); the "
-            "paper counts 239 with 43 physics problems. Names are the release's, numbered from 0 (the paper's CRK1 is "
-            "CRK0 here); the materials science names skip MatSci15, 17, 26 and 27. The authors publish no generation "
+            "paper's text counts 239 with 43 physics problems, its Table 4 lists 44. Names are the release's, numbered "
+            "from 0 where Table 4 numbers from 1 (CRK0 is its CRK1); the materials science names skip MatSci15, 17, 26 "
+            "and 27 (MatSci28 is its MatSci25). The authors publish no generation "
             f"code, input ranges or seeds. Chemistry and physics formulas name constants without values "
             f"({report['fitted']} problems); srbf fitted them to the training rows ({STARTS} Levenberg-Marquardt "
             "starts). Every formula reproduces its rows to float32 precision (formula_check): within FVU 1.2e-7, or, "
