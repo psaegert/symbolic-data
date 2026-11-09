@@ -2455,9 +2455,9 @@
    "url": "https://doi.org/10.1016/j.dche.2024.100198"
   },
   "data": {
-   "short": "GitHub PaulsonLab/TorchSISSO@f869f95",
+   "short": "GitHub PaulsonLab/TorchSISSO@acbf6ee",
    "title": "TorchSISSO examples/Specific_Energy (MIT)",
-   "url": "https://github.com/PaulsonLab/TorchSISSO/tree/f869f9527bbe023402840c42c332b91cf58d738c/examples/Specific_Energy"
+   "url": "https://github.com/PaulsonLab/TorchSISSO/tree/acbf6eef8ffcdea7c5cfe2fb358f9bdbf9256d12/examples/Specific_Energy"
   },
   "notes": "Same files as SyMANTIC's quinone redox-potential example; underlying data Tabor et al. 2019, J. Mater. Chem. A (doi:10.1039/C9TA03219C). Preprint arXiv:2410.01752."
  },

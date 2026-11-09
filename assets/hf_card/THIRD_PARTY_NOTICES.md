@@ -17,6 +17,35 @@ The vendored upstream files and their NOTICEs live in the source repo (github.co
 What srbf changed: every catalog of srbf's 2026-11 release states it in its metadata (`srbf_changes`); a data
 catalog stores the rows its authors published as arrays.
 
+## Permission notes
+
+Data that may be redistributed only with a note attached carry it here and in the problem's metadata
+(`permission_note`).
+
+505_tecator (srbench-2021-blackbox), from the Tecator data set at StatLib (OpenML 505):
+
+```
+1. Statement of permission from Tecator (the original data source)
+
+These data are recorded on a Tecator Infratec Food and Feed Analyzer
+working in the wavelength range 850 - 1050 nm by the Near Infrared
+Transmission (NIT) principle. Each sample contains finely chopped pure
+meat with different moisture, fat and protein contents.
+
+If results from these data are used in a publication we want you to
+mention the instrument and company name (Tecator) in the publication.
+In addition, please send a preprint of your article to
+
+Karin Thente, Tecator AB,
+Box 70, S-263 21 Hoganas, Sweden
+
+The data are available in the public domain with no responsability from
+the original data source. The data can be redistributed as long as this
+permission note is attached.
+For more information about the instrument - call Perstorp Analytical's
+representative in your area.
+```
+
 ## Catalogs published before 2026-11
 
 | Catalog(s) | Upstream source | License |
@@ -90,9 +119,9 @@ the members whose license allows redistribution; the license column names theirs
 | friedman-random-function-generator-instances | HeuristicLab FriedmanRandomFunction(.cs)/InstanceProvider (v3.3.16 @ecf4b5c), 12 instances regenerated from the provider seed; family defined by Friedman 2001 | facts only: 12 random-function instances generated with HeuristicLab's FriedmanRandomFunction provider (GPL-3.0 code, not copied; Friedman 2001, Ann. Stat. 29:1189) |
 | gecco-2013-2017-real | Oliveira et al. 2018 compilation (GECCO 2018 Companion, doi:10.1145/3205651.3208293): 11 UCI tables (ids 1, 29, 162, 165, 186 x2, 242 x2, 243, 291, 294), StatLib Boston, mlbench Ozone (via laic-ufmg/gp-benchmarks), Dow Chemical + Tower (Dow), QSAR %F/LD50/%PPB via DALabNOVA/slim | CC BY 4.0 (UCI Machine Learning Repository members) and MIT (the QSAR members, DALabNOVA/slim) |
 | gecco-2022-covid-ny | Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage2/data/135_NY_value_{cases,deaths,hosp}_14_14_{train,test}.csv | CC BY 4.0 (Zenodo 10.5281/zenodo.6842176, SRBench 2022 competition, La Cava et al.) |
-| gecco-2022-exact-rediscovery | Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_exact_formula_*_data{,_train,_test}.csv (catalog URLs point at the byte-identical cavalab/srbench srcomp copies) | CC BY 4.0 (Zenodo 10.5281/zenodo.6842176, SRBench 2022 competition, La Cava et al.) |
+| gecco-2022-exact-rediscovery | Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_exact_formula_*_data{,_train,_test}.csv (the source of record; the files are downloaded from their byte-identical copies in the GPL-3.0 cavalab/srbench srcomp branch, sha256 equal, checked 2026-11-09) | CC BY 4.0 (Zenodo 10.5281/zenodo.6842176, SRBench 2022 competition, La Cava et al.) |
 | gecco-2022-extrapolation | Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_extrapolation_*_data*.csv | CC BY 4.0 (Zenodo 10.5281/zenodo.6842176, SRBench 2022 competition, La Cava et al.) |
-| gecco-2022-feature-selection | Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_featureselection_*_data*.csv (catalog URLs point at the byte-identical cavalab/srbench srcomp copies) | CC BY 4.0 (Zenodo 10.5281/zenodo.6842176, SRBench 2022 competition, La Cava et al.) |
+| gecco-2022-feature-selection | Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_featureselection_*_data*.csv (the source of record; the files are downloaded from their byte-identical copies in the GPL-3.0 cavalab/srbench srcomp branch, sha256 equal, checked 2026-11-09) | CC BY 4.0 (Zenodo 10.5281/zenodo.6842176, SRBench 2022 competition, La Cava et al.) |
 | gecco-2022-local-optima | Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_localopt_*_data*.csv | CC BY 4.0 (Zenodo 10.5281/zenodo.6842176, SRBench 2022 competition, La Cava et al.) |
 | gecco-2022-noise | Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_noise_*_data*.csv | CC BY 4.0 (Zenodo 10.5281/zenodo.6842176, SRBench 2022 competition, La Cava et al.) |
 | gecco-2023-performance | Zenodo 10.5281/zenodo.8283005 'SRBench Competition 2023 - Datasets, Scripts, and Results' (de Franca, Virgolin, Kamienny, Bomarito 2023), srbench-competition-2023.zip datasets/dataset_{1,2,3}{,_test}.csv | CC BY 4.0 (Zenodo 10.5281/zenodo.8283005, SRBench 2023 competition, de Franca et al.) |
@@ -189,7 +218,7 @@ the members whose license allows redistribution; the license column names theirs
 | symformer-in-domain-synthetic-evaluation | SymFormer generator (vastlik/symformer @35bc93c), a frozen draw with the authors' configs; Vastl et al. 2024, IEEE Access 12:37840 | CC BY 4.0 (Vastl et al. 2024, SymFormer, IEEE Access 12:37840); formulas drawn by srbf from the authors' generator |
 | symtree-benchmark-functions | de Franca 2018, Information Sciences 442:18 (arXiv:1801.01807) Table 1 + Sec. 5; author's notebook in folivetti/ITSR (GPL-3.0) | facts only: functions and ranges cited from de Franca 2018 (Inf. Sci. 442:18, arXiv:1801.01807) and the original Kattan et al. papers; no upstream license |
 | tisr-air-density | Frotscher et al. 2023, Int. J. Thermophys. 44:105 (doi:10.1007/s10765-023-03197-z), ESM1 Tables 4-5 (MS grid, MS densities at experimental state points, experimental densities); experimental values originate in von Preetzmann et al. 2021, Int. J. Thermophys. 42:127 (doi:10.1007/s10765-021-02871-4), Table 2; TU Berlin DepositOnce copy doi:10.14279/depositonce-18496 | CC BY 4.0 (Frotscher et al. 2023, Int. J. Thermophys. 44:105, ESM1; experimental densities: von Preetzmann et al. 2021, Int. J. Thermophys. 42:127, Table 2) |
-| torchsisso-specific-energy | PaulsonLab/TorchSISSO examples/Specific_Energy/{train.dat,redox_test_pade.csv} (pinned @f869f95; blobs identical at HEAD) | MIT (PaulsonLab/TorchSISSO) |
+| torchsisso-specific-energy | PaulsonLab/TorchSISSO examples/Specific_Energy/{train.dat,redox_test_pade.csv} (pinned @acbf6ee, which carries the MIT LICENSE; blobs identical to f869f95, the last commit touching the folder) | MIT (PaulsonLab/TorchSISSO) |
 | torchsisso-synthetic-expressions | Muthyala, Sorourifar & Paulson, TorchSISSO, arXiv:2410.01752 Table 1 + Sec. 4.1 (Digit. Chem. Eng. 13:100198) | facts only: formulas and ranges cited from Muthyala et al. 2024 (TorchSISSO, Digit. Chem. Eng. 13:100198; arXiv:2410.01752, CC BY-NC-ND 4.0); no text or tables reproduced |
 | treloar-rubber | Linka & Kuhl 2023, Comput. Methods Appl. Mech. Eng. 403:115731, Table 2 (arXiv:2210.02202v2), tabulating Treloar 1944 (Trans. Faraday Soc. 40:59) at 20 C and 50 C | CC BY 4.0 (Linka & Kuhl 2023, Comput. Methods Appl. Mech. Eng. 403:115731, Table 2; data: Treloar 1944, Trans. Faraday Soc. 40:59) |
 | vladislavleva | dso-org/deep-symbolic-optimization benchmarks.csv (Petersen et al.) | BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts) |
