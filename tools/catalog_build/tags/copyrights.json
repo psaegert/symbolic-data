@@ -1,0 +1,708 @@
+[
+ {
+  "source": "AutoResearch/autora-synthetic",
+  "names": [
+   "AutoResearch/autora-synthetic"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/AutoResearch/autora-synthetic/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2023 Autonomous Empirical Research Initiative"
+  ],
+  "catalogs": [
+   "autora-synthetic-behavioural-science-models-points"
+  ]
+ },
+ {
+  "source": "CP3-Origins/Things-to-bench",
+  "names": [
+   "CP3-Origins/Things-to-bench"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/CP3-Origins/Things-to-bench/blob/master/LICENSE",
+  "copyright": [
+   "Copyright (c) 2023 CP3-Origins"
+  ],
+  "catalogs": [
+   "cp3-bench",
+   "cp3-bench-standard-tuning-datasets-points",
+   "cp3-blackbox",
+   "cp3-cosmo"
+  ]
+ },
+ {
+  "source": "DALabNOVA/slim",
+  "names": [
+   "DALabNOVA/slim"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/DALabNOVA/slim/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2024 DALabNOVA"
+  ],
+  "catalogs": [
+   "gecco-2013-2017-real",
+   "gsgp-real-world",
+   "mcdermott-predictive-modelling"
+  ]
+ },
+ {
+  "source": "EPFL-IMOS/Sym-Q",
+  "names": [
+   "EPFL-IMOS/Sym-Q"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/EPFL-IMOS/Sym-Q/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2023 Wenqi Zhou"
+  ],
+  "catalogs": [
+   "sym-q-ai-feynman-with-drift-terms"
+  ]
+ },
+ {
+  "source": "EpistasisLab/pmlb",
+  "names": [
+   "EpistasisLab/pmlb",
+   "PMLB"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/EpistasisLab/pmlb/blob/master/LICENSE",
+  "copyright": [
+   "Copyright (c) 2016 Epistasis Lab at UPenn"
+  ],
+  "catalogs": [
+   "first-principles",
+   "nikuradse",
+   "srbench-2.0-blackbox",
+   "srbench-2.0-first-principles",
+   "srbench-2021-blackbox",
+   "srbench-2021-strogatz",
+   "srbench2-blackbox"
+  ]
+ },
+ {
+  "source": "HKUST-KnowComp/NewtonBench",
+  "names": [
+   "HKUST-KnowComp/NewtonBench"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/HKUST-KnowComp/NewtonBench/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2025 HKUST-KnowComp"
+  ],
+  "catalogs": [
+   "newtonbench"
+  ]
+ },
+ {
+  "source": "IBM/AI-Descartes",
+  "names": [
+   "IBM/AI-Descartes"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/IBM/AI-Descartes/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2022 International Business Machines"
+  ],
+  "catalogs": [
+   "ai-descartes",
+   "ai-descartes-real-data"
+  ]
+ },
+ {
+  "source": "IBM/AI-Hilbert",
+  "names": [
+   "IBM/AI-Hilbert"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/IBM/AI-Hilbert/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2024 International Business Machines"
+  ],
+  "catalogs": [
+   "ai-hilbert-problem-set",
+   "ai-hilbert-real-data"
+  ]
+ },
+ {
+  "source": "figshare 10.6084/m9.figshare.29615831 (PhyE2E_datas, Ying et al. 2025)",
+  "names": [
+   "figshare 10.6084/m9.figshare.29615831",
+   "the authors' figshare record"
+  ],
+  "license": "Apache-2.0",
+  "url": "https://doi.org/10.6084/m9.figshare.29615831.v1",
+  "copyright": [],
+  "note": "Apache 2.0 per the figshare record (code: Jie0618/PhysicsRegression); no copyright line or NOTICE file",
+  "catalogs": [
+   "phye2e-llm-generated-synthetic-formulas",
+   "phye2e-space-physics"
+  ]
+ },
+ {
+  "source": "KindXiaoming/pykan",
+  "names": [
+   "KindXiaoming/pykan"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/KindXiaoming/pykan/blob/master/LICENSE",
+  "copyright": [
+   "Copyright (c) 2024 Ziming Liu"
+  ],
+  "catalogs": [
+   "kan-toy-functions"
+  ]
+ },
+ {
+  "source": "LironSimon/SciMED",
+  "names": [
+   "LironSimon/SciMED"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/LironSimon/SciMED/blob/master/LICENSE",
+  "copyright": [
+   "Copyright (c) 2022 Teddy Lazebnik"
+  ],
+  "catalogs": [
+   "scimed-settling-sphere-configurations"
+  ]
+ },
+ {
+  "source": "MilesCranmer/pysr_paper",
+  "names": [
+   "MilesCranmer/pysr_paper"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/MilesCranmer/pysr_paper/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2020-2023 @MilesCranmer"
+  ],
+  "catalogs": [
+   "pysr-empiricalbench",
+   "pysr-empiricalbench-formulas"
+  ]
+ },
+ {
+  "source": "NISL-MSU/MultiSetSR",
+  "names": [
+   "NISL-MSU/MultiSetSR"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/NISL-MSU/MultiSetSR/blob/master/LICENSE",
+  "copyright": [
+   "Copyright (c) 2024 Montana State University"
+  ],
+  "note": "the license file states YEAR: 2024, COPYRIGHT HOLDER: Montana State University",
+  "catalogs": [
+   "decomposable-nsr-synthetic-e1-e13"
+  ]
+ },
+ {
+  "source": "PaulsonLab/TorchSISSO",
+  "names": [
+   "PaulsonLab/TorchSISSO"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/PaulsonLab/TorchSISSO/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2025 Madhav Reddy Muthyala"
+  ],
+  "catalogs": [
+   "torchsisso-specific-energy"
+  ]
+ },
+ {
+  "source": "Roy-SR-007/HierBOSSS",
+  "names": [
+   "Roy-SR-007/HierBOSSS",
+   "NAKONAKO4/langlaw"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/Roy-SR-007/HierBOSSS/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2026 Authors of HierBOSSS [Somjit Roy, Pritam Dey, Bani K. Mallick, and Debdeep Pati]"
+  ],
+  "note": "langlaw's README states the MIT License without a copyright line; its data come from HierBOSSS",
+  "catalogs": [
+   "hierbosss-single-atom-catalysis-and-synthetic-polynomial",
+   "langlaw-perovskites"
+  ]
+ },
+ {
+  "source": "Shun-0922/Mem-Bias-NSR",
+  "names": [
+   "Shun-0922/Mem-Bias-NSR"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/Shun-0922/Mem-Bias-NSR/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2021 SymposiumOrganization"
+  ],
+  "catalogs": [
+   "reproduction-bias-not-included-test-sets"
+  ]
+ },
+ {
+  "source": "SymposiumOrganization/ControllableNeuralSymbolicRegression",
+  "names": [
+   "SymposiumOrganization/ControllableNeuralSymbolicRegression"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/SymposiumOrganization/ControllableNeuralSymbolicRegression/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2021 SymposiumOrganization"
+  ],
+  "catalogs": [
+   "nsrwh-only-five-variables-nc",
+   "nsrwh-only-five-variables-wc",
+   "nsrwh-train-nc",
+   "nsrwh-train-wc"
+  ]
+ },
+ {
+  "source": "WassimTenachi/PhySO",
+  "names": [
+   "WassimTenachi/PhySO"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/WassimTenachi/PhySO/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2023 Wassim Tenachi"
+  ],
+  "catalogs": [
+   "feynman-bonus",
+   "physo-astro",
+   "physo-astrophysical-case-studies",
+   "physo-class",
+   "physo-milky-way-streams",
+   "physo-streams"
+  ]
+ },
+ {
+  "source": "XieZikai/LLM-PySR",
+  "names": [
+   "XieZikai/LLM-PySR"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/XieZikai/LLM-PySR/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2026 Z.X."
+  ],
+  "catalogs": [
+   "llm-pysr-battery"
+  ]
+ },
+ {
+  "source": "bilgesi/SR-LLM-Integration",
+  "names": [
+   "bilgesi/SR-LLM-Integration"
+  ],
+  "license": "Apache-2.0",
+  "url": "https://github.com/bilgesi/SR-LLM-Integration/blob/main/LICENSE",
+  "copyright": [],
+  "catalogs": [
+   "knowledge-integration-newtonian-cases"
+  ],
+  "note": "the license file carries no copyright line; no NOTICE file"
+ },
+ {
+  "source": "briandesilva/discovery-of-physics-from-data",
+  "names": [
+   "briandesilva/discovery-of-physics-from-data"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/briandesilva/discovery-of-physics-from-data/blob/master/LICENSE",
+  "copyright": [
+   "Copyright (c) 2020 Brian de SIlva"
+  ],
+  "catalogs": [
+   "falling-balls"
+  ]
+ },
+ {
+  "source": "deep-symbolic-mathematics/LLM-SR",
+  "names": [
+   "deep-symbolic-mathematics/LLM-SR"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/deep-symbolic-mathematics/LLM-SR/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2024 [Your Name or Organization]"
+  ],
+  "catalogs": [
+   "llm-sr-bactgrow",
+   "llm-sr-stress-strain"
+  ]
+ },
+ {
+  "source": "dso-org/deep-symbolic-optimization",
+  "names": [
+   "dso-org/deep-symbolic-optimization",
+   "DSO fork in samholt/DeepGenerativeSymbolicRegression",
+   "benchmarks.csv, DSO"
+  ],
+  "license": "BSD-3-Clause",
+  "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/master/LICENSE",
+  "copyright": [
+   "Copyright (c) 2018, Lawrence Livermore National Security, LLC"
+  ],
+  "catalogs": [
+   "constant",
+   "dgsr-additional-feynman",
+   "dgsr-feynman-d-2-d-5-subsets",
+   "dgsr-synthetic-d-12",
+   "dso-benchmark-registry",
+   "dso-benchmark-registry-points",
+   "grammarvae-points",
+   "jin",
+   "keijzer",
+   "keijzer-points",
+   "korns",
+   "koza",
+   "livermore",
+   "livermore2",
+   "meier",
+   "neat",
+   "neat-points",
+   "nguyen",
+   "nonic-points",
+   "pagie-points",
+   "poly",
+   "r-rationals-points",
+   "sine-points",
+   "vladislavleva",
+   "vladislavleva-points"
+  ],
+  "notice_file": "This work was produced under the auspices of the U.S. Department of\nEnergy by Lawrence Livermore National Laboratory under Contract\nDE-AC52-07NA27344.\n\nThis work was prepared as an account of work sponsored by an agency of\nthe United States Government. Neither the United States Government nor\nLawrence Livermore National Security, LLC, nor any of their employees\nmakes any warranty, expressed or implied, or assumes any legal liability\nor responsibility for the accuracy, completeness, or usefulness of any\ninformation, apparatus, product, or process disclosed, or represents that\nits use would not infringe privately owned rights.\n\nReference herein to any specific commercial product, process, or service\nby trade name, trademark, manufacturer, or otherwise does not necessarily\nconstitute or imply its endorsement, recommendation, or favoring by the\nUnited States Government or Lawrence Livermore National Security, LLC.\n\nThe views and opinions of authors expressed herein do not necessarily\nstate or reflect those of the United States Government or Lawrence\nLivermore National Security, LLC, and shall not be used for advertising\nor product endorsement purposes."
+ },
+ {
+  "source": "facebookresearch/symbolicregression",
+  "names": [
+   "facebookresearch/symbolicregression"
+  ],
+  "license": "Apache-2.0",
+  "url": "https://github.com/facebookresearch/symbolicregression/blob/main/LICENSE",
+  "copyright": [
+   "Copyright 2020 - present, Facebook, Inc"
+  ],
+  "catalogs": [
+   "e2e-in-domain-synthetic-validation-set"
+  ]
+ },
+ {
+  "source": "google/BIG-bench",
+  "names": [
+   "google/BIG-bench"
+  ],
+  "license": "Apache-2.0",
+  "url": "https://github.com/google/BIG-bench/blob/main/LICENSE",
+  "copyright": [],
+  "catalogs": [
+   "lasr-bigbench"
+  ],
+  "note": "the license file carries no copyright line; no NOTICE file"
+ },
+ {
+  "source": "intell-sci-comput/PSE",
+  "names": [
+   "intell-sci-comput/PSE"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/intell-sci-comput/PSE/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2024 intell-sci-comput"
+  ],
+  "catalogs": [
+   "pse-high-dimensional-distractor-set"
+  ]
+ },
+ {
+  "source": "isds-neu/SymbolicPhysicsLearner",
+  "names": [
+   "isds-neu/SymbolicPhysicsLearner"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/isds-neu/SymbolicPhysicsLearner/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2023 isds-neu"
+  ],
+  "catalogs": [
+   "falling-balls",
+   "nguyen-c-points"
+  ]
+ },
+ {
+  "source": "jiangnanhugo/egg-sr",
+  "names": [
+   "jiangnanhugo/egg-sr"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/jiangnanhugo/egg-sr/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2014"
+  ],
+  "catalogs": [
+   "cvgp-trigonometric-control-variable-datasets"
+  ]
+ },
+ {
+  "source": "kartelj/rils-rols",
+  "names": [
+   "kartelj/rils-rols"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/kartelj/rils-rols/blob/master/LICENSE",
+  "copyright": [
+   "Copyright (c) 2016 Epistasis Lab at UPenn"
+  ],
+  "catalogs": [
+   "rils-rols-random-instances"
+  ]
+ },
+ {
+  "source": "mojivalipour/symbolicgpt",
+  "names": [
+   "mojivalipour/symbolicgpt"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/mojivalipour/symbolicgpt/blob/master/LICENSE.txt",
+  "copyright": [
+   "Copyright (c) 2020 Andrej Karpathy (minGPT), 2021 Mojtaba Valipour (symblicGPT)"
+  ],
+  "catalogs": [
+   "symbolicgpt-bivariate-set",
+   "symbolicgpt-test-sets"
+  ]
+ },
+ {
+  "source": "omron-sinicx/srsd-benchmark",
+  "names": [
+   "omron-sinicx/srsd-benchmark"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/omron-sinicx/srsd-benchmark/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2022 OMRON SINIC X Corporation"
+  ],
+  "catalogs": [
+   "scrbenchmark",
+   "srsd-dummy"
+  ]
+ },
+ {
+  "source": "prescriptiveanalytics/SCR-Benchmarks",
+  "names": [
+   "prescriptiveanalytics/SCR-Benchmarks"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/main/LICENSE",
+  "copyright": [],
+  "note": "the license file carries no copyright line",
+  "catalogs": [
+   "scrbenchmark"
+  ]
+ },
+ {
+  "source": "scikit-learn/scikit-learn",
+  "names": [
+   "scikit-learn/scikit-learn",
+   "scikit-learn"
+  ],
+  "license": "BSD-3-Clause",
+  "url": "https://github.com/scikit-learn/scikit-learn/blob/main/COPYING",
+  "copyright": [
+   "Copyright (c) 2007-2026 The scikit-learn developers."
+  ],
+  "catalogs": [
+   "gplearn-diabetes"
+  ]
+ },
+ {
+  "source": "trevorstephens/gplearn",
+  "names": [
+   "trevorstephens/gplearn"
+  ],
+  "license": "BSD-3-Clause",
+  "url": "https://github.com/trevorstephens/gplearn/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2015-2026, Trevor Stephens"
+  ],
+  "catalogs": [
+   "gplearn-documentation-examples"
+  ]
+ },
+ {
+  "source": "trishullab/LibraryAugmentedSymbolicRegression.jl",
+  "names": [
+   "trishullab/LibraryAugmentedSymbolicRegression.jl"
+  ],
+  "license": "Apache-2.0",
+  "url": "https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/master/LICENSE",
+  "copyright": [
+   "Copyright 2020 Miles Cranmer"
+  ],
+  "catalogs": [
+   "lasr-bigbench",
+   "lasr-noisy-feynman-with-distractors",
+   "lasr-synthetic-equations"
+  ]
+ },
+ {
+  "source": "tsenftle/Metal-Oxide-LASSO-lo",
+  "names": [
+   "tsenftle/Metal-Oxide-LASSO-lo"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/tsenftle/Metal-Oxide-LASSO-lo/blob/master/LICENSE",
+  "copyright": [
+   "Copyright (c) 2018 tsenftle"
+  ],
+  "catalogs": [
+   "hierbosss-single-atom"
+  ]
+ },
+ {
+  "source": "hftsoi/symbolfit",
+  "names": [
+   "hftsoi/symbolfit"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/hftsoi/symbolfit/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2024 Ho Fung Tsoi"
+  ],
+  "catalogs": [
+   "symbolfit-lhc-spectra"
+  ]
+ },
+ {
+  "source": "henniggroup/symbolic-regression-utilities",
+  "names": [
+   "henniggroup/symbolic-regression-utilities"
+  ],
+  "license": "Apache-2.0",
+  "url": "https://github.com/henniggroup/symbolic-regression-utilities/blob/master/LICENSE",
+  "copyright": [],
+  "catalogs": [
+   "superconductor-tc"
+  ],
+  "note": "the license file carries no copyright line; no NOTICE file"
+ },
+ {
+  "source": "DeaglanBartlett/ESR",
+  "names": [
+   "DeaglanBartlett/ESR"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/DeaglanBartlett/ESR",
+  "copyright": [
+   "Copyright 2022 Deaglan J. Bartlett"
+  ],
+  "note": "no license file; the README states the MIT licence and this copyright line",
+  "catalogs": [
+   "esr-cosmology",
+   "esr-cosmology-datasets"
+  ]
+ },
+ {
+  "source": "samuelkim314/DeepSymReg",
+  "names": [
+   "samuelkim314/DeepSymReg"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/samuelkim314/DeepSymReg",
+  "copyright": [],
+  "note": "no license file; the README states: All content in this repository is licensed under the MIT license.",
+  "catalogs": [
+   "kim-et-al-eql-benchmark-functions"
+  ]
+ },
+ {
+  "source": "viktmar/FastSRB",
+  "names": [
+   "viktmar/FastSRB"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/viktmar/FastSRB/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2025 Viktor Martinek"
+  ],
+  "catalogs": [
+   "fastsrb",
+   "srsd-dummy"
+  ]
+ },
+ {
+  "source": "SymposiumOrganization/NeuralSymbolicRegressionThatScales",
+  "names": [
+   "SymposiumOrganization/NeuralSymbolicRegressionThatScales"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/SymposiumOrganization/NeuralSymbolicRegressionThatScales/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2021 SymposiumOrganization"
+  ],
+  "catalogs": [
+   "soose-fc",
+   "soose-nc",
+   "soose-wc"
+  ]
+ },
+ {
+  "source": "scipy/scipy",
+  "names": [
+   "scipy/scipy"
+  ],
+  "license": "BSD-3-Clause",
+  "url": "https://github.com/scipy/scipy/blob/main/LICENSE.txt",
+  "copyright": [
+   "Copyright (c) 2001-2002 Enthought, Inc. 2003, SciPy Developers."
+  ],
+  "catalogs": [
+   "erbench-densities"
+  ]
+ },
+ {
+  "source": "EquationDiscovery/Equation_Recovery_Benchmark",
+  "names": [
+   "ERBench"
+  ],
+  "license": "MIT",
+  "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark",
+  "copyright": [],
+  "note": "ERBench (Kahlmeyer, Voigt, Habeck & Giesen) states MIT for SynEq and PHYBench without a copyright line",
+  "catalogs": [
+   "erbench-phybench",
+   "erbench-syneq"
+  ]
+ },
+ {
+  "source": "RealSR/SciLaws-Bench",
+  "names": [
+   "SciLaws-Bench"
+  ],
+  "license": "MIT",
+  "url": "https://huggingface.co/datasets/RealSR/SciLaws-Bench",
+  "copyright": [],
+  "note": "MIT for the tasks magnet_3c90_core_loss__log_P_vol and ocean_mesoscale_eddy_closure__Sx per SciLaws-Bench's dataset/LICENSES.md, which names no copyright holder",
+  "catalogs": [
+   "scilaws-real"
+  ]
+ },
+ {
+  "source": "psaegert/symbolic-data",
+  "names": [
+   "self-generated"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/psaegert/symbolic-data/blob/main/LICENSE",
+  "copyright": [
+   "Copyright (c) 2024 Paul Saegert"
+  ],
+  "catalogs": [
+   "lample-charton-v24",
+   "lample-charton-v24-bench"
+  ]
+ }
+]

@@ -42,7 +42,9 @@ NOTICED_BEFORE_2026_11 = ("erbench-eponymous", "erbench-oeis")
 LEGAL_CODE = "The full CC BY-SA 4.0 legal code follows."
 
 CARD = """---
-license: cc-by-sa-4.0
+license:
+- cc-by-sa-4.0
+- cc-by-sa-3.0
 ---
 
 # symbolic-data assets (share-alike catalogs)

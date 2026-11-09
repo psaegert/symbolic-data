@@ -1,7 +1,21 @@
 # Third-party notices (per-catalog upstream sources and licenses)
 
-Full license texts and vendored upstream files live in the source repo
-(github.com/psaegert/symbolic-data, `assets/upstream/*/NOTICE` + `LICENSE.*` files).
+No single license covers this repo: every catalog stays under the license of the source it took content from.
+The vendored upstream files and their NOTICEs live in the source repo (github.com/psaegert/symbolic-data,
+`assets/upstream/*/NOTICE` + `LICENSE.*` files).
+
+## License texts
+
+- MIT, BSD-3-Clause and Apache-2.0: `LICENSES/MIT.txt`, `LICENSES/BSD-3-Clause.txt`, `LICENSES/Apache-2.0.txt`; each
+  source's copyright notice is in the table "Copyright notices" at the end.
+- CC BY 4.0: https://creativecommons.org/licenses/by/4.0/legalcode
+- CC BY 3.0: https://creativecommons.org/licenses/by/3.0/legalcode
+- CC BY 2.5: https://creativecommons.org/licenses/by/2.5/legalcode
+- CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+- Etalab Open Licence 2.0: https://www.etalab.gouv.fr/wp-content/uploads/2018/11/open-licence.pdf
+
+What srbf changed: every catalog of srbf's 2026-11 release states it in its metadata (`srbf_changes`); a data
+catalog stores the rows its authors published as arrays.
 
 ## Catalogs published before 2026-11
 
@@ -180,3 +194,82 @@ the members whose license allows redistribution; the license column names theirs
 | vladislavleva | dso-org/deep-symbolic-optimization benchmarks.csv (Petersen et al.) | BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts) |
 | vladislavleva-points | Vladislavleva-2/-3 meshes (Vladislavleva et al. 2009, IEEE TEVC, Table I) via the released vladislavleva catalog | BSD-3-Clause (dso-org/deep-symbolic-optimization) |
 | white-et-al-2013-proposed-sr-set-points | Keijzer-6 grid as specified by White et al. 2013 (GPEM 14:3) Table 5 | facts only: Keijzer-6 grid cited from White et al. 2013 (GPEM 14:3) and Keijzer 2003; no upstream license |
+
+## Copyright notices
+
+The copyright notice of every MIT, BSD-3-Clause and Apache-2.0 source the catalogs published here took content from, as the source's license file states it. The license texts are in LICENSES/.
+
+| Source | License | Copyright notice | Catalogs |
+|---|---|---|---|
+| [AutoResearch/autora-synthetic](https://github.com/AutoResearch/autora-synthetic/blob/main/LICENSE) | MIT | Copyright (c) 2023 Autonomous Empirical Research Initiative | autora-synthetic-behavioural-science-models-points |
+| [bilgesi/SR-LLM-Integration](https://github.com/bilgesi/SR-LLM-Integration/blob/main/LICENSE) | Apache-2.0 | none stated (the license file carries no copyright line; no NOTICE file) | knowledge-integration-newtonian-cases |
+| [briandesilva/discovery-of-physics-from-data](https://github.com/briandesilva/discovery-of-physics-from-data/blob/master/LICENSE) | MIT | Copyright (c) 2020 Brian de SIlva | falling-balls |
+| [CP3-Origins/Things-to-bench](https://github.com/CP3-Origins/Things-to-bench/blob/master/LICENSE) | MIT | Copyright (c) 2023 CP3-Origins | cp3-bench, cp3-bench-standard-tuning-datasets-points, cp3-blackbox, cp3-cosmo |
+| [DALabNOVA/slim](https://github.com/DALabNOVA/slim/blob/main/LICENSE) | MIT | Copyright (c) 2024 DALabNOVA | gecco-2013-2017-real, gsgp-real-world, mcdermott-predictive-modelling |
+| [DeaglanBartlett/ESR](https://github.com/DeaglanBartlett/ESR) | MIT | Copyright 2022 Deaglan J. Bartlett (no license file; the README states the MIT licence and this copyright line) | esr-cosmology, esr-cosmology-datasets |
+| [deep-symbolic-mathematics/LLM-SR](https://github.com/deep-symbolic-mathematics/LLM-SR/blob/main/LICENSE) | MIT | Copyright (c) 2024 [Your Name or Organization] | llm-sr-bactgrow, llm-sr-stress-strain |
+| [dso-org/deep-symbolic-optimization](https://github.com/dso-org/deep-symbolic-optimization/blob/master/LICENSE) | BSD-3-Clause | Copyright (c) 2018, Lawrence Livermore National Security, LLC | constant, dgsr-additional-feynman, dgsr-feynman-d-2-d-5-subsets, dgsr-synthetic-d-12, dso-benchmark-registry, dso-benchmark-registry-points, grammarvae-points, jin, keijzer, keijzer-points, korns, koza, livermore, livermore2, meier, neat, neat-points, nguyen, nonic-points, pagie-points, poly, r-rationals-points, sine-points, vladislavleva, vladislavleva-points |
+| [EPFL-IMOS/Sym-Q](https://github.com/EPFL-IMOS/Sym-Q/blob/main/LICENSE) | MIT | Copyright (c) 2023 Wenqi Zhou | sym-q-ai-feynman-with-drift-terms |
+| [EpistasisLab/pmlb](https://github.com/EpistasisLab/pmlb/blob/master/LICENSE) | MIT | Copyright (c) 2016 Epistasis Lab at UPenn | first-principles, nikuradse, srbench-2.0-blackbox, srbench-2.0-first-principles, srbench-2021-blackbox, srbench-2021-strogatz, srbench2-blackbox |
+| [EquationDiscovery/Equation_Recovery_Benchmark](https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark) | MIT | none stated (ERBench (Kahlmeyer, Voigt, Habeck & Giesen) states MIT for SynEq and PHYBench without a copyright line) | erbench-phybench, erbench-syneq |
+| [facebookresearch/symbolicregression](https://github.com/facebookresearch/symbolicregression/blob/main/LICENSE) | Apache-2.0 | Copyright 2020 - present, Facebook, Inc | e2e-in-domain-synthetic-validation-set |
+| [figshare 10.6084/m9.figshare.29615831 (PhyE2E_datas, Ying et al. 2025)](https://doi.org/10.6084/m9.figshare.29615831.v1) | Apache-2.0 | none stated (Apache 2.0 per the figshare record (code: Jie0618/PhysicsRegression); no copyright line or NOTICE file) | phye2e-llm-generated-synthetic-formulas, phye2e-space-physics |
+| [google/BIG-bench](https://github.com/google/BIG-bench/blob/main/LICENSE) | Apache-2.0 | none stated (the license file carries no copyright line; no NOTICE file) | lasr-bigbench |
+| [henniggroup/symbolic-regression-utilities](https://github.com/henniggroup/symbolic-regression-utilities/blob/master/LICENSE) | Apache-2.0 | none stated (the license file carries no copyright line; no NOTICE file) | superconductor-tc |
+| [hftsoi/symbolfit](https://github.com/hftsoi/symbolfit/blob/main/LICENSE) | MIT | Copyright (c) 2024 Ho Fung Tsoi | symbolfit-lhc-spectra |
+| [HKUST-KnowComp/NewtonBench](https://github.com/HKUST-KnowComp/NewtonBench/blob/main/LICENSE) | MIT | Copyright (c) 2025 HKUST-KnowComp | newtonbench |
+| [IBM/AI-Descartes](https://github.com/IBM/AI-Descartes/blob/main/LICENSE) | MIT | Copyright (c) 2022 International Business Machines | ai-descartes, ai-descartes-real-data |
+| [IBM/AI-Hilbert](https://github.com/IBM/AI-Hilbert/blob/main/LICENSE) | MIT | Copyright (c) 2024 International Business Machines | ai-hilbert-problem-set, ai-hilbert-real-data |
+| [intell-sci-comput/PSE](https://github.com/intell-sci-comput/PSE/blob/main/LICENSE) | MIT | Copyright (c) 2024 intell-sci-comput | pse-high-dimensional-distractor-set |
+| [isds-neu/SymbolicPhysicsLearner](https://github.com/isds-neu/SymbolicPhysicsLearner/blob/main/LICENSE) | MIT | Copyright (c) 2023 isds-neu | falling-balls, nguyen-c-points |
+| [jiangnanhugo/egg-sr](https://github.com/jiangnanhugo/egg-sr/blob/main/LICENSE) | MIT | Copyright (c) 2014 | cvgp-trigonometric-control-variable-datasets |
+| [kartelj/rils-rols](https://github.com/kartelj/rils-rols/blob/master/LICENSE) | MIT | Copyright (c) 2016 Epistasis Lab at UPenn | rils-rols-random-instances |
+| [KindXiaoming/pykan](https://github.com/KindXiaoming/pykan/blob/master/LICENSE) | MIT | Copyright (c) 2024 Ziming Liu | kan-toy-functions |
+| [LironSimon/SciMED](https://github.com/LironSimon/SciMED/blob/master/LICENSE) | MIT | Copyright (c) 2022 Teddy Lazebnik | scimed-settling-sphere-configurations |
+| [MilesCranmer/pysr_paper](https://github.com/MilesCranmer/pysr_paper/blob/main/LICENSE) | MIT | Copyright (c) 2020-2023 @MilesCranmer | pysr-empiricalbench, pysr-empiricalbench-formulas |
+| [mojivalipour/symbolicgpt](https://github.com/mojivalipour/symbolicgpt/blob/master/LICENSE.txt) | MIT | Copyright (c) 2020 Andrej Karpathy (minGPT), 2021 Mojtaba Valipour (symblicGPT) | symbolicgpt-bivariate-set, symbolicgpt-test-sets |
+| [NISL-MSU/MultiSetSR](https://github.com/NISL-MSU/MultiSetSR/blob/master/LICENSE) | MIT | Copyright (c) 2024 Montana State University (the license file states YEAR: 2024, COPYRIGHT HOLDER: Montana State University) | decomposable-nsr-synthetic-e1-e13 |
+| [omron-sinicx/srsd-benchmark](https://github.com/omron-sinicx/srsd-benchmark/blob/main/LICENSE) | MIT | Copyright (c) 2022 OMRON SINIC X Corporation | scrbenchmark, srsd-dummy |
+| [PaulsonLab/TorchSISSO](https://github.com/PaulsonLab/TorchSISSO/blob/main/LICENSE) | MIT | Copyright (c) 2025 Madhav Reddy Muthyala | torchsisso-specific-energy |
+| [prescriptiveanalytics/SCR-Benchmarks](https://github.com/prescriptiveanalytics/SCR-Benchmarks/blob/main/LICENSE) | MIT | none stated (the license file carries no copyright line) | scrbenchmark |
+| [psaegert/symbolic-data](https://github.com/psaegert/symbolic-data/blob/main/LICENSE) | MIT | Copyright (c) 2024 Paul Saegert | lample-charton-v24, lample-charton-v24-bench |
+| [RealSR/SciLaws-Bench](https://huggingface.co/datasets/RealSR/SciLaws-Bench) | MIT | none stated (MIT for the tasks magnet_3c90_core_loss__log_P_vol and ocean_mesoscale_eddy_closure__Sx per SciLaws-Bench's dataset/LICENSES.md, which names no copyright holder) | scilaws-real |
+| [Roy-SR-007/HierBOSSS](https://github.com/Roy-SR-007/HierBOSSS/blob/main/LICENSE) | MIT | Copyright (c) 2026 Authors of HierBOSSS [Somjit Roy, Pritam Dey, Bani K. Mallick, and Debdeep Pati] (langlaw's README states the MIT License without a copyright line; its data come from HierBOSSS) | hierbosss-single-atom-catalysis-and-synthetic-polynomial, langlaw-perovskites |
+| [samuelkim314/DeepSymReg](https://github.com/samuelkim314/DeepSymReg) | MIT | none stated (no license file; the README states: All content in this repository is licensed under the MIT license.) | kim-et-al-eql-benchmark-functions |
+| [scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn/blob/main/COPYING) | BSD-3-Clause | Copyright (c) 2007-2026 The scikit-learn developers. | gplearn-diabetes |
+| [scipy/scipy](https://github.com/scipy/scipy/blob/main/LICENSE.txt) | BSD-3-Clause | Copyright (c) 2001-2002 Enthought, Inc. 2003, SciPy Developers. | erbench-densities |
+| [Shun-0922/Mem-Bias-NSR](https://github.com/Shun-0922/Mem-Bias-NSR/blob/main/LICENSE) | MIT | Copyright (c) 2021 SymposiumOrganization | reproduction-bias-not-included-test-sets |
+| [SymposiumOrganization/ControllableNeuralSymbolicRegression](https://github.com/SymposiumOrganization/ControllableNeuralSymbolicRegression/blob/main/LICENSE) | MIT | Copyright (c) 2021 SymposiumOrganization | nsrwh-only-five-variables-nc, nsrwh-only-five-variables-wc, nsrwh-train-nc, nsrwh-train-wc |
+| [SymposiumOrganization/NeuralSymbolicRegressionThatScales](https://github.com/SymposiumOrganization/NeuralSymbolicRegressionThatScales/blob/main/LICENSE) | MIT | Copyright (c) 2021 SymposiumOrganization | soose-fc, soose-nc, soose-wc |
+| [trevorstephens/gplearn](https://github.com/trevorstephens/gplearn/blob/main/LICENSE) | BSD-3-Clause | Copyright (c) 2015-2026, Trevor Stephens | gplearn-documentation-examples |
+| [trishullab/LibraryAugmentedSymbolicRegression.jl](https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/master/LICENSE) | Apache-2.0 | Copyright 2020 Miles Cranmer | lasr-bigbench, lasr-noisy-feynman-with-distractors, lasr-synthetic-equations |
+| [tsenftle/Metal-Oxide-LASSO-lo](https://github.com/tsenftle/Metal-Oxide-LASSO-lo/blob/master/LICENSE) | MIT | Copyright (c) 2018 tsenftle | hierbosss-single-atom |
+| [viktmar/FastSRB](https://github.com/viktmar/FastSRB/blob/main/LICENSE) | MIT | Copyright (c) 2025 Viktor Martinek | fastsrb, srsd-dummy |
+| [WassimTenachi/PhySO](https://github.com/WassimTenachi/PhySO/blob/main/LICENSE) | MIT | Copyright (c) 2023 Wassim Tenachi | feynman-bonus, physo-astro, physo-astrophysical-case-studies, physo-class, physo-milky-way-streams, physo-streams |
+| [XieZikai/LLM-PySR](https://github.com/XieZikai/LLM-PySR/blob/main/LICENSE) | MIT | Copyright (c) 2026 Z.X. | llm-pysr-battery |
+
+### NOTICE of dso-org/deep-symbolic-optimization
+
+```
+This work was produced under the auspices of the U.S. Department of
+Energy by Lawrence Livermore National Laboratory under Contract
+DE-AC52-07NA27344.
+
+This work was prepared as an account of work sponsored by an agency of
+the United States Government. Neither the United States Government nor
+Lawrence Livermore National Security, LLC, nor any of their employees
+makes any warranty, expressed or implied, or assumes any legal liability
+or responsibility for the accuracy, completeness, or usefulness of any
+information, apparatus, product, or process disclosed, or represents that
+its use would not infringe privately owned rights.
+
+Reference herein to any specific commercial product, process, or service
+by trade name, trademark, manufacturer, or otherwise does not necessarily
+constitute or imply its endorsement, recommendation, or favoring by the
+United States Government or Lawrence Livermore National Security, LLC.
+
+The views and opinions of authors expressed herein do not necessarily
+state or reflect those of the United States Government or Lawrence
+Livermore National Security, LLC, and shall not be used for advertising
+or product endorsement purposes.
+```

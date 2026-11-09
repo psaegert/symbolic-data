@@ -84,3 +84,16 @@ def test_the_notices_name_every_catalog_they_vouch_for():
     passed = pc.license_pass()
     published = {**pc.CATALOGS, **pc.DATA_CATALOGS}
     assert all(n in passed or n in pc.NOTICED_BEFORE_2026_11 for n in published)
+
+
+def test_every_mit_bsd_or_apache_source_ships_its_copyright_notice_and_license_text(tmp_path, monkeypatch):
+    assert pc.without_copyright() == []
+    for source in pc.copyrights():
+        assert source["license"] in pc.NOTICE_LICENSES and source["catalogs"], source["source"]
+        assert source["copyright"] or source.get("note"), source["source"]       # a notice, or why there is none
+    assert all((Path(pc.HF_CARD) / "LICENSES" / f"{lic}.txt").is_file() for lic in pc.NOTICE_LICENSES)
+    # a catalog whose MIT source loses its entry is caught
+    entries = [s for s in pc.copyrights() if s["source"] != "IBM/AI-Hilbert"]
+    (tmp_path / "copyrights.json").write_text(json.dumps(entries))
+    monkeypatch.setattr(pc, "COPYRIGHTS", str(tmp_path / "copyrights.json"))
+    assert pc.without_copyright() == ["ai-hilbert-problem-set", "ai-hilbert-real-data"]
