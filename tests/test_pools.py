@@ -166,3 +166,27 @@ def test_n_support_prior_cannot_cap_pools(tmp_path):
     src = ProblemSource({"catalog": _freeze([p], tmp_path), "sampling": {"n_support": "prior", "n_validation": 0}})
     with pytest.raises(ValueError, match="cannot cap a data catalog"):
         list(src)
+
+
+def test_a_frozen_catalog_written_twice_has_the_same_bytes(tmp_path, monkeypatch):
+    # np.savez dates every zip entry 1980-01-01, not the time it is written, so a rebuilt catalog keeps the sha256 it
+    # was published under; this guards that property against a numpy or zipfile change
+    import hashlib
+    import time
+    x, y = _rows(300)
+    xt, yt = _rows(100, start=10_000)
+    p = data_problem(x, y, x_test=xt, y_test=yt, variables=["x1", "x2"], test_split="given", eq_id="g", gt_kind="none")
+    catalog = ProblemCatalog.from_problems([p], name="pools")
+    first = catalog.save(tmp_path / "first")
+    now = time.time()
+    monkeypatch.setattr(time, "time", lambda: now + 86_400)                       # written again a day later
+    second = catalog.save(tmp_path / "second")
+    monkeypatch.undo()
+
+    def digest(path):
+        return hashlib.sha256(open(path, "rb").read()).hexdigest()
+
+    assert digest(first) == digest(second)
+    again = ProblemCatalog.from_npz(second).problems[0]                              # and it reads back whole
+    np.testing.assert_array_equal(again.x_support, x)
+    np.testing.assert_array_equal(again.x_validation, xt)

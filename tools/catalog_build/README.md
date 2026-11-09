@@ -24,9 +24,10 @@ own generator, and the release catalogs' corrections. Run them from the reposito
    its sha256, and `SYMBOLIC_DATA_CATALOG_RAW` points at a folder holding them (files with a URL are downloaded).
    Run `catalog_tags.py apply` on them too. `tools/publish_catalogs.py` publishes them from `build/data-catalogs`
    (`DATA_CATALOGS`; the share-alike members through `publish_catalogs_sa.py`). A data catalog not built keeps its
-   hosted versions. A rebuild writes new npz bytes even where nothing changed (the zip entries carry their write
-   time), and the publish refuses changed bytes under a published version: once published, rebuild only the
-   catalog you fix (`--only <set tag>`), with its version bumped.
+   hosted versions. A rebuild writes the same npz bytes where nothing changed (np.savez dates every zip entry
+   1980-01-01; the builds of 2026-11-05 and 2026-11-08 match by sha256), so a published catalog stays unchanged; a
+   catalog whose content changes needs its version bumped, since the publish refuses new bytes under a published
+   version.
 7. `python tools/catalog_build/count_release.py` — the release's problem and subset counts (the curated catalogs and
    the data build).
 
