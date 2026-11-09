@@ -111,3 +111,86 @@ def test_a_hosted_entry_the_notices_do_not_know_is_refused(repo, monkeypatch, ca
         _publish(repo, monkeypatch, hosted)
     _publish(repo, monkeypatch, hosted, retired=("old-catalog",))
     assert "preserved retired entries: ['old-catalog']" in capsys.readouterr().out
+
+
+def _load(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+sa = _load("publish_catalogs_sa", TOOLS / "publish_catalogs_sa.py")
+restricted = _load("publish_catalogs_restricted", TOOLS / "publish_catalogs_restricted.py")
+
+
+def test_each_repo_publishes_exactly_what_the_license_pass_routes_to_it():
+    # owner 2026-11-09: licensed data in the main repo, share-alike and copyleft in the share-alike repo, data under
+    # non-commercial terms or with no license in the restricted repo
+    passed = pc.license_pass()
+    tables = {"main": {**pc.CATALOGS, **pc.DATA_CATALOGS}, "sa": {**sa.CATALOGS, **sa.DATA_CATALOGS},
+              "restricted": restricted.DATA_CATALOGS}
+    routes = {"main": pc.SHAREABLE, "sa": sa.ROUTE, "restricted": restricted.ROUTE}
+    for repo, names in tables.items():
+        assert all(passed[n]["redistribute"] in routes[repo] for n in names if n in passed), repo
+    for repo in ("sa", "restricted"):                                    # nothing routed to a repo is left behind
+        assert {n for n, r in passed.items() if r["redistribute"] in routes[repo]} <= set(tables[repo]), repo
+    assert not set(tables["main"]) & set(tables["restricted"]) and not set(tables["main"]) & set(tables["sa"])
+
+
+@pytest.mark.parametrize("route, shareable", [("yes, restricted repo", pc.SHAREABLE),
+                                              ("yes", ("yes, restricted repo",)),
+                                              ("yes, share-alike repo", ("yes, restricted repo",))])
+def test_a_repo_refuses_a_catalog_routed_to_another(repo, monkeypatch, route, shareable):
+    rows = json.loads((repo / "licenses.json").read_text())
+    rows = [dict(r, redistribute=route if r["catalog"] == "esr-cosmology" else r["redistribute"]) for r in rows]
+    (repo / "licenses.json").write_text(json.dumps(rows))
+    with pytest.raises(SystemExit, match=r"the license pass does not clear \['esr-cosmology"):
+        _publish(repo, monkeypatch, {}, shareable=shareable)
+
+
+def test_a_first_publish_starts_from_an_empty_manifest(repo, monkeypatch, capsys):
+    from huggingface_hub.errors import RepositoryNotFoundError
+
+    class NoRepoApi:
+        def hf_hub_download(self, **_):
+            raise RepositoryNotFoundError.__new__(RepositoryNotFoundError)        # as the hub answers a missing repo
+
+    monkeypatch.setattr(pc, "HfApi", NoRepoApi)
+    built = {n: (f"{n}.npz", 1, "problem_catalog") for n in ("esr-cosmology", "treloar-rubber")}
+    pc.publish("fake/new-repo", str(repo / "assets"), {}, {}, built=built, build_dir=str(repo / "build"))
+    out = capsys.readouterr().out
+    assert "hosted manifest (fake/new-repo): 0 entries" in out and "new: esr-cosmology@1, treloar-rubber@1" in out
+
+
+def test_the_restricted_notices_list_every_dataset_with_its_terms():
+    text = (Path(restricted.CARD_DIR) / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8")
+    assert pc.notices(text, names=restricted.DATA_CATALOGS, terms=True) == text, \
+        "run python tools/publish_catalogs_restricted.py --notices"
+    assert pc.without_copyright(names=restricted.DATA_CATALOGS) == []
+    passed = pc.license_pass()
+    for name in restricted.DATA_CATALOGS:
+        row = passed[name]
+        for mid in row.get("members") or {"all": None}:
+            assert f"| {name} | {mid} |" in text, (name, mid)
+    for card in (Path(restricted.CARD_DIR) / "README.md", Path(pc.HF_CARD) / "README.md"):
+        assert "open an issue at\nhttps://github.com/psaegert/symbolic-data" in card.read_text().replace(
+            "open an issue at https://", "open an issue at\nhttps://")
+
+
+def test_restricted_members_carry_their_terms_and_the_statement():
+    build = _load("build_data_catalogs", TOOLS / "catalog_build" / "build_data_catalogs.py")
+    problems = [types.SimpleNamespace(eq_id=i, meta={}) for i in ("ok", "sa", "nc", "out")]
+    members = {"ok": {"license": "MIT", "share": "yes"}, "sa": {"license": "GPL-3.0", "share": "share-alike"},
+               "nc": {"license": "CC BY-NC 4.0 (x)", "share": "restricted", "terms": "non-commercial use only"},
+               "out": {"license": "NIST SRD", "share": "no", "reason": "terms forbid redistribution"}}
+    parts, left_out = build.split_members(problems, {"catalog": "c", "members": members})
+    assert [[p.eq_id for p in parts[k]] for k in ("", "-share-alike", "-restricted")] == [["ok"], ["sa"], ["nc"]]
+    assert left_out == ["out: terms forbid redistribution"]
+    nc = parts["-restricted"][0].meta
+    assert nc["terms"] == "non-commercial use only" and "CC BY-NC 4.0 (x)" in nc["statement"]
+    assert "github.com/psaegert/symbolic-data" in nc["statement"] and "terms" not in parts[""][0].meta
+    whole = [types.SimpleNamespace(eq_id="a", meta={})]
+    parts, _ = build.split_members(whole, {"catalog": "w", "redistribute": "yes, restricted repo", "terms": "none stated",
+                                           "license": "no licence", "upstream": "somewhere"})
+    assert parts[""][0].meta["terms"] == "none stated" and "Source: somewhere" in parts[""][0].meta["statement"]

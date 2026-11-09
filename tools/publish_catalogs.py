@@ -42,6 +42,7 @@ import os
 import re
 
 from huggingface_hub import HfApi, CommitOperationAdd
+from huggingface_hub.errors import EntryNotFoundError, RepositoryNotFoundError
 
 REPO = "psaegert/symbolic-data-assets"          # MUST match resolver.HF_MANIFEST_REPO
 REPO_TYPE = "dataset"
@@ -237,7 +238,6 @@ DATA_CATALOGS = {
     "gecco-2022-noise": ("gecco-2022-noise.npz", 40, "problem_catalog"),
     "gecco-2023-performance": ("gecco-2023-performance.npz", 3, "problem_catalog"),
     "gp-gomea-real-world": ("gp-gomea-real-world.npz", 7, "problem_catalog"),
-    "gplearn-diabetes": ("gplearn-diabetes.npz", 1, "problem_catalog"),
     "gsgp-real-world": ("gsgp-real-world.npz", 7, "problem_catalog"),
     "hierbosss-single-atom": ("hierbosss-single-atom.npz", 1, "problem_catalog"),
     "langlaw-perovskites": ("langlaw-perovskites.npz", 4, "problem_catalog"),
@@ -320,9 +320,12 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
         return os.path.abspath(os.path.join(where[name], rel))
 
     api = HfApi()
-    manifest_path = api.hf_hub_download(repo_id=repo, repo_type=REPO_TYPE, filename="manifest.json")
-    with open(manifest_path, "r", encoding="utf-8") as handle:
-        hosted = json.load(handle)
+    try:
+        manifest_path = api.hf_hub_download(repo_id=repo, repo_type=REPO_TYPE, filename="manifest.json")
+        with open(manifest_path, "r", encoding="utf-8") as handle:
+            hosted = json.load(handle)
+    except (RepositoryNotFoundError, EntryNotFoundError):     # a repo's first publish: nothing hosted yet
+        hosted = {}
     print(f"hosted manifest ({repo}): {len(hosted)} entries")
 
     passed = license_pass()
@@ -389,6 +392,7 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
 
     who = api.whoami()["name"]
     print(f"HF user: {who}")
+    api.create_repo(repo_id=repo, repo_type=REPO_TYPE, exist_ok=True)
 
     # 1. upload only the MISSING-version files, in one commit so a single revision pins them
     ops = list(extra_ops)
@@ -433,7 +437,7 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
           f"({len(new_names)} new, {len(preserved)} preserved-retired)")
 
 
-NOTICES_TABLE = "<!-- the table below: python tools/publish_catalogs.py --notices (from tools/catalog_build/tags/licenses.json) -->"
+NOTICES_TABLE = "<!-- generated below: the publish tool's --notices, from tools/catalog_build/tags/licenses.json and copyrights.json -->"
 # catalogs without a license-pass row: their notices are the hand-written table "Catalogs published before 2026-11"
 NOTICED_BEFORE_2026_11 = (
     "ai-descartes", "cp3-blackbox", "cp3-cosmo", "erbench-densities", "erbench-phybench", "erbench-syneq", "fastsrb",
@@ -462,22 +466,31 @@ def copyrights() -> list[dict]:
         return json.load(handle)
 
 
-def without_copyright() -> list[str]:
-    """Catalogs on the main repo that need a copyright entry but have none: those whose license-pass license names an
-    MIT, BSD-3-Clause or Apache-2.0 source (not as cited facts), and every hand-noticed and retired hosted catalog
-    (all of them took content from such sources)."""
+def without_copyright(names=None) -> list[str]:
+    """Catalogs that need a copyright entry but have none: of ``names`` (default: this repo's tables, with every
+    hand-noticed and retired hosted catalog, all of which took content from such sources), those whose license-pass
+    license names an MIT, BSD-3-Clause or Apache-2.0 source (not as cited facts)."""
     passed = license_pass()
     covered = {name for source in copyrights() for name in source["catalogs"]}
     pattern = r"\b(" + "|".join(re.escape(lic) for lic in NOTICE_LICENSES) + r")\b"
-    needed = {name for name in {**CATALOGS, **DATA_CATALOGS} if name in passed
-              and not passed[name]["license"].startswith("facts only") and re.search(pattern, passed[name]["license"])}
-    return sorted((needed | set(NOTICED_BEFORE_2026_11) | set(RETIRED_HOSTED)) - covered)
+    extra = set(NOTICED_BEFORE_2026_11) | set(RETIRED_HOSTED) if names is None else set()
+    names = set(CATALOGS) | set(DATA_CATALOGS) if names is None else set(names)
+    # cited facts, and data the license pass records as having none (a code licence named alongside is not theirs)
+    unlicensed = ("facts only", "no licence", "no license", "no data licence")
+    needed = {name for name in names if name in passed
+              and not passed[name]["license"].startswith(unlicensed) and re.search(pattern, passed[name]["license"])}
+    return sorted((needed | extra) - covered)
 
 
-def notices(text: str) -> str:
-    """THIRD_PARTY_NOTICES.md ``text`` with the part after NOTICES_TABLE rewritten: the license pass's row of every
-    catalog published here, then the copyright notice of every MIT, BSD-3-Clause and Apache-2.0 source."""
+def notices(text: str, names=None, terms: bool = False) -> str:
+    """A notices file ``text`` with the part after NOTICES_TABLE rewritten: the license pass's row of every catalog of
+    ``names`` (default: this repo's tables), then the copyright notice of every MIT, BSD-3-Clause and Apache-2.0
+    source they (and, for this repo, its hand-noticed and retired hosted catalogs) took content from. ``terms``: one
+    row per dataset with the terms at its source (the restricted repo)."""
     passed = license_pass()
+    listed = set(NOTICED_BEFORE_2026_11) | set(RETIRED_HOSTED) if names is None else set()
+    names = set(CATALOGS) | set(DATA_CATALOGS) if names is None else set(names)
+    listed |= names
 
     def cell(s: str) -> str:
         return " ".join(s.split()).replace("|", "\\|")
@@ -486,15 +499,29 @@ def notices(text: str) -> str:
         lines = "; ".join(source["copyright"]) or "none stated"
         return cell(f"{lines} ({source['note']})" if source.get("note") else lines)
 
-    rows = [f"| {name} | {cell(passed[name]['upstream'])} | {cell(passed[name]['license'])} |"
-            for name in sorted({**CATALOGS, **DATA_CATALOGS}) if name in passed]
-    ordered = sorted(copyrights(), key=lambda s: s["source"].lower())
+    if terms:
+        header = "| Catalog | Dataset | Source and license | Terms at the source |\n|---|---|---|---|\n"
+        rows = []
+        for name in sorted(n for n in names if n in passed):
+            row = passed[name]
+            if row.get("members"):
+                rows += [f"| {name} | {mid} | {cell(m['license'])} | {cell(m['terms'])} |"
+                         for mid, m in sorted(row["members"].items())]
+            else:
+                rows.append(f"| {name} | all | {cell(row['upstream'])}; {cell(row['license'])} | {cell(row['terms'])} |")
+    else:
+        header = "| Catalog | Upstream source | License |\n|---|---|---|\n"
+        rows = [f"| {name} | {cell(passed[name]['upstream'])} | {cell(passed[name]['license'])} |"
+                for name in sorted(names) if name in passed]
+    ordered = [dict(s, catalogs=[c for c in s["catalogs"] if c in listed])
+               for s in sorted(copyrights(), key=lambda s: s["source"].lower())]
+    ordered = [s for s in ordered if s["catalogs"]]
     sources = [f"| [{cell(s['source'])}]({s['url']}) | {s['license']} | {notice(s)} | {', '.join(s['catalogs'])} |"
                for s in ordered]
     notice_files = "".join(f"\n### NOTICE of {s['source']}\n\n```\n{s['notice_file']}\n```\n"
                            for s in ordered if s.get("notice_file"))
     head, _, _ = text.partition(NOTICES_TABLE)
-    return (head + NOTICES_TABLE + "\n\n| Catalog | Upstream source | License |\n|---|---|---|\n" + "\n".join(rows)
+    return (head + NOTICES_TABLE + "\n\n" + header + "\n".join(rows)
             + "\n\n## Copyright notices\n\nThe copyright notice of every MIT, BSD-3-Clause and Apache-2.0 source the catalogs "
             "published here took content from, as the source's license file states it. The license texts are in "
             "LICENSES/.\n\n| Source | License | Copyright notice | Catalogs |\n|---|---|---|---|\n" + "\n".join(sources)
