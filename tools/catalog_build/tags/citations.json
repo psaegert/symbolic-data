@@ -2542,5 +2542,185 @@
   },
   "data": null,
   "notes": "Keijzer-6 grid as specified in Table 5 (Keijzer 2003); points srbf-generated."
+ },
+ {
+  "catalog": "gecco-2013-2017-real-restricted",
+  "paper": {
+   "short": "Oliveira et al. 2018",
+   "title": "Analysing symbolic regression benchmarks under a meta-learning approach",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference Companion (GECCO '18), pp. 1342-1349",
+   "url": "https://doi.org/10.1145/3205651.3208293"
+  },
+  "data": {
+   "short": "GitHub laic-ufmg/gp-benchmarks@53b10df",
+   "title": "gp-benchmarks compilation repository (script + spreadsheet of the 2013-2017 GECCO datasets)",
+   "url": "https://github.com/laic-ufmg/gp-benchmarks/tree/53b10dff51b9d773e1b91868208cf2e6cccf5ad6"
+  },
+  "notes": "Preprint arXiv:1805.10365. Member data come from their own records: UCI ML Repository (ids 1, 29, 162, 165, 186, 242, 243, 291, 294; CC BY 4.0) and the QSAR %F/LD50/%PPB tables via DALabNOVA/slim@aca7357 (MIT)."
+ },
+ {
+  "catalog": "gecco-2013-2017-real-share-alike",
+  "paper": {
+   "short": "Oliveira et al. 2018",
+   "title": "Analysing symbolic regression benchmarks under a meta-learning approach",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference Companion (GECCO '18), pp. 1342-1349",
+   "url": "https://doi.org/10.1145/3205651.3208293"
+  },
+  "data": {
+   "short": "GitHub laic-ufmg/gp-benchmarks@53b10df",
+   "title": "gp-benchmarks compilation repository (script + spreadsheet of the 2013-2017 GECCO datasets)",
+   "url": "https://github.com/laic-ufmg/gp-benchmarks/tree/53b10dff51b9d773e1b91868208cf2e6cccf5ad6"
+  },
+  "notes": "Preprint arXiv:1805.10365. Member data come from their own records: UCI ML Repository (ids 1, 29, 162, 165, 186, 242, 243, 291, 294; CC BY 4.0) and the QSAR %F/LD50/%PPB tables via DALabNOVA/slim@aca7357 (MIT)."
+ },
+ {
+  "catalog": "gp-gomea-real-world-restricted",
+  "paper": {
+   "short": "Virgolin et al. 2021",
+   "title": "Improving Model-Based Genetic Programming for Symbolic Regression of Small Expressions",
+   "venue": "Evolutionary Computation 29(2):211-237",
+   "url": "https://doi.org/10.1162/evco_a_00278"
+  },
+  "data": {
+   "short": "GP-GOMEA authors' Google Drive folder DatasetsGP/Regression",
+   "title": "Preprocessed regression datasets of Virgolin et al.",
+   "url": "https://drive.google.com/drive/folders/1w-uTuSA-3d07LKyWIcVk3FdnysDz-QaV"
+  },
+  "notes": "Preprint arXiv:1904.02050. Members originate from UCI (Airfoil 291, Concrete 165, Energy 242, Wine 186, Yacht 243; CC BY 4.0), Boston housing, Dow Chemical (EvoStar 2010) and Tower (Vladislavleva)."
+ },
+ {
+  "catalog": "langlaw-perovskites-restricted",
+  "paper": {
+   "short": "Guan et al. 2026",
+   "title": "Discovery of Interpretable Physical Laws in Materials via Language-Model-Guided Symbolic Regression",
+   "venue": "arXiv preprint arXiv:2602.22967",
+   "url": "https://arxiv.org/abs/2602.22967"
+  },
+  "data": {
+   "short": "GitHub NAKONAKO4/langlaw@a69229c",
+   "title": "LangLaw data/{bulk_modulus,bandgap,oer_activity}.csv (README: MIT)",
+   "url": "https://github.com/NAKONAKO4/langlaw/tree/a69229ce0c8f4549f5ba87514713c19e0e7974c2/data"
+  },
+  "notes": "Fourth member from Roy-SR-007/HierBOSSS@0c6b856 perovskites_data/processed_data.csv (MIT). Underlying data: Weng et al. 2020, Nat. Commun. 11:3513 (doi:10.1038/s41467-020-17263-9) and the NOMAD dataset \"Cubic ABO3 perovskites\" (Foppa 2022, doi:10.17172/NOMAD/2022.02.21-3)."
+ },
+ {
+  "catalog": "mcdermott-predictive-modelling-restricted",
+  "paper": {
+   "short": "McDermott et al. 2012",
+   "title": "Genetic programming needs better benchmarks",
+   "venue": "Proceedings of the 14th annual conference on Genetic and evolutionary computation (GECCO '12), pp. 791-798",
+   "url": "https://doi.org/10.1145/2330163.2330273"
+  },
+  "data": {
+   "short": "GitHub DALabNOVA/slim@aca7357",
+   "title": "slim_gsgp datasets/data (QSAR %F, LD50, %PPB tables; MIT)",
+   "url": "https://github.com/DALabNOVA/slim/tree/aca73575c46a1a2d90dd55680e09f8b1c4d3a8cf/slim_gsgp/datasets/data"
+  },
+  "notes": "QSAR tables of Archetti et al. 2007 (doi:10.1007/s10710-007-9040-z). Other Table 1 members come from their own sources: SILSO yearly sunspot number (CC BY-NC) and Mackey-Glass mg.dat (R. Jang, Wayback copy)."
+ },
+ {
+  "catalog": "nuclear-misr-restricted",
+  "paper": {
+   "short": "Munoz et al. 2025",
+   "title": "Discovering nuclear models from symbolic machine learning",
+   "venue": "Communications Physics 8(1):101",
+   "url": "https://doi.org/10.1038/s42005-025-02023-2"
+  },
+  "data": {
+   "short": "AME2020 (Wang et al. 2021, Chin. Phys. C 45:030003)",
+   "title": "The AME 2020 atomic mass evaluation (II). Tables, graphs and references*",
+   "url": "https://doi.org/10.1088/1674-1137/abddaf"
+  },
+  "notes": "Binding energies from AME2020 (cited as data); charge radii from Angeli & Marinova 2013, ADNDT 99:69 (doi:10.1016/j.adt.2011.12.006; IAEA charge_radii.csv). srbf uses the MISR split files of munozariasjm/nuclear-misr@791e28c Data/Experimental (no licence file). Preprint arXiv:2404.11477."
+ },
+ {
+  "catalog": "phye2e-space-physics-restricted",
+  "paper": {
+   "short": "Ying et al. 2025",
+   "title": "A neural symbolic model for space physics",
+   "venue": "Nature Machine Intelligence 7(10):1726-1741",
+   "url": "https://doi.org/10.1038/s42256-025-01126-3"
+  },
+  "data": {
+   "short": "figshare 10.6084/m9.figshare.29615831.v1",
+   "title": "PhyE2E_datas",
+   "url": "https://doi.org/10.6084/m9.figshare.29615831.v1"
+  },
+  "notes": "The 17 application files of the figshare record (SILSO sunspot copy is CC BY-NC). Code Zenodo 10.5281/zenodo.16305086."
+ },
+ {
+  "catalog": "scilaws-real-restricted",
+  "paper": {
+   "short": "Huang et al. 2026",
+   "title": "Can LLMs Discover Scientific Laws in Real and Parallel Worlds?",
+   "venue": "arXiv preprint arXiv:2609.01552",
+   "url": "https://arxiv.org/abs/2609.01552"
+  },
+  "data": {
+   "short": "Hugging Face RealSR/SciLaws-Bench@15b9325",
+   "title": "SciLaws-Bench (SciLaws-Real tasks; per-task licences)",
+   "url": "https://huggingface.co/datasets/RealSR/SciLaws-Bench/tree/15b93258fabc8f1785c5a5ffd4d3e51fc15dd860"
+  },
+  "notes": "66 Type I tasks; each task's data keep their upstream licence (dataset/LICENSES.md). Harness: github.com/yiyihum/SciLaws-Bench."
+ },
+ {
+  "catalog": "shape-constrained-real-world-restricted",
+  "paper": {
+   "short": "Kronberger et al. 2022",
+   "title": "Shape-Constrained Symbolic Regression—Improving Extrapolation with Prior Knowledge",
+   "venue": "Evolutionary Computation 30(1):75-98",
+   "url": "https://doi.org/10.1162/evco_a_00294"
+  },
+  "data": {
+   "short": "UCI ML Repository 10.24432/C5859H",
+   "title": "Auto MPG",
+   "url": "https://doi.org/10.24432/C5859H"
+  },
+  "notes": "Cars = UCI Auto MPG (the same rows; CC BY 4.0). Preprint arXiv:2103.15624. The set's other members (friction F05128, flow stress) come from the authors' files in folivetti/ITEA@8669fd1 datasets/knowledge (no licence; industrial / doi:10.1063/1.5112747)."
+ },
+ {
+  "catalog": "srbench-2.0-blackbox-restricted",
+  "paper": {
+   "short": "Imai Aldeia et al. 2025",
+   "title": "Call for Action: towards the next generation of symbolic regression benchmark",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference Companion (GECCO '25 Companion), pp. 2529-2538",
+   "url": "https://doi.org/10.1145/3712255.3734309"
+  },
+  "data": {
+   "short": "PMLB (EpistasisLab/pmlb@7c1f4bd)",
+   "title": "PMLB datasets (MIT)",
+   "url": "https://github.com/EpistasisLab/pmlb/tree/7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68/datasets"
+  },
+  "notes": "Preprint arXiv:2505.03977. 12 PMLB black-box datasets, fetched from PMLB master (= 7c1f4bd, srbf PMLB_REVISION). PMLB: Romano et al., arXiv:2012.00058."
+ },
+ {
+  "catalog": "srbench-2.0-first-principles-restricted",
+  "paper": {
+   "short": "Imai Aldeia et al. 2025",
+   "title": "Call for Action: towards the next generation of symbolic regression benchmark",
+   "venue": "Proceedings of the Genetic and Evolutionary Computation Conference Companion (GECCO '25 Companion), pp. 2529-2538",
+   "url": "https://doi.org/10.1145/3712255.3734309"
+  },
+  "data": {
+   "short": "PMLB (EpistasisLab/pmlb@7c1f4bd)",
+   "title": "PMLB first_principles_* datasets (MIT)",
+   "url": "https://github.com/EpistasisLab/pmlb/tree/7c1f4bdc00136dc2e55c87fa6b8ba6e8af6d1a68/datasets"
+  },
+  "notes": "Preprint arXiv:2505.03977. The 12 first_principles_* datasets were added to PMLB by PR #181 (commit 7c1f4bd); sources include Cranmer 2023 EmpiricalBench and Russeil et al. 2024 MvSR."
+ },
+ {
+  "catalog": "srbench-2021-blackbox-restricted",
+  "paper": {
+   "short": "La Cava et al. 2021",
+   "title": "Contemporary Symbolic Regression Methods and their Relative Performance",
+   "venue": "NeurIPS 2021 Track on Datasets and Benchmarks",
+   "url": "https://arxiv.org/abs/2107.14351"
+  },
+  "data": {
+   "short": "PMLB (EpistasisLab/pmlb@5ed0151)",
+   "title": "PMLB v1.0.2a datasets (MIT)",
+   "url": "https://github.com/EpistasisLab/pmlb/tree/5ed0151f01919aff0d616d5e8ea463587a255745/datasets"
+  },
+  "notes": "122 black-box regression datasets; membership from cavalab/srbench v2.0 (e5ded47). PMLB: Romano et al., arXiv:2012.00058."
  }
 ]

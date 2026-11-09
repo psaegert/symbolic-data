@@ -1776,5 +1776,130 @@
    }
   ],
   "notes": null
+ },
+ {
+  "catalog": "gecco-2013-2017-real-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-33.json notes: the 21 real-world members of Oliveira et al. 2018's compilation (UCI tables: abalone, airfoil, Boston, CCPP, concrete, energy, ozone, wine, yacht, Dow, Tower, ...)",
+  "origin_proposal": null,
+  "tags": [],
+  "notes": null
+ },
+ {
+  "catalog": "gecco-2013-2017-real-share-alike",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-33.json notes: the 21 real-world members of Oliveira et al. 2018's compilation (UCI tables: abalone, airfoil, Boston, CCPP, concrete, energy, ozone, wine, yacht, Dow, Tower, ...)",
+  "origin_proposal": null,
+  "tags": [],
+  "notes": null
+ },
+ {
+  "catalog": "gp-gomea-real-world-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-35.json notes: '10 fixed real-world tabular regression datasets with no ground-truth formula' (Virgolin et al. 2021; mostly UCI)",
+  "origin_proposal": null,
+  "tags": [],
+  "notes": null
+ },
+ {
+  "catalog": "langlaw-perovskites-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-120.json notes: 'real DFT (bulk modulus, band gap) and experimental (OER) tables with no ground-truth formulas'",
+  "origin_proposal": null,
+  "tags": [],
+  "notes": "2 of 4 datasets are DFT-computed, not measured."
+ },
+ {
+  "catalog": "mcdermott-predictive-modelling-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-48.json notes: QSAR tables (%F, LD50, %PPB), Mackey-Glass series, sunspots (McDermott et al. 2012 Table 1, predictive-modelling sets)",
+  "origin_proposal": null,
+  "tags": [
+   {
+    "tag": "extrapolation",
+    "source": "2 of 6 problems: facts split_readings: 'given: the authors' years split, 1700-1920 fits, 1921-1955 tests' and 1956-1979 tests (Jaske 1996)"
+   },
+   {
+    "tag": "several tests",
+    "source": "subsets 'sunspots test 1921-1955' and 'sunspots test 1956-1979': BUILD_NOTES.md item 6, 'sunspots = two problems (the authors' two test periods ...)'"
+   }
+  ],
+  "notes": "Mackey-Glass is a simulated delay-differential series; the other 5 are measured."
+ },
+ {
+  "catalog": "nuclear-misr-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/critic-5.json notes: 'fixed real nuclear data': AME2020 binding energies and measured charge radii",
+  "origin_proposal": null,
+  "tags": [],
+  "notes": "No extrapolation: the published files are a random 20% split."
+ },
+ {
+  "catalog": "phye2e-space-physics-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-103.json notes: PhyE2E applications: sunspot numbers (SILSO), plasma pressure (Geotail/THEMIS), solar rotation, Fe X contribution function (CHIANTI)",
+  "origin_proposal": null,
+  "tags": [
+   {
+    "tag": "extrapolation",
+    "source": "facts split_readings: 'the near side r < 28 RE fits, the far side r > 28 RE tests' (12), 'T < 2.8e6 K fits, T >= 2.8e6 K tests' (2), sunspots 1855-1976 fit / next cycles test (1); 15 of 16"
+   }
+  ],
+  "notes": "Fe X targets come from the CHIANTI atomic database (computed), the rest are observations."
+ },
+ {
+  "catalog": "scilaws-real-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-95.json notes: '118 law-discovery tasks on real published measurements' in six disciplines (SciLaws-Bench, arXiv:2609.01552)",
+  "origin_proposal": null,
+  "tags": [
+   {
+    "tag": "extrapolation",
+    "source": "sets/fresh-95.json datasets[].split: 'single-group splits are task-specific (interpolation, input-range extrapolation, temporal transfer or cross-condition generalization; paper Sec. 2.3 and App. B.3)'"
+   }
+  ],
+  "notes": "Extrapolation applies to an unknown share of the 66 tasks: the release does not label each task's split kind."
+ },
+ {
+  "catalog": "shape-constrained-real-world-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/fresh-50.json notes: friction test-bench data (Miba), flow stress, UCI Auto MPG; the authors' own train/test files (Kronberger et al. 2022)",
+  "origin_proposal": null,
+  "tags": [
+   {
+    "tag": "extrapolation",
+    "source": "1 of 4 problems: sets/fresh-50.json cars split 'model years 70-76 vs 76-82. Sequential, i.e. temporal and extrapolative (test mpg reaches 46.6 vs train max 35.0)'"
+   }
+  ],
+  "notes": "Extrapolation rests on 1 of 4 problems (cars); friction test points lie inside the train box."
+ },
+ {
+  "catalog": "srbench-2.0-blackbox-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/done-7.json notes: '12 PMLB 1.0 regression datasets' chosen by clustering SRBench 1.0 results; 'The three fri_* datasets come from Friedman's generator'",
+  "origin_proposal": null,
+  "tags": [],
+  "notes": "3 of 12 members are Friedman-generator data."
+ },
+ {
+  "catalog": "srbench-2.0-first-principles-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/done-8.json notes: 12 PMLB first_principles_* datasets: 'the others are historical or real measurements' (7 of 12); 5 generated from laws",
+  "origin_proposal": null,
+  "tags": [
+   {
+    "tag": "noisy data",
+    "source": "sets/done-8.json notes: 'the five generated sets carry the creators' noise (Table 1: ideal_gas, newton, planck 10%; rydberg 1%; schechter 20%)'"
+   }
+  ],
+  "notes": "Noise tag covers 5 of 12 datasets (the generated ones)."
+ },
+ {
+  "catalog": "srbench-2021-blackbox-restricted",
+  "origin": "measured data",
+  "origin_source": "sets/done-0.json notes: '122 PMLB regression datasets'; 'The paper also states 46 real-world and 76 synthetic problems'; friedman subset = 62 Friedman-generator sets",
+  "origin_proposal": "mixed real and synthetic data: PMLB compilation, 76 of 122 synthetic (62 Friedman-generator sets)",
+  "tags": [],
+  "notes": "Not tagged: fri_* members likely carry generator noise and irrelevant features, but the record states it only for 564_fried (OpenML description)."
  }
 ]

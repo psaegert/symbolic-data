@@ -908,10 +908,10 @@ def oxygen_ion(rec, prob, _set):
     target = rec["target"]["column"]
     feats = list(rec["feature_names"])
     x, y = columns(df, feats, target)
-    test = df["Fold1"].to_numpy() == 1
-    return Rows(x[~test], y[~test], feats, GIVEN,
-                "given: the authors' fixed outer fold 1 (a contiguous block of the database) tests, folds 2-5 fit",
-                x_test=x[test], y_test=y[test])
+    fold = df["NFold"].to_numpy()                 # the authors' fixed outer 5-fold split (srbf ruling 2026-11-05)
+    return Rows(x, y, feats, folds([np.flatnonzero(fold == k) for k in range(1, 6)]),
+                "folds: the authors' fixed outer 5-fold split (NFold; contiguous blocks of the database); each run "
+                "tests on one fold and fits on the other four")
 
 
 @reader("fresh-137", "drsr-debcat", "DRSR DEBCat mass-luminosity")

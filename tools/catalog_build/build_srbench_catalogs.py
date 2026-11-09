@@ -6,6 +6,9 @@ split is the authors' procedure: SRBench 2021 and 2.0 both split every run 75/25
 train_test_split, so every problem's rule is {"random": 0.25}. The tracks are named apart (srbf 2026-10-17) so that
 nobody reads Feynman into "SRBench": srbf's Feynman is its own formula catalogs.
 
+The license pass routes each dataset (owner 2026-11-09): those whose source sets non-commercial terms or states no
+license go to ``<track>-restricted``, with their terms and statement (build_data_catalogs.split_members).
+
 Inputs are the survey's records (paths.data_set_record): each dataset's pinned URL,
 the sha256 of its .tsv.gz (from PMLB's Git LFS pointer), its row count and feature names. Every file is checked
 against them before it enters a catalog; a mismatch stops the build.
