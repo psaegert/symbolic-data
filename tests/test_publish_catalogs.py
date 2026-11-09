@@ -79,7 +79,7 @@ def test_a_new_version_needs_a_license_row_or_a_hand_written_notice(repo, monkey
 def test_the_notices_name_every_catalog_they_vouch_for():
     text = (Path(pc.HF_CARD) / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8")
     assert pc.notices(text) == text, "run python tools/publish_catalogs.py --notices"
-    assert set(pc.NOTICED_BEFORE_2026_11) <= pc.hand_noticed(text)
+    assert set(pc.NOTICED_BEFORE_2026_11 + pc.RETIRED_HOSTED) <= pc.hand_noticed(text)
     assert {"fastsrb", "lample-charton-v24-bench"} <= pc.hand_noticed(text)        # '(@1, @2, @3)' dropped
     passed = pc.license_pass()
     published = {**pc.CATALOGS, **pc.DATA_CATALOGS}
@@ -97,3 +97,17 @@ def test_every_mit_bsd_or_apache_source_ships_its_copyright_notice_and_license_t
     (tmp_path / "copyrights.json").write_text(json.dumps(entries))
     monkeypatch.setattr(pc, "COPYRIGHTS", str(tmp_path / "copyrights.json"))
     assert pc.without_copyright() == ["ai-hilbert-problem-set", "ai-hilbert-real-data"]
+    # so is a hand-noticed catalog, and a retired one whose versions stay hosted
+    entries = [s for s in pc.copyrights() if s["source"] not in ("viktmar/FastSRB", "dso-org/deep-symbolic-optimization")]
+    (tmp_path / "copyrights.json").write_text(json.dumps(entries))
+    missing = pc.without_copyright()
+    assert "fastsrb" in missing and "srsd-dummy" not in missing                 # srsd-dummy keeps its SRSD entry
+    assert {"grammarvae", "nonic", "pagie", "r-rationals", "sine", "keijzer"} <= set(missing)
+
+
+def test_a_hosted_entry_the_notices_do_not_know_is_refused(repo, monkeypatch, capsys):
+    hosted = {"old-catalog": {"versions": {"1": {}}}}
+    with pytest.raises(SystemExit, match=r"hosted entries \['old-catalog'\] are neither published here nor listed"):
+        _publish(repo, monkeypatch, hosted)
+    _publish(repo, monkeypatch, hosted, retired=("old-catalog",))
+    assert "preserved retired entries: ['old-catalog']" in capsys.readouterr().out

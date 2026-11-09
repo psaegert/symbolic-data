@@ -330,6 +330,7 @@
   "copyright": [
    "Copyright (c) 2024 [Your Name or Organization]"
   ],
+  "note": "as the license file states it: the project left the template's holder unfilled",
   "catalogs": [
    "llm-sr-bactgrow",
    "llm-sr-stress-strain"
@@ -354,6 +355,7 @@
    "dgsr-synthetic-d-12",
    "dso-benchmark-registry",
    "dso-benchmark-registry-points",
+   "grammarvae",
    "grammarvae-points",
    "jin",
    "keijzer",
@@ -366,10 +368,14 @@
    "neat",
    "neat-points",
    "nguyen",
+   "nonic",
    "nonic-points",
+   "pagie",
    "pagie-points",
    "poly",
+   "r-rationals",
    "r-rationals-points",
+   "sine",
    "sine-points",
    "vladislavleva",
    "vladislavleva-points"
@@ -644,6 +650,7 @@
    "Copyright (c) 2021 SymposiumOrganization"
   ],
   "catalogs": [
+   "bench-nv25",
    "soose-fc",
    "soose-nc",
    "soose-wc"
@@ -701,8 +708,11 @@
    "Copyright (c) 2024 Paul Saegert"
   ],
   "catalogs": [
+   "bench-nv25",
+   "lample-charton-v23",
    "lample-charton-v24",
-   "lample-charton-v24-bench"
+   "lample-charton-v24-bench",
+   "v23-val"
   ]
  }
 ]
