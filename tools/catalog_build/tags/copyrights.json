@@ -75,8 +75,10 @@
    "first-principles",
    "nikuradse",
    "srbench-2.0-blackbox",
-   "srbench-2.0-first-principles",
+   "srbench-2.0-blackbox-restricted",
+   "srbench-2.0-first-principles-restricted",
    "srbench-2021-blackbox",
+   "srbench-2021-blackbox-restricted",
    "srbench-2021-strogatz",
    "srbench2-blackbox"
   ]
@@ -180,7 +182,8 @@
   ],
   "catalogs": [
    "pysr-empiricalbench",
-   "pysr-empiricalbench-formulas"
+   "pysr-empiricalbench-formulas",
+   "srbench-2.0-first-principles"
   ]
  },
  {
@@ -695,6 +698,19 @@
   "note": "MIT for the tasks magnet_3c90_core_loss__log_P_vol and ocean_mesoscale_eddy_closure__Sx per SciLaws-Bench's dataset/LICENSES.md, which names no copyright holder",
   "catalogs": [
    "scilaws-real"
+  ]
+ },
+ {
+  "source": "Kaggle 'Massive Yahoo Finance Dataset' (stock_details_5_years.csv, v2)",
+  "names": [
+   "Kaggle Yahoo-finance dump"
+  ],
+  "license": "Apache-2.0",
+  "url": "https://www.kaggle.com/datasets/iveeaten3223times/massive-yahoo-finance-dataset",
+  "copyright": [],
+  "note": "Kaggle's licence field says Apache 2.0 and names no holder; its description defers to Yahoo Finance's terms",
+  "catalogs": [
+   "mvsr-2024"
   ]
  },
  {

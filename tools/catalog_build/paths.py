@@ -82,11 +82,25 @@ def _data_sets() -> dict[str, dict[str, Any]]:
 
 @lru_cache(maxsize=1)
 def licenses() -> dict[str, dict[str, Any]]:
-    """The license pass, by catalog (tags/licenses.json): ``license``, ``redistribute`` (``yes``, ``yes, share-alike
-    repo``, ``yes, these members``, ``no``, ``unclear``) and, for a catalog whose datasets differ, ``members``: per
-    problem its ``license`` and ``share`` (``yes``, ``share-alike``, ``no``, with the ``reason``)."""
+    """The license pass, by catalog (tags/licenses.json): ``license``, ``redistribute`` (``yes``, ``yes, these
+    members``, ``yes, share-alike repo``, ``yes, restricted repo``, ``no``) and, for a catalog whose datasets differ,
+    ``members``: per problem its ``license`` and ``share`` (``yes``, ``share-alike``, ``restricted``, ``no``, with the
+    ``reason``). Restricted data (non-commercial terms, or no license; owner 2026-11-09) also name their ``terms``."""
     with open(Path(__file__).resolve().parent / "tags" / "licenses.json", encoding="utf-8") as fh:
         return {r["catalog"]: r for r in json.load(fh)}
+
+
+# Owner 2026-11-09: data under non-commercial terms or with no license are republished, with this statement, in the
+# restricted repo; a rights holder who objects has them removed.
+REMOVAL = ("If you hold rights to these data and object to their republication, open an issue at "
+           "https://github.com/psaegert/symbolic-data and they will be removed.")
+
+
+def statement(source: str, terms: str) -> str:
+    """Why srbf republishes restricted data, where they come from and on what terms."""
+    return (f"srbf republishes these data unchanged so that every run uses exactly the same bytes, pinned by sha256, "
+            f"and does not depend on a third-party host that may change, move or disappear. Source: {source}. Terms at "
+            f"the source: {terms}. {REMOVAL}")
 
 
 @lru_cache(maxsize=1)

@@ -22,9 +22,13 @@ own generator, and the release catalogs' corrections. Run them from the reposito
    and the four SRBench tracks from PMLB. They are written to `build/data-catalogs` (git-ignored) and published to
    Hugging Face only. Their input files are not in the repository: `data_sets.json` names each file, its source and
    its sha256, and `SYMBOLIC_DATA_CATALOG_RAW` points at a folder holding them (files with a URL are downloaded).
-   Run `catalog_tags.py apply` on them too. `tools/publish_catalogs.py` publishes them from `build/data-catalogs`
-   (`DATA_CATALOGS`; the share-alike members through `publish_catalogs_sa.py`). A data catalog not built keeps its
-   hosted versions. A rebuild writes the same npz bytes where nothing changed (np.savez dates every zip entry
+   Run `catalog_tags.py apply` on them too. The license pass (`tags/licenses.json`) routes every set and member:
+   licensed data to `tools/publish_catalogs.py` (the main repo), share-alike and copyleft data to
+   `publish_catalogs_sa.py`, and data under non-commercial terms or with no license, each carrying a statement of
+   its source, its terms and why srbf republishes it (owner 2026-11-09), to `publish_catalogs_restricted.py`; a set
+   whose datasets differ is split into `<slug>`, `<slug>-share-alike` and `<slug>-restricted`. All three publish from
+   `build/data-catalogs` (their `DATA_CATALOGS`), and each refuses what the pass routes elsewhere. A data catalog not
+   built keeps its hosted versions. A rebuild writes the same npz bytes where nothing changed (np.savez dates every zip entry
    1980-01-01; the builds of 2026-11-05 and 2026-11-08 match by sha256), so a published catalog stays unchanged; a
    catalog whose content changes needs its version bumped, since the publish refuses new bytes under a published
    version.

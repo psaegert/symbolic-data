@@ -6,6 +6,9 @@ split is the authors' procedure: SRBench 2021 and 2.0 both split every run 75/25
 train_test_split, so every problem's rule is {"random": 0.25}. The tracks are named apart (srbf 2026-10-17) so that
 nobody reads Feynman into "SRBench": srbf's Feynman is its own formula catalogs.
 
+The license pass routes each dataset (owner 2026-11-09): those whose source sets non-commercial terms or states no
+license go to ``<track>-restricted``, with their terms and statement (build_data_catalogs.split_members).
+
 Inputs are the survey's records (paths.data_set_record): each dataset's pinned URL,
 the sha256 of its .tsv.gz (from PMLB's Git LFS pointer), its row count and feature names. Every file is checked
 against them before it enters a catalog; a mismatch stops the build.
@@ -32,6 +35,7 @@ from symbolic_data.catalog import ProblemCatalog
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import paths  # noqa: E402  the survey's records
+from build_data_catalogs import split_members  # noqa: E402  the license pass's routing, shared with the data catalogs
 
 CACHE = paths.CACHE / "pmlb"
 SPLIT = {"random": 0.25}
@@ -208,12 +212,22 @@ def build(track: str, out: Path) -> dict:
     for i, e in enumerate(entries):
         problems.append(problem_of(e, track, display, split_text, rec))
         print(f"  {track} {i + 1}/{len(entries)} {e['id']}: {problems[-1].x_support.shape}", flush=True)
+    # each dataset as the license pass routes it (owner 2026-11-09): licensed ones in the track's catalog, those under
+    # non-commercial terms or with no license in <track>-restricted, with their statement
+    parts, left_out = split_members(problems, paths.licenses().get(track) or {})
     meta = {"display_name": display, "kind": "data", "test_split": SPLIT, "split_as_published": split_text,
             "source_record": f"catalog-prep/sets/{tag}.json", "built_from": "build_srbench_catalogs.py",
             "rules": "srbf data catalogs (2026-10-17): pools, <= 512 fitting + 512 test rows drawn per run"}
-    path = ProblemCatalog.from_problems(problems, name=track, version=1, meta=meta).save(out / f"{track}.npz")
-    return {"track": track, "problems": len(problems), "rows": int(sum(p.x_support.shape[0] for p in problems)),
-            "path": str(path), "bytes": os.path.getsize(path)}
+    report = {"track": track, "left_out": left_out}
+    for suffix, part in parts.items():
+        (out / f"{track}{suffix}.npz").unlink(missing_ok=True)
+        if part:
+            label = {"": "", "-share-alike": " (share-alike)", "-restricted": " (restricted)"}[suffix]
+            path = ProblemCatalog.from_problems(part, name=track + suffix, version=1,
+                                                meta={**meta, "display_name": display + label}).save(out / f"{track}{suffix}.npz")
+            report[track + suffix] = {"problems": len(part), "rows": int(sum(p.x_support.shape[0] for p in part)),
+                                      "path": str(path), "bytes": os.path.getsize(path)}
+    return report
 
 
 def main() -> None:

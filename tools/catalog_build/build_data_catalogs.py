@@ -16,11 +16,13 @@ row). There is a test split ONLY where the benchmark's authors give one:
 Where the authors give several test sets (in- and out-of-domain), each is a problem of its own in its own subset
 (srbf ruling 9, 2026-10-05). The SRBench tracks are built by build_srbench_catalogs.py.
 
-srbf republishes data only where its license allows it (srbf ruling 2026-11-05: what may not be shared is left out of
-the benchmark and listed on the benchmarks page). The license pass (tags/licenses.json, paths.licenses) decides: a set
-that may not be shared is not built, and a stale catalog of it is removed; a set whose datasets differ keeps the
-members that may be shared, each with its license in its metadata, and its share-alike members go to a catalog of
-their own, ``<slug>-share-alike``, published with the share-alike catalogs.
+The license pass (tags/licenses.json, paths.licenses) routes every set and member (owner rulings 2026-11-05 and
+2026-11-09): licensed data go to the main assets repo; share-alike and copyleft data to the share-alike repo; data
+under non-commercial terms or with no license are republished, with a statement of their source, their terms and why
+srbf republishes them (paths.statement), in the restricted repo; only data whose terms restrict redistribution are
+left out (listed on the benchmarks page), and a stale catalog of such a set is removed. A set whose datasets differ
+keeps each member in its metadata with its license, and its share-alike and restricted members go to catalogs of
+their own, ``<slug>-share-alike`` and ``<slug>-restricted``.
 
 Inputs are the survey's records (paths.py): ``final_problems.json`` says which data problems srbf keeps after every
 exclusion, ``data_sets.json`` holds each dataset's files, sha256, columns and split as published. The files themselves
@@ -140,6 +142,37 @@ def problem(rows: R.Rows, prob: dict, catalog: str, display: str, record: dict, 
                         test_split=rows.split, eq_id=rows.eq_id or prob["id"], meta=meta, **test, **gt)
 
 
+PARTS = {"yes": "", "share-alike": "-share-alike", "restricted": "-restricted"}
+
+
+def split_members(problems: list, lic: dict) -> tuple[dict[str, list], list[str]]:
+    """The problems by the catalog they go to (``""`` the set's own, ``-share-alike``, ``-restricted``) and those left
+    out, as the license pass routes them. Each kept member carries its license; restricted data (a member marked
+    ``restricted``, or every problem of a set routed whole to the restricted repo) also carry their terms and the
+    statement of why srbf republishes them."""
+    parts: dict[str, list] = {suffix: [] for suffix in PARTS.values()}
+    left_out = []
+    whole_restricted = lic.get("redistribute") == "yes, restricted repo"
+    whole_elsewhere = whole_restricted or lic.get("redistribute") == "yes, share-alike repo"
+    for p in problems:
+        member = (lic.get("members") or {}).get(p.eq_id)
+        if member is None and lic.get("members"):
+            raise ValueError(f"{p.eq_id}: not in the license pass's members of {lic['catalog']}")
+        if member is not None and member["share"] == "no":
+            left_out.append(f"{p.eq_id}: {member['reason']}")
+            continue
+        if member is not None:
+            p.meta["license"] = member["license"]
+        elif whole_elsewhere:                                          # a set routed whole to another repo
+            p.meta["license"] = lic["license"]
+        if whole_restricted or (member is not None and member["share"] == "restricted"):
+            terms = member["terms"] if member is not None else lic["terms"]
+            p.meta["terms"] = terms
+            p.meta["statement"] = paths.statement(p.meta["license"] if member is not None else lic["upstream"], terms)
+        parts[PARTS[member["share"]] if member is not None else ""].append(p)
+    return parts, left_out
+
+
 def build(tag: str, probs: list[dict], out: Path, formulas: Formulas) -> dict:
     spec = R.SETS[tag]
     lic = paths.licenses().get(spec.slug) or {}
@@ -162,30 +195,25 @@ def build(tag: str, probs: list[dict], out: Path, formulas: Formulas) -> dict:
             rows.finish()
             problems.append(problem(rows, prob, spec.slug, spec.display, record, formulas))
             notes.append(rows.summary())
-    share_alike, left_out = [], []
-    if lic.get("members"):
-        kept = []
-        for p in problems:
-            member = lic["members"][p.eq_id]
-            if member["share"] == "no":
-                left_out.append(f"{p.eq_id}: {member['reason']}")
-                continue
-            p.meta["license"] = member["license"]
-            (kept if member["share"] == "yes" else share_alike).append(p)
-        problems = kept
-    if not problems:
-        return {"tag": tag, "catalog": spec.slug, "problems": 0, "skipped": skipped, "left_out": left_out}
+    parts, left_out = split_members(problems, lic)
+    problems, share_alike, restricted = parts[""], parts["-share-alike"], parts["-restricted"]
+    for name in (spec.slug, f"{spec.slug}-share-alike", f"{spec.slug}-restricted"):
+        (out / f"{name}.npz").unlink(missing_ok=True)                 # a part that lost its members leaves no stale file
     meta = {"display_name": spec.display, "kind": "data", "source_record": f"catalog-prep/sets/{tag}.json",
-            "source_name": rec["name"], "built_from": "build_data_catalogs.py", "rules": RULES,
-            "test_splits": sorted({_split_key(p) for p in problems})}
-    path = ProblemCatalog.from_problems(problems, name=spec.slug, version=1, meta=meta).save(out / f"{spec.slug}.npz")
-    if share_alike:
-        name = f"{spec.slug}-share-alike"
-        sa_meta = {**meta, "display_name": f"{spec.display} (share-alike)", "share_alike": True,
-                   "test_splits": sorted({_split_key(p) for p in share_alike})}
-        ProblemCatalog.from_problems(share_alike, name=name, version=1, meta=sa_meta).save(out / f"{name}.npz")
-    return {"tag": tag, "catalog": spec.slug, "display": spec.display, "problems": len(problems),
-            "share_alike": len(share_alike), "left_out": left_out,
+            "source_name": rec["name"], "built_from": "build_data_catalogs.py", "rules": RULES}
+    path = None
+    for suffix, part, label, flag in (("", problems, "", {}), ("-share-alike", share_alike, " (share-alike)", {"share_alike": True}),
+                                      ("-restricted", restricted, " (restricted)", {"restricted": True})):
+        if part:
+            saved = ProblemCatalog.from_problems(part, name=spec.slug + suffix, version=1, meta={
+                **meta, **flag, "display_name": spec.display + label,
+                "test_splits": sorted({_split_key(p) for p in part})}).save(out / f"{spec.slug}{suffix}.npz")
+            path = path or saved
+    if path is None:
+        return {"tag": tag, "catalog": spec.slug, "problems": 0, "skipped": skipped, "left_out": left_out}
+    problems = problems or share_alike or restricted                  # the set's own catalog, else its first part
+    return {"tag": tag, "catalog": spec.slug, "display": spec.display, "problems": len(parts[""]),
+            "share_alike": len(share_alike), "restricted": len(restricted), "left_out": left_out,
             "path": str(path), "bytes": os.path.getsize(path),
             "splits": dict(sorted(_count(_split_key(p) for p in problems).items())),
             "gt_kinds": dict(_count(p.gt_kind for p in problems)),

@@ -17,6 +17,25 @@ The vendored upstream files and their NOTICEs live in the source repo (github.co
 What srbf changed: every catalog of srbf's 2026-11 release states it in its metadata (`srbf_changes`); a data
 catalog stores the rows its authors published as arrays.
 
+## Datasets under other terms in catalogs published before 2026-11
+
+`srbench2-blackbox@1` and `first-principles@1` (published 2026-07) include datasets whose sources set
+non-commercial terms or state no license; the license check of 2026-11-09 found them. Their versions stay
+published so that pinned references keep resolving. Newer catalogs keep such data in
+psaegert/symbolic-data-assets-restricted.
+
+| Catalog | Dataset | Terms at the source |
+|---|---|---|
+| srbench2-blackbox@1 | 192_vineyard | non-commercial use only (Simonoff smoothmeth); PMLB's copy (MIT) |
+| srbench2-blackbox@1 | 557_analcatdata_apnea1 | non-commercial use only (analcatdata); PMLB's copy (MIT) |
+| srbench2-blackbox@1 | 1028_SWD, 1089_USCrime, 210_cloud, 522_pm10, 678_visualizing_environmental | none stated at the source; PMLB's copy (MIT) |
+| first-principles@1 | absorption, supernovae_zg, supernovae_zr | none stated: erusseil/MvSR-analysis real_data (Russeil et al. 2024), unlicensed; PMLB's copy (MIT) |
+
+srbf republishes these data unchanged so that every run uses exactly the same bytes, pinned by sha256, and
+does not depend on a third-party host that may change, move or disappear. If you hold rights to these data
+and object to their republication, open an issue at https://github.com/psaegert/symbolic-data and they will
+be removed.
+
 ## Permission notes
 
 Data that may be redistributed only with a note attached carry it here and in the problem's metadata
@@ -75,7 +94,7 @@ its content was taken from and that source's license. Each catalog also carries 
 and data) and what srbf changed (`srbf_changes`) in its metadata. A data catalog holding several datasets keeps only
 the members whose license allows redistribution; the license column names theirs.
 
-<!-- the table below: python tools/publish_catalogs.py --notices (from tools/catalog_build/tags/licenses.json) -->
+<!-- generated below: the publish tool's --notices, from tools/catalog_build/tags/licenses.json and copyrights.json -->
 
 | Catalog | Upstream source | License |
 |---|---|---|
@@ -130,7 +149,6 @@ the members whose license allows redistribution; the license column names theirs
 | gp-benchmarks-sr-table | McDermott et al. 2012, 'Genetic Programming Needs Better Benchmarks', GECCO 2012, Table 3 (corrected v3 on gpbenchmarks.org); members from Koza, Nguyen, Korns, Keijzer, Vladislavleva, Pagie | facts only: formulas and ranges cited from McDermott et al. 2012 (GECCO, Table 3) and the original family papers; no upstream license |
 | gp-benchmarks-sr-table-points | McDermott et al. 2012 (GECCO) Table 3 grids for Keijzer-6, Vladislavleva-3, Pagie-2 | facts only: grids cited from McDermott et al. 2012 (GECCO, Table 3) and the original family papers; no upstream license |
 | gp-gomea-real-world | GP-GOMEA authors' preprocessed copies on Google Drive (Virgolin et al. 2021, EC 29(2), arXiv:1904.02050) of UCI Airfoil, Concrete, Energy (x2), Wine (x2), Yacht; Boston housing; Dow Chemical; Tower | CC BY 4.0 (UCI Machine Learning Repository) |
-| gplearn-diabetes | scikit-learn sklearn/datasets/data/diabetes_data_raw.csv.gz (@866c0f5), the diabetes data of Efron, Hastie, Johnstone & Tibshirani 2004 (Ann. Stat. 32:407-499) | BSD-3-Clause (scikit-learn, sklearn/datasets/data/diabetes_data_raw.csv.gz; data: Efron et al. 2004, Ann. Stat. 32:407-499) |
 | gplearn-documentation-examples | gplearn documentation, Symbolic Regressor example (doc/examples.rst @64517a8) | BSD-3-Clause (trevorstephens/gplearn documentation example) |
 | gpu-lm-inner-constant-recovery-problems | TensorConv/CuSR experiments/e3_admit_criterion/out/corpus_manifest.json (@414b905), 18 single-inner ADMIT records (arXiv:2609.03352 Sec. IV-E) | facts only: formulas and ranges cited from the CuSR e3 corpus manifest (TensorConv/CuSR; arXiv:2609.03352); no upstream license |
 | grammarvae-points | dso-org/deep-symbolic-optimization benchmarks.csv (Petersen et al.) | BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts) |
@@ -203,9 +221,9 @@ the members whose license allows redistribution; the license column names theirs
 | sine-points | Sine on x = 0.0..6.2 step 0.1 via the released sine catalog (DSO benchmarks.csv) | BSD-3-Clause (dso-org/deep-symbolic-optimization) |
 | sisso-octet-binaries | Ghiringhelli et al. 2015, PRL 114:105503, Supplemental Material Critical_Role_SI.pdf (82 octet binaries, RS vs ZB energy differences + atomic features) | CC BY 3.0 (Ghiringhelli et al. 2015, Phys. Rev. Lett. 114:105503, Supplemental Material) |
 | spl-noise-data-scarcity-grid | Sun, Liu, Wang & Sun, 'Symbolic Physics Learner', ICLR 2023, arXiv:2205.13134v2 Sec. 4.1 (f(x) = 0.3x^3 + 0.5x^2 + 2x, x ~ U[-10, 10]) | facts only: one formula and its range from Sun et al. 2023 (Symbolic Physics Learner, ICLR, arXiv:2205.13134v2, a CC BY-SA 4.0 paper) |
-| srbench-2.0-blackbox | PMLB (EpistasisLab/pmlb) datasets selected by SRBench 2.0 (Aldeia et al. 2025) | MIT (PMLB) |
-| srbench-2.0-first-principles | PMLB first_principles_* datasets (EpistasisLab/pmlb), selected by SRBench 2.0 | MIT (PMLB) |
-| srbench-2021-blackbox | PMLB regression datasets used by SRBench 2021 (La Cava et al. 2021), EpistasisLab/pmlb | MIT (PMLB) |
+| srbench-2.0-blackbox | PMLB (EpistasisLab/pmlb) datasets selected by SRBench 2.0 (Aldeia et al. 2025) | per dataset: CC BY 4.0 (UCI), generated data, OpenML BNG (public domain), StatLib permissions (503_wind; 505_tecator with its note), CC0 (titanic); PMLB's copies (MIT) |
+| srbench-2.0-first-principles | PMLB first_principles_* datasets (EpistasisLab/pmlb), selected by SRBench 2.0 | per dataset: MIT (MilesCranmer/pysr_paper, EmpiricalBench); two from the unlicensed MvSR-analysis repo |
+| srbench-2021-blackbox | PMLB regression datasets used by SRBench 2021 (La Cava et al. 2021), EpistasisLab/pmlb | per dataset: CC BY 4.0 (UCI), generated data, OpenML BNG (public domain), StatLib permissions (503_wind; 505_tecator with its note), CC0 (titanic); PMLB's copies (MIT) |
 | srbench-2021-strogatz | PMLB strogatz_* datasets (EpistasisLab/pmlb), the ODE-Strogatz track of SRBench 2021 | MIT (PMLB) |
 | superconductor-tc | henniggroup/symbolic-regression-utilities datasets/AllenDynes and examples/data_AD.txt (@11cf1f3), Allen-Dynes 1975 table (Xie et al. 2019, PRB 100:174513) | Apache-2.0 (henniggroup/symbolic-regression-utilities; Xie et al. 2019, PRB 100:174513; values from Allen & Dynes 1975, PRB 12:905) |
 | surfacebench-explicit-surfaces | Kabra et al., SurfaceBench, TMLR 2026, arXiv:2511.10833v2 App. A.7 Table 7 | CC BY 4.0 (Kabra et al. 2026, SurfaceBench, arXiv:2511.10833, Table 7) |
@@ -240,7 +258,7 @@ The copyright notice of every MIT, BSD-3-Clause and Apache-2.0 source the catalo
 | [deep-symbolic-mathematics/LLM-SR](https://github.com/deep-symbolic-mathematics/LLM-SR/blob/main/LICENSE) | MIT | Copyright (c) 2024 [Your Name or Organization] (as the license file states it: the project left the template's holder unfilled) | llm-sr-bactgrow, llm-sr-stress-strain |
 | [dso-org/deep-symbolic-optimization](https://github.com/dso-org/deep-symbolic-optimization/blob/master/LICENSE) | BSD-3-Clause | Copyright (c) 2018, Lawrence Livermore National Security, LLC | constant, dgsr-additional-feynman, dgsr-feynman-d-2-d-5-subsets, dgsr-synthetic-d-12, dso-benchmark-registry, dso-benchmark-registry-points, grammarvae, grammarvae-points, jin, keijzer, keijzer-points, korns, koza, livermore, livermore2, meier, neat, neat-points, nguyen, nonic, nonic-points, pagie, pagie-points, poly, r-rationals, r-rationals-points, sine, sine-points, vladislavleva, vladislavleva-points |
 | [EPFL-IMOS/Sym-Q](https://github.com/EPFL-IMOS/Sym-Q/blob/main/LICENSE) | MIT | Copyright (c) 2023 Wenqi Zhou | sym-q-ai-feynman-with-drift-terms |
-| [EpistasisLab/pmlb](https://github.com/EpistasisLab/pmlb/blob/master/LICENSE) | MIT | Copyright (c) 2016 Epistasis Lab at UPenn | first-principles, nikuradse, srbench-2.0-blackbox, srbench-2.0-first-principles, srbench-2021-blackbox, srbench-2021-strogatz, srbench2-blackbox |
+| [EpistasisLab/pmlb](https://github.com/EpistasisLab/pmlb/blob/master/LICENSE) | MIT | Copyright (c) 2016 Epistasis Lab at UPenn | first-principles, nikuradse, srbench-2.0-blackbox, srbench-2021-blackbox, srbench-2021-strogatz, srbench2-blackbox |
 | [EquationDiscovery/Equation_Recovery_Benchmark](https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark) | MIT | none stated (ERBench (Kahlmeyer, Voigt, Habeck & Giesen) states MIT for SynEq and PHYBench without a copyright line) | erbench-phybench, erbench-syneq |
 | [facebookresearch/symbolicregression](https://github.com/facebookresearch/symbolicregression/blob/main/LICENSE) | Apache-2.0 | Copyright 2020 - present, Facebook, Inc | e2e-in-domain-synthetic-validation-set |
 | [figshare 10.6084/m9.figshare.29615831 (PhyE2E_datas, Ying et al. 2025)](https://doi.org/10.6084/m9.figshare.29615831.v1) | Apache-2.0 | none stated (Apache 2.0 per the figshare record (code: Jie0618/PhysicsRegression); no copyright line or NOTICE file) | phye2e-llm-generated-synthetic-formulas, phye2e-space-physics |
@@ -256,7 +274,7 @@ The copyright notice of every MIT, BSD-3-Clause and Apache-2.0 source the catalo
 | [kartelj/rils-rols](https://github.com/kartelj/rils-rols/blob/master/LICENSE) | MIT | Copyright (c) 2016 Epistasis Lab at UPenn | rils-rols-random-instances |
 | [KindXiaoming/pykan](https://github.com/KindXiaoming/pykan/blob/master/LICENSE) | MIT | Copyright (c) 2024 Ziming Liu | kan-toy-functions |
 | [LironSimon/SciMED](https://github.com/LironSimon/SciMED/blob/master/LICENSE) | MIT | Copyright (c) 2022 Teddy Lazebnik | scimed-settling-sphere-configurations |
-| [MilesCranmer/pysr_paper](https://github.com/MilesCranmer/pysr_paper/blob/main/LICENSE) | MIT | Copyright (c) 2020-2023 @MilesCranmer | pysr-empiricalbench, pysr-empiricalbench-formulas |
+| [MilesCranmer/pysr_paper](https://github.com/MilesCranmer/pysr_paper/blob/main/LICENSE) | MIT | Copyright (c) 2020-2023 @MilesCranmer | pysr-empiricalbench, pysr-empiricalbench-formulas, srbench-2.0-first-principles |
 | [mojivalipour/symbolicgpt](https://github.com/mojivalipour/symbolicgpt/blob/master/LICENSE.txt) | MIT | Copyright (c) 2020 Andrej Karpathy (minGPT), 2021 Mojtaba Valipour (symblicGPT) | symbolicgpt-bivariate-set, symbolicgpt-test-sets |
 | [NISL-MSU/MultiSetSR](https://github.com/NISL-MSU/MultiSetSR/blob/master/LICENSE) | MIT | Copyright (c) 2024 Montana State University (the license file states YEAR: 2024, COPYRIGHT HOLDER: Montana State University) | decomposable-nsr-synthetic-e1-e13 |
 | [omron-sinicx/srsd-benchmark](https://github.com/omron-sinicx/srsd-benchmark/blob/main/LICENSE) | MIT | Copyright (c) 2022 OMRON SINIC X Corporation | scrbenchmark, srsd-dummy |
@@ -266,7 +284,6 @@ The copyright notice of every MIT, BSD-3-Clause and Apache-2.0 source the catalo
 | [RealSR/SciLaws-Bench](https://huggingface.co/datasets/RealSR/SciLaws-Bench) | MIT | none stated (MIT for the tasks magnet_3c90_core_loss__log_P_vol and ocean_mesoscale_eddy_closure__Sx per SciLaws-Bench's dataset/LICENSES.md, which names no copyright holder) | scilaws-real |
 | [Roy-SR-007/HierBOSSS](https://github.com/Roy-SR-007/HierBOSSS/blob/main/LICENSE) | MIT | Copyright (c) 2026 Authors of HierBOSSS [Somjit Roy, Pritam Dey, Bani K. Mallick, and Debdeep Pati] (langlaw's README states the MIT License without a copyright line; its data come from HierBOSSS) | hierbosss-single-atom-catalysis-and-synthetic-polynomial, langlaw-perovskites |
 | [samuelkim314/DeepSymReg](https://github.com/samuelkim314/DeepSymReg) | MIT | none stated (no license file; the README states: All content in this repository is licensed under the MIT license.) | kim-et-al-eql-benchmark-functions |
-| [scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn/blob/main/COPYING) | BSD-3-Clause | Copyright (c) 2007-2026 The scikit-learn developers. | gplearn-diabetes |
 | [scipy/scipy](https://github.com/scipy/scipy/blob/main/LICENSE.txt) | BSD-3-Clause | Copyright (c) 2001-2002 Enthought, Inc. 2003, SciPy Developers. | erbench-densities |
 | [Shun-0922/Mem-Bias-NSR](https://github.com/Shun-0922/Mem-Bias-NSR/blob/main/LICENSE) | MIT | Copyright (c) 2021 SymposiumOrganization | reproduction-bias-not-included-test-sets |
 | [SymposiumOrganization/ControllableNeuralSymbolicRegression](https://github.com/SymposiumOrganization/ControllableNeuralSymbolicRegression/blob/main/LICENSE) | MIT | Copyright (c) 2021 SymposiumOrganization | nsrwh-only-five-variables-nc, nsrwh-only-five-variables-wc, nsrwh-train-nc, nsrwh-train-wc |

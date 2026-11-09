@@ -26,13 +26,21 @@ content from**, and the `license` tags list every license that occurs. THIRD_PAR
 each catalog's source and license and every MIT, BSD-3-Clause and Apache-2.0 source's copyright
 notice; LICENSES/ holds those licenses' texts, and the notices link the Creative Commons and Etalab
 legal codes. Every catalog of srbf's 2026-11 release also names its license, its citations and what
-srbf changed in its own metadata. Share-alike (CC BY-SA) catalogs are deliberately NOT in this repo:
-they live in the separate
+srbf changed in its own metadata. Share-alike and copyleft catalogs (CC BY-SA, GPL, ODbL) live in the separate
 [psaegert/symbolic-data-assets-sa](https://huggingface.co/datasets/psaegert/symbolic-data-assets-sa)
-repo behind a license firewall.
+repo, and data whose sources set non-commercial terms or state no license in
+[psaegert/symbolic-data-assets-restricted](https://huggingface.co/datasets/psaegert/symbolic-data-assets-restricted),
+so that the tags above stay true. Two catalogs published here in 2026-07, `srbench2-blackbox@1` and
+`first-principles@1`, include such datasets; THIRD_PARTY_NOTICES.md names them and their terms.
+
+## Removal on request
+
+If you hold rights to any data here and object to their republication, open an issue at
+https://github.com/psaegert/symbolic-data and they will be removed.
 
 The data catalogs (a benchmark's published data as frozen pools) are built from their authors'
-files by the source repo's builders (`tools/catalog_build`) and published only here.
+files by the source repo's builders (`tools/catalog_build`) and published only on Hugging Face:
+here and in the two repos named above.
 
 Curated in [psaegert/symbolic-data](https://github.com/psaegert/symbolic-data) (builders,
 vendored upstream files with NOTICEs, validation reports).

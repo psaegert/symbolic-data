@@ -513,7 +513,7 @@
    {
     "kind": "part",
     "problems": 7,
-    "text": "srbf runs 14 of the 21 real-world datasets: 4 have data that may not be shared (Boston housing, Ozone, Dow Chemical, Tower), the Million Song Dataset is left out for its size (375 MB), and NOX and WND were never published."
+    "text": "srbf runs 14 of the 21 real-world datasets here: Boston housing, Dow Chemical and Tower, whose sources state no license, are in 'GECCO 2013-2017 GP regression compilation (real data) (restricted)', Ozone (GPL) is in its share-alike set, the Million Song Dataset is left out for its size (375 MB), and NOX and WND were never published."
    }
   ],
   "follows_first_publication": []
@@ -607,7 +607,7 @@
    {
     "kind": "part",
     "problems": 3,
-    "text": "srbf runs 7 of the 10 datasets: Boston housing, Dow Chemical and Tower have data that may not be shared."
+    "text": "srbf runs 7 of the 10 datasets here: Boston housing, Dow Chemical and Tower, whose sources state no license, are in 'GP-GOMEA real-world set (restricted)'."
    }
   ],
   "follows_first_publication": []
@@ -620,6 +620,11 @@
     "kind": "part",
     "problems": 1,
     "text": "srbf runs 1 of the 2 gplearn examples here (diabetes data); the formula example is in 'gplearn documentation examples'."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "In gplearn's example the evolved formulas serve as extra features for a ridge regression, scored by that model's test R^2; srbf asks for one formula that predicts disease progression directly."
    }
   ],
   "follows_first_publication": []
@@ -692,7 +697,7 @@
    {
     "kind": "part",
     "problems": 362,
-    "text": "srbf runs 14 of HeuristicLab's 376 problems here and 1 in its pinned-points set: 164 are run in other srbf sets (Keijzer, Korns, Nguyen, Vladislavleva, Feynman, ...), the 88 generated instances have no published formula, the 94 PennML datasets are run in SRBench, the 14 real-world and Miba datasets have no clear license, and AircraftMaximumLift has inputs without a range."
+    "text": "srbf runs 14 of HeuristicLab's 376 problems here and 1 in its pinned-points set: 164 are run in other srbf sets (Keijzer, Korns, Nguyen, Vladislavleva, Feynman, ...), the 88 generated instances have no published formula, the 94 PennML datasets are run in SRBench, the 14 real-world and Miba datasets are in 'HeuristicLab regression instances (real-world data)', and AircraftMaximumLift has inputs without a range."
    }
   ],
   "follows_first_publication": [
@@ -829,6 +834,11 @@
   "authors_total": 4,
   "changes": [
    {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 3 of the 4 problems here: the band-gap data, extracted from a closed-access article and without a license, are in 'LangLaw perovskite datasets (restricted)'."
+   },
+   {
     "kind": "changed",
     "problems": 2,
     "text": "The out-of-distribution tests for bulk modulus (10 perovskites) and OER activity (5 perovskites) are not published in the authors' input form and are not used."
@@ -927,7 +937,7 @@
    {
     "kind": "part",
     "problems": 9,
-    "text": "srbf runs 3 of the 12 problems of McDermott et al.'s list here: Mackey-Glass and the two sunspot problems have data that may not be shared, the two trading, the prime-number and the DyFor GDP and CPI problems have no published data, and the simulated DyFor series is in the pinned-points set."
+    "text": "srbf runs 3 of the 12 problems of McDermott et al.'s list here: Mackey-Glass (no license stated) and the two sunspot problems (non-commercial license) are in 'McDermott et al. predictive-modelling sets (restricted)', the two trading, the prime-number and the DyFor GDP and CPI problems have no published data, and the simulated DyFor series is in the pinned-points set."
    }
   ],
   "follows_first_publication": []
@@ -1111,7 +1121,7 @@
    {
     "kind": "part",
     "problems": 3,
-    "text": "srbf runs 1 of the 4 datasets: the charge-radius data may not be shared, and the two KAN variants have no published data."
+    "text": "srbf runs 1 of the 4 datasets here: the charge-radius data, whose source states no license, are in 'Nuclear binding energies and charge radii (MISR) (restricted)', and the two KAN variants have no published data."
    }
   ],
   "follows_first_publication": []
@@ -1155,7 +1165,7 @@
    {
     "kind": "part",
     "problems": 2,
-    "text": "srbf runs 15 of the 17 datasets: the sunspot data has a non-commercial license, and the lunar-tide data (13.3 million samples) needs a gridding the authors did not publish."
+    "text": "srbf runs 15 of the 17 datasets here: the sunspot data, whose license is non-commercial, are in 'PhyE2E space-physics applications (restricted)', and the lunar-tide data (13.3 million samples) needs a gridding the authors did not publish."
    },
    {
     "kind": "changed",
@@ -1304,8 +1314,8 @@
   "changes": [
    {
     "kind": "part",
-    "problems": 61,
-    "text": "srbf runs 57 of SciLaws-Real's 118 tasks: only the 66 single-group (Type I) tasks fit srbf's protocol; of these, 7 have data that may not be shared and 2 with share-alike licenses are in a separate set."
+    "problems": 63,
+    "text": "srbf runs 55 of SciLaws-Real's 118 tasks here: only the 66 single-group (Type I) tasks fit srbf's protocol; of these, 6 whose sources set non-commercial or scientific-use-only terms or state no license are in 'SciLaws-Bench SciLaws-Real (Type I) (restricted)', 4 with share-alike or copyleft licenses are in its share-alike set, and 1 (river lengths derived from HydroSHEDS) may not be redistributed."
    }
   ],
   "follows_first_publication": []
@@ -1316,8 +1326,8 @@
   "changes": [
    {
     "kind": "part",
-    "problems": 116,
-    "text": "srbf runs here the 2 single-group tasks whose data carry a share-alike license; the other 57 shareable single-group tasks are in 'SciLaws-Bench SciLaws-Real (Type I)', the 52 multi-group tasks need a protocol srbf does not have, and 7 tasks have data that may not be shared."
+    "problems": 114,
+    "text": "srbf runs here the 4 single-group tasks whose data carry a share-alike or copyleft license; 55 more single-group tasks are in 'SciLaws-Bench SciLaws-Real (Type I)' and 6 in its restricted set, 1 may not be redistributed, and the 52 multi-group tasks need a protocol srbf does not have."
    }
   ],
   "follows_first_publication": []
@@ -1358,7 +1368,7 @@
    {
     "kind": "part",
     "problems": 3,
-    "text": "srbf runs 1 of the 4 problems: the friction and flow-stress data may not be shared."
+    "text": "srbf runs 1 of the 4 problems here: the friction and flow-stress data, whose sources state no license, are in 'Shape-constrained SR real-world set (restricted)'."
    },
    {
     "kind": "changed",
@@ -1432,19 +1442,37 @@
  {
   "catalog": "srbench-2.0-blackbox",
   "authors_total": 12,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 7,
+    "text": "srbf runs 5 of the 12 datasets here: the 7 whose sources set non-commercial terms or state no license (2 non-commercial, 5 without a license) are in 'SRBench 2.0 black-box (restricted)'."
+   }
+  ],
   "follows_first_publication": []
  },
  {
   "catalog": "srbench-2.0-first-principles",
   "authors_total": 12,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 10 of the 12 datasets here: absorption and supernovae_zr, taken from a repository without a license, are in 'SRBench 2.0 first-principles (restricted)'."
+   }
+  ],
   "follows_first_publication": []
  },
  {
   "catalog": "srbench-2021-blackbox",
   "authors_total": 122,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 38,
+    "text": "srbf runs 84 of the 122 datasets here: the 38 whose sources set non-commercial terms or state no license (20 non-commercial, 18 without a license) are in 'SRBench 2021 black-box (restricted)'."
+   }
+  ],
   "follows_first_publication": []
  },
  {
@@ -1629,7 +1657,7 @@
    {
     "kind": "part",
     "problems": 3,
-    "text": "srbf runs 6 of the 9 problems of Vladislavleva et al. (2009) here: Vladislavleva-2 and -3 train on fixed points and are in 'Vladislavleva (fixed points)', and the real-world Tower data may not be shared."
+    "text": "srbf runs 6 of the 9 problems of Vladislavleva et al. (2009) here: Vladislavleva-2 and -3 train on fixed points and are in 'Vladislavleva (fixed points)', and the real-world Tower data are in 'Tower (Dow distillation tower)'."
    }
   ],
   "follows_first_publication": [
@@ -1643,7 +1671,7 @@
    {
     "kind": "part",
     "problems": 7,
-    "text": "srbf runs here the 2 problems that train on fixed points (Vladislavleva-2 and -3); the others are in 'Vladislavleva' or, for the Tower data, not run."
+    "text": "srbf runs here the 2 problems that train on fixed points (Vladislavleva-2 and -3); the others are in 'Vladislavleva' and, for the Tower data, in 'Tower (Dow distillation tower)'."
    }
   ],
   "follows_first_publication": []
@@ -1655,11 +1683,438 @@
    {
     "kind": "part",
     "problems": 6,
-    "text": "srbf runs 1 of the 7 problems of White et al. (2013) here: Korns-12, Vladislavleva-4, Nguyen-7 and Pagie-1 are run in their own benchmarks' sets, and the Dow Chemical and GP Challenge data may not be shared."
+    "text": "srbf runs 1 of the 7 problems of White et al. (2013) here: Korns-12, Vladislavleva-4, Nguyen-7 and Pagie-1 are run in their own benchmarks' sets, the Dow Chemical data are in 'White et al. 2013 proposed SR set', and the GP Challenge is run protein by protein in 'GP Challenge (protein energy function)'."
    }
   ],
   "follows_first_publication": [
    "Keijzer-6 is Keijzer's harmonic number (Keijzer 2003) on x = 1..50, tested on 1..120; later copies print x(x+1)/2."
   ]
+ },
+ {
+  "catalog": "scilaws-real-restricted",
+  "follows_first_publication": [],
+  "authors_total": 118,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 112,
+    "text": "srbf runs here the 6 single-group tasks whose sources set non-commercial or scientific-use-only terms or state no license; 55 more single-group tasks are in 'SciLaws-Bench SciLaws-Real (Type I)' and 4 in its share-alike set, 1 may not be redistributed, and the 52 multi-group tasks need a protocol srbf does not have."
+   }
+  ]
+ },
+ {
+  "catalog": "gecco-2013-2017-real-restricted",
+  "follows_first_publication": [],
+  "authors_total": 21,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 18,
+    "text": "srbf runs here the 3 real-world datasets whose sources state no license (Boston housing, Dow Chemical, Tower); 14 more are in 'GECCO 2013-2017 GP regression compilation (real data)' and Ozone is in its share-alike set, the Million Song Dataset is left out for its size (375 MB), and NOX and WND were never published."
+   }
+  ]
+ },
+ {
+  "catalog": "gecco-2013-2017-real-share-alike",
+  "follows_first_publication": [],
+  "authors_total": 21,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 20,
+    "text": "srbf runs here the Ozone dataset, whose data carry a copyleft license (GPL-2); 14 more are in 'GECCO 2013-2017 GP regression compilation (real data)' and 3 in its restricted set, the Million Song Dataset is left out for its size (375 MB), and NOX and WND were never published."
+   }
+  ]
+ },
+ {
+  "catalog": "gp-gomea-real-world-restricted",
+  "follows_first_publication": [],
+  "authors_total": 10,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 7,
+    "text": "srbf runs here the 3 datasets whose sources state no license (Boston housing, Dow Chemical, Tower); the other 7 are in 'GP-GOMEA real-world set'."
+   }
+  ]
+ },
+ {
+  "catalog": "mcdermott-predictive-modelling-restricted",
+  "follows_first_publication": [],
+  "authors_total": 12,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 9,
+    "text": "srbf runs here 3 of the 12 problems of McDermott et al.'s list: Mackey-Glass, whose source states no license, and the two sunspot problems, whose license is non-commercial; 3 more are in 'McDermott et al. predictive-modelling sets', the two trading, the prime-number and the DyFor GDP and CPI problems have no published data, and the simulated DyFor series is in the pinned-points set."
+   }
+  ]
+ },
+ {
+  "catalog": "nuclear-misr-restricted",
+  "follows_first_publication": [],
+  "authors_total": 4,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs here the charge-radius dataset, whose source states no license; the binding-energy dataset is in 'Nuclear binding energies and charge radii (MISR)', and the two KAN variants have no published data."
+   }
+  ]
+ },
+ {
+  "catalog": "phye2e-space-physics-restricted",
+  "follows_first_publication": [],
+  "authors_total": 17,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 16,
+    "text": "srbf runs here the sunspot dataset, whose license is non-commercial; 15 more are in 'PhyE2E space-physics applications', and the lunar-tide data (13.3 million samples) needs a gridding the authors did not publish."
+   }
+  ]
+ },
+ {
+  "catalog": "shape-constrained-real-world-restricted",
+  "follows_first_publication": [],
+  "authors_total": 4,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs here the friction and flow-stress problems, whose sources state no license; the Auto MPG problem is in 'Shape-constrained SR real-world set'."
+   },
+   {
+    "kind": "changed",
+    "problems": 3,
+    "text": "srbf does not check the shape constraints that the authors set for the problems."
+   }
+  ]
+ },
+ {
+  "catalog": "langlaw-perovskites-restricted",
+  "follows_first_publication": [],
+  "authors_total": 4,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 3,
+    "text": "srbf runs here the band-gap problem, whose data were extracted from a closed-access article and state no license; the other 3 are in 'LangLaw perovskite datasets'."
+   }
+  ]
+ },
+ {
+  "catalog": "srbench-2021-blackbox-restricted",
+  "follows_first_publication": [],
+  "authors_total": 122,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 84,
+    "text": "srbf runs here the 38 datasets whose sources set non-commercial terms or state no license (20 non-commercial, 18 without a license); the other 84 are in 'SRBench 2021 black-box'."
+   }
+  ]
+ },
+ {
+  "catalog": "srbench-2.0-blackbox-restricted",
+  "follows_first_publication": [],
+  "authors_total": 12,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 5,
+    "text": "srbf runs here the 7 datasets whose sources set non-commercial terms or state no license (2 non-commercial, 5 without a license); the other 5 are in 'SRBench 2.0 black-box'."
+   }
+  ]
+ },
+ {
+  "catalog": "srbench-2.0-first-principles-restricted",
+  "follows_first_publication": [],
+  "authors_total": 12,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 10,
+    "text": "srbf runs here absorption and supernovae_zr, whose source repository states no license; the other 10 are in 'SRBench 2.0 first-principles'."
+   }
+  ]
+ },
+ {
+  "catalog": "bms-real-data",
+  "authors_total": 3,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 3,
+    "text": "The authors validate by leave-one-out cross-validation over all rows; srbf fits all rows of each dataset and has no test."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "dow-chemical-evostar-2010",
+  "authors_total": 1,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "dow-distillation-tower",
+  "authors_total": 1,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "Vladislavleva et al. (2009) test extrapolation on the records outside a box in five scaled inputs, but on the published 4,999 records their rule does not give their 3,136 / 1,864 split (it gives 4,721 / 278); srbf fits all records and has no test."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "dow-emulator",
+  "authors_total": 2,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 1 of the 2 outputs (y2): y1 was published only in the original download, which is lost, and the one surviving copy of the data holds y2 only."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "The paper also tests on a 181-point extreme-range set, with some inputs 8 to 10% outside the training range, that was never released; srbf tests only on the 275 published random points."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "eql-double-pendulum",
+  "authors_total": 4,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 4,
+    "text": "The authors fit one model with all four outputs (the x and y positions of the two segment tips) and report one error over them; srbf runs each output as a separate problem."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "ffx-cmos-ota",
+  "authors_total": 6,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "ffx-high-dimensional-circuits",
+  "authors_total": 12,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "gp-challenge-protein",
+  "authors_total": 54,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 54,
+    "text": "The authors ask for one energy function shared by all 54 proteins, scored by how well it ranks each protein's decoys; srbf runs each protein as a separate regression of the decoys' reference rank on the 8 energy terms."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "implied-volatility-slices",
+  "authors_total": 61462,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 61428,
+    "text": "srbf runs the 34 public slices of the paper's data set D2; the 61,428 S&P 500 slices of its data set D1 were never published."
+   },
+   {
+    "kind": "changed",
+    "problems": 34,
+    "text": "The authors fit one formula per curve type (SVI5, C6, C8), with parameters refitted per slice; srbf runs each slice as a separate problem."
+   },
+   {
+    "kind": "filled",
+    "problems": 34,
+    "text": "The paper does not say how many points per slice it used; srbf uses the 125-point version of each slice, the largest in the authors' repository and the one their evaluation notebook fits."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "materials-laws-multi-agent",
+  "authors_total": 3,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 1 of the 3 case studies (Vickers hardness): the metallic-glass data were published only in a supplement that is not available, and the descriptors the authors computed from the alloy compositions for the Young's-modulus task were never published."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "The authors report training and test errors on the hardness data but never say which compounds they tested on; srbf fits all 61 compounds and has no test."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "mvsr-2025",
+  "authors_total": 51,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 51,
+    "text": "The authors pose one task per data set (supernovae, galaxies, Michaelis-Menten, Nikuradse, network degrees): one formula, with parameters refitted per view, fitted to all its views at once and scored by its worst view; srbf runs each of the 51 views as a separate problem."
+   },
+   {
+    "kind": "changed",
+    "problems": 51,
+    "text": "The authors pick each view's 20% test rows with replacement, so some repeat and fewer than 20% of the rows are held out; srbf picks them without replacement."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "shadow-economies",
+  "authors_total": 3,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 2 of the 3 tasks (shadow-economy share and absolute economy size): the target of the third, per-capita GDP, is not in the published file."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "white-2013-proposed",
+  "authors_total": 7,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 6,
+    "text": "srbf runs 1 of the 7 problems of White et al. (2013) here (the Dow Chemical data): Keijzer-6 is in 'White et al. 2013 proposed SR set (fixed points)', Korns-12, Vladislavleva-4, Nguyen-7 and Pagie-1 are run in their own benchmarks' sets, and the GP Challenge, one ranking task over 54 proteins, is run protein by protein in 'GP Challenge (protein energy function)'."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "dimensionless-learning",
+  "authors_total": 5,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "For the keyhole data the authors' code fixes the 18 test rows of its 80/20 split, and the supplement adds a test on SS316 after fitting on the other two alloys; srbf uses neither and splits the rows 80/20 anew in every run."
+   },
+   {
+    "kind": "filled",
+    "problems": 1,
+    "text": "For the porosity data the authors report training and test scores without saying how they split the rows; srbf uses the random 80/20 split they state for the convection data."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "drsr-debcat",
+  "authors_total": 3,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 1,
+    "text": "srbf runs 2 of DRSR's 3 problems here (the DEBCat mass-luminosity data in linear and in log units): the synthetic mixture data set, half linear and half logistic at random, is not a function of x and is not run."
+   },
+   {
+    "kind": "filled",
+    "problems": 2,
+    "text": "The authors do not say which stars they used; srbf takes both stars of every catalogued system that has a luminosity (324 stars), the selection that reproduces the scaling constants they print."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "In the linear-units setting the authors rescale mass and luminosity to [0, 1] with constants they do not print; srbf uses both in solar units."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "oxygen-ion-conductors",
+  "authors_total": 2,
+  "changes": [],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "sldbench",
+  "authors_total": 77,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 77,
+    "text": "SLDBench poses 8 tasks, each asking for one law shared by all control groups of the task with constants refitted per group (the domain-mixture task predicts 5 losses at once); srbf runs each control group, and each of the 5 domain-mixture losses, as a separate problem."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "heuristiclab-real-world",
+  "authors_total": 376,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 362,
+    "text": "srbf runs 14 of HeuristicLab's 376 problems here (the 5 real-world and 9 Miba friction datasets): 15 formula problems are in 'HeuristicLab regression instance providers' and 'HeuristicLab regression instance providers (fixed points)', 164 are run in other srbf sets (Keijzer, Korns, Nguyen, Vladislavleva, Feynman, ...), the 88 generated instances have no published formula, the 94 PennML datasets are run in SRBench, and AircraftMaximumLift has inputs without a range."
+   },
+   {
+    "kind": "changed",
+    "problems": 9,
+    "text": "In the 9 Miba friction datasets the material, material category, grooving and oil inputs are letter codes; srbf turns each code into an input of its own that is 1 where the code applies and 0 elsewhere."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "mvsr-2024",
+  "authors_total": 501,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 20,
+    "text": "The authors pose one task per domain (chemistry, astrophysics, finance): one formula, with constants refitted per view, fitted to all its views at once; srbf runs each of the 20 views as a separate problem."
+   },
+   {
+    "kind": "changed",
+    "problems": 481,
+    "text": "In the finance task the authors test the formulas found on the 10 company views by refitting them to the price-change histograms of 480 other companies and of the S&P 500; srbf rebuilt these 481 histograms with the authors' recipe (the authors publish only the resulting errors) and runs each as a problem of its own."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "ideasearch-pdf",
+  "authors_total": 6,
+  "changes": [
+   {
+    "kind": "filled",
+    "problems": 6,
+    "text": "The authors published no data, only how they made them; srbf computed the six parton densities from the CT18NNLO grid on the authors' 20 x 20 training grid and their 20 test points at Q = 100 GeV, taking the details the text leaves open, such as where the test points lie in x, from the authors' own figures."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "sparc-radial-acceleration",
+  "authors_total": 3,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 2,
+    "text": "srbf runs 1 of the 3 problems of Desmond et al. (2023) (the observed SPARC data); the two MOND mock data sets, which place the authors' laws on the 2,696 observed baryonic accelerations rather than on a stated input range, are not run."
+   }
+  ],
+  "follows_first_publication": []
  }
 ]
