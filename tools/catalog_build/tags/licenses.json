@@ -674,7 +674,7 @@
   "license": "CC BY 4.0 (Zenodo 10.5281/zenodo.6842176, SRBench 2022 competition, La Cava et al.)",
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
-  "upstream": "Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_exact_formula_*_data{,_train,_test}.csv (catalog URLs point at the byte-identical cavalab/srbench srcomp copies)",
+  "upstream": "Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_exact_formula_*_data{,_train,_test}.csv (the source of record; the files are downloaded from their byte-identical copies in the GPL-3.0 cavalab/srbench srcomp branch, sha256 equal, checked 2026-11-09)",
   "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* (120 exact_formula CSVs)",
   "name": "GECCO 2022 synthetic: exact rediscovery",
   "set": "done-11",
@@ -706,7 +706,7 @@
   "license": "CC BY 4.0 (Zenodo 10.5281/zenodo.6842176, SRBench 2022 competition, La Cava et al.)",
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
-  "upstream": "Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_featureselection_*_data*.csv (catalog URLs point at the byte-identical cavalab/srbench srcomp copies)",
+  "upstream": "Zenodo 10.5281/zenodo.6842176 'Results files from the 2022 SRBench Competition' (W. La Cava 2022), srbench_competition_results.zip, members zenodo/data/stage1/data/*_featureselection_*_data*.csv (the source of record; the files are downloaded from their byte-identical copies in the GPL-3.0 cavalab/srbench srcomp branch, sha256 equal, checked 2026-11-09)",
   "evidence": "https://zenodo.org/api/records/6842176 metadata.license.id = cc-by-4.0; zip central directory (range-read 2026-11-04) holds zenodo/data/stage1/data/*_{exact_formula,featureselection,localopt,extrapolation,noise}_* CSVs and zenodo/data/stage2/data/135_NY_* (90 featureselection CSVs); survey done-12: '30 CSVs at cavalab/srbench srcomp ... (identical to Zenodo 6842176 zip members)'",
   "name": "GECCO 2022 synthetic: feature selection",
   "set": "done-12",
@@ -2013,7 +2013,7 @@
     "share": "yes"
    },
    "nuclear_binding_energy_ame2020__BE_per_A": {
-    "license": "CC0-1.0",
+    "license": "CC-BY-3.0 (its source AME2020, Wang et al. 2021, Chin. Phys. C 45:030003; SciLaws labels it CC0-1.0)",
     "share": "yes"
    },
    "ocean_mesoscale_eddy_closure__Sx": {
@@ -2452,7 +2452,7 @@
   "license": "MIT (PaulsonLab/TorchSISSO)",
   "verdict": "permissive",
   "redistribute": "yes",
-  "upstream": "PaulsonLab/TorchSISSO examples/Specific_Energy/{train.dat,redox_test_pade.csv} (pinned @f869f95; blobs identical at HEAD)",
+  "upstream": "PaulsonLab/TorchSISSO examples/Specific_Energy/{train.dat,redox_test_pade.csv} (pinned @acbf6ee, which carries the MIT LICENSE; blobs identical to f869f95, the last commit touching the folder)",
   "evidence": "gh api repos/PaulsonLab/TorchSISSO/license -> MIT (LICENSE 'MIT License, Copyright (c) 2025 Madhav Reddy Muthyala', added 2025-06-18); examples/Specific_Energy blob shas at HEAD equal those at f869f95 (README b13478a, redox_test_pade.csv f83cba7, train.dat ffe8eba)",
   "name": "Specific energy of organic compounds (TorchSISSO)",
   "set": "fresh-116",

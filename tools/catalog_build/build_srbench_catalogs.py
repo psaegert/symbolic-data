@@ -54,6 +54,21 @@ STROGATZ = ["strogatz_bacres1", "strogatz_bacres2", "strogatz_barmag1", "strogat
 STROGATZ_SPLIT = "train_test_split(train_size=0.75, test_size=0.25), one split per seed (SRBench 2021 ground-truth problems)"
 # srbf 2026-10-17: SRBench 2.0 first-principles without supernovae_zg (redundant with its sibling)
 LEAVE_OUT = {"srbench-2.0-first-principles": {"first_principles_supernovae_zg"}}
+# Datasets whose source permits redistribution only with its permission note attached: the note travels in the
+# problem's metadata (and in the dataset card's notices). Tecator's statement, section 1 of the StatLib file
+# (OpenML 505's description quotes it).
+PERMISSION_NOTES = {
+    "505_tecator": (
+        "Statement of permission from Tecator (the original data source): These data are recorded on a Tecator "
+        "Infratec Food and Feed Analyzer working in the wavelength range 850 - 1050 nm by the Near Infrared "
+        "Transmission (NIT) principle. Each sample contains finely chopped pure meat with different moisture, fat and "
+        "protein contents. If results from these data are used in a publication we want you to mention the "
+        "instrument and company name (Tecator) in the publication. In addition, please send a preprint of your "
+        "article to Karin Thente, Tecator AB, Box 70, S-263 21 Hoganas, Sweden. The data are available in the public "
+        "domain with no responsability from the original data source. The data can be redistributed as long as this "
+        "permission note is attached. For more information about the instrument - call Perstorp Analytical's "
+        "representative in your area."),
+}
 
 
 def _sha256(data: bytes) -> str:
@@ -97,6 +112,7 @@ def problem_of(entry: dict, track: str, display: str, split_text: str, set_meta:
         "catalog": track, "catalog_display": display, "source": entry.get("source"), "url": entry["url"],
         "sha256": entry["sha256"], "pmlb_name": entry.get("pmlb_name"), "feature_names": features,
         "subset": entry.get("subset"), "split_as_published": split_text, "n_rows": int(len(frame)),
+        **({"permission_note": PERMISSION_NOTES[entry["id"]]} if entry["id"] in PERMISSION_NOTES else {}),
     }
     if entry.get("reference_law"):
         # information only (the authors' accepted hypothesis, not used to score runs): kept for readers
