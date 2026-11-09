@@ -3988,7 +3988,7 @@
  },
  {
   "catalog": "llm-srbench",
-  "license": "no license: the Hugging Face dataset states none; the code repository's README names MIT, but the repository has no license file and does not hold the data",
+  "license": "no license: the Hugging Face dataset states none, and it is gated (access is granted automatically, without terms, to anyone who shares their contact details with the authors); the code repository's README names MIT, but the repository has no license file and does not hold the data",
   "verdict": "no license found",
   "redistribute": "yes, restricted repo",
   "upstream": "Hugging Face dataset nnheui/llm-srbench @4f22d48 (https://huggingface.co/datasets/nnheui/llm-srbench), lsr_bench_data.hdf5 and the five parquet splits",

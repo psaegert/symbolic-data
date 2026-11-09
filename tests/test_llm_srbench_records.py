@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 BUILD = Path(__file__).resolve().parents[1] / "tools" / "catalog_build"
 
@@ -46,16 +47,31 @@ def test_rows_stored_as_float32_count_as_reproduced_where_the_formula_is_steep()
     assert L.unexplained(g, rows, []) == 999                                         # a wrong formula is caught
 
 
-def test_a_record_that_states_its_ground_truth_kind_keeps_it():
+def _stated(prob):
+    """The ground truth the data builder gives a formula a**2 that misses its rows by more than float32 eps."""
     B = _module("build_data_catalogs")
     R = sys.modules["data_catalog_readers"]
     rng = np.random.default_rng(1)
     a = rng.uniform(1.0, 2.0, 200)
-    y = a ** 2 * (1 + 1e-3 * rng.standard_normal(200))                # the formula misses by more than float32 eps
+    rows = R.Rows(a[:, None], a ** 2 * (1 + 1e-3 * rng.standard_normal(200)), ["a"], R.NONE, "none")
+    rows.finish()
+    return B.with_ground_truth(rows, {"id": "t", "formula": "a**2", **prob}, B.Formulas()), rows.meta
 
-    def kind(prob):
-        rows = R.Rows(a[:, None], y, ["a"], R.NONE, "none")
-        rows.finish()
-        return B.with_ground_truth(rows, prob, B.Formulas())["gt_kind"]
-    assert kind({"id": "t", "formula": "a**2"}) == "reference"
-    assert kind({"id": "t", "formula": "a**2", "gt_kind": "exact"}) == "exact"
+
+def test_a_record_that_states_its_ground_truth_kind_with_a_full_check_keeps_it():
+    assert _stated({})[0]["gt_kind"] == "reference"
+    check = {"rows": 200, "rows_within_input_rounding": 200, "fit_fvu": 1e-6}
+    gt, meta = _stated({"gt_kind": "exact", "gt_check": check})
+    assert gt["gt_kind"] == "exact"
+    assert meta["gt_kind_stated"] is True and meta["gt_check"] == check and meta["formula_fvu_on_fit_rows"] > 1e-7
+
+
+@pytest.mark.parametrize("prob", [
+    {"gt_kind": "exact"},                                                             # no check
+    {"gt_kind": "exact", "gt_check": {"rows": 199, "rows_within_input_rounding": 199}},   # not over these rows
+    {"gt_kind": "exact", "gt_check": {"rows": 200, "rows_within_input_rounding": 197}},   # rows outside rounding
+    {"gt_kind": "approximate", "gt_check": {"rows": 200, "rows_within_input_rounding": 200}},
+])
+def test_a_stated_ground_truth_kind_without_a_passing_check_is_refused(prob):
+    with pytest.raises(ValueError):
+        _stated(prob)

@@ -15,7 +15,8 @@ release's parquet files, with the repairs srbf makes (marked in tags/deviations.
   only squared; srbf takes the positive root.
 
 Every formula is checked against all of its problem's rows (FVU per array, kept in the record), and every array is
-pinned by the sha256 of its bytes. The script writes the set's record into data_sets.json.gz and its 240 data
+pinned by the sha256 of its bytes. Each problem states gt_kind 'exact' with its check over the training rows
+(``gt_check``); the builder honours the stated kind only when that check puts every row within float32 input rounding. The script writes the set's record into data_sets.json.gz and its 240 data
 problems into final_problems.json.gz (assets/upstream/catalog-prep); build_data_catalogs.py builds the catalog
 ``llm-srbench`` from them (reader ``llm_srbench`` in data_catalog_readers.py).
 
@@ -172,7 +173,7 @@ def record(raw: Path) -> tuple[dict, list[dict], dict]:
             checks[k] = {"fvu": fvu(a64[:, 0], predict(f, a64, list(values.values()))),
                          "rows_unexplained_by_rounding": unexplained(f, a64, list(values.values()))}
             report["worst_fvu"][k] = max(report["worst_fvu"].get(k, 0.0), checks[k]["fvu"])
-        if checks["train"]["fvu"] > F32_EPS and checks["train"]["rows_unexplained_by_rounding"]:
+        if checks["train"]["rows_unexplained_by_rounding"]:       # the builder honours 'exact' only with every row
             raise SystemExit(f"{name}: the formula misses its training rows ({checks['train']})")
         if checks["train"]["fvu"] > F32_EPS:
             report["exact_by_rounding"].append(name)
@@ -207,7 +208,9 @@ def record(raw: Path) -> tuple[dict, list[dict], dict]:
                            "high": float(train[:, i + 1].max())}
                           for i, (n, d) in enumerate(zip(inputs, row["symbol_descs"][1:]))],
             "constants": values, "data_key": ["sha", HDF5[1], f"/{dataset_id}"], "formula_of": None,
-            "gt_kind": "exact"})
+            "gt_kind": "exact",
+            "gt_check": {"rows": len(train), "fit_fvu": checks["train"]["fvu"],
+                         "rows_within_input_rounding": len(train) - checks["train"]["rows_unexplained_by_rounding"]}})
     rec = {
         "tag": TAG, "name": "LLM-SRBench", "kind": "data", "status": "complete", "blocked_reason": None,
         "sources": ["https://arxiv.org/abs/2504.10415", f"https://huggingface.co/datasets/nnheui/llm-srbench/tree/{REVISION}",

@@ -103,15 +103,34 @@ class Formulas:
         return compile_expression(self.engine(), eq_id, prepared, {v: {} for v in rename.values()}, name="data")
 
 
+def stated_kind(rows: R.Rows, prob: dict) -> str | None:
+    """The ground-truth kind a record states, honoured only with the record's own check over the fitting rows
+    (``gt_check``: ``rows``, ``rows_within_input_rounding``, ``fit_fvu``). A stated ``exact`` needs every fitting row
+    within float32 input rounding: the authors computed each target before storing its row as float32, so where a
+    formula is steep a row misses by more than eps while agreeing within that rounding (LLM-SRBench;
+    llm_srbench_records.py). Anything else a record states is refused, not trusted."""
+    kind = prob.get("gt_kind")
+    if kind is None:
+        return None
+    if kind not in ("exact", "reference"):
+        raise ValueError(f"{prob['id']}: stated gt_kind {kind!r} is neither 'exact' nor 'reference'")
+    check, n = prob.get("gt_check") or {}, len(rows.y)
+    if check.get("rows") != n:
+        raise ValueError(f"{prob['id']}: states gt_kind {kind!r} without a check over its {n} fitting rows")
+    if kind == "exact" and check.get("rows_within_input_rounding") != n:
+        raise ValueError(f"{prob['id']}: states gt_kind 'exact', but its check puts "
+                         f"{check.get('rows_within_input_rounding')} of {n} fitting rows within float32 input rounding")
+    return kind
+
+
 def with_ground_truth(rows: R.Rows, prob: dict, formulas: Formulas) -> dict:
     """data_problem keyword arguments for the problem's formula: exact when it reproduces the fitting rows to float32
     eps, a reference law otherwise; a formula SimpliPy cannot read yet is kept as text and the problem is black-box.
-    A record that states its ``gt_kind`` keeps it: its own check showed the formula generated the data (LLM-SRBench:
-    targets computed before the rows were stored as float32, so where a formula is steep a row misses by more than eps
-    while every row agrees within that rounding; llm_srbench_records.py)."""
+    A record may state the kind with its own check (stated_kind); the check goes into the problem's meta."""
     f = formula_of(prob)
     if f is None:
         return {"gt_kind": "none"}
+    stated = stated_kind(rows, prob)
     from symbolic_data._evaluation import evaluate
     names = rows.formula_names or rows.features
     try:
@@ -125,7 +144,10 @@ def with_ground_truth(rows: R.Rows, prob: dict, formulas: Formulas) -> dict:
     fvu = float(np.mean((rows.y - pred) ** 2) / np.var(rows.y)) if np.var(rows.y) > 0 else float("nan")
     rows.meta["formula"] = f
     rows.meta["formula_fvu_on_fit_rows"] = fvu
-    kind = prob.get("gt_kind") or ("exact" if fvu <= float(np.finfo(np.float32).eps) else "reference")
+    if stated:
+        rows.meta["gt_kind_stated"] = True
+        rows.meta["gt_check"] = dict(prob["gt_check"])
+    kind = stated or ("exact" if fvu <= float(np.finfo(np.float32).eps) else "reference")
     return {"gt_kind": kind, "expression": compiled["expression"], "skeleton": compiled["prefix"],
             "constants": compiled["constants"]}
 
