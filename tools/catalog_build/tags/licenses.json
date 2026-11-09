@@ -3985,5 +3985,23 @@
   ],
   "terms": "non-commercial use only; none stated",
   "routing": "owner 2026-11-09: republished with a statement in the restricted repo"
+ },
+ {
+  "catalog": "llm-srbench",
+  "license": "no license: the Hugging Face dataset states none; the code repository's README names MIT, but the repository has no license file and does not hold the data",
+  "verdict": "no license found",
+  "redistribute": "yes, restricted repo",
+  "upstream": "Hugging Face dataset nnheui/llm-srbench @4f22d48 (https://huggingface.co/datasets/nnheui/llm-srbench), lsr_bench_data.hdf5 and the five parquet splits",
+  "evidence": "Hugging Face API dataset_info(nnheui/llm-srbench, files_metadata=True) on 2026-11-09: revision 4f22d48100d94125d3af1e7bd40897fcc7f9597d, gated 'auto', no license in the card; gh api repos/deep-symbolic-mathematics/llm-srbench/license -> 404, repository license null, README 'This repository is licensed under MIT licence.'",
+  "name": "LLM-SRBench",
+  "set": "llm-srbench",
+  "problems": 369,
+  "sources": [
+   "https://arxiv.org/abs/2504.10415",
+   "https://huggingface.co/datasets/nnheui/llm-srbench/tree/4f22d48100d94125d3af1e7bd40897fcc7f9597d",
+   "https://github.com/deep-symbolic-mathematics/llm-srbench/tree/6fdbe409b75ea749c0a93c69b6861637d804dec4"
+  ],
+  "terms": "none stated",
+  "routing": "owner 2026-11-09: republished with a statement in the restricted repo"
  }
 ]

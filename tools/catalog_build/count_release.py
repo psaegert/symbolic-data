@@ -132,7 +132,8 @@ def main() -> None:
     clash = sorted(n for n, c in names.items() if c > 1)   # srbf needs unique names: reported, both counted
     for r in rows:
         r["problems"] = sum(r["subsets"].values())
-        tag = (re.findall(r"\b(?:fresh|done|critic|interrupted)-\d+\b", str(r.get("source_record") or "")) or [None])[0]
+        tag = (re.findall(r"\b(?:fresh|done|critic|interrupted)-\d+\b|(?<=sets/)[\w-]+(?=\.json)",
+                          str(r.get("source_record") or "")) or [None])[0]
         if tag:                                   # the survey's set: its name, and its sources where the catalog has none
             rec = paths.set_record(tag) if tag in paths.set_tags() else {}
             r["set"], r["set_name"] = tag, rec.get("name")

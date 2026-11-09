@@ -1901,5 +1901,22 @@
   "origin_proposal": "mixed real and synthetic data: PMLB compilation, 76 of 122 synthetic (62 Friedman-generator sets)",
   "tags": [],
   "notes": "Not tagged: fri_* members likely carry generator noise and irrelevant features, but the record states it only for 564_fried (OpenML description)."
+ },
+ {
+  "catalog": "llm-srbench",
+  "origin": "generated formulas",
+  "origin_source": "Hugging Face card of nnheui/llm-srbench: 'LSR-Synth, which introduces synthetic, discovery-driven problems' (129 of 240, 258 of srbf's 369 problems); 'LSR-Transform, which transforms common physical models into less common mathematical representations' (111)",
+  "origin_proposal": "synthetic data: data files the authors computed from their formulas, LSR-Synth chemistry, biology and physics on simulated trajectories",
+  "tags": [
+   {
+    "tag": "extrapolation",
+    "source": "129 of 369 problems: each LSR-Synth out-of-domain test is the last stretch of time (chemistry, biology, physics) or the upper end of the strain and temperature line (materials science); sets/llm-srbench.json notes"
+   },
+   {
+    "tag": "several tests",
+    "source": "258 of 369 problems: subsets 'LSR-Synth ... in-domain' / 'LSR-Synth ... out-of-domain', the published test and ood_test arrays (facts split_readings)"
+   }
+  ],
+  "notes": "LSR-Transform rewrites AI Feynman laws for another of their variables."
  }
 ]

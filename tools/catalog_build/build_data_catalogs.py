@@ -105,7 +105,10 @@ class Formulas:
 
 def with_ground_truth(rows: R.Rows, prob: dict, formulas: Formulas) -> dict:
     """data_problem keyword arguments for the problem's formula: exact when it reproduces the fitting rows to float32
-    eps, a reference law otherwise; a formula SimpliPy cannot read yet is kept as text and the problem is black-box."""
+    eps, a reference law otherwise; a formula SimpliPy cannot read yet is kept as text and the problem is black-box.
+    A record that states its ``gt_kind`` keeps it: its own check showed the formula generated the data (LLM-SRBench:
+    targets computed before the rows were stored as float32, so where a formula is steep a row misses by more than eps
+    while every row agrees within that rounding; llm_srbench_records.py)."""
     f = formula_of(prob)
     if f is None:
         return {"gt_kind": "none"}
@@ -122,7 +125,7 @@ def with_ground_truth(rows: R.Rows, prob: dict, formulas: Formulas) -> dict:
     fvu = float(np.mean((rows.y - pred) ** 2) / np.var(rows.y)) if np.var(rows.y) > 0 else float("nan")
     rows.meta["formula"] = f
     rows.meta["formula_fvu_on_fit_rows"] = fvu
-    kind = "exact" if fvu <= float(np.finfo(np.float32).eps) else "reference"
+    kind = prob.get("gt_kind") or ("exact" if fvu <= float(np.finfo(np.float32).eps) else "reference")
     return {"gt_kind": kind, "expression": compiled["expression"], "skeleton": compiled["prefix"],
             "constants": compiled["constants"]}
 

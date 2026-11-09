@@ -2722,5 +2722,20 @@
    "url": "https://github.com/EpistasisLab/pmlb/tree/5ed0151f01919aff0d616d5e8ea463587a255745/datasets"
   },
   "notes": "122 black-box regression datasets; membership from cavalab/srbench v2.0 (e5ded47). PMLB: Romano et al., arXiv:2012.00058."
+ },
+ {
+  "catalog": "llm-srbench",
+  "paper": {
+   "short": "Shojaee et al. 2025",
+   "title": "LLM-SRBench: A New Benchmark for Scientific Equation Discovery with Large Language Models",
+   "venue": "ICML 2025",
+   "url": "https://arxiv.org/abs/2504.10415"
+  },
+  "data": {
+   "short": "Hugging Face nnheui/llm-srbench@4f22d48",
+   "title": "LLM-SRBench data release: lsr_bench_data.hdf5 and five parquet splits (no license stated)",
+   "url": "https://huggingface.co/datasets/nnheui/llm-srbench/tree/4f22d48100d94125d3af1e7bd40897fcc7f9597d"
+  },
+  "notes": "Code: deep-symbolic-mathematics/llm-srbench@6fdbe40. LSR-Transform rewrites laws of the AI Feynman database (Udrescu & Tegmark 2020)."
  }
 ]

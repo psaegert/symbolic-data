@@ -1,9 +1,9 @@
 {
  "_ruled": "srbf 2026-10-05; problems with no_input_spec: srbf 2026-11-03; PMLB compilations: srbf 2026-11-02; done-33/34 superseded by the symbolic-data ERBench catalogs: srbf 2026-11-04",
  "sets": {
-  "done-24": "LLM-SRBench LSR-Transform: no licence and broken (missing constants, unmaintained); srbf 2026-09-29 + 2026-10-05: remove from srbf",
-  "done-25": "LSR-Transform-Anon: LLM-SRBench LSR-Transform with renamed variables; removed with LLM-SRBench",
-  "done-26": "LLM-SRBench LSR-Synth Material Science: removed with LLM-SRBench",
+  "done-24": "LLM-SRBench LSR-Transform: superseded 2026-11-09 (srbf): LLM-SRBench returns whole as the data catalog llm-srbench, the authors' frozen release with the formulas repaired (llm_srbench_records.py); this record's formula problems are not built",
+  "done-25": "LSR-Transform-Anon: the same 111 datasets as the LSR-Transform subset of the data catalog llm-srbench, under other variable names: a duplicate (srbf 2026-11-09)",
+  "done-26": "LLM-SRBench LSR-Synth Material Science: superseded 2026-11-09 (srbf): in the data catalog llm-srbench (the authors' frozen release); this record's formula problems are not built",
   "done-38": "SymbolicArena Full Task Set: redundant (srbf holds 398/664; the rest is LLM-SRBench or held elsewhere); srbf 2026-10-05: drop",
   "interrupted-2": "SymbolicArena Core50: part of SymbolicArena (16/50 LLM-SRBench); dropped with it",
   "fresh-65": "KAN special functions: no input range for any of its 15 problems, ellipj's output and the complex spherical harmonics unspecified; srbf 2026-10-05: drop",

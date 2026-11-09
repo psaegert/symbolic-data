@@ -45,6 +45,7 @@ DATA_CATALOGS = {
     "ideasearch-pdf": ("ideasearch-pdf.npz", 6, "problem_catalog"),
     "implied-volatility-slices": ("implied-volatility-slices.npz", 34, "problem_catalog"),
     "langlaw-perovskites-restricted": ("langlaw-perovskites-restricted.npz", 1, "problem_catalog"),
+    "llm-srbench": ("llm-srbench.npz", 1, "problem_catalog"),
     "materials-laws-multi-agent": ("materials-laws-multi-agent.npz", 1, "problem_catalog"),
     "mcdermott-predictive-modelling-restricted": ("mcdermott-predictive-modelling-restricted.npz", 3, "problem_catalog"),
     "mvsr-2024": ("mvsr-2024.npz", 501, "problem_catalog"),
