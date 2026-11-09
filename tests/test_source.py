@@ -140,7 +140,9 @@ def _lample_charton_cfg():
 
 def test_generate_mode_produces_problems():
     # A generative catalog (catalog: {type: lample_charton, ...}) drawn `size` times.
-    src = ProblemSource({"catalog": _lample_charton_cfg(), "sampling": {"size": 6, "n_support": 16, "noise": 0.0}})
+    # a seeded Generator: an entropy stream can draw only placeholders now and then
+    src = ProblemSource({"catalog": _lample_charton_cfg(), "sampling": {"size": 6, "n_support": 16, "noise": 0.0}},
+                        rng=np.random.default_rng(0))
     assert src.mode == "generate" and src.size_hint() == 6
     problems = list(src)
     assert len(problems) == 6  # one problem (or placeholder) per generated skeleton
@@ -155,7 +157,8 @@ def test_generate_mode_streams_unbounded_without_size():
     # No `size` -> an UNBOUNDED streaming generative source (size_hint None); take a few via islice
     # (the training-time generation mode flash-ansr consumes).
     from itertools import islice
-    src = ProblemSource({"catalog": _lample_charton_cfg(), "sampling": {"n_support": 16, "noise": 0.0}})
+    src = ProblemSource({"catalog": _lample_charton_cfg(), "sampling": {"n_support": 16, "noise": 0.0}},
+                        rng=np.random.default_rng(0))
     assert src.mode == "generate" and src.size_hint() is None
     problems = list(islice(iter(src), 4))
     assert len(problems) == 4
