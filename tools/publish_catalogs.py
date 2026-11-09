@@ -291,6 +291,31 @@ def license_pass() -> dict[str, dict]:
         return {row["catalog"]: row for row in json.load(handle)}
 
 
+# the share a member of a catalog must have, by the catalog's own routing (a set's own catalog holds its licensed
+# members; a -share-alike or -restricted part holds the members routed there)
+MEMBER_SHARE = {"yes, these members": "yes", "yes, share-alike repo": "share-alike", "yes, restricted repo": "restricted"}
+
+
+def member_violations(path: str, row: dict | None, restricted: bool) -> list[str]:
+    """What a built .npz holds against the license pass: a problem its row's members route to another catalog or
+    leave out (a stale or unsplit build), restricted data without their terms and statement in the restricted repo,
+    or restricted data anywhere else."""
+    import numpy as np
+    problems = json.loads(str(np.load(path)["_meta"].item())).get("problems", [])
+    members = (row or {}).get("members")
+    want = MEMBER_SHARE.get((row or {}).get("redistribute"))
+    found = []
+    for p in problems:
+        eq_id, meta = p.get("eq_id"), p.get("meta") or {}
+        if members is not None and (eq_id not in members or members[eq_id]["share"] != want):
+            found.append(f"{eq_id}: routed to {members[eq_id]['share'] if eq_id in members else 'no member'}")
+        elif restricted and not (meta.get("terms") and meta.get("statement")):
+            found.append(f"{eq_id}: restricted data without terms and statement")
+        elif not restricted and meta.get("terms"):
+            found.append(f"{eq_id}: restricted data ({meta['terms']})")
+    return found
+
+
 def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execute: bool = False,
             extra_ops: tuple = (), built: dict | None = None, build_dir: str = DATA_BUILD,
             shareable: tuple = SHAREABLE, hand_noticed: tuple = (), retired: tuple = ()) -> None:
@@ -305,6 +330,8 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
     * a ``built`` catalog not built here keeps its hosted versions; one neither built nor hosted -> REFUSED;
     * a catalog whose license-pass row does not say one of ``shareable`` -> REFUSED;
     * a version to upload whose catalog has no license-pass row and is not ``hand_noticed`` -> REFUSED;
+    * a built catalog holding a problem its license-pass members route elsewhere, restricted data without their
+      terms and statement in the restricted repo, or restricted data in another repo -> REFUSED;
     * a hosted entry absent locally that is not ``retired`` (so the card's notices do not know it) -> REFUSED.
 
     Dry-run by default; ``execute=True`` publishes.
@@ -375,6 +402,14 @@ def publish(repo: str, data_dir: str, catalogs: dict, multi_version: dict, execu
     if barred:
         raise SystemExit(f"REFUSED: the license pass does not clear {barred} for {repo} "
                          f"(tools/catalog_build/tags/licenses.json).")
+    # what each catalog to upload holds, problem by problem: a stale or unsplit build must not publish data the
+    # license pass routes to another repo
+    restricted_repo = "yes, restricted repo" in shareable
+    misplaced = {name: found for name in new_names for rel in new_versions[name].values() if rel.endswith(".npz")
+                 for found in [member_violations(local(name, rel), passed.get(name), restricted_repo)] if found}
+    if misplaced:
+        raise SystemExit(f"REFUSED: problems the license pass routes elsewhere, or restricted data without their "
+                         f"statement, in {misplaced} -- rebuild the data catalogs (tools/catalog_build/README.md).")
     unnoticed = [name for name in new_names if name not in passed and name not in hand_noticed]
     if unnoticed:
         raise SystemExit(f"REFUSED: no license-pass row and no hand-written notice for {unnoticed} -- add its row to "

@@ -39,7 +39,8 @@ If you hold rights to any data here and object to their republication, open an i
 https://github.com/psaegert/symbolic-data and they will be removed.
 
 The data catalogs (a benchmark's published data as frozen pools) are built from their authors'
-files by the source repo's builders (`tools/catalog_build`) and published only here.
+files by the source repo's builders (`tools/catalog_build`) and published only on Hugging Face:
+here and in the two repos named above.
 
 Curated in [psaegert/symbolic-data](https://github.com/psaegert/symbolic-data) (builders,
 vendored upstream files with NOTICEs, validation reports).

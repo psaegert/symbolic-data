@@ -194,3 +194,47 @@ def test_restricted_members_carry_their_terms_and_the_statement():
     parts, _ = build.split_members(whole, {"catalog": "w", "redistribute": "yes, restricted repo", "terms": "none stated",
                                            "license": "no licence", "upstream": "somewhere"})
     assert parts[""][0].meta["terms"] == "none stated" and "Source: somewhere" in parts[""][0].meta["statement"]
+
+
+def _built(repo, name, problems):
+    np.savez(repo / "build" / f"{name}.npz",
+             _meta=np.array(json.dumps({"catalog": {"version": 1}, "problems": problems})))
+
+
+def _route(repo, name, **row):
+    rows = [r for r in json.loads((repo / "licenses.json").read_text()) if r["catalog"] != name]
+    (repo / "licenses.json").write_text(json.dumps(rows + [{"catalog": name, "license": "x", "upstream": "y", **row}]))
+
+
+def _publish_built(repo, monkeypatch, names, shareable=pc.SHAREABLE):
+    (repo / "manifest.json").write_text("{}")
+    monkeypatch.setattr(pc, "HfApi", lambda: types.SimpleNamespace(hf_hub_download=lambda **_: str(repo / "manifest.json")))
+    pc.publish("fake/repo", str(repo / "assets"), {}, {}, built={n: (f"{n}.npz", 1, "problem_catalog") for n in names},
+               build_dir=str(repo / "build"), shareable=shareable)
+
+
+def test_a_stale_unsplit_catalog_is_refused(repo, monkeypatch, capsys):
+    # an 11-05-style build of a set whose datasets the license pass now splits: every member in the set's own catalog
+    members = {"a": {"license": "MIT", "share": "yes"}, "b": {"license": "none", "share": "restricted", "terms": "none stated"}}
+    _route(repo, "esr-cosmology", redistribute="yes, these members", members=members)
+    _built(repo, "esr-cosmology", [{"eq_id": "a", "meta": {}}, {"eq_id": "b", "meta": {}}])
+    with pytest.raises(SystemExit, match=r"routes elsewhere.*'esr-cosmology': \['b: routed to restricted'\]"):
+        _publish_built(repo, monkeypatch, ["esr-cosmology"])
+    _built(repo, "esr-cosmology", [{"eq_id": "a", "meta": {}}])                          # split as the pass routes it
+    _publish_built(repo, monkeypatch, ["esr-cosmology"])
+    assert "dry run" in capsys.readouterr().out
+
+
+def test_restricted_data_carry_their_statement_and_stay_in_the_restricted_repo(repo, monkeypatch, capsys):
+    _route(repo, "treloar-rubber", redistribute="yes, restricted repo", terms="none stated")
+    restricted_route = ("yes, restricted repo",)
+    _built(repo, "treloar-rubber", [{"eq_id": "t", "meta": {"terms": "none stated"}}])
+    with pytest.raises(SystemExit, match="restricted data without terms and statement"):
+        _publish_built(repo, monkeypatch, ["treloar-rubber"], restricted_route)
+    _built(repo, "treloar-rubber", [{"eq_id": "t", "meta": {"terms": "none stated", "statement": "srbf republishes ..."}}])
+    _publish_built(repo, monkeypatch, ["treloar-rubber"], restricted_route)
+    assert "dry run" in capsys.readouterr().out
+    # restricted data in a catalog routed to the main repo
+    _built(repo, "esr-cosmology", [{"eq_id": "e", "meta": {"terms": "non-commercial use only", "statement": "..."}}])
+    with pytest.raises(SystemExit, match=r"'esr-cosmology': \['e: restricted data \(non-commercial use only\)'\]"):
+        _publish_built(repo, monkeypatch, ["esr-cosmology"])

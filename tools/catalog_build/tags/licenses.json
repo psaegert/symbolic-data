@@ -775,7 +775,8 @@
   "verdict": "attribution (CC BY)",
   "redistribute": "yes",
   "upstream": "MontrealBikeLane.csv of the SRBench 2023 Track 2 template (ufabc-bcc/srbench-competition-2023-track-2-*, BSD-3-Clause), byte-identical in Zenodo 10.5281/zenodo.8283005; counts from City of Montreal open data 'Compteurs cyclistes permanents'",
-  "evidence": "https://zenodo.org/api/records/8283005 metadata.license.id = cc-by-4.0; gh api repos/ufabc-bcc/srbench-competition-2023-track-2-victoria-university-of-wellington/license -> BSD-3-Clause; survey done-18 recorded_licences"
+  "evidence": "https://zenodo.org/api/records/8283005 metadata.license.id = cc-by-4.0; gh api repos/ufabc-bcc/srbench-competition-2023-track-2-victoria-university-of-wellington/license -> BSD-3-Clause; survey done-18 recorded_licences",
+  "note": "builds no problem, so it is in no release: the organisers fix no target layout and no split for the Montreal bike-lane track, which was judged on written reports (build_data_report.json, done-18)"
  },
  {
   "catalog": "gecco-2023-performance",
