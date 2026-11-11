@@ -1,6 +1,10 @@
 metadata:
   name: jin
-  version: 1
+  version: 2
+  tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
+  srbf_changes: []
+  license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
+  citation: {"paper": {"short": "Jin et al. 2019", "title": "Bayesian Symbolic Regression", "venue": "arXiv preprint arXiv:1910.08892", "url": "https://arxiv.org/abs/1910.08892"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: Jin Bayesian-SR suite.
   sources:
   - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
@@ -63,6 +67,7 @@ expressions:
             - 30
         function_set: Jin
       finite_fraction: 1.0
+    subset: in-range
   Jin-2:
     raw: 8.0*pow(x1,2)+8.0*pow(x2,3)-15.0
     prepared: 8.0*((v1)**(2))+8.0*((v2)**(3))-15.0
@@ -106,6 +111,7 @@ expressions:
             - 30
         function_set: Jin
       finite_fraction: 1.0
+    subset: in-range
   Jin-3:
     raw: 0.2*pow(x1,3)+0.5*pow(x2,3)-1.2*x2-0.5*x1
     prepared: 0.2*((v1)**(3))+0.5*((v2)**(3))-1.2*v2-0.5*v1
@@ -149,6 +155,7 @@ expressions:
             - 30
         function_set: Jin
       finite_fraction: 1.0
+    subset: in-range
   Jin-4:
     raw: 1.5*exp(x1)+5.0*cos(x2)
     prepared: 1.5*exp(v1)+5.0*cos(v2)
@@ -192,6 +199,7 @@ expressions:
             - 30
         function_set: Jin
       finite_fraction: 1.0
+    subset: in-range
   Jin-5:
     raw: 6.0*sin(x1)*cos(x2)
     prepared: 6.0*sin(v1)*cos(v2)
@@ -235,6 +243,7 @@ expressions:
             - 30
         function_set: Jin
       finite_fraction: 1.0
+    subset: in-range
   Jin-6:
     raw: 1.35*x1*x2+5.5*sin((x1-1.0)*(x2-1.0))
     prepared: 1.35*v1*v2+5.5*sin((v1-1.0)*(v2-1.0))
@@ -278,3 +287,760 @@ expressions:
             - 30
         function_set: Jin
       finite_fraction: 1.0
+    subset: in-range
+  Jin-1.wide:
+    raw: 2.5*pow(x1,4)-1.3*pow(x1,3)+0.5*pow(x2,2)-1.7*x2
+    prepared: 2.5*((v1)**(4))-1.3*((v1)**(3))+0.5*((v2)**(2))-1.7*v2
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: wide
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-1.beyond:
+    raw: 2.5*pow(x1,4)-1.3*pow(x1,3)+0.5*pow(x2,2)-1.7*x2
+    prepared: 2.5*((v1)**(4))-1.3*((v1)**(3))+0.5*((v2)**(2))-1.7*v2
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: beyond
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-2.wide:
+    raw: 8.0*pow(x1,2)+8.0*pow(x2,3)-15.0
+    prepared: 8.0*((v1)**(2))+8.0*((v2)**(3))-15.0
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: wide
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-2.beyond:
+    raw: 8.0*pow(x1,2)+8.0*pow(x2,3)-15.0
+    prepared: 8.0*((v1)**(2))+8.0*((v2)**(3))-15.0
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: beyond
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-3.wide:
+    raw: 0.2*pow(x1,3)+0.5*pow(x2,3)-1.2*x2-0.5*x1
+    prepared: 0.2*((v1)**(3))+0.5*((v2)**(3))-1.2*v2-0.5*v1
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: wide
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-3.beyond:
+    raw: 0.2*pow(x1,3)+0.5*pow(x2,3)-1.2*x2-0.5*x1
+    prepared: 0.2*((v1)**(3))+0.5*((v2)**(3))-1.2*v2-0.5*v1
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: beyond
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-4.wide:
+    raw: 1.5*exp(x1)+5.0*cos(x2)
+    prepared: 1.5*exp(v1)+5.0*cos(v2)
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: wide
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-4.beyond:
+    raw: 1.5*exp(x1)+5.0*cos(x2)
+    prepared: 1.5*exp(v1)+5.0*cos(v2)
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: beyond
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-5.wide:
+    raw: 6.0*sin(x1)*cos(x2)
+    prepared: 6.0*sin(v1)*cos(v2)
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: wide
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-5.beyond:
+    raw: 6.0*sin(x1)*cos(x2)
+    prepared: 6.0*sin(v1)*cos(v2)
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: beyond
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-6.wide:
+    raw: 1.35*x1*x2+5.5*sin((x1-1.0)*(x2-1.0))
+    prepared: 1.35*v1*v2+5.5*sin((v1-1.0)*(v2-1.0))
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: wide
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -6.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '
+  Jin-6.beyond:
+    raw: 1.35*x1*x2+5.5*sin((x1-1.0)*(x2-1.0))
+    prepared: 1.35*v1*v2+5.5*sin((v1-1.0)*(v2-1.0))
+    n_variables: 2
+    sources:
+    - Jin et al. 2019 (arXiv:1910.08892), Bayesian Symbolic Regression
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3;
+      Petersen et al. 2021, Mundhenk et al. 2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -3.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 100
+        test:
+          all:
+            U:
+            - -3.0
+            - 3.0
+            - 30
+        function_set: Jin
+      finite_fraction: 1.0
+    subset: beyond
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: 3.0
+              high: 6.0
+    test_source: 'Jin, Fu, Kang, Guo & Guo 2019, ''Bayesian Symbolic Regression'', arXiv:1910.08892v3,
+      Sec. 4 ''Datasets'' pp. 5-6 (source-audit/raw/A3/jin2019_bsr_arxiv1910.08892.pdf,
+      opened): ''For each target formula, we have one training dataset and three testing
+      datasets. The training set consists of 100 samples with predictors generated independently
+      from U[-3, 3] ... We consider three different testing sets, all '

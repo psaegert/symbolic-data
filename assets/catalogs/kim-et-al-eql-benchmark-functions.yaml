@@ -1,0 +1,534 @@
+metadata:
+  name: kim-et-al-eql-benchmark-functions
+  version: 1
+  tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 12 of the 13 functions: Kim-8 (exp(-x^2) on [-1, 1]) is run as Livermore-21, without Kim et al.'s extrapolation test."}]
+  license: "MIT (samuelkim314/DeepSymReg) + CC BY 4.0 (Kim et al. 2020, IEEE TNNLS)"
+  citation: {"paper": {"short": "Kim et al. 2021", "title": "Integration of Neural Network-Based Symbolic Regression in Deep Learning for Scientific Discovery", "venue": "IEEE Transactions on Neural Networks and Learning Systems 32(9):4166-4177", "url": "https://doi.org/10.1109/TNNLS.2020.3017010"}, "data": {"short": "GitHub samuelkim314/DeepSymReg@57bbe2e", "title": "DeepSymReg benchmark.py (no licence file)", "url": "https://github.com/samuelkim314/DeepSymReg/blob/57bbe2e2c7f0cd07dc34ed99c7dc75bdd1445d87/benchmark.py"}}
+  description: Kim et al. EQL benchmark functions
+  sources:
+  - https://arxiv.org/abs/1912.04825
+  - https://arxiv.org/e-print/1912.04825v2
+  - https://arxiv.org/e-print/1912.04825v1
+  - https://doi.org/10.1109/TNNLS.2020.3017010
+  - https://github.com/samuelkim314/DeepSymReg/blob/57bbe2e2c7f0cd07dc34ed99c7dc75bdd1445d87/benchmark.py
+  - https://github.com/samuelkim314/DeepSymReg/blob/57bbe2e2c7f0cd07dc34ed99c7dc75bdd1445d87/benchmark_l0.py
+  - https://github.com/samuelkim314/DeepSymRegTorch/blob/fe17a19cf339e2dee9870f6fb8045eec90849f32/benchmark_l12.py
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/fresh-158.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  Kim-1:
+    raw: x
+    prepared: v1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-2:
+    raw: x**2
+    prepared: v1**2
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-3:
+    raw: x**3
+    prepared: v1**3
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-4:
+    raw: sin(2*pi*x)
+    prepared: sin(2*3.141592653589793*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-5:
+    raw: x*y
+    prepared: v1*v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+      y: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-6:
+    raw: 1/(1 + exp(-10*x))
+    prepared: 1/(1 + exp(-10*v1))
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-7:
+    raw: x*y/2 + z/2
+    prepared: v1*v2/2 + v3/2
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+      y: uniform U[-1,1]
+      z: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v3:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-9:
+    raw: x**2 + sin(2*pi*y)
+    prepared: v1**2 + sin(2*3.141592653589793*v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+      y: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-10:
+    raw: x**2 + y - 2*z
+    prepared: v1**2 + v2 - 2*v3
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: z
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+      y: uniform U[-1,1]
+      z: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v3:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-11:
+    raw: exp(x)
+    prepared: exp(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-12:
+    raw: sin(2*pi*x) + sin(4*pi*y)
+    prepared: sin(2*3.141592653589793*v1) + sin(4*3.141592653589793*v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x: uniform U[-1,1]
+      y: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0
+  Kim-13:
+    raw: (x1 + x2*x3)**3
+    prepared: (v1 + v2*v3)**3
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: x3
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      x1: uniform U[-1,1]
+      x2: uniform U[-1,1]
+      x3: uniform U[-1,1]
+    test:
+      vars:
+        v1:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v2:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+        v3:
+          dist:
+            name: uniform
+            kwargs:
+              low: -2.0
+              high: 2.0
+    test_source: 'Kim et al. EQL benchmark (DeepSymReg) benchmark.py DOMAIN_TEST and paper Sec. III-A l.165, as quoted in
+      the records: ''Extrapolation test points in the authors'' runs come from U[-2, 2]''; set notes: ''256 training points
+      on U[-1,1], 100 extrapolation test points on U[-2,2] used to pick the answer among 20 trials''.'
+    meta:
+      finite_fraction: 1.0

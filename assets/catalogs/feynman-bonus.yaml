@@ -1,6 +1,9 @@
 metadata:
   name: feynman-bonus
-  version: 1
+  version: 2
+  tags: {"origin": "science formula", "tags": []}
+  srbf_changes: []
+  citation: {"paper": {"short": "Udrescu & Tegmark 2020", "title": "AI Feynman: A physics-inspired method for symbolic regression", "venue": "Science Advances 6(16):eaay2631", "url": "https://doi.org/10.1126/sciadv.aay2631"}, "data": {"short": "GitHub WassimTenachi/PhySO@bfbfa88", "title": "BonusEquations.csv (PhySO copy; MIT)", "url": "https://github.com/WassimTenachi/PhySO/blob/bfbfa88d5def09d3d0cd47f3e2252b5a25836721/physo/benchmark/FeynmanDataset/BonusEquations.csv"}}
   description: AI-Feynman BONUS set (20 named physics results), aifeynman-original rendering — the 3rd rendering
     of the bonus set alongside fastsrb B1-B20 (SRSD) and srsd-dummy B1-B20, mirroring the main set's variant structure.
   sources: &id001

@@ -1,0 +1,2811 @@
+metadata:
+  name: ai-feynman-database-100-main-equations
+  version: 1
+  tags: {"origin": "science formula", "tags": []}
+  srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 74 of the 100 equations: in the other 26 no input is left once the units are removed, so the target is a constant."}]
+  license: "facts only: formulas, ranges and units cited from the Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, Sci. Adv. 6:eaay2631); no upstream license"
+  citation: {"paper": {"short": "Udrescu & Tegmark 2020", "title": "AI Feynman: A physics-inspired method for symbolic regression", "venue": "Science Advances 6(16):eaay2631", "url": "https://doi.org/10.1126/sciadv.aay2631"}, "data": {"short": "Feynman Symbolic Regression Database (FSReD), Wayback 2021-10-19", "title": "AI Feynman / Feynman Symbolic Regression Database download page (space.mit.edu, host now dead)", "url": "https://web.archive.org/web/20211019022249/https://space.mit.edu/home/tegmark/main_aifeynman.html"}}
+  description: 'AI Feynman database: 100 main equations (FSReD)'
+  sources:
+  - https://arxiv.org/abs/1905.11481
+  - https://doi.org/10.1126/sciadv.aay2631
+  - https://web.archive.org/web/2022id_/https://space.mit.edu/home/tegmark/main_aifeynman.html
+  - https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5322ec8a446cf75e96ec9b3bb904f4d1970eff1e/datasets/FeynmanEquationsDimensionless.csv
+  - https://github.com/intell-sci-comput/PSE/blob/9a7d5711152a89abbac0328faa2f440cc5498fb5/baselines/algorithms/DGSR/datasets/FeynmanEquationsDimensionless.csv
+  - https://web.archive.org/web/2022id_/https://space.mit.edu/home/tegmark/aifeynman/FeynmanEquations.csv
+  - https://github.com/WassimTenachi/PhySO/blob/04c7bb9535f1fdde9acaec7c8e273a3a9f694ab4/physo/benchmark/FeynmanDataset/units.csv
+  - https://github.com/SJ001/AI-Feynman/blob/a05bc4a5be23d6eb3e1d0b2f7eb1ab5b78a920ad/aifeynman/dimensionalAnalysis.py
+  - https://www.dropbox.com/s/9i05v6yw1kbkup3/Feynman_without_units.tar.gz
+  - https://www.dropbox.com/s/7kgfr00qpokgz8w/Feynman_with_units.tar.gz
+  sampling_defaults:
+    n_points: 512
+    method: random
+    noise: 0.0
+  source_kind: set
+  source_record: catalog-prep/sets/interrupted-3.json
+  conventions:
+    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
+      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
+      9(6))'
+expressions:
+  I.6.2a:
+    raw: sqrt(2)*exp(-var1**2/2)/(2*sqrt(pi))
+    prepared: sqrt(2)*(1/(2*sqrt(3.141592653589793)))*exp(-v1**2/2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,3] (the with-units input theta, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.6.2:
+    raw: sqrt(2)*exp(-var2**2/(2*var1**2))/(2*sqrt(pi)*var1)
+    prepared: sqrt(2)*exp(-v2**2/(2*v1**2))/(2*sqrt(3.141592653589793)*v1)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,3] (the with-units input sigma, FeynmanEquations.csv)
+      var2: uniform U[1,3] (the with-units input theta, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.6.2b:
+    raw: sqrt(2)*exp(-(var2 - var3)**2/(2*var1**2))/(2*sqrt(pi)*var1)
+    prepared: sqrt(2)*exp(-(v2 - v3)**2/(2*v1**2))/(2*sqrt(3.141592653589793)*v1)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: var3
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,3] (the with-units input sigma, FeynmanEquations.csv)
+      var2: uniform U[1,3] (the with-units input theta, FeynmanEquations.csv)
+      var3: uniform U[1,3] (the with-units input theta1, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.8.14:
+    raw: sqrt((var1 - 1)**2 + (-var2 + var3)**2)
+    prepared: sqrt((v1 - 1)**2 + (-v2 + v3)**2)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: x2/x1
+      v2:
+        name: var2
+        expr: y1/x1
+      v3:
+        name: var3
+        expr: y2/x1
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = x2/x1 with x1 ~ U[1,5], x2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = y1/x1 with x1 ~ U[1,5], y1 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var3: 'not given by the authors; derived: var3 = y2/x1 with x1 ~ U[1,5], y2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      x1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      x2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      y1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      y2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.9.18:
+    raw: var1/((var2 - 1)**2 + (-var3 + var4)**2 + (-var5 + var6)**2)
+    prepared: v1/((v2 - 1)**2 + (-v3 + v4)**2 + (-v5 + v6)**2)
+    n_variables: 6
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: m2/m1
+      v2:
+        name: var2
+        expr: x2/x1
+      v3:
+        name: var3
+        expr: y1/x1
+      v4:
+        name: var4
+        expr: y2/x1
+      v5:
+        name: var5
+        expr: z1/x1
+      v6:
+        name: var6
+        expr: z2/x1
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = m2/m1 with m1 ~ U[1,2], m2 ~ U[1,2] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = x2/x1 with x1 ~ U[3,4], x2 ~ U[1,2] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var3: 'not given by the authors; derived: var3 = y1/x1 with x1 ~ U[3,4], y1 ~ U[3,4] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var4: 'not given by the authors; derived: var4 = y2/x1 with x1 ~ U[3,4], y2 ~ U[1,2] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var5: 'not given by the authors; derived: var5 = z1/x1 with x1 ~ U[3,4], z1 ~ U[3,4] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var6: 'not given by the authors; derived: var6 = z2/x1 with x1 ~ U[3,4], z2 ~ U[1,2] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      m1:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      m2:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      x1:
+        sample_range:
+        - 3.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      x2:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      y1:
+        sample_range:
+        - 3.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      y2:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      z1:
+        sample_range:
+        - 3.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      z2:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.10.7:
+    raw: 1/sqrt(1 - 1/var1**2)
+    prepared: 1/sqrt(1 - 1/v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: c/v
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = c/v with v ~ U[1,2], c ~ U[3,10] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      v:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.11.19:
+    raw: var1*var4 + var2*var5 + var3
+    prepared: v1*v4 + v2*v5 + v3
+    n_variables: 5
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: x2/x1
+      v2:
+        name: var2
+        expr: x3/x1
+      v3:
+        name: var3
+        expr: y1/x1
+      v4:
+        name: var4
+        expr: y2/x1
+      v5:
+        name: var5
+        expr: y3/x1
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = x2/x1 with x1 ~ U[1,5], x2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = x3/x1 with x1 ~ U[1,5], x3 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var3: 'not given by the authors; derived: var3 = y1/x1 with x1 ~ U[1,5], y1 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var4: 'not given by the authors; derived: var4 = y2/x1 with x1 ~ U[1,5], y2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var5: 'not given by the authors; derived: var5 = y3/x1 with x1 ~ U[1,5], y3 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      x1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      x2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      x3:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      y1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      y2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      y3:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.12.1:
+    raw: var1
+    prepared: v1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input mu, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.13.4:
+    raw: var1**2/2 + var2**2/2 + 1/2
+    prepared: v1**2/2 + v2**2/2 + 1/2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: u/v
+      v2:
+        name: var2
+        expr: w/v
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = u/v with v ~ U[1,5], u ~ U[1,5] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = w/v with v ~ U[1,5], w ~ U[1,5] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      v:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      u:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      w:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.12.2:
+    raw: var1/(4*pi)
+    prepared: (1/(4*3.141592653589793))*v1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: q2/q1
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = q2/q1 with q1 ~ U[1,5], q2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      q1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      q2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.12.11:
+    raw: var1*sin(var2) + 1
+    prepared: v1*sin(v2) + 1
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: B*v/Ef
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = B*v/Ef with Ef ~ U[1,5], B ~ U[1,5], v ~ U[1,5] (FeynmanEquations.csv
+        ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: uniform U[1,5] (the with-units input theta, FeynmanEquations.csv)
+    latent:
+      Ef:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      B:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.13.12:
+    raw: var1*(-1 + 1/var2)
+    prepared: v1*(-1 + 1/v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: m2/m1
+      v2:
+        name: var2
+        expr: r2/r1
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = m2/m1 with m1 ~ U[1,5], m2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = r2/r1 with r1 ~ U[1,5], r2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      m1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      m2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      r1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      r2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.15.3x:
+    raw: (1 - var2)/sqrt(1 - 1/var1**2)
+    prepared: (1 - v2)/sqrt(1 - 1/v1**2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: c/u
+      v2:
+        name: var2
+        expr: t*u/x
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = c/u with u ~ U[1,2], c ~ U[3,20] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = t*u/x with x ~ U[5,10], u ~ U[1,2], t ~ U[1,2] (FeynmanEquations.csv
+        ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      u:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 3.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      x:
+        sample_range:
+        - 5.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      t:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.15.3t:
+    raw: (-var1 + var2)/sqrt(1 - var1**2)
+    prepared: (-v1 + v2)/sqrt(1 - v1**2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: u/c
+      v2:
+        name: var2
+        expr: c*t/x
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = u/c with c ~ U[3,10], u ~ U[1,2] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = c*t/x with x ~ U[1,5], c ~ U[3,10], t ~ U[1,5] (FeynmanEquations.csv
+        ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      c:
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      u:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      x:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      t:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.15.1:
+    raw: 1/sqrt(1 - 1/var1**2)
+    prepared: 1/sqrt(1 - 1/v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: c/v
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = c/v with v ~ U[1,2], c ~ U[3,10] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      v:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.16.6:
+    raw: (var1 + var2)/(var1*var2 + 1)
+    prepared: (v1 + v2)/(v1*v2 + 1)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: v/c
+      v2:
+        name: var2
+        expr: u/c
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = v/c with c ~ U[1,5], v ~ U[1,5] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = u/c with c ~ U[1,5], u ~ U[1,5] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      c:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      u:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.18.4:
+    raw: (var1*var2 + 1)/(var1 + 1)
+    prepared: (v1*v2 + 1)/(v1 + 1)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: m2/m1
+      v2:
+        name: var2
+        expr: r2/r1
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = m2/m1 with m1 ~ U[1,5], m2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = r2/r1 with r1 ~ U[1,5], r2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      m1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      m2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      r1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      r2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.18.12:
+    raw: sin(var1)
+    prepared: sin(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 0.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[0,5] (the with-units input theta, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.18.14:
+    raw: sin(var1)
+    prepared: sin(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input theta, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.24.6:
+    raw: var1**2/4 + 1/4
+    prepared: v1**2/4 + 1/4
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: omega_0/omega
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = omega_0/omega with omega ~ U[1,3], omega_0 ~ U[1,3] (FeynmanEquations.csv
+        ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      omega:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      omega_0:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.26.2:
+    raw: asin(var1*sin(var2))
+    prepared: asin(v1*sin(v2))
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[0,1] (the with-units input n, FeynmanEquations.csv)
+      var2: uniform U[1,5] (the with-units input theta2, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.27.6:
+    raw: var1/(var1 + var2)
+    prepared: v1/(v1 + v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: d2/d1
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = d2/d1 with d1 ~ U[1,5], d2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: uniform U[1,5] (the with-units input n, FeynmanEquations.csv)
+    latent:
+      d1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      d2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.29.16:
+    raw: sqrt(var1**2 - 2*var1*cos(var2 - var3) + 1)
+    prepared: sqrt(v1**2 - 2*v1*cos(v2 - v3) + 1)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: x2/x1
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: var3
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = x2/x1 with x1 ~ U[1,5], x2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: uniform U[1,5] (the with-units input theta1, FeynmanEquations.csv)
+      var3: uniform U[1,5] (the with-units input theta2, FeynmanEquations.csv)
+    latent:
+      x1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      x2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.30.3:
+    raw: sin(var1*var2/2)**2/sin(var1/2)**2
+    prepared: sin(v1*v2/2)**2/sin(v1/2)**2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input theta, FeynmanEquations.csv)
+      var2: uniform U[1,5] (the with-units input n, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.30.5:
+    raw: asin(1/(var1*var2))
+    prepared: asin(1/(v1*v2))
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: d/lambd
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = d/lambd with lambd ~ U[1,2], d ~ U[2,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: uniform U[1,5] (the with-units input n, FeynmanEquations.csv)
+    latent:
+      lambd:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      d:
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.32.17:
+    raw: 4*pi/(3*(1 - var2**2/var1**2)**2)
+    prepared: 4*3.141592653589793/(3*(1 - v2**2/v1**2)**2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: omega*r/c
+      v2:
+        name: var2
+        expr: omega_0*r/c
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = omega*r/c with c ~ U[1,2], r ~ U[1,2], omega ~ U[1,2] (FeynmanEquations.csv
+        ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = omega_0*r/c with c ~ U[1,2], r ~ U[1,2], omega_0 ~ U[3,5] (FeynmanEquations.csv
+        ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      c:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      r:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      omega:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      omega_0:
+        sample_range:
+        - 3.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.34.1:
+    raw: 1/(1 - var1)
+    prepared: 1/(1 - v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: v/c
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = v/c with c ~ U[3,10], v ~ U[1,2] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      c:
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.34.14:
+    raw: (var1 + 1)/sqrt(1 - var1**2)
+    prepared: (v1 + 1)/sqrt(1 - v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: v/c
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = v/c with c ~ U[3,10], v ~ U[1,2] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      c:
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.37.4:
+    raw: 2*sqrt(var1)*cos(var2) + var1 + 1
+    prepared: 2*sqrt(v1)*cos(v2) + v1 + 1
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: I2/I1
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = I2/I1 with I1 ~ U[1,5], I2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: uniform U[1,5] (the with-units input delta, FeynmanEquations.csv)
+    latent:
+      I1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      I2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.39.11:
+    raw: 1/(var1 - 1)
+    prepared: 1/(v1 - 1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[2,5] (the with-units input gamma, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.39.22:
+    raw: var1
+    prepared: v1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input n, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.40.1:
+    raw: var1*exp(-1/var2)
+    prepared: v1*exp(-1/v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        expr: T*kb/(g*m*x)
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input n_0, FeynmanEquations.csv)
+      var2: 'not given by the authors; derived: var2 = T*kb/(g*m*x) with m ~ U[1,5], x ~ U[1,5], T ~ U[1,5], g ~ U[1,5], kb
+        ~ U[1,5] (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      m:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      x:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      g:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.41.16:
+    raw: 1/(2*pi**3*(exp(1/(2*pi*var1)) - 1))
+    prepared: 1/(2*3.141592653589793**3*(exp(1/(2*3.141592653589793*v1)) - 1))
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: T*kb/(h*omega)
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = T*kb/(h*omega) with omega ~ U[1,5], T ~ U[1,5], h ~ U[1,5], kb ~ U[1,5]
+        (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      omega:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      h:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.43.43:
+    raw: 1/(var1 - 1)
+    prepared: 1/(v1 - 1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[2,5] (the with-units input gamma, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.44.4:
+    raw: var1*log(var2)
+    prepared: v1*log(v2)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        expr: V2/V1
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input n, FeynmanEquations.csv)
+      var2: 'not given by the authors; derived: var2 = V2/V1 with V1 ~ U[1,5], V2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      V1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      V2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.47.23:
+    raw: sqrt(var1)
+    prepared: sqrt(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input gamma, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  I.48.2:
+    raw: var1**2/sqrt(1 - 1/var1**2)
+    prepared: v1**2/sqrt(1 - 1/v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: c/v
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = c/v with v ~ U[1,2], c ~ U[3,10] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      v:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.50.26:
+    raw: var2*cos(var1)**2 + cos(var1)
+    prepared: v2*cos(v1)**2 + cos(v1)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: omega*t
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = omega*t with omega ~ U[1,3], t ~ U[1,3] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: uniform U[1,3] (the with-units input alpha, FeynmanEquations.csv)
+    latent:
+      omega:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      t:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.2.42:
+    raw: (var1 - 1)/var2
+    prepared: (v1 - 1)/v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: T2/T1
+      v2:
+        name: var2
+        expr: d/sqrt(A)
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = T2/T1 with T1 ~ U[1,5], T2 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = d/sqrt(A) with A ~ U[1,5], d ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      T1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      T2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      A:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      d:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.6.11:
+    raw: cos(var1)/(4*pi)
+    prepared: (1/(4*3.141592653589793))*cos(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,3] (the with-units input theta, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  II.6.15a:
+    raw: 3*var3*sqrt(var1**2 + var2**2)/(4*pi)
+    prepared: 3*(1/(4*3.141592653589793))*v3*sqrt(v1**2 + v2**2)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: x/r
+      v2:
+        name: var2
+        expr: y/r
+      v3:
+        name: var3
+        expr: z/r
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = x/r with r ~ U[1,3], x ~ U[1,3] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = y/r with r ~ U[1,3], y ~ U[1,3] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+      var3: 'not given by the authors; derived: var3 = z/r with r ~ U[1,3], z ~ U[1,3] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      r:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      x:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      y:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      z:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.6.15b:
+    raw: 3*sin(var1)*cos(var1)/(4*pi)
+    prepared: 3*(1/(4*3.141592653589793))*sin(v1)*cos(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,3] (the with-units input theta, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  II.10.9:
+    raw: 1/(var1 + 1)
+    prepared: 1/(v1 + 1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input chi, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  II.11.3:
+    raw: 1/(1 - var1**2)
+    prepared: 1/(1 - v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: omega/omega_0
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = omega/omega_0 with omega_0 ~ U[3,5], omega ~ U[1,2] (FeynmanEquations.csv
+        ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      omega_0:
+        sample_range:
+        - 3.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      omega:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.11.17:
+    raw: var1*(var3*cos(var2) + 1)
+    prepared: v1*(v3*cos(v2) + 1)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: var3
+        expr: Ef*p_d/(T*kb)
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,3] (the with-units input n_0, FeynmanEquations.csv)
+      var2: uniform U[1,3] (the with-units input theta, FeynmanEquations.csv)
+      var3: 'not given by the authors; derived: var3 = Ef*p_d/(T*kb) with kb ~ U[1,3], T ~ U[1,3], p_d ~ U[1,3], Ef ~ U[1,3]
+        (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      kb:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      p_d:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      Ef:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.11.20:
+    raw: 1/(3*var1)
+    prepared: 1/(3*v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: T*kb/(Ef*p_d)
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = T*kb/(Ef*p_d) with p_d ~ U[1,5], Ef ~ U[1,5], kb ~ U[1,5], T ~ U[1,5]
+        (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      p_d:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      Ef:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.11.27:
+    raw: var1*var2/(-var1*var2/3 + 1)
+    prepared: v1*v2/(-v1*v2/3 + 1)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[0,1] (the with-units input n, FeynmanEquations.csv)
+      var2: uniform U[0,1] (the with-units input alpha, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  II.11.28:
+    raw: var1*var2/(-var1*var2/3 + 1) + 1
+    prepared: v1*v2/(-v1*v2/3 + 1) + 1
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[0,1] (the with-units input n, FeynmanEquations.csv)
+      var2: uniform U[0,1] (the with-units input alpha, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  II.13.23:
+    raw: 1/sqrt(1 - 1/var1**2)
+    prepared: 1/sqrt(1 - 1/v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: c/v
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = c/v with v ~ U[1,2], c ~ U[3,10] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      v:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.13.34:
+    raw: 1/sqrt(1 - 1/var1**2)
+    prepared: 1/sqrt(1 - 1/v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: c/v
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = c/v with v ~ U[1,2], c ~ U[3,10] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      v:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.15.4:
+    raw: -cos(var1)
+    prepared: -cos(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input theta, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  II.15.5:
+    raw: -cos(var1)
+    prepared: -cos(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input theta, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  II.21.32:
+    raw: 1/(4*pi*(1 - 1/var1))
+    prepared: 1/(4*3.141592653589793*(1 - 1/v1))
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: c/v
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = c/v with v ~ U[1,2], c ~ U[3,10] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      v:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.24.17:
+    raw: sqrt(1 - pi**2/var1**2)
+    prepared: sqrt(1 - 3.141592653589793**2/v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: d*omega/c
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = d*omega/c with omega ~ U[4,6], c ~ U[1,2], d ~ U[2,4] (FeynmanEquations.csv
+        ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      omega:
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      d:
+        sample_range:
+        - 2.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.34.11:
+    raw: var1/2
+    prepared: v1/2
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input g_, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  II.34.29b:
+    raw: 2*pi*var1*var2
+    prepared: 2*3.141592653589793*v1*v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        expr: Jz/h
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input g_, FeynmanEquations.csv)
+      var2: 'not given by the authors; derived: var2 = Jz/h with h ~ U[1,5], Jz ~ U[1,5] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      h:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      Jz:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.35.18:
+    raw: var1/(exp(var2) + exp(-var2))
+    prepared: v1/(exp(v2) + exp(-v2))
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        expr: B*mom/(T*kb)
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,3] (the with-units input n_0, FeynmanEquations.csv)
+      var2: 'not given by the authors; derived: var2 = B*mom/(T*kb) with kb ~ U[1,3], T ~ U[1,3], mom ~ U[1,3], B ~ U[1,3]
+        (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      kb:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      mom:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      B:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.35.21:
+    raw: tanh(1/var1)
+    prepared: tanh(1/v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: T*kb/(B*mom)
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = T*kb/(B*mom) with mom ~ U[1,5], B ~ U[1,5], kb ~ U[1,5], T ~ U[1,5]
+        (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      mom:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      B:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.36.38:
+    raw: var2*var3/var1 + 1/var1
+    prepared: v2*v3/v1 + 1/v1
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: T*kb/(H*mom)
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: var3
+        expr: M/(H*c**2*epsilon)
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = T*kb/(H*mom) with mom ~ U[1,3], H ~ U[1,3], kb ~ U[1,3], T ~ U[1,3]
+        (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: uniform U[1,3] (the with-units input alpha, FeynmanEquations.csv)
+      var3: 'not given by the authors; derived: var3 = M/(H*c**2*epsilon) with H ~ U[1,3], epsilon ~ U[1,3], c ~ U[1,3], M
+        ~ U[1,3] (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      mom:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      H:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      epsilon:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      M:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.37.1:
+    raw: var1 + 1
+    prepared: v1 + 1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input chi, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  II.38.3:
+    raw: var2/var1
+    prepared: v2/v1
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: d/sqrt(A)
+      v2:
+        name: var2
+        expr: x/sqrt(A)
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = d/sqrt(A) with A ~ U[1,5], d ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = x/sqrt(A) with A ~ U[1,5], x ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      A:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      d:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      x:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.38.14:
+    raw: 1/(2*var1 + 2)
+    prepared: 1/(2*v1 + 2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input sigma, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  III.4.32:
+    raw: 1/(exp(1/(2*pi*var1)) - 1)
+    prepared: 1/(exp(1/(2*3.141592653589793*v1)) - 1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: T*kb/(h*omega)
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = T*kb/(h*omega) with h ~ U[1,5], omega ~ U[1,5], kb ~ U[1,5], T ~ U[1,5]
+        (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      h:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      omega:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  III.4.33:
+    raw: 1/(2*pi*(exp(1/(2*pi*var1)) - 1))
+    prepared: 1/(2*3.141592653589793*(exp(1/(2*3.141592653589793*v1)) - 1))
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: T*kb/(h*omega)
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = T*kb/(h*omega) with h ~ U[1,5], omega ~ U[1,5], kb ~ U[1,5], T ~ U[1,5]
+        (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      h:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      omega:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  III.8.54:
+    raw: sin(2*pi/var1)**2
+    prepared: sin(2*3.141592653589793/v1)**2
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: h/(E_n*t)
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = h/(E_n*t) with E_n ~ U[1,2], t ~ U[1,2], h ~ U[1,4] (FeynmanEquations.csv
+        ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      E_n:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      t:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      h:
+        sample_range:
+        - 1.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  III.9.52:
+    raw: 8*pi*sin(var2/2 - var3/2)**2/(var1*(var2 - var3)**2)
+    prepared: 8*3.141592653589793*sin(v2/2 - v3/2)**2/(v1*(v2 - v3)**2)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: h/(Ef*p_d*t)
+      v2:
+        name: var2
+        expr: omega*t
+      v3:
+        name: var3
+        expr: omega_0*t
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = h/(Ef*p_d*t) with p_d ~ U[1,3], Ef ~ U[1,3], t ~ U[1,3], h ~ U[1,3]
+        (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = omega*t with t ~ U[1,3], omega ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var3: 'not given by the authors; derived: var3 = omega_0*t with t ~ U[1,3], omega_0 ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      p_d:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      Ef:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      t:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      h:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      omega:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      omega_0:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  III.10.19:
+    raw: sqrt(var1**2 + var2**2 + 1)
+    prepared: sqrt(v1**2 + v2**2 + 1)
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: By/Bx
+      v2:
+        name: var2
+        expr: Bz/Bx
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = By/Bx with Bx ~ U[1,5], By ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+      var2: 'not given by the authors; derived: var2 = Bz/Bx with Bx ~ U[1,5], Bz ~ U[1,5] (FeynmanEquations.csv ranges),
+        i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      Bx:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      By:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      Bz:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  III.12.43:
+    raw: var1/(2*pi)
+    prepared: (1/(2*3.141592653589793))*v1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input n, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  III.13.18:
+    raw: 4*pi*var1
+    prepared: 4*3.141592653589793*v1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: d*k
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = d*k with d ~ U[1,5], k ~ U[1,5] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      d:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      k:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  III.14.14:
+    raw: exp(1/var1) - 1
+    prepared: exp(1/v1) - 1
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: T*kb/(Volt*q)
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = T*kb/(Volt*q) with q ~ U[1,2], Volt ~ U[1,2], kb ~ U[1,2], T ~ U[1,2]
+        (FeynmanEquations.csv ranges), i.e. a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      q:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      Volt:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  III.15.12:
+    raw: 2 - 2*cos(var1)
+    prepared: 2 - 2*cos(v1)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        expr: d*k
+      v0:
+        name: y
+    input_distributions:
+      var1: 'not given by the authors; derived: var1 = d*k with k ~ U[1,5], d ~ U[1,5] (FeynmanEquations.csv ranges), i.e.
+        a push-forward of the with-units uniforms, jointly with the other groups'
+    latent:
+      k:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      d:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  III.15.27:
+    raw: 2*pi*var1/var2
+    prepared: 2*3.141592653589793*v1/v2
+    n_variables: 2
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input alpha, FeynmanEquations.csv)
+      var2: uniform U[1,5] (the with-units input n, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  III.17.37:
+    raw: var1*(var2*cos(var3) + 1)
+    prepared: v1*(v2*cos(v3) + 1)
+    n_variables: 3
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: var2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: var3
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input beta, FeynmanEquations.csv)
+      var2: uniform U[1,5] (the with-units input alpha, FeynmanEquations.csv)
+      var3: uniform U[1,5] (the with-units input theta, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0
+  III.19.51:
+    raw: -1/(8*var1**2)
+    prepared: -1/(8*v1**2)
+    n_variables: 1
+    subset: all
+    vars:
+      v1:
+        name: var1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      var1: uniform U[1,5] (the with-units input n, FeynmanEquations.csv)
+    meta:
+      finite_fraction: 1.0

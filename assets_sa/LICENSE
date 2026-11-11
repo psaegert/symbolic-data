@@ -1,6 +1,7 @@
 This directory subtree (assets_sa/) contains material licensed under the Creative Commons
 Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0), SEPARATE from the rest of this
-repository. Everything under assets_sa/ is licensed CC BY-SA 4.0; nothing outside it is.
+repository. Everything under assets_sa/catalogs/ is licensed CC BY-SA 4.0; nothing outside
+assets_sa/ is. assets_sa/LICENSES/ holds the texts of the copyleft licenses below.
 
 Derived from:
 - The On-Line Encyclopedia of Integer Sequences (OEIS), https://oeis.org/, copyright The OEIS
@@ -18,6 +19,26 @@ Wikipedia equation lists via ERBench; OEIS entry prose, sequence titles, and con
 comments REMOVED (the vendored train_sa.csv drops the description column entirely); expressions
 canonicalized to the symbolic-data catalog format ('^'->'**', Abs->abs, log(u,10) rewrite,
 x_k->v{k+1} variable renaming); exact duplicates merged.
+
+The Hugging Face repo psaegert/symbolic-data-assets-sa also holds share-alike and copyleft data
+catalogs built by tools/catalog_build/build_data_catalogs.py (not stored under assets_sa/). Each
+problem's metadata names its license; the rows its authors published are stored as arrays (frozen
+pools), and no value is changed.
+
+- scilaws-real-share-alike: four SciLaws-Real tasks of SciLaws-Bench (Huang et al. 2026,
+  arXiv:2609.01552; Hugging Face dataset RealSR/SciLaws-Bench, per-task licenses in its
+  dataset/LICENSES.md): running_endurance_iaaf__velocity (CC BY-SA 4.0);
+  baseball_pythagorean_winpct_lahman__win_pct (CC BY-SA 3.0, legal code
+  https://creativecommons.org/licenses/by-sa/3.0/legalcode); binary_pulsar_post_keplerian_atnf__PBDOT
+  (GPL-3.0-or-later: the ATNF Pulsar Catalogue, psrcat v2.8.0, whose programs and databases remain
+  the property of the Australia Telescope National Facility, CSIRO; text in LICENSES/GPL-3.0-only.txt);
+  wind_turbine_power_curve_engie__power_kW (ODbL 1.0 as SciLaws labels it, on ENGIE wind-turbine data;
+  text in LICENSES/ODbL-1.0.txt).
+- gecco-2013-2017-real-share-alike: the Ozone data set (OZO) of the R package mlbench (Friedrich
+  Leisch and Evgenia Dimitriadou), GPL-2 (text in LICENSES/GPL-2.0-only.txt), from the Oliveira et al.
+  2018 GECCO 2013-17 compilation.
+- dimensionless-learning: the dataset files of PyDimension v1.0.0 (xiaoyuxie-vico/PyDimension @7f90b01;
+  Xie et al. 2022, Nat. Commun. 13:7562), GPL-3.0 (text in LICENSES/GPL-3.0-only.txt).
 
 The full CC BY-SA 4.0 legal code follows.
 
