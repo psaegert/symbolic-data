@@ -1,0 +1,2 @@
+exported 60 of 1001 streamed; skipped {'placeholder': 126, 'constant y': 2} | taken {'poly3': 20, 'rat2': 20, 'sup3': 20}
+classes {'poly3': 35, 'sup3': 36, 'rat2': 21, 'rep': 17, 'trans': 2} | used variables [(1, 1), (2, 1), (3, 5), (4, 7), (5, 3), (6, 10), (7, 13), (8, 7), (9, 6), (10, 4), (11, 2), (12, 1)]

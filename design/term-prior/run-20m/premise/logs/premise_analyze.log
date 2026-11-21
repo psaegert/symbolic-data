@@ -1,0 +1,45 @@
+problems with a pool: {'nonlin': 60, 'struct': 59, 't8': 100, 'tp10c': 197}
+
+== recovery and bad draws by set
+t8      n=100 pool recovery  27.0% [19.3%, 36.4%] | median bad 28% | median used vars 6 | median size 24 | poly3 0% sup3 0% rat2 0% rep 0% trans 75%
+tp10c   n=197 pool recovery  41.6% [35.0%, 48.6%] | median bad 33% | median used vars 6 | median size 21 | poly3 7% sup3 7% rat2 3% rep 6% trans 43%
+struct  n= 59 pool recovery  52.5% [40.0%, 64.7%] | median bad 15% | median used vars 7 | median size 21 | poly3 59% sup3 59% rat2 36% rep 27% trans 2%
+nonlin  n= 60 pool recovery  36.7% [25.6%, 49.3%] | median bad 23% | median used vars 7 | median size 20 | poly3 38% sup3 37% rat2 33% rep 58% trans 13%
+
+== recovery by used variables (bins) and set
+       mean                      size                 
+set  nonlin struct    t8 tp10c nonlin struct  t8 tp10c
+vbin                                                  
+1-2    1.00   1.00  0.64  0.84      1      2  14    19
+3-4    0.55   0.82  0.24  0.49     11     11  17    39
+5-6    0.41   0.31  0.18  0.34     17     13  28    62
+7+     0.26   0.48  0.22  0.33     31     33  41    76
+
+== recovery by structural size (bins) and set
+        mean                      size                 
+set   nonlin struct    t8 tp10c nonlin struct  t8 tp10c
+sbin                                                   
+<=5      NaN    NaN   NaN  1.00      0      0   0     4
+6-10    1.00   1.00  1.00  0.82      3      6   5    17
+11-15   0.64   0.86  0.50  0.59     11      7   6    32
+16+     0.26   0.41  0.21  0.31     46     46  89   144
+
+== logistic fit: pool_rec ~ set + nvar + size (t8 = reference)
+statsmodels fit failed: No module named 'statsmodels'
+
+== recovery by class, pooled over all three sets (each problem once)
+poly3 =True  n= 71 recovery  60.6% [48.9%, 71.1%] | median size 18 | median vars 7
+poly3 =False n=345 recovery  34.5% [29.7%, 39.7%] | median size 22 | median vars 6
+sup3  =True  n= 70 recovery  51.4% [40.0%, 62.8%] | median size 19 | median vars 7
+sup3  =False n=346 recovery  36.4% [31.5%, 41.6%] | median size 22 | median vars 6
+rat2  =True  n= 47 recovery  31.9% [20.4%, 46.2%] | median size 24 | median vars 8
+rat2  =False n=369 recovery  39.8% [35.0%, 44.9%] | median size 21 | median vars 6
+rep   =True  n= 63 recovery  25.4% [16.3%, 37.3%] | median size 22 | median vars 7
+rep   =False n=353 recovery  41.4% [36.3%, 46.6%] | median size 21 | median vars 6
+trans =True  n=169 recovery  32.5% [25.9%, 39.9%] | median size 22 | median vars 6
+trans =False n=247 recovery  43.3% [37.3%, 49.6%] | median size 21 | median vars 6
+
+== structured problems vs unstructured round-10c controls, stratified (used variables x size x transcendental)
+non-linear structured        n= 98 (matched 98) recovery 34.7% | matched-stratum controls 43.2% | difference -8.6% [-21.9%, +4.6%] | controls n=177
+linear sums (poly/one-form)  n= 41 (matched 41) recovery 73.2% | matched-stratum controls 54.6% | difference +18.5% [-2.0%, +39.7%] | controls n=177
+rational sums                n= 47 (matched 47) recovery 31.9% | matched-stratum controls 38.9% | difference -7.0% [-24.2%, +9.2%] | controls n=177

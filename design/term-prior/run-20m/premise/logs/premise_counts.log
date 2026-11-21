@@ -1,0 +1,24 @@
+by set x selected_as (struct, nonlin):
+                     mean  size  sum
+set    selected_as                  
+nonlin poly3        0.600    20   12
+       rat2         0.250    20    5
+       sup3         0.250    20    5
+struct poly3        0.550    20   11
+       rat2         0.400    20    8
+       sup3         0.632    19   12
+
+non-linear structured pooled by origin:
+         mean  size  sum
+set                     
+nonlin  0.367    60   22
+struct  0.321    28    9
+tp10c   0.300    10    3
+
+non-linear structured by class:
+  poly3: 13 of 30 = 43.3%
+  sup3: 6 of 29 = 20.7%
+  rat2: 15 of 47 = 31.9%
+linear sums: 30 of 41; by set {'struct': 31, 'tp10c': 10}
+controls: 177 unstructured tp10c, recovery 40.1%
+median bad: nl 0.214 controls 0.346

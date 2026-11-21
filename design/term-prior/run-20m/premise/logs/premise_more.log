@@ -1,0 +1,36 @@
+== linear (weighted sum of single variables) among classes
+poly3: n=48 linear 85% | recovery linear 73% (n=41) non-linear 14% (n=7)
+sup3: n=48 linear 85% | recovery linear 73% (n=41) non-linear 14% (n=7)
+rat2: n=27 linear 0% | recovery linear nan% (n=0) non-linear 37% (n=27)
+overlap poly3 & sup3: 41 of 48 / 48
+
+== examples: struct set, non-linear, by selection
+-- selected as poly3: n=20, linear 80%, recovery 55%
+   rec=0 vars=8 x5 + (x12 * x16 + (x13 * (x11 - x3) + x5 * x6)) - x4
+   rec=0 vars=10 pow(x2, 4) + 24.9057 * (x11 * (x13 * (x7 * x8))) - 7.40924 * (x10 * (x2 * (x4 * x5))) - 5.2015 * (x14 * (x5 * (x8 * x9)))
+   rec=0 vars=6 pow(x10 + x3, 3) + pow(x13 - x4, 4) - pow(x10 + x13, 2) - pow(x16 + x9, 3)
+   rec=0 vars=6 134.714 * x9 + x3 * (208.057 * x5 - 68.0257) - 66.6884 * x16 - 28.6676 * (x4 * x6) - 924.192
+-- selected as sup3: n=19, linear 79%, recovery 63%
+   rec=0 vars=6 2.21932 * sin(x10) + (sin(x17) + sin(x2)) - 0.838825 * sin(x14) - 3.01 * sin(x3) - 0.0430247 * sin(x7)
+   rec=0 vars=5 4.01527 * rootn(x9, 3) + (0.245766 / rootn(x13, 3) + (3.64685 / rootn(x2, 3) + (61.1154 / rootn(x5, 3) + 133.9 / rootn(x9, 3)))) - 13.3413 /
+   rec=0 vars=6 3.85555 * x15 / (x15 - 6.47882 * x1) + x5 / (x10 - 0.889986 * x1) - x12 / (x3 - 20.4541 * x5)
+   rec=1 vars=3 17.5074 * abs(x12) + (5.76832 * abs(x16) + 7.09022 * abs(x8))
+-- selected as rat2: n=20, linear 0%, recovery 40%
+   rec=1 vars=9 pow(x3, 3) - x11 * (x13 * (x14 * (x6 * x7))) / (x17 * x3) - x13 * (x16 * pow(x3, 2)) / x5
+   rec=0 vars=7 x4 / x10 - 3889 * (pow(x14, 2) * (pow(x3, 3) * (pow(x4, 2) * (pow(x6, 3) * ((x4 + x9 - 1.86759) * (1/(x1 + x4))))))) / 80
+   rec=0 vars=10 x3 * (x16 - x14) / (x4 * x7) + (x3 + (x3 * x4 / x2 + (x11 * x5 + x3 * x6) / x4)) / x8
+   rec=0 vars=3 1/pow(x10, 3) + (1/pow(x16, 2) + 1/pow(x10, 2) / x3) - x16 - x3
+
+== t8 vs tp10c within strata (transcendental x used-variable bin)
+            mean       size      
+set           t8 tp10c   t8 tp10c
+trans vbin                       
+False 1-4   0.11  0.75    9    28
+      5-6   0.00  0.38    3    37
+      7+    0.23  0.40   13    47
+True  1-4   0.55  0.47   22    30
+      5-6   0.20  0.28   25    25
+      7+    0.21  0.21   28    29
+
+stratified recovery difference tp10c - t8 (t8 stratum weights): +9.2% [-2.7%, +21.1%]
+raw difference: +14.6%
