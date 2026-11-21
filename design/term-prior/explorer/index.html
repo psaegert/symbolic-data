@@ -1,0 +1,1098 @@
+<title>Expression Prior Explorer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style id="term-colors"></style>
+<style>
+/* Layout: a workbench in one column. One draw fills the top and Resample is the main control; how that draw was
+   composed follows; the statistics of the whole bank close the page. */
+:root {
+  --bg: #f4f5f8;
+  --surface: #ffffff;
+  --sunken: #eceef3;
+  --ink: #161b26;
+  --muted: #5a6376;
+  --line: #dce0e8;
+  --t0: #7c8598;
+  --focus: #3355d6;
+  --flag: #b4402f;
+  --flag-bg: #fbe9e6;
+  --p0: #2a78d6; --p1: #eb6834; --p2: #1baf7a; --p3: #c98a00;
+  --p4: #d4588a; --p5: #008300; --p6: #6250d6; --p7: #e34948;
+  --font-display: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11141a; --surface: #191d25; --sunken: #20252f; --ink: #e8ebf1; --muted: #9ba4b6; --line: #2c323e;
+    --t0: #8d96aa; --focus: #8fa7ff; --flag: #f08a78; --flag-bg: #3a211d;
+    --p0: #3987e5; --p1: #d95926; --p2: #199e70; --p3: #c98500;
+    --p4: #d55181; --p5: #0ca30c; --p6: #9085e9; --p7: #e66767;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11141a; --surface: #191d25; --sunken: #20252f; --ink: #e8ebf1; --muted: #9ba4b6; --line: #2c323e;
+  --t0: #8d96aa; --focus: #8fa7ff; --flag: #f08a78; --flag-bg: #3a211d;
+  --p0: #3987e5; --p1: #d95926; --p2: #199e70; --p3: #c98500;
+  --p4: #d55181; --p5: #0ca30c; --p6: #9085e9; --p7: #e66767;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 24px 64px; display: grid; gap: 18px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap > * { min-width: 0; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: 1.75rem; font-weight: 600; }
+h2 { font-size: 1.2rem; font-weight: 600; }
+h3 { font-size: 0.98rem; font-weight: 600; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 72ch; margin-top: 6px; }
+.mono { font-family: var(--font-mono); }
+.eyebrow { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+.small { font-size: 0.8rem; color: var(--muted); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; min-width: 0; }
+.block { display: grid; gap: 12px; min-width: 0; }
+.sec-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 12px; }
+button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* controls */
+.controls { display: grid; gap: 12px; }
+.priors { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 6px; }
+.priors button { text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 8px;
+  padding: 8px 12px; font: inherit; cursor: pointer; display: grid; gap: 1px; }
+.priors button small { color: var(--muted); font-size: 0.78rem; }
+.priors button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.bar { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.btn { font: inherit; font-weight: 600; border-radius: 8px; padding: 9px 14px; cursor: pointer; border: 1px solid var(--ink); }
+.btn.primary { background: var(--ink); color: var(--bg); font-size: 1rem; padding: 11px 28px; }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn:disabled { opacity: 0.4; cursor: default; }
+.kbd { font-family: var(--font-mono); font-size: 0.72rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; color: var(--muted); }
+details.filt > summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; width: max-content; max-width: 100%; }
+.filt-body { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 10px 16px; margin-top: 10px; }
+.filt-body label { display: grid; gap: 4px; font-size: 0.85rem; color: var(--muted); }
+.filt-body label.check { display: flex; gap: 8px; align-items: center; color: var(--ink); }
+.filt-body select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; }
+
+/* the draw */
+.hero { display: grid; gap: 14px; }
+.chips, .changes { display: flex; flex-wrap: wrap; gap: 5px 6px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px;
+  font-size: 0.78rem; color: var(--ink); background: var(--surface); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.chip b { font-weight: 600; }
+.chip.flag { color: var(--flag); border-color: currentColor; background: var(--flag-bg); }
+.chip.cls { background: var(--sunken); }
+.exprs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 12px; }
+.expr { border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px 12px; display: grid; gap: 6px; min-width: 0; align-content: start; }
+.expr .label { display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.8rem; color: var(--muted); }
+.legend > span { display: inline-flex; gap: 6px; align-items: center; }
+.legend b { color: var(--ink); font-family: var(--font-mono); font-weight: 500; }
+.sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; flex: none; }
+.sw.own { border: 1.5px solid var(--muted); background: var(--surface); }
+.tree-head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+.toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.toggle button { font: inherit; font-size: 0.85rem; border: 0; background: var(--surface); color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.toggle button + button { border-left: 1px solid var(--line); }
+.toggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.treebox { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: var(--sunken); }
+.treebox svg { display: block; }
+.math { overflow-x: auto; overflow-y: hidden; max-width: 100%; min-height: 26px; }
+.math.big { font-size: 1.12rem; padding: 4px 0; }
+.math .fallback { font-family: var(--font-mono); font-size: 0.85em; }
+
+/* composition */
+.graph { overflow-x: auto; }
+.graph svg { display: block; }
+.steps { display: grid; gap: 12px; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.step > header { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.step > header .n { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+.step > header p { color: var(--muted); font-size: 0.88rem; flex-basis: 100%; max-width: 78ch; }
+.hp { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); gap: 8px; }
+.hp div { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; display: grid; gap: 1px; background: var(--sunken); }
+.hp b { font-family: var(--font-mono); font-weight: 500; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.hp span { font-size: 0.75rem; color: var(--muted); }
+.src { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.src.inherited { color: var(--p2); } .src.redrawn { color: var(--p1); }
+.pool { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); gap: 10px; }
+.pterm { border: 1px solid var(--line); border-left-width: 4px; border-radius: 8px; padding: 10px 12px; display: grid; gap: 8px; min-width: 0; background: var(--surface); }
+.pterm.wide { grid-column: 1 / -1; }
+.pterm .head { display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; justify-content: space-between; }
+.pterm .name { font-family: var(--font-mono); font-weight: 500; }
+.leaves { display: grid; gap: 8px; }
+.leaf { display: grid; grid-template-columns: 82px minmax(0, 1fr); gap: 10px; align-items: start; border-top: 1px solid var(--line); padding-top: 8px; }
+.leaf:first-child { border-top: 0; padding-top: 0; }
+.leaf .tag { font-family: var(--font-mono); font-size: 0.82rem; display: grid; gap: 2px; }
+.chg { font-family: var(--font-mono); font-size: 0.75rem; border-radius: 4px; padding: 1px 6px; background: var(--sunken); border: 1px dashed var(--ink); }
+.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; font-size: 0.88rem; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; }
+details.subtrace { border-top: 1px dashed var(--line); padding-top: 8px; }
+details.subtrace > summary { cursor: pointer; font-weight: 600; font-size: 0.88rem; }
+.substeps { display: grid; gap: 10px; margin-top: 10px; padding-left: 12px; border-left: 2px solid var(--line); }
+.substeps .step { padding: 12px; background: var(--sunken); }
+details.recipe > summary { cursor: pointer; font-family: var(--font-display); font-weight: 600; }
+.recipe ol { padding-left: 1.3em; margin: 10px 0 0; display: grid; gap: 8px; font-size: 0.9rem; max-width: 92ch; }
+.recipe li::marker { color: var(--muted); font-variant-numeric: tabular-nums; }
+.bars { display: flex; align-items: end; gap: 2px; height: 46px; }
+.bars div { flex: 1; background: var(--line); border-radius: 2px 2px 0 0; min-width: 3px; }
+.bars div.on { background: var(--ink); }
+.bars-axis { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tablewrap { overflow-x: auto; }
+table.gt { border-collapse: collapse; font-size: 0.86rem; font-variant-numeric: tabular-nums; min-width: 420px; }
+table.gt th { text-align: left; font-weight: 600; color: var(--muted); font-size: 0.78rem; padding: 4px 14px 4px 0; border-bottom: 1px solid var(--line); }
+table.gt td { padding: 5px 14px 5px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.empty { color: var(--muted); padding: 20px; text-align: center; border: 1px dashed var(--line); border-radius: var(--r); }
+
+/* statistics */
+.stats { display: flex; flex-wrap: wrap; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.stat { background: var(--surface); padding: 10px 12px; display: grid; gap: 2px; flex: 1 1 150px; min-width: 0; }
+.stat b { font-family: var(--font-display); font-size: 1.25rem; font-variant-numeric: tabular-nums; font-weight: 600; }
+.stat span { font-size: 0.78rem; color: var(--muted); }
+.stat i { font-style: normal; font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.charts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 12px; }
+.chart { display: grid; gap: 6px; align-content: start; }
+.chart svg { width: 100%; height: auto; display: block; }
+.chart .legend { font-size: 0.75rem; }
+@media (prefers-reduced-motion: no-preference) { .priors button, .btn, .toggle button { transition: border-color .15s, box-shadow .15s, background .15s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Flash-ANSR training priors</div>
+    <h1>Expression Prior Explorer</h1>
+    <p class="lede">Draws from the real samplers, each with its full trace: 400–600 per prior, generated 2026-11-20 and 21. Round 8 is the unified term prior, built up in six steps from T8 itself; round 9 adds a structure level per expression. Resample to see another draw; the composition below follows it, and the statistics at the bottom cover every draw of the chosen prior.</p>
+  </header>
+
+  <section class="panel controls" aria-label="Prior and resampling">
+    <div class="priors" id="priors" role="group" aria-label="Prior"></div>
+    <div class="bar">
+      <button class="btn primary" id="resample" type="button" title="Resample (R)">Resample</button>
+      <button class="btn ghost" id="prev" type="button" disabled>Previous</button>
+      <span class="small">or press <span class="kbd">R</span></span>
+      <span class="small" id="count"></span>
+    </div>
+    <details class="filt" id="filters">
+      <summary>Only resample draws that…</summary>
+      <div class="filt-body">
+        <label for="f-held">Holdout
+          <select id="f-held"><option value="">any</option><option value="kept">reach training</option><option value="held">are held out (precise key)</option></select>
+        </label>
+        <label for="f-case" class="branch-only">Alphabet branch
+          <select id="f-case"><option value="">any</option><option value="full">parent's alphabet, full</option><option value="subset">parent's alphabet, subset per term</option><option value="shared">one shared alphabet</option><option value="own">own alphabet per term</option></select>
+        </label>
+        <label for="f-n0" class="pool-only">Operators in the top-level tree
+          <select id="f-n0"><option value="">any</option><option value="0-2">0–2</option><option value="3-5">3–5</option><option value="6-8">6–8</option><option value="9-99">9 or more</option></select>
+        </label>
+        <label for="f-m" class="pool-only">Groups (pool size M)
+          <select id="f-m"><option value="">any</option><option value="1">1</option><option value="2">2</option><option value="3-4">3–4</option><option value="5-99">5 or more</option></select>
+        </label>
+        <label class="check pool-only" for="f-reuse"><input type="checkbox" id="f-reuse"> use a composite term at least twice</label>
+        <label class="check nest-only" for="f-rec"><input type="checkbox" id="f-rec"> use a nested term</label>
+        <label class="check" for="f-uni"><input type="checkbox" id="f-uni"> have one variable</label>
+        <label class="check" for="f-poly"><input type="checkbox" id="f-poly"> are a polynomial with ≥ 3 terms</label>
+        <label class="check" for="f-rat"><input type="checkbox" id="f-rat"> are a sum of ≥ 2 rational terms</label>
+        <label class="check" for="f-rep"><input type="checkbox" id="f-rep"> have two terms of one form</label>
+      </div>
+    </details>
+  </section>
+
+  <section class="panel hero" aria-labelledby="draw-h">
+    <div class="sec-head"><h2 id="draw-h">This draw</h2><span class="small mono" id="draw-id"></span></div>
+    <div class="chips" id="chips"></div>
+    <div class="exprs">
+      <div class="expr">
+        <div class="label"><span class="eyebrow">Raw</span><span class="small" id="raw-note">as sampled</span></div>
+        <div class="math big" id="raw"></div>
+      </div>
+      <div class="expr">
+        <div class="label"><span class="eyebrow">Simplified</span><span class="small">what the model is trained on</span></div>
+        <div class="math big" id="simp"></div>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="tree-head">
+      <div class="toggle" role="group" aria-label="Tree to show">
+        <button type="button" data-tree="raw" aria-pressed="true">Raw tree</button>
+        <button type="button" data-tree="simp" aria-pressed="false">Simplified tree</button>
+      </div>
+      <span class="small">Pills are + − × ÷, square boxes are functions; a dashed edge leads to an exponent or root index. Hover a node for its origin.</span>
+    </div>
+    <div class="treebox" id="tree"></div>
+  </section>
+
+  <section class="block" aria-labelledby="comp-h">
+    <div class="sec-head"><h2 id="comp-h">How this draw was composed</h2><span class="small" id="comp-note"></span></div>
+    <div class="panel" id="graph-panel" style="display:grid;gap:8px">
+      <h3>Terms and copies</h3>
+      <p class="small">Each box is a term with the number of times it occurs in the expression. An arrow from a tree to a term counts the slots that term fills in one copy of that tree. A sub-level is a tree of its own, so its terms sit one column further right.</p>
+      <div class="graph" id="graph"></div>
+    </div>
+    <div class="steps" id="steps"></div>
+    <details class="panel recipe" id="recipe">
+      <summary>How this prior samples, step by step</summary>
+      <ol id="recipe-list"></ol>
+    </details>
+  </section>
+
+  <section class="block" aria-labelledby="stats-h">
+    <div class="sec-head"><h2 id="stats-h">Over all draws of this prior</h2><span class="small" id="stats-note"></span></div>
+    <div class="stats" id="stats"></div>
+    <div class="charts" id="charts"></div>
+  </section>
+</div>
+
+<script>
+window.MathJax = {
+  tex: { packages: { '[+]': ['html'] } },
+  svg: { fontCache: 'local' },
+  options: { enableMenu: false },
+  startup: { typeset: false }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.js" async></script>
+<script>
+"use strict";
+// ---------------------------------------------------------------- vocabulary
+const BIN = new Set(["+", "-", "*", "/", "pow", "rootn"]);
+const UN = new Set(["neg", "inv", "abs", "sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh", "asinh", "acosh", "atanh", "exp", "log"]);
+const PILL = new Set(["+", "-", "*", "/"]);
+const arity = t => BIN.has(t) ? 2 : UN.has(t) ? 1 : 0;
+const isVar = t => /^x\d+$/.test(t);
+const isSlot = t => /^@\d+$/.test(t);
+const NC = 16;
+const pc = j => `p${((j % NC) + NC) % NC}`;
+const cvar = j => j < 0 ? "var(--muted)" : `var(--c${((j % NC) + NC) % NC})`;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const SUB = { 0: "₀", 1: "₁", 2: "₂", 3: "₃", 4: "₄", 5: "₅", 6: "₆", 7: "₇", 8: "₈", 9: "₉" };
+const varLabel = t => "x" + t.slice(1).split("").map(d => SUB[d]).join("");
+const $ = id => document.getElementById(id);
+const plural = (n, one, many) => `${n} ${n === 1 ? one : (many || one + "s")}`;
+
+// 16 term colours: the 8 categorical hues, then the same hues darkened toward the ink.
+(function termColors() {
+  const rules = [":root {"];
+  for (let j = 0; j < 8; j++) rules.push(`--c${j}: var(--p${j}); --c${j + 8}: color-mix(in oklab, var(--p${j}) 62%, var(--ink));`);
+  rules.push("}");
+  for (let j = 0; j < NC; j++) rules.push(`.math .p${j}, .math g.p${j} { color: var(--c${j}); fill: var(--c${j}); }`);
+  $("term-colors").textContent = rules.join("\n");
+})();
+
+function fmt(s) {
+  if (s === "np.pi") return "π";
+  if (s === "np.e") return "e";
+  const v = Number(s);
+  if (!Number.isFinite(v)) return String(s);
+  if (Number.isInteger(v) && Math.abs(v) < 1e5) return String(v);
+  const a = Math.abs(v);
+  if (a >= 1e4 || a < 1e-3) return v.toExponential(2);
+  return String(Number(v.toPrecision(4)));
+}
+function parse(tokens) {
+  let i = 0;
+  function rec(parent, k) {
+    const idx = i, t = String(tokens[i++]);
+    const node = { t, idx, kids: [], slot: !!parent && (parent.t === "pow" || parent.t === "rootn") && k === 1 };
+    for (let c = 0; c < arity(t); c++) node.kids.push(rec(node, c));
+    return node;
+  }
+  return rec(null, 0);
+}
+
+// ---------------------------------------------------------------- provenance: one colour per term, at every level
+// Top-level terms take colours 0..M-1 in pool order, deeper terms continue depth-first. A sub-level's own tree keeps
+// the colour of the term it is. origin[i] is the colour of raw token i (-1: the top-level tree).
+function prepare(r) {
+  if (r._prep) return r;
+  r._prep = true; r._terms = [];
+  if (!r.pool || (r.H && r.H.const_law)) return r;
+  let next = 0;
+  (function visit(lv, prefix, depth, mult) {
+    if (lv._own === undefined) lv._own = -1;
+    lv._cls = lv.pool.map(() => next++);
+    lv._names = lv.pool.map((p, j) => (prefix ? prefix + "." : "P") + (j + 1));
+    lv.pool.forEach((p, j) => {
+      r._terms.push({ name: lv._names[j], p, color: lv._cls[j], depth, total: mult * p.uses });
+      if (p.kind === "level") { p.sub._own = lv._cls[j]; visit(p.sub, lv._names[j], depth + 1, mult * p.uses); }
+    });
+  })(r, "", 1, 1);
+  try { const pv = provenance(r); r._origin = pv.origin; r._changes = pv.changes; }
+  catch (e) { r._origin = r.rawo ? r.rawo.map(o => o < 0 ? -1 : r._cls[o]) : null; r._changes = null; }
+  return r;
+}
+function provenance(lv) {
+  const origin = [], changes = [], toks = [];
+  lv.shape.forEach(t => {
+    if (!isSlot(t)) { toks.push(t); origin.push(lv._own); changes.push(null); return; }
+    const k = +t.slice(1), j = lv.assign[k], leaf = lv.leaves[k], p = lv.pool[j];
+    toks.push(...leaf.tokens);
+    const inner = p.kind === "level" ? provenance(p.sub) : null;
+    if (inner && inner.origin.length !== leaf.tokens.length) throw new Error("copy changed length");
+    leaf.tokens.forEach((_, i) => {
+      origin.push(inner ? inner.origin[i] : lv._cls[j]);
+      changes.push((leaf.how === "copy" && leaf.changes && leaf.changes[i]) || (inner && inner.changes[i]) || null);
+    });
+  });
+  if (toks.join(" ") !== lv.raw.join(" ")) throw new Error("raw does not match its parts");
+  return { origin, changes };
+}
+function provenanceSafe(lv) { try { return provenance(lv); } catch (e) { return { origin: null, changes: null }; } }
+const isTermRec = p => p.kind === "level" && p.sub && p.sub.H && p.sub.H.theta !== undefined;   // round 8: every composite is a term
+const opCount = toks => toks.filter(t => arity(String(t))).length;
+const kindText = p => isTermRec(p) ? "term" : p.kind === "level" ? "sub-level" : p.kind === "term" ? (p.mess ? "one LC tree" : "term") : p.kind === "var" ? "variable" : "constant";
+const termValue = p => p.kind === "var" ? varLabel(p.val) : p.kind === "const" ? fmt(p.val) : "";
+
+// ---------------------------------------------------------------- LaTeX
+const FN = { sin: "\\sin", cos: "\\cos", tan: "\\tan", asin: "\\arcsin", acos: "\\arccos", atan: "\\arctan", sinh: "\\sinh",
+  cosh: "\\cosh", tanh: "\\tanh", asinh: "\\operatorname{arsinh}", acosh: "\\operatorname{arcosh}",
+  atanh: "\\operatorname{artanh}", exp: "\\exp", log: "\\log" };
+function texNum(s) {
+  if (s === "np.pi") return "\\pi";
+  if (s === "np.e") return "e";
+  const v = Number(s);
+  if (!Number.isFinite(v)) return "\\text{" + s + "}";
+  const a = Math.abs(v);
+  if (a !== 0 && (a >= 1e4 || a < 1e-3)) { const [m, e] = v.toExponential(2).split("e"); return `${m}\\times 10^{${Number(e)}}`; }
+  return String(Number.isInteger(v) ? v : Number(v.toPrecision(4)));
+}
+// opt.origin: colour per token; opt.changes: change record per token (underlined); opt.slots: slot k -> {c, name}.
+// Signs are pulled to the front of products and quotients, and a chain of * / inv prints flat (as one fraction when it has
+// a denominator); a factor that is a different term (another colour) or a changed node stays one grouped factor.
+function toTex(tokens, opt = {}) {
+  const root = parse(tokens);
+  const { origin, changes, slots } = opt;
+  const par = (x, p) => x.p < p ? { s: `\\left(${x.s}\\right)`, p: 9, sg: x.sg } : x;
+  const M = x => x.sg < 0 ? { s: `-${x.p < 2 ? `\\left(${x.s}\\right)` : x.s}`, p: 2.5, sg: 1 } : x;
+  const U = (s, ch) => ch ? `\\underline{${s}}` : s;
+  function T(n, parentOrigin) {
+    const o = origin ? origin[n.idx] : -1;
+    const ch = changes ? changes[n.idx] : null;
+    const opCh = !!ch && ch[0] === "op";
+    const t = n.t;
+    let r;
+    if (!n.kids.length) {
+      if (isVar(t)) r = { s: `x_{${t.slice(1)}}`, p: 9, sg: 1 };
+      else if (isSlot(t)) {
+        const sl = slots ? slots[Number(t.slice(1))] : null;
+        r = { s: sl ? `\\class{${pc(sl.c)}}{\\boxed{\\scriptstyle P_{${sl.name.slice(1)}}}}` : `\\boxed{${t.slice(1)}}`, p: 9, sg: 1 };
+      } else { const v = Number(t); r = v < 0 ? { s: texNum(String(-v)), p: 9, sg: -1 } : { s: texNum(t), p: 9, sg: 1 }; }
+      if (ch) r = { s: U(r.s, true), p: r.p, sg: r.sg };
+    } else if (t === "neg") {
+      const a = T(n.kids[0], o); r = { s: a.s, p: a.p, sg: -a.sg };
+    } else if (t === "*" || t === "/" || t === "inv") {
+      const num = [], den = []; let sg = 1;
+      const walk = (m, up, top) => {
+        const same = top || ((origin ? origin[m.idx] : -1) === o && !(changes && changes[m.idx]));
+        if (same && m.t === "*") { walk(m.kids[0], up, false); walk(m.kids[1], up, false); return; }
+        if (same && m.t === "/") { walk(m.kids[0], up, false); walk(m.kids[1], !up, false); return; }
+        if (same && m.t === "inv") { walk(m.kids[0], !up, false); return; }
+        const x = T(m, o); sg *= x.sg;
+        if (!(x.s === "1" && x.p === 9)) (up ? num : den).push(x);
+      };
+      walk(n, true, true);
+      const join = xs => xs.map(x => par(x, 2).s).join(` ${U("\\cdot", opCh)} `);
+      const top = join(num) || "1";
+      r = den.length ? { s: `\\frac{${top}}{${join(den)}}`, p: 9, sg } : { s: top, p: num.length > 1 ? 2 : (num[0] ? num[0].p : 9), sg };
+    } else if (t === "+" || t === "-") {
+      const a = T(n.kids[0], o), b = T(n.kids[1], o), sb = t === "-" ? -b.sg : b.sg;
+      r = { s: `${M(a).s} ${U(sb < 0 ? "-" : "+", opCh)} ${par(b, sb < 0 ? 1.5 : 1).s}`, p: 1, sg: 1 };
+    } else if (t === "pow") {
+      const a = M(T(n.kids[0], o)), b = M(T(n.kids[1], o));
+      r = { s: `{${par(a, 9).s}}^{${b.s}}`, p: 5, sg: 1 };
+    } else if (t === "rootn") {
+      const a = M(T(n.kids[0], o)), k = Number(n.kids[1].t);
+      if (Number.isFinite(k) && !n.kids[1].kids.length) {
+        const rt = Math.abs(k) === 2 ? `\\sqrt{${a.s}}` : `\\sqrt[${Math.abs(k)}]{${a.s}}`;
+        r = { s: k < 0 ? `\\frac{1}{${rt}}` : rt, p: 9, sg: 1 };
+      } else { const b = M(T(n.kids[1], o)); r = { s: `{${par(a, 9).s}}^{1/${par(b, 9).s}}`, p: 5, sg: 1 }; }
+    }
+    else if (t === "abs") r = { s: `\\left|${M(T(n.kids[0], o)).s}\\right|`, p: 9, sg: 1 };
+    else if (FN[t]) r = { s: `${U(FN[t], opCh)}\\left(${M(T(n.kids[0], o)).s}\\right)`, p: 5, sg: 1 };
+    else r = { s: `\\text{${t}}`, p: 9, sg: 1 };
+    if (origin && o >= 0 && o !== parentOrigin) r = { s: `\\class{${pc(o)}}{${r.s}}`, p: r.p, sg: r.sg };
+    return r;
+  }
+  return M(T(root, -1)).s;
+}
+function toInfix(tokens) {
+  // plain-text fallback shown until MathJax loads: same rules as the formulas (flat products, signs in front)
+  const root = parse(tokens);
+  const par = (x, p) => x.p < p ? `(${x.s})` : x.s;
+  const M = x => x.sg < 0 ? { s: "-" + (x.p < 2 ? `(${x.s})` : x.s), p: 2.5, sg: 1 } : x;
+  function T(n) {
+    const t = n.t;
+    if (!n.kids.length) {
+      if (isVar(t)) return { s: t, p: 9, sg: 1 };
+      if (isSlot(t)) return { s: `[${t.slice(1)}]`, p: 9, sg: 1 };
+      const v = Number(t); return v < 0 ? { s: fmt(String(-v)), p: 9, sg: -1 } : { s: fmt(t), p: 9, sg: 1 };
+    }
+    if (t === "neg") { const a = T(n.kids[0]); return { s: a.s, p: a.p, sg: -a.sg }; }
+    if (t === "*" || t === "/" || t === "inv") {
+      const num = [], den = []; let sg = 1;
+      const walk = (m, up) => {
+        if (m.t === "*") { walk(m.kids[0], up); walk(m.kids[1], up); return; }
+        if (m.t === "/") { walk(m.kids[0], up); walk(m.kids[1], !up); return; }
+        if (m.t === "inv") { walk(m.kids[0], !up); return; }
+        const x = T(m); sg *= x.sg; if (!(x.s === "1" && x.p === 9)) (up ? num : den).push(x);
+      };
+      walk(n, true);
+      const top = num.map(x => par(x, 2)).join(" * ") || "1";
+      if (!den.length) return { s: top, p: num.length > 1 ? 2 : (num[0] ? num[0].p : 9), sg };
+      const bottom = den.length === 1 ? par(den[0], 2.1) : "(" + den.map(x => par(x, 2)).join(" * ") + ")";
+      return { s: `${top} / ${bottom}`, p: 2, sg };
+    }
+    if (t === "+" || t === "-") {
+      const a = T(n.kids[0]), b = T(n.kids[1]), sb = t === "-" ? -b.sg : b.sg;
+      return { s: `${M(a).s} ${sb < 0 ? "-" : "+"} ${par(b, sb < 0 ? 1.5 : 1)}`, p: 1, sg: 1 };
+    }
+    if (t === "pow" || t === "rootn") return { s: `${t}(${M(T(n.kids[0])).s}, ${M(T(n.kids[1])).s})`, p: 9, sg: 1 };
+    return { s: `${t}(${M(T(n.kids[0])).s})`, p: 9, sg: 1 };
+  }
+  return M(T(root)).s;
+}
+let mjReady = false;
+function mathEl(tokens, opt = {}, cls = "") {
+  const el = document.createElement("div");
+  el.className = "math " + cls;
+  el.dataset.tex = toTex(tokens, opt);
+  el.dataset.fallback = toInfix(tokens);
+  typeset(el);
+  return el;
+}
+function typeset(el) {
+  if (mjReady) {
+    try { el.replaceChildren(MathJax.tex2svg(el.dataset.tex, { display: false })); return; }
+    catch (e) { /* fall through to text */ }
+  }
+  el.innerHTML = `<span class="fallback">${esc(el.dataset.fallback)}</span>`;
+}
+function retypesetAll() { document.querySelectorAll(".math[data-tex]").forEach(typeset); }
+
+// ---------------------------------------------------------------- trees
+const OPL = { "+": "+", "-": "−", "*": "×", "/": "÷", pow: "^", rootn: "√", neg: "−( )", inv: "1/( )", abs: "| |" };
+function nodeLabel(n, slots) {
+  if (n.kids.length) return OPL[n.t] || n.t;
+  if (isVar(n.t)) return varLabel(n.t);
+  if (isSlot(n.t)) { const sl = slots ? slots[Number(n.t.slice(1))] : null; return sl ? sl.name : `□${n.t.slice(1)}`; }
+  return fmt(n.t);
+}
+const valText = v => { const s = String(v); return isVar(s) ? varLabel(s) : arity(s) ? s : fmt(s); };
+// opt.origin / opt.changes / opt.slots as in toTex; opt.names: colour -> term name for tooltips.
+function treeSVG(tokens, opt = {}) {
+  const root = parse(tokens);
+  const { origin, changes, slots, names } = opt;
+  const cw = 6.9, padX = 8, h = 22, dy = 44, gap = 8;
+  let cursor = 0, maxDepth = 0;
+  const width = n => n.slot ? Math.max(18, nodeLabel(n, slots).length * 6.2 + 6) : Math.max(n.kids.length ? 28 : 26, nodeLabel(n, slots).length * cw + 2 * padX);
+  (function lay(n, d) {
+    n.d = d; maxDepth = Math.max(maxDepth, d); n.w = width(n);
+    if (!n.kids.length) { n.x = cursor + n.w / 2; cursor += n.w + gap; return; }
+    n.kids.forEach(k => lay(k, d + 1));
+    n.x = (n.kids[0].x + n.kids[n.kids.length - 1].x) / 2;
+  })(root, 0);
+  const shift = Math.max(0, root.w / 2 - root.x) + 4;
+  const W = Math.max(cursor - gap, root.w) + shift + 8, H = maxDepth * dy + h + 8;
+  const edges = [], nodes = [];
+  (function walk(n) {
+    const x = n.x + shift, y = n.d * dy + h / 2 + 4;
+    n.kids.forEach(k => {
+      edges.push(`<line x1="${x}" y1="${y + h / 2}" x2="${k.x + shift}" y2="${k.d * dy + 4}" stroke="var(--line)" stroke-width="1.5"${k.slot ? ' stroke-dasharray="3 3"' : ""}/>`);
+      walk(k);
+    });
+    const o = origin ? origin[n.idx] : -1;
+    const ch = changes ? changes[n.idx] : null;
+    const lab = nodeLabel(n, slots);
+    let tip = n.kids.length ? n.t : isVar(n.t) ? varLabel(n.t) : isSlot(n.t) ? `slot ${n.t.slice(1)}` : fmt(n.t);
+    if (origin) tip += o >= 0 ? ` · from ${names && names[o] ? names[o] : "term " + (o + 1)}` : " · top-level tree";
+    if (ch) tip += ` · changed in this copy (${ch[0]}${ch[1] !== undefined && ch[1] !== null ? ", was " + valText(ch[1]) : ""})`;
+    if (n.slot) {
+      nodes.push(`<g><title>${esc(tip)} (typed literal)</title><text x="${x}" y="${y + 4}" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" font-style="italic" fill="${ch ? "var(--ink)" : "var(--muted)"}"${ch ? ' text-decoration="underline"' : ""}>${esc(lab)}</text></g>`);
+      return;
+    }
+    let stroke = "var(--muted)", fill = "var(--surface)", dash = "", sw = 1.3;
+    if (isSlot(n.t)) {
+      const sl = slots ? slots[Number(n.t.slice(1))] : null;
+      stroke = sl ? cvar(sl.c) : "var(--muted)"; fill = `color-mix(in oklab, ${stroke} 16%, var(--surface))`; dash = ' stroke-dasharray="4 3"'; sw = 1.6;
+    } else if (o >= 0) { stroke = cvar(o); fill = `color-mix(in oklab, ${stroke} 18%, var(--surface))`; sw = 1.6; }
+    if (ch) { dash = ' stroke-dasharray="3 2"'; sw = 2.2; }
+    const rx = n.kids.length ? (PILL.has(n.t) ? h / 2 : 4) : 6;
+    nodes.push(`<g><title>${esc(tip)}</title>` +
+      `<rect x="${x - n.w / 2}" y="${y - h / 2}" width="${n.w}" height="${h}" rx="${rx}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"${dash}/>` +
+      `<text x="${x}" y="${y + 4}" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11.5" fill="var(--ink)">${esc(lab)}</text></g>`);
+  })(root);
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Expression tree">${edges.join("")}${nodes.join("")}</svg>`;
+}
+
+// ---------------------------------------------------------------- priors and recipes
+const PRIORS = {
+  t8: { name: "T8 prior", sub: "plain LC, as trained (35-token cap)" },
+  pool4: { name: "Round 6", sub: "term pool, n1 ≤ 4, alphabet flips" },
+  r7: { name: "Round 7", sub: "recursive pool, nesting fix, budget ×1.3" },
+  r7c: { name: "Round 7, corpus functions", sub: "round 7 with corpus-tempered function weights" },
+  r8a: { name: "Round 8a: T8 case", sub: "unified term prior, every addition off" },
+  r8b: { name: "Round 8b: + recursion", sub: "budgeted nested terms" },
+  r8c: { name: "Round 8c: + reuse", sub: "fewer groups, additive-share and family urns" },
+  r8d: { name: "Round 8d: + inheritance", sub: "children copy values and variables" },
+  r8e: { name: "Round 8e: + copy changes", sub: "copies redraw parts of their template" },
+  r8f: { name: "Round 8f: + budget ×1.3", sub: "8e with round 7's budget scale" },
+  r8: { name: "Round 8 (base)", sub: "8f with hyperbolic functions at half weight" },
+  r9: { name: "Round 9", sub: "round 8 + structure level and operator-level forms" },
+  r9b: { name: "Round 9b", sub: "9 with one structure level per expression" },
+  r10: { name: "Round 10", sub: "round 8 + structure level and three relations" },
+  r10b: { name: "Round 10b", sub: "10 with parameters halfway to real formulas" },
+  r10c: { name: "Round 10c", sub: "10b with structure level s uniform (mean 0.5)" },
+};
+const isR8 = k => /^r(8|9|10)/.test(k);          // round 8 and 9 share the term trace
+const R8_STEP = { r8a: 0, r8b: 1, r8c: 2, r8d: 3, r8e: 4, r8f: 5, r8: 6, r9: 7, r9b: 8, r10: 9, r10b: 10, r10c: 11 };
+const RECIPES = {
+  t8: [
+    "Draw the operator count n from p(n) ∝ exp(n^0.7), n = 0…17.",
+    "Grow an exact-size tree: functions have mass 0.5 and lose ×0.25 per nested function (neg and inv pass through); a binary node prefers its parent's class (+ − or × ÷), a switch costs ×0.5. Weights: + − × ÷ 10 each, pow and rootn 5 with exponents from their own prior, every other function 1.",
+    "Leaves: the number of distinct kinds k is uniform in 1…min(leaves, 17), the kinds are drawn from x1…x17 and “constant”; every kind is used once, the rest of the leaves are uniform over the chosen kinds. Constants are Cauchy(0, 5).",
+    "Simplify (permissive canon). Resample if every variable cancelled or the result is longer than 35 tokens.",
+  ],
+  pool: cap => [
+    "Budget B from the same p(n) as the T8 prior. τ0 gets n0 operators, uniform in 1…min(8, B); the remaining budget is R = B − n0.",
+    "Per expression: reuse ρ ~ U(0,1) sets the pool size M = 1 + Binomial(L − 1, 1 − ρ) for τ0's L leaves; α ~ log-uniform[0.1, 10] sets how evenly leaves spread over the pool; r ~ U(0,1) becomes r_eff = r + (1 − r)·R/B; κ ~ U(0, 0.5); the new-variable gate opens with probability 0.5. A constant law (0.3%, T8's rate) skips everything below.",
+    "τ0's shape comes from the T8 tree sampler with n0 operators. One family urn (α = 0.36) is shared by τ0, every pool term and every operator swap in a copy.",
+    "Alphabets: τ0's alphabet A0 has a size uniform in 1…min(L, 17). Pool terms take their variables from A0 (50%: the full A0 or a random subset per term, half each), from one shared level-1 alphabet (25%), or from their own LC draw over all 17 variables (25%).",
+    `Pool: each term is composite with probability r_eff, an LC tree sized so its uses add up to about R / (number of composite terms), at most ${cap} operators, with at least one variable; otherwise a constant (probability κ, only once the pool has a variable-bearing term) or the next variable of A0.`,
+    "Leaves: every pool term fills one leaf, the remaining leaves draw from Dirichlet(α) weights over the pool.",
+    "Each use of a composite term is a modified copy: 10% of copies swap one operator for another of the same arity; if the gate is open, each variable swaps to any of x1…x17 with probability 0.5; exponents are redrawn with probability 0.5; constants are redrawn with probability 0.9 and kept with 0.1. A reused constant term is redrawn 90% of the time.",
+    "Simplify (permissive canon). Resample only if every variable cancelled. No length cap.",
+  ],
+};
+RECIPES.r7 = c => [
+  "Budget B: an operator count from p(n) ∝ exp(n^0.7), n = 0…17, times 1.3, rounded. A constant law (0.3%, T8's rate) skips everything below.",
+  "Every level draws its own hyperparameters. At the top level each comes from its root prior: additive share s ~ Beta(0.5, 0.5) (+ and − share s, × and ÷ share 1 − s, so most expressions lean to sums or to products), own-tree share f ~ Beta(2, 3), reuse ρ ~ Beta(2, 1), spread α ~ log-uniform[0.1, 10], composite share r ~ U(0, 1), constant share κ ~ U(0, 0.5), new-variable gate (50%), alphabet branch (four options, 25% each). A deeper level copies each value from its parent with probability 0.6 (depth 1), 0.35 (depth 2) or 0.2 (depth 3) and otherwise redraws it from the root prior, so every level's marginal is the root prior.",
+  "A level with budget b grows its own tree with n = f·b operators (1 to 8) using its additive share. Function nesting is counted through binary nodes: each function above a node multiplies the mass of a new function by 0.25. A level placed under functions starts at that depth.",
+  "Pool size M = 1 + Binomial(L − 1, 1 − ρ) for the tree's L leaf slots. Each pool term is composite with probability r + (1 − r)·R/b, R = b − n; otherwise a constant (probability κ, only once a variable-bearing term exists) or the next variable of the level's alphabet.",
+  "A composite term gets the budget share R / (composite terms × its uses). Up to 4 operators it is one LC tree; larger, it is a sub-level built the same way (at most 3 levels), except that 20% of large terms stay one LC tree of up to 8 operators (the random component). Every composite term draws its own additive share (copied from its level or redrawn) and starts at the deepest function depth of the slots it fills.",
+  "Alphabets: the top level draws one sized by LC's rule. Each level's composite terms take their variables from the level's alphabet (full or a random subset), from one shared alphabet for the level's terms, or from their own draw.",
+  "Every pool term fills one slot, the remaining slots draw from Dirichlet(α) weights. Each use of a composite term is a modified copy: 10% swap one operator for another of the same arity; if the gate is open, each variable swaps to any of x1…x17 with probability 0.5; exponents redrawn with probability 0.5; constants redrawn with probability 0.9.",
+  c ? "Function weights: T8's total function weight, split by corpus frequency (11,668 real formulas, add-one smoothed, square root). Inverse trig and inverse hyperbolic functions get about 12% of function nodes instead of about 40%." : "Function weights as in T8: every function weight 1, so inverse trig and inverse hyperbolic functions are about 40% of function nodes.",
+  "Simplify (permissive canon). Resample only if every variable cancelled. No length cap.",
+];
+RECIPES.r8 = key => {
+  const s = R8_STEP[key], on = k => s >= k;
+  return [
+    `Budget B: an operator count from p(n) ∝ exp(n^0.7), n = 0…17${on(5) ? ", times 1.3, rounded" : ""}.${on(3) ? " Per expression, an inheritance strength λ ~ Beta(3, 2)." : ""}`,
+    `Every term draws its hyperparameters. Flat: ${on(1) ? "with probability 0.2" : "always"} the term's whole budget goes into its own tree. Own-tree share f ~ Beta(2, 3). Reuse ρ ~ ${on(2) ? "Beta(2, 1)" : "U(0, 1)"}. Spread α ${on(2) ? "~ log-uniform[0.1, 10]" : "= ∞ (uniform)"}.${on(2) ? " Additive share s ~ Beta(0.5, 0.5)." : ""}${on(4) ? " Copy gate: open with probability 0.5." : ""} ${on(3) ? "A nested term copies each value from its parent with probability λ^depth and otherwise redraws it from the root prior." : "A nested term redraws every value from the root prior."}`,
+    ...(on(7) ? [`Structure level: per expression ${on(11) ? "s ~ U(0, 1), i.e. Beta(1, 1) (mean 0.5)" : "s ~ Beta(0.5, 1.5) (mean 0.25; 40% of expressions below 0.1, 12% above 0.6)"}, ${on(8) ? "used unchanged by every term of the expression" : "inherited like the other values (copied with probability λ^depth, otherwise redrawn)"}. A term with budget ≥ 1 picks a structural form with probability s, otherwise an LC tree as below.`,
+      on(9) ? `Relations, from one relation urn per expression (concentration 1; base shares halfway between equal shares and the root shares of 10,801 real formulas: repeat product 31.5%, pairing 21.4%, affine 13.9%, power 12.3%, repeat sum 12.0%, function 8.9%). Repeat and combine: ${on(10) ? "k copies of one nested term (products: 2–6 copies with probabilities 51, 26.5, 13, 7, 2.5%; sums: 2–5 copies with 66, 20.5, 8, 5.5%), joined by × (÷ with probability 0.26) or + (− with probability 0.24); in a product each copy may get its own power or root (probability 0.33), in a sum its own coefficient (0.42); copies swap variables (probability 0.7) and redraw exponents (0.44). These values are halfway between round 10's and those measured on 10,801 real formulas" : "k = 2–5 copies of one nested term (k = 2 with probability 0.45), joined by × (÷ with probability 0.3) or + (− with probability 0.25); in a product each copy may get its own power or root (probability 0.4), in a sum its own coefficient (0.5); copies swap variables (probability 0.7) and redraw exponents (0.5)"}, and a copy that would merge with the others on simplification is varied again. Pairing: two independent nested terms joined by one operator (× ÷ with probability 0.6, + − otherwise). Composition: a function (damped by the nesting decay), a power or root, or affine c·□ + c around one nested term, which may not itself be a composition.` : "Forms, from one form urn per expression (concentration 1; base shares sum 0.25, product 0.20, ratio, power, function 0.15 each, affine 0.10): sum of k terms (k = 2–5, each operator − with probability 0.25), product of k factors (k = 2–4, each operator ÷ with probability 0.3), ratio □/□, power □^e or root (exponent prior as T8), function f(□) from the family urn (damped by the nesting decay per enclosing function), affine c·□ + c. A form's operators come out of the term's budget; the rest goes to its slots."] : []),
+    `Own tree: b operators if flat, otherwise max(1, round(f·b)), from the T8 tree sampler.${on(1) ? " Function nesting counts every function above a node, also across terms (round 7's rule)." : ""}${on(2) ? " Binary labels follow the additive share; one family urn (α = 0.36) is shared by the whole expression." : " No family urn, as in T8.1."}`,
+    "Grouping: the tree's L slots form k = 1 + Binomial(L − 1, 1 − ρ) groups, at most 17. Each group takes one slot, the remaining slots follow Dirichlet(α) weights. With ρ ~ U(0, 1) and α = ∞ this is exactly T8's leaf rule.",
+    `Budget split: the remaining budget R = b − n is shared out by v ~ Dirichlet(1); each of a group's |t| copies gets R·v_t/|t| operators, rounded up with probability equal to the fraction. A group with 0 operators is an atom: a variable or the constant, distinct within the term${on(3) ? ", taken from the parent's alphabet with probability λ^depth, otherwise fresh" : ", drawn fresh"}. A group with operators is a nested term built the same way. A nested term must contain a variable.`,
+    `Copies: the first slot of a group holds the template, the others hold copies. Constants are always redrawn (the model sees them as placeholders).${on(4) ? " Each copy swaps one operator with probability 0.1, redraws each exponent with probability 0.5 and, if its gate is open, swaps each variable to any of x1…x17 with probability 0.5." : " Otherwise copies are identical."}`,
+    on(6) ? "Function weights: as in T8.1, except the six hyperbolic functions (sinh, cosh, tanh, asinh, acosh, atanh) at 0.5 instead of 1. The share a function node loses there goes to every other function in proportion: each hyperbolic function 4.0% → 2.3% of function labels, every other function 4.0% → 4.5%, pow and rootn 20% → 22.7%; the family urn's base shares follow." : "Function weights as in T8.1: every function 1, pow and rootn 5.",
+    `Simplify (permissive canon). Resample if every variable cancelled${on(1) ? "" : " or the result is longer than 35 tokens"}.`,
+  ];
+};
+const BRANCH7 = { "parent-full": "this level's alphabet, full", "parent-subset": "this level's alphabet, subset per term", "shared": "one shared alphabet for this level's terms", "own": "own draw per term" };
+const BRANCH_KEY = { "tau0-full": "full", "parent-full": "full", "tau0-subset": "subset", "parent-subset": "subset", "shared-L1": "shared", "shared": "shared", "own": "own" };
+const BRANCH = { "tau0-full": "τ0's alphabet, full", "tau0-subset": "τ0's alphabet, subset per term", "shared-L1": "one shared level-1 alphabet", "own": "own alphabet per term (LC draw)" };
+const T8P = (() => { const w = []; for (let n = 0; n <= 17; n++) w.push(Math.exp(Math.pow(n, 0.7))); const s = w.reduce((a, b) => a + b); return w.map(x => x / s); })();
+
+// ---------------------------------------------------------------- state, filters, resampling
+const state = { data: [], prior: "r7", cur: null, history: [], tree: "raw" };
+function store(k, v) { try { localStorage.setItem("pe-" + k, v); } catch (e) { /* storage unavailable */ } }
+function load(k) { try { return localStorage.getItem("pe-" + k); } catch (e) { return null; } }
+const FILTERS = ["f-case", "f-n0", "f-m", "f-held", "f-reuse", "f-rec", "f-uni", "f-poly", "f-rat", "f-rep"];
+function inRange(v, spec) { if (!spec) return true; const [a, b] = spec.split("-").map(Number); return b === undefined ? v === a : v >= a && v <= b; }
+function matches(r) {
+  if (r.prior !== state.prior) return false;
+  const c = r.cls, H = r.H;
+  if (r.prior !== "t8") {
+    if (H.const_law && ($("f-case").value || $("f-n0").value || $("f-m").value || $("f-reuse").checked || $("f-rec").checked)) return false;
+    if ($("f-case").value && !isR8(r.prior) && BRANCH_KEY[H.case || H.branch] !== $("f-case").value) return false;
+    if (!inRange(H.n0 ?? H.n, $("f-n0").value)) return false;
+    if (!inRange(H.M, $("f-m").value)) return false;
+    if ($("f-reuse").checked && !reuses(r)) return false;
+    if ($("f-rec").checked && !((r.levels || 1) >= 2)) return false;
+  }
+  if ($("f-uni").checked && c.nv !== 1) return false;
+  if ($("f-poly").checked && !c.poly3) return false;
+  if ($("f-rat").checked && !c.rat2) return false;
+  if ($("f-rep").checked && !c.rep) return false;
+  const hv = $("f-held").value;
+  if (hv === "kept" && r.held) return false;
+  if (hv === "held" && !r.held) return false;
+  return true;
+}
+const reuses = r => (r.pool || []).some(p => (p.kind === "term" || p.kind === "level") && p.uses >= 2);
+function candidates() { return state.data.filter(matches); }
+function updateCount() {
+  const total = state.data.filter(r => r.prior === state.prior).length, m = candidates().length;
+  $("count").textContent = state.data.length ? (m === total ? `${total} draws in the bank` : `${m} of ${total} draws match the filters`) : "";
+}
+function resample() {
+  if (!state.data.length) return;
+  const m = candidates();
+  updateCount();
+  if (!m.length) { showEmpty("No draw matches these filters. Clear a filter and resample."); return; }
+  let r = m[Math.floor(Math.random() * m.length)];
+  if (m.length > 1 && state.cur && r.id === state.cur.id) r = m[(m.indexOf(r) + 1) % m.length];
+  if (state.cur) state.history.push(state.cur.id);
+  show(r);
+}
+function previous() {
+  const id = state.history.pop();
+  const r = state.data.find(x => x.id === id);
+  if (r) show(r);
+}
+function renderPriors() {
+  $("priors").innerHTML = Object.entries(PRIORS).map(([k, p]) =>
+    `<button type="button" data-prior="${k}" aria-pressed="${k === state.prior}"><span>${esc(p.name)}</span><small>${esc(p.sub)}</small></button>`).join("");
+  $("priors").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    if (b.dataset.prior === state.prior) return;
+    state.prior = b.dataset.prior; store("prior", state.prior); onPriorChange();
+  }));
+  const isPool = state.prior !== "t8", nests = state.prior === "r7" || state.prior === "r7c" || isR8(state.prior);
+  document.querySelectorAll(".pool-only").forEach(e => { e.hidden = !isPool; });
+  document.querySelectorAll(".branch-only").forEach(e => { e.hidden = !isPool || isR8(state.prior); });
+  document.querySelectorAll(".nest-only").forEach(e => { e.hidden = !nests; });
+  const steps = state.prior === "t8" ? RECIPES.t8 : state.prior === "pool4" ? RECIPES.pool(4) : isR8(state.prior) ? RECIPES.r8(state.prior) : RECIPES.r7(state.prior === "r7c");
+  $("recipe-list").innerHTML = steps.map(s => `<li>${esc(s)}</li>`).join("");
+}
+// T8, round 6 and round 7 ship in samples.json; each round-8 step loads its own file when first selected.
+const EXTRA = { r8a: "samples_r8a.json", r8b: "samples_r8b.json", r8c: "samples_r8c.json", r8d: "samples_r8d.json", r8e: "samples_r8e.json", r8f: "samples_r8f.json", r8: "samples_r8.json", r9: "samples_r9.json", r9b: "samples_r9b.json", r10: "samples_r10.json", r10b: "samples_r10b.json", r10c: "samples_r10c.json" };
+const loaded = new Set();
+function ensure(prior) {
+  if (!EXTRA[prior] || loaded.has(prior)) return Promise.resolve();
+  $("raw").innerHTML = `<div class="empty">Loading the draws of ${esc(PRIORS[prior].name)}…</div>`;
+  return fetch(EXTRA[prior]).then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+    .then(d => { if (!loaded.has(prior)) { state.data.push(...d); loaded.add(prior); } });
+}
+function onPriorChange() {
+  state.history = []; state.cur = null;
+  if (location.hash.slice(1) !== state.prior) { try { location.hash = state.prior; } catch (e) { /* hash unavailable */ } }
+  renderPriors();
+  const prior = state.prior;
+  ensure(prior).then(() => { if (state.prior === prior) { renderStats(); resample(); } })
+    .catch(e => showEmpty(`The draws of this prior did not load (${e.message}). Select the prior again to retry.`));
+}
+
+// ---------------------------------------------------------------- the draw
+function html(s) { const d = document.createElement("div"); d.innerHTML = s; return d.firstElementChild || d; }
+function showEmpty(msg) {
+  state.cur = null; $("prev").disabled = !state.history.length;
+  ["chips", "legend", "graph", "steps", "simp", "tree"].forEach(id => { $(id).innerHTML = ""; });
+  $("raw").innerHTML = `<div class="empty">${esc(msg)}</div>`;
+  $("draw-id").textContent = ""; $("comp-note").textContent = "";
+}
+function classChips(r) {
+  const c = r.cls, out = [];
+  if (r.held) out.push(`<span class="chip flag">held out by the precise key</span>`);
+  if (c.poly3) out.push(`<span class="chip cls">polynomial, ≥ 3 terms</span>`);
+  if (c.rat2) out.push(`<span class="chip cls">sum of ≥ 2 rational terms</span>`);
+  if (c.sup3) out.push(`<span class="chip cls">≥ 3 terms of one form</span>`);
+  if (c.rep) out.push(`<span class="chip cls">two terms share a form</span>`);
+  if (c.aff) out.push(`<span class="chip cls">weighted sum of variables</span>`);
+  (c.fam || []).forEach(f => out.push(`<span class="chip cls">${esc(f.replace("_", " "))}</span>`));
+  return out.join("");
+}
+const isPoolDraw = r => r.prior !== "t8" && !(r.H && r.H.const_law);
+function show(r) {
+  prepare(r);
+  state.cur = r;
+  $("prev").disabled = !state.history.length;
+  $("draw-id").textContent = `draw #${r.id} · ${PRIORS[r.prior].name}`;
+  const isPool = isPoolDraw(r);
+  const ops = r.simp.filter(t => arity(t)).length;
+  const chip = (k, v) => `<span class="chip">${esc(k)} <b>${esc(v)}</b></span>`;
+  const parts = [chip("tokens, raw → simplified", `${r.raw.length} → ${r.simp.length}`), chip("operators", ops), chip("variables", r.cls.nv), chip("additive terms", r.cls.k)];
+  if (r.prior === "t8") {
+    parts.push(chip("operators drawn", r.H.n_ops));
+    const rej = Object.values(r.rejected || {}).reduce((a, b) => a + b, 0);
+    if (rej) parts.push(chip("resampled first", plural(rej, "time")));
+  } else if (!isPool) parts.push(`<span class="chip">constant law</span>`);
+  else {
+    const comps = r._terms.filter(t => t.p.kind === "term" || t.p.kind === "level");
+    parts.push(chip("budget B", r.B ?? r.H.B), chip("levels", r.levels || 1), chip("terms", r._terms.length),
+      chip("copies of composite terms", comps.reduce((s, t) => s + t.total, 0)));
+    if (r.lam) parts.push(chip("inheritance λ", r.lam));
+    const most = comps.reduce((a, t) => (!a || t.total > a.total ? t : a), null);
+    if (most && most.total >= 2) parts.push(chip("most-used term", `${most.name} ×${most.total}`));
+  }
+  $("chips").innerHTML = parts.join("") + classChips(r);
+  $("raw-note").textContent = isPool ? "as sampled, coloured by the term each part came from; underlined parts were changed in that copy" : "as sampled, before simplification";
+  $("raw").replaceChildren(mathEl(r.raw, isPool ? { origin: r._origin, changes: r._changes } : {}, "big"));
+  $("simp").replaceChildren(mathEl(r.simp, {}, "big"));
+  $("legend").innerHTML = isPool ? legendHTML(r._terms, "top-level tree") : "";
+  renderTree();
+  renderComposition(r);
+}
+function legendHTML(terms, ownLabel) {
+  const items = terms.map(t => `<span><span class="sw" style="background:${cvar(t.color)}"></span><b>${esc(t.name)}</b> ${esc(kindText(t.p))}${termValue(t.p) ? " " + esc(termValue(t.p)) : ""} ×${t.total}</span>`);
+  if (ownLabel) items.unshift(`<span><span class="sw own"></span>${esc(ownLabel)}</span>`);
+  return items.join("");
+}
+function renderTree() {
+  const r = state.cur; if (!r) return;
+  document.querySelectorAll(".toggle button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tree === state.tree)));
+  const isPool = isPoolDraw(r);
+  const names = isPool ? Object.fromEntries(r._terms.map(t => [t.color, t.name])) : null;
+  $("tree").innerHTML = state.tree === "raw"
+    ? treeSVG(r.raw, isPool ? { origin: r._origin, changes: r._changes, names } : {})
+    : treeSVG(r.simp, {});
+}
+
+// ---------------------------------------------------------------- composition
+function graphSVG(r) {
+  const nodes = [{ id: "top", name: "top-level tree", kind: plural(r.H.n0 ?? r.H.n, "operator"), color: -1, col: 0, total: 1 }], edges = [];
+  (function visit(lv, parentId, col, mult) {
+    lv.pool.forEach((p, j) => {
+      const id = parentId + "/" + j, total = mult * p.uses;
+      const kind = isTermRec(p) ? `term · ${plural(opCount(p.tokens), "op")}` : p.kind === "level" ? `sub-level · ${plural(p.sub.H.n, "op")}` : p.kind === "term" ? `${p.mess ? "LC tree" : "term"} · ${plural(p.n1, "op")}` : `${kindText(p)} ${termValue(p)}`;
+      nodes.push({ id, name: lv._names[j], kind, color: lv._cls[j], col, total });
+      edges.push({ from: parentId, to: id, n: p.uses });
+      if (p.kind === "level") visit(p.sub, id, col + 1, total);
+    });
+  })(r, "top", 1, 1);
+  const colW = 236, bw = 176, bh = 42, rowH = 54, padY = 8, padX = 4;
+  const byId = Object.fromEntries(nodes.map(n => [n.id, n]));
+  // Tidy layout: terms without children take consecutive rows, a tree sits centred on its terms.
+  const kids = {}; edges.forEach(e => (kids[e.from] = kids[e.from] || []).push(e.to));
+  let nextRow = 0;
+  (function place(id) {
+    const ch = kids[id] || [];
+    if (!ch.length) { byId[id].row = nextRow++; return; }
+    ch.forEach(place);
+    byId[id].row = (byId[ch[0]].row + byId[ch[ch.length - 1]].row) / 2;
+  })("top");
+  const maxRows = Math.max(1, nextRow), cols = Math.max(...nodes.map(n => n.col)) + 1;
+  const W = padX * 2 + (cols - 1) * colW + bw, H = padY * 2 + maxRows * rowH - (rowH - bh);
+  const pos = n => ({ x: padX + n.col * colW, y: padY + n.row * rowH });
+  const parts = [`<defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker></defs>`];
+  edges.forEach(e => {
+    const a = pos(byId[e.from]), b = pos(byId[e.to]);
+    const x1 = a.x + bw, y1 = a.y + bh / 2, x2 = b.x - 2, y2 = b.y + bh / 2, mx = (x1 + x2) / 2;
+    parts.push(`<g><title>${esc(byId[e.from].name)} → ${esc(byId[e.to].name)}: ${plural(e.n, "slot")} per copy</title><path d="M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}" fill="none" stroke="var(--muted)" stroke-opacity="0.7" stroke-width="${Math.min(1.2 + 0.6 * e.n, 4.5)}" marker-end="url(#ah)"/>` +
+      `<text x="${x2 - 12}" y="${y2 - 6}" text-anchor="end" font-size="11" fill="var(--ink)" font-family="IBM Plex Mono, monospace">${e.n}</text></g>`);
+  });
+  nodes.forEach(n => {
+    const p = pos(n), col = cvar(n.color);
+    parts.push(`<g><title>${esc(n.name)}: ${esc(n.kind)}, occurs ${n.total}×</title>` +
+      `<rect x="${p.x}" y="${p.y}" width="${bw}" height="${bh}" rx="7" fill="${n.color < 0 ? "var(--surface)" : `color-mix(in oklab, ${col} 18%, var(--surface))`}" stroke="${col}" stroke-width="${n.color < 0 ? 1.5 : 2}"/>` +
+      `<text x="${p.x + 10}" y="${p.y + 17}" font-size="12.5" font-weight="500" fill="var(--ink)" font-family="IBM Plex Mono, monospace">${esc(n.name)}</text>` +
+      `<text x="${p.x + 10}" y="${p.y + 33}" font-size="10.5" fill="var(--muted)" font-family="IBM Plex Sans, system-ui, sans-serif">${esc(n.kind)}</text>` +
+      `<text x="${p.x + bw - 10}" y="${p.y + 26}" font-size="13" text-anchor="end" font-weight="600" fill="var(--ink)" font-family="IBM Plex Mono, monospace">×${n.total}</text></g>`);
+  });
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Terms and how often each occurs">${parts.join("")}</svg>`;
+}
+function renderComposition(r) {
+  const isPool = isPoolDraw(r);
+  $("graph-panel").hidden = !isPool;
+  $("graph").innerHTML = isPool ? graphSVG(r) : "";
+  $("comp-note").textContent = r.prior === "t8" ? "one LC tree with filled leaves" : !isPool ? "a constant law" : `${plural(r.levels || 1, "level")}, ${plural(r._terms.length, "term")}`;
+  const parts = r.prior === "t8" ? traceT8(r) : r.prior === "pool4" ? tracePool(r) : isR8(r.prior) ? traceR8(r) : traceR7(r);
+  $("steps").replaceChildren(...parts);
+}
+function step(n, title, desc, ...children) {
+  const s = document.createElement("section"); s.className = "step";
+  const h = document.createElement("header");
+  h.innerHTML = `${n === "" || n == null ? "" : `<span class="n">${String(n).padStart(2, "0")}</span>`}<h3>${esc(title)}</h3>${desc ? `<p>${desc}</p>` : ""}`;
+  s.appendChild(h); children.forEach(c => c && s.appendChild(c)); return s;
+}
+function hpGrid(items) { return html(`<div class="hp">${items.map(([v, l]) => `<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}</div>`); }
+const SRC = { root: "root prior", inherited: "copied from parent", redrawn: "redrawn" };
+function hpGrid7(items) {
+  return html(`<div class="hp">${items.map(([v, l, src]) => `<div><b>${esc(v)}</b><span>${esc(l)}</span>${src ? `<span class="src ${src}">${esc(SRC[src] || src)}</span>` : ""}</div>`).join("")}</div>`);
+}
+function budgetBars(drawn, label) {
+  const max = Math.max(...T8P);
+  return html(`<div style="display:grid;gap:4px;max-width:420px"><div class="small">${esc(label)}</div><div class="bars" aria-hidden="true">${T8P.map((p, n) =>
+    `<div class="${n === drawn ? "on" : ""}" style="height:${Math.max(4, 100 * p / max)}%" title="n = ${n}: ${(100 * p).toFixed(1)}%"></div>`).join("")}</div><div class="bars-axis"><span>0</span><span>drawn: ${drawn}</span><span>17</span></div></div>`);
+}
+function treeBox(tokens, opt) { return html(`<div class="treebox">${treeSVG(tokens, opt)}</div>`); }
+const CHG = { var: "variable swapped", exp: "exponent redrawn", fresh: "constant redrawn", shared: "constant kept", op: "operator swapped" };
+function changeChips(tokens, ch) {
+  const items = [];
+  (ch || []).forEach((c, i) => { if (c) items.push(`<span class="chg" title="${esc(CHG[c[0]] || c[0])}">${c[0] === "shared" ? "kept " + esc(fmt(c[1])) : esc(valText(c[1])) + " → " + esc(valText(tokens[i]))}</span>`); });
+  return items.length ? html(`<div class="changes">${items.join("")}</div>`) : html(`<div class="small">identical to the pool term</div>`);
+}
+const slotsOf = lv => lv.assign.map(j => ({ c: lv._cls[j], name: lv._names[j] }));
+const levelTerms = lv => lv.pool.map((p, j) => ({ name: lv._names[j], p, color: lv._cls[j], total: p.uses }));
+const legendEl = (lv, ownLabel) => html(`<div class="legend">${legendHTML(levelTerms(lv), ownLabel)}</div>`);
+const leafHow = { var: "variable", first: "constant, first use", shared: "constant, value kept", fresh: "constant, value redrawn" };
+function poolCards(lv, depth) {
+  const cards = lv.pool.map((p, j) => {
+    const col = cvar(lv._cls[j]);
+    const el = document.createElement("div"); el.className = "pterm" + (p.kind === "level" ? " wide" : ""); el.style.borderLeftColor = col;
+    el.innerHTML = `<div class="head"><span class="name" style="color:${col}">${esc(lv._names[j])}</span><span class="small">${esc(p.kind === "term" && p.mess ? "one LC tree (random component)" : kindText(p))} · used ${p.uses}×</span></div>`;
+    if (p.kind === "term") {
+      const info = p.s_add !== undefined
+        ? `${plural(p.n1, "operator")} (budget share ${p.target}) · additive share ${p.s_add} (${esc(SRC[p.s_src] || p.s_src)}) · starts at depth ${p.c0}`
+        : `${plural(p.n1, "operator")} (target ${p.target})`;
+      el.appendChild(html(`<div class="small">${info} · variables from ${esc(p.alph_src)}${p.alphabet ? ": " + p.alphabet.map(varLabel).join(" ") : ""}</div>`));
+      el.appendChild(mathEl(p.tokens)); el.appendChild(treeBox(p.tokens, {}));
+    } else if (p.kind === "level") {
+      const r8 = isTermRec(p);
+      el.appendChild(html(`<div class="small">${r8 ? `budget ${plural(p.target, "operator")} per copy · ${plural(opCount(p.tokens), "operator")} drawn` : `budget share ${p.target}`} · starts at depth ${p.c0}${p.alph_src ? ` · variables from ${esc(p.alph_src)}` : ""}</div>`));
+      el.appendChild(mathEl(p.tokens, { origin: provenanceSafe(p.sub).origin }));
+      const det = document.createElement("details"); det.className = "subtrace";
+      det.innerHTML = `<summary>How ${esc(lv._names[j])} was built (${r8 ? "depth" : "level"} ${depth + 2})</summary>`;
+      const box = document.createElement("div"); box.className = "substeps";
+      box.append(...(r8 ? termSteps(p.sub, depth + 1, null) : levelSteps(p.sub, depth + 1, null)));
+      det.appendChild(box); el.appendChild(det);
+    } else {
+      el.appendChild(html(`<div class="mono" style="font-size:1.05rem">${esc(termValue(p))}</div>${p.src ? `<div class="small">${esc(p.src === "fresh" ? "drawn fresh" : p.src === "parent's alphabet" ? "from the parent's alphabet" : p.src)}</div>` : ""}`));
+    }
+    return el;
+  });
+  const box = document.createElement("div"); box.className = "pool"; box.replaceChildren(...cards); return box;
+}
+function leafRows(lv) {
+  const leaves = document.createElement("div"); leaves.className = "leaves";
+  lv.leaves.forEach((lf, i) => {
+    const row = document.createElement("div"); row.className = "leaf";
+    const col = cvar(lv._cls[lf.pool]);
+    row.innerHTML = `<div class="tag"><span>slot ${i}</span><span style="color:${col}">← ${esc(lv._names[lf.pool])}</span></div>`;
+    const body = document.createElement("div"); body.style.display = "grid"; body.style.gap = "6px"; body.style.minWidth = "0";
+    if (lf.how === "copy") {
+      const p = lv.pool[lf.pool];
+      const origin = p.kind === "level" ? provenanceSafe(p.sub).origin : lf.tokens.map(() => lv._cls[lf.pool]);
+      body.appendChild(mathEl(lf.tokens, { origin, changes: lf.changes }));
+      body.appendChild(changeChips(lf.tokens, lf.changes));
+    } else {
+      body.appendChild(html(`<div><span class="mono">${esc(valText(lf.tokens[0]))}</span> <span class="small">${esc(leafHow[lf.how] || lf.how)}</span></div>`));
+    }
+    row.appendChild(body); leaves.appendChild(row);
+  });
+  return leaves;
+}
+function traceT8(r) {
+  const H = r.H, out = [];
+  out.push(step(1, "Operator count", "Drawn from the length prior. Most draws have 13–17 operators.", budgetBars(H.n_ops, "p(n) ∝ exp(n^0.7)")));
+  out.push(step(2, "Tree shape", `${plural(H.n_ops, "operator")}, ${plural(H.leaves, "leaf slot")}. Dashed edges lead to exponents, which come from their own prior.`, treeBox(r.shape, {})));
+  const kinds = H.kinds.map(k => k === "<c>" ? `<span class="chip">constant</span>` : `<span class="chip mono">${varLabel(k)}</span>`).join(" ");
+  const fills = r.leafvals.map((v, i) => `<span class="chip mono">slot ${i} = ${esc(valText(v))}</span>`).join(" ");
+  const rej = Object.entries(r.rejected || {});
+  const rejText = rej.length ? ` Resampled before this draw: ${rej.map(([k, v]) => `${v}× ${k}`).join(", ")}.` : " Accepted on the first draw.";
+  out.push(step(3, "Leaves", `${plural(H.n_kinds, "distinct kind")}, drawn uniformly from 1…min(${H.leaves}, 17). Each kind is used once, the remaining leaves pick uniformly among them. The filled expression is the raw one at the top.${rejText}`,
+    html(`<div class="changes">${kinds}</div>`), html(`<div class="changes">${fills}</div>`)));
+  return out;
+}
+function tracePool(r) {
+  const H = r.H, out = [];
+  if (H.const_law) return [step(1, "Constant law", "This expression drew the constant-law coin (0.3%, T8's rate) and is a single constant.")];
+  out.push(step(1, "Hyperparameters", "Drawn once for this expression. Everything below is sampled with these values.",
+    hpGrid([
+      [H.B, "budget B (operators), T8 prior"], [H.n0, "operators in τ0, n0"], [H.R, "remaining budget R = B − n0"],
+      [H.L, "leaf slots of τ0, L"], [`${H.rho} → ${H.M}`, "reuse ρ → pool size M"], [H.alpha, "spread α (small = one term dominates)"],
+      [`${H.r} → ${H.r_eff}`, "composite share r → r_eff"], [H.kappa, "constant share κ"],
+      [H.gate ? "open" : "closed", "new-variable gate for copies"], [BRANCH[H.case] || H.case, "alphabet branch"],
+    ]),
+    budgetBars(H.B, "Budget B ~ p(n) ∝ exp(n^0.7)")));
+  out.push(step(2, "Base expression τ0", `The T8 tree sampler with ${plural(H.n0, "operator")}. Each slot shows the pool term it receives.`,
+    mathEl(r.shape, { slots: slotsOf(r) }, "big"), treeBox(r.shape, { slots: slotsOf(r) }), legendEl(r, "τ0")));
+  const A0 = H.A0.map(v => `<span class="chip mono">${varLabel(v)}</span>`).join(" ");
+  const A1 = H.A1 ? H.A1.map(v => `<span class="chip mono">${varLabel(v)}</span>`).join(" ") : "";
+  out.push(step(3, "Alphabets", `Branch: ${esc(BRANCH[H.case] || H.case)}.`,
+    html(`<dl class="kv"><dt>τ0's alphabet A0</dt><dd><div class="changes">${A0}</div></dd>${H.A1 ? `<dt>Level-1 alphabet</dt><dd><div class="changes">${A1}</div></dd>` : ""}</dl>`)));
+  out.push(step(4, "Pool", `${plural(H.M, "term")}. Each is composite with probability r_eff = ${H.r_eff}; otherwise a constant or the next variable of A0.`, poolCards(r, 0)));
+  const nCopies = r.leaves.filter(l => l.how === "copy").length;
+  out.push(step(5, "Filling the leaves", `${nCopies} cop${nCopies === 1 ? "y" : "ies"} of composite terms. Changed parts are underlined and listed. The assembled expression is the raw one at the top.`, leafRows(r)));
+  return out;
+}
+function levelSteps(lv, depth, startN) {
+  const H = lv.H, out = [], S = H.src || {};
+  let n = startN;
+  const num = () => (startN == null ? "" : n++);
+  const lvlName = depth === 0 ? "top level" : `level ${depth + 1}`;
+  out.push(step(num(), depth === 0 ? "Hyperparameters" : `Hyperparameters (${lvlName})`,
+    depth === 0 ? "Drawn from the root priors for the top level. Deeper levels copy or redraw each value." : "Each value is copied from the parent level or redrawn from its root prior.",
+    hpGrid7([
+      [H.b, "budget of this level", null], [`${H.f} → ${H.n}`, "own-tree share f → operators n", S.f],
+      [H.s_add, "additive share s (+ − vs × ÷)", S.s_add], [`${H.rho} → ${H.M}`, "reuse ρ → pool size M", S.rho],
+      [H.alpha, "spread α", S.alpha], [`${H.r} → ${H.r_eff}`, "composite share r → r_eff", S.r],
+      [H.kappa, "constant share κ", S.kappa], [H.gate ? "open" : "closed", "new-variable gate for copies", S.gate],
+      [BRANCH7[H.branch] || H.branch, "alphabet branch for this level's terms", S.branch], [H.c0, "function depth this level starts at", null],
+    ])));
+  const slots = slotsOf(lv);
+  const depthChips = (H.slot_depths || []).map((d, i) => `<span class="chip mono">slot ${i} ← <span style="color:${cvar(slots[i].c)}">${esc(slots[i].name)}</span> · depth ${d}</span>`).join(" ");
+  out.push(step(num(), depth === 0 ? "Top-level tree" : `Tree of ${lvlName}`, `${plural(H.n, "operator")}, ${plural(H.L, "slot")}. The depth after each slot is the number of functions above it; terms placed there start at that depth.`,
+    mathEl(lv.shape, { slots }, "big"), treeBox(lv.shape, { slots }), html(`<div class="changes">${depthChips}</div>`), legendEl(lv, depth === 0 ? "top-level tree" : "this level's tree")));
+  const A = (H.A || []).map(v => `<span class="chip mono">${varLabel(v)}</span>`).join(" ");
+  const Ash = H.A_sh ? H.A_sh.map(v => `<span class="chip mono">${varLabel(v)}</span>`).join(" ") : "";
+  out.push(step(num(), "Alphabet", depth === 0 ? "The top level's alphabet, sized by LC's rule." : "Handed down by the parent level, or drawn here for an own-alphabet term.",
+    html(`<dl class="kv"><dt>This level's alphabet</dt><dd><div class="changes">${A}</div></dd>${H.A_sh ? `<dt>Shared alphabet for its terms</dt><dd><div class="changes">${Ash}</div></dd>` : ""}</dl>`)));
+  out.push(step(num(), "Pool", `${plural(H.M, "term")}, composite with probability r_eff = ${H.r_eff}. Remaining budget R = ${H.R}.`, poolCards(lv, depth)));
+  const nCopies = lv.leaves.filter(l => l.how === "copy").length;
+  out.push(step(num(), "Filling the slots", `${nCopies} cop${nCopies === 1 ? "y" : "ies"} of composite terms. Changed parts are underlined and listed.${depth === 0 ? " The assembled expression is the raw one at the top." : ""}`, leafRows(lv)));
+  if (depth > 0) {
+    const pv = provenanceSafe(lv);
+    out.push(step(num(), `Assembled ${lvlName}`, "Before simplification, coloured by term like the expression at the top.",
+      mathEl(lv.raw, pv, "big"), treeBox(lv.raw, pv)));
+  }
+  return out;
+}
+const THETA_LABEL = { flat: "flat: whole budget in the own tree", f: "own-tree share f", rho: "reuse ρ → groups", alpha: "spread α of the extra slots",
+  s_add: "additive share (+ − vs × ÷)", gate: "copy gate (variable swaps)", s_struct: "structure level s (form vs LC tree)" };
+function termSteps(lv, depth, startN) {
+  const H = lv.H, th = H.theta || {}, S = H.src || {}, out = [];
+  let n = startN;
+  const num = () => (startN == null ? "" : n++);
+  const items = [[H.b, "budget b of this term", null]];
+  Object.keys(th).forEach(k => {
+    let v = th[k];
+    if (k === "flat") v = v ? "yes" : "no";
+    else if (k === "gate") v = v ? "open" : "closed";
+    else if (k === "rho") v = `${v} → ${H.M}`;
+    items.push([v, THETA_LABEL[k] || k, S[k]]);
+  });
+  items.push([H.c0, "function depth this term starts at", null]);
+  out.push(step(num(), depth === 0 ? "Hyperparameters" : "Hyperparameters of this term",
+    depth === 0 ? "Drawn from the root priors. Nested terms copy or redraw each value."
+      : H.lam_d > 0 ? `Each value is copied from the parent with probability λ^${depth} = ${H.lam_d}, otherwise redrawn from the root prior.` : "Every value is redrawn from the root prior (no inheritance in this step).",
+    hpGrid7(items)));
+  const slots = slotsOf(lv);
+  const depthChips = (H.slot_depths || []).map((d, i) => `<span class="chip mono">slot ${i} ← <span style="color:${cvar(slots[i].c)}">${esc(slots[i].name)}</span> · depth ${d}</span>`).join(" ");
+  const isForm = H.form && H.form !== "LC tree";
+  out.push(step(num(), (depth === 0 ? "Own tree" : "Own tree of this term") + (isForm ? `: ${H.form}` : ""),
+    `${isForm ? `A structural form (chosen with probability s = ${th.s_struct}): ` : ""}${plural(H.n, "operator")} of the budget ${H.b}${isForm ? "" : th.flat ? " (flat: all of it)" : ` (share f = ${th.f})`}, ${plural(H.L, "slot")}. The depth after each slot is the number of functions above it; a nested term placed there starts at that depth.`,
+    mathEl(lv.shape, { slots }, "big"), treeBox(lv.shape, { slots }), html(`<div class="changes">${depthChips}</div>`), legendEl(lv, depth === 0 ? "top-level tree" : "this term's tree")));
+  const trs = lv.pool.map((p, j) => {
+    const what = p.kind === "level" ? `nested term, ${plural(opCount(p.tokens), "operator")}` : p.kind === "var" ? `variable ${varLabel(p.val)}, ${p.src === "fresh" ? "drawn fresh" : p.src === "parent's alphabet" ? "from the parent's alphabet" : "forced (a term needs a variable)"}` : "the constant (every slot redrawn)";
+    return `<tr><td class="mono" style="color:${cvar(lv._cls[j])}">${esc(lv._names[j])}</td><td>${p.uses}</td><td>${H.budgets ? H.budgets[j] : "–"}</td><td>${esc(what)}</td></tr>`;
+  }).join("");
+  const rounding = H.rounding ? ` Rounding left ${H.rounding > 0 ? `${plural(H.rounding, "operator")} unused` : `${plural(-H.rounding, "operator")} over budget`}.` : "";
+  out.push(step(num(), "Groups and budget",
+    `${plural(H.L, "slot")} in ${plural(H.M, "group")}. The remaining budget R = ${H.R} is split over the groups; a group whose copies get 0 operators is an atom.${rounding}`,
+    html(`<div class="tablewrap"><table class="gt"><thead><tr><th>group</th><th>slots</th><th>operators per copy</th><th>becomes</th></tr></thead><tbody>${trs}</tbody></table></div>`),
+    poolCards(lv, depth)));
+  const nCopies = lv.leaves.filter((l, i) => l.how === "copy" && lv.leaves.findIndex(m => m.pool === l.pool) !== i).length;
+  out.push(step(num(), "Filling the slots", `The first slot of a group holds its template, ${plural(nCopies, "slot")} hold${nCopies === 1 ? "s" : ""} copies. Changed parts are underlined and listed; constants are always redrawn.${depth === 0 ? " The assembled expression is the raw one at the top." : ""}`, leafRows(lv)));
+  if (depth > 0) {
+    const pv = provenanceSafe(lv);
+    out.push(step(num(), "Assembled term", "Before simplification, coloured by term like the expression at the top.", mathEl(lv.raw, pv, "big"), treeBox(lv.raw, pv)));
+  }
+  return out;
+}
+function traceR8(r) {
+  const s = R8_STEP[r.prior];
+  const out = [step(1, "Budget", `B = ${r.B} operators: a draw from the T8 operator-count prior${s >= 5 ? ", times 1.3" : ""}.${r.lam ? ` Inheritance strength for this expression: λ = ${r.lam}.` : ""} ${r.levels > 1 ? `Terms nest ${r.levels} deep.` : "No group received operators, so this draw is one tree with atoms, as in T8."}`)];
+  out.push(...termSteps(r, 0, 2));
+  return out;
+}
+function traceR7(r) {
+  if (r.H.const_law) return [step(1, "Constant law", "This expression drew the constant-law coin (0.3%, T8's rate) and is a single constant.")];
+  const out = [step(1, "Budget", `B = ${r.B} operators: a draw from the T8 operator-count prior, times 1.3. ${r.levels > 1 ? `This expression uses ${r.levels} levels.` : "No term was large enough to become a sub-level."}`)];
+  out.push(...levelSteps(r, 0, 2));
+  return out;
+}
+
+// ---------------------------------------------------------------- statistics
+function pct(a) { return a.length ? 100 * a.filter(Boolean).length / a.length : 0; }
+function median(a) { const s = [...a].sort((x, y) => x - y); return s.length ? s[Math.floor(s.length / 2)] : 0; }
+const opsOf = r => r.simp.filter(t => arity(t)).length;
+function renderStats() {
+  const all = state.data.filter(r => r.prior === state.prior), t8 = state.data.filter(r => r.prior === "t8");
+  const isT8 = state.prior === "t8";
+  $("stats-note").textContent = all.length ? `${all.length} draws${isT8 ? "" : ", with the T8 prior for reference"}` : "";
+  if (!all.length) { $("stats").innerHTML = ""; $("charts").innerHTML = ""; return; }
+  const tile = (label, f, unit, digits, noRef) => {
+    const v = f(all), vs = unit === "%" ? v.toFixed(digits) + "%" : String(v);
+    let ref = "";
+    if (!isT8) ref = noRef ? `<i>no T8 counterpart</i>` : `<i>T8 prior: ${unit === "%" ? f(t8).toFixed(digits) + "%" : f(t8)}</i>`;
+    return `<div class="stat"><span>${esc(label)}</span><b>${vs}</b>${ref}</div>`;
+  };
+  const tiles = [
+    tile("Median length (tokens)", a => median(a.map(r => r.simp.length)), "", 0),
+    tile("Trivial (≤ 5 tokens)", a => pct(a.map(r => r.simp.length <= 5)), "%", 1),
+    tile("One variable", a => pct(a.map(r => r.cls.nv === 1)), "%", 1),
+    tile("Two terms share a form", a => pct(a.map(r => r.cls.rep)), "%", 1),
+    tile("≥ 3 terms of one form", a => pct(a.map(r => r.cls.sup3)), "%", 1),
+    tile("Sum of ≥ 2 rational terms", a => pct(a.map(r => r.cls.rat2)), "%", 1),
+    tile("Polynomial, ≥ 3 terms", a => pct(a.map(r => r.cls.poly3)), "%", 1),
+    tile("Contains a transcendental", a => pct(a.map(r => r.cls.trans)), "%", 0),
+    tile("Held out (precise key)", a => pct(a.map(r => r.held)), "%", 1),
+  ];
+  if (!isT8) tiles.push(tile("Reuses a composite term", a => pct(a.map(reuses)), "%", 0, true));
+  const FNS = new Set(["sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh", "asinh", "acosh", "atanh", "exp", "log", "abs"]);
+  const HYPS = new Set(["sinh", "cosh", "tanh", "asinh", "acosh", "atanh"]);
+  tiles.push(tile("Hyperbolic, of function nodes before simplification", a => { let h = 0, n = 0; a.forEach(r => r.raw.forEach(t => { if (FNS.has(t)) { n++; if (HYPS.has(t)) h++; } })); return n ? 100 * h / n : 0; }, "%", 1));
+  if (isR8(state.prior) && all.some(r => r.coh)) {
+    const coh = (k, a) => { let x = 0, n = 0; a.forEach(r => { if (r.coh) { x += r.coh[k][0]; n += r.coh[k][1]; } }); return n ? 100 * x / n : 0; };
+    tiles.push(tile("Nested variables reusing an ancestor's", a => coh("var", a), "%", 0, true));
+    tiles.push(tile("Nested trees with the parent's +/× class", a => coh("cls", a), "%", 0, true));
+  }
+  if (state.prior === "r7" || state.prior === "r7c" || isR8(state.prior)) tiles.push(tile("Uses a nested term", a => pct(a.map(r => (r.levels || 1) >= 2)), "%", 0, true));
+  $("stats").innerHTML = tiles.join("");
+  const range = (lo, hi, w) => { const b = []; for (let x = lo; x <= hi; x += w) { const a = x; b.push(w === 1 ? { l: String(a), t: v => v === a } : { l: `${a}–${a + w - 1}`, t: v => v >= a && v <= a + w - 1 }); } return b; };
+  const charts = [
+    { t: "Length after simplification", u: "tokens", f: r => r.simp.length, bins: [...range(1, 60, 5), { l: "61+", t: v => v >= 61 }], note: "The T8 prior resamples anything longer than 35 tokens." },
+    { t: "Operators after simplification", u: "operators", f: opsOf, bins: [...range(0, 23, 2), { l: "24+", t: v => v >= 24 }] },
+    { t: "Distinct variables", u: "variables", f: r => r.cls.nv, bins: [...range(0, 8, 1), { l: "9+", t: v => v >= 9 }] },
+    { t: "Top-level additive terms", u: "terms", f: r => r.cls.k, bins: [...range(1, 8, 1), { l: "9+", t: v => v >= 9 }] },
+  ];
+  const legend = isT8 ? "" : `<div class="legend"><span><span class="sw" style="background:var(--p0)"></span>${esc(PRIORS[state.prior].name)}</span><span><svg width="18" height="10" aria-hidden="true"><line x1="1" x2="17" y1="5" y2="5" stroke="var(--ink)" stroke-width="2"/><circle cx="9" cy="5" r="3.2" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/></svg>T8 prior</span></div>`;
+  $("charts").innerHTML = charts.map(c => {
+    const share = arr => { const v = arr.map(c.f); return c.bins.map(b => v.filter(b.t).length / Math.max(1, v.length)); };
+    return `<div class="panel chart"><h3>${esc(c.t)}</h3>${c.note ? `<p class="small">${esc(c.note)}</p>` : ""}${legend}${histSVG(c, share(all), isT8 ? null : share(t8))}</div>`;
+  }).join("");
+}
+function histSVG(c, vals, ref) {
+  const W = 440, H = 200, ml = 38, mr = 8, mt = 10, mb = 42;
+  const n = vals.length, pw = W - ml - mr, ph = H - mt - mb;
+  const peak = Math.max(...vals, ...(ref || [0]), 1e-9);
+  const stepY = peak > 0.4 ? 0.2 : peak > 0.2 ? 0.1 : peak > 0.08 ? 0.05 : 0.02;
+  const ymax = Math.ceil(peak / stepY - 1e-9) * stepY;
+  const y = v => mt + ph - (v / ymax) * ph, bw = pw / n, base = mt + ph;
+  const parts = [];
+  for (let k = 0; k * stepY <= ymax + 1e-9; k++) { const v = k * stepY; parts.push(`<line x1="${ml}" x2="${W - mr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${ml - 6}" y="${y(v) + 3.5}" text-anchor="end" font-size="10" fill="var(--muted)">${Math.round(v * 100)}%</text>`); }
+  const every = n > 10 ? 2 : 1;
+  vals.forEach((v, i) => {
+    const x = ml + i * bw + 1, w = bw - 2, yt = y(v), hgt = Math.max(0, base - yt), rr = Math.min(4, w / 2, hgt);
+    const d = hgt > 0 ? `M${x},${base} V${yt + rr} Q${x},${yt} ${x + rr},${yt} H${x + w - rr} Q${x + w},${yt} ${x + w},${yt + rr} V${base} Z` : "";
+    const tip = `${c.bins[i].l} ${c.u}: ${(100 * v).toFixed(1)}%${ref ? ` · T8 prior ${(100 * ref[i]).toFixed(1)}%` : ""}`;
+    parts.push(`<g><title>${esc(tip)}</title><rect x="${ml + i * bw}" y="${mt}" width="${bw}" height="${ph}" fill="transparent"/>${d ? `<path d="${d}" fill="var(--p0)"/>` : ""}</g>`);
+    if (i % every === 0 || i === n - 1) parts.push(`<text x="${ml + (i + 0.5) * bw}" y="${H - mb + 14}" text-anchor="middle" font-size="9.5" fill="var(--muted)">${esc(c.bins[i].l)}</text>`);
+  });
+  if (ref) {
+    parts.push(`<polyline points="${ref.map((v, i) => `${ml + (i + 0.5) * bw},${y(v)}`).join(" ")}" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" pointer-events="none"/>`);
+    ref.forEach((v, i) => parts.push(`<circle cx="${ml + (i + 0.5) * bw}" cy="${y(v)}" r="3.4" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6" pointer-events="none"/>`));
+  }
+  parts.push(`<text x="${ml + pw / 2}" y="${H - 6}" text-anchor="middle" font-size="10.5" fill="var(--muted)">${esc(c.u)}</text>`);
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(c.t)}">${parts.join("")}</svg>`;
+}
+
+// ---------------------------------------------------------------- boot
+FILTERS.forEach(id => $(id).addEventListener("change", resample));
+$("resample").addEventListener("click", resample);
+$("prev").addEventListener("click", previous);
+document.querySelectorAll(".toggle button").forEach(b => b.addEventListener("click", () => { state.tree = b.dataset.tree; renderTree(); }));
+document.addEventListener("keydown", e => {
+  if (e.key !== "r" && e.key !== "R") return;
+  if (e.metaKey || e.ctrlKey || e.altKey || /^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+  e.preventDefault(); resample();
+});
+const fromHash = location.hash.slice(1), saved = load("prior");
+state.prior = PRIORS[fromHash] ? fromHash : saved && PRIORS[saved] ? saved : "r10c";
+renderPriors();
+$("raw").innerHTML = `<div class="empty">Loading the draws…</div>`;
+fetch("samples.json").then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); }).then(d => {
+  state.data = d.concat(state.data); return ensure(state.prior);
+}).then(() => { renderStats(); resample(); })
+  .catch(e => { $("raw").innerHTML = `<div class="empty">The draws did not load: ${esc(e.message)}. Reload the page to try again.</div>`; });
+window.addEventListener("hashchange", () => {
+  const k = location.hash.slice(1);
+  if (PRIORS[k] && k !== state.prior) { state.prior = k; store("prior", k); onPriorChange(); }
+});
+(function waitMJ(tries) {
+  if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+    MathJax.startup.promise.then(() => {
+      mjReady = typeof MathJax.tex2svg === "function";
+      // MathJax only injects its CSS when it typesets the page itself; without it the hidden MathML copy shows.
+      try { if (MathJax.svgStylesheet) document.head.appendChild(MathJax.svgStylesheet()); } catch (e) { /* keep going */ }
+      retypesetAll();
+    });
+  } else if (tries > 0) setTimeout(() => waitMJ(tries - 1), 200);
+})(60);
+</script>

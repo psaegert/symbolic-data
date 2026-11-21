@@ -1,0 +1,44 @@
+{
+ "real formulas": {
+  "name": "real formulas",
+  "product: k = 2/3/4/5/6+ (%)": "57 / 23 / 11 / 4 / 5",
+  "product: copies differing in variable / exponent / constant / shape (%)": "99 / 45 / 0 / 0",
+  "product: distinct variables per repeat, median / mean": "2 / 2.88",
+  "sum: k = 2/3/4/5/6+ (%)": "87 / 11 / 1 / 0 / 0",
+  "sum: copies differing in variable / exponent / constant / shape (%)": "89 / 4 / 1 / 8",
+  "sum: distinct variables per repeat, median / mean": "2 / 2.44",
+  "product: factor exponents (%)": "1: 68, -1: 19, 2: 7, -2: 2, 3: 1, -3: 1, 1/2: 0, 4: 0",
+  "product: factors with a negative exponent (%)": "23",
+  "product: factors with exponent other than +-1 (%)": "12",
+  "sum: summands with a coefficient / with minus (%)": "9 / 24",
+  "pairing: + / - / * / \u00f7 (%)": "28 / 16 / 29 / 26"
+ },
+ "round 10": {
+  "name": "round 10",
+  "product: k = 2/3/4/5/6+ (%)": "71 / 14 / 7 / 3 / 4",
+  "product: copies differing in variable / exponent / constant / shape (%)": "98 / 60 / 3 / 0",
+  "product: distinct variables per repeat, median / mean": "2 / 2.71",
+  "sum: k = 2/3/4/5/6+ (%)": "76 / 13 / 6 / 2 / 3",
+  "sum: copies differing in variable / exponent / constant / shape (%)": "88 / 3 / 1 / 10",
+  "sum: distinct variables per repeat, median / mean": "2 / 2.48",
+  "product: factor exponents (%)": "1: 57, -1: 24, 2: 5, -2: 4, 3: 2, -3: 2, 4: 1, 1/2: 1",
+  "product: factors with a negative exponent (%)": "31",
+  "product: factors with exponent other than +-1 (%)": "19",
+  "sum: summands with a coefficient / with minus (%)": "13 / 27",
+  "pairing: + / - / * / \u00f7 (%)": "26 / 19 / 30 / 25"
+ },
+ "round 10b": {
+  "name": "round 10b",
+  "product: k = 2/3/4/5/6+ (%)": "70 / 16 / 8 / 3 / 5",
+  "product: copies differing in variable / exponent / constant / shape (%)": "98 / 60 / 2 / 0",
+  "product: distinct variables per repeat, median / mean": "2 / 2.74",
+  "sum: k = 2/3/4/5/6+ (%)": "77 / 13 / 5 / 2 / 3",
+  "sum: copies differing in variable / exponent / constant / shape (%)": "89 / 2 / 1 / 9",
+  "sum: distinct variables per repeat, median / mean": "2 / 2.51",
+  "product: factor exponents (%)": "1: 58, -1: 24, 2: 5, -2: 3, 3: 2, -3: 1, 4: 1, 1/2: 1",
+  "product: factors with a negative exponent (%)": "31",
+  "product: factors with exponent other than +-1 (%)": "17",
+  "sum: summands with a coefficient / with minus (%)": "14 / 26",
+  "pairing: + / - / * / \u00f7 (%)": "26 / 19 / 31 / 24"
+ }
+}

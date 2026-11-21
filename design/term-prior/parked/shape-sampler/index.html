@@ -1,0 +1,641 @@
+<title>Term-Pool Shape Sampler</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Layout: controls on the left; on the right one sample (term graph, layers, assembled expression) above the analysis
+   of many samples. Hue = layer, shade = term within the layer; pill = binary, box = unary, dot = empty leaf. */
+:root {
+  --bg: #f3f4f7; --surface: #ffffff; --sunken: #ebedf2; --ink: #151a25; --muted: #5a6376; --line: #dbdfe7;
+  --focus: #3355d6;
+  --L1: #2a78d6; --L2: #eb6834; --L3: #1baf7a; --L4: #eda100; --L5: #e87ba4;
+  --leaf: #a3aab8;
+  --font-display: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10131a; --surface: #181c25; --sunken: #1f2430; --ink: #e9ecf2; --muted: #9aa3b5; --line: #2b313d; --focus: #8fa7ff;
+    --L1: #3987e5; --L2: #d95926; --L3: #199e70; --L4: #c98500; --L5: #d55181; --leaf: #6c7486;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10131a; --surface: #181c25; --sunken: #1f2430; --ink: #e9ecf2; --muted: #9aa3b5; --line: #2b313d; --focus: #8fa7ff;
+  --L1: #3987e5; --L2: #d95926; --L3: #199e70; --L4: #c98500; --L5: #d55181; --leaf: #6c7486;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1480px; margin: 0 auto; padding-block: 24px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h1 { font-size: 1.75rem; font-weight: 600; }
+h2 { font-size: 1.12rem; font-weight: 600; }
+h3 { font-size: 0.95rem; font-weight: 600; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 74ch; margin-top: 6px; }
+.eyebrow { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+.layout { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 20px; align-items: start; margin-top: 20px; }
+@media (max-width: 980px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; }
+.side { display: grid; gap: 14px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); max-height: calc(100vh - 24px); overflow-y: auto; }
+@media (max-width: 980px) { .side { position: static; max-height: none; } }
+.main { display: grid; gap: 16px; min-width: 0; }
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 10px; }
+legend { font-family: var(--font-display); font-weight: 600; margin-bottom: 4px; }
+.ctl { display: grid; gap: 2px; }
+.ctl label { display: flex; justify-content: space-between; gap: 8px; font-size: 0.84rem; color: var(--muted); }
+.ctl label output { font-family: var(--font-mono); color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ctl input[type=range] { width: 100%; accent-color: var(--ink); }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button, .btn { font: inherit; border-radius: 8px; padding: 7px 12px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.seg button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); font-weight: 600; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.seedbox { display: flex; gap: 6px; align-items: center; font-size: 0.85rem; color: var(--muted); }
+.seedbox input, .seedbox select { width: 7.5em; font: inherit; font-family: var(--font-mono); padding: 5px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.hint { font-size: 0.78rem; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; font-size: 0.8rem; background: var(--sunken); font-variant-numeric: tabular-nums; }
+.chip b { font-family: var(--font-mono); font-weight: 500; }
+.scroll { overflow-x: auto; border: 1px dashed var(--line); border-radius: 8px; background: var(--sunken); padding: 8px; }
+.scroll svg { display: block; }
+.layers { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(230px, 1fr); gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+.layer { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.layer > header { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; border-bottom: 3px solid; padding-bottom: 4px; }
+.layer > header span { font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.term { border: 1px solid var(--line); border-radius: 8px; padding: 8px; background: var(--surface); display: grid; gap: 4px; min-width: 0; }
+.term .head { display: flex; justify-content: space-between; gap: 6px; font-size: 0.8rem; }
+.term .name { font-family: var(--font-mono); font-weight: 500; display: inline-flex; gap: 6px; align-items: center; }
+.sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
+.term.unused { opacity: 0.45; }
+.term .tbox { overflow-x: auto; }
+.term svg { display: block; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.8rem; color: var(--muted); align-items: center; }
+.legend span { display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+.charts { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+.chart { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 6px; min-width: 0; }
+.chart.wide { grid-column: span 2; }
+@media (max-width: 760px) { .chart.wide { grid-column: auto; } }
+.chart p { font-size: 0.8rem; color: var(--muted); }
+.chart svg { width: 100%; height: auto; display: block; }
+.tiles { display: flex; flex-wrap: wrap; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.tile { flex: 1 1 150px; background: var(--surface); padding: 10px 12px; display: grid; gap: 2px; min-width: 0; }
+.tile b { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.tile span { font-size: 0.76rem; color: var(--muted); }
+.sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.math { overflow-x: auto; overflow-y: hidden; max-width: 100%; min-height: 24px; }
+.math.big { font-size: 1.05rem; padding: 4px 0; }
+.math .fallback { font-family: var(--font-mono); font-size: 0.85em; }
+@media (prefers-reduced-motion: no-preference) { .seg button, .btn { transition: border-color .15s, box-shadow .15s; } }
+</style>
+<style id="term-colors"></style>
+
+<div class="wrap">
+  <div class="eyebrow">Hierarchical term-pool prior · T8 operators, empty leaves</div>
+  <h1>Term-Pool Shape Sampler</h1>
+  <p class="lede">Layered patterns whose leaves are replaced by patterns of deeper layers, sampled live in your browser. Every pattern is drawn from the T8 operator prior with the family-affinity urn, independently and with one global set of hyperparameters. Leaves stay empty for now. Change any value and the sample and the analysis update.</p>
+
+  <div class="layout">
+    <aside class="side">
+      <section class="panel" style="display:grid;gap:12px">
+        <div class="row">
+          <button class="btn primary" id="resample" type="button">New sample</button>
+          <div class="seedbox"><label for="seed">seed</label><input id="seed" type="number" value="20261120" inputmode="numeric"></div>
+        </div>
+        <div class="row"><button class="btn" id="reset" type="button">Reset to defaults</button></div>
+      </section>
+      <section class="panel"><fieldset id="g-layers"><legend>Layers and terms</legend></fieldset></section>
+      <section class="panel"><fieldset id="g-layerhp"><legend>Layer and term hyperparameters</legend>
+        <div class="ctl"><label for="sizeMode">pattern size n</label>
+          <select id="sizeMode" style="font:inherit;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink)">
+            <option value="t8">T8 operator-count prior, every pattern</option>
+            <option value="t8root">T8 prior for layer 1, draft rule deeper</option>
+            <option value="draft">draft rule: 1 + Poisson(μ_λ − 1), capped</option>
+          </select></div>
+        <p class="hint" id="size-hint"></p>
+      </fieldset></section>
+      <section class="panel"><fieldset id="g-phi"><legend>Global pattern prior φ (T8)</legend>
+        <p class="hint">Operator weights stay T8's: 10 for + − × ÷, 5 for pow and rootn, 1 for every other operator.</p></fieldset></section>
+      <section class="panel"><fieldset><legend>Replacement</legend>
+        <div class="seg" role="group" aria-label="Replacement mode">
+          <button type="button" id="m-copy" aria-pressed="true">anew per copy</button>
+          <button type="button" id="m-shared" aria-pressed="false">once per term (comparison)</button>
+        </div>
+        <p class="hint">Decided: every copy decides its leaves anew. Once per term (every copy identical) stays as a comparison. Copies are not modified yet; the slight per-copy modifications come later.</p>
+        <div class="ctl"><label for="maxNodes">safety cap on internal nodes <output id="o-maxNodes"></output></label><input type="range" id="maxNodes" min="100" max="3000" step="50"></div>
+      </fieldset></section>
+    </aside>
+
+    <main class="main">
+      <section class="panel" style="display:grid;gap:12px">
+        <div class="sec-head"><h2>One sample</h2><span class="hint" id="sample-note"></span></div>
+        <div class="chips" id="sample-chips"></div>
+        <div class="legend" id="legend"></div>
+        <h3>Assembled expression</h3>
+        <p class="hint">Each part is coloured by the term it came from; □ is an empty leaf.</p>
+        <div class="math big" id="final-math"></div>
+        <div class="scroll" id="final"></div>
+        <h3>Which term uses which</h3>
+        <p class="hint">Columns are layers. A box is a term with its number of copies in the expression. An arrow counts the leaves a term handed to a deeper one. Faded terms were drawn but never used.</p>
+        <div class="scroll" id="graph"></div>
+        <h3>Layers and their patterns</h3>
+        <p class="hint">Each term's pattern before replacement. In once-per-term mode a filled square leaf is replaced by the term of that colour; in per-copy mode the decisions belong to each copy and show in the assembled expression.</p>
+        <div class="layers" id="layers"></div>
+      </section>
+
+      <section style="display:grid;gap:12px">
+        <div class="sec-head"><h2>Over many samples</h2>
+          <div class="row"><span class="hint" id="an-note"></span>
+            <label class="seedbox" for="nAn">samples <select id="nAn"><option value="500">500</option><option value="2000" selected>2,000</option><option value="5000">5,000</option></select></label>
+          </div>
+        </div>
+        <p class="hint">Reference ticks marked “one T8 tree” come from single patterns of this prior with the T8 operator-count prior p(n) ∝ exp(n^0.7), n ≤ 17, and the same φ.</p>
+        <div class="tiles" id="tiles"></div>
+        <div class="charts" id="charts"></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script>
+window.MathJax = { tex: { packages: { '[+]': ['html', 'ams'] } }, svg: { fontCache: 'local' }, options: { enableMenu: false }, startup: { typeset: false } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.js" async></script>
+<script>
+"use strict";
+// ------------------------------------------------------------------ parameters
+const DEFAULTS = { qL: 0.5, qT: 0.5, mp: 0.5, kp: 4, muMin: 1.5, muMax: 5, alpha: 1, eps: 0.1, nCap: 10,
+  w1: 0.5, gamma: 0.25, delta: 0.5, alphaFam: 0.36, maxNodes: 1000, shared: false, sizeMode: "t8" };
+const CONTROLS = [
+  ["g-layers", "qL", "layer ratio q for Λ (P(Λ ≤ 3))", 0.05, 0.95, 0.05],
+  ["g-layers", "qT", "term ratio q for T_λ (P(T ≤ 3))", 0.05, 0.95, 0.05],
+  ["g-layers", "eps", "jump remainder ε (to layers λ+2 …)", 0, 0.5, 0.01],
+  ["g-layerhp", "mp", "replacement probability: Beta mean", 0.02, 0.98, 0.02],
+  ["g-layerhp", "kp", "replacement probability: Beta concentration", 0.5, 40, 0.5],
+  ["g-layerhp", "muMin", "size scale μ_λ: lower end", 1, 8, 0.5],
+  ["g-layerhp", "muMax", "size scale μ_λ: upper end", 1, 10, 0.5],
+  ["g-layerhp", "alpha", "term weights: Dirichlet α", 0.05, 20, 0.05],
+  ["g-layerhp", "nCap", "size cap per pattern (operators)", 1, 17, 1],
+  ["g-phi", "w1", "unary mass w₁", 0.05, 2, 0.05],
+  ["g-phi", "gamma", "nesting decay γ (per nested function)", 0.01, 1, 0.01],
+  ["g-phi", "delta", "class switch factor δ (+ − vs × ÷)", 0.05, 1, 0.05],
+  ["g-phi", "alphaFam", "family urn concentration α_fam", 0.05, 50, 0.05],
+];
+let P = { ...DEFAULTS };
+try { const s = JSON.parse(localStorage.getItem("tps4-params") || "null"); if (s) P = { ...DEFAULTS, ...s }; } catch (e) { /* storage unavailable */ }
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// ------------------------------------------------------------------ randomness
+function mulberry(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function normal(r) { let u = 0; while (u === 0) u = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * r()); }
+function gammaS(k, r) {
+  if (k < 1) return gammaS(k + 1, r) * Math.pow(r() || 1e-12, 1 / k);
+  const d = k - 1 / 3, c = 1 / Math.sqrt(9 * d);
+  for (;;) { let x, v; do { x = normal(r); v = 1 + c * x; } while (v <= 0); v = v * v * v; const u = r();
+    if (u < 1 - 0.0331 * x ** 4) return d * v; if (Math.log(u) < 0.5 * x * x + d * (1 - v + Math.log(v))) return d * v; }
+}
+const betaS = (a, b, r) => { const x = gammaS(a, r), y = gammaS(b, r); return x / (x + y); };
+const dirichlet = (n, a, r) => { const g = Array.from({ length: n }, () => gammaS(a, r)); const s = g.reduce((p, q) => p + q, 0); return g.map(x => x / s); };
+function poisson(lam, r) { if (lam <= 0) return 0; const L = Math.exp(-lam); let k = 0, p = 1; do { k++; p *= r(); } while (p > L); return k - 1; }
+const categorical = (w, r) => { const s = w.reduce((a, b) => a + b, 0); let x = r() * s, c = 0; for (let i = 0; i < w.length; i++) { c += w[i]; if (x < c) return i; } return w.length - 1; };
+const choice = (vals, w, r) => vals[categorical(w, r)];
+const truncGeomP = (q, K) => { const w = Array.from({ length: K }, (_, k) => Math.pow(q, k)); const s = w.reduce((a, b) => a + b, 0); return w.map(x => x / s); };
+const T8N = (() => { const w = []; for (let n = 0; n <= 17; n++) w.push(Math.exp(Math.pow(n, 0.7))); const s = w.reduce((a, b) => a + b, 0); return w.map(x => x / s); })();
+
+// ------------------------------------------------------------------ the T8 pattern prior with the family urn
+const W = { "+": 10, "-": 10, "*": 10, "/": 10, pow: 5, rootn: 5, abs: 1, inv: 1, neg: 1, sin: 1, cos: 1, tan: 1, asin: 1, acos: 1, atan: 1,
+  sinh: 1, cosh: 1, tanh: 1, asinh: 1, acosh: 1, atanh: 1, exp: 1, log: 1 };
+const BIN = ["+", "-", "*", "/"], BIN_CLASS = { "+": "A", "-": "A", "*": "M", "/": "M" };
+const S_OPS = ["neg", "inv"], INDEPENDENT = ["pow", "rootn"];
+const FAMILIES = { abs: ["abs"], exp: ["exp"], hyperbolic: ["sinh", "cosh", "tanh"], inverse_hyperbolic: ["asinh", "acosh", "atanh"],
+  inverse_trig: ["asin", "acos", "atan"], log: ["log"], trig: ["sin", "cos", "tan"] };
+const FAM_NAMES = Object.keys(FAMILIES);
+const FAMILY_OF = Object.fromEntries(FAM_NAMES.flatMap(f => FAMILIES[f].map(o => [o, f])));
+const F_OPS = [...INDEPENDENT, ...FAM_NAMES.flatMap(f => FAMILIES[f])];
+const sumW = ops => ops.reduce((s, o) => s + W[o], 0);
+const UNARY_TOTAL = sumW(F_OPS) + sumW(S_OPS);
+const mF = sumW(F_OPS) / UNARY_TOTAL, mS = sumW(S_OPS) / UNARY_TOTAL;
+const FAM_MASS = FAM_NAMES.map(f => sumW(FAMILIES[f])), FAM_TOTAL = FAM_MASS.reduce((a, b) => a + b, 0);
+const FAM_PI = FAM_MASS.map(m => m / FAM_TOTAL);
+const P_INDEPENDENT = sumW(INDEPENDENT) / (sumW(INDEPENDENT) + FAM_TOTAL);
+const TRANS = new Set(["sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh", "asinh", "acosh", "atanh", "exp", "log"]);
+const FSET = new Set([...TRANS, "abs"]);
+const INVERSE = new Set(["asin", "acos", "atan", "asinh", "acosh", "atanh"]);
+
+const tableCache = new Map();
+function t8Table(w1, g, nmax) {
+  const key = `${w1}|${g}|${nmax}`; if (tableCache.has(key)) return tableCache.get(key);
+  const D = nmax + 2;
+  const C = Array.from({ length: D + 1 }, () => { const a = new Array(nmax + 1).fill(0); a[0] = 1; return a; });
+  for (let m = 1; m <= nmax; m++) {
+    let bin = 0; for (let i = 0; i < m; i++) bin += C[0][i] * C[0][m - 1 - i];
+    for (let c = D; c >= 0; c--) C[c][m] = w1 * (mF * Math.pow(g, c) * C[Math.min(c + 1, D)][m - 1] + mS * C[c][m - 1]) + bin;
+  }
+  tableCache.set(key, C); return C;
+}
+function powExp(r) {
+  const u = r();
+  if (u < 0.65) return choice([2, -2, 3, -3, 4, -4, 5, -5], [16, 16, 9, 9, 4, 4, 1, 1], r);
+  if (u < 0.95) return choice([0.5, -0.5, 0.25, -0.25, 1.5, -1.5, 2.5, -2.5, 0.75, -0.75], [6, 6, 3, 3, 2, 2, 1.2, 1.2, 1, 1], r);
+  // N(0, 2^2) rounded to d decimals, d uniform on 1..d_x (d_x = decimals of the shortest representation of x)
+  const x = 2 * normal(r), mant = String(x).split("e")[0], dx = Math.max(1, (mant.split(".")[1] || "").length);
+  return Number(x.toFixed(1 + Math.floor(r() * dx))) + 0;
+}
+const rootIdx = r => choice([2, -2, 3, -3, 4, -4, 5, -5], [16, 16, 9, 9, 4, 4, 1, 1], r);
+function sampleT8(n, phi, r) {
+  const C = t8Table(phi.w1, phi.gamma, Math.max(n, 1)), D = C.length - 1;
+  const counts = FAM_NAMES.map(() => 0);
+  function fnLabel() {
+    if (r() < P_INDEPENDENT) return choice(INDEPENDENT, INDEPENDENT.map(o => W[o]), r);
+    const j = categorical(FAM_PI.map((pi, k) => phi.alphaFam * pi + counts[k]), r); counts[j]++;
+    const mem = FAMILIES[FAM_NAMES[j]]; return choice(mem, mem.map(o => W[o]), r);
+  }
+  function grow(c, m, k) {
+    if (m === 0) return { k: "l" };
+    const pF = phi.w1 * mF * Math.pow(phi.gamma, c) * C[Math.min(c + 1, D)][m - 1];
+    const pS = phi.w1 * mS * C[c][m - 1];
+    const splits = []; let pB = 0; for (let i = 0; i < m; i++) { const v = C[0][i] * C[0][m - 1 - i]; splits.push(v); pB += v; }
+    let x = r() * (pF + pS + pB);
+    if (x < pF) {
+      const op = fnLabel(), node = { k: "u", op, c: [grow(Math.min(c + 1, D), m - 1, null)] };
+      if (op === "pow") node.e = powExp(r); else if (op === "rootn") node.e = rootIdx(r);
+      return node;
+    }
+    if (x < pF + pS) return { k: "u", op: choice(S_OPS, S_OPS.map(o => W[o]), r), c: [grow(c, m - 1, k)] };
+    const i = categorical(splits, r);
+    const ws = BIN.map(o => W[o] * (k && BIN_CLASS[o] !== k ? phi.delta : 1));
+    const op = choice(BIN, ws, r), k2 = BIN_CLASS[op];
+    return { k: "b", op, c: [grow(0, i, k2), grow(0, m - 1 - i, k2)] };
+  }
+  return grow(0, n, null);
+}
+const countLeaves = t => t.k === "l" ? 1 : t.c.reduce((s, c) => s + countLeaves(c), 0);
+function pickLayer(l, Lam, eps, r) { if (l + 1 >= Lam) return Lam; if (r() < 1 - eps) return l + 1; return l + 2 + Math.floor(r() * (Lam - l - 1)); }
+
+// ------------------------------------------------------------------ one expression
+function sampleExpr(P, r) {
+  const pL = truncGeomP(P.qL, 5), pT = truncGeomP(P.qT, 5);
+  const Lam = 1 + categorical(pL, r);
+  const layers = [];
+  for (let l = 1; l <= Lam; l++) {
+    const T = l === 1 ? 1 : 1 + categorical(pT, r);
+    const pRep = l === Lam ? 0 : betaS(P.mp * P.kp, (1 - P.mp) * P.kp, r);
+    const lo = Math.min(P.muMin, P.muMax), hi = Math.max(P.muMin, P.muMax), mu = lo + (hi - lo) * r();
+    const w = dirichlet(T, P.alpha, r);
+    const terms = [];
+    const t8size = P.sizeMode === "t8" || (P.sizeMode === "t8root" && l === 1);
+    for (let i = 0; i < T; i++) { const n = t8size ? categorical(T8N, r) : Math.min(1 + poisson(mu - 1, r), P.nCap); terms.push({ n, pattern: sampleT8(n, P, r) }); }
+    layers.push({ l, T, pRep, mu, w, terms });
+  }
+  const decide = (l, pattern) => {
+    const k = countLeaves(pattern), refs = [];
+    for (let j = 0; j < k; j++) { if (r() < layers[l - 1].pRep) { const l2 = pickLayer(l, Lam, P.eps, r); refs.push([l2, categorical(layers[l2 - 1].w, r)]); } else refs.push(null); }
+    return refs;
+  };
+  if (P.shared) for (const L of layers) for (const t of L.terms) t.refs = decide(L.l, t.pattern);
+  let budget = P.maxNodes, truncated = false;
+  const copies = new Map(), edges = new Map();
+  function inst(l, i) {
+    const key = l + "." + i; copies.set(key, (copies.get(key) || 0) + 1);
+    const term = layers[l - 1].terms[i], refs = P.shared ? term.refs : decide(l, term.pattern);
+    let j = 0;
+    function clone(node) {
+      if (node.k === "l") {
+        const ref = refs[j++];
+        if (ref) { if (budget > 0) { const e = key + ">" + ref[0] + "." + ref[1]; edges.set(e, (edges.get(e) || 0) + 1); return inst(ref[0], ref[1]); } truncated = true; }
+        return { k: "l", o: [l, i] };
+      }
+      budget--;
+      const out = { k: node.k, op: node.op, o: [l, i], c: node.c.map(clone) };
+      if (node.e !== undefined) out.e = node.e;
+      return out;
+    }
+    return clone(term.pattern);
+  }
+  const root = inst(1, 0);
+  return { Lam, layers, root, copies, edges, truncated, stats: exprStats(root, copies) };
+}
+const GROUPS = ["+", "−", "×", "÷", "pow", "rootn", "functions", "neg", "inv", "abs"];
+const groupOf = op => ({ "+": 0, "-": 1, "*": 2, "/": 3, pow: 4, rootn: 5, neg: 7, inv: 8, abs: 9 }[op] ?? 6);
+function exprStats(root, copies) {
+  let ops = 0, depth = 0, fn = 0, inv = 0, nested = false, cross = false; const byLayer = [0, 0, 0, 0, 0], groups = new Array(10).fill(0), fams = new Set();
+  (function walk(n, d, fnAnc) {
+    depth = Math.max(depth, d);
+    if (n.k === "l") return;
+    ops++; if (n.o) byLayer[n.o[0] - 1]++; groups[groupOf(n.op)]++;
+    let anc = fnAnc;
+    if (FSET.has(n.op)) {
+      fn++; if (INVERSE.has(n.op)) inv++; fams.add(FAMILY_OF[n.op]);
+      const key = n.o ? n.o[0] + "." + n.o[1] : "single";
+      if (fnAnc !== null) { nested = true; if (fnAnc !== key) cross = true; }
+      anc = key;
+    }
+    n.c.forEach(c => walk(c, d + 1, anc));
+  })(root, 0, null);
+  let maxCopies = 0, deepest = 1, used = 0;
+  if (copies) for (const [k, v] of copies) { used++; maxCopies = Math.max(maxCopies, v); deepest = Math.max(deepest, Number(k.split(".")[0])); }
+  return { ops, depth, byLayer, groups, fn, inv, nested, cross, mixed: fams.size >= 2, fams: fams.size, maxCopies, deepest, used };
+}
+
+// ------------------------------------------------------------------ colours and labels
+const MIX = [0, 26, 13, 39, 52];
+const termColor = (l, i) => MIX[i % 5] === 0 ? `var(--L${l})` : `color-mix(in oklab, var(--L${l}) ${100 - MIX[i % 5]}%, var(--ink))`;
+const termName = (l, i) => `L${l}·T${i + 1}`;
+(function termCSS() {
+  const rules = [];
+  for (let l = 1; l <= 5; l++) for (let i = 0; i < 5; i++) rules.push(`.math .t${l}_${i}, .math g.t${l}_${i} { color: ${termColor(l, i)}; fill: ${termColor(l, i)}; }`);
+  $("term-colors").textContent = rules.join("\n");
+})();
+const fmtE = e => Number.isInteger(e) ? String(e) : String(e);
+function opLabel(n) {
+  switch (n.op) {
+    case "+": return "+"; case "-": return "−"; case "*": return "×"; case "/": return "÷";
+    case "pow": return "^" + fmtE(n.e).replace("-", "−"); case "rootn": return n.e === 2 ? "√" : "√" + fmtE(n.e).replace("-", "−");
+    case "neg": return "−( )"; case "inv": return "1/( )"; case "abs": return "| |"; default: return n.op;
+  }
+}
+
+// ------------------------------------------------------------------ LaTeX
+const FN = { sin: "\\sin", cos: "\\cos", tan: "\\tan", asin: "\\arcsin", acos: "\\arccos", atan: "\\arctan", sinh: "\\sinh", cosh: "\\cosh",
+  tanh: "\\tanh", asinh: "\\operatorname{arsinh}", acosh: "\\operatorname{arcosh}", atanh: "\\operatorname{artanh}", exp: "\\exp", log: "\\log" };
+function texExp(e) { return Number.isInteger(e) ? String(e) : (Math.abs(e * 4 - Math.round(e * 4)) < 1e-9 ? (e < 0 ? "-" : "") + `\\tfrac{${Math.round(Math.abs(e) * 4) / (Math.abs(e * 2) % 1 === 0 ? 2 : 1) / (Math.abs(e * 2) % 1 === 0 ? 1 : 1)}}{1}` : String(e)); }
+function expTex(e) {
+  const a = Math.abs(e), sgn = e < 0 ? "-" : "";
+  if (Number.isInteger(e)) return String(e);
+  for (const q of [2, 4]) { const p = a * q; if (Math.abs(p - Math.round(p)) < 1e-9) return `${sgn}\\tfrac{${Math.round(p)}}{${q}}`; }
+  return String(e);
+}
+function toTex(root, opt = {}) {
+  const par = (x, p) => x.p < p ? { s: `\\left(${x.s}\\right)`, p: 9 } : x;
+  function T(n, parentO) {
+    const o = n.o ? n.o[0] + "_" + n.o[1] : null;
+    let r;
+    if (n.k === "l") {
+      const ref = opt.leafRef ? opt.leafRef() : null;
+      r = ref ? { s: `\\class{t${ref[0]}_${ref[1]}}{\\blacksquare}`, p: 9 } : { s: "\\square", p: 9 };
+    } else {
+      const a = T(n.c[0], o), b = n.c[1] ? T(n.c[1], o) : null;
+      switch (n.op) {
+        case "+": r = { s: `${par(a, 1).s} + ${par(b, 1).s}`, p: 1 }; break;
+        case "-": r = { s: `${par(a, 1).s} - ${par(b, 1.5).s}`, p: 1 }; break;
+        case "*": r = { s: `${par(a, 2).s} \\cdot ${par(b, 2.6).s}`, p: 2 }; break;
+        case "/": r = { s: `\\frac{${a.s}}{${b.s}}`, p: 9 }; break;
+        case "pow": r = { s: `{${par(a, 9).s}}^{${expTex(n.e)}}`, p: 5 }; break;
+        case "rootn": { const k = Math.abs(n.e), rt = k === 2 ? `\\sqrt{${a.s}}` : `\\sqrt[${k}]{${a.s}}`; r = { s: n.e < 0 ? `\\frac{1}{${rt}}` : rt, p: 9 }; break; }
+        case "neg": r = { s: `-${par(a, 2.6).s}`, p: 2.5 }; break;
+        case "inv": r = { s: `\\frac{1}{${a.s}}`, p: 9 }; break;
+        case "abs": r = { s: `\\left|${a.s}\\right|`, p: 9 }; break;
+        default: r = { s: `${FN[n.op] || "\\text{" + n.op + "}"}\\left(${a.s}\\right)`, p: 5 };
+      }
+    }
+    if (opt.color && o && o !== parentO) r = { s: `\\class{t${o}}{${r.s}}`, p: r.p };
+    return r;
+  }
+  return T(root, null).s;
+}
+function toInfix(n) {
+  if (n.k === "l") return "□";
+  const a = toInfix(n.c[0]), b = n.c[1] ? toInfix(n.c[1]) : null;
+  if (b !== null) return `(${a} ${opLabel(n)} ${b})`;
+  if (n.op === "pow") return `(${a})^${n.e}`;
+  if (n.op === "rootn") return `root${n.e}(${a})`;
+  return `${n.op}(${a})`;
+}
+let mjReady = false;
+function mathEl(root, opt, cls = "") {
+  const el = document.createElement("div"); el.className = "math " + cls;
+  el.dataset.tex = toTex(root, opt); el.dataset.fallback = toInfix(root);
+  typeset(el); return el;
+}
+function typeset(el) {
+  if (mjReady) { try { el.replaceChildren(MathJax.tex2svg(el.dataset.tex, { display: false })); return; } catch (e) { /* fall back */ } }
+  el.innerHTML = `<span class="fallback">${esc(el.dataset.fallback)}</span>`;
+}
+
+// ------------------------------------------------------------------ labelled trees
+function treeSVG(root, opt) {
+  const cw = 6.6, h = 18, dy = opt.dy || 30, gap = 6, pad = 6;
+  const labelW = n => n.k === "l" ? 10 : Math.max(20, opLabel(n).length * cw + 10);
+  (function measure(n) { const lw = labelW(n); if (!n.c) { n.sw = lw; return; } n.c.forEach(measure); const cs = n.c.reduce((s, c) => s + c.sw, 0) + gap * (n.c.length - 1); n.sw = Math.max(lw, cs); })(root);
+  let maxD = 0;
+  (function place(n, x0, d) {
+    n.d = d; maxD = Math.max(maxD, d);
+    if (!n.c) { n.x = x0 + n.sw / 2; return; }
+    const cs = n.c.reduce((s, c) => s + c.sw, 0) + gap * (n.c.length - 1); let x = x0 + (n.sw - cs) / 2;
+    n.c.forEach(c => { place(c, x, d + 1); x += c.sw + gap; });
+    n.x = n.c.length === 1 ? n.c[0].x : (n.c[0].x + n.c[n.c.length - 1].x) / 2;
+  })(root, pad, 0);
+  const W = root.sw + 2 * pad, H = maxD * dy + h + 2 * pad;
+  const edges = [], marks = [];
+  let leafIdx = 0;
+  (function walk(n) {
+    const x = n.x, y = pad + n.d * dy + h / 2;
+    if (n.c) n.c.forEach(c => edges.push(`<line x1="${x}" y1="${y}" x2="${c.x}" y2="${pad + c.d * dy + h / 2}" stroke="var(--line)" stroke-width="1.3"/>`));
+    if (n.k === "l") {
+      const ref = opt.leafRefs ? opt.leafRefs[leafIdx++] : null;
+      if (ref) marks.push(`<g><title>leaf replaced by ${termName(ref[0], ref[1])}</title><rect x="${x - 5}" y="${y - 5}" width="10" height="10" rx="2" fill="${termColor(ref[0], ref[1])}"/></g>`);
+      else marks.push(`<g><title>empty leaf${n.o ? " from " + termName(n.o[0], n.o[1]) : ""}</title><circle cx="${x}" cy="${y}" r="3.5" fill="${n.o && opt.colorLeaves ? `color-mix(in oklab, ${termColor(n.o[0], n.o[1])} 45%, var(--leaf))` : "var(--leaf)"}"/></g>`);
+    } else {
+      const col = n.o ? termColor(n.o[0], n.o[1]) : opt.color, w = labelW(n);
+      marks.push(`<g><title>${esc(n.op)}${n.e !== undefined ? " " + n.e : ""}${n.o ? " · " + termName(n.o[0], n.o[1]) : ""}</title>` +
+        `<rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" rx="${n.k === "b" ? 9 : 3}" fill="color-mix(in oklab, ${col} 20%, var(--surface))" stroke="${col}" stroke-width="1.5"/>` +
+        `<text x="${x}" y="${y + 4}" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, ui-monospace, monospace" fill="var(--ink)">${esc(opLabel(n))}</text></g>`);
+    }
+    if (n.c) n.c.forEach(walk);
+  })(root);
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opt.label || "tree")}">${edges.join("")}${marks.join("")}</svg>`;
+}
+
+// ------------------------------------------------------------------ one-sample views
+function renderSample(ex) {
+  const st = ex.stats;
+  $("sample-chips").innerHTML = [
+    ["Λ", ex.Lam], ["terms per layer", ex.layers.map(L => L.T).join(" · ")], ["operators", st.ops], ["depth", st.depth],
+    ["terms used", `${st.used} of ${ex.layers.reduce((s, L) => s + L.T, 0)}`], ["most copies of one term", st.maxCopies],
+    ["functions", st.fn], ["function families", st.fams],
+  ].map(([k, v]) => `<span class="chip">${esc(k)} <b>${esc(v)}</b></span>`).join("") +
+    (st.nested ? `<span class="chip">function inside a function${st.cross ? ", across terms" : ""}</span>` : "") + (ex.truncated ? `<span class="chip">safety cap reached</span>` : "");
+  $("sample-note").textContent = `seed ${$("seed").value}`;
+  $("legend").innerHTML = ex.layers.map(L => `<span><span class="sw" style="background:var(--L${L.l})"></span>layer ${L.l}</span>`).join("") +
+    `<span><svg width="22" height="14"><rect x="1" y="2" width="20" height="10" rx="5" fill="none" stroke="var(--muted)" stroke-width="1.5"/></svg>binary</span>` +
+    `<span><svg width="22" height="14"><rect x="1" y="2" width="20" height="10" rx="2" fill="none" stroke="var(--muted)" stroke-width="1.5"/></svg>unary</span>` +
+    `<span><svg width="12" height="14"><circle cx="6" cy="7" r="3.5" fill="var(--leaf)"/></svg>empty leaf</span>`;
+  if (st.ops <= 250) $("final-math").replaceChildren(mathEl(ex.root, { color: true }, "big"));
+  else $("final-math").innerHTML = `<span class="hint">Formula hidden above 250 operators (this one has ${st.ops}); the tree below shows it.</span>`;
+  $("final").innerHTML = treeSVG(ex.root, { label: "assembled expression", colorLeaves: true });
+  renderGraph(ex); renderLayers(ex);
+}
+function renderGraph(ex) {
+  const colW = 150, rowH = 54, bw = 92, bh = 34, padX = 12, padY = 26;
+  const maxT = Math.max(...ex.layers.map(L => L.T));
+  const W = padX * 2 + ex.Lam * colW - (colW - bw), H = padY + maxT * rowH + 8;
+  const pos = (l, i) => ({ x: padX + (l - 1) * colW, y: padY + i * rowH });
+  const parts = [`<defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker></defs>`];
+  ex.layers.forEach(L => parts.push(`<text x="${pos(L.l, 0).x}" y="14" font-size="11" fill="var(--muted)" font-family="IBM Plex Sans, system-ui, sans-serif">layer ${L.l}${L.l < ex.Lam ? ` · p = ${L.pRep.toFixed(2)}` : ""}</text>`));
+  for (const [e, cnt] of ex.edges) {
+    const [a, b] = e.split(">"); const [l1, i1] = a.split(".").map(Number), [l2, i2] = b.split(".").map(Number);
+    const p1 = pos(l1, i1), p2 = pos(l2, i2);
+    const x1 = p1.x + bw, y1 = p1.y + bh / 2, x2 = p2.x, y2 = p2.y + bh / 2, mx = (x1 + x2) / 2;
+    parts.push(`<g><title>${termName(l1, i1)} → ${termName(l2, i2)}: ${cnt} leaf replacement${cnt === 1 ? "" : "s"}</title><path d="M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2 - 3},${y2}" fill="none" stroke="var(--muted)" stroke-width="${Math.min(1 + cnt * 0.6, 5)}" stroke-opacity="0.65" marker-end="url(#ah)"/>` +
+      `<text x="${mx}" y="${(y1 + y2) / 2 - 4}" font-size="10.5" text-anchor="middle" fill="var(--ink)" font-family="IBM Plex Mono, monospace">${cnt}</text></g>`);
+  }
+  ex.layers.forEach(L => L.terms.forEach((t, i) => {
+    const p = pos(L.l, i), c = ex.copies.get(L.l + "." + i) || 0, col = termColor(L.l, i);
+    parts.push(`<g opacity="${c ? 1 : 0.4}"><title>${termName(L.l, i)}: ${t.n} operators, ${c} cop${c === 1 ? "y" : "ies"}, weight ${(L.w[i] * 100).toFixed(0)}%</title>` +
+      `<rect x="${p.x}" y="${p.y}" width="${bw}" height="${bh}" rx="7" fill="color-mix(in oklab, ${col} 22%, var(--surface))" stroke="${col}" stroke-width="2"/>` +
+      `<text x="${p.x + 8}" y="${p.y + 21}" font-size="12" fill="var(--ink)" font-family="IBM Plex Mono, monospace">${termName(L.l, i)}</text>` +
+      `<text x="${p.x + bw - 8}" y="${p.y + 21}" font-size="12" text-anchor="end" fill="var(--ink)" font-family="IBM Plex Mono, monospace" font-weight="500">×${c}</text></g>`);
+  }));
+  $("graph").innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="term graph">${parts.join("")}</svg>`;
+}
+function renderLayers(ex) {
+  const box = $("layers"); box.replaceChildren();
+  ex.layers.forEach(L => {
+    const col = document.createElement("div"); col.className = "layer";
+    col.innerHTML = `<header style="border-color:var(--L${L.l})"><h3>Layer ${L.l}</h3><span>μ ${L.mu.toFixed(1)}${L.l < ex.Lam ? ` · p ${L.pRep.toFixed(2)}` : " · deepest"}</span></header>`;
+    L.terms.forEach((t, i) => {
+      const c = ex.copies.get(L.l + "." + i) || 0, refs = P.shared ? t.refs : null;
+      const card = document.createElement("div"); card.className = "term" + (c ? "" : " unused");
+      card.innerHTML = `<div class="head"><span class="name"><span class="sw" style="background:${termColor(L.l, i)}"></span>${termName(L.l, i)}</span><span class="hint">n = ${t.n} · ×${c}</span></div>`;
+      let j = 0;
+      card.appendChild(mathEl(t.pattern, { leafRef: refs ? () => refs[j++] : null }));
+      const tb = document.createElement("div"); tb.className = "tbox";
+      tb.innerHTML = treeSVG(t.pattern, { label: termName(L.l, i), color: termColor(L.l, i), leafRefs: refs });
+      card.appendChild(tb);
+      const repl = refs ? refs.filter(Boolean).map(rf => termName(rf[0], rf[1])) : [];
+      card.insertAdjacentHTML("beforeend", `<div class="hint">${refs ? (repl.length ? "leaves → " + repl.join(", ") : "no leaf replaced") : "leaves decided per copy"}</div>`);
+      col.appendChild(card);
+    });
+    box.appendChild(col);
+  });
+}
+
+// ------------------------------------------------------------------ analysis
+function barChart({ labels, values, colors, ref, refLabel, yFmt, xTitle, title, W = 360 }) {
+  const H = 190, ml = 34, mr = 8, mt = 10, mb = 34;
+  const n = values.length, pw = W - ml - mr, ph = H - mt - mb;
+  const ymax = Math.max(1e-9, ...values, ...(ref || [0])) * 1.08;
+  const bw = pw / n, g = Math.min(4, bw * 0.2);
+  const y = v => mt + ph - (v / ymax) * ph;
+  const parts = [];
+  for (let k = 0; k <= 2; k++) { const v = ymax * k / 2, yy = y(v); parts.push(`<line x1="${ml}" x2="${W - mr}" y1="${yy}" y2="${yy}" stroke="var(--line)" stroke-width="1"/><text x="${ml - 5}" y="${yy + 4}" text-anchor="end" font-size="10" fill="var(--muted)">${yFmt(v)}</text>`); }
+  const every = Math.ceil(n / 14);
+  values.forEach((v, i) => {
+    const x = ml + i * bw + g / 2, hh = Math.max(0, mt + ph - y(v)), col = Array.isArray(colors) ? colors[i] : colors;
+    parts.push(`<g><title>${esc(labels[i])}: ${yFmt(v)}${ref ? ` (${refLabel}: ${yFmt(ref[i])})` : ""}</title><rect x="${x}" y="${y(v)}" width="${Math.max(1, bw - g)}" height="${hh}" rx="${Math.min(3, (bw - g) / 2)}" fill="${col}"/><rect x="${ml + i * bw}" y="${mt}" width="${bw}" height="${ph}" fill="transparent"/></g>`);
+    if (i % every === 0) parts.push(`<text x="${ml + i * bw + bw / 2}" y="${H - mb + 14}" text-anchor="middle" font-size="10" fill="var(--muted)">${esc(labels[i])}</text>`);
+  });
+  if (ref) ref.forEach((v, i) => { const cx = ml + i * bw + bw / 2; parts.push(`<line x1="${cx - Math.max(3, bw * 0.35)}" x2="${cx + Math.max(3, bw * 0.35)}" y1="${y(v)}" y2="${y(v)}" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/>`); });
+  parts.push(`<text x="${ml + pw / 2}" y="${H - 4}" text-anchor="middle" font-size="10.5" fill="var(--muted)">${esc(xTitle)}</text>`);
+  const legend = ref ? `<div class="legend"><span><span class="sw" style="background:${Array.isArray(colors) ? "var(--L1)" : colors}"></span>sampled</span><span><svg width="16" height="8"><line x1="1" x2="15" y1="4" y2="4" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/></svg>${esc(refLabel)}</span></div>` : "";
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)}">${parts.join("")}</svg>${legend}`;
+}
+const pctF = v => (100 * v).toFixed(v < 0.1 ? 1 : 0) + "%";
+function hist(vals, lo, hi) { const c = Array(hi - lo + 1).fill(0); vals.forEach(v => { c[Math.min(Math.max(v, lo), hi) - lo]++; }); return c.map(x => x / Math.max(1, vals.length)); }
+function median(a) { const s = [...a].sort((x, y) => x - y); return s[Math.floor(s.length / 2)]; }
+const mean = a => a.reduce((s, x) => s + x, 0) / Math.max(1, a.length);
+function renderAnalysis() {
+  const N = Number($("nAn").value), r = mulberry(Number($("seed").value) * 7919 + 17);
+  const S = [], lamD = [], tD = [];
+  for (let k = 0; k < N; k++) { const ex = sampleExpr(P, r); ex.stats.trunc = ex.truncated; S.push(ex.stats); lamD.push(ex.Lam); ex.layers.forEach(L => { if (L.l >= 2) tD.push(L.T); }); }
+  const R = []; for (let k = 0; k < N; k++) { const n = categorical(T8N, r); R.push(exprStats(sampleT8(n, P, r), null)); }
+  const ops = S.map(s => s.ops), depth = S.map(s => s.depth);
+  const reuse = S.filter(s => s.maxCopies >= 2).length / N;
+  const grp = A => { const g = new Array(10).fill(0); A.forEach(s => s.groups.forEach((v, i) => g[i] += v)); const t = g.reduce((a, b) => a + b, 0) || 1; return g.map(v => v / t); };
+  const nestS = mean(S.map(s => s.nested ? 1 : 0)), nestR = mean(R.map(s => s.nested ? 1 : 0)), crossS = mean(S.map(s => s.cross ? 1 : 0));
+  const mixS = mean(S.filter(s => s.fn >= 2).map(s => s.mixed ? 1 : 0)), mixR = mean(R.filter(s => s.fn >= 2).map(s => s.mixed ? 1 : 0));
+  const invS = S.reduce((a, s) => a + s.inv, 0) / Math.max(1, S.reduce((a, s) => a + s.fn, 0));
+  $("tiles").innerHTML = [
+    [median(ops), `median operators (one T8 tree: ${median(R.map(s => s.ops))})`], [[...ops].sort((a, b) => a - b)[Math.floor(0.9 * N)], "90th percentile of operators"],
+    [pctF(S.filter(s => s.ops > 17).length / N), "more than 17 operators"], [pctF(S.filter(s => s.trunc).length / N), "hit the node cap"],
+    [pctF(nestS), `a function inside a function (one T8 tree: ${pctF(nestR)})`], [pctF(crossS), "… where the two come from different terms"],
+    [pctF(mixS), `≥ 2 function families, of draws with ≥ 2 functions (one T8 tree: ${pctF(mixR)})`],
+    [pctF(reuse), "expressions with a term used twice or more"], [pctF(invS), "inverse trig/hyperbolic share of functions"],
+  ].map(([v, l]) => `<div class="tile"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("");
+  $("an-note").textContent = `${N.toLocaleString()} samples, seed ${$("seed").value}`;
+  const pL = truncGeomP(P.qL, 5), pT = truncGeomP(P.qT, 5);
+  const EDGES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 21, 31, 51, 101, 201, 501, 1001];
+  const short = v => v >= 1000 ? `${v / 1000}k` : String(v);
+  const binLab = EDGES.map((e, i) => i + 1 < EDGES.length ? (EDGES[i + 1] - e === 1 ? String(e) : `≤${short(EDGES[i + 1] - 1)}`) : `>${short(e - 1)}`);
+  const binOf = v => { let i = 0; while (i + 1 < EDGES.length && v >= EDGES[i + 1]) i++; return i; };
+  const binH = vals => { const c = new Array(EDGES.length).fill(0); vals.forEach(v => c[binOf(v)]++); return c.map(x => x / Math.max(1, vals.length)); };
+  const opsH = binH(ops), refOps = binH(R.map(s => s.ops));
+  const byL = [0, 0, 0, 0, 0]; S.forEach(s => s.byLayer.forEach((v, i) => byL[i] += v)); const tot = byL.reduce((a, b) => a + b, 0) || 1;
+  const LC5 = ["1", "2", "3", "4", "5"].map(l => `var(--L${l})`);
+  const charts = [
+    { t: "Operator mix", w: true, p: "Share of all operators in the assembled expressions; ticks: one T8 tree.",
+      svg: barChart({ labels: GROUPS, values: grp(S), colors: "var(--L1)", ref: grp(R), refLabel: "one T8 tree", yFmt: pctF, xTitle: "operator", title: "operator mix", W: 560 }) },
+    { t: "Nesting and families", p: "Share of expressions; ticks: one T8 tree (nesting across terms cannot happen there).",
+      svg: barChart({ labels: ["fn in fn", "across terms", "≥ 2 families"], values: [nestS, crossS, mixS], colors: ["var(--L2)", "var(--L5)", "var(--L3)"], ref: [nestR, 0, mixR], refLabel: "one T8 tree", yFmt: pctF, xTitle: "", title: "nesting" }) },
+    { t: "Size of the assembled expression", w: true, p: "Operators per expression, single values up to 17, then widening bins; ticks: one T8 tree with n ~ T8 size prior.",
+      svg: barChart({ labels: binLab, values: opsH, colors: "var(--L1)", ref: refOps, refLabel: "one T8 tree", yFmt: pctF, xTitle: "operators", title: "size", W: 560 }) },
+    { t: "Number of layers Λ", p: `P(Λ ≤ 3) = ${pctF(pL[0] + pL[1] + pL[2])} by design.`,
+      svg: barChart({ labels: ["1", "2", "3", "4", "5"], values: hist(lamD, 1, 5), colors: LC5, ref: pL, refLabel: "target p(Λ)", yFmt: pctF, xTitle: "Λ", title: "layers" }) },
+    { t: "Terms per layer T_λ (λ ≥ 2)", p: `P(T ≤ 3) = ${pctF(pT[0] + pT[1] + pT[2])} by design.`,
+      svg: barChart({ labels: ["1", "2", "3", "4", "5"], values: hist(tD, 1, 5), colors: "var(--L2)", ref: pT, refLabel: "target p(T)", yFmt: pctF, xTitle: "terms in a layer", title: "terms per layer" }) },
+    { t: "Depth", p: "Longest root-to-leaf path; ticks: one T8 tree.",
+      svg: barChart({ labels: hist(depth, 0, 30).map((_, i) => String(i)), values: hist(depth, 0, 30), colors: "var(--L3)", ref: hist(R.map(s => s.depth), 0, 30), refLabel: "one T8 tree", yFmt: pctF, xTitle: "depth (last bar: 30 or more)", title: "depth" }) },
+    { t: "Deepest layer that appears", p: "A layer is used only if some leaf points into it.",
+      svg: barChart({ labels: ["1", "2", "3", "4", "5"], values: hist(S.map(s => s.deepest), 1, 5), colors: LC5, yFmt: pctF, xTitle: "deepest layer used", title: "deepest layer" }) },
+    { t: "Where the operators come from", p: "Share of all operators by the layer of the term they were copied from.",
+      svg: barChart({ labels: ["1", "2", "3", "4", "5"], values: byL.map(v => v / tot), colors: LC5, yFmt: pctF, xTitle: "layer of origin", title: "origin" }) },
+    { t: "Copies of the most-used term", p: `${pctF(reuse)} of expressions repeat at least one term.`,
+      svg: barChart({ labels: hist(S.map(s => s.maxCopies), 1, 12).map((_, i) => String(i + 1)), values: hist(S.map(s => s.maxCopies), 1, 12), colors: "var(--L4)", yFmt: pctF, xTitle: "copies (last bar: 12 or more)", title: "reuse" }) },
+  ];
+  $("charts").innerHTML = charts.map(c => `<div class="chart${c.w ? " wide" : ""}"><h3>${esc(c.t)}</h3><p>${esc(c.p)}</p>${c.svg}</div>`).join("");
+}
+
+// ------------------------------------------------------------------ controls
+function fmtCtl(key, v) {
+  if (key === "qL" || key === "qT") { const p = truncGeomP(v, 5); return `${v.toFixed(2)} · ${pctF(p[0] + p[1] + p[2])}`; }
+  if (key === "nCap" || key === "maxNodes") return String(v);
+  return Number(v).toFixed(2);
+}
+function buildControls() {
+  CONTROLS.forEach(([g, key, label, mn, mx, step]) => {
+    const d = document.createElement("div"); d.className = "ctl";
+    d.innerHTML = `<label for="c-${key}">${esc(label)} <output id="o-${key}"></output></label><input type="range" id="c-${key}" min="${mn}" max="${mx}" step="${step}" value="${P[key]}">`;
+    $(g).appendChild(d);
+    const inp = d.querySelector("input");
+    inp.addEventListener("input", () => { P[key] = Number(inp.value); $("o-" + key).textContent = fmtCtl(key, P[key]); schedule(); });
+  });
+  $("maxNodes").addEventListener("input", () => { P.maxNodes = Number($("maxNodes").value); $("o-maxNodes").textContent = P.maxNodes; schedule(); });
+  $("sizeMode").addEventListener("change", () => { P.sizeMode = $("sizeMode").value; syncControls(); schedule(); });
+  $("m-shared").addEventListener("click", () => { P.shared = true; syncControls(); schedule(); });
+  $("m-copy").addEventListener("click", () => { P.shared = false; syncControls(); schedule(); });
+}
+function syncControls() {
+  CONTROLS.forEach(([, key]) => { $("c-" + key).value = P[key]; $("o-" + key).textContent = fmtCtl(key, P[key]); });
+  $("maxNodes").value = P.maxNodes; $("o-maxNodes").textContent = P.maxNodes;
+  $("sizeMode").value = P.sizeMode;
+  $("size-hint").textContent = P.sizeMode === "t8" ? "Every pattern: p(n) ∝ exp(n^0.7), n = 0…17. The size scale μ_λ and the size cap are unused."
+    : P.sizeMode === "t8root" ? "Layer 1 from T8's prior; deeper layers from 1 + Poisson(μ_λ − 1), capped." : "Every pattern from 1 + Poisson(μ_λ − 1), capped; μ_λ ~ U(lower, upper) per layer.";
+  $("m-shared").setAttribute("aria-pressed", String(P.shared)); $("m-copy").setAttribute("aria-pressed", String(!P.shared));
+}
+let timer = null;
+function schedule() {
+  try { localStorage.setItem("tps4-params", JSON.stringify(P)); } catch (e) { /* storage unavailable */ }
+  drawOne(); clearTimeout(timer); timer = setTimeout(renderAnalysis, 300);
+}
+function drawOne() { renderSample(sampleExpr(P, mulberry(Number($("seed").value) || 1))); }
+$("resample").addEventListener("click", () => { $("seed").value = Math.floor(Math.random() * 1e8); drawOne(); renderAnalysis(); });
+$("seed").addEventListener("change", () => { drawOne(); renderAnalysis(); });
+$("nAn").addEventListener("change", renderAnalysis);
+$("reset").addEventListener("click", () => { P = { ...DEFAULTS }; syncControls(); schedule(); });
+buildControls(); syncControls(); drawOne(); renderAnalysis();
+(function waitMJ(tries) {
+  if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+    MathJax.startup.promise.then(() => {
+      mjReady = typeof MathJax.tex2svg === "function";
+      try { if (MathJax.svgStylesheet) document.head.appendChild(MathJax.svgStylesheet()); } catch (e) { /* keep going */ }
+      document.querySelectorAll(".math[data-tex]").forEach(typeset);
+    });
+  } else if (tries > 0) setTimeout(() => waitMJ(tries - 1), 200);
+})(60);
+</script>

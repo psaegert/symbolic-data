@@ -1,0 +1,118 @@
+{
+ "T8": {
+  "L": {
+   "pairing (product)": 2715,
+   "pairing (sum)": 2352,
+   "mixed sum": 7893,
+   "repeat product, 2 copies": 1507,
+   "repeat product, 3+ copies": 1231,
+   "mixed product": 7531,
+   "composition (function)": 4138,
+   "affine": 1723,
+   "composition (power, root, 1/x)": 325,
+   "repeat sum, 3+ copies": 1567,
+   "repeat sum, 2 copies": 1704
+  },
+  "roots": {
+   "pairing (product)": 511,
+   "mixed product": 720,
+   "affine": 89,
+   "composition (power, root, 1/x)": 114,
+   "mixed sum": 818,
+   "pairing (sum)": 496,
+   "composition (function)": 185,
+   "repeat product, 3+ copies": 9,
+   "atom": 19,
+   "repeat sum, 2 copies": 11,
+   "repeat sum, 3+ copies": 26,
+   "repeat product, 2 copies": 2
+  }
+ },
+ "round 8": {
+  "L": {
+   "mixed sum": 5919,
+   "mixed product": 5338,
+   "repeat product, 2 copies": 1671,
+   "repeat sum, 2 copies": 1955,
+   "pairing (sum)": 1299,
+   "repeat sum, 3+ copies": 1678,
+   "affine": 2532,
+   "pairing (product)": 1711,
+   "composition (function)": 3395,
+   "repeat product, 3+ copies": 1298,
+   "composition (power, root, 1/x)": 555
+  },
+  "roots": {
+   "mixed sum": 904,
+   "repeat sum, 3+ copies": 83,
+   "repeat sum, 2 copies": 56,
+   "pairing (sum)": 329,
+   "mixed product": 725,
+   "atom": 21,
+   "affine": 107,
+   "pairing (product)": 401,
+   "composition (power, root, 1/x)": 148,
+   "repeat product, 3+ copies": 61,
+   "composition (function)": 126,
+   "repeat product, 2 copies": 39
+  }
+ },
+ "round 9b": {
+  "L": {
+   "composition (power, root, 1/x)": 621,
+   "affine": 3034,
+   "mixed sum": 5341,
+   "composition (function)": 3160,
+   "repeat product, 2 copies": 1693,
+   "mixed product": 5050,
+   "repeat sum, 2 copies": 1994,
+   "pairing (product)": 1585,
+   "pairing (sum)": 1239,
+   "repeat product, 3+ copies": 1550,
+   "repeat sum, 3+ copies": 1721
+  },
+  "roots": {
+   "composition (power, root, 1/x)": 208,
+   "mixed sum": 767,
+   "mixed product": 684,
+   "affine": 184,
+   "pairing (product)": 358,
+   "pairing (sum)": 294,
+   "repeat sum, 2 copies": 63,
+   "composition (function)": 211,
+   "repeat product, 2 copies": 53,
+   "repeat product, 3+ copies": 85,
+   "repeat sum, 3+ copies": 78,
+   "atom": 15
+  }
+ },
+ "real formulas": {
+  "L": {
+   "mixed product": 3180,
+   "repeat sum, 2 copies": 1702,
+   "composition (function)": 1123,
+   "repeat product, 2 copies": 5207,
+   "repeat product, 3+ copies": 11089,
+   "composition (power, root, 1/x)": 880,
+   "affine": 2903,
+   "pairing (sum)": 1134,
+   "pairing (product)": 1621,
+   "repeat sum, 3+ copies": 572,
+   "mixed sum": 695
+  },
+  "roots": {
+   "mixed product": 794,
+   "composition (function)": 121,
+   "repeat product, 2 copies": 2393,
+   "repeat product, 3+ copies": 2297,
+   "composition (power, root, 1/x)": 809,
+   "affine": 1120,
+   "pairing (sum)": 692,
+   "pairing (product)": 979,
+   "atom": 650,
+   "repeat sum, 3+ copies": 132,
+   "mixed sum": 184,
+   "repeat sum, 2 copies": 630
+  }
+ }
+}
