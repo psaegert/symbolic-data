@@ -1,0 +1,5 @@
+| | polynomial >= 3 | one form >= 3 | both | both and linear |
+| t8 | 11 | 5 | 1 | 1 |
+| r8 | 41 | 34 | 21 | 21 |
+| r10c | 131 | 123 | 99 | 96 |
+| corpus | 194 | 121 | 99 | 73 |

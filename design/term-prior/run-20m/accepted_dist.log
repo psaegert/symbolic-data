@@ -1,0 +1,9 @@
+t8    all          n= 3000 poly3 0.37% sup3 0.17% rat2 1.27% rep 0.9% transcendental 75.7% | median variables 6 tokens 26
+t8    <=35 tokens  n= 3000 poly3 0.37% sup3 0.17% rat2 1.27% rep 0.9% transcendental 75.7% | median variables 6 tokens 26
+t8    <=35, kept   n= 2912 poly3 0.34% sup3 0.17% rat2 1.30% rep 0.9% transcendental 77.0% | median variables 6 tokens 27
+r8    all          n= 3000 poly3 1.37% sup3 1.13% rat2 1.67% rep 4.8% transcendental 62.3% | median variables 4 tokens 23
+r8    <=35 tokens  n= 2598 poly3 1.54% sup3 1.31% rat2 1.54% rep 4.5% transcendental 61.9% | median variables 4 tokens 20
+r8    <=35, kept   n= 2379 poly3 1.39% sup3 1.13% rat2 1.56% rep 4.7% transcendental 65.5% | median variables 4 tokens 22
+r10c  all          n= 3000 poly3 4.37% sup3 4.10% rat2 2.33% rep 5.5% transcendental 46.0% | median variables 6 tokens 29
+r10c  <=35 tokens  n= 2177 poly3 5.56% sup3 5.05% rat2 2.07% rep 4.8% transcendental 47.2% | median variables 5 tokens 24
+r10c  <=35, kept   n= 2044 poly3 5.14% sup3 4.55% rat2 2.15% rep 4.8% transcendental 48.7% | median variables 6 tokens 25

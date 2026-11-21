@@ -1,0 +1,30 @@
+== registered comparison: strata used variables x size, T8 weights
+           mean       size      
+set          t8 tp10c   t8 tp10c
+vb  sb                          
+1-4 <=15   0.89  0.76    9    37
+    16-22  0.15  0.54   13    13
+    23+    0.33  0.00    9     8
+5-6 <=15   0.00  0.46    2    13
+    16-22  0.23  0.31   13    32
+    23+    0.15  0.29   13    17
+7+  <=15    NaN  1.00    0     2
+    16-22  0.22  0.46    9    24
+    23+    0.22  0.24   32    50
+stratified difference tp10c - t8: +7.4% [-3.9%, +18.7%] (100 of 100 T8 problems in strata that both sets fill)
+
+== coverage parse of the ground truth: fully explained or not
+-- full_strict
+                    mean  size
+set   full_strict             
+t8    False        0.226    93
+      True         0.857     7
+tp10c False        0.299   117
+      True         0.588    80
+-- full_rule
+                  mean  size
+set   full_rule             
+t8    False      0.265    68
+      True       0.281    32
+tp10c False      0.238    63
+      True       0.500   134
