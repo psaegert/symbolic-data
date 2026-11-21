@@ -39,6 +39,22 @@ This replaces the former internal holdout machinery (a separate `HoldoutManager`
 versions used for training generation; there is no longer a separate `HoldoutManager` in the public
 API — holdout is a `ProblemSource` policy.
 
+## Generative catalogs: `holdout_pools` and the family key
+
+A generative catalog (`LampleChartonCatalog`) excludes benchmark laws at the source: every pool listed under
+`holdout_pools` registers its laws, and a drawn skeleton whose FAMILY matches a registered one is resampled. A family
+is matched in two layers -- the exact prototype (a hash) and its functional image on fixed probe grids, standardized
+so the output-affine family `a*f + b` shares one key. The prototype is chosen by `holdout_family`:
+
+| key | literals masked | fold | images |
+|---|---|---|---|
+| `legacy` (default) | every literal, exponents and root indices included | every operator with a constant operand collapses to its other operand (`x^2`, `c/(x+a)` and `a*x+b` all become `x`) | non-finite entries zeroed, then standardized |
+| `precise` | fittable literals only (by role); exponents and root indices are structure | affine reparametrizations only (`X+c`, `c*X`, `X/c` -> `X`; `c/X` -> `inv X`; `c^X` -> `exp X`); additive term signs are spelling; one pass over the constant-free prototype | standardized over the finite entries |
+
+Under `precise` each law additionally registers the prototypes of its sign variants and of two generic-coefficient
+members (an affine wrap and a seeded redraw of its constants). The key is baked into a training corpus, so it is a
+per-catalog choice; see the changelog entry for the measured effect on the T8 pools.
+
 ## Filters: `{filter: {...}}`
 
 A `filter` rule drops problems failing any of its predicates:

@@ -7,6 +7,32 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ### Added
 
+- **`holdout_family`** (optional catalog key, `legacy` | `precise`, default `legacy`): the holdout FAMILY KEY. The
+  legacy key masks every literal and folds every operator with a `<constant>` operand into its other operand. Since
+  pow/rootn carry their exponent as a literal (typed slots), that also strips exponents and root indices, and it folds
+  `c/X` into `X`: x^2, x^3, sqrt(x), c/(x+a), a*x+b and exp(c*x) all reduce to the core `x`, so every 2-3 term
+  univariate polynomial, every partial-fraction sum and every linear model shared a key with some benchmark law.
+  `precise` keys a draw by the family its pipeline fits:
+  - fittable literals are masked by ROLE (simplipy's `mask_fittable`, the policy that prepares training targets);
+    exponents and root indices stay structure;
+  - the fold removes a constant only where it reparametrizes affinely (`X+c`, `c-X`, `c*X`, `X/c` -> `X`), maps
+    `c/X` -> `inv X` and `c^X` -> `exp X`, and treats additive term signs as spelling (a coefficient is free);
+  - one canonicalize-relabel-mask-fold pass over the constant-free prototype, so term order and variable labels no
+    longer depend on coefficient values (a pass that loses a variable is discarded);
+  - images are standardized over their finite entries with the non-finite ones keyed as a marker (the legacy layer
+    zeroes them first, which breaks invariance under `a*f + b` wherever an image is partly NaN);
+  - each law also registers the prototypes of two generic-coefficient members (an affine wrap and a seeded redraw of
+    its fittable literals), because the canonical form decides by value whether a coefficient factors out.
+
+  Measured on the 29 T8 holdout pools (6,660 law renderings) with three members per law with redrawn constants and one
+  random affine wrap: escaped laws in canonical form legacy 3 -> precise 0; redrawn members 53 -> 0; affine wraps
+  1,660 -> 7. On 20,000 raw T8.1 prior draws: held out 6.42% -> 2.80%; univariate polynomials with >= 3 terms
+  100% -> 50% (6 draws), polynomials with >= 3 variable terms 30.5% -> 6.3%, sums of >= 3 terms of one motif
+  54.5% -> 3.0%. Cost: 11.7 vs 7.0 ms per probed draw, registration 199 vs 145 s for the 29 pools. Absent = legacy
+  (byte-identical); a catalog pickled before the key existed loads as legacy. A K-term sum of one core with distinct
+  inner constants (a/(x+b) + c/(x+d), sums of exponentials) is still held out wherever the single core is a benchmark
+  law: its standardized image equals the core's (the family contains the core by tying the inner constants).
+
 - **Data catalogs: problems that hold pools of rows** (`symbolic_data.pools`). A frozen problem whose `meta` carries
   a `test_split` rule holds every row available for fitting (support arrays) and, for `"given"`, the authors' test
   rows (validation arrays); `"none"` means no test split (validation stays empty); `{"random": f}` means the

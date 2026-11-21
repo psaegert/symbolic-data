@@ -7,7 +7,7 @@ import warnings
 import numpy as np
 
 from symbolic_data.compilation import safe_f
-from symbolic_data.token_ops import normalize_skeleton
+from symbolic_data.token_ops import normalize_expression, normalize_skeleton
 
 
 # Fixed seed for the default holdout grid. Previously each HoldoutManager drew a fresh
@@ -64,6 +64,15 @@ class HoldoutManager:
     extra_constant_fills: np.ndarray = field(default_factory=lambda: _default_constant_fills().copy())
     skeleton_hashes: set[Tuple[str, ...]] = field(default_factory=set)
     expression_images: set[Tuple[float, ...] | Tuple[Tuple[float, ...], ...]] = field(default_factory=set)
+    # The exact-structure key keeps numerals when the prototypes carry STRUCTURAL literals (the precise
+    # family key: a pow exponent or rootn index is part of the family, so pow x1 2 and pow x1 3 must not
+    # share a hash). The legacy key masks every numeral, as before.
+    keep_literals: bool = False
+    # Standardize an image over its FINITE entries and key the non-finite ones as a marker. The legacy layer zeroes
+    # non-finite entries first, so a*f + b moves the finite points but not the zeroed ones and the two images stop
+    # matching: on the 29 T8 pools, every law whose image is partly NaN (sqrt of a sign-changing term, log of one)
+    # had affine variants that escaped. The NaN pattern itself is affine-invariant, so keying it is exact.
+    finite_standardization: bool = False
 
     def register_skeleton(
         self,
@@ -145,10 +154,37 @@ class HoldoutManager:
         return not keys.isdisjoint(self.expression_images)
 
     @staticmethod
-    def _normalize_tokens(tokens: Sequence[str]) -> list[str]:
+    def _finite_image_key(grid_index: int, image: np.ndarray) -> tuple:
+        """The image key under ``finite_standardization``: mean and std over the finite entries only, sign made
+        canonical by the first finite entry off the mean, 4-dp rounding as in the legacy key, and ``inf`` at every
+        non-finite entry (a standardized finite value never is; inf == inf, so the marker compares and hashes). Exactly invariant under a*f + b (a != 0). A finite part that is constant keys by its value
+        (as the legacy constant branch does); an image with no finite entry keys as the legacy all-nonfinite case."""
+        finite = np.isfinite(image)
+        if not finite.any():
+            return (grid_index, "const", "nonfinite")
+        values = image[finite]
+        mean = float(values.mean())
+        std = float(values.std())
+        if not (np.isfinite(std) and std > 1e-12 and np.isfinite(mean)):
+            return (grid_index, "const", round(mean, 4) if np.isfinite(mean) else "nonfinite")
+        flat = values.reshape(-1)
+        off = flat[np.abs(flat - mean) > 1e-12 * max(std, 1.0)]
+        sign = -1.0 if off.size and off[0] < mean else 1.0
+        standardized = np.full(image.shape, np.inf)
+        standardized[finite] = np.round(sign * (values - mean) / std, 4)
+        if standardized.ndim == 1:
+            return (grid_index, "finite", tuple(standardized.tolist()))
+        return (grid_index, "finite", tuple(tuple(row) for row in standardized.tolist()))
+
+    def _normalize_tokens(self, tokens: Sequence[str]) -> list[str]:
         # Canonicalize before hashing: variable renames (v1 -> x1) and numeric literals
         # (3.5 -> <constant>) must not defeat the exact-match layer; literal skeletons
         # otherwise leak through BOTH holdout layers (mirror of the flash-ansr fix).
+        # With keep_literals the caller's prototype has already masked every fittable literal,
+        # so a numeral left in it is structure (an exponent or root index) and stays.
+        if self.keep_literals:
+            return ["<constant>" if token == "<c>" else token
+                    for token in normalize_expression([str(token) for token in tokens]) or []]
         return list(normalize_skeleton([str(token) for token in tokens]))
 
     def _evaluate_to_keys(
@@ -206,6 +242,9 @@ class HoldoutManager:
                 # most of a 7% rejection rate). The finite part of the image still
                 # fingerprints the function; all-nonfinite images fall through to the
                 # value-keyed constant branch as const-0.
+                if self.finite_standardization:
+                    keys.add(self._finite_image_key(grid_index, image))
+                    continue
                 image = np.where(np.isfinite(image), image, 0.0)
                 flat = image.reshape(-1)
                 std = float(flat.std())
