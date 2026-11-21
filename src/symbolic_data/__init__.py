@@ -28,3 +28,6 @@ from symbolic_data.pools import data_problem, draw_from_pools
 from symbolic_data.tensor_ops import mask_unused_variable_columns
 from symbolic_data.paths import get_path, get_root, substitute_root_path
 from symbolic_data.config_io import load_config, save_config
+
+# Register the research term prior as `type: term_prior` (design/term-prior).
+import symbolic_data.term_prior  # noqa: E402,F401
