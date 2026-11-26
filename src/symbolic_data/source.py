@@ -252,6 +252,30 @@ class ProblemSource:
                 if problem.is_placeholder or self._passes_filters(problem):
                     yield problem
 
+    def draw(self, index: int, rng: np.random.Generator) -> Problem:
+        """Problem ``index`` of a finite catalog, drawn from ``rng`` alone under this source's usage policy.
+
+        The unit a renderer seeds once per problem and run (:mod:`symbolic_data.draws`): a declarative catalog's entry
+        ``index`` realized (with the source's ``max_trials`` and placeholder protocol), a data problem's pools drawn
+        (:func:`~symbolic_data.pools.draw_from_pools`), a realized problem as stored. Holdouts and filters are not
+        applied, and one problem per expression is required, so ``index`` names exactly one problem.
+        """
+        if self.mode != "set":
+            raise ValueError(f"draw(index, rng) needs a finite catalog; this source is in {self.mode!r} mode")
+        if self.problems_per_expression != 1:
+            raise ValueError("draw(index, rng) needs problems_per_expression: 1 (an index names one problem)")
+        catalog = self._get_catalog()
+        if isinstance(catalog, GenerativeCatalog):
+            raise ValueError("draw(index, rng) needs a declarative or a frozen catalog, not a generative one")
+        if getattr(catalog, "frozen", False):
+            problem = (catalog.problems or [])[index]
+            if problem.is_placeholder or not has_pools(problem):
+                return problem
+            return draw_from_pools(problem, *self._pool_caps(), rng)
+        entries = self.__dict__.setdefault("_entry_order", list(catalog.entries.values()))
+        n_support, n_validation = self._resolve_counts(catalog)
+        return self._realize_problem(catalog, entries[index], n_support, n_validation, self._get_engine(), rng)
+
     def _realize_problem(self, catalog: Catalog, entry, n_support: int | None, n_validation: int, engine, rng) -> Problem:
         """Realize one catalog entry into a Problem, applying usage policy (split + noise).
 
