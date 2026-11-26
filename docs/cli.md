@@ -76,8 +76,9 @@ symbolic-data render-draws ./assets/catalogs/nguyen.yaml ./assets/catalogs/keijz
 | `--ids CATALOG=FILE` | render only these problems of a catalog (a JSON list of ids, or a mapping with an `ids` list); repeatable. |
 | `--seed-root` | the string every problem's seed is derived from. |
 | `--simplipy-engine` | the engine the ground truth is compiled with (default `acj-5-4-llm`). |
+| `--attempts` | an attempts document (`symbolic-data/draw-attempts`, see [Frozen draws](draws.md#acceptance-a-draw-on-which-the-formula-can-be-recognized)): the attempt each listed problem keeps. |
 | `--jobs` | catalogs rendered at once. |
-| `--update` | add catalogs to a root that already holds draws (same settings). |
+| `--update` | add catalogs to a root that already holds draws (same settings and attempts). |
 
 ## verify-draws
 

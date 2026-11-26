@@ -6,7 +6,12 @@ pinned-point ``.npz`` companions not superseded by a newer build, and the locall
 the catalogs and the engine are final; a second run with the same software writes the same bytes, which
 ``symbolic-data verify-draws <root> <catalogs>`` checks.
 
-    render_draws.py --out <root> [--formula-only] [--catalogs build/data-catalogs] [--only <name> ...] [--jobs N]
+Each problem keeps the attempt srbf's acceptance check chose (docs/draws.md): ``--plan`` writes the catalogs and the
+frozen ids as JSON for srbf's ``scripts/accept_frozen_draws.py``, which writes the attempts document that ``--attempts``
+renders with.
+
+    render_draws.py --plan <plan.json> [--formula-only] [--catalogs build/data-catalogs] [--only <name> ...]
+    render_draws.py --out <root> --attempts <attempts.json> [--formula-only] [--catalogs ...] [--only ...] [--jobs N]
 """
 from __future__ import annotations
 
@@ -48,7 +53,9 @@ def main() -> None:
     from symbolic_data.draws import DrawsSettings, render
 
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("--out", required=True, help="the root to render into")
+    ap.add_argument("--out", help="the root to render into")
+    ap.add_argument("--plan", help="write the catalogs and the frozen ids to this JSON file instead of rendering")
+    ap.add_argument("--attempts", help="the attempts document each problem's attempt is taken from")
     ap.add_argument("--symbolic-data", default=str(paths.REPO))
     ap.add_argument("--catalogs", default=str(paths.DATA_BUILD), help="the built data catalogs (*.npz), if any")
     ap.add_argument("--formula-only", action="store_true", help="the formula catalogs alone")
@@ -59,7 +66,14 @@ def main() -> None:
     files = release_catalogs(Path(a.symbolic_data), Path(a.catalogs), formula_only=a.formula_only)
     if a.only:
         files = [f for f in files if f.stem in set(a.only)]
-    manifest = render([str(f) for f in files], a.out, DrawsSettings(), ids=frozen_ids(), jobs=a.jobs, update=a.update)
+    if a.plan:
+        Path(a.plan).write_text(json.dumps({"catalogs": [str(f) for f in files], "ids": frozen_ids()}, indent=1) + "\n")
+        print(f"{len(files)} catalogs -> {a.plan}")
+        return
+    if not a.out:
+        ap.error("--out is required unless --plan is given")
+    manifest = render([str(f) for f in files], a.out, DrawsSettings(), ids=frozen_ids(), attempts=a.attempts, jobs=a.jobs,
+                      update=a.update)
     catalogs = manifest["catalogs"].values()
     print(f"{len(manifest['catalogs'])} catalogs, {sum(c['problems'] for c in catalogs):,} problems, "
           f"{sum(f['bytes'] for c in catalogs for f in c['files'].values()) / 1e9:.2f} GB -> {a.out}")

@@ -29,6 +29,45 @@ noised; a stored problem keeps the noisy targets it was stored with.
 part of the layout, the seeds and the manifest, so a later render can add repeats `2, 3, ...` beside it without a
 change of format, and repeat 1 stays byte-identical.
 
+## Acceptance: a draw on which the formula can be recognized
+
+With one draw per problem, a draw on which the true formula cannot be recovered wastes the problem for every method.
+So a problem's draw is chosen among seeded **attempts** `k = 1, 2, ...`, and each problem keeps the first attempt on
+which its own formula can be recognized. **This is a deviation from every benchmark that leaves values to chance**:
+the points (and the per-run values) of every checked problem are conditioned on its formula being recoverable from
+them, where the benchmark's authors draw them unconditionally.
+
+- Only what the authors leave to chance differs between attempts: input points, random constants, per-run values.
+  The formula and its fixed constants never change.
+- The attempts come in a fixed order, attempt `k` from its own seed (below). The rule that accepts an attempt is the
+  evaluation harness's, not symbolic-data's: srbf accepts the first attempt on which (a) every target is finite and
+  the FVU is defined on the fitting and on the held-out points, (b) srbf's oracle (the ground truth with its
+  constants refitted, 1,024 seeded restarts) reaches numeric recovery on the held-out points, and (c) srbf's judge
+  recognizes the refitted formula symbolically (`srbf.draw_acceptance`).
+- When no attempt within `max_trials` is accepted, the problem keeps attempt 1 and is flagged `formula_inherent`:
+  what defeats recovery is the formula (or the method), not the luck of the draw.
+- Formulas that are constants by construction (skeleton `<constant>`), data problems and stored problems are not
+  checked and keep attempt 1.
+
+symbolic-data does not judge: the two sides meet in `CatalogDraws`, which draws attempt `k` of a problem exactly as
+the render draws it, and in an **attempts document** that names each checked problem's attempt and flag:
+
+```json
+{"format": "symbolic-data/draw-attempts", "format_version": 1,
+ "settings": {"n_support": 512, "n_validation": 512, "layout": "random", "max_trials": 100,
+              "seed_root": "symbolic-data/frozen-draws/1", "simplipy_engine": "acj-5-4-llm"},
+ "repeats": [1], "rule": "...",
+ "catalogs": {"feynman": {"source_sha256": "...",
+                          "attempts": {"1": {"I.6.2a": {"attempt": 2, "formula_inherent": false, "failed": {"symbolic": 1}}}}}}}
+```
+
+`render-draws --attempts FILE` renders with it and refuses a document chosen under other settings, for another
+version of a catalog (`source_sha256`), or without one of the catalogs rendered. A problem the document does not list
+keeps attempt 1 unchecked. Each problem's record carries `attempt`, `checked` and `formula_inherent`; the manifest
+records, per catalog and repeat, how many problems were checked, how many keep a later attempt and which are flagged,
+and at the top the document's sha256 and rule (`acceptance`; `null` for a render without one). `verify-draws`
+renders again with the attempts the files keep, so a check of reproducibility needs no evaluation harness.
+
 ## Layout
 
 ```
@@ -60,13 +99,13 @@ render writes the same manifest.
 
 ## Seeds
 
-Problem `eq_id` of catalog `name` in repeat `r` draws from
+Attempt `k` of problem `eq_id` of catalog `name` in repeat `r` draws from
 
-    SeedSequence(int(sha256("<seed_root>\x1f<name>\x1f<eq_id>\x1f<r>")))
+    SeedSequence(int(sha256("<seed_root>\x1f<name>\x1f<eq_id>\x1f<r>\x1f<k>")))
 
 spawned into two streams: the first draws the points and the per-run values (passed to `ProblemSource.draw`), the
-second the noise vectors. A problem's draw therefore depends on nothing but its catalog name, its id, the repeat and
-the seed root (`symbolic-data/frozen-draws/1` by default): not on the other problems, their order, or which of them
+second the noise vectors. A problem's draw therefore depends on nothing but its catalog name, its id, the repeat, the
+attempt and the seed root (`symbolic-data/frozen-draws/1` by default): not on the other problems, their order, or which of them
 are rendered, and the noise vector does not move when a sampler needs more attempts. Ids must be distinct within a
 catalog.
 
@@ -78,8 +117,9 @@ symbolic-data verify-draws ./draws ./assets/catalogs/nguyen.yaml ./assets/catalo
 ```
 
 `render-draws` takes any catalog reference (a local `.yaml` or `.npz`, a `name[@version]`), renders with 512
-fitting and 512 held-out points by default, compiles the ground truth with `acj-5-4-llm` (`--simplipy-engine`), and
-refuses a root that already holds draws unless `--update` adds catalogs with the same settings. `--ids CATALOG=FILE`
+fitting and 512 held-out points by default, compiles the ground truth with `acj-5-4-llm` (`--simplipy-engine`), takes
+each problem's attempt from `--attempts`, and refuses a root that already holds draws unless `--update` adds catalogs
+with the same settings and attempts. `--ids CATALOG=FILE`
 renders a frozen subset (a JSON list of ids, or a mapping with an `ids` list). `verify-draws` checks every file
 against the manifest and, for the catalogs it is given, renders them again into a scratch folder and compares the
 bytes: a render is reproducible when that passes.
