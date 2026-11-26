@@ -37,6 +37,10 @@ own generator, and the release catalogs' corrections. Run them from the reposito
    version.
 7. `python tools/catalog_build/count_release.py` — the release's problem and subset counts (the curated catalogs and
    the data build).
+8. `python tools/catalog_build/render_draws.py --out <root> --jobs 8` — the release's frozen draws
+   (`symbolic_data.draws`, docs/draws.md): every problem of every release catalog drawn once (ERBench SynEq and OEIS
+   on their frozen 1,024), for srbf to read. Run it after the catalogs and the engine are final; `symbolic-data
+   verify-draws <root> <catalogs>` shows that a second render writes the same bytes.
 
 `SYMBOLIC_DATA_CATALOG_PREP` points the builders at another copy of the survey's records (`paths.py`). Text copied
 from the records into a catalog passes `paths.public` (no local paths, no internal wording).

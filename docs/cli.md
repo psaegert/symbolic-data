@@ -1,7 +1,7 @@
 # Command-line interface
 
-`symbolic-data` ships a small CLI with **one command**, `materialize`. Invoke it as
-`symbolic-data materialize ...` (console script) or `python -m symbolic_data materialize ...`.
+`symbolic-data` ships a small CLI with three commands: `materialize`, `render-draws` and `verify-draws`. Invoke
+it as `symbolic-data materialize ...` (console script) or `python -m symbolic_data materialize ...`.
 
 ```bash
 symbolic-data --help
@@ -56,6 +56,44 @@ The frozen `.npz` it writes is loaded back with `load_catalog("./data/my_val.npz
 > Hugging Face artifacts (resolved by name, not bundled — see [Benchmarks](benchmarks.md)), and
 > decontamination is a `ProblemSource` `holdouts: [{exclude: <catalog>}]` (see
 > [Holdout & leak-safety](holdout.md)).
+
+## render-draws
+
+Render catalogs' [frozen draws](draws.md): every problem drawn once (fitting points, held-out points, per-run
+values, a standard normal noise vector per side; for a data problem one draw of its pools), written to
+`<root>/<catalog>/repeat-<r>.npz` with a `manifest.json` of sha256 sums.
+
+```bash
+symbolic-data render-draws ./assets/catalogs/nguyen.yaml ./assets/catalogs/keijzer-points.npz -o ./draws --jobs 2
+```
+
+| flag | meaning |
+|---|---|
+| `catalogs` | catalog references: local `.yaml` / `.npz` paths or `name[@version]`. |
+| `-o`, `--output` | the root to render into. |
+| `--repeats` | the repeats to render (default `1`: one draw per problem). |
+| `--n-support`, `--n-validation` | fitting and held-out points per formula problem; the most fitting and test rows of a data problem (default 512 each). |
+| `--ids CATALOG=FILE` | render only these problems of a catalog (a JSON list of ids, or a mapping with an `ids` list); repeatable. |
+| `--seed-root` | the string every problem's seed is derived from. |
+| `--simplipy-engine` | the engine the ground truth is compiled with (default `acj-5-4-llm`). |
+| `--jobs` | catalogs rendered at once. |
+| `--update` | add catalogs to a root that already holds draws (same settings). |
+
+## verify-draws
+
+Check a rendered root: every file exists and matches the sha256 the manifest records. Catalogs given after the
+root are rendered again into a scratch folder and must reproduce the recorded bytes. Exits non-zero on any finding.
+
+```bash
+symbolic-data verify-draws ./draws ./assets/catalogs/nguyen.yaml ./assets/catalogs/keijzer-points.npz
+```
+
+| flag | meaning |
+|---|---|
+| `root` | the rendered root. |
+| `catalogs` | catalogs to render again and compare. |
+| `--ids CATALOG=FILE` | as for `render-draws`. |
+| `--jobs` | catalogs rendered at once. |
 
 ## Programmatic use
 

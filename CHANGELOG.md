@@ -7,6 +7,17 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ### Added
 
+- **Frozen draws** (`symbolic_data.draws`, `symbolic-data render-draws` / `verify-draws`, docs/draws.md). Every
+  problem of a catalog is drawn once and written to `<root>/<catalog>/repeat-<r>.npz` with a `manifest.json` of
+  sha256 sums, for every method, budget, shard and machine to read instead of drawing: a formula problem's fitting
+  and held-out points, its per-run values with the ground truth written with them, and a standard normal noise
+  vector per side (a noise level `s` gives `y + s * std(y) * noise`, the scalar noise of a `ProblemSource`); a data
+  problem's rows of one draw from its pools. Seeds derive from (seed root, catalog, problem id, repeat); one draw per
+  problem (repeat 1) by default, with the repeat index kept in the format. A second render writes the same bytes.
+  `tools/catalog_build/render_draws.py` renders the release's catalogs.
+- **`ProblemSource.draw(index, rng)`**: problem `index` of a finite catalog drawn from `rng` alone (an entry
+  realized, a data problem's pools drawn, a realized problem as stored), the unit the renderer seeds.
+
 - **Data catalogs: problems that hold pools of rows** (`symbolic_data.pools`). A frozen problem whose `meta` carries
   a `test_split` rule holds every row available for fitting (support arrays) and, for `"given"`, the authors' test
   rows (validation arrays); `"none"` means no test split (validation stays empty); `{"random": f}` means the
