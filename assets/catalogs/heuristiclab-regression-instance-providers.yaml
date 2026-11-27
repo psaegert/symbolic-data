@@ -3,10 +3,10 @@ metadata:
   version: 1
   benchmark: "heuristiclab-regression-instance-providers"
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  license: "facts only: formulas cited from the defining authors and instances generated with HeuristicLab's providers (heal-research/HeuristicLab, GPL-3.0 code, not copied)"
+  citation: {"paper": {"short": "Wagner et al. 2014", "title": "Architecture and Design of the HeuristicLab Optimization Environment", "venue": "Advanced Methods and Applications in Computational Intelligence, Topics in Intelligent Engineering and Informatics 6, Springer", "url": "https://doi.org/10.1007/978-3-319-01436-4_10"}, "data": {"short": "GitHub heal-research/HeuristicLab@c57538b", "title": "HeuristicLab regression instance providers (GPL-3.0)", "url": "https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression"}}
   srbf_changes: [{"kind": "part", "problems": 363, "text": "srbf runs 13 of HeuristicLab's 376 problems here and 1 in its pinned-points set: 164 are run in other srbf sets (Keijzer, Korns, Nguyen, Vladislavleva, Feynman, ...), the 88 generated instances have no published formula, the 94 PennML datasets are run in SRBench, the 14 real-world and Miba datasets are in 'HeuristicLab regression instances (real-world data)', AircraftMaximumLift has inputs without a range, and the piecewise Breiman-I instance is left out (srbf poses formulas as their authors wrote them, and SimpliPy cannot read a piecewise definition)."}]
   srbf_notes: ["Follows the defining publication: Formulas and ranges follow the defining authors (Keijzer, Korns, Vladislavleva, Friedman, Chen et al.) rather than HeuristicLab's code where they differ (e.g. Korns-14's sign, Korns-15's range)."]
-  license: "facts only: formulas cited from the defining authors and instances generated with HeuristicLab's providers (heal-research/HeuristicLab, GPL-3.0 code, not copied)"
-  citation: {"data": {"short": "GitHub heal-research/HeuristicLab@c57538b", "title": "HeuristicLab regression instance providers (GPL-3.0)", "url": "https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression"}}
   description: HeuristicLab regression instance providers
   sources:
   - https://github.com/heal-research/HeuristicLab
@@ -34,9 +34,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Keijzer-5:
     raw: 30*x*z/((x - 10)*y**2)

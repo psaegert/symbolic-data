@@ -38,12 +38,12 @@ CATALOGS = {"erbench-syneq": "assets/catalogs", "erbench-phybench": "assets/cata
 ALPHAS = ("0", "0.5", "1")
 # subsets above 1024 problems get one frozen subsample (ruling 5); the set names keep the earlier salts' form
 FROZEN = {"erbench-syneq": "release/erbench-syneq", "erbench-oeis": "erbench-oeis"}
-SAMPLING = ("ERBench's own generator (src/benchmark.py generate_problem / get_samples; srbf ruling 2026-11-03): one problem per "
+SAMPLING = ("ERBench's own generator (src/benchmark.py generate_problem / get_samples): one problem per "
             "formula and alpha in {0, 0.5, 1}; every variable a fresh 1-3 part mixture (uniform sub-interval or normal "
             "with sigma = distance to the nearer edge / 3; integers: uniform-integer or binomial), clipped to the "
             "support; fitting rows in the window [a1, a1 + (b - a)/2], a1 = a + alpha (b - a)/2; test rows on the rest "
             "of the support, split by length; 0 or 1 dummy column per problem (drawn once, seeded), its values drawn "
-            "from the point set's own values. srbf sets the number of points and the noise (ruling 4); invalid rows are "
+            "from the point set's own values. srbf sets the number of points and the noise; invalid rows are "
             "redrawn (per-point rejection) where ERBench resamples invalid targets.")
 
 
@@ -54,7 +54,7 @@ def dummies_of(catalog: str, eq_id: str) -> int:
 
 def prepared_of(raw: str) -> str:
     """ERBench's sympy text in SimpliPy's infix, as the version-1 import writes it (erbench_to_catalogs), re-derived
-    here from ``raw`` so a fix of that rewrite reaches every catalog (2026-11-28: log(u, 10) parenthesized)."""
+    here from ``raw`` so a fix of that rewrite reaches every catalog (2026-11-27: log(u, 10) parenthesized)."""
     return E.substitute_pi(E.to_v_space(E.normalize_expression(raw))[0])
 
 
@@ -147,7 +147,7 @@ def main() -> None:
                 doc["metadata"]["version"] = max(doc["metadata"]["version"], int(current["metadata"]["version"]) + 1)
             else:
                 doc["metadata"]["version"] = int(current["metadata"]["version"])
-        target.write_text(yaml.safe_dump(doc, sort_keys=False, allow_unicode=True, width=120))
+        target.write_text(yaml.safe_dump(paths.public(doc), sort_keys=False, allow_unicode=True, width=120))
         rec = {"formulas": len(yaml.safe_load(text)["expressions"]), "problems": len(doc["expressions"]),
                "with_dummy": sum(e["meta"]["dummies"] for e in doc["expressions"].values()),
                "raw_vs_prepared": {"checked": GATE.get(True, 0), "unchecked": GATE.get(None, 0)}}

@@ -3,10 +3,10 @@ metadata:
   version: 1
   benchmark: "gp-benchmarks-sr-table"
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
-  srbf_changes: [{"kind": "part", "problems": 40, "text": "srbf runs 11 of the 51 problems of McDermott et al.'s table here and 2 more in its pinned-points set; the other 38 are run in the sets of the benchmarks they come from (Koza, Nguyen, Pagie, Korns, Keijzer, Vladislavleva)."}]
-  srbf_notes: ["Follows the defining publication: Korns-7, Vladislavleva-7, Keijzer-5 and Nguyen-9 follow their original authors where later copies differ; Korns-5, -6, -8 and -9 use plain log and square root as printed."]
   license: "facts only: formulas and ranges cited from McDermott et al. 2012 (GECCO, Table 3) and the original family papers; no upstream license"
   citation: {"paper": {"short": "McDermott et al. 2012", "title": "Genetic programming needs better benchmarks", "venue": "Proceedings of the 14th annual conference on Genetic and evolutionary computation (GECCO '12), pp. 791-798", "url": "https://doi.org/10.1145/2330163.2330273"}}
+  srbf_changes: [{"kind": "part", "problems": 40, "text": "srbf runs 11 of the 51 problems of McDermott et al.'s table here and 2 more in its pinned-points set; the other 38 are run in the sets of the benchmarks they come from (Koza, Nguyen, Pagie, Korns, Keijzer, Vladislavleva)."}]
+  srbf_notes: ["Follows the defining publication: Korns-7, Vladislavleva-7, Keijzer-5 and Nguyen-9 follow their original authors where later copies differ; Korns-5, -6, -8 and -9 use plain log and square root as printed."]
   description: GP benchmarks SR table (McDermott et al. 2012)
   sources:
   - https://doi.org/10.1145/2330163.2330273
@@ -15,8 +15,8 @@ metadata:
   - http://www.korns.com/Accuracy%20in%20Symbolic%20Regression.pdf
   - https://doi.org/10.1007/s10710-010-9121-2
   - https://mural.maynoothuniversity.ie/id/eprint/12336/1/Galvan_Semantically_2011.pdf
-  - https://doi.org/10.1007/3-540-36599-0_7 (Keijzer 2003; read by sets/fresh-10.json)
-  - https://doi.org/10.1109/TEVC.2008.926486 (Vladislavleva et al. 2009; read by sets/fresh-13.json)
+  - https://doi.org/10.1007/3-540-36599-0_7 (Keijzer 2003; read by the benchmark survey record)
+  - https://doi.org/10.1109/TEVC.2008.926486 (Vladislavleva et al. 2009; read by the benchmark survey record)
   - 'local: symbolic-data/assets/catalogs/{koza,nguyen,pagie,korns,keijzer,vladislavleva,neat}.yaml (what srbf holds)'
   sampling_defaults:
     n_points: 512
@@ -24,9 +24,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Korns-13:
     raw: 32 - 3*(tan(x)/tan(y))*(tan(z)/tan(v))

@@ -1,0 +1,306 @@
+{
+ "rules": {
+  "defining publication": "A benchmark srbf runs as its defining publication states it, where later copies changed it, carries no star; the set shows a note.",
+  "paper vs code": "Where a benchmark's paper and its authors' code or data differ, srbf follows what produced the authors' published results (their code or data) and notes the paper's version; no star."
+ },
+ "instances": [
+  {
+   "catalog": "ai-hilbert-problem-set",
+   "rule": "paper vs code",
+   "text": "Kepler with missing axioms draws m1 and m2 on [0.5, 2], the range of the data the authors' notebook reads; their script data_gen_kepler.py draws [0.5, 3].",
+   "star": false,
+   "changed_2026_11_28": true
+  },
+  {
+   "catalog": "autora-synthetic-behavioural-science-models-points",
+   "rule": "paper vs code",
+   "text": "Weber-Fechner uses the authors' code: log(S2/S1) on the 100 x 100 grid with S1 <= S2 (5,050 points), as the code keeps them.",
+   "star": false,
+   "changed_2026_11_28": true
+  },
+  {
+   "catalog": "cp3-bench-standard-tuning-datasets-points",
+   "rule": "paper vs code",
+   "text": "F7's y takes the authors' CSV grid, 30 values on [-50, 5]; the paper's Table 6 prints [-5, 5].",
+   "star": false,
+   "changed_2026_11_28": true
+  },
+  {
+   "catalog": "cvgp-trigonometric-control-variable-datasets",
+   "rule": "paper vs code",
+   "text": "The 24,000 problems are VSR-DPG's files (Jiang & Xue 2024, data/algebraic_equations @b841bb3): CVGP's expressions embedded into 10 to 50 variables. srbf follows those files: inputs LogUniform(0.1, 10), where CVGP's own code samples U(0.5, 10).",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "decomposable-nsr-synthetic-e1-e13",
+   "rule": "paper vs code",
+   "text": "Where the paper's printed ranges differ from the authors' generator (E2, E3, E9, E10), srbf follows the generator, which produced the published results.",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "dgsr-additional-feynman",
+   "rule": "paper vs code",
+   "text": "A-32 draws its inputs on U(1, 3), as the authors' code and experiment log do; the paper's Table 35 prints U(4, 6).",
+   "star": false,
+   "changed_2026_11_28": true
+  },
+  {
+   "catalog": "dgsr-synthetic-d-12",
+   "rule": "paper vs code",
+   "text": "Paper and code disagree on 6 of the 7 formulas; srbf uses the code's rows, which the published runs used.",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "dso-benchmark-registry",
+   "rule": "paper vs code",
+   "text": "Korns-15 uses the registry's own range [0, 50], which the registry's runs used; Korns (2011) uses [-50, 50], as srbf's Korns set does.",
+   "star": false,
+   "changed_2026_11_28": true
+  },
+  {
+   "catalog": "dso-benchmark-registry-points",
+   "rule": "defining publication",
+   "text": "Neat-6 is Keijzer's harmonic number on x = 1..50, tested on x = 1..120 (Keijzer 2003); later copies differ.",
+   "star": false
+  },
+  {
+   "catalog": "e2e-in-domain-synthetic-validation-set",
+   "rule": "paper vs code",
+   "text": "srbf regenerated the functions with the generator settings stored in the authors' released model (max_exponent_prefactor 2, max_centroids 4, its operator down-sampling), which produced their published results; the paper's Table 3 prints other settings (constants from a mantissa in [0, 1] and an exponent in [-2, 2], up to 10 clusters).",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "erbench-public-legacy-formulas",
+   "rule": "defining publication",
+   "text": "Korns-13 to -15 and Nguyen-9 (Uy et al.'s F9 on [-1, 1]^2) follow Korns 2011 and Uy et al. 2011, not ERBench's re-renderings.",
+   "star": false
+  },
+  {
+   "catalog": "esr-cosmology",
+   "rule": "paper vs code",
+   "text": "ESR's code fits H^2 as a function of x = 1 + z (likelihood.py), so srbf poses H^2; the paper speaks of H(z).",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "esr-cosmology-datasets",
+   "rule": "paper vs code",
+   "text": "ESR's code fits H^2 as a function of x = 1 + z (likelihood.py), so srbf poses H^2; the paper speaks of H(z).",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "fastsrb",
+   "rule": "defining publication",
+   "text": "Where SRSD's own files disagree, srbf follows SRSD's code and published data: I.44.4's n on [1e24, 1e26], integer inputs on lo..hi-1, and the signs and ranges of I.29.16, B6, B7, III.15.27 and III.21.20.",
+   "star": false
+  },
+  {
+   "catalog": "fastsrb",
+   "rule": "paper vs code",
+   "text": "Where SRSD's own files disagree, srbf follows SRSD's code and published data (I.44.4's n on [1e24, 1e26], integer inputs on lo..hi-1, the signs and ranges of I.29.16, B6, B7, III.15.27 and III.21.20).",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "gp-benchmarks-sr-table",
+   "rule": "defining publication",
+   "text": "Korns-7, Vladislavleva-7, Keijzer-5 and Nguyen-9 follow their original authors where later copies differ; Korns-5, -6, -8 and -9 use plain log and square root as printed.",
+   "star": false
+  },
+  {
+   "catalog": "gp-benchmarks-sr-table-points",
+   "rule": "defining publication",
+   "text": "Keijzer-6 is Keijzer's harmonic number (Keijzer 2003) on x = 1..50, tested on 1..120.",
+   "star": false
+  },
+  {
+   "catalog": "gp-benchmarks-sr-table-points",
+   "rule": "paper vs code",
+   "text": "Pagie-2 follows the authors' reference code (ECJ: [-5, 5]^3, step 0.4); Pagie's thesis uses [-3, 3]^3.",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "grammarvae-points",
+   "rule": "defining publication",
+   "text": "GrammarVAE-1 is fitted on the authors' 1,000 evenly spaced points on [-10, 10].",
+   "star": false
+  },
+  {
+   "catalog": "heuristiclab-regression-instance-providers",
+   "rule": "defining publication",
+   "text": "Formulas and ranges follow the defining authors (Keijzer, Korns, Vladislavleva, Friedman, Chen et al.) rather than HeuristicLab's code where they differ (e.g. Korns-14's sign, Korns-15's range).",
+   "star": false
+  },
+  {
+   "catalog": "heuristiclab-regression-instance-providers-points",
+   "rule": "defining publication",
+   "text": "Keijzer-6 is Keijzer's harmonic number (Keijzer 2003) on x = 1..50, tested on 1..120.",
+   "star": false
+  },
+  {
+   "catalog": "kan-feynman-no-units-subset",
+   "rule": "paper vs code",
+   "text": "I.16.6 draws a = u/c and b = v/c as in the AI Feynman without-units data the authors point to (u, v and c on [1, 5]); the paper states (-1, 1).",
+   "star": false,
+   "changed_2026_11_28": true
+  },
+  {
+   "catalog": "keijzer",
+   "rule": "defining publication",
+   "text": "Keijzer-5 samples its denominator variable on [1, 2] as Keijzer (2003) defines it; later copies swapped two input ranges.",
+   "star": false
+  },
+  {
+   "catalog": "keijzer-points",
+   "rule": "defining publication",
+   "text": "Keijzer-6 is the harmonic number sum 1/i (Keijzer 2003, Eq. 7); later copies print x(x+1)/2.",
+   "star": false
+  },
+  {
+   "catalog": "keijzer-points",
+   "rule": "defining publication",
+   "text": "Keijzer-4, -8 and -9 use Keijzer's own training and test grids (step 0.05; tests starting at 0) where later copies differ.",
+   "star": false
+  },
+  {
+   "catalog": "korns",
+   "rule": "defining publication",
+   "text": "Korns-7 uses Korns' (2011) amplitude 213.80940889; later copies print 2.1380940889.",
+   "star": false
+  },
+  {
+   "catalog": "korns",
+   "rule": "defining publication",
+   "text": "Korns-5, -6, -8 and -9 use plain log and square root as Korns prints them; later copies wrap the arguments in absolute values.",
+   "star": false
+  },
+  {
+   "catalog": "korns",
+   "rule": "defining publication",
+   "text": "Korns-13 to -15, dropped from later copies, are included, Korns-15 on Korns' range [-50, 50].",
+   "star": false
+  },
+  {
+   "catalog": "langlaw-perovskites",
+   "rule": "paper vs code",
+   "text": "For bulk modulus srbf uses the 450 rows the paper reports on; the preprocessing script writes 504 rescaled rows.",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "lasr-noisy-feynman-with-distractors",
+   "rule": "paper vs code",
+   "text": "The released code runs 97 of the 100 equations; srbf runs all 100, as the paper's results table does.",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "livermore",
+   "rule": "paper vs code",
+   "text": "Four formulas are printed with typos in the paper; srbf uses the forms the authors ran (their repository).",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "livermore2",
+   "rule": "paper vs code",
+   "text": "The rule |y| < 100 is the authors' code; no paper states it.",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "neat",
+   "rule": "defining publication",
+   "text": "Neat-9 (the Pagie function) is sampled at random on [-5, 5]^2, as the neat-GP paper samples its training sets; Pagie's own 26 x 26 grid is in 'Pagie (fixed points)'.",
+   "star": false
+  },
+  {
+   "catalog": "neat-points",
+   "rule": "defining publication",
+   "text": "Neat-6 is Keijzer's harmonic number on x = 1..50, tested on x = 1..120 (Keijzer 2003); later copies print x(x+1)/2.",
+   "star": false
+  },
+  {
+   "catalog": "nguyen",
+   "rule": "defining publication",
+   "text": "Nguyen-9 and Nguyen-10 sample their inputs on [-1, 1]^2 as Uy et al. (2011) define them; later copies use [0, 1]^2.",
+   "star": false
+  },
+  {
+   "catalog": "pagie-points",
+   "rule": "defining publication",
+   "text": "Pagie-1 is fitted on the authors' 26 x 26 grid with step 0.4 on [-5, 5]^2.",
+   "star": false
+  },
+  {
+   "catalog": "phye2e-space-physics",
+   "rule": "paper vs code",
+   "text": "Differential rotation uses the notebook's seeded 27/7 split, which produced the published result; the paper speaks of 28 of 34 points.",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "poly",
+   "rule": "defining publication",
+   "text": "Poly-10 samples its inputs on [-1, 1] as Poli (2003) defines it; later copies use [0, 1].",
+   "star": false
+  },
+  {
+   "catalog": "rsrm-gaussian-cdf-extrapolation-test-points",
+   "rule": "paper vs code",
+   "text": "srbf uses sigma = 50, 40 and 30, which the authors' plotted curves and reported errors match; the printed panel titles give 1/30, 1/40 and 1/50.",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "shape-constrained-sr-synthetic",
+   "rule": "paper vs code",
+   "text": "The three FDE problems use the boxes and formulas of the authors' generators (HeuristicLab), which produced the data (Flow psi with sin(pi theta/180)); the paper's tables print wider input spaces and sin(theta/(2 pi)).",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "sine-points",
+   "rule": "defining publication",
+   "text": "Sine is sin(x) on the 63 points x = 0, 0.1, ..., 6.2 as the Field Guide defines it; later copies replaced it with another formula sampled at random.",
+   "star": false
+  },
+  {
+   "catalog": "srsd-dummy",
+   "rule": "defining publication",
+   "text": "Built on the corrected FastSRB laws (SRSD's code and published data where SRSD's files disagree) with SRSD's own published dummy columns.",
+   "star": false
+  },
+  {
+   "catalog": "sym-q-ai-feynman-with-drift-terms",
+   "rule": "paper vs code",
+   "text": "The input range U[-10, 10] is the authors' code; the paper's Table 8 lists per-equation ranges.",
+   "star": false,
+   "changed_2026_11_28": false
+  },
+  {
+   "catalog": "symbolicregression-com-toy-test-suite-1",
+   "rule": "defining publication",
+   "text": "Ripple2d is 2 sin((x1 - 4)(x2 - 4)) as its author defines it; later copies misprint it.",
+   "star": false
+  },
+  {
+   "catalog": "vladislavleva",
+   "rule": "defining publication",
+   "text": "Vladislavleva-7 is 2 sin((x1 - 4)(x2 - 4)) as Vladislavleva et al. (2009) define it; later copies print 2 sin(x1 - 4)(x2 - 4).",
+   "star": false
+  },
+  {
+   "catalog": "white-et-al-2013-proposed-sr-set-points",
+   "rule": "defining publication",
+   "text": "Keijzer-6 is Keijzer's harmonic number (Keijzer 2003) on x = 1..50, tested on 1..120; later copies print x(x+1)/2.",
+   "star": false
+  }
+ ]
+}

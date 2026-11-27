@@ -3,9 +3,10 @@ metadata:
   version: 2
   benchmark: "srsd-dummy"
   tags: {"origin": "science formula", "tags": ["dummy inputs"]}
-  srbf_changes: []
   srbf_notes: ["Follows the defining publication: Built on the corrected FastSRB laws (SRSD's code and published data where SRSD's files disagree) with SRSD's own published dummy columns."]
+  problem_flags: {"trivial": ["III.12.43", "I.29.4", "I.34.27", "I.15.3t", "III.4.33", "B15"]}
   citation: {"paper": {"short": "Matsubara et al. 2024", "title": "Rethinking Symbolic Regression Datasets and Benchmarks for Scientific Discovery", "venue": "Journal of Data-centric Machine Learning Research (DMLR) 2024", "url": "https://arxiv.org/abs/2206.10540"}}
+  srbf_changes: []
   license: 'MIT (base laws: viktmar/FastSRB; dummy recipe: omron-sinicx/srsd-benchmark) + CC BY 4.0 (dummy configuration:
     SRSD''s Hugging Face datasets); see THIRD_PARTY_LICENSES'
   description: 'SRSD-Feynman with dummy variables (120): FastSRB''s laws (fastsrb@3) with SRSD''s published dummy columns

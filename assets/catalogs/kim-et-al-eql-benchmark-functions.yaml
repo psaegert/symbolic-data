@@ -3,9 +3,10 @@ metadata:
   version: 1
   benchmark: "kim-et-al-eql-benchmark-functions"
   tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
-  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 12 of the 13 functions: Kim-8 (exp(-x^2) on [-1, 1]) is run as Livermore-21, without Kim et al.'s extrapolation test."}]
   license: "MIT (samuelkim314/DeepSymReg) + CC BY 4.0 (Kim et al. 2020, IEEE TNNLS)"
   citation: {"paper": {"short": "Kim et al. 2021", "title": "Integration of Neural Network-Based Symbolic Regression in Deep Learning for Scientific Discovery", "venue": "IEEE Transactions on Neural Networks and Learning Systems 32(9):4166-4177", "url": "https://doi.org/10.1109/TNNLS.2020.3017010"}, "data": {"short": "GitHub samuelkim314/DeepSymReg@57bbe2e", "title": "DeepSymReg benchmark.py (no licence file)", "url": "https://github.com/samuelkim314/DeepSymReg/blob/57bbe2e2c7f0cd07dc34ed99c7dc75bdd1445d87/benchmark.py"}}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 12 of the 13 functions: Kim-8 (exp(-x^2) on [-1, 1]) is run as Livermore-21, without Kim et al.'s extrapolation test."}]
+  problem_flags: {"trivial": ["Kim-1"]}
   description: Kim et al. EQL benchmark functions
   sources:
   - https://arxiv.org/abs/1912.04825
@@ -21,9 +22,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Kim-1:
     raw: x

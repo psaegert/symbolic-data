@@ -118,7 +118,7 @@ def statement(source: str, terms: str) -> str:
 @lru_cache(maxsize=1)
 def dropped() -> dict[str, dict[str, Any]]:
     """What srbf's release leaves out by rule (tags/dropped.json), by catalog: the whole catalog (``members`` null) or
-    the listed problems of it, each with its public ``reason`` (scope: y = f(x) on one data set, 2026-11-28; formulas as
+    the listed problems of it, each with its public ``reason`` (scope: y = f(x) on one data set, 2026-11-27; formulas as
     their authors wrote them, 2026-11-26). The builders skip what it names, and count_release lists it."""
     with open(Path(__file__).resolve().parent / "tags" / "dropped.json", encoding="utf-8") as fh:
         return {r["catalog"]: r for r in json.load(fh)}
@@ -157,6 +157,14 @@ def citations() -> dict[str, dict[str, Any]]:
         return {c["catalog"]: c for c in json.load(fh)}
 
 
+def load_yaml(path: str | os.PathLike) -> Any:
+    """A yaml file read with libyaml's safe loader where available (the same result, several times faster on the
+    large catalogs)."""
+    import yaml
+    with open(path, encoding="utf-8") as fh:
+        return yaml.load(fh, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))
+
+
 def input_file(name: str | os.PathLike) -> Path:
     """The local copy of a file a record names: ``catalog-prep/raw/...`` under RAW, ``symbolic-data/...`` in this
     repository, anything else as given (the survey's working tree names its files by absolute path)."""
@@ -190,6 +198,18 @@ _LOCAL = [(re.compile(_PATH + r"srbf_eval_local/workflow_archive/"), ""),
           (re.compile(_PATH + r"srbf_eval_local/"), ""),
           (re.compile(_PATH + r"Projects/symbolic-data(-wt-[\w-]+)?/"), "symbolic-data/"),
           (re.compile(_PATH), "~/"),
+          # the survey's working copy: a file in its raw folder is named by its own path, its set records are
+          # internal (no record ids in public text: the 2026-11-27 audit)
+          (re.compile(r"(?<![\w/])(?:catalog-prep/)?raw/[\w.-]+/"), ""),
+          (re.compile(r"(?<![\w/])(?:catalog-prep/)?sets/[\w.-]+?(?:\.\.[\w.-]+)?\.json"), "the benchmark survey record"),
+          (re.compile(r"\bsets? (?:fresh|done|critic|interrupted)-\d+(?:(?:, | and )(?:fresh|done|critic|interrupted)-\d+)*"),
+           "the benchmark survey records"),
+          (re.compile(r"\bcatalog-prep (?:fresh|done|critic|interrupted)-\d+\b"), "the benchmark survey record"),
+          (re.compile(r"\b(?:fresh|done|critic|interrupted)-\d+\b"), "a survey record"),
+          # ruling numbers stay out of public text
+          (re.compile(r";\s*(?:srbf |owner )?ruling \d{4}-\d\d-\d\d[^()]*(?:\([^()]*\)[^()]*)*\)"), ")"),
+          (re.compile(r"\s*\((?:srbf |owner )?rulings?(?: [^()]*(?:\([^()]*\)[^()]*)*)?\)"), ""),
+          (re.compile(r"\b(?:srbf|owner) ruling \d{4}-\d\d-\d\d(?:/\d\d)?(?: \(\w+\))?:?\s*"), ""),
           (re.compile(r"\bOWNER DECISION\b"), "DECISION"),
           (re.compile(r"\bowner call\b"), "srbf's call"),
           # the survey's notes name srbf's maintainer as "the owner"; a data owner and owner-occupied homes stay

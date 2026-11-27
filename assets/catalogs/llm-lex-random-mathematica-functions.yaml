@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "llm-lex-random-mathematica-functions"
   tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 20, "text": "srbf runs 3 of the 23 functions here (the multivariate examples); the 20 univariate functions, which use a fixed grid, are in its pinned-points set."}]
   license: "CC BY 4.0 (Harvey et al. 2025, arXiv:2505.07956; Mach. Learn.: Sci. Technol. 7:045040)"
   citation: {"paper": {"short": "Harvey et al. 2026", "title": "Symbolic regression with multimodal large language models and Kolmogorov–Arnold networks", "venue": "Machine Learning: Science and Technology 7(4):045040", "url": "https://doi.org/10.1088/2632-2153/ae8b73"}}
+  srbf_changes: [{"kind": "part", "problems": 20, "text": "srbf runs 3 of the 23 functions here (the multivariate examples); the 20 univariate functions, which use a fixed grid, are in its pinned-points set."}]
   description: LLM-LEx random Mathematica functions
   sources:
   - https://arxiv.org/abs/2505.07956
@@ -26,9 +26,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   kanlex-ex1:
     raw: exp(sin(pi*x) + y**2)

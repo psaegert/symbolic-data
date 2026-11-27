@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "torchsisso"
   tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 9 of the 10 expressions: expression 9 is Feynman I.44.4 and is run in srbf's Feynman set."}]
   license: "facts only: formulas and ranges cited from Muthyala et al. 2024 (TorchSISSO, Digit. Chem. Eng. 13:100198; arXiv:2410.01752, CC BY-NC-ND 4.0); no text or tables reproduced"
   citation: {"paper": {"short": "Muthyala et al. 2024", "title": "TorchSISSO: A PyTorch-based implementation of the sure independence screening and sparsifying operator for efficient and interpretable model discovery", "venue": "Digital Chemical Engineering 13:100198", "url": "https://doi.org/10.1016/j.dche.2024.100198"}}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 9 of the 10 expressions: expression 9 is Feynman I.44.4 and is run in srbf's Feynman set."}]
   description: TorchSISSO synthetic expressions
   sources:
   - https://arxiv.org/abs/2410.01752
@@ -22,9 +22,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   '1':
     raw: 10*x1/(x2*(x3+x4))

@@ -3,9 +3,10 @@ metadata:
   version: 1
   benchmark: "dgsr-synthetic-d-12"
   tags: {"origin": "generated formulas", "tags": []}
-  srbf_changes: []
   license: "BSD-3-Clause (benchmarks.csv, DSO fork in samholt/DeepGenerativeSymbolicRegression; Holt et al. 2023, arXiv:2401.00282)"
   citation: {"paper": {"short": "Holt et al. 2023", "title": "Deep Generative Symbolic Regression", "venue": "ICLR 2023", "url": "https://arxiv.org/abs/2401.00282"}, "data": {"short": "GitHub samholt/DeepGenerativeSymbolicRegression@5dbf04d", "title": "DGSR benchmarks.csv (DSO fork in the authors' repository)", "url": "https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv"}}
+  srbf_changes: []
+  srbf_notes: ["Paper and code differ: Paper and code disagree on 6 of the 7 formulas; srbf uses the code's rows, which the published runs used."]
   description: DGSR synthetic d=12
   sources:
   - https://arxiv.org/abs/2401.00282
@@ -25,9 +26,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   l_cd_12_1:
     raw: x12+x9*(x10+x11)*(x1+x2+x3+x4+x5+x6+x7*x8)

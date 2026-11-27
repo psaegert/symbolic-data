@@ -3,9 +3,10 @@ metadata:
   version: 1
   benchmark: "geobench"
   tags: {"origin": "science formula", "tags": []}
-  srbf_changes: []
   license: "facts only: geometric formulas and ranges cited from Xu et al. 2024 (GeoBench, OpenReview TqzNI4v9DT); no upstream license"
   citation: {"paper": {"short": "Xu et al. 2024", "title": "GeoBench: A new benchmark on Symbolic Regression with Geometric Expressions", "venue": "ICLR 2025 submission (OpenReview TqzNI4v9DT, not accepted)", "url": "https://web.archive.org/web/20260118085022/https://openreview.net/pdf?id=TqzNI4v9DT"}}
+  srbf_changes: []
+  problem_flags: {"trivial": ["circle-1", "rectangle-3", "cuboid-4"]}
   description: GeoBench (SR with geometric expressions)
   sources:
   - https://openreview.net/forum?id=TqzNI4v9DT
@@ -17,9 +18,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   triangle-1:
     raw: x1 + x2 + x3

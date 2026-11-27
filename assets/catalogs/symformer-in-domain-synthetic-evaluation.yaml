@@ -2,10 +2,11 @@ metadata:
   name: symformer-in-domain-synthetic-evaluation
   version: 1
   benchmark: "symformer-in-domain-synthetic-evaluation"
-  tags: {"origin": "generated formulas", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 18976, "text": "The authors never published their evaluation formulas; srbf regenerated the 20,000 with the authors' generator and seed and runs a fixed sample of 1,024 of them."}]
+  tags: {"origin": "generated formulas", "tags": ["generator in-distribution"]}
   license: "CC BY 4.0 (Vastl et al. 2024, SymFormer, IEEE Access 12:37840); formulas drawn by srbf from the authors' generator"
   citation: {"paper": {"short": "Vastl et al. 2024", "title": "SymFormer: End-to-End Symbolic Regression Using Transformer-Based Architecture", "venue": "IEEE Access 12:37840-37849", "url": "https://doi.org/10.1109/ACCESS.2024.3374649"}, "data": {"short": "GitHub vastlik/symformer@35bc93c", "title": "SymFormer generator and configs (no licence file)", "url": "https://github.com/vastlik/symformer/tree/35bc93c6c563c68a07a3a9adcf9b10d5b87a9d46"}}
+  srbf_changes: [{"kind": "part", "problems": 18976, "text": "The authors never published their evaluation formulas; srbf regenerated the 20,000 with the authors' generator and seed and runs a fixed sample of 1,024 of them."}]
+  problem_flags: {"trivial": ["symformer-uni-p001-d46", "symformer-uni-p003-d56", "symformer-uni-p003-d66", "symformer-uni-p004-d05", "symformer-uni-p012-d15", "symformer-uni-p014-d28", "symformer-uni-p018-d08", "symformer-uni-p018-d38", "symformer-uni-p024-d39", "symformer-uni-p037-d59", "symformer-uni-p043-d47", "symformer-uni-p044-d63", "symformer-uni-p046-d43", "symformer-uni-p047-d51", "symformer-uni-p047-d53", "symformer-uni-p056-d32", "symformer-uni-p061-d66", "symformer-uni-p063-d37", "symformer-uni-p064-d19", "symformer-uni-p064-d34", "symformer-uni-p074-d10", "symformer-uni-p074-d68", "symformer-uni-p080-d74", "symformer-uni-p081-d08", "symformer-uni-p081-d53", "symformer-uni-p085-d74", "symformer-uni-p091-d76", "symformer-uni-p101-d69", "symformer-uni-p106-d47", "symformer-uni-p109-d53", "symformer-uni-p114-d47", "symformer-uni-p120-d57", "symformer-uni-p120-d75", "symformer-uni-p126-d00", "symformer-biv-p000-d58", "symformer-biv-p006-d39", "symformer-biv-p012-d05", "symformer-biv-p012-d46", "symformer-biv-p019-d34", "symformer-biv-p020-d50", "symformer-biv-p028-d28", "symformer-biv-p034-d26", "symformer-biv-p055-d00", "symformer-biv-p058-d57", "symformer-biv-p068-d14", "symformer-biv-p071-d63", "symformer-biv-p075-d33", "symformer-biv-p098-d53", "symformer-biv-p100-d67", "symformer-biv-p104-d55", "symformer-biv-p107-d67", "symformer-biv-p123-d57", "symformer-biv-p126-d32"]}
   description: SymFormer in-domain synthetic evaluation
   sources:
   - https://arxiv.org/abs/2205.15764
@@ -32,9 +33,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   symformer-uni-p000-d59:
     raw: -x/log(x)**2 - 3.0073999986052513/log(x)**2

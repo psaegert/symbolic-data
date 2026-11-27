@@ -5,6 +5,7 @@ metadata:
   tags: {"origin": "science formula", "tags": []}
   license: "CC BY 4.0 (Holt et al. 2023, DGSR, arXiv:2401.00282, Table 35) + BSD-3-Clause (benchmarks.csv, DSO fork in samholt/DeepGenerativeSymbolicRegression)"
   citation: {"paper": {"short": "Holt et al. 2023", "title": "Deep Generative Symbolic Regression", "venue": "ICLR 2023", "url": "https://arxiv.org/abs/2401.00282"}, "data": {"short": "GitHub samholt/DeepGenerativeSymbolicRegression@5dbf04d", "title": "DGSR benchmarks.csv (DSO fork in the authors' repository)", "url": "https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv"}}
+  srbf_changes: []
   srbf_notes: ["Paper and code differ: A-32 draws its inputs on U(1, 3), as the authors' code and experiment log do; the paper's Table 35 prints U(4, 6)."]
   description: DGSR Additional Feynman
   sources:

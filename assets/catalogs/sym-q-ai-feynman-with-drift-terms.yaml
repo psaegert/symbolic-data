@@ -1,11 +1,13 @@
 metadata:
   name: sym-q-ai-feynman-with-drift-terms
+  display_name: "sym-q-ai-feynman-with-drift-terms*"
   version: 1
   benchmark: "sym-q-ai-feynman-with-drift-terms"
-  tags: {"origin": "science formula", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 15, "text": "srbf runs the 15 AI-Feynman expressions Sym-Q evaluates, without the drift terms of its drift experiment. Those problems cannot be rebuilt: Sym-Q names nine kinds of drift but not the equations it added them to (only 'all equations with three or fewer variables, excluding those exceeding the model's size limits') nor the input each drift uses."}]
+  tags: {"origin": "science formula", "tags": ["srbf-modified"]}
   license: "MIT (EPFL-IMOS/Sym-Q) + CC0 1.0 (Tian et al., arXiv:2402.05306)"
   citation: {"paper": {"short": "Tian et al. 2025", "title": "Interactive symbolic regression with co-design mechanism through offline reinforcement learning", "venue": "Nature Communications 16(1):3930", "url": "https://doi.org/10.1038/s41467-025-59288-y"}, "data": {"short": "GitHub EPFL-IMOS/Sym-Q@104a486", "title": "Sym-Q utils.py BENCHMARK (MIT)", "url": "https://github.com/EPFL-IMOS/Sym-Q/blob/104a486070f615cd4fdb93a0e95adfd59625ee64/utils.py"}}
+  srbf_changes: [{"kind": "part", "problems": 15, "text": "srbf runs the 15 AI-Feynman expressions Sym-Q evaluates, without the drift terms of its drift experiment. Those problems cannot be rebuilt: Sym-Q names nine kinds of drift but not the equations it added them to (only 'all equations with three or fewer variables, excluding those exceeding the model's size limits') nor the input each drift uses."}, {"kind": "changed", "problems": 15, "text": "srbf uses the input range of the authors' code, U[-10, 10] for every input, rather than the per-equation ranges of the paper's Table 8."}]
+  srbf_notes: ["Paper and code differ: The input range U[-10, 10] is the authors' code; the paper's Table 8 lists per-equation ranges."]
   description: Sym-Q AI-Feynman with drift terms
   sources:
   - 'https://arxiv.org/abs/2402.05306 (Sym-Q; v2 PDF https://arxiv.org/pdf/2402.05306v2: drift text p.8-9, Fig. 4 p.10, Table
@@ -32,9 +34,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Feynman-1:
     raw: exp(-x**2/2)/sqrt(2*pi)

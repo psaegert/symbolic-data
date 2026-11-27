@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "heuristiclab-physics-instances"
   tags: {"origin": "science formula", "tags": []}
-  srbf_changes: []
   license: "facts only: formulas and ranges cited from the HeuristicLab Physics instance provider (heal-research/HeuristicLab, GPL-3.0 code, not copied) and Chen et al. 2018 (arXiv:1706.02281)"
   citation: {"paper": {"short": "Chen et al. 2018", "title": "A multilevel block building algorithm for fast modeling generalized separable systems", "venue": "Expert Systems with Applications 109:25-34", "url": "https://doi.org/10.1016/j.eswa.2018.05.021"}, "data": {"short": "GitHub heal-research/HeuristicLab@c57538b", "title": "HeuristicLab Physics Benchmark Problems provider (GPL-3.0)", "url": "https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Physics"}}
+  srbf_changes: []
   description: HeuristicLab Physics instances
   sources:
   - https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Physics
@@ -28,9 +28,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   RocketFuelFlow:
     raw: p0*A/sqrt(T0)*sqrt(1.4/287*(2/(1.4 + 1))**((1.4 + 1)/(1.4 - 1)))

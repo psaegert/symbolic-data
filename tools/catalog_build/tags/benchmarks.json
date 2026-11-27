@@ -40,6 +40,7 @@
   "benchmark": "bms",
   "catalogs": [
    "bms-real-data",
+   "bms-rossler",
    "bms-synthetic-prior-expression-and-bessel-functions",
    "bms-synthetic-prior-expression-and-bessel-functions-points"
   ]
@@ -533,6 +534,12 @@
   ]
  },
  {
+  "benchmark": "llm-sr-oscillators",
+  "catalogs": [
+   "llm-sr-oscillators"
+  ]
+ },
+ {
   "benchmark": "llm-sr-stress-strain",
   "catalogs": [
    "llm-sr-stress-strain"
@@ -776,6 +783,12 @@
   "benchmark": "spl-noise-data-scarcity-grid",
   "catalogs": [
    "spl-noise-data-scarcity-grid"
+  ]
+ },
+ {
+  "benchmark": "sr-dynamical-systems",
+  "catalogs": [
+   "sr-dynamical-systems"
   ]
  },
  {

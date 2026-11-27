@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "bms"
   tags: {"origin": "generated formulas", "tags": ["integer inputs", "srbf-modified"]}
-  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 2 of the 3 problems here; the noise-free Bessel study is in 'BMS synthetic prior expression and Bessel functions* (fixed points)'."}, {"kind": "filled", "problems": 1, "text": "For the noisy Bessel study the authors give only the range x in [0, 4], not how the points are placed; srbf samples x uniformly on [0, 4] and the order nu uniformly from 0 to 4."}]
   license: "facts only: formulas cited from Guimera et al. 2020 (Bayesian machine scientist, Sci. Adv. 6:eaav6971, CC BY-NC 4.0); no text or tables reproduced"
   citation: {"paper": {"short": "Guimerà et al. 2020", "title": "A Bayesian machine scientist to aid in the solution of challenging scientific problems", "venue": "Science Advances 6(5):eaav6971", "url": "https://doi.org/10.1126/sciadv.aav6971"}}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 2 of the 3 problems here; the noise-free Bessel study is in 'BMS synthetic prior expression and Bessel functions* (fixed points)'."}, {"kind": "filled", "problems": 1, "text": "For the noisy Bessel study the authors give only the range x in [0, 4], not how the points are placed; srbf samples x uniformly on [0, 4] and the order nu uniformly from 0 to 4."}]
   description: BMS synthetic prior expression and Bessel functions
   display_name: "BMS synthetic prior expression and Bessel functions*"
   modified_by_srbf: 'the authors give the noisy Bessel problem''s range, x in [0, 4], but not how its points are placed: srbf
@@ -23,9 +23,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   bms-prior-expression:
     raw: x1*(-1.19 + x2)*cos(x1)/(0.29*log(0.29))

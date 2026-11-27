@@ -26,7 +26,6 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import paths  # noqa: E402  the curated inputs
@@ -104,7 +103,7 @@ def survey_sets(symbolic_data: Path, data_build: Path) -> dict[str, str]:
 
 
 def from_yaml(path: Path, tier: dict[str, dict[str, str]]) -> dict[str, Any]:
-    doc = yaml.safe_load(open(path))
+    doc = paths.load_yaml(path)
     name = doc["metadata"]["name"]
     keep = set(json.load(open(paths.frozen_path(FROZEN[name])))["ids"]) if name in FROZEN else None
     subsets: Counter[str] = Counter()

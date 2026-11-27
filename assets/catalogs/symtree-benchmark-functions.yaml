@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "symtree-benchmark-functions"
   tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 901, "text": "srbf runs 16 of SymTree's 17 benchmark functions (F7 is run as Nguyen-7); the paper's 900 random polynomials were never published and their generator has no seed."}]
   license: "facts only: functions and ranges cited from de Franca 2018 (Inf. Sci. 442:18, arXiv:1801.01807) and the original Kattan et al. papers; no upstream license"
   citation: {"paper": {"short": "Olivetti de França 2018", "title": "A greedy search tree heuristic for symbolic regression", "venue": "Information Sciences 442-443:18-32", "url": "https://doi.org/10.1016/j.ins.2018.02.040"}}
+  srbf_changes: [{"kind": "part", "problems": 901, "text": "srbf runs 16 of SymTree's 17 benchmark functions (F7 is run as Nguyen-7); the paper's 900 random polynomials were never published and their generator has no seed."}]
   description: SymTree benchmark functions
   sources:
   - https://arxiv.org/abs/1801.01807
@@ -20,9 +20,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   F1:
     raw: x**3 + x**2 + 5*x

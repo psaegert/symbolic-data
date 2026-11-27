@@ -44,9 +44,13 @@ import piecewise  # noqa: E402  the exact Piecewise -> floor/Abs rewrite
 import authors_tests  # noqa: E402  the authors' test sets (rulings 9(1), 9(7))
 import formula_gate  # noqa: E402  the numeric check that each prepared formula computes its raw formula
 
-RULES = ("srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark's formulas, constants and input distributions; "
-         "srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per "
-         "problem (ruling 9(6))")
+# the public rules texts of the catalogs (no ruling numbers or record ids: the 2026-11-27 audit)
+RULES = ("srbf formula catalogs: the benchmark's formulas, constants and input distributions; srbf draws the points (512 "
+         "to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input's "
+         "range) is drawn with the points (the entry's per_run block); srbf's release freezes one draw per problem")
+POINTS_RULES = ("srbf data catalogs of formula problems whose authors fix the points: the formula evaluated on the authors' "
+                "points, fitted on them as published; a test only where the authors give one; srbf fits on at most 512 "
+                "points and tests on at most 512 (a random 512 where the authors' set is larger)")
 
 
 # The operators of SimpliPy 0.15 (srbf ruling 2026-11-02: whole classes) as sympy prints them.
@@ -105,7 +109,7 @@ FAMILY_POINTS = {("fresh-10", "Keijzer-6"): "keijzer", ("fresh-27", "Neat-6"): "
 # ruling 2026-11-05: one PhySO Class SR set, as the authors draw them)
 SLUGS = {"fresh-2": "pysr-empiricalbench-formulas", "fresh-56": "physo-class"}
 
-# Transcription fixes to the survey's records (the 2026-11-28 audit: srbf posed another law than the authors'). Each
+# Transcription fixes to the survey's records (the 2026-11-27 audit: srbf posed another law than the authors'). Each
 # replaces the record's fields; the reason says what the record had wrong and where the authors' version is.
 RECORD_FIXES = {
     ("fresh-46", "AircraftLift"): {
@@ -490,6 +494,13 @@ def points_problem(p: dict[str, Any], slug: str, display: str, engine) -> Any:
         x_test = np.column_stack([rng.uniform(lo, hi, per * len(orders)), np.repeat(orders, per)])
         split, note = "given", (f"srbf: the authors measure the error on [{lo:g}, {hi:g}] without stating its points; "
                                 f"{per} points per order, uniform, seeded")
+    if p.get("constraints"):                   # the authors' constraints on a row (AutoRA's Weber-Fechner: S1 <= S2)
+        local = {n: sympy.Symbol(n) for n in names}
+        for c in p["constraints"]:
+            ok = sympy.lambdify([local[n] for n in names], parse_expr(c, local_dict=local), modules="numpy")
+            x = x[np.broadcast_to(np.asarray(ok(*x.T), dtype=bool), (len(x),))]
+            if x_test is not None:
+                x_test = x_test[np.broadcast_to(np.asarray(ok(*x_test.T), dtype=bool), (len(x_test),))]
     y = np.asarray(f(*x.T), dtype=float).reshape(-1) * np.ones(len(x))
     yt = None if x_test is None else np.asarray(f(*x_test.T), dtype=float).reshape(-1) * np.ones(len(x_test))
     gt: dict[str, Any] = {"gt_kind": "exact"}
@@ -949,10 +960,8 @@ def build_family_points(problems: list[dict[str, Any]], out: Path, engine) -> di
         by_catalog[catalog].append(release_points_problem(catalog, eq_id, engine))
     for catalog, pinned in sorted(by_catalog.items()):
         ProblemCatalog.from_problems(pinned, name=f"{catalog}-points", version=1, meta={
-            "display_name": f"{catalog} (pinned points)", "kind": "data", "rules": RULES,
-            "companion_of": catalog, "source_record": ", ".join(
-                [f"catalog-prep {t}" for t in sorted({t for (t, i), c in FAMILY_POINTS.items() if c == catalog})]
-                + (["the release catalog (RELEASE_POINTS)"] if any(c == catalog for c, _ in RELEASE_POINTS) else []))
+            "display_name": f"{catalog} (pinned points)", "kind": "data", "rules": POINTS_RULES, "companion_of": catalog,
+            "test_splits": sorted({json.dumps(q.meta.get("test_split")) for q in pinned})
         }).save(out / f"{catalog}-points.npz")
         print(f"{catalog}-points: {', '.join(q.eq_id for q in pinned)}", flush=True)
     return {c: [q.eq_id for q in v] for c, v in by_catalog.items()}
@@ -1039,7 +1048,7 @@ def main() -> None:
             modified = {"display_name": f"{rec['name']}*", "modified_by_srbf": MODIFIED[tag]} if tag in MODIFIED else {}
             doc = {"metadata": {"name": slug, "version": 1, "description": rec["name"], **modified, "sources": rec.get("sources"),
                                 "sampling_defaults": {"n_points": 512, "method": "random", "noise": 0.0},
-                                "source_kind": "set", "source_record": f"catalog-prep/sets/{tag}.json",
+                                "source_kind": "set",
                                 "conventions": {"rules": RULES}},
                    "expressions": entries}
             (out / f"{slug}.yaml").write_text(yaml.safe_dump(paths.public(doc), sort_keys=False, allow_unicode=True, width=120))

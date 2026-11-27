@@ -3,10 +3,10 @@ metadata:
   version: 1
   benchmark: "dso-benchmark-registry"
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
-  srbf_changes: [{"kind": "part", "problems": 264, "text": "srbf runs here only the registry problems that no other srbf set covers (Nguyen-12a and Korns-13 to -15; Neat-6 is in the pinned-points set); the registry's other rows are run in the sets of their own benchmarks, apart from its two software sanity tests."}]
-  srbf_notes: ["Follows the defining publication: Korns-15 uses Korns' own input range [-50, 50]; the registry's 2021 copy used [0, 50]."]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization)"
   citation: {"paper": {"short": "Petersen et al. 2021", "title": "Deep symbolic regression: Recovering mathematical expressions from data via risk-seeking policy gradients", "venue": "ICLR 2021", "url": "https://arxiv.org/abs/1912.04871"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
+  srbf_changes: [{"kind": "part", "problems": 264, "text": "srbf runs here only the registry problems that no other srbf set covers (Nguyen-12a and Korns-13 to -15; Neat-6 is in the pinned-points set); the registry's other rows are run in the sets of their own benchmarks, apart from its two software sanity tests."}]
+  srbf_notes: ["Paper and code differ: Korns-15 uses the registry's own range [0, 50], which the registry's runs used; Korns (2011) uses [-50, 50], as srbf's Korns set does."]
   description: DSO benchmark registry (benchmarks.csv)
   sources:
   - https://github.com/dso-org/deep-symbolic-optimization/blob/master/dso/dso/task/regression/benchmarks.csv
@@ -28,9 +28,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Nguyen-12a:
     raw: x**4 - x**3 + y**2/2 - y
@@ -192,7 +192,7 @@ expressions:
       v1:
         name: x0
         sample_range:
-        - -50.0
+        - 0.0
         - 50.0
         sample_type:
         - uni
@@ -200,7 +200,7 @@ expressions:
       v2:
         name: x1
         sample_range:
-        - -50.0
+        - 0.0
         - 50.0
         sample_type:
         - uni
@@ -208,7 +208,7 @@ expressions:
       v3:
         name: x2
         sample_range:
-        - -50.0
+        - 0.0
         - 50.0
         sample_type:
         - uni
@@ -216,7 +216,7 @@ expressions:
       v4:
         name: x3
         sample_range:
-        - -50.0
+        - 0.0
         - 50.0
         sample_type:
         - uni
@@ -224,7 +224,7 @@ expressions:
       v5:
         name: x4
         sample_range:
-        - -50.0
+        - 0.0
         - 50.0
         sample_type:
         - uni
@@ -232,15 +232,10 @@ expressions:
       v0:
         name: y
     input_distributions:
-      x0: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
-        +50''; same rule for the testing matrix and for all five features)'
-      x1: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
-        +50''; same rule for the testing matrix and for all five features)'
-      x2: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
-        +50''; same rule for the testing matrix and for all five features)'
-      x3: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
-        +50''; same rule for the testing matrix and for all five features)'
-      x4: 'uniform U[-50,50] (Korns 2011 Sec. 1.1: ''a training matrix is filled with pseudo random numbers between -50 and
-        +50''; same rule for the testing matrix and for all five features)'
+      x0: uniform U[0, 50] (the registry's own range; Korns 2011 uses [-50, 50])
+      x1: uniform U[0, 50] (the registry's own range; Korns 2011 uses [-50, 50])
+      x2: uniform U[0, 50] (the registry's own range; Korns 2011 uses [-50, 50])
+      x3: uniform U[0, 50] (the registry's own range; Korns 2011 uses [-50, 50])
+      x4: uniform U[0, 50] (the registry's own range; Korns 2011 uses [-50, 50])
     meta:
-      finite_fraction: 0.494
+      finite_fraction: 1.0

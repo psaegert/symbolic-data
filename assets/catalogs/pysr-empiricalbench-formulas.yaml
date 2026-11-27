@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "pysr-empiricalbench"
   tags: {"origin": "science formula", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 4, "text": "srbf runs the 5 formula problems here; the authors' 4 measured-data problems are in 'PySR EmpiricalBench data'."}]
   license: "MIT (MilesCranmer/pysr_paper)"
   citation: {"paper": {"short": "Cranmer 2023", "title": "Interpretable Machine Learning for Science with PySR and SymbolicRegression.jl", "venue": "arXiv preprint arXiv:2305.01582", "url": "https://arxiv.org/abs/2305.01582"}, "data": {"short": "GitHub MilesCranmer/pysr_paper@b306874", "title": "pysr_paper equations.yml (MIT)", "url": "https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/data/empirical_bench/equations.yml"}}
+  srbf_changes: [{"kind": "part", "problems": 4, "text": "srbf runs the 5 formula problems here; the authors' 4 measured-data problems are in 'PySR EmpiricalBench data'."}]
   description: PySR EmpiricalBench
   sources:
   - https://arxiv.org/abs/2305.01582
@@ -27,9 +27,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   newton:
     raw: 6.67408e-11*m1*m2/r**2

@@ -134,7 +134,11 @@
    "venue": "Science Advances 6(5):eaav6971",
    "url": "https://doi.org/10.1126/sciadv.aav6971"
   },
-  "data": null,
+  "data": {
+   "short": "Guimerà et al. 2020, the stated points",
+   "title": "the points the publication states; srbf evaluates the formula on them",
+   "url": "https://doi.org/10.1126/sciadv.aav6971"
+  },
   "notes": "Bessel J_nu on [0, 4]; points are srbf-generated (100 seeded uniform draws per order); no upstream data file."
  },
  {
@@ -167,7 +171,11 @@
    "venue": "IEEE Transactions on Evolutionary Computation 12(6):736-749",
    "url": "https://doi.org/10.1109/TEVC.2008.919006"
   },
-  "data": null,
+  "data": {
+   "short": "Schmidt & Lipson 2008, the stated points",
+   "title": "the points the publication states; srbf evaluates the formula on them",
+   "url": "https://doi.org/10.1109/TEVC.2008.919006"
+  },
   "notes": "F1-F3 formulas and grids follow GPTP IV 2006 Table 4 (Schmidt & Lipson, doi:10.1007/978-0-387-49650-4_8; also GECCO 2005 late-breaking paper); TEC 2008 Sec. V-C for the evenly spaced grid. Points are srbf-generated; no upstream data file."
  },
  {
@@ -224,11 +232,11 @@
    "url": "https://doi.org/10.1007/978-3-031-43421-1_11"
   },
   "data": {
-   "short": "GitHub jiangnanhugo/cvgp@e79202e",
-   "title": "CVGP expression files data/ (authors' repository, no licence file)",
-   "url": "https://github.com/jiangnanhugo/cvgp/tree/e79202e2e3b859a97fe139453b3871b5793e33b9/data"
+   "short": "GitHub jiangnanhugo/VSR-DPG@b841bb3",
+   "title": "VSR-DPG data/algebraic_equations (equations_trigonometric and large_scale_10..50): CVGP's expressions embedded into 10 to 50 variables",
+   "url": "https://github.com/jiangnanhugo/VSR-DPG/tree/b841bb349d301c1f233289f09525472ddb7a9246/data/algebraic_equations"
   },
-  "notes": "Preprint arXiv:2306.08057. The same expressions are shipped under MIT in jiangnanhugo/egg-sr@c9f8dce datasets/scibench (the copy the release licence cites); related sets in Racing-CVGP and VSR-DPG."
+  "notes": "Preprint arXiv:2306.08057. The same expressions are shipped under MIT in jiangnanhugo/egg-sr@c9f8dce datasets/scibench (the copy the release licence cites); related sets in Racing-CVGP and VSR-DPG. The 24,000 problems srbf samples from are VSR-DPG's files (Jiang & Xue 2024, arXiv:2402.00254, appendix 'Dataset for Algebraic Equations'), which embed CVGP's expressions into 10 to 50 variables and sample inputs LogUniform(0.1, 10); CVGP's own code samples U(0.5, 10)."
  },
  {
   "catalog": "ddrsr-simple-test-and-complex-test",
@@ -318,7 +326,12 @@
  },
  {
   "catalog": "dow-chemical-evostar-2010",
-  "paper": null,
+  "paper": {
+   "short": "EvoStar 2010 SR competition",
+   "title": "Evostar 2010 Symbolic Regression Competition (organiser's description, A. Kordon, The Dow Chemical Company)",
+   "venue": "competition description (gpbenchmarks.org archive)",
+   "url": "http://web.archive.org/web/20201001115943/http://gpbenchmarks.org/wp-content/uploads/2019/08/Evostar_2010_Symbolic_Regression_Competition.pdf"
+  },
   "data": {
    "short": "EvoStar 2010 SR competition data (Wayback 2012-06-28)",
    "title": "SymbolicRegressionCompetition.xls (A. Kordon, The Dow Chemical Company), organiser's file",
@@ -633,7 +646,11 @@
    "venue": "IEEE Transactions on Evolutionary Computation",
    "url": "https://doi.org/10.1109/tevc.2026.3663396"
   },
-  "data": null,
+  "data": {
+   "short": "UCI Machine Learning Repository",
+   "title": "the member datasets as published at the UCI repository (listed in the notes)",
+   "url": "https://archive.ics.uci.edu"
+  },
   "notes": "No single collection record. Members: UCI 409 Daily Demand Forecasting Orders (doi:10.24432/C5BC8T), UCI 9 Auto MPG (doi:10.24432/C5859H), California housing (Pace & Barry 1997) via figshare article 3829992 (scikit-learn mirror). Preprint arXiv:2501.17168."
  },
  {
@@ -874,7 +891,12 @@
  },
  {
   "catalog": "gecco-2023-performance",
-  "paper": null,
+  "paper": {
+   "short": "SRBench Competition 2023",
+   "title": "SRBench Competition 2023 (GECCO 2023), Track 1: performance",
+   "venue": "competition page (no organizer report published)",
+   "url": "https://cavalab.org/srbench/competition-2023/"
+  },
   "data": {
    "short": "Zenodo 10.5281/zenodo.8283005",
    "title": "SRBench Competition 2023 - Datasets, Scripts, and Results",
@@ -923,7 +945,11 @@
    "venue": "Proceedings of the 14th annual conference on Genetic and evolutionary computation (GECCO '12), pp. 791-798",
    "url": "https://doi.org/10.1145/2330163.2330273"
   },
-  "data": null,
+  "data": {
+   "short": "McDermott et al. 2012, the stated points",
+   "title": "the points the publication states; srbf evaluates the formula on them",
+   "url": "https://doi.org/10.1145/2330163.2330273"
+  },
   "notes": "Keijzer-6, Vladislavleva-3 and Pagie-2 on the Table 3 grids; points srbf-generated; no upstream data file."
  },
  {
@@ -1034,7 +1060,11 @@
    "venue": "arXiv preprint arXiv:2305.16956",
    "url": "https://arxiv.org/abs/2305.16956"
   },
-  "data": null,
+  "data": {
+   "short": "UCI Machine Learning Repository and the GSGP authors' tables",
+   "title": "the member datasets as published (listed in the notes)",
+   "url": "https://archive.ics.uci.edu"
+  },
   "notes": "Membership from Anselmi et al. 2023, Table 1 (GSGP lineage of Castelli, Vanneschi et al.). No collection record; members: UCI Airfoil Self-Noise (id 291, doi:10.24432/C5VW2C), Concrete Compressive Strength (165), Parkinsons Telemonitoring (189), Concrete Slump (182), all CC BY 4.0; QSAR %F/%PPB/LD50 via DALabNOVA/slim@aca7357 (MIT; Archetti et al. 2007, doi:10.1007/s10710-007-9040-z)."
  },
  {
@@ -1076,7 +1106,12 @@
  },
  {
   "catalog": "heuristiclab-real-world",
-  "paper": null,
+  "paper": {
+   "short": "Wagner et al. 2014",
+   "title": "Architecture and Design of the HeuristicLab Optimization Environment",
+   "venue": "Advanced Methods and Applications in Computational Intelligence, Topics in Intelligent Engineering and Informatics 6, Springer",
+   "url": "https://doi.org/10.1007/978-3-319-01436-4_10"
+  },
   "data": {
    "short": "GitHub heal-research/HeuristicLab@c57538b",
    "title": "HeuristicLab RegressionRealWorld.zip + MibaFriction.zip",
@@ -1086,7 +1121,12 @@
  },
  {
   "catalog": "heuristiclab-regression-instance-providers",
-  "paper": null,
+  "paper": {
+   "short": "Wagner et al. 2014",
+   "title": "Architecture and Design of the HeuristicLab Optimization Environment",
+   "venue": "Advanced Methods and Applications in Computational Intelligence, Topics in Intelligent Engineering and Informatics 6, Springer",
+   "url": "https://doi.org/10.1007/978-3-319-01436-4_10"
+  },
   "data": {
    "short": "GitHub heal-research/HeuristicLab@c57538b",
    "title": "HeuristicLab regression instance providers (GPL-3.0)",
@@ -1373,7 +1413,12 @@
  },
  {
   "catalog": "livermore2",
-  "paper": null,
+  "paper": {
+   "short": "Mundhenk et al. 2021",
+   "title": "Symbolic Regression via Neural-Guided Genetic Programming Population Seeding",
+   "venue": "NeurIPS 2021",
+   "url": "https://arxiv.org/abs/2111.00053"
+  },
   "data": {
    "short": "GitHub dso-org/deep-symbolic-optimization@2069d4e",
    "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)",
@@ -1400,7 +1445,11 @@
    "venue": "Machine Learning: Science and Technology 7(4):045040",
    "url": "https://doi.org/10.1088/2632-2153/ae8b73"
   },
-  "data": null,
+  "data": {
+   "short": "Harvey et al. 2026, the stated points",
+   "title": "the points the publication states; srbf evaluates the formula on them",
+   "url": "https://doi.org/10.1088/2632-2153/ae8b73"
+  },
   "notes": "100 evenly spaced points on [0.1, 5]; srbf-generated; no upstream data file."
  },
  {
@@ -1486,7 +1535,11 @@
    "venue": "Proceedings of the 14th annual conference on Genetic and evolutionary computation (GECCO '12), pp. 791-798",
    "url": "https://doi.org/10.1145/2330163.2330273"
   },
-  "data": null,
+  "data": {
+   "short": "McDermott et al. 2012, the stated points",
+   "title": "the points the publication states; srbf evaluates the formula on them",
+   "url": "https://doi.org/10.1145/2330163.2330273"
+  },
   "notes": "DyFor simulated series (Wagner, Michalewicz, Khouja & McGregor 2007, IEEE TEVC 11:433, doi:10.1109/TEVC.2006.882430) on x = 1..60; points srbf-generated."
  },
  {
@@ -2006,7 +2059,11 @@
    "venue": "ICLR 2024",
    "url": "https://arxiv.org/abs/2305.14656"
   },
-  "data": null,
+  "data": {
+   "short": "Xu et al. 2024, the stated points",
+   "title": "the points the publication states; srbf evaluates the formula on them",
+   "url": "https://arxiv.org/abs/2305.14656"
+  },
   "notes": "Three normal-CDF curves on the 201-point grid E[-100,100]; points srbf-generated."
  },
  {
@@ -2118,7 +2175,11 @@
    "venue": "lulu.com, 2008 (freely available; App. B.2, TinyGP example)",
    "url": "http://www.gp-field-guide.org.uk"
   },
-  "data": null,
+  "data": {
+   "short": "Poli et al. 2008, the stated points",
+   "title": "the points the publication states; srbf evaluates the formula on them",
+   "url": "http://www.gp-field-guide.org.uk"
+  },
   "notes": "The authors' Sine is sin(x) on x = 0.0, 0.1, ..., 6.2 (63 points); DSO's row \"Sine\" is Nguyen-6 instead (survey fresh-18, source audit A1). Re-used by McPhee et al., GECCO 2015 (doi:10.1145/2739480.2754778). Points srbf-generated."
  },
  {
@@ -2540,7 +2601,11 @@
    "venue": "Genetic Programming and Evolvable Machines 14(1):3-29",
    "url": "https://doi.org/10.1007/s10710-012-9177-2"
   },
-  "data": null,
+  "data": {
+   "short": "White et al. 2013, the stated points",
+   "title": "the points the publication states; srbf evaluates the formula on them",
+   "url": "https://doi.org/10.1007/s10710-012-9177-2"
+  },
   "notes": "Keijzer-6 grid as specified in Table 5 (Keijzer 2003); points srbf-generated."
  },
  {

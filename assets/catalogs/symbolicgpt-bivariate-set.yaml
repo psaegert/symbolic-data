@@ -3,10 +3,11 @@ metadata:
   display_name: "symbolicgpt-bivariate-set*"
   version: 1
   benchmark: "symbolicgpt-bivariate-set"
-  tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
-  srbf_changes: [{"kind": "part", "problems": 5977, "text": "The authors evaluate 7,000 validation samples but publish the formulas of only 1,024; srbf runs 1,023 of these: 1 has no real value at all."}, {"kind": "filled", "problems": 1023, "text": "The authors publish these formulas with their constants masked; srbf draws the constants anew in every run, uniform on [-2.1, 2.1], the authors' generator law."}]
+  tags: {"origin": "generated formulas", "tags": ["generator in-distribution", "dummy inputs", "srbf-modified"]}
   license: "MIT (mojivalipour/symbolicgpt; HF DataAnalyticsLab/SymbolicGPT)"
   citation: {"paper": {"short": "Tymkow et al. 2025", "title": "Symbolic-Diffusion: Deep Learning Based Symbolic Regression with D3PM Discrete Token Diffusion", "venue": "arXiv preprint arXiv:2510.07570", "url": "https://arxiv.org/abs/2510.07570"}, "data": {"short": "GitHub rtymk/Symbolic_Diffusion@07439d1", "title": "Symbolic-Diffusion repository (evaluation notebooks; GPL-3.0)", "url": "https://github.com/rtymk/Symbolic_Diffusion/tree/07439d164d64891c9b006b11dd75cdeb2c45f6d0"}}
+  srbf_changes: [{"kind": "part", "problems": 5977, "text": "The authors evaluate 7,000 validation samples but publish the formulas of only 1,024; srbf runs 1,023 of these: 1 has no real value at all."}, {"kind": "filled", "problems": 1023, "text": "The authors publish these formulas with their constants masked; srbf draws the constants anew in every run, uniform on [-2.1, 2.1], the authors' generator law."}]
+  problem_flags: {"trivial": ["symdiff-valv9-0000", "symdiff-valv9-0030", "symdiff-valv9-0049", "symdiff-valv9-0053", "symdiff-valv9-0057", "symdiff-valv9-0069", "symdiff-valv9-0071", "symdiff-valv9-0074", "symdiff-valv9-0077", "symdiff-valv9-0091", "symdiff-valv9-0096", "symdiff-valv9-0108", "symdiff-valv9-0112", "symdiff-valv9-0134", "symdiff-valv9-0136", "symdiff-valv9-0169", "symdiff-valv9-0176", "symdiff-valv9-0179", "symdiff-valv9-0184", "symdiff-valv9-0193", "symdiff-valv9-0206", "symdiff-valv9-0211", "symdiff-valv9-0213", "symdiff-valv9-0218", "symdiff-valv9-0238", "symdiff-valv9-0239", "symdiff-valv9-0252", "symdiff-valv9-0304", "symdiff-valv9-0312", "symdiff-valv9-0318", "symdiff-valv9-0331", "symdiff-valv9-0337", "symdiff-valv9-0340", "symdiff-valv9-0347", "symdiff-valv9-0348", "symdiff-valv9-0353", "symdiff-valv9-0359", "symdiff-valv9-0366", "symdiff-valv9-0391", "symdiff-valv9-0394", "symdiff-valv9-0395", "symdiff-valv9-0399", "symdiff-valv9-0406", "symdiff-valv9-0407", "symdiff-valv9-0418", "symdiff-valv9-0422", "symdiff-valv9-0451", "symdiff-valv9-0452", "symdiff-valv9-0453", "symdiff-valv9-0459", "symdiff-valv9-0468", "symdiff-valv9-0483", "symdiff-valv9-0486", "symdiff-valv9-0515", "symdiff-valv9-0518", "symdiff-valv9-0519", "symdiff-valv9-0521", "symdiff-valv9-0541", "symdiff-valv9-0551", "symdiff-valv9-0556", "symdiff-valv9-0600", "symdiff-valv9-0603", "symdiff-valv9-0606", "symdiff-valv9-0621", "symdiff-valv9-0635", "symdiff-valv9-0648", "symdiff-valv9-0650", "symdiff-valv9-0655", "symdiff-valv9-0657", "symdiff-valv9-0659", "symdiff-valv9-0666", "symdiff-valv9-0669", "symdiff-valv9-0671", "symdiff-valv9-0676", "symdiff-valv9-0697", "symdiff-valv9-0698", "symdiff-valv9-0703", "symdiff-valv9-0723", "symdiff-valv9-0732", "symdiff-valv9-0753", "symdiff-valv9-0761", "symdiff-valv9-0777", "symdiff-valv9-0785", "symdiff-valv9-0786", "symdiff-valv9-0793", "symdiff-valv9-0803", "symdiff-valv9-0808", "symdiff-valv9-0809", "symdiff-valv9-0822", "symdiff-valv9-0828", "symdiff-valv9-0836", "symdiff-valv9-0845", "symdiff-valv9-0856", "symdiff-valv9-0860", "symdiff-valv9-0884", "symdiff-valv9-0888", "symdiff-valv9-0897", "symdiff-valv9-0910", "symdiff-valv9-0918", "symdiff-valv9-0944", "symdiff-valv9-0945", "symdiff-valv9-0950", "symdiff-valv9-0962", "symdiff-valv9-0966", "symdiff-valv9-0973", "symdiff-valv9-0974", "symdiff-valv9-0979", "symdiff-valv9-0988", "symdiff-valv9-0997", "symdiff-valv9-0999", "symdiff-valv9-1004", "symdiff-valv9-1005", "symdiff-valv9-1007", "symdiff-valv9-1016", "symdiff-valv9-1018"]}
   description: SymbolicGPT bivariate set (Symbolic-Diffusion split)
   sources:
   - https://arxiv.org/abs/2510.07570
@@ -35,9 +36,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   symdiff-valv9-0000:
     raw: c1*x2 + c2

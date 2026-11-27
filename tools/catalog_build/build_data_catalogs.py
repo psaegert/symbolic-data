@@ -54,7 +54,7 @@ from symbolic_data import data_problem  # noqa: E402
 from symbolic_data.catalog import ProblemCatalog  # noqa: E402
 
 BUILT_ELSEWHERE = {"done-0", "done-7", "done-8"}  # the SRBench tracks: build_srbench_catalogs.py
-# Transcription fixes to the survey's records (the 2026-11-28 audit: three cp3-bench reference formulas did not fit their
+# Transcription fixes to the survey's records (the 2026-11-27 audit: three cp3-bench reference formulas did not fit their
 # own data, FVU 68 / 0.09 / 1.4; each corrected form reproduces every row of its file to float precision). The reason
 # goes into the problem's metadata.
 FORMULA_FIXES = {
@@ -71,8 +71,7 @@ FORMULA_FIXES = {
                           "the authors' data set the second mass equal to the first (m2 = m1, not 0.5) and the sine's phase "
                           "is -3 t^2/M + 2 v0 t/M; exact on every row of the authors' file"),
 }
-RULES = ("srbf data catalogs (2026-10-17): pools; <= 512 fitting + 512 test rows drawn per run; a test split only "
-         "where the authors give one")
+RULES = "srbf data catalogs: the benchmark's rows as published, held as pools; srbf fits on at most 512 rows and tests on at most 512 (a random 512 where the authors' test set is larger); a test split only where the authors give one"
 
 
 def _split_key(p) -> str:
@@ -153,7 +152,7 @@ def reference_of(prob: dict, catalog: str, eq_id: str | None) -> dict | None:
 def with_ground_truth(rows: R.Rows, prob: dict, formulas: Formulas, catalog: str = "") -> dict:
     """data_problem keyword arguments for the problem's formula: exact when it reproduces the fitting rows to float32
     eps; a reference law only with a stated reason and an FVU bound it meets (reference_of), and refused otherwise
-    (the 2026-11-28 audit: three transcription errors stood as 'reference' laws); a formula SimpliPy cannot read yet is
+    (the 2026-11-27 audit: three transcription errors stood as 'reference' laws); a formula SimpliPy cannot read yet is
     kept as text and the problem is black-box. A record may state the kind with its own check (stated_kind); the check
     goes into the problem's meta."""
     f = formula_of(prob)
@@ -202,6 +201,7 @@ def problem(rows: R.Rows, prob: dict, catalog: str, display: str, record: dict, 
         **({"transforms": rows.transforms} if rows.transforms else {}),
         **rows.meta,
     }
+    meta = paths.public(meta)          # public metadata: no local paths, record ids or internal wording
     test = {"x_test": rows.x_test, "y_test": rows.y_test} if R.rule_of(rows.split) == "given" else {}
     return data_problem(rows.x, rows.y, variables=[f"v{i + 1}" for i in range(rows.x.shape[1])],
                         test_split=rows.split, eq_id=rows.eq_id or prob["id"], meta=meta, **test, **gt)
@@ -270,10 +270,12 @@ def build(tag: str, probs: list[dict], out: Path, formulas: Formulas) -> dict:
     problems, share_alike, restricted = parts[""], parts["-share-alike"], parts["-restricted"]
     for name in (spec.slug, f"{spec.slug}-share-alike", f"{spec.slug}-restricted"):
         (out / f"{name}.npz").unlink(missing_ok=True)                 # a part that lost its members leaves no stale file
-    meta = {"display_name": spec.display, "kind": "data", "source_record": f"catalog-prep/sets/{tag}.json",
-            "source_name": rec["name"], "built_from": "build_data_catalogs.py", "rules": RULES}
+    meta = {"display_name": spec.display, "kind": "data", "source_name": rec["name"], "built_from": "build_data_catalogs.py",
+            "rules": RULES}
+    whole = {"yes, restricted repo": {"restricted": True}, "yes, share-alike repo": {"share_alike": True}}.get(
+        lic.get("redistribute"), {})                                # a set the license pass routes whole to one repo
     path = None
-    for suffix, part, label, flag in (("", problems, "", {}), ("-share-alike", share_alike, " (share-alike)", {"share_alike": True}),
+    for suffix, part, label, flag in (("", problems, "", whole), ("-share-alike", share_alike, " (share-alike)", {"share_alike": True}),
                                       ("-restricted", restricted, " (restricted)", {"restricted": True})):
         if part:
             saved = ProblemCatalog.from_problems(part, name=spec.slug + suffix, version=1, meta={

@@ -3,10 +3,10 @@ metadata:
   display_name: "chen-luo-jiang-block-building-test-cases*"
   version: 1
   benchmark: "chen-luo-jiang-block-building-test-cases"
-  tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 13 of the 14 cases: Case 14 has two inputs without a meaning or a range."}, {"kind": "filled", "problems": 10, "text": "For the 10 toy cases the authors fix only the input box and recommend Latin-hypercube or orthogonal designs; srbf samples the inputs uniformly at random in the box."}]
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   license: "facts only: formulas and ranges cited from Chen, Luo & Jiang 2018 (Expert Syst. Appl., arXiv:1706.02281); no upstream license"
   citation: {"paper": {"short": "Chen et al. 2018", "title": "A multilevel block building algorithm for fast modeling generalized separable systems", "venue": "Expert Systems with Applications 109:25-34", "url": "https://doi.org/10.1016/j.eswa.2018.05.021"}}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 13 of the 14 cases: Case 14 has two inputs without a meaning or a range."}, {"kind": "filled", "problems": 10, "text": "For the 10 toy cases the authors fix only the input box and recommend Latin-hypercube or orthogonal designs; srbf samples the inputs uniformly at random in the box."}]
   description: Chen-Luo-Jiang block-building test cases
   sources:
   - https://arxiv.org/abs/1706.02281
@@ -25,9 +25,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Case-1:
     raw: 0.5*exp(x1)*sin(2*x2)

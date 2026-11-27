@@ -2,10 +2,10 @@ metadata:
   name: phye2e-llm-generated-synthetic-formulas
   version: 1
   benchmark: "phye2e-llm-generated-synthetic-formulas"
-  tags: {"origin": "generated formulas", "tags": []}
-  srbf_changes: []
+  tags: {"origin": "generated formulas", "tags": ["generator in-distribution"]}
   license: "Apache-2.0 (figshare 10.6084/m9.figshare.29615831, PhyE2E_datas; Ying et al. 2025, Nat. Mach. Intell. 7:1726)"
   citation: {"paper": {"short": "Ying et al. 2025", "title": "A neural symbolic model for space physics", "venue": "Nature Machine Intelligence 7(10):1726-1741", "url": "https://doi.org/10.1038/s42256-025-01126-3"}, "data": {"short": "figshare 10.6084/m9.figshare.29615831.v1", "title": "PhyE2E_datas", "url": "https://doi.org/10.6084/m9.figshare.29615831.v1"}}
+  srbf_changes: []
   description: PhyE2E LLM-generated synthetic formulas
   sources:
   - https://arxiv.org/abs/2503.07994
@@ -24,9 +24,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   phye2e-000:
     raw: 0.375*B*mom/(pi*Ef*d**2)

@@ -3,9 +3,10 @@ metadata:
   version: 1
   benchmark: "errless-synthetic-posterior-set"
   tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
-  srbf_changes: []
   license: "CC BY 4.0 (ERRLESS, arXiv:2608.09617, Table 4)"
   citation: {"paper": {"short": "Boussif et al. 2026", "title": "Bayesian Symbolic Regression with Entropic Reinforcement Learning", "venue": "UAI 2026", "url": "https://arxiv.org/abs/2608.09617"}}
+  srbf_changes: []
+  problem_flags: {"trivial": ["synthetic_7"]}
   description: ERRLESS synthetic posterior set
   sources:
   - https://arxiv.org/abs/2608.09617
@@ -23,9 +24,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   synthetic_1:
     raw: x + sin(5.5*x)
@@ -53,10 +54,10 @@ expressions:
             kwargs:
               low: -2.0
               high: 2.0
-    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
-      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
-      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
-      raw/fresh-138/synthetic_*.pkl.'
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in the benchmark survey record:
+      ''20 training points from the training range, 100 noise-free test points from the wider test range (an extrapolation
+      test ...)''; identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen
+      pickles synthetic_*.pkl.'
     meta:
       finite_fraction: 1.0
   synthetic_2:
@@ -100,10 +101,10 @@ expressions:
             kwargs:
               low: -2.0
               high: 2.0
-    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
-      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
-      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
-      raw/fresh-138/synthetic_*.pkl.'
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in the benchmark survey record:
+      ''20 training points from the training range, 100 noise-free test points from the wider test range (an extrapolation
+      test ...)''; identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen
+      pickles synthetic_*.pkl.'
     meta:
       finite_fraction: 1.0
   synthetic_3:
@@ -147,10 +148,10 @@ expressions:
             kwargs:
               low: 0.0
               high: 3.0
-    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
-      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
-      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
-      raw/fresh-138/synthetic_*.pkl.'
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in the benchmark survey record:
+      ''20 training points from the training range, 100 noise-free test points from the wider test range (an extrapolation
+      test ...)''; identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen
+      pickles synthetic_*.pkl.'
     meta:
       finite_fraction: 1.0
   synthetic_4:
@@ -194,10 +195,10 @@ expressions:
             kwargs:
               low: 0.0
               high: 3.0
-    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
-      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
-      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
-      raw/fresh-138/synthetic_*.pkl.'
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in the benchmark survey record:
+      ''20 training points from the training range, 100 noise-free test points from the wider test range (an extrapolation
+      test ...)''; identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen
+      pickles synthetic_*.pkl.'
     meta:
       finite_fraction: 1.0
   synthetic_5:
@@ -241,10 +242,10 @@ expressions:
             kwargs:
               low: 0.0
               high: 3.0
-    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
-      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
-      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
-      raw/fresh-138/synthetic_*.pkl.'
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in the benchmark survey record:
+      ''20 training points from the training range, 100 noise-free test points from the wider test range (an extrapolation
+      test ...)''; identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen
+      pickles synthetic_*.pkl.'
     meta:
       finite_fraction: 1.0
   synthetic_6:
@@ -273,10 +274,10 @@ expressions:
             kwargs:
               low: -0.99
               high: 0.99
-    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
-      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
-      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
-      raw/fresh-138/synthetic_*.pkl.'
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in the benchmark survey record:
+      ''20 training points from the training range, 100 noise-free test points from the wider test range (an extrapolation
+      test ...)''; identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen
+      pickles synthetic_*.pkl.'
     meta:
       finite_fraction: 1.0
   synthetic_7:
@@ -305,9 +306,9 @@ expressions:
             kwargs:
               low: -1.0
               high: 1.0
-    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in sets/fresh-138.json: ''20 training
-      points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'';
-      identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen pickles
-      raw/fresh-138/synthetic_*.pkl.'
+    test_source: 'ERRLESS (arXiv:2608.09617v2) App. B.1 Table 4 and Sec. 5.1, as recorded in the benchmark survey record:
+      ''20 training points from the training range, 100 noise-free test points from the wider test range (an extrapolation
+      test ...)''; identical in notebooks/synthetic_dataset.ipynb @ b7ae784 (np.random.rand(n) * (maxi - mini) + mini); frozen
+      pickles synthetic_*.pkl.'
     meta:
       finite_fraction: 1.0

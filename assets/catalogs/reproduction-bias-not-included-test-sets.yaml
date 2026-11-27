@@ -3,9 +3,10 @@ metadata:
   version: 1
   benchmark: "reproduction-bias-not-included-test-sets"
   tags: {"origin": "generated formulas", "tags": []}
-  srbf_changes: []
   license: "MIT (Shun-0922/Mem-Bias-NSR; Sato & Sato 2025, arXiv:2505.22081)"
   citation: {"paper": {"short": "Sato & Sato 2025", "title": "Can Test-time Computation Mitigate Reproduction Bias in Neural Symbolic Regression?", "venue": "arXiv preprint arXiv:2505.22081", "url": "https://arxiv.org/abs/2505.22081"}, "data": {"short": "GitHub Shun-0922/Mem-Bias-NSR@7a153ec", "title": "Mem-Bias-NSR not_included.json + baseline.json (MIT)", "url": "https://github.com/Shun-0922/Mem-Bias-NSR/tree/7a153ec94f59caffbd9404094a2e1eab58aa0c2e/test_datasets/original_datasets"}}
+  srbf_changes: []
+  problem_flags: {"trivial": ["not_included-033", "not_included-070", "baseline-013", "baseline-069", "baseline-087", "baseline-090", "baseline-103", "baseline-110"]}
   description: Reproduction-bias 'not included' test sets
   sources:
   - https://arxiv.org/abs/2505.22081
@@ -24,9 +25,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   not_included-000:
     raw: -2.187*tan(-5.433*x_1 + x_3 + cos(x_2 - 1.11270056282437*exp(0.059*x_1)) + 7.841)

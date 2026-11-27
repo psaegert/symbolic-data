@@ -3,9 +3,10 @@ metadata:
   version: 1
   benchmark: "rils-rols-random-instances"
   tags: {"origin": "generated formulas", "tags": []}
-  srbf_changes: []
   license: "MIT (kartelj/rils-rols; Kartelj & Djukanovic 2023, J. Big Data 10:71)"
   citation: {"paper": {"short": "Kartelj & Djukanović 2023", "title": "RILS-ROLS: robust symbolic regression via iterated local search and ordinary least squares", "venue": "Journal of Big Data 10(1):71", "url": "https://doi.org/10.1186/s40537-023-00743-2"}, "data": {"short": "GitHub kartelj/rils-rols@54861c1", "title": "rils-rols paper_resources/random_12345_truth/all.f (MIT)", "url": "https://github.com/kartelj/rils-rols/tree/54861c1c8dc4a521da6885bdcfdc54ecb7b38c31/paper_resources/random_12345_truth"}}
+  srbf_changes: []
+  problem_flags: {"trivial": ["random_03_01_0010000_00", "random_03_01_0010000_02", "random_03_01_0010000_03", "random_03_01_0010000_04", "random_04_01_0010000_04", "random_07_01_0010000_03", "random_08_01_0010000_01", "random_13_01_0010000_02", "random_15_02_0010000_04"]}
   description: RILS-ROLS random instances
   sources:
   - https://doi.org/10.1186/s40537-023-00743-2
@@ -24,9 +25,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   random_03_01_0010000_00:
     raw: log(exp(x0))

@@ -71,7 +71,7 @@ def _rewrite_two_arg_logs(expr: str) -> str:
             arg = _rewrite_two_arg_logs(expr[j + 4:comma].strip())
             base = expr[comma + 1:k].strip()
             # parenthesized: the rewrite replaces one factor, and log(u, 10)/log(w, 10) must not become
-            # 0.434*log(u)/0.434*log(w), a product (the 2026-11-28 audit: six ERBench Eponymous problems)
+            # 0.434*log(u)/0.434*log(w), a product (the 2026-11-27 audit: six ERBench Eponymous problems)
             if base == "E":
                 out.append(f"log({arg})")
             elif base == "10":

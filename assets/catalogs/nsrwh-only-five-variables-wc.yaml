@@ -2,10 +2,10 @@ metadata:
   name: nsrwh-only-five-variables-wc
   version: 1
   benchmark: "nsrwh-only-five-variables-wc"
-  tags: {"origin": "generated formulas", "tags": []}
-  srbf_changes: []
+  tags: {"origin": "generated formulas", "tags": ["generator in-distribution"]}
   license: "MIT (SymposiumOrganization/ControllableNeuralSymbolicRegression)"
   citation: {"paper": {"short": "Bendinelli et al. 2023", "title": "Controllable Neural Symbolic Regression", "venue": "ICML 2023 (PMLR 202)", "url": "https://arxiv.org/abs/2304.10336"}, "data": {"short": "GitHub SymposiumOrganization/ControllableNeuralSymbolicRegression@3060cb8", "title": "NSRwH test_set/only_five_variables_wc.csv (MIT)", "url": "https://github.com/SymposiumOrganization/ControllableNeuralSymbolicRegression/blob/3060cb8d2b79071f80c51cd35c2808833ae15ec8/test_set/only_five_variables_wc.csv"}}
+  srbf_changes: []
   description: NSRwH only_five_variables_wc
   sources:
   - https://arxiv.org/abs/2304.10336
@@ -29,9 +29,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   only_five_variables_wc-000:
     raw: x_1*(x_4 - x_5 + (x_2 + 1.86)*(x_3 - 7.708))

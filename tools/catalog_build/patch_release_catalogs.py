@@ -345,7 +345,7 @@ def main() -> None:
             continue
         for eq_id in dropped:
             text = drop_entry(text, eq_id)
-        line = f"  dropped: {json.dumps(', '.join(dropped) + ': DSO repository sanity tests, not a benchmark (srbf ruling 2026-11-03)')}\n"
+        line = f"  dropped: {json.dumps(', '.join(dropped) + ': DSO repository sanity tests, not a benchmark')}\n"
         texts[catalog] = text if line in text else re.sub(r"(?m)^(  version: \d+\n)", lambda m: m.group(1) + line, text, count=1)
         changed.setdefault(catalog, []).extend(f"{i} dropped" for i in dropped)
     for catalog in TEST_CATALOGS:

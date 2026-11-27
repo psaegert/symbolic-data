@@ -6,7 +6,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: one scaling law per task, its constants refit per group and scored over all groups of the task (one law shared across several data sets). Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -16,7 +16,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: one energy function shared by 54 proteins and scored by how it ranks each protein's decoys (one law across several data sets, a ranking objective). Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -26,7 +26,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: multi-view symbolic regression: one parametric form whose constants are refit per view, scored over all views of a domain (one law across several data sets). Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -36,7 +36,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: multi-view symbolic regression: one parametric form whose constants are refit per view, scored over all views of a group (one law across several data sets). Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -46,7 +46,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: multi-view symbolic regression: one parametric form fitted jointly to several views of a law, the error taken as the maximum over the views. Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -56,7 +56,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: multi-view symbolic regression on the authors' fixed points: one parametric form fitted jointly to several views, the error taken as the maximum over the views. Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -66,7 +66,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: conditional parametric symbolic regression: one global form with per-slice parameters, fitted over all slices of a curve type. Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -76,7 +76,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: one strain-energy function fitted across deformation modes, trained on two modes and tested on the third. Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -99,7 +99,7 @@
   ],
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: the plasma application fits one unified formula across 12 data sets (Kp and solar-wind pressure bins). Tasks of this kind are not in this release; they may come in a future version. The set's other problems (differential rotation, the two Fe X lines, and the sunspot numbers) stay.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -109,7 +109,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: class symbolic regression: one law with shared constants fitted jointly to several data sets drawn with different free constants. Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -119,7 +119,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: class symbolic regression: one potential with shared constants fitted jointly to 29 stellar streams, each with its own energy. Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {
@@ -129,7 +129,7 @@
   "members": null,
   "kind": "scope",
   "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: interactive discovery: the method chooses where to query each law. Tasks of this kind are not in this release; they may come in a future version.",
-  "ruled": "2026-11-28",
+  "ruled": "2026-11-27",
   "was_in_release": true
  },
  {

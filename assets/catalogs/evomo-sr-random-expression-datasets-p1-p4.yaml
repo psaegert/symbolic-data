@@ -3,10 +3,10 @@ metadata:
   display_name: "evomo-sr-random-expression-datasets-p1-p4*"
   version: 1
   benchmark: "evomo-sr-random-expression-datasets-p1-p4"
-  tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
-  srbf_changes: [{"kind": "changed", "problems": 4, "text": "In the out-of-range test the authors move each input out of the box equally often; srbf picks the moved input at random for each point, which matches only on average."}]
+  tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests", "srbf-modified"]}
   license: "CC BY 4.0 (Rossetti et al. 2026, EvoMO-SR, arXiv:2609.36187, Table 3)"
   citation: {"paper": {"short": "Rossetti et al. 2026", "title": "EvoMO-SR: Multiobjective LLM-based Evolution of Symbolic Expressions with substructure guidance", "venue": "arXiv preprint arXiv:2609.36187", "url": "https://arxiv.org/abs/2609.36187"}, "data": {"short": "anonymous.4open.science EvoMO-SR-47B6 manifest.csv", "title": "EvoMO-SR anonymised code release, random_data/random_functions/manifest.csv", "url": "https://anonymous.4open.science/api/repo/EvoMO-SR-47B6/file/random_data/random_functions/manifest.csv"}}
+  srbf_changes: [{"kind": "changed", "problems": 4, "text": "In the out-of-range test the authors move each input out of the box equally often; srbf picks the moved input at random for each point, which matches only on average."}, {"kind": "changed", "problems": 8, "text": "The authors place the inputs with a Latin-hypercube design; srbf draws each point independently from the same uniform marginals."}]
   description: EvoMO-SR random-expression datasets P1-P4
   sources:
   - https://arxiv.org/abs/2609.36187
@@ -26,9 +26,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   P1:
     raw: 1.883*sin(x1) + 1.61*cos(x0)
@@ -107,10 +107,10 @@ expressions:
       row_constraints:
       - 1*(abs(v1) > 1.2) + 1*(abs(v2) > 1.2) == 1
       - 1*(abs(v1) <= 1.0) + 1*(abs(v2) <= 1.0) == 1
-    test_source: 'EvoMO-SR random-expression generator, raw/fresh-136/random_data/generate_random_datasets.py l.425-474 and
-      random_functions/generation_config.json + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower
-      -1.0, id_upper 1.0, ood_mode ''axis'', ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one
-      balanced, randomly ordered coordinate outside ID support'''
+    test_source: 'EvoMO-SR random-expression generator, random_data/generate_random_datasets.py l.425-474 and random_functions/generation_config.json
+      + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower -1.0, id_upper 1.0, ood_mode ''axis'',
+      ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one balanced, randomly ordered coordinate
+      outside ID support'' (X = LHS on t'
     meta:
       finite_fraction: 1.0
   P2:
@@ -190,10 +190,10 @@ expressions:
       row_constraints:
       - 1*(abs(v1) > 1.2) + 1*(abs(v2) > 1.2) == 1
       - 1*(abs(v1) <= 1.0) + 1*(abs(v2) <= 1.0) == 1
-    test_source: 'EvoMO-SR random-expression generator, raw/fresh-136/random_data/generate_random_datasets.py l.425-474 and
-      random_functions/generation_config.json + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower
-      -1.0, id_upper 1.0, ood_mode ''axis'', ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one
-      balanced, randomly ordered coordinate outside ID support'''
+    test_source: 'EvoMO-SR random-expression generator, random_data/generate_random_datasets.py l.425-474 and random_functions/generation_config.json
+      + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower -1.0, id_upper 1.0, ood_mode ''axis'',
+      ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one balanced, randomly ordered coordinate
+      outside ID support'' (X = LHS on t'
     meta:
       finite_fraction: 1.0
   P3:
@@ -299,10 +299,10 @@ expressions:
       row_constraints:
       - 1*(abs(v1) > 1.2) + 1*(abs(v2) > 1.2) + 1*(abs(v3) > 1.2) == 1
       - 1*(abs(v1) <= 1.0) + 1*(abs(v2) <= 1.0) + 1*(abs(v3) <= 1.0) == 2
-    test_source: 'EvoMO-SR random-expression generator, raw/fresh-136/random_data/generate_random_datasets.py l.425-474 and
-      random_functions/generation_config.json + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower
-      -1.0, id_upper 1.0, ood_mode ''axis'', ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one
-      balanced, randomly ordered coordinate outside ID support'''
+    test_source: 'EvoMO-SR random-expression generator, random_data/generate_random_datasets.py l.425-474 and random_functions/generation_config.json
+      + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower -1.0, id_upper 1.0, ood_mode ''axis'',
+      ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one balanced, randomly ordered coordinate
+      outside ID support'' (X = LHS on t'
     meta:
       finite_fraction: 1.0
   P4:
@@ -408,9 +408,9 @@ expressions:
       row_constraints:
       - 1*(abs(v1) > 1.2) + 1*(abs(v2) > 1.2) + 1*(abs(v3) > 1.2) == 1
       - 1*(abs(v1) <= 1.0) + 1*(abs(v2) <= 1.0) + 1*(abs(v3) <= 1.0) == 2
-    test_source: 'EvoMO-SR random-expression generator, raw/fresh-136/random_data/generate_random_datasets.py l.425-474 and
-      random_functions/generation_config.json + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower
-      -1.0, id_upper 1.0, ood_mode ''axis'', ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one
-      balanced, randomly ordered coordinate outside ID support'''
+    test_source: 'EvoMO-SR random-expression generator, random_data/generate_random_datasets.py l.425-474 and random_functions/generation_config.json
+      + manifest.csv (opened): n_train 1000, n_id_test 1000, n_ood_test 2000, id_lower -1.0, id_upper 1.0, ood_mode ''axis'',
+      ood_min_distance 1.2, ood_max_distance 2.0; sample_axis_ood: ''Move exactly one balanced, randomly ordered coordinate
+      outside ID support'' (X = LHS on t'
     meta:
       finite_fraction: 1.0

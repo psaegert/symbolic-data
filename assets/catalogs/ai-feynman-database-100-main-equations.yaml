@@ -1,11 +1,13 @@
 metadata:
   name: ai-feynman-database-100-main-equations
+  display_name: "ai-feynman-database-100-main-equations*"
   version: 1
   benchmark: "ai-feynman-database-100-main-equations"
-  tags: {"origin": "science formula", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 74 of the 100 equations: in the other 26 no input is left once the units are removed, so the target is a constant."}]
+  tags: {"origin": "science formula", "tags": ["srbf-modified"]}
   license: "facts only: formulas, ranges and units cited from the Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, Sci. Adv. 6:eaay2631); no upstream license"
   citation: {"paper": {"short": "Udrescu & Tegmark 2020", "title": "AI Feynman: A physics-inspired method for symbolic regression", "venue": "Science Advances 6(16):eaay2631", "url": "https://doi.org/10.1126/sciadv.aay2631"}, "data": {"short": "Feynman Symbolic Regression Database (FSReD), Wayback 2021-10-19", "title": "AI Feynman / Feynman Symbolic Regression Database download page (space.mit.edu, host now dead)", "url": "https://web.archive.org/web/20211019022249/https://space.mit.edu/home/tegmark/main_aifeynman.html"}}
+  srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 74 of the 100 equations: in the other 26 no input is left once the units are removed, so the target is a constant."}, {"kind": "filled", "problems": 48, "text": "For 48 of the 74 equations the database gives the dimensionless inputs only as ratios of AI Feynman's dimensional variables, without their distribution; srbf draws the dimensional variables on AI Feynman's ranges and computes the ratios (a push-forward)."}]
+  problem_flags: {"trivial": ["I.12.1", "I.12.2", "I.39.22", "I.41.16", "II.34.11", "II.37.1", "III.4.32", "III.4.33", "III.12.43", "III.13.18"]}
   description: 'AI Feynman database: 100 main equations (FSReD)'
   sources:
   - https://arxiv.org/abs/1905.11481
@@ -24,9 +26,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   I.6.2a:
     raw: sqrt(2)*exp(-var1**2/2)/(2*sqrt(pi))

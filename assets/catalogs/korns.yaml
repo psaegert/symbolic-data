@@ -3,10 +3,11 @@ metadata:
   version: 2
   benchmark: "korns"
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
-  srbf_changes: []
   srbf_notes: ["Follows the defining publication: Korns-7 uses Korns' (2011) amplitude 213.80940889; later copies print 2.1380940889.", "Follows the defining publication: Korns-5, -6, -8 and -9 use plain log and square root as Korns prints them; later copies wrap the arguments in absolute values.", "Follows the defining publication: Korns-13 to -15, dropped from later copies, are included, Korns-15 on Korns' range [-50, 50]."]
+  problem_flags: {"trivial": ["Korns-1"]}
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   citation: {"paper": {"short": "Korns 2011", "title": "Accuracy in Symbolic Regression", "venue": "Genetic Programming Theory and Practice IX, Genetic and Evolutionary Computation, pp. 129-151", "url": "https://doi.org/10.1007/978-1-4614-1770-5_8"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
+  srbf_changes: []
   description: Korns accuracy suite (5-variable, constant-heavy).
   sources:
   - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
@@ -345,7 +346,7 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 0.5034
   Korns-6:
@@ -399,7 +400,7 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 0.505
   Korns-7:
@@ -453,7 +454,7 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 1.0
   Korns-8:
@@ -507,7 +508,7 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 0.5043
   Korns-9:
@@ -561,7 +562,7 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 0.2522
   Korns-10:
@@ -816,7 +817,7 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' member (catalog-prep fresh-11), missing from the DSO
+    source_audit: the authors' member (the benchmark survey record), missing from the DSO
       transcription
     meta:
       finite_fraction: 1.0
@@ -871,7 +872,7 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' member (catalog-prep fresh-11), missing from the DSO
+    source_audit: the authors' member (the benchmark survey record), missing from the DSO
       transcription
     meta:
       finite_fraction: 1.0
@@ -926,7 +927,7 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' member (catalog-prep fresh-11), missing from the DSO
+    source_audit: the authors' member (the benchmark survey record), missing from the DSO
       transcription
     meta:
       finite_fraction: 0.494

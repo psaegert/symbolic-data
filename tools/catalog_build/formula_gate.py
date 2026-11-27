@@ -2,7 +2,7 @@
 
 A builder rewrites each formula the authors wrote (sympy spelling: named constants, two-argument logs, Piecewise,
 cot, pi, ...) into the infix SimpliPy reads. A rewrite that loses a pair of parentheses poses another law without any
-error (the 2026-11-28 audit found ERBench's log(u, 10) / log(w, 10) written as 0.434*log(u)/0.434*log(w), a product).
+error (the 2026-11-27 audit found ERBench's log(u, 10) / log(w, 10) written as 0.434*log(u)/0.434*log(w), a product).
 So every builder evaluates both on the same points and refuses an entry whose prepared formula differs from its raw
 formula, unless the difference is expected and listed with its reason in tags/raw_vs_prepared_allowed.json (catalog,
 problem ids, reason).

@@ -3,9 +3,10 @@ metadata:
   version: 3
   benchmark: "fastsrb"
   tags: {"origin": "science formula", "tags": []}
-  srbf_changes: []
-  srbf_notes: ["Follows the defining publication: Where SRSD's own files disagree, srbf follows SRSD's code and published data: I.44.4's n on [1e24, 1e26], integer inputs on lo..hi-1, and the signs and ranges of I.29.16, B6, B7, III.15.27 and III.21.20."]
+  srbf_notes: ["Follows the defining publication: Where SRSD's own files disagree, srbf follows SRSD's code and published data: I.44.4's n on [1e24, 1e26], integer inputs on lo..hi-1, and the signs and ranges of I.29.16, B6, B7, III.15.27 and III.21.20.", "Paper and code differ: Where SRSD's own files disagree, srbf follows SRSD's code and published data (I.44.4's n on [1e24, 1e26], integer inputs on lo..hi-1, the signs and ranges of I.29.16, B6, B7, III.15.27 and III.21.20)."]
+  problem_flags: {"trivial": ["III.12.43", "I.29.4", "I.34.27", "I.15.3t", "III.4.33", "B15"]}
   citation: {"paper": {"short": "Martinek 2025", "title": "Fast Symbolic Regression Benchmarking", "venue": "Advances in Swarm Intelligence, Lecture Notes in Computer Science, pp. 307-317", "url": "https://doi.org/10.1007/978-981-95-0985-0_25"}, "data": {"short": "GitHub viktmar/FastSRB@bcd094b", "title": "FastSRB src/expressions.yaml (MIT)", "url": "https://github.com/viktmar/FastSRB/blob/bcd094b2a79e7d0b9ddb6436416b8024a69ddf32/src/expressions.yaml"}}
+  srbf_changes: []
   license: MIT (viktmar/FastSRB; see THIRD_PARTY_LICENSES + upstream PR viktmar/FastSRB#1)
   description: FastSRB benchmark (Martinek, arXiv:2508.14481), 120 equations.
   sources:

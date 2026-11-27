@@ -1,0 +1,10 @@
+[
+ {
+  "id": "domain-conditioned-inputs",
+  "text": "Inputs are conditioned on the formula's domain: srbf draws each point from the inputs' declared distributions and keeps it only where the formula is finite (and meets the authors' row constraints), so for a formula that is undefined on part of its box the accepted points follow the declared law restricted to the domain. For 666 problems more than half of the declared box lies outside the domain (e.g. Korns-5, -6, -8, -9 and -15 about half, FastSRB II.24.17 88%)."
+ },
+ {
+  "id": "frozen-draws",
+  "text": "srbf's release draws every problem once (512 points to fit, 512 to test) and freezes the draw, so every method sees the same data."
+ }
+]

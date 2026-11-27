@@ -1,11 +1,12 @@
 metadata:
   name: kan-toy-functions
+  display_name: "kan-toy-functions*"
   version: 1
   benchmark: "kan-toy-functions"
-  tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: []
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   license: "CC BY 4.0 (Liu et al. 2024, KAN, arXiv:2404.19756) + MIT (KindXiaoming/pykan)"
   citation: {"paper": {"short": "Liu et al. 2025", "title": "KAN: Kolmogorov-Arnold Networks", "venue": "ICLR 2025", "url": "https://arxiv.org/abs/2404.19756"}}
+  srbf_changes: [{"kind": "filled", "problems": 3, "text": "For three of the five functions no input range is published; srbf uses U[-1, 1], the default of the authors' generator (pykan's create_dataset)."}]
   description: KAN toy functions
   sources:
   - https://arxiv.org/abs/2404.19756
@@ -25,9 +26,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   kan-1:
     raw: besselj(0, 20*x)

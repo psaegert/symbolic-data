@@ -3,10 +3,10 @@ metadata:
   display_name: "ddrsr-simple-test-and-complex-test*"
   version: 1
   benchmark: "ddrsr-simple-test-and-complex-test"
-  tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: [{"kind": "filled", "problems": 20, "text": "The authors give only the range (0, 1) for every input, not how points are spread over it; srbf samples uniformly."}]
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   license: "facts only: formulas and ranges cited from Deng et al. 2026 (DDRSR, arXiv:2608.02628), Table 5; no upstream license"
   citation: {"paper": {"short": "Deng et al. 2026", "title": "Deep Divide-and-Reduce in Symbolic Regression", "venue": "arXiv preprint arXiv:2608.02628", "url": "https://arxiv.org/abs/2608.02628"}}
+  srbf_changes: [{"kind": "filled", "problems": 20, "text": "The authors give only the range (0, 1) for every input, not how points are spread over it; srbf samples uniformly."}]
   description: DDRSR simple_test and complex-test
   sources:
   - https://arxiv.org/abs/2608.02628
@@ -20,9 +20,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   simple_test-1:
     raw: x1*x2+x2*x3

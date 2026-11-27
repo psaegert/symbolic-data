@@ -44,8 +44,22 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import paths  # noqa: E402  the curated inputs
 ORIGINS = ("science formula", "classic benchmark", "generated formulas", "measured data", "synthetic data")
-TAGS = ("extrapolation", "several tests", "no test split", "dummy inputs", "integer inputs", "fixed points",
-        "noisy data", "outliers", "srbf-modified")
+TAGS = ("extrapolation", "several tests", "no test split", "fit only", "generator in-distribution", "dummy inputs",
+        "integer inputs", "fixed points", "noisy data", "outliers", "srbf-modified")
+# per-problem flags for filtering (owner 2026-11-27), written as ``problem_flags`` {flag: [ids]} into the catalog's
+# metadata from tags/problem_flags.json (``flags`` computes them; FLAGS defines each)
+FLAGS = {
+    "trivial": "the target is linear in one input: a straight-line fit to one input explains it (R^2 >= 0.999 on the "
+               "fitting rows; formula problems on 256 points of the declared ranges)",
+    "low-signal": "the inputs barely predict the target: a random forest and a linear fit (shuffled 5-fold CV) both "
+                  "reach R^2 < 0.05 on the fitting rows (data without an exact law)",
+    "target-leak": "the target is an exact function of other inputs it is computed from (e.g. a total and its parts)",
+    "tiny": "fewer than 20 fitting rows, or no more rows than inputs plus one (underdetermined even for a linear fit)",
+    "ordered": "the rows are sorted by an input and the authors' split is random or by folds, so a test row usually sits "
+               "between two fitting rows (interpolation)",
+}
+TARGET_LEAKS = {"evogp-uci": ["daily_demand_forecasting_orders"],
+                "srbench-2021-blackbox-restricted": ["527_analcatdata_election2000"]}
 # the reading pass used "physics law" for science formulas; data that is neither measured nor drawn by srbf from a
 # formula became "synthetic data" (its origin proposals: simulator output, synthetic data, fitted model output,
 # mixed real and synthetic data with most rows synthetic)
@@ -79,7 +93,7 @@ def _int_input(spec: dict[str, Any]) -> bool:
 
 
 def yaml_facts(path: Path) -> dict[str, Any]:
-    doc = yaml.safe_load(open(path))
+    doc = paths.load_yaml(path)
     md, entries = doc["metadata"], doc["expressions"]
     dummy = integer = tested = fresh = suffixed = 0
     bases = {str(k).split(".", 1)[0] for k, e in entries.items() if e.get("test_source") and "." in str(k)}
@@ -110,13 +124,14 @@ def npz_facts(path: Path) -> dict[str, Any]:
     meta = json.loads(str(np.load(path)["_meta"]))
     md = meta["catalog"].get("meta") or {}
     rules = [(p.get("meta") or {}).get("test_split") or "none" for p in meta["problems"]]
+    fit_only = sum(1 for p, r in zip(meta["problems"], rules) if r == "none" and p.get("gt_kind") in (None, "none"))
     split = Counter(str({"folds": len(r["folds"])} if isinstance(r, dict) and "folds" in r else r) for r in rules)
     readings = Counter(str((p.get("meta") or {}).get("split_reading") or "")[:120] for p in meta["problems"])
     return {"entries": len(meta["problems"]), "test_split": dict(split),
             "split_readings": dict(readings.most_common(4)),
             "ground_truth": dict(Counter(str(p.get("gt_kind")) for p in meta["problems"])),
             "pinned_points": path.stem.endswith("-points"), "modified_by_srbf": md.get("modified_by_srbf"),
-            "display_name": md.get("display_name") or meta["catalog"]["name"]}
+            "display_name": md.get("display_name") or meta["catalog"]["name"], "fit_only": fit_only}
 
 
 def facts(counts: Path) -> list[dict[str, Any]]:
@@ -136,7 +151,9 @@ def facts(counts: Path) -> list[dict[str, Any]]:
             sure.append("integer inputs")
         if f.get("pinned_points"):
             sure.append("fixed points")
-        if starred_by(deviations.get(r["name"]) or {}):     # derived from the deviations (2026-11-28), as the '*' is
+        if f.get("fit_only") and 2 * f["fit_only"] >= f["entries"]:    # neither a ground truth nor a test split
+            sure.append("fit only")
+        if starred_by(deviations.get(r["name"]) or {}):     # derived from the deviations (2026-11-27), as the '*' is
             sure.append("srbf-modified")
         if f.get("extra_test_entries") or (r["kind"] == "formula" and len(r["subsets"]) > 1 and f.get("with_test_block")
                                            and set(r["subsets"]) & {"iid", "ood", "in-range", "wide", "beyond", "id"}):
@@ -163,6 +180,8 @@ def _file_share(tag: str, f: dict[str, Any]) -> tuple[int, int]:
     x, n = f["facts"], f["facts"]["entries"]
     if tag == "dummy inputs":
         return x["with_dummy_input"], n
+    if tag == "fit only":
+        return x["fit_only"], n
     if tag == "integer inputs":
         return x["with_integer_input"], n
     if tag == "several tests" and x.get("extra_test_entries"):
@@ -202,9 +221,10 @@ def merge(facts_path: Path, judged_path: Path) -> list[dict[str, Any]]:
 
 # ---------------------------------------------------------------------------------------------------------- apply
 # the metadata keys apply writes, in their order after ``version`` (each one flow line); the keys it removes from the
-# public metadata (internal record ids; the 2026-11-28 audit)
-KEYS = ("benchmark", "tags", "license", "citation", "srbf_changes", "srbf_notes")
+# public metadata (internal record ids; the 2026-11-27 audit)
+KEYS = ("benchmark", "tags", "license", "citation", "srbf_changes", "srbf_notes", "problem_flags")
 REMOVED = ("source_record",)
+OPTIONAL = ("srbf_notes", "problem_flags")      # written only where they hold something (srbf_changes: [] says "none")
 
 
 def _block(text: str, key: str) -> re.Match | None:
@@ -238,7 +258,7 @@ def values(row: dict[str, Any]) -> dict[str, Any]:
     """The metadata values a row sets (None: leave the key as it is)."""
     return {"benchmark": row.get("benchmark"), "tags": {"origin": row["origin"], "tags": row["tags"]},
             "license": row.get("license"), "citation": row.get("citation"), "srbf_changes": row.get("srbf_changes"),
-            "srbf_notes": row.get("srbf_notes")}
+            "srbf_notes": row.get("srbf_notes"), "problem_flags": row.get("problem_flags")}
 
 
 def apply_yaml(path: Path, row: dict[str, Any], published: dict[str, int]) -> str:
@@ -248,7 +268,7 @@ def apply_yaml(path: Path, row: dict[str, Any], published: dict[str, int]) -> st
     text, after = before, "version"
     for key, value in values(row).items():
         if value is not None:
-            text = _set_line(text, key, _flow(key, value) if value != [] or key != "srbf_notes" else "", after)
+            text = _set_line(text, key, "" if value in ([], {}) and key in OPTIONAL else _flow(key, value), after)
         if _block(text, key):
             after = key
     for key in REMOVED:
@@ -281,7 +301,7 @@ def apply_npz(path: Path, row: dict[str, Any]) -> str:
     md = meta["catalog"].setdefault("meta", {})
     before = json.dumps(md, sort_keys=True)
     for key, value in values(row).items():
-        if key == "srbf_notes" and value == []:
+        if value in ([], {}) and key in OPTIONAL:
             md.pop(key, None)
         elif value is not None:
             md[key] = value
@@ -316,16 +336,20 @@ def apply(tags_path: Path, published_paths: list[Path], licenses_path: Path | No
     citations = {c["catalog"]: {k: c[k] for k in ("paper", "data") if c.get(k)} for c in _rows(citations_path)}
     # the deviation audit (tags/deviations.json): how srbf's version differs from the authors' benchmark; anything
     # beyond running part of it earns the '*' (stars); a version that follows the defining publication, or the rule
-    # for paper-vs-code conflicts, is a visible note without a star (owner 2026-11-28)
+    # for paper-vs-code conflicts, is a visible note without a star (owner 2026-11-27)
     deviations = {c["catalog"]: c for c in _rows(deviations_path)}
-    # the benchmark each catalog belongs to (tags/benchmarks.json): srbf averages by benchmark (owner 2026-11-28)
+    # the benchmark each catalog belongs to (tags/benchmarks.json): srbf averages by benchmark (owner 2026-11-27)
     benchmark = {c: b["benchmark"] for b in _rows(benchmarks_path) for c in b["catalogs"]}
+    # the per-problem flags (tags/problem_flags.json, ``flags``)
+    flags_path = Path(__file__).resolve().parent / "tags" / "problem_flags.json"
+    flags = json.loads(flags_path.read_text())["flags"] if flags_path.exists() else {}
     done = Counter()
     for row in json.load(open(tags_path)):
         dev = deviations.get(row["catalog"])
         row = {**row, "license": licenses.get(row["catalog"]), "citation": citations.get(row["catalog"]) or None,
                "srbf_changes": dev["changes"] if dev else None, "srbf_notes": notes_of(dev) if dev else None,
-               "star": starred_by(dev) if dev else None, "benchmark": benchmark.get(row["catalog"])}
+               "star": starred_by(dev) if dev else None, "benchmark": benchmark.get(row["catalog"]),
+               "problem_flags": flags.get(row["catalog"], {})}
         if benchmarks_path and row["benchmark"] is None:
             raise SystemExit(f"{row['catalog']}: no benchmark in {benchmarks_path}")
         path = Path(row["file"]) if Path(row["file"]).is_absolute() else paths.REPO / row["file"]
@@ -352,9 +376,99 @@ def notes_of(dev: dict[str, Any]) -> list[str]:
             *(f"Paper and code differ: {t}" for t in dev.get("paper_vs_code") or [])]
 
 
+# ---------------------------------------------------------------------------------------------------- problem flags
+def _single_input_r2(x: np.ndarray, y: np.ndarray) -> float:
+    """The best R^2 of a straight-line fit of ``y`` to one column of ``x``."""
+    best, vy = 0.0, float(np.var(y))
+    if vy <= 0 or len(y) < 3:
+        return 0.0
+    for j in range(x.shape[1]):
+        a = np.column_stack([x[:, j], np.ones(len(y))])
+        if np.var(x[:, j]) <= 0:
+            continue
+        coef, *_ = np.linalg.lstsq(a, y, rcond=None)
+        best = max(best, 1.0 - float(np.mean((y - a @ coef) ** 2)) / vy)
+    return best
+
+
+def _low_signal(x: np.ndarray, y: np.ndarray) -> bool:
+    from sklearn.ensemble import RandomForestRegressor
+    from sklearn.linear_model import LinearRegression
+    from sklearn.model_selection import KFold, cross_val_score
+    if len(y) < 10 or np.var(y) <= 0:
+        return False
+    take = np.random.default_rng(0).permutation(len(y))[:1000]
+    x, y = x[take], y[take]
+    folds = KFold(min(5, len(y) // 2), shuffle=True, random_state=0)     # shuffled: rows sorted by an input
+    ols = float(np.mean(cross_val_score(LinearRegression(), x, y, cv=folds, scoring="r2")))
+    if ols >= 0.05:
+        return False
+    rf = float(np.mean(cross_val_score(RandomForestRegressor(n_estimators=50, random_state=0, n_jobs=4), x, y, cv=folds,
+                                       scoring="r2")))
+    return rf < 0.05
+
+
+def _ordered(x: np.ndarray, rule: Any) -> bool:
+    if not (isinstance(rule, dict) and ("random" in rule or "folds" in rule)) or len(x) < 10:
+        return False
+    d = np.diff(x, axis=0)
+    return bool(any((np.all(d[:, j] >= 0) or np.all(d[:, j] <= 0)) and np.ptp(x[:, j]) > 0 for j in range(x.shape[1])))
+
+
+def flags(counts: Path) -> dict[str, dict[str, list[str]]]:
+    """Each release catalog's problems that carry a flag of FLAGS (data catalogs from their rows; formula catalogs'
+    'trivial' from 256 points of each entry's declared ranges)."""
+    import formula_gate
+    out: dict[str, dict[str, list[str]]] = {}
+    frozen = {n: set(json.loads(paths.frozen_path(f).read_text())["ids"]) for n, f in
+              {"erbench-syneq": "release__erbench-syneq.json", "erbench-oeis": "erbench-oeis.json"}.items()}
+    for r in json.load(open(counts))["rows"]:
+        found: dict[str, list[str]] = {k: [] for k in FLAGS}
+        found["target-leak"] = list(TARGET_LEAKS.get(r["name"], []))
+        path = Path(r["file"])
+        if path.suffix == ".npz":
+            z = np.load(path)
+            meta = json.loads(str(z["_meta"]))
+            for i, p in enumerate(meta["problems"]):
+                x = np.asarray(z[f"p{i}__x_support"], dtype=np.float64)
+                y = np.asarray(z[f"p{i}__y_support"], dtype=np.float64).reshape(-1)
+                eq = str(p.get("eq_id"))
+                if _single_input_r2(x, y) >= 0.999:
+                    found["trivial"].append(eq)
+                if len(y) < 20 or len(y) <= x.shape[1] + 1:
+                    found["tiny"].append(eq)
+                if _ordered(x, (p.get("meta") or {}).get("test_split")):
+                    found["ordered"].append(eq)
+                if p.get("gt_kind") != "exact" and _low_signal(x, y):       # an exact law's rows carry the full signal
+                    found["low-signal"].append(eq)
+        else:
+            doc = paths.load_yaml(path)
+            rng = np.random.default_rng(0)
+            for key, e in doc["expressions"].items():
+                if r["name"] in frozen and str(key) not in frozen[r["name"]]:
+                    continue
+                keys = sorted((k for k in (e.get("vars") or {}) if k != "v0"), key=lambda k: int(k[1:]))
+                try:
+                    f = formula_gate._function(str(e["prepared"]), keys)
+                    cols = [rng.uniform(*(formula_gate.box_of(e["vars"][k]) or (0.5, 2.0)), 256) for k in keys]
+                    y = formula_gate._values(f, cols)
+                except Exception:
+                    continue
+                ok = np.isfinite(y)
+                if ok.sum() >= 16 and _single_input_r2(np.column_stack(cols)[ok], y[ok]) >= 0.999:
+                    found["trivial"].append(str(key))
+        found = {k: v for k, v in found.items() if v}
+        if found:
+            out[r["name"]] = found
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
+    a0 = sub.add_parser("flags")
+    a0.add_argument("--counts", required=True)
+    a0.add_argument("--out", default=str(Path(__file__).resolve().parent / "tags" / "problem_flags.json"))
     a1 = sub.add_parser("facts")
     a1.add_argument("--counts", required=True)
     a1.add_argument("--out", required=True)
@@ -370,14 +484,18 @@ def main() -> None:
     a3.add_argument("--deviations", default=str(Path(__file__).resolve().parent / "tags" / "deviations.json"))
     a3.add_argument("--benchmarks", default=str(Path(__file__).resolve().parent / "tags" / "benchmarks.json"))
     a = ap.parse_args()
-    if a.cmd == "facts":
+    if a.cmd == "flags":
+        found = flags(Path(a.counts))
+        Path(a.out).write_text(json.dumps({"definitions": FLAGS, "flags": found}, indent=1) + "\n")
+        print({k: sum(len(v.get(k, [])) for v in found.values()) for k in FLAGS}, "->", a.out)
+    elif a.cmd == "facts":
         rows = facts(Path(a.counts))
-        Path(a.out).write_text(json.dumps(rows, indent=1))
+        Path(a.out).write_text(json.dumps(rows, indent=1) + "\n")
         c = Counter(t for r in rows for t in r["tags_from_files"])
         print(f"{len(rows)} catalogs; tags from the files: {dict(c)} -> {a.out}")
     elif a.cmd == "merge":
         rows = merge(Path(a.facts), Path(a.judged))
-        Path(a.out).write_text(json.dumps(rows, indent=1))
+        Path(a.out).write_text(json.dumps(rows, indent=1) + "\n")
         print(f"{len(rows)} catalogs; origins {dict(Counter(r['origin'] for r in rows))}; "
               f"tags {dict(Counter(t for r in rows for t in r['tags']))}; "
               f"below half {dict(Counter(t for r in rows for t in r['below_half']))} -> {a.out}")

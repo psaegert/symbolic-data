@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "lasr-synthetic-equations"
   tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
-  srbf_changes: []
   license: "Apache-2.0 (trishullab/LibraryAugmentedSymbolicRegression.jl; Grayeli et al. 2024, arXiv:2409.09359)"
   citation: {"paper": {"short": "Grayeli et al. 2024", "title": "Symbolic Regression with a Learned Concept Library", "venue": "NeurIPS 2024", "url": "https://arxiv.org/abs/2409.09359"}, "data": {"short": "GitHub trishullab/LibraryAugmentedSymbolicRegression.jl@de6b22d", "title": "LaSR experiments/dataset.py synthetic_equations() (Apache-2.0)", "url": "https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/experiments/dataset.py"}}
+  srbf_changes: []
   description: LaSR synthetic equations
   sources:
   - https://arxiv.org/abs/2409.09359
@@ -25,9 +25,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   eq0:
     raw: exp(((1.485035504085099 - log(y2)) / (-0.5917667741788188 - y4)) + (sqrt(y1 + y4) + sqrt(y2)))

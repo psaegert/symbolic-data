@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "gsr-symset"
   tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: []
   license: "facts only: formulas and ranges cited from Tohme et al. 2023 (GSR, TMLR, arXiv:2205.15569), Table 20; no upstream license"
   citation: {"paper": {"short": "Tohme et al. 2022", "title": "GSR: A Generalized Symbolic Regression Approach", "venue": "Transactions on Machine Learning Research (12/2022)", "url": "https://arxiv.org/abs/2205.15569"}}
+  srbf_changes: []
   description: GSR SymSet
   sources:
   - https://arxiv.org/abs/2205.15569
@@ -21,9 +21,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   SymSet-1:
     raw: x*sinh(x) - 4/5

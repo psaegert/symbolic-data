@@ -30,6 +30,11 @@
     "kind": "part",
     "problems": 26,
     "text": "srbf runs 74 of the 100 equations: in the other 26 no input is left once the units are removed, so the target is a constant."
+   },
+   {
+    "kind": "filled",
+    "problems": 48,
+    "text": "For 48 of the 74 equations the database gives the dimensionless inputs only as ratios of AI Feynman's dimensional variables, without their distribution; srbf draws the dimensional variables on AI Feynman's ranges and computes the ratios (a push-forward)."
    }
   ],
   "follows_first_publication": []
@@ -44,7 +49,10 @@
     "text": "srbf runs 9 problems here (8 of the paper's 17 plus a second, synthetic version of the Kepler problem): the real-data Kepler and time-dilation problems are in 'AI Hilbert real data', the 6 problems taken from the Feynman database are run once in srbf's Feynman set, and the Bell-inequality problem, which has no data, is not run."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "Kepler with missing axioms draws m1 and m2 on [0.5, 2], the range of the data the authors' notebook reads; their script data_gen_kepler.py draws [0.5, 3]."
+  ]
  },
  {
   "catalog": "ai-hilbert-real-data",
@@ -68,7 +76,10 @@
     "text": "srbf runs 7 of the package's 10 models: the Q-learning agent is not a fixed function of its inputs, and the linear-mixed-model and template models have no fixed formula."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "Weber-Fechner uses the authors' code: log(S2/S1) on the 100 x 100 grid with S1 <= S2 (5,050 points), as the code keeps them."
+  ]
  },
  {
   "catalog": "black-hole-spiral-plane",
@@ -169,6 +180,11 @@
     "kind": "changed",
     "problems": 11,
     "text": "For C3a-C3f and C4a-C4e the paper also tests on extrapolation sets that were never published; srbf tests only on the published 80/20 split."
+   },
+   {
+    "kind": "changed",
+    "problems": 12,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (12 of 28 problems, 2,000 to 25,000 rows), it uses a random 512 of them in each run."
    }
   ],
   "follows_first_publication": []
@@ -183,7 +199,10 @@
     "text": "srbf runs 4 of the 8 tuning problems: F3 to F6 are treated as Keijzer-4, Jin-1, Jin-4 and Vladislavleva-1 and run in those benchmarks' sets, with those benchmarks' points rather than CP3-bench's grids."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "F7's y takes the authors' CSV grid, 30 values on [-50, 5]; the paper's Table 6 prints [-5, 5]."
+  ]
  },
  {
   "catalog": "cvgp-trigonometric-control-variable-datasets",
@@ -195,7 +214,10 @@
     "text": "srbf runs a fixed sample of 1,024 of the 24,000 expressions, chosen by a hash of each name and spread over the authors' configurations in proportion to their sizes."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "The 24,000 problems are VSR-DPG's files (Jiang & Xue 2024, data/algebraic_equations @b841bb3): CVGP's expressions embedded into 10 to 50 variables. srbf follows those files: inputs LogUniform(0.1, 10), where CVGP's own code samples U(0.5, 10)."
+  ]
  },
  {
   "catalog": "ddrsr-simple-test-and-complex-test",
@@ -258,8 +280,9 @@
     "text": "srbf runs here only the registry problems that no other srbf set covers (Nguyen-12a and Korns-13 to -15; Neat-6 is in the pinned-points set); the registry's other rows are run in the sets of their own benchmarks, apart from its two software sanity tests."
    }
   ],
-  "follows_first_publication": [
-   "Korns-15 uses Korns' own input range [-50, 50]; the registry's 2021 copy used [0, 50]."
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "Korns-15 uses the registry's own range [0, 50], which the registry's runs used; Korns (2011) uses [-50, 50], as srbf's Korns set does."
   ]
  },
  {
@@ -286,7 +309,10 @@
     "text": "srbf runs a fixed sample of 1,024 of the 10,000 validation functions, which it regenerated with the authors' own code and seed (the authors publish no list)."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "srbf regenerated the functions with the generator settings stored in the authors' released model (max_exponent_prefactor 2, max_centroids 4, its operator down-sampling), which produced their published results; the paper's Table 3 prints other settings (constants from a mantissa in [0, 1] and an exponent in [-2, 2], up to 10 clusters)."
+  ]
  },
  {
   "catalog": "eql-cart-pendulum",
@@ -421,7 +447,10 @@
     "text": "srbf runs 1 of the 3 ESR problems here (the cosmic-chronometer data): the Pantheon+ supernova task fits a function through an integral, not y = f(x), and the mock problem is in 'ESR cosmology formulas'."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "ESR's code fits H^2 as a function of x = 1 + z (likelihood.py), so srbf poses H^2; the paper speaks of H(z)."
+  ]
  },
  {
   "catalog": "esr-cosmology-datasets",
@@ -433,7 +462,10 @@
     "text": "srbf runs 1 of the 3 ESR problems here (the mock problem); the cosmic-chronometer data are in 'ESR cosmology data', and the Pantheon+ task is not y = f(x)."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "ESR's code fits H^2 as a function of x = 1 + z (likelihood.py), so srbf poses H^2; the paper speaks of H(z)."
+  ]
  },
  {
   "catalog": "evogp-uci",
@@ -443,6 +475,11 @@
     "kind": "part",
     "problems": 1,
     "text": "srbf runs 3 of EvoGP's 4 tasks: the fourth, Feynman I.9.18, is run in srbf's Feynman set."
+   },
+   {
+    "kind": "kept",
+    "problems": 1,
+    "text": "daily_demand_forecasting_orders: the target is the sum of three of its inputs, an exact target leak; srbf keeps it as published."
    }
   ],
   "follows_first_publication": []
@@ -455,6 +492,11 @@
     "kind": "changed",
     "problems": 4,
     "text": "In the out-of-range test the authors move each input out of the box equally often; srbf picks the moved input at random for each point, which matches only on average."
+   },
+   {
+    "kind": "changed",
+    "problems": 8,
+    "text": "The authors place the inputs with a Latin-hypercube design; srbf draws each point independently from the same uniform marginals."
    }
   ],
   "follows_first_publication": []
@@ -471,6 +513,9 @@
   "changes": [],
   "follows_first_publication": [
    "Where SRSD's own files disagree, srbf follows SRSD's code and published data: I.44.4's n on [1e24, 1e26], integer inputs on lo..hi-1, and the signs and ranges of I.29.16, B6, B7, III.15.27 and III.21.20."
+  ],
+  "paper_vs_code": [
+   "Where SRSD's own files disagree, srbf follows SRSD's code and published data (I.44.4's n on [1e24, 1e26], integer inputs on lo..hi-1, the signs and ranges of I.29.16, B6, B7, III.15.27 and III.21.20)."
   ]
  },
  {
@@ -505,6 +550,11 @@
     "kind": "part",
     "problems": 7,
     "text": "srbf runs 14 of the 21 real-world datasets here: Boston housing, Dow Chemical and Tower, whose sources state no license, are in 'GECCO 2013-2017 GP regression compilation (real data) (restricted)', Ozone (GPL) is in its share-alike set, the Million Song Dataset is left out for its size (375 MB), and NOX and WND were never published."
+   },
+   {
+    "kind": "changed",
+    "problems": 11,
+    "text": "The authors test on fixed folds and average over them; srbf's release runs each problem once, so it scores one of the folds."
    }
   ],
   "follows_first_publication": []
@@ -518,7 +568,13 @@
  {
   "catalog": "gecco-2022-exact-rediscovery",
   "authors_total": 40,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 40,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (40 of 40 problems, 1,000 rows), it uses a random 512 of them in each run."
+   }
+  ],
   "follows_first_publication": []
  },
  {
@@ -536,19 +592,37 @@
  {
   "catalog": "gecco-2022-local-optima",
   "authors_total": 30,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 30,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (30 of 30 problems, 900 rows), it uses a random 512 of them in each run."
+   }
+  ],
   "follows_first_publication": []
  },
  {
   "catalog": "gecco-2022-noise",
   "authors_total": 40,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 40,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (40 of 40 problems, 949 rows), it uses a random 512 of them in each run."
+   }
+  ],
   "follows_first_publication": []
  },
  {
   "catalog": "gecco-2023-performance",
   "authors_total": 3,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 3,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (3 of 3 problems, 10,000 to 11,039 rows), it uses a random 512 of them in each run."
+   }
+  ],
   "follows_first_publication": []
  },
  {
@@ -585,10 +659,18 @@
     "kind": "part",
     "problems": 49,
     "text": "srbf runs here the 2 problems of the table that train on fixed points (Keijzer-6, Vladislavleva-3) and Pagie-2 from the authors' reference code; the rest are in 'GP benchmarks SR table (McDermott et al. 2012)' or in their own benchmarks' sets."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (1 of 3 problems, 5,083 rows), it uses a random 512 of them in each run."
    }
   ],
   "follows_first_publication": [
    "Keijzer-6 is Keijzer's harmonic number (Keijzer 2003) on x = 1..50, tested on 1..120."
+  ],
+  "paper_vs_code": [
+   "Pagie-2 follows the authors' reference code (ECJ: [-5, 5]^3, step 0.4); Pagie's thesis uses [-3, 3]^3."
   ]
  },
  {
@@ -671,6 +753,11 @@
     "kind": "changed",
     "problems": 2,
     "text": "The authors work with binned data (30 bins in cos theta); srbf samples cos theta uniformly at random, and tests the out-of-domain problem on the 30 bin centres."
+   },
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "The physical constants are priced as numbers: alpha = 0.00755 (the MadGraph default the authors quote in their earlier paper), s = 10^6 GeV^2 (sqrt(s) = 1 TeV) and the unit conversion (hbar c)^2 = 0.3893793721e9 pb GeV^2; a method recovers the law with their product as one constant."
    }
   ],
   "follows_first_publication": []
@@ -788,6 +875,11 @@
     "kind": "part",
     "problems": 7,
     "text": "srbf runs here the 8 Keijzer problems that train on fixed points; the other 7 are in 'Keijzer'."
+   },
+   {
+    "kind": "changed",
+    "problems": 6,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (6 of 8 problems, 991 to 6,001 rows), it uses a random 512 of them in each run."
    }
   ],
   "follows_first_publication": [
@@ -842,9 +934,17 @@
     "kind": "changed",
     "problems": 2,
     "text": "The out-of-distribution tests for bulk modulus (10 perovskites) and OER activity (5 perovskites) are not published in the authors' input form and are not used."
+   },
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "The authors test on fixed folds and average over them; srbf's release runs each problem once, so it scores one of the folds."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "For bulk modulus srbf uses the 450 rows the paper reports on; the preprocessing script writes 504 rescaled rows."
+  ]
  },
  {
   "catalog": "lasr-bigbench",
@@ -862,7 +962,10 @@
     "text": "The paper adds 'random noise variables' without saying how many or how they are distributed, and the authors' released code switches them off for Feynman; srbf adds them with the authors' recipe from their other sets (pad to 11 inputs, extra inputs uniform on [1, 20]) and keeps the formula's own inputs in the first columns where that recipe shuffles the column order."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "The released code runs 97 of the 100 equations; srbf runs all 100, as the paper's results table does."
+  ]
  },
  {
   "catalog": "lasr-synthetic-equations",
@@ -880,13 +983,19 @@
     "text": "srbf also runs 3 problems that are not in the published Livermore set, taken from a later DSO code release: a new Livermore-19 and exact copies of Livermore-7 and -8 (7a, 8a); as a result the paper's Livermore-19 to -22 appear as Livermore-20 to -23."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "Four formulas are printed with typos in the paper; srbf uses the forms the authors ran (their repository)."
+  ]
  },
  {
   "catalog": "livermore2",
   "authors_total": 150,
   "changes": [],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "The rule |y| < 100 is the authors' code; no paper states it."
+  ]
  },
  {
   "catalog": "llm-lex-random-mathematica-functions",
@@ -921,13 +1030,25 @@
  {
   "catalog": "llm-sr-bactgrow",
   "authors_total": 2,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (2 of 2 problems, 2,500 to 15,000 rows), it uses a random 512 of them in each run."
+   }
+  ],
   "follows_first_publication": []
  },
  {
   "catalog": "llm-sr-stress-strain",
   "authors_total": 2,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (2 of 2 problems, 738 to 1,442 rows), it uses a random 512 of them in each run."
+   }
+  ],
   "follows_first_publication": []
  },
  {
@@ -1016,6 +1137,11 @@
     "kind": "part",
     "problems": 3,
     "text": "srbf runs 2 of the 5 Nguyen-c problems here; Nguyen-1c, -5c and -8c are run as Constant-1, -2 and -5 (on DSR's input ranges, not SPL's)."
+   },
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (2 of 2 problems, 1,001 rows), it uses a random 512 of them in each run."
    }
   ],
   "follows_first_publication": []
@@ -1029,7 +1155,13 @@
  {
   "catalog": "nonic-points",
   "authors_total": 1,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (1 of 1 problems, 10,000 rows), it uses a random 512 of them in each run."
+   }
+  ],
   "follows_first_publication": []
  },
  {
@@ -1108,9 +1240,17 @@
     "kind": "part",
     "problems": 14,
     "text": "srbf runs 3 of the 17 datasets here: the 12 plasma-pressure datasets are left out, because the authors fit one formula across all 12 (a task over several data sets, outside srbf's scope); the sunspot data, whose license is non-commercial, are in 'PhyE2E space-physics applications (restricted)'; and the lunar-tide data (13.3 million samples) needs a gridding the authors did not publish."
+   },
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (2 of 3 problems, 650 rows), it uses a random 512 of them in each run."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "Differential rotation uses the notebook's seeded 27/7 split, which produced the published result; the paper speaks of 28 of 34 points."
+  ]
  },
  {
   "catalog": "physo-astro",
@@ -1177,7 +1317,13 @@
  {
   "catalog": "r-rationals-points",
   "authors_total": 6,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 3,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (3 of 6 problems, 10,000 rows), it uses a random 512 of them in each run."
+   }
+  ],
   "follows_first_publication": []
  },
  {
@@ -1214,7 +1360,10 @@
     "text": "srbf fits on every point RSRM's model saw (x = 0 to 100) and tests on the extrapolation x = -100 to -1; the appendix's test range [10, 25] lies inside the fitting range and is not used."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "srbf uses sigma = 50, 40 and 30, which the authors' plotted curves and reported errors match; the printed panel titles give 1/30, 1/40 and 1/50."
+  ]
  },
  {
   "catalog": "scilaws-real",
@@ -1224,6 +1373,11 @@
     "kind": "part",
     "problems": 63,
     "text": "srbf runs 55 of SciLaws-Real's 118 tasks here: only the 66 single-group (Type I) tasks fit srbf's protocol; of these, 6 whose sources set non-commercial or scientific-use-only terms or state no license are in 'SciLaws-Bench SciLaws-Real (Type I) (restricted)', 4 with share-alike or copyleft licenses are in its share-alike set, and 1 (river lengths derived from HydroSHEDS) may not be redistributed."
+   },
+   {
+    "kind": "changed",
+    "problems": 23,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (23 of 55 problems, 540 to 109,477 rows), it uses a random 512 of them in each run."
    }
   ],
   "follows_first_publication": []
@@ -1236,6 +1390,11 @@
     "kind": "part",
     "problems": 114,
     "text": "srbf runs here the 4 single-group tasks whose data carry a share-alike or copyleft license; 55 more single-group tasks are in 'SciLaws-Bench SciLaws-Real (Type I)' and 6 in its restricted set, 1 may not be redistributed, and the 52 multi-group tasks need a protocol srbf does not have."
+   },
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (2 of 4 problems, 938 to 171,525 rows), it uses a random 512 of them in each run."
    }
   ],
   "follows_first_publication": []
@@ -1410,9 +1569,17 @@
     "kind": "part",
     "problems": 15,
     "text": "srbf runs the 15 AI-Feynman expressions Sym-Q evaluates, without the drift terms of its drift experiment. Those problems cannot be rebuilt: Sym-Q names nine kinds of drift but not the equations it added them to (only 'all equations with three or fewer variables, excluding those exceeding the model's size limits') nor the input each drift uses."
+   },
+   {
+    "kind": "changed",
+    "problems": 15,
+    "text": "srbf uses the input range of the authors' code, U[-10, 10] for every input, rather than the per-equation ranges of the paper's Table 8."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "The input range U[-10, 10] is the authors' code; the paper's Table 8 lists per-equation ranges."
+  ]
  },
  {
   "catalog": "symantic-synthetic-set",
@@ -1512,7 +1679,13 @@
  {
   "catalog": "torchsisso-specific-energy",
   "authors_total": 1,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (1 of 1 problems, 1,000 rows), it uses a random 512 of them in each run."
+   }
+  ],
   "follows_first_publication": []
  },
  {
@@ -1549,6 +1722,11 @@
     "kind": "part",
     "problems": 7,
     "text": "srbf runs here the 2 problems that train on fixed points (Vladislavleva-2 and -3); the others are in 'Vladislavleva' and, for the Tower data, in 'Tower (Dow distillation tower)'."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (1 of 2 problems, 5,083 rows), it uses a random 512 of them in each run."
    }
   ],
   "follows_first_publication": []
@@ -1576,6 +1754,11 @@
     "kind": "part",
     "problems": 112,
     "text": "srbf runs here the 6 single-group tasks whose sources set non-commercial or scientific-use-only terms or state no license; 55 more single-group tasks are in 'SciLaws-Bench SciLaws-Real (Type I)' and 4 in its share-alike set, 1 may not be redistributed, and the 52 multi-group tasks need a protocol srbf does not have."
+   },
+   {
+    "kind": "changed",
+    "problems": 3,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (3 of 6 problems, 3,219 to 3,672 rows), it uses a random 512 of them in each run."
    }
   ]
  },
@@ -1588,6 +1771,11 @@
     "kind": "part",
     "problems": 18,
     "text": "srbf runs here the 3 real-world datasets whose sources state no license (Boston housing, Dow Chemical, Tower); 14 more are in 'GECCO 2013-2017 GP regression compilation (real data)' and Ozone is in its share-alike set, the Million Song Dataset is left out for its size (375 MB), and NOX and WND were never published."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "The authors test on fixed folds and average over them; srbf's release runs each problem once, so it scores one of the folds."
    }
   ]
  },
@@ -1600,6 +1788,11 @@
     "kind": "part",
     "problems": 20,
     "text": "srbf runs here the Ozone dataset, whose data carry a copyleft license (GPL-2); 14 more are in 'GECCO 2013-2017 GP regression compilation (real data)' and 3 in its restricted set, the Million Song Dataset is left out for its size (375 MB), and NOX and WND were never published."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "The authors test on fixed folds and average over them; srbf's release runs each problem once, so it scores one of the folds."
    }
   ]
  },
@@ -1648,6 +1841,11 @@
     "kind": "part",
     "problems": 16,
     "text": "srbf runs here the sunspot dataset, whose license is non-commercial; 3 more are in 'PhyE2E space-physics applications', the 12 plasma-pressure datasets are left out (one formula fitted across all 12), and the lunar-tide data (13.3 million samples) needs a gridding the authors did not publish."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (1 of 1 problems, 522 rows), it uses a random 512 of them in each run."
    }
   ]
  },
@@ -1665,6 +1863,11 @@
     "kind": "changed",
     "problems": 3,
     "text": "srbf does not check the shape constraints that the authors set for the problems."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (1 of 3 problems, 12,902 rows), it uses a random 512 of them in each run."
    }
   ]
  },
@@ -1677,6 +1880,11 @@
     "kind": "part",
     "problems": 3,
     "text": "srbf runs here the band-gap problem, whose data were extracted from a closed-access article and state no license; the other 3 are in 'LangLaw perovskite datasets'."
+   },
+   {
+    "kind": "changed",
+    "problems": 1,
+    "text": "The authors test on fixed folds and average over them; srbf's release runs each problem once, so it scores one of the folds."
    }
   ]
  },
@@ -1689,6 +1897,16 @@
     "kind": "part",
     "problems": 84,
     "text": "srbf runs here the 38 datasets whose sources set non-commercial terms or state no license (20 non-commercial, 18 without a license); the other 84 are in 'SRBench 2021 black-box'."
+   },
+   {
+    "kind": "kept",
+    "problems": 4,
+    "text": "197_cpu_act and 573_cpu_act, and 227_cpu_small and 562_cpu_small, are the same data under two PMLB names; srbf keeps both copies, as SRBench does."
+   },
+   {
+    "kind": "kept",
+    "problems": 1,
+    "text": "527_analcatdata_election2000: the target is one input minus the sum of others (the total minus its parts), an exact target leak; srbf keeps it as published."
    }
   ]
  },
@@ -1771,6 +1989,11 @@
     "kind": "changed",
     "problems": 4,
     "text": "The authors fit one model with all four outputs (the x and y positions of the two segment tips) and report one error over them; srbf runs each output as a separate problem."
+   },
+   {
+    "kind": "changed",
+    "problems": 4,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (4 of 4 problems, 701 rows), it uses a random 512 of them in each run."
    }
   ],
   "follows_first_publication": []
@@ -1784,7 +2007,13 @@
  {
   "catalog": "ffx-high-dimensional-circuits",
   "authors_total": 12,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 3,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (3 of 12 problems, 1,250 rows), it uses a random 512 of them in each run."
+   }
+  ],
   "follows_first_publication": []
  },
  {
@@ -1870,7 +2099,13 @@
  {
   "catalog": "oxygen-ion-conductors",
   "authors_total": 2,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 2,
+    "text": "The authors test on fixed folds and average over them; srbf's release runs each problem once, so it scores one of the folds."
+   }
+  ],
   "follows_first_publication": []
  },
  {
@@ -1886,6 +2121,16 @@
     "kind": "changed",
     "problems": 9,
     "text": "In the 9 Miba friction datasets the material, material category, grooving and oil inputs are letter codes; srbf turns each code into an input of its own that is 1 where the code applies and 0 elsewhere."
+   },
+   {
+    "kind": "changed",
+    "problems": 5,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (5 of 14 problems, 725 to 4,449 rows), it uses a random 512 of them in each run."
+   },
+   {
+    "kind": "kept",
+    "problems": 1,
+    "text": "SARCOS: all 4,449 rows of the authors' test set are copies of training rows; srbf keeps the split as published."
    }
   ],
   "follows_first_publication": []

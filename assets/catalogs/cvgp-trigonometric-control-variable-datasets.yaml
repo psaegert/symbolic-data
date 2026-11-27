@@ -3,9 +3,10 @@ metadata:
   version: 1
   benchmark: "cvgp-trigonometric-control-variable-datasets"
   tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
-  srbf_changes: [{"kind": "part", "problems": 22976, "text": "srbf runs a fixed sample of 1,024 of the 24,000 expressions, chosen by a hash of each name and spread over the authors' configurations in proportion to their sizes."}]
   license: "MIT (jiangnanhugo/egg-sr scibench copy of the CVGP expressions; Jiang & Xue 2023, arXiv:2306.08057)"
-  citation: {"paper": {"short": "Jiang & Xue 2023", "title": "Symbolic Regression via Control Variable Genetic Programming", "venue": "Machine Learning and Knowledge Discovery in Databases: Research Track, Lecture Notes in Computer Science, pp. 178-195", "url": "https://doi.org/10.1007/978-3-031-43421-1_11"}, "data": {"short": "GitHub jiangnanhugo/cvgp@e79202e", "title": "CVGP expression files data/ (authors' repository, no licence file)", "url": "https://github.com/jiangnanhugo/cvgp/tree/e79202e2e3b859a97fe139453b3871b5793e33b9/data"}}
+  citation: {"paper": {"short": "Jiang & Xue 2023", "title": "Symbolic Regression via Control Variable Genetic Programming", "venue": "Machine Learning and Knowledge Discovery in Databases: Research Track, Lecture Notes in Computer Science, pp. 178-195", "url": "https://doi.org/10.1007/978-3-031-43421-1_11"}, "data": {"short": "GitHub jiangnanhugo/VSR-DPG@b841bb3", "title": "VSR-DPG data/algebraic_equations (equations_trigonometric and large_scale_10..50): CVGP's expressions embedded into 10 to 50 variables", "url": "https://github.com/jiangnanhugo/VSR-DPG/tree/b841bb349d301c1f233289f09525472ddb7a9246/data/algebraic_equations"}}
+  srbf_changes: [{"kind": "part", "problems": 22976, "text": "srbf runs a fixed sample of 1,024 of the 24,000 expressions, chosen by a hash of each name and spread over the authors' configurations in proportion to their sizes."}]
+  srbf_notes: ["Paper and code differ: The 24,000 problems are VSR-DPG's files (Jiang & Xue 2024, data/algebraic_equations @b841bb3): CVGP's expressions embedded into 10 to 50 variables. srbf follows those files: inputs LogUniform(0.1, 10), where CVGP's own code samples U(0.5, 10)."]
   description: CVGP trigonometric / control-variable datasets
   sources:
   - https://arxiv.org/abs/2306.08057
@@ -26,9 +27,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   inv_nv2_nt11_prog_31:
     raw: -0.4156 - 0.7314/x0 - 0.7943/x0/x1

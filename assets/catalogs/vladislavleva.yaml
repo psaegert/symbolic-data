@@ -385,7 +385,7 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-13) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 1.0
     test:

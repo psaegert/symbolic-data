@@ -1,4 +1,4 @@
-"""The catalog builders' gates and the 2026-11-28 audit fixes (tools/catalog_build): the numeric raw-vs-prepared check
+"""The catalog builders' gates and the 2026-11-27 audit fixes (tools/catalog_build): the numeric raw-vs-prepared check
 of the formula builders, the reference-law gate of the data builder, and the transcription fixes (ERBench's
 two-argument log, HeuristicLab's AircraftLift, cp3-bench's reference formulas, HEP LLM-SR's target)."""
 import importlib.util

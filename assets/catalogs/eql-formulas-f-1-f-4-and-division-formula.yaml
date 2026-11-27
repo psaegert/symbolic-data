@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "eql-formulas-f-1-f-4-and-division-formula"
   tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
-  srbf_changes: []
   license: "facts only: formulas and ranges cited from Martius & Lampert 2016 (arXiv:1610.02995) and Sahoo et al. 2018 (arXiv:1806.07259); no upstream license"
   citation: {"paper": {"short": "Martius & Lampert 2016", "title": "Extrapolation and learning equations", "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)", "url": "https://arxiv.org/abs/1610.02995"}}
+  srbf_changes: []
   description: EQL formulas F-1..F-4 and division formula
   sources:
   - https://arxiv.org/abs/1610.02995
@@ -25,9 +25,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   F-1:
     raw: (1/3)*(sin(pi*x1) + sin(2*pi*x2 + pi/8) + x2 - x3*x4)
@@ -764,10 +764,10 @@ expressions:
               high: 2.0
       row_constraints:
       - maximum.reduce([abs(v1), abs(v2), abs(v3), abs(v4)]) > 1.0
-    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (raw/fresh-157/arXiv1806.07259v1_source.tar.gz,
-      opened) l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for
-      instance [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2
-      ... The extrapolation test set contains 5000 uniformly'
+    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (arXiv1806.07259v1_source.tar.gz, opened)
+      l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for instance
+      [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2 ... The
+      extrapolation test set contains 5000 uniformly sampled point'
     meta:
       finite_fraction: 1.0
   div:
@@ -842,9 +842,9 @@ expressions:
               high: 2.0
       row_constraints:
       - maximum(abs(v1), abs(v2)) > 1.0
-    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (raw/fresh-157/arXiv1806.07259v1_source.tar.gz,
-      opened) l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for
-      instance [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2
-      ... The extrapolation test set contains 5000 uniformly'
+    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (arXiv1806.07259v1_source.tar.gz, opened)
+      l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for instance
+      [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2 ... The
+      extrapolation test set contains 5000 uniformly sampled point'
     meta:
       finite_fraction: 1.0

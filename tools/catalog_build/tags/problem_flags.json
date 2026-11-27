@@ -1,0 +1,1051 @@
+{
+ "definitions": {
+  "trivial": "the target is linear in one input: a straight-line fit to one input explains it (R^2 >= 0.999 on the fitting rows; formula problems on 256 points of the declared ranges)",
+  "low-signal": "the inputs barely predict the target: a random forest and a linear fit (shuffled 5-fold CV) both reach R^2 < 0.05 on the fitting rows (data without an exact law)",
+  "target-leak": "the target is an exact function of other inputs it is computed from (e.g. a total and its parts)",
+  "tiny": "fewer than 20 fitting rows, or no more rows than inputs plus one (underdetermined even for a linear fit)",
+  "ordered": "the rows are sorted by an input and the authors' split is random or by folds, so a test row usually sits between two fitting rows (interpolation)"
+ },
+ "flags": {
+  "e2e-in-domain-synthetic-validation-set": {
+   "trivial": [
+    "e2e-indomain-00060",
+    "e2e-indomain-00077",
+    "e2e-indomain-00248",
+    "e2e-indomain-00256",
+    "e2e-indomain-00337",
+    "e2e-indomain-00345",
+    "e2e-indomain-00351",
+    "e2e-indomain-00542",
+    "e2e-indomain-00558",
+    "e2e-indomain-00598",
+    "e2e-indomain-00684",
+    "e2e-indomain-00726",
+    "e2e-indomain-00810",
+    "e2e-indomain-00822",
+    "e2e-indomain-00918",
+    "e2e-indomain-00998",
+    "e2e-indomain-01065",
+    "e2e-indomain-01091",
+    "e2e-indomain-01190",
+    "e2e-indomain-01304",
+    "e2e-indomain-01318",
+    "e2e-indomain-01369",
+    "e2e-indomain-01454",
+    "e2e-indomain-01603",
+    "e2e-indomain-01638",
+    "e2e-indomain-01682",
+    "e2e-indomain-01733",
+    "e2e-indomain-01773",
+    "e2e-indomain-02034",
+    "e2e-indomain-02048",
+    "e2e-indomain-02093",
+    "e2e-indomain-02101",
+    "e2e-indomain-02190",
+    "e2e-indomain-02205",
+    "e2e-indomain-02213",
+    "e2e-indomain-02318",
+    "e2e-indomain-02323",
+    "e2e-indomain-02359",
+    "e2e-indomain-02594",
+    "e2e-indomain-02608",
+    "e2e-indomain-02668",
+    "e2e-indomain-02695",
+    "e2e-indomain-02735",
+    "e2e-indomain-02838",
+    "e2e-indomain-02870",
+    "e2e-indomain-02880",
+    "e2e-indomain-02919",
+    "e2e-indomain-02930",
+    "e2e-indomain-02949",
+    "e2e-indomain-03119",
+    "e2e-indomain-03239",
+    "e2e-indomain-03386",
+    "e2e-indomain-03434",
+    "e2e-indomain-03478",
+    "e2e-indomain-03520",
+    "e2e-indomain-03522",
+    "e2e-indomain-03675",
+    "e2e-indomain-03792",
+    "e2e-indomain-03798",
+    "e2e-indomain-03831",
+    "e2e-indomain-03868",
+    "e2e-indomain-03892",
+    "e2e-indomain-04005",
+    "e2e-indomain-04039",
+    "e2e-indomain-04134",
+    "e2e-indomain-04139",
+    "e2e-indomain-04205",
+    "e2e-indomain-04287",
+    "e2e-indomain-04314",
+    "e2e-indomain-04481",
+    "e2e-indomain-04582",
+    "e2e-indomain-04615",
+    "e2e-indomain-04618",
+    "e2e-indomain-04647",
+    "e2e-indomain-04670",
+    "e2e-indomain-04716",
+    "e2e-indomain-04859",
+    "e2e-indomain-04868",
+    "e2e-indomain-05063",
+    "e2e-indomain-05113",
+    "e2e-indomain-05123",
+    "e2e-indomain-05139",
+    "e2e-indomain-05310",
+    "e2e-indomain-05389",
+    "e2e-indomain-05449",
+    "e2e-indomain-05458",
+    "e2e-indomain-05480",
+    "e2e-indomain-05574",
+    "e2e-indomain-05588",
+    "e2e-indomain-05600",
+    "e2e-indomain-05784",
+    "e2e-indomain-05814",
+    "e2e-indomain-05817",
+    "e2e-indomain-05877",
+    "e2e-indomain-05967",
+    "e2e-indomain-06035",
+    "e2e-indomain-06049",
+    "e2e-indomain-06129",
+    "e2e-indomain-06131",
+    "e2e-indomain-06147",
+    "e2e-indomain-06205",
+    "e2e-indomain-06261",
+    "e2e-indomain-06273",
+    "e2e-indomain-06292",
+    "e2e-indomain-06361",
+    "e2e-indomain-06385",
+    "e2e-indomain-06456",
+    "e2e-indomain-06545",
+    "e2e-indomain-06561",
+    "e2e-indomain-06593",
+    "e2e-indomain-06657",
+    "e2e-indomain-06777",
+    "e2e-indomain-06863",
+    "e2e-indomain-06878",
+    "e2e-indomain-07001",
+    "e2e-indomain-07026",
+    "e2e-indomain-07116",
+    "e2e-indomain-07217",
+    "e2e-indomain-07250",
+    "e2e-indomain-07411",
+    "e2e-indomain-07471",
+    "e2e-indomain-07488",
+    "e2e-indomain-07615",
+    "e2e-indomain-07732",
+    "e2e-indomain-07733",
+    "e2e-indomain-07792",
+    "e2e-indomain-07806",
+    "e2e-indomain-07829",
+    "e2e-indomain-07898",
+    "e2e-indomain-07947",
+    "e2e-indomain-08100",
+    "e2e-indomain-08170",
+    "e2e-indomain-08196",
+    "e2e-indomain-08213",
+    "e2e-indomain-08217",
+    "e2e-indomain-08297",
+    "e2e-indomain-08326",
+    "e2e-indomain-08459",
+    "e2e-indomain-08460",
+    "e2e-indomain-08671",
+    "e2e-indomain-08724",
+    "e2e-indomain-08728",
+    "e2e-indomain-08740",
+    "e2e-indomain-08789",
+    "e2e-indomain-08842",
+    "e2e-indomain-08877",
+    "e2e-indomain-08918",
+    "e2e-indomain-08927",
+    "e2e-indomain-08969",
+    "e2e-indomain-08979",
+    "e2e-indomain-09071",
+    "e2e-indomain-09143",
+    "e2e-indomain-09348",
+    "e2e-indomain-09520",
+    "e2e-indomain-09671",
+    "e2e-indomain-09691",
+    "e2e-indomain-09710",
+    "e2e-indomain-09712",
+    "e2e-indomain-09727",
+    "e2e-indomain-09733",
+    "e2e-indomain-09807",
+    "e2e-indomain-09819",
+    "e2e-indomain-09831",
+    "e2e-indomain-09958",
+    "e2e-indomain-09966"
+   ]
+  },
+  "erbench-syneq": {
+   "trivial": [
+    "syneq_359_alpha0.5",
+    "syneq_1001_alpha1",
+    "syneq_1195_alpha1",
+    "syneq_1200_alpha1",
+    "syneq_1368_alpha1",
+    "syneq_2739_alpha1",
+    "syneq_3039_alpha0.5",
+    "syneq_3039_alpha1",
+    "syneq_4310_alpha0.5",
+    "syneq_4777_alpha0"
+   ]
+  },
+  "symformer-in-domain-synthetic-evaluation": {
+   "trivial": [
+    "symformer-uni-p001-d46",
+    "symformer-uni-p003-d56",
+    "symformer-uni-p003-d66",
+    "symformer-uni-p004-d05",
+    "symformer-uni-p012-d15",
+    "symformer-uni-p014-d28",
+    "symformer-uni-p018-d08",
+    "symformer-uni-p018-d38",
+    "symformer-uni-p024-d39",
+    "symformer-uni-p037-d59",
+    "symformer-uni-p043-d47",
+    "symformer-uni-p044-d63",
+    "symformer-uni-p046-d43",
+    "symformer-uni-p047-d51",
+    "symformer-uni-p047-d53",
+    "symformer-uni-p056-d32",
+    "symformer-uni-p061-d66",
+    "symformer-uni-p063-d37",
+    "symformer-uni-p064-d19",
+    "symformer-uni-p064-d34",
+    "symformer-uni-p074-d10",
+    "symformer-uni-p074-d68",
+    "symformer-uni-p080-d74",
+    "symformer-uni-p081-d08",
+    "symformer-uni-p081-d53",
+    "symformer-uni-p085-d74",
+    "symformer-uni-p091-d76",
+    "symformer-uni-p101-d69",
+    "symformer-uni-p106-d47",
+    "symformer-uni-p109-d53",
+    "symformer-uni-p114-d47",
+    "symformer-uni-p120-d57",
+    "symformer-uni-p120-d75",
+    "symformer-uni-p126-d00",
+    "symformer-biv-p000-d58",
+    "symformer-biv-p006-d39",
+    "symformer-biv-p012-d05",
+    "symformer-biv-p012-d46",
+    "symformer-biv-p019-d34",
+    "symformer-biv-p020-d50",
+    "symformer-biv-p028-d28",
+    "symformer-biv-p034-d26",
+    "symformer-biv-p055-d00",
+    "symformer-biv-p058-d57",
+    "symformer-biv-p068-d14",
+    "symformer-biv-p071-d63",
+    "symformer-biv-p075-d33",
+    "symformer-biv-p098-d53",
+    "symformer-biv-p100-d67",
+    "symformer-biv-p104-d55",
+    "symformer-biv-p107-d67",
+    "symformer-biv-p123-d57",
+    "symformer-biv-p126-d32"
+   ]
+  },
+  "erbench-oeis": {
+   "trivial": [
+    "A022982_alpha0",
+    "A022987_alpha0",
+    "A022988_alpha0.5",
+    "A022995_alpha0",
+    "A022995_alpha1",
+    "A022996_alpha0.5",
+    "A023451_alpha1",
+    "A023456_alpha0.5",
+    "A027184_alpha0.5",
+    "A056121_alpha0.5",
+    "A056126_alpha0",
+    "A063337_alpha0.5",
+    "A068796_alpha1",
+    "A070290_alpha1",
+    "A070291_alpha0",
+    "A070293_alpha1",
+    "A097802_alpha0",
+    "A098850_alpha0.5",
+    "A102603_alpha1",
+    "A132754_alpha0.5",
+    "A132755_alpha0",
+    "A132757_alpha0",
+    "A132760_alpha1",
+    "A132762_alpha1",
+    "A132769_alpha0",
+    "A132769_alpha0.5",
+    "A132771_alpha1",
+    "A135403_alpha1",
+    "A138235_alpha1",
+    "A139245_alpha0",
+    "A139264_alpha0.5",
+    "A139279_alpha1",
+    "A139280_alpha1",
+    "A139609_alpha0",
+    "A139610_alpha1",
+    "A139614_alpha0",
+    "A139614_alpha0.5",
+    "A156376_alpha1",
+    "A156795_alpha0.5",
+    "A156795_alpha1",
+    "A164284_alpha0.5",
+    "A190991_alpha0.5",
+    "A014628_alpha1",
+    "A236673_alpha0",
+    "A242215_alpha0.5",
+    "A290781_alpha0",
+    "A337177_alpha0.5",
+    "A356714_alpha0.5",
+    "A361692_alpha0",
+    "A016993_alpha0",
+    "A017017_alpha1",
+    "A017029_alpha0",
+    "A017029_alpha1",
+    "A017365_alpha0.5",
+    "A017461_alpha0",
+    "A017473_alpha0.5",
+    "A017533_alpha0.5",
+    "A020705_alpha0",
+    "A020722_alpha0.5",
+    "A020722_alpha1",
+    "A020723_alpha0",
+    "A020723_alpha0.5",
+    "A022960_alpha0",
+    "A022966_alpha1",
+    "A022968_alpha1",
+    "A022973_alpha0",
+    "A022973_alpha1"
+   ]
+  },
+  "symbolicgpt-bivariate-set": {
+   "trivial": [
+    "symdiff-valv9-0000",
+    "symdiff-valv9-0030",
+    "symdiff-valv9-0049",
+    "symdiff-valv9-0053",
+    "symdiff-valv9-0057",
+    "symdiff-valv9-0069",
+    "symdiff-valv9-0071",
+    "symdiff-valv9-0074",
+    "symdiff-valv9-0077",
+    "symdiff-valv9-0091",
+    "symdiff-valv9-0096",
+    "symdiff-valv9-0108",
+    "symdiff-valv9-0112",
+    "symdiff-valv9-0134",
+    "symdiff-valv9-0136",
+    "symdiff-valv9-0169",
+    "symdiff-valv9-0176",
+    "symdiff-valv9-0179",
+    "symdiff-valv9-0184",
+    "symdiff-valv9-0193",
+    "symdiff-valv9-0206",
+    "symdiff-valv9-0211",
+    "symdiff-valv9-0213",
+    "symdiff-valv9-0218",
+    "symdiff-valv9-0238",
+    "symdiff-valv9-0239",
+    "symdiff-valv9-0252",
+    "symdiff-valv9-0304",
+    "symdiff-valv9-0312",
+    "symdiff-valv9-0318",
+    "symdiff-valv9-0331",
+    "symdiff-valv9-0337",
+    "symdiff-valv9-0340",
+    "symdiff-valv9-0347",
+    "symdiff-valv9-0348",
+    "symdiff-valv9-0353",
+    "symdiff-valv9-0359",
+    "symdiff-valv9-0366",
+    "symdiff-valv9-0391",
+    "symdiff-valv9-0394",
+    "symdiff-valv9-0395",
+    "symdiff-valv9-0399",
+    "symdiff-valv9-0406",
+    "symdiff-valv9-0407",
+    "symdiff-valv9-0418",
+    "symdiff-valv9-0422",
+    "symdiff-valv9-0451",
+    "symdiff-valv9-0452",
+    "symdiff-valv9-0453",
+    "symdiff-valv9-0459",
+    "symdiff-valv9-0468",
+    "symdiff-valv9-0483",
+    "symdiff-valv9-0486",
+    "symdiff-valv9-0515",
+    "symdiff-valv9-0518",
+    "symdiff-valv9-0519",
+    "symdiff-valv9-0521",
+    "symdiff-valv9-0541",
+    "symdiff-valv9-0551",
+    "symdiff-valv9-0556",
+    "symdiff-valv9-0600",
+    "symdiff-valv9-0603",
+    "symdiff-valv9-0606",
+    "symdiff-valv9-0621",
+    "symdiff-valv9-0635",
+    "symdiff-valv9-0648",
+    "symdiff-valv9-0650",
+    "symdiff-valv9-0655",
+    "symdiff-valv9-0657",
+    "symdiff-valv9-0659",
+    "symdiff-valv9-0666",
+    "symdiff-valv9-0669",
+    "symdiff-valv9-0671",
+    "symdiff-valv9-0676",
+    "symdiff-valv9-0697",
+    "symdiff-valv9-0698",
+    "symdiff-valv9-0703",
+    "symdiff-valv9-0723",
+    "symdiff-valv9-0732",
+    "symdiff-valv9-0753",
+    "symdiff-valv9-0761",
+    "symdiff-valv9-0777",
+    "symdiff-valv9-0785",
+    "symdiff-valv9-0786",
+    "symdiff-valv9-0793",
+    "symdiff-valv9-0803",
+    "symdiff-valv9-0808",
+    "symdiff-valv9-0809",
+    "symdiff-valv9-0822",
+    "symdiff-valv9-0828",
+    "symdiff-valv9-0836",
+    "symdiff-valv9-0845",
+    "symdiff-valv9-0856",
+    "symdiff-valv9-0860",
+    "symdiff-valv9-0884",
+    "symdiff-valv9-0888",
+    "symdiff-valv9-0897",
+    "symdiff-valv9-0910",
+    "symdiff-valv9-0918",
+    "symdiff-valv9-0944",
+    "symdiff-valv9-0945",
+    "symdiff-valv9-0950",
+    "symdiff-valv9-0962",
+    "symdiff-valv9-0966",
+    "symdiff-valv9-0973",
+    "symdiff-valv9-0974",
+    "symdiff-valv9-0979",
+    "symdiff-valv9-0988",
+    "symdiff-valv9-0997",
+    "symdiff-valv9-0999",
+    "symdiff-valv9-1004",
+    "symdiff-valv9-1005",
+    "symdiff-valv9-1007",
+    "symdiff-valv9-1016",
+    "symdiff-valv9-1018"
+   ]
+  },
+  "symbolicgpt-test-sets": {
+   "trivial": [
+    "sgpt-1v-020",
+    "sgpt-1v-047",
+    "sgpt-1v-074",
+    "sgpt-1v-083",
+    "sgpt-1v-085",
+    "sgpt-1v-089",
+    "sgpt-1v-092",
+    "sgpt-1v-095",
+    "sgpt-1v-127",
+    "sgpt-1v-131",
+    "sgpt-1v-139",
+    "sgpt-1v-140",
+    "sgpt-1v-148",
+    "sgpt-1v-175",
+    "sgpt-1v-180",
+    "sgpt-1v-208",
+    "sgpt-1v-209",
+    "sgpt-1v-213",
+    "sgpt-1v-240",
+    "sgpt-1v-254",
+    "sgpt-1v-299",
+    "sgpt-1v-304",
+    "sgpt-1v-307",
+    "sgpt-1v-310",
+    "sgpt-1v-327",
+    "sgpt-1v-333",
+    "sgpt-1v-346",
+    "sgpt-1v-374",
+    "sgpt-1v-387",
+    "sgpt-1v-416",
+    "sgpt-1v-431",
+    "sgpt-1v-435",
+    "sgpt-1v-443",
+    "sgpt-1v-466",
+    "sgpt-1v-468",
+    "sgpt-1v-519",
+    "sgpt-1v-535",
+    "sgpt-1v-578",
+    "sgpt-1v-587",
+    "sgpt-1v-603",
+    "sgpt-1v-625",
+    "sgpt-1v-639",
+    "sgpt-1v-642",
+    "sgpt-1v-686",
+    "sgpt-1v-710",
+    "sgpt-1v-734",
+    "sgpt-1v-744",
+    "sgpt-1v-746",
+    "sgpt-1v-773",
+    "sgpt-1v-779",
+    "sgpt-1v-794",
+    "sgpt-1v-803",
+    "sgpt-1v-807",
+    "sgpt-1v-896",
+    "sgpt-1v-898",
+    "sgpt-1v-923",
+    "sgpt-1v-960",
+    "sgpt-2v-024",
+    "sgpt-2v-035",
+    "sgpt-2v-107",
+    "sgpt-2v-163",
+    "sgpt-2v-183",
+    "sgpt-2v-197",
+    "sgpt-2v-201",
+    "sgpt-2v-240",
+    "sgpt-2v-244",
+    "sgpt-2v-264",
+    "sgpt-2v-322",
+    "sgpt-2v-324",
+    "sgpt-2v-334",
+    "sgpt-2v-340",
+    "sgpt-2v-358",
+    "sgpt-2v-392",
+    "sgpt-2v-401",
+    "sgpt-2v-404",
+    "sgpt-2v-405",
+    "sgpt-2v-453",
+    "sgpt-2v-464",
+    "sgpt-2v-478",
+    "sgpt-2v-508",
+    "sgpt-2v-517",
+    "sgpt-2v-536",
+    "sgpt-2v-553",
+    "sgpt-2v-564",
+    "sgpt-2v-576",
+    "sgpt-2v-600",
+    "sgpt-2v-624",
+    "sgpt-2v-650",
+    "sgpt-2v-698",
+    "sgpt-2v-707",
+    "sgpt-2v-739",
+    "sgpt-2v-773",
+    "sgpt-2v-823",
+    "sgpt-2v-825",
+    "sgpt-2v-829",
+    "sgpt-2v-855",
+    "sgpt-2v-865",
+    "sgpt-2v-891",
+    "sgpt-3v-083",
+    "sgpt-3v-089",
+    "sgpt-3v-134",
+    "sgpt-3v-214",
+    "sgpt-3v-226",
+    "sgpt-3v-236",
+    "sgpt-3v-475",
+    "sgpt-3v-481",
+    "sgpt-3v-549",
+    "sgpt-3v-556",
+    "sgpt-3v-578",
+    "sgpt-3v-595",
+    "sgpt-3v-606",
+    "sgpt-3v-610",
+    "sgpt-3v-616",
+    "sgpt-3v-642",
+    "sgpt-3v-654",
+    "sgpt-3v-659",
+    "sgpt-3v-711",
+    "sgpt-3v-722",
+    "sgpt-3v-796",
+    "sgpt-3v-887",
+    "sgpt-gen-d1-042",
+    "sgpt-gen-d1-059",
+    "sgpt-gen-d1-074",
+    "sgpt-gen-d1-084",
+    "sgpt-gen-d1-148",
+    "sgpt-gen-d2-019",
+    "sgpt-gen-d2-042",
+    "sgpt-gen-d2-086",
+    "sgpt-gen-d2-143",
+    "sgpt-gen-d2-178",
+    "sgpt-gen-d3-112",
+    "sgpt-gen-d3-140",
+    "sgpt-gen-d3-189",
+    "sgpt-gen-d4-084",
+    "sgpt-gen-d5-004",
+    "sgpt-gen-d5-007",
+    "sgpt-gen-d5-084",
+    "sgpt-gen-d5-106",
+    "sgpt-gen-d5-121",
+    "sgpt-gen-d5-148",
+    "sgpt-gen-d5-154",
+    "sgpt-gen-d5-172"
+   ]
+  },
+  "erbench-eponymous": {
+   "trivial": [
+    "eponymous_22_alpha0",
+    "eponymous_22_alpha0.5",
+    "eponymous_22_alpha1",
+    "eponymous_44_alpha0",
+    "eponymous_44_alpha0.5",
+    "eponymous_44_alpha1",
+    "eponymous_124_alpha0",
+    "eponymous_124_alpha0.5",
+    "eponymous_124_alpha1",
+    "eponymous_137_alpha0",
+    "eponymous_137_alpha0.5",
+    "eponymous_137_alpha1",
+    "eponymous_197_alpha0",
+    "eponymous_197_alpha0.5",
+    "eponymous_197_alpha1"
+   ]
+  },
+  "soose-fc": {
+   "trivial": [
+    "SOOSE-FC-030",
+    "SOOSE-FC-049",
+    "SOOSE-FC-064",
+    "SOOSE-FC-074",
+    "SOOSE-FC-115",
+    "SOOSE-FC-133",
+    "SOOSE-FC-169",
+    "SOOSE-FC-035.ood",
+    "SOOSE-FC-064.ood",
+    "SOOSE-FC-074.ood",
+    "SOOSE-FC-115.ood",
+    "SOOSE-FC-169.ood"
+   ]
+  },
+  "soose-wc": {
+   "trivial": [
+    "SOOSE-WC-065",
+    "SOOSE-WC-126",
+    "SOOSE-WC-135",
+    "SOOSE-WC-065.ood"
+   ]
+  },
+  "llm-srbench": {
+   "trivial": [
+    "lsr_synth/chem_react/CRK2/test",
+    "lsr_synth/chem_react/CRK2/ood_test",
+    "lsr_synth/chem_react/CRK9/test",
+    "lsr_synth/chem_react/CRK9/ood_test",
+    "lsr_synth/bio_pop_growth/BPG6/test",
+    "lsr_synth/bio_pop_growth/BPG6/ood_test",
+    "lsr_synth/bio_pop_growth/BPG10/test",
+    "lsr_synth/bio_pop_growth/BPG10/ood_test",
+    "lsr_synth/matsci/MatSci13/test",
+    "lsr_synth/matsci/MatSci13/ood_test"
+   ]
+  },
+  "nsrwh-train-nc": {
+   "trivial": [
+    "train_nc-023",
+    "train_nc-131",
+    "train_nc-247",
+    "train_nc-252",
+    "train_nc-265"
+   ]
+  },
+  "reproduction-bias-not-included-test-sets": {
+   "trivial": [
+    "not_included-033",
+    "not_included-070",
+    "baseline-013",
+    "baseline-069",
+    "baseline-087",
+    "baseline-090",
+    "baseline-103",
+    "baseline-110"
+   ]
+  },
+  "nsrwh-train-wc": {
+   "trivial": [
+    "train_wc-001",
+    "train_wc-023",
+    "train_wc-051",
+    "train_wc-131",
+    "train_wc-172",
+    "train_wc-208",
+    "train_wc-247",
+    "train_wc-265",
+    "train_wc-283",
+    "train_wc-297"
+   ]
+  },
+  "erbench-phybench": {
+   "trivial": [
+    "phybench_4_alpha0",
+    "phybench_4_alpha0.5",
+    "phybench_4_alpha1",
+    "phybench_31_alpha0",
+    "phybench_31_alpha0.5",
+    "phybench_31_alpha1",
+    "phybench_32_alpha0",
+    "phybench_32_alpha0.5",
+    "phybench_32_alpha1",
+    "phybench_33_alpha0",
+    "phybench_33_alpha0.5",
+    "phybench_33_alpha1",
+    "phybench_47_alpha0",
+    "phybench_47_alpha0.5",
+    "phybench_47_alpha1",
+    "phybench_72_alpha0",
+    "phybench_72_alpha0.5",
+    "phybench_72_alpha1",
+    "phybench_75_alpha0",
+    "phybench_75_alpha0.5",
+    "phybench_75_alpha1"
+   ]
+  },
+  "rils-rols-random-instances": {
+   "trivial": [
+    "random_03_01_0010000_00",
+    "random_03_01_0010000_02",
+    "random_03_01_0010000_03",
+    "random_03_01_0010000_04",
+    "random_04_01_0010000_04",
+    "random_07_01_0010000_03",
+    "random_08_01_0010000_01",
+    "random_13_01_0010000_02",
+    "random_15_02_0010000_04"
+   ]
+  },
+  "livermore2": {
+   "trivial": [
+    "Livermore2-Vars2-25",
+    "Livermore2-Vars4-5",
+    "Livermore2-Vars5-5",
+    "Livermore2-Vars7-8"
+   ]
+  },
+  "fastsrb": {
+   "trivial": [
+    "III.12.43",
+    "I.29.4",
+    "I.34.27",
+    "I.15.3t",
+    "III.4.33",
+    "B15"
+   ]
+  },
+  "scrbenchmark": {
+   "trivial": [
+    "FeynmanICh15Eq3t",
+    "FeynmanIIICh4Eq33",
+    "FeynmanBonus15",
+    "FeynmanICh29Eq4",
+    "FeynmanICh34Eq27",
+    "FeynmanIIICh12Eq43"
+   ]
+  },
+  "srsd-dummy": {
+   "trivial": [
+    "III.12.43",
+    "I.29.4",
+    "I.34.27",
+    "I.15.3t",
+    "III.4.33",
+    "B15"
+   ]
+  },
+  "erbench-densities": {
+   "trivial": [
+    "Moyal_alpha0",
+    "Moyal_alpha0.5",
+    "Moyal_alpha1",
+    "Boltzmann_alpha0",
+    "Boltzmann_alpha0.5",
+    "Boltzmann_alpha1"
+   ]
+  },
+  "srbench-2021-blackbox": {
+   "low-signal": [
+    "1201_BNG_breastTumor",
+    "1595_poker"
+   ],
+   "ordered": [
+    "503_wind",
+    "561_cpu"
+   ]
+  },
+  "ai-feynman-database-100-main-equations": {
+   "trivial": [
+    "I.12.1",
+    "I.12.2",
+    "I.39.22",
+    "I.41.16",
+    "II.34.11",
+    "II.37.1",
+    "III.4.32",
+    "III.4.33",
+    "III.12.43",
+    "III.13.18"
+   ]
+  },
+  "geobench": {
+   "trivial": [
+    "circle-1",
+    "rectangle-3",
+    "cuboid-4"
+   ]
+  },
+  "scilaws-real": {
+   "trivial": [
+    "gutenberg_richter_b_value_usgs__gr_freq_mag"
+   ],
+   "low-signal": [
+    "bns_merger_disk_ejecta__Mej",
+    "drosophila_isolation_by_distance_dest__M_stat"
+   ],
+   "tiny": [
+    "gutenberg_richter_b_value_usgs__gr_freq_mag"
+   ]
+  },
+  "srbench-2021-blackbox-restricted": {
+   "target-leak": [
+    "527_analcatdata_election2000"
+   ],
+   "ordered": [
+    "519_vinnie",
+    "556_analcatdata_apnea2",
+    "557_analcatdata_apnea1",
+    "663_rabe_266",
+    "695_chatfield_4",
+    "712_chscase_geyser1"
+   ]
+  },
+  "sr-dynamical-systems": {
+   "trivial": [
+    "pendulum_theta",
+    "pendulum_omega",
+    "sir_recovered",
+    "sirv_recovered",
+    "sirv_vaccinated",
+    "seir_recovered",
+    "seird_recovered",
+    "seird_deceased"
+   ]
+  },
+  "llm-lex-random-mathematica-functions-points": {
+   "trivial": [
+    "llmlex-09",
+    "llmlex-11"
+   ]
+  },
+  "korns": {
+   "trivial": [
+    "Korns-1"
+   ]
+  },
+  "gecco-2013-2017-real": {
+   "low-signal": [
+    "FFR",
+    "PPB",
+    "LD50"
+   ],
+   "tiny": [
+    "PPB",
+    "LD50"
+   ],
+   "ordered": [
+    "ENC",
+    "ENH"
+   ]
+  },
+  "heuristiclab-real-world": {
+   "low-signal": [
+    "Temp1"
+   ]
+  },
+  "srbench-2021-strogatz": {
+   "trivial": [
+    "strogatz_vdp2"
+   ]
+  },
+  "kim-et-al-eql-benchmark-functions": {
+   "trivial": [
+    "Kim-1"
+   ]
+  },
+  "ffx-high-dimensional-circuits": {
+   "low-signal": [
+    "ffx-voltref-dvref",
+    "ffx-voltref-pwr"
+   ]
+  },
+  "srbench-2.0-first-principles": {
+   "tiny": [
+    "first_principles_bode",
+    "first_principles_kepler",
+    "first_principles_tully_fisher"
+   ],
+   "ordered": [
+    "first_principles_leavitt"
+   ]
+  },
+  "eql-cart-pendulum": {
+   "trivial": [
+    "eql-cartpendulum-y1",
+    "eql-cartpendulum-y1.extrap",
+    "eql-cartpendulum-y2",
+    "eql-cartpendulum-y2.extrap"
+   ]
+  },
+  "coevolved-fitness-predictors-test-problems-points": {
+   "trivial": [
+    "Random-1"
+   ],
+   "tiny": [
+    "Random-5"
+   ]
+  },
+  "errless-synthetic-posterior-set": {
+   "trivial": [
+    "synthetic_7"
+   ]
+  },
+  "gsgp-real-world": {
+   "low-signal": [
+    "ppb",
+    "ld50"
+   ],
+   "tiny": [
+    "ppb",
+    "ld50"
+   ]
+  },
+  "srbench-2.0-blackbox-restricted": {
+   "ordered": [
+    "557_analcatdata_apnea1"
+   ]
+  },
+  "eql-pendulum-vector-field": {
+   "trivial": [
+    "eql-pendulum-y1",
+    "eql-pendulum-y1.extrap-near",
+    "eql-pendulum-y1.extrap-far"
+   ]
+  },
+  "gfn-sr-noisy-near-twin-set": {
+   "trivial": [
+    "f2",
+    "g2"
+   ]
+  },
+  "ai-descartes-real-data": {
+   "low-signal": [
+    "kepler-exoplanets",
+    "langmuir-table-ix"
+   ],
+   "tiny": [
+    "kepler-solar-system",
+    "kepler-binary-stars",
+    "relativistic-time-dilation",
+    "langmuir-table-ix",
+    "langmuir-sun-et-al"
+   ]
+  },
+  "dimensionless-learning": {
+   "ordered": [
+    "rayleigh_benard_Nu",
+    "rayleigh_benard_q",
+    "porosity_Phi"
+   ]
+  },
+  "symbolfit-lhc-spectra": {
+   "low-signal": [
+    "dimuon"
+   ],
+   "tiny": [
+    "dimuon"
+   ]
+  },
+  "pysr-empiricalbench": {
+   "tiny": [
+    "kepler",
+    "bode"
+   ]
+  },
+  "scilaws-real-share-alike": {
+   "low-signal": [
+    "binary_pulsar_post_keplerian_atnf__PBDOT"
+   ]
+  },
+  "bms-real-data": {
+   "low-signal": [
+    "RDFunding",
+    "Trepat"
+   ],
+   "tiny": [
+    "Trepat"
+   ]
+  },
+  "evogp-uci": {
+   "target-leak": [
+    "daily_demand_forecasting_orders"
+   ]
+  },
+  "langlaw-perovskites": {
+   "low-signal": [
+    "langlaw_oer_activity"
+   ],
+   "tiny": [
+    "langlaw_oer_activity"
+   ],
+   "ordered": [
+    "hierbosss_oer_1080"
+   ]
+  },
+  "mcdermott-predictive-modelling": {
+   "low-signal": [
+    "median-oral-lethal-dose",
+    "plasma-protein-binding"
+   ],
+   "tiny": [
+    "median-oral-lethal-dose",
+    "plasma-protein-binding"
+   ]
+  },
+  "ai-hilbert-real-data": {
+   "tiny": [
+    "kepler_binary_stars",
+    "relativistic_time_dilation"
+   ]
+  },
+  "srbench-2.0-first-principles-restricted": {
+   "tiny": [
+    "first_principles_absorption"
+   ],
+   "ordered": [
+    "first_principles_absorption",
+    "first_principles_supernovae_zr"
+   ]
+  },
+  "mcdermott-table-1-predictive-modelling-sets-points": {
+   "low-signal": [
+    "dyfor-simulated"
+   ],
+   "tiny": [
+    "dyfor-simulated"
+   ]
+  },
+  "gecco-2013-2017-real-share-alike": {
+   "ordered": [
+    "OZO"
+   ]
+  },
+  "lasr-bigbench": {
+   "low-signal": [
+    "bigbench_mcq_grade"
+   ]
+  },
+  "torchsisso-specific-energy": {
+   "tiny": [
+    "Specific_Energy"
+   ]
+  }
+ }
+}

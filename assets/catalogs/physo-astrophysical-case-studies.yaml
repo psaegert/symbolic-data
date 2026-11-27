@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "physo-astrophysical-case-studies"
   tags: {"origin": "science formula", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 3, "text": "srbf runs 9 of the 12 problems here; the NFW profile and the expansion law are in 'PhySO astrophysics', and the Pantheon supernova task fits a function through an integral, not y = f(x)."}]
   license: "CC BY 4.0 (Tenachi et al. 2023, ApJ 959:99, arXiv:2303.03192, Appendices A-B) + MIT (WassimTenachi/PhySO)"
   citation: {"paper": {"short": "Tenachi et al. 2023", "title": "Deep Symbolic Regression for Physics Guided by Units Constraints: Toward the Automated Discovery of Physical Laws", "venue": "The Astrophysical Journal 959(2):99", "url": "https://doi.org/10.3847/1538-4357/ad014c"}}
+  srbf_changes: [{"kind": "part", "problems": 3, "text": "srbf runs 9 of the 12 problems here; the NFW profile and the expansion law are in 'PhySO astrophysics', and the Pantheon supernova task fits a function through an integral, not y = f(x)."}]
   description: PhySO astrophysical case studies
   sources:
   - https://arxiv.org/abs/2303.03192
@@ -22,9 +22,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   relativistic-energy:
     raw: m*10**2/sqrt(1 - v**2/10**2)

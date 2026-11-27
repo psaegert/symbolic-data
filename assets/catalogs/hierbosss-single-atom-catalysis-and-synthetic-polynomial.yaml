@@ -3,9 +3,9 @@ metadata:
   version: 1
   benchmark: "hierbosss"
   tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 1 of the 2 HierBOSSS problems here (the synthetic polynomial); the catalysis data are in 'HierBOSSS single-atom catalysis'."}]
   license: "CC BY 4.0 (Roy et al. 2025, HierBOSSS, arXiv:2509.19710v1) + MIT (Roy-SR-007/HierBOSSS)"
   citation: {"paper": {"short": "Roy et al. 2025", "title": "Probabilistic Symbolic Regression for Equation Discovery via Operator-induced and Regularized Symbolic Forests", "venue": "arXiv preprint (v1)", "url": "https://arxiv.org/abs/2509.19710"}, "data": {"short": "HierBOSSS_simulated_example.R (Wayback; repository deleted)", "title": "Roy-SR-007/HierBOSSS simulated example script (MIT)", "url": "https://web.archive.org/web/20260609230815/https://github.com/Roy-SR-007/HierBOSSS/blob/c9c72931e18ce0cb791c42ff6a6b214dcab28d75/HierBOSSS_simulated_example.R"}}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 1 of the 2 HierBOSSS problems here (the synthetic polynomial); the catalysis data are in 'HierBOSSS single-atom catalysis'."}]
   description: HierBOSSS single-atom catalysis and synthetic polynomial
   sources:
   - https://arxiv.org/abs/2509.19710v1
@@ -24,9 +24,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   hierbosss-v1-sim-eq5.2:
     raw: 5*(x1 + x2)*x3

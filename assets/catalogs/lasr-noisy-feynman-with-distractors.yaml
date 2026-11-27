@@ -3,10 +3,11 @@ metadata:
   display_name: "lasr-noisy-feynman-with-distractors*"
   version: 1
   benchmark: "lasr-noisy-feynman-with-distractors"
-  tags: {"origin": "science formula", "tags": ["dummy inputs"]}
-  srbf_changes: [{"kind": "filled", "problems": 100, "text": "The paper adds 'random noise variables' without saying how many or how they are distributed, and the authors' released code switches them off for Feynman; srbf adds them with the authors' recipe from their other sets (pad to 11 inputs, extra inputs uniform on [1, 20]) and keeps the formula's own inputs in the first columns where that recipe shuffles the column order."}]
+  tags: {"origin": "science formula", "tags": ["dummy inputs", "srbf-modified"]}
   license: "Apache-2.0 (trishullab/LibraryAugmentedSymbolicRegression.jl; Grayeli et al. 2024, arXiv:2409.09359)"
   citation: {"paper": {"short": "Grayeli et al. 2024", "title": "Symbolic Regression with a Learned Concept Library", "venue": "NeurIPS 2024", "url": "https://arxiv.org/abs/2409.09359"}, "data": {"short": "GitHub trishullab/LibraryAugmentedSymbolicRegression.jl@de6b22d", "title": "LaSR data/FeynmanEquations.csv + experiments dummy recipe (Apache-2.0)", "url": "https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/data/FeynmanEquations.csv"}}
+  srbf_changes: [{"kind": "filled", "problems": 100, "text": "The paper adds 'random noise variables' without saying how many or how they are distributed, and the authors' released code switches them off for Feynman; srbf adds them with the authors' recipe from their other sets (pad to 11 inputs, extra inputs uniform on [1, 20]) and keeps the formula's own inputs in the first columns where that recipe shuffles the column order."}]
+  srbf_notes: ["Paper and code differ: The released code runs 97 of the 100 equations; srbf runs all 100, as the paper's results table does."]
   description: LaSR noisy Feynman with distractors
   sources:
   - https://arxiv.org/abs/2409.09359
@@ -28,9 +29,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   I.6.2a:
     raw: exp(-theta**2/2)/sqrt(2*pi)
