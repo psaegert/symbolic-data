@@ -120,6 +120,7 @@ def npz_facts(path: Path) -> dict[str, Any]:
 
 
 def facts(counts: Path) -> list[dict[str, Any]]:
+    deviations = {d["catalog"]: d for d in json.loads((Path(__file__).resolve().parent / "tags" / "deviations.json").read_text())}
     inventory: dict[str, Counter[str]] = {}
     for p in paths.testspecs():
         inventory.setdefault(p["catalog"], Counter())[p["test_kind"]] += 1
@@ -127,7 +128,7 @@ def facts(counts: Path) -> list[dict[str, Any]]:
     for r in json.load(open(counts))["rows"]:
         path = Path(r["file"])
         f = yaml_facts(path) if path.suffix == ".yaml" else npz_facts(path)
-        tag = (re.findall(r"sets/([\w-]+)\.json", str(r.get("source_record") or "")) or [None])[0]
+        tag = r.get("set") or (re.findall(r"sets/([\w-]+)\.json", str(r.get("source_record") or "")) or [None])[0]
         sure = []                                           # tags the files settle
         if f.get("with_dummy_input"):
             sure.append("dummy inputs")
@@ -135,7 +136,7 @@ def facts(counts: Path) -> list[dict[str, Any]]:
             sure.append("integer inputs")
         if f.get("pinned_points"):
             sure.append("fixed points")
-        if "*" in str(f["display_name"]) or f.get("modified_by_srbf"):
+        if starred_by(deviations.get(r["name"]) or {}):     # derived from the deviations (2026-11-28), as the '*' is
             sure.append("srbf-modified")
         if f.get("extra_test_entries") or (r["kind"] == "formula" and len(r["subsets"]) > 1 and f.get("with_test_block")
                                            and set(r["subsets"]) & {"iid", "ood", "in-range", "wide", "beyond", "id"}):
@@ -200,31 +201,64 @@ def merge(facts_path: Path, judged_path: Path) -> list[dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------------------------------------- apply
-def _tags_line(row: dict[str, Any]) -> str:
-    return "  tags: " + json.dumps({"origin": row["origin"], "tags": row["tags"]}, ensure_ascii=False) + "\n"
+# the metadata keys apply writes, in their order after ``version`` (each one flow line); the keys it removes from the
+# public metadata (internal record ids; the 2026-11-28 audit)
+KEYS = ("benchmark", "tags", "license", "citation", "srbf_changes", "srbf_notes")
+REMOVED = ("source_record",)
+
+
+def _block(text: str, key: str) -> re.Match | None:
+    """A top-level metadata key's line and its continuation lines (deeper-indented, as yaml wraps a long value)."""
+    return re.search(rf"(?m)^  {key}:(?: .*)?\n(?:(?:    | {{5,}}).*\n)*", text)
 
 
 def _set_line(text: str, key: str, line: str, after: str) -> str:
-    """The metadata's ``key`` line replaced by ``line``, or inserted after its ``after`` line."""
-    old = re.search(rf"(?m)^  {key}: .*\n", text)
+    """The metadata's ``key`` (with its continuation lines) replaced by ``line``, or inserted after its ``after``
+    key; an empty ``line`` removes it."""
+    old = _block(text, key)
     if old:
-        return text.replace(old.group(0), line, 1)
-    return re.sub(rf"(?m)^(  {after}: .*\n)", lambda m: m.group(1) + line, text, count=1)
+        return text[:old.start()] + line + text[old.end():]
+    if not line:
+        return text
+    anchor = _block(text, after)
+    return text[:anchor.end()] + line + text[anchor.end():] if anchor else text
+
+
+def _flow(key: str, value: Any) -> str:
+    return f"  {key}: " + json.dumps(value, ensure_ascii=False) + "\n"
+
+
+def starred(display: str, star: bool | None) -> str:
+    """The display name with srbf's '*' (it changed or filled something; deviations.json) or without it."""
+    base = display.rstrip("*").rstrip()
+    return base + "*" if star else base
+
+
+def values(row: dict[str, Any]) -> dict[str, Any]:
+    """The metadata values a row sets (None: leave the key as it is)."""
+    return {"benchmark": row.get("benchmark"), "tags": {"origin": row["origin"], "tags": row["tags"]},
+            "license": row.get("license"), "citation": row.get("citation"), "srbf_changes": row.get("srbf_changes"),
+            "srbf_notes": row.get("srbf_notes")}
 
 
 def apply_yaml(path: Path, row: dict[str, Any], published: dict[str, int]) -> str:
-    """Write the tags as one flow line after the metadata's ``version`` (and the license after them); bump a published
-    version once."""
+    """Write each key of KEYS as one flow line after the metadata's ``version``, remove REMOVED, and set the display
+    name's star; bump a published version once."""
     before = path.read_text()
-    text = _set_line(before, "tags", _tags_line(row), after="version")
-    if row.get("license"):
-        text = _set_line(text, "license", "  license: " + json.dumps(row["license"], ensure_ascii=False) + "\n", "tags")
-    if row.get("citation"):
-        text = _set_line(text, "citation", "  citation: " + json.dumps(row["citation"], ensure_ascii=False) + "\n",
-                         "license" if row.get("license") else "tags")
-    if row.get("srbf_changes") is not None:
-        text = _set_line(text, "srbf_changes", "  srbf_changes: " + json.dumps(row["srbf_changes"], ensure_ascii=False) + "\n",
-                         "tags")
+    text, after = before, "version"
+    for key, value in values(row).items():
+        if value is not None:
+            text = _set_line(text, key, _flow(key, value) if value != [] or key != "srbf_notes" else "", after)
+        if _block(text, key):
+            after = key
+    for key in REMOVED:
+        text = _set_line(text, key, "", "version")
+    if row.get("star") is not None:
+        head = yaml.safe_load(text.split("\nexpressions:", 1)[0])["metadata"]
+        display = head.get("display_name") or head["name"]
+        new = starred(display, row["star"])
+        if new != head["name"] or head.get("display_name"):
+            text = _set_line(text, "display_name", _flow("display_name", new) if new != head["name"] else "", "name")
     if text == before:
         return "unchanged"
     m = re.search(r"(?m)^  name: (\S+)$", text)
@@ -245,14 +279,18 @@ def apply_npz(path: Path, row: dict[str, Any]) -> str:
     arrays = {k: z[k] for k in z.files}
     meta = json.loads(str(arrays["_meta"]))
     md = meta["catalog"].setdefault("meta", {})
-    tags = {"origin": row["origin"], "tags": row["tags"]}
-    keys = ("license", "citation", "srbf_changes")
-    if md.get("tags") == tags and all(md.get(k) == (row.get(k) if row.get(k) is not None else md.get(k)) for k in keys):
+    before = json.dumps(md, sort_keys=True)
+    for key, value in values(row).items():
+        if key == "srbf_notes" and value == []:
+            md.pop(key, None)
+        elif value is not None:
+            md[key] = value
+    for key in REMOVED:
+        md.pop(key, None)
+    if row.get("star") is not None:
+        md["display_name"] = starred(md.get("display_name") or meta["catalog"]["name"], row["star"])
+    if json.dumps(md, sort_keys=True) == before:
         return "unchanged"
-    md["tags"] = tags
-    for key in keys:
-        if row.get(key) is not None:
-            md[key] = row[key]
     arrays["_meta"] = np.array(json.dumps(meta))
     tmp = path.with_name(path.stem + ".tmp.npz")
     np.savez(tmp, **arrays)
@@ -260,33 +298,58 @@ def apply_npz(path: Path, row: dict[str, Any]) -> str:
     return "written"
 
 
+def _rows(path: Path | None) -> list[dict[str, Any]]:
+    return json.load(open(path)) if path and path.exists() else []
+
+
 def apply(tags_path: Path, published_paths: list[Path], licenses_path: Path | None = None,
-          citations_path: Path | None = None, deviations_path: Path | None = None) -> None:
+          citations_path: Path | None = None, deviations_path: Path | None = None,
+          benchmarks_path: Path | None = None) -> None:
     published: dict[str, int] = {}
     for p in published_paths:
         for name, v in json.load(open(p)).items():
             if isinstance(v, dict) and v.get("default_version") is not None:
                 published[name] = int(max(int(x) for x in (v.get("versions") or {"1": None})))
     # the license pass (tags/licenses.json): the license line of every catalog that may be shared (not where unclear)
-    licenses = {r["catalog"]: r["license"] for r in json.load(open(licenses_path))
-                if r["redistribute"].startswith("yes")} \
-        if licenses_path and licenses_path.exists() else {}
+    licenses = {r["catalog"]: r["license"] for r in _rows(licenses_path) if r["redistribute"].startswith("yes")}
     # the citations (tags/citations.json): the paper and the dataset of each catalog, where they exist
-    citations = {c["catalog"]: {k: c[k] for k in ("paper", "data") if c.get(k)}
-                 for c in json.load(open(citations_path))} if citations_path and citations_path.exists() else {}
-    # the deviation audit (tags/deviations.json): how srbf's version differs from the authors' benchmark
-    changes = {c["catalog"]: c["changes"] for c in json.load(open(deviations_path))} \
-        if deviations_path and deviations_path.exists() else {}
+    citations = {c["catalog"]: {k: c[k] for k in ("paper", "data") if c.get(k)} for c in _rows(citations_path)}
+    # the deviation audit (tags/deviations.json): how srbf's version differs from the authors' benchmark; anything
+    # beyond running part of it earns the '*' (stars); a version that follows the defining publication, or the rule
+    # for paper-vs-code conflicts, is a visible note without a star (owner 2026-11-28)
+    deviations = {c["catalog"]: c for c in _rows(deviations_path)}
+    # the benchmark each catalog belongs to (tags/benchmarks.json): srbf averages by benchmark (owner 2026-11-28)
+    benchmark = {c: b["benchmark"] for b in _rows(benchmarks_path) for c in b["catalogs"]}
     done = Counter()
     for row in json.load(open(tags_path)):
+        dev = deviations.get(row["catalog"])
         row = {**row, "license": licenses.get(row["catalog"]), "citation": citations.get(row["catalog"]) or None,
-               "srbf_changes": changes.get(row["catalog"])}
+               "srbf_changes": dev["changes"] if dev else None, "srbf_notes": notes_of(dev) if dev else None,
+               "star": starred_by(dev) if dev else None, "benchmark": benchmark.get(row["catalog"])}
+        if benchmarks_path and row["benchmark"] is None:
+            raise SystemExit(f"{row['catalog']}: no benchmark in {benchmarks_path}")
         path = Path(row["file"]) if Path(row["file"]).is_absolute() else paths.REPO / row["file"]
         note = apply_yaml(path, row, published) if path.suffix == ".yaml" else apply_npz(path, row)
         done[note.split(",")[0]] += 1
         if "version" in note:
             print(f"{row['catalog']}: {note}", flush=True)
     print(dict(done))
+
+
+STAR_KINDS = ("changed", "filled", "kept")      # a change of these kinds earns the '*'; "part" (srbf runs part) does not
+
+
+def starred_by(dev: dict[str, Any]) -> bool:
+    """Whether srbf's version carries the '*': it changes, fills in or keeps-as-published-but-flags something."""
+    return any(c["kind"] in STAR_KINDS for c in dev.get("changes") or [])
+
+
+def notes_of(dev: dict[str, Any]) -> list[str]:
+    """The catalog's visible notes without a star: where srbf follows the defining publication, and where the rule
+    for paper-vs-code conflicts applied (follow what produced the authors' published results; the paper's version
+    noted)."""
+    return [*(f"Follows the defining publication: {t}" for t in dev.get("follows_first_publication") or []),
+            *(f"Paper and code differ: {t}" for t in dev.get("paper_vs_code") or [])]
 
 
 def main() -> None:
@@ -305,6 +368,7 @@ def main() -> None:
     a3.add_argument("--licenses", default=str(Path(__file__).resolve().parent / "tags" / "licenses.json"))
     a3.add_argument("--citations", default=str(Path(__file__).resolve().parent / "tags" / "citations.json"))
     a3.add_argument("--deviations", default=str(Path(__file__).resolve().parent / "tags" / "deviations.json"))
+    a3.add_argument("--benchmarks", default=str(Path(__file__).resolve().parent / "tags" / "benchmarks.json"))
     a = ap.parse_args()
     if a.cmd == "facts":
         rows = facts(Path(a.counts))
@@ -318,7 +382,8 @@ def main() -> None:
               f"tags {dict(Counter(t for r in rows for t in r['tags']))}; "
               f"below half {dict(Counter(t for r in rows for t in r['below_half']))} -> {a.out}")
     else:
-        apply(Path(a.tags), [Path(p) for p in a.published], Path(a.licenses), Path(a.citations), Path(a.deviations))
+        apply(Path(a.tags), [Path(p) for p in a.published], Path(a.licenses), Path(a.citations), Path(a.deviations),
+              Path(a.benchmarks))
 
 
 if __name__ == "__main__":

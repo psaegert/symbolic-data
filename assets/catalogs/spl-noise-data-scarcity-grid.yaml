@@ -1,6 +1,7 @@
 metadata:
   name: spl-noise-data-scarcity-grid
   version: 1
+  benchmark: "spl-noise-data-scarcity-grid"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: []
   license: "facts only: one formula and its range from Sun et al. 2023 (Symbolic Physics Learner, ICLR, arXiv:2205.13134v2, a CC BY-SA 4.0 paper)"
@@ -18,7 +19,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-150.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

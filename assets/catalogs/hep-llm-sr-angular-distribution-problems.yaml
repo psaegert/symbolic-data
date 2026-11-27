@@ -1,12 +1,13 @@
 metadata:
   name: hep-llm-sr-angular-distribution-problems
   version: 1
+  benchmark: "hep-llm-sr-angular-distribution-problems"
   tags: {"origin": "science formula", "tags": ["extrapolation"]}
   srbf_changes: [{"kind": "part", "problems": 3, "text": "srbf runs the 2 formula problems of the paper; its 3 data tasks were never published."}, {"kind": "changed", "problems": 2, "text": "The authors work with binned data (30 bins in cos theta); srbf samples cos theta uniformly at random, and tests the out-of-domain problem on the 30 bin centres."}]
   license: "CC BY 4.0 (Morales-Alvarado 2025, arXiv:2510.03397)"
   citation: {"paper": {"short": "Morales-Alvarado 2025", "title": "Foundation models for equation discovery in high energy physics", "venue": "arXiv preprint arXiv:2510.03397", "url": "https://arxiv.org/abs/2510.03397"}}
   description: HEP LLM-SR angular-distribution problems
-  display_name: HEP LLM-SR angular-distribution problems*
+  display_name: "HEP LLM-SR angular-distribution problems*"
   modified_by_srbf: 'the physical constants are priced as numbers: alpha = 0.00755 (the MadGraph default the authors quote
     in their earlier paper, arXiv:2508.00989), s = 10^6 GeV^2 (sqrt(s) = 1 TeV) and the unit conversion (hbar c)^2 = 0.3893793721e9
     pb GeV^2; a method recovers the law with their product as one constant'
@@ -24,7 +25,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-127.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

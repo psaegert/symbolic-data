@@ -1,6 +1,7 @@
 metadata:
   name: kan-toy-functions
   version: 1
+  benchmark: "kan-toy-functions"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: []
   license: "CC BY 4.0 (Liu et al. 2024, KAN, arXiv:2404.19756) + MIT (KindXiaoming/pykan)"
@@ -23,7 +24,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-66.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

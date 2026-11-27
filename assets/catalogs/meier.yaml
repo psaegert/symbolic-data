@@ -1,6 +1,7 @@
 metadata:
   name: meier
   version: 2
+  benchmark: "meier"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: [{"kind": "part", "problems": 2, "text": "srbf runs 2 of the 4 functions of Meier et al. (2013): the other two are Koza's quintic and sextic, run in srbf's Koza set."}]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"

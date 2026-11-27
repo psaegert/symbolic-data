@@ -1,6 +1,7 @@
 metadata:
   name: gplearn-documentation-examples
   version: 1
+  benchmark: "gplearn-documentation-examples"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 1 of the 2 gplearn examples here (the toy formula); the diabetes data example is in 'gplearn documentation example (diabetes)'."}]
   license: "BSD-3-Clause (trevorstephens/gplearn documentation example)"
@@ -28,7 +29,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-146.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

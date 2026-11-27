@@ -1,6 +1,7 @@
 metadata:
   name: sym-q-ai-feynman-with-drift-terms
   version: 1
+  benchmark: "sym-q-ai-feynman-with-drift-terms"
   tags: {"origin": "science formula", "tags": []}
   srbf_changes: [{"kind": "part", "problems": 15, "text": "srbf runs the 15 AI-Feynman expressions Sym-Q evaluates, without the drift terms of its drift experiment. Those problems cannot be rebuilt: Sym-Q names nine kinds of drift but not the equations it added them to (only 'all equations with three or fewer variables, excluding those exceeding the model's size limits') nor the input each drift uses."}]
   license: "MIT (EPFL-IMOS/Sym-Q) + CC0 1.0 (Tian et al., arXiv:2402.05306)"
@@ -30,7 +31,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/interrupted-9.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

@@ -1,6 +1,7 @@
 metadata:
   name: kan-feynman-no-units-subset
   version: 1
+  benchmark: "kan-feynman-no-units-subset"
   tags: {"origin": "science formula", "tags": []}
   srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 1 of the 27 formulas: 20 have no input range from the authors, and 6 are identical to problems srbf runs in its Feynman set."}]
   license: "CC BY 4.0 (Liu et al. 2024, KAN, arXiv:2404.19756, Table 2)"
@@ -21,7 +22,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/interrupted-6.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

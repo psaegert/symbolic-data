@@ -1,6 +1,7 @@
 metadata:
   name: jin
   version: 2
+  benchmark: "jin"
   tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
   srbf_changes: []
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"

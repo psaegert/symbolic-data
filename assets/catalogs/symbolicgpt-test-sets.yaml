@@ -1,6 +1,8 @@
 metadata:
   name: symbolicgpt-test-sets
+  display_name: "symbolicgpt-test-sets*"
   version: 1
+  benchmark: "symbolicgpt-test-sets"
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "dummy inputs"]}
   srbf_changes: [{"kind": "part", "problems": 2792, "text": "srbf runs 988 problems of a fixed sample of 1,024 of the 3,780 published test formulas (the paper speaks of 4,000): 21 have no point where they are defined and 15 have no real value at all."}, {"kind": "changed", "problems": 2, "text": "For 2 formulas the authors' test region contains no point where the formula is defined; srbf tests them on the training range."}]
   license: "MIT (mojivalipour/symbolicgpt; HF DataAnalyticsLab/SymbolicGPT)"
@@ -27,7 +29,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-79.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

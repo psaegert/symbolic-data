@@ -1,6 +1,7 @@
 metadata:
   name: constant
   version: 2
+  benchmark: "constant"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: [{"kind": "part", "problems": 2, "text": "srbf runs 8 of the 10 'Constant' problems listed in the DSO repository: Const-Test-1 and -2 are software sanity tests, not benchmark problems."}]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"

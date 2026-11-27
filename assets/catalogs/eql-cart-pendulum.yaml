@@ -1,6 +1,7 @@
 metadata:
   name: eql-cart-pendulum
   version: 1
+  benchmark: "eql-cart-pendulum"
   tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs"]}
   srbf_changes: []
   license: "facts only: equations and input ranges cited from Sahoo, Lampert & Martius 2018 (ICML, arXiv:1806.07259) and their EQL generator; no upstream license"
@@ -20,7 +21,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-157.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

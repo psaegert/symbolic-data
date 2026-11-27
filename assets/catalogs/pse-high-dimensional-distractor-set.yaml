@@ -1,6 +1,7 @@
 metadata:
   name: pse-high-dimensional-distractor-set
   version: 1
+  benchmark: "pse-high-dimensional-distractor-set"
   tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
   srbf_changes: []
   license: "MIT (intell-sci-comput/PSE; Ruan et al. 2026, arXiv:2407.04405)"
@@ -20,7 +21,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-106.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

@@ -1,6 +1,8 @@
 metadata:
   name: livermore
+  display_name: "livermore*"
   version: 2
+  benchmark: "livermore"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: [{"kind": "changed", "problems": 3, "text": "srbf also runs 3 problems that are not in the published Livermore set, taken from a later DSO code release: a new Livermore-19 and exact copies of Livermore-7 and -8 (7a, 8a); as a result the paper's Livermore-19 to -22 appear as Livermore-20 to -23."}]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"

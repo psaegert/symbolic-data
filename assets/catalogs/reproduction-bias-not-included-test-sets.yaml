@@ -1,6 +1,7 @@
 metadata:
   name: reproduction-bias-not-included-test-sets
   version: 1
+  benchmark: "reproduction-bias-not-included-test-sets"
   tags: {"origin": "generated formulas", "tags": []}
   srbf_changes: []
   license: "MIT (Shun-0922/Mem-Bias-NSR; Sato & Sato 2025, arXiv:2505.22081)"
@@ -22,7 +23,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-87.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

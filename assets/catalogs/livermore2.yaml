@@ -1,6 +1,7 @@
 metadata:
   name: livermore2
   version: 2
+  benchmark: "livermore2"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: []
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"

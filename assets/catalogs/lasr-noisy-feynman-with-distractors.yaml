@@ -1,6 +1,8 @@
 metadata:
   name: lasr-noisy-feynman-with-distractors
+  display_name: "lasr-noisy-feynman-with-distractors*"
   version: 1
+  benchmark: "lasr-noisy-feynman-with-distractors"
   tags: {"origin": "science formula", "tags": ["dummy inputs"]}
   srbf_changes: [{"kind": "filled", "problems": 100, "text": "The paper adds 'random noise variables' without saying how many or how they are distributed, and the authors' released code switches them off for Feynman; srbf adds them with the authors' recipe from their other sets (pad to 11 inputs, extra inputs uniform on [1, 20]) and keeps the formula's own inputs in the first columns where that recipe shuffles the column order."}]
   license: "Apache-2.0 (trishullab/LibraryAugmentedSymbolicRegression.jl; Grayeli et al. 2024, arXiv:2409.09359)"
@@ -25,7 +27,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/interrupted-7.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

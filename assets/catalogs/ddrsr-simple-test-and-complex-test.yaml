@@ -1,6 +1,8 @@
 metadata:
   name: ddrsr-simple-test-and-complex-test
+  display_name: "ddrsr-simple-test-and-complex-test*"
   version: 1
+  benchmark: "ddrsr-simple-test-and-complex-test"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: [{"kind": "filled", "problems": 20, "text": "The authors give only the range (0, 1) for every input, not how points are spread over it; srbf samples uniformly."}]
   license: "facts only: formulas and ranges cited from Deng et al. 2026 (DDRSR, arXiv:2608.02628), Table 5; no upstream license"
@@ -17,7 +19,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-105.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

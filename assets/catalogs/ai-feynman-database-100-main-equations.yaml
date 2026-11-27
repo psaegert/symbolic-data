@@ -1,6 +1,7 @@
 metadata:
   name: ai-feynman-database-100-main-equations
   version: 1
+  benchmark: "ai-feynman-database-100-main-equations"
   tags: {"origin": "science formula", "tags": []}
   srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 74 of the 100 equations: in the other 26 no input is left once the units are removed, so the target is a constant."}]
   license: "facts only: formulas, ranges and units cited from the Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, Sci. Adv. 6:eaay2631); no upstream license"
@@ -22,7 +23,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/interrupted-3.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

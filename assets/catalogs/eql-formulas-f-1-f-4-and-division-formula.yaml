@@ -1,6 +1,7 @@
 metadata:
   name: eql-formulas-f-1-f-4-and-division-formula
   version: 1
+  benchmark: "eql-formulas-f-1-f-4-and-division-formula"
   tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
   srbf_changes: []
   license: "facts only: formulas and ranges cited from Martius & Lampert 2016 (arXiv:1610.02995) and Sahoo et al. 2018 (arXiv:1806.07259); no upstream license"
@@ -23,7 +24,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-154.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

@@ -1,6 +1,8 @@
 metadata:
   name: nsrwh-only-five-variables-nc
+  display_name: "nsrwh-only-five-variables-nc*"
   version: 1
+  benchmark: "nsrwh-only-five-variables-nc"
   tags: {"origin": "generated formulas", "tags": ["extrapolation"]}
   srbf_changes: [{"kind": "changed", "problems": 2, "text": "For 2 expressions the authors' out-of-distribution test region [-25, 25] contains no point where the expression is defined; srbf tests them on the training range."}]
   license: "MIT (SymposiumOrganization/ControllableNeuralSymbolicRegression)"
@@ -24,7 +26,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-77.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

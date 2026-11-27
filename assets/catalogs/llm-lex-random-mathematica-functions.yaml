@@ -1,6 +1,7 @@
 metadata:
   name: llm-lex-random-mathematica-functions
   version: 1
+  benchmark: "llm-lex-random-mathematica-functions"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: [{"kind": "part", "problems": 20, "text": "srbf runs 3 of the 23 functions here (the multivariate examples); the 20 univariate functions, which use a fixed grid, are in its pinned-points set."}]
   license: "CC BY 4.0 (Harvey et al. 2025, arXiv:2505.07956; Mach. Learn.: Sci. Technol. 7:045040)"
@@ -24,7 +25,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-131.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

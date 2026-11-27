@@ -1,6 +1,7 @@
 metadata:
   name: heuristiclab-physics-instances
   version: 1
+  benchmark: "heuristiclab-physics-instances"
   tags: {"origin": "science formula", "tags": []}
   srbf_changes: []
   license: "facts only: formulas and ranges cited from the HeuristicLab Physics instance provider (heal-research/HeuristicLab, GPL-3.0 code, not copied) and Chen et al. 2018 (arXiv:1706.02281)"
@@ -26,7 +27,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-45.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

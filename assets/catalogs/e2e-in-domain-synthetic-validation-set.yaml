@@ -1,6 +1,7 @@
 metadata:
   name: e2e-in-domain-synthetic-validation-set
   version: 1
+  benchmark: "e2e-in-domain-synthetic-validation-set"
   tags: {"origin": "generated formulas", "tags": []}
   srbf_changes: [{"kind": "part", "problems": 8976, "text": "srbf runs a fixed sample of 1,024 of the 10,000 validation functions, which it regenerated with the authors' own code and seed (the authors publish no list)."}]
   license: "Apache-2.0 (facebookresearch/symbolicregression; Kamienny et al. 2022, arXiv:2204.10532)"
@@ -23,7 +24,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-81.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

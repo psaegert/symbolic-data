@@ -1,6 +1,7 @@
 metadata:
   name: phye2e-llm-generated-synthetic-formulas
   version: 1
+  benchmark: "phye2e-llm-generated-synthetic-formulas"
   tags: {"origin": "generated formulas", "tags": []}
   srbf_changes: []
   license: "Apache-2.0 (figshare 10.6084/m9.figshare.29615831, PhyE2E_datas; Ying et al. 2025, Nat. Mach. Intell. 7:1726)"
@@ -22,7 +23,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-102.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

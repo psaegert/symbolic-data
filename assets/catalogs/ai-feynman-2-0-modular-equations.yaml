@@ -1,6 +1,8 @@
 metadata:
   name: ai-feynman-2-0-modular-equations
+  display_name: "ai-feynman-2-0-modular-equations*"
   version: 1
+  benchmark: "ai-feynman-2-0-modular-equations"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: [{"kind": "part", "problems": 11, "text": "srbf runs 1 of the 12 modular equations: the authors give an input range only for equation 12."}, {"kind": "filled", "problems": 1, "text": "For equation 12 the authors state the range [-1, 1] but not how inputs are spread over it; srbf samples them uniformly."}]
   license: "facts only: formulas cited from Udrescu et al. 2020 (AI Feynman 2.0, NeurIPS 33, arXiv:2006.10782), Table 4; no upstream license"
@@ -23,7 +25,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-0.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling

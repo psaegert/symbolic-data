@@ -1,6 +1,8 @@
 metadata:
   name: rsrm-constant-optimization-benchmark
+  display_name: "rsrm-constant-optimization-benchmark*"
   version: 1
+  benchmark: "rsrm"
   tags: {"origin": "classic benchmark", "tags": []}
   srbf_changes: [{"kind": "part", "problems": 4, "text": "srbf runs 93 of the 97 pairs of expression and input range: 4 are identical to problems srbf runs in its Constant and Keijzer sets."}, {"kind": "filled", "problems": 93, "text": "The appendix gives only a range for the inputs, not how points are spread over it or whether all inputs share it; srbf samples every input uniformly on the same range."}]
   license: "facts only: formulas and ranges cited from Xu, Liu & Sun 2024 (RSRM, ICLR 2024, Appendix C.6, Table S8); no upstream license"
@@ -16,7 +18,6 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-29.json
   conventions:
     rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
       srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
