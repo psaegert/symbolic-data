@@ -1,6 +1,6 @@
 metadata:
   name: dso-benchmark-registry
-  version: 1
+  version: 2
   benchmark: "dso-benchmark-registry"
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization)"

@@ -1,6 +1,6 @@
 metadata:
   name: ai-hilbert-problem-set
-  version: 1
+  version: 2
   benchmark: "ai-hilbert"
   tags: {"origin": "science formula", "tags": []}
   license: "MIT (IBM/AI-Hilbert)"

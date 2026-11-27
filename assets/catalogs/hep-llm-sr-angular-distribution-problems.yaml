@@ -1,6 +1,6 @@
 metadata:
   name: hep-llm-sr-angular-distribution-problems
-  version: 1
+  version: 2
   benchmark: "hep-llm-sr-angular-distribution-problems"
   tags: {"origin": "science formula", "tags": ["extrapolation", "srbf-modified"]}
   license: "CC BY 4.0 (Morales-Alvarado 2025, arXiv:2510.03397)"

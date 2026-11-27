@@ -1,6 +1,6 @@
 metadata:
   name: heuristiclab-regression-instance-providers
-  version: 1
+  version: 2
   benchmark: "heuristiclab-regression-instance-providers"
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
   license: "facts only: formulas cited from the defining authors and instances generated with HeuristicLab's providers (heal-research/HeuristicLab, GPL-3.0 code, not copied)"

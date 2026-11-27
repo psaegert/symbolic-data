@@ -959,7 +959,7 @@ def build_family_points(problems: list[dict[str, Any]], out: Path, engine) -> di
     for catalog, eq_id in RELEASE_POINTS:
         by_catalog[catalog].append(release_points_problem(catalog, eq_id, engine))
     for catalog, pinned in sorted(by_catalog.items()):
-        ProblemCatalog.from_problems(pinned, name=f"{catalog}-points", version=1, meta={
+        ProblemCatalog.from_problems(pinned, name=f"{catalog}-points", version=paths.version_of(f"{catalog}-points"), meta={
             "display_name": f"{catalog} (pinned points)", "kind": "data", "rules": POINTS_RULES, "companion_of": catalog,
             "test_splits": sorted({json.dumps(q.meta.get("test_split")) for q in pinned})
         }).save(out / f"{catalog}-points.npz")
@@ -1031,7 +1031,7 @@ def main() -> None:
         if pinned:
             from symbolic_data.catalog import ProblemCatalog
             modified = {"modified_by_srbf": MODIFIED_POINTS[tag]} if tag in MODIFIED_POINTS else {}
-            ProblemCatalog.from_problems(pinned, name=f"{slug}-points", version=1, meta={
+            ProblemCatalog.from_problems(pinned, name=f"{slug}-points", version=paths.version_of(f"{slug}-points"), meta={
                 "display_name": points_display, **modified, "kind": "data", "rules": POINTS_RULES,
                 "test_splits": sorted({json.dumps(q.meta.get("test_split")) for q in pinned})}).save(out / f"{slug}-points.npz")
         differs: dict[str, str] = {}
@@ -1046,7 +1046,7 @@ def main() -> None:
                 entries.pop(eq_id)
         if entries:
             modified = {"display_name": f"{rec['name']}*", "modified_by_srbf": MODIFIED[tag]} if tag in MODIFIED else {}
-            doc = {"metadata": {"name": slug, "version": 1, "description": rec["name"], **modified, "sources": rec.get("sources"),
+            doc = {"metadata": {"name": slug, "version": paths.version_of(slug), "description": rec["name"], **modified, "sources": rec.get("sources"),
                                 "sampling_defaults": {"n_points": 512, "method": "random", "noise": 0.0},
                                 "source_kind": "set",
                                 "conventions": {"rules": RULES}},

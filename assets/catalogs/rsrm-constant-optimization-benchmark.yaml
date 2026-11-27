@@ -1,7 +1,7 @@
 metadata:
   name: rsrm-constant-optimization-benchmark
   display_name: "rsrm-constant-optimization-benchmark*"
-  version: 1
+  version: 2
   benchmark: "rsrm"
   tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   license: "facts only: formulas and ranges cited from Xu, Liu & Sun 2024 (RSRM, ICLR 2024, Appendix C.6, Table S8); no upstream license"

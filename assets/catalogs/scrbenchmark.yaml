@@ -1,7 +1,7 @@
 metadata:
   name: scrbenchmark
   display_name: "scrbenchmark*"
-  version: 1
+  version: 2
   benchmark: "scrbenchmark"
   tags: {"origin": "science formula", "tags": ["srbf-modified"]}
   license: "MIT (prescriptiveanalytics/SCR-Benchmarks; SRSD laws: omron-sinicx/srsd-benchmark, MIT)"

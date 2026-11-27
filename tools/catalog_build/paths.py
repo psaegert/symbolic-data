@@ -115,6 +115,56 @@ def statement(source: str, terms: str) -> str:
             f"the source: {terms}. {REMOVAL}")
 
 
+# The version a builder writes for a catalog whose problems changed after a version of it was used (the frozen-draw
+# renders and acceptance runs read version 1 of the 2026-11 catalogs; none of these is published yet): one above the
+# latest published or used version (the 2026-11-27 audit). A catalog not listed is at version 1.
+VERSIONS = {
+    # problem definitions changed: ranges flipped to the code's or data's, records fixed, compilations kept whole
+    "ai-hilbert-problem-set": 2, "dso-benchmark-registry": 2, "dgsr-additional-feynman": 2,
+    "dgsr-feynman-d-2-d-5-subsets": 2, "hep-llm-sr-angular-distribution-problems": 2,
+    "heuristiclab-regression-instance-providers": 2, "kan-feynman-no-units-subset": 2,
+    "physo-astrophysical-case-studies": 2, "rsrm-constant-optimization-benchmark": 2, "scrbenchmark": 2,
+    "shape-constrained-sr-synthetic": 2,
+    # pinned points changed (AutoRA's Weber-Fechner keeps S1 <= S2; cp3-bench F7's y on the CSV's grid)
+    "autora-synthetic-behavioural-science-models-points": 2, "cp3-bench-standard-tuning-datasets-points": 2,
+    # data catalogs whose problems changed (cp3-bench's three corrected formulas; PhyE2E's plasma datasets left out)
+    "cp3-bench": 2, "phye2e-space-physics": 2,
+}
+
+
+def version_of(catalog: str) -> int:
+    return VERSIONS.get(catalog, 1)
+
+
+# The environment the data catalogs are built in: CSV parsing differs between pandas versions in the last digit, so a
+# rebuild with another pandas writes other bytes (pyproject's ``build`` extra pins it). Recorded in every data catalog's
+# metadata and the build reports; a build with another pandas stops unless SYMBOLIC_DATA_ANY_PANDAS=1.
+BUILD_PANDAS = "3.0.5"
+
+
+def build_environment() -> dict[str, str]:
+    """The versions that decide a data catalog's bytes (python, numpy, pandas, simplipy, symbolic-data's source)."""
+    import platform
+    import numpy
+    import pandas
+    try:
+        import simplipy
+        simplipy_version = simplipy.__version__
+    except Exception:                                     # pragma: no cover
+        simplipy_version = "unavailable"
+    return {"python": platform.python_version(), "numpy": numpy.__version__, "pandas": pandas.__version__,
+            "simplipy": simplipy_version}
+
+
+def check_build_environment() -> dict[str, str]:
+    env = build_environment()
+    if env["pandas"] != BUILD_PANDAS and os.environ.get("SYMBOLIC_DATA_ANY_PANDAS") != "1":
+        raise SystemExit(f"data catalogs are built with pandas {BUILD_PANDAS} (pip install -e .[build]); this is pandas "
+                         f"{env['pandas']}, whose CSV parsing may differ in the last digit. Set SYMBOLIC_DATA_ANY_PANDAS=1 "
+                         "to build anyway.")
+    return env
+
+
 @lru_cache(maxsize=1)
 def dropped() -> dict[str, dict[str, Any]]:
     """What srbf's release leaves out by rule (tags/dropped.json), by catalog: the whole catalog (``members`` null) or

@@ -200,7 +200,7 @@ def build_strogatz(out: Path) -> dict:
     problems = [strogatz_problem(n, engine) for n in STROGATZ]
     meta = {"display_name": "SRBench 2021 Strogatz", "kind": "data", "test_split": SPLIT, "split_as_published": STROGATZ_SPLIT,
             "pmlb_commit": STROGATZ_COMMIT, "built_from": "build_srbench_catalogs.py",
-            "rules": RULES, "test_splits": [json.dumps(SPLIT)]}
+            "rules": RULES, "test_splits": [json.dumps(SPLIT)], "built_with": paths.build_environment()}
     path = ProblemCatalog.from_problems(problems, name="srbench-2021-strogatz", version=1, meta=meta).save(out / "srbench-2021-strogatz.npz")
     return {"track": "srbench-2021-strogatz", "problems": len(problems), "rows": int(sum(p.x_support.shape[0] for p in problems)),
             "path": str(path), "bytes": os.path.getsize(path), "gt_kinds": sorted({p.gt_kind for p in problems})}
@@ -219,7 +219,7 @@ def build(track: str, out: Path) -> dict:
     parts, left_out = split_members(problems, paths.licenses().get(track) or {})
     meta = {"display_name": display, "kind": "data", "test_split": SPLIT, "split_as_published": split_text,
             "built_from": "build_srbench_catalogs.py",
-            "rules": RULES, "test_splits": [json.dumps(SPLIT)]}
+            "rules": RULES, "test_splits": [json.dumps(SPLIT)], "built_with": paths.build_environment()}
     report = {"track": track, "left_out": left_out}
     for suffix, part in parts.items():
         (out / f"{track}{suffix}.npz").unlink(missing_ok=True)
@@ -238,10 +238,12 @@ def main() -> None:
     ap.add_argument("--out", default=str(paths.DATA_BUILD))
     ap.add_argument("--only", default=None)
     a = ap.parse_args()
+    env = paths.check_build_environment()
     out = Path(os.path.expanduser(a.out))
     out.mkdir(parents=True, exist_ok=True)
     tracks = a.only.split(",") if a.only else list(TRACKS) + ["srbench-2021-strogatz"]
     report = [build_strogatz(out) if t == "srbench-2021-strogatz" else build(t, out) for t in tracks]
+    report.append({"_environment": env})                  # the build manifest: what decided the bytes
     print(json.dumps(report, indent=1))
     (out / "build_srbench_report.json").write_text(json.dumps(report, indent=1))
 

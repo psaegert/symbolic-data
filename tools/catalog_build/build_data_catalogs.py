@@ -271,14 +271,14 @@ def build(tag: str, probs: list[dict], out: Path, formulas: Formulas) -> dict:
     for name in (spec.slug, f"{spec.slug}-share-alike", f"{spec.slug}-restricted"):
         (out / f"{name}.npz").unlink(missing_ok=True)                 # a part that lost its members leaves no stale file
     meta = {"display_name": spec.display, "kind": "data", "source_name": rec["name"], "built_from": "build_data_catalogs.py",
-            "rules": RULES}
+            "rules": RULES, "built_with": paths.build_environment()}
     whole = {"yes, restricted repo": {"restricted": True}, "yes, share-alike repo": {"share_alike": True}}.get(
         lic.get("redistribute"), {})                                # a set the license pass routes whole to one repo
     path = None
     for suffix, part, label, flag in (("", problems, "", whole), ("-share-alike", share_alike, " (share-alike)", {"share_alike": True}),
                                       ("-restricted", restricted, " (restricted)", {"restricted": True})):
         if part:
-            saved = ProblemCatalog.from_problems(part, name=spec.slug + suffix, version=1, meta={
+            saved = ProblemCatalog.from_problems(part, name=spec.slug + suffix, version=paths.version_of(spec.slug + suffix), meta={
                 **meta, **flag, "display_name": spec.display + label,
                 "test_splits": sorted({_split_key(p) for p in part})}).save(out / f"{spec.slug}{suffix}.npz")
             path = path or saved
@@ -317,12 +317,14 @@ def main() -> None:
             spec = R.SETS.get(tag)
             print(f"{tag:14s} {len(probs):4d}  {spec.slug if spec else '-- no reader --'}")
         return
+    env = paths.check_build_environment()
     out = Path(os.path.expanduser(a.out))
     out.mkdir(parents=True, exist_ok=True)
     tags = a.only.split(",") if a.only else [t for t in sets if t in R.SETS]
     formulas = Formulas()
     report_path = out / "build_data_report.json"
     report = json.loads(report_path.read_text()) if report_path.exists() else {}
+    report["_environment"] = env                          # the build manifest: what decided the bytes
     failed = []
     for tag in tags:
         try:
