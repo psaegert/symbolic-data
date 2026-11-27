@@ -2,7 +2,7 @@ metadata:
   name: kan-feynman-no-units-subset
   display_name: "kan-feynman-no-units-subset*"
   version: 2
-  benchmark: "kan-feynman-no-units-subset"
+  benchmark: "kan"
   tags: {"origin": "science formula", "tags": ["srbf-modified"]}
   license: "CC BY 4.0 (Liu et al. 2024, KAN, arXiv:2404.19756, Table 2)"
   citation: {"paper": {"short": "Liu et al. 2025", "title": "KAN: Kolmogorov-Arnold Networks", "venue": "ICLR 2025", "url": "https://arxiv.org/abs/2404.19756"}}
@@ -30,10 +30,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   I.16.6:
+    subset: "feynman-no-units"
     raw: (a+b)/(1+a*b)
     prepared: (v1 + v2)/(v1*v2 + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: a
@@ -73,10 +73,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.9.18:
+    subset: "feynman-no-units"
     raw: a/((b-1)**2+(c-d)**2+(e-f)**2)
     prepared: v1/((v2 - 1)**2 + (v3 - v4)**2 + (v5 - v6)**2)
     n_variables: 6
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -165,10 +165,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.12.11:
+    subset: "feynman-no-units"
     raw: 1+a*sin(theta)
     prepared: v1*sin(v2) + 1
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -211,10 +211,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.13.12:
+    subset: "feynman-no-units"
     raw: a*(1/b-1)
     prepared: v1*(-1 + 1/v2)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -259,10 +259,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.15.3x:
+    subset: "feynman-no-units"
     raw: (1-a)/sqrt(1-b**2)
     prepared: (1 - v1)/sqrt(1 - v2**2)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -307,10 +307,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.18.4:
+    subset: "feynman-no-units"
     raw: (1+a*b)/(1+a)
     prepared: (v1*v2 + 1)/(v1 + 1)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -355,10 +355,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.27.6:
+    subset: "feynman-no-units"
     raw: 1/(1+a*b)
     prepared: 1/(v1*v2 + 1)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -394,10 +394,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.29.16:
+    subset: "feynman-no-units"
     raw: sqrt(1+a**2-2*a*cos(theta_1-theta_2))
     prepared: sqrt(v1**2 - 2*v1*cos(v2 - v3) + 1)
     n_variables: 3
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -442,10 +442,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.30.3:
+    subset: "feynman-no-units"
     raw: sin(n*theta/2)**2/sin(theta/2)**2
     prepared: sin(v1*v2/2)**2/sin(v2/2)**2
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: n
@@ -471,10 +471,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.30.5:
+    subset: "feynman-no-units"
     raw: asin(a/n)
     prepared: asin(v1/v2)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -510,10 +510,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.37.4:
+    subset: "feynman-no-units"
     raw: 1+a+2*sqrt(a)*cos(delta)
     prepared: 2*sqrt(v1)*cos(v2) + v1 + 1
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -549,10 +549,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.40.1:
+    subset: "feynman-no-units"
     raw: n_0*exp(-a)
     prepared: v1*exp(-v2)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: n_0
@@ -609,10 +609,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.44.4:
+    subset: "feynman-no-units"
     raw: n*log(a)
     prepared: v1*log(v2)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: n
@@ -648,10 +648,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.50.26:
+    subset: "feynman-no-units"
     raw: cos(a)+alpha*cos(a)**2
     prepared: v2*cos(v1)**2 + cos(v1)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -687,10 +687,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.2.42:
+    subset: "feynman-no-units"
     raw: (a-1)*b
     prepared: v2*(v1 - 1)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -735,10 +735,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.6.15a:
+    subset: "feynman-no-units"
     raw: 1/(4*pi)*c*sqrt(a**2+b**2)
     prepared: (1/(4*3.141592653589793))*v3*sqrt(v1**2 + v2**2)
     n_variables: 3
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -787,10 +787,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.27:
+    subset: "feynman-no-units"
     raw: n*alpha/(1-n*alpha/3)
     prepared: v1*v2/(-v1*v2/3 + 1)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: n
@@ -816,10 +816,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.35.18:
+    subset: "feynman-no-units"
     raw: n_0/(exp(a)+exp(-a))
     prepared: v1/(exp(v2) + exp(-v2))
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: n_0
@@ -869,10 +869,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.36.38:
+    subset: "feynman-no-units"
     raw: a+alpha*b
     prepared: v1 + v2*v3
     n_variables: 3
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -948,10 +948,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.9.52:
+    subset: "feynman-no-units"
     raw: a*sin((b-c)/2)**2/((b-c)/2)**2
     prepared: v1*sin(v2/2 - v3/2)**2/(v2/2 - v3/2)**2
     n_variables: 3
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -1014,10 +1014,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.10.19:
+    subset: "feynman-no-units"
     raw: sqrt(1+a**2+b**2)
     prepared: sqrt(v1**2 + v2**2 + 1)
     n_variables: 2
-    subset: kan-feynman-no-units
     vars:
       v1:
         name: a
@@ -1055,6 +1055,7 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.6.2:
+    subset: "feynman-no-units"
     raw: exp(-(theta/sigma)**2/2)/(sqrt(2*pi)*sigma)
     prepared: exp(-(v2/v1)**2/2)/(sqrt(2*3.141592653589793)*v1)
     n_variables: 2
@@ -1080,11 +1081,11 @@ expressions:
         - pos
       v0:
         name: f
-    subset: kan-feynman-no-units
     meta:
       same_as: feynman:I.6.2
       finite_fraction: 1.0
   I.6.2b:
+    subset: "feynman-no-units"
     raw: exp(-((theta-theta1)/sigma)**2/2)/(sqrt(2*pi)*sigma)
     prepared: exp(-((v2-v3)/v1)**2/2)/(sqrt(2*3.141592653589793)*v1)
     n_variables: 3
@@ -1118,11 +1119,11 @@ expressions:
         - pos
       v0:
         name: f
-    subset: kan-feynman-no-units
     meta:
       same_as: feynman:I.6.2b
       finite_fraction: 1.0
   I.26.2:
+    subset: "feynman-no-units"
     raw: arcsin(n*sin(theta2))
     prepared: asin(v1*sin(v2))
     n_variables: 2
@@ -1148,11 +1149,11 @@ expressions:
         - pos
       v0:
         name: theta1
-    subset: kan-feynman-no-units
     meta:
       same_as: feynman:I.26.2
       finite_fraction: 1.0
   II.11.7:
+    subset: "feynman-no-units"
     raw: beta*(1+alpha*cos(theta))
     prepared: v1*(1+v2*cos(v3))
     n_variables: 3
@@ -1186,11 +1187,11 @@ expressions:
         - pos
       v0:
         name: f
-    subset: kan-feynman-no-units
     meta:
       same_as: feynman:III.17.37
       finite_fraction: 1.0
   II.38.3:
+    subset: "feynman-no-units"
     raw: q/C
     prepared: v1/v2
     n_variables: 2
@@ -1216,11 +1217,11 @@ expressions:
         - pos
       v0:
         name: Volt
-    subset: kan-feynman-no-units
     meta:
       same_as: feynman:I.25.13
       finite_fraction: 1.0
   III.17.37:
+    subset: "feynman-no-units"
     raw: beta*(1+alpha*cos(theta))
     prepared: v1*(1+v2*cos(v3))
     n_variables: 3
@@ -1254,7 +1255,6 @@ expressions:
         - pos
       v0:
         name: f
-    subset: kan-feynman-no-units
     meta:
       same_as: feynman:III.17.37
       finite_fraction: 1.0

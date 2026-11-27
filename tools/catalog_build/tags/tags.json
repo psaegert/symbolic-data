@@ -1,7 +1,7 @@
 [
  {
   "catalog": "cvgp-trigonometric-control-variable-datasets",
-  "display_name": "cvgp-trigonometric-control-variable-datasets",
+  "display_name": "cvgp-trigonometric-control-variable-datasets*",
   "kind": "formula",
   "problems": 1024,
   "file": "assets/catalogs/cvgp-trigonometric-control-variable-datasets.yaml",
@@ -33,7 +33,7 @@
  },
  {
   "catalog": "e2e-in-domain-synthetic-validation-set",
-  "display_name": "e2e-in-domain-synthetic-validation-set",
+  "display_name": "e2e-in-domain-synthetic-validation-set*",
   "kind": "formula",
   "problems": 1024,
   "file": "assets/catalogs/e2e-in-domain-synthetic-validation-set.yaml",
@@ -105,7 +105,7 @@
  },
  {
   "catalog": "symformer-in-domain-synthetic-evaluation",
-  "display_name": "symformer-in-domain-synthetic-evaluation",
+  "display_name": "symformer-in-domain-synthetic-evaluation*",
   "kind": "formula",
   "problems": 1024,
   "file": "assets/catalogs/symformer-in-domain-synthetic-evaluation.yaml",
@@ -615,7 +615,7 @@
  },
  {
   "catalog": "nsrwh-train-wc",
-  "display_name": "nsrwh-train-wc",
+  "display_name": "nsrwh-train-wc*",
   "kind": "formula",
   "problems": 299,
   "file": "assets/catalogs/nsrwh-train-wc.yaml",
@@ -919,7 +919,7 @@
  },
  {
   "catalog": "srbench-2021-blackbox",
-  "display_name": "SRBench 2021 black-box",
+  "display_name": "SRBench 2021 black-box*",
   "kind": "data",
   "problems": 84,
   "file": "build/data-catalogs/srbench-2021-blackbox.npz",
@@ -1415,7 +1415,7 @@
  },
  {
   "catalog": "decomposable-nsr-synthetic-e1-e13",
-  "display_name": "decomposable-nsr-synthetic-e1-e13",
+  "display_name": "decomposable-nsr-synthetic-e1-e13*",
   "kind": "formula",
   "problems": 24,
   "file": "assets/catalogs/decomposable-nsr-synthetic-e1-e13.yaml",
@@ -1517,7 +1517,7 @@
  },
  {
   "catalog": "llm-lex-random-mathematica-functions-points",
-  "display_name": "LLM-LEx random Mathematica functions (pinned points)",
+  "display_name": "LLM-LEx random Mathematica functions (pinned points)*",
   "kind": "data",
   "problems": 20,
   "file": "assets/catalogs/llm-lex-random-mathematica-functions-points.npz",
@@ -1641,7 +1641,7 @@
  },
  {
   "catalog": "symtree-benchmark-functions",
-  "display_name": "symtree-benchmark-functions",
+  "display_name": "symtree-benchmark-functions*",
   "kind": "formula",
   "problems": 16,
   "file": "assets/catalogs/symtree-benchmark-functions.yaml",
@@ -1845,7 +1845,7 @@
  },
  {
   "catalog": "heuristiclab-regression-instance-providers",
-  "display_name": "heuristiclab-regression-instance-providers",
+  "display_name": "heuristiclab-regression-instance-providers*",
   "kind": "formula",
   "problems": 13,
   "file": "assets/catalogs/heuristiclab-regression-instance-providers.yaml",
@@ -1901,7 +1901,7 @@
  },
  {
   "catalog": "kim-et-al-eql-benchmark-functions",
-  "display_name": "kim-et-al-eql-benchmark-functions",
+  "display_name": "kim-et-al-eql-benchmark-functions*",
   "kind": "formula",
   "problems": 12,
   "file": "assets/catalogs/kim-et-al-eql-benchmark-functions.yaml",
@@ -1981,7 +1981,7 @@
  },
  {
   "catalog": "gp-benchmarks-sr-table",
-  "display_name": "gp-benchmarks-sr-table",
+  "display_name": "gp-benchmarks-sr-table*",
   "kind": "formula",
   "problems": 11,
   "file": "assets/catalogs/gp-benchmarks-sr-table.yaml",
@@ -2061,7 +2061,7 @@
  },
  {
   "catalog": "srbench-2.0-first-principles",
-  "display_name": "SRBench 2.0 first-principles",
+  "display_name": "SRBench 2.0 first-principles*",
   "kind": "data",
   "problems": 10,
   "file": "build/data-catalogs/srbench-2.0-first-principles.npz",
@@ -2093,7 +2093,7 @@
  },
  {
   "catalog": "ai-hilbert-problem-set",
-  "display_name": "ai-hilbert-problem-set",
+  "display_name": "ai-hilbert-problem-set*",
   "kind": "formula",
   "problems": 9,
   "file": "assets/catalogs/ai-hilbert-problem-set.yaml",
@@ -2117,7 +2117,7 @@
  },
  {
   "catalog": "physo-astrophysical-case-studies",
-  "display_name": "physo-astrophysical-case-studies",
+  "display_name": "physo-astrophysical-case-studies*",
   "kind": "formula",
   "problems": 9,
   "file": "assets/catalogs/physo-astrophysical-case-studies.yaml",
@@ -2141,7 +2141,7 @@
  },
  {
   "catalog": "torchsisso-synthetic-expressions",
-  "display_name": "torchsisso-synthetic-expressions",
+  "display_name": "torchsisso-synthetic-expressions*",
   "kind": "formula",
   "problems": 9,
   "file": "assets/catalogs/torchsisso-synthetic-expressions.yaml",
@@ -2165,7 +2165,7 @@
  },
  {
   "catalog": "constant",
-  "display_name": "constant",
+  "display_name": "constant*",
   "kind": "formula",
   "problems": 8,
   "file": "assets/catalogs/constant.yaml",
@@ -2269,7 +2269,7 @@
  },
  {
   "catalog": "neat",
-  "display_name": "neat",
+  "display_name": "neat*",
   "kind": "formula",
   "problems": 8,
   "file": "assets/catalogs/neat.yaml",
@@ -2419,7 +2419,7 @@
  },
  {
   "catalog": "keijzer",
-  "display_name": "keijzer",
+  "display_name": "keijzer*",
   "kind": "formula",
   "problems": 7,
   "file": "assets/catalogs/keijzer.yaml",
@@ -2443,7 +2443,7 @@
  },
  {
   "catalog": "autora-synthetic-behavioural-science-models-points",
-  "display_name": "AutoRA synthetic behavioural-science models (autora-synthetic: Weber-Fechner, Stevens power law, exponential learning, Luce choice ratio, expected value theory, prospect theory) (pinned points)",
+  "display_name": "AutoRA synthetic behavioural-science models (autora-synthetic: Weber-Fechner, Stevens power law, exponential learning, Luce choice ratio, expected value theory, prospect theory) (pinned points)*",
   "kind": "data",
   "problems": 7,
   "file": "assets/catalogs/autora-synthetic-behavioural-science-models-points.npz",
@@ -2483,7 +2483,7 @@
  },
  {
   "catalog": "gp-gomea-real-world",
-  "display_name": "GP-GOMEA real-world set",
+  "display_name": "GP-GOMEA real-world set*",
   "kind": "data",
   "problems": 7,
   "file": "build/data-catalogs/gp-gomea-real-world.npz",
@@ -2521,7 +2521,7 @@
  },
  {
   "catalog": "srbench-2.0-blackbox-restricted",
-  "display_name": "SRBench 2.0 black-box (restricted)",
+  "display_name": "SRBench 2.0 black-box (restricted)*",
   "kind": "data",
   "problems": 7,
   "file": "build/data-catalogs/srbench-2.0-blackbox-restricted.npz",
@@ -2621,7 +2621,7 @@
  },
  {
   "catalog": "vladislavleva",
-  "display_name": "vladislavleva",
+  "display_name": "vladislavleva*",
   "kind": "formula",
   "problems": 6,
   "file": "assets/catalogs/vladislavleva.yaml",
@@ -2795,7 +2795,7 @@
  },
  {
   "catalog": "erbench-public-legacy-formulas",
-  "display_name": "erbench-public-legacy-formulas",
+  "display_name": "erbench-public-legacy-formulas*",
   "kind": "formula",
   "problems": 5,
   "file": "assets/catalogs/erbench-public-legacy-formulas.yaml",
@@ -2865,7 +2865,7 @@
  },
  {
   "catalog": "pysr-empiricalbench-formulas",
-  "display_name": "pysr-empiricalbench-formulas",
+  "display_name": "pysr-empiricalbench-formulas*",
   "kind": "formula",
   "problems": 5,
   "file": "assets/catalogs/pysr-empiricalbench-formulas.yaml",
@@ -2913,7 +2913,7 @@
  },
  {
   "catalog": "srbench-2.0-blackbox",
-  "display_name": "SRBench 2.0 black-box",
+  "display_name": "SRBench 2.0 black-box*",
   "kind": "data",
   "problems": 5,
   "file": "build/data-catalogs/srbench-2.0-blackbox.npz",
@@ -2951,7 +2951,7 @@
  },
  {
   "catalog": "dso-benchmark-registry",
-  "display_name": "dso-benchmark-registry",
+  "display_name": "dso-benchmark-registry*",
   "kind": "formula",
   "problems": 4,
   "file": "assets/catalogs/dso-benchmark-registry.yaml",
@@ -3007,7 +3007,7 @@
  },
  {
   "catalog": "scimed-settling-sphere-configurations",
-  "display_name": "scimed-settling-sphere-configurations",
+  "display_name": "scimed-settling-sphere-configurations*",
   "kind": "formula",
   "problems": 4,
   "file": "assets/catalogs/scimed-settling-sphere-configurations.yaml",
@@ -3039,7 +3039,7 @@
  },
  {
   "catalog": "cp3-bench-standard-tuning-datasets-points",
-  "display_name": "CP3-bench standard tuning datasets (pinned points)",
+  "display_name": "CP3-bench standard tuning datasets (pinned points)*",
   "kind": "data",
   "problems": 4,
   "file": "assets/catalogs/cp3-bench-standard-tuning-datasets-points.npz",
@@ -3151,7 +3151,7 @@
  },
  {
   "catalog": "pysr-empiricalbench",
-  "display_name": "PySR EmpiricalBench",
+  "display_name": "PySR EmpiricalBench*",
   "kind": "data",
   "problems": 4,
   "file": "build/data-catalogs/pysr-empiricalbench.npz",
@@ -3247,7 +3247,7 @@
  },
  {
   "catalog": "llm-lex-random-mathematica-functions",
-  "display_name": "llm-lex-random-mathematica-functions",
+  "display_name": "llm-lex-random-mathematica-functions*",
   "kind": "formula",
   "problems": 3,
   "file": "assets/catalogs/llm-lex-random-mathematica-functions.yaml",
@@ -3271,7 +3271,7 @@
  },
  {
   "catalog": "gp-benchmarks-sr-table-points",
-  "display_name": "GP benchmarks SR table (McDermott et al. 2012) (pinned points)",
+  "display_name": "GP benchmarks SR table (McDermott et al. 2012) (pinned points)*",
   "kind": "data",
   "problems": 3,
   "file": "assets/catalogs/gp-benchmarks-sr-table-points.npz",
@@ -3509,7 +3509,7 @@
  },
  {
   "catalog": "gp-gomea-real-world-restricted",
-  "display_name": "GP-GOMEA real-world set (restricted)",
+  "display_name": "GP-GOMEA real-world set (restricted)*",
   "kind": "data",
   "problems": 3,
   "file": "build/data-catalogs/gp-gomea-real-world-restricted.npz",
@@ -3557,7 +3557,7 @@
  },
  {
   "catalog": "mcdermott-predictive-modelling-restricted",
-  "display_name": "McDermott et al. predictive-modelling sets (restricted)",
+  "display_name": "McDermott et al. predictive-modelling sets (restricted)*",
   "kind": "data",
   "problems": 3,
   "file": "build/data-catalogs/mcdermott-predictive-modelling-restricted.npz",
@@ -3597,7 +3597,7 @@
  },
  {
   "catalog": "mcdermott-predictive-modelling",
-  "display_name": "McDermott et al. predictive-modelling sets",
+  "display_name": "McDermott et al. predictive-modelling sets*",
   "kind": "data",
   "problems": 3,
   "file": "build/data-catalogs/mcdermott-predictive-modelling.npz",
@@ -3810,7 +3810,7 @@
  },
  {
   "catalog": "meier",
-  "display_name": "meier",
+  "display_name": "meier*",
   "kind": "formula",
   "problems": 2,
   "file": "assets/catalogs/meier.yaml",
@@ -3834,7 +3834,7 @@
  },
  {
   "catalog": "physo-astro",
-  "display_name": "physo-astro",
+  "display_name": "physo-astro*",
   "kind": "formula",
   "problems": 2,
   "file": "assets/catalogs/physo-astro.yaml",
@@ -3938,7 +3938,7 @@
  },
  {
   "catalog": "ai-hilbert-real-data",
-  "display_name": "AI Hilbert real data",
+  "display_name": "AI Hilbert real data*",
   "kind": "data",
   "problems": 2,
   "file": "build/data-catalogs/ai-hilbert-real-data.npz",
@@ -4210,7 +4210,7 @@
  },
  {
   "catalog": "shadow-economies",
-  "display_name": "Shadow Economies",
+  "display_name": "Shadow Economies*",
   "kind": "data",
   "problems": 2,
   "file": "build/data-catalogs/shadow-economies.npz",
@@ -4250,7 +4250,7 @@
  },
  {
   "catalog": "srbench-2.0-first-principles-restricted",
-  "display_name": "SRBench 2.0 first-principles (restricted)",
+  "display_name": "SRBench 2.0 first-principles (restricted)*",
   "kind": "data",
   "problems": 2,
   "file": "build/data-catalogs/srbench-2.0-first-principles-restricted.npz",
@@ -4346,7 +4346,7 @@
  },
  {
   "catalog": "esr-cosmology-datasets",
-  "display_name": "esr-cosmology-datasets",
+  "display_name": "esr-cosmology-datasets*",
   "kind": "formula",
   "problems": 1,
   "file": "assets/catalogs/esr-cosmology-datasets.yaml",
@@ -4370,7 +4370,7 @@
  },
  {
   "catalog": "gplearn-documentation-examples",
-  "display_name": "gplearn-documentation-examples",
+  "display_name": "gplearn-documentation-examples*",
   "kind": "formula",
   "problems": 1,
   "file": "assets/catalogs/gplearn-documentation-examples.yaml",
@@ -4394,7 +4394,7 @@
  },
  {
   "catalog": "hierbosss-single-atom-catalysis-and-synthetic-polynomial",
-  "display_name": "hierbosss-single-atom-catalysis-and-synthetic-polynomial",
+  "display_name": "hierbosss-single-atom-catalysis-and-synthetic-polynomial*",
   "kind": "formula",
   "problems": 1,
   "file": "assets/catalogs/hierbosss-single-atom-catalysis-and-synthetic-polynomial.yaml",
@@ -4504,7 +4504,7 @@
  },
  {
   "catalog": "dso-benchmark-registry-points",
-  "display_name": "DSO benchmark registry (benchmarks.csv) (pinned points)",
+  "display_name": "DSO benchmark registry (benchmarks.csv) (pinned points)*",
   "kind": "data",
   "problems": 1,
   "file": "assets/catalogs/dso-benchmark-registry-points.npz",
@@ -4576,7 +4576,7 @@
  },
  {
   "catalog": "heuristiclab-regression-instance-providers-points",
-  "display_name": "HeuristicLab regression instance providers (pinned points)",
+  "display_name": "HeuristicLab regression instance providers (pinned points)*",
   "kind": "data",
   "problems": 1,
   "file": "assets/catalogs/heuristiclab-regression-instance-providers-points.npz",
@@ -4616,7 +4616,7 @@
  },
  {
   "catalog": "mcdermott-table-1-predictive-modelling-sets-points",
-  "display_name": "McDermott Table 1 predictive-modelling sets (pinned points)",
+  "display_name": "McDermott Table 1 predictive-modelling sets (pinned points)*",
   "kind": "data",
   "problems": 1,
   "file": "assets/catalogs/mcdermott-table-1-predictive-modelling-sets-points.npz",
@@ -4648,7 +4648,7 @@
  },
  {
   "catalog": "neat-points",
-  "display_name": "neat (pinned points)",
+  "display_name": "neat (pinned points)*",
   "kind": "data",
   "problems": 1,
   "file": "assets/catalogs/neat-points.npz",
@@ -4792,7 +4792,7 @@
  },
  {
   "catalog": "white-et-al-2013-proposed-sr-set-points",
-  "display_name": "White et al. 2013 proposed SR set (pinned points)",
+  "display_name": "White et al. 2013 proposed SR set (pinned points)*",
   "kind": "data",
   "problems": 1,
   "file": "assets/catalogs/white-et-al-2013-proposed-sr-set-points.npz",
@@ -4942,7 +4942,7 @@
  },
  {
   "catalog": "esr-cosmology",
-  "display_name": "ESR cosmology datasets",
+  "display_name": "ESR cosmology datasets*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/esr-cosmology.npz",
@@ -5030,7 +5030,7 @@
  },
  {
   "catalog": "hierbosss-single-atom",
-  "display_name": "HierBOSSS single-atom catalysis",
+  "display_name": "HierBOSSS single-atom catalysis*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/hierbosss-single-atom.npz",
@@ -5132,7 +5132,7 @@
  },
  {
   "catalog": "nuclear-misr-restricted",
-  "display_name": "Nuclear binding energies and charge radii (MISR) (restricted)",
+  "display_name": "Nuclear binding energies and charge radii (MISR) (restricted)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/nuclear-misr-restricted.npz",
@@ -5156,7 +5156,7 @@
  },
  {
   "catalog": "nuclear-misr",
-  "display_name": "Nuclear binding energies and charge radii (MISR)",
+  "display_name": "Nuclear binding energies and charge radii (MISR)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/nuclear-misr.npz",
@@ -5268,7 +5268,7 @@
  },
  {
   "catalog": "sparc-radial-acceleration",
-  "display_name": "Radial acceleration relation (SPARC)",
+  "display_name": "Radial acceleration relation (SPARC)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/sparc-radial-acceleration.npz",
@@ -5340,7 +5340,7 @@
  },
  {
   "catalog": "white-2013-proposed",
-  "display_name": "White et al. 2013 proposed SR set",
+  "display_name": "White et al. 2013 proposed SR set*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/white-2013-proposed.npz",

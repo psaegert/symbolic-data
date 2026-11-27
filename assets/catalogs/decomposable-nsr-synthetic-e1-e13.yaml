@@ -29,10 +29,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   E1:
+    subset: "interp"
     raw: (3.0375*x0*x1 + 5.5*sin(9/4*(x0 - 2/3)*(x1 - 2/3)))/5
     prepared: 0.6075*v1*v2 + 1.1*sin(9*(v1 - 1*2/3)*(v2 - 1*2/3)/4)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -60,10 +60,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E1.extrap:
+    subset: "extrap"
     raw: (3.0375*x0*x1 + 5.5*sin(9/4*(x0 - 2/3)*(x1 - 2/3)))/5
     prepared: 0.6075*v1*v2 + 1.1*sin(9*(v1 - 1*2/3)*(v2 - 1*2/3)/4)
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -121,10 +121,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E2:
+    subset: "interp"
     raw: 5.5 + (1 - x0/4)**2 + sqrt(x1 + 10)*sin(x2/5)
     prepared: (1 - v1/4)**2 + sqrt(v2 + 10)*sin(v3/5) + 5.5
     n_variables: 3
-    subset: interp
     vars:
       v1:
         name: x0
@@ -162,10 +162,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E2.extrap:
+    subset: "extrap"
     raw: 5.5 + (1 - x0/4)**2 + sqrt(x1 + 10)*sin(x2/5)
     prepared: (1 - v1/4)**2 + sqrt(v2 + 10)*sin(v3/5) + 5.5
     n_variables: 3
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -245,10 +245,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E3:
+    subset: "interp"
     raw: (1.5*exp(1.5*x0) + 5*cos(3*x1))/10
     prepared: 0.15*exp(1.5*v1) + cos(3*v2)/2
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -276,10 +276,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E3.extrap:
+    subset: "extrap"
     raw: (1.5*exp(1.5*x0) + 5*cos(3*x1))/10
     prepared: 0.15*exp(1.5*v1) + cos(3*v2)/2
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -337,10 +337,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E4:
+    subset: "interp"
     raw: ((1 - x0)**2 + (1 - x2)**2 + 100*(x1 - x0**2)**2 + 100*(x3 - x2**2)**2)/10000
     prepared: (1 - v1)**2/10000 + (1 - v3)**2/10000 + (-v1**2 + v2)**2/100 + (-v3**2 + v4)**2/100
     n_variables: 4
-    subset: interp
     vars:
       v1:
         name: x0
@@ -388,10 +388,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E4.extrap:
+    subset: "extrap"
     raw: ((1 - x0)**2 + (1 - x2)**2 + 100*(x1 - x0**2)**2 + 100*(x3 - x2**2)**2)/10000
     prepared: (1 - v1)**2/10000 + (1 - v3)**2/10000 + (-v1**2 + v2)**2/100 + (-v3**2 + v4)**2/100
     n_variables: 4
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -493,10 +493,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E5:
+    subset: "interp"
     raw: sin(x0 + x1*x2) + exp(1.2*x3)
     prepared: exp(1.2*v4) + sin(v1 + v2*v3)
     n_variables: 4
-    subset: interp
     vars:
       v1:
         name: x0
@@ -544,10 +544,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E5.extrap:
+    subset: "extrap"
     raw: sin(x0 + x1*x2) + exp(1.2*x3)
     prepared: exp(1.2*v4) + sin(v1 + v2*v3)
     n_variables: 4
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -649,10 +649,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E6:
+    subset: "interp"
     raw: tanh(x0/2) + Abs(x1)*cos(x2**2/5)
     prepared: cos(v3**2/5)*abs(v2) + tanh(v1/2)
     n_variables: 3
-    subset: interp
     vars:
       v1:
         name: x0
@@ -690,10 +690,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E6.extrap:
+    subset: "extrap"
     raw: tanh(x0/2) + Abs(x1)*cos(x2**2/5)
     prepared: cos(v3**2/5)*abs(v2) + tanh(v1/2)
     n_variables: 3
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -773,10 +773,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E7:
+    subset: "interp"
     raw: (1 - x1**2)/(sin(2*pi*x0) + 1.5)
     prepared: (1 - v2**2)/(sin(2*3.141592653589793*v1) + 1.5)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -804,10 +804,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E7.extrap:
+    subset: "extrap"
     raw: (1 - x1**2)/(sin(2*pi*x0) + 1.5)
     prepared: (1 - v2**2)/(sin(2*3.141592653589793*v1) + 1.5)
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -865,10 +865,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E9:
+    subset: "interp"
     raw: log(2*x1 + 1) - log(4*x0**2 + 1)
     prepared: -log(4*v1**2 + 1) + log(2*v2 + 1)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -896,10 +896,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E9.extrap:
+    subset: "extrap"
     raw: log(2*x1 + 1) - log(4*x0**2 + 1)
     prepared: -log(4*v1**2 + 1) + log(2*v2 + 1)
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -951,10 +951,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E10:
+    subset: "interp"
     raw: sin(x0*exp(x1))
     prepared: sin(v1*exp(v2))
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -1081,10 +1081,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E10.extrap:
+    subset: "extrap"
     raw: sin(x0*exp(x1))
     prepared: sin(v1*exp(v2))
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -1241,10 +1241,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E11:
+    subset: "interp"
     raw: x0*log(x1**4)
     prepared: v1*log(v2**4)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -1272,10 +1272,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E11.extrap:
+    subset: "extrap"
     raw: x0*log(x1**4)
     prepared: v1*log(v2**4)
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -1333,10 +1333,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E12:
+    subset: "interp"
     raw: 1 + x0*sin(1/x1)
     prepared: v1*sin(1/v2) + 1
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -1364,10 +1364,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E12.extrap:
+    subset: "extrap"
     raw: 1 + x0*sin(1/x1)
     prepared: v1*sin(1/v2) + 1
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -1425,10 +1425,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E13:
+    subset: "interp"
     raw: sqrt(x0)*log(x1**2)
     prepared: sqrt(v1)*log(v2**2)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -1456,10 +1456,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E13.extrap:
+    subset: "extrap"
     raw: sqrt(x0)*log(x1**2)
     prepared: sqrt(v1)*log(v2**2)
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0

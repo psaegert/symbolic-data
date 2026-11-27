@@ -2,7 +2,7 @@ metadata:
   name: erbench-public-legacy-formulas
   display_name: "erbench-public-legacy-formulas*"
   version: 2
-  benchmark: "erbench-public-legacy-formulas"
+  benchmark: "erbench"
   tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   license: "facts only: formulas and ranges cited from the original family authors (Korns 2011; Uy et al. 2011; Udrescu et al. 2020; DSO benchmarks.csv, BSD-3-Clause); ERBench ids for mapping only"
   citation: {"paper": {"short": "Kahlmeyer et al. 2026", "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms", "venue": "arXiv preprint arXiv:2606.09276", "url": "https://arxiv.org/abs/2606.09276"}, "data": {"short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c", "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)", "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"}}
@@ -33,11 +33,11 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   AIF2-table4-eq12:
+    subset: "legacy"
     raw: x_0*x_1*x_2 - x_2*sqrt(1 - x_0**2)*sqrt(1-x_1**2)- x_1*sqrt(1 - x_0**2)*sqrt(1-x_2**2) - x_0*sqrt(1 - x_1**2)*sqrt(1-x_2**2)
     prepared: v1*v2*v3 - v1*sqrt(1 - v2**2)*sqrt(1 - v3**2) - v2*sqrt(1 - v1**2)*sqrt(1 - v3**2) - v3*sqrt(1 - v1**2)*sqrt(1
       - v2**2)
     n_variables: 3
-    subset: Feynman / AIF2 12 modular equations (Table 4 rows 5-16)
     vars:
       v1:
         name: x_0
@@ -72,10 +72,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Korns-13:
+    subset: "legacy"
     raw: -3*tan(x_0)*tan(x_1)/(tan(x_2)*tan(x_3)) + 32
     prepared: -3*tan(v1)*tan(v2)/(tan(v3)*tan(v4)) + 32
     n_variables: 4
-    subset: Korns
     vars:
       v1:
         name: x_0
@@ -119,10 +119,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Korns-14:
+    subset: "legacy"
     raw: -(4.2*cos(x_0) - 4.2*tan(x_1))*tanh(x_2)/sin(x_3) + 22
     prepared: (-4.2*cos(v1) + 4.2*tan(v2))*tanh(v3)/sin(v4) + 22
     n_variables: 4
-    subset: Korns
     vars:
       v1:
         name: x_0
@@ -166,10 +166,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Korns-15:
+    subset: "legacy"
     raw: -6*(log(x_2) - tan(x_3))*exp(-x_1)*tan(x_0) + 12
     prepared: -6*(log(v3) - tan(v4))*exp(-v2)*tan(v1) + 12
     n_variables: 4
-    subset: Korns
     vars:
       v1:
         name: x_0
@@ -213,10 +213,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Uy2011-F9:
+    subset: "legacy"
     raw: sin(x) + sin(y**2)
     prepared: sin(v1) + sin(v2**2)
     n_variables: 2
-    subset: Nguyen / Uy 2011 bivariate functions
     vars:
       v1:
         name: x

@@ -113,9 +113,10 @@ def yaml_facts(path: Path) -> dict[str, Any]:
         if e.get("test_source") and "." in str(key):
             suffixed += 1
     several = sum(1 for k in entries if str(k).split(".", 1)[0] in bases)
+    labels = sorted({str(e.get(k)) for e in entries.values() for k in ("subset", "subset_detail") if e.get(k)})
     return {"entries": len(entries), "with_dummy_input": dummy, "with_integer_input": integer,
             "with_test_block": tested, "with_fresh_test_instance": fresh, "extra_test_entries": suffixed,
-            "in_several_tests": several,
+            "in_several_tests": several, "subset_labels": labels,
             "joint_inputs": sorted({(e.get("inputs") or {}).get("name") for e in entries.values()} - {None}),
             "modified_by_srbf": md.get("modified_by_srbf"), "display_name": md.get("display_name") or md["name"]}
 
@@ -155,8 +156,9 @@ def facts(counts: Path) -> list[dict[str, Any]]:
             sure.append("fit only")
         if starred_by(deviations.get(r["name"]) or {}):     # derived from the deviations (2026-11-27), as the '*' is
             sure.append("srbf-modified")
-        if f.get("extra_test_entries") or (r["kind"] == "formula" and len(r["subsets"]) > 1 and f.get("with_test_block")
-                                           and set(r["subsets"]) & {"iid", "ood", "in-range", "wide", "beyond", "id"}):
+        labels = set(f.get("subset_labels") or r["subsets"])          # the authors' subsets, also where a part replaced them
+        if f.get("extra_test_entries") or (r["kind"] == "formula" and len(labels) > 1 and f.get("with_test_block")
+                                           and labels & {"iid", "ood", "in-range", "wide", "beyond", "id"}):
             sure.append("several tests")
         split = f.get("test_split") or {}
         if split and set(split) == {"none"}:
@@ -279,6 +281,8 @@ def apply_yaml(path: Path, row: dict[str, Any], published: dict[str, int]) -> st
         new = starred(display, row["star"])
         if new != head["name"] or head.get("display_name"):
             text = _set_line(text, "display_name", _flow("display_name", new) if new != head["name"] else "", "name")
+    if row.get("subset_rule"):
+        text = subsets_yaml(text, row["catalog"], row.get("part"), row.get("tiers") or {})
     if text == before:
         return "unchanged"
     m = re.search(r"(?m)^  name: (\S+)$", text)
@@ -309,13 +313,85 @@ def apply_npz(path: Path, row: dict[str, Any]) -> str:
         md.pop(key, None)
     if row.get("star") is not None:
         md["display_name"] = starred(md.get("display_name") or meta["catalog"]["name"], row["star"])
-    if json.dumps(md, sort_keys=True) == before:
+    problems_before = json.dumps(meta["problems"], sort_keys=True)
+    if row.get("subset_rule"):
+        subsets_npz(meta, row["catalog"], row.get("part"))
+    if json.dumps(md, sort_keys=True) == before and json.dumps(meta["problems"], sort_keys=True) == problems_before:
         return "unchanged"
     arrays["_meta"] = np.array(json.dumps(meta))
     tmp = path.with_name(path.stem + ".tmp.npz")
     np.savez(tmp, **arrays)
     os.replace(tmp, path)
     return "written"
+
+
+# ------------------------------------------------------------------------------------------- the middle level: subset
+# srbf averages with nested random effects, benchmark > subset > problem (owner 2026-11-27); the structure is fixed in
+# advance from the authors' own splits, never from measured variance. A problem's `subset` is its catalog's part of the
+# benchmark where its benchmark joins sibling catalogs (tags/benchmarks.json `parts`), else the authors' own subset,
+# else the catalog's own name (one subset). An authors' subset a part replaces stays as `subset_detail`.
+NO_SUBSET = ("", "all")
+
+
+def catalog_base(name: str) -> str:
+    """A catalog's name without its packaging suffix (-restricted, -share-alike, -points)."""
+    base = re.sub(r"-(restricted|share-alike)$", "", name)
+    return base[: -len("-points")] if base.endswith("-points") else base
+
+
+def middle_level(catalog: str, existing: str | None, part: str | None) -> tuple[str, str | None]:
+    """(subset, subset_detail) of one problem: see the rule above."""
+    existing = (existing or "").strip()
+    if part:
+        return part, (existing if existing not in NO_SUBSET and existing != part else None)
+    if existing not in NO_SUBSET:
+        return existing, None
+    return catalog_base(catalog), None
+
+
+_ENTRY = re.compile(r"^  (?! )(.+?):\s*$")
+_SUBSET_LINE = re.compile(r"^    (subset|subset_detail): ")
+
+
+def subsets_yaml(text: str, catalog: str, part: str | None, tiers: dict[str, str]) -> str:
+    """The yaml with every entry's `subset` (and `subset_detail`) set by middle_level; a line-wise edit that leaves
+    every other line as it is."""
+    head, sep, body = text.partition("\nexpressions:\n")
+    if not sep:
+        return text
+    lines = body.splitlines(keepends=True)
+    out: list[str] = []
+    i = 0
+    while i < len(lines):
+        m = _ENTRY.match(lines[i])
+        if not m:
+            out.append(lines[i])
+            i += 1
+            continue
+        key = yaml.safe_load(m.group(1)) if m.group(1)[:1] in "'\"" else m.group(1)
+        j = i + 1
+        while j < len(lines) and not _ENTRY.match(lines[j]) and (lines[j].startswith("   ") or not lines[j].strip()):
+            j += 1
+        block = lines[i + 1:j]
+        existing = next((yaml.safe_load(ln.split(":", 1)[1]) for ln in block if ln.startswith("    subset: ")), None)
+        existing = str(existing) if existing is not None else tiers.get(str(key))
+        subset, detail = middle_level(catalog, existing, part)
+        kept = [ln for ln in block if not _SUBSET_LINE.match(ln)]
+        new = [f"    subset: {json.dumps(subset, ensure_ascii=False)}\n"]
+        if detail:
+            new.append(f"    subset_detail: {json.dumps(detail, ensure_ascii=False)}\n")
+        out.extend([lines[i], *new, *kept])
+        i = j
+    return head + sep + "".join(out)
+
+
+def subsets_npz(meta: dict[str, Any], catalog: str, part: str | None) -> None:
+    for p in meta["problems"]:
+        pm = p.setdefault("meta", {})
+        subset, detail = middle_level(catalog, pm.get("subset"), part)
+        if detail:
+            pm["subset_detail"] = detail
+        pm["subset"] = subset
 
 
 def _rows(path: Path | None) -> list[dict[str, Any]]:
@@ -341,6 +417,11 @@ def apply(tags_path: Path, published_paths: list[Path], licenses_path: Path | No
     deviations = {c["catalog"]: c for c in _rows(deviations_path)}
     # the benchmark each catalog belongs to (tags/benchmarks.json): srbf averages by benchmark (owner 2026-11-27)
     benchmark = {c: b["benchmark"] for b in _rows(benchmarks_path) for c in b["catalogs"]}
+    part = {c: p for b in _rows(benchmarks_path) for c, p in (b.get("parts") or {}).items()}
+    # FastSRB's and SRSD's difficulty tiers are their authors' subsets (release_subsets.json)
+    rel = paths.release_subsets()
+    tiers = {cat: {str(k): t["name"] for t in rel[cat].get("subsets") or [] for k in t.get("keys") or []}
+             for cat in ("fastsrb", "srsd-dummy") if cat in rel}
     # the per-problem flags (tags/problem_flags.json, ``flags``)
     flags_path = Path(__file__).resolve().parent / "tags" / "problem_flags.json"
     flags = json.loads(flags_path.read_text())["flags"] if flags_path.exists() else {}
@@ -350,7 +431,8 @@ def apply(tags_path: Path, published_paths: list[Path], licenses_path: Path | No
         row = {**row, "license": licenses.get(row["catalog"]), "citation": citations.get(row["catalog"]) or None,
                "srbf_changes": dev["changes"] if dev else None, "srbf_notes": notes_of(dev) if dev else None,
                "star": starred_by(dev) if dev else None, "benchmark": benchmark.get(row["catalog"]),
-               "problem_flags": flags.get(row["catalog"], {})}
+               "problem_flags": flags.get(row["catalog"], {}), "subset_rule": benchmarks_path is not None,
+               "part": part.get(row["catalog"]), "tiers": tiers.get(row["catalog"], {})}
         if benchmarks_path and row["benchmark"] is None:
             raise SystemExit(f"{row['catalog']}: no benchmark in {benchmarks_path}")
         path = Path(row["file"]) if Path(row["file"]).is_absolute() else paths.REPO / row["file"]

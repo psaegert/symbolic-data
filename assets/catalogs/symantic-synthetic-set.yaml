@@ -26,10 +26,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Synthetic_1:
+    subset: "symantic-synthetic-set"
     raw: 10*(x1/(x2*(x3 + x4))) + 2.5
     prepared: 10*v1/(v2*(v3 + v4)) + 2.5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x1
@@ -82,10 +82,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Synthetic_2:
+    subset: "symantic-synthetic-set"
     raw: 3*sqrt(x1) + 2.1*sin(x2) + 3
     prepared: 3*sqrt(v1) + 2.1*sin(v2) + 3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x1
@@ -138,10 +138,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Synthetic_3:
+    subset: "symantic-synthetic-set"
     raw: 2.5382*cos(x4) + x1**2 - 0.5
     prepared: v1**2 + 2.5382*cos(v4) - 0.5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x1
@@ -194,10 +194,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Synthetic_4:
+    subset: "symantic-synthetic-set"
     raw: (x1 + exp(x1))/(x1**2 - x2**2)
     prepared: (v1 + exp(v1))/(v1**2 - v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -223,10 +223,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Synthetic_5:
+    subset: "symantic-synthetic-set"
     raw: sqrt(x1**2 + x2**2)
     prepared: sqrt(v1**2 + v2**2)
     n_variables: 10
-    subset: all
     vars:
       v1:
         name: x1
@@ -324,10 +324,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Synthetic_6:
+    subset: "symantic-synthetic-set"
     raw: exp(-x1*x2) + sin(x1*x3)
     prepared: sin(v1*v3) + exp(-v1*v2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -362,10 +362,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Synthetic_7:
+    subset: "symantic-synthetic-set"
     raw: x1**3 + 3*x1*x2**2 + 5*x1*x3**3
     prepared: v1**3 + 3*v1*v2**2 + 5*v1*v3**3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -400,10 +400,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Synthetic_8:
+    subset: "symantic-synthetic-set"
     raw: x1**3 + x1**2 + x1
     prepared: v1**3 + v1**2 + v1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -429,10 +429,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Synthetic_9:
+    subset: "symantic-synthetic-set"
     raw: x1**4 - x1**3 + 0.5*x2**2 - x2
     prepared: v1**4 - v1**3 + 0.5*v2**2 - v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -458,10 +458,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Synthetic_10:
+    subset: "symantic-synthetic-set"
     raw: sin(x1**2)*cos(x1) - 2
     prepared: sin(v1**2)*cos(v1) - 2
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x1

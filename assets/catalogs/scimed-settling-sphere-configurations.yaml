@@ -36,10 +36,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   A:
+    subset: "scimed-settling-sphere-configurations"
     raw: v0 + a*t
     prepared: v1 + v2*v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: v0
@@ -74,10 +74,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   B:
+    subset: "scimed-settling-sphere-configurations"
     raw: 4/3*y30*y31
     prepared: 4*v30*v31/3
     n_variables: 33
-    subset: all
     vars:
       v1:
         name: y1
@@ -274,10 +274,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   C:
+    subset: "scimed-settling-sphere-configurations"
     raw: 13.08*(rhop - rhoa)*d/(rhoa*V**2)
     prepared: 13.08*v3*(v1 - v2)/(v2*v4**2)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: rhop
@@ -330,10 +330,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E:
+    subset: "scimed-settling-sphere-configurations"
     raw: pi*Cd*rhoa*v**2*d**2/8
     prepared: 3.141592653589793*v1*v2*v3**2*v4**2/8
     n_variables: 12
-    subset: all
     vars:
       v1:
         name: Cd

@@ -33,10 +33,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   newton:
+    subset: "formulas"
     raw: 6.67408e-11*m1*m2/r**2
     prepared: log(6.67408e-11*v2*v3/v1**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: r
@@ -72,10 +72,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   planck:
+    subset: "formulas"
     raw: 2*6.62607004e-34*nu**3/(299792458**2)*(1/(exp(6.62607004e-34*nu/(1.38064852e-23*T)) - 1))
     prepared: log(1.47449944028424e-50*v1**3/(exp(4.79924466221135e-11*v1/v2) - 1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: nu
@@ -103,10 +103,10 @@ expressions:
     meta:
       finite_fraction: 0.9721
   schechter:
+    subset: "formulas"
     raw: (0.002/2.5e8)*(L/2.5e8)**(-1.20)*exp(-L/2.5e8)
     prepared: log(0.0956352499790036*exp(-4.0e-9*v1)/v1**1.2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: L
@@ -124,10 +124,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   ideal_gas:
+    subset: "formulas"
     raw: n*8.314*T/V
     prepared: log(8.314*v1*v2/v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: n
@@ -163,10 +163,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   rydberg:
+    subset: "formulas"
     raw: 1/(1.097e7*(1/n_1**2 - 1/n_2**2))
     prepared: log(1/(-10970000.0/v2**2 + 10970000.0/v1**2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: n_1

@@ -22,7 +22,11 @@
   "catalogs": [
    "ai-hilbert-problem-set",
    "ai-hilbert-real-data"
-  ]
+  ],
+  "parts": {
+   "ai-hilbert-problem-set": "problem-set",
+   "ai-hilbert-real-data": "real-data"
+  }
  },
  {
   "benchmark": "autora-synthetic-behavioural-science-models",
@@ -43,7 +47,13 @@
    "bms-rossler",
    "bms-synthetic-prior-expression-and-bessel-functions",
    "bms-synthetic-prior-expression-and-bessel-functions-points"
-  ]
+  ],
+  "parts": {
+   "bms-real-data": "real-data",
+   "bms-synthetic-prior-expression-and-bessel-functions": "synthetic",
+   "bms-rossler": "rossler",
+   "bms-synthetic-prior-expression-and-bessel-functions-points": "synthetic"
+  }
  },
  {
   "benchmark": "chen-luo-jiang-block-building-test-cases",
@@ -68,7 +78,11 @@
   "catalogs": [
    "cp3-bench",
    "cp3-bench-standard-tuning-datasets-points"
-  ]
+  ],
+  "parts": {
+   "cp3-bench": "cosmology",
+   "cp3-bench-standard-tuning-datasets-points": "standard-tuning"
+  }
  },
  {
   "benchmark": "cvgp-trigonometric-control-variable-datasets",
@@ -89,22 +103,16 @@
   ]
  },
  {
-  "benchmark": "dgsr-additional-feynman",
+  "benchmark": "dgsr",
   "catalogs": [
-   "dgsr-additional-feynman"
-  ]
- },
- {
-  "benchmark": "dgsr-feynman-d-2-d-5-subsets",
-  "catalogs": [
-   "dgsr-feynman-d-2-d-5-subsets"
-  ]
- },
- {
-  "benchmark": "dgsr-synthetic-d-12",
-  "catalogs": [
+   "dgsr-additional-feynman",
+   "dgsr-feynman-d-2-d-5-subsets",
    "dgsr-synthetic-d-12"
-  ]
+  ],
+  "parts": {
+   "dgsr-additional-feynman": "additional-feynman",
+   "dgsr-synthetic-d-12": "synthetic-d-12"
+  }
  },
  {
   "benchmark": "dimensionless-learning",
@@ -150,70 +158,40 @@
   ]
  },
  {
-  "benchmark": "eql-cart-pendulum",
+  "benchmark": "eql",
   "catalogs": [
-   "eql-cart-pendulum"
-  ]
- },
- {
-  "benchmark": "eql-double-pendulum",
-  "catalogs": [
-   "eql-double-pendulum"
-  ]
- },
- {
-  "benchmark": "eql-formulas-f-1-f-4-and-division-formula",
-  "catalogs": [
-   "eql-formulas-f-1-f-4-and-division-formula"
-  ]
- },
- {
-  "benchmark": "eql-pendulum-vector-field",
-  "catalogs": [
-   "eql-pendulum-vector-field"
-  ]
- },
- {
-  "benchmark": "eql-robotic-arm-forward-kinematics",
-  "catalogs": [
+   "eql-cart-pendulum",
+   "eql-double-pendulum",
+   "eql-formulas-f-1-f-4-and-division-formula",
+   "eql-pendulum-vector-field",
    "eql-robotic-arm-forward-kinematics"
-  ]
+  ],
+  "parts": {
+   "eql-robotic-arm-forward-kinematics": "robotic-arm",
+   "eql-formulas-f-1-f-4-and-division-formula": "formulas",
+   "eql-cart-pendulum": "cart-pendulum",
+   "eql-pendulum-vector-field": "pendulum-vector-field",
+   "eql-double-pendulum": "double-pendulum"
+  }
  },
  {
-  "benchmark": "erbench-densities",
+  "benchmark": "erbench",
   "catalogs": [
-   "erbench-densities"
-  ]
- },
- {
-  "benchmark": "erbench-eponymous",
-  "catalogs": [
-   "erbench-eponymous"
-  ]
- },
- {
-  "benchmark": "erbench-oeis",
-  "catalogs": [
-   "erbench-oeis"
-  ]
- },
- {
-  "benchmark": "erbench-phybench",
-  "catalogs": [
-   "erbench-phybench"
-  ]
- },
- {
-  "benchmark": "erbench-public-legacy-formulas",
-  "catalogs": [
-   "erbench-public-legacy-formulas"
-  ]
- },
- {
-  "benchmark": "erbench-syneq",
-  "catalogs": [
+   "erbench-densities",
+   "erbench-eponymous",
+   "erbench-oeis",
+   "erbench-phybench",
+   "erbench-public-legacy-formulas",
    "erbench-syneq"
-  ]
+  ],
+  "parts": {
+   "erbench-syneq": "syneq",
+   "erbench-oeis": "oeis",
+   "erbench-eponymous": "eponymous",
+   "erbench-phybench": "phybench",
+   "erbench-densities": "densities",
+   "erbench-public-legacy-formulas": "legacy"
+  }
  },
  {
   "benchmark": "errless-synthetic-posterior-set",
@@ -265,16 +243,15 @@
   ]
  },
  {
-  "benchmark": "ffx-cmos-ota",
+  "benchmark": "ffx",
   "catalogs": [
-   "ffx-cmos-ota"
-  ]
- },
- {
-  "benchmark": "ffx-high-dimensional-circuits",
-  "catalogs": [
+   "ffx-cmos-ota",
    "ffx-high-dimensional-circuits"
-  ]
+  ],
+  "parts": {
+   "ffx-high-dimensional-circuits": "high-dimensional-circuits",
+   "ffx-cmos-ota": "cmos-ota"
+  }
  },
  {
   "benchmark": "friedman-functions",
@@ -294,42 +271,6 @@
    "gecco-2013-2017-real",
    "gecco-2013-2017-real-restricted",
    "gecco-2013-2017-real-share-alike"
-  ]
- },
- {
-  "benchmark": "gecco-2022-covid-ny",
-  "catalogs": [
-   "gecco-2022-covid-ny"
-  ]
- },
- {
-  "benchmark": "gecco-2022-exact-rediscovery",
-  "catalogs": [
-   "gecco-2022-exact-rediscovery"
-  ]
- },
- {
-  "benchmark": "gecco-2022-extrapolation",
-  "catalogs": [
-   "gecco-2022-extrapolation"
-  ]
- },
- {
-  "benchmark": "gecco-2022-feature-selection",
-  "catalogs": [
-   "gecco-2022-feature-selection"
-  ]
- },
- {
-  "benchmark": "gecco-2022-local-optima",
-  "catalogs": [
-   "gecco-2022-local-optima"
-  ]
- },
- {
-  "benchmark": "gecco-2022-noise",
-  "catalogs": [
-   "gecco-2022-noise"
   ]
  },
  {
@@ -369,7 +310,11 @@
   "catalogs": [
    "gplearn-diabetes",
    "gplearn-documentation-examples"
-  ]
+  ],
+  "parts": {
+   "gplearn-documentation-examples": "symbolic-regressor-example",
+   "gplearn-diabetes": "diabetes"
+  }
  },
  {
   "benchmark": "gpu-lm-inner-constant-recovery-problems",
@@ -402,18 +347,19 @@
   ]
  },
  {
-  "benchmark": "heuristiclab-physics-instances",
+  "benchmark": "heuristiclab",
   "catalogs": [
-   "heuristiclab-physics-instances"
-  ]
- },
- {
-  "benchmark": "heuristiclab-regression-instance-providers",
-  "catalogs": [
+   "heuristiclab-physics-instances",
    "heuristiclab-real-world",
    "heuristiclab-regression-instance-providers",
    "heuristiclab-regression-instance-providers-points"
-  ]
+  ],
+  "parts": {
+   "heuristiclab-real-world": "real-world",
+   "heuristiclab-regression-instance-providers": "instances",
+   "heuristiclab-physics-instances": "physics",
+   "heuristiclab-regression-instance-providers-points": "instances"
+  }
  },
  {
   "benchmark": "hierbosss",
@@ -435,16 +381,15 @@
   ]
  },
  {
-  "benchmark": "kan-feynman-no-units-subset",
+  "benchmark": "kan",
   "catalogs": [
-   "kan-feynman-no-units-subset"
-  ]
- },
- {
-  "benchmark": "kan-toy-functions",
-  "catalogs": [
+   "kan-feynman-no-units-subset",
    "kan-toy-functions"
-  ]
+  ],
+  "parts": {
+   "kan-feynman-no-units-subset": "feynman-no-units",
+   "kan-toy-functions": "toy"
+  }
  },
  {
   "benchmark": "keijzer",
@@ -485,22 +430,17 @@
   ]
  },
  {
-  "benchmark": "lasr-bigbench",
+  "benchmark": "lasr",
   "catalogs": [
-   "lasr-bigbench"
-  ]
- },
- {
-  "benchmark": "lasr-noisy-feynman-with-distractors",
-  "catalogs": [
-   "lasr-noisy-feynman-with-distractors"
-  ]
- },
- {
-  "benchmark": "lasr-synthetic-equations",
-  "catalogs": [
+   "lasr-bigbench",
+   "lasr-noisy-feynman-with-distractors",
    "lasr-synthetic-equations"
-  ]
+  ],
+  "parts": {
+   "lasr-noisy-feynman-with-distractors": "noisy-feynman",
+   "lasr-synthetic-equations": "synthetic",
+   "lasr-bigbench": "bigbench"
+  }
  },
  {
   "benchmark": "livermore",
@@ -528,22 +468,17 @@
   ]
  },
  {
-  "benchmark": "llm-sr-bactgrow",
+  "benchmark": "llm-sr",
   "catalogs": [
-   "llm-sr-bactgrow"
-  ]
- },
- {
-  "benchmark": "llm-sr-oscillators",
-  "catalogs": [
-   "llm-sr-oscillators"
-  ]
- },
- {
-  "benchmark": "llm-sr-stress-strain",
-  "catalogs": [
+   "llm-sr-bactgrow",
+   "llm-sr-oscillators",
    "llm-sr-stress-strain"
-  ]
+  ],
+  "parts": {
+   "llm-sr-oscillators": "oscillators",
+   "llm-sr-bactgrow": "bactgrow",
+   "llm-sr-stress-strain": "stress-strain"
+  }
  },
  {
   "benchmark": "llm-srbench",
@@ -563,7 +498,10 @@
    "mcdermott-predictive-modelling",
    "mcdermott-predictive-modelling-restricted",
    "mcdermott-table-1-predictive-modelling-sets-points"
-  ]
+  ],
+  "parts": {
+   "mcdermott-table-1-predictive-modelling-sets-points": "dyfor"
+  }
  },
  {
   "benchmark": "meier",
@@ -583,7 +521,10 @@
   "catalogs": [
    "nguyen",
    "nguyen-c-points"
-  ]
+  ],
+  "parts": {
+   "nguyen-c-points": "nguyen-c"
+  }
  },
  {
   "benchmark": "nikuradse",
@@ -598,28 +539,19 @@
   ]
  },
  {
-  "benchmark": "nsrwh-only-five-variables-nc",
+  "benchmark": "nsrwh",
   "catalogs": [
-   "nsrwh-only-five-variables-nc"
-  ]
- },
- {
-  "benchmark": "nsrwh-only-five-variables-wc",
-  "catalogs": [
-   "nsrwh-only-five-variables-wc"
-  ]
- },
- {
-  "benchmark": "nsrwh-train-nc",
-  "catalogs": [
-   "nsrwh-train-nc"
-  ]
- },
- {
-  "benchmark": "nsrwh-train-wc",
-  "catalogs": [
+   "nsrwh-only-five-variables-nc",
+   "nsrwh-only-five-variables-wc",
+   "nsrwh-train-nc",
    "nsrwh-train-wc"
-  ]
+  ],
+  "parts": {
+   "nsrwh-only-five-variables-nc": "only-five-variables-nc",
+   "nsrwh-only-five-variables-wc": "only-five-variables-wc",
+   "nsrwh-train-nc": "train-nc",
+   "nsrwh-train-wc": "train-wc"
+  }
  },
  {
   "benchmark": "nuclear-misr",
@@ -641,29 +573,27 @@
   ]
  },
  {
-  "benchmark": "phye2e-llm-generated-synthetic-formulas",
+  "benchmark": "phye2e",
   "catalogs": [
-   "phye2e-llm-generated-synthetic-formulas"
-  ]
- },
- {
-  "benchmark": "phye2e-space-physics",
-  "catalogs": [
+   "phye2e-llm-generated-synthetic-formulas",
    "phye2e-space-physics",
    "phye2e-space-physics-restricted"
-  ]
+  ],
+  "parts": {
+   "phye2e-llm-generated-synthetic-formulas": "synthetic",
+   "phye2e-space-physics": "space-physics",
+   "phye2e-space-physics-restricted": "space-physics"
+  }
  },
  {
-  "benchmark": "physo-astro",
+  "benchmark": "physo",
   "catalogs": [
-   "physo-astro"
-  ]
- },
- {
-  "benchmark": "physo-astrophysical-case-studies",
-  "catalogs": [
+   "physo-astro",
    "physo-astrophysical-case-studies"
-  ]
+  ],
+  "parts": {
+   "physo-astro": "astrophysical-case-studies"
+  }
  },
  {
   "benchmark": "poly",
@@ -682,7 +612,11 @@
   "catalogs": [
    "pysr-empiricalbench",
    "pysr-empiricalbench-formulas"
-  ]
+  ],
+  "parts": {
+   "pysr-empiricalbench-formulas": "formulas",
+   "pysr-empiricalbench": "empirical-data"
+  }
  },
  {
   "benchmark": "r-rationals",
@@ -707,7 +641,10 @@
   "catalogs": [
    "rsrm-constant-optimization-benchmark",
    "rsrm-gaussian-cdf-extrapolation-test-points"
-  ]
+  ],
+  "parts": {
+   "rsrm-gaussian-cdf-extrapolation-test-points": "gaussian-cdf-extrapolation"
+  }
  },
  {
   "benchmark": "scilaws-real",
@@ -741,7 +678,11 @@
    "shape-constrained-real-world",
    "shape-constrained-real-world-restricted",
    "shape-constrained-sr-synthetic"
-  ]
+  ],
+  "parts": {
+   "shape-constrained-real-world-restricted": "real-world",
+   "shape-constrained-real-world": "real-world"
+  }
  },
  {
   "benchmark": "sine",
@@ -756,22 +697,17 @@
   ]
  },
  {
-  "benchmark": "soose-fc",
+  "benchmark": "soose",
   "catalogs": [
-   "soose-fc"
-  ]
- },
- {
-  "benchmark": "soose-nc",
-  "catalogs": [
-   "soose-nc"
-  ]
- },
- {
-  "benchmark": "soose-wc",
-  "catalogs": [
+   "soose-fc",
+   "soose-nc",
    "soose-wc"
-  ]
+  ],
+  "parts": {
+   "soose-fc": "fc",
+   "soose-nc": "nc",
+   "soose-wc": "wc"
+  }
  },
  {
   "benchmark": "sparc-radial-acceleration",
@@ -792,31 +728,51 @@
   ]
  },
  {
-  "benchmark": "srbench-2.0-blackbox",
+  "benchmark": "srbench-2.0",
   "catalogs": [
    "srbench-2.0-blackbox",
-   "srbench-2.0-blackbox-restricted"
-  ]
- },
- {
-  "benchmark": "srbench-2.0-first-principles",
-  "catalogs": [
+   "srbench-2.0-blackbox-restricted",
    "srbench-2.0-first-principles",
    "srbench-2.0-first-principles-restricted"
-  ]
+  ],
+  "parts": {
+   "srbench-2.0-first-principles": "first-principles",
+   "srbench-2.0-blackbox-restricted": "blackbox",
+   "srbench-2.0-blackbox": "blackbox",
+   "srbench-2.0-first-principles-restricted": "first-principles"
+  }
  },
  {
-  "benchmark": "srbench-2021-blackbox",
+  "benchmark": "srbench-2021",
   "catalogs": [
    "srbench-2021-blackbox",
-   "srbench-2021-blackbox-restricted"
-  ]
+   "srbench-2021-blackbox-restricted",
+   "srbench-2021-strogatz"
+  ],
+  "parts": {
+   "srbench-2021-blackbox": "blackbox",
+   "srbench-2021-blackbox-restricted": "blackbox",
+   "srbench-2021-strogatz": "strogatz"
+  }
  },
  {
-  "benchmark": "srbench-2021-strogatz",
+  "benchmark": "srbench-competition-2022",
   "catalogs": [
-   "srbench-2021-strogatz"
-  ]
+   "gecco-2022-covid-ny",
+   "gecco-2022-exact-rediscovery",
+   "gecco-2022-extrapolation",
+   "gecco-2022-feature-selection",
+   "gecco-2022-local-optima",
+   "gecco-2022-noise"
+  ],
+  "parts": {
+   "gecco-2022-exact-rediscovery": "exact-rediscovery",
+   "gecco-2022-noise": "noise",
+   "gecco-2022-extrapolation": "extrapolation",
+   "gecco-2022-feature-selection": "feature-selection",
+   "gecco-2022-local-optima": "local-optima",
+   "gecco-2022-covid-ny": "covid-ny"
+  }
  },
  {
   "benchmark": "srsd-dummy",
@@ -889,20 +845,32 @@
   "catalogs": [
    "torchsisso-specific-energy",
    "torchsisso-synthetic-expressions"
-  ]
+  ],
+  "parts": {
+   "torchsisso-synthetic-expressions": "synthetic",
+   "torchsisso-specific-energy": "specific-energy"
+  }
  },
  {
   "benchmark": "vladislavleva",
   "catalogs": [
    "vladislavleva",
    "vladislavleva-points"
-  ]
+  ],
+  "parts": {
+   "vladislavleva": "synthetic",
+   "vladislavleva-points": "synthetic"
+  }
  },
  {
   "benchmark": "white-2013-proposed",
   "catalogs": [
    "white-2013-proposed",
    "white-et-al-2013-proposed-sr-set-points"
-  ]
+  ],
+  "parts": {
+   "white-et-al-2013-proposed-sr-set-points": "synthetic",
+   "white-2013-proposed": "real-world"
+  }
  }
 ]

@@ -22,6 +22,7 @@ metadata:
     sampling: vars use the `fastsrb` distribution (sample_range/sample_type).
 expressions:
   Nguyen-1:
+    subset: "nguyen"
     raw: x1 ** 3 + x1 ** 2 + x1
     prepared: v1 ** 3 + v1 ** 2 + v1
     n_variables: 1
@@ -41,6 +42,7 @@ expressions:
       v0:
         name: y
   Nguyen-2:
+    subset: "nguyen"
     raw: x1 ** 4 + x1 ** 3 + x1 ** 2 + x1
     prepared: v1 ** 4 + v1 ** 3 + v1 ** 2 + v1
     n_variables: 1
@@ -60,6 +62,7 @@ expressions:
       v0:
         name: y
   Nguyen-3:
+    subset: "nguyen"
     raw: x1 ** 5 + x1 ** 4 + x1 ** 3 + x1 ** 2 + x1
     prepared: v1 ** 5 + v1 ** 4 + v1 ** 3 + v1 ** 2 + v1
     n_variables: 1
@@ -79,6 +82,7 @@ expressions:
       v0:
         name: y
   Nguyen-4:
+    subset: "nguyen"
     raw: x1 ** 6 + x1 ** 5 + x1 ** 4 + x1 ** 3 + x1 ** 2 + x1
     prepared: v1 ** 6 + v1 ** 5 + v1 ** 4 + v1 ** 3 + v1 ** 2 + v1
     n_variables: 1
@@ -98,6 +102,7 @@ expressions:
       v0:
         name: y
   Nguyen-5:
+    subset: "nguyen"
     raw: sin(x1 ** 2) * cos(x1) - 1
     prepared: sin(v1 ** 2) * cos(v1) - 1
     n_variables: 1
@@ -117,6 +122,7 @@ expressions:
       v0:
         name: y
   Nguyen-6:
+    subset: "nguyen"
     raw: sin(x1) + sin(x1 + x1 ** 2)
     prepared: sin(v1) + sin(v1 + v1 ** 2)
     n_variables: 1
@@ -136,6 +142,7 @@ expressions:
       v0:
         name: y
   Nguyen-7:
+    subset: "nguyen"
     raw: log(x1 + 1) + log(x1 ** 2 + 1)
     prepared: log(v1 + 1) + log(v1 ** 2 + 1)
     n_variables: 1
@@ -155,6 +162,7 @@ expressions:
       v0:
         name: y
   Nguyen-8:
+    subset: "nguyen"
     raw: sqrt(x1)
     prepared: sqrt(v1)
     n_variables: 1
@@ -174,6 +182,7 @@ expressions:
       v0:
         name: y
   Nguyen-9:
+    subset: "nguyen"
     raw: sin(x1) + sin(x2 ** 2)
     prepared: sin(v1) + sin(v2 ** 2)
     n_variables: 2
@@ -204,6 +213,7 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-10:
+    subset: "nguyen"
     raw: 2 * sin(x1) * cos(x2)
     prepared: 2 * sin(v1) * cos(v2)
     n_variables: 2
@@ -234,6 +244,7 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-11:
+    subset: "nguyen"
     raw: x1 ** x2
     prepared: v1 ** v2
     n_variables: 2
@@ -284,6 +295,7 @@ expressions:
       defines random (uniform) sampling in the range, while the mesh([start:step:stop])
       defines regular sampling in t'
   Nguyen-12:
+    subset: "nguyen"
     raw: x1 ** 4 - x1 ** 3 + x2 ** 2 / 2 - x2
     prepared: v1 ** 4 - v1 ** 3 + v2 ** 2 / 2 - v2
     n_variables: 2

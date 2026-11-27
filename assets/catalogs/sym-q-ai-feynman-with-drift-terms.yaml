@@ -39,10 +39,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Feynman-1:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: exp(-x**2/2)/sqrt(2*pi)
     prepared: 0.3989422804014327*exp(-v1**2/2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x
@@ -59,10 +59,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-2:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: exp(-(x*y**(-1))**2/2)/(sqrt(2*pi)*y)
     prepared: 0.3989422804014327*exp(-v1**2/(2*v2**2))/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -88,10 +88,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-3:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: x*y
     prepared: v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -117,10 +117,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-4:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: x*y
     prepared: v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -146,10 +146,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-5:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: 1/2*x*y**2
     prepared: v1*v2**2/2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -175,10 +175,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-6:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: x/y
     prepared: v1/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -204,10 +204,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-7:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: sin(theta1)/sin(theta2)
     prepared: sin(v1)/sin(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: theta1
@@ -233,10 +233,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-8:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: x/y
     prepared: v1/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -262,10 +262,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-9:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: x*y/(2*pi)
     prepared: 0.1591549430918953*v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -291,10 +291,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-10:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: 1.5*x*y
     prepared: 1.5*v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -320,10 +320,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-11:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: x/(4*pi*y**2)
     prepared: v1/(4*3.141592653589793*v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -349,10 +349,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-12:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: x*y**2/2
     prepared: v1*v2**2/2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -378,10 +378,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-13:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: x*y**2
     prepared: v1*v2**2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -407,10 +407,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-14:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: x/(2*(1+y))
     prepared: v1/(2*v2 + 2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -436,10 +436,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-15:
+    subset: "sym-q-ai-feynman-with-drift-terms"
     raw: x*y/(2*pi)
     prepared: (1/(2*3.141592653589793))*v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x

@@ -32,10 +32,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Ripple2d:
+    subset: "symbolicregression-com-toy-test-suite-1"
     raw: (x1 - 3)*(x2 - 3) + 2*sin((x1 - 4)*(x2 - 4))
     prepared: (v1 - 3)*(v2 - 3) + 2*sin((v1 - 4)*(v2 - 4))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1

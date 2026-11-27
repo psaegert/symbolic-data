@@ -1,7 +1,7 @@
 metadata:
   name: nsrwh-train-nc
   version: 1
-  benchmark: "nsrwh-train-nc"
+  benchmark: "nsrwh"
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "generator in-distribution"]}
   license: "MIT (SymposiumOrganization/ControllableNeuralSymbolicRegression)"
   citation: {"paper": {"short": "Bendinelli et al. 2023", "title": "Controllable Neural Symbolic Regression", "venue": "ICML 2023 (PMLR 202)", "url": "https://arxiv.org/abs/2304.10336"}, "data": {"short": "GitHub SymposiumOrganization/ControllableNeuralSymbolicRegression@3060cb8", "title": "NSRwH test_set/train_nc.csv (MIT)", "url": "https://github.com/SymposiumOrganization/ControllableNeuralSymbolicRegression/blob/3060cb8d2b79071f80c51cd35c2808833ae15ec8/test_set/train_nc.csv"}}
@@ -28,10 +28,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   train_nc-000:
+    subset: "train-nc"
     raw: sin(x_1)/x_1**2
     prepared: sin(v1)/v1**2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -60,10 +60,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-001:
+    subset: "train-nc"
     raw: x_1 + cos(x_1*x_2*x_3)**4
     prepared: v1 + cos(v1*v2*v3)**4
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -122,10 +122,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-002:
+    subset: "train-nc"
     raw: sqrt(x_1 - x_2 - tan(x_2))
     prepared: sqrt(v1 - v2 - tan(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -169,10 +169,10 @@ expressions:
     meta:
       finite_fraction: 0.4996
   train_nc-003:
+    subset: "train-nc"
     raw: cos(log(x_1)/x_1)
     prepared: cos(log(v1)/v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -201,10 +201,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-004:
+    subset: "train-nc"
     raw: x_1**3 + x_1*tan(x_2) + x_1 - x_2
     prepared: v1**3 + v1*tan(v2) + v1 - v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -248,10 +248,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-005:
+    subset: "train-nc"
     raw: tan(cos(x_1**2 - x_2))
     prepared: tan(cos(v1**2 - v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -295,10 +295,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-006:
+    subset: "train-nc"
     raw: tan(x_1**2 + x_1 + x_1/x_2)
     prepared: tan(v1**2 + v1 + v1/v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -342,10 +342,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-007:
+    subset: "train-nc"
     raw: x_1/(x_2**2*(x_1 + x_2**2))
     prepared: v1/(v2**2*(v1 + v2**2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -389,10 +389,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-008:
+    subset: "train-nc"
     raw: x_1*x_2**2
     prepared: v1*v2**2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -436,10 +436,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-009:
+    subset: "train-nc"
     raw: x_1*x_2/x_3 + x_1 - x_4
     prepared: v1*v2/v3 + v1 - v4
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -513,10 +513,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-010:
+    subset: "train-nc"
     raw: tan(tan(exp(x_1**4)))
     prepared: tan(tan(exp(v1**4)))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -545,10 +545,10 @@ expressions:
     meta:
       finite_fraction: 0.5168
   train_nc-011:
+    subset: "train-nc"
     raw: x_1*x_2*(sqrt(x_3) + x_4 + cos(x_1))
     prepared: v1*v2*(sqrt(v3) + v4 + cos(v1))
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -622,10 +622,10 @@ expressions:
     meta:
       finite_fraction: 0.494
   train_nc-012:
+    subset: "train-nc"
     raw: x_2 + sin(x_1)
     prepared: v2 + sin(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -669,10 +669,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-013:
+    subset: "train-nc"
     raw: x_1*x_2 + asin(x_1 - x_2)
     prepared: v1*v2 + asin(v1 - v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -716,10 +716,10 @@ expressions:
     meta:
       finite_fraction: 0.0941
   train_nc-014:
+    subset: "train-nc"
     raw: -x_1**2 + (x_1 + x_2)*(x_3 + x_4)
     prepared: -v1**2 + (v1 + v2)*(v3 + v4)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -793,10 +793,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-015:
+    subset: "train-nc"
     raw: x_1*(-x_1 + x_2)*sqrt(cos(x_2))
     prepared: v1*(-v1 + v2)*sqrt(cos(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -840,10 +840,10 @@ expressions:
     meta:
       finite_fraction: 0.4686
   train_nc-016:
+    subset: "train-nc"
     raw: x_1**(1/4)*(x_2 + x_3)
     prepared: v1**(1/4)*(v2 + v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -902,10 +902,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-017:
+    subset: "train-nc"
     raw: x_1/(x_2 + sin(x_2))
     prepared: v1/(v2 + sin(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -949,10 +949,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-018:
+    subset: "train-nc"
     raw: x_1*tan(x_3)/sqrt(x_1*cos(x_2))
     prepared: v1*tan(v3)/sqrt(v1*cos(v2))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1011,10 +1011,10 @@ expressions:
     meta:
       finite_fraction: 0.4928
   train_nc-019:
+    subset: "train-nc"
     raw: log(sqrt(x_1) - x_2/(x_3 + x_4))
     prepared: log(sqrt(v1) - v2/(v3 + v4))
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1088,10 +1088,10 @@ expressions:
     meta:
       finite_fraction: 0.4385
   train_nc-020:
+    subset: "train-nc"
     raw: tan(x_1 + exp(x_2))
     prepared: tan(v1 + exp(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1135,10 +1135,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-021:
+    subset: "train-nc"
     raw: x_1**2*log(x_2)/x_3
     prepared: v1**2*log(v2)/v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1197,10 +1197,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   train_nc-022:
+    subset: "train-nc"
     raw: x_1**2 + x_1 - x_2
     prepared: v1**2 + v1 - v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1244,10 +1244,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-023:
+    subset: "train-nc"
     raw: x_1
     prepared: v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1276,10 +1276,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-024:
+    subset: "train-nc"
     raw: x_1*(x_2 + tan(x_1))
     prepared: v1*(v2 + tan(v1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1323,10 +1323,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-025:
+    subset: "train-nc"
     raw: -x_1**3*x_3*(sqrt(x_2) - 1)**3
     prepared: -v1**3*v3*(sqrt(v2) - 1)**3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1385,10 +1385,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   train_nc-026:
+    subset: "train-nc"
     raw: -tan(-sqrt(x_1) + x_1 + x_2**2)
     prepared: -tan(-sqrt(v1) + v1 + v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1432,10 +1432,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-027:
+    subset: "train-nc"
     raw: x_1*exp(-x_1) - sqrt(x_2)
     prepared: v1*exp(-v1) - sqrt(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1479,10 +1479,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   train_nc-028:
+    subset: "train-nc"
     raw: -x_1 + x_2*sin(x_1) + x_2
     prepared: -v1 + v2*sin(v1) + v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1526,10 +1526,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-029:
+    subset: "train-nc"
     raw: x_1*(sqrt(x_1) + x_1)
     prepared: v1*(sqrt(v1) + v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1558,10 +1558,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-030:
+    subset: "train-nc"
     raw: x_1*cos(cos(x_1/x_2))/x_2
     prepared: v1*cos(cos(v1/v2))/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1605,10 +1605,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-031:
+    subset: "train-nc"
     raw: x_1*tan(x_1)/(x_1 + x_2)
     prepared: v1*tan(v1)/(v1 + v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1652,10 +1652,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-032:
+    subset: "train-nc"
     raw: x_1*x_2*x_3*(x_1 - x_3 + tan(x_2))
     prepared: v1*v2*v3*(v1 - v3 + tan(v2))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1714,10 +1714,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-033:
+    subset: "train-nc"
     raw: x_1/x_2 + x_2
     prepared: v1/v2 + v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1761,10 +1761,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-034:
+    subset: "train-nc"
     raw: tan((x_1 + x_2)/x_3)
     prepared: tan((v1 + v2)/v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1823,10 +1823,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-035:
+    subset: "train-nc"
     raw: (-x_3 + cos(x_2))*tan(2*x_1)
     prepared: (-v3 + cos(v2))*tan(2*v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1885,10 +1885,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-036:
+    subset: "train-nc"
     raw: x_2*log(x_1)/x_1
     prepared: v2*log(v1)/v1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1932,10 +1932,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-037:
+    subset: "train-nc"
     raw: x_1*x_3*exp(cos(exp(x_2)/x_1))
     prepared: v1*v3*exp(cos(exp(v2)/v1))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1994,10 +1994,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-038:
+    subset: "train-nc"
     raw: x_1**5/x_2 - cos(x_1)
     prepared: v1**5/v2 - cos(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2041,10 +2041,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-039:
+    subset: "train-nc"
     raw: (1 - x_1)/x_1
     prepared: (1 - v1)/v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2073,10 +2073,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-040:
+    subset: "train-nc"
     raw: (x_1 + x_2**4)/tan(sqrt(x_3))
     prepared: (v1 + v2**4)/tan(sqrt(v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2135,10 +2135,10 @@ expressions:
     meta:
       finite_fraction: 0.494
   train_nc-041:
+    subset: "train-nc"
     raw: x_1*x_2/(x_1 + x_2*(x_2 + cos(sin(x_2))))
     prepared: v1*v2/(v1 + v2*(v2 + cos(sin(v2))))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2182,10 +2182,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-042:
+    subset: "train-nc"
     raw: cos(-x_1 + x_2*x_3 + x_4)
     prepared: cos(-v1 + v2*v3 + v4)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2259,10 +2259,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-043:
+    subset: "train-nc"
     raw: x_1*(-2*x_1 + asin(x_1))
     prepared: v1*(-2*v1 + asin(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2291,10 +2291,10 @@ expressions:
     meta:
       finite_fraction: 0.0955
   train_nc-044:
+    subset: "train-nc"
     raw: x_1*exp(x_1 + x_2 - tan(x_2))/x_3
     prepared: v1*exp(v1 + v2 - tan(v2))/v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2353,10 +2353,10 @@ expressions:
     meta:
       finite_fraction: 0.9997
   train_nc-045:
+    subset: "train-nc"
     raw: (x_1**2 + x_2)**5
     prepared: (v1**2 + v2)**5
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2400,10 +2400,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-046:
+    subset: "train-nc"
     raw: exp(x_1/(x_2 - asin(x_2)))
     prepared: exp(v1/(v2 - asin(v2)))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2447,10 +2447,10 @@ expressions:
     meta:
       finite_fraction: 0.0816
   train_nc-047:
+    subset: "train-nc"
     raw: sin(x_1 - x_2*x_3)
     prepared: sin(v1 - v2*v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2509,10 +2509,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-048:
+    subset: "train-nc"
     raw: x_1 - sin(x_1*(x_1 + x_2)*tan(x_3))
     prepared: v1 - sin(v1*(v1 + v2)*tan(v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2571,10 +2571,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-049:
+    subset: "train-nc"
     raw: x_1*(x_4 + tan(x_2/(x_1 + x_3)))
     prepared: v1*(v4 + tan(v2/(v1 + v3)))
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2648,10 +2648,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-050:
+    subset: "train-nc"
     raw: cos(log(sin(x_2)*tan(x_1 - x_2)))
     prepared: cos(log(sin(v2)*tan(v1 - v2)))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2695,10 +2695,10 @@ expressions:
     meta:
       finite_fraction: 0.5032
   train_nc-051:
+    subset: "train-nc"
     raw: x_1 - x_2*cos(x_3)
     prepared: v1 - v2*cos(v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2757,10 +2757,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-052:
+    subset: "train-nc"
     raw: sin(tan(cos(x_1)))
     prepared: sin(tan(cos(v1)))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2789,10 +2789,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-053:
+    subset: "train-nc"
     raw: exp(2*sin(x_1 + tan(x_1)))
     prepared: exp(2*sin(v1 + tan(v1)))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2821,10 +2821,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-054:
+    subset: "train-nc"
     raw: x_1**4*(x_1 + 1)**4
     prepared: v1**4*(v1 + 1)**4
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2853,10 +2853,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-055:
+    subset: "train-nc"
     raw: sin(x_1*x_2**2*sin(x_1)**2)
     prepared: sin(v1*v2**2*sin(v1)**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2900,10 +2900,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-056:
+    subset: "train-nc"
     raw: -x_1**2*x_2 + x_1 + tan(x_3)
     prepared: -v1**2*v2 + v1 + tan(v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2962,10 +2962,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-057:
+    subset: "train-nc"
     raw: x_1*x_2 + x_1 - x_3
     prepared: v1*v2 + v1 - v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3024,10 +3024,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-058:
+    subset: "train-nc"
     raw: exp(x_1/sqrt(x_2))
     prepared: exp(v1/sqrt(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3071,10 +3071,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   train_nc-059:
+    subset: "train-nc"
     raw: x_1 + x_3 + exp(x_1)/x_2
     prepared: v1 + v3 + exp(v1)/v2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3133,10 +3133,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-060:
+    subset: "train-nc"
     raw: x_1 - sin(x_2*x_3)**2
     prepared: v1 - sin(v2*v3)**2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3195,10 +3195,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-061:
+    subset: "train-nc"
     raw: x_1*(2*x_2**2 + 1)
     prepared: v1*(2*v2**2 + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3242,10 +3242,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-062:
+    subset: "train-nc"
     raw: sqrt(x_1) + 3*x_1*(x_2 + x_3)
     prepared: sqrt(v1) + 3*v1*(v2 + v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3304,10 +3304,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-063:
+    subset: "train-nc"
     raw: x_1 + sqrt(x_1/(x_2 + tan(x_1)))
     prepared: v1 + sqrt(v1/(v2 + tan(v1)))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3351,10 +3351,10 @@ expressions:
     meta:
       finite_fraction: 0.5026
   train_nc-064:
+    subset: "train-nc"
     raw: sin(tan(x_1*x_2*x_3))
     prepared: sin(tan(v1*v2*v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3413,10 +3413,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-065:
+    subset: "train-nc"
     raw: x_1*(sqrt(x_1) + x_2*x_3)**2/x_3**2
     prepared: v1*(sqrt(v1) + v2*v3)**2/v3**2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3475,10 +3475,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-066:
+    subset: "train-nc"
     raw: x_3**3 + cos(x_1)/asin(x_2*x_3)
     prepared: v3**3 + cos(v1)/asin(v2*v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3537,10 +3537,10 @@ expressions:
     meta:
       finite_fraction: 0.0544
   train_nc-067:
+    subset: "train-nc"
     raw: x_1*x_3*(x_1 + x_2)
     prepared: v1*v3*(v1 + v2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3599,10 +3599,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-068:
+    subset: "train-nc"
     raw: x_1 + (sqrt(x_1) - x_3)**2*(x_1 + x_2)**2
     prepared: v1 + (sqrt(v1) - v3)**2*(v1 + v2)**2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3661,10 +3661,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-069:
+    subset: "train-nc"
     raw: x_1**2*exp(-x_2)
     prepared: v1**2*exp(-v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3708,10 +3708,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-070:
+    subset: "train-nc"
     raw: x_1 + x_2**2 - asin(x_1)
     prepared: v1 + v2**2 - asin(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3755,10 +3755,10 @@ expressions:
     meta:
       finite_fraction: 0.0955
   train_nc-071:
+    subset: "train-nc"
     raw: x_2*exp(4*x_1)
     prepared: v2*exp(4*v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3802,10 +3802,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-072:
+    subset: "train-nc"
     raw: x_1**4*exp(tan(x_1))
     prepared: v1**4*exp(tan(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3834,10 +3834,10 @@ expressions:
     meta:
       finite_fraction: 0.9996
   train_nc-073:
+    subset: "train-nc"
     raw: exp(x_1 - asin(x_1))
     prepared: exp(v1 - asin(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3866,10 +3866,10 @@ expressions:
     meta:
       finite_fraction: 0.0955
   train_nc-074:
+    subset: "train-nc"
     raw: sin(sqrt(x_1*x_2))
     prepared: sin(sqrt(v1*v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3913,10 +3913,10 @@ expressions:
     meta:
       finite_fraction: 0.4991
   train_nc-075:
+    subset: "train-nc"
     raw: x_1*(x_1 + x_2*x_3)*tan(x_1**2)
     prepared: v1*(v1 + v2*v3)*tan(v1**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3975,10 +3975,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-076:
+    subset: "train-nc"
     raw: cos(x_1) - tan(x_2)
     prepared: cos(v1) - tan(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4022,10 +4022,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-077:
+    subset: "train-nc"
     raw: log(x_1 - x_2 - sqrt(x_3 + x_2/x_1))
     prepared: log(v1 - v2 - sqrt(v3 + v2/v1))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4084,10 +4084,10 @@ expressions:
     meta:
       finite_fraction: 0.1924
   train_nc-078:
+    subset: "train-nc"
     raw: x_1**6 - x_2
     prepared: v1**6 - v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4131,10 +4131,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-079:
+    subset: "train-nc"
     raw: x_2*(sin(x_1) + 1)
     prepared: v2*(sin(v1) + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4178,10 +4178,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-080:
+    subset: "train-nc"
     raw: cos(x_1/x_2**2)
     prepared: cos(v1/v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4225,10 +4225,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-081:
+    subset: "train-nc"
     raw: x_1 - tan(x_1*x_2)
     prepared: v1 - tan(v1*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4272,10 +4272,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-082:
+    subset: "train-nc"
     raw: -x_1 + 2*x_2 + x_3 + exp(x_1)
     prepared: -v1 + 2*v2 + v3 + exp(v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4334,10 +4334,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-083:
+    subset: "train-nc"
     raw: x_1 - x_3 + x_2**2/x_1**2
     prepared: v1 - v3 + v2**2/v1**2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4396,10 +4396,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-084:
+    subset: "train-nc"
     raw: x_2*(-x_1 + sin(x_1))
     prepared: v2*(-v1 + sin(v1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4443,10 +4443,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-085:
+    subset: "train-nc"
     raw: x_1 + x_2 - exp(x_3)
     prepared: v1 + v2 - exp(v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4505,10 +4505,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-086:
+    subset: "train-nc"
     raw: cos(tan(x_1 + x_2))
     prepared: cos(tan(v1 + v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4552,10 +4552,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-087:
+    subset: "train-nc"
     raw: x_1/(x_1**5 - x_2)
     prepared: v1/(v1**5 - v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4599,10 +4599,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-088:
+    subset: "train-nc"
     raw: x_1*(x_2**2 + 1)
     prepared: v1*(v2**2 + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4646,10 +4646,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-089:
+    subset: "train-nc"
     raw: x_1 - x_4*cos(x_2**2)/tan(x_3)
     prepared: v1 - v4*cos(v2**2)/tan(v3)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4723,10 +4723,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-090:
+    subset: "train-nc"
     raw: sqrt(x_1 - x_2**2*x_3)
     prepared: sqrt(v1 - v2**2*v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4785,10 +4785,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-091:
+    subset: "train-nc"
     raw: asin((x_1 + x_2/x_1)**(3/2))
     prepared: asin((v1 + v2/v1)**(3/2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4833,10 +4833,10 @@ expressions:
       finite_fraction: 0.0277
       low_validity: true
   train_nc-092:
+    subset: "train-nc"
     raw: 2*x_1 + x_3 + tan(x_1)/x_2
     prepared: 2*v1 + v3 + tan(v1)/v2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4895,10 +4895,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-093:
+    subset: "train-nc"
     raw: (x_1**2*x_2**2 + x_3)**3
     prepared: (v1**2*v2**2 + v3)**3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4957,10 +4957,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-094:
+    subset: "train-nc"
     raw: sin(x_1 - x_2/sqrt(x_1/x_3) + x_3)
     prepared: sin(v1 - v2/sqrt(v1/v3) + v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5019,10 +5019,10 @@ expressions:
     meta:
       finite_fraction: 0.5016
   train_nc-095:
+    subset: "train-nc"
     raw: x_1/(x_3*(-x_1 + x_2**2*sin(x_2)))
     prepared: v1/(v3*(-v1 + v2**2*sin(v2)))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5081,10 +5081,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-096:
+    subset: "train-nc"
     raw: exp(2*x_1**2)
     prepared: exp(2*v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5113,10 +5113,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-097:
+    subset: "train-nc"
     raw: x_1*(x_1*x_3 + x_2)/x_2
     prepared: v1*(v1*v3 + v2)/v2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5175,10 +5175,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-098:
+    subset: "train-nc"
     raw: x_3 + sin(x_1 - x_2)/sin(x_3**2)
     prepared: v3 + sin(v1 - v2)/sin(v3**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5237,10 +5237,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-099:
+    subset: "train-nc"
     raw: x_1/(x_1 + sin(x_1**(1/4)))**2
     prepared: v1/(v1 + sin(v1**(1/4)))**2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5269,10 +5269,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-100:
+    subset: "train-nc"
     raw: 2*x_1 + exp(x_1)
     prepared: 2*v1 + exp(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5301,10 +5301,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-101:
+    subset: "train-nc"
     raw: cos(x_1**3/x_2)
     prepared: cos(v1**3/v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5348,10 +5348,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-102:
+    subset: "train-nc"
     raw: x_1*(x_1 + 2*x_2)
     prepared: v1*(v1 + 2*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5395,10 +5395,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-103:
+    subset: "train-nc"
     raw: (x_1 - x_2)**4*cos(sqrt(x_3))**4
     prepared: (v1 - v2)**4*cos(sqrt(v3))**4
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5457,10 +5457,10 @@ expressions:
     meta:
       finite_fraction: 0.494
   train_nc-104:
+    subset: "train-nc"
     raw: x_1*x_2**2/(x_1 - x_2**2*(x_1 + x_2))
     prepared: v1*v2**2/(v1 - v2**2*(v1 + v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5504,10 +5504,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-105:
+    subset: "train-nc"
     raw: (x_1 - x_2)**3
     prepared: (v1 - v2)**3
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5551,10 +5551,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-106:
+    subset: "train-nc"
     raw: x_1/sin(x_1 - x_2)
     prepared: v1/sin(v1 - v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5598,10 +5598,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-107:
+    subset: "train-nc"
     raw: x_1 + tan(x_1**(-2))
     prepared: v1 + tan(v1**(-2))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5630,10 +5630,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-108:
+    subset: "train-nc"
     raw: x_1**(3/2) + x_1**2
     prepared: v1**2 + v1**(3/2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5662,10 +5662,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-109:
+    subset: "train-nc"
     raw: x_1 - x_3**2*tan(x_2)
     prepared: v1 - v3**2*tan(v2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5724,10 +5724,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-110:
+    subset: "train-nc"
     raw: x_1**4 + x_2**2
     prepared: v1**4 + v2**2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5771,10 +5771,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-111:
+    subset: "train-nc"
     raw: 2*x_1 + sin(x_1*x_2)
     prepared: 2*v1 + sin(v1*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5818,10 +5818,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-112:
+    subset: "train-nc"
     raw: x_1**2*(x_1 - (x_2 + 1)**2)
     prepared: v1**2*(v1 - (v2 + 1)**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5865,10 +5865,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-113:
+    subset: "train-nc"
     raw: (x_1**2*(x_1 + 2*x_2) - x_2)/(x_1 + 2*x_2)
     prepared: (v1**2*(v1 + 2*v2) - v2)/(v1 + 2*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5912,10 +5912,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-114:
+    subset: "train-nc"
     raw: x_1 + x_2/x_3 + tan(x_1)
     prepared: v1 + v2/v3 + tan(v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5974,10 +5974,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-115:
+    subset: "train-nc"
     raw: 2*x_2 + sqrt(x_1**4 - x_1 + x_2)
     prepared: 2*v2 + sqrt(v1**4 - v1 + v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6021,10 +6021,10 @@ expressions:
     meta:
       finite_fraction: 0.934
   train_nc-116:
+    subset: "train-nc"
     raw: sqrt(x_2*(x_1 + sqrt(x_2))/(x_1 + x_2*x_3))
     prepared: sqrt(v2*(v1 + sqrt(v2))/(v1 + v2*v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6083,10 +6083,10 @@ expressions:
     meta:
       finite_fraction: 0.2945
   train_nc-117:
+    subset: "train-nc"
     raw: x_1**(1/4) - x_1
     prepared: -v1 + v1**(1/4)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6115,10 +6115,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-118:
+    subset: "train-nc"
     raw: x_2*(exp(x_1/2) + 1)
     prepared: v2*(exp(v1/2) + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6162,10 +6162,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-119:
+    subset: "train-nc"
     raw: x_1*asin(x_2*(x_1 - 1))
     prepared: v1*asin(v2*(v1 - 1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6209,10 +6209,10 @@ expressions:
     meta:
       finite_fraction: 0.0556
   train_nc-120:
+    subset: "train-nc"
     raw: log(x_1**2)
     prepared: log(v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6241,10 +6241,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-121:
+    subset: "train-nc"
     raw: x_1 - x_2 - tan(sin(x_2))
     prepared: v1 - v2 - tan(sin(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6288,10 +6288,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-122:
+    subset: "train-nc"
     raw: -x_1 - x_2
     prepared: -v1 - v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6335,10 +6335,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-123:
+    subset: "train-nc"
     raw: x_1**3 + (x_1 + 2*x_2)*exp(x_2)
     prepared: v1**3 + (v1 + 2*v2)*exp(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6382,10 +6382,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-124:
+    subset: "train-nc"
     raw: sin(x_1*tan(x_1))
     prepared: sin(v1*tan(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6414,10 +6414,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-125:
+    subset: "train-nc"
     raw: x_1 + x_3 + sin(x_1 + x_2)
     prepared: v1 + v3 + sin(v1 + v2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6476,10 +6476,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-126:
+    subset: "train-nc"
     raw: x_1**2 + x_1*x_2 + 2*x_1 + x_3
     prepared: v1**2 + v1*v2 + 2*v1 + v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6538,10 +6538,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-127:
+    subset: "train-nc"
     raw: exp((-x_2**2*x_3 + cos(x_1 + x_2))/x_2)
     prepared: exp((-v2**2*v3 + cos(v1 + v2))/v2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6600,10 +6600,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-128:
+    subset: "train-nc"
     raw: sqrt(sin(x_1*(x_1 - x_2 - 1)))
     prepared: sqrt(sin(v1*(v1 - v2 - 1)))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6647,10 +6647,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   train_nc-129:
+    subset: "train-nc"
     raw: cos(x_1**2*x_2)
     prepared: cos(v1**2*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6694,10 +6694,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-130:
+    subset: "train-nc"
     raw: x_1*(x_1*x_2 + x_1 + x_3)
     prepared: v1*(v1*v2 + v1 + v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6756,10 +6756,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-131:
+    subset: "train-nc"
     raw: x_1
     prepared: v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6788,10 +6788,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-132:
+    subset: "train-nc"
     raw: 3*x_1 + x_2
     prepared: 3*v1 + v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6835,10 +6835,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-133:
+    subset: "train-nc"
     raw: -x_1*x_2 + x_1 + x_2**2/x_1
     prepared: -v1*v2 + v1 + v2**2/v1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6882,10 +6882,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-134:
+    subset: "train-nc"
     raw: x_1*sin(x_1**4)
     prepared: v1*sin(v1**4)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6914,10 +6914,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-135:
+    subset: "train-nc"
     raw: x_1*sin(sqrt(x_2)*(x_3 + x_4)**4)
     prepared: v1*sin(sqrt(v2)*(v3 + v4)**4)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6991,10 +6991,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   train_nc-136:
+    subset: "train-nc"
     raw: sqrt(x_1 + x_2*x_3)
     prepared: sqrt(v1 + v2*v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7053,10 +7053,10 @@ expressions:
     meta:
       finite_fraction: 0.5043
   train_nc-137:
+    subset: "train-nc"
     raw: x_3*asin(x_1*x_2)
     prepared: v3*asin(v1*v2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7115,10 +7115,10 @@ expressions:
     meta:
       finite_fraction: 0.0547
   train_nc-138:
+    subset: "train-nc"
     raw: x_1*(x_2 + cos(x_2))
     prepared: v1*(v2 + cos(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7162,10 +7162,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-139:
+    subset: "train-nc"
     raw: exp(x_1/x_2)
     prepared: exp(v1/v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7209,10 +7209,10 @@ expressions:
     meta:
       finite_fraction: 0.9997
   train_nc-140:
+    subset: "train-nc"
     raw: x_1*(x_1 + x_3 + x_4 + exp(x_2))
     prepared: v1*(v1 + v3 + v4 + exp(v2))
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7286,10 +7286,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-141:
+    subset: "train-nc"
     raw: x_1 + x_2 - x_3*x_4
     prepared: v1 + v2 - v3*v4
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7363,10 +7363,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-142:
+    subset: "train-nc"
     raw: sqrt(x_1 + sin(exp(x_1)))
     prepared: sqrt(v1 + sin(exp(v1)))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7395,10 +7395,10 @@ expressions:
     meta:
       finite_fraction: 0.5314
   train_nc-143:
+    subset: "train-nc"
     raw: x_1*x_3/(x_1 + x_3*(x_2 - x_4))
     prepared: v1*v3/(v1 + v3*(v2 - v4))
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7472,10 +7472,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-144:
+    subset: "train-nc"
     raw: x_2**2/(x_1*x_2 - x_3)**2 + sin(x_1)
     prepared: v2**2/(v1*v2 - v3)**2 + sin(v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7534,10 +7534,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-145:
+    subset: "train-nc"
     raw: x_2 + exp(x_1) + sin(x_2)
     prepared: v2 + exp(v1) + sin(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7581,10 +7581,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-146:
+    subset: "train-nc"
     raw: x_1*exp(tan(x_1))
     prepared: v1*exp(tan(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7613,10 +7613,10 @@ expressions:
     meta:
       finite_fraction: 0.9996
   train_nc-147:
+    subset: "train-nc"
     raw: x_1**2*x_2*x_3
     prepared: v1**2*v2*v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7675,10 +7675,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-148:
+    subset: "train-nc"
     raw: x_1 - x_2**2*asin(x_2)
     prepared: v1 - v2**2*asin(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7722,10 +7722,10 @@ expressions:
     meta:
       finite_fraction: 0.0975
   train_nc-149:
+    subset: "train-nc"
     raw: x_3*x_4 + exp(x_1/2) + exp(x_2)
     prepared: v3*v4 + exp(v1/2) + exp(v2)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7799,10 +7799,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-150:
+    subset: "train-nc"
     raw: sqrt(sqrt(2)*sqrt(x_1) + x_2)
     prepared: sqrt(sqrt(2)*sqrt(v1) + v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7846,10 +7846,10 @@ expressions:
     meta:
       finite_fraction: 0.329
   train_nc-151:
+    subset: "train-nc"
     raw: x_2*cos(x_1)
     prepared: v2*cos(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7893,10 +7893,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-152:
+    subset: "train-nc"
     raw: x_1*x_2 + x_1 + x_3
     prepared: v1*v2 + v1 + v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7955,10 +7955,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-153:
+    subset: "train-nc"
     raw: x_1*(log(x_1**5) + 1)
     prepared: v1*(log(v1**5) + 1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7987,10 +7987,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-154:
+    subset: "train-nc"
     raw: sin(2*x_1)
     prepared: sin(2*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8019,10 +8019,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-155:
+    subset: "train-nc"
     raw: x_1**2 + tan(x_2)
     prepared: v1**2 + tan(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8066,10 +8066,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-156:
+    subset: "train-nc"
     raw: x_1**4*x_2**4*(cos(x_1) + 1)**4
     prepared: v1**4*v2**4*(cos(v1) + 1)**4
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8113,10 +8113,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-157:
+    subset: "train-nc"
     raw: x_1**2*x_2
     prepared: v1**2*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8160,10 +8160,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-158:
+    subset: "train-nc"
     raw: x_1*(x_1 + x_2 + sin(x_2**3))
     prepared: v1*(v1 + v2 + sin(v2**3))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8207,10 +8207,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-159:
+    subset: "train-nc"
     raw: x_1*(x_2**2*tan(x_2) - 2)
     prepared: v1*(v2**2*tan(v2) - 2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8254,10 +8254,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-160:
+    subset: "train-nc"
     raw: -sqrt(x_1) + x_1*x_2 + x_3
     prepared: -sqrt(v1) + v1*v2 + v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8316,10 +8316,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-161:
+    subset: "train-nc"
     raw: 1/(x_1**4*x_2**2)
     prepared: 1/(v1**4*v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8363,10 +8363,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-162:
+    subset: "train-nc"
     raw: x_1**8*(x_1**4 - 1)**2
     prepared: v1**8*(v1**4 - 1)**2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8395,10 +8395,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-163:
+    subset: "train-nc"
     raw: x_1 + x_2**2 - x_3
     prepared: v1 + v2**2 - v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8457,10 +8457,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-164:
+    subset: "train-nc"
     raw: x_1 + 1/sin(x_1)
     prepared: v1 + 1/sin(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8489,10 +8489,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-165:
+    subset: "train-nc"
     raw: x_1/(-x_2 + exp(x_2))
     prepared: v1/(-v2 + exp(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8536,10 +8536,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-166:
+    subset: "train-nc"
     raw: x_1*(-x_1*x_2 + cos(x_1))
     prepared: v1*(-v1*v2 + cos(v1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8583,10 +8583,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-167:
+    subset: "train-nc"
     raw: 1/x_1
     prepared: 1/v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8615,10 +8615,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-168:
+    subset: "train-nc"
     raw: x_1*(x_1 + x_2)*exp(x_3)
     prepared: v1*(v1 + v2)*exp(v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8677,10 +8677,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-169:
+    subset: "train-nc"
     raw: x_1*cos(x_1 + (x_1*x_3 + x_2)**2)
     prepared: v1*cos(v1 + (v1*v3 + v2)**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8739,10 +8739,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-170:
+    subset: "train-nc"
     raw: x_2*(x_1 + x_3)*tan(x_1)
     prepared: v2*(v1 + v3)*tan(v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8801,10 +8801,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-171:
+    subset: "train-nc"
     raw: x_1*x_2*exp(-x_1) + x_1
     prepared: v1*v2*exp(-v1) + v1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8848,10 +8848,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-172:
+    subset: "train-nc"
     raw: x_1/sin(x_2)
     prepared: v1/sin(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8895,10 +8895,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-173:
+    subset: "train-nc"
     raw: x_1*sqrt(sin(2*x_1)/x_1)
     prepared: v1*sqrt(sin(2*v1)/v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8927,10 +8927,10 @@ expressions:
     meta:
       finite_fraction: 0.5256
   train_nc-174:
+    subset: "train-nc"
     raw: sqrt(x_2) + cos(exp(cos(x_1)))
     prepared: sqrt(v2) + cos(exp(cos(v1)))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8974,10 +8974,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   train_nc-175:
+    subset: "train-nc"
     raw: x_1*(2 - x_2)
     prepared: v1*(2 - v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9021,10 +9021,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-176:
+    subset: "train-nc"
     raw: x_1**2*x_2*(x_1 + x_2**2*x_3)
     prepared: v1**2*v2*(v1 + v2**2*v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9083,10 +9083,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-177:
+    subset: "train-nc"
     raw: x_1*(x_1 + x_2)/x_2
     prepared: v1*(v1 + v2)/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9130,10 +9130,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-178:
+    subset: "train-nc"
     raw: (cos(x_1) - cos(sin(x_1)))**2
     prepared: (cos(v1) - cos(sin(v1)))**2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9162,10 +9162,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-179:
+    subset: "train-nc"
     raw: (2*x_1 + x_2)**3
     prepared: (2*v1 + v2)**3
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9209,10 +9209,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-180:
+    subset: "train-nc"
     raw: x_2 + x_3 + cos(x_1)
     prepared: v2 + v3 + cos(v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9271,10 +9271,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-181:
+    subset: "train-nc"
     raw: x_1 - x_2*x_3 - sqrt(cos(x_2))
     prepared: v1 - v2*v3 - sqrt(cos(v2))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9333,10 +9333,10 @@ expressions:
     meta:
       finite_fraction: 0.4686
   train_nc-182:
+    subset: "train-nc"
     raw: x_1*x_2
     prepared: v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9380,10 +9380,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-183:
+    subset: "train-nc"
     raw: x_1*cos(x_1**2) - x_2
     prepared: v1*cos(v1**2) - v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9427,10 +9427,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-184:
+    subset: "train-nc"
     raw: x_1 + x_2 + sin(x_2) + tan(cos(x_1))
     prepared: v1 + v2 + sin(v2) + tan(cos(v1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9474,10 +9474,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-185:
+    subset: "train-nc"
     raw: x_2 + cos(x_1*(x_2 + 1))
     prepared: v2 + cos(v1*(v2 + 1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9521,10 +9521,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-186:
+    subset: "train-nc"
     raw: (x_1 + x_2)/sqrt(x_2)
     prepared: (v1 + v2)/sqrt(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9568,10 +9568,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   train_nc-187:
+    subset: "train-nc"
     raw: (x_1*(x_2**2 - 1) + x_2**2)/(x_1*(x_2**2 - 1))
     prepared: (v1*(v2**2 - 1) + v2**2)/(v1*(v2**2 - 1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9615,10 +9615,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-188:
+    subset: "train-nc"
     raw: sin(x_1) - sin(exp(x_1))**4
     prepared: sin(v1) - sin(exp(v1))**4
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9647,10 +9647,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-189:
+    subset: "train-nc"
     raw: x_1*x_2 + x_2/sqrt(1 - x_3**2)
     prepared: v1*v2 + v2/sqrt(1 - v3**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9709,10 +9709,10 @@ expressions:
     meta:
       finite_fraction: 0.0984
   train_nc-190:
+    subset: "train-nc"
     raw: x_1*(1 - exp(tan(x_1)))
     prepared: v1*(1 - exp(tan(v1)))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9741,10 +9741,10 @@ expressions:
     meta:
       finite_fraction: 0.9996
   train_nc-191:
+    subset: "train-nc"
     raw: cos(cos(x_1))
     prepared: cos(cos(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9773,10 +9773,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-192:
+    subset: "train-nc"
     raw: cos(x_2) + tan(x_1)
     prepared: cos(v2) + tan(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9820,10 +9820,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-193:
+    subset: "train-nc"
     raw: x_2*(-x_1 + log(x_1))/x_3
     prepared: v2*(-v1 + log(v1))/v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9882,10 +9882,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-194:
+    subset: "train-nc"
     raw: tan(x_2*(x_1 + 1))**2
     prepared: tan(v2*(v1 + 1))**2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9929,10 +9929,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-195:
+    subset: "train-nc"
     raw: x_1*x_2
     prepared: v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9976,10 +9976,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-196:
+    subset: "train-nc"
     raw: x_1*asin(sin((x_2 + sin(x_2))**2))
     prepared: v1*asin(sin((v2 + sin(v2))**2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10023,10 +10023,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-197:
+    subset: "train-nc"
     raw: sin(-x_2 + x_3 + sin(x_1))
     prepared: sin(-v2 + v3 + sin(v1))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10085,10 +10085,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-198:
+    subset: "train-nc"
     raw: sin(x_1**2 + x_1 - tan(x_1))
     prepared: sin(v1**2 + v1 - tan(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10117,10 +10117,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-199:
+    subset: "train-nc"
     raw: exp(exp(x_1*x_4*(x_2 + x_3)))
     prepared: exp(exp(v1*v4*(v2 + v3)))
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10194,10 +10194,10 @@ expressions:
     meta:
       finite_fraction: 0.5573
   train_nc-200:
+    subset: "train-nc"
     raw: x_1 + x_2 - x_3**3
     prepared: v1 + v2 - v3**3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10256,10 +10256,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-201:
+    subset: "train-nc"
     raw: x_1*(x_1 + x_2)*(x_1*sin(x_1) + 1)
     prepared: v1*(v1 + v2)*(v1*sin(v1) + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10303,10 +10303,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-202:
+    subset: "train-nc"
     raw: x_1**3/asin(x_2)**2
     prepared: v1**3/asin(v2)**2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10350,10 +10350,10 @@ expressions:
     meta:
       finite_fraction: 0.0975
   train_nc-203:
+    subset: "train-nc"
     raw: x_1/(x_1 + sin(x_1))
     prepared: v1/(v1 + sin(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10382,10 +10382,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-204:
+    subset: "train-nc"
     raw: (x_1 + x_2)*log(x_3)
     prepared: (v1 + v2)*log(v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10444,10 +10444,10 @@ expressions:
     meta:
       finite_fraction: 0.494
   train_nc-205:
+    subset: "train-nc"
     raw: x_1**3*x_2*x_3
     prepared: v1**3*v2*v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10506,10 +10506,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-206:
+    subset: "train-nc"
     raw: x_1**2*tan(sin(2*x_2))
     prepared: v1**2*tan(sin(2*v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10553,10 +10553,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-207:
+    subset: "train-nc"
     raw: x_1 + (x_1*x_3 + x_2*x_3 - x_2 + x_3)**2/x_3**2
     prepared: v1 + (v1*v3 + v2*v3 - v2 + v3)**2/v3**2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10615,10 +10615,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-208:
+    subset: "train-nc"
     raw: -x_2 + asin(sin(tan(x_1)))
     prepared: -v2 + asin(sin(tan(v1)))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10662,10 +10662,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-209:
+    subset: "train-nc"
     raw: (x_2 + x_3)*(x_1 - x_2 + exp(x_1))
     prepared: (v2 + v3)*(v1 - v2 + exp(v1))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10724,10 +10724,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-210:
+    subset: "train-nc"
     raw: 3*x_1 - x_2 + x_3**2
     prepared: 3*v1 - v2 + v3**2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10786,10 +10786,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-211:
+    subset: "train-nc"
     raw: x_1*exp(x_2) + sin(x_1)
     prepared: v1*exp(v2) + sin(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10833,10 +10833,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-212:
+    subset: "train-nc"
     raw: (x_1**2 + x_2)*cos(x_2)/cos(x_1)
     prepared: (v1**2 + v2)*cos(v2)/cos(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10880,10 +10880,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-213:
+    subset: "train-nc"
     raw: x_1 + x_2**2 + x_2*x_3/x_4 - x_5
     prepared: v1 + v2**2 + v2*v3/v4 - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10972,10 +10972,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-214:
+    subset: "train-nc"
     raw: sqrt(x_2)*(x_1 - x_2)
     prepared: sqrt(v2)*(v1 - v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11019,10 +11019,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   train_nc-215:
+    subset: "train-nc"
     raw: x_1**3 + cos(sin(x_2 + 2*x_3))
     prepared: v1**3 + cos(sin(v2 + 2*v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11081,10 +11081,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-216:
+    subset: "train-nc"
     raw: x_1**4*(x_1 + asin(x_1)**3)
     prepared: v1**4*(v1 + asin(v1)**3)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11113,10 +11113,10 @@ expressions:
     meta:
       finite_fraction: 0.0955
   train_nc-217:
+    subset: "train-nc"
     raw: x_1*exp(exp(x_1))
     prepared: v1*exp(exp(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11145,10 +11145,10 @@ expressions:
     meta:
       finite_fraction: 0.8258
   train_nc-218:
+    subset: "train-nc"
     raw: x_1/(x_2 + tan(x_2)) - x_2
     prepared: v1/(v2 + tan(v2)) - v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11192,10 +11192,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-219:
+    subset: "train-nc"
     raw: x_1**2*x_2 + x_1**2 + x_2
     prepared: v1**2*v2 + v1**2 + v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11239,10 +11239,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-220:
+    subset: "train-nc"
     raw: x_2 - x_3 + tan(x_1)
     prepared: v2 - v3 + tan(v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11301,10 +11301,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-221:
+    subset: "train-nc"
     raw: x_1**4 + x_2
     prepared: v1**4 + v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11348,10 +11348,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-222:
+    subset: "train-nc"
     raw: exp(2*x_1)
     prepared: exp(2*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11380,10 +11380,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-223:
+    subset: "train-nc"
     raw: x_1**5
     prepared: v1**5
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11412,10 +11412,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-224:
+    subset: "train-nc"
     raw: x_1**4/x_2
     prepared: v1**4/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11459,10 +11459,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-225:
+    subset: "train-nc"
     raw: 4*x_1**2 - sin(x_1 + exp(x_2))
     prepared: 4*v1**2 - sin(v1 + exp(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11506,10 +11506,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-226:
+    subset: "train-nc"
     raw: x_1**2*exp(asin(x_1))
     prepared: v1**2*exp(asin(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11538,10 +11538,10 @@ expressions:
     meta:
       finite_fraction: 0.0955
   train_nc-227:
+    subset: "train-nc"
     raw: x_1**4*cos(x_2)**4 - x_1
     prepared: v1**4*cos(v2)**4 - v1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11585,10 +11585,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-228:
+    subset: "train-nc"
     raw: x_1*(x_1 + 1/tan(x_2*x_3 + x_3))
     prepared: v1*(v1 + 1/tan(v2*v3 + v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11647,10 +11647,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-229:
+    subset: "train-nc"
     raw: x_1 - sin(x_1*tan(x_2))
     prepared: v1 - sin(v1*tan(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11694,10 +11694,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-230:
+    subset: "train-nc"
     raw: x_2 - x_3 + cos(x_1)**2
     prepared: v2 - v3 + cos(v1)**2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11756,10 +11756,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-231:
+    subset: "train-nc"
     raw: cos(x_1 + 2*x_2)
     prepared: cos(v1 + 2*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11803,10 +11803,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-232:
+    subset: "train-nc"
     raw: x_3*(x_1 + x_2)/(x_1*x_3*x_5 + x_4)
     prepared: v3*(v1 + v2)/(v1*v3*v5 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11895,10 +11895,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-233:
+    subset: "train-nc"
     raw: x_1 + sqrt(cos(x_2))
     prepared: v1 + sqrt(cos(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11942,10 +11942,10 @@ expressions:
     meta:
       finite_fraction: 0.4686
   train_nc-234:
+    subset: "train-nc"
     raw: exp(x_1**2 + x_2)
     prepared: exp(v1**2 + v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11989,10 +11989,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-235:
+    subset: "train-nc"
     raw: -sqrt(x_1) + x_1**2
     prepared: -sqrt(v1) + v1**2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12021,10 +12021,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-236:
+    subset: "train-nc"
     raw: x_1**2
     prepared: v1**2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12053,10 +12053,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-237:
+    subset: "train-nc"
     raw: x_1 + x_2 + sin(x_2)
     prepared: v1 + v2 + sin(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12100,10 +12100,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-238:
+    subset: "train-nc"
     raw: tan(x_1*exp(x_2/x_1))
     prepared: tan(v1*exp(v2/v1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12147,10 +12147,10 @@ expressions:
     meta:
       finite_fraction: 0.9998
   train_nc-239:
+    subset: "train-nc"
     raw: x_1*(x_1 + x_2 + 1)
     prepared: v1*(v1 + v2 + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12194,10 +12194,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-240:
+    subset: "train-nc"
     raw: x_1/(x_2 - x_3**2)
     prepared: v1/(v2 - v3**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12256,10 +12256,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-241:
+    subset: "train-nc"
     raw: x_1*(x_2**2 + tan(1))/x_2
     prepared: v1*(v2**2 + tan(1))/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12303,10 +12303,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-242:
+    subset: "train-nc"
     raw: x_1**3 + x_1 - x_2
     prepared: v1**3 + v1 - v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12350,10 +12350,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-243:
+    subset: "train-nc"
     raw: x_2*exp(x_1/(x_2*x_3*tan(x_1)))
     prepared: v2*exp(v1/(v2*v3*tan(v1)))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12412,10 +12412,10 @@ expressions:
     meta:
       finite_fraction: 0.9982
   train_nc-244:
+    subset: "train-nc"
     raw: sin(sin(tan(cos(x_1))))
     prepared: sin(sin(tan(cos(v1))))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12444,10 +12444,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-245:
+    subset: "train-nc"
     raw: x_1 - x_2 + x_2/(2*x_3)
     prepared: v1 - v2 + v2/(2*v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12506,10 +12506,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-246:
+    subset: "train-nc"
     raw: x_1 - cos(x_2 + x_3**2)
     prepared: v1 - cos(v2 + v3**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12568,10 +12568,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-247:
+    subset: "train-nc"
     raw: 2*x_1 - 1
     prepared: 2*v1 - 1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12600,10 +12600,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-248:
+    subset: "train-nc"
     raw: x_1**2 + sin(x_1)**2
     prepared: v1**2 + sin(v1)**2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12632,10 +12632,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-249:
+    subset: "train-nc"
     raw: x_1/x_2
     prepared: v1/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12679,10 +12679,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-250:
+    subset: "train-nc"
     raw: x_1/(x_1 + x_2)**2 + cos(exp(x_3))
     prepared: v1/(v1 + v2)**2 + cos(exp(v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12741,10 +12741,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-251:
+    subset: "train-nc"
     raw: x_1*x_2
     prepared: v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12788,10 +12788,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-252:
+    subset: "train-nc"
     raw: 2*x_1 + asin(x_1)
     prepared: 2*v1 + asin(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12820,10 +12820,10 @@ expressions:
     meta:
       finite_fraction: 0.0955
   train_nc-253:
+    subset: "train-nc"
     raw: x_3*cos(x_1*x_2)
     prepared: v3*cos(v1*v2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12882,10 +12882,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-254:
+    subset: "train-nc"
     raw: (x_1 + cos(x_2 + tan(x_1)))*tan(x_2)
     prepared: (v1 + cos(v2 + tan(v1)))*tan(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12929,10 +12929,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-255:
+    subset: "train-nc"
     raw: x_1*(x_2 + exp(x_1))
     prepared: v1*(v2 + exp(v1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12976,10 +12976,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-256:
+    subset: "train-nc"
     raw: sqrt(x_1) - x_1*asin(x_1)
     prepared: sqrt(v1) - v1*asin(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13009,10 +13009,10 @@ expressions:
       finite_fraction: 0.0486
       low_validity: true
   train_nc-257:
+    subset: "train-nc"
     raw: x_1*x_2 + sin(x_1)
     prepared: v1*v2 + sin(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13056,10 +13056,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-258:
+    subset: "train-nc"
     raw: sin(sin(x_1)**2)/x_1
     prepared: sin(sin(v1)**2)/v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13088,10 +13088,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-259:
+    subset: "train-nc"
     raw: exp(sin(exp(x_1))/x_1)
     prepared: exp(sin(exp(v1))/v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13120,10 +13120,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-260:
+    subset: "train-nc"
     raw: -exp(1/x_1) + tan(sin(x_1))
     prepared: -exp(1/v1) + tan(sin(v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13152,10 +13152,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-261:
+    subset: "train-nc"
     raw: x_1*sin(exp(exp(x_1)))
     prepared: v1*sin(exp(exp(v1)))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13184,10 +13184,10 @@ expressions:
     meta:
       finite_fraction: 0.8258
   train_nc-262:
+    subset: "train-nc"
     raw: x_1/(x_2 - 2*x_3)**2
     prepared: v1/(v2 - 2*v3)**2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13246,10 +13246,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-263:
+    subset: "train-nc"
     raw: sqrt(tan(cos(x_1)))
     prepared: sqrt(tan(cos(v1)))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13278,10 +13278,10 @@ expressions:
     meta:
       finite_fraction: 0.4666
   train_nc-264:
+    subset: "train-nc"
     raw: x_1*x_2**2*(x_1 + exp(x_1))
     prepared: v1*v2**2*(v1 + exp(v1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13325,10 +13325,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-265:
+    subset: "train-nc"
     raw: x_1
     prepared: v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13357,10 +13357,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-266:
+    subset: "train-nc"
     raw: x_1/x_2**6
     prepared: v1/v2**6
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13404,10 +13404,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-267:
+    subset: "train-nc"
     raw: exp((x_1 - x_2**2 - x_2)/x_2)
     prepared: exp((v1 - v2**2 - v2)/v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13451,10 +13451,10 @@ expressions:
     meta:
       finite_fraction: 0.9997
   train_nc-268:
+    subset: "train-nc"
     raw: x_2*(x_1*x_2*asin(x_1**2) + 1)
     prepared: v2*(v1*v2*asin(v1**2) + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13498,10 +13498,10 @@ expressions:
     meta:
       finite_fraction: 0.0955
   train_nc-269:
+    subset: "train-nc"
     raw: x_1*sqrt(sin(x_1**2))/sqrt(x_2)
     prepared: v1*sqrt(sin(v1**2))/sqrt(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13545,10 +13545,10 @@ expressions:
     meta:
       finite_fraction: 0.2873
   train_nc-270:
+    subset: "train-nc"
     raw: x_1*(x_1 - x_2*(x_1 + x_2))/x_2
     prepared: v1*(v1 - v2*(v1 + v2))/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13592,10 +13592,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-271:
+    subset: "train-nc"
     raw: x_2*x_3 + cos(x_1)
     prepared: v2*v3 + cos(v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13654,10 +13654,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-272:
+    subset: "train-nc"
     raw: cos(x_1**4*x_2**2)
     prepared: cos(v1**4*v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13701,10 +13701,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-273:
+    subset: "train-nc"
     raw: sqrt(x_1)*x_2*x_3*log(x_1)
     prepared: sqrt(v1)*v2*v3*log(v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13763,10 +13763,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-274:
+    subset: "train-nc"
     raw: x_1*x_2**5 + x_3
     prepared: v1*v2**5 + v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13825,10 +13825,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-275:
+    subset: "train-nc"
     raw: exp(-x_1*(-x_2 + x_3 + x_4)/x_2)
     prepared: exp(-v1*(-v2 + v3 + v4)/v2)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13902,10 +13902,10 @@ expressions:
     meta:
       finite_fraction: 0.9979
   train_nc-276:
+    subset: "train-nc"
     raw: x_1**3*x_2**3 + x_1 - 1
     prepared: v1**3*v2**3 + v1 - 1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13949,10 +13949,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-277:
+    subset: "train-nc"
     raw: x_1 + x_2 + sin(x_1)
     prepared: v1 + v2 + sin(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13996,10 +13996,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-278:
+    subset: "train-nc"
     raw: asin(x_1)**(-2) + 1/x_1
     prepared: asin(v1)**(-2) + 1/v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14028,10 +14028,10 @@ expressions:
     meta:
       finite_fraction: 0.0955
   train_nc-279:
+    subset: "train-nc"
     raw: x_1*x_2 + x_1 + 2*x_3 - x_4
     prepared: v1*v2 + v1 + 2*v3 - v4
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14105,10 +14105,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-280:
+    subset: "train-nc"
     raw: (x_1**(3/2) + x_2)/x_1
     prepared: (v1**(3/2) + v2)/v1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14152,10 +14152,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-281:
+    subset: "train-nc"
     raw: x_1*exp(-x_2*(x_1 + x_2)/(x_2**2 + x_3))
     prepared: v1*exp(-v2*(v1 + v2)/(v2**2 + v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14214,10 +14214,10 @@ expressions:
     meta:
       finite_fraction: 0.9998
   train_nc-282:
+    subset: "train-nc"
     raw: cos(x_1)/x_1**2
     prepared: cos(v1)/v1**2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14246,10 +14246,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-283:
+    subset: "train-nc"
     raw: -x_1*sin(x_1) + 2*x_1 + exp(x_1)
     prepared: -v1*sin(v1) + 2*v1 + exp(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14278,10 +14278,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-284:
+    subset: "train-nc"
     raw: x_2*tan(x_1 + x_2)
     prepared: v2*tan(v1 + v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14325,10 +14325,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-285:
+    subset: "train-nc"
     raw: x_1/(x_1 + x_2)
     prepared: v1/(v1 + v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14372,10 +14372,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-286:
+    subset: "train-nc"
     raw: 2*x_1 - x_2**2
     prepared: 2*v1 - v2**2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14419,10 +14419,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-287:
+    subset: "train-nc"
     raw: x_1 - x_2*x_3 - x_2
     prepared: v1 - v2*v3 - v2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14481,10 +14481,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-288:
+    subset: "train-nc"
     raw: cos(x_1*tan(cos(x_1/x_2)))
     prepared: cos(v1*tan(cos(v1/v2)))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14528,10 +14528,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-289:
+    subset: "train-nc"
     raw: x_1 + x_3*(x_1 + tan(x_2))
     prepared: v1 + v3*(v1 + tan(v2))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14590,10 +14590,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-290:
+    subset: "train-nc"
     raw: x_2 + sqrt(2)*sqrt(x_1*x_2)
     prepared: v2 + sqrt(2)*sqrt(v1*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14637,10 +14637,10 @@ expressions:
     meta:
       finite_fraction: 0.4991
   train_nc-291:
+    subset: "train-nc"
     raw: -x_1**3 + x_1
     prepared: -v1**3 + v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14669,10 +14669,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-292:
+    subset: "train-nc"
     raw: x_1**2/x_2
     prepared: v1**2/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14716,10 +14716,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-293:
+    subset: "train-nc"
     raw: exp(2*x_1 + x_2)
     prepared: exp(2*v1 + v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14763,10 +14763,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-294:
+    subset: "train-nc"
     raw: x_1 - tan(x_2)/x_1
     prepared: v1 - tan(v2)/v1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14810,10 +14810,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-295:
+    subset: "train-nc"
     raw: sqrt(x_1)*x_2/(x_1 + x_2)
     prepared: sqrt(v1)*v2/(v1 + v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14857,10 +14857,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   train_nc-296:
+    subset: "train-nc"
     raw: x_2 + sin(x_2)/(2*x_1)
     prepared: v2 + sin(v2)/(2*v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14904,10 +14904,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-297:
+    subset: "train-nc"
     raw: -x_3 + asin(x_1**3*tan(x_2))
     prepared: -v3 + asin(v1**3*tan(v2))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14966,10 +14966,10 @@ expressions:
     meta:
       finite_fraction: 0.1142
   train_nc-298:
+    subset: "train-nc"
     raw: tan(x_1) - asin(x_1)
     prepared: tan(v1) - asin(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14998,10 +14998,10 @@ expressions:
     meta:
       finite_fraction: 0.0955
   train_nc-299:
+    subset: "train-nc"
     raw: x_1 + tan(x_1**3*x_2**3)
     prepared: v1 + tan(v1**3*v2**3)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15045,10 +15045,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   train_nc-300:
+    subset: "train-nc"
     raw: 1/x_1
     prepared: 1/v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x_1

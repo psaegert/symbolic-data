@@ -28,6 +28,7 @@ metadata:
       and need per-entry review.'
 expressions:
   Livermore-1:
+    subset: "livermore"
     raw: 1./3+x1+sin(pow(x1,2))
     prepared: 1./3+v1+sin(((v1)**(2)))
     n_variables: 1
@@ -58,6 +59,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-2:
+    subset: "livermore"
     raw: sin(pow(x1,2))*cos(x1)-2
     prepared: sin(((v1)**(2)))*cos(v1)-2
     n_variables: 1
@@ -88,6 +90,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-3:
+    subset: "livermore"
     raw: sin(pow(x1,3))*cos(pow(x1,2))-1
     prepared: sin(((v1)**(3)))*cos(((v1)**(2)))-1
     n_variables: 1
@@ -118,6 +121,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-4:
+    subset: "livermore"
     raw: log(x1+1)+log(pow(x1,2)+1)+log(x1)
     prepared: log(v1+1)+log(((v1)**(2))+1)+log(v1)
     n_variables: 1
@@ -148,6 +152,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-5:
+    subset: "livermore"
     raw: pow(x1,4)-pow(x1,3)+pow(x2,2)-x2
     prepared: ((v1)**(4))-((v1)**(3))+((v2)**(2))-v2
     n_variables: 2
@@ -186,6 +191,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-6:
+    subset: "livermore"
     raw: 4*pow(x1,4)+3*pow(x1,3)+2*pow(x1,2)+x1
     prepared: 4*((v1)**(4))+3*((v1)**(3))+2*((v1)**(2))+v1
     n_variables: 1
@@ -216,6 +222,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-7:
+    subset: "livermore"
     raw: div(exp(x1)-exp(-1*x1),2)
     prepared: ((exp(v1)-exp(-1*v1))/(2))
     n_variables: 1
@@ -246,6 +253,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-7a:
+    subset: "livermore"
     raw: div(exp(x1)-exp(-1*x1),2)
     prepared: ((exp(v1)-exp(-1*v1))/(2))
     n_variables: 1
@@ -276,6 +284,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-8:
+    subset: "livermore"
     raw: div(exp(x1)+exp(-1*x1),2)
     prepared: ((exp(v1)+exp(-1*v1))/(2))
     n_variables: 1
@@ -306,6 +315,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-8a:
+    subset: "livermore"
     raw: div(exp(x1)+exp(-1*x1),2)
     prepared: ((exp(v1)+exp(-1*v1))/(2))
     n_variables: 1
@@ -336,6 +346,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-9:
+    subset: "livermore"
     raw: pow(x1,9)+pow(x1,8)+pow(x1,7)+pow(x1,6)+pow(x1,5)+pow(x1,4)+pow(x1,3)+pow(x1,2)+x1
     prepared: ((v1)**(9))+((v1)**(8))+((v1)**(7))+((v1)**(6))+((v1)**(5))+((v1)**(4))+((v1)**(3))+((v1)**(2))+v1
     n_variables: 1
@@ -366,6 +377,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-10:
+    subset: "livermore"
     raw: 6*sin(x1)*cos(x2)
     prepared: 6*sin(v1)*cos(v2)
     n_variables: 2
@@ -404,6 +416,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-11:
+    subset: "livermore"
     raw: div(pow(x1,2)*pow(x2,2),(x1+x2))
     prepared: ((((v1)**(2))*((v2)**(2)))/((v1+v2)))
     n_variables: 2
@@ -442,6 +455,7 @@ expressions:
         function_set: None
       finite_fraction: 1.0
   Livermore-12:
+    subset: "livermore"
     raw: div(pow(x1,5),pow(x2,3))
     prepared: ((((v1)**(5)))/(((v2)**(3))))
     n_variables: 2
@@ -480,6 +494,7 @@ expressions:
         function_set: None
       finite_fraction: 1.0
   Livermore-13:
+    subset: "livermore"
     raw: pow(x1,1/3)
     prepared: ((v1)**(1/3))
     n_variables: 1
@@ -510,6 +525,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-14:
+    subset: "livermore"
     raw: pow(x1,3)+pow(x1,2)+x1+sin(x1)+sin(pow(x2,2))
     prepared: ((v1)**(3))+((v1)**(2))+v1+sin(v1)+sin(((v2)**(2)))
     n_variables: 2
@@ -548,6 +564,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-15:
+    subset: "livermore"
     raw: pow(x1,1/5)
     prepared: ((v1)**(1/5))
     n_variables: 1
@@ -578,6 +595,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-16:
+    subset: "livermore"
     raw: pow(x1,2/3)
     prepared: ((v1)**(2/3))
     n_variables: 1
@@ -608,6 +626,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-17:
+    subset: "livermore"
     raw: 4*sin(x1)*cos(x2)
     prepared: 4*sin(v1)*cos(v2)
     n_variables: 2
@@ -646,6 +665,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-18:
+    subset: "livermore"
     raw: sin(pow(x1,2))*cos(x1)-5
     prepared: sin(((v1)**(2)))*cos(v1)-5
     n_variables: 1
@@ -676,6 +696,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-19:
+    subset: "livermore"
     raw: log(pow(x1,2)+x1)+log(pow(x1,3)+x1)
     prepared: log(((v1)**(2))+v1)+log(((v1)**(3))+v1)
     n_variables: 1
@@ -706,6 +727,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-20:
+    subset: "livermore"
     raw: pow(x1,5)+pow(x1,4)+pow(x1,2)+x1
     prepared: ((v1)**(5))+((v1)**(4))+((v1)**(2))+v1
     n_variables: 1
@@ -736,6 +758,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-21:
+    subset: "livermore"
     raw: exp(-1*pow(x1,2))
     prepared: exp(-1*((v1)**(2)))
     n_variables: 1
@@ -766,6 +789,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-22:
+    subset: "livermore"
     raw: pow(x1,8)+pow(x1,7)+pow(x1,6)+pow(x1,5)+pow(x1,4)+pow(x1,3)+pow(x1,2)+x1
     prepared: ((v1)**(8))+((v1)**(7))+((v1)**(6))+((v1)**(5))+((v1)**(4))+((v1)**(3))+((v1)**(2))+v1
     n_variables: 1
@@ -796,6 +820,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Livermore-23:
+    subset: "livermore"
     raw: exp(-0.5*pow(x1,2))
     prepared: exp(-0.5*((v1)**(2)))
     n_variables: 1

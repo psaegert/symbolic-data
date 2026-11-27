@@ -43,6 +43,7 @@ metadata:
       on 9/120, full configuration on 0/120).
 expressions:
   II.38.3:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -167,6 +168,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.38.14:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -264,6 +266,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.7.38:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -347,6 +350,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.12.43:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -416,6 +420,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   III.15.27:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -723,6 +728,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   I.12.1:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -797,6 +803,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.12.4:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -872,6 +879,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.12.5:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -946,6 +954,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.14.3:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1034,6 +1043,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.14.4:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1126,6 +1136,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.18.12:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1215,6 +1226,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.18.14:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1328,6 +1340,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.25.13:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1403,6 +1416,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.26.2:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1498,6 +1512,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.27.6:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1607,6 +1622,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.30.5:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1718,6 +1734,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   I.43.16:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1832,6 +1849,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.47.23:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1924,6 +1942,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.2.42:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2062,6 +2081,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.3.24:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2147,6 +2167,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.4.23:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2240,6 +2261,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.8.31:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2309,6 +2331,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.10.9:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2393,6 +2416,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.13.17:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2482,6 +2506,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.15.4:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2590,6 +2615,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.15.5:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2689,6 +2715,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.27.16:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2771,6 +2798,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.27.18:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2839,6 +2867,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.34.11:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2963,6 +2992,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.34.29b:
+    subset: "easy"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3070,6 +3100,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.10.7:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3151,6 +3182,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.11.19:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3294,6 +3326,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.12.2:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3384,6 +3417,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.12.11:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3512,6 +3546,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.13.4:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3627,6 +3662,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.13.12:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3738,6 +3774,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.15.1:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3828,6 +3865,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.16.6:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3908,6 +3946,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.18.4:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4024,6 +4063,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.24.6:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4142,6 +4182,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.29.4:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4224,6 +4265,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.32.5:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4305,6 +4347,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.34.1:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4404,6 +4447,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.34.8:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4518,6 +4562,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.34.27:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4595,6 +4640,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.38.12:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4680,6 +4726,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.39.1:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4772,6 +4819,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.39.11:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4871,6 +4919,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.43.31:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4945,6 +4994,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.43.43:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5046,6 +5096,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.48.2:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5135,6 +5186,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.6.11:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5234,6 +5286,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.8.7:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5327,6 +5380,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.11.3:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5450,6 +5504,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.21.32:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5559,6 +5614,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   II.34.2a:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5658,6 +5714,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.34.2:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5748,6 +5805,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.34.29a:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5823,6 +5881,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.37.1:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5930,6 +5989,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.4.32:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6015,6 +6075,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.8.54:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6107,6 +6168,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.13.18:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6205,6 +6267,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.14.14:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6310,6 +6373,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.15.12:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6408,6 +6472,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.15.14:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6484,6 +6549,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.17.37:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6582,6 +6648,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.19.51:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6692,6 +6759,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   B8:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6773,6 +6841,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B18:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6891,6 +6960,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.8.14:
+    subset: "medium"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7014,6 +7084,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.6.2a:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7097,6 +7168,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.6.2:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7192,6 +7264,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.6.2b:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7296,6 +7369,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.9.18:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7470,6 +7544,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.15.3t:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7574,6 +7649,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.29.16:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7698,6 +7774,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   I.15.3x:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7793,6 +7870,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.30.3:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7892,6 +7970,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   I.32.17:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8024,6 +8103,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.37.4:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8133,6 +8213,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.39.22:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8232,6 +8313,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.40.1:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8360,6 +8442,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.41.16:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8460,6 +8543,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.44.4:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8581,6 +8665,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   I.50.26:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8704,6 +8789,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   I.34.14:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8794,6 +8880,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.6.15b:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8903,6 +8990,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.6.15a:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9024,6 +9112,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.11.17:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9144,6 +9233,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.11.20:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9258,6 +9348,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.11.27:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9357,6 +9448,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.11.28:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9432,6 +9524,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.13.23:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9513,6 +9606,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.13.34:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9594,6 +9688,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.24.17:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9676,6 +9771,7 @@ expressions:
       finite_fraction: 0.1326
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.35.18:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9790,6 +9886,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.35.21:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9913,6 +10010,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   II.36.38:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -10056,6 +10154,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.4.33:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -10151,6 +10250,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.9.52:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -10284,6 +10384,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.10.19:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -10397,6 +10498,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   III.21.20:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -10513,6 +10615,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   B1:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -10628,6 +10731,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   B2:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -10775,6 +10879,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B3:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -10892,6 +10997,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B4:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -11033,6 +11139,7 @@ expressions:
       finite_fraction: 0.5022
       finite_fraction_source: srsd-dummy@1 (same base law)
   B5:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -11156,6 +11263,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B6:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -11314,6 +11422,7 @@ expressions:
       finite_fraction: 0.5041
       finite_fraction_source: fastsrb.v2
   B7:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -11426,6 +11535,7 @@ expressions:
       finite_fraction: 0.7304
       finite_fraction_source: fastsrb.v2
   B9:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -11536,6 +11646,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B10:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -11638,6 +11749,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B11:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -11761,6 +11873,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: fastsrb.v2
   B12:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -11885,6 +11998,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B13:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -12027,6 +12141,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B14:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -12168,6 +12283,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B15:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -12283,6 +12399,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B16:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -12408,6 +12525,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B17:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -12545,6 +12663,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B19:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -12680,6 +12799,7 @@ expressions:
       finite_fraction: 1.0
       finite_fraction_source: srsd-dummy@1 (same base law)
   B20:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024

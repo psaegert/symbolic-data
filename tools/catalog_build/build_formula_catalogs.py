@@ -1067,6 +1067,10 @@ def main() -> None:
                 skipped[p["id"]] = f"{type(exc).__name__}: {exc}"[:200]
         for member in residues().get(tag, {}).get("members", []):      # a compilation kept whole (2026-11-27)
             entries[member["id"]] = copied(member, out)
+        subset_of = {i: name for name, ids in residues().get(tag, {}).get("subsets", {}).items() for i in ids}
+        for key, entry in entries.items():                         # the compilation's own subsets, for every member
+            if key in subset_of:
+                entry["subset"] = subset_of[key]
         if pinned:
             from symbolic_data.catalog import ProblemCatalog
             modified = {"modified_by_srbf": MODIFIED_POINTS[tag]} if tag in MODIFIED_POINTS else {}

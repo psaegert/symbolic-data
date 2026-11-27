@@ -1,16 +1,16 @@
 {
- "what": "every problem set of srbf's next release (181 catalogs in 145 benchmarks; names are the stable keys, a '*' goes only into display names; srbf averages by benchmark)",
- "branch": "symbolic-data feat/audit-fixes @ 2469af3",
+ "what": "every problem set of srbf's next release (181 catalogs in 113 benchmarks; names are the stable keys, a '*' goes only into display names; srbf averages by benchmark)",
+ "branch": "symbolic-data feat/audit-fixes @ d91aa4e",
  "generated": "2026-11-28 (owner rulings: scope y = f(x) on one data set; formulas as written; additions LLM-SR oscillators, BMS Rössler, Brum et al.; compilations kept whole; averaging by benchmark)",
  "totals": {
   "sets": 181,
-  "benchmarks": 145,
+  "benchmarks": 113,
   "problems": 14271,
   "problems_by_kind": {
    "formula": 13198,
    "data": 1073
   },
-  "subsets": 255,
+  "subsets": 224,
   "sets_by_repo": {
    "psaegert/symbolic-data-assets": 147,
    "psaegert/symbolic-data-assets-restricted": 29,
@@ -203,7 +203,7 @@
    "version": 1,
    "problems": 6,
    "subsets": {
-    "all": 6
+    "ai-descartes-real-data": 6
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "ai-descartes-real-data.npz",
@@ -225,7 +225,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "ai-feynman-2-0-modular-equations": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "ai-feynman-2-0-modular-equations.yaml",
@@ -246,7 +246,7 @@
    "version": 1,
    "problems": 74,
    "subsets": {
-    "all": 74
+    "ai-feynman-database-100-main-equations": 74
    },
    "where": "symbolic-data assets/catalogs",
    "file": "ai-feynman-database-100-main-equations.yaml",
@@ -267,7 +267,7 @@
    "version": 2,
    "problems": 9,
    "subsets": {
-    "all": 9
+    "problem-set": 9
    },
    "where": "symbolic-data assets/catalogs",
    "file": "ai-hilbert-problem-set.yaml",
@@ -288,7 +288,7 @@
    "version": 1,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "real-data": 2
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "ai-hilbert-real-data.npz",
@@ -337,7 +337,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "black-hole-spiral-plane": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "black-hole-spiral-plane.npz",
@@ -359,7 +359,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "real-data": 3
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "bms-real-data.npz",
@@ -382,7 +382,7 @@
    "version": 1,
    "problems": 2,
    "subsets": {
-    "high-noise": 2
+    "rossler": 2
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "bms-rossler.npz",
@@ -405,7 +405,7 @@
    "version": 1,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "synthetic": 2
    },
    "where": "symbolic-data assets/catalogs",
    "file": "bms-synthetic-prior-expression-and-bessel-functions.yaml",
@@ -427,7 +427,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "synthetic": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "bms-synthetic-prior-expression-and-bessel-functions-points.npz",
@@ -472,7 +472,7 @@
    "version": 1,
    "problems": 8,
    "subsets": {
-    "all": 8
+    "coevolved-fitness-predictors-test-problems": 8
    },
    "where": "symbolic-data assets/catalogs",
    "file": "coevolved-fitness-predictors-test-problems-points.npz",
@@ -495,7 +495,7 @@
    "version": 2,
    "problems": 8,
    "subsets": {
-    "all": 8
+    "constant": 8
    },
    "where": "symbolic-data assets/catalogs",
    "file": "constant.yaml",
@@ -516,7 +516,7 @@
    "version": 2,
    "problems": 28,
    "subsets": {
-    "all": 28
+    "cosmology": 28
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "cp3-bench.npz",
@@ -537,7 +537,7 @@
    "version": 2,
    "problems": 4,
    "subsets": {
-    "all": 4
+    "standard-tuning": 4
    },
    "where": "symbolic-data assets/catalogs",
    "file": "cp3-bench-standard-tuning-datasets-points.npz",
@@ -560,7 +560,7 @@
    "version": 1,
    "problems": 1024,
    "subsets": {
-    "all": 1024
+    "cvgp-trigonometric-control-variable-datasets": 1024
    },
    "where": "symbolic-data assets/catalogs",
    "file": "cvgp-trigonometric-control-variable-datasets.yaml",
@@ -623,13 +623,12 @@
   {
    "name": "dgsr-additional-feynman",
    "display_name": "dgsr-additional-feynman",
-   "benchmark": "dgsr-additional-feynman",
+   "benchmark": "dgsr",
    "kind": "formula",
    "version": 2,
    "problems": 32,
    "subsets": {
-    "all": 8,
-    "additional-feynman": 24
+    "additional-feynman": 32
    },
    "where": "symbolic-data assets/catalogs",
    "file": "dgsr-additional-feynman.yaml",
@@ -643,14 +642,13 @@
   {
    "name": "dgsr-feynman-d-2-d-5-subsets",
    "display_name": "dgsr-feynman-d-2-d-5-subsets",
-   "benchmark": "dgsr-feynman-d-2-d-5-subsets",
+   "benchmark": "dgsr",
    "kind": "formula",
    "version": 2,
    "problems": 15,
    "subsets": {
-    "all": 2,
-    "feynman-d2": 7,
-    "feynman-d5": 6
+    "feynman-d5": 8,
+    "feynman-d2": 7
    },
    "where": "symbolic-data assets/catalogs",
    "file": "dgsr-feynman-d-2-d-5-subsets.yaml",
@@ -664,12 +662,12 @@
   {
    "name": "dgsr-synthetic-d-12",
    "display_name": "dgsr-synthetic-d-12",
-   "benchmark": "dgsr-synthetic-d-12",
+   "benchmark": "dgsr",
    "kind": "formula",
    "version": 1,
    "problems": 7,
    "subsets": {
-    "all": 7
+    "synthetic-d-12": 7
    },
    "where": "symbolic-data assets/catalogs",
    "file": "dgsr-synthetic-d-12.yaml",
@@ -688,7 +686,7 @@
    "version": 1,
    "problems": 5,
    "subsets": {
-    "all": 5
+    "dimensionless-learning": 5
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "dimensionless-learning.npz",
@@ -709,7 +707,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "dow-chemical-evostar-2010": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "dow-chemical-evostar-2010.npz",
@@ -728,7 +726,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "dow-distillation-tower": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "dow-distillation-tower.npz",
@@ -751,7 +749,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "dow-emulator": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "dow-emulator.npz",
@@ -795,7 +793,7 @@
    "version": 2,
    "problems": 4,
    "subsets": {
-    "all": 4
+    "dso-benchmark-registry": 4
    },
    "where": "symbolic-data assets/catalogs",
    "file": "dso-benchmark-registry.yaml",
@@ -817,7 +815,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "dso-benchmark-registry": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "dso-benchmark-registry-points.npz",
@@ -840,7 +838,7 @@
    "version": 1,
    "problems": 1024,
    "subsets": {
-    "all": 1024
+    "e2e-in-domain-synthetic-validation-set": 1024
    },
    "where": "symbolic-data assets/catalogs",
    "file": "e2e-in-domain-synthetic-validation-set.yaml",
@@ -857,13 +855,12 @@
   {
    "name": "eql-cart-pendulum",
    "display_name": "eql-cart-pendulum",
-   "benchmark": "eql-cart-pendulum",
+   "benchmark": "eql",
    "kind": "formula",
    "version": 1,
    "problems": 8,
    "subsets": {
-    "interp": 4,
-    "extrap": 4
+    "cart-pendulum": 8
    },
    "where": "symbolic-data assets/catalogs",
    "file": "eql-cart-pendulum.yaml",
@@ -881,12 +878,12 @@
   {
    "name": "eql-double-pendulum",
    "display_name": "EQL double-pendulum kinematics*",
-   "benchmark": "eql-double-pendulum",
+   "benchmark": "eql",
    "kind": "data",
    "version": 1,
    "problems": 4,
    "subsets": {
-    "all": 4
+    "double-pendulum": 4
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "eql-double-pendulum.npz",
@@ -903,16 +900,12 @@
   {
    "name": "eql-formulas-f-1-f-4-and-division-formula",
    "display_name": "eql-formulas-f-1-f-4-and-division-formula",
-   "benchmark": "eql-formulas-f-1-f-4-and-division-formula",
+   "benchmark": "eql",
    "kind": "formula",
    "version": 1,
    "problems": 13,
    "subsets": {
-    "complex-formulas-interp": 4,
-    "complex-formulas-extrap-near": 3,
-    "complex-formulas-extrap": 4,
-    "division-interp": 1,
-    "division-extrap": 1
+    "formulas": 13
    },
    "where": "symbolic-data assets/catalogs",
    "file": "eql-formulas-f-1-f-4-and-division-formula.yaml",
@@ -929,14 +922,12 @@
   {
    "name": "eql-pendulum-vector-field",
    "display_name": "eql-pendulum-vector-field",
-   "benchmark": "eql-pendulum-vector-field",
+   "benchmark": "eql",
    "kind": "formula",
    "version": 1,
    "problems": 6,
    "subsets": {
-    "interp": 2,
-    "extrap-near": 2,
-    "extrap-far": 2
+    "pendulum-vector-field": 6
    },
    "where": "symbolic-data assets/catalogs",
    "file": "eql-pendulum-vector-field.yaml",
@@ -954,13 +945,12 @@
   {
    "name": "eql-robotic-arm-forward-kinematics",
    "display_name": "EQL robotic-arm forward kinematics*",
-   "benchmark": "eql-robotic-arm-forward-kinematics",
+   "benchmark": "eql",
    "kind": "formula",
    "version": 1,
    "problems": 28,
    "subsets": {
-    "interp": 14,
-    "extrap": 14
+    "robotic-arm": 28
    },
    "where": "symbolic-data assets/catalogs",
    "file": "eql-robotic-arm-forward-kinematics.yaml",
@@ -979,12 +969,12 @@
   {
    "name": "erbench-densities",
    "display_name": "erbench-densities",
-   "benchmark": "erbench-densities",
+   "benchmark": "erbench",
    "kind": "formula",
    "version": 2,
    "problems": 99,
    "subsets": {
-    "all": 99
+    "densities": 99
    },
    "where": "symbolic-data assets/catalogs",
    "file": "erbench-densities.yaml",
@@ -1001,12 +991,12 @@
   {
    "name": "erbench-eponymous",
    "display_name": "erbench-eponymous*",
-   "benchmark": "erbench-eponymous",
+   "benchmark": "erbench",
    "kind": "formula",
    "version": 3,
    "problems": 585,
    "subsets": {
-    "all": 585
+    "eponymous": 585
    },
    "where": "symbolic-data assets_sa/catalogs",
    "file": "erbench-eponymous.yaml",
@@ -1024,12 +1014,12 @@
   {
    "name": "erbench-oeis",
    "display_name": "erbench-oeis*",
-   "benchmark": "erbench-oeis",
+   "benchmark": "erbench",
    "kind": "formula",
    "version": 2,
    "problems": 1024,
    "subsets": {
-    "all": 1024
+    "oeis": 1024
    },
    "where": "symbolic-data assets_sa/catalogs",
    "file": "erbench-oeis.yaml",
@@ -1048,12 +1038,12 @@
   {
    "name": "erbench-phybench",
    "display_name": "erbench-phybench",
-   "benchmark": "erbench-phybench",
+   "benchmark": "erbench",
    "kind": "formula",
    "version": 2,
    "problems": 270,
    "subsets": {
-    "all": 270
+    "phybench": 270
    },
    "where": "symbolic-data assets/catalogs",
    "file": "erbench-phybench.yaml",
@@ -1070,14 +1060,12 @@
   {
    "name": "erbench-public-legacy-formulas",
    "display_name": "erbench-public-legacy-formulas*",
-   "benchmark": "erbench-public-legacy-formulas",
+   "benchmark": "erbench",
    "kind": "formula",
    "version": 2,
    "problems": 5,
    "subsets": {
-    "Feynman / AIF2 12 modular equations (Table 4 rows 5-16)": 1,
-    "Korns": 3,
-    "Nguyen / Uy 2011 bivariate functions": 1
+    "legacy": 5
    },
    "where": "symbolic-data assets/catalogs",
    "file": "erbench-public-legacy-formulas.yaml",
@@ -1093,12 +1081,12 @@
   {
    "name": "erbench-syneq",
    "display_name": "erbench-syneq*",
-   "benchmark": "erbench-syneq",
+   "benchmark": "erbench",
    "kind": "formula",
    "version": 2,
    "problems": 1024,
    "subsets": {
-    "all": 1024
+    "syneq": 1024
    },
    "where": "symbolic-data assets/catalogs",
    "file": "erbench-syneq.yaml",
@@ -1121,7 +1109,7 @@
    "version": 1,
    "problems": 7,
    "subsets": {
-    "all": 7
+    "errless-synthetic-posterior-set": 7
    },
    "where": "symbolic-data assets/catalogs",
    "file": "errless-synthetic-posterior-set.yaml",
@@ -1186,7 +1174,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "evogp-uci": 3
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "evogp-uci.npz",
@@ -1237,7 +1225,7 @@
    "version": 1,
    "problems": 11,
    "subsets": {
-    "all": 11
+    "falling-balls": 11
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "falling-balls.npz",
@@ -1279,7 +1267,7 @@
    "version": 2,
    "problems": 100,
    "subsets": {
-    "all": 100
+    "feynman": 100
    },
    "where": "symbolic-data assets/catalogs",
    "file": "feynman.yaml",
@@ -1298,7 +1286,7 @@
    "version": 2,
    "problems": 20,
    "subsets": {
-    "all": 20
+    "feynman-bonus": 20
    },
    "where": "symbolic-data assets/catalogs",
    "file": "feynman-bonus.yaml",
@@ -1312,12 +1300,12 @@
   {
    "name": "ffx-cmos-ota",
    "display_name": "FFX CMOS OTA circuit targets",
-   "benchmark": "ffx-cmos-ota",
+   "benchmark": "ffx",
    "kind": "data",
    "version": 1,
    "problems": 6,
    "subsets": {
-    "all": 6
+    "cmos-ota": 6
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "ffx-cmos-ota.npz",
@@ -1331,12 +1319,12 @@
   {
    "name": "ffx-high-dimensional-circuits",
    "display_name": "FFX high-dimensional circuit problems*",
-   "benchmark": "ffx-high-dimensional-circuits",
+   "benchmark": "ffx",
    "kind": "data",
    "version": 1,
    "problems": 12,
    "subsets": {
-    "all": 12
+    "high-dimensional-circuits": 12
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "ffx-high-dimensional-circuits.npz",
@@ -1357,7 +1345,7 @@
    "version": 1,
    "problems": 4,
    "subsets": {
-    "all": 4
+    "friedman-functions": 4
    },
    "where": "symbolic-data assets/catalogs",
    "file": "friedman-functions.yaml",
@@ -1378,7 +1366,7 @@
    "version": 1,
    "problems": 12,
    "subsets": {
-    "all": 12
+    "friedman-random-function-generator-instances": 12
    },
    "where": "symbolic-data assets/catalogs",
    "file": "friedman-random-function-generator-instances.yaml",
@@ -1399,7 +1387,7 @@
    "version": 1,
    "problems": 14,
    "subsets": {
-    "all": 14
+    "gecco-2013-2017-real": 14
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gecco-2013-2017-real.npz",
@@ -1420,7 +1408,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "gecco-2013-2017-real": 3
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gecco-2013-2017-real-restricted.npz",
@@ -1441,7 +1429,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "gecco-2013-2017-real": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gecco-2013-2017-real-share-alike.npz",
@@ -1457,12 +1445,12 @@
   {
    "name": "gecco-2022-covid-ny",
    "display_name": "GECCO 2022 real-world: COVID-19 New York",
-   "benchmark": "gecco-2022-covid-ny",
+   "benchmark": "srbench-competition-2022",
    "kind": "data",
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "covid-ny": 3
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gecco-2022-covid-ny.npz",
@@ -1476,15 +1464,12 @@
   {
    "name": "gecco-2022-exact-rediscovery",
    "display_name": "GECCO 2022 synthetic: exact rediscovery*",
-   "benchmark": "gecco-2022-exact-rediscovery",
+   "benchmark": "srbench-competition-2022",
    "kind": "data",
    "version": 1,
    "problems": 40,
    "subsets": {
-    "easier": 10,
-    "easy": 10,
-    "medium": 10,
-    "hard": 10
+    "exact-rediscovery": 40
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gecco-2022-exact-rediscovery.npz",
@@ -1501,14 +1486,12 @@
   {
    "name": "gecco-2022-extrapolation",
    "display_name": "GECCO 2022 synthetic: extrapolation",
-   "benchmark": "gecco-2022-extrapolation",
+   "benchmark": "srbench-competition-2022",
    "kind": "data",
    "version": 1,
    "problems": 30,
    "subsets": {
-    "easy": 10,
-    "medium": 10,
-    "hard": 10
+    "extrapolation": 30
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gecco-2022-extrapolation.npz",
@@ -1525,14 +1508,12 @@
   {
    "name": "gecco-2022-feature-selection",
    "display_name": "GECCO 2022 synthetic: feature selection",
-   "benchmark": "gecco-2022-feature-selection",
+   "benchmark": "srbench-competition-2022",
    "kind": "data",
    "version": 1,
    "problems": 30,
    "subsets": {
-    "easy": 10,
-    "medium": 10,
-    "hard": 10
+    "feature-selection": 30
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gecco-2022-feature-selection.npz",
@@ -1549,14 +1530,12 @@
   {
    "name": "gecco-2022-local-optima",
    "display_name": "GECCO 2022 synthetic: escaping local optima*",
-   "benchmark": "gecco-2022-local-optima",
+   "benchmark": "srbench-competition-2022",
    "kind": "data",
    "version": 1,
    "problems": 30,
    "subsets": {
-    "easy": 10,
-    "medium": 10,
-    "hard": 10
+    "local-optima": 30
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gecco-2022-local-optima.npz",
@@ -1573,12 +1552,12 @@
   {
    "name": "gecco-2022-noise",
    "display_name": "GECCO 2022 synthetic: noise sensitivity*",
-   "benchmark": "gecco-2022-noise",
+   "benchmark": "srbench-competition-2022",
    "kind": "data",
    "version": 1,
    "problems": 40,
    "subsets": {
-    "all": 40
+    "noise": 40
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gecco-2022-noise.npz",
@@ -1600,7 +1579,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "gecco-2023-performance": 3
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gecco-2023-performance.npz",
@@ -1644,7 +1623,7 @@
    "version": 1,
    "problems": 6,
    "subsets": {
-    "all": 6
+    "gfn-sr-noisy-near-twin-set": 6
    },
    "where": "symbolic-data assets/catalogs",
    "file": "gfn-sr-noisy-near-twin-set.yaml",
@@ -1712,7 +1691,7 @@
    "version": 1,
    "problems": 7,
    "subsets": {
-    "all": 7
+    "gp-gomea-real-world": 7
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gp-gomea-real-world.npz",
@@ -1733,7 +1712,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "gp-gomea-real-world": 3
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gp-gomea-real-world-restricted.npz",
@@ -1754,7 +1733,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "diabetes": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gplearn-diabetes.npz",
@@ -1775,7 +1754,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "symbolic-regressor-example": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "gplearn-documentation-examples.yaml",
@@ -1796,7 +1775,7 @@
    "version": 1,
    "problems": 18,
    "subsets": {
-    "all": 18
+    "gpu-lm-inner-constant-recovery-problems": 18
    },
    "where": "symbolic-data assets/catalogs",
    "file": "gpu-lm-inner-constant-recovery-problems.yaml",
@@ -1815,7 +1794,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "grammarvae": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "grammarvae-points.npz",
@@ -1837,7 +1816,7 @@
    "version": 1,
    "problems": 7,
    "subsets": {
-    "all": 7
+    "gsgp-real-world": 7
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "gsgp-real-world.npz",
@@ -1856,7 +1835,7 @@
    "version": 1,
    "problems": 17,
    "subsets": {
-    "all": 17
+    "gsr-symset": 17
    },
    "where": "symbolic-data assets/catalogs",
    "file": "gsr-symset.yaml",
@@ -1875,7 +1854,7 @@
    "version": 2,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "hep-llm-sr-angular-distribution-problems": 2
    },
    "where": "symbolic-data assets/catalogs",
    "file": "hep-llm-sr-angular-distribution-problems.yaml",
@@ -1892,12 +1871,12 @@
   {
    "name": "heuristiclab-physics-instances",
    "display_name": "heuristiclab-physics-instances",
-   "benchmark": "heuristiclab-physics-instances",
+   "benchmark": "heuristiclab",
    "kind": "formula",
    "version": 1,
    "problems": 5,
    "subsets": {
-    "all": 5
+    "physics": 5
    },
    "where": "symbolic-data assets/catalogs",
    "file": "heuristiclab-physics-instances.yaml",
@@ -1911,12 +1890,12 @@
   {
    "name": "heuristiclab-real-world",
    "display_name": "HeuristicLab regression instances (real-world data)*",
-   "benchmark": "heuristiclab-regression-instance-providers",
+   "benchmark": "heuristiclab",
    "kind": "data",
    "version": 1,
    "problems": 14,
    "subsets": {
-    "all": 14
+    "real-world": 14
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "heuristiclab-real-world.npz",
@@ -1932,12 +1911,12 @@
   {
    "name": "heuristiclab-regression-instance-providers",
    "display_name": "heuristiclab-regression-instance-providers*",
-   "benchmark": "heuristiclab-regression-instance-providers",
+   "benchmark": "heuristiclab",
    "kind": "formula",
    "version": 2,
    "problems": 13,
    "subsets": {
-    "all": 13
+    "instances": 13
    },
    "where": "symbolic-data assets/catalogs",
    "file": "heuristiclab-regression-instance-providers.yaml",
@@ -1954,12 +1933,12 @@
   {
    "name": "heuristiclab-regression-instance-providers-points",
    "display_name": "HeuristicLab regression instance providers (pinned points)*",
-   "benchmark": "heuristiclab-regression-instance-providers",
+   "benchmark": "heuristiclab",
    "kind": "data",
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "instances": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "heuristiclab-regression-instance-providers-points.npz",
@@ -2024,7 +2003,7 @@
    "version": 1,
    "problems": 6,
    "subsets": {
-    "all": 6
+    "ideasearch-pdf": 6
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "ideasearch-pdf.npz",
@@ -2065,13 +2044,12 @@
   {
    "name": "kan-feynman-no-units-subset",
    "display_name": "kan-feynman-no-units-subset*",
-   "benchmark": "kan-feynman-no-units-subset",
+   "benchmark": "kan",
    "kind": "formula",
    "version": 2,
    "problems": 27,
    "subsets": {
-    "all": 1,
-    "kan-feynman-no-units": 26
+    "feynman-no-units": 27
    },
    "where": "symbolic-data assets/catalogs",
    "file": "kan-feynman-no-units-subset.yaml",
@@ -2087,12 +2065,12 @@
   {
    "name": "kan-toy-functions",
    "display_name": "kan-toy-functions*",
-   "benchmark": "kan-toy-functions",
+   "benchmark": "kan",
    "kind": "formula",
    "version": 1,
    "problems": 5,
    "subsets": {
-    "all": 5
+    "toy": 5
    },
    "where": "symbolic-data assets/catalogs",
    "file": "kan-toy-functions.yaml",
@@ -2113,7 +2091,7 @@
    "version": 2,
    "problems": 7,
    "subsets": {
-    "all": 7
+    "keijzer": 7
    },
    "where": "symbolic-data assets/catalogs",
    "file": "keijzer.yaml",
@@ -2134,7 +2112,7 @@
    "version": 1,
    "problems": 8,
    "subsets": {
-    "all": 8
+    "keijzer": 8
    },
    "where": "symbolic-data assets/catalogs",
    "file": "keijzer-points.npz",
@@ -2156,7 +2134,7 @@
    "version": 1,
    "problems": 12,
    "subsets": {
-    "all": 12
+    "kim-et-al-eql-benchmark-functions": 12
    },
    "where": "symbolic-data assets/catalogs",
    "file": "kim-et-al-eql-benchmark-functions.yaml",
@@ -2178,7 +2156,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "knowledge-integration-newtonian-cases": 3
    },
    "where": "symbolic-data assets/catalogs",
    "file": "knowledge-integration-newtonian-cases.yaml",
@@ -2199,7 +2177,7 @@
    "version": 2,
    "problems": 15,
    "subsets": {
-    "all": 15
+    "korns": 15
    },
    "where": "symbolic-data assets/catalogs",
    "file": "korns.yaml",
@@ -2220,7 +2198,7 @@
    "version": 2,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "koza": 2
    },
    "where": "symbolic-data assets/catalogs",
    "file": "koza.yaml",
@@ -2239,7 +2217,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "langlaw-perovskites": 3
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "langlaw-perovskites.npz",
@@ -2260,7 +2238,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "langlaw-perovskites": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "langlaw-perovskites-restricted.npz",
@@ -2276,12 +2254,12 @@
   {
    "name": "lasr-bigbench",
    "display_name": "LaSR BIG-bench scaling-law task",
-   "benchmark": "lasr-bigbench",
+   "benchmark": "lasr",
    "kind": "data",
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "bigbench": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "lasr-bigbench.npz",
@@ -2295,12 +2273,12 @@
   {
    "name": "lasr-noisy-feynman-with-distractors",
    "display_name": "lasr-noisy-feynman-with-distractors*",
-   "benchmark": "lasr-noisy-feynman-with-distractors",
+   "benchmark": "lasr",
    "kind": "formula",
    "version": 1,
    "problems": 100,
    "subsets": {
-    "all": 100
+    "noisy-feynman": 100
    },
    "where": "symbolic-data assets/catalogs",
    "file": "lasr-noisy-feynman-with-distractors.yaml",
@@ -2317,12 +2295,12 @@
   {
    "name": "lasr-synthetic-equations",
    "display_name": "lasr-synthetic-equations",
-   "benchmark": "lasr-synthetic-equations",
+   "benchmark": "lasr",
    "kind": "formula",
    "version": 1,
    "problems": 41,
    "subsets": {
-    "all": 41
+    "synthetic": 41
    },
    "where": "symbolic-data assets/catalogs",
    "file": "lasr-synthetic-equations.yaml",
@@ -2343,7 +2321,7 @@
    "version": 2,
    "problems": 25,
    "subsets": {
-    "all": 25
+    "livermore": 25
    },
    "where": "symbolic-data assets/catalogs",
    "file": "livermore.yaml",
@@ -2364,7 +2342,7 @@
    "version": 2,
    "problems": 150,
    "subsets": {
-    "all": 150
+    "livermore2": 150
    },
    "where": "symbolic-data assets/catalogs",
    "file": "livermore2.yaml",
@@ -2383,7 +2361,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "llm-lex-random-mathematica-functions": 3
    },
    "where": "symbolic-data assets/catalogs",
    "file": "llm-lex-random-mathematica-functions.yaml",
@@ -2404,7 +2382,7 @@
    "version": 1,
    "problems": 20,
    "subsets": {
-    "all": 20
+    "llm-lex-random-mathematica-functions": 20
    },
    "where": "symbolic-data assets/catalogs",
    "file": "llm-lex-random-mathematica-functions-points.npz",
@@ -2444,13 +2422,12 @@
   {
    "name": "llm-sr-bactgrow",
    "display_name": "LLM-SR E. coli growth rate*",
-   "benchmark": "llm-sr-bactgrow",
+   "benchmark": "llm-sr",
    "kind": "data",
    "version": 1,
    "problems": 2,
    "subsets": {
-    "bactgrow in-domain": 1,
-    "bactgrow out-of-domain": 1
+    "bactgrow": 2
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "llm-sr-bactgrow.npz",
@@ -2468,13 +2445,12 @@
   {
    "name": "llm-sr-oscillators",
    "display_name": "LLM-SR nonlinear oscillators*",
-   "benchmark": "llm-sr-oscillators",
+   "benchmark": "llm-sr",
    "kind": "data",
    "version": 1,
    "problems": 4,
    "subsets": {
-    "oscillators in-domain": 2,
-    "oscillators out-of-domain": 2
+    "oscillators": 4
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "llm-sr-oscillators.npz",
@@ -2492,13 +2468,12 @@
   {
    "name": "llm-sr-stress-strain",
    "display_name": "LLM-SR stress-strain (Al 6061-T651)*",
-   "benchmark": "llm-sr-stress-strain",
+   "benchmark": "llm-sr",
    "kind": "data",
    "version": 1,
    "problems": 2,
    "subsets": {
-    "stress-strain in-domain": 1,
-    "stress-strain out-of-domain": 1
+    "stress-strain": 2
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "llm-sr-stress-strain.npz",
@@ -2550,7 +2525,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "materials-laws-multi-agent": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "materials-laws-multi-agent.npz",
@@ -2573,7 +2548,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "mcdermott-predictive-modelling": 3
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "mcdermott-predictive-modelling.npz",
@@ -2594,7 +2569,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 1,
+    "mcdermott-predictive-modelling": 1,
     "sunspots test 1921-1955": 1,
     "sunspots test 1956-1979": 1
    },
@@ -2618,7 +2593,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "dyfor": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "mcdermott-table-1-predictive-modelling-sets-points.npz",
@@ -2640,7 +2615,7 @@
    "version": 2,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "meier": 2
    },
    "where": "symbolic-data assets/catalogs",
    "file": "meier.yaml",
@@ -2661,7 +2636,7 @@
    "version": 2,
    "problems": 8,
    "subsets": {
-    "all": 8
+    "neat": 8
    },
    "where": "symbolic-data assets/catalogs",
    "file": "neat.yaml",
@@ -2682,7 +2657,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "neat": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "neat-points.npz",
@@ -2705,7 +2680,7 @@
    "version": 2,
    "problems": 12,
    "subsets": {
-    "all": 12
+    "nguyen": 12
    },
    "where": "symbolic-data assets/catalogs",
    "file": "nguyen.yaml",
@@ -2726,7 +2701,7 @@
    "version": 1,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "nguyen-c": 2
    },
    "where": "symbolic-data assets/catalogs",
    "file": "nguyen-c-points.npz",
@@ -2749,7 +2724,7 @@
    "version": 1,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "nikuradse": 2
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "nikuradse.npz",
@@ -2771,7 +2746,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "nonic": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "nonic-points.npz",
@@ -2788,12 +2763,12 @@
   {
    "name": "nsrwh-only-five-variables-nc",
    "display_name": "nsrwh-only-five-variables-nc*",
-   "benchmark": "nsrwh-only-five-variables-nc",
+   "benchmark": "nsrwh",
    "kind": "formula",
    "version": 1,
    "problems": 301,
    "subsets": {
-    "all": 301
+    "only-five-variables-nc": 301
    },
    "where": "symbolic-data assets/catalogs",
    "file": "nsrwh-only-five-variables-nc.yaml",
@@ -2811,12 +2786,12 @@
   {
    "name": "nsrwh-only-five-variables-wc",
    "display_name": "nsrwh-only-five-variables-wc",
-   "benchmark": "nsrwh-only-five-variables-wc",
+   "benchmark": "nsrwh",
    "kind": "formula",
    "version": 1,
    "problems": 301,
    "subsets": {
-    "all": 301
+    "only-five-variables-wc": 301
    },
    "where": "symbolic-data assets/catalogs",
    "file": "nsrwh-only-five-variables-wc.yaml",
@@ -2832,12 +2807,12 @@
   {
    "name": "nsrwh-train-nc",
    "display_name": "nsrwh-train-nc",
-   "benchmark": "nsrwh-train-nc",
+   "benchmark": "nsrwh",
    "kind": "formula",
    "version": 1,
    "problems": 301,
    "subsets": {
-    "all": 301
+    "train-nc": 301
    },
    "where": "symbolic-data assets/catalogs",
    "file": "nsrwh-train-nc.yaml",
@@ -2854,12 +2829,12 @@
   {
    "name": "nsrwh-train-wc",
    "display_name": "nsrwh-train-wc*",
-   "benchmark": "nsrwh-train-wc",
+   "benchmark": "nsrwh",
    "kind": "formula",
    "version": 1,
    "problems": 299,
    "subsets": {
-    "all": 299
+    "train-wc": 299
    },
    "where": "symbolic-data assets/catalogs",
    "file": "nsrwh-train-wc.yaml",
@@ -2882,7 +2857,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "nuclear-misr": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "nuclear-misr.npz",
@@ -2903,7 +2878,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "nuclear-misr": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "nuclear-misr-restricted.npz",
@@ -2924,7 +2899,7 @@
    "version": 1,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "oxygen-ion-conductors": 2
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "oxygen-ion-conductors.npz",
@@ -2945,7 +2920,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "pagie": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "pagie-points.npz",
@@ -2963,14 +2938,12 @@
   {
    "name": "phye2e-llm-generated-synthetic-formulas",
    "display_name": "phye2e-llm-generated-synthetic-formulas",
-   "benchmark": "phye2e-llm-generated-synthetic-formulas",
+   "benchmark": "phye2e",
    "kind": "formula",
    "version": 1,
    "problems": 600,
    "subsets": {
-    "easy": 200,
-    "medium": 200,
-    "hard": 200
+    "synthetic": 600
    },
    "where": "symbolic-data assets/catalogs",
    "file": "phye2e-llm-generated-synthetic-formulas.yaml",
@@ -2986,12 +2959,12 @@
   {
    "name": "phye2e-space-physics",
    "display_name": "PhyE2E space-physics applications*",
-   "benchmark": "phye2e-space-physics",
+   "benchmark": "phye2e",
    "kind": "data",
    "version": 2,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "space-physics": 3
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "phye2e-space-physics.npz",
@@ -3008,12 +2981,12 @@
   {
    "name": "phye2e-space-physics-restricted",
    "display_name": "PhyE2E space-physics applications (restricted)*",
-   "benchmark": "phye2e-space-physics",
+   "benchmark": "phye2e",
    "kind": "data",
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "space-physics": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "phye2e-space-physics-restricted.npz",
@@ -3030,12 +3003,12 @@
   {
    "name": "physo-astro",
    "display_name": "physo-astro*",
-   "benchmark": "physo-astro",
+   "benchmark": "physo",
    "kind": "formula",
    "version": 3,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "astrophysical-case-studies": 2
    },
    "where": "symbolic-data assets/catalogs",
    "file": "physo-astro.yaml",
@@ -3051,7 +3024,7 @@
   {
    "name": "physo-astrophysical-case-studies",
    "display_name": "physo-astrophysical-case-studies*",
-   "benchmark": "physo-astrophysical-case-studies",
+   "benchmark": "physo",
    "kind": "formula",
    "version": 2,
    "problems": 9,
@@ -3078,7 +3051,7 @@
    "version": 2,
    "problems": 6,
    "subsets": {
-    "all": 6
+    "poly": 6
    },
    "where": "symbolic-data assets/catalogs",
    "file": "poly.yaml",
@@ -3097,7 +3070,7 @@
    "version": 1,
    "problems": 20,
    "subsets": {
-    "all": 20
+    "pse-high-dimensional-distractor-set": 20
    },
    "where": "symbolic-data assets/catalogs",
    "file": "pse-high-dimensional-distractor-set.yaml",
@@ -3118,7 +3091,7 @@
    "version": 1,
    "problems": 4,
    "subsets": {
-    "all": 4
+    "empirical-data": 4
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "pysr-empiricalbench.npz",
@@ -3141,7 +3114,7 @@
    "version": 1,
    "problems": 5,
    "subsets": {
-    "all": 5
+    "formulas": 5
    },
    "where": "symbolic-data assets/catalogs",
    "file": "pysr-empiricalbench-formulas.yaml",
@@ -3162,7 +3135,7 @@
    "version": 1,
    "problems": 6,
    "subsets": {
-    "all": 6
+    "r-rationals": 6
    },
    "where": "symbolic-data assets/catalogs",
    "file": "r-rationals-points.npz",
@@ -3184,7 +3157,7 @@
    "version": 1,
    "problems": 300,
    "subsets": {
-    "all": 300
+    "reproduction-bias-not-included-test-sets": 300
    },
    "where": "symbolic-data assets/catalogs",
    "file": "reproduction-bias-not-included-test-sets.yaml",
@@ -3203,7 +3176,7 @@
    "version": 1,
    "problems": 235,
    "subsets": {
-    "all": 235
+    "rils-rols-random-instances": 235
    },
    "where": "symbolic-data assets/catalogs",
    "file": "rils-rols-random-instances.yaml",
@@ -3222,8 +3195,9 @@
    "version": 2,
    "problems": 97,
    "subsets": {
-    "all": 93,
-    "nguyen-c": 4
+    "keijzer": 21,
+    "nguyen-c": 40,
+    "jin-star": 36
    },
    "where": "symbolic-data assets/catalogs",
    "file": "rsrm-constant-optimization-benchmark.yaml",
@@ -3244,7 +3218,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "gaussian-cdf-extrapolation": 3
    },
    "where": "symbolic-data assets/catalogs",
    "file": "rsrm-gaussian-cdf-extrapolation-test-points.npz",
@@ -3267,7 +3241,7 @@
    "version": 1,
    "problems": 55,
    "subsets": {
-    "all": 55
+    "scilaws-real": 55
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "scilaws-real.npz",
@@ -3288,7 +3262,7 @@
    "version": 1,
    "problems": 6,
    "subsets": {
-    "all": 6
+    "scilaws-real": 6
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "scilaws-real-restricted.npz",
@@ -3310,7 +3284,7 @@
    "version": 1,
    "problems": 4,
    "subsets": {
-    "all": 4
+    "scilaws-real": 4
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "scilaws-real-share-alike.npz",
@@ -3332,7 +3306,7 @@
    "version": 1,
    "problems": 4,
    "subsets": {
-    "all": 4
+    "scimed-settling-sphere-configurations": 4
    },
    "where": "symbolic-data assets/catalogs",
    "file": "scimed-settling-sphere-configurations.yaml",
@@ -3376,7 +3350,7 @@
    "version": 1,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "shadow-economies": 2
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "shadow-economies.npz",
@@ -3399,7 +3373,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "real-world": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "shape-constrained-real-world.npz",
@@ -3420,7 +3394,7 @@
    "version": 1,
    "problems": 3,
    "subsets": {
-    "all": 3
+    "real-world": 3
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "shape-constrained-real-world-restricted.npz",
@@ -3441,8 +3415,8 @@
    "version": 2,
    "problems": 19,
    "subsets": {
-    "all": 7,
-    "FEY": 12
+    "FDE": 3,
+    "FEY": 16
    },
    "where": "symbolic-data assets/catalogs",
    "file": "shape-constrained-sr-synthetic.yaml",
@@ -3463,7 +3437,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "sine": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "sine-points.npz",
@@ -3485,7 +3459,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "sisso-octet-binaries": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "sisso-octet-binaries.npz",
@@ -3501,13 +3475,12 @@
   {
    "name": "soose-fc",
    "display_name": "soose-fc",
-   "benchmark": "soose-fc",
+   "benchmark": "soose",
    "kind": "formula",
    "version": 2,
    "problems": 400,
    "subsets": {
-    "iid": 200,
-    "ood": 200
+    "fc": 400
    },
    "where": "symbolic-data assets/catalogs",
    "file": "soose-fc.yaml",
@@ -3525,13 +3498,12 @@
   {
    "name": "soose-nc",
    "display_name": "soose-nc",
-   "benchmark": "soose-nc",
+   "benchmark": "soose",
    "kind": "formula",
    "version": 2,
    "problems": 400,
    "subsets": {
-    "iid": 200,
-    "ood": 200
+    "nc": 400
    },
    "where": "symbolic-data assets/catalogs",
    "file": "soose-nc.yaml",
@@ -3549,13 +3521,12 @@
   {
    "name": "soose-wc",
    "display_name": "soose-wc",
-   "benchmark": "soose-wc",
+   "benchmark": "soose",
    "kind": "formula",
    "version": 2,
    "problems": 400,
    "subsets": {
-    "iid": 200,
-    "ood": 200
+    "wc": 400
    },
    "where": "symbolic-data assets/catalogs",
    "file": "soose-wc.yaml",
@@ -3601,7 +3572,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "spl-noise-data-scarcity-grid": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "spl-noise-data-scarcity-grid.yaml",
@@ -3638,13 +3609,12 @@
   {
    "name": "srbench-2.0-blackbox",
    "display_name": "SRBench 2.0 black-box*",
-   "benchmark": "srbench-2.0-blackbox",
+   "benchmark": "srbench-2.0",
    "kind": "data",
    "version": 1,
    "problems": 5,
    "subsets": {
-    "non-friedman": 2,
-    "friedman": 3
+    "blackbox": 5
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "srbench-2.0-blackbox.npz",
@@ -3660,12 +3630,12 @@
   {
    "name": "srbench-2.0-blackbox-restricted",
    "display_name": "SRBench 2.0 black-box (restricted)*",
-   "benchmark": "srbench-2.0-blackbox",
+   "benchmark": "srbench-2.0",
    "kind": "data",
    "version": 1,
    "problems": 7,
    "subsets": {
-    "non-friedman": 7
+    "blackbox": 7
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "srbench-2.0-blackbox-restricted.npz",
@@ -3681,12 +3651,12 @@
   {
    "name": "srbench-2.0-first-principles",
    "display_name": "SRBench 2.0 first-principles*",
-   "benchmark": "srbench-2.0-first-principles",
+   "benchmark": "srbench-2.0",
    "kind": "data",
    "version": 1,
    "problems": 10,
    "subsets": {
-    "remainder": 10
+    "first-principles": 10
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "srbench-2.0-first-principles.npz",
@@ -3702,12 +3672,12 @@
   {
    "name": "srbench-2.0-first-principles-restricted",
    "display_name": "SRBench 2.0 first-principles (restricted)*",
-   "benchmark": "srbench-2.0-first-principles",
+   "benchmark": "srbench-2.0",
    "kind": "data",
    "version": 1,
    "problems": 2,
    "subsets": {
-    "remainder": 2
+    "first-principles": 2
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "srbench-2.0-first-principles-restricted.npz",
@@ -3724,13 +3694,12 @@
   {
    "name": "srbench-2021-blackbox",
    "display_name": "SRBench 2021 black-box*",
-   "benchmark": "srbench-2021-blackbox",
+   "benchmark": "srbench-2021",
    "kind": "data",
    "version": 1,
    "problems": 84,
    "subsets": {
-    "friedman": 62,
-    "non_friedman": 22
+    "blackbox": 84
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "srbench-2021-blackbox.npz",
@@ -3746,12 +3715,12 @@
   {
    "name": "srbench-2021-blackbox-restricted",
    "display_name": "SRBench 2021 black-box (restricted)*",
-   "benchmark": "srbench-2021-blackbox",
+   "benchmark": "srbench-2021",
    "kind": "data",
    "version": 1,
    "problems": 38,
    "subsets": {
-    "non_friedman": 38
+    "blackbox": 38
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "srbench-2021-blackbox-restricted.npz",
@@ -3767,12 +3736,12 @@
   {
    "name": "srbench-2021-strogatz",
    "display_name": "SRBench 2021 Strogatz",
-   "benchmark": "srbench-2021-strogatz",
+   "benchmark": "srbench-2021",
    "kind": "data",
    "version": 1,
    "problems": 14,
    "subsets": {
-    "all": 14
+    "strogatz": 14
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "srbench-2021-strogatz.npz",
@@ -3814,7 +3783,7 @@
    "version": 1,
    "problems": 2,
    "subsets": {
-    "all": 2
+    "superconductor-tc": 2
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "superconductor-tc.npz",
@@ -3837,7 +3806,7 @@
    "version": 1,
    "problems": 15,
    "subsets": {
-    "all": 15
+    "sym-q-ai-feynman-with-drift-terms": 15
    },
    "where": "symbolic-data assets/catalogs",
    "file": "sym-q-ai-feynman-with-drift-terms.yaml",
@@ -3858,7 +3827,7 @@
    "version": 1,
    "problems": 10,
    "subsets": {
-    "all": 10
+    "symantic-synthetic-set": 10
    },
    "where": "symbolic-data assets/catalogs",
    "file": "symantic-synthetic-set.yaml",
@@ -3879,7 +3848,7 @@
    "version": 1,
    "problems": 5,
    "subsets": {
-    "all": 5
+    "symbolfit-lhc-spectra": 5
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "symbolfit-lhc-spectra.npz",
@@ -3898,7 +3867,7 @@
    "version": 1,
    "problems": 1023,
    "subsets": {
-    "all": 1023
+    "symbolicgpt-bivariate-set": 1023
    },
    "where": "symbolic-data assets/catalogs",
    "file": "symbolicgpt-bivariate-set.yaml",
@@ -3921,7 +3890,7 @@
    "version": 1,
    "problems": 988,
    "subsets": {
-    "all": 988
+    "symbolicgpt-test-sets": 988
    },
    "where": "symbolic-data assets/catalogs",
    "file": "symbolicgpt-test-sets.yaml",
@@ -3945,7 +3914,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "symbolicregression-com-toy-test-suite-1": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "symbolicregression-com-toy-test-suite-1.yaml",
@@ -3967,7 +3936,7 @@
    "version": 1,
    "problems": 1024,
    "subsets": {
-    "all": 1024
+    "symformer-in-domain-synthetic-evaluation": 1024
    },
    "where": "symbolic-data assets/catalogs",
    "file": "symformer-in-domain-synthetic-evaluation.yaml",
@@ -3989,7 +3958,7 @@
    "version": 1,
    "problems": 16,
    "subsets": {
-    "all": 16
+    "symtree-benchmark-functions": 16
    },
    "where": "symbolic-data assets/catalogs",
    "file": "symtree-benchmark-functions.yaml",
@@ -4033,7 +4002,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "specific-energy": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "torchsisso-specific-energy.npz",
@@ -4055,7 +4024,7 @@
    "version": 1,
    "problems": 9,
    "subsets": {
-    "all": 9
+    "synthetic": 9
    },
    "where": "symbolic-data assets/catalogs",
    "file": "torchsisso-synthetic-expressions.yaml",
@@ -4076,7 +4045,7 @@
    "version": 2,
    "problems": 6,
    "subsets": {
-    "all": 6
+    "synthetic": 6
    },
    "where": "symbolic-data assets/catalogs",
    "file": "vladislavleva.yaml",
@@ -4121,7 +4090,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "real-world": 1
    },
    "where": "symbolic-data build/data-catalogs (Hugging Face only)",
    "file": "white-2013-proposed.npz",
@@ -4142,7 +4111,7 @@
    "version": 1,
    "problems": 1,
    "subsets": {
-    "all": 1
+    "synthetic": 1
    },
    "where": "symbolic-data assets/catalogs",
    "file": "white-et-al-2013-proposed-sr-set-points.npz",

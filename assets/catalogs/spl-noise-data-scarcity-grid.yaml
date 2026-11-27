@@ -25,10 +25,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   spl-noise-scarcity-cubic:
+    subset: "spl-noise-data-scarcity-grid"
     raw: 0.3*x**3 + 0.5*x**2 + 2*x
     prepared: 0.3*v1**3 + 0.5*v1**2 + 2*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x

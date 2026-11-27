@@ -26,6 +26,7 @@ metadata:
       and need per-entry review.'
 expressions:
   Koza-2:
+    subset: "koza"
     raw: pow(x1,5)-2*pow(x1,3)+x1
     prepared: ((v1)**(5))-2*((v1)**(3))+v1
     n_variables: 1
@@ -56,6 +57,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Koza-3:
+    subset: "koza"
     raw: pow(x1,6)-2*pow(x1,4)+pow(x1,2)
     prepared: ((v1)**(6))-2*((v1)**(4))+((v1)**(2))
     n_variables: 1

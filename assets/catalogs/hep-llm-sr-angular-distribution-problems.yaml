@@ -31,10 +31,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   ee_mumu_angular_id:
+    subset: "hep-llm-sr-angular-distribution-problems"
     raw: 2*pi*hbarc2*alpha**2/(4*s)*(1 + cos_theta**2)
     prepared: 0.0110977988290651*3.141592653589793*(v1**2 + 1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: cos_theta
@@ -51,10 +51,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   ee_mumu_angular_ood:
+    subset: "hep-llm-sr-angular-distribution-problems"
     raw: 2*pi*hbarc2*alpha**2/(4*s)*(1 + cos_theta**2)
     prepared: 0.0110977988290651*3.141592653589793*(v1**2 + 1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: cos_theta

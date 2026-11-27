@@ -40,10 +40,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   FeynmanICh9Eq18:
+    subset: "hard"
     raw: 6.67430e-11*m1*m2/((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
     prepared: 6.6743e-11*v1*v2/((v3 - v4)**2 + (v5 - v6)**2 + (v7 - v8)**2)
     n_variables: 8
-    subset: hard
     vars:
       v1:
         name: m1
@@ -129,10 +129,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanICh12Eq11:
+    subset: "remainder"
     raw: q*(Ef + B*v*sin(theta))
     prepared: v1*(v2 + v3*v4*sin(v5))
     n_variables: 5
-    subset: remainder
     vars:
       v1:
         name: q
@@ -186,10 +186,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanICh26Eq2:
+    subset: "remainder"
     raw: sin(theta1)/sin(theta2)
     prepared: sin(v1)/sin(v2)
     n_variables: 2
-    subset: remainder
     vars:
       v1:
         name: theta1
@@ -215,10 +215,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanICh27Eq6:
+    subset: "remainder"
     raw: 1/(1/d1 + n/d2)
     prepared: 1/(v2/v3 + 1/v1)
     n_variables: 3
-    subset: remainder
     vars:
       v1:
         name: d1
@@ -253,10 +253,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanICh29Eq16:
+    subset: "hard"
     raw: sqrt(x1**2 + x2**2 + 2*x1*x2*cos(theta1 - theta2))
     prepared: sqrt(v1**2 + 2*v1*v2*cos(v3 - v4) + v2**2)
     n_variables: 4
-    subset: hard
     vars:
       v1:
         name: x1
@@ -300,10 +300,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanICh30Eq5:
+    subset: "remainder"
     raw: lambd/(n*sin(theta))
     prepared: v1/(v2*sin(v3))
     n_variables: 3
-    subset: remainder
     vars:
       v1:
         name: lambd
@@ -436,10 +436,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanICh38Eq12:
+    subset: "remainder"
     raw: 4*pi*8.854e-12*(6.626e-34/(2*pi))**2/(m*q**2)
     prepared: 3.5416e-11*(1.0975969e-67/3.141592653589793**2)*3.141592653589793/(v1*v2**2)
     n_variables: 2
-    subset: remainder
     vars:
       v1:
         name: m
@@ -466,10 +466,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanICh44Eq4:
+    subset: "hard"
     raw: n*1.380649e-23*T*log(V2/V1)
     prepared: 1.380649e-23*v1*v2*log(v3/v4)
     n_variables: 4
-    subset: hard
     vars:
       v1:
         name: n
@@ -513,10 +513,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanIIICh9Eq52:
+    subset: "hard"
     raw: (p_d*Ef*t/(6.626e-34/(2*pi)))**2*sin((omega - omega_0)*t/2)**2/((omega - omega_0)*t/2)**2
     prepared: 3.64432516163265e+67*3.141592653589793**2*v1**2*v2**2*sin(v3*(v4 - v5)/2)**2/(v4 - v5)**2
     n_variables: 5
-    subset: hard
     vars:
       v1:
         name: p_d
@@ -571,10 +571,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanIIICh15Eq27:
+    subset: "remainder"
     raw: 2*pi*alpha/(n*d)
     prepared: 2*3.141592653589793*v1/(v2*v3)
     n_variables: 3
-    subset: remainder
     vars:
       v1:
         name: alpha
@@ -904,10 +904,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanIIICh21Eq20:
+    subset: "hard"
     raw: -rho_c_0*q*A_vec/m
     prepared: -v1*v2*v3/v4
     n_variables: 4
-    subset: hard
     vars:
       v1:
         name: rho_c_0
@@ -954,10 +954,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanBonus7:
+    subset: "remainder"
     raw: sqrt(8*pi*6.67430e-11*rho/3 - alpha*2.99792458e8**2/d**2)
     prepared: sqrt(1.77981333333333e-10*3.141592653589793*v1 - 8.98755178736818e+16*v2/v3**2)
     n_variables: 3
-    subset: remainder
     vars:
       v1:
         name: rho
@@ -994,10 +994,10 @@ expressions:
     meta:
       finite_fraction: 0.6631
   FeynmanBonus10:
+    subset: "hard"
     raw: (cos(theta2) - v/2.99792458e8)/(1 - v/2.99792458e8*cos(theta2))
     prepared: (-3.33564095198152e-9*v2 + cos(v1))/(-3.33564095198152e-9*v2*cos(v1) + 1)
     n_variables: 2
-    subset: hard
     vars:
       v1:
         name: theta2
@@ -1023,10 +1023,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanBonus13:
+    subset: "hard"
     raw: 1/(4*pi*8.854e-12)*q/sqrt(r**2 + d**2 - 2*r*d*cos(alpha))
     prepared: (28235825615.541/3.141592653589793)*v1/sqrt(v2**2 - 2*v2*v3*cos(v4) + v3**2)
     n_variables: 4
-    subset: hard
     vars:
       v1:
         name: q
@@ -1071,10 +1071,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanBonus19:
+    subset: "hard"
     raw: -1/(8*pi*6.67430e-11)*(2.99792458e8**4*k_f/r**2 + H_G**2*2.99792458e8**2*(1 - 2*alpha))
     prepared: -1872855580.36049/3.141592653589793*(8.07760871306249e+33*v1/v2**2 + 8.98755178736818e+16*v3**2*(1 - 2*v4))
     n_variables: 4
-    subset: hard
     vars:
       v1:
         name: k_f
@@ -1122,6 +1122,7 @@ expressions:
     meta:
       finite_fraction: 1.0
   FeynmanICh6Eq20a:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1165,11 +1166,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 1
-    subset: hard
     meta:
       same_as: fastsrb:I.6.2a
       finite_fraction: 1.0
   FeynmanICh6Eq20:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1234,11 +1235,11 @@ expressions:
     constraints:
     - v2 != 0
     n_variables: 2
-    subset: hard
     meta:
       same_as: fastsrb:I.6.2
       finite_fraction: 1.0
   FeynmanICh6Eq20b:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1312,11 +1313,11 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:I.6.2b
       finite_fraction: 1.0
   FeynmanICh15Eq3t:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1390,11 +1391,11 @@ expressions:
     constraints:
     - 1 - v2 ^ 2 / 2.99792458e8 ^ 2 >= 0
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:I.15.3t
       finite_fraction: 1.0
   FeynmanICh15Eq3x:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1468,11 +1469,11 @@ expressions:
     constraints:
     - 1 - v2 ^ 2 / 2.99792458e8 ^ 2 > 0
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:I.15.3x
       finite_fraction: 1.0
   FeynmanICh30Eq3:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1553,8 +1554,8 @@ expressions:
     meta:
       finite_fraction: 1.0
       same_as: fastsrb:I.30.3
-    subset: hard
   FeynmanICh32Eq17:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1647,11 +1648,11 @@ expressions:
     constraints:
     - v3 ^ 2 - v4 ^ 2 != 0
     n_variables: 4
-    subset: hard
     meta:
       same_as: fastsrb:I.32.17
       finite_fraction: 1.0
   FeynmanICh34Eq14:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1711,11 +1712,11 @@ expressions:
     - 2.99792458e8 ^ 2 - v1 ^ 2 > 0
     - v2 != 0
     n_variables: 2
-    subset: hard
     meta:
       same_as: fastsrb:I.34.14
       finite_fraction: 1.0
   FeynmanICh37Eq4:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1785,11 +1786,11 @@ expressions:
     constraints:
     - v1*v2 >= 0
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:I.37.4
       finite_fraction: 1.0
   FeynmanICh39Eq22:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1858,11 +1859,11 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:I.39.22
       finite_fraction: 1.0
   FeynmanICh40Eq1:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -1951,11 +1952,11 @@ expressions:
     constraints:
     - v4 != 0
     n_variables: 4
-    subset: hard
     meta:
       same_as: fastsrb:I.40.1
       finite_fraction: 1.0
   FeynmanICh50Eq26:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2039,11 +2040,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 4
-    subset: hard
     meta:
       same_as: fastsrb:I.50.26
       finite_fraction: 1.0
   FeynmanIICh6Eq15a:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2143,11 +2144,11 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 5
-    subset: hard
     meta:
       same_as: fastsrb:II.6.15a
       finite_fraction: 1.0
   FeynmanIICh6Eq15b:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2217,11 +2218,11 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:II.6.15b
       finite_fraction: 1.0
   FeynmanIICh11Eq17:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2320,11 +2321,11 @@ expressions:
     constraints:
     - v5 != 0
     n_variables: 5
-    subset: hard
     meta:
       same_as: fastsrb:II.11.17
       finite_fraction: 1.0
   FeynmanIICh11Eq20:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2408,11 +2409,11 @@ expressions:
     constraints:
     - v4 != 0
     n_variables: 4
-    subset: hard
     meta:
       same_as: fastsrb:II.11.20
       finite_fraction: 1.0
   FeynmanIICh11Eq27:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2481,11 +2482,11 @@ expressions:
     constraints:
     - 1 - (v1 * v2 / 3) != 0
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:II.11.27
       finite_fraction: 1.0
   FeynmanIICh11Eq28:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2539,11 +2540,11 @@ expressions:
     constraints:
     - 1-(v1*v2/3) != 0
     n_variables: 2
-    subset: hard
     meta:
       same_as: fastsrb:II.11.28
       finite_fraction: 1.0
   FeynmanIICh13Eq23:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2603,11 +2604,11 @@ expressions:
     constraints:
     - 2.99792458e8 ^ 2 - v2 ^ 2 > 0
     n_variables: 2
-    subset: hard
     meta:
       same_as: fastsrb:II.13.23
       finite_fraction: 1.0
   FeynmanIICh13Eq34:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2667,11 +2668,11 @@ expressions:
     constraints:
     - 2.99792458e8 ^ 2 - v2 ^ 2 > 0
     n_variables: 2
-    subset: hard
     meta:
       same_as: fastsrb:II.13.34
       finite_fraction: 1.0
   FeynmanIICh35Eq18:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2755,11 +2756,11 @@ expressions:
     constraints:
     - v4 != 0
     n_variables: 4
-    subset: hard
     meta:
       same_as: fastsrb:II.35.18
       finite_fraction: 1.0
   FeynmanIICh35Eq21:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2843,11 +2844,11 @@ expressions:
     constraints:
     - v4 != 0
     n_variables: 4
-    subset: hard
     meta:
       same_as: fastsrb:II.35.21
       finite_fraction: 1.0
   FeynmanIICh36Eq38:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -2951,11 +2952,11 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 5
-    subset: hard
     meta:
       same_as: fastsrb:II.36.38
       finite_fraction: 1.0
   FeynmanIIICh4Eq33:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3011,11 +3012,11 @@ expressions:
     - v1 != 0
     - v2 != 0
     n_variables: 2
-    subset: hard
     meta:
       same_as: fastsrb:III.4.33
       finite_fraction: 1.0
   FeynmanIIICh10Eq19:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3098,11 +3099,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 4
-    subset: hard
     meta:
       same_as: fastsrb:III.10.19
       finite_fraction: 1.0
   FeynmanBonus2:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3219,11 +3220,11 @@ expressions:
     - v2 != 0
     - v4 * v3 ^ 2 / (v1 * v2 ^ 2) >= -1 / 2
     n_variables: 6
-    subset: hard
     meta:
       same_as: fastsrb:B2
       finite_fraction: 1.0
   FeynmanBonus3:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3310,11 +3311,11 @@ expressions:
     constraints:
     - v2 * cos(v3 - v4) != -1
     n_variables: 4
-    subset: hard
     meta:
       same_as: fastsrb:B3
       finite_fraction: 1.0
   FeynmanBonus5:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3398,11 +3399,11 @@ expressions:
     - v2 + v3 != 0
     - v2 * (v2 + v3) > 0
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:B5
       finite_fraction: 1.0
   FeynmanBonus6:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3542,8 +3543,8 @@ expressions:
     meta:
       finite_fraction: 0.5041
       same_as: fastsrb:B6
-    subset: hard
   FeynmanBonus9:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3623,11 +3624,11 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:B9
       finite_fraction: 1.0
   FeynmanBonus11:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3714,8 +3715,8 @@ expressions:
     meta:
       finite_fraction: 1.0
       same_as: fastsrb:B11
-    subset: hard
   FeynmanBonus12:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3818,11 +3819,11 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 5
-    subset: hard
     meta:
       same_as: fastsrb:B12
       finite_fraction: 1.0
   FeynmanBonus14:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -3924,11 +3925,11 @@ expressions:
     - v3 != 0
     - v5 != -2
     n_variables: 5
-    subset: hard
     meta:
       same_as: fastsrb:B14
       finite_fraction: 1.0
   FeynmanBonus15:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4004,11 +4005,11 @@ expressions:
     - v1 / 2.99792458e8 * cos(v3) != -1
     - 2.99792458e8 ^ 2 - v1 ^ 2 >= 0
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:B15
       finite_fraction: 1.0
   FeynmanBonus16:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4112,11 +4113,11 @@ expressions:
         unit: null
     constraints: null
     n_variables: 5
-    subset: hard
     meta:
       same_as: fastsrb:B16
       finite_fraction: 1.0
   FeynmanBonus17:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4232,11 +4233,11 @@ expressions:
     - v1 != 0
     - v6 != 0
     n_variables: 6
-    subset: hard
     meta:
       same_as: fastsrb:B17
       finite_fraction: 1.0
   FeynmanBonus20:
+    subset: "hard"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4314,11 +4315,11 @@ expressions:
         unit: null
     constraints: null
     n_variables: 3
-    subset: hard
     meta:
       same_as: fastsrb:B20
       finite_fraction: 1.0
   FeynmanICh8Eq14:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4402,11 +4403,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:I.8.14
       finite_fraction: 1.0
   FeynmanICh10Eq7:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4466,11 +4467,11 @@ expressions:
     constraints:
     - 1 - v2 ^ 2 / 2.99792458e8 ^ 2 > 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.10.7
       finite_fraction: 1.0
   FeynmanICh11Eq19:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4583,11 +4584,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 6
-    subset: remainder
     meta:
       same_as: fastsrb:I.11.19
       finite_fraction: 1.0
   FeynmanICh12Eq1:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4640,11 +4641,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.12.1
       finite_fraction: 1.0
   FeynmanICh12Eq2:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4713,11 +4714,11 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:I.12.2
       finite_fraction: 1.0
   FeynmanICh12Eq4:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4771,11 +4772,11 @@ expressions:
     constraints:
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.12.4
       finite_fraction: 1.0
   FeynmanICh12Eq5:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4828,11 +4829,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.12.5
       finite_fraction: 1.0
   FeynmanICh13Eq4:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -4917,11 +4918,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:I.13.4
       finite_fraction: 1.0
   FeynmanICh13Eq12:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5011,11 +5012,11 @@ expressions:
     - v3 != 0
     - v4 != 0
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:I.13.12
       finite_fraction: 1.0
   FeynmanICh14Eq3:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5073,11 +5074,11 @@ expressions:
         unit: null
     constraints: null
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.14.3
       finite_fraction: 1.0
   FeynmanICh14Eq4:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5130,11 +5131,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.14.4
       finite_fraction: 1.0
   FeynmanICh15Eq10:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5194,11 +5195,11 @@ expressions:
     constraints:
     - 1 - v2 ^ 2 / 2.99792458e8 ^ 2 > 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.15.1
       finite_fraction: 1.0
   FeynmanICh16Eq6:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5257,11 +5258,11 @@ expressions:
     constraints:
     - 1 + v1 * v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.16.6
       finite_fraction: 1.0
   FeynmanICh18Eq4:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5347,11 +5348,11 @@ expressions:
     constraints:
     - v1 + v3 != 0
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:I.18.4
       finite_fraction: 1.0
   FeynmanICh18Eq12:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5419,11 +5420,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:I.18.12
       finite_fraction: 1.0
   FeynmanICh18Eq16:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5506,11 +5507,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:I.18.14
       finite_fraction: 1.0
   FeynmanICh24Eq6:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5598,11 +5599,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:I.24.6
       finite_fraction: 1.0
   FeynmanICh25Eq13:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5656,11 +5657,11 @@ expressions:
     constraints:
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.25.13
       finite_fraction: 1.0
   FeynmanICh29Eq4:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5703,11 +5704,11 @@ expressions:
         unit: null
     constraints: null
     n_variables: 1
-    subset: remainder
     meta:
       same_as: fastsrb:I.29.4
       finite_fraction: 1.0
   FeynmanICh32Eq5:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5767,11 +5768,11 @@ expressions:
     - v3 != 0
     - v4 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.32.5
       finite_fraction: 1.0
   FeynmanICh34Eq10:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5831,11 +5832,11 @@ expressions:
     constraints:
     - 2.99792458e8 - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.34.1
       finite_fraction: 1.0
   FeynmanICh34Eq8:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5919,11 +5920,11 @@ expressions:
     constraints:
     - v4 != 0
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:I.34.8
       finite_fraction: 1.0
   FeynmanICh34Eq27:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -5961,11 +5962,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 1
-    subset: remainder
     meta:
       same_as: fastsrb:I.34.27
       finite_fraction: 1.0
   FeynmanICh39Eq10:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6018,11 +6019,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.39.1
       finite_fraction: 1.0
   FeynmanICh39Eq11:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6091,11 +6092,11 @@ expressions:
     constraints:
     - v1 - 1 != 0
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:I.39.11
       finite_fraction: 1.0
   FeynmanICh41Eq16:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6156,11 +6157,11 @@ expressions:
     constraints:
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.41.16
       finite_fraction: 1.0
   FeynmanICh43Eq16:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6244,11 +6245,11 @@ expressions:
     constraints:
     - v4 != 0
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:I.43.16
       finite_fraction: 1.0
   FeynmanICh43Eq31:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6301,11 +6302,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.43.31
       finite_fraction: 1.0
   FeynmanICh43Eq43:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6376,11 +6377,11 @@ expressions:
     - v1 - 1 != 0
     - v3 != 0
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:I.43.43
       finite_fraction: 1.0
   FeynmanICh47Eq23:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6451,11 +6452,11 @@ expressions:
     - v1 * v2 / v3 >= 0
     - v3 != 0
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:I.47.23
       finite_fraction: 1.0
   FeynmanICh48Eq2:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6514,11 +6515,11 @@ expressions:
     constraints:
     - 1 - v2 ^ 2 / 2.99792458e8 ^ 2 > 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:I.48.2
       finite_fraction: 1.0
   FeynmanIICh2Eq42:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6617,11 +6618,11 @@ expressions:
     constraints:
     - v5 != 0
     n_variables: 5
-    subset: remainder
     meta:
       same_as: fastsrb:II.2.42
       finite_fraction: 1.0
   FeynmanIICh3Eq24:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6676,11 +6677,11 @@ expressions:
     constraints:
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:II.3.24
       finite_fraction: 1.0
   FeynmanIICh4Eq23:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6734,11 +6735,11 @@ expressions:
     constraints:
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:II.4.23
       finite_fraction: 1.0
   FeynmanIICh6Eq11:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6807,11 +6808,11 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:II.6.11
       finite_fraction: 1.0
   FeynmanIICh8Eq7:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6865,11 +6866,11 @@ expressions:
     constraints:
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:II.8.7
       finite_fraction: 1.0
   FeynmanIICh8Eq31:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6908,11 +6909,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 1
-    subset: remainder
     meta:
       same_as: fastsrb:II.8.31
       finite_fraction: 1.0
   FeynmanIICh10Eq9:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -6966,11 +6967,11 @@ expressions:
     constraints:
     - 1 + v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:II.10.9
       finite_fraction: 1.0
   FeynmanIICh11Eq3:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7072,11 +7073,11 @@ expressions:
     - v3 != 0
     - v4 ^ 2 - v5 ^ 2 != 0
     n_variables: 5
-    subset: remainder
     meta:
       same_as: fastsrb:II.11.3
       finite_fraction: 1.0
   FeynmanIICh13Eq17:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7135,11 +7136,11 @@ expressions:
     constraints:
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:II.13.17
       finite_fraction: 1.0
   FeynmanIICh15Eq4:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7208,11 +7209,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:II.15.4
       finite_fraction: 1.0
   FeynmanIICh15Eq5:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7281,11 +7282,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:II.15.5
       finite_fraction: 1.0
   FeynmanIICh21Eq32:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7367,8 +7368,8 @@ expressions:
       same_as: fastsrb:II.21.32
     accept_dropped:
     - (-(v1)/(v2*((-3.711322364871929e-19*v3)-1.1126264541953286e-10)))
-    subset: remainder
   FeynmanIICh24Eq17:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7429,11 +7430,11 @@ expressions:
     - v1 ^ 2 / 2.99792458e8 ^ 2 - pi ^ 2 / v2 ^ 2 >= 0
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:II.24.17
       finite_fraction: 0.1344
   FeynmanIICh27Eq16:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7476,11 +7477,11 @@ expressions:
         unit: null
     constraints: null
     n_variables: 1
-    subset: remainder
     meta:
       same_as: fastsrb:II.27.16
       finite_fraction: 1.0
   FeynmanIICh27Eq18:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7518,11 +7519,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 1
-    subset: remainder
     meta:
       same_as: fastsrb:II.27.18
       finite_fraction: 1.0
   FeynmanIICh34Eq2a:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7591,11 +7592,11 @@ expressions:
     constraints:
     - v3 != 0
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:II.34.2a
       finite_fraction: 1.0
   FeynmanIICh34Eq2:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7664,11 +7665,11 @@ expressions:
         - -1
     constraints: null
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:II.34.2
       finite_fraction: 1.0
   FeynmanIICh34Eq11:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7753,11 +7754,11 @@ expressions:
     constraints:
     - v4 != 0
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:II.34.11
       finite_fraction: 1.0
   FeynmanIICh34Eq29a:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7811,11 +7812,11 @@ expressions:
     constraints:
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:II.34.29a
       finite_fraction: 1.0
   FeynmanIICh34Eq29b:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7883,11 +7884,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:II.34.29b
       finite_fraction: 1.0
   FeynmanIICh37Eq1:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -7955,11 +7956,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:II.37.1
       finite_fraction: 1.0
   FeynmanIICh38Eq3:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8044,11 +8045,11 @@ expressions:
     constraints:
     - v4 != 0
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:II.38.3
       finite_fraction: 1.0
   FeynmanIICh38Eq14:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8106,11 +8107,11 @@ expressions:
     constraints:
     - 1 + v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:II.38.14
       finite_fraction: 1.0
   FeynmanIIICh4Eq32:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8165,11 +8166,11 @@ expressions:
     - v1 != 0
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:III.4.32
       finite_fraction: 1.0
   FeynmanIIICh7Eq38:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8222,11 +8223,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:III.7.38
       finite_fraction: 1.0
   FeynmanIIICh8Eq54:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8279,11 +8280,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:III.8.54
       finite_fraction: 1.0
   FeynmanIIICh12Eq43:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8325,8 +8326,8 @@ expressions:
     meta:
       finite_fraction: 1.0
       same_as: fastsrb:III.12.43
-    subset: remainder
   FeynmanIIICh13Eq18:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8394,11 +8395,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:III.13.18
       finite_fraction: 1.0
   FeynmanIIICh14Eq14:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8482,11 +8483,11 @@ expressions:
     constraints:
     - v4 != 0
     n_variables: 4
-    subset: remainder
     meta:
       same_as: fastsrb:III.14.14
       finite_fraction: 1.0
   FeynmanIIICh15Eq12:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8554,11 +8555,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:III.15.12
       finite_fraction: 1.0
   FeynmanIIICh15Eq14:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8613,11 +8614,11 @@ expressions:
     - v1 != 0
     - v2 != 0
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:III.15.14
       finite_fraction: 1.0
   FeynmanIIICh17Eq37:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8685,11 +8686,11 @@ expressions:
         - 0
     constraints: null
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:III.17.37
       finite_fraction: 1.0
   FeynmanIIICh19Eq51:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8763,8 +8764,8 @@ expressions:
     meta:
       finite_fraction: 1.0
       same_as: fastsrb:III.19.51
-    subset: remainder
   FeynmanBonus1:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8861,8 +8862,8 @@ expressions:
     meta:
       finite_fraction: 1.0
       same_as: fastsrb:B1
-    subset: remainder
   FeynmanBonus4:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -8964,11 +8965,11 @@ expressions:
     - v1 != 0
     - v5 != 0
     n_variables: 5
-    subset: remainder
     meta:
       same_as: fastsrb:B4
       finite_fraction: 0.5074
   FeynmanBonus8:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9028,11 +9029,11 @@ expressions:
     constraints:
     - v1 * (1 - cos(v2)) / (9.10938356e-31 * 2.99792458e8 ^ 2) != -1
     n_variables: 2
-    subset: remainder
     meta:
       same_as: fastsrb:B8
       finite_fraction: 1.0
   FeynmanBonus18:
+    subset: "remainder"
     sources:
     - Feynman lectures, Feynman Symbolic Regression Benchmark
     - variable sampling ranges from Matsubara et at. 2024
@@ -9111,7 +9112,6 @@ expressions:
     constraints:
     - v2 != 0
     n_variables: 3
-    subset: remainder
     meta:
       same_as: fastsrb:B18
       finite_fraction: 1.0

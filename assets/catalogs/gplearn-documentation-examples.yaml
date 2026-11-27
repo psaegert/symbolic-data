@@ -36,10 +36,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   toy-polynomial:
+    subset: "symbolic-regressor-example"
     raw: X0**2 - X1**2 + X1 - 1
     prepared: v1**2 - v2**2 + v2 - 1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: X0

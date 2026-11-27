@@ -3,6 +3,7 @@ members copied from the identical srbf problem), the rule for paper-vs-code conf
 published results), the added sets (LLM-SR oscillators, BMS Rössler, Brum et al.), the overlap fingerprint, the problem
 flags, and the metadata catalog_tags.py writes (stars from the deviations, notes, flags)."""
 import importlib.util
+import json
 import sys
 from pathlib import Path
 
@@ -194,3 +195,33 @@ def test_compilations_follow_their_own_code_and_standalone_sets_their_defining_p
     assert F.fixed(_record("interrupted-1", "Uy2011-F9")) == _record("interrupted-1", "Uy2011-F9")
     korns = yaml.safe_load((REPO / "assets/catalogs/korns.yaml").read_text())["expressions"]
     assert "22.0-(4.2" in korns["Korns-14"]["prepared"].replace(" ", "") or "-4.2" in korns["Korns-14"]["prepared"]
+
+
+# ------------------------------------------------------------------- nested averaging: benchmark > subset > problem
+def test_the_middle_level_is_the_part_then_the_authors_subset_then_the_catalog():
+    assert T.middle_level("soose-fc", "iid", "fc") == ("fc", "iid")
+    assert T.middle_level("fastsrb", "easy", None) == ("easy", None)
+    assert T.middle_level("keijzer-points", "all", None) == ("keijzer", None)
+    assert T.middle_level("gecco-2013-2017-real-restricted", None, None) == ("gecco-2013-2017-real", None)
+
+
+def test_the_subset_writer_changes_nothing_but_the_subsets(tmp_path):
+    text = ("metadata:\n  name: toy\n  version: 1\nexpressions:\n  e1:\n    raw: x\n    subset: all\n    vars:\n"
+            "      v1:\n        name: x\n  'e.2':\n    raw: y\n    subset: iid\n")
+    new = T.subsets_yaml(text, "toy", "fc", {})
+    doc = yaml.safe_load(new)
+    assert doc["expressions"]["e1"]["subset"] == "fc" and "subset_detail" not in doc["expressions"]["e1"]
+    assert doc["expressions"]["e.2"]["subset"] == "fc" and doc["expressions"]["e.2"]["subset_detail"] == "iid"
+    assert doc["expressions"]["e1"]["vars"] == {"v1": {"name": "x"}}
+
+
+def test_sibling_catalogs_share_one_benchmark_and_every_release_problem_has_a_subset():
+    rows = json.loads((BUILD / "tags" / "benchmarks.json").read_text())
+    of = {c: b["benchmark"] for b in rows for c in b["catalogs"]}
+    assert {of[c] for c in ("erbench-syneq", "erbench-oeis", "erbench-public-legacy-formulas")} == {"erbench"}
+    assert {of[c] for c in ("soose-nc", "soose-wc", "soose-fc")} == {"soose"}
+    assert of["llm-sr-oscillators"] == of["llm-sr-bactgrow"] == "llm-sr"
+    assert of["feynman"] != of["srbench-2021-strogatz"] and of["kim-et-al-eql-benchmark-functions"] != of["eql-cart-pendulum"]
+    for name in ("soose-fc", "keijzer", "scrbenchmark"):
+        doc = yaml.safe_load((REPO / f"assets/catalogs/{name}.yaml").read_text())
+        assert all(e.get("subset") for e in doc["expressions"].values()), name

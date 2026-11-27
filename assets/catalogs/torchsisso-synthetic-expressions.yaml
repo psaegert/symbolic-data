@@ -28,10 +28,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   '1':
+    subset: "synthetic"
     raw: 10*x1/(x2*(x3+x4))
     prepared: 10*v1/(v2*(v3 + v4))
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x1
@@ -75,10 +75,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   '2':
+    subset: "synthetic"
     raw: 2*sin(x2) + 3*sqrt(x1)
     prepared: 3*sqrt(v1) + 2*sin(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -104,10 +104,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   '3':
+    subset: "synthetic"
     raw: 3*exp(x1)/(x2 + exp(x3))
     prepared: 3*exp(v1)/(v2 + exp(v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -142,10 +142,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   '4':
+    subset: "synthetic"
     raw: 3*x3 + x2**2 + x1**3
     prepared: v1**3 + v2**2 + 3*v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -180,10 +180,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   '5':
+    subset: "synthetic"
     raw: (x2 + exp(x2))/(x1**2 - x2**2)
     prepared: (v2 + exp(v2))/(v1**2 - v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -209,10 +209,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   '6':
+    subset: "synthetic"
     raw: sqrt(x1**2 + x2**2)
     prepared: sqrt(v1**2 + v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -238,10 +238,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   '7':
+    subset: "synthetic"
     raw: sin(x1*x3) + 1.5*exp(-x1*x2)
     prepared: sin(v1*v3) + 1.5*exp(-v1*v2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -276,10 +276,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   '8':
+    subset: "synthetic"
     raw: 5*(x1*x3**3) + x1**3 + 3*(x1*x2**2)
     prepared: v1**3 + 3*v1*v2**2 + 5*v1*v3**3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -314,10 +314,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   '10':
+    subset: "synthetic"
     raw: exp(-x1/(x3*x2))
     prepared: exp(-v1/(v2*v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1

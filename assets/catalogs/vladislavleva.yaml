@@ -29,6 +29,7 @@ metadata:
       and need per-entry review.'
 expressions:
   Vladislavleva-1:
+    subset: "synthetic"
     raw: div(exp(-pow(x1-1,2)),(1.2+pow((x2-2.5),2)))
     prepared: ((exp(-((v1-1)**(2))))/((1.2+(((v2-2.5))**(2)))))
     n_variables: 2
@@ -93,6 +94,7 @@ expressions:
       b) means that the x variable is sampled randomly from an interval [a, b]. Notation
       x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Vladislavleva-4:
+    subset: "synthetic"
     raw: div(10,(5+(pow((x1-3),2)+pow((x2-3),2)+pow((x3-3),2)+pow((x4-3),2)+pow((x5-3),2))))
     prepared: ((10)/((5+((((v1-3))**(2))+(((v2-3))**(2))+(((v3-3))**(2))+(((v4-3))**(2))+(((v5-3))**(2))))))
     n_variables: 5
@@ -197,6 +199,7 @@ expressions:
       b) means that the x variable is sampled randomly from an interval [a, b]. Notation
       x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Vladislavleva-5:
+    subset: "synthetic"
     raw: 30*(x1-1)*div(x3-1,(x1-10)*pow(x2,2))
     prepared: 30*(v1-1)*((v3-1)/((v1-10)*((v2)**(2))))
     n_variables: 3
@@ -296,6 +299,7 @@ expressions:
       b) means that the x variable is sampled randomly from an interval [a, b]. Notation
       x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Vladislavleva-6:
+    subset: "synthetic"
     raw: 6*sin(x1)*cos(x2)
     prepared: 6*sin(v1)*cos(v2)
     n_variables: 2
@@ -360,6 +364,7 @@ expressions:
       b) means that the x variable is sampled randomly from an interval [a, b]. Notation
       x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Vladislavleva-7:
+    subset: "synthetic"
     raw: (x1 - 3)*(x2 - 3) + 2*sin((x1 - 4)*(x2 - 4))
     prepared: (v1 - 3)*(v2 - 3) + 2*sin((v1 - 4)*(v2 - 4))
     n_variables: 2
@@ -409,6 +414,7 @@ expressions:
       b) means that the x variable is sampled randomly from an interval [a, b]. Notation
       x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Vladislavleva-8:
+    subset: "synthetic"
     raw: div(pow((x1-3),4)+pow((x2-3),3)-(x2-3),pow((x2-2),4)+10)
     prepared: (((((v1-3))**(4))+(((v2-3))**(3))-(v2-3))/((((v2-2))**(4))+10))
     n_variables: 2

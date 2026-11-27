@@ -27,6 +27,7 @@ metadata:
       and need per-entry review.'
 expressions:
   Meier-3:
+    subset: "meier"
     raw: div(pow(x1,2)*pow(x2,2),(x1+x2))
     prepared: ((((v1)**(2))*((v2)**(2)))/((v1+v2)))
     n_variables: 2
@@ -65,6 +66,7 @@ expressions:
         function_set: None
       finite_fraction: 1.0
   Meier-4:
+    subset: "meier"
     raw: div(pow(x1,5),pow(x2,3))
     prepared: ((((v1)**(5)))/(((v2)**(3))))
     n_variables: 2

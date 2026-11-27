@@ -29,6 +29,7 @@ metadata:
       and need per-entry review.'
 expressions:
   Keijzer-5:
+    subset: "keijzer"
     raw: 30*x*z/((x - 10)*y**2)
     prepared: 30*v1*v3/(v2**2*(v1 - 10))
     n_variables: 3
@@ -67,6 +68,7 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-10:
+    subset: "keijzer"
     raw: pow(x1,x2)
     prepared: ((v1)**(v2))
     n_variables: 2
@@ -131,6 +133,7 @@ expressions:
       defines random (uniform) sampling in the range, while the mesh([start:step:stop])
       defines regular sampling in t'
   Keijzer-11:
+    subset: "keijzer"
     raw: x1*x2+sin((x1-1)*(x2-1))
     prepared: v1*v2+sin((v1-1)*(v2-1))
     n_variables: 2
@@ -195,6 +198,7 @@ expressions:
       defines random (uniform) sampling in the range, while the mesh([start:step:stop])
       defines regular sampling in t'
   Keijzer-12:
+    subset: "keijzer"
     raw: pow(x1,4)-pow(x1,3)+div(pow(x2,2),2)-x2
     prepared: ((v1)**(4))-((v1)**(3))+((((v2)**(2)))/(2))-v2
     n_variables: 2
@@ -259,6 +263,7 @@ expressions:
       defines random (uniform) sampling in the range, while the mesh([start:step:stop])
       defines regular sampling in t'
   Keijzer-13:
+    subset: "keijzer"
     raw: 6*sin(x1)*cos(x2)
     prepared: 6*sin(v1)*cos(v2)
     n_variables: 2
@@ -323,6 +328,7 @@ expressions:
       defines random (uniform) sampling in the range, while the mesh([start:step:stop])
       defines regular sampling in t'
   Keijzer-14:
+    subset: "keijzer"
     raw: div(8,2+pow(x1,2)+pow(x2,2))
     prepared: ((8)/(2+((v1)**(2))+((v2)**(2))))
     n_variables: 2
@@ -387,6 +393,7 @@ expressions:
       defines random (uniform) sampling in the range, while the mesh([start:step:stop])
       defines regular sampling in t'
   Keijzer-15:
+    subset: "keijzer"
     raw: div(pow(x1,3),5)+div(pow(x2,3),2)-x2-x1
     prepared: ((((v1)**(3)))/(5))+((((v2)**(3)))/(2))-v2-v1
     n_variables: 2

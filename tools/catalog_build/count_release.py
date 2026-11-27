@@ -9,9 +9,11 @@ The totals come from the built catalogs and their frozen subsamples (srbf ruling
   srbench-*.npz) and published to Hugging Face only;
 - less what the rules leave out (tags/dropped.json; a file of a dropped catalog left in a build is ignored).
 
-A problem's subset is its entry's ``subset``, else release_subsets.json's tiers (FastSRB, SRSD), else ``all``. Subsets
-with fewer than 20 problems in a catalog with several subsets are listed (the floor was lifted 2026-11-04: a benchmark
-keeps the subsets its authors define).
+A problem's subset is its entry's ``subset`` (catalog_tags.py apply writes it for every problem: the catalog's part of
+its benchmark, else the authors' subset, else the catalog; docs/benchmarks.md), else release_subsets.json's tiers
+(FastSRB, SRSD), else the catalog. Subsets with fewer than 20 problems in a catalog with several subsets are listed (the
+floor was lifted 2026-11-04: a benchmark keeps the subsets its authors define). Benchmarks and subsets are also counted
+across catalogs (``benchmark_subsets``: the distinct (benchmark, subset) pairs).
 
     count_release.py [--symbolic-data <repo>] [--catalogs <locally built data catalogs>] [--out <json>]
 """
@@ -110,7 +112,7 @@ def from_yaml(path: Path, tier: dict[str, dict[str, str]]) -> dict[str, Any]:
     for key, e in doc["expressions"].items():
         if keep is not None and str(key) not in keep:
             continue
-        subsets[e.get("subset") or tier.get(name, {}).get(str(key), "all")] += 1
+        subsets[e.get("subset") or tier.get(name, {}).get(str(key)) or name] += 1
     md = doc["metadata"]
     return {"name": name, "kind": "formula", "file": str(path), "version": md.get("version"),
             "source_record": md.get("source_record"),
@@ -121,7 +123,7 @@ def from_yaml(path: Path, tier: dict[str, dict[str, str]]) -> dict[str, Any]:
 def from_npz(path: Path) -> dict[str, Any]:
     meta = json.loads(str(np.load(path)["_meta"]))
     cat = meta["catalog"]
-    subsets = Counter((p.get("meta") or {}).get("subset") or "all" for p in meta["problems"])
+    subsets = Counter((p.get("meta") or {}).get("subset") or cat["name"] for p in meta["problems"])
     md = cat.get("meta") or {}
     return {"name": cat["name"], "kind": "data", "file": str(path), "version": cat.get("version"),
             "source_record": md.get("source_record"),
@@ -170,8 +172,9 @@ def main() -> None:
         by_kind[r["kind"]] += r["problems"]
     total = sum(r["problems"] for r in rows)
     benchmarks = Counter(r.get("benchmark") for r in rows)
+    pairs = Counter((r.get("benchmark") or r["name"], s) for r in rows for s in r["subsets"])
     report = {"rule": __doc__.split("\n\n")[1].strip(), "catalogs": len(rows), "problems": total,
-              "benchmarks": len([b for b in benchmarks if b]),
+              "benchmarks": len([b for b in benchmarks if b]), "benchmark_subsets": len(pairs),
               "without_benchmark": sorted(r["name"] for r in rows if not r.get("benchmark")),
               "subsets": sum(len(r["subsets"]) for r in rows), "problems_by_kind": dict(by_kind),
               "subsets_below_floor": [{"catalog": c, "subset": s, "problems": n} for c, s, n in small],
@@ -181,7 +184,8 @@ def main() -> None:
               "rows": sorted(rows, key=lambda r: -r["problems"])}
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     Path(a.out).write_text(json.dumps(report, indent=1))
-    print(f"{len(rows)} catalogs in {report['benchmarks']} benchmarks, {total:,} problems "
+    print(f"{len(rows)} catalogs in {report['benchmarks']} benchmarks ({report['benchmark_subsets']} benchmark subsets), "
+          f"{total:,} problems "
           f"({', '.join(f'{k} {v:,}' for k, v in by_kind.items())}), {report['subsets']} subsets ({len(small)} below {FLOOR})"
           f" -> {a.out}")
     if report["without_benchmark"]:

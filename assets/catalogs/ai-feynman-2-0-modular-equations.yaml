@@ -31,11 +31,11 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   table4-eq12:
+    subset: "ai-feynman-2-0-modular-equations"
     raw: x*y*z - z*sqrt(1 - x**2)*sqrt(1 - y**2) - y*sqrt(1 - x**2)*sqrt(1 - z**2) - x*sqrt(1 - y**2)*sqrt(1 - z**2)
     prepared: v1*v2*v3 - v1*sqrt(1 - v2**2)*sqrt(1 - v3**2) - v2*sqrt(1 - v1**2)*sqrt(1 - v3**2) - v3*sqrt(1 - v1**2)*sqrt(1
       - v2**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x

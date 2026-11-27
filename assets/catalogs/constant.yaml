@@ -28,6 +28,7 @@ metadata:
       and need per-entry review.'
 expressions:
   Constant-1:
+    subset: "constant"
     raw: 3.39*pow(x1,3)+2.12*pow(x1,2)+1.78*x1
     prepared: 3.39*((v1)**(3))+2.12*((v1)**(2))+1.78*v1
     n_variables: 1
@@ -58,6 +59,7 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
   Constant-2:
+    subset: "constant"
     raw: sin(pow(x1,2))*cos(x1)-0.75
     prepared: sin(((v1)**(2)))*cos(v1)-0.75
     n_variables: 1
@@ -88,6 +90,7 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
   Constant-3:
+    subset: "constant"
     raw: sin(1.5*x1)*cos(0.5*x2)
     prepared: sin(1.5*v1)*cos(0.5*v2)
     n_variables: 2
@@ -126,6 +129,7 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
   Constant-4:
+    subset: "constant"
     raw: 2.7*pow(x1,x2)
     prepared: 2.7*((v1)**(v2))
     n_variables: 2
@@ -164,6 +168,7 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
   Constant-5:
+    subset: "constant"
     raw: sqrt(1.23*x1)
     prepared: sqrt(1.23*v1)
     n_variables: 1
@@ -194,6 +199,7 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
   Constant-6:
+    subset: "constant"
     raw: pow(x1,0.426)
     prepared: ((v1)**(0.426))
     n_variables: 1
@@ -224,6 +230,7 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
   Constant-7:
+    subset: "constant"
     raw: 2*sin(1.3*x1)*cos(x2)
     prepared: 2*sin(1.3*v1)*cos(v2)
     n_variables: 2
@@ -262,6 +269,7 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
   Constant-8:
+    subset: "constant"
     raw: log(x1+1.4)+log(pow(x1,2)+1.3)
     prepared: log(v1+1.4)+log(((v1)**(2))+1.3)
     n_variables: 1

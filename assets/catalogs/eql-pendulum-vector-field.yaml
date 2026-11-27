@@ -1,7 +1,7 @@
 metadata:
   name: eql-pendulum-vector-field
   version: 1
-  benchmark: "eql-pendulum-vector-field"
+  benchmark: "eql"
   tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs"]}
   license: "facts only: formulas and ranges cited from Martius & Lampert 2016 (arXiv:1610.02995); no upstream license"
   citation: {"paper": {"short": "Martius & Lampert 2016", "title": "Extrapolation and learning equations", "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)", "url": "https://arxiv.org/abs/1610.02995"}}
@@ -28,10 +28,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   eql-pendulum-y1:
+    subset: "pendulum-vector-field"
     raw: x2/9.81
     prepared: 0.101936799184506*v2
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x1
@@ -57,10 +57,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-pendulum-y1.extrap-near:
+    subset: "pendulum-vector-field"
     raw: x2/9.81
     prepared: 0.101936799184506*v2
     n_variables: 2
-    subset: extrap-near
     vars:
       v1:
         name: x1
@@ -106,10 +106,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-pendulum-y1.extrap-far:
+    subset: "pendulum-vector-field"
     raw: x2/9.81
     prepared: 0.101936799184506*v2
     n_variables: 2
-    subset: extrap-far
     vars:
       v1:
         name: x1
@@ -155,10 +155,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-pendulum-y2:
+    subset: "pendulum-vector-field"
     raw: -sin(x1)
     prepared: -sin(v1)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x1
@@ -184,10 +184,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-pendulum-y2.extrap-near:
+    subset: "pendulum-vector-field"
     raw: -sin(x1)
     prepared: -sin(v1)
     n_variables: 2
-    subset: extrap-near
     vars:
       v1:
         name: x1
@@ -233,10 +233,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-pendulum-y2.extrap-far:
+    subset: "pendulum-vector-field"
     raw: -sin(x1)
     prepared: -sin(v1)
     n_variables: 2
-    subset: extrap-far
     vars:
       v1:
         name: x1

@@ -2,7 +2,7 @@ metadata:
   name: physo-astrophysical-case-studies
   display_name: "physo-astrophysical-case-studies*"
   version: 2
-  benchmark: "physo-astrophysical-case-studies"
+  benchmark: "physo"
   tags: {"origin": "science formula", "tags": ["srbf-modified"]}
   license: "CC BY 4.0 (Tenachi et al. 2023, ApJ 959:99, arXiv:2303.03192, Appendices A-B) + MIT (WassimTenachi/PhySO)"
   citation: {"paper": {"short": "Tenachi et al. 2023", "title": "Deep Symbolic Regression for Physics Guided by Units Constraints: Toward the Automated Discovery of Physical Laws", "venue": "The Astrophysical Journal 959(2):99", "url": "https://doi.org/10.3847/1538-4357/ad014c"}}
@@ -29,10 +29,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   relativistic-energy:
+    subset: "astrophysical-case-studies"
     raw: m*10**2/sqrt(1 - v**2/10**2)
     prepared: 100*v1/sqrt(1 - v2**2/100)
     n_variables: 2
-    subset: astrophysical-case-studies
     vars:
       v1:
         name: m
@@ -58,10 +58,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   isochrone-action:
+    subset: "astrophysical-case-studies"
     raw: 0.467/sqrt(-2*E0) - (1/2)*(L + (1/2)*sqrt(L**2 - 4*0.467*1.234))
     prepared: -v1/2 - sqrt(v1**2 - 1*4*0.467*1.234)/4 + 0.2335*sqrt(2)/sqrt(-v2)
     n_variables: 2
-    subset: astrophysical-case-studies
     vars:
       v1:
         name: L
@@ -87,10 +87,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   damped-harmonic-oscillator:
+    subset: "astrophysical-case-studies"
     raw: exp(-0.101*t)*cos(0.784*t + 0.997)
     prepared: exp(-0.101*v1)*cos(0.784*v1 + 0.997)
     n_variables: 1
-    subset: astrophysical-case-studies
     vars:
       v1:
         name: t
@@ -107,10 +107,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   classical-gravity:
+    subset: "astrophysical-case-studies"
     raw: 1.184*m1*m2/r**2
     prepared: 1.184*v1*v2/v3**2
     n_variables: 3
-    subset: astrophysical-case-studies
     vars:
       v1:
         name: m1
@@ -145,10 +145,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   appb-ideal-gas-law:
+    subset: "constants-of-nature"
     raw: n*8.314*T/V
     prepared: 8.314*v1*v2/v3
     n_variables: 3
-    subset: constants-of-nature
     vars:
       v1:
         name: n
@@ -183,10 +183,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   appb-terminal-velocity:
+    subset: "constants-of-nature"
     raw: sqrt(2*m*9.807/(rho*A*0.470))
     prepared: 6.460024372525*sqrt(v1/(v2*v3))
     n_variables: 3
-    subset: constants-of-nature
     vars:
       v1:
         name: m
@@ -221,10 +221,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   appb-classical-gravity:
+    subset: "constants-of-nature"
     raw: 6.674*m1*m2/r**2
     prepared: 6.674*v1*v2/v3**2
     n_variables: 3
-    subset: constants-of-nature
     vars:
       v1:
         name: m1
@@ -259,10 +259,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   appb-black-body-photon-count:
+    subset: "constants-of-nature"
     raw: 1/(exp(6.123*nu/(1.123*T)) - 1)
     prepared: 1/(exp(5.45235975066785*v1/v2) - 1)
     n_variables: 2
-    subset: constants-of-nature
     vars:
       v1:
         name: nu
@@ -288,10 +288,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   appb-wave-interference:
+    subset: "constants-of-nature"
     raw: E_1 + 3.5 + 2*sqrt(3.5*E_1)*cos(dPhi)
     prepared: 3.74165738677394*sqrt(v1)*cos(v2) + v1 + 3.5
     n_variables: 2
-    subset: constants-of-nature
     vars:
       v1:
         name: E_1

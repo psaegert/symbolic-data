@@ -32,10 +32,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   kanlex-ex1:
+    subset: "llm-lex-random-mathematica-functions"
     raw: exp(sin(pi*x) + y**2)
     prepared: exp(v2**2 + sin(3.141592653589793*v1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -61,10 +61,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kanlex-ex2:
+    subset: "llm-lex-random-mathematica-functions"
     raw: x*y
     prepared: v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -90,10 +90,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kanlex-ex3:
+    subset: "llm-lex-random-mathematica-functions"
     raw: x*y/z
     prepared: v1*v2/v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x

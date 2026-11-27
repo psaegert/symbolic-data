@@ -30,10 +30,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Case-1:
+    subset: "toy-cases"
     raw: 0.5*exp(x1)*sin(2*x2)
     prepared: 0.5*exp(v1)*sin(2*v2)
     n_variables: 2
-    subset: toy-cases
     vars:
       v1:
         name: x1
@@ -63,10 +63,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-2:
+    subset: "toy-cases"
     raw: 2*cos(x1) + sin(3*x2 - x3)
     prepared: sin(3*v2 - v3) + 2*cos(v1)
     n_variables: 3
-    subset: toy-cases
     vars:
       v1:
         name: x1
@@ -107,10 +107,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-3:
+    subset: "toy-cases"
     raw: 1.2 + 10*sin(2*x1) - 3*x2**2*cos(x3)
     prepared: -3*v2**2*cos(v3) + 10*sin(2*v1) + 1.2
     n_variables: 3
-    subset: toy-cases
     vars:
       v1:
         name: x1
@@ -151,10 +151,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-4:
+    subset: "toy-cases"
     raw: x3*sin(x1) - 2*x3*cos(x2)
     prepared: v3*sin(v1) - 2*v3*cos(v2)
     n_variables: 3
-    subset: toy-cases
     vars:
       v1:
         name: x1
@@ -195,10 +195,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-5:
+    subset: "toy-cases"
     raw: 2*x1*sin(x2)*cos(x4) - 0.5*x4*cos(x3)
     prepared: 2*v1*sin(v2)*cos(v4) - 0.5*v4*cos(v3)
     n_variables: 4
-    subset: toy-cases
     vars:
       v1:
         name: x1
@@ -250,10 +250,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-6:
+    subset: "toy-cases"
     raw: 10 + 0.2*x1 - 0.2*x5**2*sin(x2) + cos(x5)*log(3*x3 + 1.2) - 1.2*exp(0.5*x4)
     prepared: 0.2*v1 - 0.2*v5**2*sin(v2) - 1.2*exp(0.5*v4) + log(3*v3 + 1.2)*cos(v5) + 10
     n_variables: 5
-    subset: toy-cases
     vars:
       v1:
         name: x1
@@ -321,10 +321,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-7:
+    subset: "toy-cases"
     raw: 2*x4*x5*sin(x1) - x5*x2 + 0.5*exp(x3)*cos(x4)
     prepared: -v2*v5 + 2*v4*v5*sin(v1) + 0.5*exp(v3)*cos(v4)
     n_variables: 5
-    subset: toy-cases
     vars:
       v1:
         name: x1
@@ -387,10 +387,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-8:
+    subset: "toy-cases"
     raw: 1.2 + 2*x4*cos(x2) + 0.5*exp(1.2*x3)*sin(3*x1)*cos(x4) - 2*cos(1.5*x5 + 5)
     prepared: 2*v4*cos(v2) + 0.5*exp(1.2*v3)*sin(3*v1)*cos(v4) - 2*cos(1.5*v5 + 5) + 1.2
     n_variables: 5
-    subset: toy-cases
     vars:
       v1:
         name: x1
@@ -453,10 +453,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-9:
+    subset: "toy-cases"
     raw: 0.5*cos(x3*x4)/(exp(x1)*x2**2)*sin(1.5*x5 - 2*x6)
     prepared: 0.5*exp(-v1)*sin(1.5*v5 - 2*v6)*cos(v3*v4)/v2**2
     n_variables: 6
-    subset: toy-cases
     vars:
       v1:
         name: x1
@@ -530,10 +530,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-10:
+    subset: "toy-cases"
     raw: 1.2 - 2*(x1 + x2)/x3*cos(x7) + 0.5*exp(x7)*x4*sin(x5*x6)
     prepared: 0.5*v4*exp(v7)*sin(v5*v6) + 1.2 - 2*(v1 + v2)*cos(v7)/v3
     n_variables: 7
-    subset: toy-cases
     vars:
       v1:
         name: x1
@@ -618,10 +618,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-11:
+    subset: "real-world-cases"
     raw: 4*10**3*x1*x2/sqrt(x3)
     prepared: 4000*v1*v2/sqrt(v3)
     n_variables: 3
-    subset: real-world-cases
     vars:
       v1:
         name: x1
@@ -656,10 +656,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-12:
+    subset: "real-world-cases"
     raw: x1*(x2 - 2) + x3*x4*x5/x6
     prepared: v1*(v2 - 2) + v3*v4*v5/v6
     n_variables: 6
-    subset: real-world-cases
     vars:
       v1:
         name: x1
@@ -721,10 +721,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Case-13:
+    subset: "real-world-cases"
     raw: x1*x2*x5*(1 - x4**2/x5**2) + 1/(2*pi)*x3*log(x5/x4)
     prepared: v1*v2*v5*(-v4**2/v5**2 + 1) + (1/(2*3.141592653589793))*v3*log(v5/v4)
     n_variables: 5
-    subset: real-world-cases
     vars:
       v1:
         name: x1

@@ -28,10 +28,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   bms-prior-expression:
+    subset: "synthetic"
     raw: x1*(-1.19 + x2)*cos(x1)/(0.29*log(0.29))
     prepared: v1*(v2 - 1.19)*(3.44827586206897/log(0.29))*cos(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -57,10 +57,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   bessel-J0-4-xmax4:
+    subset: "synthetic"
     raw: besselj(nu, x)
     prepared: besselj(v2, v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x

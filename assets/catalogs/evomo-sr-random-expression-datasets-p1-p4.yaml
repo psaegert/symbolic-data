@@ -31,10 +31,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   P1:
+    subset: "simple-id"
     raw: 1.883*sin(x1) + 1.61*cos(x0)
     prepared: 1.883*sin(v2) + 1.61*cos(v1)
     n_variables: 2
-    subset: simple-id
     vars:
       v1:
         name: x0
@@ -62,10 +62,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   P1.ood:
+    subset: "simple-ood"
     raw: 1.883*sin(x1) + 1.61*cos(x0)
     prepared: 1.883*sin(v2) + 1.61*cos(v1)
     n_variables: 2
-    subset: simple-ood
     vars:
       v1:
         name: x0
@@ -114,10 +114,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   P2:
+    subset: "simple-id"
     raw: 1.1*x0**3 + 2.016*x0**2 - 1.694*x1
     prepared: 1.1*v1**3 + 2.016*v1**2 - 1.694*v2
     n_variables: 2
-    subset: simple-id
     vars:
       v1:
         name: x0
@@ -145,10 +145,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   P2.ood:
+    subset: "simple-ood"
     raw: 1.1*x0**3 + 2.016*x0**2 - 1.694*x1
     prepared: 1.1*v1**3 + 2.016*v1**2 - 1.694*v2
     n_variables: 2
-    subset: simple-ood
     vars:
       v1:
         name: x0
@@ -197,10 +197,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   P3:
+    subset: "medium-id"
     raw: -1.951*x0**2 - 0.351*x1*sin(x1) + 2.365*x2**2 + 2.885
     prepared: -1.951*v1**2 - 0.351*v2*sin(v2) + 2.365*v3**2 + 2.885
     n_variables: 3
-    subset: medium-id
     vars:
       v1:
         name: x0
@@ -238,10 +238,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   P3.ood:
+    subset: "medium-ood"
     raw: -1.951*x0**2 - 0.351*x1*sin(x1) + 2.365*x2**2 + 2.885
     prepared: -1.951*v1**2 - 0.351*v2*sin(v2) + 2.365*v3**2 + 2.885
     n_variables: 3
-    subset: medium-ood
     vars:
       v1:
         name: x0
@@ -306,10 +306,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   P4:
+    subset: "complex-id"
     raw: 1.903*x1**2 + 2.379*x1*x2 - 2.165*sin(x0) - 1.081*cos(x0) - 2.233*cos(x2) - 2.102
     prepared: 1.903*v2**2 + 2.379*v2*v3 - 2.165*sin(v1) - 1.081*cos(v1) - 2.233*cos(v3) - 2.102
     n_variables: 3
-    subset: complex-id
     vars:
       v1:
         name: x0
@@ -347,10 +347,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   P4.ood:
+    subset: "complex-ood"
     raw: 1.903*x1**2 + 2.379*x1*x2 - 2.165*sin(x0) - 1.081*cos(x0) - 2.233*cos(x2) - 2.102
     prepared: 1.903*v2**2 + 2.379*v2*v3 - 2.165*sin(v1) - 1.081*cos(v1) - 2.233*cos(v3) - 2.102
     n_variables: 3
-    subset: complex-ood
     vars:
       v1:
         name: x0

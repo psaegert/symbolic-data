@@ -24,10 +24,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Keijzer-1@[0,1]:
+    subset: "keijzer"
     raw: 0.3*x1*sin(6.28*x1)
     prepared: 0.3*v1*sin(6.28*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -44,10 +44,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-1@[-1,1]:
+    subset: "keijzer"
     raw: 0.3*x1*sin(6.28*x1)
     prepared: 0.3*v1*sin(6.28*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -64,10 +64,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-1@[0,10]:
+    subset: "keijzer"
     raw: 0.3*x1*sin(6.28*x1)
     prepared: 0.3*v1*sin(6.28*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -84,10 +84,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-1@[-10,10]:
+    subset: "keijzer"
     raw: 0.3*x1*sin(6.28*x1)
     prepared: 0.3*v1*sin(6.28*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -104,10 +104,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-1@[0,50]:
+    subset: "keijzer"
     raw: 0.3*x1*sin(6.28*x1)
     prepared: 0.3*v1*sin(6.28*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -124,10 +124,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-1@[-50,50]:
+    subset: "keijzer"
     raw: 0.3*x1*sin(6.28*x1)
     prepared: 0.3*v1*sin(6.28*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -144,10 +144,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-4@[0,1]:
+    subset: "keijzer"
     raw: (30.0*x1*x2*x3)/((x1 - 10.0)*x2**2)
     prepared: 30.0*v1*v3/(v2*(v1 - 10.0))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -182,10 +182,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-4@[-1,1]:
+    subset: "keijzer"
     raw: (30.0*x1*x2*x3)/((x1 - 10.0)*x2**2)
     prepared: 30.0*v1*v3/(v2*(v1 - 10.0))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -220,10 +220,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-4@[0,10]:
+    subset: "keijzer"
     raw: (30.0*x1*x2*x3)/((x1 - 10.0)*x2**2)
     prepared: 30.0*v1*v3/(v2*(v1 - 10.0))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -258,10 +258,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-4@[-10,10]:
+    subset: "keijzer"
     raw: (30.0*x1*x2*x3)/((x1 - 10.0)*x2**2)
     prepared: 30.0*v1*v3/(v2*(v1 - 10.0))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -296,10 +296,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-4@[0,50]:
+    subset: "keijzer"
     raw: (30.0*x1*x2*x3)/((x1 - 10.0)*x2**2)
     prepared: 30.0*v1*v3/(v2*(v1 - 10.0))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -334,10 +334,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-4@[-50,50]:
+    subset: "keijzer"
     raw: (30.0*x1*x2*x3)/((x1 - 10.0)*x2**2)
     prepared: 30.0*v1*v3/(v2*(v1 - 10.0))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -372,10 +372,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-14@[0,1]:
+    subset: "keijzer"
     raw: 8.0/(2.0 + x1**2 + x2**2)
     prepared: 8.0/(v1**2 + v2**2 + 2.0)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -401,10 +401,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-14@[-1,1]:
+    subset: "keijzer"
     raw: 8.0/(2.0 + x1**2 + x2**2)
     prepared: 8.0/(v1**2 + v2**2 + 2.0)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -430,10 +430,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-14@[0,10]:
+    subset: "keijzer"
     raw: 8.0/(2.0 + x1**2 + x2**2)
     prepared: 8.0/(v1**2 + v2**2 + 2.0)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -459,10 +459,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-14@[-10,10]:
+    subset: "keijzer"
     raw: 8.0/(2.0 + x1**2 + x2**2)
     prepared: 8.0/(v1**2 + v2**2 + 2.0)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -488,10 +488,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-14@[0,50]:
+    subset: "keijzer"
     raw: 8.0/(2.0 + x1**2 + x2**2)
     prepared: 8.0/(v1**2 + v2**2 + 2.0)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -517,10 +517,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-14@[-50,50]:
+    subset: "keijzer"
     raw: 8.0/(2.0 + x1**2 + x2**2)
     prepared: 8.0/(v1**2 + v2**2 + 2.0)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -546,10 +546,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-15@[0,1]:
+    subset: "keijzer"
     raw: x1**0.6 + x2**1.5 - x2 - x1
     prepared: v1**0.6 - v1 - v2 + v2**1.5
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -575,10 +575,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-15@[0,10]:
+    subset: "keijzer"
     raw: x1**0.6 + x2**1.5 - x2 - x1
     prepared: v1**0.6 - v1 - v2 + v2**1.5
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -604,10 +604,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-15@[0,50]:
+    subset: "keijzer"
     raw: x1**0.6 + x2**1.5 - x2 - x1
     prepared: v1**0.6 - v1 - v2 + v2**1.5
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -633,10 +633,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-1c@[0,1]:
+    subset: "nguyen-c"
     raw: 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -653,10 +653,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-1c@[0,10]:
+    subset: "nguyen-c"
     raw: 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -673,10 +673,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-1c@[-10,10]:
+    subset: "nguyen-c"
     raw: 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -693,10 +693,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-1c@[0,50]:
+    subset: "nguyen-c"
     raw: 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -713,10 +713,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-1c@[-50,50]:
+    subset: "nguyen-c"
     raw: 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -733,10 +733,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-2c@[0,1]:
+    subset: "nguyen-c"
     raw: 0.48*x1**4 + 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 0.48*v1**4 + 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -753,10 +753,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-2c@[-1,1]:
+    subset: "nguyen-c"
     raw: 0.48*x1**4 + 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 0.48*v1**4 + 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -773,10 +773,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-2c@[0,10]:
+    subset: "nguyen-c"
     raw: 0.48*x1**4 + 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 0.48*v1**4 + 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -793,10 +793,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-2c@[-10,10]:
+    subset: "nguyen-c"
     raw: 0.48*x1**4 + 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 0.48*v1**4 + 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -813,10 +813,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-2c@[0,50]:
+    subset: "nguyen-c"
     raw: 0.48*x1**4 + 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 0.48*v1**4 + 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -833,10 +833,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-2c@[-50,50]:
+    subset: "nguyen-c"
     raw: 0.48*x1**4 + 3.39*x1**3 + 2.12*x1**2 + 1.78*x1
     prepared: 0.48*v1**4 + 3.39*v1**3 + 2.12*v1**2 + 1.78*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -853,10 +853,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-5c@[0,1]:
+    subset: "nguyen-c"
     raw: sin(x1**2)*cos(x1) - 0.75
     prepared: sin(v1**2)*cos(v1) - 0.75
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -873,10 +873,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-5c@[0,10]:
+    subset: "nguyen-c"
     raw: sin(x1**2)*cos(x1) - 0.75
     prepared: sin(v1**2)*cos(v1) - 0.75
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -893,10 +893,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-5c@[-10,10]:
+    subset: "nguyen-c"
     raw: sin(x1**2)*cos(x1) - 0.75
     prepared: sin(v1**2)*cos(v1) - 0.75
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -913,10 +913,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-5c@[0,50]:
+    subset: "nguyen-c"
     raw: sin(x1**2)*cos(x1) - 0.75
     prepared: sin(v1**2)*cos(v1) - 0.75
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -933,10 +933,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-5c@[-50,50]:
+    subset: "nguyen-c"
     raw: sin(x1**2)*cos(x1) - 0.75
     prepared: sin(v1**2)*cos(v1) - 0.75
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -953,10 +953,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-7c@[0,1]:
+    subset: "nguyen-c"
     raw: log(x1 + 1.4) + log(x1**2 + 1.3)
     prepared: log(v1 + 1.4) + log(v1**2 + 1.3)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -973,10 +973,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-7c@[-1,1]:
+    subset: "nguyen-c"
     raw: log(x1 + 1.4) + log(x1**2 + 1.3)
     prepared: log(v1 + 1.4) + log(v1**2 + 1.3)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -993,10 +993,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-7c@[0,10]:
+    subset: "nguyen-c"
     raw: log(x1 + 1.4) + log(x1**2 + 1.3)
     prepared: log(v1 + 1.4) + log(v1**2 + 1.3)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1013,10 +1013,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-7c@[0,50]:
+    subset: "nguyen-c"
     raw: log(x1 + 1.4) + log(x1**2 + 1.3)
     prepared: log(v1 + 1.4) + log(v1**2 + 1.3)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1033,10 +1033,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-8c@[0,1]:
+    subset: "nguyen-c"
     raw: sqrt(1.23*x1)
     prepared: 1.10905365064094*sqrt(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1053,10 +1053,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-8c@[0,10]:
+    subset: "nguyen-c"
     raw: sqrt(1.23*x1)
     prepared: 1.10905365064094*sqrt(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1073,10 +1073,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-8c@[0,50]:
+    subset: "nguyen-c"
     raw: sqrt(1.23*x1)
     prepared: 1.10905365064094*sqrt(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1093,10 +1093,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-9c@[0,1]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1) + sin(0.5*x2**2)
     prepared: sin(1.5*v1) + sin(0.5*v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1122,10 +1122,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-9c@[-1,1]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1) + sin(0.5*x2**2)
     prepared: sin(1.5*v1) + sin(0.5*v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1151,10 +1151,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-9c@[0,10]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1) + sin(0.5*x2**2)
     prepared: sin(1.5*v1) + sin(0.5*v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1180,10 +1180,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-9c@[-10,10]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1) + sin(0.5*x2**2)
     prepared: sin(1.5*v1) + sin(0.5*v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1209,10 +1209,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-9c@[0,50]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1) + sin(0.5*x2**2)
     prepared: sin(1.5*v1) + sin(0.5*v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1238,10 +1238,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-9c@[-50,50]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1) + sin(0.5*x2**2)
     prepared: sin(1.5*v1) + sin(0.5*v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1267,10 +1267,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-10c@[-1,1]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1)*cos(0.5*x2)
     prepared: sin(1.5*v1)*cos(0.5*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1296,10 +1296,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-10c@[0,10]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1)*cos(0.5*x2)
     prepared: sin(1.5*v1)*cos(0.5*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1325,10 +1325,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-10c@[-10,10]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1)*cos(0.5*x2)
     prepared: sin(1.5*v1)*cos(0.5*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1354,10 +1354,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-10c@[0,50]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1)*cos(0.5*x2)
     prepared: sin(1.5*v1)*cos(0.5*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1383,10 +1383,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-10c@[-50,50]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1)*cos(0.5*x2)
     prepared: sin(1.5*v1)*cos(0.5*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1412,10 +1412,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-11c@[0,10]:
+    subset: "nguyen-c"
     raw: 2.7*x1**x2
     prepared: 2.7*v1**v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1441,10 +1441,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-11c@[0,50]:
+    subset: "nguyen-c"
     raw: 2.7*x1**x2
     prepared: 2.7*v1**v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x1
@@ -1470,10 +1470,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-1@[0,1]:
+    subset: "jin-star"
     raw: 2.5*x1**4 - 1.3*x1**3 + 0.5*x1**2 - 1.7*x1
     prepared: 2.5*v1**4 - 1.3*v1**3 + 0.5*v1**2 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1490,10 +1490,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-1@[-1,1]:
+    subset: "jin-star"
     raw: 2.5*x1**4 - 1.3*x1**3 + 0.5*x1**2 - 1.7*x1
     prepared: 2.5*v1**4 - 1.3*v1**3 + 0.5*v1**2 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1510,10 +1510,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-1@[0,10]:
+    subset: "jin-star"
     raw: 2.5*x1**4 - 1.3*x1**3 + 0.5*x1**2 - 1.7*x1
     prepared: 2.5*v1**4 - 1.3*v1**3 + 0.5*v1**2 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1530,10 +1530,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-1@[-10,10]:
+    subset: "jin-star"
     raw: 2.5*x1**4 - 1.3*x1**3 + 0.5*x1**2 - 1.7*x1
     prepared: 2.5*v1**4 - 1.3*v1**3 + 0.5*v1**2 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1550,10 +1550,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-1@[0,50]:
+    subset: "jin-star"
     raw: 2.5*x1**4 - 1.3*x1**3 + 0.5*x1**2 - 1.7*x1
     prepared: 2.5*v1**4 - 1.3*v1**3 + 0.5*v1**2 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1570,10 +1570,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-1@[-50,50]:
+    subset: "jin-star"
     raw: 2.5*x1**4 - 1.3*x1**3 + 0.5*x1**2 - 1.7*x1
     prepared: 2.5*v1**4 - 1.3*v1**3 + 0.5*v1**2 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1590,10 +1590,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-2@[0,1]:
+    subset: "jin-star"
     raw: 8.0*x1**3 - 8.0*x1**2 + 15.0*x1
     prepared: 8.0*v1**3 - 8.0*v1**2 + 15.0*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1610,10 +1610,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-2@[-1,1]:
+    subset: "jin-star"
     raw: 8.0*x1**3 - 8.0*x1**2 + 15.0*x1
     prepared: 8.0*v1**3 - 8.0*v1**2 + 15.0*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1630,10 +1630,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-2@[0,10]:
+    subset: "jin-star"
     raw: 8.0*x1**3 - 8.0*x1**2 + 15.0*x1
     prepared: 8.0*v1**3 - 8.0*v1**2 + 15.0*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1650,10 +1650,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-2@[-10,10]:
+    subset: "jin-star"
     raw: 8.0*x1**3 - 8.0*x1**2 + 15.0*x1
     prepared: 8.0*v1**3 - 8.0*v1**2 + 15.0*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1670,10 +1670,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-2@[0,50]:
+    subset: "jin-star"
     raw: 8.0*x1**3 - 8.0*x1**2 + 15.0*x1
     prepared: 8.0*v1**3 - 8.0*v1**2 + 15.0*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1690,10 +1690,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-2@[-50,50]:
+    subset: "jin-star"
     raw: 8.0*x1**3 - 8.0*x1**2 + 15.0*x1
     prepared: 8.0*v1**3 - 8.0*v1**2 + 15.0*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1710,10 +1710,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-3@[0,1]:
+    subset: "jin-star"
     raw: 0.7*x1**3 - 1.7*x1
     prepared: 0.7*v1**3 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1730,10 +1730,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-3@[-1,1]:
+    subset: "jin-star"
     raw: 0.7*x1**3 - 1.7*x1
     prepared: 0.7*v1**3 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1750,10 +1750,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-3@[0,10]:
+    subset: "jin-star"
     raw: 0.7*x1**3 - 1.7*x1
     prepared: 0.7*v1**3 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1770,10 +1770,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-3@[-10,10]:
+    subset: "jin-star"
     raw: 0.7*x1**3 - 1.7*x1
     prepared: 0.7*v1**3 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1790,10 +1790,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-3@[0,50]:
+    subset: "jin-star"
     raw: 0.7*x1**3 - 1.7*x1
     prepared: 0.7*v1**3 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1810,10 +1810,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-3@[-50,50]:
+    subset: "jin-star"
     raw: 0.7*x1**3 - 1.7*x1
     prepared: 0.7*v1**3 - 1.7*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1830,10 +1830,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-4@[0,1]:
+    subset: "jin-star"
     raw: 1.5*exp(x1) + 5.0*cos(x1)
     prepared: 1.5*exp(v1) + 5.0*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1850,10 +1850,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-4@[-1,1]:
+    subset: "jin-star"
     raw: 1.5*exp(x1) + 5.0*cos(x1)
     prepared: 1.5*exp(v1) + 5.0*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1870,10 +1870,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-4@[0,10]:
+    subset: "jin-star"
     raw: 1.5*exp(x1) + 5.0*cos(x1)
     prepared: 1.5*exp(v1) + 5.0*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1890,10 +1890,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-4@[-10,10]:
+    subset: "jin-star"
     raw: 1.5*exp(x1) + 5.0*cos(x1)
     prepared: 1.5*exp(v1) + 5.0*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1910,10 +1910,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-4@[0,50]:
+    subset: "jin-star"
     raw: 1.5*exp(x1) + 5.0*cos(x1)
     prepared: 1.5*exp(v1) + 5.0*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1930,10 +1930,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-4@[-50,50]:
+    subset: "jin-star"
     raw: 1.5*exp(x1) + 5.0*cos(x1)
     prepared: 1.5*exp(v1) + 5.0*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1950,10 +1950,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-5@[0,1]:
+    subset: "jin-star"
     raw: 6.0*sin(x1)*cos(x1)
     prepared: 6.0*sin(v1)*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1970,10 +1970,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-5@[-1,1]:
+    subset: "jin-star"
     raw: 6.0*sin(x1)*cos(x1)
     prepared: 6.0*sin(v1)*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -1990,10 +1990,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-5@[0,10]:
+    subset: "jin-star"
     raw: 6.0*sin(x1)*cos(x1)
     prepared: 6.0*sin(v1)*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -2010,10 +2010,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-5@[-10,10]:
+    subset: "jin-star"
     raw: 6.0*sin(x1)*cos(x1)
     prepared: 6.0*sin(v1)*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -2030,10 +2030,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-5@[0,50]:
+    subset: "jin-star"
     raw: 6.0*sin(x1)*cos(x1)
     prepared: 6.0*sin(v1)*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -2050,10 +2050,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-5@[-50,50]:
+    subset: "jin-star"
     raw: 6.0*sin(x1)*cos(x1)
     prepared: 6.0*sin(v1)*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -2070,10 +2070,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-6@[0,1]:
+    subset: "jin-star"
     raw: 1.35*x1**2 + 5.5*sin((x1 - 1)**2)
     prepared: 1.35*v1**2 + 5.5*sin((v1 - 1)**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -2090,10 +2090,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-6@[-1,1]:
+    subset: "jin-star"
     raw: 1.35*x1**2 + 5.5*sin((x1 - 1)**2)
     prepared: 1.35*v1**2 + 5.5*sin((v1 - 1)**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -2110,10 +2110,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-6@[0,10]:
+    subset: "jin-star"
     raw: 1.35*x1**2 + 5.5*sin((x1 - 1)**2)
     prepared: 1.35*v1**2 + 5.5*sin((v1 - 1)**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -2130,10 +2130,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-6@[-10,10]:
+    subset: "jin-star"
     raw: 1.35*x1**2 + 5.5*sin((x1 - 1)**2)
     prepared: 1.35*v1**2 + 5.5*sin((v1 - 1)**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -2150,10 +2150,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-6@[0,50]:
+    subset: "jin-star"
     raw: 1.35*x1**2 + 5.5*sin((x1 - 1)**2)
     prepared: 1.35*v1**2 + 5.5*sin((v1 - 1)**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -2170,10 +2170,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Jin*-6@[-50,50]:
+    subset: "jin-star"
     raw: 1.35*x1**2 + 5.5*sin((x1 - 1)**2)
     prepared: 1.35*v1**2 + 5.5*sin((v1 - 1)**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x1
@@ -2190,6 +2190,7 @@ expressions:
     meta:
       finite_fraction: 1.0
   Nguyen-1c@[-1,1]:
+    subset: "nguyen-c"
     raw: 3.39*pow(x1,3)+2.12*pow(x1,2)+1.78*x1
     prepared: 3.39*((v1)**(3))+2.12*((v1)**(2))+1.78*v1
     n_variables: 1
@@ -2220,8 +2221,8 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
       same_as: constant:Constant-1
-    subset: nguyen-c
   Nguyen-5c@[-1,1]:
+    subset: "nguyen-c"
     raw: sin(pow(x1,2))*cos(x1)-0.75
     prepared: sin(((v1)**(2)))*cos(v1)-0.75
     n_variables: 1
@@ -2252,8 +2253,8 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
       same_as: constant:Constant-2
-    subset: nguyen-c
   Nguyen-10c@[0,1]:
+    subset: "nguyen-c"
     raw: sin(1.5*x1)*cos(0.5*x2)
     prepared: sin(1.5*v1)*cos(0.5*v2)
     n_variables: 2
@@ -2292,8 +2293,8 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
       same_as: constant:Constant-3
-    subset: nguyen-c
   Nguyen-11c@[0,1]:
+    subset: "nguyen-c"
     raw: 2.7*pow(x1,x2)
     prepared: 2.7*((v1)**(v2))
     n_variables: 2
@@ -2332,4 +2333,3 @@ expressions:
         function_set: CKoza
       finite_fraction: 1.0
       same_as: constant:Constant-4
-    subset: nguyen-c

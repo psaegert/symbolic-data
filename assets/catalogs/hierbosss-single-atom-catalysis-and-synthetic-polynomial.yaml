@@ -30,10 +30,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   hierbosss-v1-sim-eq5.2:
+    subset: "simulated-example"
     raw: 5*(x1 + x2)*x3
     prepared: 5*v3*(v1 + v2)
     n_variables: 3
-    subset: simulated-example
     vars:
       v1:
         name: x1

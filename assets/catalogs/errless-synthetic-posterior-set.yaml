@@ -29,10 +29,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   synthetic_1:
+    subset: "errless-synthetic-posterior-set"
     raw: x + sin(5.5*x)
     prepared: v1 + sin(5.5*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x
@@ -61,10 +61,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   synthetic_2:
+    subset: "errless-synthetic-posterior-set"
     raw: 4.567*exp(x) + y
     prepared: v2 + 4.567*exp(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -108,10 +108,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   synthetic_3:
+    subset: "errless-synthetic-posterior-set"
     raw: sin(y + 2.5*x)
     prepared: sin(2.5*v1 + v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -155,10 +155,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   synthetic_4:
+    subset: "errless-synthetic-posterior-set"
     raw: sqrt(x**2 + y**2)
     prepared: sqrt(v1**2 + v2**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -202,10 +202,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   synthetic_5:
+    subset: "errless-synthetic-posterior-set"
     raw: sin(x)*cos(y)
     prepared: sin(v1)*cos(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -249,10 +249,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   synthetic_6:
+    subset: "errless-synthetic-posterior-set"
     raw: 1/sqrt(1 - x**2)
     prepared: 1/sqrt(1 - v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x
@@ -281,10 +281,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   synthetic_7:
+    subset: "errless-synthetic-posterior-set"
     raw: 2.37*x + 3.02
     prepared: 2.37*v1 + 3.02
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x

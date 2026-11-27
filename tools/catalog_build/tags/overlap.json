@@ -3,8 +3,8 @@
  "totals": {
   "catalogs": 181,
   "problems": 14271,
-  "same_law_elsewhere": 1763,
-  "identical_elsewhere": 728,
+  "same_law_elsewhere": 1569,
+  "identical_elsewhere": 507,
   "identical_within": 724
  },
  "catalogs": [
@@ -27,7 +27,7 @@
    "identical_elsewhere": 0,
    "identical_within": 0,
    "shares_laws_with": {
-    "erbench-public-legacy-formulas": 1
+    "erbench": 1
    }
   },
   {
@@ -39,37 +39,30 @@
    "identical_elsewhere": 18,
    "identical_within": 11,
    "shares_laws_with": {
-    "kan-feynman-no-units-subset": 19,
+    "kan": 19,
     "symformer-in-domain-synthetic-evaluation": 16,
-    "lasr-noisy-feynman-with-distractors": 8,
+    "erbench": 15,
+    "nsrwh": 12,
+    "lasr": 8,
     "feynman": 8,
-    "erbench-oeis": 8,
-    "soose-fc": 8,
-    "livermore2": 8,
-    "soose-nc": 8,
-    "nsrwh-train-wc": 8,
     "symbolicgpt-bivariate-set": 8,
-    "erbench-syneq": 8,
+    "soose": 8,
     "symbolicgpt-test-sets": 8,
-    "nsrwh-train-nc": 6,
-    "scrbenchmark": 6,
+    "livermore2": 8,
     "fastsrb": 6,
     "srsd-dummy": 6,
-    "erbench-eponymous": 5,
+    "scrbenchmark": 6,
     "reproduction-bias-not-included-test-sets": 4,
+    "dgsr": 4,
     "sym-q-ai-feynman-with-drift-terms": 3,
     "rils-rols-random-instances": 3,
     "shape-constrained-sr": 2,
     "sr-dynamical-systems": 2,
-    "coevolved-fitness-predictors-test-problems": 2,
-    "eql-cart-pendulum": 2,
-    "llm-lex-random-mathematica-functions": 2,
     "kim-et-al-eql-benchmark-functions": 2,
-    "soose-wc": 2,
-    "physo-astrophysical-case-studies": 2,
-    "dgsr-additional-feynman": 2,
-    "dgsr-feynman-d-2-d-5-subsets": 2,
-    "erbench-densities": 1,
+    "coevolved-fitness-predictors-test-problems": 2,
+    "eql": 2,
+    "llm-lex-random-mathematica-functions": 2,
+    "physo": 2,
     "nguyen": 1,
     "gfn-sr-noisy-near-twin-set": 1
    }
@@ -83,7 +76,7 @@
    "identical_elsewhere": 0,
    "identical_within": 0,
    "shares_laws_with": {
-    "phye2e-llm-generated-synthetic-formulas": 1
+    "phye2e": 1
    }
   },
   {
@@ -165,7 +158,7 @@
    "identical_elsewhere": 2,
    "identical_within": 0,
    "shares_laws_with": {
-    "heuristiclab-regression-instance-providers": 2
+    "heuristiclab": 2
    }
   },
   {
@@ -177,16 +170,16 @@
    "identical_elsewhere": 0,
    "identical_within": 0,
    "shares_laws_with": {
-    "rils-rols-random-instances": 1,
-    "sr-dynamical-systems": 1,
-    "nsrwh-train-nc": 1,
-    "erbench-eponymous": 1,
-    "eql-cart-pendulum": 1,
-    "reproduction-bias-not-included-test-sets": 1,
-    "llm-lex-random-mathematica-functions": 1,
     "ai-feynman-database-100-main-equations": 1,
+    "sr-dynamical-systems": 1,
+    "reproduction-bias-not-included-test-sets": 1,
     "kim-et-al-eql-benchmark-functions": 1,
-    "symformer-in-domain-synthetic-evaluation": 1
+    "eql": 1,
+    "symformer-in-domain-synthetic-evaluation": 1,
+    "nsrwh": 1,
+    "erbench": 1,
+    "llm-lex-random-mathematica-functions": 1,
+    "rils-rols-random-instances": 1
    }
   },
   {
@@ -253,7 +246,7 @@
   },
   {
    "catalog": "dgsr-additional-feynman",
-   "benchmark": "dgsr-additional-feynman",
+   "benchmark": "dgsr",
    "problems": 32,
    "with_law": 32,
    "same_law_elsewhere": 32,
@@ -261,23 +254,23 @@
    "identical_within": 5,
    "shares_laws_with": {
     "feynman": 28,
-    "lasr-noisy-feynman-with-distractors": 27,
+    "lasr": 27,
     "scrbenchmark": 18,
     "srsd-dummy": 17,
     "fastsrb": 17,
-    "erbench-eponymous": 4,
+    "erbench": 4,
     "feynman-bonus": 4,
     "rils-rols-random-instances": 4,
     "geobench": 3,
     "shape-constrained-sr": 1,
-    "nsrwh-train-nc": 1,
+    "nsrwh": 1,
     "ai-feynman-database-100-main-equations": 1,
-    "kan-feynman-no-units-subset": 1
+    "kan": 1
    }
   },
   {
    "catalog": "dgsr-feynman-d-2-d-5-subsets",
-   "benchmark": "dgsr-feynman-d-2-d-5-subsets",
+   "benchmark": "dgsr",
    "problems": 15,
    "with_law": 15,
    "same_law_elsewhere": 15,
@@ -285,26 +278,25 @@
    "identical_within": 0,
    "shares_laws_with": {
     "feynman": 15,
-    "lasr-noisy-feynman-with-distractors": 15,
-    "scrbenchmark": 9,
+    "lasr": 15,
     "srsd-dummy": 9,
+    "scrbenchmark": 9,
     "fastsrb": 9,
     "sym-q-ai-feynman-with-drift-terms": 6,
-    "nsrwh-train-nc": 3,
-    "erbench-eponymous": 3,
     "symformer-in-domain-synthetic-evaluation": 3,
+    "nsrwh": 3,
+    "erbench": 3,
     "geobench": 2,
+    "kan": 2,
     "ai-feynman-database-100-main-equations": 2,
     "kim-et-al-eql-benchmark-functions": 1,
     "llm-lex-random-mathematica-functions": 1,
-    "kan-toy-functions": 1,
-    "shape-constrained-sr": 1,
-    "kan-feynman-no-units-subset": 1
+    "shape-constrained-sr": 1
    }
   },
   {
    "catalog": "dgsr-synthetic-d-12",
-   "benchmark": "dgsr-synthetic-d-12",
+   "benchmark": "dgsr",
    "problems": 7,
    "with_law": 7,
    "same_law_elsewhere": 0,
@@ -371,10 +363,10 @@
    "identical_elsewhere": 2,
    "identical_within": 0,
    "shares_laws_with": {
+    "erbench": 3,
     "korns": 3,
-    "erbench-public-legacy-formulas": 3,
     "gp-benchmarks-sr-table": 3,
-    "heuristiclab-regression-instance-providers": 2,
+    "heuristiclab": 2,
     "nguyen": 1,
     "keijzer": 1,
     "symantic-synthetic-set": 1
@@ -402,28 +394,28 @@
   },
   {
    "catalog": "eql-cart-pendulum",
-   "benchmark": "eql-cart-pendulum",
+   "benchmark": "eql",
    "problems": 8,
    "with_law": 8,
    "same_law_elsewhere": 4,
    "identical_elsewhere": 0,
    "identical_within": 4,
    "shares_laws_with": {
-    "rils-rols-random-instances": 4,
-    "sr-dynamical-systems": 4,
-    "nsrwh-train-nc": 4,
-    "erbench-eponymous": 4,
-    "coevolved-fitness-predictors-test-problems": 4,
-    "reproduction-bias-not-included-test-sets": 4,
-    "llm-lex-random-mathematica-functions": 4,
     "ai-feynman-database-100-main-equations": 4,
+    "sr-dynamical-systems": 4,
+    "reproduction-bias-not-included-test-sets": 4,
     "kim-et-al-eql-benchmark-functions": 4,
-    "symformer-in-domain-synthetic-evaluation": 4
+    "coevolved-fitness-predictors-test-problems": 4,
+    "symformer-in-domain-synthetic-evaluation": 4,
+    "nsrwh": 4,
+    "erbench": 4,
+    "llm-lex-random-mathematica-functions": 4,
+    "rils-rols-random-instances": 4
    }
   },
   {
    "catalog": "eql-double-pendulum",
-   "benchmark": "eql-double-pendulum",
+   "benchmark": "eql",
    "problems": 4,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -433,7 +425,7 @@
   },
   {
    "catalog": "eql-formulas-f-1-f-4-and-division-formula",
-   "benchmark": "eql-formulas-f-1-f-4-and-division-formula",
+   "benchmark": "eql",
    "problems": 13,
    "with_law": 13,
    "same_law_elsewhere": 0,
@@ -443,7 +435,7 @@
   },
   {
    "catalog": "eql-pendulum-vector-field",
-   "benchmark": "eql-pendulum-vector-field",
+   "benchmark": "eql",
    "problems": 6,
    "with_law": 6,
    "same_law_elsewhere": 0,
@@ -453,7 +445,7 @@
   },
   {
    "catalog": "eql-robotic-arm-forward-kinematics",
-   "benchmark": "eql-robotic-arm-forward-kinematics",
+   "benchmark": "eql",
    "problems": 28,
    "with_law": 28,
    "same_law_elsewhere": 0,
@@ -463,22 +455,22 @@
   },
   {
    "catalog": "erbench-densities",
-   "benchmark": "erbench-densities",
+   "benchmark": "erbench",
    "problems": 99,
    "with_law": 99,
    "same_law_elsewhere": 3,
    "identical_elsewhere": 0,
    "identical_within": 0,
    "shares_laws_with": {
-    "lasr-noisy-feynman-with-distractors": 3,
     "ai-feynman-database-100-main-equations": 3,
-    "feynman": 3,
-    "sym-q-ai-feynman-with-drift-terms": 3
+    "lasr": 3,
+    "sym-q-ai-feynman-with-drift-terms": 3,
+    "feynman": 3
    }
   },
   {
    "catalog": "erbench-eponymous",
-   "benchmark": "erbench-eponymous",
+   "benchmark": "erbench",
    "problems": 585,
    "with_law": 585,
    "same_law_elsewhere": 138,
@@ -486,37 +478,32 @@
    "identical_within": 10,
    "shares_laws_with": {
     "symformer-in-domain-synthetic-evaluation": 78,
-    "scrbenchmark": 72,
-    "fastsrb": 72,
     "srsd-dummy": 72,
-    "nsrwh-train-nc": 69,
+    "scrbenchmark": 72,
+    "nsrwh": 72,
+    "fastsrb": 72,
+    "dgsr": 66,
     "feynman": 66,
-    "lasr-noisy-feynman-with-distractors": 66,
+    "lasr": 66,
+    "kan": 57,
     "sym-q-ai-feynman-with-drift-terms": 54,
-    "dgsr-feynman-d-2-d-5-subsets": 54,
-    "kan-feynman-no-units-subset": 39,
     "ai-feynman-database-100-main-equations": 36,
     "llm-lex-random-mathematica-functions": 33,
-    "rils-rols-random-instances": 24,
     "kim-et-al-eql-benchmark-functions": 24,
+    "rils-rols-random-instances": 24,
     "geobench": 21,
-    "kan-toy-functions": 18,
     "reproduction-bias-not-included-test-sets": 12,
-    "erbench-phybench": 12,
-    "dgsr-additional-feynman": 12,
     "scimed-settling-sphere-configurations": 9,
-    "phye2e-llm-generated-synthetic-formulas": 6,
+    "phye2e": 6,
     "sr-dynamical-systems": 3,
     "coevolved-fitness-predictors-test-problems": 3,
-    "eql-cart-pendulum": 3,
-    "livermore2": 3,
-    "nsrwh-train-wc": 3,
-    "erbench-oeis": 3
+    "eql": 3,
+    "livermore2": 3
    }
   },
   {
    "catalog": "erbench-oeis",
-   "benchmark": "erbench-oeis",
+   "benchmark": "erbench",
    "problems": 1024,
    "with_law": 1024,
    "same_law_elsewhere": 57,
@@ -525,39 +512,34 @@
    "shares_laws_with": {
     "symformer-in-domain-synthetic-evaluation": 54,
     "ai-feynman-database-100-main-equations": 51,
-    "soose-fc": 49,
-    "livermore2": 49,
-    "soose-nc": 49,
-    "nsrwh-train-wc": 49,
+    "nsrwh": 50,
     "symbolicgpt-bivariate-set": 49,
-    "erbench-syneq": 49,
+    "soose": 49,
     "symbolicgpt-test-sets": 49,
+    "livermore2": 49,
     "gfn-sr-noisy-near-twin-set": 1,
-    "nsrwh-train-nc": 1,
-    "erbench-eponymous": 1,
     "rils-rols-random-instances": 1
    }
   },
   {
    "catalog": "erbench-phybench",
-   "benchmark": "erbench-phybench",
+   "benchmark": "erbench",
    "problems": 270,
    "with_law": 270,
    "same_law_elsewhere": 15,
    "identical_elsewhere": 0,
    "identical_within": 0,
    "shares_laws_with": {
-    "erbench-eponymous": 9,
     "llm-lex-random-mathematica-functions": 9,
     "srsd-dummy": 3,
-    "fastsrb": 3,
     "scrbenchmark": 3,
-    "phye2e-llm-generated-synthetic-formulas": 3
+    "fastsrb": 3,
+    "phye2e": 3
    }
   },
   {
    "catalog": "erbench-public-legacy-formulas",
-   "benchmark": "erbench-public-legacy-formulas",
+   "benchmark": "erbench",
    "problems": 5,
    "with_law": 5,
    "same_law_elsewhere": 5,
@@ -567,38 +549,34 @@
     "gp-benchmarks-sr-table": 4,
     "dso-benchmark-registry": 3,
     "korns": 3,
-    "heuristiclab-regression-instance-providers": 2,
+    "heuristiclab": 2,
     "ai-feynman-2-0-modular-equations": 1,
-    "symtree-benchmark-functions": 1,
-    "nguyen": 1
+    "nguyen": 1,
+    "symtree-benchmark-functions": 1
    }
   },
   {
    "catalog": "erbench-syneq",
-   "benchmark": "erbench-syneq",
+   "benchmark": "erbench",
    "problems": 1024,
    "with_law": 1024,
    "same_law_elsewhere": 77,
    "identical_elsewhere": 0,
    "identical_within": 16,
    "shares_laws_with": {
+    "nsrwh": 75,
+    "soose": 74,
     "symbolicgpt-test-sets": 74,
     "livermore2": 74,
-    "soose-fc": 74,
-    "soose-nc": 74,
-    "nsrwh-train-wc": 74,
     "symformer-in-domain-synthetic-evaluation": 65,
-    "symbolicgpt-bivariate-set": 63,
     "ai-feynman-database-100-main-equations": 63,
-    "erbench-oeis": 39,
-    "nsrwh-train-nc": 36,
-    "scrbenchmark": 35,
-    "soose-wc": 35,
+    "symbolicgpt-bivariate-set": 63,
     "fastsrb": 35,
     "srsd-dummy": 35,
-    "physo-astrophysical-case-studies": 24,
+    "scrbenchmark": 35,
+    "physo": 24,
     "feynman": 11,
-    "lasr-noisy-feynman-with-distractors": 11
+    "lasr": 11
    }
   },
   {
@@ -678,34 +656,27 @@
     "srsd-dummy": 109,
     "scrbenchmark": 107,
     "feynman": 38,
-    "lasr-noisy-feynman-with-distractors": 38,
-    "dgsr-additional-feynman": 17,
-    "erbench-eponymous": 12,
-    "dgsr-feynman-d-2-d-5-subsets": 12,
+    "lasr": 38,
+    "dgsr": 29,
+    "erbench": 16,
     "sym-q-ai-feynman-with-drift-terms": 10,
-    "nsrwh-train-nc": 7,
+    "nsrwh": 8,
     "geobench": 7,
     "symformer-in-domain-synthetic-evaluation": 7,
     "feynman-bonus": 7,
+    "kan": 6,
     "kim-et-al-eql-benchmark-functions": 4,
     "llm-lex-random-mathematica-functions": 4,
-    "kan-toy-functions": 4,
     "ai-feynman-database-100-main-equations": 4,
     "rils-rols-random-instances": 3,
     "livermore2": 3,
-    "nsrwh-train-wc": 3,
     "shape-constrained-sr": 3,
-    "kan-feynman-no-units-subset": 2,
-    "erbench-phybench": 2,
-    "phye2e-llm-generated-synthetic-formulas": 2,
+    "phye2e": 2,
+    "soose": 2,
     "symbolicgpt-test-sets": 2,
-    "soose-fc": 2,
-    "soose-nc": 2,
-    "soose-wc": 2,
-    "erbench-syneq": 2,
     "reproduction-bias-not-included-test-sets": 1,
     "symbolicgpt-bivariate-set": 1,
-    "physo-astrophysical-case-studies": 1
+    "physo": 1
    }
   },
   {
@@ -717,33 +688,26 @@
    "identical_elsewhere": 52,
    "identical_within": 18,
    "shares_laws_with": {
-    "lasr-noisy-feynman-with-distractors": 97,
+    "lasr": 97,
+    "dgsr": 48,
     "scrbenchmark": 40,
     "srsd-dummy": 39,
     "fastsrb": 39,
-    "dgsr-additional-feynman": 30,
-    "dgsr-feynman-d-2-d-5-subsets": 18,
     "sym-q-ai-feynman-with-drift-terms": 14,
+    "erbench": 12,
     "shape-constrained-sr": 12,
-    "erbench-eponymous": 10,
     "ai-feynman-database-100-main-equations": 8,
+    "kan": 8,
     "geobench": 8,
-    "nsrwh-train-nc": 7,
-    "kan-feynman-no-units-subset": 6,
+    "nsrwh": 7,
     "symformer-in-domain-synthetic-evaluation": 5,
     "rils-rols-random-instances": 5,
-    "phye2e-llm-generated-synthetic-formulas": 3,
+    "phye2e": 3,
     "kim-et-al-eql-benchmark-functions": 2,
     "llm-lex-random-mathematica-functions": 2,
-    "kan-toy-functions": 2,
-    "erbench-densities": 1,
+    "soose": 1,
     "symbolicgpt-test-sets": 1,
-    "livermore2": 1,
-    "soose-fc": 1,
-    "soose-nc": 1,
-    "soose-wc": 1,
-    "nsrwh-train-wc": 1,
-    "erbench-syneq": 1
+    "livermore2": 1
    }
   },
   {
@@ -758,13 +722,13 @@
     "srsd-dummy": 7,
     "fastsrb": 7,
     "scrbenchmark": 6,
-    "dgsr-additional-feynman": 4,
+    "dgsr": 4,
     "shape-constrained-sr": 2
    }
   },
   {
    "catalog": "ffx-cmos-ota",
-   "benchmark": "ffx-cmos-ota",
+   "benchmark": "ffx",
    "problems": 6,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -774,7 +738,7 @@
   },
   {
    "catalog": "ffx-high-dimensional-circuits",
-   "benchmark": "ffx-high-dimensional-circuits",
+   "benchmark": "ffx",
    "problems": 12,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -791,7 +755,7 @@
    "identical_elsewhere": 2,
    "identical_within": 0,
    "shares_laws_with": {
-    "heuristiclab-regression-instance-providers": 2
+    "heuristiclab": 2
    }
   },
   {
@@ -836,7 +800,7 @@
   },
   {
    "catalog": "gecco-2022-covid-ny",
-   "benchmark": "gecco-2022-covid-ny",
+   "benchmark": "srbench-competition-2022",
    "problems": 3,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -846,7 +810,7 @@
   },
   {
    "catalog": "gecco-2022-exact-rediscovery",
-   "benchmark": "gecco-2022-exact-rediscovery",
+   "benchmark": "srbench-competition-2022",
    "problems": 40,
    "with_law": 10,
    "same_law_elsewhere": 0,
@@ -856,7 +820,7 @@
   },
   {
    "catalog": "gecco-2022-extrapolation",
-   "benchmark": "gecco-2022-extrapolation",
+   "benchmark": "srbench-competition-2022",
    "problems": 30,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -866,7 +830,7 @@
   },
   {
    "catalog": "gecco-2022-feature-selection",
-   "benchmark": "gecco-2022-feature-selection",
+   "benchmark": "srbench-competition-2022",
    "problems": 30,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -876,7 +840,7 @@
   },
   {
    "catalog": "gecco-2022-local-optima",
-   "benchmark": "gecco-2022-local-optima",
+   "benchmark": "srbench-competition-2022",
    "problems": 30,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -886,7 +850,7 @@
   },
   {
    "catalog": "gecco-2022-noise",
-   "benchmark": "gecco-2022-noise",
+   "benchmark": "srbench-competition-2022",
    "problems": 40,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -914,23 +878,22 @@
    "identical_within": 4,
    "shares_laws_with": {
     "feynman": 5,
-    "lasr-noisy-feynman-with-distractors": 5,
-    "scrbenchmark": 4,
+    "lasr": 5,
     "srsd-dummy": 4,
+    "dgsr": 4,
+    "scrbenchmark": 4,
     "fastsrb": 4,
     "kim-et-al-eql-benchmark-functions": 3,
     "symformer-in-domain-synthetic-evaluation": 3,
-    "dgsr-feynman-d-2-d-5-subsets": 2,
     "sym-q-ai-feynman-with-drift-terms": 2,
     "reproduction-bias-not-included-test-sets": 2,
-    "nsrwh-train-nc": 2,
-    "erbench-eponymous": 2,
-    "dgsr-additional-feynman": 2,
-    "torchsisso": 1,
+    "nsrwh": 2,
+    "erbench": 2,
     "errless-synthetic-posterior-set": 1,
+    "torchsisso": 1,
     "symantic-synthetic-set": 1,
-    "llm-lex-random-mathematica-functions": 1,
-    "kan-toy-functions": 1
+    "kan": 1,
+    "llm-lex-random-mathematica-functions": 1
    }
   },
   {
@@ -944,8 +907,8 @@
    "shares_laws_with": {
     "nguyen": 1,
     "symantic-synthetic-set": 1,
-    "erbench-oeis": 1,
-    "ai-feynman-database-100-main-equations": 1
+    "ai-feynman-database-100-main-equations": 1,
+    "erbench": 1
    }
   },
   {
@@ -958,11 +921,11 @@
    "identical_within": 0,
    "shares_laws_with": {
     "korns": 8,
-    "heuristiclab-regression-instance-providers": 5,
-    "erbench-public-legacy-formulas": 4,
+    "heuristiclab": 5,
+    "erbench": 4,
     "dso-benchmark-registry": 3,
-    "symtree-benchmark-functions": 1,
     "nguyen": 1,
+    "symtree-benchmark-functions": 1,
     "keijzer": 1,
     "symbolicregression-com-toy-test-suite-1": 1,
     "vladislavleva": 1
@@ -1070,20 +1033,19 @@
   },
   {
    "catalog": "heuristiclab-physics-instances",
-   "benchmark": "heuristiclab-physics-instances",
+   "benchmark": "heuristiclab",
    "problems": 5,
    "with_law": 5,
-   "same_law_elsewhere": 4,
-   "identical_elsewhere": 4,
+   "same_law_elsewhere": 3,
+   "identical_elsewhere": 3,
    "identical_within": 0,
    "shares_laws_with": {
-    "shape-constrained-sr": 3,
-    "heuristiclab-regression-instance-providers": 2
+    "shape-constrained-sr": 3
    }
   },
   {
    "catalog": "heuristiclab-real-world",
-   "benchmark": "heuristiclab-regression-instance-providers",
+   "benchmark": "heuristiclab",
    "problems": 14,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -1093,20 +1055,19 @@
   },
   {
    "catalog": "heuristiclab-regression-instance-providers",
-   "benchmark": "heuristiclab-regression-instance-providers",
+   "benchmark": "heuristiclab",
    "problems": 13,
    "with_law": 13,
-   "same_law_elsewhere": 12,
-   "identical_elsewhere": 11,
+   "same_law_elsewhere": 11,
+   "identical_elsewhere": 10,
    "identical_within": 0,
    "shares_laws_with": {
     "gp-benchmarks-sr-table": 5,
     "korns": 3,
+    "erbench": 2,
     "dso-benchmark-registry": 2,
-    "erbench-public-legacy-formulas": 2,
     "friedman-functions": 2,
     "chen-luo-jiang-block-building-test-cases": 2,
-    "heuristiclab-physics-instances": 2,
     "keijzer": 1,
     "symbolicregression-com-toy-test-suite-1": 1,
     "vladislavleva": 1,
@@ -1116,7 +1077,7 @@
   },
   {
    "catalog": "heuristiclab-regression-instance-providers-points",
-   "benchmark": "heuristiclab-regression-instance-providers",
+   "benchmark": "heuristiclab",
    "problems": 1,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -1163,15 +1124,15 @@
    "identical_elsewhere": 0,
    "identical_within": 0,
    "shares_laws_with": {
+    "keijzer": 3,
     "livermore": 3,
     "symtree-benchmark-functions": 3,
-    "vladislavleva": 3,
-    "keijzer": 3
+    "vladislavleva": 3
    }
   },
   {
    "catalog": "kan-feynman-no-units-subset",
-   "benchmark": "kan-feynman-no-units-subset",
+   "benchmark": "kan",
    "problems": 27,
    "with_law": 27,
    "same_law_elsewhere": 21,
@@ -1180,23 +1141,22 @@
    "shares_laws_with": {
     "ai-feynman-database-100-main-equations": 19,
     "feynman": 6,
-    "lasr-noisy-feynman-with-distractors": 6,
-    "erbench-eponymous": 3,
+    "lasr": 6,
+    "erbench": 3,
+    "srsd-dummy": 3,
+    "dgsr": 3,
     "scrbenchmark": 3,
     "fastsrb": 3,
-    "srsd-dummy": 3,
     "sym-q-ai-feynman-with-drift-terms": 2,
-    "dgsr-additional-feynman": 2,
     "scimed-settling-sphere-configurations": 1,
     "shape-constrained-sr": 1,
-    "nsrwh-train-nc": 1,
-    "dgsr-feynman-d-2-d-5-subsets": 1,
-    "symformer-in-domain-synthetic-evaluation": 1
+    "symformer-in-domain-synthetic-evaluation": 1,
+    "nsrwh": 1
    }
   },
   {
    "catalog": "kan-toy-functions",
-   "benchmark": "kan-toy-functions",
+   "benchmark": "kan",
    "problems": 5,
    "with_law": 5,
    "same_law_elsewhere": 2,
@@ -1204,17 +1164,17 @@
    "identical_within": 0,
    "shares_laws_with": {
     "llm-lex-random-mathematica-functions": 2,
-    "dgsr-feynman-d-2-d-5-subsets": 1,
-    "nsrwh-train-nc": 1,
-    "erbench-eponymous": 1,
+    "srsd-dummy": 1,
+    "geobench": 1,
+    "dgsr": 1,
+    "kim-et-al-eql-benchmark-functions": 1,
     "scrbenchmark": 1,
     "feynman": 1,
-    "sym-q-ai-feynman-with-drift-terms": 1,
-    "kim-et-al-eql-benchmark-functions": 1,
-    "lasr-noisy-feynman-with-distractors": 1,
-    "geobench": 1,
-    "srsd-dummy": 1,
     "symformer-in-domain-synthetic-evaluation": 1,
+    "nsrwh": 1,
+    "lasr": 1,
+    "sym-q-ai-feynman-with-drift-terms": 1,
+    "erbench": 1,
     "fastsrb": 1
    }
   },
@@ -1228,14 +1188,14 @@
    "identical_within": 0,
    "shares_laws_with": {
     "nguyen": 2,
-    "heuristiclab-regression-instance-providers": 1,
+    "heuristiclab": 1,
     "gp-benchmarks-sr-table": 1,
     "dso-benchmark-registry": 1,
     "symantic-synthetic-set": 1,
     "livermore": 1,
     "jin": 1,
-    "vladislavleva": 1,
     "symtree-benchmark-functions": 1,
+    "vladislavleva": 1,
     "rsrm": 1
    }
   },
@@ -1259,23 +1219,23 @@
    "identical_within": 0,
    "shares_laws_with": {
     "symformer-in-domain-synthetic-evaluation": 5,
-    "nsrwh-train-nc": 3,
-    "erbench-eponymous": 3,
+    "nsrwh": 3,
+    "erbench": 3,
     "geobench": 3,
     "llm-lex-random-mathematica-functions": 2,
-    "rils-rols-random-instances": 1,
-    "sr-dynamical-systems": 1,
-    "coevolved-fitness-predictors-test-problems": 1,
-    "eql-cart-pendulum": 1,
-    "reproduction-bias-not-included-test-sets": 1,
     "ai-feynman-database-100-main-equations": 1,
-    "dgsr-feynman-d-2-d-5-subsets": 1,
+    "sr-dynamical-systems": 1,
+    "reproduction-bias-not-included-test-sets": 1,
+    "coevolved-fitness-predictors-test-problems": 1,
+    "eql": 1,
+    "rils-rols-random-instances": 1,
+    "srsd-dummy": 1,
+    "dgsr": 1,
+    "kan": 1,
     "scrbenchmark": 1,
     "feynman": 1,
+    "lasr": 1,
     "sym-q-ai-feynman-with-drift-terms": 1,
-    "lasr-noisy-feynman-with-distractors": 1,
-    "srsd-dummy": 1,
-    "kan-toy-functions": 1,
     "fastsrb": 1
    }
   },
@@ -1299,9 +1259,9 @@
    "identical_within": 0,
    "shares_laws_with": {
     "gp-benchmarks-sr-table": 8,
-    "heuristiclab-regression-instance-providers": 3,
+    "heuristiclab": 3,
+    "erbench": 3,
     "dso-benchmark-registry": 3,
-    "erbench-public-legacy-formulas": 3,
     "neat": 1,
     "symtree-benchmark-functions": 1
    }
@@ -1338,7 +1298,7 @@
   },
   {
    "catalog": "lasr-bigbench",
-   "benchmark": "lasr-bigbench",
+   "benchmark": "lasr",
    "problems": 1,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -1348,7 +1308,7 @@
   },
   {
    "catalog": "lasr-noisy-feynman-with-distractors",
-   "benchmark": "lasr-noisy-feynman-with-distractors",
+   "benchmark": "lasr",
    "problems": 100,
    "with_law": 100,
    "same_law_elsewhere": 97,
@@ -1356,37 +1316,30 @@
    "identical_within": 18,
    "shares_laws_with": {
     "feynman": 97,
+    "dgsr": 47,
     "scrbenchmark": 40,
     "srsd-dummy": 39,
     "fastsrb": 39,
-    "dgsr-additional-feynman": 29,
-    "dgsr-feynman-d-2-d-5-subsets": 18,
     "sym-q-ai-feynman-with-drift-terms": 14,
+    "erbench": 12,
     "shape-constrained-sr": 11,
-    "erbench-eponymous": 10,
     "ai-feynman-database-100-main-equations": 8,
+    "kan": 8,
     "geobench": 8,
-    "nsrwh-train-nc": 7,
-    "kan-feynman-no-units-subset": 6,
+    "nsrwh": 7,
     "symformer-in-domain-synthetic-evaluation": 5,
     "rils-rols-random-instances": 5,
-    "phye2e-llm-generated-synthetic-formulas": 3,
+    "phye2e": 3,
     "kim-et-al-eql-benchmark-functions": 2,
     "llm-lex-random-mathematica-functions": 2,
-    "kan-toy-functions": 2,
-    "erbench-densities": 1,
+    "soose": 1,
     "symbolicgpt-test-sets": 1,
-    "livermore2": 1,
-    "soose-fc": 1,
-    "soose-nc": 1,
-    "soose-wc": 1,
-    "nsrwh-train-wc": 1,
-    "erbench-syneq": 1
+    "livermore2": 1
    }
   },
   {
    "catalog": "lasr-synthetic-equations",
-   "benchmark": "lasr-synthetic-equations",
+   "benchmark": "lasr",
    "problems": 41,
    "with_law": 41,
    "same_law_elsewhere": 0,
@@ -1405,10 +1358,10 @@
    "shares_laws_with": {
     "meier": 2,
     "symantic-synthetic-set": 1,
-    "symtree-benchmark-functions": 1,
-    "jin": 1,
-    "vladislavleva": 1,
     "keijzer": 1,
+    "jin": 1,
+    "symtree-benchmark-functions": 1,
+    "vladislavleva": 1,
     "poly": 1
    }
   },
@@ -1421,26 +1374,20 @@
    "identical_elsewhere": 5,
    "identical_within": 12,
    "shares_laws_with": {
-    "nsrwh-train-wc": 12,
+    "nsrwh": 13,
+    "erbench": 12,
+    "soose": 11,
     "symbolicgpt-test-sets": 11,
-    "soose-fc": 11,
-    "soose-nc": 11,
-    "erbench-syneq": 11,
-    "symbolicgpt-bivariate-set": 8,
     "ai-feynman-database-100-main-equations": 8,
+    "symbolicgpt-bivariate-set": 8,
     "symformer-in-domain-synthetic-evaluation": 8,
-    "erbench-oeis": 7,
-    "scrbenchmark": 5,
     "fastsrb": 5,
     "srsd-dummy": 5,
-    "nsrwh-train-nc": 4,
-    "soose-wc": 4,
+    "scrbenchmark": 5,
     "feynman": 3,
-    "lasr-noisy-feynman-with-distractors": 3,
-    "physo-astrophysical-case-studies": 1,
-    "erbench-eponymous": 1,
-    "phye2e-llm-generated-synthetic-formulas": 1,
-    "nsrwh-only-five-variables-wc": 1
+    "lasr": 3,
+    "physo": 1,
+    "phye2e": 1
    }
   },
   {
@@ -1452,20 +1399,19 @@
    "identical_elsewhere": 1,
    "identical_within": 0,
    "shares_laws_with": {
-    "kan-toy-functions": 2,
-    "erbench-eponymous": 2,
-    "dgsr-feynman-d-2-d-5-subsets": 1,
-    "nsrwh-train-nc": 1,
+    "kan": 2,
+    "erbench": 2,
+    "srsd-dummy": 1,
+    "geobench": 1,
+    "dgsr": 1,
+    "kim-et-al-eql-benchmark-functions": 1,
     "scrbenchmark": 1,
     "feynman": 1,
-    "sym-q-ai-feynman-with-drift-terms": 1,
-    "kim-et-al-eql-benchmark-functions": 1,
-    "lasr-noisy-feynman-with-distractors": 1,
-    "geobench": 1,
-    "srsd-dummy": 1,
     "symformer-in-domain-synthetic-evaluation": 1,
-    "fastsrb": 1,
-    "erbench-phybench": 1
+    "nsrwh": 1,
+    "lasr": 1,
+    "sym-q-ai-feynman-with-drift-terms": 1,
+    "fastsrb": 1
    }
   },
   {
@@ -1477,16 +1423,16 @@
    "identical_elsewhere": 0,
    "identical_within": 0,
    "shares_laws_with": {
-    "rils-rols-random-instances": 1,
-    "sr-dynamical-systems": 1,
-    "nsrwh-train-nc": 1,
-    "erbench-eponymous": 1,
-    "coevolved-fitness-predictors-test-problems": 1,
-    "eql-cart-pendulum": 1,
-    "reproduction-bias-not-included-test-sets": 1,
     "ai-feynman-database-100-main-equations": 1,
+    "sr-dynamical-systems": 1,
+    "reproduction-bias-not-included-test-sets": 1,
     "kim-et-al-eql-benchmark-functions": 1,
-    "symformer-in-domain-synthetic-evaluation": 1
+    "coevolved-fitness-predictors-test-problems": 1,
+    "eql": 1,
+    "symformer-in-domain-synthetic-evaluation": 1,
+    "nsrwh": 1,
+    "erbench": 1,
+    "rils-rols-random-instances": 1
    }
   },
   {
@@ -1501,7 +1447,7 @@
   },
   {
    "catalog": "llm-sr-bactgrow",
-   "benchmark": "llm-sr-bactgrow",
+   "benchmark": "llm-sr",
    "problems": 2,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -1511,7 +1457,7 @@
   },
   {
    "catalog": "llm-sr-oscillators",
-   "benchmark": "llm-sr-oscillators",
+   "benchmark": "llm-sr",
    "problems": 4,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -1521,7 +1467,7 @@
   },
   {
    "catalog": "llm-sr-stress-strain",
-   "benchmark": "llm-sr-stress-strain",
+   "benchmark": "llm-sr",
    "problems": 2,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -1600,8 +1546,8 @@
    "identical_elsewhere": 6,
    "identical_within": 0,
    "shares_laws_with": {
-    "symtree-benchmark-functions": 5,
     "nguyen": 5,
+    "symtree-benchmark-functions": 5,
     "korns": 1,
     "vladislavleva": 1
    }
@@ -1632,7 +1578,7 @@
     "gfn-sr-noisy-near-twin-set": 1,
     "ai-feynman-database-100-main-equations": 1,
     "symformer-in-domain-synthetic-evaluation": 1,
-    "erbench-public-legacy-formulas": 1,
+    "erbench": 1,
     "gp-benchmarks-sr-table": 1,
     "dso-benchmark-registry": 1
    }
@@ -1669,20 +1615,19 @@
   },
   {
    "catalog": "nsrwh-only-five-variables-nc",
-   "benchmark": "nsrwh-only-five-variables-nc",
+   "benchmark": "nsrwh",
    "problems": 301,
    "with_law": 301,
-   "same_law_elsewhere": 3,
-   "identical_elsewhere": 2,
+   "same_law_elsewhere": 1,
+   "identical_elsewhere": 0,
    "identical_within": 2,
    "shares_laws_with": {
-    "nsrwh-train-nc": 2,
-    "phye2e-llm-generated-synthetic-formulas": 1
+    "phye2e": 1
    }
   },
   {
    "catalog": "nsrwh-only-five-variables-wc",
-   "benchmark": "nsrwh-only-five-variables-wc",
+   "benchmark": "nsrwh",
    "problems": 301,
    "with_law": 301,
    "same_law_elsewhere": 8,
@@ -1694,75 +1639,62 @@
   },
   {
    "catalog": "nsrwh-train-nc",
-   "benchmark": "nsrwh-train-nc",
+   "benchmark": "nsrwh",
    "problems": 301,
    "with_law": 301,
-   "same_law_elsewhere": 26,
-   "identical_elsewhere": 4,
+   "same_law_elsewhere": 24,
+   "identical_elsewhere": 0,
    "identical_within": 14,
    "shares_laws_with": {
+    "erbench": 18,
     "symformer-in-domain-synthetic-evaluation": 16,
-    "erbench-eponymous": 14,
     "feynman": 8,
-    "lasr-noisy-feynman-with-distractors": 8,
+    "lasr": 8,
+    "dgsr": 7,
     "kim-et-al-eql-benchmark-functions": 7,
     "sym-q-ai-feynman-with-drift-terms": 6,
-    "dgsr-feynman-d-2-d-5-subsets": 6,
-    "llm-lex-random-mathematica-functions": 6,
     "ai-feynman-database-100-main-equations": 6,
-    "scrbenchmark": 6,
-    "srsd-dummy": 6,
+    "llm-lex-random-mathematica-functions": 6,
     "fastsrb": 6,
+    "srsd-dummy": 6,
+    "scrbenchmark": 6,
     "rils-rols-random-instances": 5,
     "geobench": 4,
+    "kan": 4,
     "sr-dynamical-systems": 3,
-    "coevolved-fitness-predictors-test-problems": 3,
-    "eql-cart-pendulum": 3,
     "reproduction-bias-not-included-test-sets": 3,
-    "erbench-syneq": 3,
-    "kan-toy-functions": 3,
+    "coevolved-fitness-predictors-test-problems": 3,
+    "eql": 3,
+    "soose": 2,
     "symbolicgpt-test-sets": 2,
     "livermore2": 2,
-    "soose-fc": 2,
-    "soose-nc": 2,
-    "soose-wc": 2,
-    "nsrwh-train-wc": 2,
-    "nsrwh-only-five-variables-nc": 2,
-    "erbench-oeis": 1,
     "symbolicgpt-bivariate-set": 1,
-    "physo-astrophysical-case-studies": 1,
-    "dgsr-additional-feynman": 1,
-    "kan-feynman-no-units-subset": 1
+    "physo": 1
    }
   },
   {
    "catalog": "nsrwh-train-wc",
-   "benchmark": "nsrwh-train-wc",
+   "benchmark": "nsrwh",
    "problems": 299,
    "with_law": 299,
    "same_law_elsewhere": 11,
-   "identical_elsewhere": 4,
+   "identical_elsewhere": 0,
    "identical_within": 9,
    "shares_laws_with": {
     "livermore2": 11,
+    "erbench": 11,
+    "soose": 10,
     "symbolicgpt-test-sets": 10,
-    "soose-fc": 10,
-    "soose-nc": 10,
-    "erbench-syneq": 10,
-    "symbolicgpt-bivariate-set": 9,
     "ai-feynman-database-100-main-equations": 9,
+    "symbolicgpt-bivariate-set": 9,
     "symformer-in-domain-synthetic-evaluation": 9,
-    "erbench-oeis": 6,
-    "scrbenchmark": 5,
     "srsd-dummy": 5,
+    "scrbenchmark": 5,
     "fastsrb": 5,
-    "nsrwh-train-nc": 4,
-    "soose-wc": 4,
-    "physo-astrophysical-case-studies": 3,
-    "erbench-eponymous": 1,
-    "phye2e-llm-generated-synthetic-formulas": 1,
+    "physo": 3,
+    "phye2e": 1,
     "feynman": 1,
-    "lasr-noisy-feynman-with-distractors": 1
+    "lasr": 1
    }
   },
   {
@@ -1807,7 +1739,7 @@
   },
   {
    "catalog": "phye2e-llm-generated-synthetic-formulas",
-   "benchmark": "phye2e-llm-generated-synthetic-formulas",
+   "benchmark": "phye2e",
    "problems": 600,
    "with_law": 600,
    "same_law_elsewhere": 8,
@@ -1815,22 +1747,20 @@
    "identical_within": 2,
    "shares_laws_with": {
     "feynman": 3,
-    "lasr-noisy-feynman-with-distractors": 3,
-    "scrbenchmark": 2,
+    "lasr": 3,
+    "erbench": 3,
     "srsd-dummy": 2,
+    "scrbenchmark": 2,
     "fastsrb": 2,
-    "erbench-eponymous": 2,
+    "nsrwh": 2,
     "ai-hilbert": 1,
-    "nsrwh-only-five-variables-nc": 1,
-    "erbench-phybench": 1,
     "rils-rols-random-instances": 1,
-    "livermore2": 1,
-    "nsrwh-train-wc": 1
+    "livermore2": 1
    }
   },
   {
    "catalog": "phye2e-space-physics",
-   "benchmark": "phye2e-space-physics",
+   "benchmark": "phye2e",
    "problems": 3,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -1840,7 +1770,7 @@
   },
   {
    "catalog": "phye2e-space-physics-restricted",
-   "benchmark": "phye2e-space-physics",
+   "benchmark": "phye2e",
    "problems": 1,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -1850,7 +1780,7 @@
   },
   {
    "catalog": "physo-astro",
-   "benchmark": "physo-astro",
+   "benchmark": "physo",
    "problems": 2,
    "with_law": 2,
    "same_law_elsewhere": 0,
@@ -1860,27 +1790,24 @@
   },
   {
    "catalog": "physo-astrophysical-case-studies",
-   "benchmark": "physo-astrophysical-case-studies",
+   "benchmark": "physo",
    "problems": 9,
    "with_law": 9,
    "same_law_elsewhere": 1,
    "identical_elsewhere": 0,
    "identical_within": 0,
    "shares_laws_with": {
-    "symbolicgpt-test-sets": 1,
-    "livermore2": 1,
-    "nsrwh-train-nc": 1,
-    "soose-fc": 1,
-    "scrbenchmark": 1,
-    "soose-nc": 1,
-    "soose-wc": 1,
-    "nsrwh-train-wc": 1,
-    "symbolicgpt-bivariate-set": 1,
     "ai-feynman-database-100-main-equations": 1,
-    "erbench-syneq": 1,
-    "symformer-in-domain-synthetic-evaluation": 1,
     "fastsrb": 1,
-    "srsd-dummy": 1
+    "srsd-dummy": 1,
+    "symbolicgpt-bivariate-set": 1,
+    "soose": 1,
+    "scrbenchmark": 1,
+    "symbolicgpt-test-sets": 1,
+    "symformer-in-domain-synthetic-evaluation": 1,
+    "nsrwh": 1,
+    "erbench": 1,
+    "livermore2": 1
    }
   },
   {
@@ -1892,7 +1819,7 @@
    "identical_elsewhere": 2,
    "identical_within": 0,
    "shares_laws_with": {
-    "heuristiclab-regression-instance-providers": 1,
+    "heuristiclab": 1,
     "livermore": 1
    }
   },
@@ -1947,17 +1874,17 @@
    "shares_laws_with": {
     "symformer-in-domain-synthetic-evaluation": 4,
     "ai-feynman-database-100-main-equations": 3,
-    "erbench-eponymous": 3,
-    "rils-rols-random-instances": 2,
+    "erbench": 3,
     "sr-dynamical-systems": 2,
-    "nsrwh-train-nc": 2,
-    "coevolved-fitness-predictors-test-problems": 2,
-    "eql-cart-pendulum": 2,
-    "llm-lex-random-mathematica-functions": 2,
     "kim-et-al-eql-benchmark-functions": 2,
-    "fastsrb": 1,
-    "scrbenchmark": 1,
+    "coevolved-fitness-predictors-test-problems": 2,
+    "eql": 2,
+    "nsrwh": 2,
+    "llm-lex-random-mathematica-functions": 2,
+    "rils-rols-random-instances": 2,
     "srsd-dummy": 1,
+    "scrbenchmark": 1,
+    "fastsrb": 1,
     "geobench": 1
    }
   },
@@ -1970,25 +1897,24 @@
    "identical_elsewhere": 0,
    "identical_within": 2,
    "shares_laws_with": {
-    "erbench-eponymous": 7,
-    "nsrwh-train-nc": 3,
+    "erbench": 7,
     "symformer-in-domain-synthetic-evaluation": 3,
-    "lasr-noisy-feynman-with-distractors": 3,
-    "dgsr-additional-feynman": 3,
+    "nsrwh": 3,
+    "dgsr": 3,
+    "lasr": 3,
     "feynman": 3,
     "ai-feynman-database-100-main-equations": 2,
-    "scrbenchmark": 2,
     "srsd-dummy": 2,
+    "scrbenchmark": 2,
     "fastsrb": 2,
     "sr-dynamical-systems": 1,
-    "coevolved-fitness-predictors-test-problems": 1,
-    "eql-cart-pendulum": 1,
     "reproduction-bias-not-included-test-sets": 1,
-    "llm-lex-random-mathematica-functions": 1,
     "kim-et-al-eql-benchmark-functions": 1,
-    "erbench-oeis": 1,
+    "coevolved-fitness-predictors-test-problems": 1,
+    "eql": 1,
+    "llm-lex-random-mathematica-functions": 1,
     "errless-synthetic-posterior-set": 1,
-    "phye2e-llm-generated-synthetic-formulas": 1
+    "phye2e": 1
    }
   },
   {
@@ -2053,8 +1979,8 @@
    "identical_elsewhere": 0,
    "identical_within": 0,
    "shares_laws_with": {
-    "erbench-eponymous": 1,
-    "kan-feynman-no-units-subset": 1
+    "kan": 1,
+    "erbench": 1
    }
   },
   {
@@ -2069,34 +1995,27 @@
     "srsd-dummy": 107,
     "fastsrb": 107,
     "feynman": 39,
-    "lasr-noisy-feynman-with-distractors": 39,
-    "dgsr-additional-feynman": 18,
-    "dgsr-feynman-d-2-d-5-subsets": 12,
-    "erbench-eponymous": 12,
+    "lasr": 39,
+    "dgsr": 30,
+    "erbench": 16,
     "sym-q-ai-feynman-with-drift-terms": 10,
-    "nsrwh-train-nc": 7,
+    "nsrwh": 8,
     "geobench": 7,
     "symformer-in-domain-synthetic-evaluation": 7,
+    "kan": 6,
     "feynman-bonus": 6,
     "ai-feynman-database-100-main-equations": 4,
     "kim-et-al-eql-benchmark-functions": 4,
     "llm-lex-random-mathematica-functions": 4,
-    "kan-toy-functions": 4,
     "livermore2": 3,
-    "nsrwh-train-wc": 3,
     "shape-constrained-sr": 3,
     "rils-rols-random-instances": 3,
+    "soose": 2,
     "symbolicgpt-test-sets": 2,
-    "soose-fc": 2,
-    "soose-nc": 2,
-    "soose-wc": 2,
-    "erbench-syneq": 2,
-    "erbench-phybench": 2,
-    "kan-feynman-no-units-subset": 2,
-    "phye2e-llm-generated-synthetic-formulas": 2,
+    "phye2e": 2,
     "reproduction-bias-not-included-test-sets": 1,
     "symbolicgpt-bivariate-set": 1,
-    "physo-astrophysical-case-studies": 1
+    "physo": 1
    }
   },
   {
@@ -2139,18 +2058,16 @@
    "identical_within": 0,
    "shares_laws_with": {
     "feynman": 12,
-    "lasr-noisy-feynman-with-distractors": 11,
-    "heuristiclab-physics-instances": 3,
+    "lasr": 11,
+    "heuristiclab": 3,
     "srsd-dummy": 3,
-    "fastsrb": 3,
     "scrbenchmark": 3,
+    "fastsrb": 3,
     "feynman-bonus": 2,
     "ai-feynman-database-100-main-equations": 2,
-    "heuristiclab-regression-instance-providers": 1,
-    "sym-q-ai-feynman-with-drift-terms": 1,
-    "kan-feynman-no-units-subset": 1,
-    "dgsr-additional-feynman": 1,
-    "dgsr-feynman-d-2-d-5-subsets": 1
+    "dgsr": 2,
+    "kan": 1,
+    "sym-q-ai-feynman-with-drift-terms": 1
    }
   },
   {
@@ -2175,85 +2092,74 @@
   },
   {
    "catalog": "soose-fc",
-   "benchmark": "soose-fc",
+   "benchmark": "soose",
    "problems": 400,
    "with_law": 400,
    "same_law_elsewhere": 14,
-   "identical_elsewhere": 14,
+   "identical_elsewhere": 6,
    "identical_within": 10,
    "shares_laws_with": {
     "symbolicgpt-test-sets": 14,
+    "nsrwh": 14,
+    "erbench": 14,
     "livermore2": 14,
-    "soose-nc": 14,
-    "nsrwh-train-wc": 14,
-    "erbench-syneq": 14,
-    "nsrwh-train-nc": 12,
-    "scrbenchmark": 12,
-    "soose-wc": 12,
-    "srsd-dummy": 12,
     "fastsrb": 12,
-    "symbolicgpt-bivariate-set": 12,
+    "srsd-dummy": 12,
+    "scrbenchmark": 12,
     "ai-feynman-database-100-main-equations": 12,
+    "symbolicgpt-bivariate-set": 12,
     "symformer-in-domain-synthetic-evaluation": 12,
-    "physo-astrophysical-case-studies": 10,
+    "physo": 10,
     "feynman": 2,
-    "lasr-noisy-feynman-with-distractors": 2,
-    "erbench-oeis": 2
+    "lasr": 2
    }
   },
   {
    "catalog": "soose-nc",
-   "benchmark": "soose-nc",
+   "benchmark": "soose",
    "problems": 400,
    "with_law": 400,
-   "same_law_elsewhere": 106,
-   "identical_elsewhere": 106,
+   "same_law_elsewhere": 12,
+   "identical_elsewhere": 5,
    "identical_within": 8,
    "shares_laws_with": {
-    "soose-wc": 104,
     "symbolicgpt-test-sets": 12,
+    "nsrwh": 12,
+    "erbench": 12,
     "livermore2": 12,
-    "soose-fc": 12,
-    "nsrwh-train-wc": 12,
-    "erbench-syneq": 12,
-    "nsrwh-train-nc": 10,
-    "scrbenchmark": 10,
-    "srsd-dummy": 10,
     "fastsrb": 10,
-    "symbolicgpt-bivariate-set": 10,
+    "srsd-dummy": 10,
+    "scrbenchmark": 10,
     "ai-feynman-database-100-main-equations": 10,
+    "symbolicgpt-bivariate-set": 10,
     "symformer-in-domain-synthetic-evaluation": 10,
-    "physo-astrophysical-case-studies": 8,
+    "physo": 8,
     "feynman": 2,
-    "lasr-noisy-feynman-with-distractors": 2,
-    "erbench-oeis": 2
+    "lasr": 2
    }
   },
   {
    "catalog": "soose-wc",
-   "benchmark": "soose-wc",
+   "benchmark": "soose",
    "problems": 400,
    "with_law": 400,
-   "same_law_elsewhere": 106,
-   "identical_elsewhere": 106,
+   "same_law_elsewhere": 12,
+   "identical_elsewhere": 6,
    "identical_within": 12,
    "shares_laws_with": {
-    "soose-nc": 106,
-    "symbolicgpt-test-sets": 12,
-    "livermore2": 12,
-    "nsrwh-train-nc": 12,
-    "soose-fc": 12,
-    "scrbenchmark": 12,
-    "nsrwh-train-wc": 12,
-    "srsd-dummy": 12,
-    "erbench-syneq": 12,
     "fastsrb": 12,
-    "symbolicgpt-bivariate-set": 8,
-    "physo-astrophysical-case-studies": 8,
+    "srsd-dummy": 12,
+    "scrbenchmark": 12,
+    "symbolicgpt-test-sets": 12,
+    "nsrwh": 12,
+    "erbench": 12,
+    "livermore2": 12,
     "ai-feynman-database-100-main-equations": 8,
+    "symbolicgpt-bivariate-set": 8,
     "symformer-in-domain-synthetic-evaluation": 8,
+    "physo": 8,
     "feynman": 4,
-    "lasr-noisy-feynman-with-distractors": 4
+    "lasr": 4
    }
   },
   {
@@ -2285,21 +2191,21 @@
    "identical_elsewhere": 0,
    "identical_within": 2,
    "shares_laws_with": {
-    "rils-rols-random-instances": 1,
-    "nsrwh-train-nc": 1,
-    "erbench-eponymous": 1,
-    "coevolved-fitness-predictors-test-problems": 1,
-    "eql-cart-pendulum": 1,
-    "reproduction-bias-not-included-test-sets": 1,
-    "llm-lex-random-mathematica-functions": 1,
     "ai-feynman-database-100-main-equations": 1,
+    "reproduction-bias-not-included-test-sets": 1,
     "kim-et-al-eql-benchmark-functions": 1,
-    "symformer-in-domain-synthetic-evaluation": 1
+    "coevolved-fitness-predictors-test-problems": 1,
+    "eql": 1,
+    "symformer-in-domain-synthetic-evaluation": 1,
+    "nsrwh": 1,
+    "erbench": 1,
+    "llm-lex-random-mathematica-functions": 1,
+    "rils-rols-random-instances": 1
    }
   },
   {
    "catalog": "srbench-2.0-blackbox",
-   "benchmark": "srbench-2.0-blackbox",
+   "benchmark": "srbench-2.0",
    "problems": 5,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -2309,7 +2215,7 @@
   },
   {
    "catalog": "srbench-2.0-blackbox-restricted",
-   "benchmark": "srbench-2.0-blackbox",
+   "benchmark": "srbench-2.0",
    "problems": 7,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -2319,7 +2225,7 @@
   },
   {
    "catalog": "srbench-2.0-first-principles",
-   "benchmark": "srbench-2.0-first-principles",
+   "benchmark": "srbench-2.0",
    "problems": 10,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -2329,7 +2235,7 @@
   },
   {
    "catalog": "srbench-2.0-first-principles-restricted",
-   "benchmark": "srbench-2.0-first-principles",
+   "benchmark": "srbench-2.0",
    "problems": 2,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -2339,7 +2245,7 @@
   },
   {
    "catalog": "srbench-2021-blackbox",
-   "benchmark": "srbench-2021-blackbox",
+   "benchmark": "srbench-2021",
    "problems": 84,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -2349,7 +2255,7 @@
   },
   {
    "catalog": "srbench-2021-blackbox-restricted",
-   "benchmark": "srbench-2021-blackbox",
+   "benchmark": "srbench-2021",
    "problems": 38,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -2359,7 +2265,7 @@
   },
   {
    "catalog": "srbench-2021-strogatz",
-   "benchmark": "srbench-2021-strogatz",
+   "benchmark": "srbench-2021",
    "problems": 14,
    "with_law": 0,
    "same_law_elsewhere": 0,
@@ -2379,34 +2285,27 @@
     "fastsrb": 109,
     "scrbenchmark": 107,
     "feynman": 38,
-    "lasr-noisy-feynman-with-distractors": 38,
-    "dgsr-additional-feynman": 17,
-    "erbench-eponymous": 12,
-    "dgsr-feynman-d-2-d-5-subsets": 12,
+    "lasr": 38,
+    "dgsr": 29,
+    "erbench": 16,
     "sym-q-ai-feynman-with-drift-terms": 10,
-    "nsrwh-train-nc": 7,
+    "nsrwh": 8,
     "geobench": 7,
     "symformer-in-domain-synthetic-evaluation": 7,
     "feynman-bonus": 7,
+    "kan": 6,
     "kim-et-al-eql-benchmark-functions": 4,
     "llm-lex-random-mathematica-functions": 4,
-    "kan-toy-functions": 4,
     "ai-feynman-database-100-main-equations": 4,
     "rils-rols-random-instances": 3,
     "livermore2": 3,
-    "nsrwh-train-wc": 3,
     "shape-constrained-sr": 3,
-    "kan-feynman-no-units-subset": 2,
-    "erbench-phybench": 2,
-    "phye2e-llm-generated-synthetic-formulas": 2,
+    "phye2e": 2,
+    "soose": 2,
     "symbolicgpt-test-sets": 2,
-    "soose-fc": 2,
-    "soose-nc": 2,
-    "soose-wc": 2,
-    "erbench-syneq": 2,
     "reproduction-bias-not-included-test-sets": 1,
     "symbolicgpt-bivariate-set": 1,
-    "physo-astrophysical-case-studies": 1
+    "physo": 1
    }
   },
   {
@@ -2428,22 +2327,20 @@
    "identical_elsewhere": 1,
    "identical_within": 8,
    "shares_laws_with": {
-    "lasr-noisy-feynman-with-distractors": 14,
+    "lasr": 14,
     "feynman": 14,
-    "scrbenchmark": 10,
     "srsd-dummy": 10,
+    "scrbenchmark": 10,
     "fastsrb": 10,
-    "dgsr-feynman-d-2-d-5-subsets": 9,
-    "nsrwh-train-nc": 5,
-    "erbench-eponymous": 5,
+    "dgsr": 9,
+    "erbench": 6,
+    "kan": 5,
     "symformer-in-domain-synthetic-evaluation": 5,
+    "nsrwh": 5,
     "ai-feynman-database-100-main-equations": 4,
     "geobench": 4,
-    "kan-feynman-no-units-subset": 3,
     "kim-et-al-eql-benchmark-functions": 2,
     "llm-lex-random-mathematica-functions": 2,
-    "kan-toy-functions": 2,
-    "erbench-densities": 1,
     "shape-constrained-sr": 1
    }
   },
@@ -2458,11 +2355,11 @@
    "shares_laws_with": {
     "torchsisso": 2,
     "nguyen": 2,
-    "geobench": 1,
     "errless-synthetic-posterior-set": 1,
+    "geobench": 1,
     "gfn-sr-noisy-near-twin-set": 1,
-    "keijzer": 1,
     "dso-benchmark-registry": 1,
+    "keijzer": 1,
     "livermore": 1
    }
   },
@@ -2485,21 +2382,17 @@
    "identical_elsewhere": 0,
    "identical_within": 139,
    "shares_laws_with": {
-    "symbolicgpt-test-sets": 139,
-    "livermore2": 139,
-    "soose-fc": 139,
-    "soose-nc": 139,
-    "nsrwh-train-wc": 139,
     "ai-feynman-database-100-main-equations": 139,
-    "erbench-syneq": 139,
+    "soose": 139,
+    "symbolicgpt-test-sets": 139,
     "symformer-in-domain-synthetic-evaluation": 139,
-    "erbench-oeis": 99,
-    "nsrwh-train-nc": 40,
-    "scrbenchmark": 40,
-    "soose-wc": 40,
-    "physo-astrophysical-case-studies": 40,
+    "nsrwh": 139,
+    "erbench": 139,
+    "livermore2": 139,
     "fastsrb": 40,
-    "srsd-dummy": 40
+    "srsd-dummy": 40,
+    "scrbenchmark": 40,
+    "physo": 40
    }
   },
   {
@@ -2511,23 +2404,19 @@
    "identical_elsewhere": 0,
    "identical_within": 64,
    "shares_laws_with": {
-    "soose-fc": 67,
+    "soose": 67,
+    "nsrwh": 67,
+    "erbench": 67,
     "livermore2": 67,
-    "soose-nc": 67,
-    "nsrwh-train-wc": 67,
-    "erbench-syneq": 67,
-    "symbolicgpt-bivariate-set": 63,
     "ai-feynman-database-100-main-equations": 63,
+    "symbolicgpt-bivariate-set": 63,
     "symformer-in-domain-synthetic-evaluation": 63,
-    "erbench-oeis": 47,
-    "nsrwh-train-nc": 20,
-    "scrbenchmark": 20,
-    "soose-wc": 20,
     "fastsrb": 20,
     "srsd-dummy": 20,
-    "physo-astrophysical-case-studies": 16,
+    "scrbenchmark": 20,
+    "physo": 16,
     "feynman": 4,
-    "lasr-noisy-feynman-with-distractors": 4
+    "lasr": 4
    }
   },
   {
@@ -2539,9 +2428,9 @@
    "identical_elsewhere": 1,
    "identical_within": 0,
    "shares_laws_with": {
-    "vladislavleva": 1,
-    "heuristiclab-regression-instance-providers": 1,
-    "gp-benchmarks-sr-table": 1
+    "heuristiclab": 1,
+    "gp-benchmarks-sr-table": 1,
+    "vladislavleva": 1
    }
   },
   {
@@ -2553,37 +2442,31 @@
    "identical_elsewhere": 0,
    "identical_within": 109,
    "shares_laws_with": {
-    "nsrwh-train-nc": 48,
-    "erbench-eponymous": 45,
+    "erbench": 81,
+    "nsrwh": 71,
     "ai-feynman-database-100-main-equations": 40,
-    "erbench-syneq": 30,
-    "erbench-oeis": 29,
-    "soose-fc": 29,
-    "livermore2": 29,
-    "soose-nc": 29,
-    "nsrwh-train-wc": 29,
     "symbolicgpt-bivariate-set": 29,
+    "soose": 29,
     "symbolicgpt-test-sets": 29,
+    "livermore2": 29,
     "kim-et-al-eql-benchmark-functions": 23,
     "geobench": 21,
-    "scrbenchmark": 15,
     "srsd-dummy": 15,
+    "scrbenchmark": 15,
     "fastsrb": 15,
-    "dgsr-feynman-d-2-d-5-subsets": 8,
+    "dgsr": 8,
     "feynman": 8,
+    "lasr": 8,
     "sym-q-ai-feynman-with-drift-terms": 8,
-    "lasr-noisy-feynman-with-distractors": 8,
     "rils-rols-random-instances": 7,
     "nguyen": 6,
     "reproduction-bias-not-included-test-sets": 6,
     "llm-lex-random-mathematica-functions": 6,
-    "soose-wc": 6,
-    "physo-astrophysical-case-studies": 6,
-    "kan-toy-functions": 5,
+    "physo": 6,
+    "kan": 6,
     "sr-dynamical-systems": 1,
     "coevolved-fitness-predictors-test-problems": 1,
-    "eql-cart-pendulum": 1,
-    "kan-feynman-no-units-subset": 1
+    "eql": 1
    }
   },
   {
@@ -2598,7 +2481,7 @@
     "nguyen": 6,
     "neat": 5,
     "vladislavleva": 3,
-    "erbench-public-legacy-formulas": 1,
+    "erbench": 1,
     "gp-benchmarks-sr-table": 1,
     "livermore": 1,
     "jin": 1,
@@ -2636,8 +2519,8 @@
    "identical_within": 0,
    "shares_laws_with": {
     "symantic-synthetic-set": 2,
-    "geobench": 1,
-    "errless-synthetic-posterior-set": 1
+    "errless-synthetic-posterior-set": 1,
+    "geobench": 1
    }
   },
   {
@@ -2651,12 +2534,12 @@
    "shares_laws_with": {
     "symtree-benchmark-functions": 3,
     "neat": 1,
+    "keijzer": 1,
     "livermore": 1,
     "jin": 1,
-    "keijzer": 1,
-    "symbolicregression-com-toy-test-suite-1": 1,
-    "heuristiclab-regression-instance-providers": 1,
-    "gp-benchmarks-sr-table": 1
+    "heuristiclab": 1,
+    "gp-benchmarks-sr-table": 1,
+    "symbolicregression-com-toy-test-suite-1": 1
    }
   },
   {

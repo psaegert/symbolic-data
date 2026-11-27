@@ -25,10 +25,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   ball_drop:
+    subset: "knowledge-integration-newtonian-cases"
     raw: sqrt(2*9.81*h)
     prepared: 4.42944691807002*sqrt(v1)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: h
@@ -86,10 +86,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   shm:
+    subset: "knowledge-integration-newtonian-cases"
     raw: 1.0*cos(sqrt(1.0/m)*t + 0.0)
     prepared: 1.0*cos(1.0*v2*sqrt(1/v1))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: m
@@ -147,10 +147,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   wave:
+    subset: "knowledge-integration-newtonian-cases"
     raw: exp(-0.1*t/2)*cos(1.0*0 - 2*pi*t)
     prepared: exp(-0.05*v1)*cos(-2*3.141592653589793*v1 + 0)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: t

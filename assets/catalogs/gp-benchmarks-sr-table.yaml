@@ -30,10 +30,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Korns-13:
+    subset: "Korns"
     raw: 32 - 3*(tan(x)/tan(y))*(tan(z)/tan(v))
     prepared: -3*tan(v1)*tan(v3)/(tan(v2)*tan(v4)) + 32
     n_variables: 5
-    subset: Korns
     vars:
       v1:
         name: x
@@ -86,10 +86,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Korns-14:
+    subset: "Korns"
     raw: 22 - 4.2*(cos(x) - tan(y))*(tanh(z)/sin(v))
     prepared: -4.2*(cos(v1) - tan(v2))*tanh(v3)/sin(v4) + 22
     n_variables: 5
-    subset: Korns
     vars:
       v1:
         name: x
@@ -142,10 +142,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Korns-15:
+    subset: "Korns"
     raw: 12 - 6*(tan(x)/exp(y))*(log(z) - tan(v))
     prepared: -6*(log(v3) - tan(v4))*exp(-v2)*tan(v1) + 12
     n_variables: 5
-    subset: Korns
     vars:
       v1:
         name: x
@@ -198,10 +198,10 @@ expressions:
     meta:
       finite_fraction: 0.494
   Korns-7:
+    subset: "Korns"
     raw: 213.80940889*(1 - exp(-0.54723748542*x))
     prepared: 213.80940889 - 213.80940889*exp(-0.54723748542*v1)
     n_variables: 5
-    subset: Korns
     vars:
       v1:
         name: x
@@ -254,10 +254,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Korns-5:
+    subset: "Korns"
     raw: 3 + 2.13*log(w)
     prepared: 2.13*log(v5) + 3
     n_variables: 5
-    subset: Korns
     vars:
       v1:
         name: x
@@ -310,10 +310,10 @@ expressions:
     meta:
       finite_fraction: 0.5034
   Korns-6:
+    subset: "Korns"
     raw: 1.3 + 0.13*sqrt(x)
     prepared: 0.13*sqrt(v1) + 1.3
     n_variables: 5
-    subset: Korns
     vars:
       v1:
         name: x
@@ -366,10 +366,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   Korns-8:
+    subset: "Korns"
     raw: 6.87 + 11*sqrt(7.23*x*v*w)
     prepared: 29.5775252514473*sqrt(v1*v4*v5) + 6.87
     n_variables: 5
-    subset: Korns
     vars:
       v1:
         name: x
@@ -422,10 +422,10 @@ expressions:
     meta:
       finite_fraction: 0.5043
   Korns-9:
+    subset: "Korns"
     raw: (sqrt(x)/log(y))*(exp(z)/v**2)
     prepared: sqrt(v1)*exp(v3)/(v4**2*log(v2))
     n_variables: 5
-    subset: Korns
     vars:
       v1:
         name: x
@@ -478,10 +478,10 @@ expressions:
     meta:
       finite_fraction: 0.2522
   Nguyen-9:
+    subset: "Nguyen"
     raw: sin(x) + sin(y**2)
     prepared: sin(v1) + sin(v2**2)
     n_variables: 2
-    subset: Nguyen
     vars:
       v1:
         name: x
@@ -507,10 +507,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Keijzer-5:
+    subset: "Keijzer"
     raw: 30*x*z/((x - 10)*y**2)
     prepared: 30*v1*v3/(v2**2*(v1 - 10))
     n_variables: 3
-    subset: Keijzer
     vars:
       v1:
         name: x
@@ -545,10 +545,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Vladislavleva-7:
+    subset: "Vladislavleva"
     raw: (x - 3)*(y - 3) + 2*sin((x - 4)*(y - 4))
     prepared: (v1 - 3)*(v2 - 3) + 2*sin((v1 - 4)*(v2 - 4))
     n_variables: 2
-    subset: Vladislavleva
     vars:
       v1:
         name: x

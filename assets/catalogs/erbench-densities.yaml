@@ -1,7 +1,7 @@
 metadata:
   name: erbench-densities
   version: 2
-  benchmark: "erbench-densities"
+  benchmark: "erbench"
   tags: {"origin": "science formula", "tags": ["extrapolation", "dummy inputs"]}
   description: ERBench Densities family (33 entries after deduplication; headline eval tier); one problem per formula and
     alpha (ERBench's generator).
@@ -29,6 +29,7 @@ metadata:
       merged with names in meta.duplicate_of_rows.'
 expressions:
   anglit_alpha0:
+    subset: "densities"
     raw: cos(2*x_0)
     prepared: cos(2*v1)
     sources:
@@ -69,6 +70,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   anglit_alpha0.5:
+    subset: "densities"
     raw: cos(2*x_0)
     prepared: cos(2*v1)
     sources:
@@ -109,6 +111,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   anglit_alpha1:
+    subset: "densities"
     raw: cos(2*x_0)
     prepared: cos(2*v1)
     sources:
@@ -149,6 +152,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   arcsine_alpha0:
+    subset: "densities"
     raw: 1/(pi*sqrt(x_0*(1 - x_0)))
     prepared: 1/(3.141592653589793*sqrt(v1*(1-v1)))
     sources:
@@ -191,6 +195,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   arcsine_alpha0.5:
+    subset: "densities"
     raw: 1/(pi*sqrt(x_0*(1 - x_0)))
     prepared: 1/(3.141592653589793*sqrt(v1*(1-v1)))
     sources:
@@ -233,6 +238,7 @@ expressions:
       alpha: 0.5
       dummies: 1
   arcsine_alpha1:
+    subset: "densities"
     raw: 1/(pi*sqrt(x_0*(1 - x_0)))
     prepared: 1/(3.141592653589793*sqrt(v1*(1-v1)))
     sources:
@@ -275,6 +281,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   logistic_alpha0:
+    subset: "densities"
     raw: exp(-x_0)/(1+exp(-x_0))^2
     prepared: exp(-v1)/(1+exp(-v1))**2
     sources:
@@ -315,6 +322,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   logistic_alpha0.5:
+    subset: "densities"
     raw: exp(-x_0)/(1+exp(-x_0))^2
     prepared: exp(-v1)/(1+exp(-v1))**2
     sources:
@@ -357,6 +365,7 @@ expressions:
       alpha: 0.5
       dummies: 1
   logistic_alpha1:
+    subset: "densities"
     raw: exp(-x_0)/(1+exp(-x_0))^2
     prepared: exp(-v1)/(1+exp(-v1))**2
     sources:
@@ -399,6 +408,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   generalized pareto_alpha0:
+    subset: "densities"
     raw: (1 + 2*x_0)^(-3/2)
     prepared: (1+2*v1)**(-3/2)
     sources:
@@ -439,6 +449,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   generalized pareto_alpha0.5:
+    subset: "densities"
     raw: (1 + 2*x_0)^(-3/2)
     prepared: (1+2*v1)**(-3/2)
     sources:
@@ -479,6 +490,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   generalized pareto_alpha1:
+    subset: "densities"
     raw: (1 + 2*x_0)^(-3/2)
     prepared: (1+2*v1)**(-3/2)
     sources:
@@ -519,6 +531,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   generalized exponential_alpha0:
+    subset: "densities"
     raw: (1 + 2*(1 - exp(-2*x_0)))*exp(-3*x_0 + 1 - exp(-2*x_0))
     prepared: (1+2*(1-exp(-2*v1)))*exp(-3*v1+1-exp(-2*v1))
     sources:
@@ -561,6 +574,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   generalized exponential_alpha0.5:
+    subset: "densities"
     raw: (1 + 2*(1 - exp(-2*x_0)))*exp(-3*x_0 + 1 - exp(-2*x_0))
     prepared: (1+2*(1-exp(-2*v1)))*exp(-3*v1+1-exp(-2*v1))
     sources:
@@ -601,6 +615,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   generalized exponential_alpha1:
+    subset: "densities"
     raw: (1 + 2*(1 - exp(-2*x_0)))*exp(-3*x_0 + 1 - exp(-2*x_0))
     prepared: (1+2*(1-exp(-2*v1)))*exp(-3*v1+1-exp(-2*v1))
     sources:
@@ -641,6 +656,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   generalized  extreme value_alpha0:
+    subset: "densities"
     raw: exp(-(1 + x_0)^(-1))*(1 + x_0)^(-2)
     prepared: exp(-(1+v1)**(-1))*(1+v1)**(-2)
     sources:
@@ -681,6 +697,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   generalized  extreme value_alpha0.5:
+    subset: "densities"
     raw: exp(-(1 + x_0)^(-1))*(1 + x_0)^(-2)
     prepared: exp(-(1+v1)**(-1))*(1+v1)**(-2)
     sources:
@@ -721,6 +738,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   generalized  extreme value_alpha1:
+    subset: "densities"
     raw: exp(-(1 + x_0)^(-1))*(1 + x_0)^(-2)
     prepared: exp(-(1+v1)**(-1))*(1+v1)**(-2)
     sources:
@@ -763,6 +781,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   gibrat_alpha0:
+    subset: "densities"
     raw: 1/(x_0*sqrt(2*pi))*exp(-0.5*(log(x_0)^2))
     prepared: 1/(v1*sqrt(2*3.141592653589793))*exp(-0.5*(log(v1)**2))
     sources:
@@ -803,6 +822,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   gibrat_alpha0.5:
+    subset: "densities"
     raw: 1/(x_0*sqrt(2*pi))*exp(-0.5*(log(x_0)^2))
     prepared: 1/(v1*sqrt(2*3.141592653589793))*exp(-0.5*(log(v1)**2))
     sources:
@@ -845,6 +865,7 @@ expressions:
       alpha: 0.5
       dummies: 1
   gibrat_alpha1:
+    subset: "densities"
     raw: 1/(x_0*sqrt(2*pi))*exp(-0.5*(log(x_0)^2))
     prepared: 1/(v1*sqrt(2*3.141592653589793))*exp(-0.5*(log(v1)**2))
     sources:
@@ -887,6 +908,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   gompertz_alpha0:
+    subset: "densities"
     raw: exp(x_0)*exp(1 - exp(x_0))
     prepared: exp(v1)*exp(1-exp(v1))
     sources:
@@ -927,6 +949,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   gompertz_alpha0.5:
+    subset: "densities"
     raw: exp(x_0)*exp(1 - exp(x_0))
     prepared: exp(v1)*exp(1-exp(v1))
     sources:
@@ -969,6 +992,7 @@ expressions:
       alpha: 0.5
       dummies: 1
   gompertz_alpha1:
+    subset: "densities"
     raw: exp(x_0)*exp(1 - exp(x_0))
     prepared: exp(v1)*exp(1-exp(v1))
     sources:
@@ -1009,6 +1033,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   right-skewed Gumbel_alpha0:
+    subset: "densities"
     raw: exp(-(x_0 + exp(-x_0)))
     prepared: exp(-(v1+exp(-v1)))
     sources:
@@ -1049,6 +1074,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   right-skewed Gumbel_alpha0.5:
+    subset: "densities"
     raw: exp(-(x_0 + exp(-x_0)))
     prepared: exp(-(v1+exp(-v1)))
     sources:
@@ -1089,6 +1115,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   right-skewed Gumbel_alpha1:
+    subset: "densities"
     raw: exp(-(x_0 + exp(-x_0)))
     prepared: exp(-(v1+exp(-v1)))
     sources:
@@ -1129,6 +1156,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   Half-Cauchy_alpha0:
+    subset: "densities"
     raw: 2/(pi*(1 + x_0^2))
     prepared: 2/(3.141592653589793*(1+v1**2))
     sources:
@@ -1169,6 +1197,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   Half-Cauchy_alpha0.5:
+    subset: "densities"
     raw: 2/(pi*(1 + x_0^2))
     prepared: 2/(3.141592653589793*(1+v1**2))
     sources:
@@ -1209,6 +1238,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   Half-Cauchy_alpha1:
+    subset: "densities"
     raw: 2/(pi*(1 + x_0^2))
     prepared: 2/(3.141592653589793*(1+v1**2))
     sources:
@@ -1249,6 +1279,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   Half-Logistic_alpha0:
+    subset: "densities"
     raw: (2*exp(-x_0))/((1 + exp(-x_0))^2)
     prepared: (2*exp(-v1))/((1+exp(-v1))**2)
     sources:
@@ -1289,6 +1320,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   Half-Logistic_alpha0.5:
+    subset: "densities"
     raw: (2*exp(-x_0))/((1 + exp(-x_0))^2)
     prepared: (2*exp(-v1))/((1+exp(-v1))**2)
     sources:
@@ -1329,6 +1361,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   Half-Logistic_alpha1:
+    subset: "densities"
     raw: (2*exp(-x_0))/((1 + exp(-x_0))^2)
     prepared: (2*exp(-v1))/((1+exp(-v1))**2)
     sources:
@@ -1369,6 +1402,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   Half-Normal_alpha0:
+    subset: "densities"
     raw: sqrt(2/pi)*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*exp(-v1**2/2)
     sources:
@@ -1409,6 +1443,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   Half-Normal_alpha0.5:
+    subset: "densities"
     raw: sqrt(2/pi)*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*exp(-v1**2/2)
     sources:
@@ -1451,6 +1486,7 @@ expressions:
       alpha: 0.5
       dummies: 1
   Half-Normal_alpha1:
+    subset: "densities"
     raw: sqrt(2/pi)*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*exp(-v1**2/2)
     sources:
@@ -1491,6 +1527,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   bradford_alpha0:
+    subset: "densities"
     raw: 1/(log(2)*(1 + x_0))
     prepared: 1/(log(2)*(1+v1))
     sources:
@@ -1533,6 +1570,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   bradford_alpha0.5:
+    subset: "densities"
     raw: 1/(log(2)*(1 + x_0))
     prepared: 1/(log(2)*(1+v1))
     sources:
@@ -1573,6 +1611,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   bradford_alpha1:
+    subset: "densities"
     raw: 1/(log(2)*(1 + x_0))
     prepared: 1/(log(2)*(1+v1))
     sources:
@@ -1615,6 +1654,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   Inverse Gaussian_alpha0:
+    subset: "densities"
     raw: 1/sqrt((2*pi*x_0^3))*exp(-((x_0-1)^2)/(2*x_0))
     prepared: 1/sqrt((2*3.141592653589793*v1**3))*exp(-((v1-1)**2)/(2*v1))
     sources:
@@ -1657,6 +1697,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   Inverse Gaussian_alpha0.5:
+    subset: "densities"
     raw: 1/sqrt((2*pi*x_0^3))*exp(-((x_0-1)^2)/(2*x_0))
     prepared: 1/sqrt((2*3.141592653589793*v1**3))*exp(-((v1-1)**2)/(2*v1))
     sources:
@@ -1697,6 +1738,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   Inverse Gaussian_alpha1:
+    subset: "densities"
     raw: 1/sqrt((2*pi*x_0^3))*exp(-((x_0-1)^2)/(2*x_0))
     prepared: 1/sqrt((2*3.141592653589793*v1**3))*exp(-((v1-1)**2)/(2*v1))
     sources:
@@ -1739,6 +1781,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   Inverse Weibull_alpha0:
+    subset: "densities"
     raw: exp(-1/x_0)/(x_0^2)
     prepared: exp(-1/v1)/(v1**2)
     sources:
@@ -1779,6 +1822,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   Inverse Weibull_alpha0.5:
+    subset: "densities"
     raw: exp(-1/x_0)/(x_0^2)
     prepared: exp(-1/v1)/(v1**2)
     sources:
@@ -1821,6 +1865,7 @@ expressions:
       alpha: 0.5
       dummies: 1
   Inverse Weibull_alpha1:
+    subset: "densities"
     raw: exp(-1/x_0)/(x_0^2)
     prepared: exp(-1/v1)/(v1**2)
     sources:
@@ -1861,6 +1906,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   Lomax_alpha0:
+    subset: "densities"
     raw: 1/((1 +x_0)^2)
     prepared: 1/((1+v1)**2)
     sources:
@@ -1901,6 +1947,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   Lomax_alpha0.5:
+    subset: "densities"
     raw: 1/((1 +x_0)^2)
     prepared: 1/((1+v1)**2)
     sources:
@@ -1941,6 +1988,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   Lomax_alpha1:
+    subset: "densities"
     raw: 1/((1 +x_0)^2)
     prepared: 1/((1+v1)**2)
     sources:
@@ -1983,6 +2031,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   Maxwell_alpha0:
+    subset: "densities"
     raw: sqrt(2/pi)*x_0^2*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*v1**2*exp(-v1**2/2)
     sources:
@@ -2025,6 +2074,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   Maxwell_alpha0.5:
+    subset: "densities"
     raw: sqrt(2/pi)*x_0^2*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*v1**2*exp(-v1**2/2)
     sources:
@@ -2067,6 +2117,7 @@ expressions:
       alpha: 0.5
       dummies: 1
   Maxwell_alpha1:
+    subset: "densities"
     raw: sqrt(2/pi)*x_0^2*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*v1**2*exp(-v1**2/2)
     sources:
@@ -2109,6 +2160,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   Moyal_alpha0:
+    subset: "densities"
     raw: (exp(-(x_0+exp(-x_0))/2))/(sqrt(2*pi))
     prepared: (exp(-(v1+exp(-v1))/2))/(sqrt(2*3.141592653589793))
     sources:
@@ -2149,6 +2201,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   Moyal_alpha0.5:
+    subset: "densities"
     raw: (exp(-(x_0+exp(-x_0))/2))/(sqrt(2*pi))
     prepared: (exp(-(v1+exp(-v1))/2))/(sqrt(2*3.141592653589793))
     sources:
@@ -2189,6 +2242,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   Moyal_alpha1:
+    subset: "densities"
     raw: (exp(-(x_0+exp(-x_0))/2))/(sqrt(2*pi))
     prepared: (exp(-(v1+exp(-v1))/2))/(sqrt(2*3.141592653589793))
     sources:
@@ -2231,6 +2285,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   standard normal_alpha0:
+    subset: "densities"
     raw: (exp(-x_0^2/2))/(sqrt(2*pi))
     prepared: (exp(-v1**2/2))/(sqrt(2*3.141592653589793))
     sources:
@@ -2271,6 +2326,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   standard normal_alpha0.5:
+    subset: "densities"
     raw: (exp(-x_0^2/2))/(sqrt(2*pi))
     prepared: (exp(-v1**2/2))/(sqrt(2*3.141592653589793))
     sources:
@@ -2311,6 +2367,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   standard normal_alpha1:
+    subset: "densities"
     raw: (exp(-x_0^2/2))/(sqrt(2*pi))
     prepared: (exp(-v1**2/2))/(sqrt(2*3.141592653589793))
     sources:
@@ -2353,6 +2410,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   standard normal~densities_19_alpha0:
+    subset: "densities"
     raw: 2/(x_0^3)
     prepared: 2/(v1**3)
     sources:
@@ -2395,6 +2453,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   standard normal~densities_19_alpha0.5:
+    subset: "densities"
     raw: 2/(x_0^3)
     prepared: 2/(v1**3)
     sources:
@@ -2437,6 +2496,7 @@ expressions:
       alpha: 0.5
       dummies: 1
   standard normal~densities_19_alpha1:
+    subset: "densities"
     raw: 2/(x_0^3)
     prepared: 2/(v1**3)
     sources:
@@ -2477,6 +2537,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   power law_alpha0:
+    subset: "densities"
     raw: 1/(2*sqrt(x_0))
     prepared: 1/(2*sqrt(v1))
     sources:
@@ -2517,6 +2578,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   power law_alpha0.5:
+    subset: "densities"
     raw: 1/(2*sqrt(x_0))
     prepared: 1/(2*sqrt(v1))
     sources:
@@ -2557,6 +2619,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   power law_alpha1:
+    subset: "densities"
     raw: 1/(2*sqrt(x_0))
     prepared: 1/(2*sqrt(v1))
     sources:
@@ -2597,6 +2660,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   rayleigh_alpha0:
+    subset: "densities"
     raw: x_0*exp(-x_0^2/2)
     prepared: v1*exp(-v1**2/2)
     sources:
@@ -2639,6 +2703,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   rayleigh_alpha0.5:
+    subset: "densities"
     raw: x_0*exp(-x_0^2/2)
     prepared: v1*exp(-v1**2/2)
     sources:
@@ -2679,6 +2744,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   rayleigh_alpha1:
+    subset: "densities"
     raw: x_0*exp(-x_0^2/2)
     prepared: v1*exp(-v1**2/2)
     sources:
@@ -2719,6 +2785,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   semicircular_alpha0:
+    subset: "densities"
     raw: 2/pi*sqrt(1 - x_0^2)
     prepared: 2/3.141592653589793*sqrt(1-v1**2)
     sources:
@@ -2759,6 +2826,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   semicircular_alpha0.5:
+    subset: "densities"
     raw: 2/pi*sqrt(1 - x_0^2)
     prepared: 2/3.141592653589793*sqrt(1-v1**2)
     sources:
@@ -2801,6 +2869,7 @@ expressions:
       alpha: 0.5
       dummies: 1
   semicircular_alpha1:
+    subset: "densities"
     raw: 2/pi*sqrt(1 - x_0^2)
     prepared: 2/3.141592653589793*sqrt(1-v1**2)
     sources:
@@ -2843,6 +2912,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   bradford~densities_23_alpha0:
+    subset: "densities"
     raw: 2*(x_0^(-3))/((1+x_0^(-2))^2)
     prepared: 2*(v1**(-3))/((1+v1**(-2))**2)
     sources:
@@ -2885,6 +2955,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   bradford~densities_23_alpha0.5:
+    subset: "densities"
     raw: 2*(x_0^(-3))/((1+x_0^(-2))^2)
     prepared: 2*(v1**(-3))/((1+v1**(-2))**2)
     sources:
@@ -2927,6 +2998,7 @@ expressions:
       alpha: 0.5
       dummies: 1
   bradford~densities_23_alpha1:
+    subset: "densities"
     raw: 2*(x_0^(-3))/((1+x_0^(-2))^2)
     prepared: 2*(v1**(-3))/((1+v1**(-2))**2)
     sources:
@@ -2967,6 +3039,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   Boltzmann_alpha0:
+    subset: "densities"
     raw: 0.09516690253473127*exp(-0.1*x_0)
     prepared: 0.09516690253473127*exp(-0.1*v1)
     sources:
@@ -3007,6 +3080,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   Boltzmann_alpha0.5:
+    subset: "densities"
     raw: 0.09516690253473127*exp(-0.1*x_0)
     prepared: 0.09516690253473127*exp(-0.1*v1)
     sources:
@@ -3047,6 +3121,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   Boltzmann_alpha1:
+    subset: "densities"
     raw: 0.09516690253473127*exp(-0.1*x_0)
     prepared: 0.09516690253473127*exp(-0.1*v1)
     sources:
@@ -3087,6 +3162,7 @@ expressions:
       alpha: 1.0
       dummies: 0
   Geometric_alpha0:
+    subset: "densities"
     raw: 0.8^(x_0-1)*0.2
     prepared: 0.8**(v1-1)*0.2
     sources:
@@ -3127,6 +3203,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   Geometric_alpha0.5:
+    subset: "densities"
     raw: 0.8^(x_0-1)*0.2
     prepared: 0.8**(v1-1)*0.2
     sources:
@@ -3167,6 +3244,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   Geometric_alpha1:
+    subset: "densities"
     raw: 0.8^(x_0-1)*0.2
     prepared: 0.8**(v1-1)*0.2
     sources:
@@ -3209,6 +3287,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   Log Series_alpha0:
+    subset: "densities"
     raw: -(0.9^x_0)/(x_0*log(0.1))
     prepared: -(0.9**v1)/(v1*log(0.1))
     sources:
@@ -3249,6 +3328,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   Log Series_alpha0.5:
+    subset: "densities"
     raw: -(0.9^x_0)/(x_0*log(0.1))
     prepared: -(0.9**v1)/(v1*log(0.1))
     sources:
@@ -3289,6 +3369,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   Log Series_alpha1:
+    subset: "densities"
     raw: -(0.9^x_0)/(x_0*log(0.1))
     prepared: -(0.9**v1)/(v1*log(0.1))
     sources:
@@ -3331,6 +3412,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   cauchy_alpha0:
+    subset: "densities"
     raw: 1/(pi*(1 + x_0^2))
     prepared: 1/(3.141592653589793*(1+v1**2))
     sources:
@@ -3371,6 +3453,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   cauchy_alpha0.5:
+    subset: "densities"
     raw: 1/(pi*(1 + x_0^2))
     prepared: 1/(3.141592653589793*(1+v1**2))
     sources:
@@ -3411,6 +3494,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   cauchy_alpha1:
+    subset: "densities"
     raw: 1/(pi*(1 + x_0^2))
     prepared: 1/(3.141592653589793*(1+v1**2))
     sources:
@@ -3453,6 +3537,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   cosine_alpha0:
+    subset: "densities"
     raw: (1 + cos(x_0))/(2*pi)
     prepared: (1+cos(v1))/(2*3.141592653589793)
     sources:
@@ -3493,6 +3578,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   cosine_alpha0.5:
+    subset: "densities"
     raw: (1 + cos(x_0))/(2*pi)
     prepared: (1+cos(v1))/(2*3.141592653589793)
     sources:
@@ -3533,6 +3619,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   cosine_alpha1:
+    subset: "densities"
     raw: (1 + cos(x_0))/(2*pi)
     prepared: (1+cos(v1))/(2*3.141592653589793)
     sources:
@@ -3575,6 +3662,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   exponential_alpha0:
+    subset: "densities"
     raw: exp(-x_0)
     prepared: exp(-v1)
     sources:
@@ -3617,6 +3705,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   exponential_alpha0.5:
+    subset: "densities"
     raw: exp(-x_0)
     prepared: exp(-v1)
     sources:
@@ -3657,6 +3746,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   exponential_alpha1:
+    subset: "densities"
     raw: exp(-x_0)
     prepared: exp(-v1)
     sources:
@@ -3699,6 +3789,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   exponential weibull_alpha0:
+    subset: "densities"
     raw: 2*(1 - exp(-x_0))*exp(-x_0)
     prepared: 2*(1-exp(-v1))*exp(-v1)
     sources:
@@ -3741,6 +3832,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   exponential weibull_alpha0.5:
+    subset: "densities"
     raw: 2*(1 - exp(-x_0))*exp(-x_0)
     prepared: 2*(1-exp(-v1))*exp(-v1)
     sources:
@@ -3781,6 +3873,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   exponential weibull_alpha1:
+    subset: "densities"
     raw: 2*(1 - exp(-x_0))*exp(-x_0)
     prepared: 2*(1-exp(-v1))*exp(-v1)
     sources:
@@ -3823,6 +3916,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   fatigue life_alpha0:
+    subset: "densities"
     raw: (x_0+1)/(2*sqrt(2*pi*x_0^3))*exp(-(x_0-1)^2/(2*x_0))
     prepared: (v1+1)/(2*sqrt(2*3.141592653589793*v1**3))*exp(-(v1-1)**2/(2*v1))
     sources:
@@ -3865,6 +3959,7 @@ expressions:
       alpha: 0.0
       dummies: 1
   fatigue life_alpha0.5:
+    subset: "densities"
     raw: (x_0+1)/(2*sqrt(2*pi*x_0^3))*exp(-(x_0-1)^2/(2*x_0))
     prepared: (v1+1)/(2*sqrt(2*3.141592653589793*v1**3))*exp(-(v1-1)**2/(2*v1))
     sources:
@@ -3905,6 +4000,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   fatigue life_alpha1:
+    subset: "densities"
     raw: (x_0+1)/(2*sqrt(2*pi*x_0^3))*exp(-(x_0-1)^2/(2*x_0))
     prepared: (v1+1)/(2*sqrt(2*3.141592653589793*v1**3))*exp(-(v1-1)**2/(2*v1))
     sources:
@@ -3947,6 +4043,7 @@ expressions:
       alpha: 1.0
       dummies: 1
   folded cauchy_alpha0:
+    subset: "densities"
     raw: 1/(pi*(1 + (x_0-1)^2)) + 1/(pi*(1 + (x_0+1)^2))
     prepared: 1/(3.141592653589793*(1+(v1-1)**2))+1/(3.141592653589793*(1+(v1+1)**2))
     sources:
@@ -3987,6 +4084,7 @@ expressions:
       alpha: 0.0
       dummies: 0
   folded cauchy_alpha0.5:
+    subset: "densities"
     raw: 1/(pi*(1 + (x_0-1)^2)) + 1/(pi*(1 + (x_0+1)^2))
     prepared: 1/(3.141592653589793*(1+(v1-1)**2))+1/(3.141592653589793*(1+(v1+1)**2))
     sources:
@@ -4027,6 +4125,7 @@ expressions:
       alpha: 0.5
       dummies: 0
   folded cauchy_alpha1:
+    subset: "densities"
     raw: 1/(pi*(1 + (x_0-1)^2)) + 1/(pi*(1 + (x_0+1)^2))
     prepared: 1/(3.141592653589793*(1+(v1-1)**2))+1/(3.141592653589793*(1+(v1+1)**2))
     sources:

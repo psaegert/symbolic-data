@@ -2,7 +2,7 @@ metadata:
   name: nsrwh-only-five-variables-nc
   display_name: "nsrwh-only-five-variables-nc*"
   version: 1
-  benchmark: "nsrwh-only-five-variables-nc"
+  benchmark: "nsrwh"
   tags: {"origin": "generated formulas", "tags": ["extrapolation", "generator in-distribution", "srbf-modified"]}
   license: "MIT (SymposiumOrganization/ControllableNeuralSymbolicRegression)"
   citation: {"paper": {"short": "Bendinelli et al. 2023", "title": "Controllable Neural Symbolic Regression", "venue": "ICML 2023 (PMLR 202)", "url": "https://arxiv.org/abs/2304.10336"}, "data": {"short": "GitHub SymposiumOrganization/ControllableNeuralSymbolicRegression@3060cb8", "title": "NSRwH test_set/only_five_variables_nc.csv (MIT)", "url": "https://github.com/SymposiumOrganization/ControllableNeuralSymbolicRegression/blob/3060cb8d2b79071f80c51cd35c2808833ae15ec8/test_set/only_five_variables_nc.csv"}}
@@ -32,10 +32,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   only_five_variables_nc-000:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2*x_3 + x_4 - x_5)
     prepared: v1*(v2*v3 + v4 - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -124,10 +124,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-001:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2**2*x_3 + x_4*(x_2 + x_5))/x_4
     prepared: (v1 + v2**2*v3 + v4*(v2 + v5))/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -216,10 +216,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-002:
+    subset: "only-five-variables-nc"
     raw: x_1/x_3 + x_2*x_4*exp(-x_5) - x_2/x_3
     prepared: v1/v3 + v2*v4*exp(-v5) - v2/v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -308,10 +308,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-003:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 + x_2)*asin(x_3 + x_4)
     prepared: v5*(v1 + v2)*asin(v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -400,10 +400,10 @@ expressions:
     meta:
       finite_fraction: 0.0974
   only_five_variables_nc-004:
+    subset: "only-five-variables-nc"
     raw: (x_4 - x_5)*asin(x_1 + x_2*x_3**4)
     prepared: (v4 - v5)*asin(v1 + v2*v3**4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -463,10 +463,10 @@ expressions:
       finite_fraction: 0.0118
       low_validity: true
   only_five_variables_nc-005:
+    subset: "only-five-variables-nc"
     raw: cos(x_1*x_5/(x_2*x_4*cos(x_3)))
     prepared: cos(v1*v5/(v2*v4*cos(v3)))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -555,10 +555,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-006:
+    subset: "only-five-variables-nc"
     raw: tan(x_1*(x_2*x_3*(x_3 + x_4) + x_5))
     prepared: tan(v1*(v2*v3*(v3 + v4) + v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -647,10 +647,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-007:
+    subset: "only-five-variables-nc"
     raw: -x_1*(x_4 + x_5)/(x_4 - (x_2 - x_3)*(x_4 + x_5))
     prepared: -v1*(v4 + v5)/(v4 - (v2 - v3)*(v4 + v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -739,10 +739,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-008:
+    subset: "only-five-variables-nc"
     raw: x_3 + x_4*x_5 + x_3*sin(x_1)/x_2
     prepared: v3 + v4*v5 + v3*sin(v1)/v2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -831,10 +831,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-009:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_3 - x_4)/(x_2 + (x_1 + x_5)*(x_3 - x_4))
     prepared: v1*(v3 - v4)/(v2 + (v1 + v5)*(v3 - v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -923,10 +923,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-010:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2 + x_3*x_4**2)/x_5
     prepared: (v1 + v2 + v3*v4**2)/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1015,10 +1015,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-011:
+    subset: "only-five-variables-nc"
     raw: x_3*tan(x_1 + asin(x_2))/x_4 + x_5
     prepared: v3*tan(v1 + asin(v2))/v4 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1107,10 +1107,10 @@ expressions:
     meta:
       finite_fraction: 0.0975
   only_five_variables_nc-012:
+    subset: "only-five-variables-nc"
     raw: sqrt(-x_5*sin(x_1*(-x_2 + x_3 + x_4)))
     prepared: sqrt(-v5*sin(v1*(-v2 + v3 + v4)))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1199,10 +1199,10 @@ expressions:
     meta:
       finite_fraction: 0.4988
   only_five_variables_nc-013:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2 + cos(x_3*x_4*x_5))
     prepared: v1*(v2 + cos(v3*v4*v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1291,10 +1291,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-014:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*x_5*(x_3 + x_4)
     prepared: v1*v2*v5*(v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1383,10 +1383,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-015:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2 - x_3/(x_4*(x_4 + x_5))) + x_1
     prepared: v1*(v2 - v3/(v4*(v4 + v5))) + v1
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1475,10 +1475,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-016:
+    subset: "only-five-variables-nc"
     raw: x_1*x_4*(x_1 + 2*x_2*x_3) - x_5
     prepared: v1*v4*(v1 + 2*v2*v3) - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1567,10 +1567,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-017:
+    subset: "only-five-variables-nc"
     raw: x_5*cos(x_1**2*(x_2*x_3 - x_4)**2)
     prepared: v5*cos(v1**2*(v2*v3 - v4)**2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1659,10 +1659,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-018:
+    subset: "only-five-variables-nc"
     raw: sqrt(x_3)*(x_1 + x_2) + x_4 + x_5**5
     prepared: sqrt(v3)*(v1 + v2) + v4 + v5**5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1751,10 +1751,10 @@ expressions:
     meta:
       finite_fraction: 0.494
   only_five_variables_nc-019:
+    subset: "only-five-variables-nc"
     raw: (x_3 - x_4*x_5)*log(x_1 + sin(x_2))
     prepared: (v3 - v4*v5)*log(v1 + sin(v2))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1843,10 +1843,10 @@ expressions:
     meta:
       finite_fraction: 0.5052
   only_five_variables_nc-020:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 - x_4**2*(x_2 - x_3))**2
     prepared: v5*(v1 - v4**2*(v2 - v3))**2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -1935,10 +1935,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-021:
+    subset: "only-five-variables-nc"
     raw: (x_1*x_5 - x_2 - sqrt(1/x_4)*Abs(x_3))/x_5
     prepared: (v1*v5 - v2 - sqrt(1/v4)*abs(v3))/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2027,10 +2027,10 @@ expressions:
     meta:
       finite_fraction: 0.5008
   only_five_variables_nc-022:
+    subset: "only-five-variables-nc"
     raw: x_5 + sin(x_1 + x_2*(x_3 + x_4))
     prepared: v5 + sin(v1 + v2*(v3 + v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2119,10 +2119,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-023:
+    subset: "only-five-variables-nc"
     raw: x_1*x_4*(x_2 - x_3)/(x_4 + x_5)
     prepared: v1*v4*(v2 - v3)/(v4 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2211,10 +2211,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-024:
+    subset: "only-five-variables-nc"
     raw: x_1*((x_3 + x_4)**2 + exp(x_2)) + x_5
     prepared: v1*((v3 + v4)**2 + exp(v2)) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2303,10 +2303,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-025:
+    subset: "only-five-variables-nc"
     raw: (x_3*x_5*(x_3 + x_4) + x_4*(x_1 + x_2))/x_4
     prepared: (v3*v5*(v3 + v4) + v4*(v1 + v2))/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2395,10 +2395,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-026:
+    subset: "only-five-variables-nc"
     raw: x_1**2*(x_2 + x_3*sqrt(x_4))**2/x_3**2 + x_5
     prepared: v1**2*(v2 + v3*sqrt(v4))**2/v3**2 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2487,10 +2487,10 @@ expressions:
     meta:
       finite_fraction: 0.5008
   only_five_variables_nc-027:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2*x_5 + x_3 + x_4)/x_5
     prepared: v1*(v2*v5 + v3 + v4)/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2579,10 +2579,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-028:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_2*x_3 + x_4*(x_1 + x_2))/x_4
     prepared: v5*(v2*v3 + v4*(v1 + v2))/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2671,10 +2671,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-029:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2 + x_3 - x_4 - x_5**3
     prepared: v1*v2 + v3 - v4 - v5**3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2763,10 +2763,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-030:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*(x_1 + x_2)*(x_3 + x_4) - x_5
     prepared: v1*v2*(v1 + v2)*(v3 + v4) - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2855,10 +2855,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-031:
+    subset: "only-five-variables-nc"
     raw: x_1*(-x_3 + x_4*(x_2 - x_5 + cos(x_2)))/x_4
     prepared: v1*(-v3 + v4*(v2 - v5 + cos(v2)))/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -2947,10 +2947,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-032:
+    subset: "only-five-variables-nc"
     raw: -x_1*(x_2 - tan(x_2*x_3))*(x_4 - x_5)
     prepared: -v1*(v2 - tan(v2*v3))*(v4 - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3039,10 +3039,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-033:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_3 + x_4*x_5*(x_1 + x_2 + x_3))
     prepared: v1*(v3 + v4*v5*(v1 + v2 + v3))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3131,10 +3131,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-034:
+    subset: "only-five-variables-nc"
     raw: (x_2*x_5*tan(x_1) - x_4 - sin(x_3))/x_5
     prepared: (v2*v5*tan(v1) - v4 - sin(v3))/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3223,10 +3223,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-035:
+    subset: "only-five-variables-nc"
     raw: x_1 + 2*x_2**2*x_3*x_4 - x_5
     prepared: v1 + 2*v2**2*v3*v4 - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3315,10 +3315,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-036:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 - x_2)/(sqrt(x_4) + x_5*(x_3 - x_5))
     prepared: v5*(v1 - v2)/(sqrt(v4) + v5*(v3 - v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3407,10 +3407,10 @@ expressions:
     meta:
       finite_fraction: 0.5008
   only_five_variables_nc-037:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_1 + x_2*x_3 - x_3*x_4*x_5)/x_3
     prepared: v1*(v1 + v2*v3 - v3*v4*v5)/v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3499,10 +3499,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-038:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_4 + x_5)*exp(-x_2)/x_3
     prepared: v1*(v4 + v5)*exp(-v2)/v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3591,10 +3591,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-039:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2 - x_3) + x_4*exp(x_5)
     prepared: v1*(v2 - v3) + v4*exp(v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3683,10 +3683,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-040:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_2*(x_2 - x_3 + x_4*x_5 + x_4))
     prepared: v1/(v2*(v2 - v3 + v4*v5 + v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3775,10 +3775,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-041:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2 - x_3*sqrt(x_4) - x_5
     prepared: v1*v2 - v3*sqrt(v4) - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3867,10 +3867,10 @@ expressions:
     meta:
       finite_fraction: 0.5008
   only_five_variables_nc-042:
+    subset: "only-five-variables-nc"
     raw: x_1*(-x_2 + (x_2 + x_5)*(-x_2 + x_3 + x_4))/(-x_2 + x_3 + x_4)
     prepared: v1*(-v2 + (v2 + v5)*(-v2 + v3 + v4))/(-v2 + v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -3959,10 +3959,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-043:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2/(2*x_3 + x_4 + x_5)
     prepared: v1 + v2/(2*v3 + v4 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4051,10 +4051,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-044:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_5*(x_3 + x_4) + asin(x_2))
     prepared: v1*(v5*(v3 + v4) + asin(v2))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4143,10 +4143,10 @@ expressions:
     meta:
       finite_fraction: 0.0975
   only_five_variables_nc-045:
+    subset: "only-five-variables-nc"
     raw: x_3*(x_4 - x_5)/(x_1 - x_2)
     prepared: v3*(v4 - v5)/(v1 - v2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4235,10 +4235,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-046:
+    subset: "only-five-variables-nc"
     raw: x_3*x_4*(x_1 + x_2)*asin(x_2 + x_5)
     prepared: v3*v4*(v1 + v2)*asin(v2 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4327,10 +4327,10 @@ expressions:
     meta:
       finite_fraction: 0.0983
   only_five_variables_nc-047:
+    subset: "only-five-variables-nc"
     raw: x_1*(2*x_2 + x_3*x_4*x_5)
     prepared: v1*(2*v2 + v3*v4*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4419,10 +4419,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-048:
+    subset: "only-five-variables-nc"
     raw: x_1 - x_2 + x_3 + x_5 + x_4**2/x_2**2
     prepared: v1 - v2 + v3 + v5 + v4**2/v2**2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4511,10 +4511,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-049:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*x_4/x_3 + x_5**2
     prepared: v1*v2*v4/v3 + v5**2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4603,10 +4603,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-050:
+    subset: "only-five-variables-nc"
     raw: x_1 + 2*x_4 + x_5 + (x_2 + x_3)**3
     prepared: v1 + 2*v4 + v5 + (v2 + v3)**3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4695,10 +4695,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-051:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1*x_3 + x_2*(x_1*x_4 + x_3))/x_3
     prepared: v5*(v1*v3 + v2*(v1*v4 + v3))/v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4787,10 +4787,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-052:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2/x_3 - x_2/x_3 - x_4/x_5
     prepared: v1*v2/v3 - v2/v3 - v4/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4879,10 +4879,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-053:
+    subset: "only-five-variables-nc"
     raw: x_1*x_3*log(x_1*x_2) + x_4*x_5
     prepared: v1*v3*log(v1*v2) + v4*v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -4971,10 +4971,10 @@ expressions:
     meta:
       finite_fraction: 0.4991
   only_five_variables_nc-054:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2**2*x_5*tan(x_3/x_4)
     prepared: v1*v2**2*v5*tan(v3/v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5063,10 +5063,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-055:
+    subset: "only-five-variables-nc"
     raw: x_1 - x_3/x_4 - x_2/x_1 + x_5/x_1
     prepared: v1 - v3/v4 - v2/v1 + v5/v1
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5155,10 +5155,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-056:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2 + x_5 + asin(x_3**2*x_4)
     prepared: v1*v2 + v5 + asin(v3**2*v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5247,10 +5247,10 @@ expressions:
     meta:
       finite_fraction: 0.0623
   only_five_variables_nc-057:
+    subset: "only-five-variables-nc"
     raw: x_1 + log(x_1 + x_2 + x_5*(x_3 - x_4))
     prepared: v1 + log(v1 + v2 + v5*(v3 - v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5339,10 +5339,10 @@ expressions:
     meta:
       finite_fraction: 0.4921
   only_five_variables_nc-058:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*(x_2*(x_1 + x_3 + x_4) - x_5)
     prepared: v1*v2*(v2*(v1 + v3 + v4) - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5431,10 +5431,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-059:
+    subset: "only-five-variables-nc"
     raw: x_1**2/(x_2*x_4*(x_3*x_4 + x_5))
     prepared: v1**2/(v2*v4*(v3*v4 + v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5523,10 +5523,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-060:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*(x_3*(x_3 + x_4) + x_5)
     prepared: v1*v2*(v3*(v3 + v4) + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5615,10 +5615,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-061:
+    subset: "only-five-variables-nc"
     raw: (x_1*x_2 + x_3 - tan(x_4*x_5))**2
     prepared: (v1*v2 + v3 - tan(v4*v5))**2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5707,10 +5707,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-062:
+    subset: "only-five-variables-nc"
     raw: asin(x_4 + x_5 + (x_1 + x_2)*(x_3 + x_4))
     prepared: asin(v4 + v5 + (v1 + v2)*(v3 + v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5800,10 +5800,10 @@ expressions:
       finite_fraction: 0.0262
       low_validity: true
   only_five_variables_nc-063:
+    subset: "only-five-variables-nc"
     raw: (x_1 + (x_4 + x_5)*log(x_2 + x_3))**2
     prepared: (v1 + (v4 + v5)*log(v2 + v3))**2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5892,10 +5892,10 @@ expressions:
     meta:
       finite_fraction: 0.4965
   only_five_variables_nc-064:
+    subset: "only-five-variables-nc"
     raw: x_4*x_5 + (x_1 + x_2*x_3 + x_2)**3
     prepared: v4*v5 + (v1 + v2*v3 + v2)**3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -5984,10 +5984,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-065:
+    subset: "only-five-variables-nc"
     raw: x_1*x_5 - x_2*x_3*x_5/(x_1*x_4)
     prepared: v1*v5 - v2*v3*v5/(v1*v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6076,10 +6076,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-066:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2 + x_1 + x_3 + x_4**4 + x_5
     prepared: v1*v2 + v1 + v3 + v4**4 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6168,10 +6168,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-067:
+    subset: "only-five-variables-nc"
     raw: log(x_1*(x_1 + x_2 - x_3 + x_4/x_5))
     prepared: log(v1*(v1 + v2 - v3 + v4/v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6260,10 +6260,10 @@ expressions:
     meta:
       finite_fraction: 0.6908
   only_five_variables_nc-068:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2*x_3 + x_2 - x_4*(x_3 - x_5))
     prepared: v1*(v2*v3 + v2 - v4*(v3 - v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6352,10 +6352,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-069:
+    subset: "only-five-variables-nc"
     raw: sqrt((x_2*x_4 + (x_1 + x_5)*(x_3 - x_4))/(x_3 - x_4))
     prepared: sqrt((v2*v4 + (v1 + v5)*(v3 - v4))/(v3 - v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6444,10 +6444,10 @@ expressions:
     meta:
       finite_fraction: 0.5073
   only_five_variables_nc-070:
+    subset: "only-five-variables-nc"
     raw: x_5*cos(x_4*(x_1 - x_2 + x_3**5))
     prepared: v5*cos(v4*(v1 - v2 + v3**5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6536,10 +6536,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-071:
+    subset: "only-five-variables-nc"
     raw: (x_1*x_2*(x_4 + x_5) + exp(x_3))/(x_4 + x_5)
     prepared: (v1*v2*(v4 + v5) + exp(v3))/(v4 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6628,10 +6628,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-072:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2 + x_3*x_5*(x_3 + x_4))/(x_3 + x_4)
     prepared: v1*(v2 + v3*v5*(v3 + v4))/(v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6720,10 +6720,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-073:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_2*(x_3 + x_4 + cos(x_5**3)))
     prepared: v1/(v2*(v3 + v4 + cos(v5**3)))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6812,10 +6812,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-074:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 + x_2*x_3 + x_3 + x_4)
     prepared: v5*(v1 + v2*v3 + v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6904,10 +6904,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-075:
+    subset: "only-five-variables-nc"
     raw: x_1*tan(x_2*(2*x_3 - x_4)) - x_5
     prepared: v1*tan(v2*(2*v3 - v4)) - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -6996,10 +6996,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-076:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2/x_3 - x_4/asin(x_2) + x_5
     prepared: v1*v2/v3 - v4/asin(v2) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7088,10 +7088,10 @@ expressions:
     meta:
       finite_fraction: 0.0975
   only_five_variables_nc-077:
+    subset: "only-five-variables-nc"
     raw: (x_1*(x_3 - x_4) - x_2**2*x_5)/x_2
     prepared: (v1*(v3 - v4) - v2**2*v5)/v2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7180,10 +7180,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-078:
+    subset: "only-five-variables-nc"
     raw: x_4**2*x_5*(x_1 + x_3*(x_2 - x_3))/(x_2 - x_3)
     prepared: v4**2*v5*(v1 + v3*(v2 - v3))/(v2 - v3)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7272,10 +7272,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-079:
+    subset: "only-five-variables-nc"
     raw: x_1*x_5*(x_1 + x_4*(x_2 + x_3))/(x_2 + x_3)
     prepared: v1*v5*(v1 + v4*(v2 + v3))/(v2 + v3)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7364,10 +7364,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-080:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2 + x_3)/(x_2*(x_3*x_4 + x_5))
     prepared: v1*(v2 + v3)/(v2*(v3*v4 + v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7456,10 +7456,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-081:
+    subset: "only-five-variables-nc"
     raw: x_3*x_4*x_5*(x_1 - x_2)
     prepared: v3*v4*v5*(v1 - v2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7548,10 +7548,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-082:
+    subset: "only-five-variables-nc"
     raw: x_1*x_4*(x_2 - x_3) + tan(x_2 + x_5)
     prepared: v1*v4*(v2 - v3) + tan(v2 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7640,10 +7640,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-083:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 - x_2 + x_3 + x_4)
     prepared: v5*(v1 - v2 + v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7732,10 +7732,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-084:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2 + x_5*cos(x_3/x_4)
     prepared: v1*v2 + v5*cos(v3/v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7824,10 +7824,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-085:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_5*(x_1**4 - x_2*x_3*x_4)
     prepared: v1 + v5*(v1**4 - v2*v3*v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -7916,10 +7916,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-086:
+    subset: "only-five-variables-nc"
     raw: (x_1*(x_2 + x_3) + x_5*exp(x_4))*exp(-x_4)
     prepared: (v1*(v2 + v3) + v5*exp(v4))*exp(-v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8008,10 +8008,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-087:
+    subset: "only-five-variables-nc"
     raw: sqrt(x_1 + x_4 + sqrt(x_2 + x_3))/x_5
     prepared: sqrt(v1 + v4 + sqrt(v2 + v3))/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8100,10 +8100,10 @@ expressions:
     meta:
       finite_fraction: 0.305
   only_five_variables_nc-088:
+    subset: "only-five-variables-nc"
     raw: x_4*tan(x_1*x_3/x_2) + x_5
     prepared: v4*tan(v1*v3/v2) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8192,10 +8192,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-089:
+    subset: "only-five-variables-nc"
     raw: x_1 + sin(x_2*x_3/(x_3 + x_4 - x_5))
     prepared: v1 + sin(v2*v3/(v3 + v4 - v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8284,10 +8284,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-090:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2**2 + x_2*x_3/x_4 - x_5
     prepared: v1 + v2**2 + v2*v3/v4 - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8376,10 +8376,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-091:
+    subset: "only-five-variables-nc"
     raw: x_1*(-x_1 - x_2 + x_3*x_4*x_5)/(x_1 + x_2)
     prepared: v1*(-v1 - v2 + v3*v4*v5)/(v1 + v2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8468,10 +8468,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-092:
+    subset: "only-five-variables-nc"
     raw: (x_1 - x_2)*(x_3 + x_4)/x_5
     prepared: (v1 - v2)*(v3 + v4)/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8560,10 +8560,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-093:
+    subset: "only-five-variables-nc"
     raw: sin(x_1*x_3/(x_2 + x_3*(x_4 + x_5)))**5
     prepared: sin(v1*v3/(v2 + v3*(v4 + v5)))**5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8652,10 +8652,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-094:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_4**2*x_5*(x_2 - x_3**5))/(x_4*(x_2 - x_3**5))
     prepared: (v1 + v4**2*v5*(v2 - v3**5))/(v4*(v2 - v3**5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8744,10 +8744,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-095:
+    subset: "only-five-variables-nc"
     raw: x_1**2*x_2*x_3*x_4/x_5
     prepared: v1**2*v2*v3*v4/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8836,10 +8836,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-096:
+    subset: "only-five-variables-nc"
     raw: -x_3 - 2*x_4 - x_5 + exp(x_1 - x_2)
     prepared: -v3 - 2*v4 - v5 + exp(v1 - v2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -8928,10 +8928,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-097:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_4 + x_5 + sin(x_1)/(x_2*x_3)
     prepared: v1 + v4 + v5 + sin(v1)/(v2*v3)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9020,10 +9020,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-098:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*(x_4 + x_5 + sin(x_3))
     prepared: v1*v2*(v4 + v5 + sin(v3))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9112,10 +9112,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-099:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2*x_3 + x_4 - x_5
     prepared: v1 + v2*v3 + v4 - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9204,10 +9204,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-100:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_1*(x_4 - x_5) - x_3 - x_4)/(x_2*(x_4 - x_5))
     prepared: v1*(v1*(v4 - v5) - v3 - v4)/(v2*(v4 - v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9296,10 +9296,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-101:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2 + x_2*x_3 + x_4 - x_5
     prepared: v1*v2 + v2*v3 + v4 - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9388,10 +9388,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-102:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2 + x_3)*(x_3 + x_5)/x_4
     prepared: v1*(v2 + v3)*(v3 + v5)/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9480,10 +9480,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-103:
+    subset: "only-five-variables-nc"
     raw: (x_1*x_2 + x_5*(x_1 + x_3 + x_4))/(x_1 + x_3 + x_4)
     prepared: (v1*v2 + v5*(v1 + v3 + v4))/(v1 + v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9572,10 +9572,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-104:
+    subset: "only-five-variables-nc"
     raw: asin((-x_1*x_3 + x_1*x_5 - x_2 + x_4)/x_5)
     prepared: asin((-v1*v3 + v1*v5 - v2 + v4)/v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9664,10 +9664,10 @@ expressions:
     meta:
       finite_fraction: 0.1306
   only_five_variables_nc-105:
+    subset: "only-five-variables-nc"
     raw: sqrt(x_1)*x_2*(x_3 + x_4 + x_5)
     prepared: sqrt(v1)*v2*(v3 + v4 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9756,10 +9756,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   only_five_variables_nc-106:
+    subset: "only-five-variables-nc"
     raw: x_1**2*x_2*exp(x_4 - x_5)/x_3
     prepared: v1**2*v2*exp(v4 - v5)/v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9848,10 +9848,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-107:
+    subset: "only-five-variables-nc"
     raw: x_1 + (x_1*x_2 + x_1*x_3 + x_4*x_5)**5/x_4**5
     prepared: v1 + (v1*v2 + v1*v3 + v4*v5)**5/v4**5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -9940,10 +9940,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-108:
+    subset: "only-five-variables-nc"
     raw: x_1/cos(x_2*sin(x_3*x_4*x_5))
     prepared: v1/cos(v2*sin(v3*v4*v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10032,10 +10032,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-109:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*x_3/(x_3 - x_4*x_5)
     prepared: v1*v2*v3/(v3 - v4*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10124,10 +10124,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-110:
+    subset: "only-five-variables-nc"
     raw: (x_3*(x_1 + x_2*(x_3 + x_4) + x_3) - x_5)/x_3
     prepared: (v3*(v1 + v2*(v3 + v4) + v3) - v5)/v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10216,10 +10216,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-111:
+    subset: "only-five-variables-nc"
     raw: x_1**2*x_5/(x_4**2*(x_2 - x_3)**2)
     prepared: v1**2*v5/(v4**2*(v2 - v3)**2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10308,10 +10308,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-112:
+    subset: "only-five-variables-nc"
     raw: (x_3*(x_1 + x_2) + x_4*cos(tan(x_5)))/x_4
     prepared: (v3*(v1 + v2) + v4*cos(tan(v5)))/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10400,10 +10400,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-113:
+    subset: "only-five-variables-nc"
     raw: x_2*exp(x_1)/(x_3**2*x_4) + x_5
     prepared: v2*exp(v1)/(v3**2*v4) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10492,10 +10492,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-114:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*(-sqrt(x_3) + x_4 + x_5 + 1)
     prepared: v1*v2*(-sqrt(v3) + v4 + v5 + 1)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10584,10 +10584,10 @@ expressions:
     meta:
       finite_fraction: 0.494
   only_five_variables_nc-115:
+    subset: "only-five-variables-nc"
     raw: x_1 - x_2 - x_3 + x_4 + x_5
     prepared: v1 - v2 - v3 + v4 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10676,10 +10676,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-116:
+    subset: "only-five-variables-nc"
     raw: (x_4 - x_5*(x_2 - cos(x_1))*(x_3 - x_4))/x_5
     prepared: (v4 - v5*(v2 - cos(v1))*(v3 - v4))/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10768,10 +10768,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-117:
+    subset: "only-five-variables-nc"
     raw: 3*x_1 - x_2 - x_3 - x_4 - x_5
     prepared: 3*v1 - v2 - v3 - v4 - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10860,10 +10860,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-118:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1*x_2*x_4 + x_2 + x_3)/(x_2*x_4**2)
     prepared: v5*(v1*v2*v4 + v2 + v3)/(v2*v4**2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -10952,10 +10952,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-119:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2/(x_3*x_4) - x_5)**3
     prepared: (v1 + v2/(v3*v4) - v5)**3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11044,10 +11044,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-120:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2)/asin(x_3*(x_3*x_4 - x_5))
     prepared: (v1 + v2)/asin(v3*(v3*v4 - v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11137,10 +11137,10 @@ expressions:
       finite_fraction: 0.0404
       low_validity: true
   only_five_variables_nc-121:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2 + x_5 + tan(x_1 - x_3*x_4)
     prepared: v1*v2 + v5 + tan(v1 - v3*v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11229,10 +11229,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-122:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_1 + x_2)*(x_1*x_3*x_4 - x_5)
     prepared: v1*(v1 + v2)*(v1*v3*v4 - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11321,10 +11321,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-123:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2)*(x_3 + x_4 - exp(x_5))
     prepared: (v1 + v2)*(v3 + v4 - exp(v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11413,10 +11413,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-124:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 - x_2)*tan(x_3 + x_4)
     prepared: v5*(v1 - v2)*tan(v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11505,10 +11505,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-125:
+    subset: "only-five-variables-nc"
     raw: x_1**2*(x_2 + tan(x_3*x_4*x_5))
     prepared: v1**2*(v2 + tan(v3*v4*v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11597,10 +11597,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-126:
+    subset: "only-five-variables-nc"
     raw: x_2*(x_1 + x_2) + x_3*x_4 + x_5
     prepared: v2*(v1 + v2) + v3*v4 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11689,10 +11689,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-127:
+    subset: "only-five-variables-nc"
     raw: -x_1*(x_2 + x_3 + x_4 + x_5) + log(x_1)
     prepared: -v1*(v2 + v3 + v4 + v5) + log(v1)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11781,10 +11781,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   only_five_variables_nc-128:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_1/x_2 - x_3/x_4 - x_5
     prepared: v1 + v1/v2 - v3/v4 - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11873,10 +11873,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-129:
+    subset: "only-five-variables-nc"
     raw: -x_3*(x_1 + x_2)*(x_1 - x_4*x_5)
     prepared: -v3*(v1 + v2)*(v1 - v4*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -11965,10 +11965,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-130:
+    subset: "only-five-variables-nc"
     raw: x_1**2*x_2 + sqrt(x_3*x_4 - x_5)
     prepared: v1**2*v2 + sqrt(v3*v4 - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12057,10 +12057,10 @@ expressions:
     meta:
       finite_fraction: 0.4956
   only_five_variables_nc-131:
+    subset: "only-five-variables-nc"
     raw: exp(sin(x_1 - x_2*x_5*(x_3 - x_4)))
     prepared: exp(sin(v1 - v2*v5*(v3 - v4)))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12149,10 +12149,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-132:
+    subset: "only-five-variables-nc"
     raw: x_1**3 + x_2*(x_3 + x_4 - x_5)
     prepared: v1**3 + v2*(v3 + v4 - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12241,10 +12241,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-133:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_2*x_3*x_4 + x_2 + x_5)
     prepared: v1/(v2*v3*v4 + v2 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12333,10 +12333,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-134:
+    subset: "only-five-variables-nc"
     raw: x_1 + 2*x_2 - x_3*(x_4 + x_5) + x_3
     prepared: v1 + 2*v2 - v3*(v4 + v5) + v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12425,10 +12425,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-135:
+    subset: "only-five-variables-nc"
     raw: (x_2*x_3 + exp(x_1) + asin(x_4))/x_5
     prepared: (v2*v3 + exp(v1) + asin(v4))/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12517,10 +12517,10 @@ expressions:
     meta:
       finite_fraction: 0.0998
   only_five_variables_nc-136:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2 + x_1 - x_3/(x_4*x_5)
     prepared: v1*v2 + v1 - v3/(v4*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12609,10 +12609,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-137:
+    subset: "only-five-variables-nc"
     raw: x_1 + tan(x_2*x_3/(x_4*x_5))
     prepared: v1 + tan(v2*v3/(v4*v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12701,10 +12701,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-138:
+    subset: "only-five-variables-nc"
     raw: x_3*(x_1 + x_2)/(x_1*x_3*x_5 + x_4)
     prepared: v3*(v1 + v2)/(v1*v3*v5 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12793,10 +12793,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-139:
+    subset: "only-five-variables-nc"
     raw: x_1 - sin(x_2 + x_3/(x_4*x_5))
     prepared: v1 - sin(v2 + v3/(v4*v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12885,10 +12885,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-140:
+    subset: "only-five-variables-nc"
     raw: (x_1**2 + x_5*(x_1*(x_3 + x_4) + x_2))/x_1
     prepared: (v1**2 + v5*(v1*(v3 + v4) + v2))/v1
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -12977,10 +12977,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-141:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2 - x_3**2*x_4 + x_5
     prepared: v1 + v2 - v3**2*v4 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13069,10 +13069,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-142:
+    subset: "only-five-variables-nc"
     raw: -x_1*asin(-x_2 + x_3 + x_4*x_5)
     prepared: -v1*asin(-v2 + v3 + v4*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13162,10 +13162,10 @@ expressions:
       finite_fraction: 0.0322
       low_validity: true
   only_five_variables_nc-143:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*x_3 + x_4 - cos(x_3*x_5)
     prepared: v1*v2*v3 + v4 - cos(v3*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13254,10 +13254,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-144:
+    subset: "only-five-variables-nc"
     raw: x_5 + sin(x_4*(x_1 + x_2)*tan(x_3))
     prepared: v5 + sin(v4*(v1 + v2)*tan(v3))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13346,10 +13346,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-145:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_2 + x_3 + x_4 + asin(x_5**3))
     prepared: v1/(v2 + v3 + v4 + asin(v5**3))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13438,10 +13438,10 @@ expressions:
     meta:
       finite_fraction: 0.0979
   only_five_variables_nc-146:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2 - x_3 + sin(x_4 + 2*x_5)
     prepared: v1 + v2 - v3 + sin(v4 + 2*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13530,10 +13530,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-147:
+    subset: "only-five-variables-nc"
     raw: (x_4 + x_5)*(x_1*x_2 + x_1 - x_3)
     prepared: (v4 + v5)*(v1*v2 + v1 - v3)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13622,10 +13622,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-148:
+    subset: "only-five-variables-nc"
     raw: sqrt(x_5)*(x_1 - x_2 - x_3**2*x_4)/x_3
     prepared: sqrt(v5)*(v1 - v2 - v3**2*v4)/v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13714,10 +13714,10 @@ expressions:
     meta:
       finite_fraction: 0.5034
   only_five_variables_nc-149:
+    subset: "only-five-variables-nc"
     raw: x_1*x_3/(x_2*(-x_2 + asin(x_4*x_5)))
     prepared: v1*v3/(v2*(-v2 + asin(v4*v5)))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13806,10 +13806,10 @@ expressions:
     meta:
       finite_fraction: 0.0539
   only_five_variables_nc-150:
+    subset: "only-five-variables-nc"
     raw: (x_1*x_2 + x_3*x_5*(x_1 + x_4))/x_3
     prepared: (v1*v2 + v3*v5*(v1 + v4))/v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13898,10 +13898,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-151:
+    subset: "only-five-variables-nc"
     raw: -x_1*tan(-x_2 + x_3 + x_4) + x_5
     prepared: -v1*tan(-v2 + v3 + v4) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -13990,10 +13990,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-152:
+    subset: "only-five-variables-nc"
     raw: x_5*(2*x_1 + x_3 + x_4 - sin(x_2))
     prepared: v5*(2*v1 + v3 + v4 - sin(v2))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14082,10 +14082,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-153:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_5*(x_2 - x_3 + exp(x_4)))
     prepared: v1/(v5*(v2 - v3 + exp(v4)))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14174,10 +14174,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-154:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2 + sin(x_2*x_4 - x_3 + x_5)
     prepared: v1 + v2 + sin(v2*v4 - v3 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14266,10 +14266,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-155:
+    subset: "only-five-variables-nc"
     raw: (-x_2*x_5*(x_1 + x_4) + x_4*(x_1 + x_2*x_3))/x_2
     prepared: (-v2*v5*(v1 + v4) + v4*(v1 + v2*v3))/v2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14358,10 +14358,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-156:
+    subset: "only-five-variables-nc"
     raw: x_2*x_4*x_5*(x_1 - x_2 - x_3)
     prepared: v2*v4*v5*(v1 - v2 - v3)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14450,10 +14450,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-157:
+    subset: "only-five-variables-nc"
     raw: x_4**3*x_5**3*(x_1*x_4**5 + (x_2 - x_3)**5)**3
     prepared: v4**3*v5**3*(v1*v4**5 + (v2 - v3)**5)**3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14542,10 +14542,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-158:
+    subset: "only-five-variables-nc"
     raw: x_1*x_3*x_4*x_5/x_2**4
     prepared: v1*v3*v4*v5/v2**4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14634,10 +14634,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-159:
+    subset: "only-five-variables-nc"
     raw: x_5*asin((x_1 - x_3 + x_4*(x_1 - x_2))/x_4)
     prepared: v5*asin((v1 - v3 + v4*(v1 - v2))/v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14726,10 +14726,10 @@ expressions:
     meta:
       finite_fraction: 0.0809
   only_five_variables_nc-160:
+    subset: "only-five-variables-nc"
     raw: (x_2**2 + x_5*(x_1 - x_5)*(x_3 + x_4))/(x_5*(x_3 + x_4))
     prepared: (v2**2 + v5*(v1 - v5)*(v3 + v4))/(v5*(v3 + v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14818,10 +14818,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-161:
+    subset: "only-five-variables-nc"
     raw: exp(sin(x_1 - x_2)/(x_3*x_4 - x_5))
     prepared: exp(sin(v1 - v2)/(v3*v4 - v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -14910,10 +14910,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-162:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_1 + x_2*x_3**2*x_4)/x_5
     prepared: v1*(v1 + v2*v3**2*v4)/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15002,10 +15002,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-163:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2*x_3*x_5*(x_3 + x_4)
     prepared: v1 + v2*v3*v5*(v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15094,10 +15094,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-164:
+    subset: "only-five-variables-nc"
     raw: (x_1 + exp(x_2*x_4*(x_2 + x_3)))/x_5
     prepared: (v1 + exp(v2*v4*(v2 + v3)))/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15186,10 +15186,10 @@ expressions:
     meta:
       finite_fraction: 0.9709
   only_five_variables_nc-165:
+    subset: "only-five-variables-nc"
     raw: (x_2 + cos(x_5*(x_3 + x_4)))*exp(x_1)
     prepared: (v2 + cos(v5*(v3 + v4)))*exp(v1)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15278,10 +15278,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-166:
+    subset: "only-five-variables-nc"
     raw: x_4*(x_1 + x_2 - x_3) - x_5
     prepared: v4*(v1 + v2 - v3) - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15370,10 +15370,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-167:
+    subset: "only-five-variables-nc"
     raw: x_2**2*x_3*x_4*x_5 + asin(x_1)
     prepared: v2**2*v3*v4*v5 + asin(v1)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15462,10 +15462,10 @@ expressions:
     meta:
       finite_fraction: 0.0955
   only_five_variables_nc-168:
+    subset: "only-five-variables-nc"
     raw: x_1 + (x_3 + x_4*cos(x_5))*tan(x_2)
     prepared: v1 + (v3 + v4*cos(v5))*tan(v2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15554,10 +15554,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-169:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2 - (x_3 + x_4)*(x_5 + asin(x_3)))
     prepared: v1*(v2 - (v3 + v4)*(v5 + asin(v3)))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15646,10 +15646,10 @@ expressions:
     meta:
       finite_fraction: 0.0984
   only_five_variables_nc-170:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2 + x_3)/(x_4 - x_5)
     prepared: (v1 + v2 + v3)/(v4 - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15738,10 +15738,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-171:
+    subset: "only-five-variables-nc"
     raw: x_1 - x_2*x_3 - x_2*x_4*x_5 - x_2
     prepared: v1 - v2*v3 - v2*v4*v5 - v2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15830,10 +15830,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-172:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2*x_3*x_5/x_4
     prepared: v1 + v2*v3*v5/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -15922,10 +15922,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-173:
+    subset: "only-five-variables-nc"
     raw: (x_3*(x_1 + x_2) - x_4*x_5)/x_4
     prepared: (v3*(v1 + v2) - v4*v5)/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16014,10 +16014,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-174:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2 + x_3*x_4*cos(x_5) + 1)
     prepared: v1*(v2 + v3*v4*cos(v5) + 1)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16106,10 +16106,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-175:
+    subset: "only-five-variables-nc"
     raw: x_1**5/(x_3 + x_4 + x_5 + tan(x_2))**5
     prepared: v1**5/(v3 + v4 + v5 + tan(v2))**5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16198,10 +16198,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-176:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*(-x_1 + x_3 + x_4 - x_5)
     prepared: v1*v2*(-v1 + v3 + v4 - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16290,10 +16290,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-177:
+    subset: "only-five-variables-nc"
     raw: (x_1 + (x_1 + x_2)*(x_2*x_5 + x_3*x_4))/(x_1 + x_2)
     prepared: (v1 + (v1 + v2)*(v2*v5 + v3*v4))/(v1 + v2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16382,10 +16382,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-178:
+    subset: "only-five-variables-nc"
     raw: x_1**2*x_2/x_3 + x_4 - exp(x_5)
     prepared: v1**2*v2/v3 + v4 - exp(v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16474,10 +16474,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-179:
+    subset: "only-five-variables-nc"
     raw: x_1 - x_2 + x_3 + x_4 + x_5
     prepared: v1 - v2 + v3 + v4 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16566,10 +16566,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-180:
+    subset: "only-five-variables-nc"
     raw: x_1 + (x_4 + x_5)*(x_4 + tan(x_2 + x_3))
     prepared: v1 + (v4 + v5)*(v4 + tan(v2 + v3))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16658,10 +16658,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-181:
+    subset: "only-five-variables-nc"
     raw: x_1**3*x_2/x_3 + x_4*x_5
     prepared: v1**3*v2/v3 + v4*v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16750,10 +16750,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-182:
+    subset: "only-five-variables-nc"
     raw: tan(x_1*exp(x_2*(x_3*x_5 + x_4)/x_5))
     prepared: tan(v1*exp(v2*(v3*v5 + v4)/v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16842,10 +16842,10 @@ expressions:
     meta:
       finite_fraction: 0.998
   only_five_variables_nc-183:
+    subset: "only-five-variables-nc"
     raw: x_1**4*(x_2 - x_3)**4 - x_4 + x_5
     prepared: v1**4*(v2 - v3)**4 - v4 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -16934,10 +16934,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-184:
+    subset: "only-five-variables-nc"
     raw: (x_3*(x_5 - sin(x_2)) + x_4*(x_1 + x_2))/x_4
     prepared: (v3*(v5 - sin(v2)) + v4*(v1 + v2))/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17026,10 +17026,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-185:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2 + x_3*x_4*x_5
     prepared: v1*v2 + v3*v4*v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17118,10 +17118,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-186:
+    subset: "only-five-variables-nc"
     raw: (x_1*x_3 + x_2*x_4)/(x_3*x_5)
     prepared: (v1*v3 + v2*v4)/(v3*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17210,10 +17210,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-187:
+    subset: "only-five-variables-nc"
     raw: (-x_3 + x_4*(x_1 + x_2)*(x_1 - x_4 + x_5))/(x_4*(x_1 - x_4 + x_5))
     prepared: (-v3 + v4*(v1 + v2)*(v1 - v4 + v5))/(v4*(v1 - v4 + v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17302,10 +17302,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-188:
+    subset: "only-five-variables-nc"
     raw: x_2*(x_1 + x_2*x_3*x_4 + x_2)/x_5
     prepared: v2*(v1 + v2*v3*v4 + v2)/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17394,10 +17394,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-189:
+    subset: "only-five-variables-nc"
     raw: x_1**5 + x_2 + x_4*(x_1 + x_3) - x_5
     prepared: v1**5 + v2 + v4*(v1 + v3) - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17486,10 +17486,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-190:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2*(-x_3 + x_5*(x_3 - x_4)))/x_2
     prepared: (v1 + v2*(-v3 + v5*(v3 - v4)))/v2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17578,10 +17578,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-191:
+    subset: "only-five-variables-nc"
     raw: -(-x_1 + x_2 + x_3)*(-x_2 + x_4 + x_5)
     prepared: (v1 - v2 - v3)*(-v2 + v4 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17670,10 +17670,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-192:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2 - x_3)*(-x_4 + x_5 + cos(x_2))
     prepared: (v1 + v2 - v3)*(-v4 + v5 + cos(v2))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17762,10 +17762,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-193:
+    subset: "only-five-variables-nc"
     raw: tan(x_1/(x_4*(x_2 + x_3) + x_5))
     prepared: tan(v1/(v4*(v2 + v3) + v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17854,10 +17854,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-194:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2**2*x_3 + x_2 - x_4*x_5
     prepared: v1 + v2**2*v3 + v2 - v4*v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -17946,10 +17946,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-195:
+    subset: "only-five-variables-nc"
     raw: x_5*cos(x_1)/(x_2*x_3 - x_4)
     prepared: v5*cos(v1)/(v2*v3 - v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18038,10 +18038,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-196:
+    subset: "only-five-variables-nc"
     raw: x_1 - x_2 + x_3 - x_4 + sqrt(x_2 + x_5)
     prepared: v1 - v2 + v3 - v4 + sqrt(v2 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18130,10 +18130,10 @@ expressions:
     meta:
       finite_fraction: 0.502
   only_five_variables_nc-197:
+    subset: "only-five-variables-nc"
     raw: x_3*(x_1 - x_2) + x_4 - sin(x_2 - x_5)
     prepared: v3*(v1 - v2) + v4 - sin(v2 - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18222,10 +18222,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-198:
+    subset: "only-five-variables-nc"
     raw: (x_1 - x_2 - x_3*(x_4 + x_5**5))/x_3
     prepared: (v1 - v2 - v3*(v4 + v5**5))/v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18314,10 +18314,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-199:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2 + sqrt(x_3*x_4)) + x_2*x_5
     prepared: v1*(v2 + sqrt(v3*v4)) + v2*v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18406,10 +18406,10 @@ expressions:
     meta:
       finite_fraction: 0.4944
   only_five_variables_nc-200:
+    subset: "only-five-variables-nc"
     raw: sqrt(x_1*x_2*x_4*x_5/x_3)
     prepared: sqrt(v1*v2*v4*v5/v3)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18498,10 +18498,10 @@ expressions:
     meta:
       finite_fraction: 0.4979
   only_five_variables_nc-201:
+    subset: "only-five-variables-nc"
     raw: x_1*x_4/(sqrt(x_2)*sqrt(x_3)*x_5)
     prepared: v1*v4/(sqrt(v2)*sqrt(v3)*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18590,10 +18590,10 @@ expressions:
     meta:
       finite_fraction: 0.2483
   only_five_variables_nc-202:
+    subset: "only-five-variables-nc"
     raw: x_3*x_4**2*x_5*(x_1 + x_2)
     prepared: v3*v4**2*v5*(v1 + v2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18682,10 +18682,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-203:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*cos(-x_2 + x_3 + x_4)/x_5
     prepared: v1*v2*cos(-v2 + v3 + v4)/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18774,10 +18774,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-204:
+    subset: "only-five-variables-nc"
     raw: x_1*(3*x_3 + x_4 - x_5)/x_2
     prepared: v1*(3*v3 + v4 - v5)/v2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18866,10 +18866,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-205:
+    subset: "only-five-variables-nc"
     raw: (x_3 - x_4 + x_5*(-x_1 + x_2))**2/x_5**2
     prepared: (v3 - v4 + v5*(-v1 + v2))**2/v5**2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -18958,10 +18958,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-206:
+    subset: "only-five-variables-nc"
     raw: -(x_4 + x_5)*(-x_1 + x_2 + x_3**2)
     prepared: (-v4 - v5)*(-v1 + v2 + v3**2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19050,10 +19050,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-207:
+    subset: "only-five-variables-nc"
     raw: x_2*x_5*(x_1 + x_2)*tan(x_3)/x_4
     prepared: v2*v5*(v1 + v2)*tan(v3)/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19142,10 +19142,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-208:
+    subset: "only-five-variables-nc"
     raw: x_1**2*(x_2 + x_3*x_5*(x_1 + x_4))
     prepared: v1**2*(v2 + v3*v5*(v1 + v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19234,10 +19234,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-209:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_2 + x_3 + sin(tan(x_4/x_5)))
     prepared: v1/(v2 + v3 + sin(tan(v4/v5)))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19326,10 +19326,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-210:
+    subset: "only-five-variables-nc"
     raw: asin(x_5*(x_3*(x_1*x_2 + x_3) - x_4))
     prepared: asin(v5*(v3*(v1*v2 + v3) - v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19389,10 +19389,10 @@ expressions:
       finite_fraction: 0.0094
       low_validity: true
   only_five_variables_nc-211:
+    subset: "only-five-variables-nc"
     raw: x_3*(x_1 + x_2) + x_4 + 2*x_5
     prepared: v3*(v1 + v2) + v4 + 2*v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19481,10 +19481,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-212:
+    subset: "only-five-variables-nc"
     raw: -x_1*(x_2*x_5 - (x_2 + x_3)*sin(x_4))
     prepared: -v1*(v2*v5 - (v2 + v3)*sin(v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19573,10 +19573,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-213:
+    subset: "only-five-variables-nc"
     raw: x_5**3*(2*x_1 + x_2)**3/(x_3**3*x_4**3)
     prepared: v5**3*(2*v1 + v2)**3/(v3**3*v4**3)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19665,10 +19665,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-214:
+    subset: "only-five-variables-nc"
     raw: (x_1**2 + x_2)/(x_3*x_4*x_5)
     prepared: (v1**2 + v2)/(v3*v4*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19757,10 +19757,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-215:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 + x_2*x_3 + x_4)*cos(x_5)
     prepared: v5*(v1 + v2*v3 + v4)*cos(v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19849,10 +19849,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-216:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 + x_2)*asin(x_3*x_4)
     prepared: v5*(v1 + v2)*asin(v3*v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -19941,10 +19941,10 @@ expressions:
     meta:
       finite_fraction: 0.0539
   only_five_variables_nc-217:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2/(x_3*(2*x_4 + x_5)**2)
     prepared: v1*v2/(v3*(2*v4 + v5)**2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20033,10 +20033,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-218:
+    subset: "only-five-variables-nc"
     raw: (x_1*x_2*x_5 + x_3 + exp(x_4))/x_5
     prepared: (v1*v2*v5 + v3 + exp(v4))/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20125,10 +20125,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-219:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2*(x_3 - x_4) + x_3 + x_5)
     prepared: v1*(v2*(v3 - v4) + v3 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20217,10 +20217,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-220:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*(x_2 + x_5)*(x_2 + x_3*x_4)
     prepared: v1*v2*(v2 + v5)*(v2 + v3*v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20309,10 +20309,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-221:
+    subset: "only-five-variables-nc"
     raw: x_1*x_4*x_5*(-x_3 + cos(sin(x_2)))
     prepared: v1*v4*v5*(-v3 + cos(sin(v2)))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20401,10 +20401,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-222:
+    subset: "only-five-variables-nc"
     raw: x_1 - cos((x_3 - x_4)*log(x_2)/x_5)
     prepared: v1 - cos((v3 - v4)*log(v2)/v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20493,10 +20493,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   only_five_variables_nc-223:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*x_3 - x_4 - x_5 + tan(x_1)
     prepared: v1*v2*v3 - v4 - v5 + tan(v1)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20585,10 +20585,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-224:
+    subset: "only-five-variables-nc"
     raw: x_1 + sqrt((x_2 + x_3 + x_4)/x_5)
     prepared: v1 + sqrt((v2 + v3 + v4)/v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20677,10 +20677,10 @@ expressions:
     meta:
       finite_fraction: 0.4963
   only_five_variables_nc-225:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 + x_2 + 2*x_3*x_4)
     prepared: v5*(v1 + v2 + 2*v3*v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20769,10 +20769,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-226:
+    subset: "only-five-variables-nc"
     raw: x_1**2*x_5*(x_2 + 1)/(x_1*x_3*x_5 + x_4)
     prepared: v1**2*v5*(v2 + 1)/(v1*v3*v5 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20861,10 +20861,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-227:
+    subset: "only-five-variables-nc"
     raw: 2*x_1 - x_2**2 + x_3 - x_4 - x_5
     prepared: 2*v1 - v2**2 + v3 - v4 - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -20953,10 +20953,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-228:
+    subset: "only-five-variables-nc"
     raw: x_1**3*(x_2 - x_3 + x_4) + x_5
     prepared: v1**3*(v2 - v3 + v4) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21045,10 +21045,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-229:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_4*(x_2 - x_3))*(x_1**2 + x_5)
     prepared: (v1 + v4*(v2 - v3))*(v1**2 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21137,10 +21137,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-230:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2*x_3*x_4*tan(x_5) + x_2
     prepared: v1 + v2*v3*v4*tan(v5) + v2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21229,10 +21229,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-231:
+    subset: "only-five-variables-nc"
     raw: x_1**2 + x_2*(x_3 + x_4) + x_5
     prepared: v1**2 + v2*(v3 + v4) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21321,10 +21321,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-232:
+    subset: "only-five-variables-nc"
     raw: (x_1*x_3*(x_2 + x_4) + x_2*x_5)**3/x_2**3
     prepared: (v1*v3*(v2 + v4) + v2*v5)**3/v2**3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21413,10 +21413,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-233:
+    subset: "only-five-variables-nc"
     raw: 2*x_1 - x_2 + 2*x_3 - x_4 + x_5
     prepared: 2*v1 - v2 + 2*v3 - v4 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21505,10 +21505,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-234:
+    subset: "only-five-variables-nc"
     raw: (-x_2 + x_3*x_4*(x_1 - 2*x_2))/(x_4*x_5)
     prepared: (-v2 + v3*v4*(v1 - 2*v2))/(v4*v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21597,10 +21597,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-235:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2)*exp(x_5)/(x_3*x_4)
     prepared: (v1 + v2)*exp(v5)/(v3*v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21689,10 +21689,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-236:
+    subset: "only-five-variables-nc"
     raw: x_2 + x_5 + exp((x_1*x_2*x_4 + x_3)/x_4)
     prepared: v2 + v5 + exp((v1*v2*v4 + v3)/v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21781,10 +21781,10 @@ expressions:
     meta:
       finite_fraction: 0.9999
   only_five_variables_nc-237:
+    subset: "only-five-variables-nc"
     raw: (x_1*(x_3 - x_4) + x_2)/(sqrt(x_5)*(x_3 - x_4))
     prepared: (v1*(v3 - v4) + v2)/(sqrt(v5)*(v3 - v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21873,10 +21873,10 @@ expressions:
     meta:
       finite_fraction: 0.5034
   only_five_variables_nc-238:
+    subset: "only-five-variables-nc"
     raw: x_1*exp(-x_5*(x_2**2*x_3 - x_4))
     prepared: v1*exp(-v5*(v2**2*v3 - v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -21965,10 +21965,10 @@ expressions:
     meta:
       finite_fraction: 0.8249
   only_five_variables_nc-239:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_5*(x_3 - x_4)*tan(sqrt(x_2))
     prepared: v1 + v5*(v3 - v4)*tan(sqrt(v2))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22057,10 +22057,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   only_five_variables_nc-240:
+    subset: "only-five-variables-nc"
     raw: x_5 + (x_4 + x_5)*exp(x_3*(x_1 + x_2))
     prepared: v5 + (v4 + v5)*exp(v3*(v1 + v2))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22149,10 +22149,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-241:
+    subset: "only-five-variables-nc"
     raw: x_2*x_3**2*(x_1 + x_2)*(x_4 + x_5)
     prepared: v2*v3**2*(v1 + v2)*(v4 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22241,10 +22241,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-242:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*sin(x_3/x_4 + x_5)
     prepared: v1*v2*sin(v3/v4 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22333,10 +22333,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-243:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2 - x_1 - x_3*x_4 - x_5
     prepared: v1*v2 - v1 - v3*v4 - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22425,10 +22425,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-244:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_1 - 2*x_2 + x_3 + x_4) + x_5
     prepared: v1*(v1 - 2*v2 + v3 + v4) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22517,10 +22517,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-245:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_3*x_4 + sqrt(x_1/x_2)) + x_5
     prepared: v1/(v3*v4 + sqrt(v1/v2)) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22609,10 +22609,10 @@ expressions:
     meta:
       finite_fraction: 0.4991
   only_five_variables_nc-246:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_2 - x_3**2*x_4 + sin(x_1))
     prepared: v5*(v2 - v3**2*v4 + sin(v1))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22701,10 +22701,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-247:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 + x_2 + x_3 + x_4)
     prepared: v5*(v1 + v2 + v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22793,10 +22793,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-248:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_1*x_2 + x_2*x_4*x_5 + x_3)
     prepared: v1*(v1*v2 + v2*v4*v5 + v3)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22885,10 +22885,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-249:
+    subset: "only-five-variables-nc"
     raw: -x_3*(x_1 + sqrt(x_2))/(x_4*(x_4 - x_5))
     prepared: -v3*(v1 + sqrt(v2))/(v4*(v4 - v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -22977,10 +22977,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   only_five_variables_nc-250:
+    subset: "only-five-variables-nc"
     raw: x_5*(2*x_1*x_2*(x_2 + x_3) + x_4)
     prepared: v5*(2*v1*v2*(v2 + v3) + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23069,10 +23069,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-251:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2)/cos(x_3 + x_4 - x_5)
     prepared: (v1 + v2)/cos(v3 + v4 - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23161,10 +23161,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-252:
+    subset: "only-five-variables-nc"
     raw: x_1 - x_4*x_5**4 + sin(x_2*x_3)
     prepared: v1 - v4*v5**4 + sin(v2*v3)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23253,10 +23253,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-253:
+    subset: "only-five-variables-nc"
     raw: x_1 - x_2 + x_3*x_4*x_5
     prepared: v1 - v2 + v3*v4*v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23345,10 +23345,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-254:
+    subset: "only-five-variables-nc"
     raw: (x_1*x_2*x_5 + x_3*(x_3 + x_4))/x_5
     prepared: (v1*v2*v5 + v3*(v3 + v4))/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23437,10 +23437,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-255:
+    subset: "only-five-variables-nc"
     raw: x_1*x_5*(x_2 + x_3 - x_4)
     prepared: v1*v5*(v2 + v3 - v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23529,10 +23529,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-256:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2 - exp(x_5*(x_3 - x_4)) + 1)
     prepared: v1*(v2 - exp(v5*(v3 - v4)) + 1)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23621,10 +23621,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-257:
+    subset: "only-five-variables-nc"
     raw: x_1*(-x_1 + x_2 + x_3 + cos(x_4 + x_5))
     prepared: v1*(-v1 + v2 + v3 + cos(v4 + v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23713,10 +23713,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-258:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 + x_2*x_3*(x_3 - x_4) + x_2)
     prepared: v5*(v1 + v2*v3*(v3 - v4) + v2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23805,10 +23805,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-259:
+    subset: "only-five-variables-nc"
     raw: x_1**4*x_2 + x_3 + 2*x_4 + x_5
     prepared: v1**4*v2 + v3 + 2*v4 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23897,10 +23897,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-260:
+    subset: "only-five-variables-nc"
     raw: -x_5 + sin(x_4*(x_1 + x_2 + x_3))
     prepared: -v5 + sin(v4*(v1 + v2 + v3))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -23989,10 +23989,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-261:
+    subset: "only-five-variables-nc"
     raw: (x_2 + x_3*(sqrt(x_1) - x_2))*(x_4 + x_5)/x_3
     prepared: (v2 + v3*(sqrt(v1) - v2))*(v4 + v5)/v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -24081,10 +24081,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   only_five_variables_nc-262:
+    subset: "only-five-variables-nc"
     raw: exp((-x_2 - x_3*x_4 + x_3*x_5*tan(x_1))/(x_3*x_5))
     prepared: exp((-v2 - v3*v4 + v3*v5*tan(v1))/(v3*v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -24173,10 +24173,10 @@ expressions:
     meta:
       finite_fraction: 0.9991
   only_five_variables_nc-263:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2 - x_3 - x_4*(x_1 + x_5)
     prepared: v1 + v2 - v3 - v4*(v1 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -24265,10 +24265,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-264:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1*x_2 + x_3*(x_1 + x_4)**2)
     prepared: v5*(v1*v2 + v3*(v1 + v4)**2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -24357,10 +24357,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-265:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2 - 2*x_3*tan(x_4) + x_5
     prepared: v1 + v2 - 2*v3*tan(v4) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -24449,10 +24449,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-266:
+    subset: "only-five-variables-nc"
     raw: x_1**2*x_4**2*x_5/(x_2*x_3)
     prepared: v1**2*v4**2*v5/(v2*v3)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -24541,10 +24541,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-267:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*(x_3 + x_4*(-x_1 + x_5))/x_4
     prepared: v1*v2*(v3 + v4*(-v1 + v5))/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -24633,10 +24633,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-268:
+    subset: "only-five-variables-nc"
     raw: 2*x_1 - sqrt(x_2) + x_3*x_4*x_5
     prepared: 2*v1 - sqrt(v2) + v3*v4*v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -24725,10 +24725,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   only_five_variables_nc-269:
+    subset: "only-five-variables-nc"
     raw: x_1 - x_2 - x_3*x_4*x_5
     prepared: v1 - v2 - v3*v4*v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -24817,10 +24817,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-270:
+    subset: "only-five-variables-nc"
     raw: x_1/(-x_1 + x_2 - x_3 + x_4 + x_5)
     prepared: v1/(-v1 + v2 - v3 + v4 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -24909,10 +24909,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-271:
+    subset: "only-five-variables-nc"
     raw: x_4*(x_1 + x_2**2)/(x_2*(x_1*x_3 + x_4*x_5))
     prepared: v4*(v1 + v2**2)/(v2*(v1*v3 + v4*v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25001,10 +25001,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-272:
+    subset: "only-five-variables-nc"
     raw: x_1*x_3*x_4*x_5/x_2
     prepared: v1*v3*v4*v5/v2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25093,10 +25093,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-273:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_4*(x_3 + asin(x_1 - x_2)) - x_5)
     prepared: v1/(v4*(v3 + asin(v1 - v2)) - v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25185,10 +25185,10 @@ expressions:
     meta:
       finite_fraction: 0.0941
   only_five_variables_nc-274:
+    subset: "only-five-variables-nc"
     raw: x_5 + (x_1 + x_4*(x_2 - x_3**2))**5
     prepared: v5 + (v1 + v4*(v2 - v3**2))**5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25277,10 +25277,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-275:
+    subset: "only-five-variables-nc"
     raw: x_1*x_4*x_5 + x_2*(x_3 + x_4)
     prepared: v1*v4*v5 + v2*(v3 + v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25369,10 +25369,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-276:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*x_3**2*(x_4 + x_5)
     prepared: v1*v2*v3**2*(v4 + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25461,10 +25461,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-277:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_2 - x_3 + x_4*(x_3 + tan(x_5)))
     prepared: v1/(v2 - v3 + v4*(v3 + tan(v5)))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25553,10 +25553,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-278:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2 + x_3**3*x_4*x_5**3
     prepared: v1 + v2 + v3**3*v4*v5**3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25645,10 +25645,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-279:
+    subset: "only-five-variables-nc"
     raw: -x_1*x_4*(x_1*x_2 - x_2 + x_3) + x_5
     prepared: -v1*v4*(v1*v2 - v2 + v3) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25737,10 +25737,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-280:
+    subset: "only-five-variables-nc"
     raw: x_1 - x_2 + x_3 + x_4 + x_5**2/x_4**2
     prepared: v1 - v2 + v3 + v4 + v5**2/v4**2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25829,10 +25829,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-281:
+    subset: "only-five-variables-nc"
     raw: x_3*x_4*(x_1 + x_2) + x_5
     prepared: v3*v4*(v1 + v2) + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -25921,10 +25921,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-282:
+    subset: "only-five-variables-nc"
     raw: x_5*(x_1 - x_2 - x_3 - x_4)
     prepared: v5*(v1 - v2 - v3 - v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26013,10 +26013,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-283:
+    subset: "only-five-variables-nc"
     raw: (x_1 + 3*x_2*x_3)*(x_4 + x_5)/x_2
     prepared: (v1 + 3*v2*v3)*(v4 + v5)/v2
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26105,10 +26105,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-284:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_5 + cos(x_2**2*x_3 + x_4))
     prepared: v1/(v5 + cos(v2**2*v3 + v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26197,10 +26197,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-285:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2/x_3 + x_3*x_4/x_5 - x_3/x_5
     prepared: v1*v2/v3 + v3*v4/v5 - v3/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26289,10 +26289,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-286:
+    subset: "only-five-variables-nc"
     raw: x_5 + sin(x_2 + x_3*x_4 + cos(x_1))
     prepared: v5 + sin(v2 + v3*v4 + cos(v1))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26381,10 +26381,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-287:
+    subset: "only-five-variables-nc"
     raw: (x_1*(x_1 - x_2) - x_3 + x_4*x_5)/x_4
     prepared: (v1*(v1 - v2) - v3 + v4*v5)/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26473,10 +26473,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-288:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*(x_4*(x_1**2 - x_3) + x_5)
     prepared: v1*v2*(v4*(v1**2 - v3) + v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26565,10 +26565,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-289:
+    subset: "only-five-variables-nc"
     raw: (x_1*x_5 + x_2*(x_3*x_4 - x_5**(3/2)))/x_5
     prepared: (v1*v5 + v2*(v3*v4 - v5**(3/2)))/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26657,10 +26657,10 @@ expressions:
     meta:
       finite_fraction: 0.5034
   only_five_variables_nc-290:
+    subset: "only-five-variables-nc"
     raw: (x_1 - sqrt(x_2))/(x_3*x_4*cos(x_5))
     prepared: (v1 - sqrt(v2))/(v3*v4*cos(v5))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26749,10 +26749,10 @@ expressions:
     meta:
       finite_fraction: 0.5003
   only_five_variables_nc-291:
+    subset: "only-five-variables-nc"
     raw: x_2*(sqrt(x_1)*x_5 + x_3 + x_4)/(x_5*(x_3 + x_4))
     prepared: v2*(sqrt(v1)*v5 + v3 + v4)/(v5*(v3 + v4))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26841,10 +26841,10 @@ expressions:
     meta:
       finite_fraction: 0.505
   only_five_variables_nc-292:
+    subset: "only-five-variables-nc"
     raw: (x_1 + x_2 + x_3 - x_4)/x_5
     prepared: (v1 + v2 + v3 - v4)/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -26933,10 +26933,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-293:
+    subset: "only-five-variables-nc"
     raw: x_1 + x_2 - sqrt(x_3) - x_4 - x_5
     prepared: v1 + v2 - sqrt(v3) - v4 - v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -27025,10 +27025,10 @@ expressions:
     meta:
       finite_fraction: 0.494
   only_five_variables_nc-294:
+    subset: "only-five-variables-nc"
     raw: 2*x_1 - x_2 - sin(x_3*x_4/x_5)
     prepared: 2*v1 - v2 - sin(v3*v4/v5)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -27117,10 +27117,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-295:
+    subset: "only-five-variables-nc"
     raw: x_1/(x_2 + x_3) + x_4/x_5
     prepared: v1/(v2 + v3) + v4/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -27209,10 +27209,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-296:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_2*x_3 + x_4*(x_1 + x_5))/x_4
     prepared: v1*(v2*v3 + v4*(v1 + v5))/v4
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -27301,10 +27301,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-297:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2/tan(x_3*x_5/x_4**2)
     prepared: v1*v2/tan(v3*v5/v4**2)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -27393,10 +27393,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-298:
+    subset: "only-five-variables-nc"
     raw: x_1*x_2*x_5*(x_2 + x_3)/(x_3 - x_4)
     prepared: v1*v2*v5*(v2 + v3)/(v3 - v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -27485,10 +27485,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-299:
+    subset: "only-five-variables-nc"
     raw: x_1**2*x_3*x_4/x_2 + x_5
     prepared: v1**2*v3*v4/v2 + v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1
@@ -27577,10 +27577,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   only_five_variables_nc-300:
+    subset: "only-five-variables-nc"
     raw: x_1*(x_1*(x_2 - x_3 + x_4) + x_4)/x_5
     prepared: v1*(v1*(v2 - v3 + v4) + v4)/v5
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: x_1

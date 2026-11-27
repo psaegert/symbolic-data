@@ -1,7 +1,7 @@
 metadata:
   name: dgsr-additional-feynman
   version: 2
-  benchmark: "dgsr-additional-feynman"
+  benchmark: "dgsr"
   tags: {"origin": "science formula", "tags": []}
   license: "CC BY 4.0 (Holt et al. 2023, DGSR, arXiv:2401.00282, Table 35) + BSD-3-Clause (benchmarks.csv, DSO fork in samholt/DeepGenerativeSymbolicRegression)"
   citation: {"paper": {"short": "Holt et al. 2023", "title": "Deep Generative Symbolic Regression", "venue": "ICLR 2023", "url": "https://arxiv.org/abs/2401.00282"}, "data": {"short": "GitHub samholt/DeepGenerativeSymbolicRegression@5dbf04d", "title": "DGSR benchmarks.csv (DSO fork in the authors' repository)", "url": "https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv"}}
@@ -33,10 +33,10 @@ metadata:
       is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Feynman-A-1:
+    subset: "additional-feynman"
     raw: x3*x1*x2/((x5-x4)**2+(x7-x6)**2+(x9-x8)**2)
     prepared: v1*v2*v3/((-v4 + v5)**2 + (-v6 + v7)**2 + (-v8 + v9)**2)
     n_variables: 9
-    subset: all
     vars:
       v1:
         name: x1
@@ -125,10 +125,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-A-6:
+    subset: "additional-feynman"
     raw: x1*(1+x3)*x2
     prepared: v1*v2*(v3 + 1)
     n_variables: 6
-    subset: all
     vars:
       v1:
         name: x1
@@ -190,10 +190,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-A-9:
+    subset: "additional-feynman"
     raw: 1/(x1-1)*x2*x4/x3
     prepared: v2*v4/(v3*(v1 - 1))
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x1
@@ -237,10 +237,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-A-21:
+    subset: "additional-feynman"
     raw: 1/(x1-1)*x2*x3
     prepared: v2*v3/(v1 - 1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -275,10 +275,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-A-22:
+    subset: "additional-feynman"
     raw: x3/(1-x2/x1)
     prepared: v3/(1 - v2/v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1
@@ -313,10 +313,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-A-29:
+    subset: "additional-feynman"
     raw: (x1*x2*x3*x4*x5/(4*x6*sin(x7/2)**2))**2
     prepared: v1**2*v2**2*v3**2*v4**2*v5**2/(16*v6**2*sin(v7/2)**4)
     n_variables: 7
-    subset: all
     vars:
       v1:
         name: x1
@@ -387,10 +387,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-A-31:
+    subset: "additional-feynman"
     raw: x1*(1-x2**2)/(1+x2*cos(x3-x4))
     prepared: v1*(1 - v2**2)/(v2*cos(v3 - v4) + 1)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x1
@@ -434,10 +434,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-A-32:
+    subset: "additional-feynman"
     raw: x1*(sin(x2/2)*sin(x4*x3/2)/(x2/2*sin(x3/2)))**2
     prepared: 4*v1*sin(v2/2)**2*sin(v3*v4/2)**2/(v2**2*sin(v3/2)**2)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x1
@@ -481,6 +481,7 @@ expressions:
     meta:
       finite_fraction: 1.0
   Feynman-A-2:
+    subset: "additional-feynman"
     raw: mom*H/(kb*T)+(mom*alpha)/(epsilon*c**2*kb*T)*M
     prepared: v1*v2/(v3*v4)+(v1*v5)/(v6*v7**2*v3*v4)*v8
     n_variables: 8
@@ -554,11 +555,11 @@ expressions:
         - pos
       v0:
         name: f
-    subset: additional-feynman
     meta:
       same_as: feynman:II.36.38
       finite_fraction: 1.0
   Feynman-A-3:
+    subset: "additional-feynman"
     raw: n_0*exp(-m*g*x/(kb*T))
     prepared: v1*exp(-v2*v5*v3/(v6*v4))
     n_variables: 6
@@ -616,11 +617,11 @@ expressions:
         - pos
       v0:
         name: n
-    subset: additional-feynman
     meta:
       same_as: feynman:I.40.1
       finite_fraction: 1.0
   Feynman-A-4:
+    subset: "additional-feynman"
     raw: x1*y1+x2*y2+x3*y3
     prepared: v1*v4+v2*v5+v3*v6
     n_variables: 6
@@ -678,11 +679,11 @@ expressions:
         - pos
       v0:
         name: A
-    subset: additional-feynman
     meta:
       same_as: feynman:I.11.19
       finite_fraction: 1.0
   Feynman-A-5:
+    subset: "additional-feynman"
     raw: n_0*(1+p_d*Ef*cos(theta)/(kb*T))
     prepared: v1*(1+v5*v6*cos(v4)/(v2*v3))
     n_variables: 6
@@ -740,11 +741,11 @@ expressions:
         - pos
       v0:
         name: n
-    subset: additional-feynman
     meta:
       same_as: feynman:II.11.17
       finite_fraction: 1.0
   Feynman-A-7:
+    subset: "additional-feynman"
     raw: n*kb*T/V
     prepared: v1*v4*v2/v3
     n_variables: 4
@@ -786,11 +787,11 @@ expressions:
         - pos
       v0:
         name: pr
-    subset: additional-feynman
     meta:
       same_as: feynman:I.39.22
       finite_fraction: 1.0
   Feynman-A-8:
+    subset: "additional-feynman"
     raw: q*v*B/p
     prepared: v1*v2*v3/v4
     n_variables: 4
@@ -832,11 +833,11 @@ expressions:
         - pos
       v0:
         name: omega
-    subset: additional-feynman
     meta:
       same_as: feynman:I.34.8
       finite_fraction: 1.0
   Feynman-A-10:
+    subset: "additional-feynman"
     raw: g_*q*B/(2*m)
     prepared: v1*v2*v3/(2*v4)
     n_variables: 4
@@ -878,11 +879,11 @@ expressions:
         - pos
       v0:
         name: omega
-    subset: additional-feynman
     meta:
       same_as: feynman:II.34.11
       finite_fraction: 1.0
   Feynman-A-11:
+    subset: "additional-feynman"
     raw: Y*A*x/d
     prepared: v1*v2*v4/v3
     n_variables: 4
@@ -924,11 +925,11 @@ expressions:
         - pos
       v0:
         name: F
-    subset: additional-feynman
     meta:
       same_as: feynman:II.38.3
       finite_fraction: 1.0
   Feynman-A-12:
+    subset: "additional-feynman"
     raw: x1*(cos(omega*t)+alpha*cos(omega*t)**2)
     prepared: v1*(cos(v2*v3)+v4*cos(v2*v3)**2)
     n_variables: 4
@@ -970,11 +971,11 @@ expressions:
         - pos
       v0:
         name: x
-    subset: additional-feynman
     meta:
       same_as: feynman:I.50.26
       finite_fraction: 1.0
   Feynman-A-13:
+    subset: "additional-feynman"
     raw: -rho_c_0*q*A_vec/m
     prepared: -v1*v2*v3/v4
     n_variables: 4
@@ -1016,11 +1017,11 @@ expressions:
         - pos
       v0:
         name: j
-    subset: additional-feynman
     meta:
       same_as: feynman:III.21.20
       finite_fraction: 1.0
   Feynman-A-14:
+    subset: "additional-feynman"
     raw: (m1*r1+m2*r2)/(m1+m2)
     prepared: (v1*v3+v2*v4)/(v1+v2)
     n_variables: 4
@@ -1062,11 +1063,11 @@ expressions:
         - pos
       v0:
         name: r
-    subset: additional-feynman
     meta:
       same_as: feynman:I.18.4
       finite_fraction: 1.0
   Feynman-A-15:
+    subset: "additional-feynman"
     raw: 1/2*m*(v**2+u**2+w**2)
     prepared: 1/2*v1*(v2**2+v3**2+v4**2)
     n_variables: 4
@@ -1108,11 +1109,11 @@ expressions:
         - pos
       v0:
         name: K
-    subset: additional-feynman
     meta:
       same_as: feynman:I.13.4
       finite_fraction: 1.0
   Feynman-A-16:
+    subset: "additional-feynman"
     raw: -mom*B*cos(theta)
     prepared: -v1*v2*cos(v3)
     n_variables: 3
@@ -1146,11 +1147,11 @@ expressions:
         - pos
       v0:
         name: E_n
-    subset: additional-feynman
     meta:
       same_as: feynman:II.15.4
       finite_fraction: 1.0
   Feynman-A-17:
+    subset: "additional-feynman"
     raw: (u+v)/(1+u*v/c**2)
     prepared: (v3+v2)/(1+v3*v2/v1**2)
     n_variables: 3
@@ -1184,11 +1185,11 @@ expressions:
         - pos
       v0:
         name: v1
-    subset: additional-feynman
     meta:
       same_as: feynman:I.16.6
       finite_fraction: 1.0
   Feynman-A-18:
+    subset: "additional-feynman"
     raw: m*g*z
     prepared: v1*v2*v3
     n_variables: 3
@@ -1222,11 +1223,11 @@ expressions:
         - pos
       v0:
         name: U
-    subset: additional-feynman
     meta:
       same_as: feynman:I.14.3
       finite_fraction: 1.0
   Feynman-A-19:
+    subset: "additional-feynman"
     raw: epsilon*c*Ef**2
     prepared: v1*v2*v3**2
     n_variables: 3
@@ -1260,11 +1261,11 @@ expressions:
         - pos
       v0:
         name: flux
-    subset: additional-feynman
     meta:
       same_as: feynman:II.27.16
       finite_fraction: 1.0
   Feynman-A-20:
+    subset: "additional-feynman"
     raw: q*v*r/2
     prepared: v1*v2*v3/2
     n_variables: 3
@@ -1298,11 +1299,11 @@ expressions:
         - pos
       v0:
         name: mom
-    subset: additional-feynman
     meta:
       same_as: feynman:II.34.2
       finite_fraction: 1.0
   Feynman-A-23:
+    subset: "additional-feynman"
     raw: mob*kb*T
     prepared: v1*v3*v2
     n_variables: 3
@@ -1336,11 +1337,11 @@ expressions:
         - pos
       v0:
         name: D
-    subset: additional-feynman
     meta:
       same_as: feynman:I.43.31
       finite_fraction: 1.0
   Feynman-A-24:
+    subset: "additional-feynman"
     raw: Int_0*sin(n*theta/2)**2/sin(theta/2)**2
     prepared: v1*sin(v3*v2/2)**2/sin(v2/2)**2
     n_variables: 3
@@ -1374,11 +1375,11 @@ expressions:
         - pos
       v0:
         name: Int
-    subset: additional-feynman
     meta:
       same_as: feynman:I.30.3
       finite_fraction: 1.0
   Feynman-A-25:
+    subset: "additional-feynman"
     raw: beta*(1+alpha*cos(theta))
     prepared: v1*(1+v2*cos(v3))
     n_variables: 3
@@ -1412,11 +1413,11 @@ expressions:
         - pos
       v0:
         name: f
-    subset: additional-feynman
     meta:
       same_as: feynman:III.17.37
       finite_fraction: 1.0
   Feynman-A-26:
+    subset: "additional-feynman"
     raw: 1/(1/d1+n/d2)
     prepared: 1/(1/v1+v3/v2)
     n_variables: 3
@@ -1450,11 +1451,11 @@ expressions:
         - pos
       v0:
         name: foc
-    subset: additional-feynman
     meta:
       same_as: feynman:I.27.6
       finite_fraction: 1.0
   Feynman-A-27:
+    subset: "additional-feynman"
     raw: 2*U*(1-cos(k*d))
     prepared: 2*v1*(1-cos(v2*v3))
     n_variables: 3
@@ -1488,11 +1489,11 @@ expressions:
         - pos
       v0:
         name: E_n
-    subset: additional-feynman
     meta:
       same_as: feynman:III.15.12
       finite_fraction: 1.0
   Feynman-A-28:
+    subset: "additional-feynman"
     raw: sigma_den/epsilon*1/(1+chi)
     prepared: v1/v2*1/(1+v3)
     n_variables: 3
@@ -1526,11 +1527,11 @@ expressions:
         - pos
       v0:
         name: Ef
-    subset: additional-feynman
     meta:
       same_as: feynman:II.10.9
       finite_fraction: 1.0
   Feynman-A-30:
+    subset: "additional-feynman"
     raw: E_n/(1+E_n/(m*c**2)*(1-cos(theta)))
     prepared: v1/(1+v1/(v2*v3**2)*(1-cos(v4)))
     n_variables: 4
@@ -1580,4 +1581,3 @@ expressions:
       base_eq_id: B8
       same_as: feynman-bonus:B8
       finite_fraction: 1.0
-    subset: additional-feynman
