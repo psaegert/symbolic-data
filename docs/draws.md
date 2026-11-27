@@ -42,8 +42,9 @@ them, where the benchmark's authors draw them unconditionally.
 - The attempts come in a fixed order, attempt `k` from its own seed (below). The rule that accepts an attempt is the
   evaluation harness's, not symbolic-data's: srbf accepts the first attempt on which (a) every target is finite and
   the FVU is defined on the fitting and on the held-out points, (b) srbf's oracle (the ground truth with its
-  constants refitted, 1,024 seeded restarts) reaches numeric recovery on the held-out points, and (c) srbf's judge
-  recognizes the refitted formula symbolically (`srbf.draw_acceptance`).
+  constants refitted, restart by restart from seeded starting values, at most 1,024 restarts, stopping at the first
+  that recovers) reaches numeric recovery on the held-out points, and (c) srbf's judge recognizes that restart's
+  refitted formula symbolically (`srbf.draw_acceptance`).
 - When no attempt within `max_trials` is accepted, the problem keeps attempt 1 and is flagged `formula_inherent`:
   what defeats recovery is the formula (or the method), not the luck of the draw.
 - Formulas that are constants by construction (skeleton `<constant>`), data problems and stored problems are not
