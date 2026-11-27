@@ -27,6 +27,9 @@ import numpy as np
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import erbench_to_catalogs as E  # noqa: E402  the version-1 import: ERBench's sympy text -> SimpliPy infix
+import formula_gate  # noqa: E402  the numeric check that each prepared formula computes its raw formula
 import freeze as F  # noqa: E402  the 1,024-problem subsamples
 import paths  # noqa: E402  the curated inputs
 CATALOGS = {"erbench-syneq": "assets/catalogs", "erbench-phybench": "assets/catalogs",
@@ -49,11 +52,30 @@ def dummies_of(catalog: str, eq_id: str) -> int:
     return hashlib.sha256(f"erbench-dummy:{catalog}:{eq_id}".encode()).digest()[0] & 1
 
 
+def prepared_of(raw: str) -> str:
+    """ERBench's sympy text in SimpliPy's infix, as the version-1 import writes it (erbench_to_catalogs), re-derived
+    here from ``raw`` so a fix of that rewrite reaches every catalog (2026-11-28: log(u, 10) parenthesized)."""
+    return E.substitute_pi(E.to_v_space(E.normalize_expression(raw))[0])
+
+
+def gated(catalog: str, key: str, raw: str, prepared: str, supports: list[list[float]]) -> None:
+    """The formula gate on ERBench's support box: the prepared formula must compute the raw one (GateError if not)."""
+    names = [f"x_{i}" for i in range(len(supports))]
+    result = formula_gate.gate(catalog, key, raw, names, prepared, [tuple(b) for b in supports])
+    GATE[result["ok"]] = GATE.get(result["ok"], 0) + 1
+
+
+GATE: dict[Any, int] = {}       # the gate's verdicts of the last convert: True checked, None no shared finite point
+
+
 def convert(catalog: str, doc: dict[str, Any]) -> dict[str, Any]:
     out = {}
+    GATE.clear()
     for key, e in doc["expressions"].items():
         keys = sorted((k for k in e["vars"] if k != "v0"), key=lambda k: int(k[1:]))
         supports = [[float(v) for v in e["vars"][k]["sample_range"]] for k in keys]
+        e = {**e, "prepared": prepared_of(e["raw"])}
+        gated(catalog, key, e["raw"], e["prepared"], supports)
         bases = {e["vars"][k]["sample_type"][0] for k in keys}
         dtype = "int" if bases == {"int"} else "float"
         for alpha in ALPHAS:
@@ -71,7 +93,7 @@ def convert(catalog: str, doc: dict[str, Any]) -> dict[str, Any]:
                           "test": {"inputs": {"name": "erbench_mixture", "kwargs": {**kwargs, "region": "test"}}},
                           "meta": {**meta, "erbench_formula": str(key), "alpha": float(alpha), "dummies": d}}
     md = dict(doc["metadata"])
-    md["version"] = int(md["version"]) + 1
+    md["version"] = int(md["version"]) + 1          # the version-1 import's next; a content change bumps it (main)
     md["description"] = (md.get("description") or "").rstrip(".") + "; one problem per formula and alpha (ERBench's generator)."
     md["conventions"] = {**(md.get("conventions") or {}), "sampling": SAMPLING}
     md["sampling_defaults"] = {**(md.get("sampling_defaults") or {}), "n_points": 512}
@@ -118,9 +140,17 @@ def main() -> None:
         text = subprocess.run(["git", "-C", str(root), "show", f"{a.base}:{where}/{catalog}.yaml"],
                               capture_output=True, text=True, check=True).stdout
         doc = convert(catalog, yaml.safe_load(text))
-        (root / where / f"{catalog}.yaml").write_text(yaml.safe_dump(doc, sort_keys=False, allow_unicode=True, width=120))
+        target = root / where / f"{catalog}.yaml"
+        if target.exists():          # a catalog whose problems change gets its next version (a published one is fixed)
+            current = yaml.safe_load(target.read_text())
+            if current["expressions"] != doc["expressions"]:
+                doc["metadata"]["version"] = max(doc["metadata"]["version"], int(current["metadata"]["version"]) + 1)
+            else:
+                doc["metadata"]["version"] = int(current["metadata"]["version"])
+        target.write_text(yaml.safe_dump(doc, sort_keys=False, allow_unicode=True, width=120))
         rec = {"formulas": len(yaml.safe_load(text)["expressions"]), "problems": len(doc["expressions"]),
-               "with_dummy": sum(e["meta"]["dummies"] for e in doc["expressions"].values())}
+               "with_dummy": sum(e["meta"]["dummies"] for e in doc["expressions"].values()),
+               "raw_vs_prepared": {"checked": GATE.get(True, 0), "unchecked": GATE.get(None, 0)}}
         if a.check:
             rec.update(check(catalog, doc, a.check))
         if catalog in FROZEN:

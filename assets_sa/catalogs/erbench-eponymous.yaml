@@ -1,6 +1,6 @@
 metadata:
   name: erbench-eponymous
-  version: 2
+  version: 3
   tags: {"origin": "science formula", "tags": ["extrapolation", "dummy inputs"]}
   srbf_changes: [{"kind": "changed", "problems": 48, "text": "16 of ERBench's 211 Eponymous formulas are exact copies of another formula in the set (same expression, input box and type); srbf keeps each once, so it runs 585 of the 633 problems."}]
   citation: {"paper": {"short": "Kahlmeyer et al. 2026", "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms", "venue": "arXiv preprint arXiv:2606.09276", "url": "https://arxiv.org/abs/2606.09276"}, "data": {"short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c", "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)", "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"}}
@@ -522,7 +522,7 @@ expressions:
       dummies: 1
   eponymous_4_alpha0:
     raw: x_0 + log(x_1/x_2, 10)
-    prepared: v1+0.4342944819032518*log(v2/v3)
+    prepared: v1+(0.4342944819032518*log(v2/v3))
     sources: &id015
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
@@ -569,7 +569,7 @@ expressions:
       dummies: 0
   eponymous_4_alpha0.5:
     raw: x_0 + log(x_1/x_2, 10)
-    prepared: v1+0.4342944819032518*log(v2/v3)
+    prepared: v1+(0.4342944819032518*log(v2/v3))
     sources: *id015
     n_variables: 4
     vars:
@@ -609,7 +609,7 @@ expressions:
       dummies: 1
   eponymous_4_alpha1:
     raw: x_0 + log(x_1/x_2, 10)
-    prepared: v1+0.4342944819032518*log(v2/v3)
+    prepared: v1+(0.4342944819032518*log(v2/v3))
     sources: *id015
     n_variables: 3
     vars:
@@ -22755,7 +22755,7 @@ expressions:
       dummies: 0
   eponymous_191_alpha0:
     raw: log(x_0*(1 - x_1)/(x_1*(1 - x_0)), 10)/log(x_2, 10)
-    prepared: 0.4342944819032518*log(v1*(1-v2)/(v2*(1-v1)))/0.4342944819032518*log(v3)
+    prepared: (0.4342944819032518*log(v1*(1-v2)/(v2*(1-v1))))/(0.4342944819032518*log(v3))
     sources: &id568
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
@@ -22806,7 +22806,7 @@ expressions:
       dummies: 1
   eponymous_191_alpha0.5:
     raw: log(x_0*(1 - x_1)/(x_1*(1 - x_0)), 10)/log(x_2, 10)
-    prepared: 0.4342944819032518*log(v1*(1-v2)/(v2*(1-v1)))/0.4342944819032518*log(v3)
+    prepared: (0.4342944819032518*log(v1*(1-v2)/(v2*(1-v1))))/(0.4342944819032518*log(v3))
     sources: *id568
     n_variables: 4
     vars:
@@ -22847,7 +22847,7 @@ expressions:
       dummies: 1
   eponymous_191_alpha1:
     raw: log(x_0*(1 - x_1)/(x_1*(1 - x_0)), 10)/log(x_2, 10)
-    prepared: 0.4342944819032518*log(v1*(1-v2)/(v2*(1-v1)))/0.4342944819032518*log(v3)
+    prepared: (0.4342944819032518*log(v1*(1-v2)/(v2*(1-v1))))/(0.4342944819032518*log(v3))
     sources: *id568
     n_variables: 3
     vars:
@@ -22886,7 +22886,7 @@ expressions:
       dummies: 0
   eponymous_192_alpha0:
     raw: log(x_0*x_2/(x_1*x_3), 10)/log(x_4, 10)
-    prepared: 0.4342944819032518*log(v1*v3/(v2*v4))/0.4342944819032518*log(v5)
+    prepared: (0.4342944819032518*log(v1*v3/(v2*v4)))/(0.4342944819032518*log(v5))
     sources: &id572
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
@@ -22941,7 +22941,7 @@ expressions:
       dummies: 0
   eponymous_192_alpha0.5:
     raw: log(x_0*x_2/(x_1*x_3), 10)/log(x_4, 10)
-    prepared: 0.4342944819032518*log(v1*v3/(v2*v4))/0.4342944819032518*log(v5)
+    prepared: (0.4342944819032518*log(v1*v3/(v2*v4)))/(0.4342944819032518*log(v5))
     sources: *id572
     n_variables: 5
     vars:
@@ -22983,7 +22983,7 @@ expressions:
       dummies: 0
   eponymous_192_alpha1:
     raw: log(x_0*x_2/(x_1*x_3), 10)/log(x_4, 10)
-    prepared: 0.4342944819032518*log(v1*v3/(v2*v4))/0.4342944819032518*log(v5)
+    prepared: (0.4342944819032518*log(v1*v3/(v2*v4)))/(0.4342944819032518*log(v5))
     sources: *id572
     n_variables: 6
     vars:
@@ -24201,7 +24201,7 @@ expressions:
       dummies: 1
   eponymous_206_alpha0:
     raw: 1*log(x_0/x_1, 10)/(211/100)
-    prepared: 1*0.4342944819032518*log(v1/v2)/(211/100)
+    prepared: 1*(0.4342944819032518*log(v1/v2))/(211/100)
     sources: &id605
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
@@ -24246,7 +24246,7 @@ expressions:
       dummies: 1
   eponymous_206_alpha0.5:
     raw: 1*log(x_0/x_1, 10)/(211/100)
-    prepared: 1*0.4342944819032518*log(v1/v2)/(211/100)
+    prepared: 1*(0.4342944819032518*log(v1/v2))/(211/100)
     sources: *id605
     n_variables: 3
     vars:
@@ -24284,7 +24284,7 @@ expressions:
       dummies: 1
   eponymous_206_alpha1:
     raw: 1*log(x_0/x_1, 10)/(211/100)
-    prepared: 1*0.4342944819032518*log(v1/v2)/(211/100)
+    prepared: 1*(0.4342944819032518*log(v1/v2))/(211/100)
     sources: *id605
     n_variables: 2
     vars:
@@ -24320,7 +24320,7 @@ expressions:
       dummies: 0
   eponymous_207_alpha0:
     raw: -1*1*log(x_0/x_1, 10)/227/50
-    prepared: -1*1*0.4342944819032518*log(v1/v2)/227/50
+    prepared: -1*1*(0.4342944819032518*log(v1/v2))/227/50
     sources: &id608
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
@@ -24363,7 +24363,7 @@ expressions:
       dummies: 0
   eponymous_207_alpha0.5:
     raw: -1*1*log(x_0/x_1, 10)/227/50
-    prepared: -1*1*0.4342944819032518*log(v1/v2)/227/50
+    prepared: -1*1*(0.4342944819032518*log(v1/v2))/227/50
     sources: *id608
     n_variables: 2
     vars:
@@ -24399,7 +24399,7 @@ expressions:
       dummies: 0
   eponymous_207_alpha1:
     raw: -1*1*log(x_0/x_1, 10)/227/50
-    prepared: -1*1*0.4342944819032518*log(v1/v2)/227/50
+    prepared: -1*1*(0.4342944819032518*log(v1/v2))/227/50
     sources: *id608
     n_variables: 3
     vars:

@@ -13,7 +13,7 @@ permissive bundle. The vendored SA csv drops the ``description`` column entirely
 embed whole OEIS entry texts with contributor comments — far more SA content than the formulas).
 
 Canonicalization (documented per entry where applied): '^' -> '**'; sympy 'Abs(' -> 'abs(';
-two-arg log(u, 10) -> 0.4342944819032518*log(u); x_k -> v{k+1}. Entries whose expression still
+two-arg log(u, 10) -> (0.4342944819032518*log(u)); x_k -> v{k+1}. Entries whose expression still
 fails to compile under dev_7-3 are EXCLUDED and logged in the build report (never silently).
 Intra-family exact duplicates (same normalized expression + support + dtype) are dropped with
 their names merged into the kept entry's meta.
@@ -70,12 +70,14 @@ def _rewrite_two_arg_logs(expr: str) -> str:
         else:
             arg = _rewrite_two_arg_logs(expr[j + 4:comma].strip())
             base = expr[comma + 1:k].strip()
+            # parenthesized: the rewrite replaces one factor, and log(u, 10)/log(w, 10) must not become
+            # 0.434*log(u)/0.434*log(w), a product (the 2026-11-28 audit: six ERBench Eponymous problems)
             if base == "E":
                 out.append(f"log({arg})")
             elif base == "10":
-                out.append(f"0.4342944819032518*log({arg})")
+                out.append(f"(0.4342944819032518*log({arg}))")
             else:
-                out.append(f"log({arg})/log({_rewrite_two_arg_logs(base)})")
+                out.append(f"(log({arg})/log({_rewrite_two_arg_logs(base)}))")
         i = k + 1
     return "".join(out)
 

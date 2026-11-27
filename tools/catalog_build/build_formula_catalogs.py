@@ -42,6 +42,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import paths  # noqa: E402  the curated inputs (assets/upstream/catalog-prep) and the public-text filter
 import piecewise  # noqa: E402  the exact Piecewise -> floor/Abs rewrite
 import authors_tests  # noqa: E402  the authors' test sets (rulings 9(1), 9(7))
+import formula_gate  # noqa: E402  the numeric check that each prepared formula computes its raw formula
 
 RULES = ("srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark's formulas, constants and input distributions; "
          "srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per "
@@ -66,7 +67,11 @@ FAMILY_SETS = {"fresh-10": "keijzer", "fresh-11": "korns", "fresh-13": "vladisla
 # Sinusoids with distinct frequencies, sampled uniformly in time, are independent and arcsine-distributed on [-A, A]:
 # each joint is A sin(u), u ~ U[0, 2 pi).
 ARM = "fresh-153"
-MODIFIED = {ARM: ("the authors' input generator is unpublished: srbf draws each joint angle as (pi/2) sin(u), "
+MODIFIED = {"fresh-127": ("the physical constants are priced as numbers: alpha = 0.00755 (the MadGraph default the "
+                          "authors quote in their earlier paper, arXiv:2508.00989), s = 10^6 GeV^2 (sqrt(s) = 1 TeV) and "
+                          "the unit conversion (hbar c)^2 = 0.3893793721e9 pb GeV^2; a method recovers the law with their "
+                          "product as one constant"),
+            ARM: ("the authors' input generator is unpublished: srbf draws each joint angle as (pi/2) sin(u), "
                   "u ~ U[0, 2 pi) (the time-sampled limit of their sinusoidal joint targets), and (pi) sin(u) for the "
                   "extrapolation test"),
             "fresh-64": ("the authors give the noisy Bessel problem's range, x in [0, 4], but not how its points are "
@@ -99,6 +104,29 @@ FAMILY_POINTS = {("fresh-10", "Keijzer-6"): "keijzer", ("fresh-27", "Neat-6"): "
 # fresh-56 is the release catalog physo-class at its next version: the same 8 laws, the constants drawn per run (srbf
 # ruling 2026-11-05: one PhySO Class SR set, as the authors draw them)
 SLUGS = {"fresh-2": "pysr-empiricalbench-formulas", "fresh-56": "physo-class"}
+
+# Transcription fixes to the survey's records (the 2026-11-28 audit: srbf posed another law than the authors'). Each
+# replaces the record's fields; the reason says what the record had wrong and where the authors' version is.
+RECORD_FIXES = {
+    ("fresh-46", "AircraftLift"): {
+        "formula": "x1*(x2 + 2) + x3*x4*x5/x6",
+        "why": ("the zero-lift angle alpha0 = -2 enters as C_La (alpha - alpha0) = x1*(x2 + 2); the record copied Chen et "
+                "al.'s Appendix B.2 print 'x2 - 2', HeuristicLab's own pre-2019 bug, which HeuristicLab fixed in commit "
+                "50af0024 (ticket #3014) and which srbf's other two copies of the problem do not have")},
+    **{("fresh-127", i): {
+        "formula": "2*pi*hbarc2*alpha**2/(4*s)*(1 + cos_theta**2)",
+        "constants": {"alpha": 0.00755, "s": 1000000.0, "hbarc2": 389379372.1},
+        "why": ("the authors fit the binned d(sigma)/d(cos theta) in pb (Morales-Alvarado 2025, Fig. 2 axis and Table 1 "
+                "fit 0.0349 (1 + cos^2 theta)), i.e. 2 pi (hbar c)^2 alpha^2/(4 s) (1 + cos^2 theta) with (hbar c)^2 = "
+                "0.3893793721e9 pb GeV^2; the record posed d(sigma)/d(Omega) in GeV^-2, 2.45e9 times smaller")}
+        for i in ("ee_mumu_angular_id", "ee_mumu_angular_ood")},
+}
+
+
+def fixed(p: dict[str, Any]) -> dict[str, Any]:
+    """The problem's record with its transcription fix (RECORD_FIXES) applied."""
+    fix = RECORD_FIXES.get((p["set"], p["id"]))
+    return {**p, **{k: v for k, v in fix.items() if k != "why"}} if fix else p
 
 
 class Unsupported(Exception):
@@ -573,7 +601,10 @@ def distinct_names(variables: dict[str, dict[str, Any]]) -> None:
         seen.add(variables[key]["name"])
 
 
-def entry_of(p: dict[str, Any]) -> dict[str, Any]:
+GATE: dict[str, dict[str, Any]] = {}     # the raw-vs-prepared gate's result per problem id of the set being built
+
+
+def entry_of(p: dict[str, Any], catalog: str = "") -> dict[str, Any]:
     names = [v["name"] for v in p["variables"]]
     if not names:
         raise Unsupported("no inputs")
@@ -603,6 +634,7 @@ def entry_of(p: dict[str, Any]) -> dict[str, Any]:
              "input_distributions": {v["name"]: v.get("distribution") for v in p["variables"]}}
     if target != p["formula"]:
         entry["target"] = f"the authors fit {target}, not the published law itself"
+    gate(catalog, p["id"], target, names, entry["prepared"], variables, constants)
     if p.get("constraints"):
         entry["row_constraints"] = row_constraints(p)
     if joint:
@@ -623,6 +655,21 @@ def entry_of(p: dict[str, Any]) -> dict[str, Any]:
     if run:
         entry["per_run"] = run
     return entry
+
+
+def gate(catalog: str, eq_id: str, target: str, names: list[str], prepared: str, variables: dict[str, dict[str, Any]],
+         constants: dict[str, float]) -> None:
+    """The formula gate (formula_gate.py): the prepared formula must compute the target the authors wrote, on points
+    drawn from each input's declared range; a difference without a listed reason stops the build (GateError). A
+    target the gate cannot evaluate (a function numpy lacks) is reported as unchecked."""
+    boxes = [formula_gate.box_of(variables.get(f"v{i + 1}") or {}) for i in range(len(names))]
+    try:
+        result = formula_gate.gate(catalog, eq_id, target, names, prepared, boxes, constants)
+    except formula_gate.GateError:
+        raise
+    except Exception as exc:                   # sympy/numpy cannot evaluate one side (harmonic, besselj, ...)
+        result = {"checked": 0, "ok": None, "error": f"{type(exc).__name__}: {exc}"[:160]}
+    GATE[eq_id] = result
 
 
 N_MC = 20_000   # the release catalogs' audit size (tools/audit_finite_fraction.py)
@@ -862,7 +909,7 @@ def main() -> None:
         return
     by_set: dict[str, list[dict]] = defaultdict(list)
     for p in problems:
-        by_set[p["set"]].append(p)
+        by_set[p["set"]].append(fixed(p))
     tags = [t for t in (a.only.split(",") if a.only else sorted(by_set)) if t not in FAMILY_SETS]
     engine = None
     if a.check:
@@ -884,13 +931,16 @@ def main() -> None:
             report_path.write_text(json.dumps(report, indent=1) + "\n")
             continue
         gone = paths.dropped_members(slug)
+        GATE.clear()
         points_display = f"{rec['name']}{'*' if tag in MODIFIED_POINTS else ''} (pinned points)"
         for p in by_set[tag]:
             if p["id"] in gone:
                 skipped[p["id"]] = "dropped by rule (tags/dropped.json)"
                 continue
             try:
-                entries.update(with_tests(p, entry_of(p)))
+                entries.update(with_tests(p, entry_of(p, slug)))
+            except formula_gate.GateError:
+                raise
             except authors_tests.Pending as why:
                 skipped[p["id"]] = f"test: {why}"
             except Unsupported as why:
@@ -927,7 +977,13 @@ def main() -> None:
                                 "conventions": {"rules": RULES}},
                    "expressions": entries}
             (out / f"{slug}.yaml").write_text(yaml.safe_dump(paths.public(doc), sort_keys=False, allow_unicode=True, width=120))
+        built_ids = {i for i in GATE if any(str(k) == i or str(k).startswith(f"{i}.") for k in entries)}
+        unchecked = {k: r.get("error") or "no point where both formulas are finite" for k, r in GATE.items()
+                     if k in built_ids and r.get("ok") is None}
         report[tag] = {"catalog": slug, "problems": len(by_set[tag]), "built": len(entries), "pinned_points": len(pinned),
+                       "raw_vs_prepared": {"checked": sum(1 for k, r in GATE.items() if k in built_ids and r.get("ok")),
+                                           "allowed": {k: r["allowed"] for k, r in GATE.items() if r.get("allowed")},
+                                           "unchecked": unchecked},
                        "skipped": skipped,
                        "check_failed": failed, "needs_simplipy_015": sorted(pending),
                        **({"per_run_skeleton_differs": differs} if differs else {})}

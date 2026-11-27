@@ -6,6 +6,10 @@ metadata:
   license: "CC BY 4.0 (Morales-Alvarado 2025, arXiv:2510.03397)"
   citation: {"paper": {"short": "Morales-Alvarado 2025", "title": "Foundation models for equation discovery in high energy physics", "venue": "arXiv preprint arXiv:2510.03397", "url": "https://arxiv.org/abs/2510.03397"}}
   description: HEP LLM-SR angular-distribution problems
+  display_name: HEP LLM-SR angular-distribution problems*
+  modified_by_srbf: 'the physical constants are priced as numbers: alpha = 0.00755 (the MadGraph default the authors quote
+    in their earlier paper, arXiv:2508.00989), s = 10^6 GeV^2 (sqrt(s) = 1 TeV) and the unit conversion (hbar c)^2 = 0.3893793721e9
+    pb GeV^2; a method recovers the law with their product as one constant'
   sources:
   - https://arxiv.org/abs/2510.03397
   - https://arxiv.org/pdf/2510.03397
@@ -27,8 +31,8 @@ metadata:
       9(6))'
 expressions:
   ee_mumu_angular_id:
-    raw: alpha**2/(4*s)*(1 + cos_theta**2)
-    prepared: 1.4250625e-11*v1**2 + 1.4250625e-11
+    raw: 2*pi*hbarc2*alpha**2/(4*s)*(1 + cos_theta**2)
+    prepared: 0.0110977988290651*3.141592653589793*(v1**2 + 1)
     n_variables: 1
     subset: all
     vars:
@@ -47,8 +51,8 @@ expressions:
     meta:
       finite_fraction: 1.0
   ee_mumu_angular_ood:
-    raw: alpha**2/(4*s)*(1 + cos_theta**2)
-    prepared: 1.4250625e-11*v1**2 + 1.4250625e-11
+    raw: 2*pi*hbarc2*alpha**2/(4*s)*(1 + cos_theta**2)
+    prepared: 0.0110977988290651*3.141592653589793*(v1**2 + 1)
     n_variables: 1
     subset: all
     vars:

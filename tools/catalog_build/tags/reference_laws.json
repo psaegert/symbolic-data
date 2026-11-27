@@ -1,0 +1,144 @@
+[
+ {
+  "catalog": "cp3-bench",
+  "ids": [
+   "C1b"
+  ],
+  "fvu_bound": 0.15,
+  "reason": "the authors add 10% noise to the Hubble rate H(z) in the published target; the law is the noise-free H(z) (measured FVU 0.112)"
+ },
+ {
+  "catalog": "cp3-bench",
+  "ids": [
+   "C5b"
+  ],
+  "fvu_bound": 0.0005,
+  "reason": "the authors add 1% noise to the NFW density in the published target; the law is the noise-free profile (measured FVU 1.9e-4)"
+ },
+ {
+  "catalog": "cp3-bench",
+  "ids": [
+   "C5c"
+  ],
+  "fvu_bound": 0.03,
+  "reason": "the authors add 10% noise to the NFW density in the published target; the law is the noise-free profile (measured FVU 0.012)"
+ },
+ {
+  "catalog": "gecco-2022-feature-selection",
+  "ids": [
+   "2082_featureselection_easy_data",
+   "3946_featureselection_easy_data",
+   "5847_featureselection_easy_data",
+   "6087_featureselection_easy_data",
+   "6589_featureselection_easy_data",
+   "7102_featureselection_easy_data",
+   "7884_featureselection_easy_data",
+   "8674_featureselection_easy_data",
+   "9023_featureselection_easy_data",
+   "9900_featureselection_easy_data"
+  ],
+  "fvu_bound": 0.05,
+  "reason": "the authors add Gaussian noise to the training and test targets, noise variance 0.025 of the noisy target's (create_data.py add_noise, paper Eq. 3); the law is the noise-free polynomial; bound twice that ratio"
+ },
+ {
+  "catalog": "gecco-2022-feature-selection",
+  "ids": [
+   "2082_featureselection_medium_data",
+   "3946_featureselection_medium_data",
+   "5847_featureselection_medium_data",
+   "6087_featureselection_medium_data",
+   "6589_featureselection_medium_data",
+   "7102_featureselection_medium_data",
+   "7884_featureselection_medium_data",
+   "8674_featureselection_medium_data",
+   "9023_featureselection_medium_data",
+   "9900_featureselection_medium_data"
+  ],
+  "fvu_bound": 0.1,
+  "reason": "the authors add Gaussian noise to the training and test targets, noise variance 0.05 of the noisy target's (create_data.py add_noise, paper Eq. 3); the law is the noise-free polynomial; bound twice that ratio"
+ },
+ {
+  "catalog": "gecco-2022-feature-selection",
+  "ids": [
+   "2082_featureselection_hard_data",
+   "3946_featureselection_hard_data",
+   "5847_featureselection_hard_data",
+   "6087_featureselection_hard_data",
+   "6589_featureselection_hard_data",
+   "7102_featureselection_hard_data",
+   "7884_featureselection_hard_data",
+   "8674_featureselection_hard_data",
+   "9023_featureselection_hard_data",
+   "9900_featureselection_hard_data"
+  ],
+  "fvu_bound": 0.2,
+  "reason": "the authors add Gaussian noise to the training and test targets, noise variance 0.1 of the noisy target's (create_data.py add_noise, paper Eq. 3); the law is the noise-free polynomial; bound twice that ratio"
+ },
+ {
+  "catalog": "gecco-2022-noise",
+  "ids": [
+   "2082_noise_easy_data",
+   "3946_noise_easy_data",
+   "5847_noise_easy_data",
+   "6087_noise_easy_data",
+   "6589_noise_easy_data",
+   "7102_noise_easy_data",
+   "7884_noise_easy_data",
+   "8674_noise_easy_data",
+   "9023_noise_easy_data",
+   "9900_noise_easy_data"
+  ],
+  "fvu_bound": 0.1,
+  "reason": "the authors add Gaussian noise to the training and test targets, noise variance 0.05 of the noisy target's (create_data.py add_noise, paper Eq. 3); the law is the noise-free rational; bound twice that ratio"
+ },
+ {
+  "catalog": "gecco-2022-noise",
+  "ids": [
+   "2082_noise_medium_data",
+   "3946_noise_medium_data",
+   "5847_noise_medium_data",
+   "6087_noise_medium_data",
+   "6589_noise_medium_data",
+   "7102_noise_medium_data",
+   "7884_noise_medium_data",
+   "8674_noise_medium_data",
+   "9023_noise_medium_data",
+   "9900_noise_medium_data"
+  ],
+  "fvu_bound": 0.2,
+  "reason": "the authors add Gaussian noise to the training and test targets, noise variance 0.1 of the noisy target's (create_data.py add_noise, paper Eq. 3); the law is the noise-free rational; bound twice that ratio"
+ },
+ {
+  "catalog": "gecco-2022-noise",
+  "ids": [
+   "2082_noise_hard_data",
+   "3946_noise_hard_data",
+   "5847_noise_hard_data",
+   "6087_noise_hard_data",
+   "6589_noise_hard_data",
+   "7102_noise_hard_data",
+   "7884_noise_hard_data",
+   "8674_noise_hard_data",
+   "9023_noise_hard_data",
+   "9900_noise_hard_data"
+  ],
+  "fvu_bound": 0.3,
+  "reason": "the authors add Gaussian noise to the training and test targets, noise variance 0.15 of the noisy target's (create_data.py add_noise, paper Eq. 3); the law is the noise-free rational; bound twice that ratio"
+ },
+ {
+  "catalog": "gecco-2023-performance",
+  "ids": [
+   "dataset_1"
+  ],
+  "fvu_bound": 0.15,
+  "reason": "the organizers add Gaussian noise (noise_ratio 0.05, sigma 0.927) to the training target of the Shubert function; the law is the noise-free function (measured FVU 0.109)"
+ },
+ {
+  "catalog": "gecco-2023-performance",
+  "ids": [
+   "dataset_3"
+  ],
+  "fvu_bound": 0.04,
+  "reason": "the organizers add Gaussian noise (noise_ratio 0.02) to the training target of the Vincent function; the law is the noise-free function (measured FVU 0.021)"
+ }
+]

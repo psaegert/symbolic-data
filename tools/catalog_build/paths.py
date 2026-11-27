@@ -129,6 +129,16 @@ def dropped_members(catalog: str) -> set[str]:
 
 
 @lru_cache(maxsize=1)
+def reference_laws() -> dict[tuple[str, str], dict[str, Any]]:
+    """(catalog, problem id) -> why the problem's law does not reproduce its rows and how far it may miss them
+    (tags/reference_laws.json: ``reason``, ``fvu_bound``). A data problem's formula is a 'reference' ground truth only
+    with such a row (or the same two fields in its record): the builder refuses any other formula that misses."""
+    with open(Path(__file__).resolve().parent / "tags" / "reference_laws.json", encoding="utf-8") as fh:
+        return {(r["catalog"], str(i)): {"reason": r["reason"], "fvu_bound": float(r["fvu_bound"])}
+                for r in json.load(fh) for i in r["ids"]}
+
+
+@lru_cache(maxsize=1)
 def citations() -> dict[str, dict[str, Any]]:
     """Each catalog's ``paper`` and ``data`` citation (tags/citations.json), where they exist."""
     with open(Path(__file__).resolve().parent / "tags" / "citations.json", encoding="utf-8") as fh:

@@ -59,7 +59,9 @@ def _stated(prob):
 
 
 def test_a_record_that_states_its_ground_truth_kind_with_a_full_check_keeps_it():
-    assert _stated({})[0]["gt_kind"] == "reference"
+    with pytest.raises(ValueError, match="no reason"):     # a miss needs a stated reason and bound (2026-11-28 gate)
+        _stated({})
+    assert _stated({"gt_reason": "1e-3 relative noise", "gt_fvu_bound": 1e-3})[0]["gt_kind"] == "reference"
     check = {"rows": 200, "rows_within_input_rounding": 200, "fit_fvu": 1e-6}
     gt, meta = _stated({"gt_kind": "exact", "gt_check": check})
     assert gt["gt_kind"] == "exact"

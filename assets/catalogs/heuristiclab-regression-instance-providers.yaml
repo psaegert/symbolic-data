@@ -688,8 +688,8 @@ expressions:
     meta:
       finite_fraction: 1.0
   AircraftLift:
-    raw: x1*(x2 - 2) + x3*x4*x5/x6
-    prepared: v1*(v2 - 2) + v3*v4*v5/v6
+    raw: x1*(x2 + 2) + x3*x4*x5/x6
+    prepared: v1*(v2 + 2) + v3*v4*v5/v6
     n_variables: 6
     subset: all
     vars:

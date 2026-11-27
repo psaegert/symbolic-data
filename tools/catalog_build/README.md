@@ -42,5 +42,14 @@ own generator, and the release catalogs' corrections. Run them from the reposito
    on their frozen 1,024), for srbf to read. Run it after the catalogs and the engine are final; `symbolic-data
    verify-draws <root> <catalogs>` shows that a second render writes the same bytes.
 
+Gates (2026-11-28 audit): every formula builder checks numerically that each entry's prepared formula computes the
+formula the authors wrote (`formula_gate.py`; an expected difference needs its row in `tags/raw_vs_prepared_allowed.json`
+with the reason), and stops otherwise; the data builder keeps a formula that misses its rows as a `reference` ground
+truth only with a stated reason and an FVU bound it meets (`tags/reference_laws.json`, or `gt_reason` and
+`gt_fvu_bound` in the record), and refuses it otherwise. Transcription fixes to the survey's records are explicit, each
+with its reason (`RECORD_FIXES` in build_formula_catalogs.py, `FORMULA_FIXES` in build_data_catalogs.py). What the
+rules leave out of the release (scope, formulas as written) is `tags/dropped.json`, with each reason; the builders skip
+it and count_release lists it.
+
 `SYMBOLIC_DATA_CATALOG_PREP` points the builders at another copy of the survey's records (`paths.py`). Text copied
 from the records into a catalog passes `paths.public` (no local paths, no internal wording).

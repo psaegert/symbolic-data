@@ -54,6 +54,23 @@ from symbolic_data import data_problem  # noqa: E402
 from symbolic_data.catalog import ProblemCatalog  # noqa: E402
 
 BUILT_ELSEWHERE = {"done-0", "done-7", "done-8"}  # the SRBench tracks: build_srbench_catalogs.py
+# Transcription fixes to the survey's records (the 2026-11-28 audit: three cp3-bench reference formulas did not fit their
+# own data, FVU 68 / 0.09 / 1.4; each corrected form reproduces every row of its file to float precision). The reason
+# goes into the problem's metadata.
+FORMULA_FIXES = {
+    ("fresh-54", "C3h"): ("300*(a_av_tt/a_av + 0.07158985**2*Omega_m0/(2*a_av**3))",
+                          "the record's prefactor 10^2*(-6) is the authors' -6 Q_D convention applied twice; the published "
+                          "target 10^2 Q_D is 300 (a_D_ddot/a_D + H_D0^2 Omega_m0/(2 a_D^3)), exact on every row"),
+    ("fresh-54", "C6a"): ("-(2*1*0.25/5)*((-4*1**2*(-3*t + 10)**(-10/3) + 2*(-3*t + 10)**(2/3))*cos(-3*t**2/1 + 2*10*t/1) "
+                          "+ 4*1*(-3*t + 10)**(-4/3)*sin(-3*t**2/1 + 2*10*t/1))",
+                          "the sine's phase is -3 t^2/M + 2 v0 t/M, as in the cosine (the record had v0 t/M); exact on every "
+                          "row of the authors' file"),
+    ("fresh-54", "C6c"): ("-(2*(m1 + m1)*(m1*m1/(m1 + m1)**2)/5)*((-4*(m1 + m1)**2*(-3*t + 10)**(-10/3) + 2*(-3*t + 10)**(2/3))"
+                          "*cos(-3*t**2/(m1 + m1) + 2*10*t/(m1 + m1)) + 4*(m1 + m1)*(-3*t + 10)**(-4/3)*sin(-3*t**2/(m1 + m1) "
+                          "+ 2*10*t/(m1 + m1)))",
+                          "the authors' data set the second mass equal to the first (m2 = m1, not 0.5) and the sine's phase "
+                          "is -3 t^2/M + 2 v0 t/M; exact on every row of the authors' file"),
+}
 RULES = ("srbf data catalogs (2026-10-17): pools; <= 512 fitting + 512 test rows drawn per run; a test split only "
          "where the authors give one")
 
@@ -69,7 +86,8 @@ def wanted() -> dict[str, list[dict]]:
     by_set: dict[str, list[dict]] = defaultdict(list)
     for p in paths.final_problems():
         if p["kind"] == "D" and p["set"] not in BUILT_ELSEWHERE:
-            by_set[p["set"]].append(p)
+            fix = FORMULA_FIXES.get((p["set"], p["id"]))
+            by_set[p["set"]].append({**p, "formula": fix[0], "formula_fix": fix[1]} if fix else p)
     return dict(by_set)
 
 
@@ -123,10 +141,21 @@ def stated_kind(rows: R.Rows, prob: dict) -> str | None:
     return kind
 
 
-def with_ground_truth(rows: R.Rows, prob: dict, formulas: Formulas) -> dict:
+def reference_of(prob: dict, catalog: str, eq_id: str | None) -> dict | None:
+    """Why the problem's formula may miss its rows and by how much (FVU): the record's own ``gt_reason`` and
+    ``gt_fvu_bound``, else its row in tags/reference_laws.json (paths.reference_laws), else None."""
+    if prob.get("gt_reason") and prob.get("gt_fvu_bound") is not None:
+        return {"reason": prob["gt_reason"], "fvu_bound": float(prob["gt_fvu_bound"])}
+    laws = paths.reference_laws()
+    return laws.get((catalog, str(eq_id))) or laws.get((catalog, str(prob["id"])))
+
+
+def with_ground_truth(rows: R.Rows, prob: dict, formulas: Formulas, catalog: str = "") -> dict:
     """data_problem keyword arguments for the problem's formula: exact when it reproduces the fitting rows to float32
-    eps, a reference law otherwise; a formula SimpliPy cannot read yet is kept as text and the problem is black-box.
-    A record may state the kind with its own check (stated_kind); the check goes into the problem's meta."""
+    eps; a reference law only with a stated reason and an FVU bound it meets (reference_of), and refused otherwise
+    (the 2026-11-28 audit: three transcription errors stood as 'reference' laws); a formula SimpliPy cannot read yet is
+    kept as text and the problem is black-box. A record may state the kind with its own check (stated_kind); the check
+    goes into the problem's meta."""
     f = formula_of(prob)
     if f is None:
         return {"gt_kind": "none"}
@@ -147,13 +176,24 @@ def with_ground_truth(rows: R.Rows, prob: dict, formulas: Formulas) -> dict:
     if stated:
         rows.meta["gt_kind_stated"] = True
         rows.meta["gt_check"] = dict(prob["gt_check"])
+    if prob.get("formula_fix"):
+        rows.meta["formula_corrected"] = prob["formula_fix"]
     kind = stated or ("exact" if fvu <= float(np.finfo(np.float32).eps) else "reference")
+    if kind == "reference":
+        ref = reference_of(prob, catalog, rows.eq_id)
+        if ref is None:
+            raise ValueError(f"{catalog}:{rows.eq_id or prob['id']}: the formula misses its rows (FVU {fvu:.3g}) and "
+                             "no reason states it as a reference law (tags/reference_laws.json)")
+        if not fvu <= ref["fvu_bound"]:
+            raise ValueError(f"{catalog}:{rows.eq_id or prob['id']}: the reference law misses its rows by FVU {fvu:.3g}, "
+                             f"above its bound {ref['fvu_bound']:g}")
+        rows.meta["reference_reason"], rows.meta["reference_fvu_bound"] = ref["reason"], ref["fvu_bound"]
     return {"gt_kind": kind, "expression": compiled["expression"], "skeleton": compiled["prefix"],
             "constants": compiled["constants"]}
 
 
 def problem(rows: R.Rows, prob: dict, catalog: str, display: str, record: dict, formulas: Formulas):
-    gt = with_ground_truth(rows, prob, formulas)
+    gt = with_ground_truth(rows, prob, formulas, catalog)
     meta = {
         "catalog": catalog, "catalog_display": display, "subset": rows.subset or prob["unit"].split(":", 1)[1],
         "source_id": prob["id"], "url": record.get("url"), "sha256": record.get("sha256"),

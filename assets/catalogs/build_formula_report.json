@@ -1394,6 +1394,11 @@
   "problems": 2,
   "built": 2,
   "pinned_points": 0,
+  "raw_vs_prepared": {
+   "checked": 2,
+   "allowed": {},
+   "unchecked": {}
+  },
   "skipped": {},
   "check_failed": {},
   "needs_simplipy_015": []
@@ -1613,13 +1618,8 @@
  "fresh-41": {
   "catalog": "breiman-i",
   "problems": 1,
-  "built": 1,
-  "pinned_points": 0,
-  "skipped": {},
-  "check_failed": {},
-  "needs_simplipy_015": [
-   "breiman-i"
-  ]
+  "built": 0,
+  "dropped": "srbf poses every formula as its authors wrote it, in SimpliPy, its expression engine. Its formula is piecewise (a Piecewise over an indicator input), which SimpliPy cannot read, so the benchmark is left out."
  },
  "fresh-42": {
   "catalog": "friedman-functions",
@@ -1660,9 +1660,15 @@
  "fresh-46": {
   "catalog": "heuristiclab-regression-instance-providers",
   "problems": 103,
-  "built": 14,
+  "built": 13,
   "pinned_points": 1,
+  "raw_vs_prepared": {
+   "checked": 13,
+   "allowed": {},
+   "unchecked": {}
+  },
   "skipped": {
+   "Breiman-I": "dropped by rule (tags/dropped.json)",
    "FriedmanRandomFunction-1% (10 dim)": "no formula",
    "FriedmanRandomFunction-5% (10 dim)": "no formula",
    "FriedmanRandomFunction-10% (10 dim)": "no formula",
@@ -1753,9 +1759,7 @@
    "FeatSel-200-50%-20%": "no formula"
   },
   "check_failed": {},
-  "needs_simplipy_015": [
-   "Breiman-I"
-  ]
+  "needs_simplipy_015": []
  },
  "fresh-48": {
   "catalog": "mcdermott-table-1-predictive-modelling-sets",
@@ -1808,11 +1812,8 @@
  "fresh-56": {
   "catalog": "physo-class",
   "problems": 8,
-  "built": 8,
-  "pinned_points": 0,
-  "skipped": {},
-  "check_failed": {},
-  "needs_simplipy_015": []
+  "built": 0,
+  "dropped": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: class symbolic regression: one law with shared constants fitted jointly to several data sets drawn with different free constants. Tasks of this kind are not in this release; they may come in a future version."
  },
  "fresh-57": {
   "catalog": "physo-astrophysical-case-studies",
@@ -1826,11 +1827,8 @@
  "fresh-59": {
   "catalog": "multi-view-sr-synthetic-benchmarks",
   "problems": 16,
-  "built": 8,
-  "pinned_points": 8,
-  "skipped": {},
-  "check_failed": {},
-  "needs_simplipy_015": []
+  "built": 0,
+  "dropped": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: multi-view symbolic regression: one parametric form fitted jointly to several views of a law, the error taken as the maximum over the views. Tasks of this kind are not in this release; they may come in a future version."
  },
  "fresh-64": {
   "catalog": "bms-synthetic-prior-expression-and-bessel-functions",
@@ -1857,24 +1855,8 @@
  "fresh-68": {
   "catalog": "occamnet-analytic-and-non-analytic-suites",
   "problems": 23,
-  "built": 22,
-  "pinned_points": 0,
-  "skipped": {},
-  "check_failed": {
-   "OccamNet-P7": "ValueError: the judge's parser refuses it: prefix expression too long (6762 tokens > 4096); refusing to risk a deep-recursion stack overflow"
-  },
-  "needs_simplipy_015": [
-   "OccamNet-P1",
-   "OccamNet-P2",
-   "OccamNet-P3",
-   "OccamNet-P4-max",
-   "OccamNet-P4-median",
-   "OccamNet-P4-min",
-   "OccamNet-P5-y0",
-   "OccamNet-P6-y0",
-   "OccamNet-P6-y1",
-   "OccamNet-P8"
-  ]
+  "built": 0,
+  "dropped": "srbf poses every formula as its authors wrote it, in SimpliPy, its expression engine. 6 of its 22 formulas are piecewise, which SimpliPy cannot read, so the benchmark is left out."
  },
  "fresh-7": {
   "catalog": "nguyen-c",
@@ -2064,69 +2046,14 @@
  "fresh-97": {
   "catalog": "newtonbench",
   "problems": 108,
-  "built": 108,
-  "pinned_points": 0,
-  "skipped": {},
-  "check_failed": {},
-  "needs_simplipy_015": []
+  "built": 0,
+  "dropped": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: interactive discovery: the method chooses where to query each law. Tasks of this kind are not in this release; they may come in a future version."
  },
  "fresh-99": {
   "catalog": "surfacebench-explicit-surfaces",
   "problems": 128,
-  "built": 256,
-  "pinned_points": 0,
-  "skipped": {},
-  "check_failed": {},
-  "needs_simplipy_015": [
-   "CMRS1",
-   "CMRS1.ood",
-   "CMRS2",
-   "CMRS2.ood",
-   "CMRS3",
-   "CMRS3.ood",
-   "CMRS4",
-   "CMRS4.ood",
-   "CMRS6",
-   "CMRS6.ood",
-   "CMRS7",
-   "CMRS7.ood",
-   "CMRS8",
-   "CMRS8.ood",
-   "CMRS9",
-   "CMRS9.ood",
-   "DIGS10",
-   "DIGS10.ood",
-   "DIGS3",
-   "DIGS3.ood",
-   "DIGS4",
-   "DIGS4.ood",
-   "DIGS7",
-   "DIGS7.ood",
-   "DIGS9",
-   "DIGS9.ood",
-   "MOCS7",
-   "MOCS7.ood",
-   "NACS3",
-   "NACS3.ood",
-   "PDS1",
-   "PDS1.ood",
-   "PDS10",
-   "PDS10.ood",
-   "PDS2",
-   "PDS2.ood",
-   "PDS3",
-   "PDS3.ood",
-   "PDS4",
-   "PDS4.ood",
-   "PDS5",
-   "PDS5.ood",
-   "PDS6",
-   "PDS6.ood",
-   "PDS8",
-   "PDS8.ood",
-   "PDS9",
-   "PDS9.ood"
-  ]
+  "built": 0,
+  "dropped": "srbf poses every formula as its authors wrote it, in SimpliPy, its expression engine. 36 of its 256 formulas are piecewise and 2 are finite sums, which SimpliPy cannot read, so the benchmark is left out."
  },
  "interrupted-1": {
   "catalog": "erbench-public-legacy-formulas",
