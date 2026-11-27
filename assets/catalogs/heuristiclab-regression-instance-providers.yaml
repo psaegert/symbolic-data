@@ -1,12 +1,13 @@
 metadata:
   name: heuristiclab-regression-instance-providers
+  display_name: "heuristiclab-regression-instance-providers*"
   version: 2
   benchmark: "heuristiclab-regression-instance-providers"
-  tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs", "srbf-modified"]}
   license: "facts only: formulas cited from the defining authors and instances generated with HeuristicLab's providers (heal-research/HeuristicLab, GPL-3.0 code, not copied)"
   citation: {"paper": {"short": "Wagner et al. 2014", "title": "Architecture and Design of the HeuristicLab Optimization Environment", "venue": "Advanced Methods and Applications in Computational Intelligence, Topics in Intelligent Engineering and Informatics 6, Springer", "url": "https://doi.org/10.1007/978-3-319-01436-4_10"}, "data": {"short": "GitHub heal-research/HeuristicLab@c57538b", "title": "HeuristicLab regression instance providers (GPL-3.0)", "url": "https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression"}}
   srbf_changes: [{"kind": "part", "problems": 363, "text": "srbf runs 13 of HeuristicLab's 376 problems here and 1 in its pinned-points set: 164 are run in other srbf sets (Keijzer, Korns, Nguyen, Vladislavleva, Feynman, ...), the 88 generated instances have no published formula, the 94 PennML datasets are run in SRBench, the 14 real-world and Miba datasets are in 'HeuristicLab regression instances (real-world data)', AircraftMaximumLift has inputs without a range, and the piecewise Breiman-I instance is left out (srbf poses formulas as their authors wrote them, and SimpliPy cannot read a piecewise definition)."}]
-  srbf_notes: ["Follows the defining publication: Formulas and ranges follow the defining authors (Keijzer, Korns, Vladislavleva, Friedman, Chen et al.) rather than HeuristicLab's code where they differ (e.g. Korns-14's sign, Korns-15's range)."]
+  srbf_notes: ["Follows the defining publication: Keijzer-5, Korns-7, Korns-13, Vladislavleva-7, Poly-10 and Friedman-I/II: HeuristicLab's code agrees with the defining authors (later copies differ).", "Follows the compilation's own code or data: Korns-14 uses HeuristicLab's sign, 22 + 4.2((cos x0 - tan x1)(tanh x2 / sin x3)) (KornsFunctionFourteen.cs); Korns (2011) prints 22 - 4.2(...).", "Follows the compilation's own code or data: Korns-15 draws X2 on [0, 50], as HeuristicLab's code does to avoid NaN (KornsFunctionFifteen.cs); Korns (2011) uses [-50, 50].", "Follows the compilation's own code or data: AircraftLift uses HeuristicLab's corrected sign, C_La (alpha - alpha0) with alpha0 = -2 (commit 50af0024); Chen et al.'s appendix prints alpha - 2."]
   description: HeuristicLab regression instance providers
   sources:
   - https://github.com/heal-research/HeuristicLab
@@ -189,8 +190,8 @@ expressions:
     meta:
       finite_fraction: 1.0
   Korns-14:
-    raw: 22.0 - (4.2*((cos(x0)-tan(x1))*(tanh(x2)/sin(x3))))
-    prepared: -4.2*(cos(v1) - tan(v2))*tanh(v3)/sin(v4) + 22.0
+    raw: 22.0 + (4.2*((cos(x0)-tan(x1))*(tanh(x2)/sin(x3))))
+    prepared: 4.2*(cos(v1) - tan(v2))*tanh(v3)/sin(v4) + 22.0
     n_variables: 5
     subset: all
     vars:
@@ -269,7 +270,7 @@ expressions:
       v3:
         name: x2
         sample_range:
-        - -50.0
+        - 0.0
         - 50.0
         sample_type:
         - uni
@@ -295,11 +296,11 @@ expressions:
     input_distributions:
       x0: uniform U[-50.0,50.0]
       x1: uniform U[-50.0,50.0]
-      x2: uniform U[-50.0,50.0]
+      x2: uniform U[0, 50] (HeuristicLab's code, which avoids NaN; Korns 2011 uses [-50, 50])
       x3: uniform U[-50.0,50.0]
       x4: uniform U[-50.0,50.0]
     meta:
-      finite_fraction: 0.494
+      finite_fraction: 1.0
   Vladislavleva-7:
     raw: (x1 - 3)*(x2 - 3) + 2*sin((x1 - 4)*(x2 - 4))
     prepared: (v1 - 3)*(v2 - 3) + 2*sin((v1 - 4)*(v2 - 4))

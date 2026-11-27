@@ -1,8 +1,9 @@
 metadata:
   name: vladislavleva
+  display_name: "vladislavleva*"
   version: 2
   benchmark: "vladislavleva"
-  tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
+  tags: {"origin": "classic benchmark", "tags": ["extrapolation", "srbf-modified"]}
   srbf_changes: [{"kind": "part", "problems": 3, "text": "srbf runs 6 of the 9 problems of Vladislavleva et al. (2009) here: Vladislavleva-2 and -3 train on fixed points and are in 'Vladislavleva (fixed points)', and the real-world Tower data are in 'Tower (Dow distillation tower)'."}]
   srbf_notes: ["Follows the defining publication: Vladislavleva-7 is 2 sin((x1 - 4)(x2 - 4)) as Vladislavleva et al. (2009) define it; later copies print 2 sin(x1 - 4)(x2 - 4)."]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"

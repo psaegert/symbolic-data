@@ -9,12 +9,20 @@
   "origin_source": "sets/fresh-91.json notes: 'random multi-variable expressions labelled by an operand set and a tuple (a,b,c)' drawn by the authors' gen_true_program.py (CVGP, Jiang & Xue 2023, Sec. 5.1)",
   "origin_proposal": null,
   "tags": [
-   "dummy inputs"
+   "dummy inputs",
+   "srbf-modified"
   ],
   "detail": {
    "dummy inputs": {
     "share": [
      960,
+     1024
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
+    "share": [
+     1024,
      1024
     ],
     "source": "the catalog files"
@@ -33,9 +41,17 @@
   "origin_source": "sets/fresh-81.json notes: 'Generator-only set ... the set exists only as output of their generator'; a frozen 10,000-function draw from the E2E authors' code and seed (Kamienny et al. 2022)",
   "origin_proposal": null,
   "tags": [
-   "generator in-distribution"
+   "generator in-distribution",
+   "srbf-modified"
   ],
   "detail": {
+   "srbf-modified": {
+    "share": [
+     1024,
+     1024
+    ],
+    "source": "the catalog files"
+   },
    "generator in-distribution": {
     "share": [
      1024,
@@ -97,9 +113,17 @@
   "origin_source": "sets/fresh-84.json notes: 'The univariate and bivariate test datasets contain 10 000 randomly sampled equations each'; the list is the output of the authors' generator (SymFormer)",
   "origin_proposal": null,
   "tags": [
-   "generator in-distribution"
+   "generator in-distribution",
+   "srbf-modified"
   ],
   "detail": {
+   "srbf-modified": {
+    "share": [
+     1024,
+     1024
+    ],
+    "source": "the catalog files"
+   },
    "generator in-distribution": {
     "share": [
      1024,
@@ -441,7 +465,7 @@
  },
  {
   "catalog": "llm-srbench",
-  "display_name": "LLM-SRBench",
+  "display_name": "LLM-SRBench*",
   "kind": "data",
   "problems": 369,
   "file": "build/data-catalogs/llm-srbench.npz",
@@ -600,9 +624,17 @@
   "origin_proposal": null,
   "tags": [
    "extrapolation",
-   "generator in-distribution"
+   "generator in-distribution",
+   "srbf-modified"
   ],
   "detail": {
+   "srbf-modified": {
+    "share": [
+     299,
+     299
+    ],
+    "source": "the catalog files"
+   },
    "extrapolation": {
     "share": [
      299,
@@ -713,7 +745,7 @@
  },
  {
   "catalog": "scrbenchmark",
-  "display_name": "scrbenchmark",
+  "display_name": "scrbenchmark*",
   "kind": "formula",
   "problems": 120,
   "file": "assets/catalogs/scrbenchmark.yaml",
@@ -863,7 +895,7 @@
  },
  {
   "catalog": "rsrm-constant-optimization-benchmark",
-  "display_name": "rsrm-constant-optimization-benchmark",
+  "display_name": "rsrm-constant-optimization-benchmark*",
   "kind": "formula",
   "problems": 97,
   "file": "assets/catalogs/rsrm-constant-optimization-benchmark.yaml",
@@ -894,8 +926,18 @@
   "origin": "synthetic data",
   "origin_source": "sets/done-0.json notes: '122 PMLB regression datasets'; 'The paper also states 46 real-world and 76 synthetic problems'; friedman subset = 62 Friedman-generator sets",
   "origin_proposal": "mixed real and synthetic data: PMLB compilation, 76 of 122 synthetic (62 Friedman-generator sets)",
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     84,
+     84
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": "Not tagged: fri_* members likely carry generator noise and irrelevant features, but the record states it only for 564_fried (OpenML description)."
  },
@@ -947,7 +989,7 @@
  },
  {
   "catalog": "scilaws-real",
-  "display_name": "SciLaws-Bench SciLaws-Real (Type I)",
+  "display_name": "SciLaws-Bench SciLaws-Real (Type I)*",
   "kind": "data",
   "problems": 55,
   "file": "build/data-catalogs/scilaws-real.npz",
@@ -1000,7 +1042,7 @@
  },
  {
   "catalog": "gecco-2022-exact-rediscovery",
-  "display_name": "GECCO 2022 synthetic: exact rediscovery",
+  "display_name": "GECCO 2022 synthetic: exact rediscovery*",
   "kind": "data",
   "problems": 40,
   "file": "build/data-catalogs/gecco-2022-exact-rediscovery.npz",
@@ -1032,7 +1074,7 @@
  },
  {
   "catalog": "gecco-2022-noise",
-  "display_name": "GECCO 2022 synthetic: noise sensitivity",
+  "display_name": "GECCO 2022 synthetic: noise sensitivity*",
   "kind": "data",
   "problems": 40,
   "file": "build/data-catalogs/gecco-2022-noise.npz",
@@ -1064,7 +1106,7 @@
  },
  {
   "catalog": "srbench-2021-blackbox-restricted",
-  "display_name": "SRBench 2021 black-box (restricted)",
+  "display_name": "SRBench 2021 black-box (restricted)*",
   "kind": "data",
   "problems": 38,
   "file": "build/data-catalogs/srbench-2021-blackbox-restricted.npz",
@@ -1174,7 +1216,7 @@
  },
  {
   "catalog": "gecco-2022-local-optima",
-  "display_name": "GECCO 2022 synthetic: escaping local optima",
+  "display_name": "GECCO 2022 synthetic: escaping local optima*",
   "kind": "data",
   "problems": 30,
   "file": "build/data-catalogs/gecco-2022-local-optima.npz",
@@ -1254,7 +1296,7 @@
  },
  {
   "catalog": "cp3-bench",
-  "display_name": "CP3-bench cosmology",
+  "display_name": "CP3-bench cosmology*",
   "kind": "data",
   "problems": 28,
   "file": "build/data-catalogs/cp3-bench.npz",
@@ -1293,7 +1335,7 @@
  },
  {
   "catalog": "sr-dynamical-systems",
-  "display_name": "Symbolic regression in dynamical systems (Brum et al.)",
+  "display_name": "Symbolic regression in dynamical systems (Brum et al.)*",
   "kind": "data",
   "problems": 28,
   "file": "build/data-catalogs/sr-dynamical-systems.npz",
@@ -1325,7 +1367,7 @@
  },
  {
   "catalog": "kan-feynman-no-units-subset",
-  "display_name": "kan-feynman-no-units-subset",
+  "display_name": "kan-feynman-no-units-subset*",
   "kind": "formula",
   "problems": 27,
   "file": "assets/catalogs/kan-feynman-no-units-subset.yaml",
@@ -1382,9 +1424,17 @@
   "origin_proposal": null,
   "tags": [
    "extrapolation",
-   "several tests"
+   "several tests",
+   "srbf-modified"
   ],
   "detail": {
+   "srbf-modified": {
+    "share": [
+     24,
+     24
+    ],
+    "source": "the catalog files"
+   },
    "several tests": {
     "share": [
      24,
@@ -1476,10 +1526,18 @@
   "origin_proposal": null,
   "tags": [
    "no test split",
-   "fixed points"
+   "fixed points",
+   "srbf-modified"
   ],
   "detail": {
    "fixed points": {
+    "share": [
+     20,
+     20
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      20,
      20
@@ -1499,7 +1557,7 @@
  },
  {
   "catalog": "shape-constrained-sr-synthetic",
-  "display_name": "shape-constrained-sr-synthetic",
+  "display_name": "shape-constrained-sr-synthetic*",
   "kind": "formula",
   "problems": 19,
   "file": "assets/catalogs/shape-constrained-sr-synthetic.yaml",
@@ -1590,8 +1648,18 @@
   "origin": "classic benchmark",
   "origin_source": "sets/fresh-141.json notes: 'SymTree's benchmark functions are de Franca's re-selection of 17 published functions, all re-sampled on U[-5,5]' (de Franca 2018, Table 1)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     16,
+     16
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -1659,7 +1727,7 @@
  },
  {
   "catalog": "gecco-2013-2017-real",
-  "display_name": "GECCO 2013-2017 GP regression compilation (real data)",
+  "display_name": "GECCO 2013-2017 GP regression compilation (real data)*",
   "kind": "data",
   "problems": 14,
   "file": "build/data-catalogs/gecco-2013-2017-real.npz",
@@ -1683,7 +1751,7 @@
  },
  {
   "catalog": "heuristiclab-real-world",
-  "display_name": "HeuristicLab regression instances (real-world data)",
+  "display_name": "HeuristicLab regression instances (real-world data)*",
   "kind": "data",
   "problems": 14,
   "file": "build/data-catalogs/heuristiclab-real-world.npz",
@@ -1785,12 +1853,20 @@
   "origin_source": "sets/fresh-46.json notes: HeuristicLab regression instance providers (Keijzer, Korns, Vladislavleva, Poly-10, Breiman-I, Friedman-I/II, Physics); formulas 'from the defining authors where readable'",
   "origin_proposal": null,
   "tags": [
-   "dummy inputs"
+   "dummy inputs",
+   "srbf-modified"
   ],
   "detail": {
    "dummy inputs": {
     "share": [
      7,
+     13
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
+    "share": [
+     13,
      13
     ],
     "source": "the catalog files"
@@ -1833,9 +1909,17 @@
   "origin_source": "sets/fresh-158.json notes: Kim et al. EQL benchmark (DeepSymReg) Appendix A benchmark table plus code-only functions; inputs U[-1,1]",
   "origin_proposal": null,
   "tags": [
-   "extrapolation"
+   "extrapolation",
+   "srbf-modified"
   ],
   "detail": {
+   "srbf-modified": {
+    "share": [
+     12,
+     12
+    ],
+    "source": "the catalog files"
+   },
    "extrapolation": {
     "share": [
      12,
@@ -1873,7 +1957,7 @@
  },
  {
   "catalog": "ffx-high-dimensional-circuits",
-  "display_name": "FFX high-dimensional circuit problems",
+  "display_name": "FFX high-dimensional circuit problems*",
   "kind": "data",
   "problems": 12,
   "file": "build/data-catalogs/ffx-high-dimensional-circuits.npz",
@@ -1905,12 +1989,20 @@
   "origin_source": "sets/fresh-31.json notes: Table 3 'Symbolic Regression Benchmark Candidates' of McDermott et al., 'Genetic Programming Needs Better Benchmarks', GECCO 2012 (Koza, Nguyen, Pagie, Korns, Keijzer, Vladislavleva)",
   "origin_proposal": null,
   "tags": [
-   "dummy inputs"
+   "dummy inputs",
+   "srbf-modified"
   ],
   "detail": {
    "dummy inputs": {
     "share": [
      8,
+     11
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
+    "share": [
+     11,
      11
     ],
     "source": "the catalog files"
@@ -1976,8 +2068,18 @@
   "origin": "measured data",
   "origin_source": "sets/done-8.json notes: 12 PMLB first_principles_* datasets: 'the others are historical or real measurements' (7 of 12); 5 generated from laws",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     10,
+     10
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {
    "noisy data": {
     "share": [
@@ -1998,8 +2100,18 @@
   "origin": "science formula",
   "origin_source": "sets/fresh-4.json notes: AI Hilbert synthetic laws: Hagen-Poiseuille, GW power, inelastic collision, pion decay, radiation damping, escape velocity, Hall effect, Compton, Kepler",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     9,
+     9
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -2012,8 +2124,18 @@
   "origin": "science formula",
   "origin_source": "sets/fresh-57.json notes: PhySO Appendix A mocks (relativistic energy, isochrone action, damped oscillator, gravity) and Appendix B cases (ideal gas, terminal velocity, ...)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     9,
+     9
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -2026,8 +2148,18 @@
   "origin": "classic benchmark",
   "origin_source": "sets/fresh-114.json notes: TorchSISSO Table 1 expressions, 'inspired from benchmarks commonly used in the symbolic regression (SR) literature'",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     9,
+     9
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -2040,8 +2172,18 @@
   "origin": "classic benchmark",
   "origin_source": "release_subsets.json constant notes: Nguyen^c set, 'Petersen et al. 2021 ... Appendix Table 9, second set'; remainder = other Constant-k and Const-Test rows of DSO benchmarks.csv",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     8,
+     8
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -2134,8 +2276,18 @@
   "origin": "classic benchmark",
   "origin_source": "release_subsets.json neat notes: 'Trujillo et al. 2016 (neat-GP), as encoded by Petersen et al. 2021 / DSO benchmarks.csv'; CONSOLIDATED.md: rows are Koza-1, Nguyen, Keijzer-6, Korns-12, Vladislavleva-1, Pagie-1",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     8,
+     8
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {
    "extrapolation": {
     "share": [
@@ -2274,8 +2426,18 @@
   "origin": "classic benchmark",
   "origin_source": "release_subsets.json keijzer: defined_by 'Keijzer 2003 (EuroGP)', as encoded in DSO benchmarks.csv",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     7,
+     7
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": "No extrapolation: the 6 test blocks are finer grids/meshes on the fit range; Keijzer-6's 1..120 extrapolation test sits in keijzer-points."
  },
@@ -2290,10 +2452,18 @@
   "origin_proposal": null,
   "tags": [
    "no test split",
-   "fixed points"
+   "fixed points",
+   "srbf-modified"
   ],
   "detail": {
    "fixed points": {
+    "share": [
+     7,
+     7
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      7,
      7
@@ -2320,8 +2490,18 @@
   "origin": "measured data",
   "origin_source": "sets/fresh-35.json notes: '10 fixed real-world tabular regression datasets with no ground-truth formula' (Virgolin et al. 2021; mostly UCI)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     7,
+     7
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -2348,8 +2528,18 @@
   "origin": "measured data",
   "origin_source": "sets/done-7.json notes: '12 PMLB 1.0 regression datasets' chosen by clustering SRBench 1.0 results; 'The three fri_* datasets come from Friedman's generator'",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     7,
+     7
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": "3 of 12 members are Friedman-generator data."
  },
@@ -2439,9 +2629,17 @@
   "origin_source": "release_subsets.json vladislavleva: defined_by 'Vladislavleva, Smits & den Hertog 2009 (IEEE TEC)', as encoded in DSO benchmarks.csv",
   "origin_proposal": null,
   "tags": [
-   "extrapolation"
+   "extrapolation",
+   "srbf-modified"
   ],
   "detail": {
+   "srbf-modified": {
+    "share": [
+     6,
+     6
+    ],
+    "source": "the catalog files"
+   },
    "extrapolation": {
     "share": [
      6,
@@ -2533,7 +2731,7 @@
  },
  {
   "catalog": "ideasearch-pdf",
-  "display_name": "IdeaSearchFitter parton distributions (CT18NNLO)",
+  "display_name": "IdeaSearchFitter parton distributions (CT18NNLO)*",
   "kind": "data",
   "problems": 6,
   "file": "build/data-catalogs/ideasearch-pdf.npz",
@@ -2565,7 +2763,7 @@
  },
  {
   "catalog": "scilaws-real-restricted",
-  "display_name": "SciLaws-Bench SciLaws-Real (Type I) (restricted)",
+  "display_name": "SciLaws-Bench SciLaws-Real (Type I) (restricted)*",
   "kind": "data",
   "problems": 6,
   "file": "build/data-catalogs/scilaws-real-restricted.npz",
@@ -2597,7 +2795,7 @@
  },
  {
   "catalog": "erbench-public-legacy-formulas",
-  "display_name": "erbench-public-legacy-formulas*",
+  "display_name": "erbench-public-legacy-formulas",
   "kind": "formula",
   "problems": 5,
   "file": "assets/catalogs/erbench-public-legacy-formulas.yaml",
@@ -2605,17 +2803,9 @@
   "origin_source": "sets/interrupted-1.json notes: ERBench legacy block; members taken from their own authors: AIF2 Table 4 eq 12, Korns-13..15, Uy 2011 F9 (formula YAML ids)",
   "origin_proposal": null,
   "tags": [
-   "dummy inputs",
    "srbf-modified"
   ],
   "detail": {
-   "dummy inputs": {
-    "share": [
-     3,
-     5
-    ],
-    "source": "the catalog files"
-   },
    "srbf-modified": {
     "share": [
      5,
@@ -2682,14 +2872,24 @@
   "origin": "science formula",
   "origin_source": "sets/fresh-2.json notes: EmpiricalBench laws generated from formulas: newton, planck, schechter, ideal_gas (Cranmer 2023, Table 2)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     5,
+     5
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
  {
   "catalog": "dimensionless-learning",
-  "display_name": "Dimensionless-learning scaling laws (Xie et al. 2022)",
+  "display_name": "Dimensionless-learning scaling laws (Xie et al. 2022)*",
   "kind": "data",
   "problems": 5,
   "file": "build/data-catalogs/dimensionless-learning.npz",
@@ -2720,8 +2920,18 @@
   "origin": "measured data",
   "origin_source": "sets/done-7.json notes: '12 PMLB 1.0 regression datasets' chosen by clustering SRBench 1.0 results; 'The three fri_* datasets come from Friedman's generator'",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     5,
+     5
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": "3 of 12 members are Friedman-generator data."
  },
@@ -2749,12 +2959,20 @@
   "origin_source": "sets/fresh-30.json notes: DSO registry benchmarks.csv; collected members Nguyen-12a, Korns-13..15 'as their own authors define them' (NGGP; Korns 2011)",
   "origin_proposal": null,
   "tags": [
-   "dummy inputs"
+   "dummy inputs",
+   "srbf-modified"
   ],
   "detail": {
    "dummy inputs": {
     "share": [
      3,
+     4
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
+    "share": [
+     4,
      4
     ],
     "source": "the catalog files"
@@ -2797,12 +3015,20 @@
   "origin_source": "sets/fresh-159.json notes: SciMED settling-sphere target equations (Keren, Liberzon & Lazebnik 2023, Table 3); built members A (v0 + a*t) and E (drag force)",
   "origin_proposal": null,
   "tags": [
-   "dummy inputs"
+   "dummy inputs",
+   "srbf-modified"
   ],
   "detail": {
    "dummy inputs": {
     "share": [
      2,
+     4
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
+    "share": [
+     4,
      4
     ],
     "source": "the catalog files"
@@ -2822,10 +3048,18 @@
   "origin_proposal": null,
   "tags": [
    "no test split",
-   "fixed points"
+   "fixed points",
+   "srbf-modified"
   ],
   "detail": {
    "fixed points": {
+    "share": [
+     4,
+     4
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      4,
      4
@@ -2845,7 +3079,7 @@
  },
  {
   "catalog": "eql-double-pendulum",
-  "display_name": "EQL double-pendulum kinematics",
+  "display_name": "EQL double-pendulum kinematics*",
   "kind": "data",
   "problems": 4,
   "file": "build/data-catalogs/eql-double-pendulum.npz",
@@ -2877,7 +3111,7 @@
  },
  {
   "catalog": "llm-sr-oscillators",
-  "display_name": "LLM-SR nonlinear oscillators",
+  "display_name": "LLM-SR nonlinear oscillators*",
   "kind": "data",
   "problems": 4,
   "file": "build/data-catalogs/llm-sr-oscillators.npz",
@@ -2926,10 +3160,18 @@
   "origin_proposal": null,
   "tags": [
    "no test split",
-   "fit only"
+   "fit only",
+   "srbf-modified"
   ],
   "detail": {
    "fit only": {
+    "share": [
+     4,
+     4
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      4,
      4
@@ -2949,7 +3191,7 @@
  },
  {
   "catalog": "scilaws-real-share-alike",
-  "display_name": "SciLaws-Bench SciLaws-Real (Type I) (share-alike)",
+  "display_name": "SciLaws-Bench SciLaws-Real (Type I) (share-alike)*",
   "kind": "data",
   "problems": 4,
   "file": "build/data-catalogs/scilaws-real-share-alike.npz",
@@ -3012,14 +3254,24 @@
   "origin": "classic benchmark",
   "origin_source": "sets/fresh-131.json notes: subset 'kanlex-multivariate-examples' (arXiv:2505.07956 Sec. 3.2): exp(sin(pi x) + y^2), x*y, x*y/z (formula YAML ids kanlex-ex1..3)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     3,
+     3
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": "Origin differs from the -points companion: the built members are hand-picked KAN-LEx examples, not the random Mathematica functions."
  },
  {
   "catalog": "gp-benchmarks-sr-table-points",
-  "display_name": "GP benchmarks SR table (McDermott et al. 2012) (pinned points)*",
+  "display_name": "GP benchmarks SR table (McDermott et al. 2012) (pinned points)",
   "kind": "data",
   "problems": 3,
   "file": "assets/catalogs/gp-benchmarks-sr-table-points.npz",
@@ -3099,7 +3351,7 @@
  },
  {
   "catalog": "bms-real-data",
-  "display_name": "Bayesian machine scientist real datasets",
+  "display_name": "Bayesian machine scientist real datasets*",
   "kind": "data",
   "problems": 3,
   "file": "build/data-catalogs/bms-real-data.npz",
@@ -3139,7 +3391,7 @@
  },
  {
   "catalog": "evogp-uci",
-  "display_name": "EvoGP regression datasets",
+  "display_name": "EvoGP regression datasets*",
   "kind": "data",
   "problems": 3,
   "file": "build/data-catalogs/evogp-uci.npz",
@@ -3179,7 +3431,7 @@
  },
  {
   "catalog": "gecco-2013-2017-real-restricted",
-  "display_name": "GECCO 2013-2017 GP regression compilation (real data) (restricted)",
+  "display_name": "GECCO 2013-2017 GP regression compilation (real data) (restricted)*",
   "kind": "data",
   "problems": 3,
   "file": "build/data-catalogs/gecco-2013-2017-real-restricted.npz",
@@ -3217,7 +3469,7 @@
  },
  {
   "catalog": "gecco-2023-performance",
-  "display_name": "GECCO 2023 competition Track 1 (performance)",
+  "display_name": "GECCO 2023 competition Track 1 (performance)*",
   "kind": "data",
   "problems": 3,
   "file": "build/data-catalogs/gecco-2023-performance.npz",
@@ -3264,14 +3516,24 @@
   "origin": "measured data",
   "origin_source": "sets/fresh-35.json notes: '10 fixed real-world tabular regression datasets with no ground-truth formula' (Virgolin et al. 2021; mostly UCI)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     3,
+     3
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
  {
   "catalog": "langlaw-perovskites",
-  "display_name": "LangLaw perovskite datasets",
+  "display_name": "LangLaw perovskite datasets*",
   "kind": "data",
   "problems": 3,
   "file": "build/data-catalogs/langlaw-perovskites.npz",
@@ -3303,9 +3565,17 @@
   "origin_source": "sets/fresh-48.json notes: QSAR tables (%F, LD50, %PPB), Mackey-Glass series, sunspots (McDermott et al. 2012 Table 1, predictive-modelling sets)",
   "origin_proposal": null,
   "tags": [
-   "several tests"
+   "several tests",
+   "srbf-modified"
   ],
   "detail": {
+   "srbf-modified": {
+    "share": [
+     3,
+     3
+    ],
+    "source": "the catalog files"
+   },
    "several tests": {
     "share": [
      3,
@@ -3334,8 +3604,18 @@
   "origin": "measured data",
   "origin_source": "sets/fresh-48.json notes: QSAR tables (%F, LD50, %PPB), Mackey-Glass series, sunspots (McDermott et al. 2012 Table 1, predictive-modelling sets)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     3,
+     3
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {
    "extrapolation": {
     "share": [
@@ -3356,7 +3636,7 @@
  },
  {
   "catalog": "phye2e-space-physics",
-  "display_name": "PhyE2E space-physics applications",
+  "display_name": "PhyE2E space-physics applications*",
   "kind": "data",
   "problems": 3,
   "file": "build/data-catalogs/phye2e-space-physics.npz",
@@ -3388,7 +3668,7 @@
  },
  {
   "catalog": "shape-constrained-real-world-restricted",
-  "display_name": "Shape-constrained SR real-world set (restricted)",
+  "display_name": "Shape-constrained SR real-world set (restricted)*",
   "kind": "data",
   "problems": 3,
   "file": "build/data-catalogs/shape-constrained-real-world-restricted.npz",
@@ -3537,8 +3817,18 @@
   "origin": "classic benchmark",
   "origin_source": "release_subsets.json meier: defined_by 'Meier et al.', as encoded in DSO benchmarks.csv",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -3551,8 +3841,18 @@
   "origin": "science formula",
   "origin_source": "release_subsets.json physo-astro notes: PhySO 'panel of astrophysical test cases' (Tenachi, Ibata & Diakogiannis 2023, Sec. V, Appendix A)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -3647,10 +3947,18 @@
   "origin_proposal": null,
   "tags": [
    "no test split",
-   "fit only"
+   "fit only",
+   "srbf-modified"
   ],
   "detail": {
    "fit only": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      2,
      2
@@ -3670,7 +3978,7 @@
  },
  {
   "catalog": "bms-rossler",
-  "display_name": "Bayesian machine scientist R\u00f6ssler system",
+  "display_name": "Bayesian machine scientist R\u00f6ssler system*",
   "kind": "data",
   "problems": 2,
   "file": "build/data-catalogs/bms-rossler.npz",
@@ -3710,7 +4018,7 @@
  },
  {
   "catalog": "drsr-debcat",
-  "display_name": "DRSR DEBCat mass-luminosity",
+  "display_name": "DRSR DEBCat mass-luminosity*",
   "kind": "data",
   "problems": 2,
   "file": "build/data-catalogs/drsr-debcat.npz",
@@ -3774,7 +4082,7 @@
  },
  {
   "catalog": "llm-sr-bactgrow",
-  "display_name": "LLM-SR E. coli growth rate",
+  "display_name": "LLM-SR E. coli growth rate*",
   "kind": "data",
   "problems": 2,
   "file": "build/data-catalogs/llm-sr-bactgrow.npz",
@@ -3814,7 +4122,7 @@
  },
  {
   "catalog": "llm-sr-stress-strain",
-  "display_name": "LLM-SR stress-strain (Al 6061-T651)",
+  "display_name": "LLM-SR stress-strain (Al 6061-T651)*",
   "kind": "data",
   "problems": 2,
   "file": "build/data-catalogs/llm-sr-stress-strain.npz",
@@ -3878,7 +4186,7 @@
  },
  {
   "catalog": "oxygen-ion-conductors",
-  "display_name": "Oxygen-ion conductor database",
+  "display_name": "Oxygen-ion conductor database*",
   "kind": "data",
   "problems": 2,
   "file": "build/data-catalogs/oxygen-ion-conductors.npz",
@@ -3911,10 +4219,18 @@
   "origin_proposal": null,
   "tags": [
    "no test split",
-   "fit only"
+   "fit only",
+   "srbf-modified"
   ],
   "detail": {
    "fit only": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      2,
      2
@@ -3942,9 +4258,17 @@
   "origin_source": "sets/done-8.json notes: 12 PMLB first_principles_* datasets: 'the others are historical or real measurements' (7 of 12); 5 generated from laws",
   "origin_proposal": null,
   "tags": [
-   "noisy data"
+   "noisy data",
+   "srbf-modified"
   ],
   "detail": {
+   "srbf-modified": {
+    "share": [
+     2,
+     2
+    ],
+    "source": "the catalog files"
+   },
    "noisy data": {
     "share": [
      2,
@@ -3958,7 +4282,7 @@
  },
  {
   "catalog": "superconductor-tc",
-  "display_name": "Superconducting Tc (Allen-Dynes data)",
+  "display_name": "Superconducting Tc (Allen-Dynes data)*",
   "kind": "data",
   "problems": 2,
   "file": "build/data-catalogs/superconductor-tc.npz",
@@ -4029,8 +4353,18 @@
   "origin": "science formula",
   "origin_source": "sets/fresh-53.json notes: formula member lcdm-mock-cc: 'exact LCDM law H = 67.4 sqrt(0.315 x^3 + 0.685)' (ESR, Bartlett et al.)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -4043,8 +4377,18 @@
   "origin": "classic benchmark",
   "origin_source": "sets/fresh-146.json notes: 'one formula (toy polynomial, exact ground truth, both inputs U[-1,1] ...)' from the gplearn docs' Symbolic Regressor example",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -4057,8 +4401,18 @@
   "origin": "classic benchmark",
   "origin_source": "sets/fresh-123.json notes: formula member = the paper's 'A Simulated Example' (HierBOSSS arXiv:2509.19710v1 Sec. 5.1, eq. 5.2): x3*(5*x1 + 5*x2) on normal inputs",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
@@ -4159,10 +4513,18 @@
   "origin_proposal": null,
   "tags": [
    "extrapolation",
-   "fixed points"
+   "fixed points",
+   "srbf-modified"
   ],
   "detail": {
    "fixed points": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      1,
      1
@@ -4223,10 +4585,18 @@
   "origin_proposal": null,
   "tags": [
    "extrapolation",
-   "fixed points"
+   "fixed points",
+   "srbf-modified"
   ],
   "detail": {
    "fixed points": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      1,
      1
@@ -4254,10 +4624,18 @@
   "origin_source": "sets/fresh-48.json problems[dyfor-simulated]: 'The simulated series of the DyFor Time Series Forecasting entry, a step function of three segments' (Wagner et al. 2007, Eq. 7) on x = 1..60",
   "origin_proposal": null,
   "tags": [
-   "fixed points"
+   "fixed points",
+   "srbf-modified"
   ],
   "detail": {
    "fixed points": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      1,
      1
@@ -4279,10 +4657,18 @@
   "origin_proposal": null,
   "tags": [
    "extrapolation",
-   "fixed points"
+   "fixed points",
+   "srbf-modified"
   ],
   "detail": {
    "fixed points": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      1,
      1
@@ -4415,10 +4801,18 @@
   "origin_proposal": null,
   "tags": [
    "extrapolation",
-   "fixed points"
+   "fixed points",
+   "srbf-modified"
   ],
   "detail": {
    "fixed points": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      1,
      1
@@ -4484,7 +4878,7 @@
  },
  {
   "catalog": "dow-distillation-tower",
-  "display_name": "Tower (Dow distillation tower)",
+  "display_name": "Tower (Dow distillation tower)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/dow-distillation-tower.npz",
@@ -4524,7 +4918,7 @@
  },
  {
   "catalog": "dow-emulator",
-  "display_name": "Emulator problem (Dow)",
+  "display_name": "Emulator problem (Dow)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/dow-emulator.npz",
@@ -4557,10 +4951,18 @@
   "origin_proposal": null,
   "tags": [
    "no test split",
-   "fit only"
+   "fit only",
+   "srbf-modified"
   ],
   "detail": {
    "fit only": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      1,
      1
@@ -4580,7 +4982,7 @@
  },
  {
   "catalog": "gecco-2013-2017-real-share-alike",
-  "display_name": "GECCO 2013-2017 GP regression compilation (real data) (share-alike)",
+  "display_name": "GECCO 2013-2017 GP regression compilation (real data) (share-alike)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/gecco-2013-2017-real-share-alike.npz",
@@ -4604,7 +5006,7 @@
  },
  {
   "catalog": "gplearn-diabetes",
-  "display_name": "gplearn documentation example (diabetes)",
+  "display_name": "gplearn documentation example (diabetes)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/gplearn-diabetes.npz",
@@ -4635,14 +5037,24 @@
   "origin": "synthetic data",
   "origin_source": "sets/fresh-123.json datasets[0].target: 'BE(eV): DFT binding (adsorption) energy of the single metal adatom on the oxide surface' (O'Connor et al. 2018, 91 rows)",
   "origin_proposal": "simulator output: DFT-computed binding energies, not measurements",
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  },
  {
   "catalog": "langlaw-perovskites-restricted",
-  "display_name": "LangLaw perovskite datasets (restricted)",
+  "display_name": "LangLaw perovskite datasets (restricted)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/langlaw-perovskites-restricted.npz",
@@ -4680,7 +5092,7 @@
  },
  {
   "catalog": "materials-laws-multi-agent",
-  "display_name": "Multi-agent materials law datasets",
+  "display_name": "Multi-agent materials law datasets*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/materials-laws-multi-agent.npz",
@@ -4727,8 +5139,18 @@
   "origin": "measured data",
   "origin_source": "sets/critic-5.json notes: 'fixed real nuclear data': AME2020 binding energies and measured charge radii",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": "No extrapolation: the published files are a random 20% split."
  },
@@ -4741,14 +5163,24 @@
   "origin": "measured data",
   "origin_source": "sets/critic-5.json notes: 'fixed real nuclear data': AME2020 binding energies and measured charge radii",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": "No extrapolation: the published files are a random 20% split."
  },
  {
   "catalog": "phye2e-space-physics-restricted",
-  "display_name": "PhyE2E space-physics applications (restricted)",
+  "display_name": "PhyE2E space-physics applications (restricted)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/phye2e-space-physics-restricted.npz",
@@ -4780,7 +5212,7 @@
  },
  {
   "catalog": "shape-constrained-real-world",
-  "display_name": "Shape-constrained SR real-world set",
+  "display_name": "Shape-constrained SR real-world set*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/shape-constrained-real-world.npz",
@@ -4812,7 +5244,7 @@
  },
  {
   "catalog": "sisso-octet-binaries",
-  "display_name": "SISSO octet binaries (rock-salt vs zinc-blende)",
+  "display_name": "SISSO octet binaries (rock-salt vs zinc-blende)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/sisso-octet-binaries.npz",
@@ -4845,10 +5277,18 @@
   "origin_proposal": null,
   "tags": [
    "no test split",
-   "fit only"
+   "fit only",
+   "srbf-modified"
   ],
   "detail": {
    "fit only": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   },
+   "srbf-modified": {
     "share": [
      1,
      1
@@ -4868,7 +5308,7 @@
  },
  {
   "catalog": "torchsisso-specific-energy",
-  "display_name": "Specific energy of organic compounds (TorchSISSO)",
+  "display_name": "Specific energy of organic compounds (TorchSISSO)*",
   "kind": "data",
   "problems": 1,
   "file": "build/data-catalogs/torchsisso-specific-energy.npz",
@@ -4907,8 +5347,18 @@
   "origin": "measured data",
   "origin_source": "sets/fresh-32.json notes: data member Dow-Chemical, 'fixed 747/319 split' of the organiser's workbook (White et al. 2013 Table 5)",
   "origin_proposal": null,
-  "tags": [],
-  "detail": {},
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     1,
+     1
+    ],
+    "source": "the catalog files"
+   }
+  },
   "below_half": {},
   "notes": null
  }

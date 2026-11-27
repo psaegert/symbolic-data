@@ -140,9 +140,9 @@ def test_apply_writes_benchmark_star_notes_and_flags_and_removes_record_ids(tmp_
     assert "display_name" not in md and "srbf_notes" not in md and "problem_flags" not in md
 
 
-def test_running_part_of_a_benchmark_earns_no_star():
-    assert not T.starred_by({"changes": [{"kind": "part", "problems": 3, "text": "x"}]})
-    assert all(T.starred_by({"changes": [{"kind": k, "problems": 1, "text": "x"}]}) for k in ("changed", "filled", "kept"))
+def test_every_deviation_earns_a_star_running_part_of_a_benchmark_included():
+    assert all(T.starred_by({"changes": [{"kind": k, "problems": 1, "text": "x"}]}) for k in ("part", "changed", "filled", "kept"))
+    assert not T.starred_by({"changes": [], "follows_first_publication": ["as Keijzer"], "compilation_code": ["x"]})
 
 
 # ------------------------------------------------------------------------------------------------ the review round
@@ -180,3 +180,17 @@ def test_all_27_kan_formulas_have_inputs_and_the_20_draw_ai_feynman_variables():
     assert variables["v1"]["expr"] == "m2/m1" and latent["x1"]["sample_range"] == [3.0, 4.0]
     doc = yaml.safe_load((REPO / "assets/catalogs/kan-feynman-no-units-subset.yaml").read_text())
     assert len(doc["expressions"]) == 27
+
+
+def test_compilations_follow_their_own_code_and_standalone_sets_their_defining_publication():
+    k14 = F.fixed(_record("fresh-46", "Korns-14"))
+    assert k14["formula"].startswith("22.0 + ")
+    k15 = {v["name"]: (v["low"], v["high"]) for v in F.fixed(_record("fresh-46", "Korns-15"))["variables"]}
+    assert k15["x2"] == (0.0, 50.0) and k15["x0"] == (-50.0, 50.0)
+    n9 = F.fixed(_record("fresh-31", "Nguyen-9"))
+    assert {(v["low"], v["high"]) for v in n9["variables"]} == {(0.0, 1.0)}
+    legacy = F.fixed(_record("interrupted-1", "Korns-15"))
+    assert [v["name"] for v in legacy["variables"]] == ["x_0", "x_1", "x_2", "x_3"]
+    assert F.fixed(_record("interrupted-1", "Uy2011-F9")) == _record("interrupted-1", "Uy2011-F9")
+    korns = yaml.safe_load((REPO / "assets/catalogs/korns.yaml").read_text())["expressions"]
+    assert "22.0-(4.2" in korns["Korns-14"]["prepared"].replace(" ", "") or "-4.2" in korns["Korns-14"]["prepared"]

@@ -1,12 +1,13 @@
 metadata:
   name: gp-benchmarks-sr-table
-  version: 1
+  display_name: "gp-benchmarks-sr-table*"
+  version: 2
   benchmark: "gp-benchmarks-sr-table"
-  tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
+  tags: {"origin": "classic benchmark", "tags": ["dummy inputs", "srbf-modified"]}
   license: "facts only: formulas and ranges cited from McDermott et al. 2012 (GECCO, Table 3) and the original family papers; no upstream license"
   citation: {"paper": {"short": "McDermott et al. 2012", "title": "Genetic programming needs better benchmarks", "venue": "Proceedings of the 14th annual conference on Genetic and evolutionary computation (GECCO '12), pp. 791-798", "url": "https://doi.org/10.1145/2330163.2330273"}}
   srbf_changes: [{"kind": "part", "problems": 40, "text": "srbf runs 11 of the 51 problems of McDermott et al.'s table here and 2 more in its pinned-points set; the other 38 are run in the sets of the benchmarks they come from (Koza, Nguyen, Pagie, Korns, Keijzer, Vladislavleva)."}]
-  srbf_notes: ["Follows the defining publication: Korns-7, Vladislavleva-7, Keijzer-5 and Nguyen-9 follow their original authors where later copies differ; Korns-5, -6, -8 and -9 use plain log and square root as printed."]
+  srbf_notes: ["Follows the defining publication: Korns-5 to -9, Korns-13 to -15, Keijzer-5 and Vladislavleva-7 as the table and its ECJ implementation print them, which agree with their original authors (later copies differ: abs() wrappers, swapped ranges, another Vladislavleva-7).", "Follows the compilation's own code or data: Nguyen-9 draws its training inputs on [0, 1]^2, as the table's ECJ implementation does (Benchmarks.java); the table and Uy et al. (2011) print [-1, 1]^2."]
   description: GP benchmarks SR table (McDermott et al. 2012)
   sources:
   - https://doi.org/10.1145/2330163.2330273
@@ -485,7 +486,7 @@ expressions:
       v1:
         name: x
         sample_range:
-        - -1.0
+        - 0.0
         - 1.0
         sample_type:
         - uni
@@ -493,7 +494,7 @@ expressions:
       v2:
         name: y
         sample_range:
-        - -1.0
+        - 0.0
         - 1.0
         sample_type:
         - uni
@@ -501,8 +502,8 @@ expressions:
       v0:
         name: y
     input_distributions:
-      x: uniform U[-1, 1]
-      y: uniform U[-1, 1]
+      x: uniform U[0, 1] (the table's ECJ implementation; the table and Uy et al. 2011 print [-1, 1])
+      y: uniform U[0, 1] (the table's ECJ implementation; the table and Uy et al. 2011 print [-1, 1])
     meta:
       finite_fraction: 1.0
   Keijzer-5:

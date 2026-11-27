@@ -1,8 +1,9 @@
 metadata:
   name: neat
+  display_name: "neat*"
   version: 2
   benchmark: "neat"
-  tags: {"origin": "classic benchmark", "tags": []}
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 8 of the 9 Neat problems here; Neat-6 trains on fixed points and is in 'Neat (fixed points)'."}]
   srbf_notes: ["Follows the defining publication: Neat-9 (the Pagie function) is sampled at random on [-5, 5]^2, as the neat-GP paper samples its training sets; Pagie's own 26 x 26 grid is in 'Pagie (fixed points)'."]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"

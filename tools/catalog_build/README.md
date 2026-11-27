@@ -17,9 +17,10 @@ own generator, and the release catalogs' corrections. Run them from the reposito
 5. `python tools/catalog_build/catalog_tags.py flags ...`, `facts ...`, `merge ...`, `apply ...` — the catalog tags
    (origin and what the catalog tests) and the catalog-level metadata srbf reads into every catalog: its `benchmark`
    (`tags/benchmarks.json`: srbf averages by benchmark; the -restricted, -share-alike, -points parts and the formula/data
-   halves of one benchmark share one slug), its `license`, `citation`, `srbf_changes` (`tags/deviations.json`; a change
-   of kind changed, filled or kept earns the '*' and the srbf-modified tag, running part of a benchmark does not), its
-   `srbf_notes` (where srbf follows the defining publication, and where the rule for paper-vs-code conflicts applied:
+   halves of one benchmark share one slug), its `license`, `citation`, `srbf_changes` (`tags/deviations.json`; every
+   deviation, running part of a benchmark included, earns the '*' and the srbf-modified tag), its
+   `srbf_notes` (where srbf follows the defining publication, where a compilation follows its own code or data, and
+   where the rule for paper-vs-code conflicts applied:
    srbf follows what produced the authors' published results, their code or data, and notes the paper's version;
    every instance in `tags/rule_applications.json`) and its `problem_flags` (`tags/problem_flags.json`, from `flags`:
    trivial, low-signal, target-leak, tiny, ordered). `tags/judged.json` is the reading of the set records each judgement

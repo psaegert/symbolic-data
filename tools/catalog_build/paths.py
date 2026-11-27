@@ -125,6 +125,8 @@ VERSIONS = {
     "heuristiclab-regression-instance-providers": 2, "kan-feynman-no-units-subset": 2,
     "physo-astrophysical-case-studies": 2, "rsrm-constant-optimization-benchmark": 2, "scrbenchmark": 2,
     "shape-constrained-sr-synthetic": 2,
+    # compilations that now follow their own code or data (owner 2026-11-27); heuristiclab is at 2 already
+    "gp-benchmarks-sr-table": 2, "erbench-public-legacy-formulas": 2,
     # pinned points changed (AutoRA's Weber-Fechner keeps S1 <= S2; cp3-bench F7's y on the CSV's grid)
     "autora-synthetic-behavioural-science-models-points": 2, "cp3-bench-standard-tuning-datasets-points": 2,
     # data catalogs whose problems changed (cp3-bench's three corrected formulas; PhyE2E's plasma datasets left out)

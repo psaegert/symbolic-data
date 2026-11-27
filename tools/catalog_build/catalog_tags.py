@@ -334,9 +334,10 @@ def apply(tags_path: Path, published_paths: list[Path], licenses_path: Path | No
     licenses = {r["catalog"]: r["license"] for r in _rows(licenses_path) if r["redistribute"].startswith("yes")}
     # the citations (tags/citations.json): the paper and the dataset of each catalog, where they exist
     citations = {c["catalog"]: {k: c[k] for k in ("paper", "data") if c.get(k)} for c in _rows(citations_path)}
-    # the deviation audit (tags/deviations.json): how srbf's version differs from the authors' benchmark; anything
-    # beyond running part of it earns the '*' (stars); a version that follows the defining publication, or the rule
-    # for paper-vs-code conflicts, is a visible note without a star (owner 2026-11-27)
+    # the deviation audit (tags/deviations.json): how srbf's version differs from the authors' benchmark; every
+    # deviation, running part of it included, earns the '*'; a version that follows the defining publication, a
+    # compilation that follows its own code or data, and the rule for paper-vs-code conflicts are visible notes without
+    # a star (owner 2026-11-27)
     deviations = {c["catalog"]: c for c in _rows(deviations_path)}
     # the benchmark each catalog belongs to (tags/benchmarks.json): srbf averages by benchmark (owner 2026-11-27)
     benchmark = {c: b["benchmark"] for b in _rows(benchmarks_path) for c in b["catalogs"]}
@@ -360,11 +361,14 @@ def apply(tags_path: Path, published_paths: list[Path], licenses_path: Path | No
     print(dict(done))
 
 
-STAR_KINDS = ("changed", "filled", "kept")      # a change of these kinds earns the '*'; "part" (srbf runs part) does not
+# every kind earns the '*': srbf changes, fills in, keeps-and-flags something, or runs part of the benchmark (owner
+# 2026-11-27: "incomplete runs over benchmarks count as stars")
+STAR_KINDS = ("part", "changed", "filled", "kept")
 
 
 def starred_by(dev: dict[str, Any]) -> bool:
-    """Whether srbf's version carries the '*': it changes, fills in or keeps-as-published-but-flags something."""
+    """Whether srbf's version carries the '*': it runs part of the benchmark, or changes, fills in or keeps-as-published-
+    but-flags something."""
     return any(c["kind"] in STAR_KINDS for c in dev.get("changes") or [])
 
 
@@ -373,6 +377,7 @@ def notes_of(dev: dict[str, Any]) -> list[str]:
     for paper-vs-code conflicts applied (follow what produced the authors' published results; the paper's version
     noted)."""
     return [*(f"Follows the defining publication: {t}" for t in dev.get("follows_first_publication") or []),
+            *(f"Follows the compilation's own code or data: {t}" for t in dev.get("compilation_code") or []),
             *(f"Paper and code differ: {t}" for t in dev.get("paper_vs_code") or [])]
 
 

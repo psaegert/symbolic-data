@@ -1,6 +1,6 @@
 {
  "what": "every problem set of srbf's next release (181 catalogs in 145 benchmarks; names are the stable keys, a '*' goes only into display names; srbf averages by benchmark)",
- "branch": "symbolic-data feat/audit-fixes @ d1c13cf",
+ "branch": "symbolic-data feat/audit-fixes @ 2469af3",
  "generated": "2026-11-28 (owner rulings: scope y = f(x) on one data set; formulas as written; additions LLM-SR oscillators, BMS Rössler, Brum et al.; compilations kept whole; averaging by benchmark)",
  "totals": {
   "sets": 181,
@@ -261,7 +261,7 @@
   },
   {
    "name": "ai-hilbert-problem-set",
-   "display_name": "ai-hilbert-problem-set",
+   "display_name": "ai-hilbert-problem-set*",
    "benchmark": "ai-hilbert",
    "kind": "formula",
    "version": 2,
@@ -274,13 +274,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "science formula",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "MIT (IBM/AI-Hilbert)"
   },
   {
    "name": "ai-hilbert-real-data",
-   "display_name": "AI Hilbert real data",
+   "display_name": "AI Hilbert real data*",
    "benchmark": "ai-hilbert",
    "kind": "data",
    "version": 1,
@@ -295,14 +297,15 @@
     "origin": "measured data",
     "tags": [
      "no test split",
-     "fit only"
+     "fit only",
+     "srbf-modified"
     ]
    },
    "license": "MIT (IBM/AI-Hilbert)"
   },
   {
    "name": "autora-synthetic-behavioural-science-models-points",
-   "display_name": "AutoRA synthetic behavioural-science models (autora-synthetic: Weber-Fechner, Stevens power law, exponential learning, Luce choice ratio, expected value theory, prospect theory) (pinned points)",
+   "display_name": "AutoRA synthetic behavioural-science models (autora-synthetic: Weber-Fechner, Stevens power law, exponential learning, Luce choice ratio, expected value theory, prospect theory) (pinned points)*",
    "benchmark": "autora-synthetic-behavioural-science-models",
    "kind": "data",
    "version": 2,
@@ -320,7 +323,8 @@
     "origin": "science formula",
     "tags": [
      "no test split",
-     "fixed points"
+     "fixed points",
+     "srbf-modified"
     ]
    },
    "license": "MIT (AutoResearch/autora-synthetic)"
@@ -485,7 +489,7 @@
   },
   {
    "name": "constant",
-   "display_name": "constant",
+   "display_name": "constant*",
    "benchmark": "constant",
    "kind": "formula",
    "version": 2,
@@ -498,7 +502,9 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "classic benchmark",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   },
@@ -525,7 +531,7 @@
   },
   {
    "name": "cp3-bench-standard-tuning-datasets-points",
-   "display_name": "CP3-bench standard tuning datasets (pinned points)",
+   "display_name": "CP3-bench standard tuning datasets (pinned points)*",
    "benchmark": "cp3-bench",
    "kind": "data",
    "version": 2,
@@ -540,14 +546,15 @@
     "origin": "classic benchmark",
     "tags": [
      "no test split",
-     "fixed points"
+     "fixed points",
+     "srbf-modified"
     ]
    },
    "license": "MIT (CP3-Origins/Things-to-bench; Thing & Koksbang 2025, arXiv:2406.15531)"
   },
   {
    "name": "cvgp-trigonometric-control-variable-datasets",
-   "display_name": "cvgp-trigonometric-control-variable-datasets",
+   "display_name": "cvgp-trigonometric-control-variable-datasets*",
    "benchmark": "cvgp-trigonometric-control-variable-datasets",
    "kind": "formula",
    "version": 1,
@@ -561,7 +568,8 @@
    "tags": {
     "origin": "generated formulas",
     "tags": [
-     "dummy inputs"
+     "dummy inputs",
+     "srbf-modified"
     ]
    },
    "license": "MIT (jiangnanhugo/egg-sr scibench copy of the CVGP expressions; Jiang & Xue 2023, arXiv:2306.08057)"
@@ -590,7 +598,7 @@
   },
   {
    "name": "decomposable-nsr-synthetic-e1-e13",
-   "display_name": "decomposable-nsr-synthetic-e1-e13",
+   "display_name": "decomposable-nsr-synthetic-e1-e13*",
    "benchmark": "decomposable-nsr-synthetic-e1-e13",
    "kind": "formula",
    "version": 1,
@@ -606,7 +614,8 @@
     "origin": "classic benchmark",
     "tags": [
      "extrapolation",
-     "several tests"
+     "several tests",
+     "srbf-modified"
     ]
    },
    "license": "MIT (NISL-MSU/MultiSetSR; Morales & Sheppard 2026, arXiv:2511.04124)"
@@ -780,7 +789,7 @@
   },
   {
    "name": "dso-benchmark-registry",
-   "display_name": "dso-benchmark-registry",
+   "display_name": "dso-benchmark-registry*",
    "benchmark": "dso-benchmark-registry",
    "kind": "formula",
    "version": 2,
@@ -794,14 +803,15 @@
    "tags": {
     "origin": "classic benchmark",
     "tags": [
-     "dummy inputs"
+     "dummy inputs",
+     "srbf-modified"
     ]
    },
    "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization)"
   },
   {
    "name": "dso-benchmark-registry-points",
-   "display_name": "DSO benchmark registry (benchmarks.csv) (pinned points)",
+   "display_name": "DSO benchmark registry (benchmarks.csv) (pinned points)*",
    "benchmark": "dso-benchmark-registry",
    "kind": "data",
    "version": 1,
@@ -816,14 +826,15 @@
     "origin": "classic benchmark",
     "tags": [
      "extrapolation",
-     "fixed points"
+     "fixed points",
+     "srbf-modified"
     ]
    },
    "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization)"
   },
   {
    "name": "e2e-in-domain-synthetic-validation-set",
-   "display_name": "e2e-in-domain-synthetic-validation-set",
+   "display_name": "e2e-in-domain-synthetic-validation-set*",
    "benchmark": "e2e-in-domain-synthetic-validation-set",
    "kind": "formula",
    "version": 1,
@@ -837,7 +848,8 @@
    "tags": {
     "origin": "generated formulas",
     "tags": [
-     "generator in-distribution"
+     "generator in-distribution",
+     "srbf-modified"
     ]
    },
    "license": "Apache-2.0 (facebookresearch/symbolicregression; Kamienny et al. 2022, arXiv:2204.10532)"
@@ -1060,7 +1072,7 @@
    "display_name": "erbench-public-legacy-formulas*",
    "benchmark": "erbench-public-legacy-formulas",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 5,
    "subsets": {
     "Feynman / AIF2 12 modular equations (Table 4 rows 5-16)": 1,
@@ -1073,7 +1085,6 @@
    "tags": {
     "origin": "classic benchmark",
     "tags": [
-     "dummy inputs",
      "srbf-modified"
     ]
    },
@@ -1125,7 +1136,7 @@
   },
   {
    "name": "esr-cosmology",
-   "display_name": "ESR cosmology datasets",
+   "display_name": "ESR cosmology datasets*",
    "benchmark": "esr-cosmology",
    "kind": "data",
    "version": 1,
@@ -1140,14 +1151,15 @@
     "origin": "measured data",
     "tags": [
      "no test split",
-     "fit only"
+     "fit only",
+     "srbf-modified"
     ]
    },
    "license": "CC BY 4.0 (Moresco et al. 2022, Living Rev. Relativ. 25:6, Table 1; arXiv:2201.07241) via DeaglanBartlett/ESR (MIT)"
   },
   {
    "name": "esr-cosmology-datasets",
-   "display_name": "esr-cosmology-datasets",
+   "display_name": "esr-cosmology-datasets*",
    "benchmark": "esr-cosmology",
    "kind": "formula",
    "version": 1,
@@ -1160,7 +1172,9 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "science formula",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "MIT (DeaglanBartlett/ESR; Bartlett, Desmond & Ferreira 2024, IEEE TEVC 28:950, arXiv:2211.11461)"
   },
@@ -1643,10 +1657,10 @@
   },
   {
    "name": "gp-benchmarks-sr-table",
-   "display_name": "gp-benchmarks-sr-table",
+   "display_name": "gp-benchmarks-sr-table*",
    "benchmark": "gp-benchmarks-sr-table",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 11,
    "subsets": {
     "Korns": 8,
@@ -1660,7 +1674,8 @@
    "tags": {
     "origin": "classic benchmark",
     "tags": [
-     "dummy inputs"
+     "dummy inputs",
+     "srbf-modified"
     ]
    },
    "license": "facts only: formulas and ranges cited from McDermott et al. 2012 (GECCO, Table 3) and the original family papers; no upstream license"
@@ -1691,7 +1706,7 @@
   },
   {
    "name": "gp-gomea-real-world",
-   "display_name": "GP-GOMEA real-world set",
+   "display_name": "GP-GOMEA real-world set*",
    "benchmark": "gp-gomea-real-world",
    "kind": "data",
    "version": 1,
@@ -1704,13 +1719,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "measured data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "CC BY 4.0 (UCI Machine Learning Repository)"
   },
   {
    "name": "gp-gomea-real-world-restricted",
-   "display_name": "GP-GOMEA real-world set (restricted)",
+   "display_name": "GP-GOMEA real-world set (restricted)*",
    "benchmark": "gp-gomea-real-world",
    "kind": "data",
    "version": 1,
@@ -1723,7 +1740,9 @@
    "repo": "psaegert/symbolic-data-assets-restricted",
    "tags": {
     "origin": "measured data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "per problem: all rights reserved (Dow Chemical); none found (StatLib Boston housing)"
   },
@@ -1750,7 +1769,7 @@
   },
   {
    "name": "gplearn-documentation-examples",
-   "display_name": "gplearn-documentation-examples",
+   "display_name": "gplearn-documentation-examples*",
    "benchmark": "gplearn-documentation-examples",
    "kind": "formula",
    "version": 1,
@@ -1763,7 +1782,9 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "classic benchmark",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "BSD-3-Clause (trevorstephens/gplearn documentation example)"
   },
@@ -1910,7 +1931,7 @@
   },
   {
    "name": "heuristiclab-regression-instance-providers",
-   "display_name": "heuristiclab-regression-instance-providers",
+   "display_name": "heuristiclab-regression-instance-providers*",
    "benchmark": "heuristiclab-regression-instance-providers",
    "kind": "formula",
    "version": 2,
@@ -1924,14 +1945,15 @@
    "tags": {
     "origin": "classic benchmark",
     "tags": [
-     "dummy inputs"
+     "dummy inputs",
+     "srbf-modified"
     ]
    },
    "license": "facts only: formulas cited from the defining authors and instances generated with HeuristicLab's providers (heal-research/HeuristicLab, GPL-3.0 code, not copied)"
   },
   {
    "name": "heuristiclab-regression-instance-providers-points",
-   "display_name": "HeuristicLab regression instance providers (pinned points)",
+   "display_name": "HeuristicLab regression instance providers (pinned points)*",
    "benchmark": "heuristiclab-regression-instance-providers",
    "kind": "data",
    "version": 1,
@@ -1946,14 +1968,15 @@
     "origin": "classic benchmark",
     "tags": [
      "extrapolation",
-     "fixed points"
+     "fixed points",
+     "srbf-modified"
     ]
    },
    "license": "facts only: Keijzer-6 grid cited from Keijzer 2003 (EuroGP) as provided by HeuristicLab; no upstream license"
   },
   {
    "name": "hierbosss-single-atom",
-   "display_name": "HierBOSSS single-atom catalysis",
+   "display_name": "HierBOSSS single-atom catalysis*",
    "benchmark": "hierbosss",
    "kind": "data",
    "version": 1,
@@ -1966,13 +1989,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "synthetic data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "MIT (tsenftle/Metal-Oxide-LASSO-lo; O'Connor, Jonayat, Janik & Senftle 2018, Nat. Catal. 1:531)"
   },
   {
    "name": "hierbosss-single-atom-catalysis-and-synthetic-polynomial",
-   "display_name": "hierbosss-single-atom-catalysis-and-synthetic-polynomial",
+   "display_name": "hierbosss-single-atom-catalysis-and-synthetic-polynomial*",
    "benchmark": "hierbosss",
    "kind": "formula",
    "version": 1,
@@ -1985,7 +2010,9 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "classic benchmark",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "CC BY 4.0 (Roy et al. 2025, HierBOSSS, arXiv:2509.19710v1) + MIT (Roy-SR-007/HierBOSSS)"
   },
@@ -2080,7 +2107,7 @@
   },
   {
    "name": "keijzer",
-   "display_name": "keijzer",
+   "display_name": "keijzer*",
    "benchmark": "keijzer",
    "kind": "formula",
    "version": 2,
@@ -2093,7 +2120,9 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "classic benchmark",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   },
@@ -2121,7 +2150,7 @@
   },
   {
    "name": "kim-et-al-eql-benchmark-functions",
-   "display_name": "kim-et-al-eql-benchmark-functions",
+   "display_name": "kim-et-al-eql-benchmark-functions*",
    "benchmark": "kim-et-al-eql-benchmark-functions",
    "kind": "formula",
    "version": 1,
@@ -2135,7 +2164,8 @@
    "tags": {
     "origin": "classic benchmark",
     "tags": [
-     "extrapolation"
+     "extrapolation",
+     "srbf-modified"
     ]
    },
    "license": "MIT (samuelkim314/DeepSymReg) + CC BY 4.0 (Kim et al. 2020, IEEE TNNLS)"
@@ -2347,7 +2377,7 @@
   },
   {
    "name": "llm-lex-random-mathematica-functions",
-   "display_name": "llm-lex-random-mathematica-functions",
+   "display_name": "llm-lex-random-mathematica-functions*",
    "benchmark": "llm-lex-random-mathematica-functions",
    "kind": "formula",
    "version": 1,
@@ -2360,13 +2390,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "classic benchmark",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "CC BY 4.0 (Harvey et al. 2025, arXiv:2505.07956; Mach. Learn.: Sci. Technol. 7:045040)"
   },
   {
    "name": "llm-lex-random-mathematica-functions-points",
-   "display_name": "LLM-LEx random Mathematica functions (pinned points)",
+   "display_name": "LLM-LEx random Mathematica functions (pinned points)*",
    "benchmark": "llm-lex-random-mathematica-functions",
    "kind": "data",
    "version": 1,
@@ -2381,7 +2413,8 @@
     "origin": "generated formulas",
     "tags": [
      "no test split",
-     "fixed points"
+     "fixed points",
+     "srbf-modified"
     ]
    },
    "license": "CC BY 4.0 (Harvey et al. 2025, arXiv:2505.07956)"
@@ -2534,7 +2567,7 @@
   },
   {
    "name": "mcdermott-predictive-modelling",
-   "display_name": "McDermott et al. predictive-modelling sets",
+   "display_name": "McDermott et al. predictive-modelling sets*",
    "benchmark": "mcdermott-predictive-modelling",
    "kind": "data",
    "version": 1,
@@ -2547,13 +2580,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "measured data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "MIT (DALabNOVA/slim QSAR tables)"
   },
   {
    "name": "mcdermott-predictive-modelling-restricted",
-   "display_name": "McDermott et al. predictive-modelling sets (restricted)",
+   "display_name": "McDermott et al. predictive-modelling sets (restricted)*",
    "benchmark": "mcdermott-predictive-modelling",
    "kind": "data",
    "version": 1,
@@ -2569,14 +2604,15 @@
    "tags": {
     "origin": "measured data",
     "tags": [
-     "several tests"
+     "several tests",
+     "srbf-modified"
     ]
    },
    "license": "per problem: CC BY-NC 4.0 (SILSO, Royal Observatory of Belgium); none found"
   },
   {
    "name": "mcdermott-table-1-predictive-modelling-sets-points",
-   "display_name": "McDermott Table 1 predictive-modelling sets (pinned points)",
+   "display_name": "McDermott Table 1 predictive-modelling sets (pinned points)*",
    "benchmark": "mcdermott-predictive-modelling",
    "kind": "data",
    "version": 1,
@@ -2590,14 +2626,15 @@
    "tags": {
     "origin": "classic benchmark",
     "tags": [
-     "fixed points"
+     "fixed points",
+     "srbf-modified"
     ]
    },
    "license": "facts only: piecewise law and integer grid cited from the DyFor benchmark (Wagner, Michalewicz, Khouja & McGregor 2007, IEEE TEVC 11:433); no upstream license"
   },
   {
    "name": "meier",
-   "display_name": "meier",
+   "display_name": "meier*",
    "benchmark": "meier",
    "kind": "formula",
    "version": 2,
@@ -2610,13 +2647,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "classic benchmark",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   },
   {
    "name": "neat",
-   "display_name": "neat",
+   "display_name": "neat*",
    "benchmark": "neat",
    "kind": "formula",
    "version": 2,
@@ -2629,13 +2668,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "classic benchmark",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   },
   {
    "name": "neat-points",
-   "display_name": "neat (pinned points)",
+   "display_name": "neat (pinned points)*",
    "benchmark": "neat",
    "kind": "data",
    "version": 1,
@@ -2650,7 +2691,8 @@
     "origin": "classic benchmark",
     "tags": [
      "extrapolation",
-     "fixed points"
+     "fixed points",
+     "srbf-modified"
     ]
    },
    "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization)"
@@ -2811,7 +2853,7 @@
   },
   {
    "name": "nsrwh-train-wc",
-   "display_name": "nsrwh-train-wc",
+   "display_name": "nsrwh-train-wc*",
    "benchmark": "nsrwh-train-wc",
    "kind": "formula",
    "version": 1,
@@ -2826,14 +2868,15 @@
     "origin": "generated formulas",
     "tags": [
      "extrapolation",
-     "generator in-distribution"
+     "generator in-distribution",
+     "srbf-modified"
     ]
    },
    "license": "MIT (SymposiumOrganization/ControllableNeuralSymbolicRegression)"
   },
   {
    "name": "nuclear-misr",
-   "display_name": "Nuclear binding energies and charge radii (MISR)",
+   "display_name": "Nuclear binding energies and charge radii (MISR)*",
    "benchmark": "nuclear-misr",
    "kind": "data",
    "version": 1,
@@ -2846,13 +2889,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "measured data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "CC BY 3.0 (AME2020, Chin. Phys. C 45, 030003)"
   },
   {
    "name": "nuclear-misr-restricted",
-   "display_name": "Nuclear binding energies and charge radii (MISR) (restricted)",
+   "display_name": "Nuclear binding energies and charge radii (MISR) (restricted)*",
    "benchmark": "nuclear-misr",
    "kind": "data",
    "version": 1,
@@ -2865,7 +2910,9 @@
    "repo": "psaegert/symbolic-data-assets-restricted",
    "tags": {
     "origin": "measured data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "per problem: none found (IAEA charge-radii compilation)"
   },
@@ -2982,7 +3029,7 @@
   },
   {
    "name": "physo-astro",
-   "display_name": "physo-astro",
+   "display_name": "physo-astro*",
    "benchmark": "physo-astro",
    "kind": "formula",
    "version": 3,
@@ -2995,13 +3042,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "science formula",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "specs authored from arXiv:2303.03192 Appendix A (paper specs; no upstream data files); PhySO repo MIT"
   },
   {
    "name": "physo-astrophysical-case-studies",
-   "display_name": "physo-astrophysical-case-studies",
+   "display_name": "physo-astrophysical-case-studies*",
    "benchmark": "physo-astrophysical-case-studies",
    "kind": "formula",
    "version": 2,
@@ -3015,7 +3064,9 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "science formula",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "CC BY 4.0 (Tenachi et al. 2023, ApJ 959:99, arXiv:2303.03192, Appendices A-B) + MIT (WassimTenachi/PhySO)"
   },
@@ -3061,7 +3112,7 @@
   },
   {
    "name": "pysr-empiricalbench",
-   "display_name": "PySR EmpiricalBench",
+   "display_name": "PySR EmpiricalBench*",
    "benchmark": "pysr-empiricalbench",
    "kind": "data",
    "version": 1,
@@ -3076,14 +3127,15 @@
     "origin": "measured data",
     "tags": [
      "no test split",
-     "fit only"
+     "fit only",
+     "srbf-modified"
     ]
    },
    "license": "MIT (MilesCranmer/pysr_paper)"
   },
   {
    "name": "pysr-empiricalbench-formulas",
-   "display_name": "pysr-empiricalbench-formulas",
+   "display_name": "pysr-empiricalbench-formulas*",
    "benchmark": "pysr-empiricalbench",
    "kind": "formula",
    "version": 1,
@@ -3096,7 +3148,9 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "science formula",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "MIT (MilesCranmer/pysr_paper)"
   },
@@ -3272,7 +3326,7 @@
   },
   {
    "name": "scimed-settling-sphere-configurations",
-   "display_name": "scimed-settling-sphere-configurations",
+   "display_name": "scimed-settling-sphere-configurations*",
    "benchmark": "scimed-settling-sphere-configurations",
    "kind": "formula",
    "version": 1,
@@ -3286,7 +3340,8 @@
    "tags": {
     "origin": "science formula",
     "tags": [
-     "dummy inputs"
+     "dummy inputs",
+     "srbf-modified"
     ]
    },
    "license": "MIT (LironSimon/SciMED) + CC BY 4.0 (Keren et al. 2023, Sci. Rep. 13:1249)"
@@ -3315,7 +3370,7 @@
   },
   {
    "name": "shadow-economies",
-   "display_name": "Shadow Economies",
+   "display_name": "Shadow Economies*",
    "benchmark": "shadow-economies",
    "kind": "data",
    "version": 1,
@@ -3330,7 +3385,8 @@
     "origin": "measured data",
     "tags": [
      "no test split",
-     "fit only"
+     "fit only",
+     "srbf-modified"
     ]
    },
    "license": "no licence: Shadow Economies data (Truscott & Korns, GPTP IX 2011) via symbolicregression.com; not redistributable without permission"
@@ -3516,7 +3572,7 @@
   },
   {
    "name": "sparc-radial-acceleration",
-   "display_name": "Radial acceleration relation (SPARC)",
+   "display_name": "Radial acceleration relation (SPARC)*",
    "benchmark": "sparc-radial-acceleration",
    "kind": "data",
    "version": 1,
@@ -3531,7 +3587,8 @@
     "origin": "measured data",
     "tags": [
      "no test split",
-     "fit only"
+     "fit only",
+     "srbf-modified"
     ]
    },
    "license": "SPARC (Lelli, McGaugh & Schombert 2016, AJ 152:157): no licence; data freely downloadable with a citation request"
@@ -3580,7 +3637,7 @@
   },
   {
    "name": "srbench-2.0-blackbox",
-   "display_name": "SRBench 2.0 black-box",
+   "display_name": "SRBench 2.0 black-box*",
    "benchmark": "srbench-2.0-blackbox",
    "kind": "data",
    "version": 1,
@@ -3594,13 +3651,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "measured data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "per dataset: CC BY 4.0 (UCI), generated data, OpenML BNG (public domain), StatLib permissions (503_wind; 505_tecator with its note), CC0 (titanic); PMLB's copies (MIT)"
   },
   {
    "name": "srbench-2.0-blackbox-restricted",
-   "display_name": "SRBench 2.0 black-box (restricted)",
+   "display_name": "SRBench 2.0 black-box (restricted)*",
    "benchmark": "srbench-2.0-blackbox",
    "kind": "data",
    "version": 1,
@@ -3613,13 +3672,15 @@
    "repo": "psaegert/symbolic-data-assets-restricted",
    "tags": {
     "origin": "measured data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "per problem: Simonoff smoothmeth: non-commercial use only; PMLB's copy (EpistasisLab/pmlb, MIT); analcatdata: non-commercial use only; PMLB's copy (EpistasisLab/pmlb, MIT); none stated at the source; PMLB's copy (EpistasisLab/pmlb, MIT)"
   },
   {
    "name": "srbench-2.0-first-principles",
-   "display_name": "SRBench 2.0 first-principles",
+   "display_name": "SRBench 2.0 first-principles*",
    "benchmark": "srbench-2.0-first-principles",
    "kind": "data",
    "version": 1,
@@ -3632,13 +3693,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "measured data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "per dataset: MIT (MilesCranmer/pysr_paper, EmpiricalBench); two from the unlicensed MvSR-analysis repo"
   },
   {
    "name": "srbench-2.0-first-principles-restricted",
-   "display_name": "SRBench 2.0 first-principles (restricted)",
+   "display_name": "SRBench 2.0 first-principles (restricted)*",
    "benchmark": "srbench-2.0-first-principles",
    "kind": "data",
    "version": 1,
@@ -3652,14 +3715,15 @@
    "tags": {
     "origin": "measured data",
     "tags": [
-     "noisy data"
+     "noisy data",
+     "srbf-modified"
     ]
    },
    "license": "per problem: none stated: erusseil/MvSR-analysis real_data (Russeil et al. 2024), unlicensed; PMLB's copy (EpistasisLab/pmlb, MIT)"
   },
   {
    "name": "srbench-2021-blackbox",
-   "display_name": "SRBench 2021 black-box",
+   "display_name": "SRBench 2021 black-box*",
    "benchmark": "srbench-2021-blackbox",
    "kind": "data",
    "version": 1,
@@ -3673,7 +3737,9 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "synthetic data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "per dataset: CC BY 4.0 (UCI), generated data, OpenML BNG (public domain), StatLib permissions (503_wind; 505_tecator with its note), CC0 (titanic); PMLB's copies (MIT)"
   },
@@ -3895,7 +3961,7 @@
   },
   {
    "name": "symformer-in-domain-synthetic-evaluation",
-   "display_name": "symformer-in-domain-synthetic-evaluation",
+   "display_name": "symformer-in-domain-synthetic-evaluation*",
    "benchmark": "symformer-in-domain-synthetic-evaluation",
    "kind": "formula",
    "version": 1,
@@ -3909,14 +3975,15 @@
    "tags": {
     "origin": "generated formulas",
     "tags": [
-     "generator in-distribution"
+     "generator in-distribution",
+     "srbf-modified"
     ]
    },
    "license": "CC BY 4.0 (Vastl et al. 2024, SymFormer, IEEE Access 12:37840); formulas drawn by srbf from the authors' generator"
   },
   {
    "name": "symtree-benchmark-functions",
-   "display_name": "symtree-benchmark-functions",
+   "display_name": "symtree-benchmark-functions*",
    "benchmark": "symtree-benchmark-functions",
    "kind": "formula",
    "version": 1,
@@ -3929,7 +3996,9 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "classic benchmark",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "facts only: functions and ranges cited from de Franca 2018 (Inf. Sci. 442:18, arXiv:1801.01807) and the original Kattan et al. papers; no upstream license"
   },
@@ -3980,7 +4049,7 @@
   },
   {
    "name": "torchsisso-synthetic-expressions",
-   "display_name": "torchsisso-synthetic-expressions",
+   "display_name": "torchsisso-synthetic-expressions*",
    "benchmark": "torchsisso",
    "kind": "formula",
    "version": 1,
@@ -3993,13 +4062,15 @@
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "classic benchmark",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "facts only: formulas and ranges cited from Muthyala et al. 2024 (TorchSISSO, Digit. Chem. Eng. 13:100198; arXiv:2410.01752, CC BY-NC-ND 4.0); no text or tables reproduced"
   },
   {
    "name": "vladislavleva",
-   "display_name": "vladislavleva",
+   "display_name": "vladislavleva*",
    "benchmark": "vladislavleva",
    "kind": "formula",
    "version": 2,
@@ -4013,7 +4084,8 @@
    "tags": {
     "origin": "classic benchmark",
     "tags": [
-     "extrapolation"
+     "extrapolation",
+     "srbf-modified"
     ]
    },
    "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
@@ -4043,7 +4115,7 @@
   },
   {
    "name": "white-2013-proposed",
-   "display_name": "White et al. 2013 proposed SR set",
+   "display_name": "White et al. 2013 proposed SR set*",
    "benchmark": "white-2013-proposed",
    "kind": "data",
    "version": 1,
@@ -4056,13 +4128,15 @@
    "repo": "psaegert/symbolic-data-assets-restricted",
    "tags": {
     "origin": "measured data",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "no licence: Dow Chemical data (EvoStar 2010 SR competition, A. Kordon) via gpbenchmarks.org; not redistributable without permission"
   },
   {
    "name": "white-et-al-2013-proposed-sr-set-points",
-   "display_name": "White et al. 2013 proposed SR set (pinned points)",
+   "display_name": "White et al. 2013 proposed SR set (pinned points)*",
    "benchmark": "white-2013-proposed",
    "kind": "data",
    "version": 1,
@@ -4077,7 +4151,8 @@
     "origin": "classic benchmark",
     "tags": [
      "extrapolation",
-     "fixed points"
+     "fixed points",
+     "srbf-modified"
     ]
    },
    "license": "facts only: Keijzer-6 grid cited from White et al. 2013 (GPEM 14:3) and Keijzer 2003; no upstream license"

@@ -1,8 +1,9 @@
 metadata:
   name: keijzer
+  display_name: "keijzer*"
   version: 2
   benchmark: "keijzer"
-  tags: {"origin": "classic benchmark", "tags": []}
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   srbf_changes: [{"kind": "part", "problems": 8, "text": "srbf runs 7 of Keijzer's 15 problems here; the 8 that train on fixed points are in 'Keijzer (fixed points)'."}]
   srbf_notes: ["Follows the defining publication: Keijzer-5 samples its denominator variable on [1, 2] as Keijzer (2003) defines it; later copies swapped two input ranges."]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"

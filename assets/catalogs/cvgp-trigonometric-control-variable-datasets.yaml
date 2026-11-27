@@ -1,8 +1,9 @@
 metadata:
   name: cvgp-trigonometric-control-variable-datasets
+  display_name: "cvgp-trigonometric-control-variable-datasets*"
   version: 1
   benchmark: "cvgp-trigonometric-control-variable-datasets"
-  tags: {"origin": "generated formulas", "tags": ["dummy inputs"]}
+  tags: {"origin": "generated formulas", "tags": ["dummy inputs", "srbf-modified"]}
   license: "MIT (jiangnanhugo/egg-sr scibench copy of the CVGP expressions; Jiang & Xue 2023, arXiv:2306.08057)"
   citation: {"paper": {"short": "Jiang & Xue 2023", "title": "Symbolic Regression via Control Variable Genetic Programming", "venue": "Machine Learning and Knowledge Discovery in Databases: Research Track, Lecture Notes in Computer Science, pp. 178-195", "url": "https://doi.org/10.1007/978-3-031-43421-1_11"}, "data": {"short": "GitHub jiangnanhugo/VSR-DPG@b841bb3", "title": "VSR-DPG data/algebraic_equations (equations_trigonometric and large_scale_10..50): CVGP's expressions embedded into 10 to 50 variables", "url": "https://github.com/jiangnanhugo/VSR-DPG/tree/b841bb349d301c1f233289f09525472ddb7a9246/data/algebraic_equations"}}
   srbf_changes: [{"kind": "part", "problems": 22976, "text": "srbf runs a fixed sample of 1,024 of the 24,000 expressions, chosen by a hash of each name and spread over the authors' configurations in proportion to their sizes."}]

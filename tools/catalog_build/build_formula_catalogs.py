@@ -156,6 +156,34 @@ RULE_FIXES = {
     ("fresh-57", "appb-wave-interference"): {"formula": "E_1 + 3.5 + 2*sqrt(3.5*E_1)*cos(dPhi)", "drop_variables": ["E_2"]},
     ("fresh-57", "appb-black-body-photon-count"): {"formula": "1/(exp(6.123*nu/(1.123*T)) - 1)",
                                                    "constants": {"h": 6.123, "kb": 1.123}},
+    # A compilation of other authors' benchmarks follows its own code or data where it differs from the defining
+    # publication (owner 2026-11-27); standalone sets (korns, keijzer, nguyen, ...) keep the defining publication.
+    # HeuristicLab @c57538b, KornsFunctionFourteen.cs / KornsFunctionFifteen.cs:
+    ("fresh-46", "Korns-14"): {"formula": "22.0 + (4.2*((cos(x0)-tan(x1))*(tanh(x2)/sin(x3))))"},
+    ("fresh-46", "Korns-15"): {"variables": {"x2": {"distribution": "uniform U[0, 50] (HeuristicLab's code, which avoids NaN; "
+                                                                    "Korns 2011 uses [-50, 50])", "low": 0.0, "high": 50.0}}},
+    # the GP-benchmarks table's ECJ implementation (ec/app/regression/Benchmarks.java @0ce5a2c) trains Nguyen-9 on [0, 1]^2
+    ("fresh-31", "Nguyen-9"): {"variables": {v: {"distribution": "uniform U[0, 1] (the table's ECJ implementation; the table "
+                                                                 "and Uy et al. 2011 print [-1, 1])", "low": 0.0, "high": 1.0}
+                                             for v in ("x", "y")}},
+    # ERBench's own renderings (its Hugging Face train.csv @95bf15c): Korns' unused fifth input dropped, Korns-15 and AI
+    # Feynman 2.0's equation 12 on ERBench's narrowed boxes
+    ("interrupted-1", "Korns-13"): {"formula": "-3*tan(x_0)*tan(x_1)/(tan(x_2)*tan(x_3)) + 32",
+                                    "replace_variables": [("x_0", -50.0, 50.0), ("x_1", -50.0, 50.0), ("x_2", -50.0, 50.0),
+                                                          ("x_3", -50.0, 50.0)]},
+    ("interrupted-1", "Korns-14"): {"formula": "-(4.2*cos(x_0) - 4.2*tan(x_1))*tanh(x_2)/sin(x_3) + 22",
+                                    "replace_variables": [("x_0", -50.0, 50.0), ("x_1", -50.0, 50.0), ("x_2", -50.0, 50.0),
+                                                          ("x_3", -50.0, 50.0)]},
+    ("interrupted-1", "Korns-15"): {"formula": "-6*(log(x_2) - tan(x_3))*exp(-x_1)*tan(x_0) + 12",
+                                    "replace_variables": [("x_0", 0.24818997227908168, 1.2481899722790817),
+                                                          ("x_1", -1.5831774122820366, -0.5831774122820366),
+                                                          ("x_2", 0.5479474173492189, 1.547947417349219),
+                                                          ("x_3", -0.5746221189112442, 0.42537788108875585)]},
+    ("interrupted-1", "AIF2-table4-eq12"): {
+        "formula": ("x_0*x_1*x_2 - x_2*sqrt(1 - x_0**2)*sqrt(1-x_1**2)- x_1*sqrt(1 - x_0**2)*sqrt(1-x_2**2) "
+                    "- x_0*sqrt(1 - x_1**2)*sqrt(1-x_2**2)"),
+        "replace_variables": [("x_0", 0.9327809291515141, 0.9952809291515141), ("x_1", -0.6901104506009879, -0.6276104506009879),
+                              ("x_2", 0.8038061536253802, 0.8663061536253802)]},
 }
 
 
@@ -193,7 +221,10 @@ def fixed(p: dict[str, Any]) -> dict[str, Any]:
     for fix in (RECORD_FIXES.get((p["set"], p["id"])), RULE_FIXES.get((p["set"], p["id"]))):
         if not fix:
             continue
-        out.update({k: v for k, v in fix.items() if k not in ("why", "variables", "drop_variables")})
+        out.update({k: v for k, v in fix.items() if k not in ("why", "variables", "drop_variables", "replace_variables")})
+        if fix.get("replace_variables"):                   # the compilation's own inputs: (name, low, high), uniform
+            out["variables"] = [{"name": n, "distribution": f"uniform U[{lo!r}, {hi!r}] (the compilation's own box)",
+                                 "low": lo, "high": hi} for n, lo, hi in fix["replace_variables"]]
         if fix.get("drop_variables"):                      # an input the authors' code fixes to a value
             out["variables"] = [v for v in out["variables"] if v["name"] not in fix["drop_variables"]]
         if fix.get("variables"):

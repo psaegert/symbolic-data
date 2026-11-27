@@ -1,7 +1,8 @@
 {
  "rules": {
   "defining publication": "A benchmark srbf runs as its defining publication states it, where later copies changed it, carries no star; the set shows a note.",
-  "paper vs code": "Where a benchmark's paper and its authors' code or data differ, srbf follows what produced the authors' published results (their code or data) and notes the paper's version; no star."
+  "paper vs code": "Where a benchmark's paper and its authors' code or data differ, srbf follows what produced the authors' published results (their code or data) and notes the paper's version; no star.",
+  "compilation code": "A compilation of other authors' benchmarks (HeuristicLab, the DSO registry, ERBench's re-renderings, the GP-benchmarks table, ...) follows its own code or data where it differs from the defining publication; the note names the defining publication's version; no star. Standalone benchmark sets keep their defining publication."
  },
  "instances": [
   {
@@ -55,8 +56,8 @@
   },
   {
    "catalog": "dso-benchmark-registry",
-   "rule": "paper vs code",
-   "text": "Korns-15 uses the registry's own range [0, 50], which the registry's runs used; Korns (2011) uses [-50, 50], as srbf's Korns set does.",
+   "rule": "compilation code",
+   "text": "Korns-15 uses the registry's own range [0, 50] on all inputs (benchmarks.csv); Korns (2011) uses [-50, 50], as srbf's Korns set does.",
    "star": false,
    "changed_2026_11_27": true
   },
@@ -75,9 +76,24 @@
   },
   {
    "catalog": "erbench-public-legacy-formulas",
-   "rule": "defining publication",
-   "text": "Korns-13 to -15 and Nguyen-9 (Uy et al.'s F9 on [-1, 1]^2) follow Korns 2011 and Uy et al. 2011, not ERBench's re-renderings.",
-   "star": false
+   "rule": "compilation code",
+   "text": "Korns-13 to -15 are ERBench's renderings on 4 inputs (Korns' unused fifth input dropped); Korns (2011) fills five inputs on [-50, 50].",
+   "star": false,
+   "changed_2026_11_27": true
+  },
+  {
+   "catalog": "erbench-public-legacy-formulas",
+   "rule": "compilation code",
+   "text": "Korns-15 and AI Feynman 2.0's equation 12 use ERBench's narrowed boxes ('supports altered afterwards to yield valid values'); Korns (2011) uses [-50, 50] and AI Feynman 2.0 states [-1, 1].",
+   "star": false,
+   "changed_2026_11_27": true
+  },
+  {
+   "catalog": "erbench-public-legacy-formulas",
+   "rule": "compilation code",
+   "text": "Nguyen-9 is Uy et al.'s F9 on [-1, 1]^2 in both.",
+   "star": false,
+   "changed_2026_11_27": true
   },
   {
    "catalog": "esr-cosmology",
@@ -109,8 +125,15 @@
   {
    "catalog": "gp-benchmarks-sr-table",
    "rule": "defining publication",
-   "text": "Korns-7, Vladislavleva-7, Keijzer-5 and Nguyen-9 follow their original authors where later copies differ; Korns-5, -6, -8 and -9 use plain log and square root as printed.",
+   "text": "Korns-5 to -9, Korns-13 to -15, Keijzer-5 and Vladislavleva-7 as the table and its ECJ implementation print them, which agree with their original authors (later copies differ: abs() wrappers, swapped ranges, another Vladislavleva-7).",
    "star": false
+  },
+  {
+   "catalog": "gp-benchmarks-sr-table",
+   "rule": "compilation code",
+   "text": "Nguyen-9 draws its training inputs on [0, 1]^2, as the table's ECJ implementation does (Benchmarks.java); the table and Uy et al. (2011) print [-1, 1]^2.",
+   "star": false,
+   "changed_2026_11_27": true
   },
   {
    "catalog": "gp-benchmarks-sr-table-points",
@@ -134,8 +157,29 @@
   {
    "catalog": "heuristiclab-regression-instance-providers",
    "rule": "defining publication",
-   "text": "Formulas and ranges follow the defining authors (Keijzer, Korns, Vladislavleva, Friedman, Chen et al.) rather than HeuristicLab's code where they differ (e.g. Korns-14's sign, Korns-15's range).",
+   "text": "Keijzer-5, Korns-7, Korns-13, Vladislavleva-7, Poly-10 and Friedman-I/II: HeuristicLab's code agrees with the defining authors (later copies differ).",
    "star": false
+  },
+  {
+   "catalog": "heuristiclab-regression-instance-providers",
+   "rule": "compilation code",
+   "text": "Korns-14 uses HeuristicLab's sign, 22 + 4.2((cos x0 - tan x1)(tanh x2 / sin x3)) (KornsFunctionFourteen.cs); Korns (2011) prints 22 - 4.2(...).",
+   "star": false,
+   "changed_2026_11_27": true
+  },
+  {
+   "catalog": "heuristiclab-regression-instance-providers",
+   "rule": "compilation code",
+   "text": "Korns-15 draws X2 on [0, 50], as HeuristicLab's code does to avoid NaN (KornsFunctionFifteen.cs); Korns (2011) uses [-50, 50].",
+   "star": false,
+   "changed_2026_11_27": true
+  },
+  {
+   "catalog": "heuristiclab-regression-instance-providers",
+   "rule": "compilation code",
+   "text": "AircraftLift uses HeuristicLab's corrected sign, C_La (alpha - alpha0) with alpha0 = -2 (commit 50af0024); Chen et al.'s appendix prints alpha - 2.",
+   "star": false,
+   "changed_2026_11_27": true
   },
   {
    "catalog": "heuristiclab-regression-instance-providers-points",
