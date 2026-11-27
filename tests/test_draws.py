@@ -8,8 +8,8 @@ import yaml
 from symbolic_data import ProblemSource, data_problem
 from symbolic_data.__main__ import main
 from symbolic_data.catalog import ProblemCatalog
-from symbolic_data.draws import (FORMAT, MANIFEST, DrawsSettings, read_meta, render, render_catalog, seed_sequence,
-                                 sha256_file, verify)
+from symbolic_data.draws import (ATTEMPTS_FORMAT, FORMAT, MANIFEST, CatalogDraws, DrawsSettings, load_attempts,
+                                 needs_check, read_meta, render, render_catalog, seed_sequence, sha256_file, verify)
 from symbolic_data.source import _inject_noise
 
 UNIT = {"sample_range": [1.0, 2.0], "sample_type": ["uni", "pos"]}
@@ -290,3 +290,89 @@ def test_the_cli_renders_and_verifies(formula_catalog, tmp_path, capsys):
     (root / "toy/repeat-1.npz").unlink()
     with pytest.raises(SystemExit):
         main(["verify-draws", str(root)])
+
+
+# ------------------------------------------------------------------------------------------------ attempts
+def _attempts(catalog_path, choices, *, name="toy", settings=SETTINGS):
+    return {"format": ATTEMPTS_FORMAT, "format_version": 1, "settings": settings.record(), "repeats": list(settings.repeats),
+            "rule": "the test's rule", "catalogs": {name: {"source_sha256": sha256_file(catalog_path), "attempts": {"1": choices}}}}
+
+
+def test_an_attempt_changes_what_is_left_to_chance_and_nothing_else(formula_catalog, engine):
+    draws = CatalogDraws(formula_catalog, SETTINGS, simplipy_engine=engine)
+    assert draws.name == "toy" and draws.ids == ["a", "b", "c"] and draws.kinds == ["formula"] * 3
+    first, second = draws.draw(0, 1, 1), draws.draw(0, 1, 2)
+    assert first.problem.expression == second.problem.expression and first.problem.constants == second.problem.constants
+    assert not np.array_equal(first.problem.x_support, second.problem.x_support)
+    assert not np.array_equal(first.noise_support, second.noise_support)
+    np.testing.assert_array_equal(draws.draw(0, 1, 2).problem.x_support, second.problem.x_support)   # seeded
+    one, two = draws.draw(2, 1, 1).problem, draws.draw(2, 1, 2).problem                           # per-run values
+    assert one.meta["per_run_values"] != two.meta["per_run_values"] and one.skeleton == two.skeleton
+    with pytest.raises(ValueError):
+        seed_sequence("s", "toy", "a", 1, 0)
+
+
+def test_needs_check_skips_constants_by_construction_and_data(formula_catalog, data_catalog, tmp_path, engine):
+    doc = {"metadata": {"name": "k"}, "expressions": {"k": {"prepared": "2.5", "vars": {"v1": dict(UNIT)}}}}
+    path = tmp_path / "k.yaml"
+    path.write_text(yaml.safe_dump(doc), encoding="utf-8")
+    constant = CatalogDraws(str(path), SETTINGS, simplipy_engine=engine).draw(0)
+    assert tuple(constant.problem.skeleton) == ("<constant>",) and not needs_check(constant.kind, constant.problem)
+    formula = CatalogDraws(formula_catalog, SETTINGS, simplipy_engine=engine).draw(1)
+    assert needs_check(formula.kind, formula.problem)
+    data = CatalogDraws(data_catalog, SETTINGS, simplipy_engine=engine).draw(0)
+    assert data.kind == "data" and not needs_check(data.kind, data.problem)
+
+
+def test_each_problem_keeps_the_attempt_the_document_names(formula_catalog, tmp_path, engine):
+    doc = _attempts(formula_catalog, {"a": {"attempt": 3, "formula_inherent": False, "failures": ["numeric", "symbolic"]},
+                                      "b": {"attempt": 1, "formula_inherent": True, "failures": ["symbolic"] * 4}})
+    path = tmp_path / "attempts.json"
+    path.write_text(json.dumps(doc), encoding="utf-8")
+    manifest = render([formula_catalog], tmp_path / "draws", SETTINGS, attempts=str(path), log=lambda _: None)
+    records = read_meta(tmp_path / "draws/toy/repeat-1.npz")["problems"]
+    assert [(r["attempt"], r["checked"], r["formula_inherent"]) for r in records] == [(3, True, False), (1, True, True), (1, False, False)]
+    assert [r["failures"] for r in records] == [["numeric", "symbolic"], ["symbolic"] * 4, []]
+    third = CatalogDraws(formula_catalog, SETTINGS, simplipy_engine=engine).draw(0, 1, 3)
+    arrays = _arrays(tmp_path / "draws/toy/repeat-1.npz", 0)
+    np.testing.assert_array_equal(arrays["x_support"], third.problem.x_support)
+    np.testing.assert_array_equal(arrays["noise_validation"], third.noise_validation)
+    assert manifest["acceptance"] == {"attempts_sha256": sha256_file(path), "rule": "the test's rule"}
+    assert manifest["catalogs"]["toy"]["acceptance"] == {"1": {"checked": 2, "later_attempt": 1, "formula_inherent": ["b"],
+                                                               "failures": {"numeric": 1, "symbolic": 5}}}
+    plain = render([formula_catalog], tmp_path / "plain", SETTINGS, log=lambda _: None)
+    assert plain["acceptance"] is None and plain["catalogs"]["toy"]["acceptance"] is None
+    assert [r["attempt"] for r in read_meta(tmp_path / "plain/toy/repeat-1.npz")["problems"]] == [1, 1, 1]
+
+
+def test_a_render_with_attempts_reproduces(formula_catalog, data_catalog, tmp_path):
+    doc = _attempts(formula_catalog, {"c": {"attempt": 2, "formula_inherent": False, "failures": ["numeric"]}})
+    doc["catalogs"]["toy-data"] = {"source_sha256": sha256_file(data_catalog), "attempts": {"1": {}}}
+    render([formula_catalog, data_catalog], tmp_path, SETTINGS, attempts=doc, log=lambda _: None)
+    assert verify(tmp_path, [formula_catalog, data_catalog]) == []
+
+
+def test_an_attempts_document_that_does_not_fit_is_refused(formula_catalog, data_catalog, tmp_path):
+    good = _attempts(formula_catalog, {})
+    with pytest.raises(ValueError, match="not in the attempts document"):
+        render([data_catalog], tmp_path / "a", SETTINGS, attempts=good, log=lambda _: None)
+    with pytest.raises(ValueError, match="other settings"):
+        load_attempts(good, DrawsSettings(n_support=32, n_validation=8, simplipy_engine="acj-4"))
+    with pytest.raises(ValueError, match="no repeat"):
+        load_attempts(good, DrawsSettings(n_support=16, n_validation=8, repeats=(1, 2), simplipy_engine="acj-4"))
+    with pytest.raises(ValueError, match="draw-attempts"):
+        load_attempts({**good, "format": "other"}, SETTINGS)
+    stale = {**good, "catalogs": {"toy": {"source_sha256": "0" * 64, "attempts": {"1": {}}}}}
+    with pytest.raises(ValueError, match="another version of the catalog"):
+        render([formula_catalog], tmp_path / "b", SETTINGS, attempts=stale, log=lambda _: None)
+    render([formula_catalog], tmp_path / "c", SETTINGS, attempts=good, log=lambda _: None)
+    with pytest.raises(ValueError, match="attempts it was rendered with"):
+        render([formula_catalog], tmp_path / "c", SETTINGS, update=True, log=lambda _: None)
+
+
+def test_the_cli_renders_with_an_attempts_document(formula_catalog, tmp_path):
+    path = tmp_path / "attempts.json"
+    path.write_text(json.dumps(_attempts(formula_catalog, {"b": {"attempt": 2, "formula_inherent": False}})), encoding="utf-8")
+    main(["render-draws", formula_catalog, "-o", str(tmp_path / "draws"), "--n-support", "16", "--n-validation", "8",
+          "--simplipy-engine", "acj-4", "--attempts", str(path)])
+    assert [r["attempt"] for r in read_meta(tmp_path / "draws/toy/repeat-1.npz")["problems"]] == [1, 2, 1]

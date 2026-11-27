@@ -15,6 +15,15 @@ All notable changes to `symbolic-data` are documented here. The format follows
   problem's rows of one draw from its pools. Seeds derive from (seed root, catalog, problem id, repeat); one draw per
   problem (repeat 1) by default, with the repeat index kept in the format. A second render writes the same bytes.
   `tools/catalog_build/render_draws.py` renders the release's catalogs.
+- **Frozen draws: attempts, so that every draw lets its formula be recognized.** A problem's draw is chosen among
+  seeded attempts `k = 1, 2, ...` (attempt `k` from `sha256(seed root, catalog, id, repeat, k)`), which differ only in
+  what the benchmark leaves to chance. `CatalogDraws.draw(row, repeat, attempt)` is the interface an acceptance check
+  draws through, and `render(..., attempts=...)` / `render-draws --attempts` take an attempts document
+  (`symbolic-data/draw-attempts`) naming each checked problem's attempt and its `formula_inherent` flag; records carry
+  `attempt`, `checked` and `formula_inherent`, the manifest the per-catalog counts and the document's sha256 and rule.
+  symbolic-data does not judge (srbf does, `srbf.draw_acceptance`); docs/draws.md states the rule as a deviation from
+  every benchmark with random values. `render_draws.py --plan` writes the release's catalogs and frozen ids for the
+  check.
 - **`ProblemSource.draw(index, rng)`**: problem `index` of a finite catalog drawn from `rng` alone (an entry
   realized, a data problem's pools drawn, a realized problem as stored), the unit the renderer seeds.
 

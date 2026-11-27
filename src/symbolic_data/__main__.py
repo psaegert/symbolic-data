@@ -53,8 +53,10 @@ def build_parser() -> argparse.ArgumentParser:
                         help="Render only these problems of CATALOG: FILE is a JSON list of ids or a mapping with an `ids` list. Repeatable.")
     render.add_argument("--seed-root", type=str, default=DEFAULT_SEED_ROOT, help="The string every problem's seed is derived from.")
     render.add_argument("--simplipy-engine", type=str, default=DEFAULT_ENGINE, help="The engine the ground truth is compiled with.")
+    render.add_argument("--attempts", type=str, default=None,
+                        help="An attempts document (symbolic-data/draw-attempts): the attempt each listed problem keeps.")
     render.add_argument("--jobs", type=int, default=1, help="Catalogs rendered at once.")
-    render.add_argument("--update", action="store_true", help="Add the catalogs to a root that holds draws (same settings).")
+    render.add_argument("--update", action="store_true", help="Add the catalogs to a root that holds draws (same settings and attempts).")
 
     verify = subparsers.add_parser("verify-draws", help="Check a rendered root; with catalogs, render them again and compare.")
     verify.add_argument("root", help="The rendered root (holding manifest.json).")
@@ -93,7 +95,8 @@ def _render_draws(args: argparse.Namespace) -> None:
 
     settings = DrawsSettings(n_support=args.n_support, n_validation=args.n_validation, repeats=tuple(args.repeats),
                              seed_root=args.seed_root, simplipy_engine=args.simplipy_engine)
-    manifest = render(args.catalogs, args.output, settings, ids=_ids(args.ids), jobs=args.jobs, update=args.update)
+    manifest = render(args.catalogs, args.output, settings, ids=_ids(args.ids), attempts=args.attempts, jobs=args.jobs,
+                      update=args.update)
     print(f"Rendered {len(manifest['catalogs'])} catalog(s) -> {args.output}/manifest.json")
 
 
