@@ -234,30 +234,6 @@
   "notes": null
  },
  {
-  "catalog": "mvsr-2024",
-  "display_name": "Multi-view SR (2024) real data",
-  "kind": "data",
-  "problems": 501,
-  "file": "build/data-catalogs/mvsr-2024.npz",
-  "origin": "measured data",
-  "origin_source": "sets/fresh-60.json notes: 'Three real-data multi-view SR tasks ... no ground truth': UV-visible absorption, SN Ia light curves (ZTF), stock prices (Kaggle)",
-  "origin_proposal": null,
-  "tags": [
-   "no test split"
-  ],
-  "detail": {
-   "no test split": {
-    "share": [
-     501,
-     501
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "below_half": {},
-  "notes": "No 'several tests': the 480 finance test assets are separate no-split problems in their own subsets, not second tests of one fit."
- },
- {
   "catalog": "soose-fc",
   "display_name": "soose-fc",
   "kind": "formula",
@@ -518,53 +494,6 @@
   "notes": null
  },
  {
-  "catalog": "surfacebench-explicit-surfaces",
-  "display_name": "surfacebench-explicit-surfaces",
-  "kind": "formula",
-  "problems": 256,
-  "file": "assets/catalogs/surfacebench-explicit-surfaces.yaml",
-  "origin": "classic benchmark",
-  "origin_source": "sets/fresh-99.json notes: 'the 129 explicit surfaces z = f(x, y) of SurfaceBench' in 13 author categories (Kabra et al., TMLR 2026, Table 6/7)",
-  "origin_proposal": null,
-  "tags": [
-   "extrapolation",
-   "several tests"
-  ],
-  "detail": {
-   "several tests": {
-    "share": [
-     256,
-     256
-    ],
-    "source": "the catalog files"
-   },
-   "extrapolation": {
-    "share": [
-     256,
-     256
-    ],
-    "source": "formula YAML test_source (SurfaceBench Sec. 5.2): 'If a model is fitted on inputs sampled from [-5,5] along each axis, OOD tests use the non-overlapping exterior bands [-10, -5] U [5, 10]'"
-   }
-  },
-  "below_half": {
-   "dummy inputs": {
-    "share": [
-     2,
-     256
-    ],
-    "source": "the catalog files"
-   },
-   "integer inputs": {
-    "share": [
-     20,
-     256
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "notes": "Hand-designed surfaces (2025-26), 'classic' only in kind. Settled 'dummy inputs' questionable: only OCS9 (both subsets), whose printed formula ignores y; not a design."
- },
- {
   "catalog": "rils-rols-random-instances",
   "display_name": "rils-rols-random-instances",
   "kind": "formula",
@@ -653,28 +582,6 @@
    }
   },
   "notes": "Settled 'dummy inputs' is right (SRSD's dummy-variable tiers), but srbf re-rolled the dummy columns: only 9/120 match SRSD's published positions (CONSOLIDATED.md)."
- },
- {
-  "catalog": "newtonbench",
-  "display_name": "newtonbench",
-  "kind": "formula",
-  "problems": 108,
-  "file": "assets/catalogs/newtonbench.yaml",
-  "origin": "science formula",
-  "origin_source": "sets/fresh-97.json notes: 'NewtonBench has 324 tasks: 108 shifted laws x 3 systems'; physics domains gravity, Coulomb force, Fourier law, Snell law, ... (Table 5)",
-  "origin_proposal": "shifted physics laws: deliberately altered ('metaphysically shifted') versions of physics laws, not the real laws",
-  "tags": [],
-  "detail": {},
-  "below_half": {
-   "dummy inputs": {
-    "share": [
-     9,
-     108
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "notes": "Settled 'dummy inputs' questionable: 'The authors define no dummy variables, but 9 laws ignore one input that the signature ... still carry'."
  },
  {
   "catalog": "feynman",
@@ -783,30 +690,6 @@
   "notes": "Not tagged: fri_* members likely carry generator noise and irrelevant features, but the record states it only for 564_fried (OpenML description)."
  },
  {
-  "catalog": "sldbench",
-  "display_name": "SLDBench (scaling-law discovery)",
-  "kind": "data",
-  "problems": 77,
-  "file": "build/data-catalogs/sldbench.npz",
-  "origin": "measured data",
-  "origin_source": "sets/fresh-94.json notes: 'fixed real measurements (5145 train + 491 test = 5636 rows from >5000 LLM training runs)'",
-  "origin_proposal": null,
-  "tags": [
-   "extrapolation"
-  ],
-  "detail": {
-   "extrapolation": {
-    "share": [
-     77,
-     77
-    ],
-    "source": "sets/fresh-94.json datasets[].split, App. A.2.5: 'unseen uses a fixed larger size of 8.19 x 10^5 tokens; seen covers up to 4.10 x 10^5 tokens'; parallel: test 8-way vs seen 1-4 way"
-   }
-  },
-  "below_half": {},
-  "notes": null
- },
- {
   "catalog": "ai-feynman-database-100-main-equations",
   "display_name": "ai-feynman-database-100-main-equations",
   "kind": "formula",
@@ -860,44 +743,6 @@
    }
   },
   "notes": "Extrapolation applies to an unknown share of the 66 tasks: the release does not label each task's split kind."
- },
- {
-  "catalog": "gp-challenge-protein",
-  "display_name": "GP Challenge (protein energy function)",
-  "kind": "data",
-  "problems": 54,
-  "file": "build/data-catalogs/gp-challenge-protein.npz",
-  "origin": "synthetic data",
-  "origin_source": "sets/fresh-40.json notes: 'each row is one I-TASSER decoy (candidate structure) of one protein, the 8 inputs are the authors' re-implementations of I-TASSER energy terms', target RMSD rank",
-  "origin_proposal": "simulator output: energy terms computed on computer-generated decoy structures, not measurements",
-  "tags": [
-   "no test split"
-  ],
-  "detail": {
-   "no test split": {
-    "share": [
-     54,
-     54
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "below_half": {},
-  "notes": null
- },
- {
-  "catalog": "mvsr-2025",
-  "display_name": "Multi-view SR (2025) real-world data",
-  "kind": "data",
-  "problems": 51,
-  "file": "build/data-catalogs/mvsr-2025.npz",
-  "origin": "measured data",
-  "origin_source": "sets/fresh-61.json notes: '51 views in 5 author-defined groups ... all 1-D, real measured or derived data' (supernovae, galaxies, Michaelis-Menten, Nikuradse, network degrees)",
-  "origin_proposal": null,
-  "tags": [],
-  "detail": {},
-  "below_half": {},
-  "notes": null
  },
  {
   "catalog": "lasr-synthetic-equations",
@@ -986,30 +831,6 @@
   "notes": "Not tagged: fri_* members likely carry generator noise and irrelevant features, but the record states it only for 564_fried (OpenML description)."
  },
  {
-  "catalog": "implied-volatility-slices",
-  "display_name": "Implied-volatility slices",
-  "kind": "data",
-  "problems": 34,
-  "file": "build/data-catalogs/implied-volatility-slices.npz",
-  "origin": "synthetic data",
-  "origin_source": "sets/fresh-170.json notes: 34 one-input implied-volatility slices (SVI5, C6, C8 types) digitized from VolaDynamics plots; 'the C6/C8 parametrizations are VolaDynamics' proprietary forms'",
-  "origin_proposal": "fitted model output: points digitized from plotted parametric fits to option quotes, not raw quotes",
-  "tags": [
-   "no test split"
-  ],
-  "detail": {
-   "no test split": {
-    "share": [
-     34,
-     34
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "below_half": {},
-  "notes": null
- },
- {
   "catalog": "gecco-2022-extrapolation",
   "display_name": "GECCO 2022 synthetic: extrapolation",
   "kind": "data",
@@ -1096,30 +917,6 @@
   },
   "below_half": {},
   "notes": "Not tagged 'noisy data': the noise sits in the decoy columns; the target is noise-free."
- },
- {
-  "catalog": "physo-milky-way-streams",
-  "display_name": "PhySO Milky Way stellar streams",
-  "kind": "data",
-  "problems": 29,
-  "file": "build/data-catalogs/physo-milky-way-streams.npz",
-  "origin": "synthetic data",
-  "origin_source": "sets/fresh-58.json notes: 'The law is exact and closed form ... the authors define the inputs only through the shipped orbit samples'; target v^2/2 = E_t + A*log(B*r+1)/r",
-  "origin_proposal": "simulator output: stellar-stream orbit samples in a known potential, not observations",
-  "tags": [
-   "no test split"
-  ],
-  "detail": {
-   "no test split": {
-    "share": [
-     29,
-     29
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "below_half": {},
-  "notes": "Rows are noise-free orbit samples (simulated streams)."
  },
  {
   "catalog": "eql-robotic-arm-forward-kinematics",
@@ -1243,35 +1040,6 @@
   },
   "below_half": {},
   "notes": null
- },
- {
-  "catalog": "occamnet-analytic-and-non-analytic-suites",
-  "display_name": "occamnet-analytic-and-non-analytic-suites",
-  "kind": "formula",
-  "problems": 22,
-  "file": "assets/catalogs/occamnet-analytic-and-non-analytic-suites.yaml",
-  "origin": "classic benchmark",
-  "origin_source": "sets/fresh-68.json notes: OccamNet's own 6 analytic targets + 8 programs (Dugan et al., arXiv:2007.10784 v3 Tables 1, 2, 5) + 3 App. F small experiments",
-  "origin_proposal": null,
-  "tags": [],
-  "detail": {},
-  "below_half": {
-   "dummy inputs": {
-    "share": [
-     4,
-     22
-    ],
-    "source": "the catalog files"
-   },
-   "integer inputs": {
-    "share": [
-     4,
-     22
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "notes": "14 of 23 are non-analytic program targets (piecewise, sort, LFSR). Settled 'dummy inputs' questionable: dummies are 4LFSR inputs a split-off scalar output does not use; artefact of the per-output split."
  },
  {
   "catalog": "ddrsr-simple-test-and-complex-test",
@@ -1956,30 +1724,6 @@
   "notes": null
  },
  {
-  "catalog": "multi-view-sr-synthetic-benchmarks",
-  "display_name": "multi-view-sr-synthetic-benchmarks",
-  "kind": "formula",
-  "problems": 8,
-  "file": "assets/catalogs/multi-view-sr-synthetic-benchmarks.yaml",
-  "origin": "classic benchmark",
-  "origin_source": "sets/fresh-59.json notes: '3 generating functions in 4 author-defined families x 4 views' (MvSR, Russeil et al. 2024, Table 1); this catalog holds the f2 and f3 views",
-  "origin_proposal": null,
-  "tags": [
-   "dummy inputs"
-  ],
-  "detail": {
-   "dummy inputs": {
-    "share": [
-     8,
-     8
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "below_half": {},
-  "notes": "Settled 'dummy inputs' acceptable: Table 1 caption 'some parameters have no effect into the data' (views switch inputs off)."
- },
- {
   "catalog": "neat",
   "display_name": "neat",
   "kind": "formula",
@@ -2000,20 +1744,6 @@
    }
   },
   "notes": "Extrapolation rests on 1 of 8 problems (inherited from Vladislavleva-1)."
- },
- {
-  "catalog": "physo-class",
-  "display_name": "physo-class",
-  "kind": "formula",
-  "problems": 8,
-  "file": "assets/catalogs/physo-class.yaml",
-  "origin": "science formula",
-  "origin_source": "release_subsets.json physo-class notes: 'Tenachi et al. 2024, Class Symbolic Regression: Gotta Fit 'Em All, Table 1: the 8 Class SR challenges' (physical laws)",
-  "origin_proposal": null,
-  "tags": [],
-  "detail": {},
-  "below_half": {},
-  "notes": null
  },
  {
   "catalog": "coevolved-fitness-predictors-test-problems-points",
@@ -2078,38 +1808,6 @@
    }
   },
   "notes": "Extrapolation rests on 1 of 8 problems."
- },
- {
-  "catalog": "multi-view-sr-synthetic-benchmarks-points",
-  "display_name": "Multi-view SR synthetic benchmarks (pinned points)",
-  "kind": "data",
-  "problems": 8,
-  "file": "assets/catalogs/multi-view-sr-synthetic-benchmarks-points.npz",
-  "origin": "classic benchmark",
-  "origin_source": "sets/fresh-59.json notes: f1 views and f1 partial domains on the authors' grids (np.arange(-2, 2, 0.2); partial views np.arange(lo, hi, 0.05))",
-  "origin_proposal": null,
-  "tags": [
-   "no test split",
-   "fixed points"
-  ],
-  "detail": {
-   "fixed points": {
-    "share": [
-     8,
-     8
-    ],
-    "source": "the catalog files"
-   },
-   "no test split": {
-    "share": [
-     8,
-     8
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "below_half": {},
-  "notes": null
  },
  {
   "catalog": "dgsr-synthetic-d-12",
@@ -2460,30 +2158,6 @@
   },
   "below_half": {},
   "notes": "Extrapolation applies to an unknown share of the 66 tasks: the release does not label each task's split kind."
- },
- {
-  "catalog": "treloar-rubber",
-  "display_name": "Treloar rubber hyperelasticity",
-  "kind": "data",
-  "problems": 6,
-  "file": "build/data-catalogs/treloar-rubber.npz",
-  "origin": "measured data",
-  "origin_source": "sets/fresh-125.json notes: 'real experimental stress-stretch curves, no ground-truth formula' (Treloar 1944, as tabulated by Linka & Kuhl 2023)",
-  "origin_proposal": null,
-  "tags": [
-   "no test split"
-  ],
-  "detail": {
-   "no test split": {
-    "share": [
-     6,
-     6
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "below_half": {},
-  "notes": null
  },
  {
   "catalog": "erbench-public-legacy-formulas",
@@ -3539,38 +3213,6 @@
   "detail": {},
   "below_half": {},
   "notes": "Only eq 12 (a trigonometric identity) is built; the other 11 modular equations (mostly physics) lack ranges."
- },
- {
-  "catalog": "breiman-i",
-  "display_name": "breiman-i",
-  "kind": "formula",
-  "problems": 1,
-  "file": "assets/catalogs/breiman-i.yaml",
-  "origin": "classic benchmark",
-  "origin_source": "sets/fresh-41.json notes: 'Breiman-I = the simulated regression example of the CART book (Breiman, Friedman, Olshen & Stone 1984, Ch. 8, pp. 237-238)'",
-  "origin_proposal": null,
-  "tags": [
-   "dummy inputs",
-   "integer inputs"
-  ],
-  "detail": {
-   "dummy inputs": {
-    "share": [
-     1,
-     1
-    ],
-    "source": "the catalog files"
-   },
-   "integer inputs": {
-    "share": [
-     1,
-     1
-    ],
-    "source": "the catalog files"
-   }
-  },
-  "below_half": {},
-  "notes": "Settled 'dummy inputs' is right: the three transcriptions 'agree on the formula, the input distributions, the dummies and the noise'."
  },
  {
   "catalog": "esr-cosmology-datasets",

@@ -200,6 +200,12 @@ def split_members(problems: list, lic: dict) -> tuple[dict[str, list], list[str]
 
 def build(tag: str, probs: list[dict], out: Path, formulas: Formulas) -> dict:
     spec = R.SETS[tag]
+    if paths.dropped_whole(spec.slug):          # left out by rule (tags/dropped.json): no catalog, no stale part
+        for name in (spec.slug, f"{spec.slug}-share-alike", f"{spec.slug}-restricted"):
+            (out / f"{name}.npz").unlink(missing_ok=True)
+        return {"tag": tag, "catalog": spec.slug, "problems": 0, "dropped": paths.dropped()[spec.slug]["reason"]}
+    gone = paths.dropped_members(spec.slug)
+    probs = [p for p in probs if p["id"] not in gone]
     lic = paths.licenses().get(spec.slug) or {}
     if lic and not lic["redistribute"].startswith("yes"):
         stale = out / f"{spec.slug}.npz"

@@ -6,7 +6,8 @@ The totals come from the built catalogs and their frozen subsamples (srbf ruling
   generative ones, FastSRB at its default version, and ERBench SynEq and OEIS at their frozen 1,024;
 - the older data catalogs (.npz) in assets/catalogs only where a newer build replaces none (SUPERSEDED);
 - the data catalogs, built outside git (--catalogs, default build/data-catalogs: its *.npz, or data/*.npz and
-  srbench-*.npz) and published to Hugging Face only.
+  srbench-*.npz) and published to Hugging Face only;
+- less what the rules leave out (tags/dropped.json; a file of a dropped catalog left in a build is ignored).
 
 A problem's subset is its entry's ``subset``, else release_subsets.json's tiers (FastSRB, SRSD), else ``all``. Subsets
 with fewer than 20 problems in a catalog with several subsets are listed (the floor was lifted 2026-11-04: a benchmark
@@ -70,6 +71,11 @@ def license_left_out() -> list[dict[str, Any]]:
     return out
 
 
+def left_out_by_rule() -> list[dict[str, Any]]:
+    """What the rules leave out (tags/dropped.json: scope, formulas as written), each with its reason and citation."""
+    return [{**r, "citation": _citation(name)} for name, r in sorted(paths.dropped().items())]
+
+
 def _citation(name: str) -> dict[str, Any] | None:
     c = paths.citations().get(name) or {}
     return {k: c[k] for k in ("paper", "data") if c.get(k)} or None
@@ -127,6 +133,8 @@ def main() -> None:
     local = Path(a.catalogs)
     for path in sorted([*local.glob("*.npz"), *(local / "data").glob("*.npz")]):
         rows.append({**from_npz(path), "source": "data build"})
+    stale = sorted(r["file"] for r in rows if paths.dropped_whole(r["name"]))   # a file of a dropped set left behind
+    rows = [r for r in rows if not paths.dropped_whole(r["name"])]
     left_out = license_left_out()
     names = Counter(r["name"] for r in rows)
     clash = sorted(n for n, c in names.items() if c > 1)   # srbf needs unique names: reported, both counted
@@ -150,6 +158,7 @@ def main() -> None:
               "subsets_below_floor": [{"catalog": c, "subset": s, "problems": n} for c, s, n in small],
               "name_clashes": {n: [r["file"] for r in rows if r["name"] == n] for n in clash}, "empty_catalogs": empty,
               "superseded_in_symbolic_data": SUPERSEDED, "left_out_for_license": left_out,
+              "left_out_by_rule": left_out_by_rule(), "dropped_files_ignored": stale,
               "rows": sorted(rows, key=lambda r: -r["problems"])}
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     Path(a.out).write_text(json.dumps(report, indent=1))

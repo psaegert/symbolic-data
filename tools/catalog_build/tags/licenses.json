@@ -130,14 +130,6 @@
   ]
  },
  {
-  "catalog": "breiman-i",
-  "license": "facts only: formula and input distribution cited from Breiman et al. 1984 (CART, Ch. 8); no upstream license",
-  "verdict": "facts only (no upstream license)",
-  "redistribute": "yes",
-  "upstream": "Breiman, Friedman, Olshen & Stone 1984, CART, Ch. 8 (definition via Sauve & Tuleau-Malot 2011, Torgo's 2dplanes page, HeuristicLab BreimanOne.cs)",
-  "evidence": "gh api repos/heal-research/operon/license -> MIT; gh api repos/heal-research/HeuristicLab/license -> GPL-3.0; gh api repos/EpistasisLab/pmlb/license -> MIT; arXiv OAI 1101.0689 <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>; OpenML 215 (2dplanes) / Torgo page: no licence on the definition"
- },
- {
   "catalog": "chen-luo-jiang-block-building-test-cases",
   "license": "facts only: formulas and ranges cited from Chen, Luo & Jiang 2018 (Expert Syst. Appl., arXiv:1706.02281); no upstream license",
   "verdict": "facts only (no upstream license)",
@@ -835,24 +827,6 @@
   ]
  },
  {
-  "catalog": "gp-challenge-protein",
-  "license": "no licence: GP challenge protein-decoy energy terms (Widera, Garibaldi & Krasnogor 2010, ICOS, ico2s.org); use encouraged, redistribution not granted",
-  "verdict": "no license found",
-  "redistribute": "yes, restricted repo",
-  "upstream": "ICOS GP challenge dataset (Widera, Garibaldi & Krasnogor 2010, GPEM 11:61-88), energy_terms.tar.gz + distances.tar.gz (http://ico2s.org/datasets/gp_challenge.html)",
-  "evidence": "http://ico2s.org/datasets/gp_challenge.html: 'We encourage everyone to test their algorithms on this dataset.' (no licence or redistribution statement); Crossref 10.1007/s10710-009-9087-0: Springer TDM licence only; Operon's copy sits in an MIT code repo",
-  "name": "GP Challenge (protein energy function)",
-  "set": "fresh-40",
-  "problems": 54,
-  "sources": [
-   "https://doi.org/10.1007/s10710-009-9087-0",
-   "https://web.archive.org/web/20170403201603/http://human-competitive.org/sites/default/files/widera-genp-paper_1.pdf",
-   "http://ico2s.org/datasets/gp_challenge.html"
-  ],
-  "terms": "none stated",
-  "routing": "owner 2026-11-09: republished with a statement in the restricted repo"
- },
- {
   "catalog": "gp-gomea-real-world",
   "license": "CC BY 4.0 (UCI Machine Learning Repository)",
   "verdict": "unclear",
@@ -1086,24 +1060,6 @@
    "https://arxiv.org/abs/2510.08317v1",
    "https://arxiv.org/pdf/2510.08317v1",
    "https://arxiv.org/e-print/2510.08317v1"
-  ],
-  "terms": "none stated",
-  "routing": "owner 2026-11-09: republished with a statement in the restricted repo"
- },
- {
-  "catalog": "implied-volatility-slices",
-  "license": "no licence: implied-volatility curves digitized from VolaDynamics plots (all rights reserved) in hannesnikulski/master-thesis (Keller-Ressel & Nikulski 2026, arXiv:2603.21892)",
-  "verdict": "no license found",
-  "redistribute": "yes, restricted repo",
-  "upstream": "hannesnikulski/master-thesis data/vola-dynamics (@1da1742): curves digitized with WebPlotDigitizer from VolaDynamics example plots (voladynamics.com)",
-  "evidence": "gh api repos/hannesnikulski/master-thesis/license -> null; survey fresh-170: 'Curves digitized with WebPlotDigitizer from VolaDynamics example plots (voladynamics.com, accessed 2025-05-26, \"All rights reserved\")'",
-  "name": "Implied-volatility slices",
-  "set": "fresh-170",
-  "problems": 34,
-  "sources": [
-   "https://arxiv.org/abs/2603.21892",
-   "https://arxiv.org/pdf/2603.21892v1",
-   "https://arxiv.org/html/2603.21892v1"
   ],
   "terms": "none stated",
   "routing": "owner 2026-11-09: republished with a statement in the restricted repo"
@@ -1435,66 +1391,6 @@
   "evidence": "assets/hf_card/THIRD_PARTY_NOTICES.md (program audit 2026-07-10): license keys deferred to each catalog's next version"
  },
  {
-  "catalog": "multi-view-sr-synthetic-benchmarks",
-  "license": "CC BY 4.0 (Russeil et al. 2024, arXiv:2402.04298)",
-  "verdict": "attribution (CC BY)",
-  "redistribute": "yes",
-  "upstream": "Russeil et al., 'Multi-View Symbolic Regression', GECCO 2024 (arXiv:2402.04298v4) Sec. 3.2 + erusseil/MvSR-analysis generate_toy.py (@ec5abd6)",
-  "evidence": "gh api repos/erusseil/MvSR-analysis/license -> null (no licence file); arXiv OAI 2402.04298 <license>http://creativecommons.org/licenses/by/4.0/</license>; Crossref 10.1145/3638529.3654087: ACM copyright"
- },
- {
-  "catalog": "multi-view-sr-synthetic-benchmarks-points",
-  "license": "CC BY 4.0 (Russeil et al. 2024, arXiv:2402.04298)",
-  "verdict": "attribution (CC BY)",
-  "redistribute": "yes",
-  "upstream": "Russeil et al. 2024 (arXiv:2402.04298) 20-point grids (np.arange in generate_toy.py)",
-  "evidence": "gh api repos/erusseil/MvSR-analysis/license -> null (no licence file); arXiv OAI 2402.04298 <license>http://creativecommons.org/licenses/by/4.0/</license>; catalog _meta (checked 2026-11-04): every problem's points are srbf-generated from the formula on the authors' stated grid / range (input_distributions are grids or seeded draws); no upstream data file was copied",
-  "name": "Multi-view SR synthetic benchmarks (pinned points)",
-  "set": "fresh-59",
-  "problems": 8,
-  "sources": [
-   "https://arxiv.org/abs/2402.04298",
-   "https://arxiv.org/pdf/2402.04298v4",
-   "https://arxiv.org/pdf/2402.04298v1"
-  ]
- },
- {
-  "catalog": "mvsr-2024",
-  "license": "no licence: erusseil/MvSR-analysis real_data (Russeil et al. 2024, GECCO); finance views from the Kaggle Yahoo-finance dump (Apache-2.0 label, Yahoo Finance terms)",
-  "verdict": "unclear",
-  "redistribute": "yes, restricted repo",
-  "upstream": "erusseil/MvSR-analysis real_data/ (@ec5abd6): absorption spectra, ZTF supernova light curves, data_market (S&P500 + 10 companies); 480 finance views from Kaggle 'massive-yahoo-finance-dataset' (iveeaten3223times, v2 2023-11-29)",
-  "evidence": "gh api repos/erusseil/MvSR-analysis/license -> null (README has no licence statement); survey fresh-60: 'Kaggle API: v2 2023-11-29, licence field Apache 2.0, description defers to Yahoo Finance terms'; PMLB first_principles_absorption / _supernovae_zg / _supernovae_zr (MIT)",
-  "name": "Multi-view SR (2024) real data",
-  "set": "fresh-60",
-  "problems": 501,
-  "sources": [
-   "https://arxiv.org/abs/2402.04298",
-   "https://arxiv.org/pdf/2402.04298v4",
-   "https://doi.org/10.1145/3638529.3654087"
-  ],
-  "terms": "none stated",
-  "routing": "owner 2026-11-09: republished with a statement in the restricted repo"
- },
- {
-  "catalog": "mvsr-2025",
-  "license": "no licence: erusseil/mvsr datasets (Russeil et al. 2025, Phil. Trans. R. Soc. A); upstream galaxy, supernova, enzyme-kinetics and KONECT network data",
-  "verdict": "no license found",
-  "redistribute": "yes, restricted repo",
-  "upstream": "erusseil/mvsr datasets/ (@b39ba79): galaxies (26 rotation curves from A&A 643 A161), supernovae (6), fluid_mechanics (6, Nikuradse), biology (5, Michaelis-Menten 1913 via Golicnik 2012), log_graphs (8 KONECT degree distributions)",
-  "evidence": "gh api repos/erusseil/mvsr/license -> null (README has no licence statement); arXiv OAI 1402.5500 (KONECT handbook) license CC BY-SA 4.0; Crossref 10.1051/0004-6361/201937079 licence: EDP Sciences copyright; Crossref 10.1098/rsta.2024.0592 (paper) CC BY 4.0",
-  "name": "Multi-view SR (2025) real-world data",
-  "set": "fresh-61",
-  "problems": 51,
-  "sources": [
-   "https://arxiv.org/abs/2509.10500",
-   "https://arxiv.org/html/2509.10500v1",
-   "https://doi.org/10.1098/rsta.2024.0592"
-  ],
-  "terms": "none stated",
-  "routing": "owner 2026-11-09: republished with a statement in the restricted repo"
- },
- {
   "catalog": "neat",
   "license": "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)",
   "verdict": "permissive",
@@ -1517,14 +1413,6 @@
    "https://www.cs.nuim.ie/~egalvan/papers/neat_Galvan_2016.pdf",
    "https://mural.maynoothuniversity.ie/id/eprint/12330/"
   ]
- },
- {
-  "catalog": "newtonbench",
-  "license": "MIT (HKUST-KnowComp/NewtonBench)",
-  "verdict": "permissive",
-  "redistribute": "yes",
-  "upstream": "HKUST-KnowComp/NewtonBench modules/*/LAW_REGISTRY (@912a4ba); identical to arXiv:2510.07172 Table 5",
-  "evidence": "gh api repos/HKUST-KnowComp/NewtonBench/license -> MIT; arXiv OAI 2510.07172 <license>http://creativecommons.org/licenses/by-nc-sa/4.0/</license>"
  },
  {
   "catalog": "nguyen",
@@ -1637,14 +1525,6 @@
    "https://arxiv.org/pdf/2404.11477v3",
    "https://doi.org/10.1038/s42005-025-02023-2"
   ]
- },
- {
-  "catalog": "occamnet-analytic-and-non-analytic-suites",
-  "license": "facts only: target functions and ranges cited from Dugan et al. 2023 (OccamNet, arXiv:2007.10784); no upstream license",
-  "verdict": "facts only (no upstream license)",
-  "redistribute": "yes",
-  "upstream": "Dugan et al., 'OccamNet', arXiv:2007.10784v3 Tables 1, 2, 5 (cross-checked with OccamNet_Public analytic-benchmarks/Benchmarks.py)",
-  "evidence": "gh api repos/druidowm/OccamNet_Public/license -> null (no licence file); gh api repos/druidowm/OccamNet_Versions/license -> null (no licence file); arXiv OAI 2007.10784 <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>"
  },
  {
   "catalog": "oxygen-ion-conductors",
@@ -1779,30 +1659,6 @@
   "redistribute": "yes",
   "upstream": "Tenachi, Ibata & Diakogiannis 2023, ApJ 959:99 (arXiv:2303.03192) Appendices A-B; PhySO demos",
   "evidence": "gh api repos/WassimTenachi/PhySO/license -> MIT; gh api repos/dscolnic/Pantheon/license -> null (no licence file); arXiv OAI 2303.03192 <license>http://creativecommons.org/licenses/by/4.0/</license>; Crossref 10.3847/1538-4357/ad014c (ApJ 959:99) CC BY 4.0"
- },
- {
-  "catalog": "physo-class",
-  "license": "MIT (WassimTenachi/PhySO)",
-  "verdict": "permissive",
-  "redistribute": "yes",
-  "upstream": "WassimTenachi/PhySO physo/benchmark/ClassDataset/ClassEquations.csv (v1.1.0, Zenodo 10.5281/zenodo.11663147)",
-  "evidence": "gh api repos/WassimTenachi/PhySO/license -> MIT; arXiv OAI 2312.01816 <license>http://creativecommons.org/licenses/by/4.0/</license>; https://zenodo.org/api/records/11663147 (PhySO v1.1.0) license mit-license"
- },
- {
-  "catalog": "physo-milky-way-streams",
-  "license": "MIT (WassimTenachi/PhySO)",
-  "verdict": "permissive",
-  "redistribute": "yes",
-  "upstream": "WassimTenachi/PhySO demos/class_sr/demo_milky_way_streams/streams.csv (@bfbfa88)",
-  "evidence": "gh api repos/WassimTenachi/PhySO/license -> MIT; Crossref 10.3847/2041-8213/ad5970 (Class SR paper) CC BY 4.0",
-  "name": "PhySO Milky Way stellar streams",
-  "set": "fresh-58",
-  "problems": 29,
-  "sources": [
-   "https://arxiv.org/abs/2312.01816",
-   "https://arxiv.org/html/2312.01816v2",
-   "https://doi.org/10.3847/2041-8213/ad5970"
-  ]
  },
  {
   "catalog": "poly",
@@ -2335,24 +2191,6 @@
    "https://doi.org/10.1103/PhysRevLett.114.105503",
    "https://journals.aps.org/prl/supplemental/10.1103/PhysRevLett.114.105503/Critical_Role_SI.pdf"
   ]
- },
- {
-  "catalog": "sldbench",
-  "license": "no licence on the dataset: pkuHaowei/sldbench (Hugging Face) rows compiled from published scaling-law studies; SLD code MIT per README",
-  "verdict": "unclear",
-  "redistribute": "yes, restricted repo",
-  "upstream": "Hugging Face pkuHaowei/sldbench @721b846 (8 scaling-law configs; Lin et al. 2025, 'Can Language Models Discover Scaling Laws?', arXiv:2507.21184), companion code linhaowei1/SLD",
-  "evidence": "HF API pkuHaowei/sldbench: cardData has no 'license', no license:* tag; linhaowei1/SLD README: 'This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.' but gh api repos/linhaowei1/SLD/license -> 404 and the root has no LICENSE; survey: rows compiled from the cited papers' public releases",
-  "name": "SLDBench (scaling-law discovery)",
-  "set": "fresh-94",
-  "problems": 77,
-  "sources": [
-   "https://arxiv.org/abs/2507.21184",
-   "https://arxiv.org/pdf/2507.21184v5",
-   "https://arxiv.org/pdf/2507.21184v1"
-  ],
-  "terms": "none stated",
-  "routing": "owner 2026-11-09: republished with a statement in the restricted repo"
  },
  {
   "catalog": "sparc-radial-acceleration",
@@ -3141,14 +2979,6 @@
   ]
  },
  {
-  "catalog": "surfacebench-explicit-surfaces",
-  "license": "CC BY 4.0 (Kabra et al. 2026, SurfaceBench, arXiv:2511.10833, Table 7)",
-  "verdict": "attribution (CC BY)",
-  "redistribute": "yes",
-  "upstream": "Kabra et al., SurfaceBench, TMLR 2026, arXiv:2511.10833v2 App. A.7 Table 7",
-  "evidence": "gh api repos/deep-symbolic-mathematics/surfacebench/license -> null (no licence file); arXiv OAI 2511.10833 <license>http://creativecommons.org/licenses/by/4.0/</license>; surfacebench README: 'This repository is licensed under MIT licence.' (no LICENSE file); HF pandoradox/symbolic-regression-surfaces cardData.license = mit"
- },
- {
   "catalog": "sym-q-ai-feynman-with-drift-terms",
   "license": "MIT (EPFL-IMOS/Sym-Q) + CC0 1.0 (Tian et al., arXiv:2402.05306)",
   "verdict": "permissive",
@@ -3259,22 +3089,6 @@
   "redistribute": "yes",
   "upstream": "Muthyala, Sorourifar & Paulson, TorchSISSO, arXiv:2410.01752 Table 1 + Sec. 4.1 (Digit. Chem. Eng. 13:100198)",
   "evidence": "gh api repos/PaulsonLab/TorchSISSO/license -> MIT; arXiv OAI 2410.01752 <license>http://creativecommons.org/licenses/by-nc-nd/4.0/</license>; Crossref 10.1016/j.dche.2024.100198 (Digit. Chem. Eng. 13:100198) CC BY-NC-ND 4.0"
- },
- {
-  "catalog": "treloar-rubber",
-  "license": "CC BY 4.0 (Linka & Kuhl 2023, Comput. Methods Appl. Mech. Eng. 403:115731, Table 2; data: Treloar 1944, Trans. Faraday Soc. 40:59)",
-  "verdict": "attribution (CC BY)",
-  "redistribute": "yes",
-  "upstream": "Linka & Kuhl 2023, Comput. Methods Appl. Mech. Eng. 403:115731, Table 2 (arXiv:2210.02202v2), tabulating Treloar 1944 (Trans. Faraday Soc. 40:59) at 20 C and 50 C",
-  "evidence": "Crossref 10.1016/j.cma.2022.115731 licence http://creativecommons.org/licenses/by/4.0/ (vor); survey fresh-125: 'Linka & Kuhl 2023 Table 2 (25/17/14 points, CC BY 4.0) -- the recommended copy'; builder reads raw/fresh-125/derived/linka_kuhl_2023_table2_treloar.csv (tools/catalog_build/data_catalog_readers.py, reader fresh-125)",
-  "name": "Treloar rubber hyperelasticity",
-  "set": "fresh-125",
-  "problems": 6,
-  "sources": [
-   "https://doi.org/10.1039/TF9444000059",
-   "https://pubs.rsc.org/en/content/articlelanding/1944/tf/tf9444000059",
-   "https://arxiv.org/abs/2603.19241"
-  ]
  },
  {
   "catalog": "vladislavleva",

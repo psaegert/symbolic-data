@@ -875,8 +875,20 @@ def main() -> None:
         rec = paths.set_record(tag)
         entries, skipped, pinned = {}, {}, []
         slug = SLUGS.get(tag) or slug_of(rec["name"])
+        if paths.dropped_whole(slug):            # left out by rule (tags/dropped.json): no catalog, no stale file
+            for stale in (out / f"{slug}.yaml", out / f"{slug}-points.npz"):
+                stale.unlink(missing_ok=True)
+            report[tag] = {"catalog": slug, "problems": len(by_set[tag]), "built": 0,
+                           "dropped": paths.dropped()[slug]["reason"]}
+            print(f"{tag:14s} {slug:50s} dropped by rule", flush=True)
+            report_path.write_text(json.dumps(report, indent=1) + "\n")
+            continue
+        gone = paths.dropped_members(slug)
         points_display = f"{rec['name']}{'*' if tag in MODIFIED_POINTS else ''} (pinned points)"
         for p in by_set[tag]:
+            if p["id"] in gone:
+                skipped[p["id"]] = "dropped by rule (tags/dropped.json)"
+                continue
             try:
                 entries.update(with_tests(p, entry_of(p)))
             except authors_tests.Pending as why:

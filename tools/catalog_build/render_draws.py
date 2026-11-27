@@ -37,6 +37,8 @@ def release_catalogs(symbolic_data: Path, data_build: Path | None, *, formula_on
         data.extend(p for p in sorted(folder.glob("*.npz")) if p.name not in count_release.SUPERSEDED)
     if data_build is not None:
         data.extend(sorted([*data_build.glob("*.npz"), *(data_build / "data").glob("*.npz")]))
+    formula = [f for f in formula if not paths.dropped_whole(f.stem)]       # left out by rule (tags/dropped.json)
+    data = [f for f in data if not paths.dropped_whole(f.stem)]
     return formula if formula_only else formula + data
 
 

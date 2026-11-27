@@ -111,12 +111,6 @@
   "follows_first_publication": []
  },
  {
-  "catalog": "breiman-i",
-  "authors_total": 1,
-  "changes": [],
-  "follows_first_publication": []
- },
- {
   "catalog": "chen-luo-jiang-block-building-test-cases",
   "authors_total": 14,
   "changes": [
@@ -696,8 +690,8 @@
   "changes": [
    {
     "kind": "part",
-    "problems": 362,
-    "text": "srbf runs 14 of HeuristicLab's 376 problems here and 1 in its pinned-points set: 164 are run in other srbf sets (Keijzer, Korns, Nguyen, Vladislavleva, Feynman, ...), the 88 generated instances have no published formula, the 94 PennML datasets are run in SRBench, the 14 real-world and Miba datasets are in 'HeuristicLab regression instances (real-world data)', and AircraftMaximumLift has inputs without a range."
+    "problems": 363,
+    "text": "srbf runs 13 of HeuristicLab's 376 problems here and 1 in its pinned-points set: 164 are run in other srbf sets (Keijzer, Korns, Nguyen, Vladislavleva, Feynman, ...), the 88 generated instances have no published formula, the 94 PennML datasets are run in SRBench, the 14 real-world and Miba datasets are in 'HeuristicLab regression instances (real-world data)', AircraftMaximumLift has inputs without a range, and the piecewise Breiman-I instance is left out (srbf poses formulas as their authors wrote them, and SimpliPy cannot read a piecewise definition)."
    }
   ],
   "follows_first_publication": [
@@ -967,40 +961,6 @@
   "follows_first_publication": []
  },
  {
-  "catalog": "multi-view-sr-synthetic-benchmarks",
-  "authors_total": 16,
-  "changes": [
-   {
-    "kind": "part",
-    "problems": 8,
-    "text": "srbf runs 8 of the 16 views here; the 8 views of the first family, which use fixed grids, are in its pinned-points set."
-   },
-   {
-    "kind": "changed",
-    "problems": 8,
-    "text": "The authors pose one task per family: one formula, with constants refitted per view, fitted to all 4 views at once, on targets rescaled to 10 y / max|y|; srbf runs each view as a separate problem on the unscaled target."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
-  "catalog": "multi-view-sr-synthetic-benchmarks-points",
-  "authors_total": 16,
-  "changes": [
-   {
-    "kind": "part",
-    "problems": 8,
-    "text": "srbf runs here the 8 views of the first family on the authors' grids; the other 8 views are in 'Multi-view SR synthetic benchmarks'."
-   },
-   {
-    "kind": "changed",
-    "problems": 8,
-    "text": "The authors pose one task per family: one formula, with constants refitted per view, fitted to all 4 views at once, on targets rescaled to 10 y / max|y|; srbf runs each view as a separate problem on the unscaled target."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
   "catalog": "neat",
   "authors_total": 9,
   "changes": [
@@ -1027,18 +987,6 @@
   "follows_first_publication": [
    "Neat-6 is Keijzer's harmonic number on x = 1..50, tested on x = 1..120 (Keijzer 2003); later copies print x(x+1)/2."
   ]
- },
- {
-  "catalog": "newtonbench",
-  "authors_total": 324,
-  "changes": [
-   {
-    "kind": "part",
-    "problems": 216,
-    "text": "srbf runs the 108 laws of NewtonBench's 'vanilla equation' setting; the other 216 tasks embed the same laws in simulators that an agent explores step by step, which srbf's protocol cannot run."
-   }
-  ],
-  "follows_first_publication": []
  },
  {
   "catalog": "nguyen",
@@ -1127,18 +1075,6 @@
   "follows_first_publication": []
  },
  {
-  "catalog": "occamnet-analytic-and-non-analytic-suites",
-  "authors_total": 23,
-  "changes": [
-   {
-    "kind": "part",
-    "problems": 1,
-    "text": "srbf runs 22 of the 23 problems: OccamNet-P7 (a function iterated four times) is left out because its formula is too long for srbf's formula parser."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
   "catalog": "pagie-points",
   "authors_total": 1,
   "changes": [
@@ -1164,13 +1100,8 @@
   "changes": [
    {
     "kind": "part",
-    "problems": 2,
-    "text": "srbf runs 15 of the 17 datasets here: the sunspot data, whose license is non-commercial, are in 'PhyE2E space-physics applications (restricted)', and the lunar-tide data (13.3 million samples) needs a gridding the authors did not publish."
-   },
-   {
-    "kind": "changed",
-    "problems": 12,
-    "text": "For the plasma-pressure data the paper trains on several near-side radii (R = 8 to 28 Earth radii) and averages the far-side error; srbf uses only the largest, r < 28."
+    "problems": 14,
+    "text": "srbf runs 3 of the 17 datasets here: the 12 plasma-pressure datasets are left out, because the authors fit one formula across all 12 (a task over several data sets, outside srbf's scope); the sunspot data, whose license is non-commercial, are in 'PhyE2E space-physics applications (restricted)'; and the lunar-tide data (13.3 million samples) needs a gridding the authors did not publish."
    }
   ],
   "follows_first_publication": []
@@ -1195,30 +1126,6 @@
     "kind": "part",
     "problems": 3,
     "text": "srbf runs 9 of the 12 problems here; the NFW profile and the expansion law are in 'PhySO astrophysics', and the Pantheon supernova task fits a function through an integral, not y = f(x)."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
-  "catalog": "physo-class",
-  "authors_total": 8,
-  "changes": [
-   {
-    "kind": "changed",
-    "problems": 8,
-    "text": "Class SR asks for one formula shared by several datasets whose constants differ; srbf runs each law as a single dataset."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
-  "catalog": "physo-milky-way-streams",
-  "authors_total": 29,
-  "changes": [
-   {
-    "kind": "changed",
-    "problems": 29,
-    "text": "srbf fits each stream on its own (the authors' single-stream setting); the authors' main task fits one law to many streams at once."
    }
   ],
   "follows_first_publication": []
@@ -1502,18 +1409,6 @@
   "follows_first_publication": []
  },
  {
-  "catalog": "surfacebench-explicit-surfaces",
-  "authors_total": 258,
-  "changes": [
-   {
-    "kind": "part",
-    "problems": 2,
-    "text": "srbf runs 128 of the 129 explicit surfaces (each with an in-range and an out-of-range test): NCS10 has no input range from the authors."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
   "catalog": "sym-q-ai-feynman-with-drift-terms",
   "authors_total": 15,
   "changes": [
@@ -1639,18 +1534,6 @@
   "follows_first_publication": []
  },
  {
-  "catalog": "treloar-rubber",
-  "authors_total": 6,
-  "changes": [
-   {
-    "kind": "changed",
-    "problems": 6,
-    "text": "The benchmark task built on these curves (EO-SR) uses only the 20 C curves, fitting the uniaxial and equibiaxial curves together and testing on the pure-shear curve; srbf fits each curve, including the three 50 C curves, on its own and has no test."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
   "catalog": "vladislavleva",
   "authors_total": 9,
   "changes": [
@@ -1770,7 +1653,7 @@
    {
     "kind": "part",
     "problems": 16,
-    "text": "srbf runs here the sunspot dataset, whose license is non-commercial; 15 more are in 'PhyE2E space-physics applications', and the lunar-tide data (13.3 million samples) needs a gridding the authors did not publish."
+    "text": "srbf runs here the sunspot dataset, whose license is non-commercial; 3 more are in 'PhyE2E space-physics applications', the 12 plasma-pressure datasets are left out (one formula fitted across all 12), and the lunar-tide data (13.3 million samples) needs a gridding the authors did not publish."
    }
   ]
  },
@@ -1911,40 +1794,6 @@
   "follows_first_publication": []
  },
  {
-  "catalog": "gp-challenge-protein",
-  "authors_total": 54,
-  "changes": [
-   {
-    "kind": "changed",
-    "problems": 54,
-    "text": "The authors ask for one energy function shared by all 54 proteins, scored by how well it ranks each protein's decoys; srbf runs each protein as a separate regression of the decoys' reference rank on the 8 energy terms."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
-  "catalog": "implied-volatility-slices",
-  "authors_total": 61462,
-  "changes": [
-   {
-    "kind": "part",
-    "problems": 61428,
-    "text": "srbf runs the 34 public slices of the paper's data set D2; the 61,428 S&P 500 slices of its data set D1 were never published."
-   },
-   {
-    "kind": "changed",
-    "problems": 34,
-    "text": "The authors fit one formula per curve type (SVI5, C6, C8), with parameters refitted per slice; srbf runs each slice as a separate problem."
-   },
-   {
-    "kind": "filled",
-    "problems": 34,
-    "text": "The paper does not say how many points per slice it used; srbf uses the 125-point version of each slice, the largest in the authors' repository and the one their evaluation notebook fits."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
   "catalog": "materials-laws-multi-agent",
   "authors_total": 3,
   "changes": [
@@ -1957,23 +1806,6 @@
     "kind": "changed",
     "problems": 1,
     "text": "The authors report training and test errors on the hardness data but never say which compounds they tested on; srbf fits all 61 compounds and has no test."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
-  "catalog": "mvsr-2025",
-  "authors_total": 51,
-  "changes": [
-   {
-    "kind": "changed",
-    "problems": 51,
-    "text": "The authors pose one task per data set (supernovae, galaxies, Michaelis-Menten, Nikuradse, network degrees): one formula, with parameters refitted per view, fitted to all its views at once and scored by its worst view; srbf runs each of the 51 views as a separate problem."
-   },
-   {
-    "kind": "changed",
-    "problems": 51,
-    "text": "The authors pick each view's 20% test rows with replacement, so some repeat and fewer than 20% of the rows are held out; srbf picks them without replacement."
    }
   ],
   "follows_first_publication": []
@@ -2048,18 +1880,6 @@
   "follows_first_publication": []
  },
  {
-  "catalog": "sldbench",
-  "authors_total": 77,
-  "changes": [
-   {
-    "kind": "changed",
-    "problems": 77,
-    "text": "SLDBench poses 8 tasks, each asking for one law shared by all control groups of the task with constants refitted per group (the domain-mixture task predicts 5 losses at once); srbf runs each control group, and each of the 5 domain-mixture losses, as a separate problem."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
   "catalog": "heuristiclab-real-world",
   "authors_total": 376,
   "changes": [
@@ -2072,23 +1892,6 @@
     "kind": "changed",
     "problems": 9,
     "text": "In the 9 Miba friction datasets the material, material category, grooving and oil inputs are letter codes; srbf turns each code into an input of its own that is 1 where the code applies and 0 elsewhere."
-   }
-  ],
-  "follows_first_publication": []
- },
- {
-  "catalog": "mvsr-2024",
-  "authors_total": 501,
-  "changes": [
-   {
-    "kind": "changed",
-    "problems": 20,
-    "text": "The authors pose one task per domain (chemistry, astrophysics, finance): one formula, with constants refitted per view, fitted to all its views at once; srbf runs each of the 20 views as a separate problem."
-   },
-   {
-    "kind": "changed",
-    "problems": 481,
-    "text": "In the finance task the authors test the formulas found on the 10 company views by refitting them to the price-change histograms of 480 other companies and of the S&P 500; srbf rebuilt these 481 histograms with the authors' recipe (the authors publish only the resulting errors) and runs each as a problem of its own."
    }
   ],
   "follows_first_publication": []

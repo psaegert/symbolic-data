@@ -104,6 +104,31 @@ def statement(source: str, terms: str) -> str:
 
 
 @lru_cache(maxsize=1)
+def dropped() -> dict[str, dict[str, Any]]:
+    """What srbf's release leaves out by rule (tags/dropped.json), by catalog: the whole catalog (``members`` null) or
+    the listed problems of it, each with its public ``reason`` (scope: y = f(x) on one data set, 2026-11-28; formulas as
+    their authors wrote them, 2026-11-26). The builders skip what it names, and count_release lists it."""
+    with open(Path(__file__).resolve().parent / "tags" / "dropped.json", encoding="utf-8") as fh:
+        return {r["catalog"]: r for r in json.load(fh)}
+
+
+def _dropped_row(catalog: str) -> dict[str, Any]:
+    base = re.sub(r"-(share-alike|restricted)$", "", catalog)       # a set's parts go with the set
+    return dropped().get(catalog) or dropped().get(base) or {}
+
+
+def dropped_whole(catalog: str) -> bool:
+    """Whether the rules leave out the whole catalog."""
+    r = _dropped_row(catalog)
+    return bool(r) and not r.get("members")
+
+
+def dropped_members(catalog: str) -> set[str]:
+    """The problems of a catalog the rules leave out (none when the catalog stays whole or goes whole)."""
+    return set(_dropped_row(catalog).get("members") or [])
+
+
+@lru_cache(maxsize=1)
 def citations() -> dict[str, dict[str, Any]]:
     """Each catalog's ``paper`` and ``data`` citation (tags/citations.json), where they exist."""
     with open(Path(__file__).resolve().parent / "tags" / "citations.json", encoding="utf-8") as fh:

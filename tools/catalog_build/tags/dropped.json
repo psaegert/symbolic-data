@@ -1,0 +1,187 @@
+[
+ {
+  "catalog": "sldbench",
+  "name": "SLDBench (scaling-law discovery)",
+  "problems": 77,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: one scaling law per task, its constants refit per group and scored over all groups of the task (one law shared across several data sets). Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "gp-challenge-protein",
+  "name": "GP Challenge (protein energy function)",
+  "problems": 54,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: one energy function shared by 54 proteins and scored by how it ranks each protein's decoys (one law across several data sets, a ranking objective). Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "mvsr-2024",
+  "name": "Multi-view SR (2024) real data",
+  "problems": 501,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: multi-view symbolic regression: one parametric form whose constants are refit per view, scored over all views of a domain (one law across several data sets). Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "mvsr-2025",
+  "name": "Multi-view SR (2025) real-world data",
+  "problems": 51,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: multi-view symbolic regression: one parametric form whose constants are refit per view, scored over all views of a group (one law across several data sets). Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "multi-view-sr-synthetic-benchmarks",
+  "name": "multi-view-sr-synthetic-benchmarks",
+  "problems": 8,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: multi-view symbolic regression: one parametric form fitted jointly to several views of a law, the error taken as the maximum over the views. Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "multi-view-sr-synthetic-benchmarks-points",
+  "name": "Multi-view SR synthetic benchmarks (pinned points)",
+  "problems": 8,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: multi-view symbolic regression on the authors' fixed points: one parametric form fitted jointly to several views, the error taken as the maximum over the views. Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "implied-volatility-slices",
+  "name": "Implied-volatility slices",
+  "problems": 34,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: conditional parametric symbolic regression: one global form with per-slice parameters, fitted over all slices of a curve type. Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "treloar-rubber",
+  "name": "Treloar rubber hyperelasticity",
+  "problems": 6,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: one strain-energy function fitted across deformation modes, trained on two modes and tested on the third. Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "phye2e-space-physics",
+  "name": "PhyE2E space-physics applications",
+  "problems": 12,
+  "members": [
+   "plasma-Kp0-Pd1.5",
+   "plasma-Kp0-Pd3.0",
+   "plasma-Kp1-Pd1.5",
+   "plasma-Kp1-Pd3.0",
+   "plasma-Kp2-Pd1.5",
+   "plasma-Kp2-Pd3.0",
+   "plasma-Kp3-Pd1.5",
+   "plasma-Kp3-Pd3.0",
+   "plasma-Kp4-Pd1.5",
+   "plasma-Kp4-Pd3.0",
+   "plasma-Kp5-Pd1.5",
+   "plasma-Kp5-Pd3.0"
+  ],
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: the plasma application fits one unified formula across 12 data sets (Kp and solar-wind pressure bins). Tasks of this kind are not in this release; they may come in a future version. The set's other problems (differential rotation, the two Fe X lines, and the sunspot numbers) stay.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "physo-class",
+  "name": "physo-class",
+  "problems": 8,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: class symbolic regression: one law with shared constants fitted jointly to several data sets drawn with different free constants. Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "physo-milky-way-streams",
+  "name": "PhySO Milky Way stellar streams",
+  "problems": 29,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: class symbolic regression: one potential with shared constants fitted jointly to 29 stellar streams, each with its own energy. Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "newtonbench",
+  "name": "newtonbench",
+  "problems": 108,
+  "members": null,
+  "kind": "scope",
+  "reason": "srbf scores a method on y = f(x) fitted to ONE data set of points (published derivative tables included). This benchmark's task is not of that kind: interactive discovery: the method chooses where to query each law. Tasks of this kind are not in this release; they may come in a future version.",
+  "ruled": "2026-11-28",
+  "was_in_release": true
+ },
+ {
+  "catalog": "breiman-i",
+  "name": "breiman-i",
+  "problems": 1,
+  "members": null,
+  "kind": "formula as written",
+  "reason": "srbf poses every formula as its authors wrote it, in SimpliPy, its expression engine. Its formula is piecewise (a Piecewise over an indicator input), which SimpliPy cannot read, so the benchmark is left out.",
+  "ruled": "2026-11-26",
+  "was_in_release": true
+ },
+ {
+  "catalog": "occamnet-analytic-and-non-analytic-suites",
+  "name": "occamnet-analytic-and-non-analytic-suites",
+  "problems": 22,
+  "members": null,
+  "kind": "formula as written",
+  "reason": "srbf poses every formula as its authors wrote it, in SimpliPy, its expression engine. 6 of its 22 formulas are piecewise, which SimpliPy cannot read, so the benchmark is left out.",
+  "ruled": "2026-11-26",
+  "was_in_release": true
+ },
+ {
+  "catalog": "surfacebench-explicit-surfaces",
+  "name": "surfacebench-explicit-surfaces",
+  "problems": 256,
+  "members": null,
+  "kind": "formula as written",
+  "reason": "srbf poses every formula as its authors wrote it, in SimpliPy, its expression engine. 36 of its 256 formulas are piecewise and 2 are finite sums, which SimpliPy cannot read, so the benchmark is left out.",
+  "ruled": "2026-11-26",
+  "was_in_release": true
+ },
+ {
+  "catalog": "heuristiclab-regression-instance-providers",
+  "name": "heuristiclab-regression-instance-providers",
+  "problems": 1,
+  "members": [
+   "Breiman-I"
+  ],
+  "kind": "formula as written",
+  "reason": "srbf poses every formula as its authors wrote it, in SimpliPy, its expression engine. Its Breiman-I instance is piecewise, which SimpliPy cannot read, so that one instance is left out; the set's other instances stay.",
+  "ruled": "2026-11-26",
+  "was_in_release": true
+ },
+ {
+  "catalog": "syren-power-spectrum",
+  "name": "syren matter power spectrum emulators",
+  "problems": null,
+  "members": null,
+  "kind": "formula as written",
+  "reason": "srbf poses every formula as its authors wrote it, in SimpliPy, its expression engine. The emulators' formulas use the Gauss hypergeometric function 2F1, which SimpliPy cannot read, so the benchmark is left out.",
+  "ruled": "2026-11-26",
+  "was_in_release": false
+ }
+]

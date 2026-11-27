@@ -9,7 +9,7 @@ The tags/licenses.json routing ("yes, restricted repo") decides what publishes h
 the license pass routes elsewhere, and the main and share-alike tools refuse what it routes here.
 
 Consumers resolve these by explicit repo syntax:
-    load_catalog("psaegert/symbolic-data-assets-restricted:mvsr-2024@1")
+    load_catalog("psaegert/symbolic-data-assets-restricted:bms-real-data@1")
 
 Run from the repo root: ``python tools/publish_catalogs_restricted.py`` (dry run; ``--execute`` publishes, which
 requires HF auth; ``--notices`` rewrites the generated part of the card's notices). The same incremental,
@@ -38,30 +38,27 @@ DATA_CATALOGS = {
     "ffx-cmos-ota": ("ffx-cmos-ota.npz", 6, "problem_catalog"),
     "ffx-high-dimensional-circuits": ("ffx-high-dimensional-circuits.npz", 12, "problem_catalog"),
     "gecco-2013-2017-real-restricted": ("gecco-2013-2017-real-restricted.npz", 3, "problem_catalog"),
-    "gp-challenge-protein": ("gp-challenge-protein.npz", 54, "problem_catalog"),
     "gp-gomea-real-world-restricted": ("gp-gomea-real-world-restricted.npz", 3, "problem_catalog"),
     "gplearn-diabetes": ("gplearn-diabetes.npz", 1, "problem_catalog"),
     "heuristiclab-real-world": ("heuristiclab-real-world.npz", 14, "problem_catalog"),
     "ideasearch-pdf": ("ideasearch-pdf.npz", 6, "problem_catalog"),
-    "implied-volatility-slices": ("implied-volatility-slices.npz", 34, "problem_catalog"),
     "langlaw-perovskites-restricted": ("langlaw-perovskites-restricted.npz", 1, "problem_catalog"),
     "llm-srbench": ("llm-srbench.npz", 1, "problem_catalog"),
     "materials-laws-multi-agent": ("materials-laws-multi-agent.npz", 1, "problem_catalog"),
     "mcdermott-predictive-modelling-restricted": ("mcdermott-predictive-modelling-restricted.npz", 3, "problem_catalog"),
-    "mvsr-2024": ("mvsr-2024.npz", 501, "problem_catalog"),
-    "mvsr-2025": ("mvsr-2025.npz", 51, "problem_catalog"),
     "nuclear-misr-restricted": ("nuclear-misr-restricted.npz", 1, "problem_catalog"),
     "oxygen-ion-conductors": ("oxygen-ion-conductors.npz", 2, "problem_catalog"),
     "phye2e-space-physics-restricted": ("phye2e-space-physics-restricted.npz", 1, "problem_catalog"),
     "scilaws-real-restricted": ("scilaws-real-restricted.npz", 6, "problem_catalog"),
     "shadow-economies": ("shadow-economies.npz", 2, "problem_catalog"),
     "shape-constrained-real-world-restricted": ("shape-constrained-real-world-restricted.npz", 3, "problem_catalog"),
-    "sldbench": ("sldbench.npz", 77, "problem_catalog"),
     "sparc-radial-acceleration": ("sparc-radial-acceleration.npz", 1, "problem_catalog"),
     "srbench-2.0-blackbox-restricted": ("srbench-2.0-blackbox-restricted.npz", 7, "problem_catalog"),
     "srbench-2.0-first-principles-restricted": ("srbench-2.0-first-principles-restricted.npz", 2, "problem_catalog"),
     "srbench-2021-blackbox-restricted": ("srbench-2021-blackbox-restricted.npz", 38, "problem_catalog"),
     "white-2013-proposed": ("white-2013-proposed.npz", 1, "problem_catalog"),
+    # left out by rule 2026-11-28 (tags/dropped.json; outside srbf's scope of y = f(x) on one data set), never
+    # published: gp-challenge-protein, implied-volatility-slices, mvsr-2024, mvsr-2025, sldbench
 }
 
 
