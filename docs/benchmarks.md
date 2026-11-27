@@ -35,6 +35,11 @@ for problem in source:                   # one Problem per expression
 To realize a *single* equation, filter the iteration by `problem.eq_id` (there is no per-id
 one-liner). The `eq_id` is the catalog key (`"I.9.18"`, `"Nguyen-5"`, `"II.38.3"`).
 
+A problem's ground truth (`problem.expression`) is the formula **as its catalog writes it**. A
+`sqrt` stays `sqrt` when the SimpliPy engine's config defines it (`defined_functions:`), and is
+written `rootn(u, 2)` otherwise; the targets and the skeleton are the same either way. See
+[Problem](sampling.md#problem).
+
 ## Resolving references
 
 `load_catalog(ref)` resolves **declarative** catalogs and **`.npz` frozen** catalogs only. `ref`

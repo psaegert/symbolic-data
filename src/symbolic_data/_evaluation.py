@@ -17,7 +17,7 @@ from simplipy import SimpliPyEngine, masking
 from symbolic_data.token_ops import normalize_expression
 from simplipy.utils import codify
 
-from symbolic_data.token_ops import desugar_sqrt
+from symbolic_data.token_ops import spell_square_roots, written_arity
 
 
 def _is_number_token(token: Any) -> bool:
@@ -60,6 +60,19 @@ def _normalize_prepared(expression: str) -> str:
     return expression.replace("^", "**")
 
 
+def _realization(engine: SimpliPyEngine, prefix: List[str]) -> List[str]:
+    """``prefix`` in realization notation, the form :func:`compile_expression` compiles.
+
+    A defined function (``sqrt`` where the engine's config defines it) has no callable of its
+    own: ``engine.to_realization`` writes it as the callables of its definition, so its value is
+    the definition's. A prefix without one is realized operator by operator, as before.
+    """
+    defined = getattr(engine, "defined_functions", None) or {}
+    if defined.keys() & set(prefix):
+        return engine.to_realization(prefix)
+    return engine.operators_to_realizations(prefix)
+
+
 def compile_expression(
     engine: SimpliPyEngine,
     eq_id: str,
@@ -76,6 +89,12 @@ def compile_expression(
     literals relabelled to ``<constant>`` + operand sorting via ``engine.mask``) — the
     catalog contract. Since simplipy 0.9 masking is a separate step, no longer part of
     ``simplify``.
+
+    ``expression`` and ``constants`` are the ground truth as written. A ``sqrt`` stays ``sqrt``
+    when the engine's config defines it (``defined_functions:``) and becomes ``rootn(u, 2)``
+    otherwise (:func:`~symbolic_data.token_ops.spell_square_roots`). The skeleton and the values
+    are the same either way: ``simplify`` and the evaluation read a defined function as its
+    definition.
     """
     if not isinstance(prepared, str) or not prepared.strip():
         raise ValueError(f"Entry {eq_id} has no prepared expression")
@@ -86,9 +105,11 @@ def compile_expression(
     variable_order = resolve_variable_order(vars_info)
 
     prefix_parsed = engine.read_infix(prepared_text, mask_numbers=False)
-    # Curated formulas spell the square root as `sqrt(...)`; translate to `rootn(u, 2)`
-    # before anything walks the prefix (the parser passes unknown names through as leaves).
-    prefix_parsed = desugar_sqrt(prefix_parsed, engine.operator_arity)
+    # The ground truth is kept as written. Curated formulas spell the square root as `sqrt(...)`:
+    # an engine whose config defines `sqrt` reads, prices and evaluates that head as written, and
+    # for any other engine it becomes `rootn(u, 2)` before anything walks the prefix (the parser
+    # passes unknown names through as leaves).
+    prefix_parsed = spell_square_roots(prefix_parsed, written_arity(engine))
     try:
         # simplipy >= 0.14 simplify is dialect-preserving: explicit binary prefix in,
         # explicit binary prefix out -- exactly what the downstream prefix consumers
@@ -122,7 +143,7 @@ def compile_expression(
     # (the structural / recovery form); `expression` + `constants` = the CONCRETE ground truth (the
     # actual formula with its literal values, matching the generative catalog's RealizedExpression);
     # `callable` evaluates that concrete formula.
-    prefix_realized = engine.operators_to_realizations(prefix_parsed)
+    prefix_realized = _realization(engine, prefix_parsed)
     code = codify(engine.prefix_to_infix(prefix_realized, realization=True), variable_order)
     return {
         "callable": engine.code_to_lambda(code),

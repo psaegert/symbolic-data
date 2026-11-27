@@ -25,6 +25,17 @@ All notable changes to `symbolic-data` are documented here. The format follows
   converts numerals, so the five calls behave as before.
 - Two pinned tagged-canonical specimens (measured on 0.14) spell differently in 0.15's canonical form; they are a
   strict xfail until they are re-pinned after SimpliPy's restructuring (phase D) or at the release mine (H).
+- **A ground truth keeps its `sqrt` as written when the engine defines it.** SimpliPy 0.15 configs may declare
+  defined functions (`defined_functions:`: `sqrt`, `cot`, `sec`, `csc`, `acot`, `asec`, `acsc`), which the engine
+  reads at their own head, prices as written and evaluates as their definition (`sqrt` as `rootn(u, 2)`).
+  `compile_expression`, and with it every catalog truth (`ProblemCatalog.realize`, the set-mode `ProblemSource`,
+  the catalog builders), now writes `sqrt u` as `rootn u 2` only for an engine that does not define `sqrt`
+  (`token_ops.spell_square_roots`, reading the engine's operators and defined functions through
+  `token_ops.written_arity`). With a defining engine a sqrt-bearing truth keeps `sqrt` in `expression`, has no
+  root-index `2` in `constants` and is one token shorter per root (`complexity`); its targets, `skeleton` and
+  `meta["prepared_normalized"]` are unchanged, bit for bit (a defined head evaluates through
+  `engine.to_realization`, as its definition). Engines without the section behave as before. Training generation (the skeleton pool, the training holdout, SymPy simplification)
+  still writes `rootn(u, 2)`: the generating vocabulary has no defined heads.
 
 ### Added
 

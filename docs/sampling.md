@@ -141,7 +141,7 @@ A `Problem` is one model-agnostic symbolic-regression problem. It is produced by
 | field | meaning |
 |---|---|
 | `skeleton` | the ground-truth skeleton tokens (prefix), constants as placeholders |
-| `expression` | GT tokens with constants substituted + normalized (via `simplipy`) |
+| `expression` | GT tokens with constants substituted, variables renamed `x1..`; a catalog formula as written (see below) |
 | `constants` | the realized constant literals |
 | `variables` / `n_variables_used` | pool variable names (X column order) / count used in the skeleton |
 | `complexity` | token length of the substituted expression |
@@ -158,6 +158,15 @@ Conventions baked in:
 - Noise is on the **target `y` only** (measurement noise); `X` is never noised. Both the clean `y_*`
   (for ground-truth evaluation, e.g. FVU) and `y_*_noisy` (what a model fits) are kept; when the
   noise spec is null/zero, `y_*_noisy` is the same array.
+- A catalog formula's **ground truth is kept as written**: `expression` and `constants` are the
+  formula as the catalog writes it, read but not simplified. A square root stays `sqrt` when the
+  SimpliPy engine's config defines it (its `defined_functions:` section, SimpliPy 0.15), and is
+  written `rootn(u, 2)` for an engine that does not define it. The engine evaluates a defined
+  function as its definition, so the targets, the `skeleton` (the engine's canonical form) and
+  `meta["prepared_normalized"]` are the same with either engine. A written `sqrt` has no root
+  index, so `constants` holds no `2` for it and `complexity` counts one token less per root.
+  Generation for training (skeleton pools, the training holdout, the SymPy simplification) writes
+  the generating vocabulary whatever the engine defines.
 - The **placeholder protocol** lets a source yield a marked, empty `Problem` (`is_placeholder=True`,
   with a `placeholder_reason`) instead of silently skipping when it cannot produce a valid problem
   for a slot, so row-accounting / resume / indexing stay aligned and the failure is recorded

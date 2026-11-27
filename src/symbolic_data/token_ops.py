@@ -135,6 +135,9 @@ def desugar_sqrt(tokens: list[str], operator_arity: dict[str, int]) -> list[str]
     then rejects as malformed. Tokens other than ``sqrt`` that are missing from
     ``operator_arity`` are treated as leaves, preserving the parser's lenient behavior
     (a genuinely alien token still fails downstream, with the same error as before).
+
+    The rewrite is unconditional. A ground truth goes through :func:`spell_square_roots`
+    instead, which keeps ``sqrt`` as written when the engine's config defines it.
     """
     out: list[str] = []
 
@@ -155,6 +158,32 @@ def desugar_sqrt(tokens: list[str], operator_arity: dict[str, int]) -> list[str]
     if end != len(tokens):
         raise ValueError(f"sqrt desugaring consumed {end} of {len(tokens)} tokens")
     return out
+
+
+def written_arity(engine: Any) -> dict[str, int]:
+    """The heads ``engine`` reads in an expression as written, with their arities.
+
+    These are the engine's operators and the functions its config defines (a SimpliPy config's
+    ``defined_functions:`` section, such as ``sqrt``). The engine reads, prices and evaluates a
+    defined function at its own head, and its value is the definition's (``sqrt`` evaluates as
+    ``rootn(u, 2)``). An engine whose config defines nothing, or a SimpliPy that predates the
+    section, reads its operators only.
+    """
+    defined = getattr(engine, "defined_functions", None) or {}
+    return {**engine.operator_arity, **{str(name): int(spec["arity"]) for name, spec in defined.items()}}
+
+
+def spell_square_roots(tokens: list[str], operator_arity: dict[str, int]) -> list[str]:
+    """``tokens`` with every ``sqrt u`` written ``rootn u 2``, unless the engine defines ``sqrt``.
+
+    ``operator_arity`` is the engine's :func:`written_arity`. An engine that defines ``sqrt``
+    reads the head as written, and the tokens come back as they are. An engine without the
+    definition has no such head, and the root is written with the operator it has
+    (:func:`desugar_sqrt`, which raises ``ValueError`` when its walk cannot place an argument).
+    """
+    if "sqrt" in operator_arity:
+        return list(tokens)
+    return desugar_sqrt(tokens, operator_arity)
 
 
 def tagged_canonical(engine: SimpliPyEngine, expression: Sequence[str],
