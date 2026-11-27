@@ -150,6 +150,12 @@ RULE_FIXES = {
     ("fresh-55", "F7"): {"variables": {"y": {"distribution": "equidistant grid E[-50,5], N = 30 points per dimension, "
                                                              "endpoints included (the authors' CSV; the paper's Table 6 "
                                                              "prints [-5, 5])", "low": -50.0}}},
+    # PhySO Appendix B, its natural-constant demos (demos_natural_const_discovery @bfbfa88): the scripts that produced
+    # the published results fix E2 = 3.5 (the constant to discover; the paper's Table 10 lists E2 as an input on [1, 5])
+    # and use h = 6.123 (the paper prints 6.626)
+    ("fresh-57", "appb-wave-interference"): {"formula": "E_1 + 3.5 + 2*sqrt(3.5*E_1)*cos(dPhi)", "drop_variables": ["E_2"]},
+    ("fresh-57", "appb-black-body-photon-count"): {"formula": "1/(exp(6.123*nu/(1.123*T)) - 1)",
+                                                   "constants": {"h": 6.123, "kb": 1.123}},
 }
 
 
@@ -187,7 +193,9 @@ def fixed(p: dict[str, Any]) -> dict[str, Any]:
     for fix in (RECORD_FIXES.get((p["set"], p["id"])), RULE_FIXES.get((p["set"], p["id"]))):
         if not fix:
             continue
-        out.update({k: v for k, v in fix.items() if k not in ("why", "variables")})
+        out.update({k: v for k, v in fix.items() if k not in ("why", "variables", "drop_variables")})
+        if fix.get("drop_variables"):                      # an input the authors' code fixes to a value
+            out["variables"] = [v for v in out["variables"] if v["name"] not in fix["drop_variables"]]
         if fix.get("variables"):
             patch = fix["variables"]
             missing = set(patch) - {v["name"] for v in out["variables"]}

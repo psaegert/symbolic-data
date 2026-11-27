@@ -143,3 +143,40 @@ def test_apply_writes_benchmark_star_notes_and_flags_and_removes_record_ids(tmp_
 def test_running_part_of_a_benchmark_earns_no_star():
     assert not T.starred_by({"changes": [{"kind": "part", "problems": 3, "text": "x"}]})
     assert all(T.starred_by({"changes": [{"kind": k, "problems": 1, "text": "x"}]}) for k in ("changed", "filled", "kept"))
+
+
+# ------------------------------------------------------------------------------------------------ the review round
+def test_a_catalog_whose_problems_changed_carries_its_bumped_version():
+    for name, version in P.VERSIONS.items():
+        path = REPO / "assets/catalogs" / f"{name}.yaml"
+        if path.exists():
+            assert yaml.safe_load(path.read_text().split("\nexpressions:", 1)[0])["metadata"]["version"] == version, name
+        elif (REPO / "assets/catalogs" / f"{name}.npz").exists():
+            from symbolic_data import catalog_metadata
+            assert catalog_metadata(REPO / "assets/catalogs" / f"{name}.npz")["version"] == version, name
+
+
+def test_a_data_build_with_another_pandas_stops(monkeypatch):
+    monkeypatch.setattr(P, "build_environment", lambda: {"pandas": "0.0.1"})
+    monkeypatch.delenv("SYMBOLIC_DATA_ANY_PANDAS", raising=False)
+    with pytest.raises(SystemExit, match="pandas"):
+        P.check_build_environment()
+    monkeypatch.setenv("SYMBOLIC_DATA_ANY_PANDAS", "1")
+    assert P.check_build_environment()["pandas"] == "0.0.1"
+
+
+def test_physo_appendix_b_follows_the_authors_scripts():
+    wave = F.fixed(_record("fresh-57", "appb-wave-interference"))
+    assert [v["name"] for v in wave["variables"]] == ["E_1", "dPhi"] and "3.5" in wave["formula"]
+    planck = F.fixed(_record("fresh-57", "appb-black-body-photon-count"))
+    assert "6.123" in planck["formula"]
+
+
+def test_all_27_kan_formulas_have_inputs_and_the_20_draw_ai_feynman_variables():
+    kan = [p for p in P.final_problems() if p["set"] == "interrupted-6"]
+    assert len(kan) == 21                                          # 1 + 20 (the 6 others are copies of feynman entries)
+    i918 = next(p for p in kan if p["id"] == "I.9.18")
+    variables, latent, _ = F.inputs_of(F.fixed(i918))
+    assert variables["v1"]["expr"] == "m2/m1" and latent["x1"]["sample_range"] == [3.0, 4.0]
+    doc = yaml.safe_load((REPO / "assets/catalogs/kan-feynman-no-units-subset.yaml").read_text())
+    assert len(doc["expressions"]) == 27

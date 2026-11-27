@@ -1,11 +1,12 @@
 metadata:
   name: physo-astrophysical-case-studies
-  version: 1
+  version: 2
   benchmark: "physo-astrophysical-case-studies"
   tags: {"origin": "science formula", "tags": []}
   license: "CC BY 4.0 (Tenachi et al. 2023, ApJ 959:99, arXiv:2303.03192, Appendices A-B) + MIT (WassimTenachi/PhySO)"
   citation: {"paper": {"short": "Tenachi et al. 2023", "title": "Deep Symbolic Regression for Physics Guided by Units Constraints: Toward the Automated Discovery of Physical Laws", "venue": "The Astrophysical Journal 959(2):99", "url": "https://doi.org/10.3847/1538-4357/ad014c"}}
   srbf_changes: [{"kind": "part", "problems": 3, "text": "srbf runs 9 of the 12 problems here; the NFW profile and the expansion law are in 'PhySO astrophysics', and the Pantheon supernova task fits a function through an integral, not y = f(x)."}]
+  srbf_notes: ["Paper and code differ: Wave interference fixes E2 = 3.5, as the authors' script does (the constant the demo discovers); the paper's Table 10 lists E2 as an input on [1, 5].", "Paper and code differ: The black-body photon count uses h = 6.123, as the authors' script does; the paper prints h = 6.626."]
   description: PhySO astrophysical case studies
   sources:
   - https://arxiv.org/abs/2303.03192
@@ -257,8 +258,8 @@ expressions:
     meta:
       finite_fraction: 1.0
   appb-black-body-photon-count:
-    raw: 1/(exp(6.626*nu/(1.123*T)) - 1)
-    prepared: 1/(exp(5.90026714158504*v1/v2) - 1)
+    raw: 1/(exp(6.123*nu/(1.123*T)) - 1)
+    prepared: 1/(exp(5.45235975066785*v1/v2) - 1)
     n_variables: 2
     subset: constants-of-nature
     vars:
@@ -286,9 +287,9 @@ expressions:
     meta:
       finite_fraction: 1.0
   appb-wave-interference:
-    raw: E_1 + E_2 + 2*sqrt(E_1*E_2)*cos(dPhi)
-    prepared: v1 + v2 + 2*sqrt(v1*v2)*cos(v3)
-    n_variables: 3
+    raw: E_1 + 3.5 + 2*sqrt(3.5*E_1)*cos(dPhi)
+    prepared: 3.74165738677394*sqrt(v1)*cos(v2) + v1 + 3.5
+    n_variables: 2
     subset: constants-of-nature
     vars:
       v1:
@@ -300,14 +301,6 @@ expressions:
         - uni
         - pos
       v2:
-        name: E_2
-        sample_range:
-        - 1.0
-        - 5.0
-        sample_type:
-        - uni
-        - pos
-      v3:
         name: dPhi
         sample_range:
         - -5.0
@@ -319,7 +312,6 @@ expressions:
         name: y
     input_distributions:
       E_1: uniform U[1.0,5.0]
-      E_2: uniform U[1.0,5.0]
       dPhi: uniform U[-5.0,5.0]
     meta:
       finite_fraction: 1.0

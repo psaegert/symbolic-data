@@ -1,13 +1,13 @@
 {
  "what": "every problem set of srbf's next release (181 catalogs in 145 benchmarks; names are the stable keys, a '*' goes only into display names; srbf averages by benchmark)",
- "branch": "symbolic-data feat/audit-fixes @ 8e2790b",
+ "branch": "symbolic-data feat/audit-fixes @ d1c13cf",
  "generated": "2026-11-28 (owner rulings: scope y = f(x) on one data set; formulas as written; additions LLM-SR oscillators, BMS Rössler, Brum et al.; compilations kept whole; averaging by benchmark)",
  "totals": {
   "sets": 181,
   "benchmarks": 145,
-  "problems": 14251,
+  "problems": 14271,
   "problems_by_kind": {
-   "formula": 13178,
+   "formula": 13198,
    "data": 1073
   },
   "subsets": 255,
@@ -264,7 +264,7 @@
    "display_name": "ai-hilbert-problem-set",
    "benchmark": "ai-hilbert",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 9,
    "subsets": {
     "all": 9
@@ -305,7 +305,7 @@
    "display_name": "AutoRA synthetic behavioural-science models (autora-synthetic: Weber-Fechner, Stevens power law, exponential learning, Luce choice ratio, expected value theory, prospect theory) (pinned points)",
    "benchmark": "autora-synthetic-behavioural-science-models",
    "kind": "data",
-   "version": 1,
+   "version": 2,
    "problems": 7,
    "subsets": {
     "Psychophysics": 2,
@@ -507,7 +507,7 @@
    "display_name": "CP3-bench cosmology*",
    "benchmark": "cp3-bench",
    "kind": "data",
-   "version": 1,
+   "version": 2,
    "problems": 28,
    "subsets": {
     "all": 28
@@ -528,7 +528,7 @@
    "display_name": "CP3-bench standard tuning datasets (pinned points)",
    "benchmark": "cp3-bench",
    "kind": "data",
-   "version": 1,
+   "version": 2,
    "problems": 4,
    "subsets": {
     "all": 4
@@ -616,7 +616,7 @@
    "display_name": "dgsr-additional-feynman",
    "benchmark": "dgsr-additional-feynman",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 32,
    "subsets": {
     "all": 8,
@@ -636,7 +636,7 @@
    "display_name": "dgsr-feynman-d-2-d-5-subsets",
    "benchmark": "dgsr-feynman-d-2-d-5-subsets",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 15,
    "subsets": {
     "all": 2,
@@ -783,7 +783,7 @@
    "display_name": "dso-benchmark-registry",
    "benchmark": "dso-benchmark-registry",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 4,
    "subsets": {
     "all": 4
@@ -1851,7 +1851,7 @@
    "display_name": "HEP LLM-SR angular-distribution problems*",
    "benchmark": "hep-llm-sr-angular-distribution-problems",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 2,
    "subsets": {
     "all": 2
@@ -1913,7 +1913,7 @@
    "display_name": "heuristiclab-regression-instance-providers",
    "benchmark": "heuristiclab-regression-instance-providers",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 13,
    "subsets": {
     "all": 13
@@ -2037,21 +2037,23 @@
   },
   {
    "name": "kan-feynman-no-units-subset",
-   "display_name": "kan-feynman-no-units-subset",
+   "display_name": "kan-feynman-no-units-subset*",
    "benchmark": "kan-feynman-no-units-subset",
    "kind": "formula",
-   "version": 1,
-   "problems": 7,
+   "version": 2,
+   "problems": 27,
    "subsets": {
     "all": 1,
-    "kan-feynman-no-units": 6
+    "kan-feynman-no-units": 26
    },
    "where": "symbolic-data assets/catalogs",
    "file": "kan-feynman-no-units-subset.yaml",
    "repo": "psaegert/symbolic-data-assets",
    "tags": {
     "origin": "science formula",
-    "tags": []
+    "tags": [
+     "srbf-modified"
+    ]
    },
    "license": "CC BY 4.0 (Liu et al. 2024, KAN, arXiv:2404.19756, Table 2)"
   },
@@ -2939,7 +2941,7 @@
    "display_name": "PhyE2E space-physics applications*",
    "benchmark": "phye2e-space-physics",
    "kind": "data",
-   "version": 1,
+   "version": 2,
    "problems": 3,
    "subsets": {
     "all": 3
@@ -3002,7 +3004,7 @@
    "display_name": "physo-astrophysical-case-studies",
    "benchmark": "physo-astrophysical-case-studies",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 9,
    "subsets": {
     "astrophysical-case-studies": 4,
@@ -3163,7 +3165,7 @@
    "display_name": "rsrm-constant-optimization-benchmark*",
    "benchmark": "rsrm",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 97,
    "subsets": {
     "all": 93,
@@ -3294,7 +3296,7 @@
    "display_name": "scrbenchmark*",
    "benchmark": "scrbenchmark",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 120,
    "subsets": {
     "hard": 45,
@@ -3380,7 +3382,7 @@
    "display_name": "shape-constrained-sr-synthetic*",
    "benchmark": "shape-constrained-sr",
    "kind": "formula",
-   "version": 1,
+   "version": 2,
    "problems": 19,
    "subsets": {
     "all": 7,

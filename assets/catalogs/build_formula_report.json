@@ -2471,11 +2471,11 @@
  },
  "interrupted-6": {
   "catalog": "kan-feynman-no-units-subset",
-  "problems": 1,
-  "built": 7,
+  "problems": 21,
+  "built": 27,
   "pinned_points": 0,
   "raw_vs_prepared": {
-   "checked": 1,
+   "checked": 21,
    "allowed": {},
    "unchecked": {}
   },

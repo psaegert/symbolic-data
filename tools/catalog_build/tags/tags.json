@@ -49,7 +49,7 @@
  },
  {
   "catalog": "erbench-syneq",
-  "display_name": "erbench-syneq",
+  "display_name": "erbench-syneq*",
   "kind": "formula",
   "problems": 1024,
   "file": "assets/catalogs/erbench-syneq.yaml",
@@ -121,7 +121,7 @@
  },
  {
   "catalog": "erbench-oeis",
-  "display_name": "erbench-oeis",
+  "display_name": "erbench-oeis*",
   "kind": "formula",
   "problems": 1024,
   "file": "assets_sa/catalogs/erbench-oeis.yaml",
@@ -169,7 +169,7 @@
  },
  {
   "catalog": "symbolicgpt-bivariate-set",
-  "display_name": "symbolicgpt-bivariate-set",
+  "display_name": "symbolicgpt-bivariate-set*",
   "kind": "formula",
   "problems": 1023,
   "file": "assets/catalogs/symbolicgpt-bivariate-set.yaml",
@@ -209,7 +209,7 @@
  },
  {
   "catalog": "symbolicgpt-test-sets",
-  "display_name": "symbolicgpt-test-sets",
+  "display_name": "symbolicgpt-test-sets*",
   "kind": "formula",
   "problems": 988,
   "file": "assets/catalogs/symbolicgpt-test-sets.yaml",
@@ -281,7 +281,7 @@
  },
  {
   "catalog": "erbench-eponymous",
-  "display_name": "erbench-eponymous",
+  "display_name": "erbench-eponymous*",
   "kind": "formula",
   "problems": 585,
   "file": "assets_sa/catalogs/erbench-eponymous.yaml",
@@ -481,7 +481,7 @@
  },
  {
   "catalog": "nsrwh-only-five-variables-nc",
-  "display_name": "nsrwh-only-five-variables-nc",
+  "display_name": "nsrwh-only-five-variables-nc*",
   "kind": "formula",
   "problems": 301,
   "file": "assets/catalogs/nsrwh-only-five-variables-nc.yaml",
@@ -791,7 +791,7 @@
  },
  {
   "catalog": "lasr-noisy-feynman-with-distractors",
-  "display_name": "lasr-noisy-feynman-with-distractors",
+  "display_name": "lasr-noisy-feynman-with-distractors*",
   "kind": "formula",
   "problems": 100,
   "file": "assets/catalogs/lasr-noisy-feynman-with-distractors.yaml",
@@ -901,7 +901,7 @@
  },
  {
   "catalog": "ai-feynman-database-100-main-equations",
-  "display_name": "ai-feynman-database-100-main-equations",
+  "display_name": "ai-feynman-database-100-main-equations*",
   "kind": "formula",
   "problems": 74,
   "file": "assets/catalogs/ai-feynman-database-100-main-equations.yaml",
@@ -1324,6 +1324,30 @@
   "notes": "Noise-free rows along simulated trajectories (the authors' noise study is not run). 21 of 28 problems leave a state unused because each derivative is fitted with all of its system's states as inputs, as in SRBench's Strogatz set; not tagged 'dummy inputs' (eql-double-pendulum precedent). No split."
  },
  {
+  "catalog": "kan-feynman-no-units-subset",
+  "display_name": "kan-feynman-no-units-subset",
+  "kind": "formula",
+  "problems": 27,
+  "file": "assets/catalogs/kan-feynman-no-units-subset.yaml",
+  "origin": "science formula",
+  "origin_source": "sets/interrupted-6.json notes: KAN Table 2 dimensionless Feynman formulas; built member I.16.6, (a+b)/(1+a*b) (relativistic velocity addition), u, v in (-1,1)",
+  "origin_proposal": null,
+  "tags": [
+   "srbf-modified"
+  ],
+  "detail": {
+   "srbf-modified": {
+    "share": [
+     27,
+     27
+    ],
+    "source": "the catalog files"
+   }
+  },
+  "below_half": {},
+  "notes": null
+ },
+ {
   "catalog": "livermore",
   "display_name": "livermore*",
   "kind": "formula",
@@ -1381,7 +1405,7 @@
  },
  {
   "catalog": "ddrsr-simple-test-and-complex-test",
-  "display_name": "ddrsr-simple-test-and-complex-test",
+  "display_name": "ddrsr-simple-test-and-complex-test*",
   "kind": "formula",
   "problems": 20,
   "file": "assets/catalogs/ddrsr-simple-test-and-complex-test.yaml",
@@ -1611,7 +1635,7 @@
  },
  {
   "catalog": "sym-q-ai-feynman-with-drift-terms",
-  "display_name": "sym-q-ai-feynman-with-drift-terms",
+  "display_name": "sym-q-ai-feynman-with-drift-terms*",
   "kind": "formula",
   "problems": 15,
   "file": "assets/catalogs/sym-q-ai-feynman-with-drift-terms.yaml",
@@ -1697,7 +1721,7 @@
  },
  {
   "catalog": "chen-luo-jiang-block-building-test-cases",
-  "display_name": "chen-luo-jiang-block-building-test-cases",
+  "display_name": "chen-luo-jiang-block-building-test-cases*",
   "kind": "formula",
   "problems": 13,
   "file": "assets/catalogs/chen-luo-jiang-block-building-test-cases.yaml",
@@ -2063,7 +2087,7 @@
  },
  {
   "catalog": "evomo-sr-random-expression-datasets-p1-p4",
-  "display_name": "evomo-sr-random-expression-datasets-p1-p4",
+  "display_name": "evomo-sr-random-expression-datasets-p1-p4*",
   "kind": "formula",
   "problems": 8,
   "file": "assets/catalogs/evomo-sr-random-expression-datasets-p1-p4.yaml",
@@ -2125,7 +2149,7 @@
  },
  {
   "catalog": "coevolved-fitness-predictors-test-problems-points",
-  "display_name": "Coevolved fitness predictors test problems* (pinned points)",
+  "display_name": "Coevolved fitness predictors test problems* (pinned points)*",
   "kind": "data",
   "problems": 8,
   "file": "assets/catalogs/coevolved-fitness-predictors-test-problems-points.npz",
@@ -2165,7 +2189,7 @@
  },
  {
   "catalog": "keijzer-points",
-  "display_name": "keijzer (pinned points)",
+  "display_name": "keijzer (pinned points)*",
   "kind": "data",
   "problems": 8,
   "file": "assets/catalogs/keijzer-points.npz",
@@ -2238,20 +2262,6 @@
     "source": "formula YAML test_source (ERRLESS App. B.1, Sec. 5.1): '20 training points from the training range, 100 noise-free test points from the wider test range (an extrapolation test ...)'"
    }
   },
-  "below_half": {},
-  "notes": null
- },
- {
-  "catalog": "kan-feynman-no-units-subset",
-  "display_name": "kan-feynman-no-units-subset",
-  "kind": "formula",
-  "problems": 7,
-  "file": "assets/catalogs/kan-feynman-no-units-subset.yaml",
-  "origin": "science formula",
-  "origin_source": "sets/interrupted-6.json notes: KAN Table 2 dimensionless Feynman formulas; built member I.16.6, (a+b)/(1+a*b) (relativistic velocity addition), u, v in (-1,1)",
-  "origin_proposal": null,
-  "tags": [],
-  "detail": {},
   "below_half": {},
   "notes": null
  },
@@ -2445,7 +2455,7 @@
  },
  {
   "catalog": "r-rationals-points",
-  "display_name": "r-rationals (pinned points)",
+  "display_name": "r-rationals (pinned points)*",
   "kind": "data",
   "problems": 6,
   "file": "assets/catalogs/r-rationals-points.npz",
@@ -2587,7 +2597,7 @@
  },
  {
   "catalog": "erbench-public-legacy-formulas",
-  "display_name": "erbench-public-legacy-formulas",
+  "display_name": "erbench-public-legacy-formulas*",
   "kind": "formula",
   "problems": 5,
   "file": "assets/catalogs/erbench-public-legacy-formulas.yaml",
@@ -2641,7 +2651,7 @@
  },
  {
   "catalog": "kan-toy-functions",
-  "display_name": "kan-toy-functions",
+  "display_name": "kan-toy-functions*",
   "kind": "formula",
   "problems": 5,
   "file": "assets/catalogs/kan-toy-functions.yaml",
@@ -3009,7 +3019,7 @@
  },
  {
   "catalog": "gp-benchmarks-sr-table-points",
-  "display_name": "GP benchmarks SR table (McDermott et al. 2012) (pinned points)",
+  "display_name": "GP benchmarks SR table (McDermott et al. 2012) (pinned points)*",
   "kind": "data",
   "problems": 3,
   "file": "assets/catalogs/gp-benchmarks-sr-table-points.npz",
@@ -3049,7 +3059,7 @@
  },
  {
   "catalog": "rsrm-gaussian-cdf-extrapolation-test-points",
-  "display_name": "RSRM Gaussian-CDF extrapolation test (pinned points)",
+  "display_name": "RSRM Gaussian-CDF extrapolation test (pinned points)*",
   "kind": "data",
   "problems": 3,
   "file": "assets/catalogs/rsrm-gaussian-cdf-extrapolation-test-points.npz",
@@ -3548,7 +3558,7 @@
  },
  {
   "catalog": "nguyen-c-points",
-  "display_name": "Nguyen-c (SPL variant) (pinned points)",
+  "display_name": "Nguyen-c (SPL variant) (pinned points)*",
   "kind": "data",
   "problems": 2,
   "file": "assets/catalogs/nguyen-c-points.npz",
@@ -3588,7 +3598,7 @@
  },
  {
   "catalog": "vladislavleva-points",
-  "display_name": "vladislavleva (pinned points)",
+  "display_name": "vladislavleva (pinned points)*",
   "kind": "data",
   "problems": 2,
   "file": "assets/catalogs/vladislavleva-points.npz",
@@ -3988,7 +3998,7 @@
  },
  {
   "catalog": "ai-feynman-2-0-modular-equations",
-  "display_name": "ai-feynman-2-0-modular-equations",
+  "display_name": "ai-feynman-2-0-modular-equations*",
   "kind": "formula",
   "problems": 1,
   "file": "assets/catalogs/ai-feynman-2-0-modular-equations.yaml",
@@ -4068,7 +4078,7 @@
  },
  {
   "catalog": "symbolicregression-com-toy-test-suite-1",
-  "display_name": "symbolicregression-com-toy-test-suite-1",
+  "display_name": "symbolicregression-com-toy-test-suite-1*",
   "kind": "formula",
   "problems": 1,
   "file": "assets/catalogs/symbolicregression-com-toy-test-suite-1.yaml",
@@ -4100,7 +4110,7 @@
  },
  {
   "catalog": "bms-synthetic-prior-expression-and-bessel-functions-points",
-  "display_name": "BMS synthetic prior expression and Bessel functions* (pinned points)",
+  "display_name": "BMS synthetic prior expression and Bessel functions* (pinned points)*",
   "kind": "data",
   "problems": 1,
   "file": "assets/catalogs/bms-synthetic-prior-expression-and-bessel-functions-points.npz",
@@ -4292,7 +4302,7 @@
  },
  {
   "catalog": "nonic-points",
-  "display_name": "nonic (pinned points)",
+  "display_name": "nonic (pinned points)*",
   "kind": "data",
   "problems": 1,
   "file": "assets/catalogs/nonic-points.npz",
@@ -4324,7 +4334,7 @@
  },
  {
   "catalog": "pagie-points",
-  "display_name": "pagie (pinned points)",
+  "display_name": "pagie (pinned points)*",
   "kind": "data",
   "problems": 1,
   "file": "assets/catalogs/pagie-points.npz",

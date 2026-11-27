@@ -831,9 +831,9 @@
   "authors_total": 27,
   "changes": [
    {
-    "kind": "part",
+    "kind": "filled",
     "problems": 20,
-    "text": "srbf runs 7 of the 27 formulas: for the other 20 the authors give no input range (the paper states one only for I.16.6, and its author points to the AI Feynman database, whose dimensionless files are a re-derivation that does not match these formulas one to one)."
+    "text": "The authors give no input range for 20 of the 27 formulas (the paper states one only for I.16.6; its author points to the AI Feynman database). srbf draws each dimensionless input as the paper's Table 2 reduces it from AI Feynman's dimensional variables (e.g. a = m2/m1), those drawn on AI Feynman's ranges (a push-forward)."
    }
   ],
   "follows_first_publication": [],
@@ -1274,7 +1274,11 @@
     "text": "srbf runs 9 of the 12 problems here; the NFW profile and the expansion law are in 'PhySO astrophysics', and the Pantheon supernova task fits a function through an integral, not y = f(x)."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "Wave interference fixes E2 = 3.5, as the authors' script does (the constant the demo discovers); the paper's Table 10 lists E2 as an input on [1, 5].",
+   "The black-body photon count uses h = 6.123, as the authors' script does; the paper prints h = 6.626."
+  ]
  },
  {
   "catalog": "poly",
