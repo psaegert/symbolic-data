@@ -46,7 +46,8 @@ them, where the benchmark's authors draw them unconditionally.
   at the first that passes) reaches numeric recovery on the held-out points and (c) srbf's judge recognizes that
   restart's refitted formula symbolically (`srbf.draw_acceptance`). An attempt fails only when no restart passes
   both, and the document records the kind of each failed attempt (`failures`: `not_finite`, `fvu_undefined`,
-  `no_prediction`, `numeric` or `symbolic`, the first check it failed).
+  `no_prediction`, `numeric` or `symbolic`, the first check it failed; `time` when the attempt reached srbf's CPU-time
+  cap per attempt, `srbf.headline.T_MAX`, before any restart passed).
 - When no attempt within `max_trials` is accepted, the problem keeps attempt 1 and is flagged `formula_inherent`:
   what defeats recovery is the formula (or the method), not the luck of the draw.
 - Formulas that are constants by construction (skeleton `<constant>`), data problems and stored problems are not
