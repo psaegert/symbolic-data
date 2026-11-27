@@ -219,37 +219,34 @@
     "text": "srbf runs 12 of the 13 functions, each with its interpolation and extrapolation test; E8 is the Pagie function and is run in srbf's Pagie and Neat sets, where its extrapolation test is not used."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "Where the paper's printed ranges differ from the authors' generator (E2, E3, E9, E10), srbf follows the generator, which produced the published results."
+  ]
  },
  {
   "catalog": "dgsr-additional-feynman",
   "authors_total": 32,
-  "changes": [
-   {
-    "kind": "part",
-    "problems": 24,
-    "text": "srbf runs 8 of the 32 problems: the other 24 are identical to problems srbf already runs in its Feynman sets."
-   }
-  ],
-  "follows_first_publication": []
+  "changes": [],
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "A-32 draws its inputs on U(1, 3), as the authors' code and experiment log do; the paper's Table 35 prints U(4, 6)."
+  ]
  },
  {
   "catalog": "dgsr-feynman-d-2-d-5-subsets",
   "authors_total": 15,
-  "changes": [
-   {
-    "kind": "part",
-    "problems": 13,
-    "text": "srbf runs 2 of the 15 problems: the other 13 are identical to problems srbf already runs in its Feynman set."
-   }
-  ],
+  "changes": [],
   "follows_first_publication": []
  },
  {
   "catalog": "dgsr-synthetic-d-12",
   "authors_total": 7,
   "changes": [],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "Paper and code disagree on 6 of the 7 formulas; srbf uses the code's rows, which the published runs used."
+  ]
  },
  {
   "catalog": "dso-benchmark-registry",
@@ -748,16 +745,25 @@
   "changes": [
    {
     "kind": "part",
-    "problems": 26,
-    "text": "srbf runs 1 of the 27 formulas: 20 have no input range from the authors, and 6 are identical to problems srbf runs in its Feynman set."
+    "problems": 20,
+    "text": "srbf runs 7 of the 27 formulas: for the other 20 the authors give no input range (the paper states one only for I.16.6, and its author points to the AI Feynman database, whose dimensionless files are a re-derivation that does not match these formulas one to one)."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "I.16.6 draws a = u/c and b = v/c as in the AI Feynman without-units data the authors point to (u, v and c on [1, 5]); the paper states (-1, 1)."
+  ]
  },
  {
   "catalog": "kan-toy-functions",
   "authors_total": 5,
-  "changes": [],
+  "changes": [
+   {
+    "kind": "filled",
+    "problems": 3,
+    "text": "For three of the five functions no input range is published; srbf uses U[-1, 1], the default of the authors' generator (pykan's create_dataset)."
+   }
+  ],
   "follows_first_publication": []
  },
  {
@@ -1191,11 +1197,6 @@
   "authors_total": 97,
   "changes": [
    {
-    "kind": "part",
-    "problems": 4,
-    "text": "srbf runs 93 of the 97 pairs of expression and input range: 4 are identical to problems srbf runs in its Constant and Keijzer sets."
-   },
-   {
     "kind": "filled",
     "problems": 93,
     "text": "The appendix gives only a range for the inputs, not how points are spread over it or whether all inputs share it; srbf samples every input uniformly on the same range."
@@ -1256,11 +1257,6 @@
   "authors_total": 120,
   "changes": [
    {
-    "kind": "part",
-    "problems": 105,
-    "text": "srbf runs 15 of the 120 equations: the other 105 are identical to problems srbf runs in FastSRB and SRSD-dummy."
-   },
-   {
     "kind": "changed",
     "problems": 15,
     "text": "srbf uses neither the shape constraints that define this benchmark nor its fixed validation sets (uniform over each input's range); it tests on new points from the training distribution."
@@ -1290,17 +1286,15 @@
   "authors_total": 19,
   "changes": [
    {
-    "kind": "part",
-    "problems": 12,
-    "text": "srbf runs 7 of the 19 problems: the other 12 are identical to problems in srbf's Feynman sets."
-   },
-   {
     "kind": "changed",
     "problems": 7,
     "text": "srbf does not check the shape constraints that the authors set for each problem."
    }
   ],
-  "follows_first_publication": []
+  "follows_first_publication": [],
+  "paper_vs_code": [
+   "The three FDE problems use the boxes and formulas of the authors' generators (HeuristicLab), which produced the data (Flow psi with sin(pi theta/180)); the paper's tables print wider input spaces and sin(theta/(2 pi))."
+  ]
  },
  {
   "catalog": "sine-points",

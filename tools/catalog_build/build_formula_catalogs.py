@@ -123,10 +123,74 @@ RECORD_FIXES = {
 }
 
 
+# Where paper and code (or data) differ, srbf follows what produced the authors' published results, their code or data,
+# and notes the paper's version (owner 2026-11-27; tags/rule_applications.json lists every instance). These flip
+# earlier readings that followed the paper; each patches the named inputs of the record.
+_U13 = "U[1, 3] (the authors' code and experiment log; the paper's Table 35 prints U(4, 6))"
+RULE_FIXES = {
+    ("interrupted-5", "Feynman-A-32"): {"variables": {v: {"distribution": _U13, "low": 1.0, "high": 3.0}
+                                                      for v in ("x1", "x2", "x3", "x4")}},
+    ("interrupted-6", "I.16.6"): {"variables": {
+        "a": {"distribution": "derived: a = u/c with u ~ U[1, 5], c ~ U[1, 5] (the AI Feynman without-units data the "
+                              "authors point to; the paper states (-1, 1))"},
+        "b": {"distribution": "derived: b = v/c with v ~ U[1, 5], c ~ U[1, 5] (the AI Feynman without-units data the "
+                              "authors point to; the paper states (-1, 1))"}}},
+    ("fresh-30", "Korns-15"): {"variables": {v: {"distribution": "uniform U[0, 50] (the registry's own range; Korns 2011 "
+                                                                 "uses [-50, 50])", "low": 0.0, "high": 50.0}
+                                             for v in ("x0", "x1", "x2", "x3", "x4")}},
+    ("fresh-4", "kepler_missing_axioms"): {"variables": {v: {"distribution": "U[0.5, 2.0] (the data the authors' notebook "
+                                                                             "reads; their script data_gen_kepler.py "
+                                                                             "draws U[0.5, 3.0])", "low": 0.5, "high": 2.0}
+                                                         for v in ("m1", "m2")}},
+    ("critic-2", "weber_fechner_law"): {"constraints": ["S1 <= S2"]},
+    ("fresh-55", "F7"): {"variables": {"y": {"distribution": "equidistant grid E[-50,5], N = 30 points per dimension, "
+                                                             "endpoints included (the authors' CSV; the paper's Table 6 "
+                                                             "prints [-5, 5])", "low": -50.0}}},
+}
+
+
+def residues() -> dict[str, dict[str, Any]]:
+    """The members of the compilations the survey cut to what srbf did not hold yet (residues_2026-11.json), by set:
+    each with the srbf problem it is identical to (``copy_of``: catalog:key). srbf keeps every compilation whole as
+    published (owner 2026-11-27), so these are copied into the compilation's catalog under its own id and subset."""
+    path = paths.PREP / "residues_2026-11.json"
+    return json.loads(path.read_text())["sets"] if path.exists() else {}
+
+
+_SOURCES: dict[str, dict[str, Any]] = {}
+
+
+def copied(member: dict[str, Any], out: Path) -> dict[str, Any]:
+    """A residue member's entry: the identical srbf problem's entry (FastSRB at its default version), with the
+    compilation's subset and a note of what it is the same as."""
+    catalog, key = member["copy_of"].split(":", 1)
+    if catalog not in _SOURCES:
+        name = VERSIONED_DEFAULT.get(catalog, catalog)
+        _SOURCES[catalog] = yaml.safe_load((paths.CATALOGS / f"{name}.yaml").read_text())["expressions"]
+    entry = json.loads(json.dumps(_SOURCES[catalog][key]))                    # a deep copy
+    entry["subset"] = member["subset"]
+    entry.setdefault("meta", {})["same_as"] = f"{catalog}:{key}"
+    return entry
+
+
+VERSIONED_DEFAULT = {"fastsrb": "fastsrb.v2"}     # the file of a catalog's default version
+
+
 def fixed(p: dict[str, Any]) -> dict[str, Any]:
-    """The problem's record with its transcription fix (RECORD_FIXES) applied."""
-    fix = RECORD_FIXES.get((p["set"], p["id"]))
-    return {**p, **{k: v for k, v in fix.items() if k != "why"}} if fix else p
+    """The problem's record with its transcription fix (RECORD_FIXES) and paper-vs-code fix (RULE_FIXES) applied; a
+    ``variables`` patch updates the named inputs."""
+    out = dict(p)
+    for fix in (RECORD_FIXES.get((p["set"], p["id"])), RULE_FIXES.get((p["set"], p["id"]))):
+        if not fix:
+            continue
+        out.update({k: v for k, v in fix.items() if k not in ("why", "variables")})
+        if fix.get("variables"):
+            patch = fix["variables"]
+            missing = set(patch) - {v["name"] for v in out["variables"]}
+            if missing:
+                raise KeyError(f"{p['set']}:{p['id']}: no inputs {sorted(missing)}")
+            out["variables"] = [{**v, **patch.get(v["name"], {})} for v in out["variables"]]
+    return out
 
 
 class Unsupported(Exception):
@@ -953,12 +1017,14 @@ def main() -> None:
                 skipped[p["id"]] = str(why)
             except Exception as exc:                      # a formula sympy cannot read, ...
                 skipped[p["id"]] = f"{type(exc).__name__}: {exc}"[:200]
+        for member in residues().get(tag, {}).get("members", []):      # a compilation kept whole (2026-11-27)
+            entries[member["id"]] = copied(member, out)
         if pinned:
             from symbolic_data.catalog import ProblemCatalog
             modified = {"modified_by_srbf": MODIFIED_POINTS[tag]} if tag in MODIFIED_POINTS else {}
             ProblemCatalog.from_problems(pinned, name=f"{slug}-points", version=1, meta={
-                "display_name": points_display, **modified, "kind": "data", "rules": RULES,
-                "source_record": f"catalog-prep/sets/{tag}.json"}).save(out / f"{slug}-points.npz")
+                "display_name": points_display, **modified, "kind": "data", "rules": POINTS_RULES,
+                "test_splits": sorted({json.dumps(q.meta.get("test_split")) for q in pinned})}).save(out / f"{slug}-points.npz")
         differs: dict[str, str] = {}
         failed = check(entries, a.check, engine, differs) if a.check and entries else {}
         differs = {k: v for k, v in differs.items() if k not in failed}      # a dropped entry is reported as failed

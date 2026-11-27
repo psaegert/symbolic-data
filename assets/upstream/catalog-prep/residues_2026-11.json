@@ -1,0 +1,867 @@
+{
+ "note": "The members of six compilations that the survey left out because srbf runs an identical problem in another catalog (residues). srbf keeps every compilation whole as published (2026-11-27): build_formula_catalogs.py copies each member from the catalog named in copy_of, under the compilation's id and subset.",
+ "sets": {
+  "critic-1": {
+   "catalog": "scrbenchmark",
+   "authors_total": 120,
+   "members": [
+    {
+     "id": "FeynmanICh6Eq20a",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.6.2a"
+    },
+    {
+     "id": "FeynmanICh6Eq20",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.6.2"
+    },
+    {
+     "id": "FeynmanICh6Eq20b",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.6.2b"
+    },
+    {
+     "id": "FeynmanICh15Eq3t",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.15.3t"
+    },
+    {
+     "id": "FeynmanICh15Eq3x",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.15.3x"
+    },
+    {
+     "id": "FeynmanICh30Eq3",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.30.3"
+    },
+    {
+     "id": "FeynmanICh32Eq17",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.32.17"
+    },
+    {
+     "id": "FeynmanICh34Eq14",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.34.14"
+    },
+    {
+     "id": "FeynmanICh37Eq4",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.37.4"
+    },
+    {
+     "id": "FeynmanICh39Eq22",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.39.22"
+    },
+    {
+     "id": "FeynmanICh40Eq1",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.40.1"
+    },
+    {
+     "id": "FeynmanICh50Eq26",
+     "subset": "hard",
+     "copy_of": "fastsrb:I.50.26"
+    },
+    {
+     "id": "FeynmanIICh6Eq15a",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.6.15a"
+    },
+    {
+     "id": "FeynmanIICh6Eq15b",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.6.15b"
+    },
+    {
+     "id": "FeynmanIICh11Eq17",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.11.17"
+    },
+    {
+     "id": "FeynmanIICh11Eq20",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.11.20"
+    },
+    {
+     "id": "FeynmanIICh11Eq27",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.11.27"
+    },
+    {
+     "id": "FeynmanIICh11Eq28",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.11.28"
+    },
+    {
+     "id": "FeynmanIICh13Eq23",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.13.23"
+    },
+    {
+     "id": "FeynmanIICh13Eq34",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.13.34"
+    },
+    {
+     "id": "FeynmanIICh35Eq18",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.35.18"
+    },
+    {
+     "id": "FeynmanIICh35Eq21",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.35.21"
+    },
+    {
+     "id": "FeynmanIICh36Eq38",
+     "subset": "hard",
+     "copy_of": "fastsrb:II.36.38"
+    },
+    {
+     "id": "FeynmanIIICh4Eq33",
+     "subset": "hard",
+     "copy_of": "fastsrb:III.4.33"
+    },
+    {
+     "id": "FeynmanIIICh10Eq19",
+     "subset": "hard",
+     "copy_of": "fastsrb:III.10.19"
+    },
+    {
+     "id": "FeynmanBonus2",
+     "subset": "hard",
+     "copy_of": "fastsrb:B2"
+    },
+    {
+     "id": "FeynmanBonus3",
+     "subset": "hard",
+     "copy_of": "fastsrb:B3"
+    },
+    {
+     "id": "FeynmanBonus5",
+     "subset": "hard",
+     "copy_of": "fastsrb:B5"
+    },
+    {
+     "id": "FeynmanBonus6",
+     "subset": "hard",
+     "copy_of": "fastsrb:B6"
+    },
+    {
+     "id": "FeynmanBonus9",
+     "subset": "hard",
+     "copy_of": "fastsrb:B9"
+    },
+    {
+     "id": "FeynmanBonus11",
+     "subset": "hard",
+     "copy_of": "fastsrb:B11"
+    },
+    {
+     "id": "FeynmanBonus12",
+     "subset": "hard",
+     "copy_of": "fastsrb:B12"
+    },
+    {
+     "id": "FeynmanBonus14",
+     "subset": "hard",
+     "copy_of": "fastsrb:B14"
+    },
+    {
+     "id": "FeynmanBonus15",
+     "subset": "hard",
+     "copy_of": "fastsrb:B15"
+    },
+    {
+     "id": "FeynmanBonus16",
+     "subset": "hard",
+     "copy_of": "fastsrb:B16"
+    },
+    {
+     "id": "FeynmanBonus17",
+     "subset": "hard",
+     "copy_of": "fastsrb:B17"
+    },
+    {
+     "id": "FeynmanBonus20",
+     "subset": "hard",
+     "copy_of": "fastsrb:B20"
+    },
+    {
+     "id": "FeynmanICh8Eq14",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.8.14"
+    },
+    {
+     "id": "FeynmanICh10Eq7",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.10.7"
+    },
+    {
+     "id": "FeynmanICh11Eq19",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.11.19"
+    },
+    {
+     "id": "FeynmanICh12Eq1",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.12.1"
+    },
+    {
+     "id": "FeynmanICh12Eq2",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.12.2"
+    },
+    {
+     "id": "FeynmanICh12Eq4",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.12.4"
+    },
+    {
+     "id": "FeynmanICh12Eq5",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.12.5"
+    },
+    {
+     "id": "FeynmanICh13Eq4",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.13.4"
+    },
+    {
+     "id": "FeynmanICh13Eq12",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.13.12"
+    },
+    {
+     "id": "FeynmanICh14Eq3",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.14.3"
+    },
+    {
+     "id": "FeynmanICh14Eq4",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.14.4"
+    },
+    {
+     "id": "FeynmanICh15Eq10",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.15.1"
+    },
+    {
+     "id": "FeynmanICh16Eq6",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.16.6"
+    },
+    {
+     "id": "FeynmanICh18Eq4",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.18.4"
+    },
+    {
+     "id": "FeynmanICh18Eq12",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.18.12"
+    },
+    {
+     "id": "FeynmanICh18Eq16",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.18.14"
+    },
+    {
+     "id": "FeynmanICh24Eq6",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.24.6"
+    },
+    {
+     "id": "FeynmanICh25Eq13",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.25.13"
+    },
+    {
+     "id": "FeynmanICh29Eq4",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.29.4"
+    },
+    {
+     "id": "FeynmanICh32Eq5",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.32.5"
+    },
+    {
+     "id": "FeynmanICh34Eq10",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.34.1"
+    },
+    {
+     "id": "FeynmanICh34Eq8",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.34.8"
+    },
+    {
+     "id": "FeynmanICh34Eq27",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.34.27"
+    },
+    {
+     "id": "FeynmanICh39Eq10",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.39.1"
+    },
+    {
+     "id": "FeynmanICh39Eq11",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.39.11"
+    },
+    {
+     "id": "FeynmanICh41Eq16",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.41.16"
+    },
+    {
+     "id": "FeynmanICh43Eq16",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.43.16"
+    },
+    {
+     "id": "FeynmanICh43Eq31",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.43.31"
+    },
+    {
+     "id": "FeynmanICh43Eq43",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.43.43"
+    },
+    {
+     "id": "FeynmanICh47Eq23",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.47.23"
+    },
+    {
+     "id": "FeynmanICh48Eq2",
+     "subset": "remainder",
+     "copy_of": "fastsrb:I.48.2"
+    },
+    {
+     "id": "FeynmanIICh2Eq42",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.2.42"
+    },
+    {
+     "id": "FeynmanIICh3Eq24",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.3.24"
+    },
+    {
+     "id": "FeynmanIICh4Eq23",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.4.23"
+    },
+    {
+     "id": "FeynmanIICh6Eq11",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.6.11"
+    },
+    {
+     "id": "FeynmanIICh8Eq7",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.8.7"
+    },
+    {
+     "id": "FeynmanIICh8Eq31",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.8.31"
+    },
+    {
+     "id": "FeynmanIICh10Eq9",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.10.9"
+    },
+    {
+     "id": "FeynmanIICh11Eq3",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.11.3"
+    },
+    {
+     "id": "FeynmanIICh13Eq17",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.13.17"
+    },
+    {
+     "id": "FeynmanIICh15Eq4",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.15.4"
+    },
+    {
+     "id": "FeynmanIICh15Eq5",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.15.5"
+    },
+    {
+     "id": "FeynmanIICh21Eq32",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.21.32"
+    },
+    {
+     "id": "FeynmanIICh24Eq17",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.24.17"
+    },
+    {
+     "id": "FeynmanIICh27Eq16",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.27.16"
+    },
+    {
+     "id": "FeynmanIICh27Eq18",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.27.18"
+    },
+    {
+     "id": "FeynmanIICh34Eq2a",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.34.2a"
+    },
+    {
+     "id": "FeynmanIICh34Eq2",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.34.2"
+    },
+    {
+     "id": "FeynmanIICh34Eq11",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.34.11"
+    },
+    {
+     "id": "FeynmanIICh34Eq29a",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.34.29a"
+    },
+    {
+     "id": "FeynmanIICh34Eq29b",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.34.29b"
+    },
+    {
+     "id": "FeynmanIICh37Eq1",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.37.1"
+    },
+    {
+     "id": "FeynmanIICh38Eq3",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.38.3"
+    },
+    {
+     "id": "FeynmanIICh38Eq14",
+     "subset": "remainder",
+     "copy_of": "fastsrb:II.38.14"
+    },
+    {
+     "id": "FeynmanIIICh4Eq32",
+     "subset": "remainder",
+     "copy_of": "fastsrb:III.4.32"
+    },
+    {
+     "id": "FeynmanIIICh7Eq38",
+     "subset": "remainder",
+     "copy_of": "fastsrb:III.7.38"
+    },
+    {
+     "id": "FeynmanIIICh8Eq54",
+     "subset": "remainder",
+     "copy_of": "fastsrb:III.8.54"
+    },
+    {
+     "id": "FeynmanIIICh12Eq43",
+     "subset": "remainder",
+     "copy_of": "fastsrb:III.12.43"
+    },
+    {
+     "id": "FeynmanIIICh13Eq18",
+     "subset": "remainder",
+     "copy_of": "fastsrb:III.13.18"
+    },
+    {
+     "id": "FeynmanIIICh14Eq14",
+     "subset": "remainder",
+     "copy_of": "fastsrb:III.14.14"
+    },
+    {
+     "id": "FeynmanIIICh15Eq12",
+     "subset": "remainder",
+     "copy_of": "fastsrb:III.15.12"
+    },
+    {
+     "id": "FeynmanIIICh15Eq14",
+     "subset": "remainder",
+     "copy_of": "fastsrb:III.15.14"
+    },
+    {
+     "id": "FeynmanIIICh17Eq37",
+     "subset": "remainder",
+     "copy_of": "fastsrb:III.17.37"
+    },
+    {
+     "id": "FeynmanIIICh19Eq51",
+     "subset": "remainder",
+     "copy_of": "fastsrb:III.19.51"
+    },
+    {
+     "id": "FeynmanBonus1",
+     "subset": "remainder",
+     "copy_of": "fastsrb:B1"
+    },
+    {
+     "id": "FeynmanBonus4",
+     "subset": "remainder",
+     "copy_of": "fastsrb:B4"
+    },
+    {
+     "id": "FeynmanBonus8",
+     "subset": "remainder",
+     "copy_of": "fastsrb:B8"
+    },
+    {
+     "id": "FeynmanBonus18",
+     "subset": "remainder",
+     "copy_of": "fastsrb:B18"
+    }
+   ],
+   "source": "the record's id map: FeynmanI{a}Ch{b}Eq{c}{s} -> {a}.{b}.{c}{s} (seven exceptions), FeynmanBonusN -> BN; the SCR code's formulas and samplers are SRSD's (copied from srsd-benchmark)"
+  },
+  "interrupted-5": {
+   "catalog": "dgsr-additional-feynman",
+   "authors_total": 32,
+   "members": [
+    {
+     "id": "Feynman-A-2",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:II.36.38"
+    },
+    {
+     "id": "Feynman-A-3",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.40.1"
+    },
+    {
+     "id": "Feynman-A-4",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.11.19"
+    },
+    {
+     "id": "Feynman-A-5",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:II.11.17"
+    },
+    {
+     "id": "Feynman-A-7",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.39.22"
+    },
+    {
+     "id": "Feynman-A-8",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.34.8"
+    },
+    {
+     "id": "Feynman-A-10",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:II.34.11"
+    },
+    {
+     "id": "Feynman-A-11",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:II.38.3"
+    },
+    {
+     "id": "Feynman-A-12",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.50.26"
+    },
+    {
+     "id": "Feynman-A-13",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:III.21.20"
+    },
+    {
+     "id": "Feynman-A-14",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.18.4"
+    },
+    {
+     "id": "Feynman-A-15",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.13.4"
+    },
+    {
+     "id": "Feynman-A-16",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:II.15.4"
+    },
+    {
+     "id": "Feynman-A-17",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.16.6"
+    },
+    {
+     "id": "Feynman-A-18",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.14.3"
+    },
+    {
+     "id": "Feynman-A-19",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:II.27.16"
+    },
+    {
+     "id": "Feynman-A-20",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:II.34.2"
+    },
+    {
+     "id": "Feynman-A-23",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.43.31"
+    },
+    {
+     "id": "Feynman-A-24",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.30.3"
+    },
+    {
+     "id": "Feynman-A-25",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:III.17.37"
+    },
+    {
+     "id": "Feynman-A-26",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:I.27.6"
+    },
+    {
+     "id": "Feynman-A-27",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:III.15.12"
+    },
+    {
+     "id": "Feynman-A-28",
+     "subset": "additional-feynman",
+     "copy_of": "feynman:II.10.9"
+    },
+    {
+     "id": "Feynman-A-30",
+     "subset": "additional-feynman",
+     "copy_of": "feynman-bonus:B8"
+    }
+   ],
+   "source": "the record's srbf_keys: identical formula, variable order and uniform ranges in srbf's feynman catalog"
+  },
+  "interrupted-4": {
+   "catalog": "dgsr-feynman-d-2-d-5-subsets",
+   "authors_total": 15,
+   "members": [
+    {
+     "id": "Feynman-1",
+     "subset": "feynman-d2",
+     "copy_of": "feynman:I.12.1"
+    },
+    {
+     "id": "Feynman-2",
+     "subset": "feynman-d2",
+     "copy_of": "feynman:II.38.14"
+    },
+    {
+     "id": "Feynman-3",
+     "subset": "feynman-d2",
+     "copy_of": "feynman:II.27.18"
+    },
+    {
+     "id": "Feynman-4",
+     "subset": "feynman-d2",
+     "copy_of": "feynman:II.11.28"
+    },
+    {
+     "id": "Feynman-5",
+     "subset": "feynman-d2",
+     "copy_of": "feynman:I.25.13"
+    },
+    {
+     "id": "Feynman-6",
+     "subset": "feynman-d2",
+     "copy_of": "feynman:I.14.4"
+    },
+    {
+     "id": "Feynman-7",
+     "subset": "feynman-d2",
+     "copy_of": "feynman:I.39.1"
+    },
+    {
+     "id": "Feynman-8",
+     "subset": "feynman-d5",
+     "copy_of": "feynman:II.35.18"
+    },
+    {
+     "id": "Feynman-9",
+     "subset": "feynman-d5",
+     "copy_of": "feynman:I.44.4"
+    },
+    {
+     "id": "Feynman-10",
+     "subset": "feynman-d5",
+     "copy_of": "feynman:II.2.42"
+    },
+    {
+     "id": "Feynman-12",
+     "subset": "feynman-d5",
+     "copy_of": "feynman:II.11.20"
+    },
+    {
+     "id": "Feynman-14",
+     "subset": "feynman-d5",
+     "copy_of": "feynman:I.13.12"
+    },
+    {
+     "id": "Feynman-15",
+     "subset": "feynman-d5",
+     "copy_of": "feynman:I.12.11"
+    }
+   ],
+   "source": "the record's srbf_keys: identical formula, variable order and uniform ranges in srbf's feynman catalog"
+  },
+  "fresh-49": {
+   "catalog": "shape-constrained-sr-synthetic",
+   "authors_total": 19,
+   "members": [
+    {
+     "id": "Jackson 2.11",
+     "subset": "FEY",
+     "copy_of": "feynman-bonus:B12"
+    },
+    {
+     "id": "Wave power",
+     "subset": "FEY",
+     "copy_of": "feynman-bonus:B9"
+    },
+    {
+     "id": "I.6.20",
+     "subset": "FEY",
+     "copy_of": "feynman:I.6.2"
+    },
+    {
+     "id": "I.9.18",
+     "subset": "FEY",
+     "copy_of": "feynman:I.9.18"
+    },
+    {
+     "id": "I.15.3x",
+     "subset": "FEY",
+     "copy_of": "feynman:I.15.3x"
+    },
+    {
+     "id": "I.15.3t",
+     "subset": "FEY",
+     "copy_of": "feynman:I.15.3t"
+    },
+    {
+     "id": "I.32.17",
+     "subset": "FEY",
+     "copy_of": "feynman:I.32.17"
+    },
+    {
+     "id": "II.6.15a",
+     "subset": "FEY",
+     "copy_of": "feynman:II.6.15a"
+    },
+    {
+     "id": "II.11.27",
+     "subset": "FEY",
+     "copy_of": "feynman:II.11.27"
+    },
+    {
+     "id": "II.11.28",
+     "subset": "FEY",
+     "copy_of": "feynman:II.11.28"
+    },
+    {
+     "id": "II.35.21",
+     "subset": "FEY",
+     "copy_of": "feynman:II.35.21"
+    },
+    {
+     "id": "III.10.19",
+     "subset": "FEY",
+     "copy_of": "feynman:III.10.19"
+    }
+   ],
+   "source": "the record's FEY subset: held with the paper's formula and Table 6 box, verified numerically (4,000 points, max rel. diff <= 1.1e-15)"
+  },
+  "interrupted-6": {
+   "catalog": "kan-feynman-no-units-subset",
+   "authors_total": 27,
+   "members": [
+    {
+     "id": "I.6.2",
+     "subset": "kan-feynman-no-units",
+     "copy_of": "feynman:I.6.2"
+    },
+    {
+     "id": "I.6.2b",
+     "subset": "kan-feynman-no-units",
+     "copy_of": "feynman:I.6.2b"
+    },
+    {
+     "id": "I.26.2",
+     "subset": "kan-feynman-no-units",
+     "copy_of": "feynman:I.26.2"
+    },
+    {
+     "id": "II.11.7",
+     "subset": "kan-feynman-no-units",
+     "copy_of": "feynman:III.17.37"
+    },
+    {
+     "id": "II.38.3",
+     "subset": "kan-feynman-no-units",
+     "copy_of": "feynman:I.25.13"
+    },
+    {
+     "id": "III.17.37",
+     "subset": "kan-feynman-no-units",
+     "copy_of": "feynman:III.17.37"
+    }
+   ],
+   "source": "the record's held_members: the same dimensionless formula in srbf's feynman catalog"
+  },
+  "fresh-29": {
+   "catalog": "rsrm-constant-optimization-benchmark",
+   "authors_total": 97,
+   "members": [
+    {
+     "id": "Nguyen-1c@[-1,1]",
+     "subset": "nguyen-c",
+     "copy_of": "constant:Constant-1"
+    },
+    {
+     "id": "Nguyen-5c@[-1,1]",
+     "subset": "nguyen-c",
+     "copy_of": "constant:Constant-2"
+    },
+    {
+     "id": "Nguyen-10c@[0,1]",
+     "subset": "nguyen-c",
+     "copy_of": "constant:Constant-3"
+    },
+    {
+     "id": "Nguyen-11c@[0,1]",
+     "subset": "nguyen-c",
+     "copy_of": "constant:Constant-4"
+    }
+   ],
+   "source": "the record's held_in_srbf: the same expression on the same range in srbf's constant catalog"
+  }
+ }
+}

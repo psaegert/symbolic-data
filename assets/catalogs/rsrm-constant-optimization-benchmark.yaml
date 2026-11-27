@@ -3,10 +3,10 @@ metadata:
   display_name: "rsrm-constant-optimization-benchmark*"
   version: 1
   benchmark: "rsrm"
-  tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 4, "text": "srbf runs 93 of the 97 pairs of expression and input range: 4 are identical to problems srbf runs in its Constant and Keijzer sets."}, {"kind": "filled", "problems": 93, "text": "The appendix gives only a range for the inputs, not how points are spread over it or whether all inputs share it; srbf samples every input uniformly on the same range."}]
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   license: "facts only: formulas and ranges cited from Xu, Liu & Sun 2024 (RSRM, ICLR 2024, Appendix C.6, Table S8); no upstream license"
   citation: {"paper": {"short": "Xu et al. 2024", "title": "Reinforcement Symbolic Regression Machine", "venue": "ICLR 2024 (proceedings version, App. C.6)", "url": "https://proceedings.iclr.cc/paper_files/paper/2024/file/ef3a55fa15aa5fe39b7a2617b3a5d06e-Paper-Conference.pdf"}}
+  srbf_changes: [{"kind": "filled", "problems": 93, "text": "The appendix gives only a range for the inputs, not how points are spread over it or whether all inputs share it; srbf samples every input uniformly on the same range."}]
   description: RSRM constant-optimization benchmark
   sources:
   - https://proceedings.iclr.cc/paper_files/paper/2024/file/ef3a55fa15aa5fe39b7a2617b3a5d06e-Paper-Conference.pdf
@@ -19,9 +19,9 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Keijzer-1@[0,1]:
     raw: 0.3*x1*sin(6.28*x1)
@@ -2189,3 +2189,147 @@ expressions:
       x1: range [-50,50] (C.6); sampling distribution not given
     meta:
       finite_fraction: 1.0
+  Nguyen-1c@[-1,1]:
+    raw: 3.39*pow(x1,3)+2.12*pow(x1,2)+1.78*x1
+    prepared: 3.39*((v1)**(3))+2.12*((v1)**(2))+1.78*v1
+    n_variables: 1
+    sources:
+    - Petersen et al. 2021 (ICLR), Deep Symbolic Regression, Appendix
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3; Petersen et al. 2021, Mundhenk et al.
+      2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -1
+            - 1
+            - 20
+        test: null
+        function_set: CKoza
+      finite_fraction: 1.0
+      same_as: constant:Constant-1
+    subset: nguyen-c
+  Nguyen-5c@[-1,1]:
+    raw: sin(pow(x1,2))*cos(x1)-0.75
+    prepared: sin(((v1)**(2)))*cos(v1)-0.75
+    n_variables: 1
+    sources:
+    - Petersen et al. 2021 (ICLR), Deep Symbolic Regression, Appendix
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3; Petersen et al. 2021, Mundhenk et al.
+      2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - -1.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - -1
+            - 1
+            - 20
+        test: null
+        function_set: CKoza
+      finite_fraction: 1.0
+      same_as: constant:Constant-2
+    subset: nguyen-c
+  Nguyen-10c@[0,1]:
+    raw: sin(1.5*x1)*cos(0.5*x2)
+    prepared: sin(1.5*v1)*cos(0.5*v2)
+    n_variables: 2
+    sources:
+    - Petersen et al. 2021 (ICLR), Deep Symbolic Regression, Appendix
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3; Petersen et al. 2021, Mundhenk et al.
+      2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - 0
+            - 1
+            - 20
+        test: null
+        function_set: CKoza
+      finite_fraction: 1.0
+      same_as: constant:Constant-3
+    subset: nguyen-c
+  Nguyen-11c@[0,1]:
+    raw: 2.7*pow(x1,x2)
+    prepared: 2.7*((v1)**(v2))
+    n_variables: 2
+    sources:
+    - Petersen et al. 2021 (ICLR), Deep Symbolic Regression, Appendix
+    - formulas + ranges from dso-org/deep-symbolic-optimization benchmarks.csv (BSD-3; Petersen et al. 2021, Mundhenk et al.
+      2021)
+    vars:
+      v1:
+        name: x1
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: x2
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    meta:
+      dso_spec:
+        train:
+          all:
+            U:
+            - 0
+            - 1
+            - 20
+        test: null
+        function_set: CKoza
+      finite_fraction: 1.0
+      same_as: constant:Constant-4
+    subset: nguyen-c
