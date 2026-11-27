@@ -107,7 +107,8 @@ CATALOGS = {
     # Table 1 (declarative; isochrone-action excluded, see physo-astro conventions).
     "physo-streams": ("physo-streams.npz", 29, "problem_catalog"),
     "physo-astro": ("physo-astro.yaml", 2, "problem_catalog"),
-    "physo-class": ("physo-class.yaml", 8, "problem_catalog"),
+    # physo-class (8) retired 2026-11-27: class SR fits one law across several data sets, outside srbf's scope
+    # (y = f(x) on one data set); its hosted versions stay
     # P4 neural-SR bespoke: SOOSE NC/WC/FC (NeSymReS, MIT; WC/FC recovered from deleted history
     # @0cfff79 — the only surviving concrete instantiation). SSDNC (no license + no canonical
     # artifact), TPSR-400 (protocol, not a file), SymbolicGPT (generator configs only) = skips.
@@ -133,7 +134,6 @@ CATALOGS = {
     "autora-synthetic-behavioural-science-models-points": ("autora-synthetic-behavioural-science-models-points.npz", 7, "problem_catalog"),
     "bms-synthetic-prior-expression-and-bessel-functions": ("bms-synthetic-prior-expression-and-bessel-functions.yaml", 2, "problem_catalog"),
     "bms-synthetic-prior-expression-and-bessel-functions-points": ("bms-synthetic-prior-expression-and-bessel-functions-points.npz", 1, "problem_catalog"),
-    "breiman-i": ("breiman-i.yaml", 1, "problem_catalog"),
     "chen-luo-jiang-block-building-test-cases": ("chen-luo-jiang-block-building-test-cases.yaml", 13, "problem_catalog"),
     "coevolved-fitness-predictors-test-problems-points": ("coevolved-fitness-predictors-test-problems-points.npz", 8, "problem_catalog"),
     "cp3-bench-standard-tuning-datasets-points": ("cp3-bench-standard-tuning-datasets-points.npz", 4, "problem_catalog"),
@@ -178,17 +178,13 @@ CATALOGS = {
     "llm-lex-random-mathematica-functions": ("llm-lex-random-mathematica-functions.yaml", 3, "problem_catalog"),
     "llm-lex-random-mathematica-functions-points": ("llm-lex-random-mathematica-functions-points.npz", 20, "problem_catalog"),
     "mcdermott-table-1-predictive-modelling-sets-points": ("mcdermott-table-1-predictive-modelling-sets-points.npz", 1, "problem_catalog"),
-    "multi-view-sr-synthetic-benchmarks": ("multi-view-sr-synthetic-benchmarks.yaml", 8, "problem_catalog"),
-    "multi-view-sr-synthetic-benchmarks-points": ("multi-view-sr-synthetic-benchmarks-points.npz", 8, "problem_catalog"),
     "neat-points": ("neat-points.npz", 1, "problem_catalog"),
-    "newtonbench": ("newtonbench.yaml", 108, "problem_catalog"),
     "nguyen-c-points": ("nguyen-c-points.npz", 1, "problem_catalog"),
     "nonic-points": ("nonic-points.npz", 1, "problem_catalog"),
     "nsrwh-only-five-variables-nc": ("nsrwh-only-five-variables-nc.yaml", 301, "problem_catalog"),
     "nsrwh-only-five-variables-wc": ("nsrwh-only-five-variables-wc.yaml", 301, "problem_catalog"),
     "nsrwh-train-nc": ("nsrwh-train-nc.yaml", 301, "problem_catalog"),
     "nsrwh-train-wc": ("nsrwh-train-wc.yaml", 299, "problem_catalog"),
-    "occamnet-analytic-and-non-analytic-suites": ("occamnet-analytic-and-non-analytic-suites.yaml", 22, "problem_catalog"),
     "phye2e-llm-generated-synthetic-formulas": ("phye2e-llm-generated-synthetic-formulas.yaml", 600, "problem_catalog"),
     "physo-astrophysical-case-studies": ("physo-astrophysical-case-studies.yaml", 9, "problem_catalog"),
     "pse-high-dimensional-distractor-set": ("pse-high-dimensional-distractor-set.yaml", 20, "problem_catalog"),
@@ -205,7 +201,6 @@ CATALOGS = {
     "pagie-points": ("pagie-points.npz", 1, "problem_catalog"),
     "grammarvae-points": ("grammarvae-points.npz", 1, "problem_catalog"),
     "spl-noise-data-scarcity-grid": ("spl-noise-data-scarcity-grid.yaml", 1, "problem_catalog"),
-    "surfacebench-explicit-surfaces": ("surfacebench-explicit-surfaces.yaml", 256, "problem_catalog"),
     "sym-q-ai-feynman-with-drift-terms": ("sym-q-ai-feynman-with-drift-terms.yaml", 15, "problem_catalog"),
     "symantic-synthetic-set": ("symantic-synthetic-set.yaml", 10, "problem_catalog"),
     "symbolicgpt-bivariate-set": ("symbolicgpt-bivariate-set.yaml", 1023, "problem_catalog"),
@@ -216,6 +211,9 @@ CATALOGS = {
     "torchsisso-synthetic-expressions": ("torchsisso-synthetic-expressions.yaml", 9, "problem_catalog"),
     "vladislavleva-points": ("vladislavleva-points.npz", 2, "problem_catalog"),
     "white-et-al-2013-proposed-sr-set-points": ("white-et-al-2013-proposed-sr-set-points.npz", 1, "problem_catalog"),
+    # left out by rule (tags/dropped.json), never published: breiman-i, occamnet-analytic-and-non-analytic-suites and
+    # surfacebench-explicit-surfaces (piecewise formulas, 2026-11-26); multi-view-sr-synthetic-benchmarks(-points) and
+    # newtonbench (outside srbf's scope: several data sets per law, interactive queries; 2026-11-27)
 }
 
 # srbf 2026-11 release: the benchmarks' published data as frozen pools (symbolic_data.pools), built into DATA_BUILD by
@@ -245,15 +243,16 @@ DATA_CATALOGS = {
     "llm-pysr-battery": ("llm-pysr-battery.npz", 2, "problem_catalog"),
     "llm-sr-bactgrow": ("llm-sr-bactgrow.npz", 2, "problem_catalog"),
     "llm-sr-stress-strain": ("llm-sr-stress-strain.npz", 2, "problem_catalog"),
+    "llm-sr-oscillators": ("llm-sr-oscillators.npz", 4, "problem_catalog"),
     "mcdermott-predictive-modelling": ("mcdermott-predictive-modelling.npz", 3, "problem_catalog"),
     "nikuradse": ("nikuradse.npz", 2, "problem_catalog"),
     "nuclear-misr": ("nuclear-misr.npz", 1, "problem_catalog"),
-    "phye2e-space-physics": ("phye2e-space-physics.npz", 15, "problem_catalog"),
-    "physo-milky-way-streams": ("physo-milky-way-streams.npz", 29, "problem_catalog"),
+    "phye2e-space-physics": ("phye2e-space-physics.npz", 3, "problem_catalog"),
     "pysr-empiricalbench": ("pysr-empiricalbench.npz", 4, "problem_catalog"),
     "scilaws-real": ("scilaws-real.npz", 57, "problem_catalog"),
     "shape-constrained-real-world": ("shape-constrained-real-world.npz", 1, "problem_catalog"),
     "sisso-octet-binaries": ("sisso-octet-binaries.npz", 1, "problem_catalog"),
+    "sr-dynamical-systems": ("sr-dynamical-systems.npz", 28, "problem_catalog"),
     "srbench-2.0-blackbox": ("srbench-2.0-blackbox.npz", 12, "problem_catalog"),
     "srbench-2.0-first-principles": ("srbench-2.0-first-principles.npz", 12, "problem_catalog"),
     "srbench-2021-blackbox": ("srbench-2021-blackbox.npz", 122, "problem_catalog"),
@@ -262,7 +261,8 @@ DATA_CATALOGS = {
     "symbolfit-lhc-spectra": ("symbolfit-lhc-spectra.npz", 5, "problem_catalog"),
     "tisr-air-density": ("tisr-air-density.npz", 3, "problem_catalog"),
     "torchsisso-specific-energy": ("torchsisso-specific-energy.npz", 1, "problem_catalog"),
-    "treloar-rubber": ("treloar-rubber.npz", 6, "problem_catalog"),
+    # left out by rule 2026-11-27 (tags/dropped.json; outside srbf's scope of y = f(x) on one data set), never published:
+    # physo-milky-way-streams, treloar-rubber, and phye2e-space-physics's 12 plasma datasets
 }
 
 
@@ -481,7 +481,8 @@ NOTICED_BEFORE_2026_11 = (
 )
 # retired catalogs whose hosted versions stay so pinned refs keep resolving; their notices stay in the card's
 # hand-written table and their sources' copyright notices in the generated one
-RETIRED_HOSTED = ("bench-nv25", "grammarvae", "lample-charton-v23", "nonic", "pagie", "r-rationals", "sine", "v23-val")
+RETIRED_HOSTED = ("bench-nv25", "grammarvae", "lample-charton-v23", "nonic", "pagie", "physo-class", "r-rationals", "sine",
+                  "v23-val")
 
 
 def hand_noticed(text: str) -> set[str]:

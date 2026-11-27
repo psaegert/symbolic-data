@@ -3,6 +3,10 @@
   "formulas": 5301,
   "problems": 15903,
   "with_dummy": 8084,
+  "raw_vs_prepared": {
+   "checked": 5301,
+   "unchecked": 0
+  },
   "failed": {},
   "constant_target": [
    "syneq_20_alpha1",
@@ -140,6 +144,10 @@
   "formulas": 90,
   "problems": 270,
   "with_dummy": 134,
+  "raw_vs_prepared": {
+   "checked": 90,
+   "unchecked": 0
+  },
   "failed": {},
   "constant_target": [
    "phybench_32_alpha0",
@@ -151,6 +159,10 @@
   "formulas": 33,
   "problems": 99,
   "with_dummy": 39,
+  "raw_vs_prepared": {
+   "checked": 33,
+   "unchecked": 0
+  },
   "failed": {},
   "constant_target": []
  },
@@ -158,6 +170,10 @@
   "formulas": 195,
   "problems": 585,
   "with_dummy": 285,
+  "raw_vs_prepared": {
+   "checked": 195,
+   "unchecked": 0
+  },
   "failed": {},
   "constant_target": [
    "eponymous_156_alpha0",
@@ -169,6 +185,10 @@
   "formulas": 3499,
   "problems": 10497,
   "with_dummy": 5242,
+  "raw_vs_prepared": {
+   "checked": 3322,
+   "unchecked": 177
+  },
   "failed": {},
   "constant_target": [
    "A024010_alpha1",

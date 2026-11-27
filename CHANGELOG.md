@@ -7,6 +7,19 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ### Added
 
+- **`catalog_metadata(ref)`**: a catalog's metadata without its problems (a yaml's `metadata` block read up to its
+  expressions, a frozen npz's catalog record from its `_meta` member alone): milliseconds where loading a large
+  catalog takes seconds. Every release catalog's metadata now carries `benchmark`, the slug srbf averages by.
+- **The benchmark audit of 2026-11-27, in tools/catalog_build** (srbf's next release): what the rules leave out with
+  each reason (`tags/dropped.json`: y = f(x) on one data set; formulas as written); three added sets (the LLM-SR
+  oscillators, the Bayesian machine scientist's Rössler series, Brum et al.'s dynamical systems); compilations kept
+  whole as published (`residues_2026-11.json`) and their overlap measured (`overlap.py`, `tags/overlap.json`); the
+  rule for paper-vs-code conflicts with every instance listed (`tags/rule_applications.json`); stars derived from the
+  deviations; the tags "fit only" and "generator in-distribution" and per-problem flags; builder gates (a numeric
+  raw-vs-prepared check; a reference ground truth only with a stated reason and an FVU bound); and transcription
+  fixes (ERBench's two-argument log, HeuristicLab's AircraftLift, three cp3-bench formulas, PhySO's expansion law,
+  HEP LLM-SR's target). tools/catalog_build/README.md describes each step.
+
 - **Frozen draws** (`symbolic_data.draws`, `symbolic-data render-draws` / `verify-draws`, docs/draws.md). Every
   problem of a catalog is drawn once and written to `<root>/<catalog>/repeat-<r>.npz` with a `manifest.json` of
   sha256 sums, for every method, budget, shard and machine to read instead of drawing: a formula problem's fitting

@@ -1,10 +1,12 @@
 metadata:
   name: kan-toy-functions
+  display_name: "kan-toy-functions*"
   version: 1
-  tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: []
+  benchmark: "kan"
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   license: "CC BY 4.0 (Liu et al. 2024, KAN, arXiv:2404.19756) + MIT (KindXiaoming/pykan)"
   citation: {"paper": {"short": "Liu et al. 2025", "title": "KAN: Kolmogorov-Arnold Networks", "venue": "ICLR 2025", "url": "https://arxiv.org/abs/2404.19756"}}
+  srbf_changes: [{"kind": "filled", "problems": 3, "text": "For three of the five functions no input range is published; srbf uses U[-1, 1], the default of the authors' generator (pykan's create_dataset)."}]
   description: KAN toy functions
   sources:
   - https://arxiv.org/abs/2404.19756
@@ -23,17 +25,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-66.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   kan-1:
+    subset: "toy"
     raw: besselj(0, 20*x)
     prepared: besselj(0, 20*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x
@@ -49,10 +50,10 @@ expressions:
       x: U[-1,1]
     needs_simplipy: '0.15'
   kan-2:
+    subset: "toy"
     raw: exp(sin(pi*x) + y**2)
     prepared: exp(v2**2 + sin(3.141592653589793*v1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -78,10 +79,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kan-3:
+    subset: "toy"
     raw: x*y
     prepared: v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -107,6 +108,7 @@ expressions:
     meta:
       finite_fraction: 1.0
   kan-4:
+    subset: "toy"
     raw: exp((sin(pi*x1/2)**2 + sin(pi*x2/2)**2 + sin(pi*x3/2)**2 + sin(pi*x4/2)**2 + sin(pi*x5/2)**2 + sin(pi*x6/2)**2 +
       sin(pi*x7/2)**2 + sin(pi*x8/2)**2 + sin(pi*x9/2)**2 + sin(pi*x10/2)**2 + sin(pi*x11/2)**2 + sin(pi*x12/2)**2 + sin(pi*x13/2)**2
       + sin(pi*x14/2)**2 + sin(pi*x15/2)**2 + sin(pi*x16/2)**2 + sin(pi*x17/2)**2 + sin(pi*x18/2)**2 + sin(pi*x19/2)**2 +
@@ -152,7 +154,6 @@ expressions:
       sin(3.141592653589793*v94/2)**2/100 + sin(3.141592653589793*v95/2)**2/100 + sin(3.141592653589793*v96/2)**2/100 + sin(3.141592653589793*v97/2)**2/100
       + sin(3.141592653589793*v98/2)**2/100 + sin(3.141592653589793*v99/2)**2/100)
     n_variables: 100
-    subset: all
     vars:
       v1:
         name: x1
@@ -1060,10 +1061,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kan-5:
+    subset: "toy"
     raw: exp((sin(pi*(x1**2 + x2**2)) + sin(pi*(x3**2 + x4**2)))/2)
     prepared: exp(sin(3.141592653589793*(v1**2 + v2**2))/2 + sin(3.141592653589793*(v3**2 + v4**2))/2)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: x1

@@ -1,7 +1,9 @@
 metadata:
   name: physo-astro
-  version: 2
-  tags: {"origin": "science formula", "tags": []}
+  display_name: "physo-astro*"
+  version: 3
+  benchmark: "physo"
+  tags: {"origin": "science formula", "tags": ["srbf-modified"]}
   srbf_changes: [{"kind": "part", "problems": 10, "text": "srbf runs 2 of the 12 problems of PhySO's astrophysics tests here; 9 more are in 'PhySO astrophysical case studies', and the Pantheon supernova task fits a function through an integral, not y = f(x)."}]
   citation: {"paper": {"short": "Tenachi et al. 2023", "title": "Deep Symbolic Regression for Physics Guided by Units Constraints: Toward the Automated Discovery of Physical Laws", "venue": "The Astrophysical Journal 959(2):99", "url": "https://doi.org/10.3847/1538-4357/ad014c"}}
   description: PhySO paper astrophysics panel (arXiv:2303.03192 Appendix A) — the two genuinely
@@ -28,6 +30,7 @@ metadata:
       task (out of scope); usa-tariffs is a non-physics demo curiosity (not imported).'
 expressions:
   nfw-profile:
+    subset: "astrophysical-case-studies"
     raw: rho0/((r/rs)*(1+r/rs)^2), rho0=0.984, rs=1.391
     prepared: 0.984/((v1/1.391)*((1+v1/1.391)**(2)))
     n_variables: 1
@@ -46,20 +49,22 @@ expressions:
       notes: same NFW structure as cp3-cosmo C5d (varying-R0 form) and physo-streams (potential
         form); registry clusters record the overlaps.
   expansion-law:
-    raw: H^2 = H0^2*(Omega_m*(1+z)^3 + (1-Omega_m)), H0=1.072, Omega_m=1.315
-    prepared: 1.149184*(1.315*((1+v1)**(3))-0.315)
+    subset: "astrophysical-case-studies"
+    raw: H^2(x) = H0^2*(Omega_m*x^3 + (1-Omega_m)), x = 1+z, H0=1.072, Omega_m=1.315
+    prepared: 1.149184*(1.315*((v1)**(3))-0.315)
     n_variables: 1
     sources:
     - arXiv:2303.03192 Appendix A (Friedmann/LCDM expansion-law mock)
     vars:
       v1:
-        name: z
-        sample_range: [0.01, 2.5]
+        name: x
+        sample_range: [1.01, 3.5]
         sample_type: [uni, pos]
       v0:
         name: H_squared
     meta:
-      notes: 'target is H SQUARED; Omega_m = 1.315 is the paper''s printed mock value (kept for
+      notes: 'the input is x = 1 + z, as the authors write the law (y(x = 1+z) = H(z)^2; z in [0.01, 2.5], so x in
+        [1.01, 3.5]); until 2026-11 srbf fed z itself. target is H SQUARED; Omega_m = 1.315 is the paper''s printed mock value (kept for
         fidelity; >1 is cosmologically unphysical and this is a mock, not LCDM). Thematic overlap
         with first-principles/cp3-cosmo H(z) laws: different rendering (H^2, no sqrt), registry
         keeps them distinct.'

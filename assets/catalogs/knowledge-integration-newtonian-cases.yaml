@@ -1,10 +1,11 @@
 metadata:
   name: knowledge-integration-newtonian-cases
   version: 1
+  benchmark: "knowledge-integration-newtonian-cases"
   tags: {"origin": "science formula", "tags": ["dummy inputs"]}
-  srbf_changes: []
   license: "Apache-2.0 (bilgesi/SR-LLM-Integration) + CC BY 4.0 (Taskin et al. 2026, Sci. Rep. 16:1614)"
   citation: {"paper": {"short": "Taskin et al. 2026", "title": "Knowledge integration for physics-informed symbolic regression using pre-trained large language models", "venue": "Scientific Reports 16(1):1614", "url": "https://doi.org/10.1038/s41598-026-35327-6"}, "data": {"short": "GitHub bilgesi/SR-LLM-Integration@1508a37", "title": "SR-LLM-Integration generator (Apache-2.0)", "url": "https://github.com/bilgesi/SR-LLM-Integration/blob/1508a3701c2d30c6c776b33762656639d999bc42/src/run_main_claim.py"}}
+  srbf_changes: []
   description: Knowledge-integration Newtonian cases
   sources:
   - https://arxiv.org/abs/2509.03036
@@ -18,17 +19,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-133.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   ball_drop:
+    subset: "knowledge-integration-newtonian-cases"
     raw: sqrt(2*9.81*h)
     prepared: 4.42944691807002*sqrt(v1)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: h
@@ -86,10 +86,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   shm:
+    subset: "knowledge-integration-newtonian-cases"
     raw: 1.0*cos(sqrt(1.0/m)*t + 0.0)
     prepared: 1.0*cos(1.0*v2*sqrt(1/v1))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: m
@@ -147,10 +147,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   wave:
+    subset: "knowledge-integration-newtonian-cases"
     raw: exp(-0.1*t/2)*cos(1.0*0 - 2*pi*t)
     prepared: exp(-0.05*v1)*cos(-2*3.141592653589793*v1 + 0)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: t

@@ -1,7 +1,9 @@
 metadata:
   name: meier
+  display_name: "meier*"
   version: 2
-  tags: {"origin": "classic benchmark", "tags": []}
+  benchmark: "meier"
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   srbf_changes: [{"kind": "part", "problems": 2, "text": "srbf runs 2 of the 4 functions of Meier et al. (2013): the other two are Koza's quintic and sextic, run in srbf's Koza set."}]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   citation: {"paper": {"short": "Meier et al. 2013", "title": "Accelerating convergence in cartesian genetic programming by using a new genetic operator", "venue": "Proceedings of the 15th annual conference on Genetic and evolutionary computation (GECCO '13), pp. 981-988", "url": "https://doi.org/10.1145/2463372.2463481"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
@@ -25,6 +27,7 @@ metadata:
       and need per-entry review.'
 expressions:
   Meier-3:
+    subset: "meier"
     raw: div(pow(x1,2)*pow(x2,2),(x1+x2))
     prepared: ((((v1)**(2))*((v2)**(2)))/((v1+v2)))
     n_variables: 2
@@ -63,6 +66,7 @@ expressions:
         function_set: None
       finite_fraction: 1.0
   Meier-4:
+    subset: "meier"
     raw: div(pow(x1,5),pow(x2,3))
     prepared: ((((v1)**(5)))/(((v2)**(3))))
     n_variables: 2

@@ -1,10 +1,12 @@
 metadata:
   name: eql-cart-pendulum
   version: 1
+  benchmark: "eql"
   tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs"]}
-  srbf_changes: []
   license: "facts only: equations and input ranges cited from Sahoo, Lampert & Martius 2018 (ICML, arXiv:1806.07259) and their EQL generator; no upstream license"
   citation: {"paper": {"short": "Sahoo et al. 2018", "title": "Learning Equations for Extrapolation and Control", "venue": "ICML 2018 (PMLR 80)", "url": "https://arxiv.org/abs/1806.07259"}, "data": {"short": "GitHub martius-lab/EQL@28521ae", "title": "EQL-DIV-ICML data generator (GPL-3.0)", "url": "https://github.com/martius-lab/EQL/tree/28521aed7a213299a52982430b2b83917fadae20/EQL-DIV-ICML"}}
+  srbf_changes: []
+  problem_flags: {"trivial": ["eql-cartpendulum-y1", "eql-cartpendulum-y1.extrap", "eql-cartpendulum-y2", "eql-cartpendulum-y2.extrap"]}
   description: EQL cart-pendulum
   sources:
   - https://proceedings.mlr.press/v80/sahoo18a.html
@@ -20,17 +22,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-157.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   eql-cartpendulum-y1:
+    subset: "cart-pendulum"
     raw: x3
     prepared: v3
     n_variables: 4
-    subset: interp
     vars:
       v1:
         name: x1
@@ -74,10 +75,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-cartpendulum-y1.extrap:
+    subset: "cart-pendulum"
     raw: x3
     prepared: v3
     n_variables: 4
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -146,17 +147,17 @@ expressions:
               high: 2.0
       row_constraints:
       - maximum.reduce([abs(v1), abs(v2) / 1.5707963267948966, abs(v3), abs(v4)]) > 1.0
-    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (raw/fresh-157/arXiv1806.07259v1_source.tar.gz,
-      opened) l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for
-      instance [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2
-      ... The extrapolation test set contains 5000 uniformly'
+    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (arXiv1806.07259v1_source.tar.gz, opened)
+      l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for instance
+      [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2 ... The
+      extrapolation test set contains 5000 uniformly sampled point'
     meta:
       finite_fraction: 1.0
   eql-cartpendulum-y2:
+    subset: "cart-pendulum"
     raw: x4
     prepared: v4
     n_variables: 4
-    subset: interp
     vars:
       v1:
         name: x1
@@ -200,10 +201,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-cartpendulum-y2.extrap:
+    subset: "cart-pendulum"
     raw: x4
     prepared: v4
     n_variables: 4
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -272,17 +273,17 @@ expressions:
               high: 2.0
       row_constraints:
       - maximum.reduce([abs(v1), abs(v2) / 1.5707963267948966, abs(v3), abs(v4)]) > 1.0
-    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (raw/fresh-157/arXiv1806.07259v1_source.tar.gz,
-      opened) l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for
-      instance [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2
-      ... The extrapolation test set contains 5000 uniformly'
+    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (arXiv1806.07259v1_source.tar.gz, opened)
+      l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for instance
+      [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2 ... The
+      extrapolation test set contains 5000 uniformly sampled point'
     meta:
       finite_fraction: 1.0
   eql-cartpendulum-y3:
+    subset: "cart-pendulum"
     raw: (-x1 - 0.01*x3 + x4**2*sin(x2) + 0.1*x4*cos(x2) + 9.81*sin(x2)*cos(x2))/(sin(x2)**2 + 1)
     prepared: (-v1 - 0.01*v3 + v4**2*sin(v2) + 0.1*v4*cos(v2) + 9.81*sin(v2)*cos(v2))/(sin(v2)**2 + 1)
     n_variables: 4
-    subset: interp
     vars:
       v1:
         name: x1
@@ -326,10 +327,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-cartpendulum-y3.extrap:
+    subset: "cart-pendulum"
     raw: (-x1 - 0.01*x3 + x4**2*sin(x2) + 0.1*x4*cos(x2) + 9.81*sin(x2)*cos(x2))/(sin(x2)**2 + 1)
     prepared: (-v1 - 0.01*v3 + v4**2*sin(v2) + 0.1*v4*cos(v2) + 9.81*sin(v2)*cos(v2))/(sin(v2)**2 + 1)
     n_variables: 4
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -398,17 +399,17 @@ expressions:
               high: 2.0
       row_constraints:
       - maximum.reduce([abs(v1), abs(v2) / 1.5707963267948966, abs(v3), abs(v4)]) > 1.0
-    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (raw/fresh-157/arXiv1806.07259v1_source.tar.gz,
-      opened) l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for
-      instance [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2
-      ... The extrapolation test set contains 5000 uniformly'
+    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (arXiv1806.07259v1_source.tar.gz, opened)
+      l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for instance
+      [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2 ... The
+      extrapolation test set contains 5000 uniformly sampled point'
     meta:
       finite_fraction: 1.0
   eql-cartpendulum-y4:
+    subset: "cart-pendulum"
     raw: (-0.2*x4 - 19.62*sin(x2) + x1*cos(x2) + 0.01*x3*cos(x2) - x4**2*sin(x2)*cos(x2))/(sin(x2)**2 + 1)
     prepared: (v1*cos(v2) + 0.01*v3*cos(v2) - v4**2*sin(v2)*cos(v2) - 0.2*v4 - 19.62*sin(v2))/(sin(v2)**2 + 1)
     n_variables: 4
-    subset: interp
     vars:
       v1:
         name: x1
@@ -452,10 +453,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-cartpendulum-y4.extrap:
+    subset: "cart-pendulum"
     raw: (-0.2*x4 - 19.62*sin(x2) + x1*cos(x2) + 0.01*x3*cos(x2) - x4**2*sin(x2)*cos(x2))/(sin(x2)**2 + 1)
     prepared: (v1*cos(v2) + 0.01*v3*cos(v2) - v4**2*sin(v2)*cos(v2) - 0.2*v4 - 19.62*sin(v2))/(sin(v2)**2 + 1)
     n_variables: 4
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -524,9 +525,9 @@ expressions:
               high: 2.0
       row_constraints:
       - maximum.reduce([abs(v1), abs(v2) / 1.5707963267948966, abs(v3), abs(v4)]) > 1.0
-    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (raw/fresh-157/arXiv1806.07259v1_source.tar.gz,
-      opened) l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for
-      instance [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2
-      ... The extrapolation test set contains 5000 uniformly'
+    test_source: 'Sahoo, Lampert & Martius 2018, arXiv:1806.07259v1, 4arxiv.tex (arXiv1806.07259v1_source.tar.gz, opened)
+      l.735: ''For testing, we have two sets, one from the training domain and one from an extrapolation domain, for instance
+      [-2,2]^n \ [-1,1]^n''; l.745-751 (division task): ''we sample 10000 points uniformly in the hypercube [-1,1]^2 ... The
+      extrapolation test set contains 5000 uniformly sampled point'
     meta:
       finite_fraction: 1.0

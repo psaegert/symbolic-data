@@ -6,11 +6,14 @@ The totals come from the built catalogs and their frozen subsamples (srbf ruling
   generative ones, FastSRB at its default version, and ERBench SynEq and OEIS at their frozen 1,024;
 - the older data catalogs (.npz) in assets/catalogs only where a newer build replaces none (SUPERSEDED);
 - the data catalogs, built outside git (--catalogs, default build/data-catalogs: its *.npz, or data/*.npz and
-  srbench-*.npz) and published to Hugging Face only.
+  srbench-*.npz) and published to Hugging Face only;
+- less what the rules leave out (tags/dropped.json; a file of a dropped catalog left in a build is ignored).
 
-A problem's subset is its entry's ``subset``, else release_subsets.json's tiers (FastSRB, SRSD), else ``all``. Subsets
-with fewer than 20 problems in a catalog with several subsets are listed (the floor was lifted 2026-11-04: a benchmark
-keeps the subsets its authors define).
+A problem's subset is its entry's ``subset`` (catalog_tags.py apply writes it for every problem: the catalog's part of
+its benchmark, else the authors' subset, else the catalog; docs/benchmarks.md), else release_subsets.json's tiers
+(FastSRB, SRSD), else the catalog. Subsets with fewer than 20 problems in a catalog with several subsets are listed (the
+floor was lifted 2026-11-04: a benchmark keeps the subsets its authors define). Benchmarks and subsets are also counted
+across catalogs (``benchmark_subsets``: the distinct (benchmark, subset) pairs).
 
     count_release.py [--symbolic-data <repo>] [--catalogs <locally built data catalogs>] [--out <json>]
 """
@@ -25,7 +28,6 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import paths  # noqa: E402  the curated inputs
@@ -70,26 +72,47 @@ def license_left_out() -> list[dict[str, Any]]:
     return out
 
 
+def left_out_by_rule() -> list[dict[str, Any]]:
+    """What the rules leave out (tags/dropped.json: scope, formulas as written), each with its reason and citation."""
+    return [{**r, "citation": _citation(name)} for name, r in sorted(paths.dropped().items())]
+
+
 def _citation(name: str) -> dict[str, Any] | None:
     c = paths.citations().get(name) or {}
     return {k: c[k] for k in ("paper", "data") if c.get(k)} or None
 
 
 def described(md: dict[str, Any]) -> dict[str, Any]:
-    """What a list of the benchmarks shows next to a catalog: its tags, description, sources and license."""
-    return {"tags": md.get("tags"), "description": md.get("description"), "sources": md.get("sources") or [],
-            "license": md.get("license"), "citation": md.get("citation"), "srbf_changes": md.get("srbf_changes")}
+    """What a list of the benchmarks shows next to a catalog: its benchmark, tags, description, sources and license."""
+    return {"benchmark": md.get("benchmark"), "tags": md.get("tags"), "description": md.get("description"),
+            "sources": md.get("sources") or [], "license": md.get("license"), "citation": md.get("citation"),
+            "srbf_changes": md.get("srbf_changes"), "srbf_notes": md.get("srbf_notes"),
+            "restricted": bool(md.get("restricted")), "share_alike": bool(md.get("share_alike")),
+            "test_splits": md.get("test_splits")}
+
+
+def survey_sets(symbolic_data: Path, data_build: Path) -> dict[str, str]:
+    """catalog -> the survey set it was built from, read from the builders' reports (the catalogs' public metadata
+    carries no internal record ids)."""
+    out: dict[str, str] = {}
+    for report in (symbolic_data / "assets/catalogs/build_formula_report.json", data_build / "build_data_report.json"):
+        if report.exists():
+            for tag, r in json.loads(report.read_text()).items():
+                if r.get("catalog") and (r.get("built") or r.get("problems")):
+                    for suffix in ("", "-points", "-share-alike", "-restricted"):
+                        out.setdefault(r["catalog"] + suffix, tag)
+    return out
 
 
 def from_yaml(path: Path, tier: dict[str, dict[str, str]]) -> dict[str, Any]:
-    doc = yaml.safe_load(open(path))
+    doc = paths.load_yaml(path)
     name = doc["metadata"]["name"]
     keep = set(json.load(open(paths.frozen_path(FROZEN[name])))["ids"]) if name in FROZEN else None
     subsets: Counter[str] = Counter()
     for key, e in doc["expressions"].items():
         if keep is not None and str(key) not in keep:
             continue
-        subsets[e.get("subset") or tier.get(name, {}).get(str(key), "all")] += 1
+        subsets[e.get("subset") or tier.get(name, {}).get(str(key)) or name] += 1
     md = doc["metadata"]
     return {"name": name, "kind": "formula", "file": str(path), "version": md.get("version"),
             "source_record": md.get("source_record"),
@@ -100,7 +123,7 @@ def from_yaml(path: Path, tier: dict[str, dict[str, str]]) -> dict[str, Any]:
 def from_npz(path: Path) -> dict[str, Any]:
     meta = json.loads(str(np.load(path)["_meta"]))
     cat = meta["catalog"]
-    subsets = Counter((p.get("meta") or {}).get("subset") or "all" for p in meta["problems"])
+    subsets = Counter((p.get("meta") or {}).get("subset") or cat["name"] for p in meta["problems"])
     md = cat.get("meta") or {}
     return {"name": cat["name"], "kind": "data", "file": str(path), "version": cat.get("version"),
             "source_record": md.get("source_record"),
@@ -127,13 +150,16 @@ def main() -> None:
     local = Path(a.catalogs)
     for path in sorted([*local.glob("*.npz"), *(local / "data").glob("*.npz")]):
         rows.append({**from_npz(path), "source": "data build"})
+    stale = sorted(r["file"] for r in rows if paths.dropped_whole(r["name"]))   # a file of a dropped set left behind
+    rows = [r for r in rows if not paths.dropped_whole(r["name"])]
     left_out = license_left_out()
+    sets = survey_sets(sd, local)
     names = Counter(r["name"] for r in rows)
     clash = sorted(n for n, c in names.items() if c > 1)   # srbf needs unique names: reported, both counted
     for r in rows:
         r["problems"] = sum(r["subsets"].values())
-        tag = (re.findall(r"\b(?:fresh|done|critic|interrupted)-\d+\b|(?<=sets/)[\w-]+(?=\.json)",
-                          str(r.get("source_record") or "")) or [None])[0]
+        tag = sets.get(r["name"]) or (re.findall(r"\b(?:fresh|done|critic|interrupted)-\d+\b|(?<=sets/)[\w-]+(?=\.json)",
+                                                 str(r.get("source_record") or "")) or [None])[0]
         if tag:                                   # the survey's set: its name, and its sources where the catalog has none
             rec = paths.set_record(tag) if tag in paths.set_tags() else {}
             r["set"], r["set_name"] = tag, rec.get("name")
@@ -145,16 +171,25 @@ def main() -> None:
     for r in rows:
         by_kind[r["kind"]] += r["problems"]
     total = sum(r["problems"] for r in rows)
+    benchmarks = Counter(r.get("benchmark") for r in rows)
+    pairs = Counter((r.get("benchmark") or r["name"], s) for r in rows for s in r["subsets"])
     report = {"rule": __doc__.split("\n\n")[1].strip(), "catalogs": len(rows), "problems": total,
+              "benchmarks": len([b for b in benchmarks if b]), "benchmark_subsets": len(pairs),
+              "without_benchmark": sorted(r["name"] for r in rows if not r.get("benchmark")),
               "subsets": sum(len(r["subsets"]) for r in rows), "problems_by_kind": dict(by_kind),
               "subsets_below_floor": [{"catalog": c, "subset": s, "problems": n} for c, s, n in small],
               "name_clashes": {n: [r["file"] for r in rows if r["name"] == n] for n in clash}, "empty_catalogs": empty,
               "superseded_in_symbolic_data": SUPERSEDED, "left_out_for_license": left_out,
+              "left_out_by_rule": left_out_by_rule(), "dropped_files_ignored": stale,
               "rows": sorted(rows, key=lambda r: -r["problems"])}
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     Path(a.out).write_text(json.dumps(report, indent=1))
-    print(f"{len(rows)} catalogs, {total:,} problems ({', '.join(f'{k} {v:,}' for k, v in by_kind.items())}), "
-          f"{report['subsets']} subsets ({len(small)} below {FLOOR}) -> {a.out}")
+    print(f"{len(rows)} catalogs in {report['benchmarks']} benchmarks ({report['benchmark_subsets']} benchmark subsets), "
+          f"{total:,} problems "
+          f"({', '.join(f'{k} {v:,}' for k, v in by_kind.items())}), {report['subsets']} subsets ({len(small)} below {FLOOR})"
+          f" -> {a.out}")
+    if report["without_benchmark"]:
+        print(f"catalogs without a benchmark (catalog_tags.py apply): {report['without_benchmark']}")
     if clash:
         print(f"name clashes (srbf needs unique catalog names): {clash}")
 

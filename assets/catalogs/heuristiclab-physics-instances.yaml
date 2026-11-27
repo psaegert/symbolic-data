@@ -1,10 +1,11 @@
 metadata:
   name: heuristiclab-physics-instances
   version: 1
+  benchmark: "heuristiclab"
   tags: {"origin": "science formula", "tags": []}
-  srbf_changes: []
   license: "facts only: formulas and ranges cited from the HeuristicLab Physics instance provider (heal-research/HeuristicLab, GPL-3.0 code, not copied) and Chen et al. 2018 (arXiv:1706.02281)"
   citation: {"paper": {"short": "Chen et al. 2018", "title": "A multilevel block building algorithm for fast modeling generalized separable systems", "venue": "Expert Systems with Applications 109:25-34", "url": "https://doi.org/10.1016/j.eswa.2018.05.021"}, "data": {"short": "GitHub heal-research/HeuristicLab@c57538b", "title": "HeuristicLab Physics Benchmark Problems provider (GPL-3.0)", "url": "https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Physics"}}
+  srbf_changes: []
   description: HeuristicLab Physics instances
   sources:
   - https://github.com/heal-research/HeuristicLab/tree/c57538bf4bf4e944e75bcac0468c33ec5a27d4bf/HeuristicLab.Problems.Instances.DataAnalysis/3.3/Regression/Physics
@@ -26,17 +27,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-45.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   RocketFuelFlow:
+    subset: "physics"
     raw: p0*A/sqrt(T0)*sqrt(1.4/287*(2/(1.4 + 1))**((1.4 + 1)/(1.4 - 1)))
     prepared: v1*v2*(0.0698430295769578*(2/(1 + 1.4))**((1 + 1.4)/(2*(1.4 - 1*1))))/sqrt(v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: p0
@@ -77,10 +77,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   AircraftLift:
+    subset: "physics"
     raw: C_Lalpha*(alpha - (-2.0)) + C_Ldelta_e*delta_e*S_HT/S_ref
     prepared: v1*(v2 + 2.0) + v3*v4*v5/v6
     n_variables: 6
-    subset: all
     vars:
       v1:
         name: C_Lalpha
@@ -154,10 +154,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   FluidDynamics:
+    subset: "physics"
     raw: V_inf*r*sin(pi*theta/180.0)*(1 - R**2/r**2) + Gamma/(2*pi)*log(r/R)
     prepared: v1*v3*(1 - v4**2/v3**2)*sin(0.0174532925199433*v2) + 0.1591549430918953*v5*log(v3/v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: V_inf
@@ -220,12 +220,12 @@ expressions:
     meta:
       finite_fraction: 1.0
   AircraftMaximumLift:
+    subset: "physics"
     raw: x1 - 0.25*x4*x5*x6*(4 + 0.1*(x2/x3) - (x2/x3)**2) + x13*(x14/x15)*x18*x7 - x13*(x14/x15)*x8 + x13*(x14/x15)*x9 +
       x16*(x17/x15)*x18*x10 - x16*(x17/x15)*x11 + x16*(x17/x15)*x12
     prepared: v1 + v10*v16*v17*v18/v15 - v11*v16*v17/v15 + v12*v16*v17/v15 + v13*v14*v18*v7/v15 - v13*v14*v8/v15 + v13*v14*v9/v15
       - 0.25*v4*v5*v6*(-v2**2/v3**2 + 0.1*v2/v3 + 4)
     n_variables: 18
-    subset: all
     vars:
       v1:
         name: x1
@@ -429,11 +429,11 @@ expressions:
     meta:
       finite_fraction: 1.0
   SheetBendingProcess:
+    subset: "physics"
     raw: 210000/(210000 + h)*(sigma_y*t**2/(wR*Rt*t) + h*t**3/(3*(Rt*t)*(wR*Rt*t)) - 4*sigma_y**3*(Rt*t)**2/(3*(wR*Rt*t)*210000**2))*(1
       + 4*t/(wR*Rt*t))
     prepared: 210000*(1 + 4/(v4*v5))*(v1*v3/(3*v4**2*v5) - v2**3*v3*v4/(33075000000*v5) + v2*v3/(v4*v5))/(v1 + 210000)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: h

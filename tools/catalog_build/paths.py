@@ -41,14 +41,26 @@ def _read(name: str) -> Any:
 
 
 @lru_cache(maxsize=1)
+def additions() -> dict[str, Any]:
+    """The sets added after the survey (the 2026-11-27 audit: LLM-SR's oscillators, the Bayesian machine scientist's
+    Rössler experiment, Brum et al.'s dynamical systems), in the survey's record format: ``sets`` (tag -> data set
+    record) and ``problems``. Vendored next to the survey's records (additions_2026-11.json)."""
+    path = Path(__file__).resolve().parents[2] / "assets/upstream/catalog-prep/additions_2026-11.json"
+    return json.loads(path.read_text()) if path.exists() else {"sets": {}, "problems": []}
+
+
+@lru_cache(maxsize=1)
 def final_problems() -> list[dict[str, Any]]:
-    """Every problem record (``set``, ``id``, ``kind`` F/D, ``unit``, ``formula``, ``variables``, ...)."""
-    return _read("final_problems.json")["problems"]
+    """Every problem record (``set``, ``id``, ``kind`` F/D, ``unit``, ``formula``, ``variables``, ...), the survey's
+    and the additions'."""
+    return _read("final_problems.json")["problems"] + additions()["problems"]
 
 
 @lru_cache(maxsize=None)
 def set_record(tag: str) -> dict[str, Any]:
     """A benchmark set's record (``name``, ``kind``, ``sources``, ...)."""
+    if tag in additions()["sets"]:
+        return additions()["sets"][tag]
     if (PREP / "sets").is_dir():
         with open(PREP / "sets" / f"{tag}.json", encoding="utf-8") as fh:
             return json.load(fh)
@@ -63,7 +75,7 @@ def _sets() -> dict[str, dict[str, Any]]:
 def set_tags() -> set[str]:
     """The tags of every recorded set."""
     if (PREP / "sets").is_dir():
-        return {p.stem for p in (PREP / "sets").glob("*.json")}
+        return {p.stem for p in (PREP / "sets").glob("*.json")} | set(additions()["sets"])
     return set(_sets()) | set(_data_sets())
 
 
@@ -77,7 +89,7 @@ def data_set_record(tag: str) -> dict[str, Any]:
 
 @lru_cache(maxsize=1)
 def _data_sets() -> dict[str, dict[str, Any]]:
-    return _read("data_sets.json")
+    return {**_read("data_sets.json"), **additions()["sets"]}
 
 
 @lru_cache(maxsize=1)
@@ -103,11 +115,106 @@ def statement(source: str, terms: str) -> str:
             f"the source: {terms}. {REMOVAL}")
 
 
+# The version a builder writes for a catalog whose problems changed after a version of it was used (the frozen-draw
+# renders and acceptance runs read version 1 of the 2026-11 catalogs; none of these is published yet): one above the
+# latest published or used version (the 2026-11-27 audit). A catalog not listed is at version 1.
+VERSIONS = {
+    # problem definitions changed: ranges flipped to the code's or data's, records fixed, compilations kept whole
+    "ai-hilbert-problem-set": 2, "dso-benchmark-registry": 2, "dgsr-additional-feynman": 2,
+    "dgsr-feynman-d-2-d-5-subsets": 2, "hep-llm-sr-angular-distribution-problems": 2,
+    "heuristiclab-regression-instance-providers": 2, "kan-feynman-no-units-subset": 2,
+    "physo-astrophysical-case-studies": 2, "rsrm-constant-optimization-benchmark": 2, "scrbenchmark": 2,
+    "shape-constrained-sr-synthetic": 2,
+    # compilations that now follow their own code or data (owner 2026-11-27); heuristiclab is at 2 already
+    "gp-benchmarks-sr-table": 2, "erbench-public-legacy-formulas": 2,
+    # pinned points changed (AutoRA's Weber-Fechner keeps S1 <= S2; cp3-bench F7's y on the CSV's grid)
+    "autora-synthetic-behavioural-science-models-points": 2, "cp3-bench-standard-tuning-datasets-points": 2,
+    # data catalogs whose problems changed (cp3-bench's three corrected formulas; PhyE2E's plasma datasets left out)
+    "cp3-bench": 2, "phye2e-space-physics": 2,
+}
+
+
+def version_of(catalog: str) -> int:
+    return VERSIONS.get(catalog, 1)
+
+
+# The environment the data catalogs are built in: CSV parsing differs between pandas versions in the last digit, so a
+# rebuild with another pandas writes other bytes (pyproject's ``build`` extra pins it). Recorded in every data catalog's
+# metadata and the build reports; a build with another pandas stops unless SYMBOLIC_DATA_ANY_PANDAS=1.
+BUILD_PANDAS = "3.0.5"
+
+
+def build_environment() -> dict[str, str]:
+    """The versions that decide a data catalog's bytes (python, numpy, pandas, simplipy, symbolic-data's source)."""
+    import platform
+    import numpy
+    import pandas
+    try:
+        import simplipy
+        simplipy_version = simplipy.__version__
+    except Exception:                                     # pragma: no cover
+        simplipy_version = "unavailable"
+    return {"python": platform.python_version(), "numpy": numpy.__version__, "pandas": pandas.__version__,
+            "simplipy": simplipy_version}
+
+
+def check_build_environment() -> dict[str, str]:
+    env = build_environment()
+    if env["pandas"] != BUILD_PANDAS and os.environ.get("SYMBOLIC_DATA_ANY_PANDAS") != "1":
+        raise SystemExit(f"data catalogs are built with pandas {BUILD_PANDAS} (pip install -e .[build]); this is pandas "
+                         f"{env['pandas']}, whose CSV parsing may differ in the last digit. Set SYMBOLIC_DATA_ANY_PANDAS=1 "
+                         "to build anyway.")
+    return env
+
+
+@lru_cache(maxsize=1)
+def dropped() -> dict[str, dict[str, Any]]:
+    """What srbf's release leaves out by rule (tags/dropped.json), by catalog: the whole catalog (``members`` null) or
+    the listed problems of it, each with its public ``reason`` (scope: y = f(x) on one data set, 2026-11-27; formulas as
+    their authors wrote them, 2026-11-26). The builders skip what it names, and count_release lists it."""
+    with open(Path(__file__).resolve().parent / "tags" / "dropped.json", encoding="utf-8") as fh:
+        return {r["catalog"]: r for r in json.load(fh)}
+
+
+def _dropped_row(catalog: str) -> dict[str, Any]:
+    base = re.sub(r"-(share-alike|restricted)$", "", catalog)       # a set's parts go with the set
+    return dropped().get(catalog) or dropped().get(base) or {}
+
+
+def dropped_whole(catalog: str) -> bool:
+    """Whether the rules leave out the whole catalog."""
+    r = _dropped_row(catalog)
+    return bool(r) and not r.get("members")
+
+
+def dropped_members(catalog: str) -> set[str]:
+    """The problems of a catalog the rules leave out (none when the catalog stays whole or goes whole)."""
+    return set(_dropped_row(catalog).get("members") or [])
+
+
+@lru_cache(maxsize=1)
+def reference_laws() -> dict[tuple[str, str], dict[str, Any]]:
+    """(catalog, problem id) -> why the problem's law does not reproduce its rows and how far it may miss them
+    (tags/reference_laws.json: ``reason``, ``fvu_bound``). A data problem's formula is a 'reference' ground truth only
+    with such a row (or the same two fields in its record): the builder refuses any other formula that misses."""
+    with open(Path(__file__).resolve().parent / "tags" / "reference_laws.json", encoding="utf-8") as fh:
+        return {(r["catalog"], str(i)): {"reason": r["reason"], "fvu_bound": float(r["fvu_bound"])}
+                for r in json.load(fh) for i in r["ids"]}
+
+
 @lru_cache(maxsize=1)
 def citations() -> dict[str, dict[str, Any]]:
     """Each catalog's ``paper`` and ``data`` citation (tags/citations.json), where they exist."""
     with open(Path(__file__).resolve().parent / "tags" / "citations.json", encoding="utf-8") as fh:
         return {c["catalog"]: c for c in json.load(fh)}
+
+
+def load_yaml(path: str | os.PathLike) -> Any:
+    """A yaml file read with libyaml's safe loader where available (the same result, several times faster on the
+    large catalogs)."""
+    import yaml
+    with open(path, encoding="utf-8") as fh:
+        return yaml.load(fh, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))
 
 
 def input_file(name: str | os.PathLike) -> Path:
@@ -143,6 +250,18 @@ _LOCAL = [(re.compile(_PATH + r"srbf_eval_local/workflow_archive/"), ""),
           (re.compile(_PATH + r"srbf_eval_local/"), ""),
           (re.compile(_PATH + r"Projects/symbolic-data(-wt-[\w-]+)?/"), "symbolic-data/"),
           (re.compile(_PATH), "~/"),
+          # the survey's working copy: a file in its raw folder is named by its own path, its set records are
+          # internal (no record ids in public text: the 2026-11-27 audit)
+          (re.compile(r"(?<![\w/])(?:catalog-prep/)?raw/[\w.-]+/"), ""),
+          (re.compile(r"(?<![\w/])(?:catalog-prep/)?sets/[\w.-]+?(?:\.\.[\w.-]+)?\.json"), "the benchmark survey record"),
+          (re.compile(r"\bsets? (?:fresh|done|critic|interrupted)-\d+(?:(?:, | and )(?:fresh|done|critic|interrupted)-\d+)*"),
+           "the benchmark survey records"),
+          (re.compile(r"\bcatalog-prep (?:fresh|done|critic|interrupted)-\d+\b"), "the benchmark survey record"),
+          (re.compile(r"\b(?:fresh|done|critic|interrupted)-\d+\b"), "a survey record"),
+          # ruling numbers stay out of public text
+          (re.compile(r";\s*(?:srbf |owner )?ruling \d{4}-\d\d-\d\d[^()]*(?:\([^()]*\)[^()]*)*\)"), ")"),
+          (re.compile(r"\s*\((?:srbf |owner )?rulings?(?: [^()]*(?:\([^()]*\)[^()]*)*)?\)"), ""),
+          (re.compile(r"\b(?:srbf|owner) ruling \d{4}-\d\d-\d\d(?:/\d\d)?(?: \(\w+\))?:?\s*"), ""),
           (re.compile(r"\bOWNER DECISION\b"), "DECISION"),
           (re.compile(r"\bowner call\b"), "srbf's call"),
           # the survey's notes name srbf's maintainer as "the owner"; a data owner and owner-occupied homes stay

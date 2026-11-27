@@ -1,10 +1,12 @@
 metadata:
   name: scimed-settling-sphere-configurations
+  display_name: "scimed-settling-sphere-configurations*"
   version: 1
-  tags: {"origin": "science formula", "tags": ["dummy inputs"]}
-  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 4 of the 5 configurations: D is the authors' control without a formula."}]
+  benchmark: "scimed-settling-sphere-configurations"
+  tags: {"origin": "science formula", "tags": ["dummy inputs", "srbf-modified"]}
   license: "MIT (LironSimon/SciMED) + CC BY 4.0 (Keren et al. 2023, Sci. Rep. 13:1249)"
   citation: {"paper": {"short": "Keren et al. 2023", "title": "A computational framework for physics-informed symbolic regression with straightforward integration of domain knowledge", "venue": "Scientific Reports 13(1):1249", "url": "https://doi.org/10.1038/s41598-023-28328-2"}, "data": {"short": "GitHub LironSimon/SciMED@2779587", "title": "SciMED data_generators/ (MIT)", "url": "https://github.com/LironSimon/SciMED/tree/27795878fd565d5aa238250bc9047eac27cebe25/data_generators"}}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 4 of the 5 configurations: D is the authors' control without a formula."}]
   description: SciMED settling-sphere configurations
   sources:
   - https://www.nature.com/articles/s41598-023-28328-2
@@ -28,17 +30,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-159.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   A:
+    subset: "scimed-settling-sphere-configurations"
     raw: v0 + a*t
     prepared: v1 + v2*v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: v0
@@ -73,10 +74,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   B:
+    subset: "scimed-settling-sphere-configurations"
     raw: 4/3*y30*y31
     prepared: 4*v30*v31/3
     n_variables: 33
-    subset: all
     vars:
       v1:
         name: y1
@@ -273,10 +274,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   C:
+    subset: "scimed-settling-sphere-configurations"
     raw: 13.08*(rhop - rhoa)*d/(rhoa*V**2)
     prepared: 13.08*v3*(v1 - v2)/(v2*v4**2)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: rhop
@@ -329,10 +330,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   E:
+    subset: "scimed-settling-sphere-configurations"
     raw: pi*Cd*rhoa*v**2*d**2/8
     prepared: 3.141592653589793*v1*v2*v3**2*v4**2/8
     n_variables: 12
-    subset: all
     vars:
       v1:
         name: Cd

@@ -1,12 +1,13 @@
 metadata:
   name: eql-robotic-arm-forward-kinematics
   version: 1
+  benchmark: "eql"
   tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs", "srbf-modified"]}
-  srbf_changes: [{"kind": "filled", "problems": 28, "text": "The authors never published how the joint angles were generated, only that they follow sinusoids of amplitude up to pi/2 (pi for the extrapolation test); srbf samples each angle as (pi/2) sin(u) with u uniform on [0, 2 pi), and with amplitude pi for the extrapolation test."}, {"kind": "filled", "problems": 28, "text": "The authors never print the arm's formulas; srbf derives them from the stated geometry (a planar arm with segments of length 0.5)."}]
   license: "facts only: task geometry and ranges cited from Martius & Lampert 2016 (arXiv:1610.02995); formulas derived by srbf; no upstream license"
   citation: {"paper": {"short": "Martius & Lampert 2016", "title": "Extrapolation and learning equations", "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)", "url": "https://arxiv.org/abs/1610.02995"}}
+  srbf_changes: [{"kind": "filled", "problems": 28, "text": "The authors never published how the joint angles were generated, only that they follow sinusoids of amplitude up to pi/2 (pi for the extrapolation test); srbf samples each angle as (pi/2) sin(u) with u uniform on [0, 2 pi), and with amplitude pi for the extrapolation test."}, {"kind": "filled", "problems": 28, "text": "The authors never print the arm's formulas; srbf derives them from the stated geometry (a planar arm with segments of length 0.5)."}]
   description: EQL robotic-arm forward kinematics
-  display_name: EQL robotic-arm forward kinematics*
+  display_name: "EQL robotic-arm forward kinematics*"
   modified_by_srbf: 'the authors'' input generator is unpublished: srbf draws each joint angle as (pi/2) sin(u), u ~ U[0,
     2 pi) (the time-sampled limit of their sinusoidal joint targets), and (pi) sin(u) for the extrapolation test'
   sources:
@@ -25,17 +26,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-153.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   kin-3-end_x:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3)
     n_variables: 3
-    subset: interp
     vars:
       v1:
         name: x1
@@ -86,10 +86,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-3-end_x.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3)
     n_variables: 3
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -152,10 +152,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-3-end_y:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3)
     n_variables: 3
-    subset: interp
     vars:
       v1:
         name: x1
@@ -206,10 +206,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-3-end_y.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3)
     n_variables: 3
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -272,10 +272,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-4-end_x:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4)
     n_variables: 4
-    subset: interp
     vars:
       v1:
         name: x1
@@ -340,10 +340,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-4-end_x.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4)
     n_variables: 4
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -422,10 +422,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-4-end_y:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4)
     n_variables: 4
-    subset: interp
     vars:
       v1:
         name: x1
@@ -490,10 +490,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-4-end_y.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4)
     n_variables: 4
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -572,10 +572,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg1_x:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1))
     prepared: 0.5*cos(v1)
     n_variables: 5
-    subset: interp
     vars:
       v1:
         name: x1
@@ -654,10 +654,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg1_x.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1))
     prepared: 0.5*cos(v1)
     n_variables: 5
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -752,10 +752,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg2_x:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2)
     n_variables: 5
-    subset: interp
     vars:
       v1:
         name: x1
@@ -834,10 +834,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg2_x.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2)
     n_variables: 5
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -932,10 +932,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg3_x:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3)
     n_variables: 5
-    subset: interp
     vars:
       v1:
         name: x1
@@ -1014,10 +1014,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg3_x.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3)
     n_variables: 5
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -1112,10 +1112,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg4_x:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4)
     n_variables: 5
-    subset: interp
     vars:
       v1:
         name: x1
@@ -1194,10 +1194,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg4_x.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4)
     n_variables: 5
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -1292,11 +1292,11 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg5_x:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4) + cos(x1 + x2 + x3 + x4 + x5))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4) + 0.5*cos(v1 + v2 + v3 +
       v4 + v5)
     n_variables: 5
-    subset: interp
     vars:
       v1:
         name: x1
@@ -1375,11 +1375,11 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg5_x.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(cos(x1) + cos(x1 + x2) + cos(x1 + x2 + x3) + cos(x1 + x2 + x3 + x4) + cos(x1 + x2 + x3 + x4 + x5))
     prepared: 0.5*cos(v1) + 0.5*cos(v1 + v2) + 0.5*cos(v1 + v2 + v3) + 0.5*cos(v1 + v2 + v3 + v4) + 0.5*cos(v1 + v2 + v3 +
       v4 + v5)
     n_variables: 5
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -1474,10 +1474,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg1_y:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1))
     prepared: 0.5*sin(v1)
     n_variables: 5
-    subset: interp
     vars:
       v1:
         name: x1
@@ -1556,10 +1556,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg1_y.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1))
     prepared: 0.5*sin(v1)
     n_variables: 5
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -1654,10 +1654,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg2_y:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2)
     n_variables: 5
-    subset: interp
     vars:
       v1:
         name: x1
@@ -1736,10 +1736,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg2_y.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2)
     n_variables: 5
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -1834,10 +1834,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg3_y:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3)
     n_variables: 5
-    subset: interp
     vars:
       v1:
         name: x1
@@ -1916,10 +1916,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg3_y.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3)
     n_variables: 5
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -2014,10 +2014,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg4_y:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4)
     n_variables: 5
-    subset: interp
     vars:
       v1:
         name: x1
@@ -2096,10 +2096,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg4_y.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4)
     n_variables: 5
-    subset: extrap
     vars:
       v1:
         name: x1
@@ -2194,11 +2194,11 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg5_y:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4) + sin(x1 + x2 + x3 + x4 + x5))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4) + 0.5*sin(v1 + v2 + v3 +
       v4 + v5)
     n_variables: 5
-    subset: interp
     vars:
       v1:
         name: x1
@@ -2277,11 +2277,11 @@ expressions:
     meta:
       finite_fraction: 1.0
   kin-5-all_seg5_y.extrap:
+    subset: "robotic-arm"
     raw: 0.5*(sin(x1) + sin(x1 + x2) + sin(x1 + x2 + x3) + sin(x1 + x2 + x3 + x4) + sin(x1 + x2 + x3 + x4 + x5))
     prepared: 0.5*sin(v1) + 0.5*sin(v1 + v2) + 0.5*sin(v1 + v2 + v3) + 0.5*sin(v1 + v2 + v3 + v4) + 0.5*sin(v1 + v2 + v3 +
       v4 + v5)
     n_variables: 5
-    subset: extrap
     vars:
       v1:
         name: x1

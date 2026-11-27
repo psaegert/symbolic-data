@@ -1,10 +1,12 @@
 metadata:
   name: ai-feynman-2-0-modular-equations
+  display_name: "ai-feynman-2-0-modular-equations*"
   version: 1
-  tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 11, "text": "srbf runs 1 of the 12 modular equations: the authors give an input range only for equation 12."}, {"kind": "filled", "problems": 1, "text": "For equation 12 the authors state the range [-1, 1] but not how inputs are spread over it; srbf samples them uniformly."}]
+  benchmark: "ai-feynman-2-0-modular-equations"
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   license: "facts only: formulas cited from Udrescu et al. 2020 (AI Feynman 2.0, NeurIPS 33, arXiv:2006.10782), Table 4; no upstream license"
   citation: {"paper": {"short": "Udrescu et al. 2020", "title": "AI Feynman 2.0: Pareto-optimal symbolic regression exploiting graph modularity", "venue": "NeurIPS 2020 (Adv. Neural Inf. Process. Syst. 33)", "url": "https://arxiv.org/abs/2006.10782"}}
+  srbf_changes: [{"kind": "part", "problems": 11, "text": "srbf runs 1 of the 12 modular equations: the authors give an input range only for equation 12."}, {"kind": "filled", "problems": 1, "text": "For equation 12 the authors state the range [-1, 1] but not how inputs are spread over it; srbf samples them uniformly."}]
   description: AI Feynman 2.0 modular equations
   sources:
   - https://arxiv.org/abs/2006.10782
@@ -23,18 +25,17 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-0.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   table4-eq12:
+    subset: "ai-feynman-2-0-modular-equations"
     raw: x*y*z - z*sqrt(1 - x**2)*sqrt(1 - y**2) - y*sqrt(1 - x**2)*sqrt(1 - z**2) - x*sqrt(1 - y**2)*sqrt(1 - z**2)
     prepared: v1*v2*v3 - v1*sqrt(1 - v2**2)*sqrt(1 - v3**2) - v2*sqrt(1 - v1**2)*sqrt(1 - v3**2) - v3*sqrt(1 - v1**2)*sqrt(1
       - v2**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x

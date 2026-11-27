@@ -1,10 +1,11 @@
 metadata:
   name: spl-noise-data-scarcity-grid
   version: 1
+  benchmark: "spl-noise-data-scarcity-grid"
   tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: []
   license: "facts only: one formula and its range from Sun et al. 2023 (Symbolic Physics Learner, ICLR, arXiv:2205.13134v2, a CC BY-SA 4.0 paper)"
   citation: {"paper": {"short": "Sun et al. 2023", "title": "Symbolic Physics Learner: Discovering governing equations via Monte Carlo tree search", "venue": "ICLR 2023", "url": "https://arxiv.org/abs/2205.13134"}}
+  srbf_changes: []
   description: SPL noise/data-scarcity grid
   sources:
   - https://arxiv.org/abs/2205.13134v2
@@ -18,17 +19,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-150.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   spl-noise-scarcity-cubic:
+    subset: "spl-noise-data-scarcity-grid"
     raw: 0.3*x**3 + 0.5*x**2 + 2*x
     prepared: 0.3*v1**3 + 0.5*v1**2 + 2*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x

@@ -1,10 +1,11 @@
 metadata:
   name: friedman-functions
   version: 1
+  benchmark: "friedman-functions"
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
-  srbf_changes: []
   license: "facts only: test functions and input distributions cited from Friedman 1991 (Ann. Stat. 19:1-67); no upstream license"
   citation: {"paper": {"short": "Friedman 1991", "title": "Multivariate Adaptive Regression Splines", "venue": "The Annals of Statistics 19(1):1-67", "url": "https://doi.org/10.1214/aos/1176347963"}}
+  srbf_changes: []
   description: Friedman functions
   sources:
   - http://web.archive.org/web/20170304074826/http://www.dtic.mil/dtic/tr/fulltext/u2/a578458.pdf
@@ -20,17 +21,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-42.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   friedman-additive:
+    subset: "friedman-functions"
     raw: 0.1*exp(4*x1) + 4/(1 + exp(-20*(x2 - 1/2))) + 3*x3 + 2*x4 + x5
     prepared: 3*v3 + 2*v4 + v5 + 0.1*exp(4*v1) + 4/(exp(-20*v2 + 20*1/2) + 1)
     n_variables: 10
-    subset: all
     vars:
       v1:
         name: x1
@@ -128,10 +128,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   friedman1:
+    subset: "friedman-functions"
     raw: 10*sin(pi*x1*x2) + 20*(x3 - 1/2)**2 + 10*x4 + 5*x5
     prepared: 10*v4 + 5*v5 + 20*(v3 - 1*1/2)**2 + 10*sin(3.141592653589793*v1*v2)
     n_variables: 10
-    subset: all
     vars:
       v1:
         name: x1
@@ -229,10 +229,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   friedman2:
+    subset: "friedman-functions"
     raw: sqrt(R**2 + (omega*L - 1/(omega*C))**2)
     prepared: sqrt(v1**2 + (v2*v3 - 1/(v2*v4))**2)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: R
@@ -276,10 +276,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   friedman3:
+    subset: "friedman-functions"
     raw: atan((omega*L - 1/(omega*C))/R)
     prepared: atan((v2*v3 - 1/(v2*v4))/v1)
     n_variables: 4
-    subset: all
     vars:
       v1:
         name: R

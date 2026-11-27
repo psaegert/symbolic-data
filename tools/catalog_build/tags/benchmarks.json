@@ -1,0 +1,876 @@
+[
+ {
+  "benchmark": "ai-descartes-real-data",
+  "catalogs": [
+   "ai-descartes-real-data"
+  ]
+ },
+ {
+  "benchmark": "ai-feynman-2-0-modular-equations",
+  "catalogs": [
+   "ai-feynman-2-0-modular-equations"
+  ]
+ },
+ {
+  "benchmark": "ai-feynman-database-100-main-equations",
+  "catalogs": [
+   "ai-feynman-database-100-main-equations"
+  ]
+ },
+ {
+  "benchmark": "ai-hilbert",
+  "catalogs": [
+   "ai-hilbert-problem-set",
+   "ai-hilbert-real-data"
+  ],
+  "parts": {
+   "ai-hilbert-problem-set": "problem-set",
+   "ai-hilbert-real-data": "real-data"
+  }
+ },
+ {
+  "benchmark": "autora-synthetic-behavioural-science-models",
+  "catalogs": [
+   "autora-synthetic-behavioural-science-models-points"
+  ]
+ },
+ {
+  "benchmark": "black-hole-spiral-plane",
+  "catalogs": [
+   "black-hole-spiral-plane"
+  ]
+ },
+ {
+  "benchmark": "bms",
+  "catalogs": [
+   "bms-real-data",
+   "bms-rossler",
+   "bms-synthetic-prior-expression-and-bessel-functions",
+   "bms-synthetic-prior-expression-and-bessel-functions-points"
+  ],
+  "parts": {
+   "bms-real-data": "real-data",
+   "bms-synthetic-prior-expression-and-bessel-functions": "synthetic",
+   "bms-rossler": "rossler",
+   "bms-synthetic-prior-expression-and-bessel-functions-points": "synthetic"
+  }
+ },
+ {
+  "benchmark": "chen-luo-jiang-block-building-test-cases",
+  "catalogs": [
+   "chen-luo-jiang-block-building-test-cases"
+  ]
+ },
+ {
+  "benchmark": "coevolved-fitness-predictors-test-problems",
+  "catalogs": [
+   "coevolved-fitness-predictors-test-problems-points"
+  ]
+ },
+ {
+  "benchmark": "constant",
+  "catalogs": [
+   "constant"
+  ]
+ },
+ {
+  "benchmark": "cp3-bench",
+  "catalogs": [
+   "cp3-bench",
+   "cp3-bench-standard-tuning-datasets-points"
+  ],
+  "parts": {
+   "cp3-bench": "cosmology",
+   "cp3-bench-standard-tuning-datasets-points": "standard-tuning"
+  }
+ },
+ {
+  "benchmark": "cvgp-trigonometric-control-variable-datasets",
+  "catalogs": [
+   "cvgp-trigonometric-control-variable-datasets"
+  ]
+ },
+ {
+  "benchmark": "ddrsr-simple-test-and-complex-test",
+  "catalogs": [
+   "ddrsr-simple-test-and-complex-test"
+  ]
+ },
+ {
+  "benchmark": "decomposable-nsr-synthetic-e1-e13",
+  "catalogs": [
+   "decomposable-nsr-synthetic-e1-e13"
+  ]
+ },
+ {
+  "benchmark": "dgsr",
+  "catalogs": [
+   "dgsr-additional-feynman",
+   "dgsr-feynman-d-2-d-5-subsets",
+   "dgsr-synthetic-d-12"
+  ],
+  "parts": {
+   "dgsr-additional-feynman": "additional-feynman",
+   "dgsr-synthetic-d-12": "synthetic-d-12"
+  }
+ },
+ {
+  "benchmark": "dimensionless-learning",
+  "catalogs": [
+   "dimensionless-learning"
+  ]
+ },
+ {
+  "benchmark": "dow-chemical-evostar-2010",
+  "catalogs": [
+   "dow-chemical-evostar-2010"
+  ]
+ },
+ {
+  "benchmark": "dow-distillation-tower",
+  "catalogs": [
+   "dow-distillation-tower"
+  ]
+ },
+ {
+  "benchmark": "dow-emulator",
+  "catalogs": [
+   "dow-emulator"
+  ]
+ },
+ {
+  "benchmark": "drsr-debcat",
+  "catalogs": [
+   "drsr-debcat"
+  ]
+ },
+ {
+  "benchmark": "dso-benchmark-registry",
+  "catalogs": [
+   "dso-benchmark-registry",
+   "dso-benchmark-registry-points"
+  ]
+ },
+ {
+  "benchmark": "e2e-in-domain-synthetic-validation-set",
+  "catalogs": [
+   "e2e-in-domain-synthetic-validation-set"
+  ]
+ },
+ {
+  "benchmark": "eql",
+  "catalogs": [
+   "eql-cart-pendulum",
+   "eql-double-pendulum",
+   "eql-formulas-f-1-f-4-and-division-formula",
+   "eql-pendulum-vector-field",
+   "eql-robotic-arm-forward-kinematics"
+  ],
+  "parts": {
+   "eql-robotic-arm-forward-kinematics": "robotic-arm",
+   "eql-formulas-f-1-f-4-and-division-formula": "formulas",
+   "eql-cart-pendulum": "cart-pendulum",
+   "eql-pendulum-vector-field": "pendulum-vector-field",
+   "eql-double-pendulum": "double-pendulum"
+  }
+ },
+ {
+  "benchmark": "erbench",
+  "catalogs": [
+   "erbench-densities",
+   "erbench-eponymous",
+   "erbench-oeis",
+   "erbench-phybench",
+   "erbench-public-legacy-formulas",
+   "erbench-syneq"
+  ],
+  "parts": {
+   "erbench-syneq": "syneq",
+   "erbench-oeis": "oeis",
+   "erbench-eponymous": "eponymous",
+   "erbench-phybench": "phybench",
+   "erbench-densities": "densities",
+   "erbench-public-legacy-formulas": "legacy"
+  }
+ },
+ {
+  "benchmark": "errless-synthetic-posterior-set",
+  "catalogs": [
+   "errless-synthetic-posterior-set"
+  ]
+ },
+ {
+  "benchmark": "esr-cosmology",
+  "catalogs": [
+   "esr-cosmology",
+   "esr-cosmology-datasets"
+  ]
+ },
+ {
+  "benchmark": "evogp-uci",
+  "catalogs": [
+   "evogp-uci"
+  ]
+ },
+ {
+  "benchmark": "evomo-sr-random-expression-datasets-p1-p4",
+  "catalogs": [
+   "evomo-sr-random-expression-datasets-p1-p4"
+  ]
+ },
+ {
+  "benchmark": "falling-balls",
+  "catalogs": [
+   "falling-balls"
+  ]
+ },
+ {
+  "benchmark": "fastsrb",
+  "catalogs": [
+   "fastsrb"
+  ]
+ },
+ {
+  "benchmark": "feynman",
+  "catalogs": [
+   "feynman"
+  ]
+ },
+ {
+  "benchmark": "feynman-bonus",
+  "catalogs": [
+   "feynman-bonus"
+  ]
+ },
+ {
+  "benchmark": "ffx",
+  "catalogs": [
+   "ffx-cmos-ota",
+   "ffx-high-dimensional-circuits"
+  ],
+  "parts": {
+   "ffx-high-dimensional-circuits": "high-dimensional-circuits",
+   "ffx-cmos-ota": "cmos-ota"
+  }
+ },
+ {
+  "benchmark": "friedman-functions",
+  "catalogs": [
+   "friedman-functions"
+  ]
+ },
+ {
+  "benchmark": "friedman-random-function-generator-instances",
+  "catalogs": [
+   "friedman-random-function-generator-instances"
+  ]
+ },
+ {
+  "benchmark": "gecco-2013-2017-real",
+  "catalogs": [
+   "gecco-2013-2017-real",
+   "gecco-2013-2017-real-restricted",
+   "gecco-2013-2017-real-share-alike"
+  ]
+ },
+ {
+  "benchmark": "gecco-2023-performance",
+  "catalogs": [
+   "gecco-2023-performance"
+  ]
+ },
+ {
+  "benchmark": "geobench",
+  "catalogs": [
+   "geobench"
+  ]
+ },
+ {
+  "benchmark": "gfn-sr-noisy-near-twin-set",
+  "catalogs": [
+   "gfn-sr-noisy-near-twin-set"
+  ]
+ },
+ {
+  "benchmark": "gp-benchmarks-sr-table",
+  "catalogs": [
+   "gp-benchmarks-sr-table",
+   "gp-benchmarks-sr-table-points"
+  ]
+ },
+ {
+  "benchmark": "gp-gomea-real-world",
+  "catalogs": [
+   "gp-gomea-real-world",
+   "gp-gomea-real-world-restricted"
+  ]
+ },
+ {
+  "benchmark": "gplearn-documentation-examples",
+  "catalogs": [
+   "gplearn-diabetes",
+   "gplearn-documentation-examples"
+  ],
+  "parts": {
+   "gplearn-documentation-examples": "symbolic-regressor-example",
+   "gplearn-diabetes": "diabetes"
+  }
+ },
+ {
+  "benchmark": "gpu-lm-inner-constant-recovery-problems",
+  "catalogs": [
+   "gpu-lm-inner-constant-recovery-problems"
+  ]
+ },
+ {
+  "benchmark": "grammarvae",
+  "catalogs": [
+   "grammarvae-points"
+  ]
+ },
+ {
+  "benchmark": "gsgp-real-world",
+  "catalogs": [
+   "gsgp-real-world"
+  ]
+ },
+ {
+  "benchmark": "gsr-symset",
+  "catalogs": [
+   "gsr-symset"
+  ]
+ },
+ {
+  "benchmark": "hep-llm-sr-angular-distribution-problems",
+  "catalogs": [
+   "hep-llm-sr-angular-distribution-problems"
+  ]
+ },
+ {
+  "benchmark": "heuristiclab",
+  "catalogs": [
+   "heuristiclab-physics-instances",
+   "heuristiclab-real-world",
+   "heuristiclab-regression-instance-providers",
+   "heuristiclab-regression-instance-providers-points"
+  ],
+  "parts": {
+   "heuristiclab-real-world": "real-world",
+   "heuristiclab-regression-instance-providers": "instances",
+   "heuristiclab-physics-instances": "physics",
+   "heuristiclab-regression-instance-providers-points": "instances"
+  }
+ },
+ {
+  "benchmark": "hierbosss",
+  "catalogs": [
+   "hierbosss-single-atom",
+   "hierbosss-single-atom-catalysis-and-synthetic-polynomial"
+  ]
+ },
+ {
+  "benchmark": "ideasearch-pdf",
+  "catalogs": [
+   "ideasearch-pdf"
+  ]
+ },
+ {
+  "benchmark": "jin",
+  "catalogs": [
+   "jin"
+  ]
+ },
+ {
+  "benchmark": "kan",
+  "catalogs": [
+   "kan-feynman-no-units-subset",
+   "kan-toy-functions"
+  ],
+  "parts": {
+   "kan-feynman-no-units-subset": "feynman-no-units",
+   "kan-toy-functions": "toy"
+  }
+ },
+ {
+  "benchmark": "keijzer",
+  "catalogs": [
+   "keijzer",
+   "keijzer-points"
+  ]
+ },
+ {
+  "benchmark": "kim-et-al-eql-benchmark-functions",
+  "catalogs": [
+   "kim-et-al-eql-benchmark-functions"
+  ]
+ },
+ {
+  "benchmark": "knowledge-integration-newtonian-cases",
+  "catalogs": [
+   "knowledge-integration-newtonian-cases"
+  ]
+ },
+ {
+  "benchmark": "korns",
+  "catalogs": [
+   "korns"
+  ]
+ },
+ {
+  "benchmark": "koza",
+  "catalogs": [
+   "koza"
+  ]
+ },
+ {
+  "benchmark": "langlaw-perovskites",
+  "catalogs": [
+   "langlaw-perovskites",
+   "langlaw-perovskites-restricted"
+  ]
+ },
+ {
+  "benchmark": "lasr",
+  "catalogs": [
+   "lasr-bigbench",
+   "lasr-noisy-feynman-with-distractors",
+   "lasr-synthetic-equations"
+  ],
+  "parts": {
+   "lasr-noisy-feynman-with-distractors": "noisy-feynman",
+   "lasr-synthetic-equations": "synthetic",
+   "lasr-bigbench": "bigbench"
+  }
+ },
+ {
+  "benchmark": "livermore",
+  "catalogs": [
+   "livermore"
+  ]
+ },
+ {
+  "benchmark": "livermore2",
+  "catalogs": [
+   "livermore2"
+  ]
+ },
+ {
+  "benchmark": "llm-lex-random-mathematica-functions",
+  "catalogs": [
+   "llm-lex-random-mathematica-functions",
+   "llm-lex-random-mathematica-functions-points"
+  ]
+ },
+ {
+  "benchmark": "llm-pysr-battery",
+  "catalogs": [
+   "llm-pysr-battery"
+  ]
+ },
+ {
+  "benchmark": "llm-sr",
+  "catalogs": [
+   "llm-sr-bactgrow",
+   "llm-sr-oscillators",
+   "llm-sr-stress-strain"
+  ],
+  "parts": {
+   "llm-sr-oscillators": "oscillators",
+   "llm-sr-bactgrow": "bactgrow",
+   "llm-sr-stress-strain": "stress-strain"
+  }
+ },
+ {
+  "benchmark": "llm-srbench",
+  "catalogs": [
+   "llm-srbench"
+  ]
+ },
+ {
+  "benchmark": "materials-laws-multi-agent",
+  "catalogs": [
+   "materials-laws-multi-agent"
+  ]
+ },
+ {
+  "benchmark": "mcdermott-predictive-modelling",
+  "catalogs": [
+   "mcdermott-predictive-modelling",
+   "mcdermott-predictive-modelling-restricted",
+   "mcdermott-table-1-predictive-modelling-sets-points"
+  ],
+  "parts": {
+   "mcdermott-table-1-predictive-modelling-sets-points": "dyfor"
+  }
+ },
+ {
+  "benchmark": "meier",
+  "catalogs": [
+   "meier"
+  ]
+ },
+ {
+  "benchmark": "neat",
+  "catalogs": [
+   "neat",
+   "neat-points"
+  ]
+ },
+ {
+  "benchmark": "nguyen",
+  "catalogs": [
+   "nguyen",
+   "nguyen-c-points"
+  ],
+  "parts": {
+   "nguyen-c-points": "nguyen-c"
+  }
+ },
+ {
+  "benchmark": "nikuradse",
+  "catalogs": [
+   "nikuradse"
+  ]
+ },
+ {
+  "benchmark": "nonic",
+  "catalogs": [
+   "nonic-points"
+  ]
+ },
+ {
+  "benchmark": "nsrwh",
+  "catalogs": [
+   "nsrwh-only-five-variables-nc",
+   "nsrwh-only-five-variables-wc",
+   "nsrwh-train-nc",
+   "nsrwh-train-wc"
+  ],
+  "parts": {
+   "nsrwh-only-five-variables-nc": "only-five-variables-nc",
+   "nsrwh-only-five-variables-wc": "only-five-variables-wc",
+   "nsrwh-train-nc": "train-nc",
+   "nsrwh-train-wc": "train-wc"
+  }
+ },
+ {
+  "benchmark": "nuclear-misr",
+  "catalogs": [
+   "nuclear-misr",
+   "nuclear-misr-restricted"
+  ]
+ },
+ {
+  "benchmark": "oxygen-ion-conductors",
+  "catalogs": [
+   "oxygen-ion-conductors"
+  ]
+ },
+ {
+  "benchmark": "pagie",
+  "catalogs": [
+   "pagie-points"
+  ]
+ },
+ {
+  "benchmark": "phye2e",
+  "catalogs": [
+   "phye2e-llm-generated-synthetic-formulas",
+   "phye2e-space-physics",
+   "phye2e-space-physics-restricted"
+  ],
+  "parts": {
+   "phye2e-llm-generated-synthetic-formulas": "synthetic",
+   "phye2e-space-physics": "space-physics",
+   "phye2e-space-physics-restricted": "space-physics"
+  }
+ },
+ {
+  "benchmark": "physo",
+  "catalogs": [
+   "physo-astro",
+   "physo-astrophysical-case-studies"
+  ],
+  "parts": {
+   "physo-astro": "astrophysical-case-studies"
+  }
+ },
+ {
+  "benchmark": "poly",
+  "catalogs": [
+   "poly"
+  ]
+ },
+ {
+  "benchmark": "pse-high-dimensional-distractor-set",
+  "catalogs": [
+   "pse-high-dimensional-distractor-set"
+  ]
+ },
+ {
+  "benchmark": "pysr-empiricalbench",
+  "catalogs": [
+   "pysr-empiricalbench",
+   "pysr-empiricalbench-formulas"
+  ],
+  "parts": {
+   "pysr-empiricalbench-formulas": "formulas",
+   "pysr-empiricalbench": "empirical-data"
+  }
+ },
+ {
+  "benchmark": "r-rationals",
+  "catalogs": [
+   "r-rationals-points"
+  ]
+ },
+ {
+  "benchmark": "reproduction-bias-not-included-test-sets",
+  "catalogs": [
+   "reproduction-bias-not-included-test-sets"
+  ]
+ },
+ {
+  "benchmark": "rils-rols-random-instances",
+  "catalogs": [
+   "rils-rols-random-instances"
+  ]
+ },
+ {
+  "benchmark": "rsrm",
+  "catalogs": [
+   "rsrm-constant-optimization-benchmark",
+   "rsrm-gaussian-cdf-extrapolation-test-points"
+  ],
+  "parts": {
+   "rsrm-gaussian-cdf-extrapolation-test-points": "gaussian-cdf-extrapolation"
+  }
+ },
+ {
+  "benchmark": "scilaws-real",
+  "catalogs": [
+   "scilaws-real",
+   "scilaws-real-restricted",
+   "scilaws-real-share-alike"
+  ]
+ },
+ {
+  "benchmark": "scimed-settling-sphere-configurations",
+  "catalogs": [
+   "scimed-settling-sphere-configurations"
+  ]
+ },
+ {
+  "benchmark": "scrbenchmark",
+  "catalogs": [
+   "scrbenchmark"
+  ]
+ },
+ {
+  "benchmark": "shadow-economies",
+  "catalogs": [
+   "shadow-economies"
+  ]
+ },
+ {
+  "benchmark": "shape-constrained-sr",
+  "catalogs": [
+   "shape-constrained-real-world",
+   "shape-constrained-real-world-restricted",
+   "shape-constrained-sr-synthetic"
+  ],
+  "parts": {
+   "shape-constrained-real-world-restricted": "real-world",
+   "shape-constrained-real-world": "real-world"
+  }
+ },
+ {
+  "benchmark": "sine",
+  "catalogs": [
+   "sine-points"
+  ]
+ },
+ {
+  "benchmark": "sisso-octet-binaries",
+  "catalogs": [
+   "sisso-octet-binaries"
+  ]
+ },
+ {
+  "benchmark": "soose",
+  "catalogs": [
+   "soose-fc",
+   "soose-nc",
+   "soose-wc"
+  ],
+  "parts": {
+   "soose-fc": "fc",
+   "soose-nc": "nc",
+   "soose-wc": "wc"
+  }
+ },
+ {
+  "benchmark": "sparc-radial-acceleration",
+  "catalogs": [
+   "sparc-radial-acceleration"
+  ]
+ },
+ {
+  "benchmark": "spl-noise-data-scarcity-grid",
+  "catalogs": [
+   "spl-noise-data-scarcity-grid"
+  ]
+ },
+ {
+  "benchmark": "sr-dynamical-systems",
+  "catalogs": [
+   "sr-dynamical-systems"
+  ]
+ },
+ {
+  "benchmark": "srbench-2.0",
+  "catalogs": [
+   "srbench-2.0-blackbox",
+   "srbench-2.0-blackbox-restricted",
+   "srbench-2.0-first-principles",
+   "srbench-2.0-first-principles-restricted"
+  ],
+  "parts": {
+   "srbench-2.0-first-principles": "first-principles",
+   "srbench-2.0-blackbox-restricted": "blackbox",
+   "srbench-2.0-blackbox": "blackbox",
+   "srbench-2.0-first-principles-restricted": "first-principles"
+  }
+ },
+ {
+  "benchmark": "srbench-2021",
+  "catalogs": [
+   "srbench-2021-blackbox",
+   "srbench-2021-blackbox-restricted",
+   "srbench-2021-strogatz"
+  ],
+  "parts": {
+   "srbench-2021-blackbox": "blackbox",
+   "srbench-2021-blackbox-restricted": "blackbox",
+   "srbench-2021-strogatz": "strogatz"
+  }
+ },
+ {
+  "benchmark": "srbench-competition-2022",
+  "catalogs": [
+   "gecco-2022-covid-ny",
+   "gecco-2022-exact-rediscovery",
+   "gecco-2022-extrapolation",
+   "gecco-2022-feature-selection",
+   "gecco-2022-local-optima",
+   "gecco-2022-noise"
+  ],
+  "parts": {
+   "gecco-2022-exact-rediscovery": "exact-rediscovery",
+   "gecco-2022-noise": "noise",
+   "gecco-2022-extrapolation": "extrapolation",
+   "gecco-2022-feature-selection": "feature-selection",
+   "gecco-2022-local-optima": "local-optima",
+   "gecco-2022-covid-ny": "covid-ny"
+  }
+ },
+ {
+  "benchmark": "srsd-dummy",
+  "catalogs": [
+   "srsd-dummy"
+  ]
+ },
+ {
+  "benchmark": "superconductor-tc",
+  "catalogs": [
+   "superconductor-tc"
+  ]
+ },
+ {
+  "benchmark": "sym-q-ai-feynman-with-drift-terms",
+  "catalogs": [
+   "sym-q-ai-feynman-with-drift-terms"
+  ]
+ },
+ {
+  "benchmark": "symantic-synthetic-set",
+  "catalogs": [
+   "symantic-synthetic-set"
+  ]
+ },
+ {
+  "benchmark": "symbolfit-lhc-spectra",
+  "catalogs": [
+   "symbolfit-lhc-spectra"
+  ]
+ },
+ {
+  "benchmark": "symbolicgpt-bivariate-set",
+  "catalogs": [
+   "symbolicgpt-bivariate-set"
+  ]
+ },
+ {
+  "benchmark": "symbolicgpt-test-sets",
+  "catalogs": [
+   "symbolicgpt-test-sets"
+  ]
+ },
+ {
+  "benchmark": "symbolicregression-com-toy-test-suite-1",
+  "catalogs": [
+   "symbolicregression-com-toy-test-suite-1"
+  ]
+ },
+ {
+  "benchmark": "symformer-in-domain-synthetic-evaluation",
+  "catalogs": [
+   "symformer-in-domain-synthetic-evaluation"
+  ]
+ },
+ {
+  "benchmark": "symtree-benchmark-functions",
+  "catalogs": [
+   "symtree-benchmark-functions"
+  ]
+ },
+ {
+  "benchmark": "tisr-air-density",
+  "catalogs": [
+   "tisr-air-density"
+  ]
+ },
+ {
+  "benchmark": "torchsisso",
+  "catalogs": [
+   "torchsisso-specific-energy",
+   "torchsisso-synthetic-expressions"
+  ],
+  "parts": {
+   "torchsisso-synthetic-expressions": "synthetic",
+   "torchsisso-specific-energy": "specific-energy"
+  }
+ },
+ {
+  "benchmark": "vladislavleva",
+  "catalogs": [
+   "vladislavleva",
+   "vladislavleva-points"
+  ],
+  "parts": {
+   "vladislavleva": "synthetic",
+   "vladislavleva-points": "synthetic"
+  }
+ },
+ {
+  "benchmark": "white-2013-proposed",
+  "catalogs": [
+   "white-2013-proposed",
+   "white-et-al-2013-proposed-sr-set-points"
+  ],
+  "parts": {
+   "white-et-al-2013-proposed-sr-set-points": "synthetic",
+   "white-2013-proposed": "real-world"
+  }
+ }
+]

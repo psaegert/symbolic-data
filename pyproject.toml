@@ -25,6 +25,9 @@ dependencies = [
 sympy = ["sympy"]
 ingest = ["pandas"]
 dev = ["pytest", "pytest-cov", "pandas", "sympy"]
+# the catalog builders (tools/catalog_build): pandas pinned, since CSV parsing differs between versions in the last digit
+# and a data catalog's bytes are pinned by sha256 (paths.BUILD_PANDAS); h5py, xlrd and openpyxl read the benchmarks' files
+build = ["pandas==3.0.5", "sympy", "scipy", "pyarrow", "h5py", "xlrd", "openpyxl", "scikit-learn", "PyYAML"]
 
 [project.scripts]
 symbolic-data = "symbolic_data.__main__:main"

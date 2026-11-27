@@ -1,10 +1,13 @@
 metadata:
   name: ai-feynman-database-100-main-equations
+  display_name: "ai-feynman-database-100-main-equations*"
   version: 1
-  tags: {"origin": "science formula", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 74 of the 100 equations: in the other 26 no input is left once the units are removed, so the target is a constant."}]
+  benchmark: "ai-feynman-database-100-main-equations"
+  tags: {"origin": "science formula", "tags": ["srbf-modified"]}
   license: "facts only: formulas, ranges and units cited from the Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, Sci. Adv. 6:eaay2631); no upstream license"
   citation: {"paper": {"short": "Udrescu & Tegmark 2020", "title": "AI Feynman: A physics-inspired method for symbolic regression", "venue": "Science Advances 6(16):eaay2631", "url": "https://doi.org/10.1126/sciadv.aay2631"}, "data": {"short": "Feynman Symbolic Regression Database (FSReD), Wayback 2021-10-19", "title": "AI Feynman / Feynman Symbolic Regression Database download page (space.mit.edu, host now dead)", "url": "https://web.archive.org/web/20211019022249/https://space.mit.edu/home/tegmark/main_aifeynman.html"}}
+  srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 74 of the 100 equations: in the other 26 no input is left once the units are removed, so the target is a constant."}, {"kind": "filled", "problems": 48, "text": "For 48 of the 74 equations the database gives the dimensionless inputs only as ratios of AI Feynman's dimensional variables, without their distribution; srbf draws the dimensional variables on AI Feynman's ranges and computes the ratios (a push-forward)."}]
+  problem_flags: {"trivial": ["I.12.1", "I.12.2", "I.39.22", "I.41.16", "II.34.11", "II.37.1", "III.4.32", "III.4.33", "III.12.43", "III.13.18"]}
   description: 'AI Feynman database: 100 main equations (FSReD)'
   sources:
   - https://arxiv.org/abs/1905.11481
@@ -22,17 +25,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/interrupted-3.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   I.6.2a:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sqrt(2)*exp(-var1**2/2)/(2*sqrt(pi))
     prepared: sqrt(2)*(1/(2*sqrt(3.141592653589793)))*exp(-v1**2/2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -49,10 +51,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.6.2:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sqrt(2)*exp(-var2**2/(2*var1**2))/(2*sqrt(pi)*var1)
     prepared: sqrt(2)*exp(-v2**2/(2*v1**2))/(2*sqrt(3.141592653589793)*v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -78,10 +80,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.6.2b:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sqrt(2)*exp(-(var2 - var3)**2/(2*var1**2))/(2*sqrt(pi)*var1)
     prepared: sqrt(2)*exp(-(v2 - v3)**2/(2*v1**2))/(2*sqrt(3.141592653589793)*v1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: var1
@@ -116,10 +118,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.8.14:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sqrt((var1 - 1)**2 + (-var2 + var3)**2)
     prepared: sqrt((v1 - 1)**2 + (-v2 + v3)**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: var1
@@ -171,10 +173,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.9.18:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1/((var2 - 1)**2 + (-var3 + var4)**2 + (-var5 + var6)**2)
     prepared: v1/((v2 - 1)**2 + (-v3 + v4)**2 + (-v5 + v6)**2)
     n_variables: 6
-    subset: all
     vars:
       v1:
         name: var1
@@ -269,10 +271,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.10.7:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/sqrt(1 - 1/var1**2)
     prepared: 1/sqrt(1 - 1/v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -300,10 +302,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.11.19:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1*var4 + var2*var5 + var3
     prepared: v1*v4 + v2*v5 + v3
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: var1
@@ -379,10 +381,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.12.1:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1
     prepared: v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -399,10 +401,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.13.4:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1**2/2 + var2**2/2 + 1/2
     prepared: v1**2/2 + v2**2/2 + 1/2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -442,10 +444,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.12.2:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1/(4*pi)
     prepared: (1/(4*3.141592653589793))*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -473,10 +475,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.12.11:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1*sin(var2) + 1
     prepared: v1*sin(v2) + 1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -520,10 +522,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.13.12:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1*(-1 + 1/var2)
     prepared: v1*(-1 + 1/v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -570,10 +572,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.15.3x:
+    subset: "ai-feynman-database-100-main-equations"
     raw: (1 - var2)/sqrt(1 - 1/var1**2)
     prepared: (1 - v2)/sqrt(1 - 1/v1**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -620,10 +622,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.15.3t:
+    subset: "ai-feynman-database-100-main-equations"
     raw: (-var1 + var2)/sqrt(1 - var1**2)
     prepared: (-v1 + v2)/sqrt(1 - v1**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -670,10 +672,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.15.1:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/sqrt(1 - 1/var1**2)
     prepared: 1/sqrt(1 - 1/v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -701,10 +703,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.16.6:
+    subset: "ai-feynman-database-100-main-equations"
     raw: (var1 + var2)/(var1*var2 + 1)
     prepared: (v1 + v2)/(v1*v2 + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -744,10 +746,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.18.4:
+    subset: "ai-feynman-database-100-main-equations"
     raw: (var1*var2 + 1)/(var1 + 1)
     prepared: (v1*v2 + 1)/(v1 + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -794,10 +796,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.18.12:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sin(var1)
     prepared: sin(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -814,10 +816,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.18.14:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sin(var1)
     prepared: sin(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -834,10 +836,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.24.6:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1**2/4 + 1/4
     prepared: v1**2/4 + 1/4
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -865,10 +867,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.26.2:
+    subset: "ai-feynman-database-100-main-equations"
     raw: asin(var1*sin(var2))
     prepared: asin(v1*sin(v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -894,10 +896,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.27.6:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1/(var1 + var2)
     prepared: v1/(v1 + v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -934,10 +936,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.29.16:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sqrt(var1**2 - 2*var1*cos(var2 - var3) + 1)
     prepared: sqrt(v1**2 - 2*v1*cos(v2 - v3) + 1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: var1
@@ -983,10 +985,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.30.3:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sin(var1*var2/2)**2/sin(var1/2)**2
     prepared: sin(v1*v2/2)**2/sin(v1/2)**2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -1012,10 +1014,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.30.5:
+    subset: "ai-feynman-database-100-main-equations"
     raw: asin(1/(var1*var2))
     prepared: asin(1/(v1*v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -1052,10 +1054,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.32.17:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 4*pi/(3*(1 - var2**2/var1**2)**2)
     prepared: 4*3.141592653589793/(3*(1 - v2**2/v1**2)**2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -1102,10 +1104,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.34.1:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(1 - var1)
     prepared: 1/(1 - v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1133,10 +1135,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.34.14:
+    subset: "ai-feynman-database-100-main-equations"
     raw: (var1 + 1)/sqrt(1 - var1**2)
     prepared: (v1 + 1)/sqrt(1 - v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1164,10 +1166,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.37.4:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 2*sqrt(var1)*cos(var2) + var1 + 1
     prepared: 2*sqrt(v1)*cos(v2) + v1 + 1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -1204,10 +1206,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.39.11:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(var1 - 1)
     prepared: 1/(v1 - 1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1224,10 +1226,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.39.22:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1
     prepared: v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1244,10 +1246,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.40.1:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1*exp(-1/var2)
     prepared: v1*exp(-1/v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -1305,10 +1307,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.41.16:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(2*pi**3*(exp(1/(2*pi*var1)) - 1))
     prepared: 1/(2*3.141592653589793**3*(exp(1/(2*3.141592653589793*v1)) - 1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1350,10 +1352,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.43.43:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(var1 - 1)
     prepared: 1/(v1 - 1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1370,10 +1372,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.44.4:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1*log(var2)
     prepared: v1*log(v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -1410,10 +1412,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.47.23:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sqrt(var1)
     prepared: sqrt(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1430,10 +1432,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.48.2:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1**2/sqrt(1 - 1/var1**2)
     prepared: v1**2/sqrt(1 - 1/v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1461,10 +1463,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.50.26:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var2*cos(var1)**2 + cos(var1)
     prepared: v2*cos(v1)**2 + cos(v1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -1501,10 +1503,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.2.42:
+    subset: "ai-feynman-database-100-main-equations"
     raw: (var1 - 1)/var2
     prepared: (v1 - 1)/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -1551,10 +1553,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.6.11:
+    subset: "ai-feynman-database-100-main-equations"
     raw: cos(var1)/(4*pi)
     prepared: (1/(4*3.141592653589793))*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1571,10 +1573,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.6.15a:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 3*var3*sqrt(var1**2 + var2**2)/(4*pi)
     prepared: 3*(1/(4*3.141592653589793))*v3*sqrt(v1**2 + v2**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: var1
@@ -1626,10 +1628,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.6.15b:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 3*sin(var1)*cos(var1)/(4*pi)
     prepared: 3*(1/(4*3.141592653589793))*sin(v1)*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1646,10 +1648,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.10.9:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(var1 + 1)
     prepared: 1/(v1 + 1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1666,10 +1668,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.3:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(1 - var1**2)
     prepared: 1/(1 - v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1697,10 +1699,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.17:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1*(var3*cos(var2) + 1)
     prepared: v1*(v3*cos(v2) + 1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: var1
@@ -1760,10 +1762,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.20:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(3*var1)
     prepared: 1/(3*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1805,10 +1807,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.27:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1*var2/(-var1*var2/3 + 1)
     prepared: v1*v2/(-v1*v2/3 + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -1834,10 +1836,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.28:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1*var2/(-var1*var2/3 + 1) + 1
     prepared: v1*v2/(-v1*v2/3 + 1) + 1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -1863,10 +1865,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.13.23:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/sqrt(1 - 1/var1**2)
     prepared: 1/sqrt(1 - 1/v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1894,10 +1896,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.13.34:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/sqrt(1 - 1/var1**2)
     prepared: 1/sqrt(1 - 1/v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1925,10 +1927,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.15.4:
+    subset: "ai-feynman-database-100-main-equations"
     raw: -cos(var1)
     prepared: -cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1945,10 +1947,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.15.5:
+    subset: "ai-feynman-database-100-main-equations"
     raw: -cos(var1)
     prepared: -cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1965,10 +1967,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.21.32:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(4*pi*(1 - 1/var1))
     prepared: 1/(4*3.141592653589793*(1 - 1/v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -1996,10 +1998,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.24.17:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sqrt(1 - pi**2/var1**2)
     prepared: sqrt(1 - 3.141592653589793**2/v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2034,10 +2036,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.34.11:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1/2
     prepared: v1/2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2054,10 +2056,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.34.29b:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 2*pi*var1*var2
     prepared: 2*3.141592653589793*v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -2094,10 +2096,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.35.18:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1/(exp(var2) + exp(-var2))
     prepared: v1/(exp(v2) + exp(-v2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -2148,10 +2150,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.35.21:
+    subset: "ai-feynman-database-100-main-equations"
     raw: tanh(1/var1)
     prepared: tanh(1/v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2193,10 +2195,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.36.38:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var2*var3/var1 + 1/var1
     prepared: v2*v3/v1 + 1/v1
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: var1
@@ -2273,10 +2275,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.37.1:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1 + 1
     prepared: v1 + 1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2293,10 +2295,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.38.3:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var2/var1
     prepared: v2/v1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -2336,10 +2338,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.38.14:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(2*var1 + 2)
     prepared: 1/(2*v1 + 2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2356,10 +2358,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.4.32:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(exp(1/(2*pi*var1)) - 1)
     prepared: 1/(exp(1/(2*3.141592653589793*v1)) - 1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2401,10 +2403,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.4.33:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 1/(2*pi*(exp(1/(2*pi*var1)) - 1))
     prepared: 1/(2*3.141592653589793*(exp(1/(2*3.141592653589793*v1)) - 1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2446,10 +2448,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.8.54:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sin(2*pi/var1)**2
     prepared: sin(2*3.141592653589793/v1)**2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2484,10 +2486,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.9.52:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 8*pi*sin(var2/2 - var3/2)**2/(var1*(var2 - var3)**2)
     prepared: 8*3.141592653589793*sin(v2/2 - v3/2)**2/(v1*(v2 - v3)**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: var1
@@ -2553,10 +2555,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.10.19:
+    subset: "ai-feynman-database-100-main-equations"
     raw: sqrt(var1**2 + var2**2 + 1)
     prepared: sqrt(v1**2 + v2**2 + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -2596,10 +2598,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.12.43:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1/(2*pi)
     prepared: (1/(2*3.141592653589793))*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2616,10 +2618,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.13.18:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 4*pi*var1
     prepared: 4*3.141592653589793*v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2647,10 +2649,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.14.14:
+    subset: "ai-feynman-database-100-main-equations"
     raw: exp(1/var1) - 1
     prepared: exp(1/v1) - 1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2692,10 +2694,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.15.12:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 2 - 2*cos(var1)
     prepared: 2 - 2*cos(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1
@@ -2723,10 +2725,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.15.27:
+    subset: "ai-feynman-database-100-main-equations"
     raw: 2*pi*var1/var2
     prepared: 2*3.141592653589793*v1/v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: var1
@@ -2752,10 +2754,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.17.37:
+    subset: "ai-feynman-database-100-main-equations"
     raw: var1*(var2*cos(var3) + 1)
     prepared: v1*(v2*cos(v3) + 1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: var1
@@ -2790,10 +2792,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.19.51:
+    subset: "ai-feynman-database-100-main-equations"
     raw: -1/(8*var1**2)
     prepared: -1/(8*v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: var1

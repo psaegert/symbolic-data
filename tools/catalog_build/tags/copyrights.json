@@ -336,6 +336,7 @@
   "note": "as the license file states it: the project left the template's holder unfilled",
   "catalogs": [
    "llm-sr-bactgrow",
+   "llm-sr-oscillators",
    "llm-sr-stress-strain"
   ]
  },

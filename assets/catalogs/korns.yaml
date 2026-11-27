@@ -1,10 +1,13 @@
 metadata:
   name: korns
   version: 2
+  benchmark: "korns"
   tags: {"origin": "classic benchmark", "tags": ["dummy inputs"]}
-  srbf_changes: []
+  srbf_notes: ["Follows the defining publication: Korns-7 uses Korns' (2011) amplitude 213.80940889; later copies print 2.1380940889.", "Follows the defining publication: Korns-5, -6, -8 and -9 use plain log and square root as Korns prints them; later copies wrap the arguments in absolute values.", "Follows the defining publication: Korns-13 to -15, dropped from later copies, are included, Korns-15 on Korns' range [-50, 50]."]
+  problem_flags: {"trivial": ["Korns-1"]}
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   citation: {"paper": {"short": "Korns 2011", "title": "Accuracy in Symbolic Regression", "venue": "Genetic Programming Theory and Practice IX, Genetic and Evolutionary Computation, pp. 129-151", "url": "https://doi.org/10.1007/978-1-4614-1770-5_8"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
+  srbf_changes: []
   description: Korns accuracy suite (5-variable, constant-heavy).
   sources:
   - Korns 2011 (GPTP IX), Accuracy in Symbolic Regression
@@ -25,6 +28,7 @@ metadata:
       and need per-entry review.'
 expressions:
   Korns-1:
+    subset: "korns"
     raw: 1.57+24.3*x4
     prepared: 1.57+24.3*v4
     n_variables: 5
@@ -92,6 +96,7 @@ expressions:
         function_set: Korns
       finite_fraction: 1.0
   Korns-2:
+    subset: "korns"
     raw: 0.23+14.2*div((x4+x2),(3*x5))
     prepared: 0.23+14.2*(((v4+v2))/((3*v5)))
     n_variables: 5
@@ -159,6 +164,7 @@ expressions:
         function_set: Korns
       finite_fraction: 1.0
   Korns-3:
+    subset: "korns"
     raw: 4.9*div((x4-x1+div(x2,x5)),(3*x5))-5.41
     prepared: 4.9*(((v4-v1+((v2)/(v5))))/((3*v5)))-5.41
     n_variables: 5
@@ -226,6 +232,7 @@ expressions:
         function_set: Korns
       finite_fraction: 1.0
   Korns-4:
+    subset: "korns"
     raw: 0.13*sin(x3)-2.3
     prepared: 0.13*sin(v3)-2.3
     n_variables: 5
@@ -293,6 +300,7 @@ expressions:
         function_set: Korns
       finite_fraction: 1.0
   Korns-5:
+    subset: "korns"
     raw: 3.0 + (2.13*log(x4))
     prepared: 2.13*log(v5) + 3.0
     n_variables: 5
@@ -343,10 +351,11 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 0.5034
   Korns-6:
+    subset: "korns"
     raw: 1.3 + (0.13*sqrt(x0))
     prepared: 0.13*sqrt(v1) + 1.3
     n_variables: 5
@@ -397,10 +406,11 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 0.505
   Korns-7:
+    subset: "korns"
     raw: 213.80940889 - (213.80940889*exp(-0.54723748542*x0))
     prepared: 213.80940889 - 213.80940889*exp(-0.54723748542*v1)
     n_variables: 5
@@ -451,10 +461,11 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 1.0
   Korns-8:
+    subset: "korns"
     raw: 6.87 + (11*sqrt(7.23*x0*x3*x4))
     prepared: 29.5775252514473*sqrt(v1*v4*v5) + 6.87
     n_variables: 5
@@ -505,10 +516,11 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 0.5043
   Korns-9:
+    subset: "korns"
     raw: ((sqrt(x0)/log(x1))*(exp(x2)/x3**2))
     prepared: sqrt(v1)*exp(v3)/(v4**2*log(v2))
     n_variables: 5
@@ -559,10 +571,11 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' definition (catalog-prep fresh-11) replaces the DSO transcription
+    source_audit: the authors' definition (the benchmark survey record) replaces the DSO transcription
     meta:
       finite_fraction: 0.2522
   Korns-10:
+    subset: "korns"
     raw: 0.81+24.3*div(2*x2+3*pow(x3,2),((4*pow(x4,3)+5*pow(x5,4))))
     prepared: 0.81+24.3*((2*v2+3*((v3)**(2)))/(((4*((v4)**(3))+5*((v5)**(4))))))
     n_variables: 5
@@ -630,6 +643,7 @@ expressions:
         function_set: Korns
       finite_fraction: 1.0
   Korns-11:
+    subset: "korns"
     raw: 6.87+11*cos(7.23*pow(x1,3))
     prepared: 6.87+11*cos(7.23*((v1)**(3)))
     n_variables: 5
@@ -697,6 +711,7 @@ expressions:
         function_set: Korns
       finite_fraction: 1.0
   Korns-12:
+    subset: "korns"
     raw: 2-2.1*cos(9.8*x1)*sin(1.3*x5)
     prepared: 2-2.1*cos(9.8*v1)*sin(1.3*v5)
     n_variables: 5
@@ -764,6 +779,7 @@ expressions:
         function_set: Korns
       finite_fraction: 1.0
   Korns-13:
+    subset: "korns"
     raw: 32.0 - (3.0*((tan(x0)/tan(x1))*(tan(x2)/tan(x3))))
     prepared: -3.0*tan(v1)*tan(v3)/(tan(v2)*tan(v4)) + 32.0
     n_variables: 5
@@ -814,11 +830,12 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' member (catalog-prep fresh-11), missing from the DSO
+    source_audit: the authors' member (the benchmark survey record), missing from the DSO
       transcription
     meta:
       finite_fraction: 1.0
   Korns-14:
+    subset: "korns"
     raw: 22.0 - (4.2*((cos(x0)-tan(x1))*(tanh(x2)/sin(x3))))
     prepared: -4.2*(cos(v1) - tan(v2))*tanh(v3)/sin(v4) + 22.0
     n_variables: 5
@@ -869,11 +886,12 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' member (catalog-prep fresh-11), missing from the DSO
+    source_audit: the authors' member (the benchmark survey record), missing from the DSO
       transcription
     meta:
       finite_fraction: 1.0
   Korns-15:
+    subset: "korns"
     raw: 12.0 - (6.0*((tan(x0)/exp(x1))*(log(x2)-tan(x3))))
     prepared: -6.0*(log(v3) - tan(v4))*exp(-v2)*tan(v1) + 12.0
     n_variables: 5
@@ -924,7 +942,7 @@ expressions:
         - pos
       v0:
         name: y
-    source_audit: the authors' member (catalog-prep fresh-11), missing from the DSO
+    source_audit: the authors' member (the benchmark survey record), missing from the DSO
       transcription
     meta:
       finite_fraction: 0.494

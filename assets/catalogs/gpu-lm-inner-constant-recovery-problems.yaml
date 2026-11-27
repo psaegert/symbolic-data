@@ -1,10 +1,11 @@
 metadata:
   name: gpu-lm-inner-constant-recovery-problems
   version: 1
+  benchmark: "gpu-lm-inner-constant-recovery-problems"
   tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: []
   license: "facts only: formulas and ranges cited from the CuSR e3 corpus manifest (TensorConv/CuSR; arXiv:2609.03352); no upstream license"
   citation: {"paper": {"short": "Mao et al. 2026", "title": "Efficient Constant Optimization for Symbolic Regression with GPU-Accelerated Tree-Based Genetic Programming", "venue": "IEEE HPEC 2026", "url": "https://arxiv.org/abs/2609.03352"}, "data": {"short": "GitHub TensorConv/CuSR@414b905", "title": "CuSR e3 corpus_manifest.json", "url": "https://github.com/TensorConv/CuSR/blob/414b9057ca0289befcc5e0bb270f87c0f430bb58/experiments/e3_admit_criterion/out/corpus_manifest.json"}}
+  srbf_changes: []
   description: GPU-LM inner-constant recovery problems
   sources:
   - https://arxiv.org/abs/2609.03352
@@ -24,17 +25,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-139.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   constructed_freq_cos_x_1.5:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*cos(1.5*x0)
     prepared: 1.7*cos(1.5*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -51,10 +51,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_freq_cos_x_3:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*cos(3.0*x0)
     prepared: 1.7*cos(3.0*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -71,10 +71,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_freq_cos_x_5:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*cos(5.0*x0)
     prepared: 1.7*cos(5.0*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -91,10 +91,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_freq_cos_x_7:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*cos(7.0*x0)
     prepared: 1.7*cos(7.0*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -111,10 +111,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_freq_sin_x2_3:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*sin(3.0*x0**2)
     prepared: 1.7*sin(3.0*v1**2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -131,10 +131,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_decay_exp_0.4:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*exp(-0.4*x0)
     prepared: 1.7*exp(-0.4*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -151,10 +151,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_decay_exp_0.9:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*exp(-0.9*x0)
     prepared: 1.7*exp(-0.9*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -171,10 +171,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_decay_exp_1.7:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*exp(-1.7*x0)
     prepared: 1.7*exp(-1.7*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -191,10 +191,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_decay_exp_3:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*exp(-3.0*x0)
     prepared: 1.7*exp(-3.0*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -211,10 +211,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_saturation_0.55:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7 - 1.7*exp(-0.55*x0)
     prepared: 1.7 - 1.7*exp(-0.55*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -231,10 +231,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_saturation_1.3:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7 - 1.7*exp(-1.3*x0)
     prepared: 1.7 - 1.7*exp(-1.3*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -251,10 +251,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_saturation_2.5:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7 - 1.7*exp(-2.5*x0)
     prepared: 1.7 - 1.7*exp(-2.5*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -271,10 +271,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_shift_recip_6.5:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7/(x0 - 6.5)
     prepared: 1.7/(v1 - 6.5)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -291,10 +291,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_shift_recip_8:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7/(x0 - 8.0)
     prepared: 1.7/(v1 - 8.0)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -311,10 +311,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_shift_recip_9.5:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7/(x0 - 9.5)
     prepared: 1.7/(v1 - 9.5)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -331,10 +331,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_power_1.3:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*x0**1.3
     prepared: 1.7*v1**1.3
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -351,10 +351,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_power_2.4:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*x0**2.4
     prepared: 1.7*v1**2.4
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0
@@ -371,10 +371,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   constructed_power_3.7:
+    subset: "gpu-lm-inner-constant-recovery-problems"
     raw: 1.7*x0**3.7
     prepared: 1.7*v1**3.7
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x0

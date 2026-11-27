@@ -1,10 +1,12 @@
 metadata:
   name: pysr-empiricalbench-formulas
+  display_name: "pysr-empiricalbench-formulas*"
   version: 1
-  tags: {"origin": "science formula", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 4, "text": "srbf runs the 5 formula problems here; the authors' 4 measured-data problems are in 'PySR EmpiricalBench data'."}]
+  benchmark: "pysr-empiricalbench"
+  tags: {"origin": "science formula", "tags": ["srbf-modified"]}
   license: "MIT (MilesCranmer/pysr_paper)"
   citation: {"paper": {"short": "Cranmer 2023", "title": "Interpretable Machine Learning for Science with PySR and SymbolicRegression.jl", "venue": "arXiv preprint arXiv:2305.01582", "url": "https://arxiv.org/abs/2305.01582"}, "data": {"short": "GitHub MilesCranmer/pysr_paper@b306874", "title": "pysr_paper equations.yml (MIT)", "url": "https://github.com/MilesCranmer/pysr_paper/blob/b30687433fb32d3b9784fbedb1480d947dc46fc0/src/data/empirical_bench/equations.yml"}}
+  srbf_changes: [{"kind": "part", "problems": 4, "text": "srbf runs the 5 formula problems here; the authors' 4 measured-data problems are in 'PySR EmpiricalBench data'."}]
   description: PySR EmpiricalBench
   sources:
   - https://arxiv.org/abs/2305.01582
@@ -25,17 +27,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-2.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   newton:
+    subset: "formulas"
     raw: 6.67408e-11*m1*m2/r**2
     prepared: log(6.67408e-11*v2*v3/v1**2)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: r
@@ -71,10 +72,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   planck:
+    subset: "formulas"
     raw: 2*6.62607004e-34*nu**3/(299792458**2)*(1/(exp(6.62607004e-34*nu/(1.38064852e-23*T)) - 1))
     prepared: log(1.47449944028424e-50*v1**3/(exp(4.79924466221135e-11*v1/v2) - 1))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: nu
@@ -102,10 +103,10 @@ expressions:
     meta:
       finite_fraction: 0.9721
   schechter:
+    subset: "formulas"
     raw: (0.002/2.5e8)*(L/2.5e8)**(-1.20)*exp(-L/2.5e8)
     prepared: log(0.0956352499790036*exp(-4.0e-9*v1)/v1**1.2)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: L
@@ -123,10 +124,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   ideal_gas:
+    subset: "formulas"
     raw: n*8.314*T/V
     prepared: log(8.314*v1*v2/v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: n
@@ -162,10 +163,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   rydberg:
+    subset: "formulas"
     raw: 1/(1.097e7*(1/n_1**2 - 1/n_2**2))
     prepared: log(1/(-10970000.0/v2**2 + 10970000.0/v1**2))
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: n_1

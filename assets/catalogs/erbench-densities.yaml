@@ -1,15 +1,17 @@
 metadata:
   name: erbench-densities
   version: 2
+  benchmark: "erbench"
   tags: {"origin": "science formula", "tags": ["extrapolation", "dummy inputs"]}
-  srbf_changes: []
-  citation: {"paper": {"short": "Kahlmeyer et al. 2026", "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms", "venue": "arXiv preprint arXiv:2606.09276", "url": "https://arxiv.org/abs/2606.09276"}, "data": {"short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c", "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)", "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"}}
   description: ERBench Densities family (33 entries after deduplication; headline eval tier); one problem per formula and
     alpha (ERBench's generator).
   sources:
   - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
   - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
   license: BSD-3-Clause (SciPy-derived, per ERBench README)
+  citation: {"paper": {"short": "Kahlmeyer et al. 2026", "title": "ERBench: A Benchmark and Testsuite for Equation Discovery Algorithms", "venue": "arXiv preprint arXiv:2606.09276", "url": "https://arxiv.org/abs/2606.09276"}, "data": {"short": "Hugging Face EquationDiscovery/Equation_Recovery_Benchmark@95bf15c", "title": "ERBench Equation_Recovery_Benchmark (train.csv + reference generator)", "url": "https://huggingface.co/datasets/EquationDiscovery/Equation_Recovery_Benchmark/tree/95bf15c27de68c3f170ca6140d2e4a811c60344f"}}
+  srbf_changes: []
+  problem_flags: {"trivial": ["Moyal_alpha0", "Moyal_alpha0.5", "Moyal_alpha1", "Boltzmann_alpha0", "Boltzmann_alpha0.5", "Boltzmann_alpha1"]}
   eval_tier: headline
   sampling_defaults:
     n_points: 512
@@ -17,31 +19,32 @@ metadata:
     noise: 0.0
   source_kind: set
   conventions:
-    sampling: 'ERBench''s own generator (src/benchmark.py generate_problem / get_samples; srbf ruling 2026-11-03): one problem
-      per formula and alpha in {0, 0.5, 1}; every variable a fresh 1-3 part mixture (uniform sub-interval or normal with sigma
-      = distance to the nearer edge / 3; integers: uniform-integer or binomial), clipped to the support; fitting rows in the
-      window [a1, a1 + (b - a)/2], a1 = a + alpha (b - a)/2; test rows on the rest of the support, split by length; 0 or 1
-      dummy column per problem (drawn once, seeded), its values drawn from the point set''s own values. srbf sets the number
-      of points and the noise (ruling 4); invalid rows are redrawn (per-point rejection) where ERBench resamples invalid targets.'
+    sampling: 'ERBench''s own generator (src/benchmark.py generate_problem / get_samples): one problem per formula and alpha
+      in {0, 0.5, 1}; every variable a fresh 1-3 part mixture (uniform sub-interval or normal with sigma = distance to the
+      nearer edge / 3; integers: uniform-integer or binomial), clipped to the support; fitting rows in the window [a1, a1
+      + (b - a)/2], a1 = a + alpha (b - a)/2; test rows on the rest of the support, split by length; 0 or 1 dummy column per
+      problem (drawn once, seeded), its values drawn from the point set''s own values. srbf sets the number of points and
+      the noise; invalid rows are redrawn (per-point rejection) where ERBench resamples invalid targets.'
     canonicalization: '''^''->''**'', ''Abs(''->''abs('', log(u,10)->log10-rewrite, x_k->v{k+1}; exact duplicates (expression+support+dtype)
       merged with names in meta.duplicate_of_rows.'
 expressions:
   anglit_alpha0:
+    subset: "densities"
     raw: cos(2*x_0)
     prepared: cos(2*v1)
-    sources: &id002
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id003
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id001
+        supports:
         - - -0.7853981633974483
           - 0.7853981633974483
         alpha: 0.0
@@ -52,7 +55,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id001
+          supports:
+          - - -0.7853981633974483
+            - 0.7853981633974483
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -65,18 +70,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   anglit_alpha0.5:
+    subset: "densities"
     raw: cos(2*x_0)
     prepared: cos(2*v1)
-    sources: *id002
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id003
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id001
+        supports:
+        - - -0.7853981633974483
+          - 0.7853981633974483
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -85,7 +96,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id001
+          supports:
+          - - -0.7853981633974483
+            - 0.7853981633974483
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -98,18 +111,24 @@ expressions:
       alpha: 0.5
       dummies: 0
   anglit_alpha1:
+    subset: "densities"
     raw: cos(2*x_0)
     prepared: cos(2*v1)
-    sources: *id002
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id003
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id001
+        supports:
+        - - -0.7853981633974483
+          - 0.7853981633974483
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -118,7 +137,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id001
+          supports:
+          - - -0.7853981633974483
+            - 0.7853981633974483
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -131,9 +152,10 @@ expressions:
       alpha: 1.0
       dummies: 0
   arcsine_alpha0:
+    subset: "densities"
     raw: 1/(pi*sqrt(x_0*(1 - x_0)))
     prepared: 1/(3.141592653589793*sqrt(v1*(1-v1)))
-    sources: &id005
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -142,12 +164,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id006
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id004
+        supports:
         - - 0.001
           - 0.999
         alpha: 0.0
@@ -158,7 +180,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id004
+          supports:
+          - - 0.001
+            - 0.999
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -171,20 +195,26 @@ expressions:
       alpha: 0.0
       dummies: 1
   arcsine_alpha0.5:
+    subset: "densities"
     raw: 1/(pi*sqrt(x_0*(1 - x_0)))
     prepared: 1/(3.141592653589793*sqrt(v1*(1-v1)))
-    sources: *id005
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id006
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id004
+        supports:
+        - - 0.001
+          - 0.999
         alpha: 0.5
         dtype: float
         dummies: 1
@@ -193,7 +223,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id004
+          supports:
+          - - 0.001
+            - 0.999
           alpha: 0.5
           dtype: float
           dummies: 1
@@ -206,20 +238,26 @@ expressions:
       alpha: 0.5
       dummies: 1
   arcsine_alpha1:
+    subset: "densities"
     raw: 1/(pi*sqrt(x_0*(1 - x_0)))
     prepared: 1/(3.141592653589793*sqrt(v1*(1-v1)))
-    sources: *id005
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id006
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id004
+        supports:
+        - - 0.001
+          - 0.999
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -228,7 +266,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id004
+          supports:
+          - - 0.001
+            - 0.999
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -241,21 +281,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   logistic_alpha0:
+    subset: "densities"
     raw: exp(-x_0)/(1+exp(-x_0))^2
     prepared: exp(-v1)/(1+exp(-v1))**2
-    sources: &id008
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id009
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id007
+        supports:
         - - -2.0
           - 2.0
         alpha: 0.0
@@ -266,7 +307,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id007
+          supports:
+          - - -2.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -279,20 +322,26 @@ expressions:
       alpha: 0.0
       dummies: 0
   logistic_alpha0.5:
+    subset: "densities"
     raw: exp(-x_0)/(1+exp(-x_0))^2
     prepared: exp(-v1)/(1+exp(-v1))**2
-    sources: *id008
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id009
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id007
+        supports:
+        - - -2.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 1
@@ -301,7 +350,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id007
+          supports:
+          - - -2.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 1
@@ -314,20 +365,26 @@ expressions:
       alpha: 0.5
       dummies: 1
   logistic_alpha1:
+    subset: "densities"
     raw: exp(-x_0)/(1+exp(-x_0))^2
     prepared: exp(-v1)/(1+exp(-v1))**2
-    sources: *id008
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id009
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id007
+        supports:
+        - - -2.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -336,7 +393,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id007
+          supports:
+          - - -2.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -349,21 +408,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   generalized pareto_alpha0:
+    subset: "densities"
     raw: (1 + 2*x_0)^(-3/2)
     prepared: (1+2*v1)**(-3/2)
-    sources: &id011
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id012
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id010
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -374,7 +434,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id010
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -387,18 +449,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   generalized pareto_alpha0.5:
+    subset: "densities"
     raw: (1 + 2*x_0)^(-3/2)
     prepared: (1+2*v1)**(-3/2)
-    sources: *id011
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id012
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id010
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -407,7 +475,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id010
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -420,18 +490,24 @@ expressions:
       alpha: 0.5
       dummies: 0
   generalized pareto_alpha1:
+    subset: "densities"
     raw: (1 + 2*x_0)^(-3/2)
     prepared: (1+2*v1)**(-3/2)
-    sources: *id011
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id012
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id010
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -440,7 +516,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id010
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -453,9 +531,10 @@ expressions:
       alpha: 1.0
       dummies: 0
   generalized exponential_alpha0:
+    subset: "densities"
     raw: (1 + 2*(1 - exp(-2*x_0)))*exp(-3*x_0 + 1 - exp(-2*x_0))
     prepared: (1+2*(1-exp(-2*v1)))*exp(-3*v1+1-exp(-2*v1))
-    sources: &id014
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -464,12 +543,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id015
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id013
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -480,7 +559,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id013
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -493,18 +574,24 @@ expressions:
       alpha: 0.0
       dummies: 1
   generalized exponential_alpha0.5:
+    subset: "densities"
     raw: (1 + 2*(1 - exp(-2*x_0)))*exp(-3*x_0 + 1 - exp(-2*x_0))
     prepared: (1+2*(1-exp(-2*v1)))*exp(-3*v1+1-exp(-2*v1))
-    sources: *id014
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id015
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id013
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -513,7 +600,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id013
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -526,18 +615,24 @@ expressions:
       alpha: 0.5
       dummies: 0
   generalized exponential_alpha1:
+    subset: "densities"
     raw: (1 + 2*(1 - exp(-2*x_0)))*exp(-3*x_0 + 1 - exp(-2*x_0))
     prepared: (1+2*(1-exp(-2*v1)))*exp(-3*v1+1-exp(-2*v1))
-    sources: *id014
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id015
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id013
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -546,7 +641,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id013
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -559,21 +656,22 @@ expressions:
       alpha: 1.0
       dummies: 0
   generalized  extreme value_alpha0:
+    subset: "densities"
     raw: exp(-(1 + x_0)^(-1))*(1 + x_0)^(-2)
     prepared: exp(-(1+v1)**(-1))*(1+v1)**(-2)
-    sources: &id017
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id018
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id016
+        supports:
         - - -0.5
           - 2.0
         alpha: 0.0
@@ -584,7 +682,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id016
+          supports:
+          - - -0.5
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -597,18 +697,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   generalized  extreme value_alpha0.5:
+    subset: "densities"
     raw: exp(-(1 + x_0)^(-1))*(1 + x_0)^(-2)
     prepared: exp(-(1+v1)**(-1))*(1+v1)**(-2)
-    sources: *id017
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id018
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id016
+        supports:
+        - - -0.5
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -617,7 +723,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id016
+          supports:
+          - - -0.5
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -630,20 +738,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   generalized  extreme value_alpha1:
+    subset: "densities"
     raw: exp(-(1 + x_0)^(-1))*(1 + x_0)^(-2)
     prepared: exp(-(1+v1)**(-1))*(1+v1)**(-2)
-    sources: *id017
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id018
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id016
+        supports:
+        - - -0.5
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -652,7 +766,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id016
+          supports:
+          - - -0.5
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -665,21 +781,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   gibrat_alpha0:
+    subset: "densities"
     raw: 1/(x_0*sqrt(2*pi))*exp(-0.5*(log(x_0)^2))
     prepared: 1/(v1*sqrt(2*3.141592653589793))*exp(-0.5*(log(v1)**2))
-    sources: &id020
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id021
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id019
+        supports:
         - - 3.4452751762614753e-10
           - 2.0
         alpha: 0.0
@@ -690,7 +807,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id019
+          supports:
+          - - 3.4452751762614753e-10
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -703,20 +822,26 @@ expressions:
       alpha: 0.0
       dummies: 0
   gibrat_alpha0.5:
+    subset: "densities"
     raw: 1/(x_0*sqrt(2*pi))*exp(-0.5*(log(x_0)^2))
     prepared: 1/(v1*sqrt(2*3.141592653589793))*exp(-0.5*(log(v1)**2))
-    sources: *id020
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id021
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id019
+        supports:
+        - - 3.4452751762614753e-10
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 1
@@ -725,7 +850,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id019
+          supports:
+          - - 3.4452751762614753e-10
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 1
@@ -738,20 +865,26 @@ expressions:
       alpha: 0.5
       dummies: 1
   gibrat_alpha1:
+    subset: "densities"
     raw: 1/(x_0*sqrt(2*pi))*exp(-0.5*(log(x_0)^2))
     prepared: 1/(v1*sqrt(2*3.141592653589793))*exp(-0.5*(log(v1)**2))
-    sources: *id020
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id021
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id019
+        supports:
+        - - 3.4452751762614753e-10
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -760,7 +893,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id019
+          supports:
+          - - 3.4452751762614753e-10
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -773,21 +908,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   gompertz_alpha0:
+    subset: "densities"
     raw: exp(x_0)*exp(1 - exp(x_0))
     prepared: exp(v1)*exp(1-exp(v1))
-    sources: &id023
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id024
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id022
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -798,7 +934,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id022
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -811,20 +949,26 @@ expressions:
       alpha: 0.0
       dummies: 0
   gompertz_alpha0.5:
+    subset: "densities"
     raw: exp(x_0)*exp(1 - exp(x_0))
     prepared: exp(v1)*exp(1-exp(v1))
-    sources: *id023
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id024
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id022
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 1
@@ -833,7 +977,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id022
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 1
@@ -846,18 +992,24 @@ expressions:
       alpha: 0.5
       dummies: 1
   gompertz_alpha1:
+    subset: "densities"
     raw: exp(x_0)*exp(1 - exp(x_0))
     prepared: exp(v1)*exp(1-exp(v1))
-    sources: *id023
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id024
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id022
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -866,7 +1018,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id022
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -879,21 +1033,22 @@ expressions:
       alpha: 1.0
       dummies: 0
   right-skewed Gumbel_alpha0:
+    subset: "densities"
     raw: exp(-(x_0 + exp(-x_0)))
     prepared: exp(-(v1+exp(-v1)))
-    sources: &id026
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id027
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id025
+        supports:
         - - -1.5
           - 2.0
         alpha: 0.0
@@ -904,7 +1059,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id025
+          supports:
+          - - -1.5
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -917,18 +1074,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   right-skewed Gumbel_alpha0.5:
+    subset: "densities"
     raw: exp(-(x_0 + exp(-x_0)))
     prepared: exp(-(v1+exp(-v1)))
-    sources: *id026
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id027
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id025
+        supports:
+        - - -1.5
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -937,7 +1100,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id025
+          supports:
+          - - -1.5
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -950,18 +1115,24 @@ expressions:
       alpha: 0.5
       dummies: 0
   right-skewed Gumbel_alpha1:
+    subset: "densities"
     raw: exp(-(x_0 + exp(-x_0)))
     prepared: exp(-(v1+exp(-v1)))
-    sources: *id026
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id027
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id025
+        supports:
+        - - -1.5
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -970,7 +1141,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id025
+          supports:
+          - - -1.5
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -983,21 +1156,22 @@ expressions:
       alpha: 1.0
       dummies: 0
   Half-Cauchy_alpha0:
+    subset: "densities"
     raw: 2/(pi*(1 + x_0^2))
     prepared: 2/(3.141592653589793*(1+v1**2))
-    sources: &id029
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id030
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id028
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -1008,7 +1182,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id028
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -1021,18 +1197,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   Half-Cauchy_alpha0.5:
+    subset: "densities"
     raw: 2/(pi*(1 + x_0^2))
     prepared: 2/(3.141592653589793*(1+v1**2))
-    sources: *id029
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id030
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id028
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -1041,7 +1223,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id028
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -1054,18 +1238,24 @@ expressions:
       alpha: 0.5
       dummies: 0
   Half-Cauchy_alpha1:
+    subset: "densities"
     raw: 2/(pi*(1 + x_0^2))
     prepared: 2/(3.141592653589793*(1+v1**2))
-    sources: *id029
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id030
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id028
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -1074,7 +1264,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id028
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -1087,21 +1279,22 @@ expressions:
       alpha: 1.0
       dummies: 0
   Half-Logistic_alpha0:
+    subset: "densities"
     raw: (2*exp(-x_0))/((1 + exp(-x_0))^2)
     prepared: (2*exp(-v1))/((1+exp(-v1))**2)
-    sources: &id032
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id033
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id031
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -1112,7 +1305,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id031
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -1125,18 +1320,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   Half-Logistic_alpha0.5:
+    subset: "densities"
     raw: (2*exp(-x_0))/((1 + exp(-x_0))^2)
     prepared: (2*exp(-v1))/((1+exp(-v1))**2)
-    sources: *id032
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id033
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id031
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -1145,7 +1346,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id031
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -1158,18 +1361,24 @@ expressions:
       alpha: 0.5
       dummies: 0
   Half-Logistic_alpha1:
+    subset: "densities"
     raw: (2*exp(-x_0))/((1 + exp(-x_0))^2)
     prepared: (2*exp(-v1))/((1+exp(-v1))**2)
-    sources: *id032
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id033
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id031
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -1178,7 +1387,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id031
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -1191,21 +1402,22 @@ expressions:
       alpha: 1.0
       dummies: 0
   Half-Normal_alpha0:
+    subset: "densities"
     raw: sqrt(2/pi)*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*exp(-v1**2/2)
-    sources: &id035
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id036
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id034
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -1216,7 +1428,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id034
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -1229,20 +1443,26 @@ expressions:
       alpha: 0.0
       dummies: 0
   Half-Normal_alpha0.5:
+    subset: "densities"
     raw: sqrt(2/pi)*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*exp(-v1**2/2)
-    sources: *id035
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id036
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id034
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 1
@@ -1251,7 +1471,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id034
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 1
@@ -1264,18 +1486,24 @@ expressions:
       alpha: 0.5
       dummies: 1
   Half-Normal_alpha1:
+    subset: "densities"
     raw: sqrt(2/pi)*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*exp(-v1**2/2)
-    sources: *id035
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id036
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id034
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -1284,7 +1512,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id034
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -1297,9 +1527,10 @@ expressions:
       alpha: 1.0
       dummies: 0
   bradford_alpha0:
+    subset: "densities"
     raw: 1/(log(2)*(1 + x_0))
     prepared: 1/(log(2)*(1+v1))
-    sources: &id038
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -1308,12 +1539,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id039
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id037
+        supports:
         - - 0.0
           - 1.0
         alpha: 0.0
@@ -1324,7 +1555,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id037
+          supports:
+          - - 0.0
+            - 1.0
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -1337,18 +1570,24 @@ expressions:
       alpha: 0.0
       dummies: 1
   bradford_alpha0.5:
+    subset: "densities"
     raw: 1/(log(2)*(1 + x_0))
     prepared: 1/(log(2)*(1+v1))
-    sources: *id038
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id039
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id037
+        supports:
+        - - 0.0
+          - 1.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -1357,7 +1596,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id037
+          supports:
+          - - 0.0
+            - 1.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -1370,20 +1611,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   bradford_alpha1:
+    subset: "densities"
     raw: 1/(log(2)*(1 + x_0))
     prepared: 1/(log(2)*(1+v1))
-    sources: *id038
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id039
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id037
+        supports:
+        - - 0.0
+          - 1.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -1392,7 +1639,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id037
+          supports:
+          - - 0.0
+            - 1.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -1405,9 +1654,10 @@ expressions:
       alpha: 1.0
       dummies: 1
   Inverse Gaussian_alpha0:
+    subset: "densities"
     raw: 1/sqrt((2*pi*x_0^3))*exp(-((x_0-1)^2)/(2*x_0))
     prepared: 1/sqrt((2*3.141592653589793*v1**3))*exp(-((v1-1)**2)/(2*v1))
-    sources: &id041
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -1416,12 +1666,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id042
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id040
+        supports:
         - - 0.2
           - 2.0
         alpha: 0.0
@@ -1432,7 +1682,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id040
+          supports:
+          - - 0.2
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -1445,18 +1697,24 @@ expressions:
       alpha: 0.0
       dummies: 1
   Inverse Gaussian_alpha0.5:
+    subset: "densities"
     raw: 1/sqrt((2*pi*x_0^3))*exp(-((x_0-1)^2)/(2*x_0))
     prepared: 1/sqrt((2*3.141592653589793*v1**3))*exp(-((v1-1)**2)/(2*v1))
-    sources: *id041
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id042
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id040
+        supports:
+        - - 0.2
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -1465,7 +1723,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id040
+          supports:
+          - - 0.2
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -1478,20 +1738,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   Inverse Gaussian_alpha1:
+    subset: "densities"
     raw: 1/sqrt((2*pi*x_0^3))*exp(-((x_0-1)^2)/(2*x_0))
     prepared: 1/sqrt((2*3.141592653589793*v1**3))*exp(-((v1-1)**2)/(2*v1))
-    sources: *id041
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id042
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id040
+        supports:
+        - - 0.2
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -1500,7 +1766,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id040
+          supports:
+          - - 0.2
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -1513,21 +1781,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   Inverse Weibull_alpha0:
+    subset: "densities"
     raw: exp(-1/x_0)/(x_0^2)
     prepared: exp(-1/v1)/(v1**2)
-    sources: &id044
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id045
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id043
+        supports:
         - - 0.2
           - 2.0
         alpha: 0.0
@@ -1538,7 +1807,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id043
+          supports:
+          - - 0.2
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -1551,20 +1822,26 @@ expressions:
       alpha: 0.0
       dummies: 0
   Inverse Weibull_alpha0.5:
+    subset: "densities"
     raw: exp(-1/x_0)/(x_0^2)
     prepared: exp(-1/v1)/(v1**2)
-    sources: *id044
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id045
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id043
+        supports:
+        - - 0.2
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 1
@@ -1573,7 +1850,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id043
+          supports:
+          - - 0.2
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 1
@@ -1586,18 +1865,24 @@ expressions:
       alpha: 0.5
       dummies: 1
   Inverse Weibull_alpha1:
+    subset: "densities"
     raw: exp(-1/x_0)/(x_0^2)
     prepared: exp(-1/v1)/(v1**2)
-    sources: *id044
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id045
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id043
+        supports:
+        - - 0.2
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -1606,7 +1891,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id043
+          supports:
+          - - 0.2
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -1619,21 +1906,22 @@ expressions:
       alpha: 1.0
       dummies: 0
   Lomax_alpha0:
+    subset: "densities"
     raw: 1/((1 +x_0)^2)
     prepared: 1/((1+v1)**2)
-    sources: &id047
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id048
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id046
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -1644,7 +1932,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id046
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -1657,18 +1947,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   Lomax_alpha0.5:
+    subset: "densities"
     raw: 1/((1 +x_0)^2)
     prepared: 1/((1+v1)**2)
-    sources: *id047
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id048
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id046
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -1677,7 +1973,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id046
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -1690,20 +1988,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   Lomax_alpha1:
+    subset: "densities"
     raw: 1/((1 +x_0)^2)
     prepared: 1/((1+v1)**2)
-    sources: *id047
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id048
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id046
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -1712,7 +2016,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id046
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -1725,9 +2031,10 @@ expressions:
       alpha: 1.0
       dummies: 1
   Maxwell_alpha0:
+    subset: "densities"
     raw: sqrt(2/pi)*x_0^2*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*v1**2*exp(-v1**2/2)
-    sources: &id050
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -1736,12 +2043,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id051
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id049
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -1752,7 +2059,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id049
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -1765,20 +2074,26 @@ expressions:
       alpha: 0.0
       dummies: 1
   Maxwell_alpha0.5:
+    subset: "densities"
     raw: sqrt(2/pi)*x_0^2*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*v1**2*exp(-v1**2/2)
-    sources: *id050
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id051
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id049
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 1
@@ -1787,7 +2102,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id049
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 1
@@ -1800,20 +2117,26 @@ expressions:
       alpha: 0.5
       dummies: 1
   Maxwell_alpha1:
+    subset: "densities"
     raw: sqrt(2/pi)*x_0^2*exp(-x_0^2/2)
     prepared: sqrt(2/3.141592653589793)*v1**2*exp(-v1**2/2)
-    sources: *id050
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id051
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id049
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -1822,7 +2145,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id049
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -1835,21 +2160,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   Moyal_alpha0:
+    subset: "densities"
     raw: (exp(-(x_0+exp(-x_0))/2))/(sqrt(2*pi))
     prepared: (exp(-(v1+exp(-v1))/2))/(sqrt(2*3.141592653589793))
-    sources: &id053
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id054
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id052
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -1860,7 +2186,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id052
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -1873,18 +2201,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   Moyal_alpha0.5:
+    subset: "densities"
     raw: (exp(-(x_0+exp(-x_0))/2))/(sqrt(2*pi))
     prepared: (exp(-(v1+exp(-v1))/2))/(sqrt(2*3.141592653589793))
-    sources: *id053
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id054
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id052
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -1893,7 +2227,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id052
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -1906,20 +2242,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   Moyal_alpha1:
+    subset: "densities"
     raw: (exp(-(x_0+exp(-x_0))/2))/(sqrt(2*pi))
     prepared: (exp(-(v1+exp(-v1))/2))/(sqrt(2*3.141592653589793))
-    sources: *id053
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id054
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id052
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -1928,7 +2270,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id052
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -1941,21 +2285,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   standard normal_alpha0:
+    subset: "densities"
     raw: (exp(-x_0^2/2))/(sqrt(2*pi))
     prepared: (exp(-v1**2/2))/(sqrt(2*3.141592653589793))
-    sources: &id056
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id057
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id055
+        supports:
         - - -2.0
           - 2.0
         alpha: 0.0
@@ -1966,7 +2311,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id055
+          supports:
+          - - -2.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -1979,18 +2326,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   standard normal_alpha0.5:
+    subset: "densities"
     raw: (exp(-x_0^2/2))/(sqrt(2*pi))
     prepared: (exp(-v1**2/2))/(sqrt(2*3.141592653589793))
-    sources: *id056
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id057
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id055
+        supports:
+        - - -2.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -1999,7 +2352,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id055
+          supports:
+          - - -2.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -2012,20 +2367,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   standard normal_alpha1:
+    subset: "densities"
     raw: (exp(-x_0^2/2))/(sqrt(2*pi))
     prepared: (exp(-v1**2/2))/(sqrt(2*3.141592653589793))
-    sources: *id056
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id057
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id055
+        supports:
+        - - -2.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -2034,7 +2395,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id055
+          supports:
+          - - -2.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -2047,9 +2410,10 @@ expressions:
       alpha: 1.0
       dummies: 1
   standard normal~densities_19_alpha0:
+    subset: "densities"
     raw: 2/(x_0^3)
     prepared: 2/(v1**3)
-    sources: &id059
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -2058,12 +2422,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id060
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id058
+        supports:
         - - 1.0
           - 2.0
         alpha: 0.0
@@ -2074,7 +2438,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id058
+          supports:
+          - - 1.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -2087,20 +2453,26 @@ expressions:
       alpha: 0.0
       dummies: 1
   standard normal~densities_19_alpha0.5:
+    subset: "densities"
     raw: 2/(x_0^3)
     prepared: 2/(v1**3)
-    sources: *id059
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id060
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id058
+        supports:
+        - - 1.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 1
@@ -2109,7 +2481,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id058
+          supports:
+          - - 1.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 1
@@ -2122,18 +2496,24 @@ expressions:
       alpha: 0.5
       dummies: 1
   standard normal~densities_19_alpha1:
+    subset: "densities"
     raw: 2/(x_0^3)
     prepared: 2/(v1**3)
-    sources: *id059
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id060
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id058
+        supports:
+        - - 1.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -2142,7 +2522,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id058
+          supports:
+          - - 1.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -2155,21 +2537,22 @@ expressions:
       alpha: 1.0
       dummies: 0
   power law_alpha0:
+    subset: "densities"
     raw: 1/(2*sqrt(x_0))
     prepared: 1/(2*sqrt(v1))
-    sources: &id062
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id063
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id061
+        supports:
         - - 5.213836029582808e-10
           - 1.0
         alpha: 0.0
@@ -2180,7 +2563,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id061
+          supports:
+          - - 5.213836029582808e-10
+            - 1.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -2193,18 +2578,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   power law_alpha0.5:
+    subset: "densities"
     raw: 1/(2*sqrt(x_0))
     prepared: 1/(2*sqrt(v1))
-    sources: *id062
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id063
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id061
+        supports:
+        - - 5.213836029582808e-10
+          - 1.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -2213,7 +2604,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id061
+          supports:
+          - - 5.213836029582808e-10
+            - 1.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -2226,18 +2619,24 @@ expressions:
       alpha: 0.5
       dummies: 0
   power law_alpha1:
+    subset: "densities"
     raw: 1/(2*sqrt(x_0))
     prepared: 1/(2*sqrt(v1))
-    sources: *id062
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id063
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id061
+        supports:
+        - - 5.213836029582808e-10
+          - 1.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -2246,7 +2645,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id061
+          supports:
+          - - 5.213836029582808e-10
+            - 1.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -2259,9 +2660,10 @@ expressions:
       alpha: 1.0
       dummies: 0
   rayleigh_alpha0:
+    subset: "densities"
     raw: x_0*exp(-x_0^2/2)
     prepared: v1*exp(-v1**2/2)
-    sources: &id065
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -2270,12 +2672,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id066
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id064
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -2286,7 +2688,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id064
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -2299,18 +2703,24 @@ expressions:
       alpha: 0.0
       dummies: 1
   rayleigh_alpha0.5:
+    subset: "densities"
     raw: x_0*exp(-x_0^2/2)
     prepared: v1*exp(-v1**2/2)
-    sources: *id065
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id066
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id064
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -2319,7 +2729,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id064
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -2332,18 +2744,24 @@ expressions:
       alpha: 0.5
       dummies: 0
   rayleigh_alpha1:
+    subset: "densities"
     raw: x_0*exp(-x_0^2/2)
     prepared: v1*exp(-v1**2/2)
-    sources: *id065
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id066
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id064
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -2352,7 +2770,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id064
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -2365,21 +2785,22 @@ expressions:
       alpha: 1.0
       dummies: 0
   semicircular_alpha0:
+    subset: "densities"
     raw: 2/pi*sqrt(1 - x_0^2)
     prepared: 2/3.141592653589793*sqrt(1-v1**2)
-    sources: &id068
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id069
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id067
+        supports:
         - - -1.0
           - 1.0
         alpha: 0.0
@@ -2390,7 +2811,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id067
+          supports:
+          - - -1.0
+            - 1.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -2403,20 +2826,26 @@ expressions:
       alpha: 0.0
       dummies: 0
   semicircular_alpha0.5:
+    subset: "densities"
     raw: 2/pi*sqrt(1 - x_0^2)
     prepared: 2/3.141592653589793*sqrt(1-v1**2)
-    sources: *id068
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id069
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id067
+        supports:
+        - - -1.0
+          - 1.0
         alpha: 0.5
         dtype: float
         dummies: 1
@@ -2425,7 +2854,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id067
+          supports:
+          - - -1.0
+            - 1.0
           alpha: 0.5
           dtype: float
           dummies: 1
@@ -2438,20 +2869,26 @@ expressions:
       alpha: 0.5
       dummies: 1
   semicircular_alpha1:
+    subset: "densities"
     raw: 2/pi*sqrt(1 - x_0^2)
     prepared: 2/3.141592653589793*sqrt(1-v1**2)
-    sources: *id068
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id069
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id067
+        supports:
+        - - -1.0
+          - 1.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -2460,7 +2897,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id067
+          supports:
+          - - -1.0
+            - 1.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -2473,9 +2912,10 @@ expressions:
       alpha: 1.0
       dummies: 1
   bradford~densities_23_alpha0:
+    subset: "densities"
     raw: 2*(x_0^(-3))/((1+x_0^(-2))^2)
     prepared: 2*(v1**(-3))/((1+v1**(-2))**2)
-    sources: &id071
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -2484,12 +2924,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id072
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id070
+        supports:
         - - 2.235761575875017e-10
           - 1.8350870916695006
         alpha: 0.0
@@ -2500,7 +2940,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id070
+          supports:
+          - - 2.235761575875017e-10
+            - 1.8350870916695006
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -2513,20 +2955,26 @@ expressions:
       alpha: 0.0
       dummies: 1
   bradford~densities_23_alpha0.5:
+    subset: "densities"
     raw: 2*(x_0^(-3))/((1+x_0^(-2))^2)
     prepared: 2*(v1**(-3))/((1+v1**(-2))**2)
-    sources: *id071
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id072
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id070
+        supports:
+        - - 2.235761575875017e-10
+          - 1.8350870916695006
         alpha: 0.5
         dtype: float
         dummies: 1
@@ -2535,7 +2983,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id070
+          supports:
+          - - 2.235761575875017e-10
+            - 1.8350870916695006
           alpha: 0.5
           dtype: float
           dummies: 1
@@ -2548,18 +2998,24 @@ expressions:
       alpha: 0.5
       dummies: 1
   bradford~densities_23_alpha1:
+    subset: "densities"
     raw: 2*(x_0^(-3))/((1+x_0^(-2))^2)
     prepared: 2*(v1**(-3))/((1+v1**(-2))**2)
-    sources: *id071
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id072
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id070
+        supports:
+        - - 2.235761575875017e-10
+          - 1.8350870916695006
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -2568,7 +3024,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id070
+          supports:
+          - - 2.235761575875017e-10
+            - 1.8350870916695006
           alpha: 1.0
           dtype: float
           dummies: 0
@@ -2581,21 +3039,22 @@ expressions:
       alpha: 1.0
       dummies: 0
   Boltzmann_alpha0:
+    subset: "densities"
     raw: 0.09516690253473127*exp(-0.1*x_0)
     prepared: 0.09516690253473127*exp(-0.1*v1)
-    sources: &id074
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id075
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id073
+        supports:
         - - 0.0
           - 50.0
         alpha: 0.0
@@ -2606,7 +3065,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id073
+          supports:
+          - - 0.0
+            - 50.0
           alpha: 0.0
           dtype: int
           dummies: 0
@@ -2619,18 +3080,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   Boltzmann_alpha0.5:
+    subset: "densities"
     raw: 0.09516690253473127*exp(-0.1*x_0)
     prepared: 0.09516690253473127*exp(-0.1*v1)
-    sources: *id074
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id075
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id073
+        supports:
+        - - 0.0
+          - 50.0
         alpha: 0.5
         dtype: int
         dummies: 0
@@ -2639,7 +3106,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id073
+          supports:
+          - - 0.0
+            - 50.0
           alpha: 0.5
           dtype: int
           dummies: 0
@@ -2652,18 +3121,24 @@ expressions:
       alpha: 0.5
       dummies: 0
   Boltzmann_alpha1:
+    subset: "densities"
     raw: 0.09516690253473127*exp(-0.1*x_0)
     prepared: 0.09516690253473127*exp(-0.1*v1)
-    sources: *id074
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id075
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id073
+        supports:
+        - - 0.0
+          - 50.0
         alpha: 1.0
         dtype: int
         dummies: 0
@@ -2672,7 +3147,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id073
+          supports:
+          - - 0.0
+            - 50.0
           alpha: 1.0
           dtype: int
           dummies: 0
@@ -2685,21 +3162,22 @@ expressions:
       alpha: 1.0
       dummies: 0
   Geometric_alpha0:
+    subset: "densities"
     raw: 0.8^(x_0-1)*0.2
     prepared: 0.8**(v1-1)*0.2
-    sources: &id077
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id078
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id076
+        supports:
         - - 1.0
           - 20.0
         alpha: 0.0
@@ -2710,7 +3188,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id076
+          supports:
+          - - 1.0
+            - 20.0
           alpha: 0.0
           dtype: int
           dummies: 0
@@ -2723,18 +3203,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   Geometric_alpha0.5:
+    subset: "densities"
     raw: 0.8^(x_0-1)*0.2
     prepared: 0.8**(v1-1)*0.2
-    sources: *id077
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id078
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id076
+        supports:
+        - - 1.0
+          - 20.0
         alpha: 0.5
         dtype: int
         dummies: 0
@@ -2743,7 +3229,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id076
+          supports:
+          - - 1.0
+            - 20.0
           alpha: 0.5
           dtype: int
           dummies: 0
@@ -2756,20 +3244,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   Geometric_alpha1:
+    subset: "densities"
     raw: 0.8^(x_0-1)*0.2
     prepared: 0.8**(v1-1)*0.2
-    sources: *id077
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id078
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id076
+        supports:
+        - - 1.0
+          - 20.0
         alpha: 1.0
         dtype: int
         dummies: 1
@@ -2778,7 +3272,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id076
+          supports:
+          - - 1.0
+            - 20.0
           alpha: 1.0
           dtype: int
           dummies: 1
@@ -2791,21 +3287,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   Log Series_alpha0:
+    subset: "densities"
     raw: -(0.9^x_0)/(x_0*log(0.1))
     prepared: -(0.9**v1)/(v1*log(0.1))
-    sources: &id080
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id081
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id079
+        supports:
         - - 1.0
           - 20.0
         alpha: 0.0
@@ -2816,7 +3313,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id079
+          supports:
+          - - 1.0
+            - 20.0
           alpha: 0.0
           dtype: int
           dummies: 0
@@ -2829,18 +3328,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   Log Series_alpha0.5:
+    subset: "densities"
     raw: -(0.9^x_0)/(x_0*log(0.1))
     prepared: -(0.9**v1)/(v1*log(0.1))
-    sources: *id080
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id081
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id079
+        supports:
+        - - 1.0
+          - 20.0
         alpha: 0.5
         dtype: int
         dummies: 0
@@ -2849,7 +3354,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id079
+          supports:
+          - - 1.0
+            - 20.0
           alpha: 0.5
           dtype: int
           dummies: 0
@@ -2862,20 +3369,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   Log Series_alpha1:
+    subset: "densities"
     raw: -(0.9^x_0)/(x_0*log(0.1))
     prepared: -(0.9**v1)/(v1*log(0.1))
-    sources: *id080
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id081
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id079
+        supports:
+        - - 1.0
+          - 20.0
         alpha: 1.0
         dtype: int
         dummies: 1
@@ -2884,7 +3397,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id079
+          supports:
+          - - 1.0
+            - 20.0
           alpha: 1.0
           dtype: int
           dummies: 1
@@ -2897,21 +3412,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   cauchy_alpha0:
+    subset: "densities"
     raw: 1/(pi*(1 + x_0^2))
     prepared: 1/(3.141592653589793*(1+v1**2))
-    sources: &id083
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id084
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id082
+        supports:
         - - -1.0
           - 1.0
         alpha: 0.0
@@ -2922,7 +3438,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id082
+          supports:
+          - - -1.0
+            - 1.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -2935,18 +3453,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   cauchy_alpha0.5:
+    subset: "densities"
     raw: 1/(pi*(1 + x_0^2))
     prepared: 1/(3.141592653589793*(1+v1**2))
-    sources: *id083
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id084
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id082
+        supports:
+        - - -1.0
+          - 1.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -2955,7 +3479,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id082
+          supports:
+          - - -1.0
+            - 1.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -2968,20 +3494,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   cauchy_alpha1:
+    subset: "densities"
     raw: 1/(pi*(1 + x_0^2))
     prepared: 1/(3.141592653589793*(1+v1**2))
-    sources: *id083
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id084
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id082
+        supports:
+        - - -1.0
+          - 1.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -2990,7 +3522,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id082
+          supports:
+          - - -1.0
+            - 1.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -3003,21 +3537,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   cosine_alpha0:
+    subset: "densities"
     raw: (1 + cos(x_0))/(2*pi)
     prepared: (1+cos(v1))/(2*3.141592653589793)
-    sources: &id086
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id087
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id085
+        supports:
         - - -3.141592653589793
           - 3.141592653589793
         alpha: 0.0
@@ -3028,7 +3563,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id085
+          supports:
+          - - -3.141592653589793
+            - 3.141592653589793
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -3041,18 +3578,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   cosine_alpha0.5:
+    subset: "densities"
     raw: (1 + cos(x_0))/(2*pi)
     prepared: (1+cos(v1))/(2*3.141592653589793)
-    sources: *id086
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id087
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id085
+        supports:
+        - - -3.141592653589793
+          - 3.141592653589793
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -3061,7 +3604,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id085
+          supports:
+          - - -3.141592653589793
+            - 3.141592653589793
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -3074,20 +3619,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   cosine_alpha1:
+    subset: "densities"
     raw: (1 + cos(x_0))/(2*pi)
     prepared: (1+cos(v1))/(2*3.141592653589793)
-    sources: *id086
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id087
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id085
+        supports:
+        - - -3.141592653589793
+          - 3.141592653589793
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -3096,7 +3647,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id085
+          supports:
+          - - -3.141592653589793
+            - 3.141592653589793
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -3109,9 +3662,10 @@ expressions:
       alpha: 1.0
       dummies: 1
   exponential_alpha0:
+    subset: "densities"
     raw: exp(-x_0)
     prepared: exp(-v1)
-    sources: &id089
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -3120,12 +3674,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id090
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id088
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -3136,7 +3690,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id088
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -3149,18 +3705,24 @@ expressions:
       alpha: 0.0
       dummies: 1
   exponential_alpha0.5:
+    subset: "densities"
     raw: exp(-x_0)
     prepared: exp(-v1)
-    sources: *id089
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id090
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id088
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -3169,7 +3731,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id088
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -3182,20 +3746,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   exponential_alpha1:
+    subset: "densities"
     raw: exp(-x_0)
     prepared: exp(-v1)
-    sources: *id089
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id090
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id088
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -3204,7 +3774,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id088
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -3217,9 +3789,10 @@ expressions:
       alpha: 1.0
       dummies: 1
   exponential weibull_alpha0:
+    subset: "densities"
     raw: 2*(1 - exp(-x_0))*exp(-x_0)
     prepared: 2*(1-exp(-v1))*exp(-v1)
-    sources: &id092
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -3228,12 +3801,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id093
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id091
+        supports:
         - - 0.0
           - 1.0
         alpha: 0.0
@@ -3244,7 +3817,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id091
+          supports:
+          - - 0.0
+            - 1.0
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -3257,18 +3832,24 @@ expressions:
       alpha: 0.0
       dummies: 1
   exponential weibull_alpha0.5:
+    subset: "densities"
     raw: 2*(1 - exp(-x_0))*exp(-x_0)
     prepared: 2*(1-exp(-v1))*exp(-v1)
-    sources: *id092
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id093
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id091
+        supports:
+        - - 0.0
+          - 1.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -3277,7 +3858,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id091
+          supports:
+          - - 0.0
+            - 1.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -3290,20 +3873,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   exponential weibull_alpha1:
+    subset: "densities"
     raw: 2*(1 - exp(-x_0))*exp(-x_0)
     prepared: 2*(1-exp(-v1))*exp(-v1)
-    sources: *id092
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id093
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id091
+        supports:
+        - - 0.0
+          - 1.0
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -3312,7 +3901,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id091
+          supports:
+          - - 0.0
+            - 1.0
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -3325,9 +3916,10 @@ expressions:
       alpha: 1.0
       dummies: 1
   fatigue life_alpha0:
+    subset: "densities"
     raw: (x_0+1)/(2*sqrt(2*pi*x_0^3))*exp(-(x_0-1)^2/(2*x_0))
     prepared: (v1+1)/(2*sqrt(2*3.141592653589793*v1**3))*exp(-(v1-1)**2/(2*v1))
-    sources: &id095
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
@@ -3336,12 +3928,12 @@ expressions:
         name: x_0
       v2:
         name: dummy
-      v0: &id096
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id094
+        supports:
         - - 8.485969149596428e-10
           - 0.29538227738363126
         alpha: 0.0
@@ -3352,7 +3944,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id094
+          supports:
+          - - 8.485969149596428e-10
+            - 0.29538227738363126
           alpha: 0.0
           dtype: float
           dummies: 1
@@ -3365,18 +3959,24 @@ expressions:
       alpha: 0.0
       dummies: 1
   fatigue life_alpha0.5:
+    subset: "densities"
     raw: (x_0+1)/(2*sqrt(2*pi*x_0^3))*exp(-(x_0-1)^2/(2*x_0))
     prepared: (v1+1)/(2*sqrt(2*3.141592653589793*v1**3))*exp(-(v1-1)**2/(2*v1))
-    sources: *id095
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id096
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id094
+        supports:
+        - - 8.485969149596428e-10
+          - 0.29538227738363126
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -3385,7 +3985,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id094
+          supports:
+          - - 8.485969149596428e-10
+            - 0.29538227738363126
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -3398,20 +4000,26 @@ expressions:
       alpha: 0.5
       dummies: 0
   fatigue life_alpha1:
+    subset: "densities"
     raw: (x_0+1)/(2*sqrt(2*pi*x_0^3))*exp(-(x_0-1)^2/(2*x_0))
     prepared: (v1+1)/(2*sqrt(2*3.141592653589793*v1**3))*exp(-(v1-1)**2/(2*v1))
-    sources: *id095
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 2
     vars:
       v1:
         name: x_0
       v2:
         name: dummy
-      v0: *id096
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id094
+        supports:
+        - - 8.485969149596428e-10
+          - 0.29538227738363126
         alpha: 1.0
         dtype: float
         dummies: 1
@@ -3420,7 +4028,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id094
+          supports:
+          - - 8.485969149596428e-10
+            - 0.29538227738363126
           alpha: 1.0
           dtype: float
           dummies: 1
@@ -3433,21 +4043,22 @@ expressions:
       alpha: 1.0
       dummies: 1
   folded cauchy_alpha0:
+    subset: "densities"
     raw: 1/(pi*(1 + (x_0-1)^2)) + 1/(pi*(1 + (x_0+1)^2))
     prepared: 1/(3.141592653589793*(1+(v1-1)**2))+1/(3.141592653589793*(1+(v1+1)**2))
-    sources: &id098
+    sources:
     - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
     - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: &id099
+      v0:
         name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: &id097
+        supports:
         - - 0.0
           - 2.0
         alpha: 0.0
@@ -3458,7 +4069,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id097
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.0
           dtype: float
           dummies: 0
@@ -3471,18 +4084,24 @@ expressions:
       alpha: 0.0
       dummies: 0
   folded cauchy_alpha0.5:
+    subset: "densities"
     raw: 1/(pi*(1 + (x_0-1)^2)) + 1/(pi*(1 + (x_0+1)^2))
     prepared: 1/(3.141592653589793*(1+(v1-1)**2))+1/(3.141592653589793*(1+(v1+1)**2))
-    sources: *id098
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id099
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id097
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 0.5
         dtype: float
         dummies: 0
@@ -3491,7 +4110,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id097
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 0.5
           dtype: float
           dummies: 0
@@ -3504,18 +4125,24 @@ expressions:
       alpha: 0.5
       dummies: 0
   folded cauchy_alpha1:
+    subset: "densities"
     raw: 1/(pi*(1 + (x_0-1)^2)) + 1/(pi*(1 + (x_0+1)^2))
     prepared: 1/(3.141592653589793*(1+(v1-1)**2))+1/(3.141592653589793*(1+(v1+1)**2))
-    sources: *id098
+    sources:
+    - ERBench (Kahlmeyer, Voigt, Habeck & Giesen, arXiv:2606.09276)
+    - HuggingFace dataset EquationDiscovery/Equation_Recovery_Benchmark
     n_variables: 1
     vars:
       v1:
         name: x_0
-      v0: *id099
+      v0:
+        name: y
     inputs:
       name: erbench_mixture
       kwargs:
-        supports: *id097
+        supports:
+        - - 0.0
+          - 2.0
         alpha: 1.0
         dtype: float
         dummies: 0
@@ -3524,7 +4151,9 @@ expressions:
       inputs:
         name: erbench_mixture
         kwargs:
-          supports: *id097
+          supports:
+          - - 0.0
+            - 2.0
           alpha: 1.0
           dtype: float
           dummies: 0

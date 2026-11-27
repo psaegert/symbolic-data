@@ -1,10 +1,11 @@
 metadata:
   name: koza
   version: 2
+  benchmark: "koza"
   tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: []
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   citation: {"paper": {"short": "Koza 1994", "title": "Genetic Programming II: Automatic Discovery of Reusable Programs", "venue": "MIT Press, 1994 (Sec. 5.1)", "url": "https://archive.org/details/geneticprogrammi0000koza_a3i3"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
+  srbf_changes: []
   description: Koza classic GP problems (quintic/sextic).
   sources:
   - Koza 1992/1994 (MIT Press), Genetic Programming I/II
@@ -25,6 +26,7 @@ metadata:
       and need per-entry review.'
 expressions:
   Koza-2:
+    subset: "koza"
     raw: pow(x1,5)-2*pow(x1,3)+x1
     prepared: ((v1)**(5))-2*((v1)**(3))+v1
     n_variables: 1
@@ -55,6 +57,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Koza-3:
+    subset: "koza"
     raw: pow(x1,6)-2*pow(x1,4)+pow(x1,2)
     prepared: ((v1)**(6))-2*((v1)**(4))+((v1)**(2))
     n_variables: 1

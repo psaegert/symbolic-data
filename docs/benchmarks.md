@@ -118,6 +118,32 @@ nguyen = load_catalog("nguyen")
 nguyen["Nguyen-5"].raw                    # 'sin(x1 ** 2) * cos(x1) - 1' on U[-1, 1]
 ```
 
+## Benchmark, subset, problem: the averaging levels
+
+srbf averages a method's scores with nested random effects: **benchmark > subset > problem**. The structure is fixed in
+advance from the benchmarks' own splits (or other obvious ones), never from measured variance. Every release catalog
+says where it sits:
+
+- **benchmark**: the catalog's metadata field `benchmark` (read it without loading the problems with
+  `symbolic_data.catalog_metadata(ref)`). Catalogs their authors present under one benchmark name share one slug: the
+  parts of ERBench, SOOSE's NC/WC/FC, NSRwH's four sets, the EQL experiments, the SRBench 2022 competition's tracks,
+  LLM-SR's problems, SRBench 2.0's and SRBench 2021's tracks, and so on; so do the license parts (`-restricted`,
+  `-share-alike`), the pinned points (`-points`) and the formula/data halves of one benchmark. The map is
+  `tools/catalog_build/tags/benchmarks.json`.
+- **subset**: every problem's `subset` (a yaml entry's `subset`, a frozen problem's `meta["subset"]`). It is
+  1. the catalog's part of the benchmark where the benchmark joins sibling catalogs (`parts` in benchmarks.json:
+     ERBench's `syneq`, `oeis`, ...; SOOSE's `nc`, `wc`, `fc`; LLM-SR's `bactgrow`, `stress-strain`, `oscillators`);
+  2. else the authors' own subset (FastSRB's and SRSD's difficulty tiers, GECCO's levels, LLM-SRBench's domains and
+     in- and out-of-domain tests, a compilation's own groups);
+  3. else the catalog's own name, one subset.
+
+  Where a part replaces an authors' finer subset (SOOSE's `iid`/`ood`, PhyE2E's difficulty levels), the finer one stays
+  as `subset_detail`.
+- **problem**: one problem of the catalog.
+
+`tools/catalog_build/catalog_tags.py apply` writes the benchmark and every problem's subset; `count_release.py` counts
+benchmarks, subsets, catalogs and problems.
+
 ## Provenance
 
 A loaded `ProblemCatalog` carries its `name`, `version`, and `source` (`"local"` or `"huggingface"`)

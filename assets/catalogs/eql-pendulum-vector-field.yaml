@@ -1,10 +1,12 @@
 metadata:
   name: eql-pendulum-vector-field
   version: 1
+  benchmark: "eql"
   tags: {"origin": "science formula", "tags": ["extrapolation", "several tests", "dummy inputs"]}
-  srbf_changes: []
   license: "facts only: formulas and ranges cited from Martius & Lampert 2016 (arXiv:1610.02995); no upstream license"
   citation: {"paper": {"short": "Martius & Lampert 2016", "title": "Extrapolation and learning equations", "venue": "arXiv preprint (ICLR 2017 submission, OpenReview BkgRp0FYe)", "url": "https://arxiv.org/abs/1610.02995"}}
+  srbf_changes: []
+  problem_flags: {"trivial": ["eql-pendulum-y1", "eql-pendulum-y1.extrap-near", "eql-pendulum-y1.extrap-far"]}
   description: EQL pendulum vector field
   sources:
   - https://arxiv.org/abs/1610.02995v1
@@ -20,17 +22,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-151.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   eql-pendulum-y1:
+    subset: "pendulum-vector-field"
     raw: x2/9.81
     prepared: 0.101936799184506*v2
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x1
@@ -56,10 +57,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-pendulum-y1.extrap-near:
+    subset: "pendulum-vector-field"
     raw: x2/9.81
     prepared: 0.101936799184506*v2
     n_variables: 2
-    subset: extrap-near
     vars:
       v1:
         name: x1
@@ -105,10 +106,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-pendulum-y1.extrap-far:
+    subset: "pendulum-vector-field"
     raw: x2/9.81
     prepared: 0.101936799184506*v2
     n_variables: 2
-    subset: extrap-far
     vars:
       v1:
         name: x1
@@ -154,10 +155,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-pendulum-y2:
+    subset: "pendulum-vector-field"
     raw: -sin(x1)
     prepared: -sin(v1)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x1
@@ -183,10 +184,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-pendulum-y2.extrap-near:
+    subset: "pendulum-vector-field"
     raw: -sin(x1)
     prepared: -sin(v1)
     n_variables: 2
-    subset: extrap-near
     vars:
       v1:
         name: x1
@@ -232,10 +233,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   eql-pendulum-y2.extrap-far:
+    subset: "pendulum-vector-field"
     raw: -sin(x1)
     prepared: -sin(v1)
     n_variables: 2
-    subset: extrap-far
     vars:
       v1:
         name: x1

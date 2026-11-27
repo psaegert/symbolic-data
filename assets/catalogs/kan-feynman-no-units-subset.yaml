@@ -1,10 +1,13 @@
 metadata:
   name: kan-feynman-no-units-subset
-  version: 1
-  tags: {"origin": "science formula", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 26, "text": "srbf runs 1 of the 27 formulas: 20 have no input range from the authors, and 6 are identical to problems srbf runs in its Feynman set."}]
+  display_name: "kan-feynman-no-units-subset*"
+  version: 2
+  benchmark: "kan"
+  tags: {"origin": "science formula", "tags": ["srbf-modified"]}
   license: "CC BY 4.0 (Liu et al. 2024, KAN, arXiv:2404.19756, Table 2)"
   citation: {"paper": {"short": "Liu et al. 2025", "title": "KAN: Kolmogorov-Arnold Networks", "venue": "ICLR 2025", "url": "https://arxiv.org/abs/2404.19756"}}
+  srbf_changes: [{"kind": "filled", "problems": 20, "text": "The authors give no input range for 20 of the 27 formulas (the paper states one only for I.16.6; its author points to the AI Feynman database). srbf draws each dimensionless input as the paper's Table 2 reduces it from AI Feynman's dimensional variables (e.g. a = m2/m1), those drawn on AI Feynman's ranges (a push-forward)."}]
+  srbf_notes: ["Paper and code differ: I.16.6 draws a = u/c and b = v/c as in the AI Feynman without-units data the authors point to (u, v and c on [1, 5]); the paper states (-1, 1)."]
   description: KAN Feynman_no_units subset
   sources:
   - https://arxiv.org/abs/2404.19756
@@ -21,30 +24,786 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/interrupted-6.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   I.16.6:
+    subset: "feynman-no-units"
     raw: (a+b)/(1+a*b)
     prepared: (v1 + v2)/(v1*v2 + 1)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: a
+        expr: u/c
+      v2:
+        name: b
+        expr: v/c
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = u/c with u ~ U[1, 5], c ~ U[1, 5] (the AI Feynman without-units data the authors point to; the paper
+        states (-1, 1))'
+      b: 'derived: b = v/c with v ~ U[1, 5], c ~ U[1, 5] (the AI Feynman without-units data the authors point to; the paper
+        states (-1, 1))'
+    latent:
+      u:
         sample_range:
-        - -1.0
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.9.18:
+    subset: "feynman-no-units"
+    raw: a/((b-1)**2+(c-d)**2+(e-f)**2)
+    prepared: v1/((v2 - 1)**2 + (v3 - v4)**2 + (v5 - v6)**2)
+    n_variables: 6
+    vars:
+      v1:
+        name: a
+        expr: m2/m1
+      v2:
+        name: b
+        expr: x2/x1
+      v3:
+        name: c
+        expr: y1/x1
+      v4:
+        name: d
+        expr: y2/x1
+      v5:
+        name: e
+        expr: z1/x1
+      v6:
+        name: f
+        expr: z2/x1
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = m2/m1 with m1 ~ U[1, 2], m2 ~ U[1, 2]'
+      b: 'derived: b = x2/x1 with x1 ~ U[3, 4], x2 ~ U[1, 2]'
+      c: 'derived: c = y1/x1 with x1 ~ U[3, 4], y1 ~ U[3, 4]'
+      d: 'derived: d = y2/x1 with x1 ~ U[3, 4], y2 ~ U[1, 2]'
+      e: 'derived: e = z1/x1 with x1 ~ U[3, 4], z1 ~ U[3, 4]'
+      f: 'derived: f = z2/x1 with x1 ~ U[3, 4], z2 ~ U[1, 2]'
+    latent:
+      m1:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      m2:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      x1:
+        sample_range:
+        - 3.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      x2:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      y1:
+        sample_range:
+        - 3.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      y2:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      z1:
+        sample_range:
+        - 3.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      z2:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.12.11:
+    subset: "feynman-no-units"
+    raw: 1+a*sin(theta)
+    prepared: v1*sin(v2) + 1
+    n_variables: 2
+    vars:
+      v1:
+        name: a
+        expr: B*v/Ef
+      v2:
+        name: theta
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = B*v/Ef with B ~ U[1, 5], Ef ~ U[1, 5], v ~ U[1, 5]'
+      theta: U[1, 5]
+    latent:
+      B:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      Ef:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.13.12:
+    subset: "feynman-no-units"
+    raw: a*(1/b-1)
+    prepared: v1*(-1 + 1/v2)
+    n_variables: 2
+    vars:
+      v1:
+        name: a
+        expr: m2/m1
+      v2:
+        name: b
+        expr: r2/r1
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = m2/m1 with m1 ~ U[1, 5], m2 ~ U[1, 5]'
+      b: 'derived: b = r2/r1 with r1 ~ U[1, 5], r2 ~ U[1, 5]'
+    latent:
+      m1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      m2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      r1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      r2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.15.3x:
+    subset: "feynman-no-units"
+    raw: (1-a)/sqrt(1-b**2)
+    prepared: (1 - v1)/sqrt(1 - v2**2)
+    n_variables: 2
+    vars:
+      v1:
+        name: a
+        expr: u*t/x
+      v2:
+        name: b
+        expr: u/c
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = u*t/x with t ~ U[1, 2], u ~ U[1, 2], x ~ U[5, 10]'
+      b: 'derived: b = u/c with c ~ U[3, 20], u ~ U[1, 2]'
+    latent:
+      t:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      u:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      x:
+        sample_range:
+        - 5.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 3.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.18.4:
+    subset: "feynman-no-units"
+    raw: (1+a*b)/(1+a)
+    prepared: (v1*v2 + 1)/(v1 + 1)
+    n_variables: 2
+    vars:
+      v1:
+        name: a
+        expr: m2/m1
+      v2:
+        name: b
+        expr: r2/r1
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = m2/m1 with m1 ~ U[1, 5], m2 ~ U[1, 5]'
+      b: 'derived: b = r2/r1 with r1 ~ U[1, 5], r2 ~ U[1, 5]'
+    latent:
+      m1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      m2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      r1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      r2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.27.6:
+    subset: "feynman-no-units"
+    raw: 1/(1+a*b)
+    prepared: 1/(v1*v2 + 1)
+    n_variables: 2
+    vars:
+      v1:
+        name: a
+        expr: d1/d2
+      v2:
+        name: b
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = d1/d2 with d1 ~ U[1, 5], d2 ~ U[1, 5]'
+      b: U[1, 5]
+    latent:
+      d1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      d2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.29.16:
+    subset: "feynman-no-units"
+    raw: sqrt(1+a**2-2*a*cos(theta_1-theta_2))
+    prepared: sqrt(v1**2 - 2*v1*cos(v2 - v3) + 1)
+    n_variables: 3
+    vars:
+      v1:
+        name: a
+        expr: x2/x1
+      v2:
+        name: theta_1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta_2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = x2/x1 with x1 ~ U[1, 5], x2 ~ U[1, 5]'
+      theta_1: U[1, 5]
+      theta_2: U[1, 5]
+    latent:
+      x1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      x2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.30.3:
+    subset: "feynman-no-units"
+    raw: sin(n*theta/2)**2/sin(theta/2)**2
+    prepared: sin(v1*v2/2)**2/sin(v2/2)**2
+    n_variables: 2
+    vars:
+      v1:
+        name: n
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      n: U[1, 5]
+      theta: U[1, 5]
+    meta:
+      finite_fraction: 1.0
+  I.30.5:
+    subset: "feynman-no-units"
+    raw: asin(a/n)
+    prepared: asin(v1/v2)
+    n_variables: 2
+    vars:
+      v1:
+        name: a
+        expr: lambd/d
+      v2:
+        name: n
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = lambd/d with d ~ U[2, 5], lambd ~ U[1, 2]'
+      n: U[1, 5]
+    latent:
+      d:
+        sample_range:
+        - 2.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      lambd:
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.37.4:
+    subset: "feynman-no-units"
+    raw: 1+a+2*sqrt(a)*cos(delta)
+    prepared: 2*sqrt(v1)*cos(v2) + v1 + 1
+    n_variables: 2
+    vars:
+      v1:
+        name: a
+        expr: I2/I1
+      v2:
+        name: delta
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = I2/I1 with I1 ~ U[1, 5], I2 ~ U[1, 5]'
+      delta: U[1, 5]
+    latent:
+      I1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      I2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.40.1:
+    subset: "feynman-no-units"
+    raw: n_0*exp(-a)
+    prepared: v1*exp(-v2)
+    n_variables: 2
+    vars:
+      v1:
+        name: n_0
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: a
+        expr: m*g*x/(kb*T)
+      v0:
+        name: y
+    input_distributions:
+      n_0: U[1, 5]
+      a: 'derived: a = m*g*x/(kb*T) with T ~ U[1, 5], g ~ U[1, 5], kb ~ U[1, 5], m ~ U[1, 5], x ~ U[1, 5]'
+    latent:
+      T:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      g:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      m:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      x:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.44.4:
+    subset: "feynman-no-units"
+    raw: n*log(a)
+    prepared: v1*log(v2)
+    n_variables: 2
+    vars:
+      v1:
+        name: n
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: a
+        expr: V2/V1
+      v0:
+        name: y
+    input_distributions:
+      n: U[1, 5]
+      a: 'derived: a = V2/V1 with V1 ~ U[1, 5], V2 ~ U[1, 5]'
+    latent:
+      V1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      V2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.50.26:
+    subset: "feynman-no-units"
+    raw: cos(a)+alpha*cos(a)**2
+    prepared: v2*cos(v1)**2 + cos(v1)
+    n_variables: 2
+    vars:
+      v1:
+        name: a
+        expr: omega*t
+      v2:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = omega*t with omega ~ U[1, 3], t ~ U[1, 3]'
+      alpha: U[1, 3]
+    latent:
+      omega:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      t:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.2.42:
+    subset: "feynman-no-units"
+    raw: (a-1)*b
+    prepared: v2*(v1 - 1)
+    n_variables: 2
+    vars:
+      v1:
+        name: a
+        expr: T2/T1
+      v2:
+        name: b
+        expr: sqrt(A)/d
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = T2/T1 with T1 ~ U[1, 5], T2 ~ U[1, 5]'
+      b: 'derived: b = sqrt(A)/d with A ~ U[1, 5], d ~ U[1, 5]'
+    latent:
+      T1:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      T2:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      A:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      d:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.6.15a:
+    subset: "feynman-no-units"
+    raw: 1/(4*pi)*c*sqrt(a**2+b**2)
+    prepared: (1/(4*3.141592653589793))*v3*sqrt(v1**2 + v2**2)
+    n_variables: 3
+    vars:
+      v1:
+        name: a
+        expr: x/r
+      v2:
+        name: b
+        expr: y/r
+      v3:
+        name: c
+        expr: z/r
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = x/r with r ~ U[1, 3], x ~ U[1, 3]'
+      b: 'derived: b = y/r with r ~ U[1, 3], y ~ U[1, 3]'
+      c: 'derived: c = z/r with r ~ U[1, 3], z ~ U[1, 3]'
+    latent:
+      r:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      x:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      y:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      z:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.11.27:
+    subset: "feynman-no-units"
+    raw: n*alpha/(1-n*alpha/3)
+    prepared: v1*v2/(-v1*v2/3 + 1)
+    n_variables: 2
+    vars:
+      v1:
+        name: n
+        sample_range:
+        - 0.0
         - 1.0
         sample_type:
         - uni
         - pos
       v2:
-        name: b
+        name: alpha
         sample_range:
-        - -1.0
+        - 0.0
         - 1.0
         sample_type:
         - uni
@@ -52,9 +811,450 @@ expressions:
       v0:
         name: y
     input_distributions:
-      a: 'random on the open interval (-1,1), stated for this equation only; the paper does not name the distribution (the
-        authors'' generator pykan create_dataset draws uniformly: torch.rand*(hi-lo)+lo, kan/utils.py L119-121)'
-      b: 'random on the open interval (-1,1), stated for this equation only; the paper does not name the distribution (the
-        authors'' generator pykan create_dataset draws uniformly: torch.rand*(hi-lo)+lo, kan/utils.py L119-121)'
+      n: U[0, 1]
+      alpha: U[0, 1]
     meta:
+      finite_fraction: 1.0
+  II.35.18:
+    subset: "feynman-no-units"
+    raw: n_0/(exp(a)+exp(-a))
+    prepared: v1/(exp(v2) + exp(-v2))
+    n_variables: 2
+    vars:
+      v1:
+        name: n_0
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: a
+        expr: mom*B/(kb*T)
+      v0:
+        name: y
+    input_distributions:
+      n_0: U[1, 3]
+      a: 'derived: a = mom*B/(kb*T) with B ~ U[1, 3], T ~ U[1, 3], kb ~ U[1, 3], mom ~ U[1, 3]'
+    latent:
+      B:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      mom:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  II.36.38:
+    subset: "feynman-no-units"
+    raw: a+alpha*b
+    prepared: v1 + v2*v3
+    n_variables: 3
+    vars:
+      v1:
+        name: a
+        expr: mom*H/(kb*T)
+      v2:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: b
+        expr: mom*M/(epsilon*c**2*kb*T)
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = mom*H/(kb*T) with H ~ U[1, 3], T ~ U[1, 3], kb ~ U[1, 3], mom ~ U[1, 3]'
+      alpha: U[1, 3]
+      b: 'derived: b = mom*M/(epsilon*c**2*kb*T) with M ~ U[1, 3], T ~ U[1, 3], c ~ U[1, 3], epsilon ~ U[1, 3], kb ~ U[1,
+        3], mom ~ U[1, 3]'
+    latent:
+      H:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      T:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      kb:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      mom:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      M:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      c:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      epsilon:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  III.9.52:
+    subset: "feynman-no-units"
+    raw: a*sin((b-c)/2)**2/((b-c)/2)**2
+    prepared: v1*sin(v2/2 - v3/2)**2/(v2/2 - v3/2)**2
+    n_variables: 3
+    vars:
+      v1:
+        name: a
+        expr: p_d*Ef*t/h
+      v2:
+        name: b
+        expr: omega*t
+      v3:
+        name: c
+        expr: omega_0*t
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = p_d*Ef*t/h with Ef ~ U[1, 3], h ~ U[1, 3], p_d ~ U[1, 3], t ~ U[1, 3]'
+      b: 'derived: b = omega*t with omega ~ U[1, 5], t ~ U[1, 3]'
+      c: 'derived: c = omega_0*t with omega_0 ~ U[1, 5], t ~ U[1, 3]'
+    latent:
+      Ef:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      h:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      p_d:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      t:
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      omega:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      omega_0:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  III.10.19:
+    subset: "feynman-no-units"
+    raw: sqrt(1+a**2+b**2)
+    prepared: sqrt(v1**2 + v2**2 + 1)
+    n_variables: 2
+    vars:
+      v1:
+        name: a
+        expr: By/Bx
+      v2:
+        name: b
+        expr: Bz/Bx
+      v0:
+        name: y
+    input_distributions:
+      a: 'derived: a = By/Bx with Bx ~ U[1, 5], By ~ U[1, 5]'
+      b: 'derived: b = Bz/Bx with Bx ~ U[1, 5], Bz ~ U[1, 5]'
+    latent:
+      Bx:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      By:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      Bz:
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+    meta:
+      finite_fraction: 1.0
+  I.6.2:
+    subset: "feynman-no-units"
+    raw: exp(-(theta/sigma)**2/2)/(sqrt(2*pi)*sigma)
+    prepared: exp(-(v2/v1)**2/2)/(sqrt(2*3.141592653589793)*v1)
+    n_variables: 2
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: sigma
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: f
+    meta:
+      same_as: feynman:I.6.2
+      finite_fraction: 1.0
+  I.6.2b:
+    subset: "feynman-no-units"
+    raw: exp(-((theta-theta1)/sigma)**2/2)/(sqrt(2*pi)*sigma)
+    prepared: exp(-((v2-v3)/v1)**2/2)/(sqrt(2*3.141592653589793)*v1)
+    n_variables: 3
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: sigma
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta1
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: f
+    meta:
+      same_as: feynman:I.6.2b
+      finite_fraction: 1.0
+  I.26.2:
+    subset: "feynman-no-units"
+    raw: arcsin(n*sin(theta2))
+    prepared: asin(v1*sin(v2))
+    n_variables: 2
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: n
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: theta2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: theta1
+    meta:
+      same_as: feynman:I.26.2
+      finite_fraction: 1.0
+  II.11.7:
+    subset: "feynman-no-units"
+    raw: beta*(1+alpha*cos(theta))
+    prepared: v1*(1+v2*cos(v3))
+    n_variables: 3
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: beta
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: f
+    meta:
+      same_as: feynman:III.17.37
+      finite_fraction: 1.0
+  II.38.3:
+    subset: "feynman-no-units"
+    raw: q/C
+    prepared: v1/v2
+    n_variables: 2
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: q
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: C
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: Volt
+    meta:
+      same_as: feynman:I.25.13
+      finite_fraction: 1.0
+  III.17.37:
+    subset: "feynman-no-units"
+    raw: beta*(1+alpha*cos(theta))
+    prepared: v1*(1+v2*cos(v3))
+    n_variables: 3
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: beta
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: alpha
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: theta
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: f
+    meta:
+      same_as: feynman:III.17.37
       finite_fraction: 1.0

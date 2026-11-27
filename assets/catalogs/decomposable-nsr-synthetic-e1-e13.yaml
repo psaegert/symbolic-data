@@ -1,10 +1,13 @@
 metadata:
   name: decomposable-nsr-synthetic-e1-e13
+  display_name: "decomposable-nsr-synthetic-e1-e13*"
   version: 1
-  tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests"]}
-  srbf_changes: [{"kind": "part", "problems": 2, "text": "srbf runs 12 of the 13 functions, each with its interpolation and extrapolation test; E8 is the Pagie function and is run in srbf's Pagie and Neat sets, where its extrapolation test is not used."}]
+  benchmark: "decomposable-nsr-synthetic-e1-e13"
+  tags: {"origin": "classic benchmark", "tags": ["extrapolation", "several tests", "srbf-modified"]}
   license: "MIT (NISL-MSU/MultiSetSR; Morales & Sheppard 2026, arXiv:2511.04124)"
   citation: {"paper": {"short": "Morales & Sheppard 2024", "title": "Univariate Skeleton Prediction in Multivariate Systems Using Transformers", "venue": "Machine Learning and Knowledge Discovery in Databases. Research Track and Demo Track, Lecture Notes in Computer Science, pp. 107-125 (ECML PKDD 2024)", "url": "https://doi.org/10.1007/978-3-031-70371-3_7"}, "data": {"short": "GitHub NISL-MSU/MultiSetSR@d5ba2ec", "title": "MultiSetSR GenerateDatasets.py (E1-E9, CS1-CS4)", "url": "https://github.com/NISL-MSU/MultiSetSR/blob/d5ba2ecb6f5a82054d957e9b8c6842e3d6d92831/src/EquationLearning/Data/GenerateDatasets.py"}}
+  srbf_changes: [{"kind": "part", "problems": 2, "text": "srbf runs 12 of the 13 functions, each with its interpolation and extrapolation test; E8 is the Pagie function and is run in srbf's Pagie and Neat sets, where its extrapolation test is not used."}]
+  srbf_notes: ["Paper and code differ: Where the paper's printed ranges differ from the authors' generator (E2, E3, E9, E10), srbf follows the generator, which produced the published results."]
   description: Decomposable NSR synthetic E1-E13
   sources:
   - https://arxiv.org/abs/2511.04124
@@ -20,17 +23,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-104.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   E1:
+    subset: "interp"
     raw: (3.0375*x0*x1 + 5.5*sin(9/4*(x0 - 2/3)*(x1 - 2/3)))/5
     prepared: 0.6075*v1*v2 + 1.1*sin(9*(v1 - 1*2/3)*(v2 - 1*2/3)/4)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -52,16 +54,16 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L210)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L210)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L211)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L211)'
     meta:
       finite_fraction: 1.0
   E1.extrap:
+    subset: "extrap"
     raw: (3.0375*x0*x1 + 5.5*sin(9/4*(x0 - 2/3)*(x1 - 2/3)))/5
     prepared: 0.6075*v1*v2 + 1.1*sin(9*(v1 - 1*2/3)*(v2 - 1*2/3)/4)
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -83,9 +85,9 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L210)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L210)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L211)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L211)'
     test:
       vars:
         v1:
@@ -113,16 +115,16 @@ expressions:
               high: 10.0
             weight: 5.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E2:
+    subset: "interp"
     raw: 5.5 + (1 - x0/4)**2 + sqrt(x1 + 10)*sin(x2/5)
     prepared: (1 - v1/4)**2 + sqrt(v2 + 10)*sin(v3/5) + 5.5
     n_variables: 3
-    subset: interp
     vars:
       v1:
         name: x0
@@ -152,18 +154,18 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L227)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L227)'
       x1: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L228)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L228)'
       x2: 'uniform U[-15,15] (authors'' generator: np.random.uniform(-15, 15, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L229)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L229)'
     meta:
       finite_fraction: 1.0
   E2.extrap:
+    subset: "extrap"
     raw: 5.5 + (1 - x0/4)**2 + sqrt(x1 + 10)*sin(x2/5)
     prepared: (1 - v1/4)**2 + sqrt(v2 + 10)*sin(v3/5) + 5.5
     n_variables: 3
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -193,11 +195,11 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L227)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L227)'
       x1: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L228)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L228)'
       x2: 'uniform U[-15,15] (authors'' generator: np.random.uniform(-15, 15, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L229)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L229)'
     test:
       vars:
         v1:
@@ -237,16 +239,16 @@ expressions:
               high: 30.0
             weight: 15.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E3:
+    subset: "interp"
     raw: (1.5*exp(1.5*x0) + 5*cos(3*x1))/10
     prepared: 0.15*exp(1.5*v1) + cos(3*v2)/2
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -268,16 +270,16 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-3,3] (authors'' generator: np.random.uniform(-3, 3, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L246)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L246)'
       x1: 'uniform U[-3,3] (authors'' generator: np.random.uniform(-3, 3, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L247)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L247)'
     meta:
       finite_fraction: 1.0
   E3.extrap:
+    subset: "extrap"
     raw: (1.5*exp(1.5*x0) + 5*cos(3*x1))/10
     prepared: 0.15*exp(1.5*v1) + cos(3*v2)/2
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -299,9 +301,9 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-3,3] (authors'' generator: np.random.uniform(-3, 3, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L246)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L246)'
       x1: 'uniform U[-3,3] (authors'' generator: np.random.uniform(-3, 3, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L247)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L247)'
     test:
       vars:
         v1:
@@ -329,16 +331,16 @@ expressions:
               high: 6.0
             weight: 3.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E4:
+    subset: "interp"
     raw: ((1 - x0)**2 + (1 - x2)**2 + 100*(x1 - x0**2)**2 + 100*(x3 - x2**2)**2)/10000
     prepared: (1 - v1)**2/10000 + (1 - v3)**2/10000 + (-v1**2 + v2)**2/100 + (-v3**2 + v4)**2/100
     n_variables: 4
-    subset: interp
     vars:
       v1:
         name: x0
@@ -376,20 +378,20 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L263)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L263)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L264)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L264)'
       x2: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L265)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L265)'
       x3: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L266)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L266)'
     meta:
       finite_fraction: 1.0
   E4.extrap:
+    subset: "extrap"
     raw: ((1 - x0)**2 + (1 - x2)**2 + 100*(x1 - x0**2)**2 + 100*(x3 - x2**2)**2)/10000
     prepared: (1 - v1)**2/10000 + (1 - v3)**2/10000 + (-v1**2 + v2)**2/100 + (-v3**2 + v4)**2/100
     n_variables: 4
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -427,13 +429,13 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L263)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L263)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L264)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L264)'
       x2: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L265)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L265)'
       x3: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L266)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L266)'
     test:
       vars:
         v1:
@@ -485,16 +487,16 @@ expressions:
               high: 10.0
             weight: 5.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E5:
+    subset: "interp"
     raw: sin(x0 + x1*x2) + exp(1.2*x3)
     prepared: exp(1.2*v4) + sin(v1 + v2*v3)
     n_variables: 4
-    subset: interp
     vars:
       v1:
         name: x0
@@ -532,20 +534,20 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L285)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L285)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L286)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L286)'
       x2: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L287)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L287)'
       x3: 'uniform U[-3,3] (authors'' generator: np.random.uniform(-3, 3, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L288)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L288)'
     meta:
       finite_fraction: 1.0
   E5.extrap:
+    subset: "extrap"
     raw: sin(x0 + x1*x2) + exp(1.2*x3)
     prepared: exp(1.2*v4) + sin(v1 + v2*v3)
     n_variables: 4
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -583,13 +585,13 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L285)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L285)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L286)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L286)'
       x2: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L287)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L287)'
       x3: 'uniform U[-3,3] (authors'' generator: np.random.uniform(-3, 3, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L288)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L288)'
     test:
       vars:
         v1:
@@ -641,16 +643,16 @@ expressions:
               high: 6.0
             weight: 3.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E6:
+    subset: "interp"
     raw: tanh(x0/2) + Abs(x1)*cos(x2**2/5)
     prepared: cos(v3**2/5)*abs(v2) + tanh(v1/2)
     n_variables: 3
-    subset: interp
     vars:
       v1:
         name: x0
@@ -680,18 +682,18 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L306)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L306)'
       x1: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L307)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L307)'
       x2: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L308)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L308)'
     meta:
       finite_fraction: 1.0
   E6.extrap:
+    subset: "extrap"
     raw: tanh(x0/2) + Abs(x1)*cos(x2**2/5)
     prepared: cos(v3**2/5)*abs(v2) + tanh(v1/2)
     n_variables: 3
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -721,11 +723,11 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L306)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L306)'
       x1: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L307)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L307)'
       x2: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L308)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L308)'
     test:
       vars:
         v1:
@@ -765,16 +767,16 @@ expressions:
               high: 20.0
             weight: 10.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E7:
+    subset: "interp"
     raw: (1 - x1**2)/(sin(2*pi*x0) + 1.5)
     prepared: (1 - v2**2)/(sin(2*3.141592653589793*v1) + 1.5)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -796,16 +798,16 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L325)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L325)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L326)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L326)'
     meta:
       finite_fraction: 1.0
   E7.extrap:
+    subset: "extrap"
     raw: (1 - x1**2)/(sin(2*pi*x0) + 1.5)
     prepared: (1 - v2**2)/(sin(2*3.141592653589793*v1) + 1.5)
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -827,9 +829,9 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L325)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L325)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L326)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L326)'
     test:
       vars:
         v1:
@@ -857,16 +859,16 @@ expressions:
               high: 10.0
             weight: 5.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E9:
+    subset: "interp"
     raw: log(2*x1 + 1) - log(4*x0**2 + 1)
     prepared: -log(4*v1**2 + 1) + log(2*v2 + 1)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -888,16 +890,16 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L359)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L359)'
       x1: 'uniform U[0,5] (authors'' generator: np.random.uniform(0, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L360)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L360)'
     meta:
       finite_fraction: 1.0
   E9.extrap:
+    subset: "extrap"
     raw: log(2*x1 + 1) - log(4*x0**2 + 1)
     prepared: -log(4*v1**2 + 1) + log(2*v2 + 1)
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -919,9 +921,9 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L359)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L359)'
       x1: 'uniform U[0,5] (authors'' generator: np.random.uniform(0, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L360)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L360)'
     test:
       vars:
         v1:
@@ -943,16 +945,16 @@ expressions:
               low: 5.0
               high: 10.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E10:
+    subset: "interp"
     raw: sin(x0*exp(x1))
     prepared: sin(v1*exp(v2))
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -1072,17 +1074,17 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-2,2] (authors'' generator: np.random.uniform(-2, 2, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L376)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L376)'
       x1: 'discrete grid: 100 equally spaced values np.linspace(-3, 3, 100) (grid E[-3,3,6/99]), each point drawn uniformly
         with replacement by np.random.choice; variable type ''discrete'' in the code (MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L377-378, L387)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L377-378, L387)'
     meta:
       finite_fraction: 1.0
   E10.extrap:
+    subset: "extrap"
     raw: sin(x0*exp(x1))
     prepared: sin(v1*exp(v2))
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -1202,10 +1204,10 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-2,2] (authors'' generator: np.random.uniform(-2, 2, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L376)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L376)'
       x1: 'discrete grid: 100 equally spaced values np.linspace(-3, 3, 100) (grid E[-3,3,6/99]), each point drawn uniformly
         with replacement by np.random.choice; variable type ''discrete'' in the code (MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L377-378, L387)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L377-378, L387)'
     test:
       vars:
         v1:
@@ -1233,16 +1235,16 @@ expressions:
               high: 6.0
             weight: 3.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E11:
+    subset: "interp"
     raw: x0*log(x1**4)
     prepared: v1*log(v2**4)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -1264,16 +1266,16 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L395)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L395)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L396)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L396)'
     meta:
       finite_fraction: 1.0
   E11.extrap:
+    subset: "extrap"
     raw: x0*log(x1**4)
     prepared: v1*log(v2**4)
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -1295,9 +1297,9 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L395)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L395)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L396)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L396)'
     test:
       vars:
         v1:
@@ -1325,16 +1327,16 @@ expressions:
               high: 10.0
             weight: 5.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E12:
+    subset: "interp"
     raw: 1 + x0*sin(1/x1)
     prepared: v1*sin(1/v2) + 1
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -1356,16 +1358,16 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L412)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L412)'
       x1: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L413)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L413)'
     meta:
       finite_fraction: 1.0
   E12.extrap:
+    subset: "extrap"
     raw: 1 + x0*sin(1/x1)
     prepared: v1*sin(1/v2) + 1
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -1387,9 +1389,9 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L412)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L412)'
       x1: 'uniform U[-10,10] (authors'' generator: np.random.uniform(-10, 10, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L413)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L413)'
     test:
       vars:
         v1:
@@ -1417,16 +1419,16 @@ expressions:
               high: 20.0
             weight: 10.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0
   E13:
+    subset: "interp"
     raw: sqrt(x0)*log(x1**2)
     prepared: sqrt(v1)*log(v2**2)
     n_variables: 2
-    subset: interp
     vars:
       v1:
         name: x0
@@ -1448,16 +1450,16 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[0,20] (authors'' generator: np.random.uniform(0, 20, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L429)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L429)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L430)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L430)'
     meta:
       finite_fraction: 1.0
   E13.extrap:
+    subset: "extrap"
     raw: sqrt(x0)*log(x1**2)
     prepared: sqrt(v1)*log(v2**2)
     n_variables: 2
-    subset: extrap
     vars:
       v1:
         name: x0
@@ -1479,9 +1481,9 @@ expressions:
         name: y
     input_distributions:
       x0: 'uniform U[0,20] (authors'' generator: np.random.uniform(0, 20, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L429)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L429)'
       x1: 'uniform U[-5,5] (authors'' generator: np.random.uniform(-5, 5, size=n), MultiSetSR @ d5ba2ecb src/EquationLearning/Data/GenerateDatasets.py
-        (raw/fresh-104/GenerateDatasets.py, sha256 9f02f5d4...0cc) L430)'
+        (GenerateDatasets.py, sha256 9f02f5d4...0cc) L430)'
     test:
       vars:
         v1:
@@ -1503,8 +1505,8 @@ expressions:
               high: 10.0
             weight: 5.0
     test_source: 'Morales & Sheppard, ''Decomposable Neural Symbolic Regression'', arXiv:2511.04124v4 main.tex l.1261-1265
-      (catalog-prep/raw/fresh-104/arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range,
-      for a variable x_v is denoted as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v,
-      2x^u_v]. ... Each extrapolation set comprised 10,000 points '
+      (arXiv-2511.04124v4_main.tex, opened): ''The original domain range, or interpolation range, for a variable x_v is denoted
+      as [x^l_v, x^u_v], while its extrapolation range is defined as [2x^l_v, x^l_v[ U ]x^u_v, 2x^u_v]. ... Each extrapolation
+      set comprised 10,000 points sampled uniformly within th'
     meta:
       finite_fraction: 1.0

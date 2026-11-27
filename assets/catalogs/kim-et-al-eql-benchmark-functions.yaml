@@ -1,10 +1,13 @@
 metadata:
   name: kim-et-al-eql-benchmark-functions
+  display_name: "kim-et-al-eql-benchmark-functions*"
   version: 1
-  tags: {"origin": "classic benchmark", "tags": ["extrapolation"]}
-  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 12 of the 13 functions: Kim-8 (exp(-x^2) on [-1, 1]) is run as Livermore-21, without Kim et al.'s extrapolation test."}]
+  benchmark: "kim-et-al-eql-benchmark-functions"
+  tags: {"origin": "classic benchmark", "tags": ["extrapolation", "srbf-modified"]}
   license: "MIT (samuelkim314/DeepSymReg) + CC BY 4.0 (Kim et al. 2020, IEEE TNNLS)"
   citation: {"paper": {"short": "Kim et al. 2021", "title": "Integration of Neural Network-Based Symbolic Regression in Deep Learning for Scientific Discovery", "venue": "IEEE Transactions on Neural Networks and Learning Systems 32(9):4166-4177", "url": "https://doi.org/10.1109/TNNLS.2020.3017010"}, "data": {"short": "GitHub samuelkim314/DeepSymReg@57bbe2e", "title": "DeepSymReg benchmark.py (no licence file)", "url": "https://github.com/samuelkim314/DeepSymReg/blob/57bbe2e2c7f0cd07dc34ed99c7dc75bdd1445d87/benchmark.py"}}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 12 of the 13 functions: Kim-8 (exp(-x^2) on [-1, 1]) is run as Livermore-21, without Kim et al.'s extrapolation test."}]
+  problem_flags: {"trivial": ["Kim-1"]}
   description: Kim et al. EQL benchmark functions
   sources:
   - https://arxiv.org/abs/1912.04825
@@ -19,17 +22,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-158.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Kim-1:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: x
     prepared: v1
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x
@@ -57,10 +59,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-2:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: x**2
     prepared: v1**2
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x
@@ -88,10 +90,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-3:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: x**3
     prepared: v1**3
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x
@@ -119,10 +121,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-4:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: sin(2*pi*x)
     prepared: sin(2*3.141592653589793*v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x
@@ -150,10 +152,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-5:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: x*y
     prepared: v1*v2
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -196,10 +198,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-6:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: 1/(1 + exp(-10*x))
     prepared: 1/(1 + exp(-10*v1))
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x
@@ -227,10 +229,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-7:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: x*y/2 + z/2
     prepared: v1*v2/2 + v3/2
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x
@@ -288,10 +290,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-9:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: x**2 + sin(2*pi*y)
     prepared: v1**2 + sin(2*3.141592653589793*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -334,10 +336,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-10:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: x**2 + y - 2*z
     prepared: v1**2 + v2 - 2*v3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x
@@ -395,10 +397,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-11:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: exp(x)
     prepared: exp(v1)
     n_variables: 1
-    subset: all
     vars:
       v1:
         name: x
@@ -426,10 +428,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-12:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: sin(2*pi*x) + sin(4*pi*y)
     prepared: sin(2*3.141592653589793*v1) + sin(4*3.141592653589793*v2)
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: x
@@ -472,10 +474,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Kim-13:
+    subset: "kim-et-al-eql-benchmark-functions"
     raw: (x1 + x2*x3)**3
     prepared: (v1 + v2*v3)**3
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: x1

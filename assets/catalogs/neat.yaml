@@ -1,8 +1,11 @@
 metadata:
   name: neat
+  display_name: "neat*"
   version: 2
-  tags: {"origin": "classic benchmark", "tags": []}
+  benchmark: "neat"
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 8 of the 9 Neat problems here; Neat-6 trains on fixed points and is in 'Neat (fixed points)'."}]
+  srbf_notes: ["Follows the defining publication: Neat-9 (the Pagie function) is sampled at random on [-5, 5]^2, as the neat-GP paper samples its training sets; Pagie's own 26 x 26 grid is in 'Pagie (fixed points)'."]
   license: "BSD-3-Clause (dso-org/deep-symbolic-optimization benchmarks.csv); formulas and ranges as in each benchmark's first publication (facts)"
   citation: {"paper": {"short": "Trujillo et al. 2016", "title": "neat Genetic Programming: Controlling bloat naturally", "venue": "Information Sciences 333:21-43", "url": "https://doi.org/10.1016/j.ins.2015.11.010"}, "data": {"short": "GitHub dso-org/deep-symbolic-optimization@2069d4e", "title": "DSO benchmark registry benchmarks.csv (uDSR release 2069d4e, BSD-3-Clause)", "url": "https://github.com/dso-org/deep-symbolic-optimization/blob/2069d4eda47b0fd6d3e66e0ade9605cd9574b87c/dso/dso/task/regression/benchmarks.csv"}}
   description: neat-GP suite (aggregated classics).
@@ -25,6 +28,7 @@ metadata:
       and need per-entry review.'
 expressions:
   Neat-1:
+    subset: "neat"
     raw: pow(x1,4)+pow(x1,3)+pow(x1,2)+x1
     prepared: ((v1)**(4))+((v1)**(3))+((v1)**(2))+v1
     n_variables: 1
@@ -55,6 +59,7 @@ expressions:
         function_set: KozaPlus1
       finite_fraction: 1.0
   Neat-2:
+    subset: "neat"
     raw: pow(x1,5)+pow(x1,4)+pow(x1,3)+pow(x1,2)+x1
     prepared: ((v1)**(5))+((v1)**(4))+((v1)**(3))+((v1)**(2))+v1
     n_variables: 1
@@ -85,6 +90,7 @@ expressions:
         function_set: KozaPlus1
       finite_fraction: 1.0
   Neat-3:
+    subset: "neat"
     raw: sin(pow(x1,2))*cos(x1)-1
     prepared: sin(((v1)**(2)))*cos(v1)-1
     n_variables: 1
@@ -115,6 +121,7 @@ expressions:
         function_set: KozaPlus1
       finite_fraction: 1.0
   Neat-4:
+    subset: "neat"
     raw: log(x1+1)+log(pow(x1,2)+1)
     prepared: log(v1+1)+log(((v1)**(2))+1)
     n_variables: 1
@@ -145,6 +152,7 @@ expressions:
         function_set: KozaPlus1
       finite_fraction: 1.0
   Neat-5:
+    subset: "neat"
     raw: 2*sin(x1)*cos(x2)
     prepared: 2*sin(v1)*cos(v2)
     n_variables: 2
@@ -183,6 +191,7 @@ expressions:
         function_set: Koza
       finite_fraction: 1.0
   Neat-7:
+    subset: "neat"
     raw: 2-2.1*cos(9.8*x1)*sin(1.3*x2)
     prepared: 2-2.1*cos(9.8*v1)*sin(1.3*v2)
     n_variables: 2
@@ -221,6 +230,7 @@ expressions:
         function_set: Korns
       finite_fraction: 1.0
   Neat-8:
+    subset: "neat"
     raw: div(exp(-pow(x1-1,2)),(1.2+pow((x2-2.5),2)))
     prepared: ((exp(-((v1-1)**(2))))/((1.2+(((v2-2.5))**(2)))))
     n_variables: 2
@@ -280,6 +290,7 @@ expressions:
       b) means that the x variable is sampled randomly from an interval [a, b]. Notation
       x1 = (a1 : c1 : b1), x2 = (a2 : c2 : b2) determ'
   Neat-9:
+    subset: "neat"
     raw: div(1,(1+pow(x1,-4)))+div(1,(1+pow(x2,-4)))
     prepared: ((1)/((1+((v1)**(-4)))))+((1)/((1+((v2)**(-4)))))
     n_variables: 2

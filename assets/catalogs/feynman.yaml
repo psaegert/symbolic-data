@@ -1,10 +1,11 @@
 metadata:
   name: feynman
   version: 2
+  benchmark: "feynman"
   tags: {"origin": "science formula", "tags": []}
-  srbf_changes: []
   license: "facts only: formulas and ranges from the Feynman Symbolic Regression Database (Udrescu & Tegmark 2020); its data files are not redistributed"
   citation: {"paper": {"short": "Udrescu & Tegmark 2020", "title": "AI Feynman: A physics-inspired method for symbolic regression", "venue": "Science Advances 6(16):eaay2631", "url": "https://doi.org/10.1126/sciadv.aay2631"}, "data": {"short": "FSReD FeynmanEquations.csv (Wayback 2025-06-30)", "title": "Feynman Symbolic Regression Database, FeynmanEquations.csv (authors' host, now dead)", "url": "https://web.archive.org/web/20250630050842/https://space.mit.edu/home/tegmark/aifeynman/FeynmanEquations.csv"}}
+  srbf_changes: []
   description: Feynman Symbolic Regression Database (Udrescu & Tegmark 2020), 100
     equations.
   sources:
@@ -19,6 +20,7 @@ metadata:
       base-10, value-equivalent to native `log_uniform`.
 expressions:
   I.6.2a:
+    subset: "feynman"
     raw: exp(-theta**2/2)/sqrt(2*pi)
     prepared: exp(-v1**2/2)/sqrt(2*3.141592653589793)
     n_variables: 1
@@ -37,6 +39,7 @@ expressions:
       v0:
         name: f
   I.6.2:
+    subset: "feynman"
     raw: exp(-(theta/sigma)**2/2)/(sqrt(2*pi)*sigma)
     prepared: exp(-(v2/v1)**2/2)/(sqrt(2*3.141592653589793)*v1)
     n_variables: 2
@@ -63,6 +66,7 @@ expressions:
       v0:
         name: f
   I.6.2b:
+    subset: "feynman"
     raw: exp(-((theta-theta1)/sigma)**2/2)/(sqrt(2*pi)*sigma)
     prepared: exp(-((v2-v3)/v1)**2/2)/(sqrt(2*3.141592653589793)*v1)
     n_variables: 3
@@ -97,6 +101,7 @@ expressions:
       v0:
         name: f
   I.8.14:
+    subset: "feynman"
     raw: sqrt((x2-x1)**2+(y2-y1)**2)
     prepared: sqrt((v2-v1)**2+(v4-v3)**2)
     n_variables: 4
@@ -139,6 +144,7 @@ expressions:
       v0:
         name: d
   I.9.18:
+    subset: "feynman"
     raw: G*m1*m2/((x2-x1)**2+(y2-y1)**2+(z2-z1)**2)
     prepared: v3*v1*v2/((v5-v4)**2+(v7-v6)**2+(v9-v8)**2)
     n_variables: 9
@@ -221,6 +227,7 @@ expressions:
       v0:
         name: F
   I.10.7:
+    subset: "feynman"
     raw: m_0/sqrt(1-v**2/c**2)
     prepared: v1/sqrt(1-v2**2/v3**2)
     n_variables: 3
@@ -255,6 +262,7 @@ expressions:
       v0:
         name: m
   I.11.19:
+    subset: "feynman"
     raw: x1*y1+x2*y2+x3*y3
     prepared: v1*v4+v2*v5+v3*v6
     n_variables: 6
@@ -313,6 +321,7 @@ expressions:
       v0:
         name: A
   I.12.1:
+    subset: "feynman"
     raw: mu*Nn
     prepared: v1*v2
     n_variables: 2
@@ -339,6 +348,7 @@ expressions:
       v0:
         name: F
   I.12.2:
+    subset: "feynman"
     raw: q1*q2*r/(4*pi*epsilon*r**3)
     prepared: v1*v2*v4/(4*3.141592653589793*v3*v4**3)
     n_variables: 4
@@ -381,6 +391,7 @@ expressions:
       v0:
         name: F
   I.12.4:
+    subset: "feynman"
     raw: q1*r/(4*pi*epsilon*r**3)
     prepared: v1*v3/(4*3.141592653589793*v2*v3**3)
     n_variables: 3
@@ -415,6 +426,7 @@ expressions:
       v0:
         name: Ef
   I.12.5:
+    subset: "feynman"
     raw: q2*Ef
     prepared: v1*v2
     n_variables: 2
@@ -441,6 +453,7 @@ expressions:
       v0:
         name: F
   I.12.11:
+    subset: "feynman"
     raw: q*(Ef+B*v*sin(theta))
     prepared: v1*(v2+v3*v4*sin(v5))
     n_variables: 5
@@ -491,6 +504,7 @@ expressions:
       v0:
         name: F
   I.13.4:
+    subset: "feynman"
     raw: 1/2*m*(v**2+u**2+w**2)
     prepared: 1/2*v1*(v2**2+v3**2+v4**2)
     n_variables: 4
@@ -533,6 +547,7 @@ expressions:
       v0:
         name: K
   I.13.12:
+    subset: "feynman"
     raw: G*m1*m2*(1/r2-1/r1)
     prepared: v5*v1*v2*(1/v4-1/v3)
     n_variables: 5
@@ -583,6 +598,7 @@ expressions:
       v0:
         name: U
   I.14.3:
+    subset: "feynman"
     raw: m*g*z
     prepared: v1*v2*v3
     n_variables: 3
@@ -617,6 +633,7 @@ expressions:
       v0:
         name: U
   I.14.4:
+    subset: "feynman"
     raw: 1/2*k_spring*x**2
     prepared: 1/2*v1*v2**2
     n_variables: 2
@@ -643,6 +660,7 @@ expressions:
       v0:
         name: U
   I.15.3x:
+    subset: "feynman"
     raw: (x-u*t)/sqrt(1-u**2/c**2)
     prepared: (v1-v2*v4)/sqrt(1-v2**2/v3**2)
     n_variables: 4
@@ -685,6 +703,7 @@ expressions:
       v0:
         name: x1
   I.15.3t:
+    subset: "feynman"
     raw: (t-u*x/c**2)/sqrt(1-u**2/c**2)
     prepared: (v4-v3*v1/v2**2)/sqrt(1-v3**2/v2**2)
     n_variables: 4
@@ -727,6 +746,7 @@ expressions:
       v0:
         name: t1
   I.15.1:
+    subset: "feynman"
     raw: m_0*v/sqrt(1-v**2/c**2)
     prepared: v1*v2/sqrt(1-v2**2/v3**2)
     n_variables: 3
@@ -761,6 +781,7 @@ expressions:
       v0:
         name: p
   I.16.6:
+    subset: "feynman"
     raw: (u+v)/(1+u*v/c**2)
     prepared: (v3+v2)/(1+v3*v2/v1**2)
     n_variables: 3
@@ -795,6 +816,7 @@ expressions:
       v0:
         name: v1
   I.18.4:
+    subset: "feynman"
     raw: (m1*r1+m2*r2)/(m1+m2)
     prepared: (v1*v3+v2*v4)/(v1+v2)
     n_variables: 4
@@ -837,6 +859,7 @@ expressions:
       v0:
         name: r
   I.18.12:
+    subset: "feynman"
     raw: r*F*sin(theta)
     prepared: v1*v2*sin(v3)
     n_variables: 3
@@ -871,6 +894,7 @@ expressions:
       v0:
         name: tau
   I.18.14:
+    subset: "feynman"
     raw: m*r*v*sin(theta)
     prepared: v1*v2*v3*sin(v4)
     n_variables: 4
@@ -913,6 +937,7 @@ expressions:
       v0:
         name: L
   I.24.6:
+    subset: "feynman"
     raw: 1/2*m*(omega**2+omega_0**2)*1/2*x**2
     prepared: 1/2*v1*(v2**2+v3**2)*1/2*v4**2
     n_variables: 4
@@ -955,6 +980,7 @@ expressions:
       v0:
         name: E_n
   I.25.13:
+    subset: "feynman"
     raw: q/C
     prepared: v1/v2
     n_variables: 2
@@ -981,6 +1007,7 @@ expressions:
       v0:
         name: Volt
   I.26.2:
+    subset: "feynman"
     raw: arcsin(n*sin(theta2))
     prepared: asin(v1*sin(v2))
     n_variables: 2
@@ -1007,6 +1034,7 @@ expressions:
       v0:
         name: theta1
   I.27.6:
+    subset: "feynman"
     raw: 1/(1/d1+n/d2)
     prepared: 1/(1/v1+v3/v2)
     n_variables: 3
@@ -1041,6 +1069,7 @@ expressions:
       v0:
         name: foc
   I.29.4:
+    subset: "feynman"
     raw: omega/c
     prepared: v1/v2
     n_variables: 2
@@ -1067,6 +1096,7 @@ expressions:
       v0:
         name: k
   I.29.16:
+    subset: "feynman"
     raw: sqrt(x1**2+x2**2-2*x1*x2*cos(theta1-theta2))
     prepared: sqrt(v1**2+v2**2-2*v1*v2*cos(v3-v4))
     n_variables: 4
@@ -1109,6 +1139,7 @@ expressions:
       v0:
         name: x
   I.30.3:
+    subset: "feynman"
     raw: Int_0*sin(n*theta/2)**2/sin(theta/2)**2
     prepared: v1*sin(v3*v2/2)**2/sin(v2/2)**2
     n_variables: 3
@@ -1143,6 +1174,7 @@ expressions:
       v0:
         name: Int
   I.30.5:
+    subset: "feynman"
     raw: arcsin(lambd/(n*d))
     prepared: asin(v1/(v3*v2))
     n_variables: 3
@@ -1177,6 +1209,7 @@ expressions:
       v0:
         name: theta
   I.32.5:
+    subset: "feynman"
     raw: q**2*a**2/(6*pi*epsilon*c**3)
     prepared: v1**2*v2**2/(6*3.141592653589793*v3*v4**3)
     n_variables: 4
@@ -1219,6 +1252,7 @@ expressions:
       v0:
         name: Pwr
   I.32.17:
+    subset: "feynman"
     raw: (1/2*epsilon*c*Ef**2)*(8*pi*r**2/3)*(omega**4/(omega**2-omega_0**2)**2)
     prepared: (1/2*v1*v2*v3**2)*(8*3.141592653589793*v4**2/3)*(v5**4/(v5**2-v6**2)**2)
     n_variables: 6
@@ -1277,6 +1311,7 @@ expressions:
       v0:
         name: Pwr
   I.34.8:
+    subset: "feynman"
     raw: q*v*B/p
     prepared: v1*v2*v3/v4
     n_variables: 4
@@ -1319,6 +1354,7 @@ expressions:
       v0:
         name: omega
   I.34.1:
+    subset: "feynman"
     raw: omega_0/(1-v/c)
     prepared: v3/(1-v2/v1)
     n_variables: 3
@@ -1353,6 +1389,7 @@ expressions:
       v0:
         name: omega
   I.34.14:
+    subset: "feynman"
     raw: (1+v/c)/sqrt(1-v**2/c**2)*omega_0
     prepared: (1+v2/v1)/sqrt(1-v2**2/v1**2)*v3
     n_variables: 3
@@ -1387,6 +1424,7 @@ expressions:
       v0:
         name: omega
   I.34.27:
+    subset: "feynman"
     raw: (h/(2*pi))*omega
     prepared: (v2/(2*3.141592653589793))*v1
     n_variables: 2
@@ -1413,6 +1451,7 @@ expressions:
       v0:
         name: E_n
   I.37.4:
+    subset: "feynman"
     raw: I1+I2+2*sqrt(I1*I2)*cos(delta)
     prepared: v1+v2+2*sqrt(v1*v2)*cos(v3)
     n_variables: 3
@@ -1447,6 +1486,7 @@ expressions:
       v0:
         name: Int
   I.38.12:
+    subset: "feynman"
     raw: 4*pi*epsilon*(h/(2*pi))**2/(m*q**2)
     prepared: 4*3.141592653589793*v4*(v3/(2*3.141592653589793))**2/(v1*v2**2)
     n_variables: 4
@@ -1489,6 +1529,7 @@ expressions:
       v0:
         name: r
   I.39.1:
+    subset: "feynman"
     raw: 3/2*pr*V
     prepared: 3/2*v1*v2
     n_variables: 2
@@ -1515,6 +1556,7 @@ expressions:
       v0:
         name: E_n
   I.39.11:
+    subset: "feynman"
     raw: 1/(gamma-1)*pr*V
     prepared: 1/(v1-1)*v2*v3
     n_variables: 3
@@ -1549,6 +1591,7 @@ expressions:
       v0:
         name: E_n
   I.39.22:
+    subset: "feynman"
     raw: n*kb*T/V
     prepared: v1*v4*v2/v3
     n_variables: 4
@@ -1591,6 +1634,7 @@ expressions:
       v0:
         name: pr
   I.40.1:
+    subset: "feynman"
     raw: n_0*exp(-m*g*x/(kb*T))
     prepared: v1*exp(-v2*v5*v3/(v6*v4))
     n_variables: 6
@@ -1649,6 +1693,7 @@ expressions:
       v0:
         name: n
   I.41.16:
+    subset: "feynman"
     raw: h/(2*pi)*omega**3/(pi**2*c**2*(exp((h/(2*pi))*omega/(kb*T))-1))
     prepared: v3/(2*3.141592653589793)*v1**3/(3.141592653589793**2*v5**2*(exp((v3/(2*3.141592653589793))*v1/(v4*v2))-1))
     n_variables: 5
@@ -1699,6 +1744,7 @@ expressions:
       v0:
         name: L_rad
   I.43.16:
+    subset: "feynman"
     raw: mu_drift*q*Volt/d
     prepared: v1*v2*v3/v4
     n_variables: 4
@@ -1741,6 +1787,7 @@ expressions:
       v0:
         name: v
   I.43.31:
+    subset: "feynman"
     raw: mob*kb*T
     prepared: v1*v3*v2
     n_variables: 3
@@ -1775,6 +1822,7 @@ expressions:
       v0:
         name: D
   I.43.43:
+    subset: "feynman"
     raw: 1/(gamma-1)*kb*v/A
     prepared: 1/(v1-1)*v2*v4/v3
     n_variables: 4
@@ -1817,6 +1865,7 @@ expressions:
       v0:
         name: kappa
   I.44.4:
+    subset: "feynman"
     raw: n*kb*T*ln(V2/V1)
     prepared: v1*v2*v3*log(v5/v4)
     n_variables: 5
@@ -1867,6 +1916,7 @@ expressions:
       v0:
         name: E_n
   I.47.23:
+    subset: "feynman"
     raw: sqrt(gamma*pr/rho)
     prepared: sqrt(v1*v2/v3)
     n_variables: 3
@@ -1901,6 +1951,7 @@ expressions:
       v0:
         name: c
   I.48.2:
+    subset: "feynman"
     raw: m*c**2/sqrt(1-v**2/c**2)
     prepared: v1*v3**2/sqrt(1-v2**2/v3**2)
     n_variables: 3
@@ -1935,6 +1986,7 @@ expressions:
       v0:
         name: E_n
   I.50.26:
+    subset: "feynman"
     raw: x1*(cos(omega*t)+alpha*cos(omega*t)**2)
     prepared: v1*(cos(v2*v3)+v4*cos(v2*v3)**2)
     n_variables: 4
@@ -1977,6 +2029,7 @@ expressions:
       v0:
         name: x
   II.2.42:
+    subset: "feynman"
     raw: kappa*(T2-T1)*A/d
     prepared: v1*(v3-v2)*v4/v5
     n_variables: 5
@@ -2027,6 +2080,7 @@ expressions:
       v0:
         name: Pwr
   II.3.24:
+    subset: "feynman"
     raw: Pwr/(4*pi*r**2)
     prepared: v1/(4*3.141592653589793*v2**2)
     n_variables: 2
@@ -2053,6 +2107,7 @@ expressions:
       v0:
         name: flux
   II.4.23:
+    subset: "feynman"
     raw: q/(4*pi*epsilon*r)
     prepared: v1/(4*3.141592653589793*v2*v3)
     n_variables: 3
@@ -2087,6 +2142,7 @@ expressions:
       v0:
         name: Volt
   II.6.11:
+    subset: "feynman"
     raw: 1/(4*pi*epsilon)*p_d*cos(theta)/r**2
     prepared: 1/(4*3.141592653589793*v1)*v2*cos(v3)/v4**2
     n_variables: 4
@@ -2129,6 +2185,7 @@ expressions:
       v0:
         name: Volt
   II.6.15a:
+    subset: "feynman"
     raw: p_d/(4*pi*epsilon)*3*z/r**5*sqrt(x**2+y**2)
     prepared: v2/(4*3.141592653589793*v1)*3*v6/v3**5*sqrt(v4**2+v5**2)
     n_variables: 6
@@ -2187,6 +2244,7 @@ expressions:
       v0:
         name: Ef
   II.6.15b:
+    subset: "feynman"
     raw: p_d/(4*pi*epsilon)*3*cos(theta)*sin(theta)/r**3
     prepared: v2/(4*3.141592653589793*v1)*3*cos(v3)*sin(v3)/v4**3
     n_variables: 4
@@ -2229,6 +2287,7 @@ expressions:
       v0:
         name: Ef
   II.8.7:
+    subset: "feynman"
     raw: 3/5*q**2/(4*pi*epsilon*d)
     prepared: 3/5*v1**2/(4*3.141592653589793*v2*v3)
     n_variables: 3
@@ -2263,6 +2322,7 @@ expressions:
       v0:
         name: E_n
   II.8.31:
+    subset: "feynman"
     raw: epsilon*Ef**2/2
     prepared: v1*v2**2/2
     n_variables: 2
@@ -2289,6 +2349,7 @@ expressions:
       v0:
         name: E_den
   II.10.9:
+    subset: "feynman"
     raw: sigma_den/epsilon*1/(1+chi)
     prepared: v1/v2*1/(1+v3)
     n_variables: 3
@@ -2323,6 +2384,7 @@ expressions:
       v0:
         name: Ef
   II.11.3:
+    subset: "feynman"
     raw: q*Ef/(m*(omega_0**2-omega**2))
     prepared: v1*v2/(v3*(v4**2-v5**2))
     n_variables: 5
@@ -2373,6 +2435,7 @@ expressions:
       v0:
         name: x
   II.11.17:
+    subset: "feynman"
     raw: n_0*(1+p_d*Ef*cos(theta)/(kb*T))
     prepared: v1*(1+v5*v6*cos(v4)/(v2*v3))
     n_variables: 6
@@ -2431,6 +2494,7 @@ expressions:
       v0:
         name: n
   II.11.20:
+    subset: "feynman"
     raw: n_rho*p_d**2*Ef/(3*kb*T)
     prepared: v1*v2**2*v3/(3*v4*v5)
     n_variables: 5
@@ -2481,6 +2545,7 @@ expressions:
       v0:
         name: Pol
   II.11.27:
+    subset: "feynman"
     raw: n*alpha/(1-(n*alpha/3))*epsilon*Ef
     prepared: v1*v2/(1-(v1*v2/3))*v3*v4
     n_variables: 4
@@ -2523,6 +2588,7 @@ expressions:
       v0:
         name: Pol
   II.11.28:
+    subset: "feynman"
     raw: 1+n*alpha/(1-(n*alpha/3))
     prepared: 1+v1*v2/(1-(v1*v2/3))
     n_variables: 2
@@ -2549,6 +2615,7 @@ expressions:
       v0:
         name: theta
   II.13.17:
+    subset: "feynman"
     raw: 1/(4*pi*epsilon*c**2)*2*I/r
     prepared: 1/(4*3.141592653589793*v1*v2**2)*2*v3/v4
     n_variables: 4
@@ -2591,6 +2658,7 @@ expressions:
       v0:
         name: B
   II.13.23:
+    subset: "feynman"
     raw: rho_c_0/sqrt(1-v**2/c**2)
     prepared: v1/sqrt(1-v2**2/v3**2)
     n_variables: 3
@@ -2625,6 +2693,7 @@ expressions:
       v0:
         name: rho_c
   II.13.34:
+    subset: "feynman"
     raw: rho_c_0*v/sqrt(1-v**2/c**2)
     prepared: v1*v2/sqrt(1-v2**2/v3**2)
     n_variables: 3
@@ -2659,6 +2728,7 @@ expressions:
       v0:
         name: j
   II.15.4:
+    subset: "feynman"
     raw: -mom*B*cos(theta)
     prepared: -v1*v2*cos(v3)
     n_variables: 3
@@ -2693,6 +2763,7 @@ expressions:
       v0:
         name: E_n
   II.15.5:
+    subset: "feynman"
     raw: -p_d*Ef*cos(theta)
     prepared: -v1*v2*cos(v3)
     n_variables: 3
@@ -2727,6 +2798,7 @@ expressions:
       v0:
         name: E_n
   II.21.32:
+    subset: "feynman"
     raw: q/(4*pi*epsilon*r*(1-v/c))
     prepared: v1/(4*3.141592653589793*v2*v3*(1-v4/v5))
     n_variables: 5
@@ -2777,6 +2849,7 @@ expressions:
       v0:
         name: Volt
   II.24.17:
+    subset: "feynman"
     raw: sqrt(omega**2/c**2-pi**2/d**2)
     prepared: sqrt(v1**2/v2**2-3.141592653589793**2/v3**2)
     n_variables: 3
@@ -2811,6 +2884,7 @@ expressions:
       v0:
         name: k
   II.27.16:
+    subset: "feynman"
     raw: epsilon*c*Ef**2
     prepared: v1*v2*v3**2
     n_variables: 3
@@ -2845,6 +2919,7 @@ expressions:
       v0:
         name: flux
   II.27.18:
+    subset: "feynman"
     raw: epsilon*Ef**2
     prepared: v1*v2**2
     n_variables: 2
@@ -2871,6 +2946,7 @@ expressions:
       v0:
         name: E_den
   II.34.2a:
+    subset: "feynman"
     raw: q*v/(2*pi*r)
     prepared: v1*v2/(2*3.141592653589793*v3)
     n_variables: 3
@@ -2905,6 +2981,7 @@ expressions:
       v0:
         name: I
   II.34.2:
+    subset: "feynman"
     raw: q*v*r/2
     prepared: v1*v2*v3/2
     n_variables: 3
@@ -2939,6 +3016,7 @@ expressions:
       v0:
         name: mom
   II.34.11:
+    subset: "feynman"
     raw: g_*q*B/(2*m)
     prepared: v1*v2*v3/(2*v4)
     n_variables: 4
@@ -2981,6 +3059,7 @@ expressions:
       v0:
         name: omega
   II.34.29a:
+    subset: "feynman"
     raw: q*h/(4*pi*m)
     prepared: v1*v2/(4*3.141592653589793*v3)
     n_variables: 3
@@ -3015,6 +3094,7 @@ expressions:
       v0:
         name: mom
   II.34.29b:
+    subset: "feynman"
     raw: g_*mom*B*Jz/(h/(2*pi))
     prepared: v1*v4*v5*v3/(v2/(2*3.141592653589793))
     n_variables: 5
@@ -3065,6 +3145,7 @@ expressions:
       v0:
         name: E_n
   II.35.18:
+    subset: "feynman"
     raw: n_0/(exp(mom*B/(kb*T))+exp(-mom*B/(kb*T)))
     prepared: v1/(exp(v4*v5/(v2*v3))+exp(-v4*v5/(v2*v3)))
     n_variables: 5
@@ -3115,6 +3196,7 @@ expressions:
       v0:
         name: n
   II.35.21:
+    subset: "feynman"
     raw: n_rho*mom*tanh(mom*B/(kb*T))
     prepared: v1*v2*tanh(v2*v3/(v4*v5))
     n_variables: 5
@@ -3165,6 +3247,7 @@ expressions:
       v0:
         name: M
   II.36.38:
+    subset: "feynman"
     raw: mom*H/(kb*T)+(mom*alpha)/(epsilon*c**2*kb*T)*M
     prepared: v1*v2/(v3*v4)+(v1*v5)/(v6*v7**2*v3*v4)*v8
     n_variables: 8
@@ -3239,6 +3322,7 @@ expressions:
       v0:
         name: f
   II.37.1:
+    subset: "feynman"
     raw: mom*(1+chi)*B
     prepared: v1*(1+v3)*v2
     n_variables: 3
@@ -3273,6 +3357,7 @@ expressions:
       v0:
         name: E_n
   II.38.3:
+    subset: "feynman"
     raw: Y*A*x/d
     prepared: v1*v2*v4/v3
     n_variables: 4
@@ -3315,6 +3400,7 @@ expressions:
       v0:
         name: F
   II.38.14:
+    subset: "feynman"
     raw: Y/(2*(1+sigma))
     prepared: v1/(2*(1+v2))
     n_variables: 2
@@ -3341,6 +3427,7 @@ expressions:
       v0:
         name: mu_S
   III.4.32:
+    subset: "feynman"
     raw: 1/(exp((h/(2*pi))*omega/(kb*T))-1)
     prepared: 1/(exp((v1/(2*3.141592653589793))*v2/(v3*v4))-1)
     n_variables: 4
@@ -3383,6 +3470,7 @@ expressions:
       v0:
         name: n
   III.4.33:
+    subset: "feynman"
     raw: (h/(2*pi))*omega/(exp((h/(2*pi))*omega/(kb*T))-1)
     prepared: (v1/(2*3.141592653589793))*v2/(exp((v1/(2*3.141592653589793))*v2/(v3*v4))-1)
     n_variables: 4
@@ -3425,6 +3513,7 @@ expressions:
       v0:
         name: E_n
   III.7.38:
+    subset: "feynman"
     raw: 2*mom*B/(h/(2*pi))
     prepared: 2*v1*v2/(v3/(2*3.141592653589793))
     n_variables: 3
@@ -3459,6 +3548,7 @@ expressions:
       v0:
         name: omega
   III.8.54:
+    subset: "feynman"
     raw: sin(E_n*t/(h/(2*pi)))**2
     prepared: sin(v1*v2/(v3/(2*3.141592653589793)))**2
     n_variables: 3
@@ -3493,6 +3583,7 @@ expressions:
       v0:
         name: prob
   III.9.52:
+    subset: "feynman"
     raw: (p_d*Ef*t/(h/(2*pi)))*sin((omega-omega_0)*t/2)**2/((omega-omega_0)*t/2)**2
     prepared: (v1*v2*v3/(v4/(2*3.141592653589793)))*sin((v5-v6)*v3/2)**2/((v5-v6)*v3/2)**2
     n_variables: 6
@@ -3551,6 +3642,7 @@ expressions:
       v0:
         name: prob
   III.10.19:
+    subset: "feynman"
     raw: mom*sqrt(Bx**2+By**2+Bz**2)
     prepared: v1*sqrt(v2**2+v3**2+v4**2)
     n_variables: 4
@@ -3593,6 +3685,7 @@ expressions:
       v0:
         name: E_n
   III.12.43:
+    subset: "feynman"
     raw: n*(h/(2*pi))
     prepared: v1*(v2/(2*3.141592653589793))
     n_variables: 2
@@ -3619,6 +3712,7 @@ expressions:
       v0:
         name: L
   III.13.18:
+    subset: "feynman"
     raw: 2*E_n*d**2*k/(h/(2*pi))
     prepared: 2*v1*v2**2*v3/(v4/(2*3.141592653589793))
     n_variables: 4
@@ -3661,6 +3755,7 @@ expressions:
       v0:
         name: v
   III.14.14:
+    subset: "feynman"
     raw: I_0*(exp(q*Volt/(kb*T))-1)
     prepared: v1*(exp(v2*v3/(v4*v5))-1)
     n_variables: 5
@@ -3711,6 +3806,7 @@ expressions:
       v0:
         name: I
   III.15.12:
+    subset: "feynman"
     raw: 2*U*(1-cos(k*d))
     prepared: 2*v1*(1-cos(v2*v3))
     n_variables: 3
@@ -3745,6 +3841,7 @@ expressions:
       v0:
         name: E_n
   III.15.14:
+    subset: "feynman"
     raw: (h/(2*pi))**2/(2*E_n*d**2)
     prepared: (v1/(2*3.141592653589793))**2/(2*v2*v3**2)
     n_variables: 3
@@ -3779,6 +3876,7 @@ expressions:
       v0:
         name: m
   III.15.27:
+    subset: "feynman"
     raw: 2*pi*alpha/(n*d)
     prepared: 2*3.141592653589793*v1/(v2*v3)
     n_variables: 3
@@ -3813,6 +3911,7 @@ expressions:
       v0:
         name: k
   III.17.37:
+    subset: "feynman"
     raw: beta*(1+alpha*cos(theta))
     prepared: v1*(1+v2*cos(v3))
     n_variables: 3
@@ -3847,6 +3946,7 @@ expressions:
       v0:
         name: f
   III.19.51:
+    subset: "feynman"
     raw: -m*q**4/(2*(4*pi*epsilon)**2*(h/(2*pi))**2)*(1/n**2)
     prepared: -v1*v2**4/(2*(4*3.141592653589793*v5)**2*(v3/(2*3.141592653589793))**2)*(1/v4**2)
     n_variables: 5
@@ -3897,6 +3997,7 @@ expressions:
       v0:
         name: E_n
   III.21.20:
+    subset: "feynman"
     raw: -rho_c_0*q*A_vec/m
     prepared: -v1*v2*v3/v4
     n_variables: 4

@@ -1,10 +1,13 @@
 metadata:
   name: lasr-noisy-feynman-with-distractors
+  display_name: "lasr-noisy-feynman-with-distractors*"
   version: 1
-  tags: {"origin": "science formula", "tags": ["dummy inputs"]}
-  srbf_changes: [{"kind": "filled", "problems": 100, "text": "The paper adds 'random noise variables' without saying how many or how they are distributed, and the authors' released code switches them off for Feynman; srbf adds them with the authors' recipe from their other sets (pad to 11 inputs, extra inputs uniform on [1, 20]) and keeps the formula's own inputs in the first columns where that recipe shuffles the column order."}]
+  benchmark: "lasr"
+  tags: {"origin": "science formula", "tags": ["dummy inputs", "srbf-modified"]}
   license: "Apache-2.0 (trishullab/LibraryAugmentedSymbolicRegression.jl; Grayeli et al. 2024, arXiv:2409.09359)"
   citation: {"paper": {"short": "Grayeli et al. 2024", "title": "Symbolic Regression with a Learned Concept Library", "venue": "NeurIPS 2024", "url": "https://arxiv.org/abs/2409.09359"}, "data": {"short": "GitHub trishullab/LibraryAugmentedSymbolicRegression.jl@de6b22d", "title": "LaSR data/FeynmanEquations.csv + experiments dummy recipe (Apache-2.0)", "url": "https://github.com/trishullab/LibraryAugmentedSymbolicRegression.jl/blob/de6b22d5282e7de3432b0d52758a6ec3f583527d/data/FeynmanEquations.csv"}}
+  srbf_changes: [{"kind": "filled", "problems": 100, "text": "The paper adds 'random noise variables' without saying how many or how they are distributed, and the authors' released code switches them off for Feynman; srbf adds them with the authors' recipe from their other sets (pad to 11 inputs, extra inputs uniform on [1, 20]) and keeps the formula's own inputs in the first columns where that recipe shuffles the column order."}]
+  srbf_notes: ["Paper and code differ: The released code runs 97 of the 100 equations; srbf runs all 100, as the paper's results table does."]
   description: LaSR noisy Feynman with distractors
   sources:
   - https://arxiv.org/abs/2409.09359
@@ -25,17 +28,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/interrupted-7.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   I.6.2a:
+    subset: "noisy-feynman"
     raw: exp(-theta**2/2)/sqrt(2*pi)
     prepared: 0.3989422804014327*exp(-v1**2/2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: theta
@@ -142,10 +144,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.6.2:
+    subset: "noisy-feynman"
     raw: exp(-(theta/sigma)**2/2)/(sqrt(2*pi)*sigma)
     prepared: 0.3989422804014327*exp(-v2**2/(2*v1**2))/v1
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: sigma
@@ -252,10 +254,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.6.2b:
+    subset: "noisy-feynman"
     raw: exp(-((theta-theta1)/sigma)**2/2)/(sqrt(2*pi)*sigma)
     prepared: 0.3989422804014327*exp(-(v2 - v3)**2/(2*v1**2))/v1
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: sigma
@@ -362,10 +364,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.8.14:
+    subset: "noisy-feynman"
     raw: sqrt((x2-x1)**2+(y2-y1)**2)
     prepared: sqrt((-v1 + v2)**2 + (-v3 + v4)**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: x1
@@ -472,10 +474,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.9.18:
+    subset: "noisy-feynman"
     raw: G*m1*m2/((x2-x1)**2+(y2-y1)**2+(z2-z1)**2)
     prepared: v1*v2*v3/((-v4 + v5)**2 + (-v6 + v7)**2 + (-v8 + v9)**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m1
@@ -582,10 +584,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.10.7:
+    subset: "noisy-feynman"
     raw: m_0/sqrt(1-v**2/c**2)
     prepared: v1/sqrt(-v2**2/v3**2 + 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m_0
@@ -692,10 +694,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.11.19:
+    subset: "noisy-feynman"
     raw: x1*y1+x2*y2+x3*y3
     prepared: v1*v4 + v2*v5 + v3*v6
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: x1
@@ -802,10 +804,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.12.1:
+    subset: "noisy-feynman"
     raw: mu*Nn
     prepared: v1*v2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: mu
@@ -912,10 +914,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.12.2:
+    subset: "noisy-feynman"
     raw: q1*q2*r/(4*pi*epsilon*r**3)
     prepared: 0.07957747154594767*v1*v2/(v3*v4**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q1
@@ -1022,10 +1024,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.12.4:
+    subset: "noisy-feynman"
     raw: q1*r/(4*pi*epsilon*r**3)
     prepared: 0.07957747154594767*v1/(v2*v3**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q1
@@ -1132,10 +1134,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.12.5:
+    subset: "noisy-feynman"
     raw: q2*Ef
     prepared: v1*v2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q2
@@ -1242,10 +1244,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.12.11:
+    subset: "noisy-feynman"
     raw: q*(Ef+B*v*sin(theta))
     prepared: v1*(v2 + v3*v4*sin(v5))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -1351,10 +1353,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.13.4:
+    subset: "noisy-feynman"
     raw: 1/2*m*(v**2+u**2+w**2)
     prepared: v1*(v2**2 + v3**2 + v4**2)/2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m
@@ -1461,10 +1463,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.13.12:
+    subset: "noisy-feynman"
     raw: G*m1*m2*(1/r2-1/r1)
     prepared: v1*v2*v5*(1/v4 - 1/v3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m1
@@ -1571,10 +1573,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.14.3:
+    subset: "noisy-feynman"
     raw: m*g*z
     prepared: v1*v2*v3
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m
@@ -1681,10 +1683,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.14.4:
+    subset: "noisy-feynman"
     raw: 1/2*k_spring*x**2
     prepared: v1*v2**2/2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: k_spring
@@ -1791,10 +1793,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.15.3x:
+    subset: "noisy-feynman"
     raw: (x-u*t)/sqrt(1-u**2/c**2)
     prepared: (v1 - v2*v4)/sqrt(-v2**2/v3**2 + 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: x
@@ -1901,10 +1903,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.15.3t:
+    subset: "noisy-feynman"
     raw: (t-u*x/c**2)/sqrt(1-u**2/c**2)
     prepared: (-v1*v3/v2**2 + v4)/sqrt(1 - v3**2/v2**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: x
@@ -2011,10 +2013,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.15.1:
+    subset: "noisy-feynman"
     raw: m_0*v/sqrt(1-v**2/c**2)
     prepared: v1*v2/sqrt(-v2**2/v3**2 + 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m_0
@@ -2121,10 +2123,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.16.6:
+    subset: "noisy-feynman"
     raw: (u+v)/(1+u*v/c**2)
     prepared: (v2 + v3)/(1 + v2*v3/v1**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: c
@@ -2231,10 +2233,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.18.4:
+    subset: "noisy-feynman"
     raw: (m1*r1+m2*r2)/(m1+m2)
     prepared: (v1*v3 + v2*v4)/(v1 + v2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m1
@@ -2341,10 +2343,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.18.12:
+    subset: "noisy-feynman"
     raw: r*F*sin(theta)
     prepared: v1*v2*sin(v3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: r
@@ -2450,10 +2452,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.18.14:
+    subset: "noisy-feynman"
     raw: m*r*v*sin(theta)
     prepared: v1*v2*v3*sin(v4)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m
@@ -2560,10 +2562,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.24.6:
+    subset: "noisy-feynman"
     raw: 1/2*m*(omega**2+omega_0**2)*1/2*x**2
     prepared: v1*v4**2*(v2**2 + v3**2)/4
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m
@@ -2670,10 +2672,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.25.13:
+    subset: "noisy-feynman"
     raw: q/C
     prepared: v1/v2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -2779,10 +2781,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.26.2:
+    subset: "noisy-feynman"
     raw: asin(n*sin(theta2))
     prepared: asin(v1*sin(v2))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n
@@ -2889,10 +2891,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.27.6:
+    subset: "noisy-feynman"
     raw: 1/(1/d1+n/d2)
     prepared: 1/(v3/v2 + 1/v1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: d1
@@ -2999,10 +3001,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.29.4:
+    subset: "noisy-feynman"
     raw: omega/c
     prepared: v1/v2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: omega
@@ -3109,10 +3111,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.29.16:
+    subset: "noisy-feynman"
     raw: sqrt(x1**2+x2**2-2*x1*x2*cos(theta1-theta2))
     prepared: sqrt(v1**2 - 2*v1*v2*cos(v3 - v4) + v2**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: x1
@@ -3219,10 +3221,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.30.3:
+    subset: "noisy-feynman"
     raw: Int_0*sin(n*theta/2)**2/sin(theta/2)**2
     prepared: v1*sin(v2*v3/2)**2/sin(v2/2)**2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: Int_0
@@ -3329,10 +3331,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.30.5:
+    subset: "noisy-feynman"
     raw: asin(lambd/(n*d))
     prepared: asin(v1/(v2*v3))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: lambd
@@ -3439,10 +3441,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.32.5:
+    subset: "noisy-feynman"
     raw: q**2*a**2/(6*pi*epsilon*c**3)
     prepared: 0.05305164769729845*v1**2*v2**2/(v3*v4**3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -3549,10 +3551,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.32.17:
+    subset: "noisy-feynman"
     raw: (1/2*epsilon*c*Ef**2)*(8*pi*r**2/3)*(omega**4/(omega**2-omega_0**2)**2)
     prepared: 4.188790204786391*v1*v2*v3**2*v4**2*v5**4/(v5**2 - v6**2)**2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: epsilon
@@ -3659,10 +3661,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.34.8:
+    subset: "noisy-feynman"
     raw: q*v*B/p
     prepared: v1*v2*v3/v4
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -3768,10 +3770,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.34.1:
+    subset: "noisy-feynman"
     raw: omega_0/(1-v/c)
     prepared: v3/(1 - v2/v1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: c
@@ -3878,10 +3880,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.34.14:
+    subset: "noisy-feynman"
     raw: (1+v/c)/sqrt(1-v**2/c**2)*omega_0
     prepared: v3*(1 + v2/v1)/sqrt(1 - v2**2/v1**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: c
@@ -3988,10 +3990,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.34.27:
+    subset: "noisy-feynman"
     raw: (h/(2*pi))*omega
     prepared: 0.1591549430918953*v1*v2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: omega
@@ -4098,10 +4100,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.37.4:
+    subset: "noisy-feynman"
     raw: I1+I2+2*sqrt(I1*I2)*cos(delta)
     prepared: v1 + v2 + 2*sqrt(v1*v2)*cos(v3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: I1
@@ -4208,10 +4210,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.38.12:
+    subset: "noisy-feynman"
     raw: 4*pi*epsilon*(h/(2*pi))**2/(m*q**2)
     prepared: 0.3183098861837907*v3**2*v4/(v1*v2**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m
@@ -4318,10 +4320,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.39.1:
+    subset: "noisy-feynman"
     raw: 3/2*pr*V
     prepared: 3*v1*v2/2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: pr
@@ -4428,10 +4430,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.39.11:
+    subset: "noisy-feynman"
     raw: 1/(gamma-1)*pr*V
     prepared: v2*v3/(v1 - 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: gamma
@@ -4538,10 +4540,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.39.22:
+    subset: "noisy-feynman"
     raw: n*kb*T/V
     prepared: v1*v2*v4/v3
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n
@@ -4648,10 +4650,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.40.1:
+    subset: "noisy-feynman"
     raw: n_0*exp(-m*g*x/(kb*T))
     prepared: v1*exp(-v2*v3*v5/(v4*v6))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n_0
@@ -4758,10 +4760,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.41.16:
+    subset: "noisy-feynman"
     raw: h/(2*pi)*omega**3/(pi**2*c**2*(exp((h/(2*pi))*omega/(kb*T))-1))
     prepared: 0.01612576721659975*v1**3*v3/(v5**2*(exp(0.1591549430918953*v1*v3/(v2*v4)) - 1))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: omega
@@ -4868,10 +4870,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.43.16:
+    subset: "noisy-feynman"
     raw: mu_drift*q*Volt/d
     prepared: v1*v2*v3/v4
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: mu_drift
@@ -4978,10 +4980,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.43.31:
+    subset: "noisy-feynman"
     raw: mob*kb*T
     prepared: v1*v2*v3
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: mob
@@ -5088,10 +5090,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.43.43:
+    subset: "noisy-feynman"
     raw: 1/(gamma-1)*kb*v/A
     prepared: v2*v4/(v3*(v1 - 1))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: gamma
@@ -5197,10 +5199,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.44.4:
+    subset: "noisy-feynman"
     raw: n*kb*T*log(V2/V1)
     prepared: v1*v2*v3*log(v5/v4)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n
@@ -5307,10 +5309,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.47.23:
+    subset: "noisy-feynman"
     raw: sqrt(gamma*pr/rho)
     prepared: sqrt(v1*v2/v3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: gamma
@@ -5417,10 +5419,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.48.2:
+    subset: "noisy-feynman"
     raw: m*c**2/sqrt(1-v**2/c**2)
     prepared: v1*v3**2/sqrt(-v2**2/v3**2 + 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m
@@ -5527,10 +5529,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.50.26:
+    subset: "noisy-feynman"
     raw: x1*(cos(omega*t)+alpha*cos(omega*t)**2)
     prepared: v1*(v4*cos(v2*v3)**2 + cos(v2*v3))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: x1
@@ -5637,10 +5639,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.2.42:
+    subset: "noisy-feynman"
     raw: kappa*(T2-T1)*A/d
     prepared: v1*v4*(-v2 + v3)/v5
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: kappa
@@ -5746,10 +5748,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.3.24:
+    subset: "noisy-feynman"
     raw: Pwr/(4*pi*r**2)
     prepared: 0.07957747154594767*v1/v2**2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: Pwr
@@ -5856,10 +5858,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.4.23:
+    subset: "noisy-feynman"
     raw: q/(4*pi*epsilon*r)
     prepared: 0.07957747154594767*v1/(v2*v3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -5966,10 +5968,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.6.11:
+    subset: "noisy-feynman"
     raw: 1/(4*pi*epsilon)*p_d*cos(theta)/r**2
     prepared: 0.07957747154594767*v2*cos(v3)/(v1*v4**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: epsilon
@@ -6076,10 +6078,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.6.15a:
+    subset: "noisy-feynman"
     raw: p_d/(4*pi*epsilon)*3*z/r**5*sqrt(x**2+y**2)
     prepared: 0.238732414637843*v2*v6*sqrt(v4**2 + v5**2)/(v1*v3**5)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: epsilon
@@ -6186,10 +6188,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.6.15b:
+    subset: "noisy-feynman"
     raw: p_d/(4*pi*epsilon)*3*cos(theta)*sin(theta)/r**3
     prepared: 0.238732414637843*v2*sin(v3)*cos(v3)/(v1*v4**3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: epsilon
@@ -6296,10 +6298,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.8.7:
+    subset: "noisy-feynman"
     raw: 3/5*q**2/(4*pi*epsilon*d)
     prepared: 0.04774648292756861*v1**2/(v2*v3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -6406,10 +6408,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.8.31:
+    subset: "noisy-feynman"
     raw: epsilon*Ef**2/2
     prepared: v1*v2**2/2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: epsilon
@@ -6516,10 +6518,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.10.9:
+    subset: "noisy-feynman"
     raw: sigma_den/epsilon*1/(1+chi)
     prepared: v1/(v2*(v3 + 1))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: sigma_den
@@ -6626,10 +6628,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.3:
+    subset: "noisy-feynman"
     raw: q*Ef/(m*(omega_0**2-omega**2))
     prepared: v1*v2/(v3*(v4**2 - v5**2))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -6736,10 +6738,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.17:
+    subset: "noisy-feynman"
     raw: n_0*(1+p_d*Ef*cos(theta)/(kb*T))
     prepared: v1*(1 + v5*v6*cos(v4)/(v2*v3))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n_0
@@ -6846,10 +6848,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.20:
+    subset: "noisy-feynman"
     raw: n_rho*p_d**2*Ef/(3*kb*T)
     prepared: v1*v2**2*v3/(3*v4*v5)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n_rho
@@ -6956,10 +6958,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.27:
+    subset: "noisy-feynman"
     raw: n*alpha/(1-(n*alpha/3))*epsilon*Ef
     prepared: v1*v2*v3*v4/(-v1*v2/3 + 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n
@@ -7066,10 +7068,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.11.28:
+    subset: "noisy-feynman"
     raw: 1+n*alpha/(1-(n*alpha/3))
     prepared: v1*v2/(-v1*v2/3 + 1) + 1
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n
@@ -7176,10 +7178,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.13.17:
+    subset: "noisy-feynman"
     raw: 1/(4*pi*epsilon*c**2)*2*I/r
     prepared: 0.1591549430918953*v3/(v1*v2**2*v4)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: epsilon
@@ -7286,10 +7288,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.13.23:
+    subset: "noisy-feynman"
     raw: rho_c_0/sqrt(1-v**2/c**2)
     prepared: v1/sqrt(-v2**2/v3**2 + 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: rho_c_0
@@ -7396,10 +7398,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.13.34:
+    subset: "noisy-feynman"
     raw: rho_c_0*v/sqrt(1-v**2/c**2)
     prepared: v1*v2/sqrt(-v2**2/v3**2 + 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: rho_c_0
@@ -7506,10 +7508,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.15.4:
+    subset: "noisy-feynman"
     raw: -mom*B*cos(theta)
     prepared: -v1*v2*cos(v3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: mom
@@ -7615,10 +7617,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.15.5:
+    subset: "noisy-feynman"
     raw: -p_d*Ef*cos(theta)
     prepared: -v1*v2*cos(v3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: p_d
@@ -7725,10 +7727,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.21.32:
+    subset: "noisy-feynman"
     raw: q/(4*pi*epsilon*r*(1-v/c))
     prepared: 0.07957747154594767*v1/(v2*v3*(-v4/v5 + 1))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -7835,10 +7837,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.24.17:
+    subset: "noisy-feynman"
     raw: sqrt(omega**2/c**2-pi**2/d**2)
     prepared: sqrt(v1**2/v2**2 - 9.869604401089357/v3**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: omega
@@ -7945,10 +7947,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.27.16:
+    subset: "noisy-feynman"
     raw: epsilon*c*Ef**2
     prepared: v1*v2*v3**2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: epsilon
@@ -8055,10 +8057,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.27.18:
+    subset: "noisy-feynman"
     raw: epsilon*Ef**2
     prepared: v1*v2**2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: epsilon
@@ -8165,10 +8167,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.34.2a:
+    subset: "noisy-feynman"
     raw: q*v/(2*pi*r)
     prepared: 0.1591549430918953*v1*v2/v3
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -8275,10 +8277,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.34.2:
+    subset: "noisy-feynman"
     raw: q*v*r/2
     prepared: v1*v2*v3/2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -8385,10 +8387,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.34.11:
+    subset: "noisy-feynman"
     raw: g_*q*B/(2*m)
     prepared: v1*v2*v3/(2*v4)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: g_
@@ -8494,10 +8496,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.34.29a:
+    subset: "noisy-feynman"
     raw: q*h/(4*pi*m)
     prepared: 0.07957747154594767*v1*v2/v3
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: q
@@ -8604,10 +8606,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.34.29b:
+    subset: "noisy-feynman"
     raw: g_*mom*B*Jz/(h/(2*pi))
     prepared: 6.283185307179586*v1*v3*v4*v5/v2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: g_
@@ -8713,10 +8715,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.35.18:
+    subset: "noisy-feynman"
     raw: n_0/(exp(mom*B/(kb*T))+exp(-mom*B/(kb*T)))
     prepared: v1/(exp(v4*v5/(v2*v3)) + exp(-v4*v5/(v2*v3)))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n_0
@@ -8822,10 +8824,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.35.21:
+    subset: "noisy-feynman"
     raw: n_rho*mom*tanh(mom*B/(kb*T))
     prepared: v1*v2*tanh(v2*v3/(v4*v5))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n_rho
@@ -8931,10 +8933,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.36.38:
+    subset: "noisy-feynman"
     raw: mom*H/(kb*T)+(mom*alpha)/(epsilon*c**2*kb*T)*M
     prepared: v1*v2/(v3*v4) + v1*v5*v8/(v3*v4*v6*v7**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: mom
@@ -9041,10 +9043,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.37.1:
+    subset: "noisy-feynman"
     raw: mom*(1+chi)*B
     prepared: v1*v2*(v3 + 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: mom
@@ -9150,10 +9152,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.38.3:
+    subset: "noisy-feynman"
     raw: Y*A*x/d
     prepared: v1*v2*v4/v3
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: Y
@@ -9259,10 +9261,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   II.38.14:
+    subset: "noisy-feynman"
     raw: Y/(2*(1+sigma))
     prepared: v1/(2*v2 + 2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: Y
@@ -9369,10 +9371,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.4.32:
+    subset: "noisy-feynman"
     raw: 1/(exp((h/(2*pi))*omega/(kb*T))-1)
     prepared: 1/(exp(0.1591549430918953*v1*v2/(v3*v4)) - 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: h
@@ -9479,10 +9481,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.4.33:
+    subset: "noisy-feynman"
     raw: (h/(2*pi))*omega/(exp((h/(2*pi))*omega/(kb*T))-1)
     prepared: 0.1591549430918953*v1*v2/(exp(0.1591549430918953*v1*v2/(v3*v4)) - 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: h
@@ -9589,10 +9591,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.7.38:
+    subset: "noisy-feynman"
     raw: 2*mom*B/(h/(2*pi))
     prepared: 12.56637061435917*v1*v2/v3
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: mom
@@ -9698,10 +9700,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.8.54:
+    subset: "noisy-feynman"
     raw: sin(E_n*t/(h/(2*pi)))**2
     prepared: sin(6.283185307179586*v1*v2/v3)**2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: E_n
@@ -9808,10 +9810,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.9.52:
+    subset: "noisy-feynman"
     raw: (p_d*Ef*t/(h/(2*pi)))*sin((omega-omega_0)*t/2)**2/((omega-omega_0)*t/2)**2
     prepared: 25.13274122871834*v1*v2*sin(v3*(v5 - v6)/2)**2/(v3*v4*(v5 - v6)**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: p_d
@@ -9918,10 +9920,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.10.19:
+    subset: "noisy-feynman"
     raw: mom*sqrt(Bx**2+By**2+Bz**2)
     prepared: v1*sqrt(v2**2 + v3**2 + v4**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: mom
@@ -10028,10 +10030,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.12.43:
+    subset: "noisy-feynman"
     raw: n*(h/(2*pi))
     prepared: 0.1591549430918953*v1*v2
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: n
@@ -10138,10 +10140,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.13.18:
+    subset: "noisy-feynman"
     raw: 2*E_n*d**2*k/(h/(2*pi))
     prepared: 12.56637061435917*v1*v2**2*v3/v4
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: E_n
@@ -10248,10 +10250,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.14.14:
+    subset: "noisy-feynman"
     raw: I_0*(exp(q*Volt/(kb*T))-1)
     prepared: v1*(exp(v2*v3/(v4*v5)) - 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: I_0
@@ -10358,10 +10360,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.15.12:
+    subset: "noisy-feynman"
     raw: 2*U*(1-cos(k*d))
     prepared: 2*v1*(1 - cos(v2*v3))
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: U
@@ -10468,10 +10470,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.15.14:
+    subset: "noisy-feynman"
     raw: (h/(2*pi))**2/(2*E_n*d**2)
     prepared: 0.01266514795529222*v1**2/(v2*v3**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: h
@@ -10578,10 +10580,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.15.27:
+    subset: "noisy-feynman"
     raw: 2*pi*alpha/(n*d)
     prepared: 6.283185307179586*v1/(v2*v3)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: alpha
@@ -10688,10 +10690,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.17.37:
+    subset: "noisy-feynman"
     raw: beta*(1+alpha*cos(theta))
     prepared: v1*(v2*cos(v3) + 1)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: beta
@@ -10798,10 +10800,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.19.51:
+    subset: "noisy-feynman"
     raw: -m*q**4/(2*(4*pi*epsilon)**2*(h/(2*pi))**2)*(1/n**2)
     prepared: -0.125*v1*v2**4/(v3**2*v4**2*v5**2)
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: m
@@ -10908,10 +10910,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.21.20:
+    subset: "noisy-feynman"
     raw: -rho_c_0*q*A_vec/m
     prepared: -v1*v2*v3/v4
     n_variables: 11
-    subset: all
     vars:
       v1:
         name: rho_c_0

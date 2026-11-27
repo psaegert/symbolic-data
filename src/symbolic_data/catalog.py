@@ -510,6 +510,28 @@ class ProblemCatalog(Catalog):
         return cache[entry.id]
 
 
+def catalog_metadata(ref: str | Path, *, install: bool = True, repo_id: str | None = None) -> dict[str, Any]:
+    """A catalog's metadata without its problems: a yaml's ``metadata`` block, read up to its ``expressions`` block,
+    or a frozen npz's catalog record (``name``, ``version`` and its ``meta``), read from the ``_meta`` member alone.
+
+    For readers that need only catalog-level fields (``benchmark``, ``tags``, ``license``, ...): it parses no entries
+    and loads no arrays (milliseconds, where loading a large catalog takes seconds). ``ref`` resolves as in
+    :func:`load_catalog`."""
+    path = Path(ref) if Path(str(ref)).exists() else Path(resolve(str(ref), install=install, repo_id=repo_id).path)
+    if path.suffix == ".npz":
+        with np.load(path, allow_pickle=False) as data:
+            cat = json.loads(str(data["_meta"].item()))["catalog"]
+        return {**(cat.get("meta") or {}), "name": cat["name"], "version": cat.get("version")}
+    head: list[str] = []
+    with open(path, encoding="utf-8") as handle:
+        for line in handle:
+            if line.startswith("expressions:"):
+                break
+            head.append(line)
+    doc = yaml.safe_load("".join(head)) or {}
+    return dict(doc.get("metadata") or {})
+
+
 def load_catalog(ref: str = "fastsrb", *, install: bool = True, repo_id: str | None = None) -> ProblemCatalog:
     """Load a :class:`ProblemCatalog` by reference.
 

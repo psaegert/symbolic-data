@@ -1,10 +1,12 @@
 metadata:
   name: dgsr-synthetic-d-12
   version: 1
+  benchmark: "dgsr"
   tags: {"origin": "generated formulas", "tags": []}
-  srbf_changes: []
   license: "BSD-3-Clause (benchmarks.csv, DSO fork in samholt/DeepGenerativeSymbolicRegression; Holt et al. 2023, arXiv:2401.00282)"
   citation: {"paper": {"short": "Holt et al. 2023", "title": "Deep Generative Symbolic Regression", "venue": "ICLR 2023", "url": "https://arxiv.org/abs/2401.00282"}, "data": {"short": "GitHub samholt/DeepGenerativeSymbolicRegression@5dbf04d", "title": "DGSR benchmarks.csv (DSO fork in the authors' repository)", "url": "https://github.com/samholt/DeepGenerativeSymbolicRegression/blob/5dbf04d413b2e67f7431407dfbd2597215723ca8/libs/sd3/dso/dso/task/regression/benchmarks.csv"}}
+  srbf_changes: []
+  srbf_notes: ["Paper and code differ: Paper and code disagree on 6 of the 7 formulas; srbf uses the code's rows, which the published runs used."]
   description: DGSR synthetic d=12
   sources:
   - https://arxiv.org/abs/2401.00282
@@ -23,17 +25,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-86.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   l_cd_12_1:
+    subset: "synthetic-d-12"
     raw: x12+x9*(x10+x11)*(x1+x2+x3+x4+x5+x6+x7*x8)
     prepared: v12 + v9*(v10 + v11)*(v1 + v2 + v3 + v4 + v5 + v6 + v7*v8)
     n_variables: 12
-    subset: all
     vars:
       v1:
         name: x1
@@ -149,10 +150,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   l_cd_12_2:
+    subset: "synthetic-d-12"
     raw: x10+x11+x12+x3*(x1+x2)*(x4*x5+x6)+x7+x8+x9
     prepared: v10 + v11 + v12 + v3*(v1 + v2)*(v4*v5 + v6) + v7 + v8 + v9
     n_variables: 12
-    subset: all
     vars:
       v1:
         name: x1
@@ -268,10 +269,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   l_cd_12_4:
+    subset: "synthetic-d-12"
     raw: x10*x9*(x1+x2+x3+x4+x5+x6+x7+x8)+x11+x12
     prepared: v10*v9*(v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8) + v11 + v12
     n_variables: 12
-    subset: all
     vars:
       v1:
         name: x1
@@ -387,10 +388,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   l_cd_12_13:
+    subset: "synthetic-d-12"
     raw: x8*(x6+x7)*(x10+x11*x12+x9)*(x1+x2+x3+x4+x5)
     prepared: v8*(v6 + v7)*(v10 + v11*v12 + v9)*(v1 + v2 + v3 + v4 + v5)
     n_variables: 12
-    subset: all
     vars:
       v1:
         name: x1
@@ -506,10 +507,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   l_cd_12_11:
+    subset: "synthetic-d-12"
     raw: x10+x11+x12+x9*(x1+x2+x3+x4+x5+x6+x7+x8)
     prepared: v10 + v11 + v12 + v9*(v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8)
     n_variables: 12
-    subset: all
     vars:
       v1:
         name: x1
@@ -625,10 +626,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   l_cd_12_45:
+    subset: "synthetic-d-12"
     raw: x1*(x10-x11-x12+x2+x3+x4+x5+x6+x7+x8+x9)
     prepared: v1*(v10 - v11 - v12 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9)
     n_variables: 12
-    subset: all
     vars:
       v1:
         name: x1
@@ -744,10 +745,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   l_cd_12_67:
+    subset: "synthetic-d-12"
     raw: x1*x2-x11*(-x10+x6+x7+x8-x9)+x12+x3+x4+x5
     prepared: v1*v2 - v11*(-v10 + v6 + v7 + v8 - v9) + v12 + v3 + v4 + v5
     n_variables: 12
-    subset: all
     vars:
       v1:
         name: x1

@@ -1,10 +1,13 @@
 metadata:
   name: shape-constrained-sr-synthetic
-  version: 1
-  tags: {"origin": "science formula", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 12, "text": "srbf runs 7 of the 19 problems: the other 12 are identical to problems in srbf's Feynman sets."}, {"kind": "changed", "problems": 7, "text": "srbf does not check the shape constraints that the authors set for each problem."}]
+  display_name: "shape-constrained-sr-synthetic*"
+  version: 2
+  benchmark: "shape-constrained-sr"
+  tags: {"origin": "science formula", "tags": ["srbf-modified"]}
   license: "facts only: formulas and input spaces cited from Kronberger et al. 2022 (Evol. Comput. 30(1):75, arXiv:2103.15624); no upstream license"
   citation: {"paper": {"short": "Kronberger et al. 2022", "title": "Shape-Constrained Symbolic Regression—Improving Extrapolation with Prior Knowledge", "venue": "Evolutionary Computation 30(1):75-98", "url": "https://doi.org/10.1162/evco_a_00294"}}
+  srbf_changes: [{"kind": "changed", "problems": 7, "text": "srbf does not check the shape constraints that the authors set for each problem."}]
+  srbf_notes: ["Paper and code differ: The three FDE problems use the boxes and formulas of the authors' generators (HeuristicLab), which produced the data (Flow psi with sin(pi theta/180)); the paper's tables print wider input spaces and sin(theta/(2 pi))."]
   description: Shape-constrained SR synthetic (FDE + FEY)
   sources:
   - https://arxiv.org/abs/2103.15624
@@ -29,17 +32,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-49.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   Aircraft lift:
+    subset: "FDE"
     raw: C_La*(alpha + 2) + C_Lde*delta_e*S_HT/S_ref
     prepared: v1*(v2 + 2) + v3*v4*v5/v6
     n_variables: 6
-    subset: all
     vars:
       v1:
         name: C_La
@@ -101,10 +103,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Flow psi:
+    subset: "FDE"
     raw: V_inf*r*sin(pi*theta/180)*(1 - (R/r)**2) + Gamma/(2*pi)*log(r/R)
     prepared: v1*v3*(1 - v4**2/v3**2)*sin(3.141592653589793*v2/180) + (1/(2*3.141592653589793))*v5*log(v3/v4)
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: V_inf
@@ -157,10 +159,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   Fuel flow:
+    subset: "FDE"
     raw: p0*A_star/sqrt(T0)*sqrt(1.4/287*(2/(1 + 1.4))**((1.4 + 1)/(1.4 - 1)))
     prepared: v1*v2*(0.0698430295769578*(2/(1 + 1.4))**((1 + 1.4)/(2*(1.4 - 1*1))))/sqrt(v3)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: p0
@@ -195,10 +197,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.41.16:
+    subset: "FEY"
     raw: h*omega**3/(pi**2*c**2*(exp(h*omega/(kb*T)) - 1))
     prepared: v1**3*v3/(3.141592653589793**2*v5**2*(exp(v1*v3/(v2*v4)) - 1))
     n_variables: 5
-    subset: all
     vars:
       v1:
         name: omega
@@ -251,10 +253,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   III.9.52:
+    subset: "FEY"
     raw: p_d*Ef*t/h*sin((omega - omega_0)*t/2)**2/((omega - omega_0)*t/2)**2
     prepared: 4*v1*v2*sin(v3*(v5 - v6)/2)**2/(v3*v4*(v5 - v6)**2)
     n_variables: 6
-    subset: all
     vars:
       v1:
         name: p_d
@@ -316,10 +318,10 @@ expressions:
     meta:
       finite_fraction: 1.0
   I.30.5:
+    subset: "FEY"
     raw: asin(lambd/(n*d))
     prepared: asin(v1/(v2*v3))
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: lambd
@@ -354,10 +356,10 @@ expressions:
     meta:
       finite_fraction: 0.9645
   I.48.20:
+    subset: "FEY"
     raw: m*c**2/sqrt(1 - v**2/c**2)
     prepared: v1*v3**2/sqrt(-v2**2/v3**2 + 1)
     n_variables: 3
-    subset: all
     vars:
       v1:
         name: m
@@ -390,4 +392,631 @@ expressions:
       v: uniform U[1,2]
       c: uniform U[3,20] (as printed in Table 6)
     meta:
+      finite_fraction: 1.0
+  Jackson 2.11:
+    subset: "FEY"
+    raw: q/(4*pi*epsilon*y**2)*(4*pi*epsilon*Volt*d-q*d*y**3/(y**2-d**2)**2)
+    prepared: v1/(4*3.141592653589793*v5*v2**2)*(4*3.141592653589793*v5*v3*v4-v1*v4*v2**3/(v2**2-v4**2)**2)
+    n_variables: 5
+    sources:
+    - Feynman Symbolic Regression Database BONUS set (Udrescu & Tegmark 2020, Science Advances 6(16):eaay2631)
+    - BonusEquations.csv vendored from WassimTenachi/PhySO (MIT, commit bfbfa88) — the canonical surviving copy (the original
+      space.mit.edu host is dead); see assets/upstream/feynman_bonus/NOTICE
+    vars:
+      v1:
+        name: q
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: y
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: Volt
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: d
+        sample_range:
+        - 4.0
+        - 6.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: epsilon
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: F
+    meta:
+      bonus_filename: test_12
+      bonus_name: 2.11 Jackson
+      base_catalog: fastsrb@1
+      base_eq_id: B12
+      variables_count_corrected: 4->5
+      same_as: feynman-bonus:B12
+      finite_fraction: 1.0
+  Wave power:
+    subset: "FEY"
+    raw: -32/5*G**4/c**5*(m1*m2)**2*(m1+m2)/r**5
+    prepared: -32/5*v1**4/v2**5*(v3*v4)**2*(v3+v4)/v5**5
+    n_variables: 5
+    sources:
+    - Feynman Symbolic Regression Database BONUS set (Udrescu & Tegmark 2020, Science Advances 6(16):eaay2631)
+    - BonusEquations.csv vendored from WassimTenachi/PhySO (MIT, commit bfbfa88) — the canonical surviving copy (the original
+      space.mit.edu host is dead); see assets/upstream/feynman_bonus/NOTICE
+    vars:
+      v1:
+        name: G
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: m1
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: m2
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: r
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: Pwr
+    meta:
+      bonus_filename: test_9
+      bonus_name: Gravitational wave ratiated power
+      base_catalog: fastsrb@1
+      base_eq_id: B9
+      same_as: feynman-bonus:B9
+      finite_fraction: 1.0
+  I.6.20:
+    subset: "FEY"
+    raw: exp(-(theta/sigma)**2/2)/(sqrt(2*pi)*sigma)
+    prepared: exp(-(v2/v1)**2/2)/(sqrt(2*3.141592653589793)*v1)
+    n_variables: 2
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: sigma
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: theta
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: f
+    meta:
+      same_as: feynman:I.6.2
+      finite_fraction: 1.0
+  I.9.18:
+    subset: "FEY"
+    raw: G*m1*m2/((x2-x1)**2+(y2-y1)**2+(z2-z1)**2)
+    prepared: v3*v1*v2/((v5-v4)**2+(v7-v6)**2+(v9-v8)**2)
+    n_variables: 9
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: m1
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: m2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: G
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x1
+        sample_range:
+        - 3.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: x2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: y1
+        sample_range:
+        - 3.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v7:
+        name: y2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v8:
+        name: z1
+        sample_range:
+        - 3.0
+        - 4.0
+        sample_type:
+        - uni
+        - pos
+      v9:
+        name: z2
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: F
+    meta:
+      same_as: feynman:I.9.18
+      finite_fraction: 1.0
+  I.15.3x:
+    subset: "FEY"
+    raw: (x-u*t)/sqrt(1-u**2/c**2)
+    prepared: (v1-v2*v4)/sqrt(1-v2**2/v3**2)
+    n_variables: 4
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 5.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: u
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: c
+        sample_range:
+        - 3.0
+        - 20.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: t
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: x1
+    meta:
+      same_as: feynman:I.15.3x
+      finite_fraction: 1.0
+  I.15.3t:
+    subset: "FEY"
+    raw: (t-u*x/c**2)/sqrt(1-u**2/c**2)
+    prepared: (v4-v3*v1/v2**2)/sqrt(1-v3**2/v2**2)
+    n_variables: 4
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: x
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 3.0
+        - 10.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: u
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: t
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: t1
+    meta:
+      same_as: feynman:I.15.3t
+      finite_fraction: 1.0
+  I.32.17:
+    subset: "FEY"
+    raw: (1/2*epsilon*c*Ef**2)*(8*pi*r**2/3)*(omega**4/(omega**2-omega_0**2)**2)
+    prepared: (1/2*v1*v2*v3**2)*(8*3.141592653589793*v4**2/3)*(v5**4/(v5**2-v6**2)**2)
+    n_variables: 6
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: epsilon
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: c
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: Ef
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: r
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: omega
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: omega_0
+        sample_range:
+        - 3.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: Pwr
+    meta:
+      same_as: feynman:I.32.17
+      finite_fraction: 1.0
+  II.6.15a:
+    subset: "FEY"
+    raw: p_d/(4*pi*epsilon)*3*z/r**5*sqrt(x**2+y**2)
+    prepared: v2/(4*3.141592653589793*v1)*3*v6/v3**5*sqrt(v4**2+v5**2)
+    n_variables: 6
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: epsilon
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: p_d
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: r
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: x
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: y
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v6:
+        name: z
+        sample_range:
+        - 1.0
+        - 3.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: Ef
+    meta:
+      same_as: feynman:II.6.15a
+      finite_fraction: 1.0
+  II.11.27:
+    subset: "FEY"
+    raw: n*alpha/(1-(n*alpha/3))*epsilon*Ef
+    prepared: v1*v2/(1-(v1*v2/3))*v3*v4
+    n_variables: 4
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: n
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: alpha
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: epsilon
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: Ef
+        sample_range:
+        - 1.0
+        - 2.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: Pol
+    meta:
+      same_as: feynman:II.11.27
+      finite_fraction: 1.0
+  II.11.28:
+    subset: "FEY"
+    raw: 1+n*alpha/(1-(n*alpha/3))
+    prepared: 1+v1*v2/(1-(v1*v2/3))
+    n_variables: 2
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: n
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: alpha
+        sample_range:
+        - 0.0
+        - 1.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: theta
+    meta:
+      same_as: feynman:II.11.28
+      finite_fraction: 1.0
+  II.35.21:
+    subset: "FEY"
+    raw: n_rho*mom*tanh(mom*B/(kb*T))
+    prepared: v1*v2*tanh(v2*v3/(v4*v5))
+    n_variables: 5
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: n_rho
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: mom
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: B
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: kb
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v5:
+        name: T
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: M
+    meta:
+      same_as: feynman:II.35.21
+      finite_fraction: 1.0
+  III.10.19:
+    subset: "FEY"
+    raw: mom*sqrt(Bx**2+By**2+Bz**2)
+    prepared: v1*sqrt(v2**2+v3**2+v4**2)
+    n_variables: 4
+    sources:
+    - Feynman Symbolic Regression Database (Udrescu & Tegmark 2020, AI Feynman)
+    - machine-readable FeynmanEquations.csv via the psaegert/ansr-data mirror
+    vars:
+      v1:
+        name: mom
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v2:
+        name: Bx
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v3:
+        name: By
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v4:
+        name: Bz
+        sample_range:
+        - 1.0
+        - 5.0
+        sample_type:
+        - uni
+        - pos
+      v0:
+        name: E_n
+    meta:
+      same_as: feynman:III.10.19
       finite_fraction: 1.0

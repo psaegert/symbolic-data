@@ -1,9 +1,10 @@
 metadata:
   name: soose-nc
   version: 2
-  tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests"]}
-  srbf_changes: []
+  benchmark: "soose"
+  tags: {"origin": "generated formulas", "tags": ["extrapolation", "several tests", "generator in-distribution"]}
   citation: {"paper": {"short": "Biggio et al. 2021", "title": "Neural Symbolic Regression that Scales", "venue": "ICML 2021 (PMLR 139)", "url": "https://arxiv.org/abs/2106.06427"}, "data": {"short": "GitHub SymposiumOrganization/NeuralSymbolicRegressionThatScales@09f5af4", "title": "NeSymReS SOOSE NC test set (test_set/nc.csv)", "url": "https://github.com/SymposiumOrganization/NeuralSymbolicRegressionThatScales/blob/09f5af4b0e142b23a9cca82e682d92229c986df1/test_set/nc.csv"}}
+  srbf_changes: []
   description: 'SOOSE-NC: 200 out-of-training-sample NeSymReS skeletons, no constants: all multiplicative
     placeholders = 1, additive = 0.'
   sources: &id001
@@ -26,6 +27,7 @@ metadata:
       NC row; block identity of the historical WC/FC source is inferred from constant density (NOTICE).
 expressions:
   SOOSE-NC-000:
+    subset: "nc"
     raw: -x_1 + log(x_1 + x_2**4)
     prepared: -v1+log(v1+v2**4)
     n_variables: 2
@@ -56,8 +58,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9287
-    subset: iid
   SOOSE-NC-001:
+    subset: "nc"
     raw: sin(x_3) + sin(x_3/(x_1 - x_2))
     prepared: sin(v3)+sin(v3/(v1-v2))
     n_variables: 3
@@ -96,8 +98,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-002:
+    subset: "nc"
     raw: x_2*cos(x_1*x_3 - x_2) - 1
     prepared: v2*cos(v1*v3-v2)-1
     n_variables: 3
@@ -136,8 +138,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-003:
+    subset: "nc"
     raw: x_2 + tan(x_1 - 1/(x_1 - 1))
     prepared: v2+tan(v1-1/(v1-1))
     n_variables: 2
@@ -168,8 +170,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-004:
+    subset: "nc"
     raw: x_1 - x_2**2 - log(x_2)
     prepared: v1-v2**2-log(v2)
     n_variables: 2
@@ -200,8 +202,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-005:
+    subset: "nc"
     raw: x_1 - tan(exp(x_1 - 1))
     prepared: v1-tan(exp(v1-1))
     n_variables: 1
@@ -224,8 +226,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-006:
+    subset: "nc"
     raw: x_1*(x_1 + 1)/(x_1 - 1)
     prepared: v1*(v1+1)/(v1-1)
     n_variables: 1
@@ -248,8 +250,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-007:
+    subset: "nc"
     raw: x_1*x_3/(-x_1 + x_2) - x_3
     prepared: v1*v3/(-v1+v2)-v3
     n_variables: 3
@@ -288,8 +290,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-008:
+    subset: "nc"
     raw: tan(x_2 + x_3)/(-x_1 - 1)
     prepared: tan(v2+v3)/(-v1-1)
     n_variables: 3
@@ -328,8 +330,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-009:
+    subset: "nc"
     raw: x_1 + cos(x_1 - x_2*x_3)
     prepared: v1+cos(v1-v2*v3)
     n_variables: 3
@@ -368,8 +370,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-010:
+    subset: "nc"
     raw: x_3 + x_3/(x_1 + x_2 + x_3)
     prepared: v3+v3/(v1+v2+v3)
     n_variables: 3
@@ -408,8 +410,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-011:
+    subset: "nc"
     raw: sqrt(-x_1*x_2 + x_3/x_1)
     prepared: sqrt(-v1*v2+v3/v1)
     n_variables: 3
@@ -448,8 +450,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5009
-    subset: iid
   SOOSE-NC-012:
+    subset: "nc"
     raw: x_1/(x_1 + x_3 + log(x_2**4))
     prepared: v1/(v1+v3+log(v2**4))
     n_variables: 3
@@ -488,8 +490,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-013:
+    subset: "nc"
     raw: sin(x_2/(-x_1 + x_2)) - tan(1)
     prepared: sin(v2/(-v1+v2))-tan(1)
     n_variables: 2
@@ -520,8 +522,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-014:
+    subset: "nc"
     raw: cos(x_2 + sin(x_1)/cos(x_3))
     prepared: cos(v2+sin(v1)/cos(v3))
     n_variables: 3
@@ -560,8 +562,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-015:
+    subset: "nc"
     raw: x_1**2 + x_2 - tan(1) - 1
     prepared: v1**2+v2-tan(1)-1
     n_variables: 2
@@ -592,8 +594,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-016:
+    subset: "nc"
     raw: x_2*sin(x_1**2 + x_1*x_2)
     prepared: v2*sin(v1**2+v1*v2)
     n_variables: 2
@@ -624,8 +626,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-017:
+    subset: "nc"
     raw: -x_1/(x_1 - x_2 + x_3 - 1) + x_3
     prepared: -v1/(v1-v2+v3-1)+v3
     n_variables: 3
@@ -664,8 +666,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-018:
+    subset: "nc"
     raw: x_2/(x_2 + cos(x_1*x_3))
     prepared: v2/(v2+cos(v1*v3))
     n_variables: 3
@@ -704,8 +706,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-019:
+    subset: "nc"
     raw: 1 + tan(x_2)/(x_2*(-x_1 + x_2))
     prepared: 1+tan(v2)/(v2*(-v1+v2))
     n_variables: 2
@@ -736,8 +738,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-020:
+    subset: "nc"
     raw: 1/(x_1 - sin(cos(x_2)))
     prepared: 1/(v1-sin(cos(v2)))
     n_variables: 2
@@ -768,8 +770,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-021:
+    subset: "nc"
     raw: (x_1 + 1)/(x_2 + 1) + 1
     prepared: (v1+1)/(v2+1)+1
     n_variables: 2
@@ -800,8 +802,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-022:
+    subset: "nc"
     raw: log(-x_1 + x_2)/(x_2*(x_2 - 1))
     prepared: log(-v1+v2)/(v2*(v2-1))
     n_variables: 2
@@ -832,8 +834,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4983
-    subset: iid
   SOOSE-NC-023:
+    subset: "nc"
     raw: (x_3 - 1)*sin(x_1 + x_1/x_2)
     prepared: (v3-1)*sin(v1+v1/v2)
     n_variables: 3
@@ -872,8 +874,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-024:
+    subset: "nc"
     raw: x_2*x_3*cos(x_1 + x_2) + x_2
     prepared: v2*v3*cos(v1+v2)+v2
     n_variables: 3
@@ -912,8 +914,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-025:
+    subset: "nc"
     raw: sin(x_2*tan(x_1**3 - x_2))
     prepared: sin(v2*tan(v1**3-v2))
     n_variables: 2
@@ -944,8 +946,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-026:
+    subset: "nc"
     raw: x_1*cos(sqrt(log(x_2))) + x_3
     prepared: v1*cos(sqrt(log(v2)))+v3
     n_variables: 3
@@ -984,8 +986,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4526
-    subset: iid
   SOOSE-NC-027:
+    subset: "nc"
     raw: x_1*sqrt(-x_3 + sin(x_2))
     prepared: v1*sqrt(-v3+sin(v2))
     n_variables: 3
@@ -1024,8 +1026,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5072
-    subset: iid
   SOOSE-NC-028:
+    subset: "nc"
     raw: cos(x_1 - tan(x_2**3))
     prepared: cos(v1-tan(v2**3))
     n_variables: 2
@@ -1056,8 +1058,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-029:
+    subset: "nc"
     raw: sqrt(x_2**2 - x_2 - exp(x_1))
     prepared: sqrt(v2**2-v2-exp(v1))
     n_variables: 2
@@ -1088,8 +1090,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.6075
-    subset: iid
   SOOSE-NC-030:
+    subset: "nc"
     raw: -x_2 + (x_3 + sin(x_1/x_2))/x_3
     prepared: -v2+(v3+sin(v1/v2))/v3
     n_variables: 3
@@ -1128,8 +1130,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-031:
+    subset: "nc"
     raw: x_3 + 1/(x_2 - log(x_1 + x_2))
     prepared: v3+1/(v2-log(v1+v2))
     n_variables: 3
@@ -1168,8 +1170,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5039
-    subset: iid
   SOOSE-NC-032:
+    subset: "nc"
     raw: sin(x_1**2) + 1/x_2
     prepared: sin(v1**2)+1/v2
     n_variables: 2
@@ -1200,8 +1202,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-033:
+    subset: "nc"
     raw: -x_2 + log(x_1*(-x_2 + exp(-1)))
     prepared: -v2+log(v1*(-v2+exp(-1)))
     n_variables: 2
@@ -1232,8 +1234,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.501
-    subset: iid
   SOOSE-NC-034:
+    subset: "nc"
     raw: (x_1 + cos(1))*log(x_2)
     prepared: (v1+cos(1))*log(v2)
     n_variables: 2
@@ -1264,8 +1266,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-035:
+    subset: "nc"
     raw: x_2 + sqrt(1 + x_3/(x_1*x_2))
     prepared: v2+sqrt(1+v3/(v1*v2))
     n_variables: 3
@@ -1304,8 +1306,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9074
-    subset: iid
   SOOSE-NC-036:
+    subset: "nc"
     raw: (x_1 - x_3)/sin(x_1*x_2)
     prepared: (v1-v3)/sin(v1*v2)
     n_variables: 3
@@ -1344,8 +1346,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-037:
+    subset: "nc"
     raw: x_2*sqrt(x_1/x_3 + x_2)/x_3
     prepared: v2*sqrt(v1/v3+v2)/v3
     n_variables: 3
@@ -1384,8 +1386,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5027
-    subset: iid
   SOOSE-NC-038:
+    subset: "nc"
     raw: sin(x_2/x_1) + sin(x_1 - x_2)
     prepared: sin(v2/v1)+sin(v1-v2)
     n_variables: 2
@@ -1416,8 +1418,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-039:
+    subset: "nc"
     raw: cos(x_1) - sqrt(cos(x_2))
     prepared: cos(v1)-sqrt(cos(v2))
     n_variables: 2
@@ -1448,8 +1450,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4686
-    subset: iid
   SOOSE-NC-040:
+    subset: "nc"
     raw: x_1*(x_1 + x_2 + x_3 + sin(x_2))
     prepared: v1*(v1+v2+v3+sin(v2))
     n_variables: 3
@@ -1488,8 +1490,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-041:
+    subset: "nc"
     raw: x_2*(x_1 + log(cos(x_3)))/x_1
     prepared: v2*(v1+log(cos(v3)))/v1
     n_variables: 3
@@ -1528,8 +1530,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4738
-    subset: iid
   SOOSE-NC-042:
+    subset: "nc"
     raw: x_1 + sin(log(x_2*(x_2 - 1)))
     prepared: v1+sin(log(v2*(v2-1)))
     n_variables: 2
@@ -1560,8 +1562,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9522
-    subset: iid
   SOOSE-NC-043:
+    subset: "nc"
     raw: (-x_1 + x_3)*log(-x_1 + x_2)
     prepared: (-v1+v3)*log(-v1+v2)
     n_variables: 3
@@ -1600,8 +1602,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4983
-    subset: iid
   SOOSE-NC-044:
+    subset: "nc"
     raw: x_3 - cos(x_1**3*x_2**3)
     prepared: v3-cos(v1**3*v2**3)
     n_variables: 3
@@ -1640,8 +1642,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-045:
+    subset: "nc"
     raw: cos((-x_1 + sin(x_2) - 1)**3)
     prepared: cos((-v1+sin(v2)-1)**3)
     n_variables: 2
@@ -1672,8 +1674,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-046:
+    subset: "nc"
     raw: x_2 + sin(x_1**5 + x_3)
     prepared: v2+sin(v1**5+v3)
     n_variables: 3
@@ -1712,8 +1714,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-047:
+    subset: "nc"
     raw: x_1 + x_2/(exp(x_2) - 1)
     prepared: v1+v2/(exp(v2)-1)
     n_variables: 2
@@ -1744,8 +1746,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-048:
+    subset: "nc"
     raw: tan(cos(x_1) + tan(1))
     prepared: tan(cos(v1)+tan(1))
     n_variables: 1
@@ -1768,8 +1770,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-049:
+    subset: "nc"
     raw: x_1 + 1 + 1/(x_1 + 1)
     prepared: v1+1+1/(v1+1)
     n_variables: 1
@@ -1792,8 +1794,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-050:
+    subset: "nc"
     raw: cos(sin(x_1)) - 1/x_1
     prepared: cos(sin(v1))-1/v1
     n_variables: 1
@@ -1816,8 +1818,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-051:
+    subset: "nc"
     raw: x_1*log(sin(tan(x_1)))
     prepared: v1*log(sin(tan(v1)))
     n_variables: 1
@@ -1840,8 +1842,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5031
-    subset: iid
   SOOSE-NC-052:
+    subset: "nc"
     raw: (x_1 + sin(x_2))*(sqrt(x_2) + x_3)
     prepared: (v1+sin(v2))*(sqrt(v2)+v3)
     n_variables: 3
@@ -1880,8 +1882,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-053:
+    subset: "nc"
     raw: tan(sin(x_1*tan(x_2) - x_3))
     prepared: tan(sin(v1*tan(v2)-v3))
     n_variables: 3
@@ -1920,8 +1922,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-054:
+    subset: "nc"
     raw: sin(x_2*(-x_1 + x_2 - x_3 + 1))
     prepared: sin(v2*(-v1+v2-v3+1))
     n_variables: 3
@@ -1960,8 +1962,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-055:
+    subset: "nc"
     raw: log(cos(x_1**2 - x_2*x_3))
     prepared: log(cos(v1**2-v2*v3))
     n_variables: 3
@@ -2000,8 +2002,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.504
-    subset: iid
   SOOSE-NC-056:
+    subset: "nc"
     raw: sin(sin(x_2*x_3/x_1**2))
     prepared: sin(sin(v2*v3/v1**2))
     n_variables: 3
@@ -2040,8 +2042,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-057:
+    subset: "nc"
     raw: x_1 + sin(exp(x_2) + cos(x_2))
     prepared: v1+sin(exp(v2)+cos(v2))
     n_variables: 2
@@ -2072,8 +2074,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-058:
+    subset: "nc"
     raw: x_1 + sqrt(x_1 - x_3) + sin(x_2)
     prepared: v1+sqrt(v1-v3)+sin(v2)
     n_variables: 3
@@ -2112,8 +2114,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5095
-    subset: iid
   SOOSE-NC-059:
+    subset: "nc"
     raw: 1 - sin(x_1*(x_1 + sin(x_1)))
     prepared: 1-sin(v1*(v1+sin(v1)))
     n_variables: 1
@@ -2136,8 +2138,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-060:
+    subset: "nc"
     raw: x_1/(x_2 + (x_1 + tan(x_3))/x_2)
     prepared: v1/(v2+(v1+tan(v3))/v2)
     n_variables: 3
@@ -2176,8 +2178,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-061:
+    subset: "nc"
     raw: -log((x_1 + x_2)**2)
     prepared: -log((v1+v2)**2)
     n_variables: 2
@@ -2208,8 +2210,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-062:
+    subset: "nc"
     raw: x_1*(-x_1 + cos(sqrt(x_2))**2)
     prepared: v1*(-v1+cos(sqrt(v2))**2)
     n_variables: 2
@@ -2240,8 +2242,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-063:
+    subset: "nc"
     raw: -exp(cos(x_1)) + sin(x_1)
     prepared: -exp(cos(v1))+sin(v1)
     n_variables: 1
@@ -2264,8 +2266,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-064:
+    subset: "nc"
     raw: x_2 + 1/(-x_1*(x_3 - 1) + x_2)
     prepared: v2+1/(-v1*(v3-1)+v2)
     n_variables: 3
@@ -2304,8 +2306,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-065:
+    subset: "nc"
     raw: x_1 + cos(1 + 1/x_2)
     prepared: v1+cos(1+1/v2)
     n_variables: 2
@@ -2336,8 +2338,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-066:
+    subset: "nc"
     raw: x_3/(x_1 - x_2*exp(x_2) - 1)
     prepared: v3/(v1-v2*exp(v2)-1)
     n_variables: 3
@@ -2376,8 +2378,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-067:
+    subset: "nc"
     raw: tan(exp(x_1 - x_2)) - 1
     prepared: tan(exp(v1-v2))-1
     n_variables: 2
@@ -2408,8 +2410,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-068:
+    subset: "nc"
     raw: cos(x_1**5*(x_2 - x_3)**5)/x_1
     prepared: cos(v1**5*(v2-v3)**5)/v1
     n_variables: 3
@@ -2448,8 +2450,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-069:
+    subset: "nc"
     raw: x_1*cos(x_2)*tan(x_2)
     prepared: v1*cos(v2)*tan(v2)
     n_variables: 2
@@ -2480,8 +2482,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-070:
+    subset: "nc"
     raw: exp(cos((x_1 + x_2 + 1)**4))
     prepared: exp(cos((v1+v2+1)**4))
     n_variables: 2
@@ -2512,8 +2514,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-071:
+    subset: "nc"
     raw: x_3/(x_2*(x_3**2 + tan(x_1)))
     prepared: v3/(v2*(v3**2+tan(v1)))
     n_variables: 3
@@ -2552,8 +2554,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-072:
+    subset: "nc"
     raw: -x_3 + (-x_1 + x_2)/log(x_2) - 1
     prepared: -v3+(-v1+v2)/log(v2)-1
     n_variables: 3
@@ -2592,8 +2594,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-073:
+    subset: "nc"
     raw: x_2 + cos(tan(x_1 - cos(1)))
     prepared: v2+cos(tan(v1-cos(1)))
     n_variables: 2
@@ -2624,8 +2626,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-074:
+    subset: "nc"
     raw: -x_2 + cos(x_2 - 1)/x_1
     prepared: -v2+cos(v2-1)/v1
     n_variables: 2
@@ -2656,8 +2658,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-075:
+    subset: "nc"
     raw: log(x_1/sin(1/x_1))
     prepared: log(v1/sin(1/v1))
     n_variables: 1
@@ -2680,8 +2682,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9782
-    subset: iid
   SOOSE-NC-076:
+    subset: "nc"
     raw: x_3/(x_2 + cos(x_1/cos(x_2)))
     prepared: v3/(v2+cos(v1/cos(v2)))
     n_variables: 3
@@ -2720,8 +2722,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-077:
+    subset: "nc"
     raw: x_1 + x_1/(x_2*(x_1 + cos(x_2)))
     prepared: v1+v1/(v2*(v1+cos(v2)))
     n_variables: 2
@@ -2752,8 +2754,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-078:
+    subset: "nc"
     raw: x_2/((x_1 + tan(x_2))*(x_2 + x_3))
     prepared: v2/((v1+tan(v2))*(v2+v3))
     n_variables: 3
@@ -2792,8 +2794,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-079:
+    subset: "nc"
     raw: x_1 - x_2*(cos(x_2) - cos(x_3))
     prepared: v1-v2*(cos(v2)-cos(v3))
     n_variables: 3
@@ -2832,8 +2834,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-080:
+    subset: "nc"
     raw: x_3*cos(x_2 + x_3) + cos(x_1)
     prepared: v3*cos(v2+v3)+cos(v1)
     n_variables: 3
@@ -2872,8 +2874,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-081:
+    subset: "nc"
     raw: x_2**2 - cos(cos(x_1))
     prepared: v2**2-cos(cos(v1))
     n_variables: 2
@@ -2904,8 +2906,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-082:
+    subset: "nc"
     raw: -x_2*sin(x_1*(x_3 - 1))
     prepared: -v2*sin(v1*(v3-1))
     n_variables: 3
@@ -2944,8 +2946,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-083:
+    subset: "nc"
     raw: tan(cos(x_1) - tan(1)) - 1
     prepared: tan(cos(v1)-tan(1))-1
     n_variables: 1
@@ -2968,8 +2970,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-084:
+    subset: "nc"
     raw: (x_2 + x_3 - cos(x_1))/x_3
     prepared: (v2+v3-cos(v1))/v3
     n_variables: 3
@@ -3008,8 +3010,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-085:
+    subset: "nc"
     raw: x_1*(sin(x_2) - sin(x_3)/x_2)
     prepared: v1*(sin(v2)-sin(v3)/v2)
     n_variables: 3
@@ -3048,8 +3050,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-086:
+    subset: "nc"
     raw: x_3*cos(x_1**2 + x_2)**3
     prepared: v3*cos(v1**2+v2)**3
     n_variables: 3
@@ -3088,8 +3090,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-087:
+    subset: "nc"
     raw: tan((x_1 - x_2**5)*sin(x_3))
     prepared: tan((v1-v2**5)*sin(v3))
     n_variables: 3
@@ -3128,8 +3130,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-088:
+    subset: "nc"
     raw: -x_1*sin(tan(x_1*x_2)) + x_1
     prepared: -v1*sin(tan(v1*v2))+v1
     n_variables: 2
@@ -3160,8 +3162,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-089:
+    subset: "nc"
     raw: cos(1 - (x_2*x_3 + x_2)/x_1)
     prepared: cos(1-(v2*v3+v2)/v1)
     n_variables: 3
@@ -3200,8 +3202,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-090:
+    subset: "nc"
     raw: x_1 - (x_2 + x_3)*sin(x_1) + 1
     prepared: v1-(v2+v3)*sin(v1)+1
     n_variables: 3
@@ -3240,8 +3242,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-091:
+    subset: "nc"
     raw: -1/tan(x_1*x_2)
     prepared: -1/tan(v1*v2)
     n_variables: 2
@@ -3272,8 +3274,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-092:
+    subset: "nc"
     raw: sin(x_1) + tan(tan(exp(x_1)))
     prepared: sin(v1)+tan(tan(exp(v1)))
     n_variables: 1
@@ -3296,8 +3298,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-093:
+    subset: "nc"
     raw: (x_2 + x_3 + (x_2 - 1)/x_2)/x_1
     prepared: (v2+v3+(v2-1)/v2)/v1
     n_variables: 3
@@ -3336,8 +3338,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-094:
+    subset: "nc"
     raw: x_1/(x_2*(-x_2 + x_3)) - x_2
     prepared: v1/(v2*(-v2+v3))-v2
     n_variables: 3
@@ -3376,8 +3378,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-095:
+    subset: "nc"
     raw: x_2 + log(x_1*(x_1 + sin(x_2)))
     prepared: v2+log(v1*(v1+sin(v2)))
     n_variables: 2
@@ -3408,8 +3410,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9707
-    subset: iid
   SOOSE-NC-096:
+    subset: "nc"
     raw: x_2 + x_3/(-x_1*x_3 - x_2)
     prepared: v2+v3/(-v1*v3-v2)
     n_variables: 3
@@ -3448,8 +3450,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-097:
+    subset: "nc"
     raw: sin(x_3*(x_1 - x_2 + 1))
     prepared: sin(v3*(v1-v2+1))
     n_variables: 3
@@ -3488,8 +3490,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-098:
+    subset: "nc"
     raw: -x_2 + x_3*sin(cos(tan(x_1)))
     prepared: -v2+v3*sin(cos(tan(v1)))
     n_variables: 3
@@ -3528,8 +3530,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-099:
+    subset: "nc"
     raw: sin(x_2*(x_1 + x_3)**2 + x_2)
     prepared: sin(v2*(v1+v3)**2+v2)
     n_variables: 3
@@ -3568,8 +3570,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-100:
+    subset: "nc"
     raw: x_1*(x_2 - asin(1/x_1))
     prepared: v1*(v2-asin(1/v1))
     n_variables: 2
@@ -3600,8 +3602,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9044
-    subset: iid
   SOOSE-NC-101:
+    subset: "nc"
     raw: cos(sqrt(x_1**2 - 1))
     prepared: cos(sqrt(v1**2-1))
     n_variables: 1
@@ -3624,8 +3626,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9044
-    subset: iid
   SOOSE-NC-102:
+    subset: "nc"
     raw: x_1*(x_1 + x_2*cos(x_3)) + 1
     prepared: v1*(v1+v2*cos(v3))+1
     n_variables: 3
@@ -3664,8 +3666,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-103:
+    subset: "nc"
     raw: x_1*cos(x_2**3 + x_2)
     prepared: v1*cos(v2**3+v2)
     n_variables: 2
@@ -3696,8 +3698,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-104:
+    subset: "nc"
     raw: sin(exp((x_2 + x_3)/x_1))
     prepared: sin(exp((v2+v3)/v1))
     n_variables: 3
@@ -3736,8 +3738,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9999
-    subset: iid
   SOOSE-NC-105:
+    subset: "nc"
     raw: tan(x_2 + (x_1 + x_3)/(x_2*x_3))
     prepared: tan(v2+(v1+v3)/(v2*v3))
     n_variables: 3
@@ -3776,8 +3778,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-106:
+    subset: "nc"
     raw: exp(1 - cos(x_1)) + 1
     prepared: exp(1-cos(v1))+1
     n_variables: 1
@@ -3800,8 +3802,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-107:
+    subset: "nc"
     raw: x_1 - sqrt(x_1 + x_2)/x_2
     prepared: v1-sqrt(v1+v2)/v2
     n_variables: 2
@@ -3832,8 +3834,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5039
-    subset: iid
   SOOSE-NC-108:
+    subset: "nc"
     raw: x_1/(x_1 + tan(sin(x_1)))
     prepared: v1/(v1+tan(sin(v1)))
     n_variables: 1
@@ -3856,8 +3858,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-109:
+    subset: "nc"
     raw: (x_3 + sin(x_1)/x_2)/x_3
     prepared: (v3+sin(v1)/v2)/v3
     n_variables: 3
@@ -3896,8 +3898,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-110:
+    subset: "nc"
     raw: x_2*x_3/(x_1*(x_1 + sqrt(x_2)))
     prepared: v2*v3/(v1*(v1+sqrt(v2)))
     n_variables: 3
@@ -3936,8 +3938,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-111:
+    subset: "nc"
     raw: x_1*sin(x_2 + x_3*sin(x_1))
     prepared: v1*sin(v2+v3*sin(v1))
     n_variables: 3
@@ -3976,8 +3978,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-112:
+    subset: "nc"
     raw: cos((x_1 + x_2)*(x_1 + x_3 + 1))
     prepared: cos((v1+v2)*(v1+v3+1))
     n_variables: 3
@@ -4016,8 +4018,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-113:
+    subset: "nc"
     raw: x_2**2*sin(x_1 - 1) - 1
     prepared: v2**2*sin(v1-1)-1
     n_variables: 2
@@ -4048,8 +4050,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-114:
+    subset: "nc"
     raw: x_2/(x_1*(x_2 + sin(x_1 + x_3)))
     prepared: v2/(v1*(v2+sin(v1+v3)))
     n_variables: 3
@@ -4088,8 +4090,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-115:
+    subset: "nc"
     raw: x_3 - 1/(x_1 + exp(x_2))
     prepared: v3-1/(v1+exp(v2))
     n_variables: 3
@@ -4128,8 +4130,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-116:
+    subset: "nc"
     raw: x_2**2 - cos(sin(x_1))
     prepared: v2**2-cos(sin(v1))
     n_variables: 2
@@ -4160,8 +4162,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-117:
+    subset: "nc"
     raw: sqrt(x_1*(x_2/x_3 + x_3))
     prepared: sqrt(v1*(v2/v3+v3))
     n_variables: 3
@@ -4200,8 +4202,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5011
-    subset: iid
   SOOSE-NC-118:
+    subset: "nc"
     raw: log(exp(x_1 + x_2) + log(x_2))
     prepared: log(exp(v1+v2)+log(v2))
     n_variables: 2
@@ -4232,8 +4234,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4788
-    subset: iid
   SOOSE-NC-119:
+    subset: "nc"
     raw: x_1*x_2/log(log(-x_1))
     prepared: v1*v2/log(log(-v1))
     n_variables: 2
@@ -4264,8 +4266,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4481
-    subset: iid
   SOOSE-NC-120:
+    subset: "nc"
     raw: sqrt(-1 + (x_1*x_2 + x_2)/x_3)
     prepared: sqrt(-1+(v1*v2+v2)/v3)
     n_variables: 3
@@ -4304,8 +4306,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.405
-    subset: iid
   SOOSE-NC-121:
+    subset: "nc"
     raw: x_2*sin(x_1 - x_3**2)
     prepared: v2*sin(v1-v3**2)
     n_variables: 3
@@ -4344,8 +4346,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-122:
+    subset: "nc"
     raw: cos(sin(x_2) + x_3/x_1)
     prepared: cos(sin(v2)+v3/v1)
     n_variables: 3
@@ -4384,8 +4386,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-123:
+    subset: "nc"
     raw: x_2 - log((x_1 - 1)**2)
     prepared: v2-log((v1-1)**2)
     n_variables: 2
@@ -4416,8 +4418,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-124:
+    subset: "nc"
     raw: sqrt(tan(x_2*(-x_1 + exp(-1))))
     prepared: sqrt(tan(v2*(-v1+exp(-1))))
     n_variables: 2
@@ -4448,8 +4450,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5034
-    subset: iid
   SOOSE-NC-125:
+    subset: "nc"
     raw: -x_2*sin(x_1*x_3 + 1) - 1
     prepared: -v2*sin(v1*v3+1)-1
     n_variables: 3
@@ -4488,8 +4490,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-126:
+    subset: "nc"
     raw: -x_1 + exp(-sin(x_1/x_2))
     prepared: -v1+exp(-sin(v1/v2))
     n_variables: 2
@@ -4520,8 +4522,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-127:
+    subset: "nc"
     raw: x_1 - x_2**2 + x_2 + x_3 - 1
     prepared: v1-v2**2+v2+v3-1
     n_variables: 3
@@ -4560,8 +4562,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-128:
+    subset: "nc"
     raw: log(cos(exp(-1/cos(x_1))))
     prepared: log(cos(exp(-1/cos(v1))))
     n_variables: 1
@@ -4584,8 +4586,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5959
-    subset: iid
   SOOSE-NC-129:
+    subset: "nc"
     raw: x_1 - x_2*cos(x_1**3)
     prepared: v1-v2*cos(v1**3)
     n_variables: 2
@@ -4616,8 +4618,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-130:
+    subset: "nc"
     raw: sin(x_2*x_3/x_1) - 1
     prepared: sin(v2*v3/v1)-1
     n_variables: 3
@@ -4656,8 +4658,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-131:
+    subset: "nc"
     raw: sqrt(x_2/(x_1 + x_1/sin(x_1)))
     prepared: sqrt(v2/(v1+v1/sin(v1)))
     n_variables: 2
@@ -4688,8 +4690,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4998
-    subset: iid
   SOOSE-NC-132:
+    subset: "nc"
     raw: sin(cos(x_1*tan(x_1) + x_1))
     prepared: sin(cos(v1*tan(v1)+v1))
     n_variables: 1
@@ -4712,8 +4714,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-133:
+    subset: "nc"
     raw: x_2/(x_2 + sqrt(x_1*x_3)) + x_3
     prepared: v2/(v2+sqrt(v1*v3))+v3
     n_variables: 3
@@ -4752,8 +4754,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5016
-    subset: iid
   SOOSE-NC-134:
+    subset: "nc"
     raw: log(sqrt(x_1*sin(x_2)))
     prepared: log(sqrt(v1*sin(v2)))
     n_variables: 2
@@ -4784,8 +4786,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5024
-    subset: iid
   SOOSE-NC-135:
+    subset: "nc"
     raw: x_3 + 1 - 1/(x_1 + x_2*x_3)
     prepared: v3+1-1/(v1+v2*v3)
     n_variables: 3
@@ -4824,8 +4826,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-136:
+    subset: "nc"
     raw: -x_1 + x_2*cos(x_3 - sin(x_3))
     prepared: -v1+v2*cos(v3-sin(v3))
     n_variables: 3
@@ -4864,8 +4866,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-137:
+    subset: "nc"
     raw: x_2*(x_2 + x_3) - cos(tan(x_1))
     prepared: v2*(v2+v3)-cos(tan(v1))
     n_variables: 3
@@ -4904,8 +4906,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-138:
+    subset: "nc"
     raw: cos(x_2)/cos(x_1/x_3)
     prepared: cos(v2)/cos(v1/v3)
     n_variables: 3
@@ -4944,8 +4946,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-139:
+    subset: "nc"
     raw: -x_1 + tan(x_1*x_2**2 - x_3)
     prepared: -v1+tan(v1*v2**2-v3)
     n_variables: 3
@@ -4984,8 +4986,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-140:
+    subset: "nc"
     raw: x_1**2 + x_2 - cos(x_2 - x_3)
     prepared: v1**2+v2-cos(v2-v3)
     n_variables: 3
@@ -5024,8 +5026,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-141:
+    subset: "nc"
     raw: x_2*cos(x_2) + cos(x_1/x_2)
     prepared: v2*cos(v2)+cos(v1/v2)
     n_variables: 2
@@ -5056,8 +5058,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-142:
+    subset: "nc"
     raw: cos(x_1 - tan(x_2)**2)
     prepared: cos(v1-tan(v2)**2)
     n_variables: 2
@@ -5088,8 +5090,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-143:
+    subset: "nc"
     raw: log(x_1 - x_2 + x_3 + exp(x_2))
     prepared: log(v1-v2+v3+exp(v2))
     n_variables: 3
@@ -5128,8 +5130,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.8109
-    subset: iid
   SOOSE-NC-144:
+    subset: "nc"
     raw: tan(x_1*cos(1/x_1)/x_2)
     prepared: tan(v1*cos(1/v1)/v2)
     n_variables: 2
@@ -5160,8 +5162,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-145:
+    subset: "nc"
     raw: -x_1*(x_1 + sin(x_1 + x_2))
     prepared: -v1*(v1+sin(v1+v2))
     n_variables: 2
@@ -5192,8 +5194,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-146:
+    subset: "nc"
     raw: sin(log(-x_1/x_2 + x_2))
     prepared: sin(log(-v1/v2+v2))
     n_variables: 2
@@ -5224,8 +5226,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5028
-    subset: iid
   SOOSE-NC-147:
+    subset: "nc"
     raw: tan(log(-x_1*x_2 + x_1))
     prepared: tan(log(-v1*v2+v1))
     n_variables: 2
@@ -5256,8 +5258,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4999
-    subset: iid
   SOOSE-NC-148:
+    subset: "nc"
     raw: x_1 + x_2 + sin(x_1 + x_3) + 1
     prepared: v1+v2+sin(v1+v3)+1
     n_variables: 3
@@ -5296,8 +5298,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-149:
+    subset: "nc"
     raw: x_2 + x_3 - tan(x_2/x_1)
     prepared: v2+v3-tan(v2/v1)
     n_variables: 3
@@ -5336,8 +5338,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-150:
+    subset: "nc"
     raw: x_2*(x_1 + log(x_2) + 1) + x_3
     prepared: v2*(v1+log(v2)+1)+v3
     n_variables: 3
@@ -5376,8 +5378,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-151:
+    subset: "nc"
     raw: sin(x_3)/(x_1**5 + x_2)
     prepared: sin(v3)/(v1**5+v2)
     n_variables: 3
@@ -5416,8 +5418,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-152:
+    subset: "nc"
     raw: x_1 + (x_2 + sin(x_1 + 1))/x_3
     prepared: v1+(v2+sin(v1+1))/v3
     n_variables: 3
@@ -5456,8 +5458,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-153:
+    subset: "nc"
     raw: asin(sin(x_1)/x_1)
     prepared: asin(sin(v1)/v1)
     n_variables: 1
@@ -5480,8 +5482,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-154:
+    subset: "nc"
     raw: -x_2 + (x_1 + sqrt(x_2))**2
     prepared: -v2+(v1+sqrt(v2))**2
     n_variables: 2
@@ -5512,8 +5514,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-155:
+    subset: "nc"
     raw: x_2 + 1 + (x_1 + cos(x_1))/x_3
     prepared: v2+1+(v1+cos(v1))/v3
     n_variables: 3
@@ -5552,8 +5554,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-156:
+    subset: "nc"
     raw: cos(x_1*(-x_1 + x_2**2*x_3))
     prepared: cos(v1*(-v1+v2**2*v3))
     n_variables: 3
@@ -5592,8 +5594,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-157:
+    subset: "nc"
     raw: (tan(x_2/x_1) - 1)/x_2
     prepared: (tan(v2/v1)-1)/v2
     n_variables: 2
@@ -5624,8 +5626,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-158:
+    subset: "nc"
     raw: x_2*cos(x_1*x_2*x_3 + x_1)
     prepared: v2*cos(v1*v2*v3+v1)
     n_variables: 3
@@ -5664,8 +5666,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-159:
+    subset: "nc"
     raw: x_2**2 + sin(x_1*x_2)
     prepared: v2**2+sin(v1*v2)
     n_variables: 2
@@ -5696,8 +5698,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-160:
+    subset: "nc"
     raw: x_1*(-x_2 + sqrt(x_1 - x_3))
     prepared: v1*(-v2+sqrt(v1-v3))
     n_variables: 3
@@ -5736,8 +5738,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5095
-    subset: iid
   SOOSE-NC-161:
+    subset: "nc"
     raw: x_3**2/(x_1*exp(x_2) + x_3)
     prepared: v3**2/(v1*exp(v2)+v3)
     n_variables: 3
@@ -5776,8 +5778,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-162:
+    subset: "nc"
     raw: (-x_1 + (-x_1 + x_2)*log(x_2))/x_1
     prepared: (-v1+(-v1+v2)*log(v2))/v1
     n_variables: 2
@@ -5808,8 +5810,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-163:
+    subset: "nc"
     raw: x_3 + sin(x_1) - 1/(x_2*x_3)
     prepared: v3+sin(v1)-1/(v2*v3)
     n_variables: 3
@@ -5848,8 +5850,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-164:
+    subset: "nc"
     raw: x_1 - x_2 + tan(x_1**2 - x_3)
     prepared: v1-v2+tan(v1**2-v3)
     n_variables: 3
@@ -5888,8 +5890,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-165:
+    subset: "nc"
     raw: sqrt(-x_1 + x_2*x_3/x_1)
     prepared: sqrt(-v1+v2*v3/v1)
     n_variables: 3
@@ -5928,8 +5930,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4945
-    subset: iid
   SOOSE-NC-166:
+    subset: "nc"
     raw: x_1 - sin(x_3/(x_1 + x_2 + 1))
     prepared: v1-sin(v3/(v1+v2+1))
     n_variables: 3
@@ -5968,8 +5970,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-167:
+    subset: "nc"
     raw: cos(x_1 + x_2 + (x_2 + x_3)**2)
     prepared: cos(v1+v2+(v2+v3)**2)
     n_variables: 3
@@ -6008,8 +6010,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-168:
+    subset: "nc"
     raw: (-x_2 + x_3*(-x_1 + x_3))**(-3)
     prepared: (-v2+v3*(-v1+v3))**(-3)
     n_variables: 3
@@ -6048,8 +6050,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-169:
+    subset: "nc"
     raw: -x_1 + cos(1 + 1/x_1)
     prepared: -v1+cos(1+1/v1)
     n_variables: 1
@@ -6072,8 +6074,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-170:
+    subset: "nc"
     raw: -x_3 + tan(x_3/(x_1*x_2))
     prepared: -v3+tan(v3/(v1*v2))
     n_variables: 3
@@ -6112,8 +6114,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-171:
+    subset: "nc"
     raw: -x_1**2 + x_1/x_2 + x_2 + x_3
     prepared: -v1**2+v1/v2+v2+v3
     n_variables: 3
@@ -6152,8 +6154,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-172:
+    subset: "nc"
     raw: cos((x_1 - x_2 - 1/x_2)**5)
     prepared: cos((v1-v2-1/v2)**5)
     n_variables: 2
@@ -6184,8 +6186,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-173:
+    subset: "nc"
     raw: x_2 + x_3 - x_3/(x_1 - 1)
     prepared: v2+v3-v3/(v1-1)
     n_variables: 3
@@ -6224,8 +6226,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-174:
+    subset: "nc"
     raw: x_1 - x_3*(x_2 - 1) + tan(x_3)
     prepared: v1-v3*(v2-1)+tan(v3)
     n_variables: 3
@@ -6264,8 +6266,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-175:
+    subset: "nc"
     raw: x_2 - cos(sin(x_1) - 1)**2
     prepared: v2-cos(sin(v1)-1)**2
     n_variables: 2
@@ -6296,8 +6298,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-176:
+    subset: "nc"
     raw: x_1 + x_2 + (x_1 + x_2*x_3)/x_3
     prepared: v1+v2+(v1+v2*v3)/v3
     n_variables: 3
@@ -6336,8 +6338,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-177:
+    subset: "nc"
     raw: x_2/(-exp(x_1) + tan(x_1)) - 1
     prepared: v2/(-exp(v1)+tan(v1))-1
     n_variables: 2
@@ -6368,8 +6370,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-178:
+    subset: "nc"
     raw: x_2*(x_2 - (-x_1 - 1)/x_2)
     prepared: v2*(v2-(-v1-1)/v2)
     n_variables: 2
@@ -6400,8 +6402,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-179:
+    subset: "nc"
     raw: cos(sin(exp(x_1) + 1))
     prepared: cos(sin(exp(v1)+1))
     n_variables: 1
@@ -6424,8 +6426,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-180:
+    subset: "nc"
     raw: log(x_2 + cos(x_2))/(x_1 + x_3)
     prepared: log(v2+cos(v2))/(v1+v3)
     n_variables: 3
@@ -6464,8 +6466,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5369
-    subset: iid
   SOOSE-NC-181:
+    subset: "nc"
     raw: -1 - sin(x_1)**2/x_2
     prepared: -1-sin(v1)**2/v2
     n_variables: 2
@@ -6496,8 +6498,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-182:
+    subset: "nc"
     raw: sin(tan(x_2))*cos(x_1)
     prepared: sin(tan(v2))*cos(v1)
     n_variables: 2
@@ -6528,8 +6530,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-183:
+    subset: "nc"
     raw: cos(x_1*(x_2 + 1) + sin(x_1))
     prepared: cos(v1*(v2+1)+sin(v1))
     n_variables: 2
@@ -6560,8 +6562,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-184:
+    subset: "nc"
     raw: sin((x_1 - x_3)/(x_2*x_3))
     prepared: sin((v1-v3)/(v2*v3))
     n_variables: 3
@@ -6600,8 +6602,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-185:
+    subset: "nc"
     raw: cos(cos(x_2)**2/(-x_1 + x_3)**2)
     prepared: cos(cos(v2)**2/(-v1+v3)**2)
     n_variables: 3
@@ -6640,8 +6642,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-186:
+    subset: "nc"
     raw: x_3 + (-x_2 + x_3)*cos(x_1 + x_3)
     prepared: v3+(-v2+v3)*cos(v1+v3)
     n_variables: 3
@@ -6680,8 +6682,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-187:
+    subset: "nc"
     raw: x_2 + x_3 + cos(x_1 + 1) + 1
     prepared: v2+v3+cos(v1+1)+1
     n_variables: 3
@@ -6720,8 +6722,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-188:
+    subset: "nc"
     raw: asin(x_1**3/(x_3*(x_2 + x_3)))
     prepared: asin(v1**3/(v3*(v2+v3)))
     n_variables: 3
@@ -6760,8 +6762,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.2873
-    subset: iid
   SOOSE-NC-189:
+    subset: "nc"
     raw: cos((x_1 - 1)**3)**2
     prepared: cos((v1-1)**3)**2
     n_variables: 1
@@ -6784,8 +6786,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-190:
+    subset: "nc"
     raw: x_1*(x_1 + x_3 + 1) + sqrt(x_2)
     prepared: v1*(v1+v3+1)+sqrt(v2)
     n_variables: 3
@@ -6824,8 +6826,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-191:
+    subset: "nc"
     raw: -x_1 + x_2 - sin(x_2*x_3)
     prepared: -v1+v2-sin(v2*v3)
     n_variables: 3
@@ -6864,8 +6866,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-192:
+    subset: "nc"
     raw: sin(x_2*x_3*(x_1*x_2 + x_3))
     prepared: sin(v2*v3*(v1*v2+v3))
     n_variables: 3
@@ -6904,8 +6906,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-193:
+    subset: "nc"
     raw: sin((-x_2 + x_3)**2/(x_1 + x_2))
     prepared: sin((-v2+v3)**2/(v1+v2))
     n_variables: 3
@@ -6944,8 +6946,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-194:
+    subset: "nc"
     raw: (x_1*x_2 + sqrt(x_2))/x_1
     prepared: (v1*v2+sqrt(v2))/v1
     n_variables: 2
@@ -6976,8 +6978,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: iid
   SOOSE-NC-195:
+    subset: "nc"
     raw: x_1 - x_3 + (x_2 + x_3)*sin(x_3)
     prepared: v1-v3+(v2+v3)*sin(v3)
     n_variables: 3
@@ -7016,8 +7018,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-196:
+    subset: "nc"
     raw: x_1 + log(x_2 + tan(x_2)) + 1
     prepared: v1+log(v2+tan(v2))+1
     n_variables: 2
@@ -7048,8 +7050,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5039
-    subset: iid
   SOOSE-NC-197:
+    subset: "nc"
     raw: x_1 - x_2*x_3 + x_2 + cos(x_3)
     prepared: v1-v2*v3+v2+cos(v3)
     n_variables: 3
@@ -7088,8 +7090,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-198:
+    subset: "nc"
     raw: x_1/(x_1 + x_2**2 + tan(x_3))
     prepared: v1/(v1+v2**2+tan(v3))
     n_variables: 3
@@ -7128,8 +7130,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-199:
+    subset: "nc"
     raw: x_2 + x_3 - tan(x_1 - x_2)/x_3
     prepared: v2+v3-tan(v1-v2)/v3
     n_variables: 3
@@ -7168,8 +7170,8 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: iid
   SOOSE-NC-000.ood:
+    subset: "nc"
     raw: -x_1 + log(x_1 + x_2**4)
     prepared: -v1+log(v1+v2**4)
     n_variables: 2
@@ -7200,7 +7202,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9287
-    subset: ood
     test:
       vars:
         v1:
@@ -7221,6 +7222,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-001.ood:
+    subset: "nc"
     raw: sin(x_3) + sin(x_3/(x_1 - x_2))
     prepared: sin(v3)+sin(v3/(v1-v2))
     n_variables: 3
@@ -7259,7 +7261,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7286,6 +7287,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-002.ood:
+    subset: "nc"
     raw: x_2*cos(x_1*x_3 - x_2) - 1
     prepared: v2*cos(v1*v3-v2)-1
     n_variables: 3
@@ -7324,7 +7326,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7351,6 +7352,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-003.ood:
+    subset: "nc"
     raw: x_2 + tan(x_1 - 1/(x_1 - 1))
     prepared: v2+tan(v1-1/(v1-1))
     n_variables: 2
@@ -7381,7 +7383,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7402,6 +7403,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-004.ood:
+    subset: "nc"
     raw: x_1 - x_2**2 - log(x_2)
     prepared: v1-v2**2-log(v2)
     n_variables: 2
@@ -7432,7 +7434,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -7453,6 +7454,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-005.ood:
+    subset: "nc"
     raw: x_1 - tan(exp(x_1 - 1))
     prepared: v1-tan(exp(v1-1))
     n_variables: 1
@@ -7475,7 +7477,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7490,6 +7491,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-006.ood:
+    subset: "nc"
     raw: x_1*(x_1 + 1)/(x_1 - 1)
     prepared: v1*(v1+1)/(v1-1)
     n_variables: 1
@@ -7512,7 +7514,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7527,6 +7528,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-007.ood:
+    subset: "nc"
     raw: x_1*x_3/(-x_1 + x_2) - x_3
     prepared: v1*v3/(-v1+v2)-v3
     n_variables: 3
@@ -7565,7 +7567,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7592,6 +7593,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-008.ood:
+    subset: "nc"
     raw: tan(x_2 + x_3)/(-x_1 - 1)
     prepared: tan(v2+v3)/(-v1-1)
     n_variables: 3
@@ -7630,7 +7632,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7657,6 +7658,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-009.ood:
+    subset: "nc"
     raw: x_1 + cos(x_1 - x_2*x_3)
     prepared: v1+cos(v1-v2*v3)
     n_variables: 3
@@ -7695,7 +7697,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7722,6 +7723,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-010.ood:
+    subset: "nc"
     raw: x_3 + x_3/(x_1 + x_2 + x_3)
     prepared: v3+v3/(v1+v2+v3)
     n_variables: 3
@@ -7760,7 +7762,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7787,6 +7788,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-011.ood:
+    subset: "nc"
     raw: sqrt(-x_1*x_2 + x_3/x_1)
     prepared: sqrt(-v1*v2+v3/v1)
     n_variables: 3
@@ -7825,7 +7827,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5009
-    subset: ood
     test:
       vars:
         v1:
@@ -7852,6 +7853,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-012.ood:
+    subset: "nc"
     raw: x_1/(x_1 + x_3 + log(x_2**4))
     prepared: v1/(v1+v3+log(v2**4))
     n_variables: 3
@@ -7890,7 +7892,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7917,6 +7918,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-013.ood:
+    subset: "nc"
     raw: sin(x_2/(-x_1 + x_2)) - tan(1)
     prepared: sin(v2/(-v1+v2))-tan(1)
     n_variables: 2
@@ -7947,7 +7949,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -7968,6 +7969,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-014.ood:
+    subset: "nc"
     raw: cos(x_2 + sin(x_1)/cos(x_3))
     prepared: cos(v2+sin(v1)/cos(v3))
     n_variables: 3
@@ -8006,7 +8008,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8033,6 +8034,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-015.ood:
+    subset: "nc"
     raw: x_1**2 + x_2 - tan(1) - 1
     prepared: v1**2+v2-tan(1)-1
     n_variables: 2
@@ -8063,7 +8065,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8084,6 +8085,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-016.ood:
+    subset: "nc"
     raw: x_2*sin(x_1**2 + x_1*x_2)
     prepared: v2*sin(v1**2+v1*v2)
     n_variables: 2
@@ -8114,7 +8116,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8135,6 +8136,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-017.ood:
+    subset: "nc"
     raw: -x_1/(x_1 - x_2 + x_3 - 1) + x_3
     prepared: -v1/(v1-v2+v3-1)+v3
     n_variables: 3
@@ -8173,7 +8175,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8200,6 +8201,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-018.ood:
+    subset: "nc"
     raw: x_2/(x_2 + cos(x_1*x_3))
     prepared: v2/(v2+cos(v1*v3))
     n_variables: 3
@@ -8238,7 +8240,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8265,6 +8266,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-019.ood:
+    subset: "nc"
     raw: 1 + tan(x_2)/(x_2*(-x_1 + x_2))
     prepared: 1+tan(v2)/(v2*(-v1+v2))
     n_variables: 2
@@ -8295,7 +8297,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8316,6 +8317,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-020.ood:
+    subset: "nc"
     raw: 1/(x_1 - sin(cos(x_2)))
     prepared: 1/(v1-sin(cos(v2)))
     n_variables: 2
@@ -8346,7 +8348,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8367,6 +8368,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-021.ood:
+    subset: "nc"
     raw: (x_1 + 1)/(x_2 + 1) + 1
     prepared: (v1+1)/(v2+1)+1
     n_variables: 2
@@ -8397,7 +8399,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8418,6 +8419,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-022.ood:
+    subset: "nc"
     raw: log(-x_1 + x_2)/(x_2*(x_2 - 1))
     prepared: log(-v1+v2)/(v2*(v2-1))
     n_variables: 2
@@ -8448,7 +8450,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4983
-    subset: ood
     test:
       vars:
         v1:
@@ -8469,6 +8470,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-023.ood:
+    subset: "nc"
     raw: (x_3 - 1)*sin(x_1 + x_1/x_2)
     prepared: (v3-1)*sin(v1+v1/v2)
     n_variables: 3
@@ -8507,7 +8509,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8534,6 +8535,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-024.ood:
+    subset: "nc"
     raw: x_2*x_3*cos(x_1 + x_2) + x_2
     prepared: v2*v3*cos(v1+v2)+v2
     n_variables: 3
@@ -8572,7 +8574,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8599,6 +8600,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-025.ood:
+    subset: "nc"
     raw: sin(x_2*tan(x_1**3 - x_2))
     prepared: sin(v2*tan(v1**3-v2))
     n_variables: 2
@@ -8629,7 +8631,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8650,6 +8651,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-026.ood:
+    subset: "nc"
     raw: x_1*cos(sqrt(log(x_2))) + x_3
     prepared: v1*cos(sqrt(log(v2)))+v3
     n_variables: 3
@@ -8688,7 +8690,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4526
-    subset: ood
     test:
       vars:
         v1:
@@ -8715,6 +8716,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-027.ood:
+    subset: "nc"
     raw: x_1*sqrt(-x_3 + sin(x_2))
     prepared: v1*sqrt(-v3+sin(v2))
     n_variables: 3
@@ -8753,7 +8755,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5072
-    subset: ood
     test:
       vars:
         v1:
@@ -8780,6 +8781,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-028.ood:
+    subset: "nc"
     raw: cos(x_1 - tan(x_2**3))
     prepared: cos(v1-tan(v2**3))
     n_variables: 2
@@ -8810,7 +8812,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8831,6 +8832,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-029.ood:
+    subset: "nc"
     raw: sqrt(x_2**2 - x_2 - exp(x_1))
     prepared: sqrt(v2**2-v2-exp(v1))
     n_variables: 2
@@ -8861,7 +8863,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.6075
-    subset: ood
     test:
       vars:
         v1:
@@ -8882,6 +8883,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-030.ood:
+    subset: "nc"
     raw: -x_2 + (x_3 + sin(x_1/x_2))/x_3
     prepared: -v2+(v3+sin(v1/v2))/v3
     n_variables: 3
@@ -8920,7 +8922,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -8947,6 +8948,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-031.ood:
+    subset: "nc"
     raw: x_3 + 1/(x_2 - log(x_1 + x_2))
     prepared: v3+1/(v2-log(v1+v2))
     n_variables: 3
@@ -8985,7 +8987,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5039
-    subset: ood
     test:
       vars:
         v1:
@@ -9012,6 +9013,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-032.ood:
+    subset: "nc"
     raw: sin(x_1**2) + 1/x_2
     prepared: sin(v1**2)+1/v2
     n_variables: 2
@@ -9042,7 +9044,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -9063,6 +9064,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-033.ood:
+    subset: "nc"
     raw: -x_2 + log(x_1*(-x_2 + exp(-1)))
     prepared: -v2+log(v1*(-v2+exp(-1)))
     n_variables: 2
@@ -9093,7 +9095,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.501
-    subset: ood
     test:
       vars:
         v1:
@@ -9114,6 +9115,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-034.ood:
+    subset: "nc"
     raw: (x_1 + cos(1))*log(x_2)
     prepared: (v1+cos(1))*log(v2)
     n_variables: 2
@@ -9144,7 +9146,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -9165,6 +9166,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-035.ood:
+    subset: "nc"
     raw: x_2 + sqrt(1 + x_3/(x_1*x_2))
     prepared: v2+sqrt(1+v3/(v1*v2))
     n_variables: 3
@@ -9203,7 +9205,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9074
-    subset: ood
     test:
       vars:
         v1:
@@ -9230,6 +9231,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-036.ood:
+    subset: "nc"
     raw: (x_1 - x_3)/sin(x_1*x_2)
     prepared: (v1-v3)/sin(v1*v2)
     n_variables: 3
@@ -9268,7 +9270,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -9295,6 +9296,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-037.ood:
+    subset: "nc"
     raw: x_2*sqrt(x_1/x_3 + x_2)/x_3
     prepared: v2*sqrt(v1/v3+v2)/v3
     n_variables: 3
@@ -9333,7 +9335,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5027
-    subset: ood
     test:
       vars:
         v1:
@@ -9360,6 +9361,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-038.ood:
+    subset: "nc"
     raw: sin(x_2/x_1) + sin(x_1 - x_2)
     prepared: sin(v2/v1)+sin(v1-v2)
     n_variables: 2
@@ -9390,7 +9392,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -9411,6 +9412,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-039.ood:
+    subset: "nc"
     raw: cos(x_1) - sqrt(cos(x_2))
     prepared: cos(v1)-sqrt(cos(v2))
     n_variables: 2
@@ -9441,7 +9443,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4686
-    subset: ood
     test:
       vars:
         v1:
@@ -9462,6 +9463,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-040.ood:
+    subset: "nc"
     raw: x_1*(x_1 + x_2 + x_3 + sin(x_2))
     prepared: v1*(v1+v2+v3+sin(v2))
     n_variables: 3
@@ -9500,7 +9502,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -9527,6 +9528,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-041.ood:
+    subset: "nc"
     raw: x_2*(x_1 + log(cos(x_3)))/x_1
     prepared: v2*(v1+log(cos(v3)))/v1
     n_variables: 3
@@ -9565,7 +9567,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4738
-    subset: ood
     test:
       vars:
         v1:
@@ -9592,6 +9593,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-042.ood:
+    subset: "nc"
     raw: x_1 + sin(log(x_2*(x_2 - 1)))
     prepared: v1+sin(log(v2*(v2-1)))
     n_variables: 2
@@ -9622,7 +9624,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9522
-    subset: ood
     test:
       vars:
         v1:
@@ -9643,6 +9644,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-043.ood:
+    subset: "nc"
     raw: (-x_1 + x_3)*log(-x_1 + x_2)
     prepared: (-v1+v3)*log(-v1+v2)
     n_variables: 3
@@ -9681,7 +9683,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4983
-    subset: ood
     test:
       vars:
         v1:
@@ -9708,6 +9709,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-044.ood:
+    subset: "nc"
     raw: x_3 - cos(x_1**3*x_2**3)
     prepared: v3-cos(v1**3*v2**3)
     n_variables: 3
@@ -9746,7 +9748,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -9773,6 +9774,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-045.ood:
+    subset: "nc"
     raw: cos((-x_1 + sin(x_2) - 1)**3)
     prepared: cos((-v1+sin(v2)-1)**3)
     n_variables: 2
@@ -9803,7 +9805,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -9824,6 +9825,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-046.ood:
+    subset: "nc"
     raw: x_2 + sin(x_1**5 + x_3)
     prepared: v2+sin(v1**5+v3)
     n_variables: 3
@@ -9862,7 +9864,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -9889,6 +9890,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-047.ood:
+    subset: "nc"
     raw: x_1 + x_2/(exp(x_2) - 1)
     prepared: v1+v2/(exp(v2)-1)
     n_variables: 2
@@ -9919,7 +9921,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -9940,6 +9941,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-048.ood:
+    subset: "nc"
     raw: tan(cos(x_1) + tan(1))
     prepared: tan(cos(v1)+tan(1))
     n_variables: 1
@@ -9962,7 +9964,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -9977,6 +9978,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-049.ood:
+    subset: "nc"
     raw: x_1 + 1 + 1/(x_1 + 1)
     prepared: v1+1+1/(v1+1)
     n_variables: 1
@@ -9999,7 +10001,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10014,6 +10015,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-050.ood:
+    subset: "nc"
     raw: cos(sin(x_1)) - 1/x_1
     prepared: cos(sin(v1))-1/v1
     n_variables: 1
@@ -10036,7 +10038,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10051,6 +10052,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-051.ood:
+    subset: "nc"
     raw: x_1*log(sin(tan(x_1)))
     prepared: v1*log(sin(tan(v1)))
     n_variables: 1
@@ -10073,7 +10075,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5031
-    subset: ood
     test:
       vars:
         v1:
@@ -10088,6 +10089,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-052.ood:
+    subset: "nc"
     raw: (x_1 + sin(x_2))*(sqrt(x_2) + x_3)
     prepared: (v1+sin(v2))*(sqrt(v2)+v3)
     n_variables: 3
@@ -10126,7 +10128,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -10153,6 +10154,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-053.ood:
+    subset: "nc"
     raw: tan(sin(x_1*tan(x_2) - x_3))
     prepared: tan(sin(v1*tan(v2)-v3))
     n_variables: 3
@@ -10191,7 +10193,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10218,6 +10219,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-054.ood:
+    subset: "nc"
     raw: sin(x_2*(-x_1 + x_2 - x_3 + 1))
     prepared: sin(v2*(-v1+v2-v3+1))
     n_variables: 3
@@ -10256,7 +10258,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10283,6 +10284,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-055.ood:
+    subset: "nc"
     raw: log(cos(x_1**2 - x_2*x_3))
     prepared: log(cos(v1**2-v2*v3))
     n_variables: 3
@@ -10321,7 +10323,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.504
-    subset: ood
     test:
       vars:
         v1:
@@ -10348,6 +10349,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-056.ood:
+    subset: "nc"
     raw: sin(sin(x_2*x_3/x_1**2))
     prepared: sin(sin(v2*v3/v1**2))
     n_variables: 3
@@ -10386,7 +10388,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10413,6 +10414,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-057.ood:
+    subset: "nc"
     raw: x_1 + sin(exp(x_2) + cos(x_2))
     prepared: v1+sin(exp(v2)+cos(v2))
     n_variables: 2
@@ -10443,7 +10445,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10464,6 +10465,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-058.ood:
+    subset: "nc"
     raw: x_1 + sqrt(x_1 - x_3) + sin(x_2)
     prepared: v1+sqrt(v1-v3)+sin(v2)
     n_variables: 3
@@ -10502,7 +10504,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5095
-    subset: ood
     test:
       vars:
         v1:
@@ -10529,6 +10530,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-059.ood:
+    subset: "nc"
     raw: 1 - sin(x_1*(x_1 + sin(x_1)))
     prepared: 1-sin(v1*(v1+sin(v1)))
     n_variables: 1
@@ -10551,7 +10553,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10566,6 +10567,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-060.ood:
+    subset: "nc"
     raw: x_1/(x_2 + (x_1 + tan(x_3))/x_2)
     prepared: v1/(v2+(v1+tan(v3))/v2)
     n_variables: 3
@@ -10604,7 +10606,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10631,6 +10632,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-061.ood:
+    subset: "nc"
     raw: -log((x_1 + x_2)**2)
     prepared: -log((v1+v2)**2)
     n_variables: 2
@@ -10661,7 +10663,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10682,6 +10683,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-062.ood:
+    subset: "nc"
     raw: x_1*(-x_1 + cos(sqrt(x_2))**2)
     prepared: v1*(-v1+cos(sqrt(v2))**2)
     n_variables: 2
@@ -10712,7 +10714,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -10733,6 +10734,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-063.ood:
+    subset: "nc"
     raw: -exp(cos(x_1)) + sin(x_1)
     prepared: -exp(cos(v1))+sin(v1)
     n_variables: 1
@@ -10755,7 +10757,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10770,6 +10771,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-064.ood:
+    subset: "nc"
     raw: x_2 + 1/(-x_1*(x_3 - 1) + x_2)
     prepared: v2+1/(-v1*(v3-1)+v2)
     n_variables: 3
@@ -10808,7 +10810,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10835,6 +10836,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-065.ood:
+    subset: "nc"
     raw: x_1 + cos(1 + 1/x_2)
     prepared: v1+cos(1+1/v2)
     n_variables: 2
@@ -10865,7 +10867,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10886,6 +10887,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-066.ood:
+    subset: "nc"
     raw: x_3/(x_1 - x_2*exp(x_2) - 1)
     prepared: v3/(v1-v2*exp(v2)-1)
     n_variables: 3
@@ -10924,7 +10926,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -10951,6 +10952,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-067.ood:
+    subset: "nc"
     raw: tan(exp(x_1 - x_2)) - 1
     prepared: tan(exp(v1-v2))-1
     n_variables: 2
@@ -10981,7 +10983,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11002,6 +11003,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-068.ood:
+    subset: "nc"
     raw: cos(x_1**5*(x_2 - x_3)**5)/x_1
     prepared: cos(v1**5*(v2-v3)**5)/v1
     n_variables: 3
@@ -11040,7 +11042,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11067,6 +11068,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-069.ood:
+    subset: "nc"
     raw: x_1*cos(x_2)*tan(x_2)
     prepared: v1*cos(v2)*tan(v2)
     n_variables: 2
@@ -11097,7 +11099,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11118,6 +11119,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-070.ood:
+    subset: "nc"
     raw: exp(cos((x_1 + x_2 + 1)**4))
     prepared: exp(cos((v1+v2+1)**4))
     n_variables: 2
@@ -11148,7 +11150,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11169,6 +11170,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-071.ood:
+    subset: "nc"
     raw: x_3/(x_2*(x_3**2 + tan(x_1)))
     prepared: v3/(v2*(v3**2+tan(v1)))
     n_variables: 3
@@ -11207,7 +11209,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11234,6 +11235,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-072.ood:
+    subset: "nc"
     raw: -x_3 + (-x_1 + x_2)/log(x_2) - 1
     prepared: -v3+(-v1+v2)/log(v2)-1
     n_variables: 3
@@ -11272,7 +11274,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -11299,6 +11300,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-073.ood:
+    subset: "nc"
     raw: x_2 + cos(tan(x_1 - cos(1)))
     prepared: v2+cos(tan(v1-cos(1)))
     n_variables: 2
@@ -11329,7 +11331,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11350,6 +11351,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-074.ood:
+    subset: "nc"
     raw: -x_2 + cos(x_2 - 1)/x_1
     prepared: -v2+cos(v2-1)/v1
     n_variables: 2
@@ -11380,7 +11382,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11401,6 +11402,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-075.ood:
+    subset: "nc"
     raw: log(x_1/sin(1/x_1))
     prepared: log(v1/sin(1/v1))
     n_variables: 1
@@ -11423,7 +11425,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9782
-    subset: ood
     test:
       vars:
         v1:
@@ -11438,6 +11439,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-076.ood:
+    subset: "nc"
     raw: x_3/(x_2 + cos(x_1/cos(x_2)))
     prepared: v3/(v2+cos(v1/cos(v2)))
     n_variables: 3
@@ -11476,7 +11478,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11503,6 +11504,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-077.ood:
+    subset: "nc"
     raw: x_1 + x_1/(x_2*(x_1 + cos(x_2)))
     prepared: v1+v1/(v2*(v1+cos(v2)))
     n_variables: 2
@@ -11533,7 +11535,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11554,6 +11555,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-078.ood:
+    subset: "nc"
     raw: x_2/((x_1 + tan(x_2))*(x_2 + x_3))
     prepared: v2/((v1+tan(v2))*(v2+v3))
     n_variables: 3
@@ -11592,7 +11594,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11619,6 +11620,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-079.ood:
+    subset: "nc"
     raw: x_1 - x_2*(cos(x_2) - cos(x_3))
     prepared: v1-v2*(cos(v2)-cos(v3))
     n_variables: 3
@@ -11657,7 +11659,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11684,6 +11685,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-080.ood:
+    subset: "nc"
     raw: x_3*cos(x_2 + x_3) + cos(x_1)
     prepared: v3*cos(v2+v3)+cos(v1)
     n_variables: 3
@@ -11722,7 +11724,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11749,6 +11750,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-081.ood:
+    subset: "nc"
     raw: x_2**2 - cos(cos(x_1))
     prepared: v2**2-cos(cos(v1))
     n_variables: 2
@@ -11779,7 +11781,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11800,6 +11801,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-082.ood:
+    subset: "nc"
     raw: -x_2*sin(x_1*(x_3 - 1))
     prepared: -v2*sin(v1*(v3-1))
     n_variables: 3
@@ -11838,7 +11840,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11865,6 +11866,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-083.ood:
+    subset: "nc"
     raw: tan(cos(x_1) - tan(1)) - 1
     prepared: tan(cos(v1)-tan(1))-1
     n_variables: 1
@@ -11887,7 +11889,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11902,6 +11903,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-084.ood:
+    subset: "nc"
     raw: (x_2 + x_3 - cos(x_1))/x_3
     prepared: (v2+v3-cos(v1))/v3
     n_variables: 3
@@ -11940,7 +11942,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -11967,6 +11968,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-085.ood:
+    subset: "nc"
     raw: x_1*(sin(x_2) - sin(x_3)/x_2)
     prepared: v1*(sin(v2)-sin(v3)/v2)
     n_variables: 3
@@ -12005,7 +12007,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12032,6 +12033,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-086.ood:
+    subset: "nc"
     raw: x_3*cos(x_1**2 + x_2)**3
     prepared: v3*cos(v1**2+v2)**3
     n_variables: 3
@@ -12070,7 +12072,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12097,6 +12098,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-087.ood:
+    subset: "nc"
     raw: tan((x_1 - x_2**5)*sin(x_3))
     prepared: tan((v1-v2**5)*sin(v3))
     n_variables: 3
@@ -12135,7 +12137,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12162,6 +12163,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-088.ood:
+    subset: "nc"
     raw: -x_1*sin(tan(x_1*x_2)) + x_1
     prepared: -v1*sin(tan(v1*v2))+v1
     n_variables: 2
@@ -12192,7 +12194,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12213,6 +12214,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-089.ood:
+    subset: "nc"
     raw: cos(1 - (x_2*x_3 + x_2)/x_1)
     prepared: cos(1-(v2*v3+v2)/v1)
     n_variables: 3
@@ -12251,7 +12253,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12278,6 +12279,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-090.ood:
+    subset: "nc"
     raw: x_1 - (x_2 + x_3)*sin(x_1) + 1
     prepared: v1-(v2+v3)*sin(v1)+1
     n_variables: 3
@@ -12316,7 +12318,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12343,6 +12344,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-091.ood:
+    subset: "nc"
     raw: -1/tan(x_1*x_2)
     prepared: -1/tan(v1*v2)
     n_variables: 2
@@ -12373,7 +12375,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12394,6 +12395,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-092.ood:
+    subset: "nc"
     raw: sin(x_1) + tan(tan(exp(x_1)))
     prepared: sin(v1)+tan(tan(exp(v1)))
     n_variables: 1
@@ -12416,7 +12418,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12431,6 +12432,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-093.ood:
+    subset: "nc"
     raw: (x_2 + x_3 + (x_2 - 1)/x_2)/x_1
     prepared: (v2+v3+(v2-1)/v2)/v1
     n_variables: 3
@@ -12469,7 +12471,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12496,6 +12497,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-094.ood:
+    subset: "nc"
     raw: x_1/(x_2*(-x_2 + x_3)) - x_2
     prepared: v1/(v2*(-v2+v3))-v2
     n_variables: 3
@@ -12534,7 +12536,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12561,6 +12562,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-095.ood:
+    subset: "nc"
     raw: x_2 + log(x_1*(x_1 + sin(x_2)))
     prepared: v2+log(v1*(v1+sin(v2)))
     n_variables: 2
@@ -12591,7 +12593,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9707
-    subset: ood
     test:
       vars:
         v1:
@@ -12612,6 +12613,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-096.ood:
+    subset: "nc"
     raw: x_2 + x_3/(-x_1*x_3 - x_2)
     prepared: v2+v3/(-v1*v3-v2)
     n_variables: 3
@@ -12650,7 +12652,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12677,6 +12678,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-097.ood:
+    subset: "nc"
     raw: sin(x_3*(x_1 - x_2 + 1))
     prepared: sin(v3*(v1-v2+1))
     n_variables: 3
@@ -12715,7 +12717,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12742,6 +12743,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-098.ood:
+    subset: "nc"
     raw: -x_2 + x_3*sin(cos(tan(x_1)))
     prepared: -v2+v3*sin(cos(tan(v1)))
     n_variables: 3
@@ -12780,7 +12782,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12807,6 +12808,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-099.ood:
+    subset: "nc"
     raw: sin(x_2*(x_1 + x_3)**2 + x_2)
     prepared: sin(v2*(v1+v3)**2+v2)
     n_variables: 3
@@ -12845,7 +12847,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -12872,6 +12873,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-100.ood:
+    subset: "nc"
     raw: x_1*(x_2 - asin(1/x_1))
     prepared: v1*(v2-asin(1/v1))
     n_variables: 2
@@ -12902,7 +12904,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9044
-    subset: ood
     test:
       vars:
         v1:
@@ -12923,6 +12924,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-101.ood:
+    subset: "nc"
     raw: cos(sqrt(x_1**2 - 1))
     prepared: cos(sqrt(v1**2-1))
     n_variables: 1
@@ -12945,7 +12947,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9044
-    subset: ood
     test:
       vars:
         v1:
@@ -12960,6 +12961,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-102.ood:
+    subset: "nc"
     raw: x_1*(x_1 + x_2*cos(x_3)) + 1
     prepared: v1*(v1+v2*cos(v3))+1
     n_variables: 3
@@ -12998,7 +13000,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13025,6 +13026,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-103.ood:
+    subset: "nc"
     raw: x_1*cos(x_2**3 + x_2)
     prepared: v1*cos(v2**3+v2)
     n_variables: 2
@@ -13055,7 +13057,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13076,6 +13077,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-104.ood:
+    subset: "nc"
     raw: sin(exp((x_2 + x_3)/x_1))
     prepared: sin(exp((v2+v3)/v1))
     n_variables: 3
@@ -13114,7 +13116,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.9999
-    subset: ood
     test:
       vars:
         v1:
@@ -13141,6 +13142,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-105.ood:
+    subset: "nc"
     raw: tan(x_2 + (x_1 + x_3)/(x_2*x_3))
     prepared: tan(v2+(v1+v3)/(v2*v3))
     n_variables: 3
@@ -13179,7 +13181,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13206,6 +13207,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-106.ood:
+    subset: "nc"
     raw: exp(1 - cos(x_1)) + 1
     prepared: exp(1-cos(v1))+1
     n_variables: 1
@@ -13228,7 +13230,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13243,6 +13244,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-107.ood:
+    subset: "nc"
     raw: x_1 - sqrt(x_1 + x_2)/x_2
     prepared: v1-sqrt(v1+v2)/v2
     n_variables: 2
@@ -13273,7 +13275,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5039
-    subset: ood
     test:
       vars:
         v1:
@@ -13294,6 +13295,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-108.ood:
+    subset: "nc"
     raw: x_1/(x_1 + tan(sin(x_1)))
     prepared: v1/(v1+tan(sin(v1)))
     n_variables: 1
@@ -13316,7 +13318,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13331,6 +13332,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-109.ood:
+    subset: "nc"
     raw: (x_3 + sin(x_1)/x_2)/x_3
     prepared: (v3+sin(v1)/v2)/v3
     n_variables: 3
@@ -13369,7 +13371,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13396,6 +13397,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-110.ood:
+    subset: "nc"
     raw: x_2*x_3/(x_1*(x_1 + sqrt(x_2)))
     prepared: v2*v3/(v1*(v1+sqrt(v2)))
     n_variables: 3
@@ -13434,7 +13436,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -13461,6 +13462,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-111.ood:
+    subset: "nc"
     raw: x_1*sin(x_2 + x_3*sin(x_1))
     prepared: v1*sin(v2+v3*sin(v1))
     n_variables: 3
@@ -13499,7 +13501,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13526,6 +13527,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-112.ood:
+    subset: "nc"
     raw: cos((x_1 + x_2)*(x_1 + x_3 + 1))
     prepared: cos((v1+v2)*(v1+v3+1))
     n_variables: 3
@@ -13564,7 +13566,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13591,6 +13592,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-113.ood:
+    subset: "nc"
     raw: x_2**2*sin(x_1 - 1) - 1
     prepared: v2**2*sin(v1-1)-1
     n_variables: 2
@@ -13621,7 +13623,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13642,6 +13643,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-114.ood:
+    subset: "nc"
     raw: x_2/(x_1*(x_2 + sin(x_1 + x_3)))
     prepared: v2/(v1*(v2+sin(v1+v3)))
     n_variables: 3
@@ -13680,7 +13682,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13707,6 +13708,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-115.ood:
+    subset: "nc"
     raw: x_3 - 1/(x_1 + exp(x_2))
     prepared: v3-1/(v1+exp(v2))
     n_variables: 3
@@ -13745,7 +13747,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13772,6 +13773,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-116.ood:
+    subset: "nc"
     raw: x_2**2 - cos(sin(x_1))
     prepared: v2**2-cos(sin(v1))
     n_variables: 2
@@ -13802,7 +13804,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -13823,6 +13824,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-117.ood:
+    subset: "nc"
     raw: sqrt(x_1*(x_2/x_3 + x_3))
     prepared: sqrt(v1*(v2/v3+v3))
     n_variables: 3
@@ -13861,7 +13863,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5011
-    subset: ood
     test:
       vars:
         v1:
@@ -13888,6 +13889,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-118.ood:
+    subset: "nc"
     raw: log(exp(x_1 + x_2) + log(x_2))
     prepared: log(exp(v1+v2)+log(v2))
     n_variables: 2
@@ -13918,7 +13920,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4788
-    subset: ood
     test:
       vars:
         v1:
@@ -13939,6 +13940,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-119.ood:
+    subset: "nc"
     raw: x_1*x_2/log(log(-x_1))
     prepared: v1*v2/log(log(-v1))
     n_variables: 2
@@ -13969,7 +13971,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4481
-    subset: ood
     test:
       vars:
         v1:
@@ -13990,6 +13991,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-120.ood:
+    subset: "nc"
     raw: sqrt(-1 + (x_1*x_2 + x_2)/x_3)
     prepared: sqrt(-1+(v1*v2+v2)/v3)
     n_variables: 3
@@ -14028,7 +14030,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.405
-    subset: ood
     test:
       vars:
         v1:
@@ -14055,6 +14056,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-121.ood:
+    subset: "nc"
     raw: x_2*sin(x_1 - x_3**2)
     prepared: v2*sin(v1-v3**2)
     n_variables: 3
@@ -14093,7 +14095,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14120,6 +14121,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-122.ood:
+    subset: "nc"
     raw: cos(sin(x_2) + x_3/x_1)
     prepared: cos(sin(v2)+v3/v1)
     n_variables: 3
@@ -14158,7 +14160,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14185,6 +14186,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-123.ood:
+    subset: "nc"
     raw: x_2 - log((x_1 - 1)**2)
     prepared: v2-log((v1-1)**2)
     n_variables: 2
@@ -14215,7 +14217,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14236,6 +14237,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-124.ood:
+    subset: "nc"
     raw: sqrt(tan(x_2*(-x_1 + exp(-1))))
     prepared: sqrt(tan(v2*(-v1+exp(-1))))
     n_variables: 2
@@ -14266,7 +14268,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5034
-    subset: ood
     test:
       vars:
         v1:
@@ -14287,6 +14288,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-125.ood:
+    subset: "nc"
     raw: -x_2*sin(x_1*x_3 + 1) - 1
     prepared: -v2*sin(v1*v3+1)-1
     n_variables: 3
@@ -14325,7 +14327,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14352,6 +14353,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-126.ood:
+    subset: "nc"
     raw: -x_1 + exp(-sin(x_1/x_2))
     prepared: -v1+exp(-sin(v1/v2))
     n_variables: 2
@@ -14382,7 +14384,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14403,6 +14404,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-127.ood:
+    subset: "nc"
     raw: x_1 - x_2**2 + x_2 + x_3 - 1
     prepared: v1-v2**2+v2+v3-1
     n_variables: 3
@@ -14441,7 +14443,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14468,6 +14469,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-128.ood:
+    subset: "nc"
     raw: log(cos(exp(-1/cos(x_1))))
     prepared: log(cos(exp(-1/cos(v1))))
     n_variables: 1
@@ -14490,7 +14492,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5959
-    subset: ood
     test:
       vars:
         v1:
@@ -14505,6 +14506,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-129.ood:
+    subset: "nc"
     raw: x_1 - x_2*cos(x_1**3)
     prepared: v1-v2*cos(v1**3)
     n_variables: 2
@@ -14535,7 +14537,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14556,6 +14557,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-130.ood:
+    subset: "nc"
     raw: sin(x_2*x_3/x_1) - 1
     prepared: sin(v2*v3/v1)-1
     n_variables: 3
@@ -14594,7 +14596,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14621,6 +14622,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-131.ood:
+    subset: "nc"
     raw: sqrt(x_2/(x_1 + x_1/sin(x_1)))
     prepared: sqrt(v2/(v1+v1/sin(v1)))
     n_variables: 2
@@ -14651,7 +14653,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4998
-    subset: ood
     test:
       vars:
         v1:
@@ -14672,6 +14673,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-132.ood:
+    subset: "nc"
     raw: sin(cos(x_1*tan(x_1) + x_1))
     prepared: sin(cos(v1*tan(v1)+v1))
     n_variables: 1
@@ -14694,7 +14696,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14709,6 +14710,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-133.ood:
+    subset: "nc"
     raw: x_2/(x_2 + sqrt(x_1*x_3)) + x_3
     prepared: v2/(v2+sqrt(v1*v3))+v3
     n_variables: 3
@@ -14747,7 +14749,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5016
-    subset: ood
     test:
       vars:
         v1:
@@ -14774,6 +14775,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-134.ood:
+    subset: "nc"
     raw: log(sqrt(x_1*sin(x_2)))
     prepared: log(sqrt(v1*sin(v2)))
     n_variables: 2
@@ -14804,7 +14806,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5024
-    subset: ood
     test:
       vars:
         v1:
@@ -14825,6 +14826,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-135.ood:
+    subset: "nc"
     raw: x_3 + 1 - 1/(x_1 + x_2*x_3)
     prepared: v3+1-1/(v1+v2*v3)
     n_variables: 3
@@ -14863,7 +14865,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14890,6 +14891,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-136.ood:
+    subset: "nc"
     raw: -x_1 + x_2*cos(x_3 - sin(x_3))
     prepared: -v1+v2*cos(v3-sin(v3))
     n_variables: 3
@@ -14928,7 +14930,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -14955,6 +14956,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-137.ood:
+    subset: "nc"
     raw: x_2*(x_2 + x_3) - cos(tan(x_1))
     prepared: v2*(v2+v3)-cos(tan(v1))
     n_variables: 3
@@ -14993,7 +14995,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15020,6 +15021,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-138.ood:
+    subset: "nc"
     raw: cos(x_2)/cos(x_1/x_3)
     prepared: cos(v2)/cos(v1/v3)
     n_variables: 3
@@ -15058,7 +15060,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15085,6 +15086,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-139.ood:
+    subset: "nc"
     raw: -x_1 + tan(x_1*x_2**2 - x_3)
     prepared: -v1+tan(v1*v2**2-v3)
     n_variables: 3
@@ -15123,7 +15125,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15150,6 +15151,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-140.ood:
+    subset: "nc"
     raw: x_1**2 + x_2 - cos(x_2 - x_3)
     prepared: v1**2+v2-cos(v2-v3)
     n_variables: 3
@@ -15188,7 +15190,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15215,6 +15216,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-141.ood:
+    subset: "nc"
     raw: x_2*cos(x_2) + cos(x_1/x_2)
     prepared: v2*cos(v2)+cos(v1/v2)
     n_variables: 2
@@ -15245,7 +15247,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15266,6 +15267,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-142.ood:
+    subset: "nc"
     raw: cos(x_1 - tan(x_2)**2)
     prepared: cos(v1-tan(v2)**2)
     n_variables: 2
@@ -15296,7 +15298,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15317,6 +15318,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-143.ood:
+    subset: "nc"
     raw: log(x_1 - x_2 + x_3 + exp(x_2))
     prepared: log(v1-v2+v3+exp(v2))
     n_variables: 3
@@ -15355,7 +15357,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.8109
-    subset: ood
     test:
       vars:
         v1:
@@ -15382,6 +15383,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-144.ood:
+    subset: "nc"
     raw: tan(x_1*cos(1/x_1)/x_2)
     prepared: tan(v1*cos(1/v1)/v2)
     n_variables: 2
@@ -15412,7 +15414,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15433,6 +15434,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-145.ood:
+    subset: "nc"
     raw: -x_1*(x_1 + sin(x_1 + x_2))
     prepared: -v1*(v1+sin(v1+v2))
     n_variables: 2
@@ -15463,7 +15465,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15484,6 +15485,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-146.ood:
+    subset: "nc"
     raw: sin(log(-x_1/x_2 + x_2))
     prepared: sin(log(-v1/v2+v2))
     n_variables: 2
@@ -15514,7 +15516,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5028
-    subset: ood
     test:
       vars:
         v1:
@@ -15535,6 +15536,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-147.ood:
+    subset: "nc"
     raw: tan(log(-x_1*x_2 + x_1))
     prepared: tan(log(-v1*v2+v1))
     n_variables: 2
@@ -15565,7 +15567,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4999
-    subset: ood
     test:
       vars:
         v1:
@@ -15586,6 +15587,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-148.ood:
+    subset: "nc"
     raw: x_1 + x_2 + sin(x_1 + x_3) + 1
     prepared: v1+v2+sin(v1+v3)+1
     n_variables: 3
@@ -15624,7 +15626,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15651,6 +15652,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-149.ood:
+    subset: "nc"
     raw: x_2 + x_3 - tan(x_2/x_1)
     prepared: v2+v3-tan(v2/v1)
     n_variables: 3
@@ -15689,7 +15691,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15716,6 +15717,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-150.ood:
+    subset: "nc"
     raw: x_2*(x_1 + log(x_2) + 1) + x_3
     prepared: v2*(v1+log(v2)+1)+v3
     n_variables: 3
@@ -15754,7 +15756,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -15781,6 +15782,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-151.ood:
+    subset: "nc"
     raw: sin(x_3)/(x_1**5 + x_2)
     prepared: sin(v3)/(v1**5+v2)
     n_variables: 3
@@ -15819,7 +15821,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15846,6 +15847,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-152.ood:
+    subset: "nc"
     raw: x_1 + (x_2 + sin(x_1 + 1))/x_3
     prepared: v1+(v2+sin(v1+1))/v3
     n_variables: 3
@@ -15884,7 +15886,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15911,6 +15912,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-153.ood:
+    subset: "nc"
     raw: asin(sin(x_1)/x_1)
     prepared: asin(sin(v1)/v1)
     n_variables: 1
@@ -15933,7 +15935,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -15948,6 +15949,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-154.ood:
+    subset: "nc"
     raw: -x_2 + (x_1 + sqrt(x_2))**2
     prepared: -v2+(v1+sqrt(v2))**2
     n_variables: 2
@@ -15978,7 +15980,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -15999,6 +16000,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-155.ood:
+    subset: "nc"
     raw: x_2 + 1 + (x_1 + cos(x_1))/x_3
     prepared: v2+1+(v1+cos(v1))/v3
     n_variables: 3
@@ -16037,7 +16039,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16064,6 +16065,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-156.ood:
+    subset: "nc"
     raw: cos(x_1*(-x_1 + x_2**2*x_3))
     prepared: cos(v1*(-v1+v2**2*v3))
     n_variables: 3
@@ -16102,7 +16104,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16129,6 +16130,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-157.ood:
+    subset: "nc"
     raw: (tan(x_2/x_1) - 1)/x_2
     prepared: (tan(v2/v1)-1)/v2
     n_variables: 2
@@ -16159,7 +16161,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16180,6 +16181,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-158.ood:
+    subset: "nc"
     raw: x_2*cos(x_1*x_2*x_3 + x_1)
     prepared: v2*cos(v1*v2*v3+v1)
     n_variables: 3
@@ -16218,7 +16220,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16245,6 +16246,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-159.ood:
+    subset: "nc"
     raw: x_2**2 + sin(x_1*x_2)
     prepared: v2**2+sin(v1*v2)
     n_variables: 2
@@ -16275,7 +16277,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16296,6 +16297,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-160.ood:
+    subset: "nc"
     raw: x_1*(-x_2 + sqrt(x_1 - x_3))
     prepared: v1*(-v2+sqrt(v1-v3))
     n_variables: 3
@@ -16334,7 +16336,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5095
-    subset: ood
     test:
       vars:
         v1:
@@ -16361,6 +16362,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-161.ood:
+    subset: "nc"
     raw: x_3**2/(x_1*exp(x_2) + x_3)
     prepared: v3**2/(v1*exp(v2)+v3)
     n_variables: 3
@@ -16399,7 +16401,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16426,6 +16427,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-162.ood:
+    subset: "nc"
     raw: (-x_1 + (-x_1 + x_2)*log(x_2))/x_1
     prepared: (-v1+(-v1+v2)*log(v2))/v1
     n_variables: 2
@@ -16456,7 +16458,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -16477,6 +16478,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-163.ood:
+    subset: "nc"
     raw: x_3 + sin(x_1) - 1/(x_2*x_3)
     prepared: v3+sin(v1)-1/(v2*v3)
     n_variables: 3
@@ -16515,7 +16517,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16542,6 +16543,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-164.ood:
+    subset: "nc"
     raw: x_1 - x_2 + tan(x_1**2 - x_3)
     prepared: v1-v2+tan(v1**2-v3)
     n_variables: 3
@@ -16580,7 +16582,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16607,6 +16608,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-165.ood:
+    subset: "nc"
     raw: sqrt(-x_1 + x_2*x_3/x_1)
     prepared: sqrt(-v1+v2*v3/v1)
     n_variables: 3
@@ -16645,7 +16647,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.4945
-    subset: ood
     test:
       vars:
         v1:
@@ -16672,6 +16673,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-166.ood:
+    subset: "nc"
     raw: x_1 - sin(x_3/(x_1 + x_2 + 1))
     prepared: v1-sin(v3/(v1+v2+1))
     n_variables: 3
@@ -16710,7 +16712,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16737,6 +16738,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-167.ood:
+    subset: "nc"
     raw: cos(x_1 + x_2 + (x_2 + x_3)**2)
     prepared: cos(v1+v2+(v2+v3)**2)
     n_variables: 3
@@ -16775,7 +16777,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16802,6 +16803,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-168.ood:
+    subset: "nc"
     raw: (-x_2 + x_3*(-x_1 + x_3))**(-3)
     prepared: (-v2+v3*(-v1+v3))**(-3)
     n_variables: 3
@@ -16840,7 +16842,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16867,6 +16868,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-169.ood:
+    subset: "nc"
     raw: -x_1 + cos(1 + 1/x_1)
     prepared: -v1+cos(1+1/v1)
     n_variables: 1
@@ -16889,7 +16891,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16904,6 +16905,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-170.ood:
+    subset: "nc"
     raw: -x_3 + tan(x_3/(x_1*x_2))
     prepared: -v3+tan(v3/(v1*v2))
     n_variables: 3
@@ -16942,7 +16944,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -16969,6 +16970,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-171.ood:
+    subset: "nc"
     raw: -x_1**2 + x_1/x_2 + x_2 + x_3
     prepared: -v1**2+v1/v2+v2+v3
     n_variables: 3
@@ -17007,7 +17009,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17034,6 +17035,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-172.ood:
+    subset: "nc"
     raw: cos((x_1 - x_2 - 1/x_2)**5)
     prepared: cos((v1-v2-1/v2)**5)
     n_variables: 2
@@ -17064,7 +17066,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17085,6 +17086,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-173.ood:
+    subset: "nc"
     raw: x_2 + x_3 - x_3/(x_1 - 1)
     prepared: v2+v3-v3/(v1-1)
     n_variables: 3
@@ -17123,7 +17125,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17150,6 +17151,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-174.ood:
+    subset: "nc"
     raw: x_1 - x_3*(x_2 - 1) + tan(x_3)
     prepared: v1-v3*(v2-1)+tan(v3)
     n_variables: 3
@@ -17188,7 +17190,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17215,6 +17216,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-175.ood:
+    subset: "nc"
     raw: x_2 - cos(sin(x_1) - 1)**2
     prepared: v2-cos(sin(v1)-1)**2
     n_variables: 2
@@ -17245,7 +17247,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17266,6 +17267,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-176.ood:
+    subset: "nc"
     raw: x_1 + x_2 + (x_1 + x_2*x_3)/x_3
     prepared: v1+v2+(v1+v2*v3)/v3
     n_variables: 3
@@ -17304,7 +17306,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17331,6 +17332,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-177.ood:
+    subset: "nc"
     raw: x_2/(-exp(x_1) + tan(x_1)) - 1
     prepared: v2/(-exp(v1)+tan(v1))-1
     n_variables: 2
@@ -17361,7 +17363,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17382,6 +17383,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-178.ood:
+    subset: "nc"
     raw: x_2*(x_2 - (-x_1 - 1)/x_2)
     prepared: v2*(v2-(-v1-1)/v2)
     n_variables: 2
@@ -17412,7 +17414,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17433,6 +17434,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-179.ood:
+    subset: "nc"
     raw: cos(sin(exp(x_1) + 1))
     prepared: cos(sin(exp(v1)+1))
     n_variables: 1
@@ -17455,7 +17457,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17470,6 +17471,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-180.ood:
+    subset: "nc"
     raw: log(x_2 + cos(x_2))/(x_1 + x_3)
     prepared: log(v2+cos(v2))/(v1+v3)
     n_variables: 3
@@ -17508,7 +17510,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5369
-    subset: ood
     test:
       vars:
         v1:
@@ -17535,6 +17536,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-181.ood:
+    subset: "nc"
     raw: -1 - sin(x_1)**2/x_2
     prepared: -1-sin(v1)**2/v2
     n_variables: 2
@@ -17565,7 +17567,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17586,6 +17587,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-182.ood:
+    subset: "nc"
     raw: sin(tan(x_2))*cos(x_1)
     prepared: sin(tan(v2))*cos(v1)
     n_variables: 2
@@ -17616,7 +17618,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17637,6 +17638,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-183.ood:
+    subset: "nc"
     raw: cos(x_1*(x_2 + 1) + sin(x_1))
     prepared: cos(v1*(v2+1)+sin(v1))
     n_variables: 2
@@ -17667,7 +17669,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17688,6 +17689,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-184.ood:
+    subset: "nc"
     raw: sin((x_1 - x_3)/(x_2*x_3))
     prepared: sin((v1-v3)/(v2*v3))
     n_variables: 3
@@ -17726,7 +17728,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17753,6 +17754,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-185.ood:
+    subset: "nc"
     raw: cos(cos(x_2)**2/(-x_1 + x_3)**2)
     prepared: cos(cos(v2)**2/(-v1+v3)**2)
     n_variables: 3
@@ -17791,7 +17793,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17818,6 +17819,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-186.ood:
+    subset: "nc"
     raw: x_3 + (-x_2 + x_3)*cos(x_1 + x_3)
     prepared: v3+(-v2+v3)*cos(v1+v3)
     n_variables: 3
@@ -17856,7 +17858,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17883,6 +17884,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-187.ood:
+    subset: "nc"
     raw: x_2 + x_3 + cos(x_1 + 1) + 1
     prepared: v2+v3+cos(v1+1)+1
     n_variables: 3
@@ -17921,7 +17923,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -17948,6 +17949,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-188.ood:
+    subset: "nc"
     raw: asin(x_1**3/(x_3*(x_2 + x_3)))
     prepared: asin(v1**3/(v3*(v2+v3)))
     n_variables: 3
@@ -17986,7 +17988,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.2873
-    subset: ood
     test:
       vars:
         v1:
@@ -18013,6 +18014,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-189.ood:
+    subset: "nc"
     raw: cos((x_1 - 1)**3)**2
     prepared: cos((v1-1)**3)**2
     n_variables: 1
@@ -18035,7 +18037,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -18050,6 +18051,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-190.ood:
+    subset: "nc"
     raw: x_1*(x_1 + x_3 + 1) + sqrt(x_2)
     prepared: v1*(v1+v3+1)+sqrt(v2)
     n_variables: 3
@@ -18088,7 +18090,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -18115,6 +18116,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-191.ood:
+    subset: "nc"
     raw: -x_1 + x_2 - sin(x_2*x_3)
     prepared: -v1+v2-sin(v2*v3)
     n_variables: 3
@@ -18153,7 +18155,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -18180,6 +18181,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-192.ood:
+    subset: "nc"
     raw: sin(x_2*x_3*(x_1*x_2 + x_3))
     prepared: sin(v2*v3*(v1*v2+v3))
     n_variables: 3
@@ -18218,7 +18220,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -18245,6 +18246,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-193.ood:
+    subset: "nc"
     raw: sin((-x_2 + x_3)**2/(x_1 + x_2))
     prepared: sin((-v2+v3)**2/(v1+v2))
     n_variables: 3
@@ -18283,7 +18285,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -18310,6 +18311,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-194.ood:
+    subset: "nc"
     raw: (x_1*x_2 + sqrt(x_2))/x_1
     prepared: (v1*v2+sqrt(v2))/v1
     n_variables: 2
@@ -18340,7 +18342,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5003
-    subset: ood
     test:
       vars:
         v1:
@@ -18361,6 +18362,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-195.ood:
+    subset: "nc"
     raw: x_1 - x_3 + (x_2 + x_3)*sin(x_3)
     prepared: v1-v3+(v2+v3)*sin(v3)
     n_variables: 3
@@ -18399,7 +18401,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -18426,6 +18427,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-196.ood:
+    subset: "nc"
     raw: x_1 + log(x_2 + tan(x_2)) + 1
     prepared: v1+log(v2+tan(v2))+1
     n_variables: 2
@@ -18456,7 +18458,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 0.5039
-    subset: ood
     test:
       vars:
         v1:
@@ -18477,6 +18478,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-197.ood:
+    subset: "nc"
     raw: x_1 - x_2*x_3 + x_2 + cos(x_3)
     prepared: v1-v2*v3+v2+cos(v3)
     n_variables: 3
@@ -18515,7 +18517,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -18542,6 +18543,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-198.ood:
+    subset: "nc"
     raw: x_1/(x_1 + x_2**2 + tan(x_3))
     prepared: v1/(v1+v2**2+tan(v3))
     n_variables: 3
@@ -18580,7 +18582,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:
@@ -18607,6 +18608,7 @@ expressions:
       in Appendix B, and it will be the main metric of interest.''; App. B: ''given
       an equation with in-sample support of (lo, hi), we extend the '
   SOOSE-NC-199.ood:
+    subset: "nc"
     raw: x_2 + x_3 - tan(x_1 - x_2)/x_3
     prepared: v2+v3-tan(v1-v2)/v3
     n_variables: 3
@@ -18645,7 +18647,6 @@ expressions:
         name: y
     meta:
       finite_fraction: 1.0
-    subset: ood
     test:
       vars:
         v1:

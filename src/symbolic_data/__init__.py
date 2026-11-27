@@ -21,7 +21,8 @@ from symbolic_data.distributions import get_distribution, fastsrb_dist, DISTRIBU
 from symbolic_data.prior_factory import build_iid_prior_callable, build_prior_callable
 from symbolic_data.registry import Registry
 from symbolic_data.problem import Problem
-from symbolic_data.catalog import Catalog, ProblemCatalog, CatalogEntry, RealizedExpression, load_catalog, CATALOGS
+from symbolic_data.catalog import (Catalog, ProblemCatalog, CatalogEntry, RealizedExpression, load_catalog, CATALOGS,
+                                   catalog_metadata)
 from symbolic_data.generative import GenerativeCatalog, LampleChartonCatalog, build_catalog, register_generative_catalog
 from symbolic_data.source import ProblemSource
 from symbolic_data.pools import data_problem, draw_from_pools

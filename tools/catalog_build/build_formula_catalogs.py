@@ -42,10 +42,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import paths  # noqa: E402  the curated inputs (assets/upstream/catalog-prep) and the public-text filter
 import piecewise  # noqa: E402  the exact Piecewise -> floor/Abs rewrite
 import authors_tests  # noqa: E402  the authors' test sets (rulings 9(1), 9(7))
+import formula_gate  # noqa: E402  the numeric check that each prepared formula computes its raw formula
 
-RULES = ("srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark's formulas, constants and input distributions; "
-         "srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per "
-         "problem (ruling 9(6))")
+# the public rules texts of the catalogs (no ruling numbers or record ids: the 2026-11-27 audit)
+RULES = ("srbf formula catalogs: the benchmark's formulas, constants and input distributions; srbf draws the points (512 "
+         "to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input's "
+         "range) is drawn with the points (the entry's per_run block); srbf's release freezes one draw per problem")
+POINTS_RULES = ("srbf data catalogs of formula problems whose authors fix the points: the formula evaluated on the authors' "
+                "points, fitted on them as published; a test only where the authors give one; srbf fits on at most 512 "
+                "points and tests on at most 512 (a random 512 where the authors' set is larger)")
 
 
 # The operators of SimpliPy 0.15 (srbf ruling 2026-11-02: whole classes) as sympy prints them.
@@ -66,7 +71,11 @@ FAMILY_SETS = {"fresh-10": "keijzer", "fresh-11": "korns", "fresh-13": "vladisla
 # Sinusoids with distinct frequencies, sampled uniformly in time, are independent and arcsine-distributed on [-A, A]:
 # each joint is A sin(u), u ~ U[0, 2 pi).
 ARM = "fresh-153"
-MODIFIED = {ARM: ("the authors' input generator is unpublished: srbf draws each joint angle as (pi/2) sin(u), "
+MODIFIED = {"fresh-127": ("the physical constants are priced as numbers: alpha = 0.00755 (the MadGraph default the "
+                          "authors quote in their earlier paper, arXiv:2508.00989), s = 10^6 GeV^2 (sqrt(s) = 1 TeV) and "
+                          "the unit conversion (hbar c)^2 = 0.3893793721e9 pb GeV^2; a method recovers the law with their "
+                          "product as one constant"),
+            ARM: ("the authors' input generator is unpublished: srbf draws each joint angle as (pi/2) sin(u), "
                   "u ~ U[0, 2 pi) (the time-sampled limit of their sinusoidal joint targets), and (pi) sin(u) for the "
                   "extrapolation test"),
             "fresh-64": ("the authors give the noisy Bessel problem's range, x in [0, 4], but not how its points are "
@@ -99,6 +108,132 @@ FAMILY_POINTS = {("fresh-10", "Keijzer-6"): "keijzer", ("fresh-27", "Neat-6"): "
 # fresh-56 is the release catalog physo-class at its next version: the same 8 laws, the constants drawn per run (srbf
 # ruling 2026-11-05: one PhySO Class SR set, as the authors draw them)
 SLUGS = {"fresh-2": "pysr-empiricalbench-formulas", "fresh-56": "physo-class"}
+
+# Transcription fixes to the survey's records (the 2026-11-27 audit: srbf posed another law than the authors'). Each
+# replaces the record's fields; the reason says what the record had wrong and where the authors' version is.
+RECORD_FIXES = {
+    ("fresh-46", "AircraftLift"): {
+        "formula": "x1*(x2 + 2) + x3*x4*x5/x6",
+        "why": ("the zero-lift angle alpha0 = -2 enters as C_La (alpha - alpha0) = x1*(x2 + 2); the record copied Chen et "
+                "al.'s Appendix B.2 print 'x2 - 2', HeuristicLab's own pre-2019 bug, which HeuristicLab fixed in commit "
+                "50af0024 (ticket #3014) and which srbf's other two copies of the problem do not have")},
+    **{("fresh-127", i): {
+        "formula": "2*pi*hbarc2*alpha**2/(4*s)*(1 + cos_theta**2)",
+        "constants": {"alpha": 0.00755, "s": 1000000.0, "hbarc2": 389379372.1},
+        "why": ("the authors fit the binned d(sigma)/d(cos theta) in pb (Morales-Alvarado 2025, Fig. 2 axis and Table 1 "
+                "fit 0.0349 (1 + cos^2 theta)), i.e. 2 pi (hbar c)^2 alpha^2/(4 s) (1 + cos^2 theta) with (hbar c)^2 = "
+                "0.3893793721e9 pb GeV^2; the record posed d(sigma)/d(Omega) in GeV^-2, 2.45e9 times smaller")}
+        for i in ("ee_mumu_angular_id", "ee_mumu_angular_ood")},
+}
+
+
+# Where paper and code (or data) differ, srbf follows what produced the authors' published results, their code or data,
+# and notes the paper's version (owner 2026-11-27; tags/rule_applications.json lists every instance). These flip
+# earlier readings that followed the paper; each patches the named inputs of the record.
+_U13 = "U[1, 3] (the authors' code and experiment log; the paper's Table 35 prints U(4, 6))"
+RULE_FIXES = {
+    ("interrupted-5", "Feynman-A-32"): {"variables": {v: {"distribution": _U13, "low": 1.0, "high": 3.0}
+                                                      for v in ("x1", "x2", "x3", "x4")}},
+    ("interrupted-6", "I.16.6"): {"variables": {
+        "a": {"distribution": "derived: a = u/c with u ~ U[1, 5], c ~ U[1, 5] (the AI Feynman without-units data the "
+                              "authors point to; the paper states (-1, 1))"},
+        "b": {"distribution": "derived: b = v/c with v ~ U[1, 5], c ~ U[1, 5] (the AI Feynman without-units data the "
+                              "authors point to; the paper states (-1, 1))"}}},
+    ("fresh-30", "Korns-15"): {"variables": {v: {"distribution": "uniform U[0, 50] (the registry's own range; Korns 2011 "
+                                                                 "uses [-50, 50])", "low": 0.0, "high": 50.0}
+                                             for v in ("x0", "x1", "x2", "x3", "x4")}},
+    ("fresh-4", "kepler_missing_axioms"): {"variables": {v: {"distribution": "U[0.5, 2.0] (the data the authors' notebook "
+                                                                             "reads; their script data_gen_kepler.py "
+                                                                             "draws U[0.5, 3.0])", "low": 0.5, "high": 2.0}
+                                                         for v in ("m1", "m2")}},
+    ("critic-2", "weber_fechner_law"): {"constraints": ["S1 <= S2"]},
+    ("fresh-55", "F7"): {"variables": {"y": {"distribution": "equidistant grid E[-50,5], N = 30 points per dimension, "
+                                                             "endpoints included (the authors' CSV; the paper's Table 6 "
+                                                             "prints [-5, 5])", "low": -50.0}}},
+    # PhySO Appendix B, its natural-constant demos (demos_natural_const_discovery @bfbfa88): the scripts that produced
+    # the published results fix E2 = 3.5 (the constant to discover; the paper's Table 10 lists E2 as an input on [1, 5])
+    # and use h = 6.123 (the paper prints 6.626)
+    ("fresh-57", "appb-wave-interference"): {"formula": "E_1 + 3.5 + 2*sqrt(3.5*E_1)*cos(dPhi)", "drop_variables": ["E_2"]},
+    ("fresh-57", "appb-black-body-photon-count"): {"formula": "1/(exp(6.123*nu/(1.123*T)) - 1)",
+                                                   "constants": {"h": 6.123, "kb": 1.123}},
+    # A compilation of other authors' benchmarks follows its own code or data where it differs from the defining
+    # publication (owner 2026-11-27); standalone sets (korns, keijzer, nguyen, ...) keep the defining publication.
+    # HeuristicLab @c57538b, KornsFunctionFourteen.cs / KornsFunctionFifteen.cs:
+    ("fresh-46", "Korns-14"): {"formula": "22.0 + (4.2*((cos(x0)-tan(x1))*(tanh(x2)/sin(x3))))"},
+    ("fresh-46", "Korns-15"): {"variables": {"x2": {"distribution": "uniform U[0, 50] (HeuristicLab's code, which avoids NaN; "
+                                                                    "Korns 2011 uses [-50, 50])", "low": 0.0, "high": 50.0}}},
+    # the GP-benchmarks table's ECJ implementation (ec/app/regression/Benchmarks.java @0ce5a2c) trains Nguyen-9 on [0, 1]^2
+    ("fresh-31", "Nguyen-9"): {"variables": {v: {"distribution": "uniform U[0, 1] (the table's ECJ implementation; the table "
+                                                                 "and Uy et al. 2011 print [-1, 1])", "low": 0.0, "high": 1.0}
+                                             for v in ("x", "y")}},
+    # ERBench's own renderings (its Hugging Face train.csv @95bf15c): Korns' unused fifth input dropped, Korns-15 and AI
+    # Feynman 2.0's equation 12 on ERBench's narrowed boxes
+    ("interrupted-1", "Korns-13"): {"formula": "-3*tan(x_0)*tan(x_1)/(tan(x_2)*tan(x_3)) + 32",
+                                    "replace_variables": [("x_0", -50.0, 50.0), ("x_1", -50.0, 50.0), ("x_2", -50.0, 50.0),
+                                                          ("x_3", -50.0, 50.0)]},
+    ("interrupted-1", "Korns-14"): {"formula": "-(4.2*cos(x_0) - 4.2*tan(x_1))*tanh(x_2)/sin(x_3) + 22",
+                                    "replace_variables": [("x_0", -50.0, 50.0), ("x_1", -50.0, 50.0), ("x_2", -50.0, 50.0),
+                                                          ("x_3", -50.0, 50.0)]},
+    ("interrupted-1", "Korns-15"): {"formula": "-6*(log(x_2) - tan(x_3))*exp(-x_1)*tan(x_0) + 12",
+                                    "replace_variables": [("x_0", 0.24818997227908168, 1.2481899722790817),
+                                                          ("x_1", -1.5831774122820366, -0.5831774122820366),
+                                                          ("x_2", 0.5479474173492189, 1.547947417349219),
+                                                          ("x_3", -0.5746221189112442, 0.42537788108875585)]},
+    ("interrupted-1", "AIF2-table4-eq12"): {
+        "formula": ("x_0*x_1*x_2 - x_2*sqrt(1 - x_0**2)*sqrt(1-x_1**2)- x_1*sqrt(1 - x_0**2)*sqrt(1-x_2**2) "
+                    "- x_0*sqrt(1 - x_1**2)*sqrt(1-x_2**2)"),
+        "replace_variables": [("x_0", 0.9327809291515141, 0.9952809291515141), ("x_1", -0.6901104506009879, -0.6276104506009879),
+                              ("x_2", 0.8038061536253802, 0.8663061536253802)]},
+}
+
+
+def residues() -> dict[str, dict[str, Any]]:
+    """The members of the compilations the survey cut to what srbf did not hold yet (residues_2026-11.json), by set:
+    each with the srbf problem it is identical to (``copy_of``: catalog:key). srbf keeps every compilation whole as
+    published (owner 2026-11-27), so these are copied into the compilation's catalog under its own id and subset."""
+    path = paths.PREP / "residues_2026-11.json"
+    return json.loads(path.read_text())["sets"] if path.exists() else {}
+
+
+_SOURCES: dict[str, dict[str, Any]] = {}
+
+
+def copied(member: dict[str, Any], out: Path) -> dict[str, Any]:
+    """A residue member's entry: the identical srbf problem's entry (FastSRB at its default version), with the
+    compilation's subset and a note of what it is the same as."""
+    catalog, key = member["copy_of"].split(":", 1)
+    if catalog not in _SOURCES:
+        name = VERSIONED_DEFAULT.get(catalog, catalog)
+        _SOURCES[catalog] = yaml.safe_load((paths.CATALOGS / f"{name}.yaml").read_text())["expressions"]
+    entry = json.loads(json.dumps(_SOURCES[catalog][key]))                    # a deep copy
+    entry["subset"] = member["subset"]
+    entry.setdefault("meta", {})["same_as"] = f"{catalog}:{key}"
+    return entry
+
+
+VERSIONED_DEFAULT = {"fastsrb": "fastsrb.v2"}     # the file of a catalog's default version
+
+
+def fixed(p: dict[str, Any]) -> dict[str, Any]:
+    """The problem's record with its transcription fix (RECORD_FIXES) and paper-vs-code fix (RULE_FIXES) applied; a
+    ``variables`` patch updates the named inputs."""
+    out = dict(p)
+    for fix in (RECORD_FIXES.get((p["set"], p["id"])), RULE_FIXES.get((p["set"], p["id"]))):
+        if not fix:
+            continue
+        out.update({k: v for k, v in fix.items() if k not in ("why", "variables", "drop_variables", "replace_variables")})
+        if fix.get("replace_variables"):                   # the compilation's own inputs: (name, low, high), uniform
+            out["variables"] = [{"name": n, "distribution": f"uniform U[{lo!r}, {hi!r}] (the compilation's own box)",
+                                 "low": lo, "high": hi} for n, lo, hi in fix["replace_variables"]]
+        if fix.get("drop_variables"):                      # an input the authors' code fixes to a value
+            out["variables"] = [v for v in out["variables"] if v["name"] not in fix["drop_variables"]]
+        if fix.get("variables"):
+            patch = fix["variables"]
+            missing = set(patch) - {v["name"] for v in out["variables"]}
+            if missing:
+                raise KeyError(f"{p['set']}:{p['id']}: no inputs {sorted(missing)}")
+            out["variables"] = [{**v, **patch.get(v["name"], {})} for v in out["variables"]]
+    return out
 
 
 class Unsupported(Exception):
@@ -398,6 +533,13 @@ def points_problem(p: dict[str, Any], slug: str, display: str, engine) -> Any:
         x_test = np.column_stack([rng.uniform(lo, hi, per * len(orders)), np.repeat(orders, per)])
         split, note = "given", (f"srbf: the authors measure the error on [{lo:g}, {hi:g}] without stating its points; "
                                 f"{per} points per order, uniform, seeded")
+    if p.get("constraints"):                   # the authors' constraints on a row (AutoRA's Weber-Fechner: S1 <= S2)
+        local = {n: sympy.Symbol(n) for n in names}
+        for c in p["constraints"]:
+            ok = sympy.lambdify([local[n] for n in names], parse_expr(c, local_dict=local), modules="numpy")
+            x = x[np.broadcast_to(np.asarray(ok(*x.T), dtype=bool), (len(x),))]
+            if x_test is not None:
+                x_test = x_test[np.broadcast_to(np.asarray(ok(*x_test.T), dtype=bool), (len(x_test),))]
     y = np.asarray(f(*x.T), dtype=float).reshape(-1) * np.ones(len(x))
     yt = None if x_test is None else np.asarray(f(*x_test.T), dtype=float).reshape(-1) * np.ones(len(x_test))
     gt: dict[str, Any] = {"gt_kind": "exact"}
@@ -573,7 +715,10 @@ def distinct_names(variables: dict[str, dict[str, Any]]) -> None:
         seen.add(variables[key]["name"])
 
 
-def entry_of(p: dict[str, Any]) -> dict[str, Any]:
+GATE: dict[str, dict[str, Any]] = {}     # the raw-vs-prepared gate's result per problem id of the set being built
+
+
+def entry_of(p: dict[str, Any], catalog: str = "") -> dict[str, Any]:
     names = [v["name"] for v in p["variables"]]
     if not names:
         raise Unsupported("no inputs")
@@ -603,6 +748,7 @@ def entry_of(p: dict[str, Any]) -> dict[str, Any]:
              "input_distributions": {v["name"]: v.get("distribution") for v in p["variables"]}}
     if target != p["formula"]:
         entry["target"] = f"the authors fit {target}, not the published law itself"
+    gate(catalog, p["id"], target, names, entry["prepared"], variables, constants)
     if p.get("constraints"):
         entry["row_constraints"] = row_constraints(p)
     if joint:
@@ -623,6 +769,21 @@ def entry_of(p: dict[str, Any]) -> dict[str, Any]:
     if run:
         entry["per_run"] = run
     return entry
+
+
+def gate(catalog: str, eq_id: str, target: str, names: list[str], prepared: str, variables: dict[str, dict[str, Any]],
+         constants: dict[str, float]) -> None:
+    """The formula gate (formula_gate.py): the prepared formula must compute the target the authors wrote, on points
+    drawn from each input's declared range; a difference without a listed reason stops the build (GateError). A
+    target the gate cannot evaluate (a function numpy lacks) is reported as unchecked."""
+    boxes = [formula_gate.box_of(variables.get(f"v{i + 1}") or {}) for i in range(len(names))]
+    try:
+        result = formula_gate.gate(catalog, eq_id, target, names, prepared, boxes, constants)
+    except formula_gate.GateError:
+        raise
+    except Exception as exc:                   # sympy/numpy cannot evaluate one side (harmonic, besselj, ...)
+        result = {"checked": 0, "ok": None, "error": f"{type(exc).__name__}: {exc}"[:160]}
+    GATE[eq_id] = result
 
 
 N_MC = 20_000   # the release catalogs' audit size (tools/audit_finite_fraction.py)
@@ -837,11 +998,9 @@ def build_family_points(problems: list[dict[str, Any]], out: Path, engine) -> di
     for catalog, eq_id in RELEASE_POINTS:
         by_catalog[catalog].append(release_points_problem(catalog, eq_id, engine))
     for catalog, pinned in sorted(by_catalog.items()):
-        ProblemCatalog.from_problems(pinned, name=f"{catalog}-points", version=1, meta={
-            "display_name": f"{catalog} (pinned points)", "kind": "data", "rules": RULES,
-            "companion_of": catalog, "source_record": ", ".join(
-                [f"catalog-prep {t}" for t in sorted({t for (t, i), c in FAMILY_POINTS.items() if c == catalog})]
-                + (["the release catalog (RELEASE_POINTS)"] if any(c == catalog for c, _ in RELEASE_POINTS) else []))
+        ProblemCatalog.from_problems(pinned, name=f"{catalog}-points", version=paths.version_of(f"{catalog}-points"), meta={
+            "display_name": f"{catalog} (pinned points)", "kind": "data", "rules": POINTS_RULES, "companion_of": catalog,
+            "test_splits": sorted({json.dumps(q.meta.get("test_split")) for q in pinned})
         }).save(out / f"{catalog}-points.npz")
         print(f"{catalog}-points: {', '.join(q.eq_id for q in pinned)}", flush=True)
     return {c: [q.eq_id for q in v] for c, v in by_catalog.items()}
@@ -862,7 +1021,7 @@ def main() -> None:
         return
     by_set: dict[str, list[dict]] = defaultdict(list)
     for p in problems:
-        by_set[p["set"]].append(p)
+        by_set[p["set"]].append(fixed(p))
     tags = [t for t in (a.only.split(",") if a.only else sorted(by_set)) if t not in FAMILY_SETS]
     engine = None
     if a.check:
@@ -875,10 +1034,25 @@ def main() -> None:
         rec = paths.set_record(tag)
         entries, skipped, pinned = {}, {}, []
         slug = SLUGS.get(tag) or slug_of(rec["name"])
+        if paths.dropped_whole(slug):            # left out by rule (tags/dropped.json): no catalog, no stale file
+            for stale in (out / f"{slug}.yaml", out / f"{slug}-points.npz"):
+                stale.unlink(missing_ok=True)
+            report[tag] = {"catalog": slug, "problems": len(by_set[tag]), "built": 0,
+                           "dropped": paths.dropped()[slug]["reason"]}
+            print(f"{tag:14s} {slug:50s} dropped by rule", flush=True)
+            report_path.write_text(json.dumps(report, indent=1) + "\n")
+            continue
+        gone = paths.dropped_members(slug)
+        GATE.clear()
         points_display = f"{rec['name']}{'*' if tag in MODIFIED_POINTS else ''} (pinned points)"
         for p in by_set[tag]:
+            if p["id"] in gone:
+                skipped[p["id"]] = "dropped by rule (tags/dropped.json)"
+                continue
             try:
-                entries.update(with_tests(p, entry_of(p)))
+                entries.update(with_tests(p, entry_of(p, slug)))
+            except formula_gate.GateError:
+                raise
             except authors_tests.Pending as why:
                 skipped[p["id"]] = f"test: {why}"
             except Unsupported as why:
@@ -891,12 +1065,18 @@ def main() -> None:
                 skipped[p["id"]] = str(why)
             except Exception as exc:                      # a formula sympy cannot read, ...
                 skipped[p["id"]] = f"{type(exc).__name__}: {exc}"[:200]
+        for member in residues().get(tag, {}).get("members", []):      # a compilation kept whole (2026-11-27)
+            entries[member["id"]] = copied(member, out)
+        subset_of = {i: name for name, ids in residues().get(tag, {}).get("subsets", {}).items() for i in ids}
+        for key, entry in entries.items():                         # the compilation's own subsets, for every member
+            if key in subset_of:
+                entry["subset"] = subset_of[key]
         if pinned:
             from symbolic_data.catalog import ProblemCatalog
             modified = {"modified_by_srbf": MODIFIED_POINTS[tag]} if tag in MODIFIED_POINTS else {}
-            ProblemCatalog.from_problems(pinned, name=f"{slug}-points", version=1, meta={
-                "display_name": points_display, **modified, "kind": "data", "rules": RULES,
-                "source_record": f"catalog-prep/sets/{tag}.json"}).save(out / f"{slug}-points.npz")
+            ProblemCatalog.from_problems(pinned, name=f"{slug}-points", version=paths.version_of(f"{slug}-points"), meta={
+                "display_name": points_display, **modified, "kind": "data", "rules": POINTS_RULES,
+                "test_splits": sorted({json.dumps(q.meta.get("test_split")) for q in pinned})}).save(out / f"{slug}-points.npz")
         differs: dict[str, str] = {}
         failed = check(entries, a.check, engine, differs) if a.check and entries else {}
         differs = {k: v for k, v in differs.items() if k not in failed}      # a dropped entry is reported as failed
@@ -909,13 +1089,19 @@ def main() -> None:
                 entries.pop(eq_id)
         if entries:
             modified = {"display_name": f"{rec['name']}*", "modified_by_srbf": MODIFIED[tag]} if tag in MODIFIED else {}
-            doc = {"metadata": {"name": slug, "version": 1, "description": rec["name"], **modified, "sources": rec.get("sources"),
+            doc = {"metadata": {"name": slug, "version": paths.version_of(slug), "description": rec["name"], **modified, "sources": rec.get("sources"),
                                 "sampling_defaults": {"n_points": 512, "method": "random", "noise": 0.0},
-                                "source_kind": "set", "source_record": f"catalog-prep/sets/{tag}.json",
+                                "source_kind": "set",
                                 "conventions": {"rules": RULES}},
                    "expressions": entries}
             (out / f"{slug}.yaml").write_text(yaml.safe_dump(paths.public(doc), sort_keys=False, allow_unicode=True, width=120))
+        built_ids = {i for i in GATE if any(str(k) == i or str(k).startswith(f"{i}.") for k in entries)}
+        unchecked = {k: r.get("error") or "no point where both formulas are finite" for k, r in GATE.items()
+                     if k in built_ids and r.get("ok") is None}
         report[tag] = {"catalog": slug, "problems": len(by_set[tag]), "built": len(entries), "pinned_points": len(pinned),
+                       "raw_vs_prepared": {"checked": sum(1 for k, r in GATE.items() if k in built_ids and r.get("ok")),
+                                           "allowed": {k: r["allowed"] for k, r in GATE.items() if r.get("allowed")},
+                                           "unchecked": unchecked},
                        "skipped": skipped,
                        "check_failed": failed, "needs_simplipy_015": sorted(pending),
                        **({"per_run_skeleton_differs": differs} if differs else {})}

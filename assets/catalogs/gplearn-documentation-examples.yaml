@@ -1,10 +1,12 @@
 metadata:
   name: gplearn-documentation-examples
+  display_name: "gplearn-documentation-examples*"
   version: 1
-  tags: {"origin": "classic benchmark", "tags": []}
-  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 1 of the 2 gplearn examples here (the toy formula); the diabetes data example is in 'gplearn documentation example (diabetes)'."}]
+  benchmark: "gplearn-documentation-examples"
+  tags: {"origin": "classic benchmark", "tags": ["srbf-modified"]}
   license: "BSD-3-Clause (trevorstephens/gplearn documentation example)"
   citation: {"data": {"short": "GitHub trevorstephens/gplearn@64517a8", "title": "gplearn documentation, SymbolicRegressor example (BSD-3-Clause)", "url": "https://github.com/trevorstephens/gplearn/blob/64517a85fd6d6c50f9ee9e5599f97458da278951/doc/examples.rst"}}
+  srbf_changes: [{"kind": "part", "problems": 1, "text": "srbf runs 1 of the 2 gplearn examples here (the toy formula); the diabetes data example is in 'gplearn documentation example (diabetes)'."}]
   description: gplearn documentation examples
   sources:
   - https://gplearn.readthedocs.io/en/stable/examples.html
@@ -28,17 +30,16 @@ metadata:
     method: random
     noise: 0.0
   source_kind: set
-  source_record: catalog-prep/sets/fresh-146.json
   conventions:
-    rules: 'srbf formula catalogs (srbf ruling 2026-10-01/05): the benchmark''s formulas, constants and input distributions;
-      srbf draws 512 + 512 points per run and sets the noise; constants with a distribution are drawn once per problem (ruling
-      9(6))'
+    rules: 'srbf formula catalogs: the benchmark''s formulas, constants and input distributions; srbf draws the points (512
+      to fit, 512 to test) and sets the noise; a value the authors draw anew for every run (a constant, an input''s range)
+      is drawn with the points (the entry''s per_run block); srbf''s release freezes one draw per problem'
 expressions:
   toy-polynomial:
+    subset: "symbolic-regressor-example"
     raw: X0**2 - X1**2 + X1 - 1
     prepared: v1**2 - v2**2 + v2 - 1
     n_variables: 2
-    subset: all
     vars:
       v1:
         name: X0
