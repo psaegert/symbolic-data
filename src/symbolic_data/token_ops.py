@@ -135,6 +135,9 @@ def desugar_sqrt(tokens: list[str], operator_arity: dict[str, int]) -> list[str]
     then rejects as malformed. Tokens other than ``sqrt`` that are missing from
     ``operator_arity`` are treated as leaves, preserving the parser's lenient behavior
     (a genuinely alien token still fails downstream, with the same error as before).
+
+    The rewrite is unconditional. A ground truth goes through :func:`spell_square_roots`
+    instead, which keeps ``sqrt`` as written when the engine's config defines it.
     """
     out: list[str] = []
 
@@ -157,6 +160,32 @@ def desugar_sqrt(tokens: list[str], operator_arity: dict[str, int]) -> list[str]
     return out
 
 
+def written_arity(engine: Any) -> dict[str, int]:
+    """The heads ``engine`` reads in an expression as written, with their arities.
+
+    These are the engine's operators and the functions its config defines (a SimpliPy config's
+    ``defined_functions:`` section, such as ``sqrt``). The engine reads, prices and evaluates a
+    defined function at its own head, and its value is the definition's (``sqrt`` evaluates as
+    ``rootn(u, 2)``). An engine whose config defines nothing, or a SimpliPy that predates the
+    section, reads its operators only.
+    """
+    defined = getattr(engine, "defined_functions", None) or {}
+    return {**engine.operator_arity, **{str(name): int(spec["arity"]) for name, spec in defined.items()}}
+
+
+def spell_square_roots(tokens: list[str], operator_arity: dict[str, int]) -> list[str]:
+    """``tokens`` with every ``sqrt u`` written ``rootn u 2``, unless the engine defines ``sqrt``.
+
+    ``operator_arity`` is the engine's :func:`written_arity`. An engine that defines ``sqrt``
+    reads the head as written, and the tokens come back as they are. An engine without the
+    definition has no such head, and the root is written with the operator it has
+    (:func:`desugar_sqrt`, which raises ``ValueError`` when its walk cannot place an argument).
+    """
+    if "sqrt" in operator_arity:
+        return list(tokens)
+    return desugar_sqrt(tokens, operator_arity)
+
+
 def tagged_canonical(engine: SimpliPyEngine, expression: Sequence[str],
                      mode: str | None = None) -> list[str]:
     """The engine's canonical form of a concrete ``expression``, in the TAGGED dialect.
@@ -166,8 +195,12 @@ def tagged_canonical(engine: SimpliPyEngine, expression: Sequence[str],
     The two are different normal forms: measured over the curated catalogs
     (2026-08-22), 796 of 3,628 expressions canonicalize differently between the
     dialects -- exact-rational literal spellings (``1.4`` becomes ``<mul> 7 <div> 5
-    </mul>``), negative exponents absorbed into ``pow`` instead of an ``inv`` wrapper,
-    negation distributed into bag sections. The v24 target contract (A3) names the
+    </mul>``), negation distributed into bag sections. SimpliPy 0.15 spells two forms
+    differently from 0.14 (measured 2026-11-05): a negative power is the reciprocal of the
+    positive power inside the product (``(1+2*v1)**(-3/2)`` is ``<mul> 1 <div> pow <add> ...
+    </add> <mul> 3 <div> 2 </mul> </mul>``, no longer ``pow`` with a negative exponent), and a
+    negation is a ``-1`` coefficient in the product (``<mul> -1 <div> ... </mul>``, no longer
+    ``neg inv``). The v24 target contract (A3) names the
     tagged canonical, so the consumer must simplify IN the tagged dialect; converting
     the prefix canonical yields a different (equal-valued, differently-spelled) form.
 

@@ -5,6 +5,38 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed (SimpliPy 0.15)
+
+- **Requires SimpliPy 0.15** (`simplipy>=0.15,<0.16`). SimpliPy 0.15 refuses every pre-0.15 rule file, so the
+  engine names move with it: the default engine (`load_engine`, `ProblemSource`), the test fixtures and the builders
+  use `acj2-4-llm`, the length-4 analog of `acj-4`; training catalogs name their own (T8.3: `acj2-5-4-llm`).
+- **lample-charton-v24 and lample-charton-v24-bench are @2**: SimpliPy 0.15's engine, and the content changed on
+  main after @1 was published (publishing is forward-only).
+- **The holdout fold runs at SimpliPy 0.15's default effort** (`HOLDOUT_EFFORT = None`: the search runs until a round
+  finds nothing). 0.14's default and the old pin were effort 4; with 0.15's default the holdout canon is a fixpoint
+  that equals the generate path's target canonicalization again, so the fold's first-pass skip is free up to the
+  residuals SimpliPy documents (docs/formal.md, L6). Measured: 0 of 2,000 T8.1 draws change on a second call at None
+  (2 at effort 4), at the same cost as effort 4 within noise.
+- **The tagged target contract (A3) spells two forms differently under SimpliPy 0.15** (its canonical form, not
+  the rules): a negative power is the reciprocal of the positive power inside the product (`<mul> 1 <div> pow ...
+  </mul>` instead of `pow` with a negative exponent), and a negation is a `-1` coefficient in the product instead of
+  `neg inv`. Training targets built on 0.15 therefore differ from 0.14-built ones (flash-ansr T8.3 vs T8.1).
+- `explicit_constant_placeholders(..., convert_numbers_to_constant=False)` lost its keyword in 0.15; 0.15 never
+  converts numerals, so the five calls behave as before.
+- Two pinned tagged-canonical specimens (measured on 0.14) spell differently in 0.15's canonical form; they are a
+  strict xfail until they are re-pinned after SimpliPy's restructuring (phase D) or at the release mine (H).
+- **A ground truth keeps its `sqrt` as written when the engine defines it.** SimpliPy 0.15 configs may declare
+  defined functions (`defined_functions:`: `sqrt`, `cot`, `sec`, `csc`, `acot`, `asec`, `acsc`), which the engine
+  reads at their own head, prices as written and evaluates as their definition (`sqrt` as `rootn(u, 2)`).
+  `compile_expression`, and with it every catalog truth (`ProblemCatalog.realize`, the set-mode `ProblemSource`,
+  the catalog builders), now writes `sqrt u` as `rootn u 2` only for an engine that does not define `sqrt`
+  (`token_ops.spell_square_roots`, reading the engine's operators and defined functions through
+  `token_ops.written_arity`). With a defining engine a sqrt-bearing truth keeps `sqrt` in `expression`, has no
+  root-index `2` in `constants` and is one token shorter per root (`complexity`); its targets, `skeleton` and
+  `meta["prepared_normalized"]` are unchanged, bit for bit (a defined head evaluates through
+  `engine.to_realization`, as its definition). Engines without the section behave as before. Training generation (the skeleton pool, the training holdout, SymPy simplification)
+  still writes `rootn(u, 2)`: the generating vocabulary has no defined heads.
+
 ### Added
 
 - **Frozen draws** (`symbolic_data.draws`, `symbolic-data render-draws` / `verify-draws`, docs/draws.md). Every

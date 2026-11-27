@@ -15,7 +15,7 @@ dependencies = [
     "numpy",
     "scikit-learn",
     "scipy",
-    "simplipy>=0.14.1,<0.15",
+    "simplipy>=0.15,<0.16",
     "pyyaml",
     "tqdm",
     "huggingface_hub",

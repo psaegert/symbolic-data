@@ -22,7 +22,7 @@ RULED = {
 @pytest.fixture(scope="module")
 def engine():
     from simplipy import SimpliPyEngine
-    return SimpliPyEngine.load("acj-4", install=True)
+    return SimpliPyEngine.load("acj2-4-llm", install=True)
 
 
 def _spec(**overrides):

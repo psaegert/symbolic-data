@@ -25,8 +25,10 @@ def catalog():
 
 
 def test_fold_runs_at_the_ruled_strength():
+    # Permissive at SimpliPy's default effort. Under 0.14 the default was effort 4; 0.15's default is None (search
+    # until a round finds nothing), which makes the canon a fixpoint the generate path shares.
     assert HOLDOUT_SIMPLIFY_MODE == "permissive"
-    assert HOLDOUT_EFFORT == 4
+    assert HOLDOUT_EFFORT is None
 
 
 @pytest.mark.parametrize("label,left,right", [
