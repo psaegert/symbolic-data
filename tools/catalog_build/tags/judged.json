@@ -1918,5 +1918,47 @@
    }
   ],
   "notes": "LSR-Transform rewrites AI Feynman laws for another of their variables."
+ },
+ {
+  "catalog": "llm-sr-oscillators",
+  "origin": "physics law",
+  "origin_source": "LLM-SR (arXiv:2404.18400v3) Sec. 3.1 p. 6 and App. D.1 pp. 19-20: two custom damped nonlinear oscillator laws with their constants (Table 2), simulated with scipy solve_ivp; the released files reproduce the printed laws to max abs error 2.6e-15",
+  "origin_proposal": "synthetic data: noise-free files generated from two physics laws (simulated oscillator trajectories), not measurements",
+  "tags": [
+   {
+    "tag": "extrapolation",
+    "source": "2 of 4 problems: each out-of-domain test is the first 20 s of the trajectory (App. D.1 p. 20: 'we utilize the time interval T = [0, 20) to evaluate the out-of-domain generalization'), the training rows are from t in [30, 50]; oscillator 2's time input leaves the training range (t in [0, 20) vs [30, 50]), oscillator 1's position and velocity do (x [-0.73, 1.10] vs [-0.57, 0.53], v [-0.23, 0.50] vs [-0.18, 0.28]; 761 of 10,000 rows inside the training box)"
+   },
+   {
+    "tag": "several tests",
+    "source": "subsets 'oscillators in-domain' / 'oscillators out-of-domain': published test_id.csv and test_ood.csv of each oscillator"
+   }
+  ],
+  "notes": "Each oscillator's rows lie on one simulated trajectory; the in-domain test rows alternate with the training rows along it, so the in-domain test is interpolation."
+ },
+ {
+  "catalog": "bms-rossler",
+  "origin": "physics law",
+  "origin_source": "sets/bms-rossler.json notes: the Rössler system with a = b = 0.2, c = 5.7, simulated by the authors (forward Euler, step 0.001, from the origin); states without error, derivatives with Gaussian noise of sd 1 and 5 (Text S4, Eqs. 5-7)",
+  "origin_proposal": "synthetic data: a simulated Rössler trajectory with noise added to the derivatives, not measurements",
+  "tags": [
+   {
+    "tag": "no test split",
+    "source": "the catalog files: split none (the authors sample 10,000 models per series on all 1,000 points and define no test set)"
+   },
+   {
+    "tag": "noisy data",
+    "source": "2 of 2 problems: every target is the Rössler right-hand side plus the authors' N(0, 25) noise"
+   }
+  ],
+  "notes": "Every law leaves one input unused (x in xdot, z in ydot, y in zdot): the authors give all three states as inputs, so the files also show 'dummy inputs'."
+ },
+ {
+  "catalog": "sr-dynamical-systems",
+  "origin": "physics law",
+  "origin_source": "sets/brum-2025.json notes: the nine ODE systems of Brum et al. (arXiv:2508.20257v2 Sec. III A, Tables I, VI, VII), 'one regression per state variable: all states of the system as inputs, that state's right-hand side at the solved states as the target'; every formula reproduces its rows exactly (FVU <= 4e-31)",
+  "origin_proposal": "simulator output: rows at the states of numerically integrated ODE trajectories, targets the exact right-hand sides",
+  "tags": [],
+  "notes": "Noise-free rows along simulated trajectories (the authors' noise study is not run). 21 of 28 problems leave a state unused because each derivative is fitted with all of its system's states as inputs, as in SRBench's Strogatz set; not tagged 'dummy inputs' (eql-double-pendulum precedent). No split."
  }
 ]

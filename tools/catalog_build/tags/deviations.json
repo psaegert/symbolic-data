@@ -1948,6 +1948,72 @@
     "kind": "kept",
     "problems": 22,
     "text": "In 22 LSR-Synth problems (12 physics, 5 chemistry, 5 biology) the system has settled before the out-of-domain window: the targets there vary by less than 0.1% of their training spread, so the out-of-domain error mostly measures tiny absolute differences. srbf keeps them as published."
+   },
+   {
+    "kind": "changed",
+    "problems": 111,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (111 of 369 problems, 6,251 to 20,000 rows), it uses a random 512 of them in each run."
+   },
+   {
+    "kind": "kept",
+    "problems": 31,
+    "text": "14 groups of problems (31 in all) are copies of each other: the same data and the same formula under different names; srbf keeps every copy, as published."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "llm-sr-oscillators",
+  "authors_total": 4,
+  "changes": [
+   {
+    "kind": "changed",
+    "problems": 4,
+    "text": "srbf tests on at most 512 rows: where the authors' test set is larger (4 of 4 problems, 10,000 rows), it uses a random 512 of them in each run."
+   }
+  ],
+  "follows_first_publication": []
+ },
+ {
+  "catalog": "bms-rossler",
+  "authors_total": 6,
+  "follows_first_publication": [],
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 4,
+    "text": "srbf runs 2 of the 6 series: the authors' noisy xdot at noise sd 5 and all three derivatives at sd 1 were never published."
+   },
+   {
+    "kind": "filled",
+    "problems": 2,
+    "text": "The authors published no data files; srbf took the noisy ydot and zdot at noise sd 5 from the 1,000 points their Supplementary Figs. S4 and S5 plot (vector data, exact to 1e-7), and regenerated the states by their integration (forward Euler with step 0.001 from the origin, every 100th step), which reproduces the figures' true-model curves to 3e-7."
+   }
+  ]
+ },
+ {
+  "catalog": "sr-dynamical-systems",
+  "authors_total": 43,
+  "changes": [
+   {
+    "kind": "part",
+    "problems": 15,
+    "text": "srbf runs the 28 noise-free problems, not the authors' noise study (Lotka-Volterra and SIR with 1, 5 and 10% Gaussian noise on states and targets): its noise was drawn separately in each method's notebook from a random state that depends on the notebook's execution history, which is not recorded, so those rows cannot be reproduced."
+   },
+   {
+    "kind": "changed",
+    "problems": 28,
+    "text": "The authors publish no data: srbf regenerates the rows from their notebooks' settings with its own integrator (scipy's RK45 algorithm, the one the notebooks call, with every sum in a fixed order so that the bytes do not depend on the machine). The states agree with scipy's to rounding (at most 2.6e-12 relative; the authors' own notebooks, run on two machines, differ from each other in the same way), and every error the notebooks store above rounding level is reproduced."
+   },
+   {
+    "kind": "kept",
+    "problems": 11,
+    "text": "The paper's parameter tables differ from the notebooks that made the rows: Lorenz step 0.02 (table 2E-3, which only the PySINDy notebook uses), pendulum window [0, 10) with step 0.01 (table [0, 5], 2E-3), Lotka-Volterra predator coefficient 0.1875 (paper 0.375; the code multiplies delta by beta), SIRV I0 = 0.1, S0 = 0.85 and rate 0.2 (table 0.01, 0.94, 0.5). srbf keeps the notebooks' values, which their stored results confirm."
+   },
+   {
+    "kind": "kept",
+    "problems": 21,
+    "text": "The epidemic compartments are fractions that sum to 1 on every row, so each epidemic derivative is fixed only up to that identity (for SIS, -0.3*S*I + 0.1*I equals -0.2*S*I + 0.1*I^2 on the data), and SEIRD's recovered and deceased columns are identical. srbf keeps the rows as the authors made them."
    }
   ],
   "follows_first_publication": []

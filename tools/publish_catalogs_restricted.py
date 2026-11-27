@@ -30,6 +30,7 @@ ROUTE = ("yes, restricted repo",)
 # and the <slug>-restricted parts of sets whose datasets differ
 DATA_CATALOGS = {
     "bms-real-data": ("bms-real-data.npz", 3, "problem_catalog"),
+    "bms-rossler": ("bms-rossler.npz", 2, "problem_catalog"),
     "dow-chemical-evostar-2010": ("dow-chemical-evostar-2010.npz", 1, "problem_catalog"),
     "dow-distillation-tower": ("dow-distillation-tower.npz", 1, "problem_catalog"),
     "dow-emulator": ("dow-emulator.npz", 1, "problem_catalog"),
@@ -57,7 +58,7 @@ DATA_CATALOGS = {
     "srbench-2.0-first-principles-restricted": ("srbench-2.0-first-principles-restricted.npz", 2, "problem_catalog"),
     "srbench-2021-blackbox-restricted": ("srbench-2021-blackbox-restricted.npz", 38, "problem_catalog"),
     "white-2013-proposed": ("white-2013-proposed.npz", 1, "problem_catalog"),
-    # left out by rule 2026-11-28 (tags/dropped.json; outside srbf's scope of y = f(x) on one data set), never
+    # left out by rule 2026-11-27 (tags/dropped.json; outside srbf's scope of y = f(x) on one data set), never
     # published: gp-challenge-protein, implied-volatility-slices, mvsr-2024, mvsr-2025, sldbench
 }
 

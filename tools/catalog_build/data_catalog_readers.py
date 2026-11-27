@@ -1251,3 +1251,65 @@ def camels(rec, prob, _set):
 def syren(rec, prob, _set):
     raise SkipDataset(f"{rec['id']}: no data published (the authors' Latin hypercubes would have to be regenerated "
                       "with CAMB)")
+
+
+# ----------------------------------------------------------------------- sets added by the 2026-11-27 audit
+def _file(entry: dict) -> bytes:
+    """A file a record names: the local copy under SYMBOLIC_DATA_CATALOG_RAW, else its pinned URL (cached); checked
+    against its sha256 either way."""
+    if paths.input_file(entry["path"]).exists() or not entry.get("url"):
+        return checked(entry["path"], entry["sha256"])
+    return fetch(entry["url"], entry["sha256"], ".csv")
+
+
+@reader("llm-sr-oscillators", "llm-sr-oscillators", "LLM-SR nonlinear oscillators")
+def llm_sr_oscillators(rec, prob, _set):
+    """Each oscillator's published train.csv fits; test_id.csv and test_ood.csv test, each a problem of its own (as
+    the sibling LLM-SR sets bactgrow and stress-strain)."""
+    f = rec["files"]
+    feats = list(rec["features"])
+    x, y = columns(csv(_file(f["train"])), feats, rec["target"])
+    out = []
+    for role, label in (("test_id", "in-domain"), ("test_ood", "out-of-domain")):
+        xt, yt = columns(csv(_file(f[role])), feats, rec["target"])
+        out.append(Rows(x, y, feats, GIVEN, f"given: the published {rec['id']}/train.csv / {role}.csv ({label} test)",
+                        x_test=xt, y_test=yt, eq_id=f"{rec['id']}/{role}", subset=f"oscillators {label}"))
+    return out
+
+
+@reader("bms-rossler", "bms-rossler", "Bayesian machine scientist Rössler system")
+def bms_rossler(rec, prob, _set):
+    """One file per series: the states x, y, z (without error, regenerated from the authors' integration scheme) and
+    the authors' noisy derivative recovered from their supplementary figures (bms_rossler_figures.py,
+    bms_rossler_rows.py). No test: the authors sample models on all 1,000 points."""
+    df = csv(checked(rec["file"], rec["sha256"]))
+    feats = list(rec["feature_names"])
+    x, y = columns(df, feats, rec["target"])
+    if len(y) != rec["n_rows"]:
+        raise ValueError(f"{rec['id']}: {len(y)} rows, record {rec['n_rows']}")
+    return Rows(x, y, feats, NONE,
+                "none: the authors sample 10,000 models per series on all 1,000 points and define no test set",
+                meta={"target": f"{rec['target']} with Gaussian noise of sd {rec['noise_sd']:g}"})
+
+
+_BRUM_ROWS: dict = {}
+
+
+@reader("brum-2025", "sr-dynamical-systems", "Symbolic regression in dynamical systems (Brum et al.)")
+def sr_dynamical_systems(rec, prob, _set):
+    """No data files published: sr_dynamical_systems.generate() regenerates the rows (each ODE right-hand side at the
+    states the authors' notebook settings solve for), and each array is checked against the sha256 of its bytes in
+    the record. No split: the authors fit and score each derivative on all rows of its trajectory."""
+    if not _BRUM_ROWS:
+        import sr_dynamical_systems as generator   # next to this module, in tools/catalog_build
+        _BRUM_ROWS.update(generator.generate())
+    rows = _BRUM_ROWS[rec["id"]]
+    if list(rows["features"]) != list(rec["features"]):
+        raise ValueError(f"{rec['id']}: features {rows['features']} != recorded {rec['features']}")
+    for role, want in rec["arrays"].items():
+        if sha256(np.ascontiguousarray(rows[role]).tobytes()) != want["sha256"]:
+            raise ValueError(f"{rec['id']}/{role}: the regenerated array's bytes differ from the record")
+    return Rows(rows["x"], rows["y"], list(rec["features"]), NONE,
+                "none: the authors fit and score each derivative on all rows of its trajectory",
+                eq_id=rec["id"].split("/", 1)[-1], meta={"target": rec["target"],
+                                                         "regenerated": "sr_dynamical_systems.generate()"})

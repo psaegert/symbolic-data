@@ -2737,5 +2737,50 @@
    "url": "https://huggingface.co/datasets/nnheui/llm-srbench/tree/4f22d48100d94125d3af1e7bd40897fcc7f9597d"
   },
   "notes": "Code: deep-symbolic-mathematics/llm-srbench@6fdbe40. LSR-Transform rewrites laws of the AI Feynman database (Udrescu & Tegmark 2020)."
+ },
+ {
+  "catalog": "llm-sr-oscillators",
+  "paper": {
+   "short": "Shojaee et al. 2025",
+   "title": "LLM-SR: Scientific Equation Discovery via Programming with Large Language Models",
+   "venue": "ICLR 2025",
+   "url": "https://arxiv.org/abs/2404.18400"
+  },
+  "data": {
+   "short": "GitHub deep-symbolic-mathematics/LLM-SR@41c2123",
+   "title": "LLM-SR data/oscillator1 and data/oscillator2 train/test_id/test_ood (MIT)",
+   "url": "https://github.com/deep-symbolic-mathematics/LLM-SR/tree/41c212312df6c16d936c9cb395356a62774c47e3/data"
+  },
+  "notes": "Nonlinear oscillator tasks Oscillation 1 and Oscillation 2, Sec. 3.1 and App. D.1."
+ },
+ {
+  "catalog": "bms-rossler",
+  "paper": {
+   "short": "Guimerà et al. 2020",
+   "title": "A Bayesian machine scientist to aid in the solution of challenging scientific problems",
+   "venue": "Science Advances 6(5):eaav6971",
+   "url": "https://doi.org/10.1126/sciadv.aav6971"
+  },
+  "data": {
+   "short": "Guimerà et al. 2020, Supplementary Figs. S4-S5",
+   "title": "Supplementary Materials aav6971_SM.pdf, Rössler experiment (Text S4); no data files published",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6994216/supplementaryFiles"
+  },
+  "notes": "Rössler system (O. E. Rössler, Phys. Lett. A 57:397, 1976, doi:10.1016/0375-9601(76)90101-8) with a = b = 0.2, c = 5.7 (Fig. 4, Text S4). Not published as data: srbf regenerated the authors' trajectory (forward Euler, step 0.001, from the origin), identified from the vector data of Figs. S4-S5, took the authors' noisy ydot and zdot at sd 5 from those figures, and drew the noise of the other four series itself. Preprint arXiv:2004.12157."
+ },
+ {
+  "catalog": "sr-dynamical-systems",
+  "paper": {
+   "short": "Brum et al. 2026",
+   "title": "Discovering equations from data: symbolic regression in dynamical systems",
+   "venue": "Journal of Physics: Complexity 7, 012001 (2026); arXiv:2508.20257 (2025)",
+   "url": "https://doi.org/10.1088/2632-072X/ae3eed"
+  },
+  "data": {
+   "short": "GitHub luizalober/review_symb_regression@094bd15",
+   "title": "The authors' notebooks (no data files; srbf regenerates the rows from their settings)",
+   "url": "https://github.com/luizalober/review_symb_regression/tree/094bd154d21aa341039689b5847f4f86e8178311/Notebooks"
+  },
+  "notes": "Nine ODE systems (Lorenz, pendulum, Lotka-Volterra, six epidemic models), right-hand sides at the solved states; arXiv v1 2025-08-27, v2 2026-01-19."
  }
 ]

@@ -107,7 +107,7 @@ CATALOGS = {
     # Table 1 (declarative; isochrone-action excluded, see physo-astro conventions).
     "physo-streams": ("physo-streams.npz", 29, "problem_catalog"),
     "physo-astro": ("physo-astro.yaml", 2, "problem_catalog"),
-    # physo-class (8) retired 2026-11-28: class SR fits one law across several data sets, outside srbf's scope
+    # physo-class (8) retired 2026-11-27: class SR fits one law across several data sets, outside srbf's scope
     # (y = f(x) on one data set); its hosted versions stay
     # P4 neural-SR bespoke: SOOSE NC/WC/FC (NeSymReS, MIT; WC/FC recovered from deleted history
     # @0cfff79 — the only surviving concrete instantiation). SSDNC (no license + no canonical
@@ -213,7 +213,7 @@ CATALOGS = {
     "white-et-al-2013-proposed-sr-set-points": ("white-et-al-2013-proposed-sr-set-points.npz", 1, "problem_catalog"),
     # left out by rule (tags/dropped.json), never published: breiman-i, occamnet-analytic-and-non-analytic-suites and
     # surfacebench-explicit-surfaces (piecewise formulas, 2026-11-26); multi-view-sr-synthetic-benchmarks(-points) and
-    # newtonbench (outside srbf's scope: several data sets per law, interactive queries; 2026-11-28)
+    # newtonbench (outside srbf's scope: several data sets per law, interactive queries; 2026-11-27)
 }
 
 # srbf 2026-11 release: the benchmarks' published data as frozen pools (symbolic_data.pools), built into DATA_BUILD by
@@ -243,6 +243,7 @@ DATA_CATALOGS = {
     "llm-pysr-battery": ("llm-pysr-battery.npz", 2, "problem_catalog"),
     "llm-sr-bactgrow": ("llm-sr-bactgrow.npz", 2, "problem_catalog"),
     "llm-sr-stress-strain": ("llm-sr-stress-strain.npz", 2, "problem_catalog"),
+    "llm-sr-oscillators": ("llm-sr-oscillators.npz", 4, "problem_catalog"),
     "mcdermott-predictive-modelling": ("mcdermott-predictive-modelling.npz", 3, "problem_catalog"),
     "nikuradse": ("nikuradse.npz", 2, "problem_catalog"),
     "nuclear-misr": ("nuclear-misr.npz", 1, "problem_catalog"),
@@ -251,6 +252,7 @@ DATA_CATALOGS = {
     "scilaws-real": ("scilaws-real.npz", 57, "problem_catalog"),
     "shape-constrained-real-world": ("shape-constrained-real-world.npz", 1, "problem_catalog"),
     "sisso-octet-binaries": ("sisso-octet-binaries.npz", 1, "problem_catalog"),
+    "sr-dynamical-systems": ("sr-dynamical-systems.npz", 28, "problem_catalog"),
     "srbench-2.0-blackbox": ("srbench-2.0-blackbox.npz", 12, "problem_catalog"),
     "srbench-2.0-first-principles": ("srbench-2.0-first-principles.npz", 12, "problem_catalog"),
     "srbench-2021-blackbox": ("srbench-2021-blackbox.npz", 122, "problem_catalog"),
@@ -259,7 +261,7 @@ DATA_CATALOGS = {
     "symbolfit-lhc-spectra": ("symbolfit-lhc-spectra.npz", 5, "problem_catalog"),
     "tisr-air-density": ("tisr-air-density.npz", 3, "problem_catalog"),
     "torchsisso-specific-energy": ("torchsisso-specific-energy.npz", 1, "problem_catalog"),
-    # left out by rule 2026-11-28 (tags/dropped.json; outside srbf's scope of y = f(x) on one data set), never published:
+    # left out by rule 2026-11-27 (tags/dropped.json; outside srbf's scope of y = f(x) on one data set), never published:
     # physo-milky-way-streams, treloar-rubber, and phye2e-space-physics's 12 plasma datasets
 }
 

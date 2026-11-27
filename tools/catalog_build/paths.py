@@ -41,14 +41,26 @@ def _read(name: str) -> Any:
 
 
 @lru_cache(maxsize=1)
+def additions() -> dict[str, Any]:
+    """The sets added after the survey (the 2026-11-27 audit: LLM-SR's oscillators, the Bayesian machine scientist's
+    Rössler experiment, Brum et al.'s dynamical systems), in the survey's record format: ``sets`` (tag -> data set
+    record) and ``problems``. Vendored next to the survey's records (additions_2026-11.json)."""
+    path = Path(__file__).resolve().parents[2] / "assets/upstream/catalog-prep/additions_2026-11.json"
+    return json.loads(path.read_text()) if path.exists() else {"sets": {}, "problems": []}
+
+
+@lru_cache(maxsize=1)
 def final_problems() -> list[dict[str, Any]]:
-    """Every problem record (``set``, ``id``, ``kind`` F/D, ``unit``, ``formula``, ``variables``, ...)."""
-    return _read("final_problems.json")["problems"]
+    """Every problem record (``set``, ``id``, ``kind`` F/D, ``unit``, ``formula``, ``variables``, ...), the survey's
+    and the additions'."""
+    return _read("final_problems.json")["problems"] + additions()["problems"]
 
 
 @lru_cache(maxsize=None)
 def set_record(tag: str) -> dict[str, Any]:
     """A benchmark set's record (``name``, ``kind``, ``sources``, ...)."""
+    if tag in additions()["sets"]:
+        return additions()["sets"][tag]
     if (PREP / "sets").is_dir():
         with open(PREP / "sets" / f"{tag}.json", encoding="utf-8") as fh:
             return json.load(fh)
@@ -63,7 +75,7 @@ def _sets() -> dict[str, dict[str, Any]]:
 def set_tags() -> set[str]:
     """The tags of every recorded set."""
     if (PREP / "sets").is_dir():
-        return {p.stem for p in (PREP / "sets").glob("*.json")}
+        return {p.stem for p in (PREP / "sets").glob("*.json")} | set(additions()["sets"])
     return set(_sets()) | set(_data_sets())
 
 
@@ -77,7 +89,7 @@ def data_set_record(tag: str) -> dict[str, Any]:
 
 @lru_cache(maxsize=1)
 def _data_sets() -> dict[str, dict[str, Any]]:
-    return _read("data_sets.json")
+    return {**_read("data_sets.json"), **additions()["sets"]}
 
 
 @lru_cache(maxsize=1)
