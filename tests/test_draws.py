@@ -325,26 +325,28 @@ def test_needs_check_skips_constants_by_construction_and_data(formula_catalog, d
 
 
 def test_each_problem_keeps_the_attempt_the_document_names(formula_catalog, tmp_path, engine):
-    doc = _attempts(formula_catalog, {"a": {"attempt": 3, "formula_inherent": False},
-                                      "b": {"attempt": 1, "formula_inherent": True}})
+    doc = _attempts(formula_catalog, {"a": {"attempt": 3, "formula_inherent": False, "failures": ["numeric", "symbolic"]},
+                                      "b": {"attempt": 1, "formula_inherent": True, "failures": ["symbolic"] * 4}})
     path = tmp_path / "attempts.json"
     path.write_text(json.dumps(doc), encoding="utf-8")
     manifest = render([formula_catalog], tmp_path / "draws", SETTINGS, attempts=str(path), log=lambda _: None)
     records = read_meta(tmp_path / "draws/toy/repeat-1.npz")["problems"]
     assert [(r["attempt"], r["checked"], r["formula_inherent"]) for r in records] == [(3, True, False), (1, True, True), (1, False, False)]
+    assert [r["failures"] for r in records] == [["numeric", "symbolic"], ["symbolic"] * 4, []]
     third = CatalogDraws(formula_catalog, SETTINGS, simplipy_engine=engine).draw(0, 1, 3)
     arrays = _arrays(tmp_path / "draws/toy/repeat-1.npz", 0)
     np.testing.assert_array_equal(arrays["x_support"], third.problem.x_support)
     np.testing.assert_array_equal(arrays["noise_validation"], third.noise_validation)
     assert manifest["acceptance"] == {"attempts_sha256": sha256_file(path), "rule": "the test's rule"}
-    assert manifest["catalogs"]["toy"]["acceptance"] == {"1": {"checked": 2, "later_attempt": 1, "formula_inherent": ["b"]}}
+    assert manifest["catalogs"]["toy"]["acceptance"] == {"1": {"checked": 2, "later_attempt": 1, "formula_inherent": ["b"],
+                                                               "failures": {"numeric": 1, "symbolic": 5}}}
     plain = render([formula_catalog], tmp_path / "plain", SETTINGS, log=lambda _: None)
     assert plain["acceptance"] is None and plain["catalogs"]["toy"]["acceptance"] is None
     assert [r["attempt"] for r in read_meta(tmp_path / "plain/toy/repeat-1.npz")["problems"]] == [1, 1, 1]
 
 
 def test_a_render_with_attempts_reproduces(formula_catalog, data_catalog, tmp_path):
-    doc = _attempts(formula_catalog, {"c": {"attempt": 2, "formula_inherent": False}})
+    doc = _attempts(formula_catalog, {"c": {"attempt": 2, "formula_inherent": False, "failures": ["numeric"]}})
     doc["catalogs"]["toy-data"] = {"source_sha256": sha256_file(data_catalog), "attempts": {"1": {}}}
     render([formula_catalog, data_catalog], tmp_path, SETTINGS, attempts=doc, log=lambda _: None)
     assert verify(tmp_path, [formula_catalog, data_catalog]) == []

@@ -37,13 +37,14 @@ Layout of a rendered root::
 
 Each ``.npz`` holds ``_meta`` (UTF-8 JSON as a ``uint8`` array: the format, the catalog's identity, the repeat, the
 settings, and one record per problem with its ground truth, ``meta``, the attempt it keeps, whether the acceptance
-rule was applied to it (``checked``) and ``formula_inherent``) and the arrays of problem ``i`` as ``p<i>__<name>``:
+rule was applied to it (``checked``), ``formula_inherent`` and ``failures``, the kind of each failed attempt in order
+as the attempts document names it) and the arrays of problem ``i`` as ``p<i>__<name>``:
 ``x_support``, ``y_support``, ``x_validation``, ``y_validation`` (float64), the two noise vectors for formula
 problems, and, where present, ``y_support_noisy`` / ``y_validation_noisy`` (stored targets that differ from the clean
 ones), ``y_reference_*`` and ``outlier_mask_*``. A placeholder (an entry with no valid draw) has no arrays. The
 manifest records, per catalog, its source file's sha256, each repeat file's path, size and sha256, and what the
-acceptance changed (problems checked, problems on a later attempt, the ids flagged formula-inherent); at the top, the
-attempts document's sha256 and rule.
+acceptance changed (problems checked, problems on a later attempt, the ids flagged formula-inherent, failed attempts
+by kind); at the top, the attempts document's sha256 and rule.
 """
 from __future__ import annotations
 
@@ -52,6 +53,7 @@ import json
 import os
 import sys
 import zipfile
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
@@ -243,7 +245,8 @@ def load_attempts(attempts: str | os.PathLike[str] | Mapping[str, Any], settings
     return doc, sha
 
 
-def _problem_record(problem: Any, row: int, kind: str, attempt: int, checked: bool, inherent: bool) -> dict[str, Any]:
+def _problem_record(problem: Any, row: int, kind: str, attempt: int, checked: bool, inherent: bool,
+                    failures: Sequence[str] = ()) -> dict[str, Any]:
     return {
         "row": int(row), "eq_id": problem.eq_id, "kind": kind,
         "skeleton": [str(t) for t in problem.skeleton] if problem.skeleton is not None else None,
@@ -252,6 +255,7 @@ def _problem_record(problem: Any, row: int, kind: str, attempt: int, checked: bo
         "complexity": problem.complexity, "gt_kind": problem.gt_kind, "noise": problem.noise, "meta": problem.meta,
         "is_placeholder": bool(problem.is_placeholder), "placeholder_reason": problem.placeholder_reason,
         "attempt": int(attempt), "checked": bool(checked), "formula_inherent": bool(inherent),
+        "failures": [str(f) for f in failures],
     }
 
 
@@ -336,7 +340,8 @@ def render_catalog(ref: str, root: str | os.PathLike[str], settings: DrawsSettin
                 attempt = int(choice["attempt"]) if choice is not None else 1
                 draw = draws.draw(row, repeat, attempt)
                 records.append(_problem_record(draw.problem, row, draw.kind, attempt, choice is not None,
-                                               bool(choice is not None and choice.get("formula_inherent"))))
+                                               bool(choice is not None and choice.get("formula_inherent")),
+                                               (choice or {}).get("failures") or ()))
                 for key, value in _draw_arrays(draw).items():
                     yield f"p{index}__{key}", value
             meta = {"format": FORMAT, "format_version": FORMAT_VERSION, "catalog": identity, "repeat": repeat,
@@ -347,9 +352,11 @@ def render_catalog(ref: str, root: str | os.PathLike[str], settings: DrawsSettin
         _write_npz(path, members())
         placeholders[str(repeat)] = sum(r["is_placeholder"] for r in records)
         files[str(repeat)] = {"path": f"{name}/{path.name}", "bytes": path.stat().st_size, "sha256": sha256_file(path)}
+        failed = Counter(f for r in records for f in r["failures"])
         acceptance[str(repeat)] = {"checked": sum(r["checked"] for r in records),
                                    "later_attempt": sum(r["attempt"] > 1 for r in records),
-                                   "formula_inherent": [r["eq_id"] for r in records if r["formula_inherent"]]}
+                                   "formula_inherent": [r["eq_id"] for r in records if r["formula_inherent"]],
+                                   "failures": dict(sorted(failed.items()))}
     kept = [draws.kinds[r] for r in rows]
     entry = {**identity, "problems": len(rows), "kinds": {k: kept.count(k) for k in sorted(set(kept))},
              "ids": None if ids is None else {"count": len(rows), "sha256": hashlib.sha256(
@@ -479,7 +486,8 @@ def _recorded_attempts(root: Path, manifest: Mapping[str, Any]) -> dict[str, Any
         for repeat, info in entry["files"].items():
             path = root / info["path"]
             if path.is_file():
-                per_repeat[repeat] = {r["eq_id"]: {"attempt": r["attempt"], "formula_inherent": r["formula_inherent"]}
+                per_repeat[repeat] = {r["eq_id"]: {"attempt": r["attempt"], "formula_inherent": r["formula_inherent"],
+                                                   "failures": list(r.get("failures") or [])}
                                       for r in read_meta(path)["problems"] if r.get("checked")}
         catalogs[name] = {"source_sha256": entry["source_sha256"], "attempts": per_repeat}
     return {"format": ATTEMPTS_FORMAT, "format_version": 1, "settings": manifest["settings"],

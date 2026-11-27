@@ -41,17 +41,20 @@ them, where the benchmark's authors draw them unconditionally.
   The formula and its fixed constants never change.
 - The attempts come in a fixed order, attempt `k` from its own seed (below). The rule that accepts an attempt is the
   evaluation harness's, not symbolic-data's: srbf accepts the first attempt on which (a) every target is finite and
-  the FVU is defined on the fitting and on the held-out points, (b) srbf's oracle (the ground truth with its
-  constants refitted, restart by restart from seeded starting values, at most 1,024 restarts, stopping at the first
-  that recovers) reaches numeric recovery on the held-out points, and (c) srbf's judge recognizes that restart's
-  refitted formula symbolically (`srbf.draw_acceptance`).
+  the FVU is defined on the fitting and on the held-out points, and at some restart (b) srbf's oracle (the ground
+  truth with its constants refitted, restart by restart from seeded starting values, at most 1,024 restarts, stopping
+  at the first that passes) reaches numeric recovery on the held-out points and (c) srbf's judge recognizes that
+  restart's refitted formula symbolically (`srbf.draw_acceptance`). An attempt fails only when no restart passes
+  both, and the document records the kind of each failed attempt (`failures`: `not_finite`, `fvu_undefined`,
+  `no_prediction`, `numeric` or `symbolic`, the first check it failed).
 - When no attempt within `max_trials` is accepted, the problem keeps attempt 1 and is flagged `formula_inherent`:
   what defeats recovery is the formula (or the method), not the luck of the draw.
 - Formulas that are constants by construction (skeleton `<constant>`), data problems and stored problems are not
   checked and keep attempt 1.
 
 symbolic-data does not judge: the two sides meet in `CatalogDraws`, which draws attempt `k` of a problem exactly as
-the render draws it, and in an **attempts document** that names each checked problem's attempt and flag:
+the render draws it, and in an **attempts document** that names each checked problem's attempt, its flag and why the
+attempts before it failed:
 
 ```json
 {"format": "symbolic-data/draw-attempts", "format_version": 1,
@@ -59,14 +62,14 @@ the render draws it, and in an **attempts document** that names each checked pro
               "seed_root": "symbolic-data/frozen-draws/1", "simplipy_engine": "acj-5-4-llm"},
  "repeats": [1], "rule": "...",
  "catalogs": {"feynman": {"source_sha256": "...",
-                          "attempts": {"1": {"I.6.2a": {"attempt": 2, "formula_inherent": false, "failed": {"symbolic": 1}}}}}}}
+                          "attempts": {"1": {"I.6.2a": {"attempt": 2, "formula_inherent": false, "failures": ["symbolic"]}}}}}}
 ```
 
 `render-draws --attempts FILE` renders with it and refuses a document chosen under other settings, for another
 version of a catalog (`source_sha256`), or without one of the catalogs rendered. A problem the document does not list
-keeps attempt 1 unchecked. Each problem's record carries `attempt`, `checked` and `formula_inherent`; the manifest
-records, per catalog and repeat, how many problems were checked, how many keep a later attempt and which are flagged,
-and at the top the document's sha256 and rule (`acceptance`; `null` for a render without one). `verify-draws`
+keeps attempt 1 unchecked. Each problem's record carries `attempt`, `checked`, `formula_inherent` and `failures`; the
+manifest records, per catalog and repeat, how many problems were checked, how many keep a later attempt, which are
+flagged and how many attempts failed of each kind, and at the top the document's sha256 and rule (`acceptance`; `null` for a render without one). `verify-draws`
 renders again with the attempts the files keep, so a check of reproducibility needs no evaluation harness.
 
 ## Layout
