@@ -29,7 +29,7 @@ from symbolic_data.numeric import STORAGE_DTYPE
 from simplipy import DEFAULT_EFFORT as simplipy_DEFAULT_EFFORT, SimpliPyEngine, masking
 
 from symbolic_data.token_ops import normalize_expression, normalize_skeleton
-from simplipy.utils import explicit_constant_placeholders, substitute_constants
+from simplipy.utils import explicit_constant_placeholders, is_numeric_string, substitute_constants
 
 from symbolic_data.config_io import load_config, save_config
 from symbolic_data.paths import substitute_root_path
@@ -55,11 +55,28 @@ HOLDOUT_EFFORT = 4
 # The registration-side SIGN CLOSURE (2026-11-05). A held-out law leaves its fittable constants free, so every sign
 # of one is inside its family -- but the canonical form writes a constant's sign into STRUCTURE (-c*x/(...) becomes
 # c*x/(-...)), so a sign variant can land on another prototype AND another image (the image layer evaluates with
-# fixed constant fills). Measured over the 29 T8 holdout pools: 2.3% of laws (simplipy 0.14.7) and 4.3% (0.15) had
+# fixed constant fills). Measured over the 29 production holdout pools: 2.3% of laws (simplipy 0.14.7) and 4.3% (0.15) had
 # a sign variant that was not held out. Each law therefore also registers the prototypes of its sign variants
 # (holdout_sign_variants): every pattern while 2**k - 1 <= HOLDOUT_SIGN_PATTERNS for k fittable constants, else
 # each single flip plus seeded random patterns up to that many. The probe side is unchanged: one lookup per draw.
 HOLDOUT_SIGN_PATTERNS = 63
+
+# The holdout FAMILY KEY (catalog key `holdout_family`, 2026-11-20). "legacy" is the key every catalog used through
+# 0.19: all literals masked, then every operator that has a <constant> operand folded into its other operand. Since
+# pow/rootn carry their exponent as a literal (typed slots), that fold also strips exponents and root indices, and it
+# folds c/X into X: x^2, x^3, sqrt(x), c/(x+a), a*x+b and exp(c*x) all reduce to the core x, so every 2-3 term
+# univariate polynomial, every partial-fraction sum and every linear model shares a key with some benchmark law
+# (measured on the 29 production holdout pools: 100% of 3-term univariate polynomials and 79% of weighted sums of >= 2 variables in
+# a production training prior were held out, against 6.4% of all draws). "precise" keys a draw by the family its pipeline actually
+# fits: FITTABLE literals are free (masked by role, as simplipy's mask_fittable masks training targets and the refit
+# frees them), TYPED literals (pow exponents, rootn indices) are structure, and the fold removes a constant only where
+# it is an affine reparametrization of its operand (X+c, c-X, c*X, X/c -> X), maps c/X to inv(X) and c^X to exp(X),
+# and leaves pow(X, 2) alone.
+HOLDOUT_FAMILIES = ("legacy", "precise")
+# Canonicalize-relabel-mask-fold passes over the folded prototype under the precise key (see holdout_family_prototype).
+# Measured on the 29 production holdout pools: 1 pass and 3 passes leave the same leak audit (affine-wrap misses 501 vs 494 of 6,660)
+# and the same draw rejection (3.04% vs 3.05%); each pass costs one engine call per draw.
+HOLDOUT_PROTOTYPE_PASSES = 1
 
 # Sentinel for "no failed draw produced row-validity evidence" in sample_data (all
 # failures were sampling errors / complex results, which carry no row counts).
@@ -302,9 +319,14 @@ class LampleChartonCatalog(GenerativeCatalog):
             simplify: bool | str = True,
             simplify_mode: str = 'f64',
             name: str = "lample_charton",
-            decontaminate: bool = True) -> None:
+            decontaminate: bool = True,
+            holdout_family: str = "legacy") -> None:
         self.name = name
         self.decontaminate = decontaminate
+        if holdout_family not in HOLDOUT_FAMILIES:
+            raise ValueError(f"holdout_family must be one of {HOLDOUT_FAMILIES}, got {holdout_family!r}")
+        # Set before any pool registers: the key decides what registration stores.
+        self.holdout_family = holdout_family
         self.simplipy_engine = simplipy_engine
         self.sample_strategy = sample_strategy
         self.variables = variables
@@ -325,7 +347,9 @@ class LampleChartonCatalog(GenerativeCatalog):
         # the slot with an arbitrary subtree (``rootn(x, tanh(y))``).
         self.typed_slots = typed_slots or {}
 
-        self.holdout_manager = HoldoutManager(n_variables=self.n_variables, allow_nan=allow_nan)
+        self.holdout_manager = HoldoutManager(n_variables=self.n_variables, allow_nan=allow_nan,
+                                              keep_literals=holdout_family == "precise",
+                                              finite_standardization=holdout_family == "precise")
 
         self.holdout_pools: list["LampleChartonCatalog | str"] = []
         for holdout_pool in holdout_pools or []:
@@ -463,6 +487,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             simplify_mode=config_.get("simplify_mode", "f64"),
             name=config_.get("name", "lample_charton"),
             decontaminate=config_.get("decontaminate", True),
+            holdout_family=config_.get("holdout_family", "legacy"),
         )
         # Optional inline FROZEN skeletons (a fixed catalog distributed as one self-contained spec --
         # e.g. a held-out validation set): the recipe still drives X/y sampling, but the skeleton set
@@ -499,6 +524,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
             simplify: bool = True,
+            holdout_family: str = "legacy",
             ) -> "LampleChartonCatalog":
         '''
         Create a LampleChartonCatalog from a set of skeletons.
@@ -534,6 +560,8 @@ class LampleChartonCatalog(GenerativeCatalog):
             Whether to allow NaNs in the support points.
         simplify : bool, optional
             Whether to simplify sampled skeletons.
+        holdout_family : {"legacy", "precise"}, optional
+            The holdout family key (see ``HOLDOUT_FAMILIES``).
 
         Returns
         -------
@@ -562,6 +590,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             holdout_pools=holdout_pools,
             allow_nan=allow_nan,
             simplify=simplify,
+            holdout_family=holdout_family,
         )
 
         catalog.skeletons = skeletons
@@ -585,6 +614,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         return state
 
     def __setstate__(self, state: dict[str, Any]) -> None:
+        state.setdefault("holdout_family", "legacy")    # pickled before the key existed
         self.__dict__.update(state)
         self.skeleton_codes = self.compile_codes() if getattr(self, "skeletons", None) else {}
 
@@ -799,11 +829,16 @@ class LampleChartonCatalog(GenerativeCatalog):
         # the target canonicalization at the sampling site IS that call, run moments
         # earlier. simplify is idempotent, so skipping the re-run cannot change the key;
         # it removes ~21% of generation wall time (measured 2026-08-31, task #92 S1).
+        # The masking step and the fold are the only places the two keys differ (HOLDOUT_FAMILIES): legacy masks
+        # every literal and folds every constant-bearing operator; precise masks by role and folds by operator.
+        precise = self.holdout_family == "precise"
+        mask = self._mask_fittable_literals if precise else normalize_skeleton
+        fold = self._precise_structural_prototype if precise else self.get_structural_prototype
         try:
             if assume_canonical:
-                canonical = normalize_skeleton(list(tokens))
+                canonical = mask(list(tokens))
             else:
-                canonical = normalize_skeleton(_canonicalize(list(tokens)))
+                canonical = mask(_canonicalize(list(tokens)))
         except Exception:
             return None    # unreadable token stream -> probe side fails closed
         if canonical is None:
@@ -811,7 +846,7 @@ class LampleChartonCatalog(GenerativeCatalog):
         canonical = list(canonical)
         for _ in range(3):
             try:
-                relabeled = list(normalize_skeleton(
+                relabeled = list(mask(
                     _relabel_variables_first_occurrence(_canonicalize(canonical))))
             except Exception:
                 break
@@ -819,9 +854,109 @@ class LampleChartonCatalog(GenerativeCatalog):
                 break
             canonical = relabeled
         try:
-            return self.get_structural_prototype(canonical)
+            prototype = fold(canonical)
         except Exception:
             return None    # cannot fold -> probe side fails closed
+        if precise:
+            # PROTOTYPE PASS. The canonical term order (and with it the first-occurrence variable labels) depends on the
+            # coefficient VALUES, so a rescaled law (a*f + b, the output-affine family) could reach a differently
+            # labeled prototype: measured on the 29 production holdout pools, 25% (legacy) / 15% (precise, without this pass) of the
+            # laws' affine wraps escaped. The folded prototype carries no fittable value, so canonicalizing and
+            # relabeling IT orders terms by structure alone. Same call on both sides (strict only decides whether the
+            # first canonicalization may fail), so registration and probing cannot drift apart. A pass that loses a
+            # variable is discarded: folding shifts can make a quotient's two sides equal ((x+1)/(x+2) -> x/x), and
+            # simplifying that to a constant would hold out every constant law (the sign closure drops such variants
+            # for the same reason).
+            for _ in range(HOLDOUT_PROTOTYPE_PASSES):
+                try:
+                    again = fold(mask(_relabel_variables_first_occurrence(list(self.simplipy_engine.simplify(
+                        prototype, mode=HOLDOUT_SIMPLIFY_MODE, effort=HOLDOUT_EFFORT)))))
+                except Exception:
+                    break
+                if again == prototype or _count_variables(again) < _count_variables(prototype):
+                    break
+                prototype = again
+        return prototype
+
+    def _mask_fittable_literals(self, tokens: list[str]) -> list[str]:
+        """The precise key's masking: a literal becomes ``<constant>`` exactly when simplipy's ``mask_fittable`` masks
+        it -- the policy that prepares training targets and decides what the refit frees. Typed literals (a pow
+        exponent, a rootn index, either half of a rational exponent) stay, so x^2 and x^3 remain different families.
+        Variables are normalized as in the legacy key. Positional (no collect pass): the canonicalization around this
+        call already collects."""
+        engine = self.simplipy_engine
+        out = [str(token) for token in tokens]
+        for index, value, role in masking.literal_sites(out, engine):
+            if masking.mask_fittable(value, role) is not None:
+                out[index] = "<constant>"
+        return ["<constant>" if token == "<c>" else token for token in normalize_expression(out) or []]
+
+    def _precise_structural_prototype(self, expression: list[str] | tuple[str, ...]) -> list[str]:
+        """The precise key's fold: remove a ``<constant>`` only where it reparametrizes its operand affinely.
+
+        Bottom-up over the prefix tree, each subtree is variable-bearing, CONSTANT (variable-free and holding a
+        ``<constant>``) or STRUCTURAL (variable-free, only typed literals, e.g. the exponent ``/ 5 2``):
+
+          * a constant subtree collapses to one ``<constant>``; a structural one is kept verbatim;
+          * ``X + c``, ``c + X``, ``X - c``, ``c - X``, ``c * X``, ``X * c``, ``X / c``  ->  ``X``  (shift, sign, scale:
+            the constant's identity value is inside the family, as in the legacy fold);
+          * ``c / X``  ->  ``inv X``  (a reciprocal is not a rescaling of X; the legacy fold made c/(x+a) the core x);
+          * ``pow c X``  ->  ``exp X``  (c^X = exp(X log c): a rescaling inside exp, not X);
+          * ``rootn c X``  ->  ``exp inv X``  (c^(1/X));
+          * ``pow X <constant>`` / ``rootn X <constant>`` (an exponent the masking abstracted, which the role-aware
+            masking never does) fall back to ``X``, the legacy, conservative direction;
+          * a structural operand is structure: ``pow X 2`` stays ``pow X 2``;
+          * additive term signs are spelling: ``A - B`` -> ``A + B`` and ``neg X`` -> ``X`` (variable-bearing operands).
+            The canonical form writes a coefficient's sign into structure (``- A * 3 B``), and a coefficient is free,
+            so a draw c1*x^6 + c2*x^5 - c3*x^4 + ... is in the family of x^6 + x^5 + x^4 + ...; the sign closure
+            covers laws with explicit constants, this covers the implicit unit coefficients. It merges coefficient-
+            free sign variants (x1 - x2 with x1 + x2): over-rejection, the doctrine's direction.
+        """
+        engine = self.simplipy_engine
+        arity_of = engine.operator_arity_compat
+        aliases = engine.operator_aliases
+        tokens = [str(token) for token in expression]
+        position = 0
+
+        def walk() -> tuple[list[str], str]:
+            nonlocal position
+            token = tokens[position]
+            position += 1
+            operator = aliases.get(token, token)
+            if operator not in arity_of:
+                if token == "<constant>":
+                    return [token], "constant"
+                if is_numeric_string(token):
+                    return [token], "structural"
+                return [token], "variable"
+            children = [walk() for _ in range(arity_of[operator])]
+            kinds = [kind for _, kind in children]
+            if "variable" not in kinds:
+                if "constant" in kinds:
+                    return ["<constant>"], "constant"
+                return [operator] + [t for child, _ in children for t in child], "structural"
+            if "constant" not in kinds:
+                if operator == "neg" and kinds == ["variable"]:
+                    return children[0][0], "variable"
+                if operator == "-" and kinds == ["variable", "variable"]:
+                    operator = "+"
+                return [operator] + [t for child, _ in children for t in child], "variable"
+            if len(children) != 2:
+                raise NotImplementedError(f"folding a constant out of a {len(children)}-ary operator")
+            constant_first = kinds[0] == "constant"
+            operand = children[1][0] if constant_first else children[0][0]
+            if constant_first and operator == "/":
+                return ["inv"] + operand, "variable"
+            if constant_first and operator == "pow":
+                return ["exp"] + operand, "variable"
+            if constant_first and operator == "rootn":
+                return ["exp", "inv"] + operand, "variable"
+            return operand, "variable"
+
+        prototype, _ = walk()
+        if position != len(tokens):
+            raise ValueError("not a single prefix expression")
+        return prototype
 
     def holdout_sign_variants(self, tokens: list[str] | tuple[str, ...]) -> list[list[str]] | None:
         """A law's sign variants (see HOLDOUT_SIGN_PATTERNS): its holdout-canonical form with the signs of its fittable
@@ -888,6 +1023,8 @@ class LampleChartonCatalog(GenerativeCatalog):
         seen = {tuple(prototype)}
         n_variables = _count_variables(prototype)
         variants = self.holdout_sign_variants(tokens)
+        if variants is not None and self.holdout_family == "precise":
+            variants = variants + self._holdout_generic_members(tokens)
         for variant in variants or []:
             variant_prototype = self.holdout_family_prototype(variant, strict=True)
             if (variant_prototype is not None and tuple(variant_prototype) not in seen
@@ -895,6 +1032,35 @@ class LampleChartonCatalog(GenerativeCatalog):
                 seen.add(tuple(variant_prototype))
                 prototypes.append((variant_prototype, True))
         return prototypes, variants is not None
+
+    def _holdout_generic_members(self, tokens: list[str] | tuple[str, ...]) -> list[list[str]]:
+        """The precise key's GENERIC-MEMBER closure: two members of a law's family with generic coefficients, whose
+        prototypes the law also registers -- the law wrapped affinely (1.7 * law + 0.6) and the law with every
+        fittable literal redrawn (seeded by the law itself, so registration is identical in every process).
+
+        The canonical form decides by VALUE whether a coefficient factors out: x*E + E with unit coefficients stays
+        expanded, c*(x + 1)*E is written factored, and folding the factored form's ``+ 1`` drops a term. A sampled draw
+        has generic coefficients, so it lands on the generic spelling, which the law's own (unit-coefficient)
+        spelling can miss. Measured on the 29 production holdout pools before this closure: 506 of 6,660 laws' affine wraps escaped,
+        77 of them only under the precise key (the legacy key's coarse fold had hidden them)."""
+        engine = self.simplipy_engine
+        tokens = ["pow" if token in ("**", "^") else token for token in tokens]
+        try:
+            canonical = list(engine.simplify(tokens, mode=HOLDOUT_SIMPLIFY_MODE, effort=HOLDOUT_EFFORT))
+            sites = list(masking.literal_sites(canonical, engine))
+        except Exception:
+            return []
+        members = [["+", "*", "1.7", *canonical, "0.6"]]
+        rng = random.Random(zlib.crc32(" ".join(canonical).encode()))
+        redrawn = list(canonical)
+        changed = False
+        for index, value, role in sites:
+            if masking.mask_fittable(value, role) is not None:
+                redrawn[index] = repr(round(rng.choice((-1, 1)) * rng.uniform(0.3, 3.0), 3))
+                changed = True
+        if changed:
+            members.append(redrawn)
+        return members
 
     def get_structural_prototype(self, expression: list[str] | tuple[str, ...], verbose: bool = False, debug: bool = False) -> list[str]:
         '''
@@ -996,7 +1162,21 @@ class LampleChartonCatalog(GenerativeCatalog):
         # laws registered without their sign variants (the variants could not be derived): the law itself is held
         # out, so this fails safe, but it is a coverage loss and is reported below
         without_variants: list[str] = []
-        if isinstance(holdout_pool_obj, GenerativeCatalog):
+        if isinstance(holdout_pool_obj, GenerativeCatalog) and self.holdout_family == "precise":
+            # The precise key registers what it probes with: this catalog's family prototype of each skeleton.
+            items = []
+            unregistered = []
+            for sk in holdout_pool_obj.skeletons:
+                prototype = self.holdout_family_prototype(list(sk), strict=True)
+                if prototype is None:
+                    unregistered.append(" ".join(map(str, sk))[:60])
+                    continue
+                items.append((prototype, self.simplipy_engine, self.variables, self.n_variables, False))
+            if unregistered:
+                raise ValueError(
+                    f"holdout pool {getattr(holdout_pool_obj, 'name', holdout_pool_obj)!r}: {len(unregistered)} "
+                    f"skeletons failed to register and would silently train: {unregistered[:10]}")
+        elif isinstance(holdout_pool_obj, GenerativeCatalog):
             items = [
                 (holdout_pool_obj.get_structural_prototype(sk), holdout_pool_obj.simplipy_engine,
                  holdout_pool_obj.variables, holdout_pool_obj.n_variables, False)
@@ -1170,7 +1350,9 @@ class LampleChartonCatalog(GenerativeCatalog):
     def clear_holdouts(self) -> None:
         """Remove all registered holdout pools and associated constraints."""
         self.holdout_pools = []
-        self.holdout_manager = HoldoutManager(n_variables=self.n_variables, allow_nan=self.allow_nan)
+        self.holdout_manager = HoldoutManager(n_variables=self.n_variables, allow_nan=self.allow_nan,
+                                              keep_literals=self.holdout_family == "precise",
+                                              finite_standardization=self.holdout_family == "precise")
 
     def save(self, directory: str, config: dict[str, Any] | str | None = None, reference: str = 'relative', recursive: bool = True) -> None:
         '''
