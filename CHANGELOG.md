@@ -13,8 +13,8 @@ All notable changes to `symbolic-data` are documented here. The format follows
   legacy one: different draws are resampled, so a training corpus generated from an unchanged config differs. Leak
   audit on the 29 production holdout pools, precise against legacy: canonical laws missed 3 -> 0, members with
   redrawn constants 53 -> 0, affine wraps 1,660 -> 7; ordinary training draws held out 6.42% -> 2.80%; +4.7 ms per
-  draw. **To reproduce a model trained before this change, set `holdout_family: legacy` in its catalog config**
-  (legacy stays byte-identical). Any other value, an empty one included, raises `ValueError`. A catalog pickled before
+  draw. **To reproduce a model trained before this change from a catalog config that names no key, set
+  `holdout_family: legacy` in that config** (legacy stays byte-identical; a config that names its key is unaffected). Any other value, an empty one included, raises `ValueError`. A catalog pickled before
   the key existed still unpickles as `legacy`. docs/holdout.md explains both keys.
 
 ### Added
