@@ -71,24 +71,25 @@ law reduced to the same core. Meanwhile, members of a held-out law's own family 
 value whether a coefficient factors out, and zeroing the non-finite part of an image breaks invariance under `a*f + b`.
 
 Leak audit on the 29 production holdout pools (6,660 law renderings; for each law three members with redrawn
-constants and one random affine wrap), counting family members that are NOT held out:
+constants and one random affine wrap), counting family members that are NOT held out, and the share of ordinary
+training draws each key removes:
 
 | | legacy | precise |
 |---|---|---|
-| laws in canonical form | 3 | 0 |
-| members with redrawn constants | 53 | 0 |
-| affine wraps `a*f + b` | 1,660 | 7 |
-| share of ordinary training draws held out | 6.42% | 2.80% |
+| laws in canonical form, not held out | 3 | 0 |
+| members with redrawn constants, not held out | 53 | 0 |
+| affine wraps `a*f + b`, not held out | 1,660 | 7 |
+| ordinary training draws held out | 6.42% | 2.80% |
 
 Cost: about +4.7 ms per draw at generation time (11.7 vs 7.0 ms per probed draw), and registration of the 29 pools
 takes 199 s instead of 145 s.
 
 ### Reproducing a catalog built before the change
 
-The key is baked into a training corpus: which draws were resampled depends on it. A model trained before 2026-11-28
-was trained with `legacy`, whether or not its catalog config names the key. To regenerate its data or audit its
-holdout, set `holdout_family: legacy` explicitly in that catalog config. A config without the key now gets `precise`.
-A catalog pickled before the key existed unpickles as `legacy`.
+The key is baked into a training corpus: which draws were resampled depends on it. A catalog config that names no
+key and was used before 2026-11-28 was built with `legacy`. To regenerate such a model's data or audit its holdout,
+set `holdout_family: legacy` explicitly in its catalog config; the same config without the key now gets `precise`.
+A config that already names its key is unaffected. A catalog pickled before the key existed unpickles as `legacy`.
 
 ## Filters: `{filter: {...}}`
 
