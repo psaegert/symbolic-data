@@ -3,6 +3,9 @@
 
 Each case is a family the OLD mask-then-simplify order split into two prototypes, so a
 generated draw of one spelling escaped a holdout registered under the other.
+
+These cases were written for the legacy family key; since 2026-11-28 the default is the precise key, and every case
+here holds under both, so the catalog fixture names each key explicitly and the module runs once per key.
 """
 import os
 import warnings
@@ -14,11 +17,12 @@ from symbolic_data.generative import (
     HOLDOUT_EFFORT, HOLDOUT_SIMPLIFY_MODE, LampleChartonCatalog)
 
 
-@pytest.fixture(scope="module")
-def catalog():
+@pytest.fixture(scope="module", params=["legacy", "precise"])
+def catalog(request):
     cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "catalog_train.yaml")
     config = yaml.safe_load(open(cfg_path, encoding="utf-8"))
     config["holdout_pools"] = []
+    config["holdout_family"] = request.param
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         return LampleChartonCatalog.from_config(config)
@@ -69,9 +73,11 @@ def test_registration_emits_no_unevaluable_sentinel(catalog):
     cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "catalog_train.yaml")
     config = yaml.safe_load(open(cfg_path, encoding="utf-8"))
     config["holdout_pools"] = ["fastsrb"]
+    config["holdout_family"] = catalog.holdout_family
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         built = LampleChartonCatalog.from_config(config)
+    assert built.holdout_family == catalog.holdout_family
     sentinels = [k for k in built.holdout_manager.expression_images
                  if isinstance(k, tuple) and len(k) > 1 and k[1] == "__unevaluable__"]
     assert sentinels == []

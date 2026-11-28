@@ -73,6 +73,13 @@ HOLDOUT_SIGN_PATTERNS = 63
 # it is an affine reparametrization of its operand (X+c, c-X, c*X, X/c -> X), maps c/X to inv(X) and c^X to exp(X),
 # and leaves pow(X, 2) alone.
 HOLDOUT_FAMILIES = ("legacy", "precise")
+# The key a catalog gets when it names none (2026-11-28: "precise", previously "legacy"). Leak audit of precise against
+# legacy on the 29 production holdout pools: canonical laws missed 3 -> 0, redrawn family members 53 -> 0, affine wraps
+# 1,660 -> 7, while the share of ordinary draws held out falls 6.42% -> 2.80% (+4.7 ms per draw). "legacy" stays
+# selectable by name: a model trained before this change is reproduced by setting `holdout_family: legacy` in its
+# catalog config. A catalog PICKLED before the key existed carries no key in its state and unpickles as legacy
+# (__setstate__), because that is the key it was built with.
+DEFAULT_HOLDOUT_FAMILY = "precise"
 # Canonicalize-relabel-mask-fold passes over the folded prototype under the precise key (see holdout_family_prototype).
 # Measured on the 29 production holdout pools: 1 pass and 3 passes leave the same leak audit (affine-wrap misses 501 vs 494 of 6,660)
 # and the same draw rejection (3.04% vs 3.05%); each pass costs one engine call per draw.
@@ -320,7 +327,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             simplify_mode: str = 'f64',
             name: str = "lample_charton",
             decontaminate: bool = True,
-            holdout_family: str = "legacy") -> None:
+            holdout_family: str = DEFAULT_HOLDOUT_FAMILY) -> None:
         self.name = name
         self.decontaminate = decontaminate
         if holdout_family not in HOLDOUT_FAMILIES:
@@ -487,7 +494,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             simplify_mode=config_.get("simplify_mode", "f64"),
             name=config_.get("name", "lample_charton"),
             decontaminate=config_.get("decontaminate", True),
-            holdout_family=config_.get("holdout_family", "legacy"),
+            holdout_family=config_.get("holdout_family", DEFAULT_HOLDOUT_FAMILY),
         )
         # Optional inline FROZEN skeletons (a fixed catalog distributed as one self-contained spec --
         # e.g. a held-out validation set): the recipe still drives X/y sampling, but the skeleton set
@@ -524,7 +531,7 @@ class LampleChartonCatalog(GenerativeCatalog):
             holdout_pools: Sequence["LampleChartonCatalog | str"] | None = None,
             allow_nan: bool = False,
             simplify: bool = True,
-            holdout_family: str = "legacy",
+            holdout_family: str = DEFAULT_HOLDOUT_FAMILY,
             ) -> "LampleChartonCatalog":
         '''
         Create a LampleChartonCatalog from a set of skeletons.
@@ -561,7 +568,8 @@ class LampleChartonCatalog(GenerativeCatalog):
         simplify : bool, optional
             Whether to simplify sampled skeletons.
         holdout_family : {"legacy", "precise"}, optional
-            The holdout family key (see ``HOLDOUT_FAMILIES``).
+            The holdout family key (see ``HOLDOUT_FAMILIES``); default ``DEFAULT_HOLDOUT_FAMILY`` ("precise").
+            Pass "legacy" to reproduce a catalog built before 2026-11-28.
 
         Returns
         -------
@@ -614,7 +622,8 @@ class LampleChartonCatalog(GenerativeCatalog):
         return state
 
     def __setstate__(self, state: dict[str, Any]) -> None:
-        state.setdefault("holdout_family", "legacy")    # pickled before the key existed
+        # Pickled before the key existed -> built with the legacy key, whatever today's default is.
+        state.setdefault("holdout_family", "legacy")
         self.__dict__.update(state)
         self.skeleton_codes = self.compile_codes() if getattr(self, "skeletons", None) else {}
 
