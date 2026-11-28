@@ -1,3 +1,4 @@
+import pytest
 
 
 def test_simplify_mode_reaches_the_target_canonicalization(monkeypatch):
@@ -77,7 +78,8 @@ def test_simplipy_engine_modes_reaches_the_loader(monkeypatch):
     assert "modes" not in seen[-1], f"absent key must not send a modes kwarg: {seen[-1]}"
 
 
-def test_the_fold_skip_is_provably_free(monkeypatch):
+@pytest.mark.parametrize("holdout_family", ["legacy", "precise"])
+def test_the_fold_skip_is_provably_free(monkeypatch, holdout_family):
     """S1 (task #92): when the target canon IS the holdout canon, the fold's opening
     canonicalization is skipped. Golden proof: same seed => byte-identical skeletons
     and identical family prototypes, with exactly one fewer simplify per holdout check."""
@@ -98,6 +100,7 @@ def test_the_fold_skip_is_provably_free(monkeypatch):
     cfg["simplipy_engine"] = "acj2-4-llm"
     cfg["holdout_pools"] = []
     cfg["simplify_mode"] = "permissive"
+    cfg["holdout_family"] = holdout_family    # the reference config predates the key: name it
 
     def draws(force_off, n=12):
         cat = gen.LampleChartonCatalog.from_config(dict(cfg))
@@ -132,7 +135,8 @@ def test_the_fold_skip_is_provably_free(monkeypatch):
     assert fast_calls < slow_calls, f"no call was saved ({fast_calls} vs {slow_calls})"
 
 
-def test_the_fold_skip_key_is_identical_on_canonical_inputs():
+@pytest.mark.parametrize("holdout_family", ["legacy", "precise"])
+def test_the_fold_skip_key_is_identical_on_canonical_inputs(holdout_family):
     """Direct key identity: for an already-canonical input, the assume_canonical path
     returns the same prototype as the full fold."""
     import os
@@ -152,6 +156,7 @@ def test_the_fold_skip_key_is_identical_on_canonical_inputs():
     cfg["simplipy_engine"] = "acj2-4-llm"
     cfg["holdout_pools"] = []
     cfg["simplify_mode"] = "permissive"
+    cfg["holdout_family"] = holdout_family    # the reference config predates the key: name it
     cat = gen.LampleChartonCatalog.from_config(cfg)
     rng = np.random.default_rng(99)
     checked = 0

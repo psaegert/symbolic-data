@@ -19,9 +19,12 @@ VARIANT = "x3 - 1/(2.8807879935653626*x2 + log(4.901810635918965*x1 + x2))"
 
 @pytest.fixture(scope="module")
 def catalog():
+    """The legacy family key: the closure was measured and gated there (under the precise key, which treats additive
+    term signs as spelling, the 0-pattern variant is already held out, so the gate below could not fail)."""
     cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "catalog_train.yaml")
     config = yaml.safe_load(open(cfg_path, encoding="utf-8"))
     config["holdout_pools"] = []
+    config["holdout_family"] = "legacy"
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         return LampleChartonCatalog.from_config(config)
@@ -140,3 +143,18 @@ def test_any_leaf_that_is_not_a_literal_is_a_variable():
     assert generative._ground_sign_sites(tokens, arity, literals={3}, fittable={3}) == [2]
     # a typed literal (here: not fittable) is still a literal, not a variable: its ground subtree is no site
     assert generative._ground_sign_sites(["*", "alpha", "exp", "2"], arity, literals={3}, fittable=set()) == []
+
+
+def test_the_variant_is_held_out_under_the_default_key():
+    """A config without `holdout_family` gets the precise key (2026-11-28), which holds the law and its sign variant
+    out as well."""
+    cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "catalog_train.yaml")
+    config = yaml.safe_load(open(cfg_path, encoding="utf-8"))
+    config["holdout_pools"] = []
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        default = LampleChartonCatalog.from_config(config)
+        assert default.holdout_family == "precise"
+        default.register_holdout_pool(_pool(LAW))
+    assert _held_out(default, LAW.replace("v", "x"))
+    assert _held_out(default, VARIANT)

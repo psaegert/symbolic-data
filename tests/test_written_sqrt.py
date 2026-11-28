@@ -175,10 +175,12 @@ def test_a_realized_problem_keeps_the_written_truth(engine_defining_sqrt, engine
 
 
 # ---- training generation stays in the generating vocabulary -------------------------------------------------------
-def _training_catalog(engine_config: str) -> LampleChartonCatalog:
+def _training_catalog(engine_config: str, holdout_family: str | None = None) -> LampleChartonCatalog:
     with open(ROOT / "configs" / "test" / "catalog_train.yaml", encoding="utf-8") as file:
         cfg = yaml.safe_load(file)
     cfg["simplipy_engine"] = engine_config
+    if holdout_family is not None:
+        cfg["holdout_family"] = holdout_family
     return LampleChartonCatalog.from_config(cfg)
 
 
@@ -196,16 +198,18 @@ def test_training_skeletons_never_carry_a_defined_head(defining_config):
     assert sampled >= 100
 
 
-def test_the_training_holdout_writes_rootn_with_a_defining_engine(defining_config, tmp_path):
-    """A frozen truth that keeps sqrt (written with a defining engine) is held out in the generating vocabulary."""
+@pytest.mark.parametrize("holdout_family, prototype", [("legacy", ("x1",)), ("precise", ("rootn", "x1", "2"))])
+def test_the_training_holdout_writes_rootn_with_a_defining_engine(defining_config, tmp_path, holdout_family, prototype):
+    """A frozen truth that keeps sqrt (written with a defining engine) is held out in the generating vocabulary. The
+    legacy family key strips the root index (sqrt x -> x); the precise key, the default since 2026-11-28, keeps it."""
     x = np.linspace(0.5, 2.5, 16)
     problem = Problem.from_data(x, np.sqrt(x), expression=["sqrt", "x1"], eq_id="rooted",
                                 meta={"alternate_renderings": ["sqrt(v1)"]})
     npz = str(ProblemCatalog.from_problems([problem], name="sqrt-probe").save(tmp_path / "sqrt-probe"))
-    catalog = _training_catalog(defining_config)
+    catalog = _training_catalog(defining_config, holdout_family)
     catalog.register_holdout_pool(npz)
     try:
-        assert ("x1",) in catalog.holdout_skeletons
+        assert prototype in catalog.holdout_skeletons
         assert not {token for proto in catalog.holdout_skeletons for token in proto} & set(DEFINED_FUNCTIONS)
         assert len(catalog.holdout_y) >= 1
     finally:

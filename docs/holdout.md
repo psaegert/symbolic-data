@@ -44,16 +44,51 @@ API — holdout is a `ProblemSource` policy.
 A generative catalog (`LampleChartonCatalog`) excludes benchmark laws at the source: every pool listed under
 `holdout_pools` registers its laws, and a drawn skeleton whose FAMILY matches a registered one is resampled. A family
 is matched in two layers -- the exact prototype (a hash) and its functional image on fixed probe grids, standardized
-so the output-affine family `a*f + b` shares one key. The prototype is chosen by `holdout_family`:
+so the output-affine family `a*f + b` shares one key. The prototype is chosen by the catalog key `holdout_family`:
 
 | key | literals masked | fold | images |
 |---|---|---|---|
-| `legacy` (default) | every literal, exponents and root indices included | every operator with a constant operand collapses to its other operand (`x^2`, `c/(x+a)` and `a*x+b` all become `x`) | non-finite entries zeroed, then standardized |
-| `precise` | fittable literals only (by role); exponents and root indices are structure | affine reparametrizations only (`X+c`, `c*X`, `X/c` -> `X`; `c/X` -> `inv X`; `c^X` -> `exp X`); additive term signs are spelling; one pass over the constant-free prototype | standardized over the finite entries |
+| `precise` (default since 2026-11-28) | fittable literals only (by role); exponents and root indices are structure | affine reparametrizations only (`X+c`, `c*X`, `X/c` -> `X`; `c/X` -> `inv X`; `c^X` -> `exp X`); additive term signs are spelling; one pass over the constant-free prototype | standardized over the finite entries |
+| `legacy` | every literal, exponents and root indices included | every operator with a constant operand collapses to its other operand (`x^2`, `c/(x+a)` and `a*x+b` all become `x`) | non-finite entries zeroed, then standardized |
 
 Under `precise` each law additionally registers the prototypes of its sign variants and of two generic-coefficient
-members (an affine wrap and a seeded redraw of its constants). The key is baked into a training corpus, so it is a
-per-catalog choice; see the changelog entry for the measured effect on the 29 production holdout pools.
+members (an affine wrap and a seeded redraw of its constants).
+
+```yaml
+type: lample_charton
+holdout_pools: [fastsrb, feynman]
+holdout_family: precise   # the default; `legacy` reproduces a catalog built before 2026-11-28
+```
+
+Any other value is an error.
+
+### Why `precise` is the default
+
+The legacy key holds out too little where it matters and too much everywhere else. Its fold strips exponents and
+root indices and turns `c/X` into `X`, so `x^2`, `x^3`, `sqrt(x)`, `c/(x+a)` and `a*x+b` all reduce to the core `x`.
+Whole structure classes (low-order polynomials, sums of rationals, weighted sums) were rejected whenever some benchmark
+law reduced to the same core. Meanwhile, members of a held-out law's own family escaped: the canonical form decides by
+value whether a coefficient factors out, and zeroing the non-finite part of an image breaks invariance under `a*f + b`.
+
+Leak audit on the 29 production holdout pools (6,660 law renderings; for each law three members with redrawn
+constants and one random affine wrap), counting family members that are NOT held out:
+
+| | legacy | precise |
+|---|---|---|
+| laws in canonical form | 3 | 0 |
+| members with redrawn constants | 53 | 0 |
+| affine wraps `a*f + b` | 1,660 | 7 |
+| share of ordinary training draws held out | 6.42% | 2.80% |
+
+Cost: about +4.7 ms per draw at generation time (11.7 vs 7.0 ms per probed draw), and registration of the 29 pools
+takes 199 s instead of 145 s.
+
+### Reproducing a catalog built before the change
+
+The key is baked into a training corpus: which draws were resampled depends on it. A model trained before 2026-11-28
+was trained with `legacy`, whether or not its catalog config names the key. To regenerate its data or audit its
+holdout, set `holdout_family: legacy` explicitly in that catalog config. A config without the key now gets `precise`.
+A catalog pickled before the key existed unpickles as `legacy`.
 
 ## Filters: `{filter: {...}}`
 

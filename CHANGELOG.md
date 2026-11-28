@@ -5,6 +5,18 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- **Behaviour change: the holdout family key defaults to `precise`** (`holdout_family`, owner ruling 2026-11-28;
+  `symbolic_data.generative.DEFAULT_HOLDOUT_FAMILY`). A generative catalog whose config names no `holdout_family`, and
+  a `LampleChartonCatalog(...)` / `from_dict(...)` call that passes none, now builds the precise holdout instead of the
+  legacy one: different draws are resampled, so a training corpus generated from an unchanged config differs. Leak
+  audit on the 29 production holdout pools, precise against legacy: canonical laws missed 3 -> 0, members with
+  redrawn constants 53 -> 0, affine wraps 1,660 -> 7; ordinary training draws held out 6.42% -> 2.80%; +4.7 ms per
+  draw. **To reproduce a model trained before this change, set `holdout_family: legacy` in its catalog config**
+  (legacy stays byte-identical). Any other value, an empty one included, raises `ValueError`. A catalog pickled before
+  the key existed still unpickles as `legacy`. docs/holdout.md explains both keys.
+
 ### Changed (SimpliPy 0.15)
 
 - **Requires SimpliPy 0.15** (`simplipy>=0.15,<0.16`). SimpliPy 0.15 refuses every pre-0.15 rule file, so the
@@ -39,11 +51,12 @@ All notable changes to `symbolic-data` are documented here. The format follows
 
 ### Added
 
-- **`holdout_family`** (optional catalog key, `legacy` | `precise`, default `legacy`): the holdout FAMILY KEY. The
-  legacy key masks every literal and folds every operator with a `<constant>` operand into its other operand. Since
-  pow/rootn carry their exponent as a literal (typed slots), that also strips exponents and root indices, and it folds
-  `c/X` into `X`: x^2, x^3, sqrt(x), c/(x+a), a*x+b and exp(c*x) all reduce to the core `x`, so every 2-3 term
-  univariate polynomial, every partial-fraction sum and every linear model shared a key with some benchmark law.
+- **`holdout_family`** (optional catalog key, `legacy` | `precise`; default `precise` since the change above): the
+  holdout FAMILY KEY. The legacy key masks every literal and folds every operator with a `<constant>` operand into its
+  other operand. Since pow/rootn carry their exponent as a literal (typed slots), that also strips exponents and root
+  indices, and it folds `c/X` into `X`: x^2, x^3, sqrt(x), c/(x+a), a*x+b and exp(c*x) all reduce to the core `x`, so
+  every 2-3 term univariate polynomial, every partial-fraction sum and every linear model shared a key with some
+  benchmark law.
   `precise` keys a draw by the family its pipeline fits:
   - fittable literals are masked by ROLE (simplipy's `mask_fittable`, the policy that prepares training targets);
     exponents and root indices stay structure;
@@ -56,14 +69,15 @@ All notable changes to `symbolic-data` are documented here. The format follows
   - each law also registers the prototypes of two generic-coefficient members (an affine wrap and a seeded redraw of
     its fittable literals), because the canonical form decides by value whether a coefficient factors out.
 
-  Measured on the 29 production holdout pools (6,660 law renderings) with three members per law with redrawn constants and one
-  random affine wrap: escaped laws in canonical form legacy 3 -> precise 0; redrawn members 53 -> 0; affine wraps
-  1,660 -> 7. On 20,000 raw draws of a production training prior: held out 6.42% -> 2.80%; univariate polynomials with >= 3 terms
-  100% -> 50% (6 draws), polynomials with >= 3 variable terms 30.5% -> 6.3%, sums of >= 3 terms of one motif
-  54.5% -> 3.0%. Cost: 11.7 vs 7.0 ms per probed draw, registration 199 vs 145 s for the 29 pools. Absent = legacy
-  (byte-identical); a catalog pickled before the key existed loads as legacy. A K-term sum of one core with distinct
-  inner constants (a/(x+b) + c/(x+d), sums of exponentials) is still held out wherever the single core is a benchmark
-  law: its standardized image equals the core's (the family contains the core by tying the inner constants).
+  Measured on the 29 production holdout pools (6,660 law renderings) with three members per law with redrawn constants
+  and one random affine wrap: escaped laws in canonical form legacy 3 -> precise 0; redrawn members 53 -> 0; affine
+  wraps 1,660 -> 7. On 20,000 raw draws of a production training prior: held out 6.42% -> 2.80%; univariate
+  polynomials with >= 3 terms 100% -> 50% (6 draws), polynomials with >= 3 variable terms 30.5% -> 6.3%, sums of >= 3
+  terms of one motif 54.5% -> 3.0%. Cost: 11.7 vs 7.0 ms per probed draw, registration 199 vs 145 s for the 29 pools.
+  `legacy` is byte-identical to the key before; a catalog pickled before the key existed loads as legacy. A K-term sum
+  of one core with distinct inner constants (a/(x+b) + c/(x+d), sums of exponentials) is still held out wherever the
+  single core is a benchmark law: its standardized image equals the core's (the family contains the core by tying the
+  inner constants).
 
 - **Data catalogs: problems that hold pools of rows** (`symbolic_data.pools`). A frozen problem whose `meta` carries
   a `test_split` rule holds every row available for fitting (support arrays) and, for `"given"`, the authors' test

@@ -14,11 +14,14 @@ import yaml
 from symbolic_data.generative import LampleChartonCatalog
 
 
-@pytest.fixture(scope="module")
-def fastsrb_catalog():
+@pytest.fixture(scope="module", params=["legacy", "precise"])
+def fastsrb_catalog(request):
+    """Written against the legacy family key; every regression holds under the precise key (the default since
+    2026-11-28) too, so the module runs once per key, each named explicitly."""
     cfg_path = os.path.join(os.path.dirname(__file__), "..", "configs", "test", "catalog_train.yaml")
     config = yaml.safe_load(open(cfg_path, encoding="utf-8"))
     config["holdout_pools"] = ["fastsrb"]
+    config["holdout_family"] = request.param
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         return LampleChartonCatalog.from_config(config)

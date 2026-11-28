@@ -124,7 +124,9 @@ def test_register_holdout_pool_frozen_alternate_renderings(tmp_path):
     frozen = ProblemCatalog.from_problems([p], name="alt-probe")
     npz = str(frozen.save(tmp_path / "alt-probe"))
 
-    catalog = LampleChartonCatalog.from_config(_cfg())
+    cfg = _cfg()
+    cfg["holdout_family"] = "legacy"    # the prototypes below are the legacy key's (the default is precise)
+    catalog = LampleChartonCatalog.from_config(cfg)
     catalog.register_holdout_pool(npz)
     try:
         # constant-stripped structural prototypes of BOTH renderings (log(c/x1) -> log(x1);
@@ -178,7 +180,9 @@ def test_register_holdout_pool_frozen_sqrt_spelling_desugars(tmp_path):
     frozen = ProblemCatalog.from_problems([p], name="sqrt-probe")
     npz = str(frozen.save(tmp_path / "sqrt-probe"))
 
-    catalog = LampleChartonCatalog.from_config(_cfg())
+    cfg = _cfg()
+    cfg["holdout_family"] = "legacy"    # the collapse below is the legacy key's (precise keeps the root index)
+    catalog = LampleChartonCatalog.from_config(cfg)
     catalog.register_holdout_pool(npz)
     try:
         # The structural prototype COLLAPSES to ('x1',): rootn's index is a numeric
